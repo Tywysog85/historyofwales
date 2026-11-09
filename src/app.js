@@ -83,7 +83,8 @@
     $("#chap-list").innerHTML = ERAS.map(function (e) {
       return '<button type="button" class="chap" data-era="' + e.id + '" data-open="' + e.id + '"><svg aria-hidden="true"><use href="#i-' + e.ill + '"/></svg><span class="span">' + T(e.spanEn, e.spanCy) + "</span><h3>" + T(e.en, e.cy) + "</h3><p>" + esc(T(e.blurbEn, e.blurbCy)) + '</p><span class="go">' + T("Read the chapter →", "Darllen y bennod →") + "</span></button>";
     }).join("");
-    $("#foot-eras").innerHTML = ERAS.map(function (e) { return '<a href="era-' + e.id + '.html">' + T(e.en, e.cy) + "</a>"; }).join("") + '<a href="#sources">' + T("Sources", "Ffynonellau") + "</a>";
+    $("#foot-eras").innerHTML = ERAS.map(function (e) { return '<a href="era-' + e.id + '.html">' + T(e.en, e.cy) + "</a>"; }).join("") + '<a href="trails.html">' + T("Trails", "Llwybrau") + '</a><a href="teachers.html">' + T("For teachers", "I athrawon") + '</a><a href="#sources">' + T("Sources", "Ffynonellau") + "</a>";
+    $("#trail-list").innerHTML = D.TRAILS.map(function (t, i) { return '<a class="trail-card" href="trail-' + t.id + '.html" data-era="' + ERAS[i % 4].id + '"><svg aria-hidden="true"><use href="#i-' + t.ill + '"/></svg><span><b>' + esc(T(t.en, t.cy)) + "</b><span>" + t.n + " " + T("stops", "arhosfan") + "</span></span></a>"; }).join("");
   }
 
   /* ---------- Chapter overlay ---------- */
@@ -248,7 +249,7 @@
     card.innerHTML = '<div class="art"><svg aria-hidden="true"><use href="#i-' + p.ill + '"/></svg></div>' +
       '<div style="display:grid;gap:.3rem"><h3>' + esc(T(p.en, p.cy)) + "</h3>" + (other !== T(p.en, p.cy) ? '<span class="cy-name">' + esc(other) + "</span>" : "") + "</div>" +
       '<div class="meta"><span><b>' + T(E.en, E.cy) + "</b></span><span>" + esc(p.year) + "</span><span>" + p.lat.toFixed(3) + "° N, " + Math.abs(p.lon).toFixed(3) + "° W</span></div>" +
-      '<p class="desc">' + esc(T(p.dEn, p.dCy)) + "</p>" + '<div>' + srcLink(p.src) + "</div>" +
+      '<p class="desc">' + esc(T(p.dEn, p.dCy)) + "</p>" + '<div style="display:flex;gap:1.2rem;flex-wrap:wrap;align-items:center"><a class="src" style="color:var(--ink)" href="place-' + p.id + '.html">' + T("Read the full story", "Darllen y stori lawn") + " →</a>" + srcLink(p.src) + "</div>" +
       '<div class="row">' + (evIdx >= 0 ? '<button type="button" class="btn" data-tl="' + evIdx + '">' + T("See it on the timeline", "Gweld ar y llinell amser") + "</button>" : "<span></span>") +
       '<div class="nav-btns"><button type="button" class="icon-btn" id="pl-prev" aria-label="' + T("Previous place", "Lle blaenorol") + '"><svg><use href="#i-left"/></svg></button><span class="people-count" style="align-self:center;min-width:3.2rem;text-align:center">' + (i + 1) + " / " + visible.length + '</span><button type="button" class="icon-btn" id="pl-next" aria-label="' + T("Next place", "Lle nesaf") + '"><svg><use href="#i-right"/></svg></button></div></div>';
     $("#pl-prev").onclick = function () { selectPlace(visible[(i - 1 + visible.length) % visible.length].id); };
@@ -289,8 +290,8 @@
     var list = PEOPLE.filter(function (p) { return pEra === "all" || p[1] === pEra; });
     $("#people-count").textContent = list.length + " " + T("people", "o bobl");
     $("#people-grid").innerHTML = list.map(function (p) {
-      var name = T(p[3], p[4]), other = lang === "en" ? p[4] : p[3], link = "era-" + p[1] + ".html#" + p[0];
-      return '<article class="plaque" data-era="' + p[1] + '"><span class="dates">' + esc(p[2]) + "</span><h3>" + esc(name) + '</h3><span class="epi">' + esc(T(p[5], p[6])) + (other !== name ? " · " + esc(other) : "") + "</span><p>" + esc(T(p[7], p[8])) + '</p><div class="links"><a class="go" href="' + link + '">' + T("Profile", "Proffil") + ' →</a><button type="button" class="copy" data-copy="' + link + '">' + T("Copy link", "Copïo’r ddolen") + "</button>" + srcLink(p[9]) + "</div></article>";
+      var name = T(p[3], p[4]), other = lang === "en" ? p[4] : p[3], link = "person-" + p[0] + ".html";
+      return '<article class="plaque" data-era="' + p[1] + '"><span class="dates">' + esc(p[2]) + "</span><h3>" + esc(name) + '</h3><span class="epi">' + esc(T(p[5], p[6])) + (other !== name ? " · " + esc(other) : "") + "</span><p>" + esc(T(p[7], p[8])) + '</p><div class="links"><a class="go" href="' + link + '">' + T("Read more", "Darllen mwy") + ' →</a><button type="button" class="copy" data-copy="' + link + '">' + T("Copy link", "Copïo’r ddolen") + "</button>" + srcLink(p[9]) + "</div></article>";
     }).join("");
   }
 

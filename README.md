@@ -6,7 +6,8 @@ An interactive, bilingual (English / Cymraeg) history of Wales: a scroll-driven 
 
 Everything is plain HTML, CSS and JavaScript. There is no framework and nothing to install.
 
-- `src/data.py` holds all the content: eras, events, places, people, sources and translations. **Edit this file to change the history.**
+- `src/data.py` holds the core content: eras, events, places, people, sources and translations. `src/long.py` holds the longer person and place histories, the themed trails and the teacher notes. **Edit these files to change the history.**
+- `src/static/` holds the icons, share image, app manifest and offline support. `tools/make_images.js` regenerates the share image and icons.
 - `src/head.html`, `src/body.html`, `src/app.js` and `src/extra.css` are the home page.
 - `src/geo/` holds the outline of Wales and its 22 local authorities, drawn from public boundary data.
 - `build.py` turns these into the finished site in `_site/`.
@@ -25,6 +26,10 @@ Every push to `main` runs `.github/workflows/deploy.yml`, which builds the site 
 One-time setup: in the repository, go to **Settings → Pages** and set **Source** to **GitHub Actions**.
 
 If you use your own domain, set `SITE_URL` in the workflow's build step (for example `SITE_URL=https://hanes.cymru/ python3 build.py`) so the sitemap and canonical links use it, and add the domain under **Settings → Pages → Custom domain**.
+
+## Visitor statistics
+
+The site can count visitors with [GoatCounter](https://www.goatcounter.com), which is free for non-commercial sites, uses no cookies and needs no cookie banner. Sign up, choose a code (for example `hanescymru`), then add `GOATCOUNTER: hanescymru` under `env:` in the build step of `.github/workflows/deploy.yml`.
 
 ## Adding photos
 

@@ -14,9 +14,10 @@
   --line: #2e3647;
   --ink: #ece9e1;
   --muted: #9ba2b0;
-  --dragon: #e2453d;
+  --dragon: #f26a62;
+  --dragon-deep: #c02c25;
   --e-ancient: #d39a62;   /* red ochre of Paviland */
-  --e-medieval: #e2453d;  /* the dragon */
+  --e-medieval: #f26a62;  /* the dragon */
   --e-industrial: #93a0e0;/* Penrhyn slate blue */
   --e-modern: #7cc495;    /* hill green */
   --f-display: "Gloock", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
@@ -55,7 +56,7 @@ button { font: inherit; color: inherit }
 .nav ul a:hover, .nav ul a.on { color: var(--ink) }
 .lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; gap: 2px }
 .lang button { border: 0; background: transparent; border-radius: 999px; padding: .2rem .7rem; font: 700 .78rem var(--f-mono); letter-spacing: .08em; cursor: pointer; color: var(--muted) }
-.lang button[aria-pressed="true"] { background: var(--dragon); color: #fff }
+.lang button[aria-pressed="true"] { background: var(--dragon-deep); color: #fff }
 @media (max-width: 720px) { .nav ul { order: 3; width: 100%; justify-content: space-between } }
 
 /* ---------- Hero ---------- */
@@ -72,7 +73,7 @@ button { font: inherit; color: inherit }
 .hero .cta { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem }
 .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .7rem 1.25rem; border-radius: 999px; border: 1px solid var(--ink); text-decoration: none; font-weight: 700; font-size: .95rem; cursor: pointer; background: transparent; transition: background .2s, color .2s }
 .btn.solid { background: var(--ink); color: var(--night) }
-.btn:hover { background: var(--dragon); border-color: var(--dragon); color: #fff }
+.btn:hover { background: var(--dragon-deep); border-color: var(--dragon-deep); color: #fff }
 .ticker { position: absolute; left: 0; right: 0; bottom: 0; border-top: 1px solid rgba(236,233,225,.12); background: rgba(14,17,24,.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px) }
 .ticker .wrap { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 1rem; padding-block: 1rem }
 .ticker b { display: block; font-family: var(--f-display); font-weight: 400; font-size: clamp(1.5rem, 3.6vw, 2.4rem); line-height: 1; font-variant-numeric: tabular-nums }
