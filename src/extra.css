@@ -1,0 +1,103 @@
+
+/* ---------- v3 additions ---------- */
+[hidden] { display: none !important }
+html.cy .l-en, html:not(.cy) .l-cy { display: none !important }
+.src { font-family: var(--f-mono); font-size: .72rem; color: var(--muted); text-decoration: none; letter-spacing: .03em; display: inline-flex; gap: .3rem; align-items: center }
+.src:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px }
+.ev .links { display: flex; flex-wrap: wrap; gap: .4rem 1.1rem; align-items: center; margin-top: .2rem }
+.ev .links .maplink { margin-top: 0 }
+
+/* On this day */
+#today { padding-block: 0 }
+.today { display: grid; grid-template-columns: minmax(10rem, 15rem) minmax(0, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 16px; overflow: hidden }
+.today .cal { background: var(--dragon); color: #fff; padding: 1.5rem; display: grid; align-content: center; gap: .2rem; text-align: center }
+.today .cal .d { font-family: var(--f-display); font-size: 4.2rem; line-height: .9 }
+.today .cal .m { font-family: var(--f-mono); letter-spacing: .14em; text-transform: uppercase; font-size: .8rem }
+.today .cal .lab { font-size: .82rem; opacity: .9; margin-top: .5rem }
+.today .items { background: var(--slate); padding: 1.4rem 1.6rem; display: grid; gap: 1rem; align-content: center; min-width: 0 }
+.today .it { display: grid; grid-template-columns: 4.2rem minmax(0,1fr); gap: 1rem; align-items: baseline }
+.today .it time { font-family: var(--f-display); font-size: 1.6rem; color: var(--c) }
+.today .it h3 { font-family: var(--f-body); font-weight: 700; font-size: 1.1rem; line-height: 1.3 }
+.today .it p { color: var(--muted); font-size: .95rem }
+.today .more { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; border-top: 1px solid var(--line); padding-top: .9rem }
+@media (max-width: 640px) { .today { grid-template-columns: 1fr } .today .cal { grid-template-columns: auto auto; justify-content: start; text-align: left; gap: 0 1rem; align-items: baseline } .today .cal .lab { grid-column: 1 / -1; margin: 0 } }
+
+/* Map modes */
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; gap: 2px; margin-bottom: 1.25rem }
+.seg button { border: 0; background: transparent; border-radius: 999px; padding: .4rem 1rem; font: 600 .9rem var(--f-body); cursor: pointer; color: var(--muted) }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--night) }
+.la { stroke: var(--night); stroke-width: 1; transition: fill .5s ease }
+.kg-panel { display: grid; gap: 1rem }
+.kg-stage { font-family: var(--f-display); font-size: clamp(1.8rem, 3.6vw, 2.6rem); line-height: 1.05 }
+.kg-legend { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem }
+.kg-legend li { display: flex; gap: .7rem; align-items: center; font-size: .98rem }
+.kg-legend i { width: 1rem; height: 1rem; border-radius: 4px; background: var(--k); flex: none }
+.kg-range { display: grid; gap: .5rem; border-top: 1px solid var(--line); padding-top: 1rem }
+.kg-range input { width: 100%; accent-color: var(--dragon) }
+.kg-ticks { display: flex; justify-content: space-between; font-family: var(--f-mono); font-size: .7rem; color: var(--muted) }
+.kg-note { font-size: .82rem; color: var(--muted) }
+
+/* Quiz */
+#quiz { background: var(--slate) }
+.quiz { max-width: 46rem; display: grid; gap: 1.25rem }
+.quiz .q-top { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; font-family: var(--f-mono); font-size: .78rem; color: var(--muted) }
+.quiz .q-bar { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden }
+.quiz .q-bar i { display: block; height: 100%; background: var(--dragon); transition: width .4s }
+.quiz h3 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); line-height: 1.15 }
+.quiz .q-ctx { color: var(--muted) }
+.answers { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: .6rem }
+@media (max-width: 520px) { .answers { grid-template-columns: 1fr } }
+.answers button { text-align: left; background: var(--night); border: 1px solid var(--line); border-radius: 12px; padding: .9rem 1.1rem; cursor: pointer; font-size: 1.02rem; font-weight: 600; transition: border-color .2s, background .2s }
+.answers button:hover:not(:disabled) { border-color: var(--ink) }
+.answers button.right { border-color: var(--e-modern); background: color-mix(in srgb, var(--e-modern) 18%, var(--night)) }
+.answers button.wrong { border-color: var(--dragon); background: color-mix(in srgb, var(--dragon) 16%, var(--night)) }
+.answers button:disabled { cursor: default }
+.q-fb { min-height: 1.6em; color: var(--muted) }
+.q-fb b { color: var(--ink) }
+.q-score { font-family: var(--f-display); font-size: clamp(4rem, 12vw, 7rem); line-height: .9; color: var(--dragon) }
+
+/* Sources */
+.reading { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: clamp(1.5rem, 4vw, 3rem) }
+.reading ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0 }
+.reading li { padding: .85rem 0; border-bottom: 1px solid var(--line); display: grid; gap: .15rem }
+.reading li b { font-weight: 700 }
+.reading li span { color: var(--muted); font-size: .93rem }
+.reading a { text-decoration-color: var(--line); text-underline-offset: 3px }
+.reading a:hover { text-decoration-color: var(--dragon) }
+.note-box { background: var(--slate); border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.2rem; color: var(--muted); font-size: .92rem }
+footer nav { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem }
+footer nav a { color: var(--muted); text-decoration: none }
+footer nav a:hover { color: var(--ink) }
+
+/* Era pages */
+.era-hero { background: radial-gradient(70% 120% at 85% 0%, color-mix(in srgb, var(--c) 28%, transparent), transparent 60%), var(--night); border-bottom: 1px solid var(--line) }
+.era-hero .wrap { padding-block: clamp(3rem, 8vw, 6rem); display: grid; gap: 1rem }
+.era-hero svg.ill { width: clamp(4rem, 9vw, 6rem); height: clamp(4rem, 9vw, 6rem); color: var(--c) }
+.era-hero h1 { font-size: clamp(3.2rem, 10vw, 7rem); line-height: .92 }
+.era-hero .span { font-family: var(--f-mono); color: var(--c); letter-spacing: .08em }
+.crumbs { font-size: .9rem; color: var(--muted) }
+.crumbs a { color: var(--muted) }
+.story { display: grid; gap: 1.2rem; max-width: 64ch; font-size: 1.12rem }
+.story p:first-child::first-letter { font-family: var(--f-display); float: left; font-size: 3.8em; line-height: .85; padding: .05em .1em 0 0; color: var(--c) }
+.era-events { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line) }
+.era-events li { display: grid; grid-template-columns: 9rem minmax(0,1fr); gap: 1.25rem; padding: 1.1rem 0; border-bottom: 1px solid var(--line) }
+.era-events time { font-family: var(--f-mono); font-size: .82rem; color: var(--c); padding-top: .2rem }
+.era-events h3 { font-family: var(--f-body); font-weight: 700; font-size: 1.15rem; line-height: 1.3 }
+.era-events li.key h3 { font-family: var(--f-display); font-weight: 400; font-size: 1.6rem }
+.era-events p { color: var(--muted); margin-top: .2rem }
+@media (max-width: 560px) { .era-events li { grid-template-columns: 1fr; gap: .2rem } }
+.plaque { scroll-margin-top: 6rem }
+.plaque:target { outline: 2px solid var(--c); outline-offset: 4px }
+.plaque .links { display: flex; flex-wrap: wrap; gap: .4rem 1rem; align-items: center; margin-top: .2rem }
+.copy { background: none; border: 0; padding: 0; cursor: pointer; font-family: var(--f-mono); font-size: .72rem; color: var(--muted) }
+.copy:hover { color: var(--ink) }
+.plaque a.go { color: var(--ink); font-weight: 700; font-size: .9rem; text-decoration: none }
+.plaque a.go:hover { text-decoration: underline }
+.era-places { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); gap: 1rem }
+.era-places a { display: grid; grid-template-columns: 3.2rem minmax(0,1fr); gap: .9rem; align-items: center; text-decoration: none; background: var(--slate); border: 1px solid var(--line); border-radius: 12px; padding: .9rem 1rem; transition: border-color .2s }
+.era-places a:hover { border-color: var(--c) }
+.era-places svg { width: 3.2rem; height: 3.2rem; color: var(--c) }
+.era-places b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 1.3rem; line-height: 1.15 }
+.era-places span { font-size: .85rem; color: var(--muted) }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap }
+.sub-h { font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 1.5rem }

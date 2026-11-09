@@ -1,0 +1,159 @@
+
+<main>
+<section id="chapters">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow"><span class="num">01</span> · <span data-cy="Penodau">Chapters</span></p>
+      <h2 data-cy="Pedair oes">Four ages of Wales</h2>
+      <p data-cy="Agorwch oes i ddarllen ei stori, neu sgroliwch drwy’r llinell amser isod. Mae gan bob oes ei thudalen ei hun hefyd.">Open an age to read its story, or scroll the full timeline below. Each age also has its own page.</p>
+    </div>
+    <div class="chapters" id="chap-list"></div>
+  </div>
+</section>
+
+<section id="today" aria-labelledby="today-h">
+  <div class="wrap">
+    <h2 id="today-h" class="eyebrow" style="margin-bottom:1rem" data-cy="Ar y dydd hwn yn hanes Cymru">On this day in Welsh history</h2>
+    <div class="today" id="today-box"></div>
+  </div>
+</section>
+
+<section id="timeline">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow"><span class="num">02</span> · <span data-cy="Llinell amser">Timeline</span></p>
+      <h2 data-cy="Y stori mewn dyddiadau">The story in dates</h2>
+      <p data-cy="Mae’r dotiau llawn yn nodi trobwyntiau. Mae gan bob digwyddiad ffynhonnell i chi ddarllen mwy.">Filled markers are turning points. Every event links to a source so you can read more. Switch to Cymraeg and the dates follow the Welsh convention: CC (Cyn Crist) and OC (Oed Crist).</p>
+    </div>
+    <div class="tl-tools">
+      <div class="chips" id="tl-filter" role="group" aria-label="Filter by era"></div>
+      <span class="people-count" id="tl-count"></span>
+    </div>
+    <div class="tl-grid">
+      <aside class="dial" id="dial">
+        <div class="yr" id="dial-yr">230,000<small>BC</small></div>
+        <div class="era-name" id="dial-era"></div>
+        <p class="now" id="dial-now"></p>
+        <div class="bar" id="dial-bar"></div>
+      </aside>
+      <ol class="events" id="events"></ol>
+    </div>
+  </div>
+</section>
+
+<section id="map">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow"><span class="num">03</span> · <span data-cy="Map">Map</span></p>
+      <h2 data-cy="Lle digwyddodd">Where it happened</h2>
+      <p data-cy="Dewiswch bin i weld y stori y tu ôl i’r lle, neu newidiwch i’r teyrnasoedd i weld sut newidiodd ffiniau Cymru.">Choose a pin to see the story behind the place, or switch to Kingdoms to watch the political map of Wales change.</p>
+    </div>
+    <div class="seg" role="group" aria-label="Map mode">
+      <button type="button" id="mode-sites" aria-pressed="true" data-cy="Safleoedd hanesyddol">Historic sites</button>
+      <button type="button" id="mode-kg" aria-pressed="false" data-cy="Teyrnasoedd">Kingdoms</button>
+    </div>
+    <div class="map-grid">
+      <div class="map-box">
+        <svg id="wales" viewBox="-40 -30 680 735" role="group" aria-label="Map of Wales">
+          <g id="grat"></g>
+          <text class="sea-l" x="40" y="430" data-cy-svg="BAE ABERTEIFI">CARDIGAN BAY</text>
+          <text class="sea-l" x="80" y="680" data-cy-svg="MÔR HAFREN">BRISTOL CHANNEL</text>
+          <path class="land" id="land" d="__WALES__"/>
+          <g id="las" hidden></g>
+          <g id="pins"></g>
+        </svg>
+        <div class="chips map-legend" id="map-filter" role="group" aria-label="Filter places by era"></div>
+      </div>
+      <article class="place-card" id="place-card" aria-live="polite"></article>
+      <article class="place-card kg-panel" id="kg-card" aria-live="polite" hidden></article>
+    </div>
+  </div>
+</section>
+
+<section id="people">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow"><span class="num">04</span> · <span data-cy="Pobl">People</span></p>
+      <h2 data-cy="Y rhai a luniodd Gymru">The people who shaped Wales</h2>
+      <p data-cy="Tywysogion, beirdd, seintiau, gwrthryfelwyr a diwygwyr. Mae gan bob un ddolen y gallwch ei rhannu.">Princes, poets, saints, rebels and reformers. Each one has a link you can share.</p>
+    </div>
+    <div class="tl-tools">
+      <div class="chips" id="people-filter" role="group" aria-label="Filter people by era"></div>
+      <span class="people-count" id="people-count"></span>
+    </div>
+    <div class="people" id="people-grid"></div>
+  </div>
+</section>
+
+<section id="language">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow"><span class="num">05</span> · <span data-cy="Iaith">Language</span></p>
+      <h2 data-cy="Cymraeg, iaith hynaf Prydain">Cymraeg, the oldest language of Britain</h2>
+      <p data-cy="Tyfodd y Gymraeg o’r Frythoneg, iaith a siaredid ar draws y rhan fwyaf o Brydain cyn y Rhufeiniaid. Mae ei barddoniaeth hynaf yn dyddio o tua 600 OC, ac mae’n dal yn iaith bob dydd i fwy na hanner miliwn o bobl.">Welsh grew out of Brittonic, spoken across most of Britain before the Romans. Its oldest poetry dates from around 600 AD, and it is still the everyday language of more than half a million people.</p>
+    </div>
+    <div class="lang-grid">
+      <div class="panel">
+        <p class="eyebrow" data-cy="Siaradwyr Cymraeg yn ôl y cyfrifiad">Welsh speakers by census</p>
+        <h3 data-cy="Canrif o ddirywiad, a’r frwydr yn ôl">A century of decline, and a fight back</h3>
+        <p data-cy="Canran y bobl tair oed a hŷn a allai siarad Cymraeg. Ni chynhaliwyd cyfrifiad yn 1941.">Share of people aged three and over who could speak Welsh. No census was taken in 1941.</p>
+        <div class="chart-wrap" id="chart"></div>
+        <p data-cy="Nod strategaeth Cymraeg 2050 Llywodraeth Cymru yw miliwn o siaradwyr erbyn canol y ganrif.">The Welsh Government’s Cymraeg 2050 strategy aims for a million speakers by mid-century.</p>
+      </div>
+      <div class="panel decoder">
+        <p class="eyebrow" data-cy="Datgodiwr enwau lleoedd">Place-name decoder</p>
+        <h3 data-cy="Beth mae’r enw’n ei olygu?">What does the name mean?</h3>
+        <p data-cy="Mae’r rhan fwyaf o enwau lleoedd Cymru yn disgrifio’r tir. Teipiwch enw i’w dorri’n ddarnau.">Most Welsh place names describe the land. Type one and it will be broken into its parts.</p>
+        <form id="dec-form" autocomplete="off">
+          <label for="dec-in" style="position:absolute;left:-9999px">Place name</label>
+          <input id="dec-in" type="text" value="Llanfairpwllgwyngyll" spellcheck="false">
+        </form>
+        <div class="parts" id="dec-out"></div>
+        <div class="samples" id="dec-samples"></div>
+      </div>
+    </div>
+    <div style="margin-top:clamp(2rem,5vw,3.5rem);display:grid;gap:1.25rem">
+      <p class="eyebrow" data-cy="Geiriau i’w dysgu">Words to know</p>
+      <ul class="words" id="words"></ul>
+    </div>
+  </div>
+</section>
+
+<section id="quiz">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow"><span class="num">06</span> · <span data-cy="Cwis">Quiz</span></p>
+      <h2 data-cy="Faint wyddoch chi?">How much do you know?</h2>
+      <p data-cy="Deg cwestiwn o’r llinell amser a’r bobl. Mae pob cwis yn wahanol.">Ten questions drawn from the timeline and the people. Every round is different.</p>
+    </div>
+    <div class="quiz" id="quiz-box"></div>
+  </div>
+</section>
+
+<section id="sources">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow"><span class="num">07</span> · <span data-cy="Ffynonellau">Sources</span></p>
+      <h2 data-cy="Darllen pellach">Further reading</h2>
+      <p data-cy="Mae pob digwyddiad, lle a pherson ar y wefan hon yn cysylltu â ffynhonnell. Dyma’r llyfrau a’r casgliadau gorau i fynd ymhellach.">Every event, place and person on this site links to a source. These are the best books and collections for going further.</p>
+    </div>
+    <div class="reading">
+      <div><p class="eyebrow" style="margin-bottom:.5rem" data-cy="Llyfrau">Books</p><ul id="read-books"></ul></div>
+      <div><p class="eyebrow" style="margin-bottom:.5rem" data-cy="Ar-lein">Online</p><ul id="read-online"></ul></div>
+    </div>
+    <p class="note-box" style="margin-top:2rem" data-cy="Mae’r dolenni i ddigwyddiadau unigol yn mynd i Wicipedia, sydd yn ei dro yn rhestru ffynonellau academaidd. Dyddiadau bras yw’r rhai a nodir ‘c.’ (circa). Map yn seiliedig ar ffiniau awdurdodau lleol; mae’r map teyrnasoedd yn fras.">Links on individual events go to Wikipedia, which in turn lists academic sources. Dates marked c. (circa) are approximate. The map is drawn from local authority boundaries, and the kingdoms map is an approximation.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="big">Diolch.</p>
+    <nav aria-label="Ages" id="foot-eras"></nav>
+    <span data-cy="Hanes Cymru · Darluniau gwreiddiol">Hanes Cymru · Original illustrations</span>
+  </div>
+</footer>
+
+<div id="overlay" hidden></div>
+<script>var DATA = __DATA__;</script>
+<script>__APP__</script>
