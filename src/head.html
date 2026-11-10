@@ -20,6 +20,7 @@
   --e-saints: #b9a0ea;    /* illuminated-manuscript violet */
   --e-kings: #e8c65a;     /* the gold of a crown */
   --e-medieval: #f26a62;  /* the dragon */
+  --e-roman: #e58fb4; --e-tudor: #62c6c4; --e-today: #f59a4a;
   --e-industrial: #93a0e0;/* Penrhyn slate blue */
   --e-modern: #7cc495;    /* hill green */
   --f-display: "Gloock", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
@@ -47,6 +48,7 @@ button { font: inherit; color: inherit }
 .chip i { width: .55rem; height: .55rem; border-radius: 50%; background: var(--c, var(--muted)); display: inline-block }
 .chips { display: flex; flex-wrap: wrap; gap: .5rem }
 [data-era="ancient"] { --c: var(--e-ancient) } [data-era="saints"] { --c: var(--e-saints) } [data-era="kings"] { --c: var(--e-kings) } [data-era="medieval"] { --c: var(--e-medieval) }
+[data-era="roman"] { --c: var(--e-roman) } [data-era="tudor"] { --c: var(--e-tudor) } [data-era="today"] { --c: var(--e-today) }
 [data-era="industrial"] { --c: var(--e-industrial) } [data-era="modern"] { --c: var(--e-modern) }
 
 /* ---------- Nav ---------- */

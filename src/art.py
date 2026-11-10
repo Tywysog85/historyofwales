@@ -212,10 +212,41 @@ def _amph(c):
             f'<circle cx="400" cy="86" r="16" fill="{c}"/><path d="M370 108h60" stroke="{c}" stroke-width="3"/>')
 
 
-MOTIF = dict(castle=_castle, dolmen=_dolmen, cross=_cross, ship=lambda c: _sea(c, 446, 2) + _ship(c, 0, -10), pit=_pit, senedd=_senedd,
+def _fort(c):
+    # a Roman fortress gate: two towers, a double arch, a wall running off both sides and a standard
+    wall = f'<g fill="{FRONT}"><rect x="0" y="330" width="800" height="110"/>' + "".join(f'<rect x="{x}" y="316" width="22" height="16"/>' for x in range(6, 800, 40)) + \
+        '<rect x="270" y="210" width="90" height="230"/><rect x="440" y="210" width="90" height="230"/><rect x="350" y="262" width="100" height="178"/>' + \
+        "".join(f'<rect x="{x}" y="196" width="18" height="16"/>' for x in (270, 294, 318, 342, 440, 464, 488, 512)) + \
+        "".join(f'<rect x="{x}" y="250" width="14" height="14"/>' for x in (362, 386, 410, 434)) + '</g>'
+    arches = f'<g fill="{c}" opacity=".55"><path d="M364 440V380a18 18 0 0 1 36 0v60z"/><path d="M404 440V380a18 18 0 0 1 36 0v60z"/></g>'
+    lights = f'<g fill="{c}" opacity=".85"><path d="M306 300v-22a9 9 0 0 1 18 0v22z"/><path d="M476 300v-22a9 9 0 0 1 18 0v22z"/><rect x="308" y="236" width="14" height="18"/><rect x="478" y="236" width="14" height="18"/></g>'
+    std = f'<path d="M150 330V150" stroke="{FRONT}" stroke-width="5"/><rect x="128" y="160" width="44" height="52" fill="{c}"/><path d="M128 212l11 12 11-12 11 12 11-12" fill="{c}"/><path d="M134 150c8-12 24-12 32 0z" fill="{FRONT}"/><circle cx="150" cy="186" r="9" fill="none" stroke="{FRONT}" stroke-width="3"/>'
+    road = f'<path d="M352 500L372 440h56l20 60z" fill="#1b2231"/><path d="M0 330h800" stroke="{c}" stroke-width="1.5" opacity=".35"/>'
+    return wall + arches + lights + std + road
+
+
+def _terrace(c):
+    # a valley terrace stepping downhill, with a chapel at the top of the street
+    out = f'<g fill="{FRONT}">'
+    win = f'<g fill="{c}" opacity=".85">'
+    for k in range(8):
+        x, y = 250 + k * 66, 330 + k * 9
+        out += f'<rect x="{x}" y="{y}" width="66" height="{112 - k * 9}"/><path d="M{x - 3} {y}l36-26 36 26z"/><rect x="{x + 44}" y="{y - 40}" width="12" height="28"/>'
+        if k % 3 != 1:
+            win += f'<rect x="{x + 12}" y="{y + 16}" width="14" height="18"/>'
+        if k % 2 == 0:
+            win += f'<rect x="{x + 40}" y="{y + 16}" width="14" height="18"/>'
+        win += f'<rect x="{x + 26}" y="{y + 58}" width="13" height="{max(10, 54 - k * 9)}" opacity=".35"/>'
+    out += '<rect x="90" y="250" width="130" height="190"/><path d="M80 250l75-64 75 64z"/></g>'
+    win += '<path d="M146 330v-40a9 9 0 0 1 18 0v40z"/><path d="M110 340v-30a8 8 0 0 1 16 0v30z"/><path d="M184 340v-30a8 8 0 0 1 16 0v30z"/><circle cx="155" cy="232" r="9"/></g>'
+    smoke = '<g fill="#8a90a3" opacity=".2"><circle cx="304" cy="270" r="12"/><circle cx="316" cy="246" r="17"/><circle cx="502" cy="296" r="11"/><circle cx="514" cy="274" r="16"/><circle cx="700" cy="322" r="10"/></g>'
+    return out + win + smoke
+
+
+MOTIF = dict(fort=_fort, terrace=_terrace, castle=_castle, dolmen=_dolmen, cross=_cross, ship=lambda c: _sea(c, 446, 2) + _ship(c, 0, -10), pit=_pit, senedd=_senedd,
              dragons=_dragons, hound=_hound, sunken=_sunken, lady=_lady, bird=_bird, owl=_owl, sword=_sword, cauldron=_cauldron,
              book=_book, arches=_arches, torch=_torch, amph=_amph)
-MOON = dict(castle=(640, 110, 34), dolmen=(400, 190, 60), cross=(620, 120, 30), ship=(170, 120, 36), pit=(650, 110, 30), senedd=(650, 100, 30),
+MOON = dict(fort=(650, 100, 30), terrace=(620, 110, 34), castle=(640, 110, 34), dolmen=(400, 190, 60), cross=(620, 120, 30), ship=(170, 120, 36), pit=(650, 110, 30), senedd=(650, 100, 30),
             dragons=(400, 120, 44), hound=(560, 120, 46), sunken=(640, 70, 26), lady=(600, 120, 40), bird=(180, 110, 34), owl=(620, 110, 50),
             sword=(600, 110, 36), cauldron=(640, 100, 30), book=(650, 96, 28), arches=(140, 110, 32), torch=(660, 100, 30), amph=(160, 110, 30))
 

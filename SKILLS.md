@@ -112,7 +112,7 @@ This file collects the techniques and lessons from building History of Wales. Ad
 ### Page-to-page transitions
 - One line of CSS, `@view-transition { navigation: auto }`, makes modern browsers cross-fade between pages. Older browsers ignore it.
 
-### Hover accordion (the six ages)
+### Hover accordion (the ages)
 - The six age posters sit in a flex row. The hovered one gets a bigger `flex-grow`, which animates. On phones the same cards become a sideways swipe row with scroll-snap.
 - Gotcha: text inside a card that should wrap must not sit in a CSS grid with a wide sibling, or the grid stretches and the title is cut off. A flex column fixed it.
 
@@ -133,3 +133,15 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
 - Small visual tweaks are published one at a time so each can be seen live.
 - Still open: a fluent Welsh speaker to proofread the Welsh, a check of the photos, and optional real voice recordings for the Welsh words (MP3s go in `src/static/audio/` as `slug.mp3`).
+
+### Adding or splitting an age (November 2026)
+
+The ages are layered: `src/data.py` holds the original four, `src/ages.py` adds Saints and Kings, and `src/ages9.py` adds Roman Wales, Tudor and Stuart Wales and Wales Today. Each layer is applied at the bottom of `data.py`.
+
+To add an age:
+1. Write its `dict` (id, names, span, blurb, two story paragraphs, in English and Welsh) in `src/ages9.py`, and add teacher notes to `TEACH` there.
+2. Put it in the `ERAS = [...]` line at the bottom of `data.py`, and extend `age()` so events move into it by year. Move people and places with the `*_PEOPLE` sets and `PLACE_ERA`.
+3. Give it a colour in `COL` and a picture in `ERA_ART` (`build.py`), the same colour as `--e-<id>` plus a `[data-era="<id>"]` rule in `src/head.html`, and a name in `ERA_NAMES` in `src/static/play.js`.
+4. Update the words that count the ages: the heading in `src/body.html`, the footer column in `build.py` and the "ages" badge in `src/static/site.js`.
+
+With nine posters in a row, a closed poster is too narrow for its title, so closed posters print the title up the side (`writing-mode: vertical-rl` with `text-orientation: sideways`, so apostrophes turn with the letters) and the open one prints it normally.

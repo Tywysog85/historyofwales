@@ -53,3 +53,7 @@ Dates and figures were written with care but should be checked against the linke
 - **Games** (daily challenge, map game, Welsh names, word pairs and more) are in `src/static/play.js`; the quiz and timeline challenge now have their own page, `quiz.html`.
 - **Your journey** (`journey.html`) shows what a visitor has read and the badges they have earned. It is stored only in their browser.
 - The menu, footer and page effects shared by every page are in `build.py` (`nav()`, `footer()`), `src/v6.css` and `src/static/site.js`.
+
+## Nine ages
+
+The site is organised into nine ages: Ancient Wales, Roman Wales, the Age of Saints, the Age of Kings, the Age of Princes, Tudor and Stuart Wales, Industrial Wales, Twentieth-Century Wales and Wales Today. See "Adding or splitting an age" in SKILLS.md.

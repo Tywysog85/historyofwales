@@ -575,3 +575,28 @@ PEOPLE = sorted(PEOPLE, key=lambda p: (_ERA_ORDER[p[1]], _born(p)))
 PLACES = [dict(pl, era="saints") if pl["id"] == "stdavids" else pl for pl in PLACES] + _AG.NEW_PLACES
 _KEYS = {"Death of Saint David", "Y Gododdin", "Offa’s Dyke", "Rhodri Mawr defeats the Vikings", "The laws of Hywel Dda", "One king for all Wales"}
 EVENTS = [ev[:9] + (1,) + ev[10:] if ev[5] in _KEYS else ev for ev in EVENTS]
+
+
+# ---------- nine ages (src/ages9.py) ----------
+import ages9 as _A9
+
+_by = {x["id"]: x for x in ERAS}
+_a, _i, _m = _by["ancient"], _by["industrial"], _by["modern"]
+_tudor_p1 = (_i["storyEn"][0], _i["storyCy"][0])
+for _k in ("spanEn", "spanCy", "blurbEn", "blurbCy"):
+    _a[_k] = _A9.ANCIENT[_k]
+for _lang in ("En", "Cy"):
+    _t = _a["story" + _lang][1]
+    _cut = _t.index(_A9.ANCIENT["cut" + _lang])
+    _a["story" + _lang][1] = _t[:_cut] + _A9.ANCIENT["end" + _lang]
+for _k in ("en", "cy", "spanEn", "spanCy", "blurbEn", "blurbCy"):
+    _i[_k] = _A9.INDUSTRIAL[_k]
+    _m[_k] = _A9.MODERN[_k]
+_i["storyEn"] = [_i["storyEn"][1], _A9.INDUSTRIAL["p2En"]]
+_i["storyCy"] = [_i["storyCy"][1], _A9.INDUSTRIAL["p2Cy"]]
+ERAS = [_a, _A9.ROMAN] + [x for x in ERAS if x["id"] in ("saints", "kings", "medieval")] + [_A9.TUDOR, _i, _m, _A9.TODAY]
+EVENTS = [(_A9.age(ev[0], ev[1]),) + ev[1:] for ev in EVENTS]
+PEOPLE = [(p[0], "roman" if p[0] in _A9.ROMAN_PEOPLE else "tudor" if p[0] in _A9.TUDOR_PEOPLE else "today" if p[0] in _A9.TODAY_PEOPLE else p[1]) + p[2:] for p in PEOPLE]
+_ERA_ORDER = {x["id"]: n for n, x in enumerate(ERAS)}
+PEOPLE = sorted(PEOPLE, key=lambda p: (_ERA_ORDER[p[1]], _born(p)))
+PLACES = [dict(pl, era=_A9.PLACE_ERA.get(pl["id"], pl["era"])) for pl in PLACES]
