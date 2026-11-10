@@ -6,7 +6,7 @@ const og = `<html><head><link href="https://fonts.googleapis.com/css2?family=Glo
 <style>body{margin:0;width:1200px;height:630px;overflow:hidden;background:#0e1118;font-family:Figtree,sans-serif}canvas{position:absolute;inset:0}
 .t{position:absolute;left:72px;top:118px;color:#ece9e1}.e{font:500 20px 'JetBrains Mono',monospace;letter-spacing:.16em;color:#9ba2b0}
 h1{font:400 220px/0.86 Gloock,serif;margin:18px 0 0;letter-spacing:-4px}h1 span{color:#e2453d}p{font:400 34px/1.25 Gloock,serif;margin:56px 0 0}</style></head>
-<body><canvas id=c width=1200 height=630></canvas><div class=t><h1>C<span>y</span>mru</h1><p>A land of Kings, Princes, Castles, Poets, and Saints.<br>A land of Coal, Slate, Iron, Copper, and Wool.</p></div>
+<body><canvas id=c width=1200 height=630></canvas><div class=t><h1>C<span>y</span>mru</h1><p>A land of Kings, Princes, Castles, Poets, and Saints.<br>Built on Coal, Slate, Iron, Copper, and Wool.</p></div>
 <script>const c=document.getElementById('c').getContext('2d'),W=1200,H=630;let s=1282;const r=()=>{s=s*16807%2147483647;return(s-1)/2147483646};
 const g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,'#0b0e16');g.addColorStop(.55,'#1a2032');g.addColorStop(.8,'#3a2a35');g.addColorStop(1,'#0e1118');c.fillStyle=g;c.fillRect(0,0,W,H);
 for(let i=0;i<120;i++){c.fillStyle='rgba(236,233,225,'+(.2+r()*.5)+')';c.fillRect(r()*W,r()*H*.6,1.5,1.5)}
