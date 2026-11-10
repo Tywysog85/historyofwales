@@ -86,11 +86,15 @@ html.menu-open { overflow: hidden }
 @media (prefers-reduced-motion: reduce) { .scroll-cue::after, .hero .cta .btn.ghost::before { animation: none; opacity: 1 } }
 
 /* ---------- marquee ---------- */
-.marquee { overflow: hidden; border-block: 1px solid var(--line); padding-block: 1.1rem; background: var(--night); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent) }
-.marquee .track { display: flex; align-items: center; gap: 2.2rem; width: max-content; animation: marquee 60s linear infinite; font-family: var(--f-display); font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1; white-space: nowrap }
-.marquee .track > span:nth-of-type(odd) { color: transparent; -webkit-text-stroke: 1px rgba(236,233,225,.55) }
+.marquee { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; cursor: grab; -webkit-user-select: none; user-select: none; overscroll-behavior-x: contain; border-block: 1px solid var(--line); padding-block: 1.1rem; background: var(--night); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent) }
+.marquee .track { display: flex; align-items: center; gap: 2.2rem; width: max-content; padding-inline: 1.1rem; font-family: var(--f-display); font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1; white-space: nowrap }
+.marquee::-webkit-scrollbar { display: none }
+.marquee.drag { cursor: grabbing }
+.marquee a { color: var(--ink); text-decoration: none; transition: color .2s; -webkit-user-drag: none }
+.marquee a:hover, .marquee a:focus-visible { color: var(--dragon, #e2453d) }
+.marquee.drag a { pointer-events: none }
 .marquee i { font-style: normal; color: var(--red); font-size: .45em }
-@keyframes marquee { to { transform: translateX(-50%) } }
+
 
 /* ---------- today bento ---------- */
 #today { padding-block: clamp(2.5rem, 6vw, 4.5rem) 0 }
@@ -360,7 +364,7 @@ footer .big span { color: var(--red) }
 #quiz { background: transparent }
 @media (prefers-reduced-motion: reduce) {
   html.js .rv { opacity: 1; transform: none }
-  .marquee .track { animation: none }
+
   ::view-transition-old(root), ::view-transition-new(root) { animation: none }
 }
 @media print { .progress, .menu, .to-top, .hero-art, .marquee, .journey-chip, .menu-btn { display: none !important } html.js .rv { opacity: 1; transform: none } .era-hero.has-art { min-height: 0 } }
