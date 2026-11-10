@@ -25,12 +25,14 @@
   var MONTHS_CY = ["Ionawr","Chwefror","Mawrth","Ebrill","Mai","Mehefin","Gorffennaf","Awst","Medi","Hydref","Tachwedd","Rhagfyr"];
 
   /* ---------- Hero sky ---------- */
-  var cv = $("#sky"), cx = HERO ? cv.getContext("2d") : null, W = 0, H = 0, dpr = 1, mouse = 0, ridges = [], stars = [];
+  var cv = $("#sky"), cx = HERO ? cv.getContext("2d") : null, W = 0, H = 0, dpr = 1, mouse = 0, ridges = [], stars = [], milky = [];
   function rnd(seed) { return function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
   (function () {
     var r = rnd(1282);
     for (var l = 0; l < 5; l++) { var w = []; for (var k = 0; k < 6; k++) w.push([r() * 6.28, 0.6 + r() * (k + 1) * 1.7, (1 / (k + 1.2)) * (0.6 + r() * 0.6)]); ridges.push(w); }
     for (var s = 0; s < 140; s++) stars.push([r(), r() * 0.6, r() * 1.2 + 0.2, r()]);
+    /* the Milky Way: a band of faint stars rising from the left horizon */
+    for (var q = 0; q < 420; q++) { var p = r(), n = (r() + r() + r() - 1.5) * 0.13; milky.push([0.0 + p * 0.62 + n * 0.5, 0.46 - p * 0.5 + n, r() * 0.9 + 0.3, r()]); }
   })();
   var LAYERS = [
     { y: 0.50, a: 0.16, c: "#232a3d", s: 0.05 }, { y: 0.60, a: 0.14, c: "#1d2433", s: 0.12 },
@@ -93,13 +95,20 @@
       cx.fillStyle = "rgba(236,233,225," + (0.15 + 0.5 * tw * s[2] / 1.4) * SKY.star + ")"; cx.fillRect(X, Y, s[2], s[2]);
       if (i % 12 === 0 && !(Y > M.h1t - 6 && (W < 1100 ? Y < M.cta + 6 : X < W * 0.62))) { var a = (0.25 + 0.6 * tw) * SKY.star, L2 = 2.5 + 3 * tw; cx.fillStyle = "rgba(244,238,226," + a + ")"; cx.fillRect(X - L2, Y, L2 * 2 + 1, 1); cx.fillRect(X, Y - L2, 1, L2 * 2 + 1); }
     });
+    if (W >= 1100 && SKY.star > 0.5) {
+      for (var b = 0; b < 5; b++) { var bx = W * (0.06 + b * 0.125), by = H * (0.4 - b * 0.1), br = H * 0.2, bg = cx.createRadialGradient(bx, by, 0, bx, by, br); bg.addColorStop(0, "rgba(150,165,215," + 0.1 * SKY.star + ")"); bg.addColorStop(1, "rgba(150,165,215,0)"); cx.fillStyle = bg; cx.fillRect(bx - br, by - br, br * 2, br * 2); }
+      milky.forEach(function (s) {
+        var X = s[0] * W, Y = s[1] * H - sy * 0.02; if (Y < 0 || X < 0) return;
+        cx.fillStyle = "rgba(226,230,245," + (0.2 + 0.55 * s[3] * (0.6 + 0.4 * Math.sin(t / 1300 + s[3] * 40))) * SKY.star + ")"; cx.fillRect(X, Y, s[2], s[2]);
+      });
+    }
     /* phones and tall, narrow windows: the mountain sits below the words. Wide screens: it stands to the right of them. */
     var narrow = W < 640, stacked = W < 1100;
     var ex0, ew, eb, eh;
     if (stacked) {
       var top = narrow ? M.cta + 18 : M.sub + 4, bot = Math.max(top + 120, M.tick + (narrow ? 26 : 10));
       eh = Math.min(bot - top, W * 0.62); if (narrow && VIS > top + 110) eh = Math.min(eh, Math.max(120, VIS - top - 4)); eb = top + eh; ew = Math.max(W * (narrow ? 1.05 : 0.8), eh * 2.3); ex0 = W * (narrow ? 0.6 : 0.7) - 0.53 * ew;
-    } else { ex0 = W * 0.38; ew = W * 0.7; eb = H * 0.72; eh = H * 0.5; }
+    } else { ew = Math.min(W * 0.6, H * 1.2); ex0 = W * 0.985 - ew; eb = H * 0.74; eh = Math.min(H * 0.5, ew * 0.62); }
     var sumX = ex0 + 0.53 * ew - mouse * 4, sumY = eb - eh - sy * 0.04;
     var mr = Math.max(narrow ? 15 : 18, Math.min(W, H) * 0.04);
     var mx = narrow ? W - mr - 14 : W * 0.9, my = (stacked ? Math.max(mr + 8, M.h1t - mr * 0.2) : H * 0.13) - sy * 0.03;
@@ -111,7 +120,11 @@
     cx.fillStyle = halo; cx.fillRect(mx - mr * 4.5, my - mr * 4.5, mr * 9, mr * 9);
     cx.fillStyle = SKY.orb; cx.beginPath(); cx.arc(mx, my, mr, 0, 7); cx.fill();
     cx.fillStyle = "rgba(180,160,140," + 0.22 * (1 - SKY.sun) + ")"; [[-.3, -.25, .22], [.28, .1, .16], [-.1, .4, .12]].forEach(function (c) { cx.beginPath(); cx.arc(mx + c[0] * mr, my + c[1] * mr, c[2] * mr, 0, 7); cx.fill(); });
+    /* first light on the horizon behind the mountain */
+    var hz = cx.createLinearGradient(0, eb - eh * 0.75, 0, eb + eh * 0.1); hz.addColorStop(0, "rgba(232,120,76,0)"); hz.addColorStop(1, "rgba(232,120,76," + Math.min(0.3, 0.17 * SKY.glow) + ")");
+    cx.fillStyle = hz; cx.fillRect(0, eb - eh * 0.75, W, eh * 0.85);
     LAYERS.forEach(function (L, i) {
+      if (i === 3 && !stacked) drawCastle(W * 0.885 - mouse * 9, H * 0.7 - sy * 0.1, H * 0.12, mix("#0d111b", SKY.tint, SKY.k * 0.35), t);
       if (i === 1) { drawEryri(ex0 - ew * 0.34 - mouse * 2, eb - sy * 0.03, ew * 0.9, eh * 0.62, true); drawEryri(ex0 - mouse * 4, eb - sy * 0.04, ew, eh); }
       var w = ridges[i], amp = stacked ? eh * (0.34 - i * 0.04) : H * L.a, base = (stacked ? eb - eh * (0.42 - i * 0.15) : H * L.y) + sy * L.s * 0.6, off = mouse * (i + 1) * 6 + (reduce ? 0 : t / 1000 * (i + 1) * 1.2);
       cx.beginPath(); cx.moveTo(0, H);
@@ -134,6 +147,23 @@
     });
     if (SKY.star > 0.5) drawMeteors(t);
     drawDragon(t, sumX, sumY, narrow, stacked);
+  }
+  /* a castle of the princes on its crag: a round keep like Dolbadarn, with a light in the window */
+  function drawCastle(x, y, s, col, t) {
+    cx.fillStyle = col; cx.beginPath();
+    cx.moveTo(x - s * 3.4, y + s * 1.6); cx.quadraticCurveTo(x - s * 1.6, y + s * 0.2, x - s * 0.9, y); cx.lineTo(x + s * 1.0, y); cx.quadraticCurveTo(x + s * 1.9, y + s * 0.3, x + s * 3.6, y + s * 1.6); cx.closePath(); cx.fill();
+    var kw = s * 0.62, kh = s * 1.15, m = kw / 5;
+    cx.fillRect(x - kw / 2, y - kh, kw, kh + 2);
+    for (var i = 0; i < 3; i++) cx.fillRect(x - kw / 2 - m * 0.3 + i * (kw + m * 0.6 - m) / 2, y - kh - m, m, m + 1);
+    cx.fillRect(x - s * 0.95, y - s * 0.36, s * 1.9, s * 0.36 + 2);
+    for (var j = 0; j < 7; j++) cx.fillRect(x - s * 0.95 + j * s * 0.3, y - s * 0.36 - m * 0.7, m * 0.9, m * 0.7 + 1);
+    cx.fillRect(x + s * 0.62, y - s * 0.62, s * 0.34, s * 0.62 + 2); cx.fillRect(x + s * 0.58, y - s * 0.62 - m * 0.6, s * 0.14, m * 0.6 + 1); cx.fillRect(x + s * 0.86, y - s * 0.62 - m * 0.6, s * 0.14, m * 0.6 + 1);
+    var fl = 0.75 + 0.25 * Math.sin(t / 330) * Math.sin(t / 97), wx = x, wy = y - kh * 0.62, wg = cx.createRadialGradient(wx, wy, 0, wx, wy, s * 0.5);
+    wg.addColorStop(0, "rgba(255,196,110," + 0.5 * fl + ")"); wg.addColorStop(1, "rgba(255,196,110,0)"); cx.fillStyle = wg; cx.fillRect(wx - s * 0.5, wy - s * 0.5, s, s);
+    cx.fillStyle = "rgba(255,214,140," + (0.75 + 0.25 * fl) + ")"; cx.fillRect(wx - m * 0.3, wy - m * 0.55, m * 0.6, m * 1.1);
+    /* the red dragon flying from the keep */
+    cx.strokeStyle = col; cx.lineWidth = Math.max(1, s * 0.03); cx.beginPath(); cx.moveTo(x, y - kh - m); cx.lineTo(x, y - kh - m - s * 0.5); cx.stroke();
+    var fw = s * 0.34, wv = reduce ? 0 : Math.sin(t / 260) * s * 0.03; cx.fillStyle = "#e2453d"; cx.beginPath(); cx.moveTo(x, y - kh - m - s * 0.5); cx.lineTo(x + fw, y - kh - m - s * 0.46 + wv); cx.lineTo(x + fw, y - kh - m - s * 0.3 + wv); cx.lineTo(x, y - kh - m - s * 0.32); cx.closePath(); cx.fill();
   }
   /* shooting stars: one every few seconds, high in the sky */
   var meteors = [], nextMeteor = 2500;
