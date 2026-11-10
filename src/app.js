@@ -124,12 +124,14 @@
     var hz = cx.createLinearGradient(0, eb - eh * 0.75, 0, eb + eh * 0.1); hz.addColorStop(0, "rgba(232,120,76,0)"); hz.addColorStop(1, "rgba(232,120,76," + Math.min(0.3, 0.17 * SKY.glow) + ")");
     cx.fillStyle = hz; cx.fillRect(0, eb - eh * 0.75, W, eh * 0.85);
     /* where the device can draw it, the mountain and castle are real 3D on their own canvas (tools/land3d.src.js); until that is ready only the sky shows */
-    var L3 = window.HCL3 && HCL3.ready, noLand = L3 || window.HCL3_WANT;
+    /* the opening is staged: sky and title first, then the words, then the land fades in (never before 1.2 s, so it does not arrive under a half-drawn title), then the dragon flies in */
+    var L3 = window.HCL3 && HCL3.ready && performance.now() > 1200, noLand = L3 || window.HCL3_WANT;
     if (L3) {
       /* the valley mist the mountains rise out of, which also hides the stars below the skyline */
-      var vm = cx.createLinearGradient(0, eb - eh * 0.45, 0, H), vc = hex(mixHex(mixHex(SKY.sky[2], SKY.sky[1], 0.45), "#aab4d2", 0.12)).join(",");
+      var vm = cx.createLinearGradient(0, eb - eh * 0.45, 0, H), mistC = mixHex(mixHex(SKY.sky[2], SKY.sky[1], 0.45), "#aab4d2", 0.12), vc = hex(mistC).join(",");
       vm.addColorStop(0, "rgba(" + vc + ",0)"); vm.addColorStop(0.3, "rgba(" + vc + ",.9)"); vm.addColorStop(0.55, "rgba(" + vc + ",1)"); vm.addColorStop(1, SKY.sky[3]); cx.fillStyle = vm; cx.fillRect(0, eb - eh * 0.45, W, H);
-      if (!FLAG) FLAG = flagArt(); HCL3.frame({ W: W, H: H, sumX: sumX - ew * 0.13, sumY: sumY + ew * 0.15, ppm: ew / 2000, ground: stacked ? { x: W * 0.5 - mouse * 9, y: eb + eh * 0.02 - sy * 0.1, ppm: ew * 0.007 } : { x: Math.min(W * 0.885, W - H * 0.3) - mouse * 9, y: H * 0.7 - sy * 0.1, ppm: H * 0.0098 }, castle: !stacked, t: t, sun: SKY.sun, fog: mixHex(SKY.sky[2], SKY.sky[1], 0.45), flag: FLAG, flagV: FLAGV });
+      if (!FLAG) FLAG = flagArt(); HCL3.frame({ W: W, H: H, sumX: sumX - ew * 0.13, sumY: sumY + ew * 0.15, ppm: ew / 2000, ground: stacked ? { x: W * 0.5 - mouse * 9, y: eb + eh * 0.02 - sy * 0.1, ppm: ew * 0.007 } : { x: Math.min(W * 0.885, W - H * 0.3) - mouse * 9, y: H * 0.7 - sy * 0.1, ppm: H * 0.0098 }, castle: !stacked, t: t, sun: SKY.sun, fog: mixHex(SKY.sky[2], SKY.sky[1], 0.45), mist: mistC, flag: FLAG, flagV: FLAGV });
+      if (HCL3.shown && !LANDT) LANDT = t;
     }
     LAYERS.forEach(function (L, i) {
       if (noLand) return;
@@ -266,8 +268,11 @@
   }
   var FIRE_PREVIEW = /[?&]fire=1/.test(location.search);
   var DPOS = { x: -999, y: -999, r: 0 }, fireAt = 0, nextFire = 5000;
+  var LANDT = 0, DT0 = -1;
   function drawDragon(t, sumX, sumY, narrow, stacked) {
-    var period = 26000, k = reduce ? 0.55 : (t % period) / period;
+    /* the dragon waits for the land to finish fading in, then starts at the beginning of its flight */
+    if (DT0 < 0 && !reduce) { if (window.HCD3_WANT && !(window.HCD3 && HCD3.ready)) return; if (window.HCL3_WANT && !(LANDT && t > LANDT + 1700)) return; DT0 = t; nextFire = t + 5000; }
+    var period = 26000, k = reduce ? 0.55 : ((t - DT0) % period) / period;
     var base = narrow ? W * 0.27 : Math.min(W * 0.17, 260);
     var sx = narrow ? W * 0.61 : W * 0.6, ex = narrow ? W * 0.72 : stacked ? W * 0.78 : sumX - W * 0.06;
     var sy0 = narrow ? M.h1t + M.h1h * 0.3 : stacked ? M.h1t + M.h1h * 0.1 : H * 0.07, ey = narrow ? M.h1t + M.h1h * 0.42 : stacked ? M.h1t + M.h1h * 0.45 : sumY - H * 0.05;

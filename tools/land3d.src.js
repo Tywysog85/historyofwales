@@ -14,6 +14,7 @@ function heightAt(h, x, z) { /* metres east and south of the map corner */
   const xi = u | 0, yi = v | 0, fx = u - xi, fy = v - yi, i = yi * HN + xi;
   return (h[i] * (1 - fx) + h[i + 1] * fx) * (1 - fy) + (h[i + HN] * (1 - fx) + h[i + HN + 1] * fx) * fy;
 }
+const MIST = { value: new THREE.Vector3(0.2, 0.18, 0.24) }; /* the colour of the valley mist as it is painted on screen, set each frame from the sky */
 function buildLand(h, colour, normal, detail) {
   const seg = HN - 1, geo = new THREE.PlaneGeometry(KM, KM, seg, seg); geo.rotateX(-Math.PI / 2); geo.translate(KM / 2, 0, KM / 2);
   const p = geo.attributes.position; for (let i = 0; i < p.count; i++) p.setY(i, h[i]);
@@ -23,12 +24,12 @@ function buildLand(h, colour, normal, detail) {
   /* fine grain from a photograph of rock, so that the slopes hold up close to */
   detail.wrapS = detail.wrapT = THREE.RepeatWrapping; detail.anisotropy = 8;
   mat.onBeforeCompile = (sh) => {
-    sh.uniforms.detail = { value: detail };
+    sh.uniforms.detail = { value: detail }; sh.uniforms.mist = MIST;
     sh.vertexShader = sh.vertexShader.replace("#include <common>", "varying float vH;\n#include <common>").replace("#include <begin_vertex>", "#include <begin_vertex>\n vH = position.y;");
-    sh.fragmentShader = sh.fragmentShader.replace("uniform float opacity;", "uniform float opacity; uniform sampler2D detail; varying float vH;")
+    sh.fragmentShader = sh.fragmentShader.replace("uniform float opacity;", "uniform float opacity; uniform sampler2D detail; uniform vec3 mist; varying float vH;")
       .replace("#include <map_fragment>", "#include <map_fragment>\n float d1 = texture2D(detail, vMapUv * 61.0).g * 2.0, d2 = texture2D(detail, vMapUv * 17.3).g * 2.0; diffuseColor.rgb *= mix(1.0, d1 * mix(1.0, d2, 0.4), 0.45);")
       /* the low ground, the ground near the eye and the outlying spurs melt away, so that the horseshoe rises out of the valley mist */
-      .replace("#include <premultiplied_alpha_fragment>", "gl_FragColor.a *= smoothstep(900.0, 2200.0, length(vViewPosition)) * smoothstep(640.0, 1000.0, vH) * (1.0 - smoothstep(0.31, 0.44, distance(vMapUv, vec2(0.342, 0.494)))); if (gl_FragColor.a < 0.02) discard;\n#include <premultiplied_alpha_fragment>");
+      .replace("#include <premultiplied_alpha_fragment>", "gl_FragColor.rgb = mix(mist, gl_FragColor.rgb, 0.3 + 0.7 * smoothstep(600.0, 960.0, vH)); gl_FragColor.a *= smoothstep(900.0, 2200.0, length(vViewPosition)) * smoothstep(560.0, 690.0, vH) * (1.0 - smoothstep(0.31, 0.44, distance(vMapUv, vec2(0.342, 0.494)))); if (gl_FragColor.a < 0.02) discard;\n#include <premultiplied_alpha_fragment>");
   };
   const g = new THREE.Group(), mesh = new THREE.Mesh(geo, mat); mesh.frustumCulled = false; g.add(mesh);
   return g;
@@ -214,12 +215,14 @@ try {
     api.ready = true; window.dispatchEvent(new Event("hcl3"));
   }).catch(fail);
   img.onerror = fail; img.src = "eryri-h.png";
+  /* on wide screens the castle's stone is fetched straight away, and nothing is shown until the castle stands, so the scene arrives whole */
+  let noCastle = false; const stoneP = window.innerWidth >= 1100 ? Promise.all(["stone.webp", "stone-n.webp"].map(ld)) : null; if (stoneP) stoneP.catch(() => {});
   function loadCastle(flag) {
     wantCastle = true;
-    Promise.all(["stone.webp", "stone-n.webp"].map(ld)).then((t) => {
+    (stoneP || Promise.all(["stone.webp", "stone-n.webp"].map(ld))).then((t) => {
       castle = buildCastle({ stone: t[0], stoneN: t[1], rock: rockT.rock, rockN: rockT.rockN, flag }); castle.group.rotation.y = 0.42; fort.add(castle.group);
       castle.base = castle.lights.map((l) => l.intensity); renderer.shadowMap.needsUpdate = true; key = "";
-    }).catch(() => {});
+    }).catch(() => { noCastle = true; });
   }
   function place(cam, D, ppm, x, y) { /* put the point the camera looks at on pixel (x, y), at ppm pixels to the metre */
     const Hf = 2 * Math.tan(cam.fov * Math.PI / 360) * D * ppm, Wf = Hf * W / H;
@@ -231,13 +234,15 @@ try {
     if (!api.ready) return;
     if (st.W !== W || st.H !== H) { W = st.W; H = st.H; renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, W < 700 ? 1.5 : 2)); renderer.setSize(W, H, false); key = ""; }
     if (st.castle && !wantCastle) loadCastle(st.flag);
+    if (st.castle && !castle && !noCastle) return;
     const c = castle && st.castle, tt = st.t / 1000; if (castle) castle.group.visible = !!c;
     if (c && st.flagV !== flagV) { flagV = st.flagV; castle.flagTex.needsUpdate = true; key = ""; }
-    const k = [st.sumX, st.sumY, st.ppm * 1000, st.sun, st.fog, st.ground.x, st.ground.y, st.ground.ppm * 1000, c ? 1 : 0].map((q) => typeof q === "number" ? q.toFixed(1) : q).join("|");
+    const k = [st.sumX, st.sumY, st.ppm * 1000, st.sun, st.fog, st.mist, st.ground.x, st.ground.y, st.ground.ppm * 1000, c ? 1 : 0].map((q) => typeof q === "number" ? q.toFixed(1) : q).join("|");
     const full = k !== key; key = k;
     if (!full && !c) return;
     if (full) {
       const sun = st.sun || 0;
+      { const m = cA.set(st.mist || st.fog); MIST.value.set(Math.pow(m.r, 1 / 2.2), Math.pow(m.g, 1 / 2.2), Math.pow(m.b, 1 / 2.2)); }
       land.fog.color.set(st.fog); fort.fog.color.set(st.fog).multiplyScalar(0.8);
       hemiL.intensity = 0.4 + 0.25 * sun; moonL.intensity = 1.7 + 0.45 * sun; moonL.color.copy(cA.set(0xc4cdea)).lerp(cB.set(0xffe6c4), sun);
       hemiL.color.copy(cA.set(0x5a6a9a)).lerp(cB.set(0xa9c4ee), sun);
