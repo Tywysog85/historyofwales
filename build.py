@@ -17,6 +17,8 @@ sys.path.insert(0, SRC)
 import data as D  # noqa: E402
 import long as L  # noqa: E402
 import towns as TW  # noqa: E402
+import photos as PH  # noqa: E402
+from urllib.parse import quote as _q
 
 BASE_URL = os.environ.get("SITE_URL", "https://tywysog85.github.io/historyofwales/")
 GOATCOUNTER = os.environ.get("GOATCOUNTER", "").strip()
@@ -173,6 +175,20 @@ def section(inner, title_en=None, title_cy=None, top=False):
 
 
 EVI = {ev: i for i, ev in enumerate(D.EVENTS)}
+COMMONS = "https://commons.wikimedia.org/wiki/"
+
+
+def photo_url(f, w=1200):
+    return f"{COMMONS}Special:FilePath/{_q(f, safe='')}?width={w}"
+
+
+def photo_fig(ph, cls=""):
+    if not ph:
+        return ""
+    f, cen, ccy = ph
+    return (f'<figure class="photo {cls}"><img src="{photo_url(f)}" alt="{e(cen)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" '
+            f'onerror="this.closest(\'figure\').remove()">'
+            f'<figcaption>{bi(cen, ccy)} · <a href="{COMMONS}File:{_q(f, safe="")}" target="_blank" rel="noopener">{bi("Photo: Wikimedia Commons", "Llun: Wikimedia Commons")}</a></figcaption></figure>')
 
 
 def event_li(ev, k=0):
@@ -226,7 +242,7 @@ def person_page(p):
             (f'<a class="btn solid" href="person-{next_p[0]}.html">{bi(next_p[3], next_p[4])} →</a>' if next_p else '<a class="btn solid" href="index.html#people">' + bi("All people", "Pawb") + " →</a>")
     meta = (f'<div class="person-meta"><span>{e(p[2])}</span><span>{bi(p[5], p[6])}</span><a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a></div>')
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', era["ill"], p[2], p[2], p[3], p[4], p[7], p[8])
-            + section(meta + paras(long_en, long_cy) + f'<p class="share no-print"><button type="button" class="btn" data-copy="person-{slug}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button> {src(p[9])}</p>', top=True)
+            + section(meta + photo_fig(PH.PERSON_PHOTOS.get(slug), "portrait") + paras(long_en, long_cy) + f'<p class="share no-print"><button type="button" class="btn" data-copy="person-{slug}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button> {src(p[9])}</p>', top=True)
             + (section(f'<ol class="era-events">{"".join(event_li(ev) for ev in related)}</ol>', "On the timeline", "Ar y llinell amser") if related else "")
             + section(f'<div class="people">{"".join(plaque(x) for x in same)}</div>', "Also in this age", "Hefyd yn yr oes hon")
             + section(f'<div class="pager">{pager}</div>'))
@@ -245,7 +261,7 @@ def place_page(pl):
     meta = (f'<div class="person-meta"><span>{e(pl["year"])}</span><span>{pl["lat"]:.3f}° N, {abs(pl["lon"]):.3f}° W</span>'
             f'<a href="{osm}" target="_blank" rel="noopener">{bi("Open in a map", "Agor mewn map")} ↗</a><a href="index.html#lle-{pid}">{bi("On our map", "Ar ein map")} →</a></div>')
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', pl["ill"], era["en"], era["cy"], pl["en"], pl["cy"], pl["dEn"], pl["dCy"])
-            + section(meta + paras(long_en, long_cy) + f'<p class="share no-print">{src(pl["src"])}</p>', top=True)
+            + section(meta + photo_fig(PH.PLACE_PHOTOS.get(pid)) + paras(long_en, long_cy) + f'<p class="share no-print">{src(pl["src"])}</p>', top=True)
             + (section(f'<ol class="era-events">{"".join(event_li(ev) for ev in related)}</ol>', "What happened here", "Beth ddigwyddodd yma") if related else "")
             + section(f'<div class="era-places">{"".join(place_tile(x) for x in near)}</div>', "Nearby", "Gerllaw"))
     ld = {"@context": "https://schema.org", "@type": "TouristAttraction", "name": pl["en"], "alternateName": pl["cy"], "description": pl["dEn"],
@@ -355,7 +371,7 @@ style += EXTRA_PAGE_CSS
 
 # ---------- index ----------
 DATA = dict(
-    ERAS=D.ERAS, EVENTS=D.EVENTS, PLACES=D.PLACES, PEOPLE=D.PEOPLE, READING=D.READING, ONLINE=D.ONLINE,
+    ERAS=D.ERAS, EVENTS=D.EVENTS, PLACES=[dict(p, ph=[photo_url(PH.PLACE_PHOTOS[p['id']][0], 640), COMMONS + 'File:' + _q(PH.PLACE_PHOTOS[p['id']][0], safe=''), PH.PLACE_PHOTOS[p['id']][1], PH.PLACE_PHOTOS[p['id']][2]] if p['id'] in PH.PLACE_PHOTOS else None) for p in D.PLACES], PEOPLE=D.PEOPLE, READING=D.READING, ONLINE=D.ONLINE,
     CENSUS=D.CENSUS, KINGDOMS=D.KINGDOMS, LA=la, DICT=D.DICT, SAMPLES=D.SAMPLES, WORDS=D.WORDS,
     TRAILS=[dict(id=t["id"], en=t["en"], cy=t["cy"], ill=t["ill"], n=len(t["items"]), introEn=t["introEn"][0], introCy=t["introCy"][0]) for t in L.TRAILS],
     AUDIO=sorted(f[:-4] for f in os.listdir(os.path.join(SRC, 'static', 'audio')) if f.endswith('.mp3')) if os.path.isdir(os.path.join(SRC, 'static', 'audio')) else [],
