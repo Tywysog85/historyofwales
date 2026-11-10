@@ -121,7 +121,7 @@ PRINT_CSS = """
 
 
 def nav(active=""):
-    items = [("index.html", "Home", "Hafan"), ("index.html#timeline", "Timeline", "Llinell amser"), ("index.html#map", "Map", "Map"),
+    items = [("index.html", "Home", "Hafan"), ("timeline.html", "Timeline", "Llinell amser"), ("index.html#map", "Map", "Map"),
              ("trails.html", "Trails", "Llwybrau"), ("teachers.html", "Teachers", "Athrawon")]
     lis = "".join(f'<li><a href="{h}"{" class=on" if active == h else ""}>{bi(a, b)}</a></li>' for h, a, b in items)
     return (f'<a class="skip" href="#main">{bi("Skip to content", "Neidio i’r cynnwys")}</a>'
@@ -382,7 +382,7 @@ DATA = dict(
 index_head = head.replace("</style>", extra_css + PRINT_CSS + "\n</style>", 1)
 index_head = index_head.replace(
     '<li><a href="#language" data-cy="Iaith">Language</a></li>',
-    '<li><a href="#language" data-cy="Iaith">Language</a></li>\n      <li><a href="#quiz" data-cy="Cwis">Quiz</a></li>')
+    '<li><a href="#language" data-cy="Iaith">Language</a></li>\n      <li><a href="#quiz" data-cy="Cwis">Quiz</a></li>\n      <li><a href="#game" data-cy="Gêm">Game</a></li>\n      <li><a href="#sources" data-cy="Ffynonellau">Sources</a></li>')
 index_head = index_head.replace('<div class="lang" role="group"', SEARCH_BTN + '<div class="lang" role="group"', 1)
 index_head = index_head.replace('<nav class="nav" aria-label="Main">', '<a class="skip" href="#chapters" data-cy="Neidio i’r cynnwys">Skip to content</a>\n<nav class="nav" aria-label="Main">', 1)
 index_head = re.sub(r"<title>.*?</title>\n", "", index_head, count=1)
@@ -394,6 +394,21 @@ index_body = (body.replace("__WALES__", geo["outline"])
               .replace("__APP__", app)
               .replace("</body>", "") + TAIL_JS)
 index_fragment = index_head + index_body  # no document skeleton
+
+# ---- Separate timeline page: same app, only the timeline section
+_tl_hero = ('<header class="era-hero" id="top" data-era="kings"><div class="wrap"><p class="crumbs"><a href="index.html" data-cy="Hanes Cymru">History of Wales</a></p>'
+            '<svg class="ill" aria-hidden="true"><use href="#i-crown"/></svg><p class="span" data-cy="230,000 CC – heddiw">230,000 BC – today</p>'
+            '<h1 data-cy="Llinell amser">Timeline</h1><p class="lede" data-cy="Holl hanes Cymru mewn dyddiadau. Sgroliwch drwy’r oesoedd neu dewiswch un.">The whole history of Wales in dates. Scroll through the ages, or pick one.</p></div></header>')
+_th = re.sub(r'<header class="hero" id="top">.*?</header>', lambda m: _tl_hero, index_head, count=1, flags=re.S)
+_th = _th.replace('<a class="brand" href="#top">', '<a class="brand" href="index.html">')
+_th = re.sub(r'<li><a href="#(\w+)"', r'<li><a href="index.html#\1"', _th)
+_th = _th.replace('<li><a href="timeline.html"', '<li><a class="on" aria-current="page" href="timeline.html"')
+_th = _th.replace('<a class="skip" href="#chapters"', '<a class="skip" href="#timeline"')
+_th = re.sub(r'<title>.*?</title>\n<meta name="description"[^>]*>\n<link rel="canonical"[^>]*>\n', lambda m: head_tags("Timeline · History of Wales", "Every date in the history of Wales, from 230,000 BC to today, in English and Cymraeg.", "timeline.html").split('<meta name="theme-color"')[0], _th, count=1, flags=re.S)
+_th = re.sub(r'<meta property="og:title" content="[^"]*">', '<meta property="og:title" content="Timeline · History of Wales">', _th, count=1)
+_th = re.sub(r'<meta property="og:url" content="[^"]*">', f'<meta property="og:url" content="{BASE_URL}timeline.html">', _th, count=1)
+_tb = ("<main>\n" + read("timeline_section.html") + "</main>\n" + index_body[index_body.index("<footer>"):])
+tl_fragment = _th + _tb
 
 
 def wrap_doc(fragment):
@@ -424,7 +439,7 @@ def write(path, text):
 def main():
     out = os.path.join(ROOT, "_site")
     shutil.rmtree(out, ignore_errors=True)
-    pages = {"index.html": wrap_doc(index_fragment)}
+    pages = {"index.html": wrap_doc(index_fragment), "timeline.html": wrap_doc(tl_fragment)}
     for i, era in enumerate(D.ERAS):
         pages[f"era-{era['id']}.html"] = era_page(i, era)
     for p in D.PEOPLE:

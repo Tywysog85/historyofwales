@@ -147,3 +147,5 @@ footer nav a:hover { color: var(--ink) }
 .place-card .credit { font-size: .75rem; color: var(--muted) } .place-card .credit a { color: var(--muted) }
 /* search button: styled up front so the nav doesn't jump on load */
 .search-btn{background:none;border:1px solid var(--line);color:var(--ink);border-radius:999px;width:2.4rem;height:2.4rem;display:grid;place-items:center;cursor:pointer;flex:none;margin-right:.6rem;padding:0}.search-btn:hover{border-color:var(--ink)}.search-btn svg{width:1.05rem;height:1.05rem}
+a.chip { text-decoration: none; color: inherit }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }

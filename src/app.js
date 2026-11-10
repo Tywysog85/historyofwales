@@ -3,7 +3,8 @@
   var WIKI = "https://en.wikipedia.org/wiki/";
   var lang = "en";
   try { if (localStorage.getItem("hc-lang") === "cy") lang = "cy"; } catch (e) {}
-  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $ = function (s, r) { return (r || document).querySelector(s) || document.createElement("input"); };
+  var HAS_TL = !!document.getElementById("events"), HERO = !!document.getElementById("sky"), HAS_MAP = !!document.getElementById("pins");
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   var ERA = {}; ERAS.forEach(function (e) { ERA[e.id] = e; });
@@ -24,7 +25,7 @@
   var MONTHS_CY = ["Ionawr","Chwefror","Mawrth","Ebrill","Mai","Mehefin","Gorffennaf","Awst","Medi","Hydref","Tachwedd","Rhagfyr"];
 
   /* ---------- Hero sky ---------- */
-  var cv = $("#sky"), cx = cv.getContext("2d"), W = 0, H = 0, dpr = 1, mouse = 0, ridges = [], stars = [];
+  var cv = $("#sky"), cx = HERO ? cv.getContext("2d") : null, W = 0, H = 0, dpr = 1, mouse = 0, ridges = [], stars = [];
   function rnd(seed) { return function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
   (function () {
     var r = rnd(1282);
@@ -35,9 +36,10 @@
     { y: 0.50, a: 0.16, c: "#232a3d", s: 0.05 }, { y: 0.60, a: 0.14, c: "#1d2433", s: 0.12 },
     { y: 0.70, a: 0.12, c: "#171d2a", s: 0.2 }, { y: 0.80, a: 0.09, c: "#121722", s: 0.3 }, { y: 0.92, a: 0.06, c: "#0e1118", s: 0.42 }
   ];
-  function size() { var r = cv.getBoundingClientRect(); dpr = Math.min(window.devicePixelRatio || 1, 2); W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; draw(); }
+  function size() { if (!HERO) return; var r = cv.getBoundingClientRect(); dpr = Math.min(window.devicePixelRatio || 1, 2); W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; draw(); }
   var t0 = 0;
   function draw(t) {
+    if (!HERO) return;
     t = t || t0;
     var sy = Math.min(window.scrollY, H);
     cx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -102,7 +104,7 @@
   }
   function loop(t) { t0 = t; if (window.scrollY < H) draw(t); requestAnimationFrame(loop); }
   window.addEventListener("resize", size);
-  if (!reduce) {
+  if (HERO && !reduce) {
     window.addEventListener("pointermove", function (e) { mouse = (e.clientX / window.innerWidth - 0.5) * 2; }, { passive: true });
     requestAnimationFrame(loop);
   } else { window.addEventListener("scroll", function () { if (window.scrollY < H) draw(); }, { passive: true }); }
@@ -154,10 +156,10 @@
   function goTo(el, block) { if (el) el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: block || "start" }); }
   document.addEventListener("click", function (ev) {
     var o = ev.target.closest("[data-open]"); if (o) { openChapter(o.dataset.open); return; }
-    var j = ev.target.closest("[data-jump]"); if (j) { var id = j.dataset.jump; closeChapter(); goTo($("#era-" + id)); return; }
+    var j = ev.target.closest("[data-jump]"); if (j) { var id = j.dataset.jump; if (!HAS_TL) { location.href = "timeline.html#era-" + id; return; } closeChapter(); goTo($("#era-" + id)); return; }
     if (ev.target.closest("[data-close]") && (ev.target.dataset.close || ev.target.closest(".close"))) closeChapter();
-    var m = ev.target.closest("[data-map]"); if (m) { setMode("sites"); selectPlace(m.dataset.map); goTo($("#map")); }
-    var t = ev.target.closest("[data-tl]"); if (t) { if (tlEra !== "all") setTlEra("all"); goTo($("#ev-" + t.dataset.tl), "center"); }
+    var m = ev.target.closest("[data-map]"); if (m) { if (!HAS_MAP) { location.href = "index.html#lle-" + m.dataset.map; return; } setMode("sites"); selectPlace(m.dataset.map); goTo($("#map")); }
+    var t = ev.target.closest("[data-tl]"); if (t) { if (!HAS_TL) { location.href = "timeline.html#ev-" + t.dataset.tl; return; } if (tlEra !== "all") setTlEra("all"); goTo($("#ev-" + t.dataset.tl), "center"); }
     var c = ev.target.closest("[data-copy]"); if (c) copyLink(c);
   });
   function copyLink(btn) {
@@ -176,6 +178,8 @@
   function route() {
     var m = /^#pennod-(\w+)/.exec(location.hash); if (m && ERA[m[1]]) { openChapter(m[1], false); return; }
     closeChapter();
+    var q = /^#(ev-\d+|era-(\w+))$/.exec(location.hash);
+    if (q && HAS_TL) { if (q[2] && ERA[q[2]]) { setTlEra(q[2]); } else if (tlEra !== "all") setTlEra("all"); setTimeout(function () { if (q[2]) window.scrollTo(0, 0); else goTo(document.getElementById(q[1]), "center"); }, 60); }
     var p = /^#lle-([\w-]+)/.exec(location.hash); if (p && PLACE[p[1]]) { setMode("sites"); selectPlace(p[1]); setTimeout(function () { goTo($("#map")); }, 50); }
   }
   window.addEventListener("hashchange", route);
@@ -207,6 +211,11 @@
   function setTlEra(v) { tlEra = v; renderTimeline(); }
   function renderTimeline() {
     var counts = {}; EVENTS.forEach(function (e) { counts[e[E_ERA]] = (counts[e[E_ERA]] || 0) + 1; });
+    if (!HAS_TL) {
+      $("#tl-teaser").innerHTML = '<a class="chip" href="timeline.html">' + T("All", "Y cyfan") + ' <span style="opacity:.6">' + EVENTS.length + "</span></a>" +
+        ERAS.map(function (e) { return '<a class="chip" data-era="' + e.id + '" href="timeline.html#era-' + e.id + '"><i></i>' + T(e.en, e.cy) + ' <span style="opacity:.6">' + counts[e.id] + "</span></a>"; }).join("");
+      return;
+    }
     chips($("#tl-filter"), tlEra, setTlEra, counts);
     var html = "", last = null, n = 0;
     EVENTS.forEach(function (e, i) {
@@ -250,8 +259,8 @@
       var mid = window.innerHeight * 0.45, best = 0, bd = 1e9;
       for (var i = 0; i < evEls.length; i++) { var r = evEls[i].getBoundingClientRect(); var dd = Math.abs(r.top + r.height / 2 - mid); if (dd < bd) { bd = dd; best = i; } if (r.top > window.innerHeight) break; }
       setActive(best);
-      var secs = ["chapters", "timeline", "map", "people", "language", "quiz"], cur = null;
-      secs.forEach(function (s) { var r = document.getElementById(s).getBoundingClientRect(); if (r.top < window.innerHeight * 0.4) cur = s; });
+      var secs = ["chapters", "map", "people", "language", "quiz", "game", "sources"], cur = null;
+      secs.forEach(function (s) { var el = document.getElementById(s); if (!el) return; var r = el.getBoundingClientRect(); if (r.top < window.innerHeight * 0.4) cur = s; });
       $$(".nav ul a").forEach(function (a) { a.classList.toggle("on", a.getAttribute("href") === "#" + cur); });
     });
   }
@@ -415,7 +424,7 @@
     var box = $("#quiz-box");
     if (!Q) return newQuiz();
     if (Q.i >= Q.qs.length) {
-      var s = Q.score, msg = s >= 9 ? T("Pencampwr! A true historian.", "Pencampwr! Hanesydd go iawn.") : s >= 6 ? T("Da iawn. Very good.", "Da iawn wir.") : s >= 3 ? T("Not bad. The timeline above has every answer.", "Ddim yn ddrwg. Mae pob ateb yn y llinell amser uchod.") : T("Time to scroll the timeline and try again.", "Amser i sgrolio’r llinell amser a rhoi cynnig arall.");
+      var s = Q.score, msg = s >= 9 ? T("Pencampwr! A true historian.", "Pencampwr! Hanesydd go iawn.") : s >= 6 ? T("Da iawn. Very good.", "Da iawn wir.") : s >= 3 ? T("Not bad. The timeline has every answer.", "Ddim yn ddrwg. Mae pob ateb yn y llinell amser.") : T("Time to explore the timeline and try again.", "Amser i bori drwy’r llinell amser a rhoi cynnig arall.");
       box.innerHTML = '<p class="eyebrow">' + T("Your score", "Eich sgôr") + '</p><p class="q-score">' + s + "/" + Q.qs.length + '</p><h3>' + msg + '</h3><p><button type="button" class="btn solid" id="q-again">' + T("Play again", "Chwarae eto") + "</button></p>";
       $("#q-again").onclick = function () { newQuiz(); $("#quiz-box button") && $("#quiz-box button").focus(); };
       return;

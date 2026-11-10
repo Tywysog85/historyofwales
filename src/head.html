@@ -60,7 +60,7 @@ button { font: inherit; color: inherit }
 .lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; gap: 2px }
 .lang button { border: 0; background: transparent; border-radius: 999px; padding: .2rem .7rem; font: 700 .78rem var(--f-mono); letter-spacing: .08em; cursor: pointer; color: var(--muted) }
 .lang button[aria-pressed="true"] { background: var(--dragon-deep); color: #fff }
-@media (max-width: 720px) { .nav ul { order: 3; width: 100%; justify-content: space-between } }
+@media (max-width: 720px) { .nav ul { order: 3; width: 100%; justify-content: flex-start; gap: .3rem 1.1rem } }
 
 /* ---------- Hero ---------- */
 .hero { position: relative; overflow: hidden; isolation: isolate; background: var(--night) }
@@ -283,7 +283,7 @@ footer .big { font-family: var(--f-display); font-size: clamp(2.5rem, 8vw, 5rem)
     <a class="brand" href="#top"><svg aria-hidden="true"><use href="#i-mtn"/></svg><span data-cy="Hanes Cymru">History of Wales</span></a>
     <ul>
       <li><a href="#chapters" data-cy="Penodau">Chapters</a></li>
-      <li><a href="#timeline" data-cy="Llinell amser">Timeline</a></li>
+      <li><a href="timeline.html" data-cy="Llinell amser">Timeline</a></li>
       <li><a href="#map" data-cy="Map">Map</a></li>
       <li><a href="#people" data-cy="Pobl">People</a></li>
       <li><a href="#language" data-cy="Iaith">Language</a></li>
@@ -304,7 +304,7 @@ footer .big { font-family: var(--f-display); font-size: clamp(2.5rem, 8vw, 5rem)
       <p data-cy="O ddannedd Neanderthal mewn ogof yn Sir Ddinbych i senedd ym Mae Caerdydd: hanes gwlad fach a gadwodd ei hiaith, ei chyfraith a'i llais.">From Neanderthal teeth in a Denbighshire cave to a parliament in Cardiff Bay: the story of a small country that kept its own language, laws and voice.</p>
     </div>
     <div class="cta">
-      <a class="btn solid" href="#timeline" data-cy="Dechrau'r daith">Start the journey</a>
+      <a class="btn solid" href="timeline.html" data-cy="Dechrau'r daith">Start the journey</a>
       <a class="btn" href="#map" data-cy="Archwilio'r map">Explore the map</a>
     </div>
   </div>
