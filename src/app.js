@@ -45,9 +45,11 @@
     var r = cv.getBoundingClientRect(), q = function (sel) { var el = hEl.querySelector(sel); return el ? el.getBoundingClientRect() : null; };
     var a = q("h1"), b = q(".sub"), c = q(".ticker"), e = q(".cta"), old = M.h1t + "," + M.h1h + "," + M.sub + "," + M.tick + "," + M.cta;
     if (a) { M.h1t = a.top - r.top; M.h1h = a.height; } var nv = document.querySelector(".nav"); M.nav = nv && window.scrollY < 4 ? Math.max(0, nv.getBoundingClientRect().bottom - r.top) : M.nav;
-    if (b) M.sub = b.bottom - r.top; if (e) M.cta = e.bottom - r.top; M.tick = c ? c.top - r.top : r.height;
+    if (b) M.sub = b.bottom - r.top; if (e) { /* the buttons slide up as they arrive, so their resting place is read from the layout, not from where they are mid-slide */ var ce = hEl.querySelector(".cta"), cy = ce.offsetHeight, cn = ce; while (cn && cn !== hEl) { cy += cn.offsetTop; cn = cn.offsetParent; } M.cta = cn === hEl ? cy + hEl.getBoundingClientRect().top - r.top : e.bottom - r.top; } M.tick = c ? c.top - r.top : r.height;
     return old !== M.h1t + "," + M.h1h + "," + M.sub + "," + M.tick + "," + M.cta;
   }
+  /* the land waits for the lettering: when the fonts arrive the words reflow, and land drawn before that would shift */
+  var FONTS = !(document.fonts && document.fonts.ready); if (!FONTS) { document.fonts.ready.then(function () { measure(); FONTS = 1; }); setTimeout(function () { FONTS = 1; }, 3500); }
   var VIS = 0; /* how much of the hero the first screen shows */
   function size() { if (!HERO) return; var r = cv.getBoundingClientRect(); dpr = Math.min(window.devicePixelRatio || 1, 2); W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; VIS = window.innerHeight - (r.top + window.scrollY); measure(); draw(); }
   if (HERO) setInterval(function () { var r = cv.getBoundingClientRect(); if (Math.abs(r.height - H) > 1 || Math.abs(r.width - W) > 1) size(); else if (measure() && reduce) draw(); }, 500);
@@ -133,7 +135,7 @@
     cx.fillStyle = hz; cx.fillRect(0, eb - eh * 0.75, W, eh * 0.85);
     /* where the device can draw it, the mountain and castle are real 3D on their own canvas (tools/land3d.src.js); until that is ready only the sky shows */
     /* the opening is staged: sky and title first, then the words, then the land fades in (never before 1.2 s, so it does not arrive under a half-drawn title), then the dragon flies in */
-    var L3 = window.HCL3 && HCL3.ready && performance.now() > 1200, noLand = L3 || window.HCL3_WANT;
+    var L3 = window.HCL3 && HCL3.ready && performance.now() > 1200 && FONTS, noLand = L3 || window.HCL3_WANT;
     if (L3) {
       /* the valley mist the mountains rise out of, which also hides the stars below the skyline */
       var vm = cx.createLinearGradient(0, eb - eh * 0.7, 0, H), mistC = mixHex(mixHex(SKY.sky[2], SKY.sky[1], 0.45), "#6f7896", 0.62), vc = hex(mistC).join(",");
