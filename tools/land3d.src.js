@@ -216,8 +216,8 @@ try {
     api.ready = true; window.dispatchEvent(new Event("hcl3"));
   }).catch(fail);
   img.onerror = fail; img.src = "eryri-h.png";
-  /* on wide screens the castle's stone is fetched straight away, and nothing is shown until the castle stands, so the scene arrives whole */
-  let noCastle = false; const stoneP = window.innerWidth >= 1100 ? Promise.all(["stone.webp", "stone-n.webp"].map(ld)) : null; if (stoneP) stoneP.catch(() => {});
+  /* the castle's stone is fetched straight away, and nothing is shown until the castle stands, so the scene arrives whole */
+  let noCastle = false; const stoneP = true ? Promise.all(["stone.webp", "stone-n.webp"].map(ld)) : null; if (stoneP) stoneP.catch(() => {});
   function loadCastle(flag) {
     wantCastle = true;
     (stoneP || Promise.all(["stone.webp", "stone-n.webp"].map(ld))).then((t) => {
