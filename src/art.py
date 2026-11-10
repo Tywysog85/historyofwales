@@ -103,7 +103,9 @@ def _senedd(c):
 
 
 def _dragons(c):
-    return dragon(90, 150, 1.45, "#e2453d") + dragon(710, 170, 1.45, "#e9e4d8", flip=True) + \
+    # the two dragons are pictures of the 3D dragon, drawn by tools/render_dragons.src.js: never hand-drawn shapes
+    return ('<image href="dragon-red.webp" x="185" y="140" width="230" height="87.2"/>'
+            '<image href="dragon-white.webp" x="425" y="108" width="230" height="119.2"/>') + \
         f'<g fill="{FRONT}"><path d="M300 440 L360 330 L392 352 L420 318 L452 356 L500 440Z"/><rect x="386" y="300" width="30" height="50"/><rect x="382" y="292" width="8" height="10"/><rect x="397" y="292" width="8" height="10"/><rect x="412" y="292" width="8" height="10"/></g>'
 
 

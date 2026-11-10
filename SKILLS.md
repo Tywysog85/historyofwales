@@ -204,6 +204,13 @@ The dragon that flies across the opening screen is a real 3D model with a skelet
 - To watch the fire without waiting, add `?fire=1` to the address (it works with `?sky=night` and the others).
 - To test with a headless browser, start Chromium with `--use-gl=swiftshader --enable-unsafe-swiftshader`; without WebGL you will only see the stand-in.
 
+## Dragon pictures for the legend pages
+
+- The red and white dragons on the legend, symbols and play pages are still pictures of the 3D dragon (`src/static/dragon-red.webp`, `dragon-white.webp`), placed in the scene by `_dragons` in `src/art.py`. Never draw dragons by hand.
+- To make them again: bundle `tools/render_dragons.src.js` with esbuild, put it beside `dragon.glb` with a page holding `<canvas id="c">`, open it in headless Chromium (`?t=0.3` for red, `?white=1&t=0.52&turn=1.2&tilt=0.2` for white) and screenshot the canvas with a see-through background. Crop, mirror the white one so they face each other, and save as WebP 760 px wide.
+- The white dragon is the same model with the red taken out of its skin in the shader, so the scales keep their light and dark.
+- The hero's dark veil dulls pictures on the left; `.hero-art:has(image)::after` in `src/v6.css` uses a lighter veil where the art holds a picture.
+
 ## The 3D mountains and castle
 
 Behind the dragon, the mountains, the moor and the castle are real 3D too, drawn on a second see-through canvas (`#land3d`) between the painted sky and the dragon. The code is `tools/land3d.src.js`.
