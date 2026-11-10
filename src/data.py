@@ -83,7 +83,7 @@ EVENTS = [
   "Mae Rhodri Mawr yn lladd yr arweinydd Danaidd Horm ar Ynys Môn ac yn rheoli rhan helaeth o Gymru.",0,"","Rhodri_the_Great"),
  ("medieval",945,1,0,"","The laws of Hywel Dda","Cyfraith Hywel Dda",
   "Welsh law is gathered under Hywel the Good and stays in use for some six hundred years.",
-  "Casglir cyfraith Cymru dan Hywel Dda, a bydd yn cael ei defnyddio am ryw chwe chan mlynedd.",1,"","Welsh_law"),
+  "Casglir cyfraith Cymru dan Hywel Dda, a bydd yn cael ei defnyddio am ryw chwe chan mlynedd.",1,"hendygwyn","Welsh_law"),
  ("medieval",1055,0,0,"","One king for all Wales","Un brenin i Gymru gyfan",
   "Gruffudd ap Llywelyn becomes the only ruler ever to unite all of Wales, until his death in 1063.",
   "Daw Gruffudd ap Llywelyn yr unig reolwr erioed i uno Cymru gyfan, hyd ei farwolaeth yn 1063.",0,"","Gruffydd_ap_Llywelyn"),

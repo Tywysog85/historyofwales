@@ -253,6 +253,13 @@ html.menu-open { overflow: hidden }
 .prose h2::before { content: ""; position: absolute; top: 0; left: 0; width: 2.6rem; height: 3px; background: var(--c) }
 .prose > p:first-child::first-letter { font-family: var(--f-display); float: left; font-size: 4.2em; line-height: .82; padding: .06em .12em 0 0; color: var(--c) }
 .prose.tale { font-size: 1.24rem; line-height: 1.8 }
+.prose .pq { margin: .6rem 0; padding: .4rem 0 .4rem 1.4rem; border-left: 3px solid var(--c) }
+.prose .pq p { font-family: var(--f-display); font-size: clamp(1.5rem, 3vw, 2.1rem); line-height: 1.25; color: var(--ink) }
+.prose .pq cite { display: block; margin-top: .6rem; font-style: normal; font-size: .9rem; letter-spacing: .04em; color: #9aa0ad }
+.prose table.kv { width: 100%; border-collapse: collapse; font-size: 1rem; line-height: 1.5; border-top: 1px solid rgba(255,255,255,.14) }
+.prose table.kv th, .prose table.kv td { text-align: left; vertical-align: top; padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(255,255,255,.14) }
+.prose table.kv th { width: 42%; font-weight: 600; color: #9aa0ad }
+.prose table.kv td { color: var(--ink) }
 .behind { margin-top: 2.5rem; background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--c); border-radius: 0 16px 16px 0; padding: 1.4rem 1.6rem; display: grid; gap: .7rem }
 .behind .eyebrow { color: var(--c) }
 .behind p:last-child { color: #d0d3da; line-height: 1.7 }

@@ -267,5 +267,8 @@ import pride as _P
 PEOPLE_LONG.update(_P.PEOPLE_LONG)
 import pride3 as _P3
 PEOPLE_LONG.update(_P3.PEOPLE_LONG)
+import hywel as _HY
+PEOPLE_LONG["hywel-dda"] = _HY.PERSON_LONG
+PLACE_LONG["hendygwyn"] = _HY.WHITLAND_LONG
 _fix = lambda t: [t := t.replace(a, b) for a, b in _P.REWORD][-1]
 PEOPLE_LONG = {k: ([_fix(t) for t in v[0]], [_fix(t) for t in v[1]]) for k, v in PEOPLE_LONG.items()}

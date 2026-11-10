@@ -27,7 +27,7 @@ Everything is plain HTML, CSS and JavaScript. There is no framework and nothing 
 | Events, people, places | `src/data.py`, `src/more.py`, `src/places2.py` (extra items are merged in and sorted by year) |
 | Longer histories of people and places, trails, teacher notes | `src/long.py` |
 | The nine ages | `src/ages.py`, `src/ages9.py` |
-| Long reads, legends, symbols, facts | `src/features.py`, `src/pride.py`, `src/pride2.py`, `src/pride3.py` |
+| Long reads, legends, symbols, facts | `src/features.py`, `src/pride.py`, `src/pride2.py`, `src/pride3.py`, `src/hywel.py` |
 | The Kingdoms map | `src/kingdoms.py` |
 | Photos and their credits | `src/photos.py` |
 | Drawn pictures | `src/art.py` |
