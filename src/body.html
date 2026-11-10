@@ -71,6 +71,21 @@
       <article class="place-card" id="place-card" aria-live="polite"></article>
       <article class="place-card kg-panel" id="kg-card" aria-live="polite" hidden></article>
     </div>
+    <div class="near" id="near">
+      <div class="near-head">
+        <p class="eyebrow" data-cy="Hanes yn eich ymyl">History near you</p>
+        <h3 data-cy="Beth sydd gerllaw?">What’s near you?</h3>
+      </div>
+      <form class="near-form" id="near-form" autocomplete="off">
+        <label for="near-in" class="sr-only" data-cy="Eich tref">Your town</label>
+        <input id="near-in" type="text" list="near-towns" placeholder="Type your town, e.g. Bala" data-cy-ph="Teipiwch eich tref, e.e. Bala">
+        <datalist id="near-towns"></datalist>
+        <button type="submit" class="btn" data-cy="Chwilio">Find</button>
+        <button type="button" class="btn" id="near-geo" data-cy="Defnyddio fy lleoliad">Use my location</button>
+      </form>
+      <p class="near-msg" id="near-msg" aria-live="polite"></p>
+      <ol class="near-list" id="near-list"></ol>
+    </div>
   </div>
 </section>
 
@@ -131,6 +146,14 @@
       <p data-cy="Deg cwestiwn o’r llinell amser a’r bobl. Mae pob cwis yn wahanol.">Ten questions drawn from the timeline and the people. Every round is different.</p>
     </div>
     <div class="quiz" id="quiz-box"></div>
+    <div class="game" id="game">
+      <div class="head" style="margin-top:clamp(2.5rem,6vw,4rem)">
+        <p class="eyebrow" data-cy="Gêm">Game</p>
+        <h2 data-cy="Her y llinell amser">Timeline challenge</h2>
+        <p data-cy="Tapiwch y pum digwyddiad yn eu trefn, o’r hynaf i’r mwyaf diweddar. Tapiwch eto i ddadwneud. Tair rownd, pum pwynt yr un.">Tap the five events in order, oldest first. Tap again to undo. Three rounds, five points each.</p>
+      </div>
+      <div class="game-box" id="game-box"></div>
+    </div>
   </div>
 </section>
 
@@ -160,4 +183,5 @@
 
 <div id="overlay" hidden></div>
 <script>var DATA = __DATA__;</script>
+<script>var TOWNS = __TOWNS__;</script>
 <script>__APP__</script>

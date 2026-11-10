@@ -1,0 +1,23 @@
+# Towns for "History near you": (English, Welsh, lat, lon)
+TOWNS = [
+ ("Aberdare","Aberdâr",51.714,-3.445),("Abergavenny","Y Fenni",51.824,-3.017),("Aberystwyth","Aberystwyth",52.415,-4.083),
+ ("Ammanford","Rhydaman",51.793,-3.988),("Bala","Y Bala",52.911,-3.597),("Bangor","Bangor",53.227,-4.129),
+ ("Barry","Y Barri",51.399,-3.283),("Blaenau Ffestiniog","Blaenau Ffestiniog",52.994,-3.938),("Brecon","Aberhonddu",51.947,-3.391),
+ ("Bridgend","Pen-y-bont ar Ogwr",51.504,-3.577),("Builth Wells","Llanfair-ym-Muallt",52.150,-3.402),("Caernarfon","Caernarfon",53.139,-4.273),
+ ("Caerphilly","Caerffili",51.574,-3.218),("Cardiff","Caerdydd",51.482,-3.179),("Cardigan","Aberteifi",52.083,-4.661),
+ ("Carmarthen","Caerfyrddin",51.858,-4.312),("Chepstow","Cas-gwent",51.641,-2.675),("Conwy","Conwy",53.280,-3.829),
+ ("Cowbridge","Y Bont-faen",51.461,-3.448),("Cwmbran","Cwmbrân",51.653,-3.021),("Denbigh","Dinbych",53.184,-3.418),
+ ("Dolgellau","Dolgellau",52.743,-3.885),("Ebbw Vale","Glynebwy",51.777,-3.211),("Fishguard","Abergwaun",51.994,-4.976),
+ ("Flint","Y Fflint",53.244,-3.133),("Haverfordwest","Hwlffordd",51.801,-4.969),("Holyhead","Caergybi",53.309,-4.633),
+ ("Holywell","Treffynnon",53.274,-3.223),("Lampeter","Llanbedr Pont Steffan",52.112,-4.079),("Llandrindod Wells","Llandrindod",52.242,-3.379),
+ ("Llandudno","Llandudno",53.324,-3.827),("Llanelli","Llanelli",51.684,-4.163),("Llangefni","Llangefni",53.256,-4.311),
+ ("Llangollen","Llangollen",52.969,-3.171),("Llantwit Major","Llanilltud Fawr",51.408,-3.486),("Machynlleth","Machynlleth",52.590,-3.853),
+ ("Merthyr Tydfil","Merthyr Tudful",51.749,-3.382),("Milford Haven","Aberdaugleddau",51.714,-5.042),("Mold","Yr Wyddgrug",53.166,-3.142),
+ ("Monmouth","Trefynwy",51.812,-2.716),("Neath","Castell-nedd",51.663,-3.804),("Newport","Casnewydd",51.584,-2.998),
+ ("Newtown","Y Drenewydd",52.513,-3.313),("Pembroke","Penfro",51.674,-4.916),("Pontypridd","Pontypridd",51.602,-3.342),
+ ("Port Talbot","Port Talbot",51.592,-3.780),("Porthmadog","Porthmadog",52.927,-4.133),("Pwllheli","Pwllheli",52.888,-4.417),
+ ("Rhyl","Y Rhyl",53.319,-3.491),("Ruthin","Rhuthun",53.115,-3.311),("St Asaph","Llanelwy",53.258,-3.442),
+ ("St Davids","Tyddewi",51.881,-5.266),("Swansea","Abertawe",51.621,-3.944),("Tenby","Dinbych-y-pysgod",51.673,-4.703),
+ ("Tredegar","Tredegar",51.772,-3.247),("Welshpool","Y Trallwng",52.660,-3.147),("Wrexham","Wrecsam",53.047,-2.993),
+ ("Chester","Caer",53.191,-2.892),("Shrewsbury","Amwythig",52.707,-2.754),("Hereford","Henffordd",52.056,-2.716),
+]

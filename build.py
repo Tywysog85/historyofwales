@@ -16,6 +16,7 @@ SRC = os.path.join(ROOT, "src")
 sys.path.insert(0, SRC)
 import data as D  # noqa: E402
 import long as L  # noqa: E402
+import towns as TW  # noqa: E402
 
 BASE_URL = os.environ.get("SITE_URL", "https://tywysog85.github.io/historyofwales/")
 GOATCOUNTER = os.environ.get("GOATCOUNTER", "").strip()
@@ -55,6 +56,7 @@ def bi(en, cy, tag="span", cls=""):
     return f'<{tag} class="l-en{c}" lang="en">{e(en)}</{tag}><{tag} class="l-cy{c}" lang="cy">{e(cy)}</{tag}>'
 
 
+SEARCH_BTN = '<button type="button" class="search-btn" data-search aria-label="Search / Chwilio"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>'
 SITE = bi("History of Wales", "Hanes Cymru")
 
 
@@ -91,7 +93,7 @@ def head_tags(title, desc, path, og_type="website"):
     return t
 
 
-TAIL_JS = ('<script>if("serviceWorker" in navigator&&location.protocol==="https:"){addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>\n'
+TAIL_JS = ('<script src="search.js" defer></script>\n<script>if("serviceWorker" in navigator&&location.protocol==="https:"){addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>\n'
            + (f'<script data-goatcounter="https://{GOATCOUNTER}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>\n' if GOATCOUNTER else ""))
 
 LANG_BOOT = '<script>try{if(localStorage.getItem("hc-lang")==="cy"){document.documentElement.classList.add("cy");document.documentElement.lang="cy"}}catch(e){}</script>'
@@ -120,7 +122,7 @@ def nav(active=""):
     lis = "".join(f'<li><a href="{h}"{" class=on" if active == h else ""}>{bi(a, b)}</a></li>' for h, a, b in items)
     return (f'<a class="skip" href="#main">{bi("Skip to content", "Neidio i’r cynnwys")}</a>'
             f'<nav class="nav" aria-label="Main"><div class="wrap"><a class="brand" href="index.html"><svg aria-hidden="true"><use href="#i-mtn"/></svg>{bi("History of Wales", "Hanes Cymru")}</a>'
-            f'<ul>{lis}</ul><div class="lang" role="group" aria-label="Language / Iaith"><button type="button" id="lang-en" aria-pressed="true">EN</button>'
+            f'<ul>{lis}</ul><button type="button" class="search-btn" data-search aria-label="Search / Chwilio"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><div class="lang" role="group" aria-label="Language / Iaith"><button type="button" id="lang-en" aria-pressed="true">EN</button>'
             '<button type="button" id="lang-cy" aria-pressed="false">CY</button></div></div></nav>')
 
 
@@ -170,9 +172,12 @@ def section(inner, title_en=None, title_cy=None, top=False):
     return f'<section{cls}><div class="wrap">{h}{inner}</div></section>'
 
 
+EVI = {ev: i for i, ev in enumerate(D.EVENTS)}
+
+
 def event_li(ev, k=0):
     links = (f'<a class="src" href="place-{ev[10]}.html">{bi("The place", "Y lle")} →</a>' if ev[10] else "") + src(ev[11])
-    return (f'<li class="{"key" if ev[9] else ""}" data-era="{ev[0]}"><time>{bi(year_label(ev), year_label(ev, True))}</time>'
+    return (f'<li id="e{EVI[ev]}" class="{"key" if ev[9] else ""}" data-era="{ev[0]}"><time>{bi(year_label(ev), year_label(ev, True))}</time>'
             f'<div><h3>{bi(ev[5], ev[6])}</h3><p>{bi(ev[7], ev[8])}</p><div class="links">{links}</div></div></li>')
 
 
@@ -212,7 +217,7 @@ def era_page(i, era):
 def person_page(p):
     slug, eid = p[0], p[1]
     era = ERA[eid]
-    long_en, long_cy = L.PEOPLE_LONG[slug]
+    long_en, long_cy = L.PEOPLE_LONG.get(slug) or D.PEOPLE_EXTRA_LONG[slug]
     related = [ev for ev in D.EVENTS if p[3] in ev[7] or p[3] in ev[5] or (slug == "dewi-sant" and "Dewi" in ev[7])]
     same = [x for x in D.PEOPLE if x[1] == eid and x[0] != slug][:4]
     idx = D.PEOPLE.index(p)
@@ -233,7 +238,7 @@ def person_page(p):
 def place_page(pl):
     pid, eid = pl["id"], pl["era"]
     era = ERA[eid]
-    long_en, long_cy = L.PLACE_LONG[pid]
+    long_en, long_cy = L.PLACE_LONG.get(pid, ([], []))
     related = [ev for ev in D.EVENTS if ev[10] == pid]
     near = sorted([x for x in D.PLACES if x["id"] != pid], key=lambda x: (x["lat"] - pl["lat"]) ** 2 + ((x["lon"] - pl["lon"]) * 0.61) ** 2)[:3]
     osm = f'https://www.openstreetmap.org/?mlat={pl["lat"]}&mlon={pl["lon"]}#map=14/{pl["lat"]}/{pl["lon"]}'
@@ -353,18 +358,21 @@ DATA = dict(
     ERAS=D.ERAS, EVENTS=D.EVENTS, PLACES=D.PLACES, PEOPLE=D.PEOPLE, READING=D.READING, ONLINE=D.ONLINE,
     CENSUS=D.CENSUS, KINGDOMS=D.KINGDOMS, LA=la, DICT=D.DICT, SAMPLES=D.SAMPLES, WORDS=D.WORDS,
     TRAILS=[dict(id=t["id"], en=t["en"], cy=t["cy"], ill=t["ill"], n=len(t["items"]), introEn=t["introEn"][0], introCy=t["introCy"][0]) for t in L.TRAILS],
+    AUDIO=sorted(f[:-4] for f in os.listdir(os.path.join(SRC, 'static', 'audio')) if f.endswith('.mp3')) if os.path.isdir(os.path.join(SRC, 'static', 'audio')) else [],
     MAPC=dict(minx=geo["minx"], maxy=geo["maxy"], k=geo["k"], sc=geo["sc"]),
 )
 index_head = head.replace("</style>", extra_css + PRINT_CSS + "\n</style>", 1)
 index_head = index_head.replace(
     '<li><a href="#language" data-cy="Iaith">Language</a></li>',
     '<li><a href="#language" data-cy="Iaith">Language</a></li>\n      <li><a href="#quiz" data-cy="Cwis">Quiz</a></li>')
+index_head = index_head.replace('<div class="lang" role="group"', SEARCH_BTN + '<div class="lang" role="group"', 1)
 index_head = index_head.replace('<nav class="nav" aria-label="Main">', '<a class="skip" href="#chapters" data-cy="Neidio i’r cynnwys">Skip to content</a>\n<nav class="nav" aria-label="Main">', 1)
 index_head = re.sub(r"<title>.*?</title>\n", "", index_head, count=1)
 index_head = re.sub(r'<meta name="description"[^>]*>\n', "", index_head, count=1)
 index_head = head_tags("History of Wales", "The history of Wales, from the first people in the caves to the Senedd: an interactive timeline, map, people and language, in English and Cymraeg.", "", "website") + index_head
 index_body = (body.replace("__WALES__", geo["outline"])
               .replace("__DATA__", json.dumps(DATA, ensure_ascii=False, separators=(",", ":")))
+              .replace("__TOWNS__", json.dumps(TW.TOWNS, ensure_ascii=False, separators=(",", ":")))
               .replace("__APP__", app)
               .replace("</body>", "") + TAIL_JS)
 index_fragment = index_head + index_body  # no document skeleton
@@ -375,6 +383,18 @@ def wrap_doc(fragment):
     return ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
             '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
             + LANG_BOOT + "\n" + fragment[:i] + "\n</head>\n<body>\n" + fragment[i:] + "\n</body>\n</html>\n")
+
+
+def search_index():
+    def yl(ev):
+        return [year_label(ev), year_label(ev, True)]
+    items = [dict(k="era", t=x["en"], c=x["cy"], u=f"era-{x['id']}.html", y=[x["spanEn"], x["spanCy"]], b=[x["blurbEn"], x["blurbCy"]], e=x["id"]) for x in D.ERAS]
+    items += [dict(k="person", t=p[3], c=p[4], u=f"person-{p[0]}.html", y=[p[2], p[2]], b=[p[5] + ". " + p[7], p[6] + ". " + p[8]], e=p[1]) for p in D.PEOPLE]
+    items += [dict(k="place", t=p["en"], c=p["cy"], u=f"place-{p['id']}.html", y=[p["year"], p["year"]], b=[p["dEn"], p["dCy"]], e=p["era"]) for p in D.PLACES]
+    items += [dict(k="event", t=ev[5], c=ev[6], u=f"era-{ev[0]}.html#e{i}", y=yl(ev), b=[ev[7], ev[8]], e=ev[0]) for i, ev in enumerate(D.EVENTS)]
+    items += [dict(k="trail", t=t["en"], c=t["cy"], u=f"trail-{t['id']}.html", y=["Trail", "Llwybr"], b=[t["introEn"][0], t["introCy"][0]], e="medieval") for t in L.TRAILS]
+    items.append(dict(k="page", t="For teachers", c="I athrawon", u="teachers.html", y=["", ""], b=["Lesson ideas and printable quizzes", "Syniadau gwersi a chwisiau i’w hargraffu"], e="industrial"))
+    return items
 
 
 def write(path, text):
@@ -400,7 +420,9 @@ def main():
     for name, text in pages.items():
         write(os.path.join(out, name), text)
     for f in os.listdir(os.path.join(SRC, "static")):
-        shutil.copy(os.path.join(SRC, "static", f), os.path.join(out, f))
+        sp = os.path.join(SRC, "static", f)
+        (shutil.copytree if os.path.isdir(sp) else shutil.copy)(sp, os.path.join(out, f))
+    write(os.path.join(out, "search.json"), json.dumps(search_index(), ensure_ascii=False, separators=(",", ":")))
     write(os.path.join(out, ".nojekyll"), "")
     write(os.path.join(out, "robots.txt"), f"User-agent: *\nAllow: /\nSitemap: {BASE_URL}sitemap.xml\n")
     write(os.path.join(out, "sitemap.xml"), '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -413,8 +435,9 @@ def main():
             if p != "index.html":
                 shutil.copy(os.path.join(out, p), os.path.join(a, p))
         for f in os.listdir(os.path.join(SRC, "static")):
-            if f.endswith((".png", ".svg")):
+            if f.endswith((".png", ".svg", ".js")) and f != "sw.js":
                 shutil.copy(os.path.join(SRC, "static", f), os.path.join(a, f))
+        shutil.copy(os.path.join(out, "search.json"), os.path.join(a, "search.json"))
     print(f"Built {len(pages)} pages -> {out}")
 
 

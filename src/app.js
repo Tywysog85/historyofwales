@@ -332,7 +332,28 @@
   $("#dec-in").addEventListener("input", renderDecoder);
   $("#dec-form").addEventListener("submit", function (e) { e.preventDefault(); });
   $("#dec-samples").addEventListener("click", function (e) { var b = e.target.closest("[data-s]"); if (b) { $("#dec-in").value = b.dataset.s; renderDecoder(); } });
-  function renderWords() { $("#words").innerHTML = D.WORDS.map(function (w) { return "<li><b>" + esc(w[0]) + '</b><span class="say">' + esc(w[1]) + "</span><span>" + esc(T(w[2], w[3])) + "</span></li>"; }).join(""); }
+  /* ---------- Words, with play buttons ---------- */
+  var AUDIO = {}; (D.AUDIO || []).forEach(function (a) { AUDIO[a] = 1; });
+  var canSpeak = "speechSynthesis" in window;
+  function slugW(w) { return w.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
+  function sayWord(w) {
+    var slug = slugW(w[0]);
+    if (AUDIO[slug]) { try { new Audio("audio/" + slug + ".mp3").play(); } catch (e) {} return; }
+    if (!canSpeak) return;
+    var vs = speechSynthesis.getVoices(), cy = vs.filter(function (v) { return /^cy/i.test(v.lang); })[0];
+    var en = vs.filter(function (v) { return /^en-GB/i.test(v.lang); })[0] || vs.filter(function (v) { return /^en/i.test(v.lang); })[0];
+    var u = new SpeechSynthesisUtterance(cy ? w[0] : w[1].toLowerCase().replace(/-/g, " "));
+    if (cy) { u.voice = cy; u.lang = cy.lang; } else if (en) { u.voice = en; u.lang = en.lang; }
+    u.rate = 0.8; speechSynthesis.cancel(); speechSynthesis.speak(u);
+  }
+  function renderWords() {
+    var play = canSpeak || D.AUDIO && D.AUDIO.length;
+    $("#words").innerHTML = D.WORDS.map(function (w, i) {
+      return "<li><b>" + esc(w[0]) + '</b><span class="say">' + esc(w[1]) + (play ? ' <button type="button" class="play" data-w="' + i + '" aria-label="' + T("Hear ", "Clywed ") + esc(w[0]) + '">▶</button>' : "") + "</span><span>" + esc(T(w[2], w[3])) + "</span></li>";
+    }).join("");
+  }
+  $("#words").addEventListener("click", function (ev) { var b = ev.target.closest(".play"); if (b) sayWord(D.WORDS[+b.dataset.w]); });
+  if (canSpeak) { try { speechSynthesis.getVoices(); } catch (e) {} }
 
   /* ---------- Quiz ---------- */
   var Q = null;
@@ -387,6 +408,94 @@
     });
   }
 
+
+  /* ---------- History near you ---------- */
+  var TW = window.TOWNS || [], nearAt = null;
+  function km(a, b, c, d) { var R = 6371, r = Math.PI / 180, x = Math.sin((c - a) * r / 2), y = Math.sin((d - b) * r / 2); return 2 * R * Math.asin(Math.sqrt(x * x + Math.cos(a * r) * Math.cos(c * r) * y * y)); }
+  function findTown(q) { q = q.trim().toLowerCase(); if (!q) return null; var hit = null; TW.forEach(function (t) { if (!hit && (t[0].toLowerCase() === q || t[1].toLowerCase() === q)) hit = t; }); if (!hit) TW.forEach(function (t) { if (!hit && (t[0].toLowerCase().indexOf(q) === 0 || t[1].toLowerCase().indexOf(q) === 0)) hit = t; }); return hit; }
+  function renderNear() {
+    $("#near-towns").innerHTML = TW.map(function (t) { return '<option value="' + esc(T(t[0], t[1])) + '">'; }).join("");
+    var inp = $("#near-in"); inp.placeholder = T("Type your town, e.g. Bala", "Teipiwch eich tref, e.e. Y Bala");
+    var list = $("#near-list"), you = $("#you-pin");
+    if (!nearAt) { list.innerHTML = ""; if (you) you.remove(); return; }
+    var near = PLACES.map(function (p) { return [km(nearAt.lat, nearAt.lon, p.lat, p.lon), p]; }).sort(function (a, b) { return a[0] - b[0]; }).slice(0, 5);
+    $("#near-msg").textContent = T("Nearest historic places to ", "Y lleoedd hanesyddol agosaf at ") + nearAt.name + ":";
+    list.innerHTML = near.map(function (x) {
+      var p = x[1], d = x[0] < 1 ? T("under 1 km", "llai nag 1 km") : Math.round(x[0]) + " km";
+      return '<li data-era="' + p.era + '"><button type="button" class="near-go" data-pid="' + p.id + '"><b>' + esc(T(p.en, p.cy)) + "</b><span>" + d + " · " + esc(p.year) + "</span></button></li>";
+    }).join("");
+    var xy = proj(nearAt.lat, nearAt.lon);
+    if (!you) { you = document.createElementNS("http://www.w3.org/2000/svg", "g"); you.id = "you-pin"; you.setAttribute("class", "you"); $("#wales").appendChild(you); }
+    you.setAttribute("transform", "translate(" + xy[0].toFixed(1) + " " + xy[1].toFixed(1) + ")");
+    you.innerHTML = '<circle r="9"/><circle class="in" r="3.5"/><text x="0" y="-15" text-anchor="middle">' + esc(T("You", "Chi")) + "</text>";
+  }
+  $("#near-form").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var t = findTown($("#near-in").value);
+    if (!t) { nearAt = null; renderNear(); $("#near-msg").textContent = T("Sorry, I don’t know that town yet. Try a nearby larger town.", "Mae’n ddrwg gen i, dw i ddim yn adnabod y dref honno eto. Rhowch gynnig ar dref fwy gerllaw."); return; }
+    nearAt = { lat: t[2], lon: t[3], name: T(t[0], t[1]) }; renderNear();
+  });
+  $("#near-geo").onclick = function () {
+    var msg = $("#near-msg");
+    if (!navigator.geolocation) { msg.textContent = T("Your browser can’t share your location. Type your town instead.", "Ni all eich porwr rannu’ch lleoliad. Teipiwch eich tref yn lle hynny."); return; }
+    msg.textContent = T("Finding you…", "Yn chwilio amdanoch…");
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      var la = pos.coords.latitude, lo = pos.coords.longitude;
+      if (la < 51.2 || la > 53.6 || lo < -5.8 || lo > -2.5) { msg.textContent = T("You seem to be outside Wales, so here is the nearest corner of it.", "Mae’n ymddangos eich bod y tu allan i Gymru, felly dyma’r gornel agosaf ati."); la = Math.min(53.45, Math.max(51.38, la)); lo = Math.min(-2.75, Math.max(-5.3, lo)); }
+      nearAt = { lat: la, lon: lo, name: T("you", "chi") }; renderNear();
+    }, function () { msg.textContent = T("Location wasn’t shared. Type your town instead.", "Ni rannwyd eich lleoliad. Teipiwch eich tref yn lle hynny."); }, { timeout: 10000, maximumAge: 600000 });
+  };
+  $("#near-list").addEventListener("click", function (ev) { var b = ev.target.closest(".near-go"); if (!b) return; selectPlace(b.dataset.pid); var c = $("#place-card"); if (c && c.scrollIntoView && innerWidth < 900) c.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }); });
+
+  /* ---------- Timeline challenge ---------- */
+  var G = null;
+  function gameRound() {
+    var pool = shuffle(EVENTS.map(function (e, i) { return i; })), pick = [];
+    for (var k = 0; k < pool.length && pick.length < 5; k++) {
+      var y = EVENTS[pool[k]][E_Y];
+      if (pick.every(function (j) { return Math.abs(EVENTS[j][E_Y] - y) >= 25; })) pick.push(pool[k]);
+    }
+    return { cards: pick, order: [], done: false };
+  }
+  function newGame() { G = { round: 1, total: 0, r: gameRound() }; renderGame(); }
+  function renderGame() {
+    if (!G) return newGame();
+    var box = $("#game-box"), r = G.r;
+    if (G.over) {
+      var s = G.total, msg = s >= 13 ? T("Brilliant! You know your history.", "Gwych! Rydych chi’n gwybod eich hanes.") : s >= 9 ? T("Da iawn! Well done.", "Da iawn wir!") : T("Good try. Every play teaches you more.", "Ymdrech dda. Mae pob gêm yn dysgu mwy i chi.");
+      box.innerHTML = '<p class="eyebrow">' + T("Final score", "Sgôr terfynol") + '</p><p class="q-score">' + s + '/15</p><h3>' + msg + '</h3><div class="game-row"><button type="button" class="btn solid" id="g-again">' + T("Play again", "Chwarae eto") + '</button><button type="button" class="btn" id="g-share">' + T("Copy my score", "Copïo fy sgôr") + "</button></div>";
+      $("#g-again").onclick = function () { newGame(); var f = $("#game-box .g-card"); if (f) f.focus(); };
+      $("#g-share").onclick = function () {
+        var b = this, txt = T("I scored " + s + "/15 in the Timeline challenge on History of Wales. Can you beat me? ", "Sgoriais " + s + "/15 yn Her y llinell amser ar Hanes Cymru. Allwch chi wneud yn well? ") + "https://historyofwales.cymru/#game";
+        try { navigator.clipboard.writeText(txt).then(function () { b.textContent = T("Copied", "Wedi copïo"); }, function () { b.textContent = txt; }); } catch (e) { b.textContent = txt; }
+      };
+      return;
+    }
+    var sorted = r.cards.slice().sort(function (a, b) { return EVENTS[a][E_Y] - EVENTS[b][E_Y]; });
+    box.innerHTML = '<div class="q-top"><span>' + T("Round", "Rownd") + " " + G.round + " / 3</span><span>" + T("Score", "Sgôr") + " " + G.total + "</span></div>" +
+      '<ol class="g-cards">' + r.cards.map(function (i) {
+        var e = EVENTS[i], n = r.order.indexOf(i), cls = "g-card";
+        if (r.done) cls += sorted.indexOf(i) === n ? " right" : " wrong";
+        return '<li><button type="button" class="' + cls + '" data-era="' + e[E_ERA] + '" data-i="' + i + '"' + (r.done ? " disabled" : "") + ' aria-pressed="' + (n >= 0) + '"><span class="g-n">' + (n >= 0 ? n + 1 : "") + "</span><span><b>" + esc(T(e[E_TEN], e[E_TCY])) + "</b>" + (r.done ? '<span class="g-y">' + yearLabel(e) + (sorted.indexOf(i) !== n ? " · " + T("should be ", "dylai fod yn ") + (sorted.indexOf(i) + 1) : "") + "</span>" : "") + "</span></button></li>";
+      }).join("") + "</ol>" +
+      '<div class="game-row"><p class="q-fb" aria-live="polite">' + (r.done ? T("You got ", "Cawsoch ") + r.pts + "/5." : T("Tap the oldest event first.", "Tapiwch y digwyddiad hynaf yn gyntaf.") + " " + r.order.length + "/5") + "</p>" +
+      (r.done ? '<button type="button" class="btn solid" id="g-next">' + (G.round < 3 ? T("Next round", "Rownd nesaf") : T("See my score", "Gweld fy sgôr")) + "</button>" : '<button type="button" class="btn solid" id="g-check"' + (r.order.length < 5 ? " disabled" : "") + ">" + T("Check", "Gwirio") + "</button>") + "</div>";
+    $$(".g-card", box).forEach(function (b) {
+      b.onclick = function () {
+        var i = +b.dataset.i, n = r.order.indexOf(i);
+        if (n >= 0) r.order = r.order.slice(0, n); else r.order.push(i);
+        renderGame(); var f = $('.g-card[data-i="' + i + '"]', box); if (f) f.focus();
+      };
+    });
+    if ($("#g-check")) $("#g-check").onclick = function () {
+      r.pts = r.order.filter(function (i, n) { return sorted[n] === i; }).length; r.done = true; G.total += r.pts; renderGame(); $("#g-next").focus();
+    };
+    if ($("#g-next")) $("#g-next").onclick = function () {
+      if (G.round >= 3) G.over = true; else { G.round++; G.r = gameRound(); }
+      renderGame(); var f = $("#game-box .g-card") || $("#g-again"); if (f) f.focus();
+    };
+  }
+
   /* ---------- Sources ---------- */
   function renderSources() {
     $("#read-books").innerHTML = D.READING.map(function (r) { return "<li><b>" + esc(r.t) + "</b><span>" + esc(T(r.n, r.nCy)) + "</span></li>"; }).join("");
@@ -401,7 +510,7 @@
     $("#lang-en").setAttribute("aria-pressed", lang === "en"); $("#lang-cy").setAttribute("aria-pressed", lang === "cy");
     $$("[data-cy]").forEach(function (el) { el.textContent = lang === "cy" ? el.dataset.cy : el.dataset.en; });
     $$("[data-cy-svg]").forEach(function (el) { el.textContent = lang === "cy" ? el.dataset.cySvg : el.dataset.enSvg; });
-    renderChapters(); renderToday(); renderTimeline(); renderPeople(); renderChart(); renderDecoder(); renderWords(); renderSources(); selectPlace(sel); if (mode === "kg") renderKg(); renderQuiz();
+    renderChapters(); renderToday(); renderTimeline(); renderPeople(); renderChart(); renderDecoder(); renderWords(); renderSources(); renderNear(); renderGame(); selectPlace(sel); if (mode === "kg") renderKg(); renderQuiz();
     if (!ov.hidden) { var m = /^#pennod-(\w+)/.exec(location.hash); if (m) openChapter(m[1], false); }
   }
   function setLang(l) { lang = l; try { localStorage.setItem("hc-lang", l); } catch (e) {} applyLang(); }

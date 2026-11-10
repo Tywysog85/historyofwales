@@ -40,7 +40,7 @@ html.cy .l-en, html:not(.cy) .l-cy { display: none !important }
 /* Quiz */
 #quiz { background: var(--slate) }
 .quiz { max-width: 46rem; display: grid; gap: 1.25rem }
-.quiz .q-top { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; font-family: var(--f-mono); font-size: .78rem; color: var(--muted) }
+.quiz .q-top, .game-box .q-top { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; font-family: var(--f-mono); font-size: .78rem; color: var(--muted) }
 .quiz .q-bar { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden }
 .quiz .q-bar i { display: block; height: 100%; background: var(--dragon); transition: width .4s }
 .quiz h3 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); line-height: 1.15 }
@@ -109,3 +109,33 @@ footer nav a:hover { color: var(--ink) }
 .trail-card svg { width: 3rem; height: 3rem; color: var(--c) }
 .trail-card b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 1.3rem; line-height: 1.15 }
 .trail-card span span { font-size: .85rem; color: var(--muted) }
+
+/* ---------- v5: near you, timeline challenge, word audio, search ---------- */
+.near { margin-top: clamp(1.5rem, 4vw, 2.5rem); background: var(--slate); border: 1px solid var(--line); border-radius: 14px; padding: clamp(1.1rem, 3vw, 1.6rem); display: grid; gap: .9rem }
+.near-head h3 { font-size: 1.7rem }
+.near-form { display: flex; flex-wrap: wrap; gap: .6rem }
+.near-form input { flex: 1 1 14rem; min-width: 0; background: var(--night); color: var(--ink); border: 1px solid var(--line); border-radius: 999px; padding: .7rem 1.1rem; font: inherit }
+.near-form input:focus { outline: 2px solid var(--dragon); outline-offset: 2px }
+.near-msg { color: var(--muted); margin: 0; min-height: 1.2em }
+.near-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr)); gap: .6rem }
+.near-go { width: 100%; text-align: left; display: grid; gap: .2rem; background: var(--night); color: var(--ink); border: 1px solid var(--line); border-left: 3px solid var(--c); border-radius: 10px; padding: .75rem .9rem; cursor: pointer; font: inherit }
+.near-go:hover { border-color: var(--ink); border-left-color: var(--c) }
+.near-go span { font-family: var(--f-mono); font-size: .75rem; color: var(--muted) }
+#wales .you circle { fill: var(--ink); opacity: .25 } #wales .you circle.in { fill: var(--ink); opacity: 1 }
+#wales .you text { fill: var(--ink); font: 600 13px var(--f-body) }
+.game-box { background: var(--slate); border: 1px solid var(--line); border-radius: 14px; padding: clamp(1.1rem, 3vw, 1.8rem); display: grid; gap: 1rem }
+.g-cards { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem }
+.g-card { width: 100%; display: flex; gap: .9rem; align-items: center; text-align: left; background: var(--night); color: var(--ink); border: 1px solid var(--line); border-left: 3px solid var(--c); border-radius: 12px; padding: .8rem 1rem; cursor: pointer; font: inherit; font-size: 1.02rem }
+.g-card:hover:not(:disabled) { border-color: var(--ink); border-left-color: var(--c) }
+.g-card[aria-pressed="true"] { background: var(--slate-2) }
+.g-card > span:last-child { display: grid; gap: .2rem }
+.g-n { flex: none; width: 2rem; height: 2rem; border-radius: 50%; border: 1px dashed var(--line); display: grid; place-items: center; font-family: var(--f-mono); font-weight: 600 }
+.g-card[aria-pressed="true"] .g-n { border: 0; background: var(--ink); color: var(--night) }
+.g-card.right { border-color: var(--e-modern) } .g-card.wrong { border-color: var(--dragon) }
+.g-card.right .g-n { background: var(--e-modern) } .g-card.wrong .g-n { background: var(--dragon) }
+.g-card:disabled { cursor: default }
+.g-y { font-family: var(--f-mono); font-size: .78rem; color: var(--muted) }
+.game-row { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; justify-content: space-between }
+.game-row .q-fb { margin: 0 }
+.words .play { margin-left: .4rem; background: none; border: 1px solid var(--line); color: var(--ink); border-radius: 999px; width: 1.9rem; height: 1.9rem; cursor: pointer; font-size: .7rem; vertical-align: middle }
+.words .play:hover { border-color: var(--dragon); color: var(--dragon) }

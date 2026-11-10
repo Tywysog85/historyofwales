@@ -516,3 +516,28 @@ WORDS = [
  ["Eisteddfod", "eye-STETH-vod", "a festival of poetry and music, held since 1176", "gŵyl farddoniaeth a cherddoriaeth, ers 1176"],
  ["Senedd", "SEN-eth", "parliament", "cynulliad deddfu"], ["Cofiwch Dryweryn", "KOV-ee-ookh druh-WER-in", "remember Tryweryn", "slogan ar waliau ledled Cymru"],
 ]
+
+
+# ---------- merge round-3 additions (src/more.py) ----------
+import re as _re
+from more import EVENTS_MORE as _EM, PEOPLE_MORE as _PM, PLACES_MORE as _PLM
+
+EVENTS = sorted(EVENTS + _EM, key=lambda ev: ev[1])
+PLACES = PLACES + _PLM
+PEOPLE_EXTRA_LONG = {p[0]: ([p[11]], [p[12]]) for p in _PM}
+_ERA_ORDER = {e["id"]: i for i, e in enumerate(ERAS)}
+
+
+def _born(p):
+    d = p[2]
+    m = _re.search(r"(\d{3,4})", d)
+    if m:
+        y = int(m.group(1))
+        return y - 40 if d.startswith(("d.", "fl.")) else y
+    if "1st century" in d:
+        return 40
+    m = _re.search(r"(\d+)(st|nd|rd|th) century", d)
+    return (int(m.group(1)) - 1) * 100 + 50 + (-30 if "early" in d else 30 if "late" in d else 0) if m else 0
+
+
+PEOPLE = sorted(PEOPLE + [p[:10] for p in _PM], key=lambda p: (_ERA_ORDER[p[1]], _born(p)))

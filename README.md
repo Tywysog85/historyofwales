@@ -38,3 +38,10 @@ The site does not use photos yet; every illustration is an original line drawing
 ## Accuracy
 
 Dates and figures were written with care but should be checked against the linked sources. Welsh text should be proofread by a fluent speaker.
+
+## Round 3 additions
+
+- **Extra content** lives in `src/more.py` (events, people and places) and is merged into `src/data.py` automatically. Events are sorted by year.
+- **Search**: `build.py` writes `search.json`; `src/static/search.js` powers the magnifier button and the `/` shortcut on every page.
+- **History near you**: town list in `src/towns.py`.
+- **Pronunciation recordings**: put MP3s in `src/static/audio/` (see the README there). Without them, the play buttons use the device's speech voice.
