@@ -148,6 +148,42 @@
     if (SKY.star > 0.5) drawMeteors(t);
     drawDragon(t, sumX, sumY, narrow, stacked);
   }
+  /* Y Ddraig Goch as on the flag: passant, facing left, in a 300 x 180 box. Painted on any canvas; `flap` folds the wing. */
+  var DP = {};
+  function ddraig(g, flap, red, far, dark, eye) {
+    function line(pts, w, col) { g.strokeStyle = col || red; g.lineWidth = w; g.lineCap = "round"; g.lineJoin = "round"; g.beginPath(); g.moveTo(pts[0], pts[1]); for (var i = 2; i < pts.length; i += 2) g.lineTo(pts[i], pts[i + 1]); g.stroke(); }
+    function shape(d, col) { g.fillStyle = col || red; g.fill(DP[d] || (DP[d] = new Path2D(d))); }
+    function claws(x, y) { shape("M" + x + " " + y + "l-13 1l8 -5l-9 -3l10 -2l-5 -6l11 5z"); }
+    /* tail, with its barb */
+    g.strokeStyle = red; g.lineWidth = 7; g.lineCap = "round"; g.beginPath(); g.moveTo(206, 98); g.bezierCurveTo(236, 104, 254, 92, 249, 75); g.bezierCurveTo(245, 62, 228, 63, 231, 75); g.bezierCurveTo(234, 86, 252, 80, 257, 60); g.stroke();
+    shape("M248 62L267 59L261 38Z");
+    /* far legs */
+    line([178, 106, 162, 128, 154, 150], 8, far); claws(156, 153);
+    line([110, 100, 90, 104, 72, 92], 7, far); shape("M75 96l-15 -1l9 -5l-10 -6l12 1l-4 -9l11 9z");
+    /* wing */
+    g.save(); g.translate(0, 82); g.scale(1, flap); g.translate(0, -82);
+    shape("M128 80L146 46L139 28L161 39L202 22L191 36L236 33L214 48L242 60L211 63Q201 67 197 80Q187 67 177 80Q167 68 156 82Z");
+    line([146, 46, 202, 22], 1.6, dark); line([146, 46, 236, 33], 1.6, dark); line([146, 46, 242, 60], 1.6, dark); line([146, 46, 197, 80], 1.6, dark);
+    g.restore();
+    /* body, neck and head */
+    shape("M106 80C122 70 150 73 172 79C190 77 205 80 211 90C217 102 209 113 196 113C182 109 166 99 150 103C136 109 122 113 114 107C102 101 100 88 106 80Z");
+    g.strokeStyle = red; g.lineWidth = 13; g.lineCap = "butt"; g.beginPath(); g.moveTo(114, 92); g.quadraticCurveTo(98, 78, 101, 54); g.stroke();
+    shape("M109 50L100 30L96 43L88 34L86 44L62 49L59 55L79 58L65 67L86 69L99 66L110 60Z");
+    line([79, 60, 54, 60], 2); shape("M45 60L56 55L54 60L56 65Z");
+    g.fillStyle = eye; g.beginPath(); g.arc(89, 50, 1.8, 0, 7); g.fill();
+    /* near legs */
+    g.fillStyle = red; g.beginPath(); g.ellipse(199, 103, 12, 14, 0.3, 0, 7); g.fill(); g.beginPath(); g.ellipse(119, 99, 10, 12, -0.2, 0, 7); g.fill();
+    line([198, 108, 212, 126, 198, 150], 8); claws(200, 153);
+    line([120, 106, 113, 128, 106, 150], 8); claws(108, 153);
+  }
+  /* the flag is painted flat once, then drawn in thin slices that billow */
+  var FLAG = null;
+  function flagArt() {
+    var c = document.createElement("canvas"); c.width = 600; c.height = 360; var g = c.getContext("2d"); g.scale(2, 2);
+    g.fillStyle = "#f6f3ec"; g.fillRect(0, 0, 300, 90); g.fillStyle = "#0f9a48"; g.fillRect(0, 90, 300, 90);
+    ddraig(g, 1, "#d21a25", "#bd1620", "#8f0f18", "#f6f3ec");
+    return c;
+  }
   /* a castle of the princes on its crag: great keep, round towers, a twin-towered gatehouse, and Y Ddraig Goch flying over it */
   function drawCastle(x, y, s, col, t) {
     var lit = "rgba(" + hex(mixHex("#aab6d6", SKY.tint, SKY.k * 0.5)).join(",") + ",", i;
@@ -190,21 +226,17 @@
     cx.fillStyle = col; for (i = 1; i < 4; i++) cx.fillRect(0.395 + i * 0.0425 - 0.006, -0.34, 0.012, 0.2);
     /* lit windows */
     slit(-0.35, -1.12, 0.17, 1); slit(-0.2, -0.74, 0.13, 2); slit(0.98, -0.82, 0.13, 3); slit(-1.5, -0.6, 0.13, 4); slit(1.5, -0.56, 0.13, 5); slit(-0.56, -1.74, 0.1, 6);
-    /* Y Ddraig Goch: white over green, the red dragon facing the pole */
-    var px = -0.56, top = -2.72, fw = 0.66, fh = 0.4, n = 14;
-    function wave(u) { return reduce ? 0 : Math.sin(u * 5.2 - t / 240) * 0.03 * u; }
-    cx.strokeStyle = "#565c6c"; cx.lineWidth = 0.028; cx.beginPath(); cx.moveTo(px, -2.1); cx.lineTo(px, top - 0.05); cx.stroke();
-    cx.fillStyle = "#c9a24a"; cx.beginPath(); cx.arc(px, top - 0.06, 0.03, 0, 7); cx.fill();
+    /* Y Ddraig Goch on its pole: thin slices of the painted flag, each lifted and shaded by the wind */
+    var px = -0.56, top = -2.86, fw = 0.86, fh = 0.516, n = 48, tt = reduce ? 0 : t;
+    cx.strokeStyle = "#565c6c"; cx.lineWidth = 0.03; cx.beginPath(); cx.moveTo(px, -2.1); cx.lineTo(px, top - 0.05); cx.stroke();
+    cx.fillStyle = "#c9a24a"; cx.beginPath(); cx.arc(px, top - 0.06, 0.032, 0, 7); cx.fill();
+    if (!FLAG) FLAG = flagArt();
     for (i = 0; i < n; i++) {
-      var u = (i + 0.5) / n, o = wave(u), sx = px + 0.014 + i * fw / n, sh = 1 - 0.12 * Math.max(0, Math.cos(u * 5.2 - t / 240)) * u;
-      cx.fillStyle = mix("#101420", "#f4f1ea", sh); cx.fillRect(sx, top + o, fw / n + 0.02, fh / 2 + 0.004);
-      cx.fillStyle = mix("#101420", "#149a4c", sh); cx.fillRect(sx, top + o + fh / 2, fw / n + 0.02, fh / 2);
+      var u = (i + 0.5) / n, ph = u * 7.5 - tt / 230, lift = (Math.sin(ph) * 0.034 + Math.sin(ph * 1.7 + 1) * 0.012) * u + 0.05 * u * u, slope = (Math.cos(ph) + 0.4 * Math.cos(ph * 1.7 + 1)) * Math.min(1, u * 2.5);
+      var fx = px + 0.015 + i * fw / n, fy = top + lift, sh = fh * (1 - 0.03 * Math.sin(ph + 1) * u);
+      cx.drawImage(FLAG, i * 600 / n, 0, 600 / n, 360, fx, fy, fw / n + 0.006, sh);
+      cx.fillStyle = slope > 0 ? "rgba(255,255,255," + 0.15 * slope + ")" : "rgba(8,12,24," + -0.3 * slope + ")"; cx.fillRect(fx, fy, fw / n, sh);
     }
-    var dk = fw * 0.74 / 206, dw = 206 * dk;
-    cx.save(); cx.transform(1, reduce ? 0 : Math.cos(2.6 - t / 240) * 0.07, 0, 1, px + 0.014 + fw / 2, top + fh / 2 + wave(0.5));
-    cx.translate(dw / 2 - 3 * dk, -56 * dk); cx.scale(-dk, dk);
-    cx.fillStyle = "#b8231f"; cx.fill(DR.far); cx.fillStyle = "#d42a25"; cx.fill(DR.body); cx.fill(DR.near);
-    cx.restore();
     cx.restore();
   }
   /* shooting stars: one every few seconds, high in the sky */
@@ -241,12 +273,6 @@
     cx.beginPath(); ERYRI.forEach(function (p, j) { var X = x0 + p[0] * w, Y = base - p[1] * h; if (j) cx.lineTo(X, Y); else cx.moveTo(X, Y); });
     cx.strokeStyle = "rgba(233,217,198,.28)"; cx.lineWidth = 1.4; cx.stroke();
   }
-  /* Y Ddraig Goch: an original silhouette, facing right, 220 x 130 units */
-  var DR = {
-    body: new Path2D("M186 34C190 33 196 35 200 38L193 40C196 42 199 44 200 46C194 47 188 46 184 45C178 47 172 52 168 58C163 66 156 72 146 74C132 77 116 78 102 77C88 76 76 74 66 76C52 79 40 88 28 96C20 101 12 102 6 98C10 98 16 95 22 90C34 80 46 70 60 66C74 62 90 64 104 63C118 62 132 62 142 58C152 54 158 46 164 38C168 32 174 28 180 28L176 20L184 27L186 18L189 29C189 31 188 32 186 34ZM8 99L-6 92L0 104L-4 112L12 102ZM138 72C142 80 144 86 150 90L156 90L152 94L158 96L146 96C138 92 134 84 130 76ZM76 74C76 84 72 92 66 98L72 100L64 102L68 106L58 104C62 96 64 86 64 76Z"),
-    far: new Path2D("M128 62C130 40 140 18 160 2C150 18 150 26 152 32C144 30 140 36 142 42C134 42 132 50 134 58Z"),
-    near: new Path2D("M92 64C86 40 74 18 48 0C62 4 80 10 96 20L104 10C112 22 118 36 120 52C114 48 108 50 108 56C102 52 96 56 98 62Z")
-  };
   var DPOS = { x: -999, y: -999, r: 0 }, fireAt = 0, nextFire = 5000;
   function drawDragon(t, sumX, sumY, narrow, stacked) {
     var period = 26000, k = reduce ? 0.55 : (t % period) / period;
@@ -264,7 +290,7 @@
     if (fireAt && fp >= 0 && fp < 1) {
       /* fire: three flickering tongues from the mouth, brightest at the root */
       var pow = Math.sin(Math.min(1, fp * 1.15) * Math.PI), L = 135 * pow;
-      cx.save(); cx.translate(199, 41); cx.rotate(0.12); cx.globalCompositeOperation = "lighter";
+      cx.save(); cx.translate(212, 37); cx.rotate(0.12); cx.globalCompositeOperation = "lighter";
       [[1, 22, "rgba(226,69,61,.8)"], [0.78, 14, "rgba(255,150,60,.9)"], [0.5, 7.5, "rgba(255,236,170,.95)"]].forEach(function (f, n) {
         var l = L * f[0] * (0.9 + 0.1 * Math.sin(t / 45 + n * 2)), w = f[1] * pow * (0.85 + 0.15 * Math.sin(t / 60 + n)), wob = 4 * Math.sin(t / 70 + n * 1.7);
         var g = cx.createLinearGradient(0, 0, l, 0); g.addColorStop(0, f[2]); g.addColorStop(1, f[2].replace(/[\d.]+\)$/, "0)"));
@@ -272,10 +298,8 @@
       });
       cx.restore();
     }
-    cx.fillStyle = "#c9372f";
-    cx.save(); cx.translate(0, 62); cx.scale(1, flap); cx.translate(0, -62); cx.fill(DR.far); cx.restore();
-    cx.fillStyle = "#e2453d"; cx.fill(DR.body);
-    cx.save(); cx.translate(0, 64); cx.scale(1, flap); cx.translate(0, -64); cx.fill(DR.near); cx.restore();
+    /* the dragon of the flag, turned to fly towards the mountain */
+    cx.translate(267, -22); cx.scale(-1, 1); ddraig(cx, 0.55 + 0.45 * flap, "#e2453d", "#c9372f", "#a82a24", "#1a1420");
     cx.restore();
   }
   function loop(t) { t0 = t; if (window.scrollY < H) draw(t); requestAnimationFrame(loop); }
