@@ -15,7 +15,7 @@ Open jobs for History of Wales. Tick a job off by deleting it. Keep this list sh
 ## Checking and sources
 
 - **Check the new history against sources.** The long reads and new people added in November 2026 were written from general knowledge. Dates, names and quotations should be checked, and sources linked.
-- **Photos for new pages.** The 29 newer places and 11 newer people have drawn pictures only.
+- **More photos.** Only 32 of the 67 places and 13 of the 71 people have a photo; the rest have drawn pictures.
 - **Real recordings for the word buttons.** They use the phone's own voice for now. MP3 files go in `src/static/audio/`.
 
 ## Ideas, not started
