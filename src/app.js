@@ -124,7 +124,7 @@
     var hz = cx.createLinearGradient(0, eb - eh * 0.75, 0, eb + eh * 0.1); hz.addColorStop(0, "rgba(232,120,76,0)"); hz.addColorStop(1, "rgba(232,120,76," + Math.min(0.3, 0.17 * SKY.glow) + ")");
     cx.fillStyle = hz; cx.fillRect(0, eb - eh * 0.75, W, eh * 0.85);
     LAYERS.forEach(function (L, i) {
-      if (i === 3 && !stacked) drawCastle(W * 0.885 - mouse * 9, H * 0.7 - sy * 0.1, H * 0.12, mix("#0d111b", SKY.tint, SKY.k * 0.35), t);
+      if (i === 3 && !stacked) drawCastle(Math.min(W * 0.885, W - H * 0.3) - mouse * 9, H * 0.7 - sy * 0.1, H * 0.125, mix("#0d111b", SKY.tint, SKY.k * 0.35), t);
       if (i === 1) { drawEryri(ex0 - ew * 0.34 - mouse * 2, eb - sy * 0.03, ew * 0.9, eh * 0.62, true); drawEryri(ex0 - mouse * 4, eb - sy * 0.04, ew, eh); }
       var w = ridges[i], amp = stacked ? eh * (0.34 - i * 0.04) : H * L.a, base = (stacked ? eb - eh * (0.42 - i * 0.15) : H * L.y) + sy * L.s * 0.6, off = mouse * (i + 1) * 6 + (reduce ? 0 : t / 1000 * (i + 1) * 1.2);
       cx.beginPath(); cx.moveTo(0, H);
@@ -148,22 +148,64 @@
     if (SKY.star > 0.5) drawMeteors(t);
     drawDragon(t, sumX, sumY, narrow, stacked);
   }
-  /* a castle of the princes on its crag: a round keep like Dolbadarn, with a light in the window */
+  /* a castle of the princes on its crag: great keep, round towers, a twin-towered gatehouse, and Y Ddraig Goch flying over it */
   function drawCastle(x, y, s, col, t) {
-    cx.fillStyle = col; cx.beginPath();
-    cx.moveTo(x - s * 3.4, y + s * 1.6); cx.quadraticCurveTo(x - s * 1.6, y + s * 0.2, x - s * 0.9, y); cx.lineTo(x + s * 1.0, y); cx.quadraticCurveTo(x + s * 1.9, y + s * 0.3, x + s * 3.6, y + s * 1.6); cx.closePath(); cx.fill();
-    var kw = s * 0.62, kh = s * 1.15, m = kw / 5;
-    cx.fillRect(x - kw / 2, y - kh, kw, kh + 2);
-    for (var i = 0; i < 3; i++) cx.fillRect(x - kw / 2 - m * 0.3 + i * (kw + m * 0.6 - m) / 2, y - kh - m, m, m + 1);
-    cx.fillRect(x - s * 0.95, y - s * 0.36, s * 1.9, s * 0.36 + 2);
-    for (var j = 0; j < 7; j++) cx.fillRect(x - s * 0.95 + j * s * 0.3, y - s * 0.36 - m * 0.7, m * 0.9, m * 0.7 + 1);
-    cx.fillRect(x + s * 0.62, y - s * 0.62, s * 0.34, s * 0.62 + 2); cx.fillRect(x + s * 0.58, y - s * 0.62 - m * 0.6, s * 0.14, m * 0.6 + 1); cx.fillRect(x + s * 0.86, y - s * 0.62 - m * 0.6, s * 0.14, m * 0.6 + 1);
-    var fl = 0.75 + 0.25 * Math.sin(t / 330) * Math.sin(t / 97), wx = x, wy = y - kh * 0.62, wg = cx.createRadialGradient(wx, wy, 0, wx, wy, s * 0.5);
-    wg.addColorStop(0, "rgba(255,196,110," + 0.5 * fl + ")"); wg.addColorStop(1, "rgba(255,196,110,0)"); cx.fillStyle = wg; cx.fillRect(wx - s * 0.5, wy - s * 0.5, s, s);
-    cx.fillStyle = "rgba(255,214,140," + (0.75 + 0.25 * fl) + ")"; cx.fillRect(wx - m * 0.3, wy - m * 0.55, m * 0.6, m * 1.1);
-    /* the red dragon flying from the keep */
-    cx.strokeStyle = col; cx.lineWidth = Math.max(1, s * 0.03); cx.beginPath(); cx.moveTo(x, y - kh - m); cx.lineTo(x, y - kh - m - s * 0.5); cx.stroke();
-    var fw = s * 0.34, wv = reduce ? 0 : Math.sin(t / 260) * s * 0.03; cx.fillStyle = "#e2453d"; cx.beginPath(); cx.moveTo(x, y - kh - m - s * 0.5); cx.lineTo(x + fw, y - kh - m - s * 0.46 + wv); cx.lineTo(x + fw, y - kh - m - s * 0.3 + wv); cx.lineTo(x, y - kh - m - s * 0.32); cx.closePath(); cx.fill();
+    var lit = "rgba(" + hex(mixHex("#aab6d6", SKY.tint, SKY.k * 0.5)).join(",") + ",", i;
+    function fl(n) { return reduce ? 0.9 : 0.78 + 0.22 * Math.sin(t / (290 + n * 37) + n * 1.9) * Math.sin(t / (90 + n * 11)); }
+    function tower(xc, w, h, n) {
+      var tw = w * 1.18, th = w * 0.2, mw = tw / (2 * n - 1);
+      cx.fillStyle = col; cx.fillRect(xc - w / 2, -h, w, h + 0.06); cx.fillRect(xc - tw / 2, -h - th, tw, th + 0.01);
+      for (var k = 0; k < n; k++) cx.fillRect(xc - tw / 2 + k * 2 * mw, -h - th - mw * 1.15, mw, mw * 1.15 + 0.01);
+      /* round stone: moonlight on one side, shadow on the other */
+      var g = cx.createLinearGradient(xc - tw / 2, 0, xc + tw / 2, 0); g.addColorStop(0, lit + ".2)"); g.addColorStop(0.4, lit + ".04)"); g.addColorStop(1, "rgba(0,0,0,.28)");
+      cx.fillStyle = g; cx.fillRect(xc - w / 2, -h, w, h); cx.fillRect(xc - tw / 2, -h - th, tw, th);
+      cx.fillStyle = lit + ".1)"; for (var c = 1; c * 0.16 < h; c++) cx.fillRect(xc - w / 2, -c * 0.16, w, 0.012);
+    }
+    function slit(wx, wy, h, n) {
+      var f = fl(n), g = cx.createRadialGradient(wx, wy, 0, wx, wy, 0.3); g.addColorStop(0, "rgba(255,190,104," + 0.42 * f + ")"); g.addColorStop(1, "rgba(255,190,104,0)");
+      cx.fillStyle = g; cx.fillRect(wx - 0.3, wy - 0.3, 0.6, 0.6);
+      cx.fillStyle = "rgba(255,218,150," + (0.7 + 0.3 * f) + ")"; cx.beginPath(); cx.moveTo(wx - 0.028, wy + h / 2); cx.lineTo(wx - 0.028, wy - h / 2 + 0.028); cx.arc(wx, wy - h / 2 + 0.028, 0.028, Math.PI, 0); cx.lineTo(wx + 0.028, wy + h / 2); cx.closePath(); cx.fill();
+    }
+    cx.save(); cx.translate(x, y); cx.scale(s, s);
+    /* the crag */
+    cx.fillStyle = col; cx.beginPath(); cx.moveTo(-4.4, 1.8);
+    [[-3.5, 1.2], [-3.0, 1.05], [-2.6, 0.62], [-2.25, 0.5], [-2.0, 0.16], [-1.8, 0.02], [1.8, 0.02], [2.0, 0.2], [2.3, 0.28], [2.6, 0.7], [3.1, 0.86], [3.5, 1.3], [4.4, 1.8]].forEach(function (p) { cx.lineTo(p[0], p[1]); });
+    cx.closePath(); cx.fill();
+    /* at the back: the flag turret, the great keep and a tall tower */
+    tower(-0.56, 0.22, 1.98, 2); tower(-0.35, 0.66, 1.55, 4); tower(0.98, 0.4, 1.12, 3);
+    /* the curtain wall */
+    cx.fillStyle = col; cx.fillRect(-1.5, -0.52, 3, 0.58);
+    for (i = 0; i < 20; i++) cx.fillRect(-1.5 + i * 0.155, -0.6, 0.085, 0.09);
+    var wg = cx.createLinearGradient(0, -0.52, 0, 0); wg.addColorStop(0, lit + ".13)"); wg.addColorStop(1, lit + "0)"); cx.fillStyle = wg; cx.fillRect(-1.5, -0.52, 3, 0.52);
+    cx.fillStyle = lit + ".09)"; for (i = 1; i < 3; i++) cx.fillRect(-1.5, -i * 0.16, 3, 0.012);
+    /* corner towers and the gatehouse */
+    tower(-1.5, 0.46, 0.92, 3); tower(1.5, 0.46, 0.86, 3);
+    cx.fillStyle = col; cx.fillRect(0.3, -0.7, 0.36, 0.76); for (i = 0; i < 3; i++) cx.fillRect(0.33 + i * 0.11, -0.77, 0.07, 0.08);
+    tower(0.2, 0.34, 0.82, 3); tower(0.76, 0.34, 0.82, 3);
+    /* the gate, with firelight in the passage */
+    var gf = fl(7), gg = cx.createRadialGradient(0.48, -0.1, 0, 0.48, -0.1, 0.5); gg.addColorStop(0, "rgba(255,176,90," + 0.5 * gf + ")"); gg.addColorStop(1, "rgba(255,176,90,0)");
+    cx.fillStyle = gg; cx.fillRect(-0.02, -0.6, 1, 1);
+    var ag = cx.createLinearGradient(0, -0.36, 0, 0.02); ag.addColorStop(0, "rgba(255,226,160," + (0.75 + 0.25 * gf) + ")"); ag.addColorStop(1, "rgba(236,128,60," + (0.7 + 0.2 * gf) + ")");
+    cx.fillStyle = ag; cx.beginPath(); cx.moveTo(0.395, 0.02); cx.lineTo(0.395, -0.25); cx.arc(0.48, -0.25, 0.085, Math.PI, 0); cx.lineTo(0.565, 0.02); cx.closePath(); cx.fill();
+    cx.fillStyle = col; for (i = 1; i < 4; i++) cx.fillRect(0.395 + i * 0.0425 - 0.006, -0.34, 0.012, 0.2);
+    /* lit windows */
+    slit(-0.35, -1.12, 0.17, 1); slit(-0.2, -0.74, 0.13, 2); slit(0.98, -0.82, 0.13, 3); slit(-1.5, -0.6, 0.13, 4); slit(1.5, -0.56, 0.13, 5); slit(-0.56, -1.74, 0.1, 6);
+    /* Y Ddraig Goch: white over green, the red dragon facing the pole */
+    var px = -0.56, top = -2.72, fw = 0.66, fh = 0.4, n = 14;
+    function wave(u) { return reduce ? 0 : Math.sin(u * 5.2 - t / 240) * 0.03 * u; }
+    cx.strokeStyle = "#565c6c"; cx.lineWidth = 0.028; cx.beginPath(); cx.moveTo(px, -2.1); cx.lineTo(px, top - 0.05); cx.stroke();
+    cx.fillStyle = "#c9a24a"; cx.beginPath(); cx.arc(px, top - 0.06, 0.03, 0, 7); cx.fill();
+    for (i = 0; i < n; i++) {
+      var u = (i + 0.5) / n, o = wave(u), sx = px + 0.014 + i * fw / n, sh = 1 - 0.12 * Math.max(0, Math.cos(u * 5.2 - t / 240)) * u;
+      cx.fillStyle = mix("#101420", "#f4f1ea", sh); cx.fillRect(sx, top + o, fw / n + 0.02, fh / 2 + 0.004);
+      cx.fillStyle = mix("#101420", "#149a4c", sh); cx.fillRect(sx, top + o + fh / 2, fw / n + 0.02, fh / 2);
+    }
+    var dk = fw * 0.74 / 206, dw = 206 * dk;
+    cx.save(); cx.transform(1, reduce ? 0 : Math.cos(2.6 - t / 240) * 0.07, 0, 1, px + 0.014 + fw / 2, top + fh / 2 + wave(0.5));
+    cx.translate(dw / 2 - 3 * dk, -56 * dk); cx.scale(-dk, dk);
+    cx.fillStyle = "#b8231f"; cx.fill(DR.far); cx.fillStyle = "#d42a25"; cx.fill(DR.body); cx.fill(DR.near);
+    cx.restore();
+    cx.restore();
   }
   /* shooting stars: one every few seconds, high in the sky */
   var meteors = [], nextMeteor = 2500;
