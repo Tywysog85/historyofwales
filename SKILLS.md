@@ -61,7 +61,7 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - `build.py` writes `search.json`, an index of events, people, places and pages. `src/static/search.js` opens a search box from the magnifier button or the `/` key.
 
 ### Offline support
-- `src/static/sw.js` caches pages. **Change the cache name** (`history-of-wales-vN`) whenever the site's look changes a lot, so returning visitors get the new version.
+- `src/static/sw.js` caches pages. **Change the cache name** (`history-of-wales-vN`, now v6) whenever the site's look changes a lot, so returning visitors get the new version.
 
 ---
 
@@ -87,6 +87,44 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - Take screenshots at computer width (1280px) and phone width (390px) with Playwright before publishing.
 - Run axe-core for accessibility. Headings must go in order (h1 → h2 → h3). A visually hidden heading (`.vh`) can fill a gap.
 - Run Lighthouse for performance, accessibility, best practice and SEO. The home page scored 92/100/100/100.
+
+## The redesign (November 2026)
+
+### Illustrations drawn in code
+- `src/art.py` draws every scene picture (castle, cromlech, dragons, longship, pithead and so on) as SVG: a night sky, a moon, three rolling ridges, then one flat "paper-cut" shape in front. `scene("castle", colour)` returns the picture.
+- This suits the site because Claude cannot open Wikimedia photos to check them, but can look at a drawing it made. To add a scene, write a small function that returns SVG shapes and add it to `MOTIF`.
+- Gotcha: make a contact sheet of all scenes and look at it before using them. Two scenes had parts in the wrong place on the first try.
+
+### New kinds of content
+- `src/features.py` holds the long reads (`STORIES`), legends (`LEGENDS`), symbols and traditions (`SYMBOLS`), quick facts (`FACTS`) and the "which figure are you" quiz. Each item has English and Welsh text side by side.
+- In a long read, a paragraph that starts with `## ` becomes a sub-heading.
+- `build.py` makes a page for each one and adds them to the search index and the sitemap.
+
+### One menu and footer for every page
+- `nav()` and `footer()` in `build.py` now make the menu and footer for all pages, including the home page (the home page template just says `__NAV__` and `__FOOTER__`).
+- The full-screen menu, the scroll progress bar, the back-to-top button and the fade-in-on-scroll effect live in `src/static/site.js`, which every page loads.
+
+### Fade-in on scroll, safely
+- Elements with the class `rv` start invisible and fade in when they scroll into view (IntersectionObserver).
+- Safety net: the hiding only applies once a tiny script in the page head has added the class `js`, and if `site.js` has not started after 2.5 seconds everything is shown anyway. Content must never depend on a script loading.
+- Gotcha when testing: the site uses smooth scrolling, so a test script must scroll with `behavior: "instant"`, or the page never really moves and nothing fades in.
+
+### Page-to-page transitions
+- One line of CSS, `@view-transition { navigation: auto }`, makes modern browsers cross-fade between pages. Older browsers ignore it.
+
+### Hover accordion (the six ages)
+- The six age posters sit in a flex row. The hovered one gets a bigger `flex-grow`, which animates. On phones the same cards become a sideways swipe row with scroll-snap.
+- Gotcha: text inside a card that should wrap must not sit in a CSS grid with a wide sibling, or the grid stretches and the title is cut off. A flex column fixed it.
+
+### Games and "Your journey"
+- `src/static/play.js` runs the daily challenge, the map game, Welsh names, the "which figure" quiz and word pairs. Each game page gets its data from `build.py` as a `PLAY` object.
+- The daily challenge picks its event from the date, so everyone gets the same one each day. Results, streaks and badges are saved in the visitor's own browser (localStorage, key `hc-journey`). Nothing is sent anywhere, so no cookie banner is needed.
+- The map game turns a tap into latitude and longitude by reversing the map projection, then measures the distance in kilometres.
+- Pages mark themselves with `data-track="person:slug"` (or era, place, story, legend) and `site.js` ticks them off for the journey page.
+
+### Checking a big change
+- Load every built page in a headless browser at phone width and report script errors and sideways scrolling. This caught a game card that was wider than the phone screen.
+- Make contact sheets (several screenshots tiled into one image) to review many pages quickly, in English and Welsh.
 
 ---
 

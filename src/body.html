@@ -1,36 +1,62 @@
 
 <main>
-<section id="chapters">
-  <div class="wrap">
-    <div class="head">
-      <p class="eyebrow"><span class="num">01</span> · <span data-cy="Penodau">Chapters</span></p>
-      <h2 data-cy="Chwe oes">Six ages of Wales</h2>
-      <p data-cy="Agorwch oes i ddarllen ei stori, neu archwiliwch y llinell amser lawn. Mae gan bob oes ei thudalen ei hun hefyd.">Open an age to read its story, or explore the full timeline. Each age also has its own page.</p>
-    </div>
-    <div class="chapters" id="chap-list"></div>
-    <div class="trails-strip">
-      <p class="eyebrow"><span data-cy="Neu dilynwch lwybr thema">Or follow a themed trail</span> · <a href="trails.html" data-cy="Pob llwybr">All trails</a> · <a href="teachers.html" data-cy="I athrawon">For teachers</a></p>
-      <div class="era-places" id="trail-list"></div>
-    </div>
-  </div>
-</section>
+<div class="marquee" aria-hidden="true"><div class="track">__MARQUEE__</div></div>
 
 <section id="today" aria-labelledby="today-h">
   <div class="wrap">
-    <h2 id="today-h" class="eyebrow" style="margin-bottom:1rem" data-cy="Ar y dydd hwn yn hanes Cymru">On this day in Welsh history</h2>
-    <div class="today" id="today-box"></div>
+    <h2 id="today-h" class="vh" data-cy="Heddiw">Today</h2>
+    <div class="bento-today">
+      <div class="b-day rv">
+        <p class="eyebrow" data-cy="Ar y dydd hwn yn hanes Cymru">On this day in Welsh history</p>
+        <div class="today" id="today-box"></div>
+      </div>
+      <a class="b-daily rv" href="daily.html">
+        <p class="eyebrow" data-cy="Her y dydd">Daily challenge</p>
+        <p class="b-q" data-cy="Ym mha flwyddyn?">In which year?</p>
+        <p class="b-sub" id="daily-sub" data-cy="Un digwyddiad newydd bob dydd. Chwe chynnig i ddyfalu’r flwyddyn.">One new event every day. Six guesses to find the year.</p>
+        <span class="b-go"><span data-cy="Chwarae heddiw">Play today’s</span> →</span>
+        <span class="b-streak" id="daily-streak" hidden></span>
+      </a>
+      <div class="b-fact rv">
+        <p class="eyebrow" data-cy="Wyddech chi?">Did you know?</p>
+        <p class="fact" id="fact" aria-live="polite"></p>
+        <button type="button" class="chip" id="fact-next"><span data-cy="Un arall">Another</span> ↻</button>
+      </div>
+    </div>
   </div>
 </section>
 
-<section id="timeline">
+<section id="chapters">
   <div class="wrap">
-    <div class="head">
-      <p class="eyebrow"><span class="num">02</span> · <span data-cy="Llinell amser">Timeline</span></p>
-      <h2 data-cy="Y stori mewn dyddiadau">The story in dates</h2>
-      <p data-cy="Dros 150 o ddigwyddiadau, o 230,000 CC hyd heddiw. Dewiswch oes i ddechrau, neu agorwch y llinell amser gyfan.">Over 150 events, from 230,000 BC to today. Pick an age to start, or open the whole timeline.</p>
+    <div class="head rv">
+      <p class="eyebrow"><span class="num">01</span> · <span data-cy="Yr oesoedd">The ages</span></p>
+      <h2 data-cy="Chwe oes Cymru">Six ages of Wales</h2>
+      <p data-cy="O helwyr oes yr iâ i’r Senedd. Dewiswch oes i ddarllen ei stori, ei phobl a’i lleoedd.">From ice-age hunters to the Senedd. Choose an age to read its story, its people and its places.</p>
     </div>
-    <div class="chips" id="tl-teaser" role="group" aria-label="Ages"></div>
-    <p style="margin-top:1.4rem"><a class="btn solid" href="timeline.html" data-cy="Agor y llinell amser →">Open the timeline →</a></p>
+    <div class="posters rv">__AGES__</div>
+    <div class="tl-band rv">
+      <div>
+        <p class="eyebrow" data-cy="Y llinell amser">The timeline</p>
+        <p class="tl-big"><span data-cy="230,000 CC">230,000 BC</span> <i>→</i> <span data-cy="heddiw">today</span></p>
+        <p class="muted" data-cy="Dros 150 o ddigwyddiadau mewn trefn, pob un â ffynhonnell.">Over 150 events in order, every one with a source.</p>
+      </div>
+      <div class="tl-band-r">
+        <div class="chips" id="tl-teaser" role="group" aria-label="Ages"></div>
+        <a class="btn solid" href="timeline.html" data-cy="Agor y llinell amser →">Open the timeline →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stories">
+  <div class="wrap">
+    <div class="head rv">
+      <p class="eyebrow"><span class="num">02</span> · <span data-cy="Erthyglau">Long reads</span></p>
+      <h2 data-cy="Y straeon y tu ôl i’r dyddiadau">The stories behind the dates</h2>
+      <p data-cy="Erthyglau pum munud ar y cwestiynau mawr: pam cymaint o gestyll, sut y goroesodd yr iaith, beth a gostiodd glo.">Five-minute essays on the big questions: why so many castles, how the language survived, what coal cost.</p>
+    </div>
+    <div class="s-grid">__STORIES__</div>
+    <p class="more-row rv"><a class="btn" href="stories.html" data-cy="Pob erthygl →">All long reads →</a></p>
   </div>
 </section>
 
@@ -90,13 +116,26 @@
       <span class="people-count" id="people-count"></span>
     </div>
     <div class="people" id="people-grid"></div>
+    <p class="more-row"><button type="button" class="btn" id="people-more"></button></p>
+  </div>
+</section>
+
+<section id="legends">
+  <div class="wrap">
+    <div class="head rv">
+      <p class="eyebrow"><span class="num">05</span> · <span data-cy="Chwedlau">Legends</span></p>
+      <h2 data-cy="Dreigiau, cewri a theyrnas dan y môr">Dragons, giants and a kingdom under the sea</h2>
+      <p data-cy="Hen chwedlau Cymru, wedi’u hadrodd o’r newydd, gyda’r hanes go iawn y tu ôl i bob un.">The old tales of Wales, retold, with the real history behind each one.</p>
+    </div>
+    <div class="l-grid">__LEGENDS__</div>
+    <p class="more-row rv"><a class="btn" href="legends.html" data-cy="Pob chwedl →">All legends →</a> <a class="btn" href="symbols.html" data-cy="Symbolau a thraddodiadau →">Symbols and traditions →</a></p>
   </div>
 </section>
 
 <section id="language">
   <div class="wrap">
     <div class="head">
-      <p class="eyebrow"><span class="num">05</span> · <span data-cy="Iaith">Language</span></p>
+      <p class="eyebrow"><span class="num">06</span> · <span data-cy="Iaith">Language</span></p>
       <h2 data-cy="Cymraeg, iaith hynaf Prydain">Cymraeg, the oldest language of Britain</h2>
       <p data-cy="Tyfodd y Gymraeg o’r Frythoneg, iaith a siaredid ar draws y rhan fwyaf o Brydain cyn y Rhufeiniaid. Mae ei barddoniaeth hynaf yn dyddio o tua 600 OC, ac mae’n dal yn iaith bob dydd i fwy na hanner miliwn o bobl.">Welsh grew out of Brittonic, spoken across most of Britain before the Romans. Its oldest poetry dates from around 600 AD, and it is still the everyday language of more than half a million people.</p>
     </div>
@@ -127,29 +166,21 @@
   </div>
 </section>
 
-<section id="quiz">
+<section id="play">
   <div class="wrap">
-    <div class="head">
-      <p class="eyebrow"><span class="num">06</span> · <span data-cy="Cwis">Quiz</span></p>
-      <h2 data-cy="Faint wyddoch chi?">How much do you know?</h2>
-      <p data-cy="Deg cwestiwn o’r llinell amser a’r bobl. Mae pob cwis yn wahanol.">Ten questions drawn from the timeline and the people. Every round is different.</p>
+    <div class="head rv">
+      <p class="eyebrow"><span class="num">07</span> · <span data-cy="Chwarae">Play</span></p>
+      <h2 data-cy="Profwch eich hun">Test yourself</h2>
+      <p data-cy="Saith gêm i bob oed: her newydd bob dydd, cwis, map, ac enwau Cymraeg. Mae eich cynnydd yn cael ei gadw ar eich dyfais.">Seven games for all ages: a new challenge every day, a quiz, a map, and Welsh names. Your progress is kept on your device.</p>
     </div>
-    <div class="quiz" id="quiz-box"></div>
-    <div class="game" id="game">
-      <div class="head" style="margin-top:clamp(2.5rem,6vw,4rem)">
-        <p class="eyebrow" data-cy="Gêm">Game</p>
-        <h2 data-cy="Her y llinell amser">Timeline challenge</h2>
-        <p data-cy="Tapiwch y pum digwyddiad yn eu trefn, o’r hynaf i’r mwyaf diweddar. Tapiwch eto i ddadwneud. Tair rownd, pum pwynt yr un.">Tap the five events in order, oldest first. Tap again to undo. Three rounds, five points each.</p>
-      </div>
-      <div class="game-box" id="game-box"></div>
-    </div>
+    <div class="play-grid">__PLAY__</div>
   </div>
 </section>
 
 <section id="sources">
   <div class="wrap">
     <div class="head">
-      <p class="eyebrow"><span class="num">07</span> · <span data-cy="Ffynonellau">Sources</span></p>
+      <p class="eyebrow"><span class="num">08</span> · <span data-cy="Ffynonellau">Sources</span></p>
       <h2 data-cy="Darllen pellach">Further reading</h2>
       <p data-cy="Mae pob digwyddiad, lle a pherson ar y wefan hon yn cysylltu â ffynhonnell. Dyma’r llyfrau a’r casgliadau gorau i fynd ymhellach.">Every event, place and person on this site links to a source. These are the best books and collections for going further.</p>
     </div>
@@ -162,13 +193,7 @@
 </section>
 </main>
 
-<footer>
-  <div class="wrap">
-    <p class="big">Diolch.</p>
-    <nav aria-label="Ages" id="foot-eras"></nav>
-    <span data-cy="Hanes Cymru · Darluniau gwreiddiol">History of Wales · Original illustrations</span>
-  </div>
-</footer>
+__FOOTER__
 
 <div id="overlay" hidden></div>
 <script>var DATA = __DATA__;</script>

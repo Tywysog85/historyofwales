@@ -178,6 +178,7 @@
   function route() {
     var m = /^#pennod-(\w+)/.exec(location.hash); if (m && ERA[m[1]]) { openChapter(m[1], false); return; }
     closeChapter();
+    if (HERO && /^#(quiz|game)$/.test(location.hash)) { location.replace("quiz.html" + location.hash); return; }
     var q = /^#(ev-\d+|era-(\w+))$/.exec(location.hash);
     if (q && HAS_TL) { if (q[2] && ERA[q[2]]) { setTlEra(q[2]); } else if (tlEra !== "all") setTlEra("all"); setTimeout(function () { if (q[2]) window.scrollTo(0, 0); else goTo(document.getElementById(q[1]), "center"); }, 60); }
     var p = /^#lle-([\w-]+)/.exec(location.hash); if (p && PLACE[p[1]]) { setMode("sites"); selectPlace(p[1]); setTimeout(function () { goTo($("#map")); }, 50); }
@@ -259,9 +260,9 @@
       var mid = window.innerHeight * 0.45, best = 0, bd = 1e9;
       for (var i = 0; i < evEls.length; i++) { var r = evEls[i].getBoundingClientRect(); var dd = Math.abs(r.top + r.height / 2 - mid); if (dd < bd) { bd = dd; best = i; } if (r.top > window.innerHeight) break; }
       setActive(best);
-      var secs = ["chapters", "map", "people", "language", "quiz", "game", "sources"], cur = null;
+      var secs = ["chapters", "stories", "map", "people", "legends", "language", "play", "sources"], cur = null;
       secs.forEach(function (s) { var el = document.getElementById(s); if (!el) return; var r = el.getBoundingClientRect(); if (r.top < window.innerHeight * 0.4) cur = s; });
-      $$(".nav ul a").forEach(function (a) { a.classList.toggle("on", a.getAttribute("href") === "#" + cur); });
+      if (HERO) $$(".nav-inline a").forEach(function (a) { a.classList.toggle("on", a.getAttribute("href") === "index.html#" + cur); });
     });
   }
   window.addEventListener("scroll", onScroll, { passive: true });
@@ -331,16 +332,30 @@
   $("#mode-kg").onclick = function () { setMode("kg"); };
 
   /* ---------- People ---------- */
-  var pEra = "all";
+  var pEra = "all", pAll = false;
+  function initials(n) { var w = n.replace(/\b(ap|ab|ferch|the|of|yr|y)\b/gi, " ").trim().split(/\s+/); return (w[0].charAt(0) + (w.length > 1 ? w[w.length - 1].charAt(0) : "")).toUpperCase(); }
   function renderPeople() {
     var counts = {}; PEOPLE.forEach(function (p) { counts[p[1]] = (counts[p[1]] || 0) + 1; });
     chips($("#people-filter"), pEra, function (v) { pEra = v; renderPeople(); }, counts);
-    var list = PEOPLE.filter(function (p) { return pEra === "all" || p[1] === pEra; });
-    $("#people-count").textContent = list.length + " " + T("people", "o bobl");
+    var list = PEOPLE.filter(function (p) { return pEra === "all" || p[1] === pEra; }), total = list.length;
+    var short = pEra === "all" && !pAll;
+    if (short) list = D.FEATURED.map(function (s) { return PEOPLE.filter(function (p) { return p[0] === s; })[0]; }).filter(Boolean);
+    $("#people-count").textContent = short ? T("12 of " + total + " people", "12 o " + total + " o bobl") : total + " " + T("people", "o bobl");
+    var more = $("#people-more"); more.hidden = pEra !== "all"; more.textContent = pAll ? T("Show fewer", "Dangos llai") : T("Show all " + PEOPLE.length + " people", "Dangos pob un o’r " + PEOPLE.length);
     $("#people-grid").innerHTML = list.map(function (p) {
-      var name = T(p[3], p[4]), other = lang === "en" ? p[4] : p[3], link = "person-" + p[0] + ".html";
-      return '<article class="plaque" data-era="' + p[1] + '"><span class="dates">' + esc(p[2]) + "</span><h3>" + esc(name) + '</h3><span class="epi">' + esc(T(p[5], p[6])) + (other !== name ? " · " + esc(other) : "") + "</span><p>" + esc(T(p[7], p[8])) + '</p><div class="links"><a class="go" href="' + link + '">' + T("Read more", "Darllen mwy") + ' →</a><button type="button" class="copy" data-copy="' + link + '">' + T("Copy link", "Copïo’r ddolen") + "</button>" + srcLink(p[9]) + "</div></article>";
+      var name = T(p[3], p[4]), other = lang === "en" ? p[4] : p[3], link = "person-" + p[0] + ".html", ph = D.PPH[p[0]];
+      return '<article class="plaque" data-era="' + p[1] + '"><div class="top-row"><span class="ava" aria-hidden="true">' + initials(p[3]) + (ph ? '<img src="' + ph + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : "") + '</span><div><span class="dates">' + esc(p[2]) + "</span><h3>" + esc(name) + '</h3></div></div><span class="epi">' + esc(T(p[5], p[6])) + (other !== name ? " · " + esc(other) : "") + "</span><p>" + esc(T(p[7], p[8])) + '</p><div class="links"><a class="go" href="' + link + '">' + T("Read more", "Darllen mwy") + ' →</a><button type="button" class="copy" data-copy="' + link + '">' + T("Copy link", "Copïo’r ddolen") + "</button>" + srcLink(p[9]) + "</div></article>";
     }).join("");
+  }
+  $("#people-more").onclick = function () { pAll = !pAll; renderPeople(); if (!pAll) goTo($("#people")); };
+
+  /* ---------- Did you know? + daily streak ---------- */
+  var factI = Math.floor(Date.now() / 864e5) % D.FACTS.length;
+  function renderFact() { var f = D.FACTS[factI % D.FACTS.length]; $("#fact").textContent = T(f[0], f[1]); }
+  $("#fact-next").onclick = function () { factI++; renderFact(); };
+  function renderStreak() {
+    var el = document.getElementById("daily-streak"); if (!el) return;
+    try { var j = JSON.parse(localStorage.getItem("hc-journey") || "{}"), n = j.d && j.d.streak || 0; if (n > 0) { el.hidden = false; el.textContent = T(n + " day streak", n + " diwrnod yn olynol"); } } catch (e) {}
   }
 
   /* ---------- Census chart ---------- */
@@ -425,6 +440,7 @@
     if (!Q) return newQuiz();
     if (Q.i >= Q.qs.length) {
       var s = Q.score, msg = s >= 9 ? T("Pencampwr! A true historian.", "Pencampwr! Hanesydd go iawn.") : s >= 6 ? T("Da iawn. Very good.", "Da iawn wir.") : s >= 3 ? T("Not bad. The timeline has every answer.", "Ddim yn ddrwg. Mae pob ateb yn y llinell amser.") : T("Time to explore the timeline and try again.", "Amser i bori drwy’r llinell amser a rhoi cynnig arall.");
+      if (window.HC) { if (s >= 8) HC.flag("quiz8"); if (s >= 10) HC.flag("quiz10"); }
       box.innerHTML = '<p class="eyebrow">' + T("Your score", "Eich sgôr") + '</p><p class="q-score">' + s + "/" + Q.qs.length + '</p><h3>' + msg + '</h3><p><button type="button" class="btn solid" id="q-again">' + T("Play again", "Chwarae eto") + "</button></p>";
       $("#q-again").onclick = function () { newQuiz(); $("#quiz-box button") && $("#quiz-box button").focus(); };
       return;
@@ -511,10 +527,11 @@
     var box = $("#game-box"), r = G.r;
     if (G.over) {
       var s = G.total, msg = s >= 13 ? T("Brilliant! You know your history.", "Gwych! Rydych chi’n gwybod eich hanes.") : s >= 9 ? T("Da iawn! Well done.", "Da iawn wir!") : T("Good try. Every play teaches you more.", "Ymdrech dda. Mae pob gêm yn dysgu mwy i chi.");
+      if (s >= 15 && window.HC) HC.flag("order15");
       box.innerHTML = '<p class="eyebrow">' + T("Final score", "Sgôr terfynol") + '</p><p class="q-score">' + s + '/15</p><h3>' + msg + '</h3><div class="game-row"><button type="button" class="btn solid" id="g-again">' + T("Play again", "Chwarae eto") + '</button><button type="button" class="btn" id="g-share">' + T("Copy my score", "Copïo fy sgôr") + "</button></div>";
       $("#g-again").onclick = function () { newGame(); var f = $("#game-box .g-card"); if (f) f.focus(); };
       $("#g-share").onclick = function () {
-        var b = this, txt = T("I scored " + s + "/15 in the Timeline challenge on History of Wales. Can you beat me? ", "Sgoriais " + s + "/15 yn Her y llinell amser ar Hanes Cymru. Allwch chi wneud yn well? ") + "https://historyofwales.cymru/#game";
+        var b = this, txt = T("I scored " + s + "/15 in the Timeline challenge on History of Wales. Can you beat me? ", "Sgoriais " + s + "/15 yn Her y llinell amser ar Hanes Cymru. Allwch chi wneud yn well? ") + "https://historyofwales.cymru/quiz.html#game";
         try { navigator.clipboard.writeText(txt).then(function () { b.textContent = T("Copied", "Wedi copïo"); }, function () { b.textContent = txt; }); } catch (e) { b.textContent = txt; }
       };
       return;
@@ -558,7 +575,7 @@
     $("#lang-en").setAttribute("aria-pressed", lang === "en"); $("#lang-cy").setAttribute("aria-pressed", lang === "cy");
     $$("[data-cy]").forEach(function (el) { el.textContent = lang === "cy" ? el.dataset.cy : el.dataset.en; });
     $$("[data-cy-svg]").forEach(function (el) { el.textContent = lang === "cy" ? el.dataset.cySvg : el.dataset.enSvg; });
-    renderChapters(); renderToday(); renderTimeline(); renderPeople(); renderChart(); renderDecoder(); renderWords(); renderSources(); renderNear(); renderGame(); selectPlace(sel); if (mode === "kg") renderKg(); renderQuiz();
+    renderChapters(); renderToday(); renderTimeline(); renderPeople(); renderFact(); renderStreak(); renderChart(); renderDecoder(); renderWords(); renderSources(); renderNear(); renderGame(); selectPlace(sel); if (mode === "kg") renderKg(); renderQuiz();
     if (!ov.hidden) { var m = /^#pennod-(\w+)/.exec(location.hash); if (m) openChapter(m[1], false); }
   }
   function setLang(l) { lang = l; try { localStorage.setItem("hc-lang", l); } catch (e) {} applyLang(); }
