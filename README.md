@@ -57,6 +57,12 @@ Visitors are counted with [GoatCounter](https://www.goatcounter.com), which uses
 
 Photos are linked from Wikimedia Commons in `src/photos.py`. Pages without a photo show a picture drawn in code by `src/art.py`. Use only photos you own or that carry a free licence, and credit the photographer and licence on the page.
 
+## Credits for artwork
+
+- **Dragon of the flag** (castle flag, and the stand-in sky dragon): vector artwork from the [flag-icons](https://github.com/lipis/flag-icons) project, MIT licence, copyright (c) 2013 Panayiotis Lipiridis.
+- **Lifelike dragon** (`src/static/dragon.glb`): 3D model and animation from the Ethereal Engine "Open Asset Kit, Basic" (github.com/ir-engine/ir-engine-assets-basic, `assets/fantasy/Dragon.glb`), described there as Creative Commons. The author is not named there; see TODO.md.
+- **three.js** (inside `src/static/dragon3d.js`): MIT licence, copyright three.js authors.
+
 ## Other things worth knowing
 
 - **Search**: `build.py` writes `search.json`; `src/static/search.js` runs the magnifier button and the `/` shortcut.
