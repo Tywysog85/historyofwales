@@ -55,6 +55,12 @@
   function hex(c) { return [parseInt(c.slice(1, 3), 16), parseInt(c.slice(3, 5), 16), parseInt(c.slice(5, 7), 16)]; }
   function mix(a, b, k) { var x = hex(a), y = hex(b); return "rgb(" + Math.round(x[0] + (y[0] - x[0]) * k) + "," + Math.round(x[1] + (y[1] - x[1]) * k) + "," + Math.round(x[2] + (y[2] - x[2]) * k) + ")"; }
   function mixHex(a, b, k) { var x = hex(a), y = hex(b); return "#" + [0, 1, 2].map(function (i) { return ("0" + Math.round(x[i] + (y[i] - x[i]) * k).toString(16)).slice(-2); }).join(""); }
+  /* a glowing star, painted once in three tints (white, blue-white, warm) and stamped wherever a bright star shines */
+  var STAR = ["255,255,255", "205,222,255", "255,232,205"].map(function (c) {
+    var k = document.createElement("canvas"); k.width = k.height = 64; var q = k.getContext("2d"), g = q.createRadialGradient(32, 32, 0, 32, 32, 32);
+    g.addColorStop(0, "rgba(255,255,255,1)"); g.addColorStop(0.14, "rgba(" + c + ",.95)"); g.addColorStop(0.3, "rgba(" + c + ",.4)"); g.addColorStop(0.6, "rgba(" + c + ",.1)"); g.addColorStop(1, "rgba(" + c + ",0)");
+    q.fillStyle = g; q.fillRect(0, 0, 64, 64); return k;
+  });
   /* sky: four colours top to bottom; star: how bright the stars are; orb: sun or moon colour; tint/k: colour washed over the hills; glow: red glow behind the summit */
   var SKIES = {
     night: { sky: ["#0b0e16", "#1a2032", "#3a2a35", "#0e1118"], star: 1, orb: "#e9d9c6", tint: "#232a3d", k: 0, glow: 1, sun: 0 },
@@ -93,8 +99,9 @@
     stars.forEach(function (s, i) {
       var tw = 0.5 + 0.5 * Math.sin(t / 900 + s[3] * 20), X = s[0] * W, Y = s[1] * H - sy * 0.02;
       if (SKY.star <= 0.02) return;
-      cx.fillStyle = "rgba(236,233,225," + (0.15 + 0.5 * tw * s[2] / 1.4) * SKY.star + ")"; cx.fillRect(X, Y, s[2], s[2]);
-      if (i % 12 === 0 && !(Y > M.h1t - 6 && (W < 1100 ? Y < M.cta + 6 : X < W * 0.62))) { var a = (0.25 + 0.6 * tw) * SKY.star, L2 = 2.5 + 3 * tw; cx.fillStyle = "rgba(244,238,226," + a + ")"; cx.fillRect(X - L2, Y, L2 * 2 + 1, 1); cx.fillRect(X, Y - L2, 1, L2 * 2 + 1); }
+      cx.fillStyle = "rgba(236,233,225," + (0.15 + 0.5 * tw * s[2] / 1.4) * SKY.star + ")"; cx.beginPath(); cx.arc(X, Y, Math.max(0.35, s[2] * 0.55), 0, 6.283); cx.fill();
+      /* the brighter stars: a soft glowing point, each a little different in size and colour, twinkling gently */
+      if (i % 7 === 0 && !(Y > M.h1t - 6 && (W < 1100 ? Y < M.cta + 6 : X < W * 0.62))) { var R = (4.5 + 7 * s[3]) * (0.85 + 0.15 * tw); cx.globalAlpha = Math.min(1, (0.5 + 0.5 * tw) * SKY.star); cx.drawImage(STAR[i % 3], X - R, Y - R, R * 2, R * 2); cx.globalAlpha = 1; }
     });
     if (W >= 1100 && SKY.star > 0.5) {
       for (var b = 0; b < 5; b++) { var bx = W * (0.06 + b * 0.125), by = H * (0.4 - b * 0.1), br = H * 0.2, bg = cx.createRadialGradient(bx, by, 0, bx, by, br); bg.addColorStop(0, "rgba(150,165,215," + 0.1 * SKY.star + ")"); bg.addColorStop(1, "rgba(150,165,215,0)"); cx.fillStyle = bg; cx.fillRect(bx - br, by - br, br * 2, br * 2); }
