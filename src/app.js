@@ -45,11 +45,16 @@
     g.addColorStop(0, "#0b0e16"); g.addColorStop(0.55, "#1a2032"); g.addColorStop(0.8, "#3a2a35"); g.addColorStop(1, "#0e1118");
     cx.fillStyle = g; cx.fillRect(0, 0, W, H);
     stars.forEach(function (s) { var tw = 0.5 + 0.5 * Math.sin(t / 900 + s[3] * 20); cx.fillStyle = "rgba(236,233,225," + (0.15 + 0.5 * tw * s[2] / 1.4) + ")"; cx.fillRect(s[0] * W, s[1] * H - sy * 0.02, s[2], s[2]); });
-    var narrow = W < 640, mx = W * (narrow ? 0.84 : 0.74) - mouse * 10, my = H * (narrow ? 0.1 : 0.3) - sy * 0.03, mr = Math.max(28, Math.min(W, H) * 0.07);
-    var mg = cx.createRadialGradient(mx, my, mr * 0.6, mx, my, mr * 4.5); mg.addColorStop(0, "rgba(226,69,61,.22)"); mg.addColorStop(1, "rgba(226,69,61,0)");
+    var narrow = W < 640;
+    /* Eryri: summit geometry */
+    var ex0 = narrow ? -W * 0.15 : W * 0.38, ew = narrow ? W * 1.35 : W * 0.7, eb = H * (narrow ? 0.62 : 0.72), eh = H * (narrow ? 0.3 : 0.5);
+    var sumX = ex0 + 0.53 * ew - mouse * 4, sumY = eb - eh - sy * 0.04;
+    var mx = narrow ? W * 0.86 : W * 0.9, my = H * (narrow ? 0.07 : 0.13) - sy * 0.03, mr = Math.max(18, Math.min(W, H) * 0.04);
+    var mg = cx.createRadialGradient(sumX, sumY, 10, sumX, sumY, Math.max(W, H) * 0.45); mg.addColorStop(0, "rgba(226,69,61,.26)"); mg.addColorStop(1, "rgba(226,69,61,0)");
     cx.fillStyle = mg; cx.fillRect(0, 0, W, H);
     cx.fillStyle = "#e9d9c6"; cx.beginPath(); cx.arc(mx, my, mr, 0, 7); cx.fill();
     LAYERS.forEach(function (L, i) {
+      if (i === 1) drawEryri(ex0 - mouse * 4, eb - sy * 0.04, ew, eh);
       var w = ridges[i], base = H * L.y + sy * L.s * 0.6, off = mouse * (i + 1) * 6;
       cx.beginPath(); cx.moveTo(0, H);
       for (var x = 0; x <= W + 8; x += 6) {
@@ -61,6 +66,39 @@
       cx.lineTo(W, H); cx.closePath(); cx.fillStyle = L.c; cx.fill();
       if (i === 1 || i === 3) { var fg = cx.createLinearGradient(0, base - H * 0.08, 0, base + H * 0.05); fg.addColorStop(0, "rgba(160,170,200,0)"); fg.addColorStop(0.6, "rgba(160,170,200," + (0.06 + 0.02 * Math.sin(t / 2200 + i)) + ")"); fg.addColorStop(1, "rgba(160,170,200,0)"); cx.fillStyle = fg; cx.fillRect(0, base - H * 0.08, W, H * 0.13); }
     });
+    drawDragon(t, sumX, sumY, narrow);
+  }
+  /* Yr Wyddfa seen from the east: Crib Goch, Garnedd Ugain, the summit, then Y Lliwedd */
+  var ERYRI = [[0,.04],[.07,.14],[.14,.3],[.2,.47],[.23,.55],[.245,.52],[.26,.6],[.275,.57],[.29,.64],[.31,.61],[.335,.71],[.37,.77],[.41,.82],[.445,.79],[.48,.86],[.51,.95],[.53,1],[.55,.95],[.575,.86],[.61,.76],[.64,.69],[.665,.73],[.685,.7],[.705,.74],[.725,.71],[.76,.6],[.82,.44],[.89,.27],[.95,.14],[1,.06]];
+  function drawEryri(x0, base, w, h) {
+    cx.beginPath(); cx.moveTo(x0, base + h * 0.2);
+    ERYRI.forEach(function (p) { cx.lineTo(x0 + p[0] * w, base - p[1] * h); });
+    cx.lineTo(x0 + w, base + h * 0.2); cx.closePath();
+    var g = cx.createLinearGradient(0, base - h, 0, base); g.addColorStop(0, "#36405e"); g.addColorStop(1, "#1e2537");
+    cx.fillStyle = g; cx.fill();
+    cx.beginPath(); ERYRI.forEach(function (p, j) { var X = x0 + p[0] * w, Y = base - p[1] * h; if (j) cx.lineTo(X, Y); else cx.moveTo(X, Y); });
+    cx.strokeStyle = "rgba(233,217,198,.28)"; cx.lineWidth = 1.4; cx.stroke();
+  }
+  /* Y Ddraig Goch: an original silhouette, facing right, 220 x 130 units */
+  var DR = {
+    body: new Path2D("M186 34C190 33 196 35 200 38L193 40C196 42 199 44 200 46C194 47 188 46 184 45C178 47 172 52 168 58C163 66 156 72 146 74C132 77 116 78 102 77C88 76 76 74 66 76C52 79 40 88 28 96C20 101 12 102 6 98C10 98 16 95 22 90C34 80 46 70 60 66C74 62 90 64 104 63C118 62 132 62 142 58C152 54 158 46 164 38C168 32 174 28 180 28L176 20L184 27L186 18L189 29C189 31 188 32 186 34ZM8 99L-6 92L0 104L-4 112L12 102ZM138 72C142 80 144 86 150 90L156 90L152 94L158 96L146 96C138 92 134 84 130 76ZM76 74C76 84 72 92 66 98L72 100L64 102L68 106L58 104C62 96 64 86 64 76Z"),
+    far: new Path2D("M128 62C130 40 140 18 160 2C150 18 150 26 152 32C144 30 140 36 142 42C134 42 132 50 134 58Z"),
+    near: new Path2D("M92 64C86 40 74 18 48 0C62 4 80 10 96 20L104 10C112 22 118 36 120 52C114 48 108 50 108 56C102 52 96 56 98 62Z")
+  };
+  function drawDragon(t, sumX, sumY, narrow) {
+    var period = 26000, k = reduce ? 0.55 : (t % period) / period;
+    var sx = narrow ? W * 0.6 : W * 0.6, ex = narrow ? W * 0.8 : sumX - W * 0.07;
+    var sy0 = narrow ? H * 0.1 : H * 0.07, ey = narrow ? H * 0.2 : sumY - H * 0.09;
+    var x = sx + (ex - sx) * k, y = sy0 + (ey - sy0) * k + Math.sin(t / 900) * H * 0.008;
+    var size = (narrow ? W * 0.22 : Math.min(W * 0.13, 200)) * (1 - 0.45 * k), sc = size / 220;
+    var alpha = reduce ? 1 : Math.min(1, k / 0.08, (1 - k) / 0.12);
+    var flap = reduce ? 1 : 0.62 + 0.38 * Math.cos(t / 260);
+    cx.save(); cx.globalAlpha = alpha; cx.translate(x, y); cx.scale(sc, sc); cx.rotate(-0.06);
+    cx.fillStyle = "#c9372f";
+    cx.save(); cx.translate(0, 62); cx.scale(1, flap); cx.translate(0, -62); cx.fill(DR.far); cx.restore();
+    cx.fillStyle = "#e2453d"; cx.fill(DR.body);
+    cx.save(); cx.translate(0, 64); cx.scale(1, flap); cx.translate(0, -64); cx.fill(DR.near); cx.restore();
+    cx.restore();
   }
   function loop(t) { t0 = t; if (window.scrollY < H) draw(t); requestAnimationFrame(loop); }
   window.addEventListener("resize", size);
