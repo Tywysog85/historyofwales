@@ -128,6 +128,16 @@ This file collects the techniques and lessons from building History of Wales. Ad
 
 ---
 
+### The changing map and adding places (November 2026)
+
+The Kingdoms view colours the council areas in `src/geo/la.json`. Each moment in time lives in `src/kingdoms.py` as a list of groups: name in English and Welsh, a colour, and the areas it covers. To add a moment, copy one and change the groups; the slider, the Play button and the labels pick it up by themselves. Labels are placed at the middle of each group's area by `renderKg()` in `src/app.js`.
+
+Two modern areas are too big for the old kingdoms, so `_split_la()` in `build.py` cuts Powys into Montgomeryshire, Radnorshire and Brecknockshire, and Gwynedd into Caernarfonshire and Meirionnydd, along lines of latitude and longitude. Move those lines there if a border looks wrong.
+
+A trap worth remembering: `element.hidden = false` does nothing on SVG shapes. Use `toggleAttribute("hidden", ...)`. This is why the Kingdoms map once showed no colours at all.
+
+New historic sites go in `src/places2.py` (`_p(id, English, Welsh, age, latitude, longitude, year, picture, source, text EN, text CY)`). A place without a photo is fine; it gets its drawn picture.
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.

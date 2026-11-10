@@ -455,23 +455,43 @@
   $("#pins").addEventListener("keydown", function (ev) { var g = ev.target.closest(".pin"); if (g && (ev.key === "Enter" || ev.key === " ")) { ev.preventDefault(); selectPlace(g.dataset.pid); var n = $('.pin[data-pid="' + g.dataset.pid + '"]'); if (n) n.focus(); } });
 
   /* ---------- Map: kingdoms ---------- */
-  var kgStage = 0;
+  var kgStage = 5, kgTimer = 0;
+  function kgStop() { if (kgTimer) { clearInterval(kgTimer); kgTimer = 0; } }
   function renderLAs() { $("#las").innerHTML = Object.keys(D.LA).map(function (n) { return '<path class="la" data-la="' + esc(n) + '" d="' + D.LA[n] + '"><title>' + esc(n) + "</title></path>"; }).join(""); }
   function renderKg() {
     var K = D.KINGDOMS[kgStage], colour = {};
     K.groups.forEach(function (g) { (g[3] === "*" ? Object.keys(D.LA) : g[3]).forEach(function (n) { colour[n] = g[2]; }); });
-    $$("#las .la").forEach(function (p) { p.style.fill = colour[p.dataset.la] || "#2a3142"; });
+    $$("#las .la").forEach(function (p) { p.style.fill = colour[p.dataset.la] || "#2a3142"; p.style.stroke = colour[p.dataset.la] || ""; });
+    /* a name on the map for each realm, placed at the middle of its land */
+    var labels = K.groups.map(function (g) {
+      var name = g[4] ? T(g[4][0], g[4][1]) : T(g[0], g[1]); if (!name) return "";
+      var sx = 0, sy = 0, sa = 0;
+      $$("#las .la").forEach(function (p) { if (g[3] !== "*" && g[3].indexOf(p.dataset.la) < 0) return; var b = p.getBBox(), a = b.width * b.height; sx += (b.x + b.width / 2) * a; sy += (b.y + b.height / 2) * a; sa += a; });
+      return sa ? '<text class="kg-label" x="' + (sx / sa).toFixed(0) + '" y="' + (sy / sa).toFixed(0) + '">' + esc(name) + "</text>" : "";
+    }).join("");
+    $("#kg-labels").innerHTML = labels;
     var card = $("#kg-card");
     card.innerHTML = '<p class="eyebrow">' + T("The changing map", "Y map yn newid") + '</p><h3 class="kg-stage">' + esc(T(K.en, K.cy)) + "</h3><p class=\"desc\">" + esc(T(K.nEn, K.nCy)) + '</p><ul class="kg-legend">' +
       K.groups.map(function (g) { return '<li style="--k:' + g[2] + '"><i></i>' + esc(T(g[0], g[1])) + "</li>"; }).join("") + "</ul>" +
       '<div class="kg-range"><label for="kg-in" class="eyebrow">' + T("Move through time", "Symud drwy amser") + '</label><input type="range" id="kg-in" min="0" max="' + (D.KINGDOMS.length - 1) + '" step="1" value="' + kgStage + '"><div class="kg-ticks">' +
-      D.KINGDOMS.map(function (k) { return "<span>" + (k.id === "today" ? T("Now", "Nawr") : k.id.replace("c", "")) + "</span>"; }).join("") + '</div></div><p class="kg-note">' + T("Approximate: borders are drawn using modern council areas as building blocks.", "Bras: lluniwyd y ffiniau gan ddefnyddio ardaloedd cynghorau modern.") + "</p>";
-    $("#kg-in").oninput = function () { kgStage = +this.value; renderKg(); var i = $("#kg-in"); if (i) i.focus(); };
+      D.KINGDOMS.map(function (k, n) { return "<span" + (n === kgStage ? ' class="on"' : "") + ">" + (k.id === "today" ? T("Now", "Nawr") : k.id.replace("c", "")) + "</span>"; }).join("") + '</div><div class="kg-btns"><button type="button" class="btn" id="kg-prev" aria-label="' + T("Earlier", "Cynharach") + '">←</button><button type="button" class="btn solid" id="kg-play">' + (kgTimer ? T("Pause", "Oedi") : "▶ " + T("Play through time", "Chwarae drwy amser")) + '</button><button type="button" class="btn" id="kg-next" aria-label="' + T("Later", "Diweddarach") + '">→</button></div></div><p class="kg-note">' + T("Approximate: borders are drawn using modern council areas as building blocks.", "Bras: lluniwyd y ffiniau gan ddefnyddio ardaloedd cynghorau modern.") + "</p>";
+    $("#kg-in").oninput = function () { kgStop(); kgStage = +this.value; renderKg(); var i = $("#kg-in"); if (i) i.focus(); };
+    $("#kg-prev").onclick = function () { kgStop(); kgStage = Math.max(0, kgStage - 1); renderKg(); $("#kg-prev").focus(); };
+    $("#kg-next").onclick = function () { kgStop(); kgStage = Math.min(D.KINGDOMS.length - 1, kgStage + 1); renderKg(); $("#kg-next").focus(); };
+    $("#kg-play").onclick = function () {
+      if (kgTimer) { kgStop(); renderKg(); } else {
+        if (kgStage >= D.KINGDOMS.length - 1) kgStage = 0; else kgStage++;
+        kgTimer = setInterval(function () { if (kgStage >= D.KINGDOMS.length - 1) { kgStop(); } else kgStage++; renderKg(); }, 2600);
+        renderKg();
+      }
+      $("#kg-play").focus();
+    };
   }
   function setMode(m) {
     mode = m;
     $("#mode-sites").setAttribute("aria-pressed", m === "sites"); $("#mode-kg").setAttribute("aria-pressed", m === "kg");
-    $("#las").hidden = m !== "kg"; $("#pins").style.display = m === "kg" ? "none" : ""; $("#map-filter").hidden = m === "kg";
+    /* SVG elements have no .hidden property in every browser, so set the attribute itself */
+    $("#las").toggleAttribute("hidden", m !== "kg"); $("#kg-labels").toggleAttribute("hidden", m !== "kg"); if (m !== "kg") kgStop(); $("#pins").style.display = m === "kg" ? "none" : ""; $("#map-filter").hidden = m === "kg";
     $("#place-card").hidden = m === "kg"; $("#kg-card").hidden = m !== "kg";
     if (m === "kg") renderKg();
   }
