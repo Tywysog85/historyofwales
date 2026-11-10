@@ -87,10 +87,10 @@
   };
   function drawDragon(t, sumX, sumY, narrow) {
     var period = 26000, k = reduce ? 0.55 : (t % period) / period;
-    var sx = narrow ? W * 0.6 : W * 0.6, ex = narrow ? W * 0.8 : sumX - W * 0.07;
-    var sy0 = narrow ? H * 0.1 : H * 0.07, ey = narrow ? H * 0.2 : sumY - H * 0.09;
+    var sx = narrow ? W * 0.6 : W * 0.6, ex = narrow ? W * 0.82 : sumX - W * 0.06;
+    var sy0 = narrow ? H * 0.06 : H * 0.07, ey = narrow ? H * 0.12 : sumY - H * 0.05;
     var x = sx + (ex - sx) * k, y = sy0 + (ey - sy0) * k + Math.sin(t / 900) * H * 0.008;
-    var size = (narrow ? W * 0.22 : Math.min(W * 0.13, 200)) * (1 - 0.45 * k), sc = size / 220;
+    var size = (narrow ? W * 0.27 : Math.min(W * 0.17, 260)) * (1 - 0.3 * k), sc = size / 220;
     var alpha = reduce ? 1 : Math.min(1, k / 0.08, (1 - k) / 0.12);
     var flap = reduce ? 1 : 0.62 + 0.38 * Math.cos(t / 260);
     cx.save(); cx.globalAlpha = alpha; cx.translate(x, y); cx.scale(sc, sc); cx.rotate(-0.06);
