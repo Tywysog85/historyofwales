@@ -84,7 +84,7 @@
       return '<button type="button" class="chap" data-era="' + e.id + '" data-open="' + e.id + '"><svg aria-hidden="true"><use href="#i-' + e.ill + '"/></svg><span class="span">' + T(e.spanEn, e.spanCy) + "</span><h3>" + T(e.en, e.cy) + "</h3><p>" + esc(T(e.blurbEn, e.blurbCy)) + '</p><span class="go">' + T("Read the chapter →", "Darllen y bennod →") + "</span></button>";
     }).join("");
     $("#foot-eras").innerHTML = ERAS.map(function (e) { return '<a href="era-' + e.id + '.html">' + T(e.en, e.cy) + "</a>"; }).join("") + '<a href="trails.html">' + T("Trails", "Llwybrau") + '</a><a href="teachers.html">' + T("For teachers", "I athrawon") + '</a><a href="#sources">' + T("Sources", "Ffynonellau") + "</a>";
-    $("#trail-list").innerHTML = D.TRAILS.map(function (t, i) { return '<a class="trail-card" href="trail-' + t.id + '.html" data-era="' + ERAS[i % 4].id + '"><svg aria-hidden="true"><use href="#i-' + t.ill + '"/></svg><span><b>' + esc(T(t.en, t.cy)) + "</b><span>" + t.n + " " + T("stops", "arhosfan") + "</span></span></a>"; }).join("");
+    $("#trail-list").innerHTML = D.TRAILS.map(function (t, i) { return '<a class="trail-card" href="trail-' + t.id + '.html" data-era="' + ERAS[i % ERAS.length].id + '"><svg aria-hidden="true"><use href="#i-' + t.ill + '"/></svg><span><b>' + esc(T(t.en, t.cy)) + "</b><span>" + t.n + " " + T("stops", "arhosfan") + "</span></span></a>"; }).join("");
   }
 
   /* ---------- Chapter overlay ---------- */

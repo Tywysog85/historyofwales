@@ -17,6 +17,8 @@
   --dragon: #f26a62;
   --dragon-deep: #c02c25;
   --e-ancient: #d39a62;   /* red ochre of Paviland */
+  --e-saints: #b9a0ea;    /* illuminated-manuscript violet */
+  --e-kings: #e8c65a;     /* the gold of a crown */
   --e-medieval: #f26a62;  /* the dragon */
   --e-industrial: #93a0e0;/* Penrhyn slate blue */
   --e-modern: #7cc495;    /* hill green */
@@ -43,7 +45,7 @@ button { font: inherit; color: inherit }
 .chip[aria-pressed="true"] { background: var(--ink); color: var(--night); border-color: var(--ink) }
 .chip i { width: .55rem; height: .55rem; border-radius: 50%; background: var(--c, var(--muted)); display: inline-block }
 .chips { display: flex; flex-wrap: wrap; gap: .5rem }
-[data-era="ancient"] { --c: var(--e-ancient) } [data-era="medieval"] { --c: var(--e-medieval) }
+[data-era="ancient"] { --c: var(--e-ancient) } [data-era="saints"] { --c: var(--e-saints) } [data-era="kings"] { --c: var(--e-kings) } [data-era="medieval"] { --c: var(--e-medieval) }
 [data-era="industrial"] { --c: var(--e-industrial) } [data-era="modern"] { --c: var(--e-modern) }
 
 /* ---------- Nav ---------- */
@@ -87,7 +89,7 @@ section { padding-block: clamp(4rem, 9vw, 7rem); position: relative }
 .num { font-family: var(--f-mono); color: var(--dragon) }
 
 /* ---------- Chapters strip ---------- */
-.chapters { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden }
+.chapters { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden }
 .chap { background: var(--slate); padding: 1.5rem 1.4rem 1.4rem; display: grid; gap: .7rem; align-content: start; text-align: left; border: 0; cursor: pointer; position: relative; transition: background .25s; min-width: 0 }
 .chap:hover { background: var(--slate-2) }
 .chap svg { width: 3.4rem; height: 3.4rem; color: var(--c) }

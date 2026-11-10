@@ -541,3 +541,37 @@ def _born(p):
 
 
 PEOPLE = sorted(PEOPLE + [p[:10] for p in _PM], key=lambda p: (_ERA_ORDER[p[1]], _born(p)))
+
+
+# ---------- six ages (src/ages.py) ----------
+import ages as _AG
+
+_anc, _med = ERAS[0], ERAS[1]
+_anc["spanEn"], _anc["spanCy"] = "230,000 BC – AD 410", "230,000 CC – 410 OC"
+_anc["storyEn"][1] = _anc["storyEn"][1].replace("When the legions left, saints such as Dewi founded churches, and the Brittonic speech of these people began to turn into Welsh.",
+                                                "Rome held Wales for more than three centuries, leaving roads, forts, towns and gold mines behind.")
+_anc["storyCy"][1] = _anc["storyCy"][1].replace("Pan adawodd y llengoedd, sefydlodd seintiau fel Dewi eglwysi, a dechreuodd iaith Frythoneg y bobl hyn droi’n Gymraeg.",
+                                                "Daliodd Rhufain Gymru am dros dair canrif, gan adael ffyrdd, caerau, trefi a mwyngloddiau aur ar ei hôl.")
+_med["spanEn"] = _med["spanCy"] = "1100 – 1485"
+_med["blurbEn"] = "Castles, poetry and the long struggle against Norman and English power."
+_med["blurbCy"] = "Cestyll, barddoniaeth a’r frwydr hir yn erbyn grym y Normaniaid a Lloegr."
+_med["storyEn"] = [_AG.PRINCES_P1_EN, _med["storyEn"][1].replace("The Normans pushed into the south and east after 1066, building castles and lordships in the March. ", "")]
+_med["storyCy"] = [_AG.PRINCES_P1_CY, _med["storyCy"][1].replace("Gwthiodd y Normaniaid i’r de a’r dwyrain ar ôl 1066, gan godi cestyll ac arglwyddiaethau yn y Mers. ", "")]
+ERAS = [ERAS[0], _AG.SAINTS, _AG.KINGS] + ERAS[1:]
+
+
+def _age(era, y):
+    if era in ("ancient", "medieval") and 410 <= y < 800:
+        return "saints"
+    if era in ("ancient", "medieval") and 800 <= y < 1100:
+        return "kings"
+    return era
+
+
+EVENTS = [(_age(ev[0], ev[1]),) + ev[1:] for ev in EVENTS]
+PEOPLE = [(p[0], "saints" if p[0] in _AG.SAINTS_PEOPLE else "kings" if p[0] in _AG.KINGS_PEOPLE else p[1]) + p[2:] for p in PEOPLE]
+_ERA_ORDER = {e["id"]: i for i, e in enumerate(ERAS)}
+PEOPLE = sorted(PEOPLE, key=lambda p: (_ERA_ORDER[p[1]], _born(p)))
+PLACES = [dict(pl, era="saints") if pl["id"] == "stdavids" else pl for pl in PLACES] + _AG.NEW_PLACES
+_KEYS = {"Death of Saint David", "Y Gododdin", "Offa’s Dyke", "Rhodri Mawr defeats the Vikings", "The laws of Hywel Dda", "One king for all Wales"}
+EVENTS = [ev[:9] + (1,) + ev[10:] if ev[5] in _KEYS else ev for ev in EVENTS]

@@ -18,6 +18,8 @@ import data as D  # noqa: E402
 import long as L  # noqa: E402
 import towns as TW  # noqa: E402
 import photos as PH  # noqa: E402
+import ages as AG  # noqa: E402
+L.TEACH.update(AG.TEACH)
 from urllib.parse import quote as _q
 
 BASE_URL = os.environ.get("SITE_URL", "https://tywysog85.github.io/historyofwales/")
@@ -291,7 +293,7 @@ def trail_page(t, i):
 
 
 def trails_index():
-    cards = "".join(f'<a class="chap" href="trail-{t["id"]}.html" data-era="{D.ERAS[i % 4]["id"]}"><svg aria-hidden="true"><use href="#i-{t["ill"]}"/></svg>'
+    cards = "".join(f'<a class="chap" href="trail-{t["id"]}.html" data-era="{D.ERAS[i % len(D.ERAS)]["id"]}"><svg aria-hidden="true"><use href="#i-{t["ill"]}"/></svg>'
                     f'<span class="span">{len(t["items"])} {bi("stops", "arhosfan")}</span><h3>{bi(t["en"], t["cy"])}</h3><p>{bi(t["introEn"][0], t["introCy"][0])}</p>'
                     f'<span class="go">{bi("Follow the trail →", "Dilyn y llwybr →")}</span></a>' for i, t in enumerate(L.TRAILS))
     main = (hero("modern", f'<a href="index.html">{SITE}</a>', "mtn", "Themed trails", "Llwybrau thema", "Trails through Welsh history", "Llwybrau drwy hanes Cymru",
