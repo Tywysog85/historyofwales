@@ -33,7 +33,7 @@ The site can count visitors with [GoatCounter](https://www.goatcounter.com), whi
 
 ## Adding photos
 
-The site does not use photos yet; every illustration is an original line drawing in `src/head.html`. When photos are added, use only ones you own or that carry a free licence (for example from Wikimedia Commons), and credit the photographer and licence on the page.
+Photos are linked from Wikimedia Commons in `src/photos.py`, and scene illustrations are drawn in `src/art.py`. When adding photos, use only ones you own or that carry a free licence (for example from Wikimedia Commons), and credit the photographer and licence on the page.
 
 ## Accuracy
 
@@ -45,3 +45,11 @@ Dates and figures were written with care but should be checked against the linke
 - **Search**: `build.py` writes `search.json`; `src/static/search.js` powers the magnifier button and the `/` shortcut on every page.
 - **History near you**: town list in `src/towns.py`.
 - **Pronunciation recordings**: put MP3s in `src/static/audio/` (see the README there). Without them, the play buttons use the device's speech voice.
+
+## The redesign (round 4)
+
+- **Long reads, legends, symbols and facts** live in `src/features.py`. Each has its own page.
+- **Illustrations** are drawn in code by `src/art.py`.
+- **Games** (daily challenge, map game, Welsh names, word pairs and more) are in `src/static/play.js`; the quiz and timeline challenge now have their own page, `quiz.html`.
+- **Your journey** (`journey.html`) shows what a visitor has read and the badges they have earned. It is stored only in their browser.
+- The menu, footer and page effects shared by every page are in `build.py` (`nav()`, `footer()`), `src/v6.css` and `src/static/site.js`.

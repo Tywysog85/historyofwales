@@ -3,7 +3,7 @@
   var data = null, box = null, last = null;
   var cy = function () { return document.documentElement.classList.contains("cy"); };
   var T = function (en, c) { return cy() ? c : en; };
-  var KIND = { era: ["Age", "Oes"], person: ["Person", "Person"], place: ["Place", "Lle"], event: ["Event", "Digwyddiad"], trail: ["Trail", "Llwybr"], page: ["Page", "Tudalen"] };
+  var KIND = { era: ["Age", "Oes"], person: ["Person", "Person"], place: ["Place", "Lle"], event: ["Event", "Digwyddiad"], trail: ["Trail", "Llwybr"], page: ["Page", "Tudalen"], story: ["Long read", "Erthygl"], legend: ["Legend", "Chwedl"] };
   var norm = function (s) { return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[’']/g, ""); };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
   var css = ".sx{position:fixed;inset:0;z-index:100;background:color-mix(in srgb,var(--night) 82%,transparent);backdrop-filter:blur(6px);display:flex;justify-content:center;align-items:flex-start;padding:calc(env(safe-area-inset-top,0px) + 8vh) var(--gut-r,16px) 16px var(--gut-l,16px)}" +
@@ -14,7 +14,7 @@
     ".sx-list{list-style:none;margin:0;padding:.4rem;overflow:auto}.sx-list a{display:grid;gap:.15rem;padding:.7rem .8rem;border-radius:10px;text-decoration:none;color:var(--ink);border-left:3px solid var(--c)}" +
     ".sx-list a:hover,.sx-list a:focus,.sx-list a[aria-selected=true]{background:var(--slate-2);outline:none}.sx-list b{font-weight:600}" +
     ".sx-meta{font:500 .72rem var(--f-mono);color:var(--muted);letter-spacing:.04em;text-transform:uppercase}.sx-b{font-size:.9rem;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}" +
-    ".sx-empty{padding:1.2rem;color:var(--muted)}.search-btn{background:none;border:1px solid var(--line);color:var(--ink);border-radius:999px;width:2.4rem;height:2.4rem;display:grid;place-items:center;cursor:pointer;flex:none;margin-right:.6rem}.search-btn:hover{border-color:var(--ink)}.search-btn svg{width:1.05rem;height:1.05rem}";
+    ".sx-empty{padding:1.2rem;color:var(--muted)}";
   var st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
 
   function load() {
@@ -25,7 +25,7 @@
   }
   function search(q) {
     var words = norm(q).split(/\s+/).filter(Boolean); if (!words.length) return [];
-    var rank = { person: 0, place: 1, era: 2, trail: 3, page: 3, event: 4 };
+    var rank = { person: 0, place: 1, era: 2, story: 2, legend: 2, trail: 3, page: 3, event: 4 };
     return data.map(function (x) {
       var s = 0;
       for (var i = 0; i < words.length; i++) {
