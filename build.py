@@ -170,22 +170,26 @@ NAV_MAIN = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#chapter
 NAV_MORE = [("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"), ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"),
             ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("journey.html", "Your journey", "Eich taith"), ("teachers.html", "For teachers", "I athrawon"),
             ("index.html#sources", "Sources", "Ffynonellau")]
+# extra links for the home page top bar, where the site name has moved into the opening screen and left room
+NAV_HOME_MORE = [("symbols.html", "Symbols", "Symbolau"), ("trails.html", "Trails", "Llwybrau"), ("gallery.html", "Gallery", "Oriel"), ("index.html#language", "Language", "Iaith")]
 SEARCH_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
 
 
-def nav(active="", skip="#main"):
+def nav(active="", skip="#main", home=False):
     def li(h, a, b, n=None):
         num = f'<span class="n">{n:02d}</span>' if n else ""
         return f'<li><a href="{h}"{" class=on aria-current=page" if active == h else ""}>{num}{bi(a, b)}</a></li>'
     main = "".join(li(*x) for x in NAV_MAIN)
+    if home:
+        main += "".join(li(*x).replace("<li>", '<li class="x">', 1) for x in NAV_HOME_MORE)
     big = li("index.html", "Home", "Hafan", 1) + "".join(li(h, a, b, i + 2) for i, (h, a, b) in enumerate(NAV_MAIN))
     more = "".join(li(*x) for x in NAV_MORE)
     return (f'<a class="skip" href="{skip}">{bi("Skip to content", "Neidio i’r cynnwys")}</a><div class="progress" aria-hidden="true"><i id="progress"></i></div>'
-            f'<nav class="nav" aria-label="Main"><div class="wrap"><a class="brand" href="index.html"><svg aria-hidden="true"><use href="#i-mtn"/></svg>{bi("History of Wales", "Hanes Cymru")}</a>'
-            f'<ul class="nav-inline">{main}</ul>'
+            f'<nav class="nav" aria-label="Main"><div class="wrap">' + ("" if home else f'<a class="brand" href="index.html">{bi("History of Wales", "Hanes Cymru")}</a>') +
+            f'<ul class="nav-inline">{main}</ul>' + ('<span class="brand" aria-hidden="true"></span>' if home else "") +
             f'<a class="journey-chip" href="journey.html" id="journey-chip" data-total="{JOURNEY_TOTAL}" aria-label="Your journey / Eich taith"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" class="tr"/><circle cx="18" cy="18" r="15" class="fg" id="journey-ring" pathLength="100" stroke-dasharray="0 100"/></svg><b id="journey-n">0</b></a>'
             f'<button type="button" class="search-btn" data-search aria-label="Search / Chwilio">{SEARCH_SVG}</button>'
-            '<div class="lang" role="group" aria-label="Language / Iaith"><button type="button" id="lang-en" aria-pressed="true">EN</button><button type="button" id="lang-cy" aria-pressed="false">CY</button></div>'
+             '<div class="lang" role="group" aria-label="Language / Iaith"><button type="button" id="lang-en" aria-pressed="true">EN</button><button type="button" id="lang-cy" aria-pressed="false">CY</button></div>'
             f'<button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="menu"><span class="bars" aria-hidden="true"><i></i><i></i></span>{bi("Menu", "Dewislen")}</button></div></nav>'
             f'<div class="menu" id="menu" hidden><div class="wrap"><ul class="menu-big">{big}</ul><div class="menu-side"><p class="eyebrow">{bi("More", "Rhagor")}</p><ul class="menu-more">{more}</ul>'
             f'<p class="menu-note">{bi("230,000 years of history, in English and Cymraeg.", "230,000 o flynyddoedd o hanes, yn Gymraeg ac yn Saesneg.")}</p></div></div></div>')
@@ -620,8 +624,21 @@ MARQUEE = "".join(f'<a href="{u}" draggable="false">{bi(a, b)}</a><i aria-hidden
     "".join(f'<a href="{u}" draggable="false" tabindex="-1" aria-hidden="true">{bi(a, b)}</a><i aria-hidden="true">✦</i>' for a, b, u in MARQ)
 
 
-def fill(fragment, active="", skip="#chapters"):
-    return (fragment.replace("__NAV__", nav(active, skip)).replace("__FOOTER__", footer()).replace("__AGES__", AGES_HTML).replace("__MARQUEE__", MARQUEE)
+def _letters(text):
+    """Each letter in its own box so the opening words can drop in and glint one by one, like "Cymru"."""
+    out, i = [], 0
+    for w in text.split(" "):
+        out.append('<span class="w">' + "".join(f'<b style="--i:{i + k}">{e(ch)}</b>' for k, ch in enumerate(w)) + "</span>")
+        i += len(w)
+    return " ".join(out)
+
+
+HERO_NAME = (f'<p class="hero-name"><span class="l-en" lang="en" aria-label="History of Wales">{_letters("History of Wales")}</span>'
+             f'<span class="l-cy" lang="cy" aria-label="Hanes Cymru">{_letters("Hanes Cymru")}</span></p>')
+
+
+def fill(fragment, active="", skip="#chapters", home=False):
+    return (fragment.replace("__NAV__", nav(active, skip, home)).replace("__HERONAME__", HERO_NAME).replace("__FOOTER__", footer()).replace("__AGES__", AGES_HTML).replace("__MARQUEE__", MARQUEE)
             .replace("__STORIES__", "".join(story_card(x, k == 0) for k, x in enumerate(F.STORIES)))
             .replace("__LEGENDS__", "".join(legend_card(x) for x in F.LEGENDS[:4])).replace("__PLAY__", play_cards()))
 
@@ -636,7 +653,7 @@ _body_filled = (body.replace("__WALES__", geo["outline"])
                 .replace("__TOWNS__", json.dumps(TW.TOWNS, ensure_ascii=False, separators=(",", ":")))
                 .replace("__APP__", app)
                 .replace("</body>", "") + TAIL_JS)
-index_fragment = fill(index_head + _body_filled)  # no document skeleton
+index_fragment = fill(index_head + _body_filled, home=True)  # no document skeleton
 
 
 def app_page(path, title, desc, hero_html, section_file, active, skip):
