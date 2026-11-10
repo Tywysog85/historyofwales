@@ -117,7 +117,7 @@ html.menu-open { overflow: hidden }
 @media (max-width: 1000px) { .bento-today { grid-template-columns: 1fr 1fr } .b-day { grid-column: 1 / -1 } }
 @media (max-width: 600px) { .bento-today { grid-template-columns: 1fr } .b-day .today { grid-template-columns: 1fr } }
 
-/* ---------- six ages: poster accordion ---------- */
+/* ---------- the ages: poster accordion ---------- */
 .posters { display: flex; gap: .7rem; height: clamp(26rem, 46vw, 36rem) }
 .poster { position: relative; flex: 1 1 0; min-width: 0; border-radius: var(--r); overflow: hidden; text-decoration: none; color: #fff; isolation: isolate; transition: flex-grow .6s var(--ease); border: 1px solid var(--line) }
 .poster .scene, .s-card .scene, .l-card .scene, .hero-art .scene { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; transition: transform 1.2s var(--ease) }
@@ -132,6 +132,12 @@ html.menu-open { overflow: hidden }
   .posters:not(:hover):not(:focus-within) .poster:first-child, .poster:hover, .poster:focus-visible { flex-grow: 3.4 }
   .posters:not(:hover):not(:focus-within) .poster:first-child :is(p, .go), .poster:hover :is(p, .go), .poster:focus-visible :is(p, .go) { max-height: 8rem; opacity: 1; transition-delay: .15s }
   .poster:hover .scene { transform: scale(1.06) }
+  /* nine posters are narrow when closed, so a closed poster carries its title up the side */
+  .poster h3 { writing-mode: vertical-rl; text-orientation: sideways; rotate: 180deg; white-space: nowrap; align-self: flex-start; font-size: clamp(1.2rem, 1.7vw, 1.5rem) }
+  .poster .span { max-height: 0; opacity: 0; overflow: hidden }
+  .posters:not(:hover):not(:focus-within) .poster:first-child h3, .poster:hover h3, .poster:focus-visible h3 { writing-mode: horizontal-tb; rotate: none; white-space: normal; font-size: clamp(1.25rem, 1.9vw, 1.7rem) }
+  .posters:not(:hover):not(:focus-within) .poster:first-child .span, .poster:hover .span, .poster:focus-visible .span { max-height: 2rem; opacity: 1 }
+  .posters:not(:hover):not(:focus-within) .poster:first-child, .poster:hover, .poster:focus-visible { flex-grow: 4.2 }
 }
 @media (hover: none), (max-width: 900px) {
   .posters { height: auto; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: calc(var(--gut-l) * -1) calc(var(--gut-r) * -1); padding-inline: var(--gut-l) var(--gut-r); scrollbar-width: none; gap: .8rem }

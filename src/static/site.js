@@ -16,7 +16,7 @@
   function count(j, kind) { var n = 0; for (var k in j.v) if (!kind || k.indexOf(kind + ":") === 0) n++; return n; }
   var BADGES = [
     ["first", "1", "First steps", "Camau cyntaf", "Read your first page", "Darllen eich tudalen gyntaf", function (j) { return count(j) >= 1; }],
-    ["ages", "VI", "Time traveller", "Teithiwr amser", "Read all six ages", "Darllen pob un o’r chwe oes", function (j) { return count(j, "era") >= 6; }],
+    ["ages", "IX", "Time traveller", "Teithiwr amser", "Read all nine ages", "Darllen pob un o’r naw oes", function (j) { return count(j, "era") >= 9; }],
     ["people10", "10", "Good company", "Cwmni da", "Meet 10 people", "Cwrdd â 10 o bobl", function (j) { return count(j, "person") >= 10; }],
     ["people30", "30", "Who’s who", "Pwy yw pwy", "Meet 30 people", "Cwrdd â 30 o bobl", function (j) { return count(j, "person") >= 30; }],
     ["places10", "⌖", "Pilgrim", "Pererin", "Visit 10 places", "Ymweld â 10 lle", function (j) { return count(j, "place") >= 10; }],

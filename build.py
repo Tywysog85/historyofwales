@@ -22,6 +22,8 @@ import ages as AG  # noqa: E402
 import features as F  # noqa: E402
 import art as A  # noqa: E402
 L.TEACH.update(AG.TEACH)
+import ages9 as AG9
+L.TEACH.update(AG9.TEACH)
 from urllib.parse import quote as _q
 
 BASE_URL = os.environ.get("SITE_URL", "https://tywysog85.github.io/historyofwales/")
@@ -52,8 +54,8 @@ fonts = "".join(re.findall(r'<link [^>]+>', head))
 ERA = {x["id"]: x for x in D.ERAS}
 PERSON = {p[0]: p for p in D.PEOPLE}
 PLACE = {p["id"]: p for p in D.PLACES}
-COL = dict(ancient="#d39a62", saints="#b9a0ea", kings="#e8c65a", medieval="#f26a62", industrial="#93a0e0", modern="#7cc495")
-ERA_ART = dict(ancient="dolmen", saints="cross", kings="ship", medieval="castle", industrial="pit", modern="senedd")
+COL = dict(ancient="#d39a62", roman="#e58fb4", saints="#b9a0ea", kings="#e8c65a", medieval="#f26a62", tudor="#62c6c4", industrial="#93a0e0", modern="#7cc495", today="#f59a4a")
+ERA_ART = dict(ancient="dolmen", roman="fort", saints="cross", kings="ship", medieval="castle", tudor="book", industrial="pit", modern="terrace", today="senedd")
 TRAIL_ART = dict(women="torch", sea="ship", chapel="book", iron="pit")
 EVENT_BY_TITLE = {ev[5]: ev for ev in D.EVENTS}
 
@@ -163,7 +165,7 @@ def footer():
             ("play.html", "All games", "Pob gêm"), ("journey.html", "Your journey", "Eich taith")]
     return ('<footer class="site-foot"><div class="wrap"><div class="foot-top"><p class="big">Diolch<span>.</span></p>'
             f'<p class="foot-tag">{bi("Thank you for reading. Wales is a small country with a long memory; this site is a way in.", "Diolch am ddarllen. Gwlad fach â chof hir yw Cymru; ffordd i mewn yw’r wefan hon.")}</p></div>'
-            f'<div class="foot-cols">{col("The six ages", "Y chwe oes", eras)}{col("Explore", "Archwilio", explore)}{col("Read", "Darllen", read)}{col("Play", "Chwarae", play)}</div>'
+            f'<div class="foot-cols">{col("The nine ages", "Y naw oes", eras)}{col("Explore", "Archwilio", explore)}{col("Read", "Darllen", read)}{col("Play", "Chwarae", play)}</div>'
             f'<div class="foot-base"><span>{bi("History of Wales · Hanes Cymru", "Hanes Cymru · History of Wales")}</span>'
             f'<span>{bi("Event links go to Wikipedia, which lists academic sources. Dates marked c. are approximate. Original illustrations; photographs from Wikimedia Commons, credited on each page.", "Mae dolenni’r digwyddiadau’n mynd i Wicipedia, sy’n rhestru ffynonellau academaidd. Dyddiadau bras yw’r rhai a nodir c. Darluniau gwreiddiol; ffotograffau o Wikimedia Commons, gyda chydnabyddiaeth ar bob tudalen.")}</span></div></div></footer>'
             f'<button type="button" class="to-top" id="to-top" aria-label="Back to top / Yn ôl i’r brig" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>')
@@ -567,7 +569,7 @@ DATA = dict(
     MAPC=dict(minx=geo["minx"], maxy=geo["maxy"], k=geo["k"], sc=geo["sc"]),
     FACTS=F.FACTS, FEATURED=FEATURED, PPH={k: photo_url(v[0], 240) for k, v in PH.PERSON_PHOTOS.items()},
 )
-ROMAN = ["I", "II", "III", "IV", "V", "VI"]
+ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"]
 AGES_HTML = "".join(
     f'<a class="poster" href="era-{x["id"]}.html" data-era="{x["id"]}">{A.scene(ERA_ART[x["id"]], COL[x["id"]])}<span class="shade"></span><span class="rn">{ROMAN[i]}</span>'
     f'<span class="txt"><span class="span">{bi(x["spanEn"], x["spanCy"])}</span><h3>{bi(x["en"], x["cy"])}</h3><p>{bi(x["blurbEn"], x["blurbCy"])}</p><span class="go">{bi("Read the chapter", "Darllen y bennod")} →</span></span></a>'
