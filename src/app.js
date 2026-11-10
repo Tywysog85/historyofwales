@@ -148,40 +148,98 @@
     if (SKY.star > 0.5) drawMeteors(t);
     drawDragon(t, sumX, sumY, narrow, stacked);
   }
-  /* Y Ddraig Goch as on the flag: passant, facing left, in a 300 x 180 box. Painted on any canvas; `flap` folds the wing. */
-  var DP = {};
-  function ddraig(g, flap, red, far, dark, eye) {
-    function line(pts, w, col) { g.strokeStyle = col || red; g.lineWidth = w; g.lineCap = "round"; g.lineJoin = "round"; g.beginPath(); g.moveTo(pts[0], pts[1]); for (var i = 2; i < pts.length; i += 2) g.lineTo(pts[i], pts[i + 1]); g.stroke(); }
-    function shape(d, col) { g.fillStyle = col || red; g.fill(DP[d] || (DP[d] = new Path2D(d))); }
-    function claws(x, y) { shape("M" + x + " " + y + "l-13 1l8 -5l-9 -3l10 -2l-5 -6l11 5z"); }
-    /* tail, with its barb */
-    g.strokeStyle = red; g.lineWidth = 7; g.lineCap = "round"; g.beginPath(); g.moveTo(206, 98); g.bezierCurveTo(236, 104, 254, 92, 249, 75); g.bezierCurveTo(245, 62, 228, 63, 231, 75); g.bezierCurveTo(234, 86, 252, 80, 257, 60); g.stroke();
-    shape("M248 62L267 59L261 38Z");
-    /* far legs */
-    line([178, 106, 162, 128, 154, 150], 8, far); claws(156, 153);
-    line([110, 100, 90, 104, 72, 92], 7, far); shape("M75 96l-15 -1l9 -5l-10 -6l12 1l-4 -9l11 9z");
-    /* wing */
-    g.save(); g.translate(0, 82); g.scale(1, flap); g.translate(0, -82);
-    shape("M128 80L146 46L139 28L161 39L202 22L191 36L236 33L214 48L242 60L211 63Q201 67 197 80Q187 67 177 80Q167 68 156 82Z");
-    line([146, 46, 202, 22], 1.6, dark); line([146, 46, 236, 33], 1.6, dark); line([146, 46, 242, 60], 1.6, dark); line([146, 46, 197, 80], 1.6, dark);
+  /* Y Ddraig Goch as on the flag: passant, facing left, in a 300 x 180 box.
+     Painted once into three layers (behind, wing, in front) so the wing can beat on its own. */
+  function dragonArt(pal) {
+    var K = 3, layers = {}, g;
+    function layer(name) { var c = document.createElement("canvas"); c.width = 300 * K; c.height = 180 * K; g = c.getContext("2d"); g.scale(K, K); g.lineJoin = "round"; g.lineCap = "round"; layers[name] = c; }
+    function shade() { /* light from above: paint a soft highlight and shadow over whatever is already drawn */
+      g.save(); g.globalCompositeOperation = "source-atop"; var s = g.createLinearGradient(0, 20, 0, 160); s.addColorStop(0, "rgba(255,190,150,.22)"); s.addColorStop(0.45, "rgba(255,190,150,0)"); s.addColorStop(1, "rgba(40,0,10,.3)"); g.fillStyle = s; g.fillRect(0, 0, 300, 180); g.restore();
+    }
+    function shape(d, fill, lw) { var p = new Path2D(d); g.fillStyle = fill || pal.red; g.fill(p); if (lw !== 0) { g.strokeStyle = pal.line; g.lineWidth = lw || 1; g.stroke(p); } return p; }
+    function bez(a, n) { var o = []; for (var i = 0; i <= n; i++) { var t = i / n, u = 1 - t; o.push([u * u * u * a[0] + 3 * u * u * t * a[2] + 3 * u * t * t * a[4] + t * t * t * a[6], u * u * u * a[1] + 3 * u * u * t * a[3] + 3 * u * t * t * a[5] + t * t * t * a[7]]); } return o; }
+    /* a limb or tail: a line of points that tapers from w0 to w1, outlined */
+    function taper(pts, w0, w1, fill) {
+      [[pal.line, 1.7], [fill || pal.red, 0]].forEach(function (pass) {
+        g.fillStyle = pass[0];
+        for (var i = 0; i < pts.length; i++) {
+          var w = (w0 + (w1 - w0) * i / (pts.length - 1)) + pass[1];
+          g.beginPath(); g.arc(pts[i][0], pts[i][1], w / 2, 0, 7); g.fill();
+          if (i) { var a = pts[i - 1], b = pts[i], wa = (w0 + (w1 - w0) * (i - 1) / (pts.length - 1)) + pass[1], dx = b[0] - a[0], dy = b[1] - a[1], l = Math.hypot(dx, dy) || 1, nx = -dy / l, ny = dx / l;
+            g.beginPath(); g.moveTo(a[0] + nx * wa / 2, a[1] + ny * wa / 2); g.lineTo(b[0] + nx * w / 2, b[1] + ny * w / 2); g.lineTo(b[0] - nx * w / 2, b[1] - ny * w / 2); g.lineTo(a[0] - nx * wa / 2, a[1] - ny * wa / 2); g.fill(); }
+        }
+      });
+    }
+    function leg(pts, w0, w1, fill) { var o = []; for (var i = 1; i < pts.length; i++) for (var k = 0; k < 6; k++) o.push([pts[i - 1][0] + (pts[i][0] - pts[i - 1][0]) * k / 6, pts[i - 1][1] + (pts[i][1] - pts[i - 1][1]) * k / 6]); o.push(pts[pts.length - 1]); taper(o, w0, w1, fill); }
+    /* a clawed foot: three toes forward and a spur behind, turned by `rot` */
+    function paw(x, y, rot, fill) {
+      g.save(); g.translate(x, y); g.rotate(rot);
+      [[-15, -5, -21, -8], [-17, 1, -24, 1], [-13, 6, -19, 10], [5, 4, 10, 8]].forEach(function (t) {
+        taper([[0, 0], [t[0] * 0.5, t[1] * 0.55], [t[0], t[1]]], 5.5, 3, fill);
+        var a = Math.atan2(t[3] - t[1], t[2] - t[0]); g.save(); g.translate(t[0], t[1]); g.rotate(a); shape("M-1 -1.8Q4 -1.6 8 1.2Q3 2 -1 1.8Z", pal.claw, 0.6); g.restore();
+      });
+      g.restore();
+    }
+    /* ---- behind: tail and the far legs ---- */
+    layer("back");
+    var tail = bez([210, 98, 240, 108, 262, 94, 254, 74], 14).concat(bez([254, 74, 248, 59, 229, 61, 232, 75], 12).slice(1), bez([232, 75, 235, 89, 254, 84, 259, 60], 12).slice(1));
+    taper(tail, 10, 3.2);
+    shape("M259 62L251 60Q256 46 262 32Q268 46 272 60L264 59Z");
+    leg([[182, 106], [165, 124], [172, 140], [160, 152]], 12, 6, pal.far); paw(160, 153, 0.1, pal.far);
+    leg([[112, 100], [92, 108], [76, 94]], 10, 6, pal.far); paw(75, 93, 0.75, pal.far);
+    shade();
+    /* ---- the wing ---- */
+    layer("wing");
+    shape("M138 82L151 40L197 17Q207 35 238 29Q231 47 250 59Q226 59 217 77Q197 69 181 85Q162 75 150 86Z", pal.far);
+    g.save(); g.clip(new Path2D("M138 82L151 40L197 17Q207 35 238 29Q231 47 250 59Q226 59 217 77Q197 69 181 85Q162 75 150 86Z"));
+    var wg = g.createRadialGradient(151, 40, 6, 151, 40, 100); wg.addColorStop(0, "rgba(255,170,140,.28)"); wg.addColorStop(1, "rgba(60,0,10,.28)"); g.fillStyle = wg; g.fillRect(120, 0, 160, 100);
+    g.strokeStyle = pal.line; g.lineWidth = 0.5; g.globalAlpha = 0.5; for (var r = 26; r < 100; r += 12) { g.beginPath(); g.arc(151, 40, r, -0.5, 1.9); g.stroke(); }
     g.restore();
-    /* body, neck and head */
-    shape("M106 80C122 70 150 73 172 79C190 77 205 80 211 90C217 102 209 113 196 113C182 109 166 99 150 103C136 109 122 113 114 107C102 101 100 88 106 80Z");
-    g.strokeStyle = red; g.lineWidth = 13; g.lineCap = "butt"; g.beginPath(); g.moveTo(114, 92); g.quadraticCurveTo(98, 78, 101, 54); g.stroke();
-    shape("M109 50L100 30L96 43L88 34L86 44L62 49L59 55L79 58L65 67L86 69L99 66L110 60Z");
-    line([79, 60, 54, 60], 2); shape("M45 60L56 55L54 60L56 65Z");
-    g.fillStyle = eye; g.beginPath(); g.arc(89, 50, 1.8, 0, 7); g.fill();
-    /* near legs */
-    g.fillStyle = red; g.beginPath(); g.ellipse(199, 103, 12, 14, 0.3, 0, 7); g.fill(); g.beginPath(); g.ellipse(119, 99, 10, 12, -0.2, 0, 7); g.fill();
-    line([198, 108, 212, 126, 198, 150], 8); claws(200, 153);
-    line([120, 106, 113, 128, 106, 150], 8); claws(108, 153);
+    [[197, 17], [238, 29], [250, 59], [217, 77], [181, 85]].forEach(function (f) { taper([[151, 40], [(151 + f[0]) / 2, (40 + f[1]) / 2 - 1], f], 4.2, 1.6); });
+    taper([[138, 84], [143, 62], [151, 40]], 8.5, 5.5);
+    shape("M148 42Q142 32 136 24Q146 28 154 37Z", pal.claw, 0.7);
+    shade();
+    /* ---- in front: body, neck, head and the near legs ---- */
+    layer("front");
+    var body = "M112 84C120 76 140 73 160 78C180 81 200 78 212 86C223 94 221 110 208 114C196 116 184 108 170 106C156 106 144 116 130 116C116 116 106 104 106 94C106 90 108 86 112 84Z";
+    var neck = "M112 42C123 49 128 62 125 72C124 78 128 82 137 82L119 103C108 98 102 86 104 76C105 70 106 66 104 61Z";
+    /* spines down the neck and back */
+    [[117, 45, -0.5], [123, 53, -0.2], [126, 62, 0.05], [126, 71, 0.2], [133, 79, -0.7], [146, 76, -1.2], [160, 77, -1.35], [174, 79, -1.45], [188, 80, -1.5], [201, 81, -1.3]].forEach(function (s) { g.save(); g.translate(s[0], s[1]); g.rotate(s[2]); shape("M-2.6 0Q2 -2 7 -1Q3 1.5 2.6 3Z", pal.red, 0.7); g.restore(); });
+    shape(body); shape(neck);
+    /* scales */
+    g.save(); var bp = new Path2D(body); bp.addPath(new Path2D(neck)); g.clip(bp); g.strokeStyle = pal.line; g.lineWidth = 0.45; g.globalAlpha = 0.42;
+    for (var yy = 40; yy < 120; yy += 4.5) for (var xx = 100 + (Math.round(yy / 4.5) % 2) * 3; xx < 224; xx += 6) { g.beginPath(); g.arc(xx, yy, 3, 0.15, Math.PI - 0.15); g.stroke(); }
+    g.restore();
+    /* paler belly plates from the throat to the hind leg */
+    var belly = shape("M104 61C102 76 104 90 113 101C120 110 130 116 140 114C150 112 160 106 172 106L172 101C160 100 150 106 140 108C130 109 122 104 117 96C111 86 110 74 111 63Z", pal.belly, 0.8);
+    g.save(); g.clip(belly); g.strokeStyle = pal.line; g.lineWidth = 0.6; g.globalAlpha = 0.7;
+    [[101, 68, 114, 66], [101, 75, 114, 73], [102, 82, 115, 79], [104, 89, 117, 85], [107, 96, 120, 91], [112, 102, 124, 96], [118, 108, 128, 100], [125, 113, 133, 104], [133, 116, 138, 105], [141, 116, 144, 104], [149, 114, 151, 102], [157, 111, 158, 100], [165, 109, 165, 98]].forEach(function (l) { g.beginPath(); g.moveTo(l[0], l[1]); g.lineTo(l[2], l[3]); g.stroke(); });
+    g.restore();
+    /* head: horns, skull, jaws, teeth, tongue, eye */
+    shape("M101 38C104 27 111 22 119 19C114 26 112 33 110 42Z", pal.claw, 0.8); shape("M93 37C92 29 96 24 101 21C100 28 100 33 101 38Z", pal.red, 0.8);
+    shape("M80 58C70 55 60 61 50 57", "rgba(0,0,0,0)", 0); g.strokeStyle = pal.red; g.lineWidth = 2.4; g.beginPath(); g.moveTo(80, 59); g.bezierCurveTo(70, 56, 60, 62, 51, 58); g.stroke();
+    shape("M41 55L53 53L51 58L54 63Z", pal.red, 0.6);
+    shape("M113 46C109 38 100 34 92 36L79 40C70 41 62 44 56 48C53 50 53 53 56 54L74 56L81 59L67 61C62 62 61 66 66 67C75 69 86 70 94 68C102 66 108 62 113 58Z");
+    g.fillStyle = "#fff7ea"; [[60, 55], [65, 55.5], [70, 56]].forEach(function (t) { g.beginPath(); g.moveTo(t[0] - 1.6, t[1]); g.lineTo(t[0], t[1] + 3.6); g.lineTo(t[0] + 1.6, t[1] + 0.3); g.fill(); });
+    [[71, 61], [76, 60.4]].forEach(function (t) { g.beginPath(); g.moveTo(t[0] - 1.4, t[1]); g.lineTo(t[0], t[1] - 3); g.lineTo(t[0] + 1.4, t[1] - 0.2); g.fill(); });
+    g.strokeStyle = pal.line; g.lineWidth = 0.8; g.beginPath(); g.moveTo(79, 41); g.quadraticCurveTo(86, 39, 92, 43); g.stroke(); g.beginPath(); g.moveTo(96, 62); g.quadraticCurveTo(103, 60, 108, 54); g.stroke();
+    g.fillStyle = pal.line; g.beginPath(); g.ellipse(59, 50, 1.5, 0.9, -0.4, 0, 7); g.fill();
+    g.fillStyle = pal.eye; g.beginPath(); g.ellipse(87, 46, 3, 1.9, 0.25, 0, 7); g.fill(); g.fillStyle = "#15090c"; g.beginPath(); g.ellipse(86.6, 46, 1, 1.7, 0.1, 0, 7); g.fill();
+    /* near legs, with muscled shoulder and haunch */
+    shape("M188 92C198 84 214 88 217 100C220 112 212 122 202 122C192 122 184 112 184 102C184 98 185 95 188 92Z");
+    shape("M112 88C120 84 131 88 133 98C135 108 128 116 120 116C112 116 106 108 107 99C107 95 109 91 112 88Z");
+    leg([[203, 108], [191, 128], [203, 142], [194, 153]], 13, 6.5); paw(194, 154, 0.1);
+    leg([[120, 104], [116, 128], [110, 150]], 11, 6.5); paw(110, 152, 0.05);
+    shade();
+    return layers;
   }
   /* the flag is painted flat once, then drawn in thin slices that billow */
   var FLAG = null;
   function flagArt() {
     var c = document.createElement("canvas"); c.width = 600; c.height = 360; var g = c.getContext("2d"); g.scale(2, 2);
     g.fillStyle = "#f6f3ec"; g.fillRect(0, 0, 300, 90); g.fillStyle = "#0f9a48"; g.fillRect(0, 90, 300, 90);
-    ddraig(g, 1, "#d21a25", "#bd1620", "#8f0f18", "#f6f3ec");
+    var L = dragonArt({ red: "#d21a25", far: "#b3141f", line: "#6f0a12", belly: "#e8474a", claw: "#9c0f18", eye: "#ffe9a8" });
+    g.drawImage(L.back, 0, 0, 300, 180); g.drawImage(L.wing, 0, 0, 300, 180); g.drawImage(L.front, 0, 0, 300, 180);
     return c;
   }
   /* a castle of the princes on its crag: great keep, round towers, a twin-towered gatehouse, and Y Ddraig Goch flying over it */
@@ -273,6 +331,7 @@
     cx.beginPath(); ERYRI.forEach(function (p, j) { var X = x0 + p[0] * w, Y = base - p[1] * h; if (j) cx.lineTo(X, Y); else cx.moveTo(X, Y); });
     cx.strokeStyle = "rgba(233,217,198,.28)"; cx.lineWidth = 1.4; cx.stroke();
   }
+  var SKYD = null, DC = null;
   var DPOS = { x: -999, y: -999, r: 0 }, fireAt = 0, nextFire = 5000;
   function drawDragon(t, sumX, sumY, narrow, stacked) {
     var period = 26000, k = reduce ? 0.55 : (t % period) / period;
@@ -290,7 +349,7 @@
     if (fireAt && fp >= 0 && fp < 1) {
       /* fire: three flickering tongues from the mouth, brightest at the root */
       var pow = Math.sin(Math.min(1, fp * 1.15) * Math.PI), L = 135 * pow;
-      cx.save(); cx.translate(212, 37); cx.rotate(0.12); cx.globalCompositeOperation = "lighter";
+      cx.save(); cx.translate(222, 36); cx.rotate(0.12); cx.globalCompositeOperation = "lighter";
       [[1, 22, "rgba(226,69,61,.8)"], [0.78, 14, "rgba(255,150,60,.9)"], [0.5, 7.5, "rgba(255,236,170,.95)"]].forEach(function (f, n) {
         var l = L * f[0] * (0.9 + 0.1 * Math.sin(t / 45 + n * 2)), w = f[1] * pow * (0.85 + 0.15 * Math.sin(t / 60 + n)), wob = 4 * Math.sin(t / 70 + n * 1.7);
         var g = cx.createLinearGradient(0, 0, l, 0); g.addColorStop(0, f[2]); g.addColorStop(1, f[2].replace(/[\d.]+\)$/, "0)"));
@@ -298,8 +357,14 @@
       });
       cx.restore();
     }
-    /* the dragon of the flag, turned to fly towards the mountain */
-    cx.translate(267, -22); cx.scale(-1, 1); ddraig(cx, 0.55 + 0.45 * flap, "#e2453d", "#c9372f", "#a82a24", "#1a1420");
+    /* the dragon of the flag, turned to fly towards the mountain. Its layers are put together on a spare canvas first,
+       so that it fades in and out as one solid dragon and the parts never show through each other. */
+    if (!SKYD) { SKYD = dragonArt({ red: "#e2453d", far: "#c9372f", line: "#7d1814", belly: "#f06a5c", claw: "#b02a22", eye: "#ffe9a8" }); DC = document.createElement("canvas"); DC.width = 900; DC.height = 540; }
+    var dg = DC.getContext("2d"), wf = 0.55 + 0.45 * flap;
+    dg.clearRect(0, 0, 900, 540); dg.drawImage(SKYD.back, 0, 0);
+    dg.save(); dg.translate(0, 246); dg.scale(1, wf); dg.translate(0, -246); dg.drawImage(SKYD.wing, 0, 0); dg.restore();
+    dg.drawImage(SKYD.front, 0, 0);
+    cx.translate(267, -22); cx.scale(-1, 1); cx.drawImage(DC, 0, 0, 300, 180);
     cx.restore();
   }
   function loop(t) { t0 = t; if (window.scrollY < H) draw(t); requestAnimationFrame(loop); }
