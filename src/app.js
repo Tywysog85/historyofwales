@@ -131,7 +131,7 @@
       /* the valley mist the mountains rise out of, which also hides the stars below the skyline */
       var vm = cx.createLinearGradient(0, eb - eh * 0.7, 0, H), mistC = mixHex(mixHex(SKY.sky[2], SKY.sky[1], 0.45), "#6f7896", 0.62), vc = hex(mistC).join(",");
       vm.addColorStop(0, "rgba(" + vc + ",0)"); vm.addColorStop(0.34, "rgba(" + vc + ",.9)"); vm.addColorStop(0.55, "rgba(" + vc + ",1)"); vm.addColorStop(1, SKY.sky[3]); cx.fillStyle = vm; cx.fillRect(0, eb - eh * 0.7, W, H);
-      if (!FLAG) FLAG = flagArt(); HCL3.frame({ W: W, H: H, sumX: sumX - ew * 0.13, sumY: sumY + ew * 0.15, ppm: ew / 2000, ground: stacked ? { x: W * 0.5 - mouse * 9, y: eb + eh * 0.02 - sy * 0.1, ppm: ew * 0.007 } : { x: Math.min(W * 0.885, W - H * 0.3) - mouse * 9, y: H * 0.7 - sy * 0.1, ppm: H * 0.0098 }, castle: !stacked, t: t, sun: SKY.sun, fog: mixHex(SKY.sky[2], SKY.sky[1], 0.45), mist: mistC, flag: FLAG, flagV: FLAGV });
+      if (!FLAG) FLAG = flagArt(); HCL3.frame({ W: W, H: H, sumX: sumX - ew * 0.13, sumY: sumY + ew * 0.15, ppm: ew / 2000, ground: stacked ? { x: W * 0.74, y: eb - eh * 0.2 - sy * 0.1, ppm: Math.min(W * 0.0075, eh * 0.0155) } : { x: Math.min(W * 0.885, W - H * 0.3) - mouse * 9, y: H * 0.7 - sy * 0.1, ppm: H * 0.0098 }, castle: true, t: t, sun: SKY.sun, fog: mixHex(SKY.sky[2], SKY.sky[1], 0.45), mist: mistC, flag: FLAG, flagV: FLAGV });
       if (HCL3.shown && !LANDT) LANDT = t;
     }
     LAYERS.forEach(function (L, i) {
@@ -321,7 +321,7 @@
         window.HCD3_WANT = window.HCL3_WANT = 1;
         var c3 = document.createElement("canvas"); c3.id = "sky3d"; c3.setAttribute("aria-hidden", "true"); cv.after(c3);
         var cl = document.createElement("canvas"); cl.id = "land3d"; cl.setAttribute("aria-hidden", "true"); cv.after(cl);
-        var s3 = document.createElement("script"); s3.type = "module"; s3.src = "hero3d.js?v=3"; /* raise the number whenever hero3d.js changes, so browsers fetch the new one */ s3.onerror = function () { window.HCD3_WANT = window.HCL3_WANT = 0; c3.remove(); cl.remove(); }; document.head.appendChild(s3);
+        var s3 = document.createElement("script"); s3.type = "module"; s3.src = "hero3d.js?v=4"; /* raise the number whenever hero3d.js changes, so browsers fetch the new one */ s3.onerror = function () { window.HCD3_WANT = window.HCL3_WANT = 0; c3.remove(); cl.remove(); }; document.head.appendChild(s3);
         setTimeout(function () { if (!(window.HCD3 && HCD3.ready)) window.HCD3_WANT = 0; if (!(window.HCL3 && HCL3.ready)) { window.HCL3_WANT = 0; cl.remove(); } }, 15000);
       }
     } catch (e3) { window.HCD3_WANT = 0; }
