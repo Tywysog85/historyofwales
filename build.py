@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build Hanes Cymru into a static site.
+"""Build History of Wales into a static site.
 
 Usage:  python3 build.py            -> writes _site/ (for GitHub Pages)
         python3 build.py --artifact -> also writes _artifact/ (preview without a document skeleton)
@@ -53,6 +53,9 @@ def bi(en, cy, tag="span", cls=""):
         return e(en)
     c = f" {cls}" if cls else ""
     return f'<{tag} class="l-en{c}" lang="en">{e(en)}</{tag}><{tag} class="l-cy{c}" lang="cy">{e(cy)}</{tag}>'
+
+
+SITE = bi("History of Wales", "Hanes Cymru")
 
 
 def paras(en_list, cy_list, cls="story"):
@@ -116,7 +119,7 @@ def nav(active=""):
              ("trails.html", "Trails", "Llwybrau"), ("teachers.html", "Teachers", "Athrawon")]
     lis = "".join(f'<li><a href="{h}"{" class=on" if active == h else ""}>{bi(a, b)}</a></li>' for h, a, b in items)
     return (f'<a class="skip" href="#main">{bi("Skip to content", "Neidio i’r cynnwys")}</a>'
-            f'<nav class="nav" aria-label="Main"><div class="wrap"><a class="brand" href="index.html"><svg aria-hidden="true"><use href="#i-mtn"/></svg><span>Hanes Cymru</span></a>'
+            f'<nav class="nav" aria-label="Main"><div class="wrap"><a class="brand" href="index.html"><svg aria-hidden="true"><use href="#i-mtn"/></svg>{bi("History of Wales", "Hanes Cymru")}</a>'
             f'<ul>{lis}</ul><div class="lang" role="group" aria-label="Language / Iaith"><button type="button" id="lang-en" aria-pressed="true">EN</button>'
             '<button type="button" id="lang-cy" aria-pressed="false">CY</button></div></div></nav>')
 
@@ -193,16 +196,16 @@ def era_page(i, era):
     evs = [ev for ev in D.EVENTS if ev[0] == eid]
     ppl = [p for p in D.PEOPLE if p[1] == eid]
     plc = [p for p in D.PLACES if p["era"] == eid]
-    pager = (f'<a class="btn" href="era-{prev_e["id"]}.html">← {bi(prev_e["en"], prev_e["cy"])}</a>' if prev_e else '<a class="btn" href="index.html">← Hanes Cymru</a>') + \
+    pager = (f'<a class="btn" href="era-{prev_e["id"]}.html">← {bi(prev_e["en"], prev_e["cy"])}</a>' if prev_e else f'<a class="btn" href="index.html">← {bi("History of Wales", "Hanes Cymru")}</a>') + \
             (f'<a class="btn solid" href="era-{next_e["id"]}.html">{bi(next_e["en"], next_e["cy"])} →</a>' if next_e else f'<a class="btn solid" href="trails.html">{bi("Follow a trail", "Dilyn llwybr")} →</a>')
-    main = (hero(eid, f'<a href="index.html">Hanes Cymru</a> / {bi("Chapter", "Pennod")} {i + 1}', era["ill"], era["spanEn"], era["spanCy"], era["en"], era["cy"], era["blurbEn"], era["blurbCy"])
+    main = (hero(eid, f'<a href="index.html">{SITE}</a> / {bi("Chapter", "Pennod")} {i + 1}', era["ill"], era["spanEn"], era["spanCy"], era["en"], era["cy"], era["blurbEn"], era["blurbCy"])
             + section(paras(era["storyEn"], era["storyCy"]), top=True)
             + section(f'<ol class="era-events">{"".join(event_li(ev) for ev in evs)}</ol>', "Timeline", "Llinell amser")
             + section(f'<div class="people">{"".join(plaque(p) for p in ppl)}</div>', "People", "Pobl")
             + (section(f'<div class="era-places">{"".join(place_tile(p) for p in plc)}</div>', "Places to visit", "Lleoedd i ymweld â nhw") if plc else "")
             + section(f'<div class="pager">{pager}</div>'))
-    ld = {"@context": "https://schema.org", "@type": "Article", "headline": era["en"], "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "Hanes Cymru", "url": BASE_URL}}
-    return page(f"era-{eid}.html", f'{era["en"]} · Hanes Cymru', era["blurbEn"], main, era=eid, ld=ld)
+    ld = {"@context": "https://schema.org", "@type": "Article", "headline": era["en"], "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
+    return page(f"era-{eid}.html", f'{era["en"]} · History of Wales', era["blurbEn"], main, era=eid, ld=ld)
 
 
 # ---------- person pages ----------
@@ -217,13 +220,13 @@ def person_page(p):
     pager = (f'<a class="btn" href="person-{prev_p[0]}.html">← {bi(prev_p[3], prev_p[4])}</a>' if prev_p else f'<a class="btn" href="era-{eid}.html">← {bi(era["en"], era["cy"])}</a>') + \
             (f'<a class="btn solid" href="person-{next_p[0]}.html">{bi(next_p[3], next_p[4])} →</a>' if next_p else '<a class="btn solid" href="index.html#people">' + bi("All people", "Pawb") + " →</a>")
     meta = (f'<div class="person-meta"><span>{e(p[2])}</span><span>{bi(p[5], p[6])}</span><a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a></div>')
-    main = (hero(eid, f'<a href="index.html">Hanes Cymru</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', era["ill"], p[2], p[2], p[3], p[4], p[7], p[8])
+    main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', era["ill"], p[2], p[2], p[3], p[4], p[7], p[8])
             + section(meta + paras(long_en, long_cy) + f'<p class="share no-print"><button type="button" class="btn" data-copy="person-{slug}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button> {src(p[9])}</p>', top=True)
             + (section(f'<ol class="era-events">{"".join(event_li(ev) for ev in related)}</ol>', "On the timeline", "Ar y llinell amser") if related else "")
             + section(f'<div class="people">{"".join(plaque(x) for x in same)}</div>', "Also in this age", "Hefyd yn yr oes hon")
             + section(f'<div class="pager">{pager}</div>'))
     ld = {"@context": "https://schema.org", "@type": "Person", "name": p[3], "alternateName": p[4], "description": p[7], "sameAs": WIKI + p[9]}
-    return page(f"person-{slug}.html", f"{p[3]} · Hanes Cymru", p[7], main, era=eid, ld=ld, og_type="profile")
+    return page(f"person-{slug}.html", f"{p[3]} · History of Wales", p[7], main, era=eid, ld=ld, og_type="profile")
 
 
 # ---------- place pages ----------
@@ -236,13 +239,13 @@ def place_page(pl):
     osm = f'https://www.openstreetmap.org/?mlat={pl["lat"]}&mlon={pl["lon"]}#map=14/{pl["lat"]}/{pl["lon"]}'
     meta = (f'<div class="person-meta"><span>{e(pl["year"])}</span><span>{pl["lat"]:.3f}° N, {abs(pl["lon"]):.3f}° W</span>'
             f'<a href="{osm}" target="_blank" rel="noopener">{bi("Open in a map", "Agor mewn map")} ↗</a><a href="index.html#lle-{pid}">{bi("On our map", "Ar ein map")} →</a></div>')
-    main = (hero(eid, f'<a href="index.html">Hanes Cymru</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', pl["ill"], era["en"], era["cy"], pl["en"], pl["cy"], pl["dEn"], pl["dCy"])
+    main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', pl["ill"], era["en"], era["cy"], pl["en"], pl["cy"], pl["dEn"], pl["dCy"])
             + section(meta + paras(long_en, long_cy) + f'<p class="share no-print">{src(pl["src"])}</p>', top=True)
             + (section(f'<ol class="era-events">{"".join(event_li(ev) for ev in related)}</ol>', "What happened here", "Beth ddigwyddodd yma") if related else "")
             + section(f'<div class="era-places">{"".join(place_tile(x) for x in near)}</div>', "Nearby", "Gerllaw"))
     ld = {"@context": "https://schema.org", "@type": "TouristAttraction", "name": pl["en"], "alternateName": pl["cy"], "description": pl["dEn"],
           "geo": {"@type": "GeoCoordinates", "latitude": pl["lat"], "longitude": pl["lon"]}}
-    return page(f"place-{pid}.html", f'{pl["en"]} · Hanes Cymru', pl["dEn"], main, era=eid, ld=ld, og_type="place")
+    return page(f"place-{pid}.html", f'{pl["en"]} · History of Wales', pl["dEn"], main, era=eid, ld=ld, og_type="place")
 
 
 # ---------- trails ----------
@@ -259,21 +262,21 @@ def trail_item(kind, ref):
 
 def trail_page(t, i):
     nxt = L.TRAILS[(i + 1) % len(L.TRAILS)]
-    main = (hero("medieval", f'<a href="index.html">Hanes Cymru</a> / <a href="trails.html">{bi("Trails", "Llwybrau")}</a>', t["ill"], "Trail", "Llwybr", t["en"], t["cy"])
+    main = (hero("medieval", f'<a href="index.html">{SITE}</a> / <a href="trails.html">{bi("Trails", "Llwybrau")}</a>', t["ill"], "Trail", "Llwybr", t["en"], t["cy"])
             + section(paras(t["introEn"], t["introCy"]), top=True)
             + section(f'<ol class="era-events trail">{"".join(trail_item(k, r) for k, r in t["items"])}</ol>', "Stops on the trail", "Arosfannau ar y llwybr")
             + section(f'<div class="pager"><a class="btn" href="trails.html">← {bi("All trails", "Pob llwybr")}</a><a class="btn solid" href="trail-{nxt["id"]}.html">{bi(nxt["en"], nxt["cy"])} →</a></div>'))
-    return page(f"trail-{t['id']}.html", f'{t["en"]} · Hanes Cymru', t["introEn"][0], main, era="medieval", active="trails.html")
+    return page(f"trail-{t['id']}.html", f'{t["en"]} · History of Wales', t["introEn"][0], main, era="medieval", active="trails.html")
 
 
 def trails_index():
     cards = "".join(f'<a class="chap" href="trail-{t["id"]}.html" data-era="{D.ERAS[i % 4]["id"]}"><svg aria-hidden="true"><use href="#i-{t["ill"]}"/></svg>'
                     f'<span class="span">{len(t["items"])} {bi("stops", "arhosfan")}</span><h3>{bi(t["en"], t["cy"])}</h3><p>{bi(t["introEn"][0], t["introCy"][0])}</p>'
                     f'<span class="go">{bi("Follow the trail →", "Dilyn y llwybr →")}</span></a>' for i, t in enumerate(L.TRAILS))
-    main = (hero("modern", '<a href="index.html">Hanes Cymru</a>', "mtn", "Themed trails", "Llwybrau thema", "Trails through Welsh history", "Llwybrau drwy hanes Cymru",
+    main = (hero("modern", f'<a href="index.html">{SITE}</a>', "mtn", "Themed trails", "Llwybrau thema", "Trails through Welsh history", "Llwybrau drwy hanes Cymru",
                  "Follow one thread through the centuries.", "Dilynwch un edefyn drwy’r canrifoedd.")
             + section(f'<h2 class="sr-only">{bi("All trails", "Pob llwybr")}</h2><div class="chapters">{cards}</div>', top=True))
-    return page("trails.html", "Trails · Hanes Cymru", "Themed trails through Welsh history: women, the sea, chapel and song, iron and coal.", main, era="modern", og_type="website", active="trails.html")
+    return page("trails.html", "Trails · History of Wales", "Themed trails through Welsh history: women, the sea, chapel and song, iron and coal.", main, era="modern", og_type="website", active="trails.html")
 
 
 # ---------- teachers ----------
@@ -302,11 +305,11 @@ def teachers_page():
                    f'<p class="eq">{bi("Enquiry question", "Cwestiwn ymholi")}: <b>{bi(t["qEn"], t["qCy"])}</b></p>'
                    f'<ol class="l-en" lang="en">{acts_en}</ol><ol class="l-cy" lang="cy">{acts_cy}</ol></article>')
     sheets = "".join(quiz_sheet(era) for era in D.ERAS)
-    intro_en = ["Hanes Cymru is free to use in the classroom. Every page works in English and Welsh, and every event links to a source, so pupils can practise checking evidence.",
+    intro_en = ["History of Wales is free to use in the classroom. Every page works in English and Welsh, and every event links to a source, so pupils can practise checking evidence.",
                 "The ideas below fit the Humanities Area of Learning and Experience in the Curriculum for Wales, with its focus on cynefin, enquiry and the diverse stories of Wales. Adapt them freely."]
     intro_cy = ["Mae Hanes Cymru am ddim i’w ddefnyddio yn y dosbarth. Mae pob tudalen yn gweithio yn Gymraeg ac yn Saesneg, ac mae pob digwyddiad yn cysylltu â ffynhonnell, fel y gall disgyblion ymarfer gwirio tystiolaeth.",
                 "Mae’r syniadau isod yn addas ar gyfer Maes Dysgu a Phrofiad y Dyniaethau yng Nghwricwlwm i Gymru, gyda’i bwyslais ar gynefin, ymholi a straeon amrywiol Cymru. Addaswch nhw fel y mynnwch."]
-    main = (hero("industrial", '<a href="index.html">Hanes Cymru</a>', "book", "For teachers", "I athrawon", "Hanes Cymru in the classroom", "Hanes Cymru yn y dosbarth",
+    main = (hero("industrial", f'<a href="index.html">{SITE}</a>', "book", "For teachers", "I athrawon", "History of Wales in the classroom", "Hanes Cymru yn y dosbarth",
                  "Lesson ideas, enquiry questions and printable quiz sheets for each age.", "Syniadau gwersi, cwestiynau ymholi a thaflenni cwis i’w hargraffu ar gyfer pob oes.")
             + section(paras(intro_en, intro_cy), top=True)
             + section(f'<div class="lessons">{blocks}</div>', "Lesson ideas", "Syniadau gwersi")
@@ -314,7 +317,7 @@ def teachers_page():
                       f'<span class="muted">{bi("Prints in whichever language is selected. Answers are hidden until opened.", "Yn argraffu yn yr iaith a ddewiswyd. Mae’r atebion yn gudd nes eu hagor.")}</span></p>{sheets}', "Printable quiz sheets", "Taflenni cwis i’w hargraffu")
             + section(f'<p>{bi("Spotted a mistake, or have a resource to share? Contact the site owner through the GitHub repository.", "Wedi gweld camgymeriad, neu am rannu adnodd? Cysylltwch â pherchennog y wefan drwy’r ystorfa GitHub.")} '
                       '<a href="https://github.com/Tywysog85/historyofwales/issues" target="_blank" rel="noopener">GitHub ↗</a></p>'))
-    return page("teachers.html", "For teachers · Hanes Cymru", "Lesson ideas and printable quiz sheets on the history of Wales, in English and Welsh.", main, era="industrial", og_type="website", active="teachers.html")
+    return page("teachers.html", "For teachers · History of Wales", "Lesson ideas and printable quiz sheets on the history of Wales, in English and Welsh.", main, era="industrial", og_type="website", active="teachers.html")
 
 
 EXTRA_PAGE_CSS = """
@@ -359,7 +362,7 @@ index_head = index_head.replace(
 index_head = index_head.replace('<nav class="nav" aria-label="Main">', '<a class="skip" href="#chapters" data-cy="Neidio i’r cynnwys">Skip to content</a>\n<nav class="nav" aria-label="Main">', 1)
 index_head = re.sub(r"<title>.*?</title>\n", "", index_head, count=1)
 index_head = re.sub(r'<meta name="description"[^>]*>\n', "", index_head, count=1)
-index_head = head_tags("Hanes Cymru", "The history of Wales, from the first people in the caves to the Senedd: an interactive timeline, map, people and language, in English and Cymraeg.", "", "website") + index_head
+index_head = head_tags("History of Wales", "The history of Wales, from the first people in the caves to the Senedd: an interactive timeline, map, people and language, in English and Cymraeg.", "", "website") + index_head
 index_body = (body.replace("__WALES__", geo["outline"])
               .replace("__DATA__", json.dumps(DATA, ensure_ascii=False, separators=(",", ":")))
               .replace("__APP__", app)

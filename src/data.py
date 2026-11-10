@@ -1,4 +1,4 @@
-# Canonical content for Hanes Cymru. build.py turns this into the site.
+# Canonical content for History of Wales. build.py turns this into the site.
 # Text inside strings uses curly quotes ‘ ’ so it never clashes with code quotes.
 
 ERAS = [

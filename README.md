@@ -1,4 +1,4 @@
-# Hanes Cymru
+# History of Wales (Hanes Cymru)
 
 An interactive, bilingual (English / Cymraeg) history of Wales: a scroll-driven timeline, a map of historic sites and changing kingdoms, the people who shaped Wales, the Welsh language, a quiz, and a page for each age.
 
