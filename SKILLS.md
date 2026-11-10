@@ -39,18 +39,13 @@ This file collects the techniques and lessons from building History of Wales. Ad
 ## Building the site
 
 ### Static site, no framework
-- Content lives in Python data files (`src/data.py`, `src/more.py`, `src/ages.py`, `src/long.py`, `src/photos.py`, `src/towns.py`). `build.py` turns them into 100+ HTML pages.
+- Content lives in Python data files in `src/` (the table in `README.md` says which file holds what). `build.py` turns them into about 190 HTML pages.
 - The home page and the timeline page share one script (`src/app.js`). The script checks which parts exist on the page (the timeline, the hero sky, the map) and skips the rest.
 
 ### Bilingual pages (English / Cymraeg)
 - On the home and timeline pages, each element carries `data-cy="…"`, and the EN/CY toggle swaps the text. The choice is remembered in the browser.
 - The other pages use `bi()` in `build.py`, which writes both languages as `.l-en` and `.l-cy` spans that CSS shows or hides.
 - Welsh dates use CC/OC instead of BC/AD.
-
-### Adding a new age (era)
-- Define the age in `src/ages.py`, with a story, blurb and teaching notes. `data.py` inserts it in order.
-- Events are reassigned to ages by year. People and places are moved in with explicit lists.
-- Give each new age a colour token in `src/head.html` (`--e-<id>`) and a `[data-era]` rule.
 
 ### Photos from Wikimedia Commons
 - Link to the image directly with `https://commons.wikimedia.org/wiki/Special:FilePath/<File name>?width=640`, and credit it with a link to the file page.
@@ -113,7 +108,7 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - One line of CSS, `@view-transition { navigation: auto }`, makes modern browsers cross-fade between pages. Older browsers ignore it.
 
 ### Hover accordion (the ages)
-- The six age posters sit in a flex row. The hovered one gets a bigger `flex-grow`, which animates. On phones the same cards become a sideways swipe row with scroll-snap.
+- The age posters sit in a flex row. The hovered one gets a bigger `flex-grow`, which animates. On phones the same cards become a sideways swipe row with scroll-snap.
 - Gotcha: text inside a card that should wrap must not sit in a CSS grid with a wide sibling, or the grid stretches and the title is cut off. A flex column fixed it.
 
 ### Games and "Your journey"
@@ -125,8 +120,6 @@ This file collects the techniques and lessons from building History of Wales. Ad
 ### Checking a big change
 - Load every built page in a headless browser at phone width and report script errors and sideways scrolling. This caught a game card that was wider than the phone screen.
 - Make contact sheets (several screenshots tiled into one image) to review many pages quickly, in English and Welsh.
-
----
 
 ### The changing map and adding places (November 2026)
 
@@ -152,12 +145,6 @@ When a page is removed (the Arthur legend became a long read), leave a redirect 
 
 `README.md` says what the site is and where things live. `EDITORIAL.md` holds the owner's rules for how it is written. `TODO.md` lists the open jobs. `SKILLS.md` is this file. The owner wants them kept clean and tidy: when something changes, edit the line that is there instead of adding a new one at the bottom, delete finished jobs from `TODO.md`, and keep the counts in `README.md` true.
 
-## Working together
-
-- Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
-- Small visual tweaks are published one at a time so each can be seen live.
-- Still open: a fluent Welsh speaker to proofread the Welsh, a check of the photos, and optional real voice recordings for the Welsh words (MP3s go in `src/static/audio/` as `slug.mp3`).
-
 ### Adding or splitting an age (November 2026)
 
 The ages are layered: `src/data.py` holds the original four, `src/ages.py` adds Saints and Kings, and `src/ages9.py` adds Roman Wales, Tudor and Stuart Wales and Wales Today. Each layer is applied at the bottom of `data.py`.
@@ -180,6 +167,11 @@ On wide screens (1100 pixels and up) the opening screen is capped at 60rem tall 
 
 Other effects in the same file: shooting stars (`drawMeteors`, night only), the dragon's fire (`fireAt`, every 9 to 16 seconds or when tapped; `DPOS` is where the dragon is for the tap test), and tilt (the `deviceorientation` listener feeds the same `mouse` value the pointer does; skipped on iOS, which asks permission). The glint on "Cymru" is CSS in `src/v6.css` (`@keyframes glint`), using a gradient clipped to the text; the letters need extra `padding-block` or their tails are cut off.
 
-## The site name above "Cymru" (home page)
+### The site name above "Cymru" on the home page (November 2026)
 
 On the home page the words "History of Wales" (Welsh: "Hanes Cymru") sit above the big "Cymru", not in the top bar. `HERO_NAME` in `build.py` writes them one letter per box (`_letters()`), and the same CSS rule as "Cymru" (`.hero h1 span, .hero .hero-name b` in `src/head.html` and `src/v6.css`) makes every letter drop in and glint. The home top bar has no name or mountain; it starts with the links, and on screens wider than 1480 pixels it shows four more (`NAV_HOME_MORE` in `build.py`). Every other page keeps "History of Wales" in the top bar as the way home.
+
+## Working together
+
+- Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
+- Small visual tweaks are published one at a time so each can be seen live.

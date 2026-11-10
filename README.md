@@ -24,7 +24,7 @@ Everything is plain HTML, CSS and JavaScript. There is no framework and nothing 
 
 | To change | Edit |
 | --- | --- |
-| Events, people, places | `src/data.py`, `src/more.py`, `src/places2.py` |
+| Events, people, places | `src/data.py`, `src/more.py`, `src/places2.py` (extra items are merged in and sorted by year) |
 | Longer histories of people and places, trails, teacher notes | `src/long.py` |
 | The nine ages | `src/ages.py`, `src/ages9.py` |
 | Long reads, legends, symbols, facts | `src/features.py`, `src/pride.py`, `src/pride2.py`, `src/pride3.py` |
@@ -33,6 +33,7 @@ Everything is plain HTML, CSS and JavaScript. There is no framework and nothing 
 | Drawn pictures | `src/art.py` |
 | The home page and opening screen | `src/head.html`, `src/body.html`, `src/app.js`, `src/extra.css`, `src/v6.css` |
 | Games, menu, badges, search | `src/static/play.js`, `src/static/site.js`, `src/static/search.js` |
+| Menu and footer shared by every page | `nav()` and `footer()` in `build.py` |
 | Icons and the share picture | `src/static/`, made by `tools/make_images.js` |
 
 To build and look at it on your own computer:
@@ -54,27 +55,13 @@ Visitors are counted with [GoatCounter](https://www.goatcounter.com), which uses
 
 ## Adding photos
 
-Photos are linked from Wikimedia Commons in `src/photos.py`, and scene illustrations are drawn in `src/art.py`. When adding photos, use only ones you own or that carry a free licence (for example from Wikimedia Commons), and credit the photographer and licence on the page.
+Photos are linked from Wikimedia Commons in `src/photos.py`. Pages without a photo show a picture drawn in code by `src/art.py`. Use only photos you own or that carry a free licence, and credit the photographer and licence on the page.
 
-## Accuracy
+## Other things worth knowing
 
-Dates and figures were written with care but should be checked against sources, and the Welsh should be proofread by a fluent speaker. Both jobs are listed in `TODO.md`.
-
-## Round 3 additions
-
-- **Extra content** lives in `src/more.py` (events, people and places) and is merged into `src/data.py` automatically. Events are sorted by year.
-- **Search**: `build.py` writes `search.json`; `src/static/search.js` powers the magnifier button and the `/` shortcut on every page.
-- **History near you**: town list in `src/towns.py`.
-- **Pronunciation recordings**: put MP3s in `src/static/audio/` (see the README there). Without them, the play buttons use the device's speech voice.
-
-## The redesign (round 4)
-
-- **Long reads, legends, symbols and facts** live in `src/features.py`. Each has its own page.
-- **Illustrations** are drawn in code by `src/art.py`.
-- **Games** (daily challenge, map game, Welsh names, word pairs and more) are in `src/static/play.js`; the quiz and timeline challenge now have their own page, `quiz.html`.
+- **Search**: `build.py` writes `search.json`; `src/static/search.js` runs the magnifier button and the `/` shortcut.
+- **History near you**: the town list is in `src/towns.py`.
+- **Pronunciation**: MP3s go in `src/static/audio/` (see the README there). Without them, the play buttons use the device's own voice.
 - **Your journey** (`journey.html`) shows what a visitor has read and the badges they have earned. It is stored only in their browser.
-- The menu, footer and page effects shared by every page are in `build.py` (`nav()`, `footer()`), `src/v6.css` and `src/static/site.js`.
-
-## Nine ages
-
-The site is organised into nine ages: Ancient Wales, Roman Wales, the Age of Saints, the Age of Kings, the Age of Princes, Tudor and Stuart Wales, Industrial Wales, Twentieth-Century Wales and Wales Today. See "Adding or splitting an age" in SKILLS.md.
+- **The nine ages**: see "Adding or splitting an age" in `SKILLS.md`.
+- **Accuracy**: checking facts against sources and proofreading the Welsh are open jobs in `TODO.md`.
