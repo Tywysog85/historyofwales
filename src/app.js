@@ -153,6 +153,39 @@
   } else { window.addEventListener("scroll", function () { if (window.scrollY < H) draw(); }, { passive: true }); }
   size();
 
+  /* ---------- Word strip: drifts by itself, and can be dragged, swiped or scrolled either way ---------- */
+  (function () {
+    var m = document.getElementById("marquee"); if (!m) return;
+    var tr = m.firstElementChild, hold = false, idle = 0, pos = 0, down = null, moved = false, last = 0;
+    function half() { return tr.children[tr.children.length / 2].offsetLeft - tr.children[0].offsetLeft; }
+    function wrap() { var h = half(); if (h <= 0) return; if (m.scrollLeft >= h) m.scrollLeft -= h; else if (m.scrollLeft <= 0) m.scrollLeft += h; pos = m.scrollLeft; }
+    function rest(ms) { idle = performance.now() + (ms || 2500); }
+    m.addEventListener("scroll", function () { if (Math.abs(m.scrollLeft - pos) > 2) { wrap(); } }, { passive: true });
+    m.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") hold = true; });
+    m.addEventListener("pointerleave", function () { hold = false; rest(600); });
+    m.addEventListener("touchstart", function () { rest(4000); }, { passive: true });
+    m.addEventListener("touchmove", function () { rest(4000); }, { passive: true });
+    m.addEventListener("wheel", function () { rest(); }, { passive: true });
+    m.addEventListener("focusin", function () { hold = true; }); m.addEventListener("focusout", function () { hold = false; rest(); });
+    m.addEventListener("pointerdown", function (e) { if (e.pointerType !== "mouse" || e.button) return; down = { x: e.clientX, s: m.scrollLeft }; moved = false; });
+    window.addEventListener("pointermove", function (e) {
+      if (!down) return; var dx = e.clientX - down.x;
+      if (!moved && Math.abs(dx) > 5) { moved = true; m.classList.add("drag"); }
+      if (moved) { m.scrollLeft = down.s - dx; var h = half(); if (m.scrollLeft <= 0) { m.scrollLeft += h; down.s += h; } else if (m.scrollLeft >= h) { m.scrollLeft -= h; down.s -= h; } pos = m.scrollLeft; }
+    });
+    window.addEventListener("pointerup", function () { if (!down) return; down = null; if (moved) { setTimeout(function () { m.classList.remove("drag"); }, 0); rest(); } });
+    m.addEventListener("click", function (e) { if (moved) { e.preventDefault(); moved = false; } }, true);
+    m.addEventListener("dragstart", function (e) { e.preventDefault(); });
+    m.scrollLeft = pos = 1;
+    if (reduce) return;
+    requestAnimationFrame(function step(t) {
+      var dt = Math.min(50, t - (last || t)); last = t;
+      if (!hold && !down && t > idle) { pos += dt * 0.045; var h = half(); if (h > 0 && pos >= h) pos -= h; m.scrollLeft = pos; }
+      else pos = m.scrollLeft;
+      requestAnimationFrame(step);
+    });
+  })();
+
   /* ---------- Count-up ticker ---------- */
   $$("[data-count]").forEach(function (el) {
     var target = +el.dataset.count, suf = el.dataset.suffix || "", st = null;

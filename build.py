@@ -572,8 +572,12 @@ AGES_HTML = "".join(
     f'<a class="poster" href="era-{x["id"]}.html" data-era="{x["id"]}">{A.scene(ERA_ART[x["id"]], COL[x["id"]])}<span class="shade"></span><span class="rn">{ROMAN[i]}</span>'
     f'<span class="txt"><span class="span">{bi(x["spanEn"], x["spanCy"])}</span><h3>{bi(x["en"], x["cy"])}</h3><p>{bi(x["blurbEn"], x["blurbCy"])}</p><span class="go">{bi("Read the chapter", "Darllen y bennod")} →</span></span></a>'
     for i, x in enumerate(D.ERAS))
-MARQ = [("Castles", "Cestyll"), ("Poets", "Beirdd"), ("Saints", "Seintiau"), ("Princes", "Tywysogion"), ("Dragons", "Dreigiau"), ("Coal", "Glo"), ("Slate", "Llechi"), ("Song", "Cân"), ("Rebels", "Gwrthryfelwyr"), ("Legends", "Chwedlau")]
-MARQUEE = ("".join(f'<span>{bi(a, b)}</span><i>✦</i>' for a, b in MARQ)) * 2
+MARQ = [("Castles", "Cestyll", "story-castles.html"), ("Poets", "Beirdd", "person-dafydd-ap-gwilym.html"), ("Saints", "Seintiau", "era-saints.html"),
+        ("Princes", "Tywysogion", "era-medieval.html"), ("Dragons", "Dreigiau", "legend-dragons.html"), ("Coal", "Glo", "story-coal.html"),
+        ("Slate", "Llechi", "place-dinorwig.html"), ("Song", "Cân", "trail-song.html"), ("Rebels", "Gwrthryfelwyr", "story-protest.html"), ("Legends", "Chwedlau", "legends.html")]
+# two copies so the strip can loop for ever; the second copy is hidden from screen readers and the Tab key
+MARQUEE = "".join(f'<a href="{u}" draggable="false">{bi(a, b)}</a><i aria-hidden="true">✦</i>' for a, b, u in MARQ) + \
+    "".join(f'<a href="{u}" draggable="false" tabindex="-1" aria-hidden="true">{bi(a, b)}</a><i aria-hidden="true">✦</i>' for a, b, u in MARQ)
 
 
 def fill(fragment, active="", skip="#chapters"):
