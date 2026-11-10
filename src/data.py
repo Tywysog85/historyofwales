@@ -600,3 +600,11 @@ PEOPLE = [(p[0], "roman" if p[0] in _A9.ROMAN_PEOPLE else "tudor" if p[0] in _A9
 _ERA_ORDER = {x["id"]: n for n, x in enumerate(ERAS)}
 PEOPLE = sorted(PEOPLE, key=lambda p: (_ERA_ORDER[p[1]], _born(p)))
 PLACES = [dict(pl, era=_A9.PLACE_ERA.get(pl["id"], pl["era"])) for pl in PLACES]
+
+
+# ---------- the changing map (src/kingdoms.py) ----------
+from kingdoms import KINGDOMS
+
+# ---------- more historic sites (src/places2.py) ----------
+from places2 import MORE_PLACES
+PLACES = PLACES + MORE_PLACES

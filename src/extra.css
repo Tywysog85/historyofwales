@@ -149,3 +149,10 @@ footer nav a:hover { color: var(--ink) }
 .search-btn{background:none;border:1px solid var(--line);color:var(--ink);border-radius:999px;width:2.4rem;height:2.4rem;display:grid;place-items:center;cursor:pointer;flex:none;margin-right:.6rem;padding:0}.search-btn:hover{border-color:var(--ink)}.search-btn svg{width:1.05rem;height:1.05rem}
 a.chip { text-decoration: none; color: inherit }
 .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
+
+/* kingdoms map: names on the land, play controls */
+.kg-label { font: 600 17px var(--f-body, sans-serif); fill: #fff; text-anchor: middle; dominant-baseline: middle; paint-order: stroke; stroke: rgba(11,14,22,.75); stroke-width: 4px; stroke-linejoin: round; pointer-events: none; letter-spacing: .01em }
+.kg-ticks span.on { color: var(--ink); font-weight: 700 }
+.kg-btns { display: flex; gap: .5rem; align-items: center; margin-top: .4rem }
+.kg-btns #kg-play { flex: 1; justify-content: center }
+@media (max-width: 900px) { .kg-ticks span:not(.on):not(:first-child):not(:last-child) { visibility: hidden } .kg-label { font-size: 24px } }

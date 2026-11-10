@@ -47,6 +47,44 @@ extra_css = read("extra.css") + read("v6.css")
 geo = json.loads(read("geo", "map.json"))
 la = json.loads(read("geo", "la.json"))
 
+
+def _split_la():
+    """Cut Powys and Gwynedd into their historic shires, so the Kingdoms map can show Brycheiniog, Meirionnydd and the rest.
+    The cuts are straight lines of latitude and longitude, so the borders are approximate."""
+    import re as _re
+    sc, k, minx, maxy = geo["sc"], geo["k"], geo["minx"], geo["maxy"]
+    Y = lambda lat: (maxy - lat) * sc
+    X = lambda lon: (lon - minx) * k * sc
+
+    def pts(d):
+        return [(float(a), float(b)) for a, b in _re.findall(r"(-?[\d.]+) (-?[\d.]+)", d)]
+
+    def clip(poly, axis, v, keep_less):
+        out = []
+        for i, p in enumerate(poly):
+            q = poly[i - 1]
+            pin, qin = (p[axis] < v) == keep_less, (q[axis] < v) == keep_less
+            if pin != qin:
+                t = (v - q[axis]) / (p[axis] - q[axis])
+                out.append((q[0] + (p[0] - q[0]) * t, q[1] + (p[1] - q[1]) * t))
+            if pin:
+                out.append(p)
+        return out
+
+    def path(*polys):
+        return " ".join("M" + " L".join(f"{x:.0f} {y:.0f}" for x, y in poly) + " Z" for poly in polys if len(poly) > 2)
+
+    powys, gwynedd = pts(la.pop("Powys")), pts(la.pop("Gwynedd"))
+    la["Montgomeryshire"] = path(clip(powys, 1, Y(52.42), True))
+    la["Radnorshire"] = path(clip(clip(powys, 1, Y(52.42), False), 1, Y(52.12), True))
+    la["Brecknockshire"] = path(clip(powys, 1, Y(52.12), False))
+    south = clip(gwynedd, 1, Y(52.97), False)
+    la["Meirionnydd"] = path(clip(south, 0, X(-4.15), False))
+    la["Caernarfonshire"] = path(clip(gwynedd, 1, Y(52.97), True), clip(south, 0, X(-4.15), True))
+
+
+_split_la()
+
 style = head[head.index("<style>") + 7: head.index("</style>")] + extra_css
 symbols = head[head.index('<svg width="0"'): head.index("</svg>", head.index('<svg width="0"')) + 6]
 fonts = "".join(re.findall(r'<link [^>]+>', head))
