@@ -145,3 +145,11 @@ To add an age:
 4. Update the words that count the ages: the heading in `src/body.html`, the footer column in `build.py` and the "ages" badge in `src/static/site.js`.
 
 With nine posters in a row, a closed poster is too narrow for its title, so closed posters print the title up the side (`writing-mode: vertical-rl` with `text-orientation: sideways`, so apostrophes turn with the letters) and the open one prints it normally.
+
+### A sky that follows the real time of day (November 2026)
+
+The home page sky is drawn in `src/app.js`. `sunOverWales()` works out how high the sun is over mid Wales from the clock alone (no location permission, no network), and `setSky()` blends between four palettes in `SKIES` (night, dawn, day, dusk) once a minute. Every colour in the scene reads from `SKY`, so a new palette is one line. To preview one, add `?sky=night`, `?sky=dawn`, `?sky=day` or `?sky=dusk` to the home page address.
+
+Keep the day palette dark enough for the light text to stay readable: the words sit on the sky, so "day" is a deep blue, not a pale one.
+
+Other effects in the same file: shooting stars (`drawMeteors`, night only), the dragon's fire (`fireAt`, every 9 to 16 seconds or when tapped; `DPOS` is where the dragon is for the tap test), and tilt (the `deviceorientation` listener feeds the same `mouse` value the pointer does; skipped on iOS, which asks permission). The glint on "Cymru" is CSS in `src/v6.css` (`@keyframes glint`), using a gradient clipped to the text; the letters need extra `padding-block` or their tails are cut off.

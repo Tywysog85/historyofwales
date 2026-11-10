@@ -45,8 +45,39 @@
     if (a) { M.h1t = a.top - r.top; M.h1h = a.height; } if (b) M.sub = b.bottom - r.top; if (e) M.cta = e.bottom - r.top; M.tick = c ? c.top - r.top : r.height;
     return old !== M.h1t + "," + M.h1h + "," + M.sub + "," + M.tick + "," + M.cta;
   }
-  function size() { if (!HERO) return; var r = cv.getBoundingClientRect(); dpr = Math.min(window.devicePixelRatio || 1, 2); W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; measure(); draw(); }
+  var VIS = 0; /* how much of the hero the first screen shows */
+  function size() { if (!HERO) return; var r = cv.getBoundingClientRect(); dpr = Math.min(window.devicePixelRatio || 1, 2); W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; VIS = window.innerHeight - (r.top + window.scrollY); measure(); draw(); }
   if (HERO) setInterval(function () { var r = cv.getBoundingClientRect(); if (Math.abs(r.height - H) > 1 || Math.abs(r.width - W) > 1) size(); else if (measure() && reduce) draw(); }, 500);
+  /* ---- the sky follows the real sun over Wales: night, dawn, day, dusk ---- */
+  function hex(c) { return [parseInt(c.slice(1, 3), 16), parseInt(c.slice(3, 5), 16), parseInt(c.slice(5, 7), 16)]; }
+  function mix(a, b, k) { var x = hex(a), y = hex(b); return "rgb(" + Math.round(x[0] + (y[0] - x[0]) * k) + "," + Math.round(x[1] + (y[1] - x[1]) * k) + "," + Math.round(x[2] + (y[2] - x[2]) * k) + ")"; }
+  function mixHex(a, b, k) { var x = hex(a), y = hex(b); return "#" + [0, 1, 2].map(function (i) { return ("0" + Math.round(x[i] + (y[i] - x[i]) * k).toString(16)).slice(-2); }).join(""); }
+  /* sky: four colours top to bottom; star: how bright the stars are; orb: sun or moon colour; tint/k: colour washed over the hills; glow: red glow behind the summit */
+  var SKIES = {
+    night: { sky: ["#0b0e16", "#1a2032", "#3a2a35", "#0e1118"], star: 1, orb: "#e9d9c6", tint: "#232a3d", k: 0, glow: 1, sun: 0 },
+    dawn: { sky: ["#141a33", "#3b3157", "#8c4b4f", "#0e1118"], star: 0.3, orb: "#ffd9a8", tint: "#5a4660", k: 0.3, glow: 1.2, sun: 0.6 },
+    day: { sky: ["#0f2646", "#1c446f", "#2f5f8f", "#0e1118"], star: 0, orb: "#fff1c9", tint: "#2c4f73", k: 0.42, glow: 0.25, sun: 1 },
+    dusk: { sky: ["#10142a", "#35274a", "#8a3a3c", "#0e1118"], star: 0.35, orb: "#ffc48f", tint: "#553a52", k: 0.28, glow: 1.5, sun: 0.6 }
+  };
+  function sunOverWales() {
+    /* height of the sun above the horizon in mid Wales, in degrees, and whether it is still morning */
+    var R = Math.PI / 180, d = Date.now() / 864e5 - 10957.5, g = (357.529 + 0.98560028 * d) * R, q = 280.459 + 0.98564736 * d;
+    var L = (q + 1.915 * Math.sin(g) + 0.02 * Math.sin(2 * g)) * R, e = (23.439 - 0.00000036 * d) * R;
+    var ra = Math.atan2(Math.cos(e) * Math.sin(L), Math.cos(L)), dec = Math.asin(Math.sin(e) * Math.sin(L));
+    var ha = ((18.697374558 + 24.06570982441908 * d) * 15 - 3.7) * R - ra, lat = 52.4 * R;
+    return { el: Math.asin(Math.sin(lat) * Math.sin(dec) + Math.cos(lat) * Math.cos(dec) * Math.cos(ha)) / R, am: Math.sin(ha) < 0 };
+  }
+  var SKY = SKIES.night;
+  function setSky() {
+    var force = (/[?&]sky=(night|dawn|day|dusk)/.exec(location.search) || [])[1];
+    if (force) { SKY = SKIES[force]; return; }
+    var s = sunOverWales(), tw = SKIES[s.am ? "dawn" : "dusk"], a, b, k;
+    if (s.el <= -9) { SKY = SKIES.night; return; }
+    if (s.el >= 9) { SKY = SKIES.day; return; }
+    if (s.el < 0) { a = SKIES.night; b = tw; k = (s.el + 9) / 9; } else { a = tw; b = SKIES.day; k = s.el / 9; }
+    SKY = { sky: a.sky.map(function (c, i) { return mixHex(c, b.sky[i], k); }), star: a.star + (b.star - a.star) * k, orb: mixHex(a.orb, b.orb, k), tint: mixHex(a.tint, b.tint, k), k: a.k + (b.k - a.k) * k, glow: a.glow + (b.glow - a.glow) * k, sun: a.sun + (b.sun - a.sun) * k };
+  }
+  if (HERO) { setSky(); setInterval(function () { setSky(); if (reduce) draw(); }, 60000); }
   var t0 = 0;
   function draw(t) {
     if (!HERO) return;
@@ -54,30 +85,32 @@
     var sy = Math.min(window.scrollY, H);
     cx.setTransform(dpr, 0, 0, dpr, 0, 0);
     var g = cx.createLinearGradient(0, 0, 0, H);
-    g.addColorStop(0, "#0b0e16"); g.addColorStop(0.55, "#1a2032"); g.addColorStop(0.8, "#3a2a35"); g.addColorStop(1, "#0e1118");
+    g.addColorStop(0, SKY.sky[0]); g.addColorStop(0.55, SKY.sky[1]); g.addColorStop(0.8, SKY.sky[2]); g.addColorStop(1, SKY.sky[3]);
     cx.fillStyle = g; cx.fillRect(0, 0, W, H);
     stars.forEach(function (s, i) {
       var tw = 0.5 + 0.5 * Math.sin(t / 900 + s[3] * 20), X = s[0] * W, Y = s[1] * H - sy * 0.02;
-      cx.fillStyle = "rgba(236,233,225," + (0.15 + 0.5 * tw * s[2] / 1.4) + ")"; cx.fillRect(X, Y, s[2], s[2]);
-      if (i % 12 === 0 && !(Y > M.h1t - 6 && (W < 1100 ? Y < M.cta + 6 : X < W * 0.62))) { var a = 0.25 + 0.6 * tw, L2 = 2.5 + 3 * tw; cx.fillStyle = "rgba(244,238,226," + a + ")"; cx.fillRect(X - L2, Y, L2 * 2 + 1, 1); cx.fillRect(X, Y - L2, 1, L2 * 2 + 1); }
+      if (SKY.star <= 0.02) return;
+      cx.fillStyle = "rgba(236,233,225," + (0.15 + 0.5 * tw * s[2] / 1.4) * SKY.star + ")"; cx.fillRect(X, Y, s[2], s[2]);
+      if (i % 12 === 0 && !(Y > M.h1t - 6 && (W < 1100 ? Y < M.cta + 6 : X < W * 0.62))) { var a = (0.25 + 0.6 * tw) * SKY.star, L2 = 2.5 + 3 * tw; cx.fillStyle = "rgba(244,238,226," + a + ")"; cx.fillRect(X - L2, Y, L2 * 2 + 1, 1); cx.fillRect(X, Y - L2, 1, L2 * 2 + 1); }
     });
     /* phones and tall, narrow windows: the mountain sits below the words. Wide screens: it stands to the right of them. */
     var narrow = W < 640, stacked = W < 1100;
     var ex0, ew, eb, eh;
     if (stacked) {
       var top = narrow ? M.cta + 18 : M.sub + 4, bot = Math.max(top + 120, M.tick + (narrow ? 26 : 10));
-      eh = Math.min(bot - top, W * 0.62); eb = top + eh; ew = Math.max(W * (narrow ? 1.05 : 0.8), eh * 2.3); ex0 = W * (narrow ? 0.6 : 0.7) - 0.53 * ew;
+      eh = Math.min(bot - top, W * 0.62); if (narrow && VIS > top + 110) eh = Math.min(eh, Math.max(120, VIS - top - 4)); eb = top + eh; ew = Math.max(W * (narrow ? 1.05 : 0.8), eh * 2.3); ex0 = W * (narrow ? 0.6 : 0.7) - 0.53 * ew;
     } else { ex0 = W * 0.38; ew = W * 0.7; eb = H * 0.72; eh = H * 0.5; }
     var sumX = ex0 + 0.53 * ew - mouse * 4, sumY = eb - eh - sy * 0.04;
     var mr = Math.max(narrow ? 15 : 18, Math.min(W, H) * 0.04);
     var mx = narrow ? W - mr - 14 : W * 0.9, my = (stacked ? Math.max(mr + 8, M.h1t - mr * 0.2) : H * 0.13) - sy * 0.03;
-    var mg = cx.createRadialGradient(sumX, sumY, 10, sumX, sumY, Math.max(W, H) * 0.45); mg.addColorStop(0, "rgba(226,69,61,.26)"); mg.addColorStop(1, "rgba(226,69,61,0)");
+    var mg = cx.createRadialGradient(sumX, sumY, 10, sumX, sumY, Math.max(W, H) * 0.45); mg.addColorStop(0, "rgba(226,69,61," + Math.min(0.42, 0.26 * SKY.glow) + ")"); mg.addColorStop(1, "rgba(226,69,61,0)");
     cx.fillStyle = mg; cx.fillRect(0, 0, W, H);
     var halo = cx.createRadialGradient(mx, my, mr * 0.9, mx, my, mr * 4.2), pulse = 0.2 + 0.05 * Math.sin(t / 2600);
-    halo.addColorStop(0, "rgba(233,217,198," + pulse + ")"); halo.addColorStop(0.35, "rgba(233,217,198," + pulse * 0.3 + ")"); halo.addColorStop(1, "rgba(233,217,198,0)");
+    var oc = hex(SKY.orb).join(","); pulse *= 1 + SKY.sun * 1.3;
+    halo.addColorStop(0, "rgba(" + oc + "," + pulse + ")"); halo.addColorStop(0.35, "rgba(" + oc + "," + pulse * 0.3 + ")"); halo.addColorStop(1, "rgba(" + oc + ",0)");
     cx.fillStyle = halo; cx.fillRect(mx - mr * 4.5, my - mr * 4.5, mr * 9, mr * 9);
-    cx.fillStyle = "#e9d9c6"; cx.beginPath(); cx.arc(mx, my, mr, 0, 7); cx.fill();
-    cx.fillStyle = "rgba(180,160,140,.22)"; [[-.3, -.25, .22], [.28, .1, .16], [-.1, .4, .12]].forEach(function (c) { cx.beginPath(); cx.arc(mx + c[0] * mr, my + c[1] * mr, c[2] * mr, 0, 7); cx.fill(); });
+    cx.fillStyle = SKY.orb; cx.beginPath(); cx.arc(mx, my, mr, 0, 7); cx.fill();
+    cx.fillStyle = "rgba(180,160,140," + 0.22 * (1 - SKY.sun) + ")"; [[-.3, -.25, .22], [.28, .1, .16], [-.1, .4, .12]].forEach(function (c) { cx.beginPath(); cx.arc(mx + c[0] * mr, my + c[1] * mr, c[2] * mr, 0, 7); cx.fill(); });
     LAYERS.forEach(function (L, i) {
       if (i === 1) { drawEryri(ex0 - ew * 0.34 - mouse * 2, eb - sy * 0.03, ew * 0.9, eh * 0.62, true); drawEryri(ex0 - mouse * 4, eb - sy * 0.04, ew, eh); }
       var w = ridges[i], amp = stacked ? eh * (0.34 - i * 0.04) : H * L.a, base = (stacked ? eb - eh * (0.42 - i * 0.15) : H * L.y) + sy * L.s * 0.6, off = mouse * (i + 1) * 6 + (reduce ? 0 : t / 1000 * (i + 1) * 1.2);
@@ -88,7 +121,7 @@
         v = Math.abs(v) * 0.6 + v * 0.4;
         cx.lineTo(x, base - v * amp);
       }
-      cx.lineTo(W, H); cx.closePath(); cx.fillStyle = L.c; cx.fill();
+      cx.lineTo(W, H); cx.closePath(); cx.fillStyle = mix(L.c, SKY.tint, SKY.k * (1 - i * 0.2)); cx.fill();
       if (i === 1 || i === 3) {
         var fg = cx.createLinearGradient(0, base - H * 0.08, 0, base + H * 0.05); fg.addColorStop(0, "rgba(160,170,200,0)"); fg.addColorStop(0.6, "rgba(160,170,200," + (0.06 + 0.02 * Math.sin(t / 2200 + i)) + ")"); fg.addColorStop(1, "rgba(160,170,200,0)"); cx.fillStyle = fg; cx.fillRect(0, base - H * 0.08, W, H * 0.13);
         /* mist: soft banks drifting across the valley */
@@ -99,7 +132,20 @@
         }
       }
     });
+    if (SKY.star > 0.5) drawMeteors(t);
     drawDragon(t, sumX, sumY, narrow, stacked);
+  }
+  /* shooting stars: one every few seconds, high in the sky */
+  var meteors = [], nextMeteor = 2500;
+  function drawMeteors(t) {
+    if (reduce) return;
+    if (t > nextMeteor) { nextMeteor = t + 3500 + Math.random() * 6000; var left = Math.random() < 0.5; meteors.push({ t: t, x: W * (left ? 0.05 + Math.random() * 0.4 : 0.55 + Math.random() * 0.4), y: H * Math.random() * 0.22, dx: (left ? 1 : -1) * (0.5 + Math.random() * 0.4), dy: 0.28 + Math.random() * 0.2, life: 700 + Math.random() * 500 }); }
+    meteors = meteors.filter(function (m) { return t - m.t < m.life; });
+    meteors.forEach(function (m) {
+      var p = (t - m.t) / m.life, d = p * Math.min(W, 700) * 0.55, x = m.x + m.dx * d, y = m.y + m.dy * d, len = 70 * Math.sin(p * Math.PI) + 12;
+      var g = cx.createLinearGradient(x, y, x - m.dx * len, y - m.dy * len); g.addColorStop(0, "rgba(255,250,235," + 0.95 * Math.sin(p * Math.PI) + ")"); g.addColorStop(1, "rgba(255,250,235,0)");
+      cx.strokeStyle = g; cx.lineWidth = 1.6; cx.lineCap = "round"; cx.beginPath(); cx.moveTo(x, y); cx.lineTo(x - m.dx * len, y - m.dy * len); cx.stroke();
+    });
   }
   /* Yr Wyddfa seen from the east: Crib Goch, Garnedd Ugain, the summit, then Y Lliwedd */
   var ERYRI = [[0,.04],[.07,.14],[.14,.3],[.2,.47],[.23,.55],[.245,.52],[.26,.6],[.275,.57],[.29,.64],[.31,.61],[.335,.71],[.37,.77],[.41,.82],[.445,.79],[.48,.86],[.51,.95],[.53,1],[.55,.95],[.575,.86],[.61,.76],[.64,.69],[.665,.73],[.685,.7],[.705,.74],[.725,.71],[.76,.6],[.82,.44],[.89,.27],[.95,.14],[1,.06]];
@@ -107,7 +153,7 @@
     cx.beginPath(); cx.moveTo(x0, base + h * 0.2);
     ERYRI.forEach(function (p) { cx.lineTo(x0 + p[0] * w, base - p[1] * h); });
     cx.lineTo(x0 + w, base + h * 0.2); cx.closePath();
-    var g = cx.createLinearGradient(0, base - h, 0, base); g.addColorStop(0, far ? "#2a3350" : "#36405e"); g.addColorStop(1, far ? "#1c2334" : "#1e2537");
+    var g = cx.createLinearGradient(0, base - h, 0, base); g.addColorStop(0, mix(far ? "#2a3350" : "#36405e", SKY.tint, SKY.k)); g.addColorStop(1, mix(far ? "#1c2334" : "#1e2537", SKY.tint, SKY.k));
     cx.fillStyle = g; cx.fill();
     if (far) return;
     /* snow on the tops: only above the snow line, with a ragged lower edge */
@@ -129,6 +175,7 @@
     far: new Path2D("M128 62C130 40 140 18 160 2C150 18 150 26 152 32C144 30 140 36 142 42C134 42 132 50 134 58Z"),
     near: new Path2D("M92 64C86 40 74 18 48 0C62 4 80 10 96 20L104 10C112 22 118 36 120 52C114 48 108 50 108 56C102 52 96 56 98 62Z")
   };
+  var DPOS = { x: -999, y: -999, r: 0 }, fireAt = 0, nextFire = 5000;
   function drawDragon(t, sumX, sumY, narrow, stacked) {
     var period = 26000, k = reduce ? 0.55 : (t % period) / period;
     var base = narrow ? W * 0.27 : Math.min(W * 0.17, 260);
@@ -138,7 +185,21 @@
     var size = base * (1 - (narrow ? 0.18 : 0.3) * k), sc = size / 220;
     var alpha = reduce ? 1 : Math.min(1, k / 0.08, (1 - k) / 0.12);
     var flap = reduce ? 1 : 0.62 + 0.38 * Math.cos(t / 260);
+    DPOS.x = x + 110 * sc; DPOS.y = y + 60 * sc; DPOS.r = Math.max(44, 120 * sc);
+    if (!reduce && t > nextFire && alpha >= 1) { fireAt = t; nextFire = t + 9000 + Math.random() * 7000; }
     cx.save(); cx.globalAlpha = alpha; cx.translate(x, y); cx.scale(sc, sc); cx.rotate(-0.06);
+    var fp = (t - fireAt) / 1300;
+    if (fireAt && fp >= 0 && fp < 1) {
+      /* fire: three flickering tongues from the mouth, brightest at the root */
+      var pow = Math.sin(Math.min(1, fp * 1.15) * Math.PI), L = 135 * pow;
+      cx.save(); cx.translate(199, 41); cx.rotate(0.12); cx.globalCompositeOperation = "lighter";
+      [[1, 22, "rgba(226,69,61,.8)"], [0.78, 14, "rgba(255,150,60,.9)"], [0.5, 7.5, "rgba(255,236,170,.95)"]].forEach(function (f, n) {
+        var l = L * f[0] * (0.9 + 0.1 * Math.sin(t / 45 + n * 2)), w = f[1] * pow * (0.85 + 0.15 * Math.sin(t / 60 + n)), wob = 4 * Math.sin(t / 70 + n * 1.7);
+        var g = cx.createLinearGradient(0, 0, l, 0); g.addColorStop(0, f[2]); g.addColorStop(1, f[2].replace(/[\d.]+\)$/, "0)"));
+        cx.fillStyle = g; cx.beginPath(); cx.moveTo(0, 0); cx.bezierCurveTo(l * 0.3, -w + wob * 0.3, l * 0.7, -w * 0.9 + wob, l, wob); cx.bezierCurveTo(l * 0.7, w * 0.9 + wob, l * 0.3, w + wob * 0.3, 0, 0); cx.fill();
+      });
+      cx.restore();
+    }
     cx.fillStyle = "#c9372f";
     cx.save(); cx.translate(0, 62); cx.scale(1, flap); cx.translate(0, -62); cx.fill(DR.far); cx.restore();
     cx.fillStyle = "#e2453d"; cx.fill(DR.body);
@@ -148,7 +209,17 @@
   function loop(t) { t0 = t; if (window.scrollY < H) draw(t); requestAnimationFrame(loop); }
   window.addEventListener("resize", size);
   if (HERO && !reduce) {
-    window.addEventListener("pointermove", function (e) { mouse = (e.clientX / window.innerWidth - 0.5) * 2; }, { passive: true });
+    window.addEventListener("pointermove", function (e) { if (e.pointerType === "mouse") mouse = (e.clientX / window.innerWidth - 0.5) * 2; }, { passive: true });
+    /* tap or click the dragon and it breathes fire */
+    hEl.addEventListener("pointerdown", function (e) {
+      if (e.target.closest("a, button")) return;
+      var r = cv.getBoundingClientRect(), dx = e.clientX - r.left - DPOS.x, dy = e.clientY - r.top - DPOS.y;
+      if (dx * dx + dy * dy < DPOS.r * DPOS.r) { fireAt = t0; nextFire = t0 + 9000; }
+    });
+    /* tilt the phone and the scene shifts a little. iOS asks permission for this, so it is left alone there. */
+    if (window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission !== "function") {
+      window.addEventListener("deviceorientation", function (e) { if (e.gamma == null) return; var g = Math.max(-1, Math.min(1, e.gamma / 28)); mouse += (g * 1.6 - mouse) * 0.12; }, { passive: true });
+    }
     requestAnimationFrame(loop);
   } else { window.addEventListener("scroll", function () { if (window.scrollY < H) draw(); }, { passive: true }); }
   size();
