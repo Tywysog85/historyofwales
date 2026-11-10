@@ -26,6 +26,7 @@ jobs:
         run: python3 build.py
         env:
           GOATCOUNTER: historyofwales
+          SITE_URL: https://historyofwales.cymru/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
