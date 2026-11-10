@@ -608,3 +608,18 @@ from kingdoms import KINGDOMS
 # ---------- more historic sites (src/places2.py) ----------
 from places2 import MORE_PLACES
 PLACES = PLACES + MORE_PLACES
+
+
+# ---------- proud history (src/pride.py): rewordings, new people and events ----------
+import pride as _PR
+def _rw(x):
+    if isinstance(x, str):
+        for _a, _b in _PR.REWORD:
+            x = x.replace(_a, _b)
+    return x
+_all = " ".join(str(f) for row in EVENTS + PEOPLE for f in row) + " ".join(t for v in PEOPLE_EXTRA_LONG.values() for part in v for t in part)
+import long as _LG
+_all += " ".join(t for v in _LG.PEOPLE_LONG.values() for part in v for t in part)
+EVENTS = sorted([tuple(_rw(f) for f in ev) for ev in EVENTS] + _PR.EVENTS_NEW, key=lambda ev: ev[1])
+PEOPLE = sorted([tuple(_rw(f) for f in p) for p in PEOPLE] + _PR.PEOPLE_NEW, key=lambda p: (_ERA_ORDER[p[1]], _born(p)))
+PEOPLE_EXTRA_LONG = {k: ([_rw(t) for t in v[0]], [_rw(t) for t in v[1]]) for k, v in PEOPLE_EXTRA_LONG.items()}

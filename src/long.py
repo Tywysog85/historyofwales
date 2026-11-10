@@ -260,3 +260,10 @@ TEACH = {
   aEn=["Make a timeline of the language movement from Tynged yr Iaith to the Senedd.", "Interview an older relative or neighbour about Aberfan, Tryweryn, the miners’ strike or 1997.", "Explore your cynefin: research one event on the timeline that happened near you, and present it to the class."],
   aCy=["Lluniwch linell amser o’r mudiad iaith o Dynged yr Iaith i’r Senedd.", "Holwch berthynas neu gymydog hŷn am Aberfan, Tryweryn, streic y glowyr neu 1997.", "Archwiliwch eich cynefin: ymchwiliwch i un digwyddiad a ddigwyddodd yn agos atoch chi, a’i gyflwyno i’r dosbarth."]),
 }
+
+
+# ---------- proud history (src/pride.py) ----------
+import pride as _P
+PEOPLE_LONG.update(_P.PEOPLE_LONG)
+_fix = lambda t: [t := t.replace(a, b) for a, b in _P.REWORD][-1]
+PEOPLE_LONG = {k: ([_fix(t) for t in v[0]], [_fix(t) for t in v[1]]) for k, v in PEOPLE_LONG.items()}

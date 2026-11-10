@@ -370,3 +370,20 @@ HERO_QS = [
   [("A castle on a rock", "Castell ar graig", "owain-glyndwr"), ("A quiet abbey library", "Llyfrgell abaty dawel", "hywel-dda"),
    ("A battlefield at dawn", "Maes y gad gyda’r wawr", "gwenllian"), ("The deck of a ship", "Bwrdd llong", "betsi-cadwaladr")]),
 ]
+
+
+# ---------- proud history (src/pride.py, src/pride2.py) ----------
+import pride as _P, pride2 as _P2
+_ar = [x for x in LEGENDS if x["id"] == "arthur"][0]
+LEGENDS = [x for x in LEGENDS if x["id"] != "arthur"]
+_arthur = dict(_P.ARTHUR, pEn=_P.ARTHUR["pEn"] + _ar["pEn"] + _P.ARTHUR["endEn"], pCy=_P.ARTHUR["pCy"] + _ar["pCy"] + _P.ARTHUR["endCy"])
+for _s in STORIES:
+    if _s["id"] == "language":
+        _s["pEn"] = _s["pEn"][:1] + _P.LATIN_EN + _s["pEn"][1:]
+        _s["pCy"] = _s["pCy"][:1] + _P.LATIN_CY + _s["pCy"][1:]
+        for _a, _b in _P.LANG_FIX:
+            assert any(_a in t for t in _s["pEn"] + _s["pCy"]), _a
+            _s["pEn"] = [t.replace(_a, _b) for t in _s["pEn"]]
+            _s["pCy"] = [t.replace(_a, _b) for t in _s["pCy"]]
+        _s["mins"] = 8
+STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES

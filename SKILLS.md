@@ -138,6 +138,16 @@ A trap worth remembering: `element.hidden = false` does nothing on SVG shapes. U
 
 New historic sites go in `src/places2.py` (`_p(id, English, Welsh, age, latitude, longitude, year, picture, source, text EN, text CY)`). A place without a photo is fine; it gets its drawn picture.
 
+### The proud voice, and adding a long read (November 2026)
+
+The owner's rules for how the site speaks are written at the top of `src/pride.py`: proud of Wales and its people, nothing that runs down the figures of Welsh history, Arthur is a king (never "myth" or "legend"), and contested points are given in the tradition's own words ("Welsh tradition holds", "Owain wrote") so the page stays both proud and true.
+
+To add a long read, add a `dict` to `STORIES` in `src/pride2.py` (id, age, picture, minutes, titles, summary, paragraphs in English and Welsh; a paragraph starting `## ` is a sub-heading). The page, the card, search and the journey pick it up.
+
+To reword an existing line without hunting for it, add an `(old, new)` pair to `REWORD` in `src/pride.py`. It is applied to every event and person at build time. After building, check the new wording appears, because a pair that does not match is silently skipped.
+
+When a page is removed (the Arthur legend became a long read), leave a redirect page at the old address in `build.py` so old links still work.
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.

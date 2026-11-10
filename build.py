@@ -504,10 +504,10 @@ def legend_page(x, i):
 
 def legends_index():
     main = (hero("medieval", f'<a href="index.html">{SITE}</a>', "book", "Legends", "Chwedlau", "Legends of Wales", "Chwedlau Cymru",
-                 "Eight old tales, retold for reading aloud, each with the real history behind it.", "Wyth hen chwedl, wedi’u hadrodd o’r newydd i’w darllen ar goedd, pob un â’r hanes go iawn y tu ôl iddi.", art="dragons")
+                 "Seven old tales, retold for reading aloud, each with the real history behind it.", "Saith hen chwedl, wedi’u hadrodd o’r newydd i’w darllen ar goedd, pob un â’r hanes go iawn y tu ôl iddi.", art="dragons")
             + section(f'<h2 class="sr-only">{bi("All legends", "Pob chwedl")}</h2><div class="l-grid">{"".join(legend_card(x) for x in F.LEGENDS)}</div>', top=True)
             + section(f'<div class="pager"><a class="btn" href="symbols.html">{bi("Symbols and traditions", "Symbolau a thraddodiadau")} →</a></div>'))
-    return page("legends.html", "Legends · History of Wales", "The legends of Wales retold: the red dragon, Gelert, Cantre’r Gwaelod, Branwen, Blodeuwedd, Arthur and Taliesin, with the history behind them.", main, era="medieval", og_type="website", active="legends.html")
+    return page("legends.html", "Legends · History of Wales", "The legends of Wales retold: the red dragon, Gelert, Cantre’r Gwaelod, Branwen, Blodeuwedd and Taliesin, with the history behind them.", main, era="medieval", og_type="website", active="legends.html")
 
 
 def symbols_page():
@@ -703,6 +703,7 @@ def main():
     pages["stories.html"] = stories_index()
     for i, x in enumerate(F.STORIES):
         pages[f"story-{x['id']}.html"] = story_page(x, i)
+    pages["legend-arthur.html"] = '<!doctype html><html lang="en"><meta charset="utf-8"><title>Arthur, King of the Britons</title><link rel="canonical" href="story-arthur.html"><meta http-equiv="refresh" content="0; url=story-arthur.html"><a href="story-arthur.html">Arthur, King of the Britons</a></html>'
     pages["legends.html"] = legends_index()
     for i, x in enumerate(F.LEGENDS):
         pages[f"legend-{x['id']}.html"] = legend_page(x, i)
