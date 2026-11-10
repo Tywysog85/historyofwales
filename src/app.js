@@ -115,7 +115,7 @@
     var ex0, ew, eb, eh;
     if (stacked) {
       var top = narrow ? M.cta + 18 : M.sub + 4, bot = Math.max(top + 120, M.tick + (narrow ? 26 : 10));
-      eh = Math.min(bot - top, W * 0.62); if (narrow && VIS > top + 110) eh = Math.min(eh, Math.max(120, VIS - top - 4)); eb = top + eh; ew = Math.max(W * (narrow ? 1.05 : 0.8), eh * 2.3); ex0 = W * (narrow ? 0.6 : 0.7) - 0.53 * ew;
+      eh = Math.min(bot - top, W * 0.62); if (narrow) eh = Math.max(120, eh * 0.56); /* on phones the mountains take the upper part of the strip and the moor the rest; this must not depend on the window height, which changes as the phone's address bar hides, or the castle jumps */ eb = top + eh; ew = Math.max(W * (narrow ? 1.05 : 0.8), eh * 2.3); ex0 = W * (narrow ? 0.6 : 0.7) - 0.53 * ew;
     } else { ew = Math.min(W * 0.6, H * 1.2); ex0 = W * 0.985 - ew; eb = H * 0.74; eh = Math.min(H * 0.5, ew * 0.62); }
     var sumX = ex0 + 0.53 * ew - mouse * 4, sumY = eb - eh - sy * 0.04;
     var mr = Math.max(narrow ? 15 : 18, Math.min(W, H) * 0.04);
