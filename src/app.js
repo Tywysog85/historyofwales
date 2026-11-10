@@ -123,9 +123,18 @@
     /* first light on the horizon behind the mountain */
     var hz = cx.createLinearGradient(0, eb - eh * 0.75, 0, eb + eh * 0.1); hz.addColorStop(0, "rgba(232,120,76,0)"); hz.addColorStop(1, "rgba(232,120,76," + Math.min(0.3, 0.17 * SKY.glow) + ")");
     cx.fillStyle = hz; cx.fillRect(0, eb - eh * 0.75, W, eh * 0.85);
+    /* where the device can draw it, the mountain and castle are real 3D on their own canvas (tools/land3d.src.js); until that is ready only the sky shows */
+    var L3 = window.HCL3 && HCL3.ready, noLand = L3 || window.HCL3_WANT;
+    if (L3) {
+      /* the valley mist the mountains rise out of, which also hides the stars below the skyline */
+      var vm = cx.createLinearGradient(0, eb - eh * 0.45, 0, H), vc = hex(mixHex(mixHex(SKY.sky[2], SKY.sky[1], 0.45), "#aab4d2", 0.12)).join(",");
+      vm.addColorStop(0, "rgba(" + vc + ",0)"); vm.addColorStop(0.3, "rgba(" + vc + ",.9)"); vm.addColorStop(0.55, "rgba(" + vc + ",1)"); vm.addColorStop(1, SKY.sky[3]); cx.fillStyle = vm; cx.fillRect(0, eb - eh * 0.45, W, H);
+      if (!FLAG) FLAG = flagArt(); HCL3.frame({ W: W, H: H, sumX: sumX - ew * 0.13, sumY: sumY + ew * 0.15, ppm: ew / 2000, ground: stacked ? { x: W * 0.5 - mouse * 9, y: eb + eh * 0.02 - sy * 0.1, ppm: ew * 0.007 } : { x: Math.min(W * 0.885, W - H * 0.3) - mouse * 9, y: H * 0.7 - sy * 0.1, ppm: H * 0.0098 }, castle: !stacked, t: t, sun: SKY.sun, fog: mixHex(SKY.sky[2], SKY.sky[1], 0.45), flag: FLAG, flagV: FLAGV });
+    }
     LAYERS.forEach(function (L, i) {
+      if (noLand) return;
       if (i === 3 && !stacked) drawCastle(Math.min(W * 0.885, W - H * 0.3) - mouse * 9, H * 0.7 - sy * 0.1, H * 0.125, mix("#0d111b", SKY.tint, SKY.k * 0.35), t);
-      if (i === 1) { drawEryri(ex0 - ew * 0.34 - mouse * 2, eb - sy * 0.03, ew * 0.9, eh * 0.62, true); drawEryri(ex0 - mouse * 4, eb - sy * 0.04, ew, eh); }
+      if (i === 1 && !noLand) { drawEryri(ex0 - ew * 0.34 - mouse * 2, eb - sy * 0.03, ew * 0.9, eh * 0.62, true); drawEryri(ex0 - mouse * 4, eb - sy * 0.04, ew, eh); }
       var w = ridges[i], amp = stacked ? eh * (0.34 - i * 0.04) : H * L.a, base = (stacked ? eb - eh * (0.42 - i * 0.15) : H * L.y) + sy * L.s * 0.6, off = mouse * (i + 1) * 6 + (reduce ? 0 : t / 1000 * (i + 1) * 1.2);
       cx.beginPath(); cx.moveTo(0, H);
       for (var x = 0; x <= W + 8; x += 6) {
@@ -156,11 +165,11 @@
     im.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="' + vb + '" width="' + w + '" height="' + h + '">' + inner + "</svg>");
   }
   /* the flag is painted flat once (white over green, then the dragon when it has loaded), and drawn in thin slices that billow */
-  var FLAG = null;
+  var FLAG = null, FLAGV = 0;
   function flagArt() {
     var c = document.createElement("canvas"); c.width = 600; c.height = 360; var g = c.getContext("2d");
     g.fillStyle = "#f6f3ec"; g.fillRect(0, 0, 600, 180); g.fillStyle = "#00a03a"; g.fillRect(0, 180, 600, 180);
-    svgImage(DSVG, "-80 0 800 480", 600, 360, function (im) { g.drawImage(im, 0, 0, 600, 360); if (reduce) draw(); });
+    svgImage(DSVG, "-80 0 800 480", 600, 360, function (im) { g.drawImage(im, 0, 0, 600, 360); FLAGV++; if (reduce) draw(); });
     return c;
   }
   /* the same dragon for the sky, a little brighter so that it shows against the night */
@@ -269,10 +278,11 @@
     if (!reduce && t > nextFire && alpha >= 1) { fireAt = t; nextFire = t + 9000 + Math.random() * 7000; }
     if (FIRE_PREVIEW && !reduce && (!fireAt || t - fireAt > 1300)) fireAt = t; /* preview: add ?fire=1 to the address and the dragon breathes fire without stopping */
     var fp = (t - fireAt) / 1300, pow = fireAt && fp >= 0 && fp < 1 ? Math.sin(Math.min(1, fp * 1.15) * Math.PI) : 0;
-    /* the lifelike dragon: a 3D model on its own canvas (dragon3d.js). It tells us where its mouth is, for the fire. */
+    /* the lifelike dragon: a 3D model on its own canvas (hero3d.js). It tells us where its mouth is, for the fire. */
     if (window.HCD3 && HCD3.ready) {
-      var m3 = HCD3.frame({ W: W, H: H, x: DPOS.x, y: DPOS.y, size: size * (narrow ? 0.85 : 1.05), alpha: alpha, t: t, fire: pow, day: SKY.sun });
-      if (m3 && pow) { cx.save(); cx.globalAlpha = alpha; cx.translate(m3.x, m3.y); cx.rotate(m3.a); cx.scale(sc * 1.7, sc * 1.7); flames(t, pow); cx.restore(); }
+      /* the fire is painted on a small canvas of its own and handed over, so that it shows in front of the mountain */
+      if (pow) { if (!FIRE) { FIRE = document.createElement("canvas"); FIRE.width = 320; FIRE.height = 128; } var keep = cx; cx = FIRE.getContext("2d"); cx.setTransform(1, 0, 0, 1, 0, 0); cx.clearRect(0, 0, 320, 128); cx.setTransform(2, 0, 0, 2, 10, 64); flames(t, pow); cx = keep; }
+      HCD3.frame({ W: W, H: H, x: DPOS.x, y: DPOS.y, size: size * (narrow ? 0.85 : 1.05), alpha: alpha, t: t, fire: pow, day: SKY.sun, flame: pow ? FIRE : null, fs: sc * 1.7 });
       return;
     }
     if (window.HCD3_WANT) return; /* still loading: no stand-in, so the dragon never changes shape in front of the visitor */
@@ -283,6 +293,7 @@
     cx.restore();
   }
   /* fire: three flickering tongues from the mouth, brightest at the root */
+  var FIRE = null;
   function flames(t, pow) {
     var L = 135 * pow; cx.save(); cx.globalCompositeOperation = "lighter";
     [[1, 22, "rgba(226,69,61,.8)"], [0.78, 14, "rgba(255,150,60,.9)"], [0.5, 7.5, "rgba(255,236,170,.95)"]].forEach(function (f, n) {
@@ -299,9 +310,11 @@
     try {
       var tc = document.createElement("canvas"), gl3 = window.WebGLRenderingContext && (tc.getContext("webgl2") || tc.getContext("webgl"));
       if (gl3 && !(navigator.connection && navigator.connection.saveData)) {
-        window.HCD3_WANT = 1; var c3 = document.createElement("canvas"); c3.id = "sky3d"; c3.setAttribute("aria-hidden", "true"); cv.after(c3);
-        var s3 = document.createElement("script"); s3.type = "module"; s3.src = "dragon3d.js"; s3.onerror = function () { window.HCD3_WANT = 0; c3.remove(); }; document.head.appendChild(s3);
-        setTimeout(function () { if (!(window.HCD3 && HCD3.ready)) window.HCD3_WANT = 0; }, 15000);
+        window.HCD3_WANT = window.HCL3_WANT = 1;
+        var c3 = document.createElement("canvas"); c3.id = "sky3d"; c3.setAttribute("aria-hidden", "true"); cv.after(c3);
+        var cl = document.createElement("canvas"); cl.id = "land3d"; cl.setAttribute("aria-hidden", "true"); cv.after(cl);
+        var s3 = document.createElement("script"); s3.type = "module"; s3.src = "hero3d.js"; s3.onerror = function () { window.HCD3_WANT = window.HCL3_WANT = 0; c3.remove(); cl.remove(); }; document.head.appendChild(s3);
+        setTimeout(function () { if (!(window.HCD3 && HCD3.ready)) window.HCD3_WANT = 0; if (!(window.HCL3 && HCL3.ready)) { window.HCL3_WANT = 0; cl.remove(); } }, 15000);
       }
     } catch (e3) { window.HCD3_WANT = 0; }
     window.addEventListener("pointermove", function (e) { if (e.pointerType === "mouse") mouse = (e.clientX / window.innerWidth - 0.5) * 2; }, { passive: true });
