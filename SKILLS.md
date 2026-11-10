@@ -173,3 +173,7 @@ The home page sky is drawn in `src/app.js`. `sunOverWales()` works out how high 
 Keep the day palette dark enough for the light text to stay readable: the words sit on the sky, so "day" is a deep blue, not a pale one.
 
 Other effects in the same file: shooting stars (`drawMeteors`, night only), the dragon's fire (`fireAt`, every 9 to 16 seconds or when tapped; `DPOS` is where the dragon is for the tap test), and tilt (the `deviceorientation` listener feeds the same `mouse` value the pointer does; skipped on iOS, which asks permission). The glint on "Cymru" is CSS in `src/v6.css` (`@keyframes glint`), using a gradient clipped to the text; the letters need extra `padding-block` or their tails are cut off.
+
+### Copying the website onto Ifan's PC (November 2026)
+
+A copy of the repo lives at `D:\Website\historyofwales.cymru` on Ifan's Mini-PC. Claude can write files there with the folder tools (stage files under `/mnt/project-files/`, then `device_commit_files`, at most 50 files per call; retry any that come back with HTTP 429). Those tools refuse anything inside `.git` and `.github`, so they can make a plain copy but not a Git checkout, and `deploy.yml` is left out. Run `python3 build.py` first to include the finished pages in `_site\` (open `_site\index.html` to browse offline). For a real Git copy with roll-back, Ifan clones the repo with GitHub Desktop into that folder (it must be empty or renamed first), or a Remote Control session runs `git clone` on the PC.
