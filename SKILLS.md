@@ -148,6 +148,10 @@ To reword an existing line without hunting for it, add an `(old, new)` pair to `
 
 When a page is removed (the Arthur legend became a long read), leave a redirect page at the old address in `build.py` so old links still work.
 
+### The four notes in the top folder (November 2026)
+
+`README.md` says what the site is and where things live. `EDITORIAL.md` holds the owner's rules for how it is written. `TODO.md` lists the open jobs. `SKILLS.md` is this file. The owner wants them kept clean and tidy: when something changes, edit the line that is there instead of adding a new one at the bottom, delete finished jobs from `TODO.md`, and keep the counts in `README.md` true.
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
