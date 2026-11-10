@@ -186,3 +186,9 @@ The dragon that flies across the opening screen is a real 3D model with a skelet
 - The 3D files load only on the home page, after the page itself, and only when the device has WebGL, is not in data-saver mode and has not asked for reduced motion. Otherwise, or if loading fails or takes over 15 seconds, the flag dragon is shown.
 - To watch the fire without waiting, add `?fire=1` to the address (it works with `?sky=night` and the others).
 - To test with a headless browser, start Chromium with `--use-gl=swiftshader --enable-unsafe-swiftshader`; without WebGL you will only see the stand-in.
+
+## The copyright notice
+
+- In the UK copyright is automatic: nothing needs registering. The notice just makes ownership plain and helps if someone does copy.
+- The © line at the bottom of every page is made by `footer()` in `build.py`. The name in it is `COPYRIGHT_OWNER` (English) and `COPYRIGHT_OWNER_CY` (Welsh) just above that function; the year updates itself (2026, then 2026–2027 and so on).
+- It claims only the site's own text and design. Photos (Wikimedia Commons) and the 3D dragon stay credited to their creators, as listed in README.md.
