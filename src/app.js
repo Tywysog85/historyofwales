@@ -148,100 +148,24 @@
     if (SKY.star > 0.5) drawMeteors(t);
     drawDragon(t, sumX, sumY, narrow, stacked);
   }
-  /* Y Ddraig Goch as on the flag: passant, facing left, in a 300 x 180 box.
-     Painted once into three layers (behind, wing, in front) so the wing can beat on its own. */
-  function dragonArt(pal) {
-    var K = 3, layers = {}, g;
-    function layer(name) { var c = document.createElement("canvas"); c.width = 300 * K; c.height = 180 * K; g = c.getContext("2d"); g.scale(K, K); g.lineJoin = "round"; g.lineCap = "round"; layers[name] = c; }
-    function shade() { /* light from above: paint a soft highlight and shadow over whatever is already drawn */
-      g.save(); g.globalCompositeOperation = "source-atop"; var s = g.createLinearGradient(0, 20, 0, 160); s.addColorStop(0, "rgba(255,190,150,.22)"); s.addColorStop(0.45, "rgba(255,190,150,0)"); s.addColorStop(1, "rgba(40,0,10,.3)"); g.fillStyle = s; g.fillRect(0, 0, 300, 180); g.restore();
-    }
-    function shape(d, fill, lw) { var p = new Path2D(d); g.fillStyle = fill || pal.red; g.fill(p); if (lw !== 0) { g.strokeStyle = pal.line; g.lineWidth = lw || 1; g.stroke(p); } return p; }
-    function bez(a, n) { var o = []; for (var i = 0; i <= n; i++) { var t = i / n, u = 1 - t; o.push([u * u * u * a[0] + 3 * u * u * t * a[2] + 3 * u * t * t * a[4] + t * t * t * a[6], u * u * u * a[1] + 3 * u * u * t * a[3] + 3 * u * t * t * a[5] + t * t * t * a[7]]); } return o; }
-    /* a limb or tail: a line of points that tapers from w0 to w1, outlined */
-    function taper(pts, w0, w1, fill) {
-      [[pal.line, 1.7], [fill || pal.red, 0]].forEach(function (pass) {
-        g.fillStyle = pass[0];
-        for (var i = 0; i < pts.length; i++) {
-          var w = (w0 + (w1 - w0) * i / (pts.length - 1)) + pass[1];
-          g.beginPath(); g.arc(pts[i][0], pts[i][1], w / 2, 0, 7); g.fill();
-          if (i) { var a = pts[i - 1], b = pts[i], wa = (w0 + (w1 - w0) * (i - 1) / (pts.length - 1)) + pass[1], dx = b[0] - a[0], dy = b[1] - a[1], l = Math.hypot(dx, dy) || 1, nx = -dy / l, ny = dx / l;
-            g.beginPath(); g.moveTo(a[0] + nx * wa / 2, a[1] + ny * wa / 2); g.lineTo(b[0] + nx * w / 2, b[1] + ny * w / 2); g.lineTo(b[0] - nx * w / 2, b[1] - ny * w / 2); g.lineTo(a[0] - nx * wa / 2, a[1] - ny * wa / 2); g.fill(); }
-        }
-      });
-    }
-    function leg(pts, w0, w1, fill) { var o = []; for (var i = 1; i < pts.length; i++) for (var k = 0; k < 6; k++) o.push([pts[i - 1][0] + (pts[i][0] - pts[i - 1][0]) * k / 6, pts[i - 1][1] + (pts[i][1] - pts[i - 1][1]) * k / 6]); o.push(pts[pts.length - 1]); taper(o, w0, w1, fill); }
-    /* a clawed foot: three toes forward and a spur behind, turned by `rot` */
-    function paw(x, y, rot, fill) {
-      g.save(); g.translate(x, y); g.rotate(rot);
-      [[-15, -5, -21, -8], [-17, 1, -24, 1], [-13, 6, -19, 10], [5, 4, 10, 8]].forEach(function (t) {
-        taper([[0, 0], [t[0] * 0.5, t[1] * 0.55], [t[0], t[1]]], 5.5, 3, fill);
-        var a = Math.atan2(t[3] - t[1], t[2] - t[0]); g.save(); g.translate(t[0], t[1]); g.rotate(a); shape("M-1 -1.8Q4 -1.6 8 1.2Q3 2 -1 1.8Z", pal.claw, 0.6); g.restore();
-      });
-      g.restore();
-    }
-    /* ---- behind: tail and the far legs ---- */
-    layer("back");
-    var tail = bez([210, 98, 240, 108, 262, 94, 254, 74], 14).concat(bez([254, 74, 248, 59, 229, 61, 232, 75], 12).slice(1), bez([232, 75, 235, 89, 254, 84, 259, 60], 12).slice(1));
-    taper(tail, 10, 3.2);
-    shape("M259 62L251 60Q256 46 262 32Q268 46 272 60L264 59Z");
-    leg([[182, 106], [165, 124], [172, 140], [160, 152]], 12, 6, pal.far); paw(160, 153, 0.1, pal.far);
-    leg([[112, 100], [92, 108], [76, 94]], 10, 6, pal.far); paw(75, 93, 0.75, pal.far);
-    shade();
-    /* ---- the wing ---- */
-    layer("wing");
-    shape("M138 82L151 40L197 17Q207 35 238 29Q231 47 250 59Q226 59 217 77Q197 69 181 85Q162 75 150 86Z", pal.far);
-    g.save(); g.clip(new Path2D("M138 82L151 40L197 17Q207 35 238 29Q231 47 250 59Q226 59 217 77Q197 69 181 85Q162 75 150 86Z"));
-    var wg = g.createRadialGradient(151, 40, 6, 151, 40, 100); wg.addColorStop(0, "rgba(255,170,140,.28)"); wg.addColorStop(1, "rgba(60,0,10,.28)"); g.fillStyle = wg; g.fillRect(120, 0, 160, 100);
-    g.strokeStyle = pal.line; g.lineWidth = 0.5; g.globalAlpha = 0.5; for (var r = 26; r < 100; r += 12) { g.beginPath(); g.arc(151, 40, r, -0.5, 1.9); g.stroke(); }
-    g.restore();
-    [[197, 17], [238, 29], [250, 59], [217, 77], [181, 85]].forEach(function (f) { taper([[151, 40], [(151 + f[0]) / 2, (40 + f[1]) / 2 - 1], f], 4.2, 1.6); });
-    taper([[138, 84], [143, 62], [151, 40]], 8.5, 5.5);
-    shape("M148 42Q142 32 136 24Q146 28 154 37Z", pal.claw, 0.7);
-    shade();
-    /* ---- in front: body, neck, head and the near legs ---- */
-    layer("front");
-    var body = "M112 84C120 76 140 73 160 78C180 81 200 78 212 86C223 94 221 110 208 114C196 116 184 108 170 106C156 106 144 116 130 116C116 116 106 104 106 94C106 90 108 86 112 84Z";
-    var neck = "M112 42C123 49 128 62 125 72C124 78 128 82 137 82L119 103C108 98 102 86 104 76C105 70 106 66 104 61Z";
-    /* spines down the neck and back */
-    [[117, 45, -0.5], [123, 53, -0.2], [126, 62, 0.05], [126, 71, 0.2], [133, 79, -0.7], [146, 76, -1.2], [160, 77, -1.35], [174, 79, -1.45], [188, 80, -1.5], [201, 81, -1.3]].forEach(function (s) { g.save(); g.translate(s[0], s[1]); g.rotate(s[2]); shape("M-2.6 0Q2 -2 7 -1Q3 1.5 2.6 3Z", pal.red, 0.7); g.restore(); });
-    shape(body); shape(neck);
-    /* scales */
-    g.save(); var bp = new Path2D(body); bp.addPath(new Path2D(neck)); g.clip(bp); g.strokeStyle = pal.line; g.lineWidth = 0.45; g.globalAlpha = 0.42;
-    for (var yy = 40; yy < 120; yy += 4.5) for (var xx = 100 + (Math.round(yy / 4.5) % 2) * 3; xx < 224; xx += 6) { g.beginPath(); g.arc(xx, yy, 3, 0.15, Math.PI - 0.15); g.stroke(); }
-    g.restore();
-    /* paler belly plates from the throat to the hind leg */
-    var belly = shape("M104 61C102 76 104 90 113 101C120 110 130 116 140 114C150 112 160 106 172 106L172 101C160 100 150 106 140 108C130 109 122 104 117 96C111 86 110 74 111 63Z", pal.belly, 0.8);
-    g.save(); g.clip(belly); g.strokeStyle = pal.line; g.lineWidth = 0.6; g.globalAlpha = 0.7;
-    [[101, 68, 114, 66], [101, 75, 114, 73], [102, 82, 115, 79], [104, 89, 117, 85], [107, 96, 120, 91], [112, 102, 124, 96], [118, 108, 128, 100], [125, 113, 133, 104], [133, 116, 138, 105], [141, 116, 144, 104], [149, 114, 151, 102], [157, 111, 158, 100], [165, 109, 165, 98]].forEach(function (l) { g.beginPath(); g.moveTo(l[0], l[1]); g.lineTo(l[2], l[3]); g.stroke(); });
-    g.restore();
-    /* head: horns, skull, jaws, teeth, tongue, eye */
-    shape("M101 38C104 27 111 22 119 19C114 26 112 33 110 42Z", pal.claw, 0.8); shape("M93 37C92 29 96 24 101 21C100 28 100 33 101 38Z", pal.red, 0.8);
-    shape("M80 58C70 55 60 61 50 57", "rgba(0,0,0,0)", 0); g.strokeStyle = pal.red; g.lineWidth = 2.4; g.beginPath(); g.moveTo(80, 59); g.bezierCurveTo(70, 56, 60, 62, 51, 58); g.stroke();
-    shape("M41 55L53 53L51 58L54 63Z", pal.red, 0.6);
-    shape("M113 46C109 38 100 34 92 36L79 40C70 41 62 44 56 48C53 50 53 53 56 54L74 56L81 59L67 61C62 62 61 66 66 67C75 69 86 70 94 68C102 66 108 62 113 58Z");
-    g.fillStyle = "#fff7ea"; [[60, 55], [65, 55.5], [70, 56]].forEach(function (t) { g.beginPath(); g.moveTo(t[0] - 1.6, t[1]); g.lineTo(t[0], t[1] + 3.6); g.lineTo(t[0] + 1.6, t[1] + 0.3); g.fill(); });
-    [[71, 61], [76, 60.4]].forEach(function (t) { g.beginPath(); g.moveTo(t[0] - 1.4, t[1]); g.lineTo(t[0], t[1] - 3); g.lineTo(t[0] + 1.4, t[1] - 0.2); g.fill(); });
-    g.strokeStyle = pal.line; g.lineWidth = 0.8; g.beginPath(); g.moveTo(79, 41); g.quadraticCurveTo(86, 39, 92, 43); g.stroke(); g.beginPath(); g.moveTo(96, 62); g.quadraticCurveTo(103, 60, 108, 54); g.stroke();
-    g.fillStyle = pal.line; g.beginPath(); g.ellipse(59, 50, 1.5, 0.9, -0.4, 0, 7); g.fill();
-    g.fillStyle = pal.eye; g.beginPath(); g.ellipse(87, 46, 3, 1.9, 0.25, 0, 7); g.fill(); g.fillStyle = "#15090c"; g.beginPath(); g.ellipse(86.6, 46, 1, 1.7, 0.1, 0, 7); g.fill();
-    /* near legs, with muscled shoulder and haunch */
-    shape("M188 92C198 84 214 88 217 100C220 112 212 122 202 122C192 122 184 112 184 102C184 98 185 95 188 92Z");
-    shape("M112 88C120 84 131 88 133 98C135 108 128 116 120 116C112 116 106 108 107 99C107 95 109 91 112 88Z");
-    leg([[203, 108], [191, 128], [203, 142], [194, 153]], 13, 6.5); paw(194, 154, 0.1);
-    leg([[120, 104], [116, 128], [110, 150]], 11, 6.5); paw(110, 152, 0.05);
-    shade();
-    return layers;
+  /* Y Ddraig Goch: the real dragon of the national flag, as vector artwork.
+     Artwork from the flag-icons project (gb-wls), MIT licence, copyright (c) 2013 Panayiotis Lipiridis. */
+  var DSVG = '<g stroke="#000" stroke-width="1.4"><path fill="#d21034" d="M419 70.8h-.1zm-.1 0a694 694 0 0 0-111.8 75c-17 14.9-12.2 26.7-12.9 40 .6 9-1.9 17.4-7.4 22.4l-37.8 7.6-3.6-10.4c1.1-5.4 5.5-8 14.9-4.7.7-6.8-4.9-9.6-11.3-12-2.3-1.8-5-3-4.7-9-1-13.5 20.6 1 20.8 1s-.8-13.7-10.7-16.4c-5.4-1.9-7.7-7.6-5.6-11.8 4.3-8.7 12.5.6 18.7 1-.2-5.7-1.8-9.7-6.7-14.2-2.6-1.7-9-2.9-9.2-5.6-.1-3.6 6-5.2 14.5-4.2-1.8-5.1-7.5-8.4-15.3-10.8l-4.6-8.1c-2.2-4-3.2-4.2 1.9-11.8 4.5-3 10.6-7.2 15.2-10.1l-5-.6c.6-5.5.7-7.4 2-16.5-5 6.7-11 5.5-16.6 8.2 0 0-15.6 2.8-20.7 9.5l-39.4-2c-8.4 1.1-15.5 3.5-16.9 11.6-19.1 2-39.1.3-53.7 18.5 10-.4 18.6-2.8 29.8-1.4 0 0 9.5.2 11.4 10.3.2.4 3.3.4 3.3.4l3.6 2.8 1.4-3.8 3.2 2.2 1-4.2 3.2 2.2.2-5 4.2 3v-6.7s15.6 0 20.4 10c.2.1-43.7 8-86.1 4.3l12.2-6c-15.4-3.2-30-6-43.6-16.7 5.1 19.4 31.7 42.1 37.2 42l-5.2-9.4 46 2c1.7 5.1 1 10.8 5 15.3 0 0-2.5 8.4 3.2 11.8.2.4 6.7-17 6.7-17s2 4.7 4 7.8c3-15 19.4-17.5 19.4-17.5l3.4 8c-5.1.8-11.5 11.2-8 17-3.5 0-9.6 10.1-7.7 15.6-2.9 2.9-10 6.7-8.3 18.8-5.6 1.2-9 11.5-7.2 22.5-8.8 8.1-6.6 23 1.2 29.1-3.2 3-5.2 5.1-5.2 8.7-3.1-1.1-6-.2-7.3 1.8-3.8-3.9-9.2-7.2-13-3.6-1-4.6-7-9.6-13.5-9a12 12 0 0 0-9-13s-1.5-22.6-8.3-30c-.7-4 .4-6.8 6-10.2 5.7-3 6.9-5.3 6.4-13.9 2.3-5.7 4-11.5-3-15.4.2 6.8-1.8 10-4.6 13-3.3-.4-4.4 3.4-6.6 5-3.1-4.1 6.5-10.6-.6-19.9-.4-.4-5-12-16.3-11.8 5.3 3.1 7.6 8.4 7.6 13.9a41 41 0 0 0-1.8 29.3c-4.7-7-7.4-20.4-11.3-22.7-3.4-.7-5-8.7-18.3-6.4 5.7 1.5 7.6 5.9 9 9.8-3.4 1.8-1.7 6.6.9 9.9-.5 7.7 4.1 12.2 11 15L85.6 237c-2.7-.3-7 10.4-8.6 10.7-2.7 1.7-7.4 6.2-2 7.5-1.6 5.7-3.1 9.2-11.7 10.4 0 0 9 5.4 16.6-3.8 8-.2 5.4-9.8 9.3-14 0-.3 2.3-1.7 5.5-10.2 1.4 7.6 9.2 30.8 26.7 42.3 15.3 16.4 28 31.9 27.8 53.7a54 54 0 0 0 12.3-22.7 89 89 0 0 1 30.8-3.6c-1.8 3.9-3.9 7.6-1.3 10-7.4 2.6-9 8-6 13.3-7.8 5.3-8.3 8.7-8.4 17.5-14.5 18.5-23.4 17.9-37.7 13-4.6-2.7-12-6.6-15.3-4.5-6.1-4.2-15-4.8-16.5 4.6 4.7-3.9 7.4-3.1 11.1.6-.7 1.9-1.3 3.7 1.4 4.8l-3.6 4c-6.6-1-15.6-1-17.9 8.7 3.4-2.9 11-3.5 17-.8l3.5 1.2.4 4.6s-9-1.4-11.4 13.3c8.4-9 14.4-6.7 14.4-6.7 3.3 4.8 15.3 4.1 24-3.8 12.1-6.8 15.7 3 23.5-3.4 6.5-4.8 14.2-1.6 19.5 4 6.1 2.3 12.5 4.2 17.5 0 0 0 6.2-3.9 12.3 2.4 0-7-5-10.9-11.8-11l-2-2c-6.5-1.4-13.7-.8-19.4-4a58 58 0 0 1 14.1-27c9.3-10 16.2-14.6 28-29.9-.5 8.7 6.1 18.3 9.6 27 0 0 7-11.1 8-20.3.3 0 8.9-4.4 12.5-8.3 7.8 4.9 20.4-3.8 28.6-11 5 2 8.9 1.8 14.7 0-4.7 9.6 2.7 18.5 14.5 22.2 1 8.4 9.6 10.2 22.5 10.2.6 5 8.3 5.7 8.3 5.7-5 2.2-7.4 4.5-7.3 9.6-5 0-8.7 1.3-10 7-6.9.2-13.9.7-19.8 4-6.3-.9-14-3.5-18.9-8.6-2.5-2.1-3.2-5.2-7.6-6.4-2.8-3.3-6.2-2.6-7.3.6-2.9-2.3-13.8-3.3-15.7 7 5.2-3.7 9.7-5.1 13-.5-1.8 3.1 4.2 5 9.4 6.2 3.7.2 10.2 3.6 12.2 9.2a20 20 0 0 1-16.7-2.6 11 11 0 0 0-13-.8c-4.4-2.8-14.7 2.5-15.1 10.9 4.3-4 8.3-6 12.3-3.4-2 .4-1.3.6-1 1.8l10 5.8c-5 1.3-9.6 3.3-7.4 12.5 0 0 4-8 13-5 .2-.3 1.3 2.8 3.9.7 3.9-4.4 12.8-6.4 20.7-7.2 6.3-.7 12.6-2.6 18 1 5-2.5 10.4-4.2 16-.2 6.6 2 11.4 9.8 19.7 6.3 4.2-3 9.3-3 14.5 2.8 0-7.4-5.5-9.9-13.3-11.5l-5.4-3.2c-5-.8-10 .1-15.1-2.3a92 92 0 0 0 57.7-42.4l12.5 4.4c3 .2 3.2 1.2 9.3 3 .2-8.9-3.7-18.1-19.8-19l-21-8c-4.6-4.8-6.6-14.9-.9-20.8 5.6-5 6.6-4.4 10.3-10.5 4.5-.4 8.7 4.2 12.8 4.2 2 5.9 13.4 11 20.6 9.3 4.5 4 13 6.2 22.5 3a18 18 0 0 0 20.5 3c2.2 2.2 6.8 4 12 2.8.5 0 2.8 5.8 8.5 7.9-2.5 2.4-1 13 1.7 16.9a17 17 0 0 0-.9 12.7c-5.8 3.7-7 6.5-4.4 12.8-7.6 12.3-16.7 13.7-25.3 10l-9.3-6-9.8-9.6c-1.7-1.6-5.2-2-5.9 1.4 0 0-12.6-2.8-13.7 7.9 5.3-5.1 12.7-.6 12.7-.4s-1.8 1.4-.4 3.4c.3-.3 9.3 3.3 17.2 6.7 4.3 1.7 5.3 2.2 7.2 3.2l-7.2-3.2a33 33 0 0 0-11-2.9c-4.4-.4-9.2-1-11.4 2.4-4.8 2-12.4 3.7-12 12.7 3.2-5.4 7.7-5.1 13.4-4.6l-.4 1.2c6.2 2.8 5-.8 10.8-1.3a44 44 0 0 1 15.3 2.5c-4.5 1.3-10.7.7-13.6 4-.6 1-2.5.6-1.6 3.2 0 0-9-.2-11.3 12 9-5.7 15.9-5.5 16-5.5l2.9.6 11-7.3c.3 0 10.6-4.6 15.3.6 4.2 2 8.6 2.2 13-.4 8.4-3.7 16.3-4 24 1.2l7.1 4.2 3-2s8-2.2 13.8 4.9c-2.4-12.3-11.2-12.7-11.2-12.7l-2-1.8-12.4-4.9c-1.9-4.5-6.4-8-1.9-13.4 4.7-23.1 10.2-40.4 1.2-63.8 8.4 3.6 14.7 14.8 25.2 10.9 0-9.4-34.6-27.3-61-41.6C508 264 560 232.1 540 191.5l9.4-29.4c4.5 9 13.5 15.8 21.6 18.7-6.7-12.7-10.5-51.6-6.7-78.4a627 627 0 0 1-57.1 60c10 2.4 18.9.7 28.6-.5l-8.2 17c-26.6-15.7-57.8-4-58 16.8.9 24.2 30.8 27.7 48.1 19.2-3.4 22.1-54.2 14-54.2 14-18-6.2-35.1-5.2-54-5 3.9-12.1 25.7-22.9 42.4-18.1-23.3-26.2 3.3-58.7 35.4-68.6-35-11.6-4.9-38.3 21.3-57.4 0 0-75.3 31.7-82.2 31.6-21.4-1.6-15.6-27-7.4-40.6zm-236.4 30.4q2.8 0 5.5.6c3.4.9 7.5 1.3 7.5 2.4-1.6 2.6-5.5 5.7-9.3 5.6s-6-2.5-7.2-8.2q.8-.4 3.5-.4zm317 89.4c5 0 10.9 2 16.6 8.2-2.7 8-26.8 12-28.4.2-.5-3.6 4.6-8.3 11.8-8.4z"/><path fill="none" stroke-linejoin="round" d="m207.4 171.2 3.7 5.3m-.2.1s0 7.2 1.5 7.3m-3.3 3.9 3.8 6.3m-10.5 1.6c.2 0 4.7 5.2 4.7 5.2m3.9-4c0 .2 4.2 8.1 4.5 8.1m-10-2.6s1.4 9.6 2.7 9.3m-9 8.3 4.2 6.5m3.7-13.3s2.3 9.1 4.1 8.3m1.9-13.8c.1.2 4.3 6.1 5.4 5.3m-1 2.3 4 8m-10.6-1.8 3.3 9.4m-11-4.6s3 10.1 5.7 8.5m-6.8 5s.2 5.3 2.8 5.6m1.8-8.3c0 .2 2.7 3.8 2.7 3.8m5-10.1 2.1 3.5m4.9-10 3.3 4.1M206 176.7c.1 4.5 7.2-1.6 10-5.4m-13 21s7.7-5.5 13.7-13.8m-16.3 26.9c5.5-1.5 15.6-13.7 17.6-20.2m-18.7 32.3c1.5.7 20.3-13 20.8-22.9M198.8 228c0-.1 17.2-4.4 24.3-23.3M198 242.3s27.5-16.5 29-28.6M412.4 270s-1.8 14.2-16 16.4m20.5 9c.1-.2 13.6-15 10.1-19.5m21.1 5.2s-.2 10.3-8.6 17.4m25.4-14.4s.3 12.4-5 17.4m20.4-10s-6 11.7-8.1 12.9m7.9 7.8s7.8 2 10.3-3.2m-8.3 20.1s7.2 1.3 10.6-5.6m-11.4 18.7s5.9 5 9.9-1.6m-94-94.4s-.7 25.3 34.8 30.4c39.7 11 58.5 5.2 60.8 49.7-1.5 17-3.6 36-16 28.7m-117.4-85.5s5.7 10.1 12.5 9.4c9-2.6 12.3 2.9 12.3 2.9m-49-2.2s15 7.3 27.7-4.5m-26-6c1.3 17.5-20.1 27.5-28.6 25.8m29.6 41c.1 0 11.6-6.8 9.3-11.6m-32.1 1.5c.3-.4 19.3-2.2 22.8-9m-31.6-19s26.9.2 28.7 5.1m7-21s-26.2 44.9 22.2 44.9m-50-45.5s-5.6 16.7-13.6 22.4m-14.2-28.2s9.7 18.8 0 28.1M261 280.8c.1.3 3.1 26.7-3.5 34.2m-9.2-33.4s1 16.8-4 22.8 1.2 18.4 1.2 18.4m-60.5 8s3.6 6.3 8.5 4.1m-2.5-17.8s8 3.5 10.7 2.2m-2-30.4s-11.8 3.3-7.3 17.3c6.8 5.5 13.4 4.6 13.4 4.6m-29.4 37.4c-.1 0 1.4 11 9 2.7 5.3-11.2 22-42.6 25.9-53.4m7.8-5.1s-8.1-6.3-7.8 2.5c-.2 5.5 2.5 6.8 2.5 6.8.3 4 3.8 9.6 6.6 4.5 1.2-5-.8-7.2-.8-7.2m4.7-9c-7.3-.4-11.3 15.7 2.8 5.6m4.8-11s-1.8 2.5-4.7-.2c-1.5-2.6-6.8 12 2.5 12.5 1.7-4.3 6.8-5.5 6.8-5.5m4.4-13.8s-4.2 2-5.7 1.7c-5 1.1-4 12.8 2.3 12.1 2.2-2.5 4.5-6 4.5-6m-40.3-23c-.2 0-16.5 25.7 9.1 32.5m198-71s-10 8.4-.7 22c-31-.5-47.5 13.8-48.8 23.4-39.4-2.8-32.2 8.8-45 12.6-17.1-14.3-42.2-6.3-40.6 8-11.4-16.1-29-8.3-31.2-4.3s-1.3-19.8-1.3-19.8-11.5 5.2-19.4 14.6v-19.9c-9.6 2-18.9 2-28.8 1.8m-25.9-7.3s14.3 8 32-2.8M166 226.3s11 10 32 6.8m-25-29.7s2.4 8.1 26.3 8.6M181 184.6s9 11 21.2 9.3m-13.5-25s3.5 6 16.8 7m-9-24.5s7 7.6 15 6.3M238 89.3s3.1-3 8.3-1.5m-10.5 17.8s-9.6-.3-9-4c.8-4.4 10.2-7.5 10.2-7.5s12.5-8 14.4-10.8m-56.6 44 12.2 23.3 5.8-8.8 3 6 5-8.7 8.6 5.5-3.2-10.7 7.2-.5s-2-5.1-8.4-6.2c1.7-1.3 7.7-5.3 7.7-5.3s-3.4-4-8.8-4.1c1.8-1.9 4.2-6.5 4-6.5l-5.3-1.2s12.2 4 21.6-1.6M221 89.7c.1.1-.7 4.8-3.3 7.5m-43.7 5.3s7.5-2 13.1-.9 13.1 3.2 13.1 3.2 9-1.2 11.9-3.3m-56.8 6s-1 3.6-1.4 6c0 1.7-5.5 4-5.5 4m10.3-17.4s4.8 6 5 9.5c.1 3.4-3.6 6-3.6 6M109 141l-5-8 4.5-1.6m90.5 121c-4-5.2 3-84.2 17.7-104.8-5.1 37.2 12 75.2 16.3 75m-79-97s6.8 2.5 20.7-8.6m18.9 26.8 10 .1m300.3-62s-166.7 77.8-169.1 82c28.1-8.6 147.5-28.5 150.4-26.8-7 1.7-151.9 35-158.7 43 36.2-1.2 111.9 11.6 123.8 24C424.5 198.3 347.6 187 324 192c17.2 4.1 83.2 46.8 83.2 53.6-10-9.5-89.3-42.2-92.4-39 18.2 10.9 43.9 51.4 43.9 61.3-5.3-8.4-51.2-57.7-53.9-54.5 4.9 6.7 14.5 64.9 9.6 67.6 0-7-17.8-58-19.3-59.4-3.6 1-26.3 62-21.8 67.8-3-20.4.5-63 6-61.3-10 1.5-41.7 43.4-38.3 50 1-10.5 2.4-17.4 20.4-52.1-20 1.2-61.2 27.1-68.2 36.4 5.6-16.5 40.5-44.4 55.8-46.4m72-60.7c17.6-9.8 72-29.7 108.4-44.4m-142.6 97s12-.2 24-32.8c11.8-44.6 105.7-94.3 107.6-103.6M128 252.8s-2.8 6-6.2 7.6m19.7 1.4s-3.7 7.2-4.6 10.6m17.5-7s3 9.8.5 14.4m-36.4-40.1c-9.4 5.3 5.4 39 50.1 42.2m-7.2-18.2s-1.2 6 7.2 18c-2.4 13.4 10.2 23.9 15.2 25.6m-26-164.2 1.4-3.6 1.5 4 2.5-.1 1.6-4 1.4 4h2.4l1.5-4.4 2.3 4.2h2l1.5-5 3 3.6 1.2-.4 1-5.2 3.1 3.6 1-.5 1.4-5 2.5 3.7 1.3-.4 1.2-4.3 2.4 4m-39 6.2 18.8-.3c6 0 15.8-8.3 26.7-5.7m-84.9 46s3.1 6.8 7.4 3m-14.6 1.5s-6 16.2 1.2 20m-9.8-37.8s0 3.8 8-2m-32.5 86.7s6.3 2 5.3 6.7m-3-80.8s4 1.9 7.8-4m34.2 189.7c6.1-.4 7.5 2.4 13 2.4 6.6.2 12.9-2.4 21-4.7m53.1 15c-.2 0-3 5.8-.5 8.7m-87.5-8.2s9.8-8 15-3.1c4.9 1.7 7.6 1.4 7.6 1.4m-17.5-21.3s2.4 6.2-5.6 5.3m-2.4 9s5.1 3.2-.7 7.5m3.8 5.8s7 1 2.9 6.7M346 341.6s19 2 20 3.4c2.2-2.3 19.2-16.2-1.7-18.1a19 19 0 0 1-18.3 14.7zm-6.8 9.5c7.1 5.7 4.2 9.1 26.6-5.9m-36.8 13s10.5 11.4 18.2-2.4m-38.3 6.5-14.3 7.5M269 380.3s8.7-7.4 12.7-3.5 21.3-3.4 21.3-3.4M275.5 348s3 6-2.8 6.7m-8.5 11.9s3 5.6-2.8 7m9.5 8.1s9 .5 5.8 7.3m78.4-8.5s-5 4.2-1.3 9m73-39s5.7 2.8-1.1 7.5m-5.7 9.9s4.3 4.5 1.4 8.2m10.6 9s5.9 1.7 5.2 6.6m77.8-11s-5 3.7-2.3 8.4M427 236.3c11.8-1.4 28.8 25 37.5 30.1m51.9-67.4s6 5.3.7 18m10.4-38.2c1.7 1.3 8.1 4.8 12.4 12.8m4.1-52.2-8.3 22.5m17.6-23.6s-1.6 20-4 24M516 198.8c-2.7 8-26.8 12-28.4.2-.9-6 14.2-15.3 28.4-.2z"/><path stroke-linejoin="round" d="m182.3 101.3 9.3 1.7s-6.5 8.8-9.3-1.7z"/></g>';
+  function svgImage(inner, vb, w, h, done) {
+    var im = new Image(); im.onload = function () { done(im); };
+    im.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="' + vb + '" width="' + w + '" height="' + h + '">' + inner + "</svg>");
   }
-  /* the flag is painted flat once, then drawn in thin slices that billow */
+  /* the flag is painted flat once (white over green, then the dragon when it has loaded), and drawn in thin slices that billow */
   var FLAG = null;
   function flagArt() {
-    var c = document.createElement("canvas"); c.width = 600; c.height = 360; var g = c.getContext("2d"); g.scale(2, 2);
-    g.fillStyle = "#f6f3ec"; g.fillRect(0, 0, 300, 90); g.fillStyle = "#0f9a48"; g.fillRect(0, 90, 300, 90);
-    var L = dragonArt({ red: "#d21a25", far: "#b3141f", line: "#6f0a12", belly: "#e8474a", claw: "#9c0f18", eye: "#ffe9a8" });
-    g.drawImage(L.back, 0, 0, 300, 180); g.drawImage(L.wing, 0, 0, 300, 180); g.drawImage(L.front, 0, 0, 300, 180);
+    var c = document.createElement("canvas"); c.width = 600; c.height = 360; var g = c.getContext("2d");
+    g.fillStyle = "#f6f3ec"; g.fillRect(0, 0, 600, 180); g.fillStyle = "#00a03a"; g.fillRect(0, 180, 600, 180);
+    svgImage(DSVG, "-80 0 800 480", 600, 360, function (im) { g.drawImage(im, 0, 0, 600, 360); if (reduce) draw(); });
     return c;
   }
+  /* the same dragon for the sky, a little brighter so that it shows against the night */
+  var SKYD = null;
+  if (HERO) svgImage(DSVG.replace(/#d21034/g, "#e2453d").replace(/#000/g, "#4e0d10"), "60 68 514 332", 771, 498, function (im) { SKYD = im; if (reduce) draw(); });
   /* a castle of the princes on its crag: great keep, round towers, a twin-towered gatehouse, and Y Ddraig Goch flying over it */
   function drawCastle(x, y, s, col, t) {
     var lit = "rgba(" + hex(mixHex("#aab6d6", SKY.tint, SKY.k * 0.5)).join(",") + ",", i;
@@ -331,7 +255,7 @@
     cx.beginPath(); ERYRI.forEach(function (p, j) { var X = x0 + p[0] * w, Y = base - p[1] * h; if (j) cx.lineTo(X, Y); else cx.moveTo(X, Y); });
     cx.strokeStyle = "rgba(233,217,198,.28)"; cx.lineWidth = 1.4; cx.stroke();
   }
-  var SKYD = null, DC = null;
+  var FIRE_PREVIEW = /[?&]fire=1/.test(location.search);
   var DPOS = { x: -999, y: -999, r: 0 }, fireAt = 0, nextFire = 5000;
   function drawDragon(t, sumX, sumY, narrow, stacked) {
     var period = 26000, k = reduce ? 0.55 : (t % period) / period;
@@ -341,35 +265,45 @@
     var x = sx + (ex - sx) * k, y = sy0 + (ey - sy0) * k + Math.sin(t / 900) * Math.min(H * 0.008, 6);
     var size = base * (1 - (narrow ? 0.18 : 0.3) * k), sc = size / 220;
     var alpha = reduce ? 1 : Math.min(1, k / 0.08, (1 - k) / 0.12);
-    var flap = reduce ? 1 : 0.62 + 0.38 * Math.cos(t / 260);
     DPOS.x = x + 110 * sc; DPOS.y = y + 60 * sc; DPOS.r = Math.max(44, 120 * sc);
     if (!reduce && t > nextFire && alpha >= 1) { fireAt = t; nextFire = t + 9000 + Math.random() * 7000; }
-    cx.save(); cx.globalAlpha = alpha; cx.translate(x, y); cx.scale(sc, sc); cx.rotate(-0.06);
-    var fp = (t - fireAt) / 1300;
-    if (fireAt && fp >= 0 && fp < 1) {
-      /* fire: three flickering tongues from the mouth, brightest at the root */
-      var pow = Math.sin(Math.min(1, fp * 1.15) * Math.PI), L = 135 * pow;
-      cx.save(); cx.translate(222, 36); cx.rotate(0.12); cx.globalCompositeOperation = "lighter";
-      [[1, 22, "rgba(226,69,61,.8)"], [0.78, 14, "rgba(255,150,60,.9)"], [0.5, 7.5, "rgba(255,236,170,.95)"]].forEach(function (f, n) {
-        var l = L * f[0] * (0.9 + 0.1 * Math.sin(t / 45 + n * 2)), w = f[1] * pow * (0.85 + 0.15 * Math.sin(t / 60 + n)), wob = 4 * Math.sin(t / 70 + n * 1.7);
-        var g = cx.createLinearGradient(0, 0, l, 0); g.addColorStop(0, f[2]); g.addColorStop(1, f[2].replace(/[\d.]+\)$/, "0)"));
-        cx.fillStyle = g; cx.beginPath(); cx.moveTo(0, 0); cx.bezierCurveTo(l * 0.3, -w + wob * 0.3, l * 0.7, -w * 0.9 + wob, l, wob); cx.bezierCurveTo(l * 0.7, w * 0.9 + wob, l * 0.3, w + wob * 0.3, 0, 0); cx.fill();
-      });
-      cx.restore();
+    if (FIRE_PREVIEW && !reduce && (!fireAt || t - fireAt > 1300)) fireAt = t; /* preview: add ?fire=1 to the address and the dragon breathes fire without stopping */
+    var fp = (t - fireAt) / 1300, pow = fireAt && fp >= 0 && fp < 1 ? Math.sin(Math.min(1, fp * 1.15) * Math.PI) : 0;
+    /* the lifelike dragon: a 3D model on its own canvas (dragon3d.js). It tells us where its mouth is, for the fire. */
+    if (window.HCD3 && HCD3.ready) {
+      var m3 = HCD3.frame({ W: W, H: H, x: DPOS.x, y: DPOS.y, size: size * (narrow ? 0.85 : 1.05), alpha: alpha, t: t, fire: pow, day: SKY.sun });
+      if (m3 && pow) { cx.save(); cx.globalAlpha = alpha; cx.translate(m3.x, m3.y); cx.rotate(m3.a); cx.scale(sc * 1.7, sc * 1.7); flames(t, pow); cx.restore(); }
+      return;
     }
-    /* the dragon of the flag, turned to fly towards the mountain. Its layers are put together on a spare canvas first,
-       so that it fades in and out as one solid dragon and the parts never show through each other. */
-    if (!SKYD) { SKYD = dragonArt({ red: "#e2453d", far: "#c9372f", line: "#7d1814", belly: "#f06a5c", claw: "#b02a22", eye: "#ffe9a8" }); DC = document.createElement("canvas"); DC.width = 900; DC.height = 540; }
-    var dg = DC.getContext("2d"), wf = 0.55 + 0.45 * flap;
-    dg.clearRect(0, 0, 900, 540); dg.drawImage(SKYD.back, 0, 0);
-    dg.save(); dg.translate(0, 246); dg.scale(1, wf); dg.translate(0, -246); dg.drawImage(SKYD.wing, 0, 0); dg.restore();
-    dg.drawImage(SKYD.front, 0, 0);
-    cx.translate(267, -22); cx.scale(-1, 1); cx.drawImage(DC, 0, 0, 300, 180);
+    if (window.HCD3_WANT) return; /* still loading: no stand-in, so the dragon never changes shape in front of the visitor */
+    /* fallback (no WebGL, data saver, reduced motion): the dragon of the flag, turned to face the mountain */
+    cx.save(); cx.globalAlpha = alpha; cx.translate(x, y); cx.scale(sc, sc); cx.rotate(-0.06);
+    if (pow) { cx.save(); cx.translate(198, 22); cx.rotate(0.12); flames(t, pow); cx.restore(); }
+    if (SKYD) { cx.translate(222, 0); cx.scale(-1, 1); cx.drawImage(SKYD, 0, 0, 222, 143.4); }
+    cx.restore();
+  }
+  /* fire: three flickering tongues from the mouth, brightest at the root */
+  function flames(t, pow) {
+    var L = 135 * pow; cx.save(); cx.globalCompositeOperation = "lighter";
+    [[1, 22, "rgba(226,69,61,.8)"], [0.78, 14, "rgba(255,150,60,.9)"], [0.5, 7.5, "rgba(255,236,170,.95)"]].forEach(function (f, n) {
+      var l = L * f[0] * (0.9 + 0.1 * Math.sin(t / 45 + n * 2)), w = f[1] * pow * (0.85 + 0.15 * Math.sin(t / 60 + n)), wob = 4 * Math.sin(t / 70 + n * 1.7);
+      var g = cx.createLinearGradient(0, 0, l, 0); g.addColorStop(0, f[2]); g.addColorStop(1, f[2].replace(/[\d.]+\)$/, "0)"));
+      cx.fillStyle = g; cx.beginPath(); cx.moveTo(0, 0); cx.bezierCurveTo(l * 0.3, -w + wob * 0.3, l * 0.7, -w * 0.9 + wob, l, wob); cx.bezierCurveTo(l * 0.7, w * 0.9 + wob, l * 0.3, w + wob * 0.3, 0, 0); cx.fill();
+    });
     cx.restore();
   }
   function loop(t) { t0 = t; if (window.scrollY < H) draw(t); requestAnimationFrame(loop); }
   window.addEventListener("resize", size);
   if (HERO && !reduce) {
+    /* load the lifelike 3D dragon where the device can draw it; otherwise the flag dragon stays */
+    try {
+      var tc = document.createElement("canvas"), gl3 = window.WebGLRenderingContext && (tc.getContext("webgl2") || tc.getContext("webgl"));
+      if (gl3 && !(navigator.connection && navigator.connection.saveData)) {
+        window.HCD3_WANT = 1; var c3 = document.createElement("canvas"); c3.id = "sky3d"; c3.setAttribute("aria-hidden", "true"); cv.after(c3);
+        var s3 = document.createElement("script"); s3.type = "module"; s3.src = "dragon3d.js"; s3.onerror = function () { window.HCD3_WANT = 0; c3.remove(); }; document.head.appendChild(s3);
+        setTimeout(function () { if (!(window.HCD3 && HCD3.ready)) window.HCD3_WANT = 0; }, 15000);
+      }
+    } catch (e3) { window.HCD3_WANT = 0; }
     window.addEventListener("pointermove", function (e) { if (e.pointerType === "mouse") mouse = (e.clientX / window.innerWidth - 0.5) * 2; }, { passive: true });
     /* tap or click the dragon and it breathes fire */
     hEl.addEventListener("pointerdown", function (e) {
