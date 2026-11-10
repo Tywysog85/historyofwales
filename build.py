@@ -283,7 +283,8 @@ def photo_fig(ph, cls=""):
 
 
 def event_li(ev, k=0):
-    links = (f'<a class="src" href="place-{ev[10]}.html">{bi("The place", "Y lle")} →</a>' if ev[10] else "") + src(ev[11])
+    links = ("".join(f'<a class="src" href="story-{x["id"]}.html">{bi("Read the long read", "Darllen yr erthygl")} →</a>' for x in story_links("events", ev[5]))
+             + (f'<a class="src" href="place-{ev[10]}.html">{bi("The place", "Y lle")} →</a>' if ev[10] else "") + src(ev[11]))
     return (f'<li id="e{EVI[ev]}" class="{"key" if ev[9] else ""}" data-era="{ev[0]}"><time>{bi(year_label(ev), year_label(ev, True))}</time>'
             f'<div><h3>{bi(ev[5], ev[6])}</h3><p>{bi(ev[7], ev[8])}</p><div class="links">{links}</div></div></li>')
 
@@ -334,6 +335,7 @@ def person_page(p):
     meta = (f'<div class="person-meta"><span>{e(p[2])}</span><span>{bi(p[5], p[6])}</span><a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a></div>')
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', era["ill"], p[2], p[2], p[3], p[4], p[7], p[8], art=ERA_ART[eid])
             + section(meta + photo_fig(PH.PERSON_PHOTOS.get(slug), "portrait") + paras(long_en, long_cy) + f'<p class="share no-print"><button type="button" class="btn" data-copy="person-{slug}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button> {src(p[9])}</p>', top=True)
+            + story_feature("people", slug)
             + (section(f'<ol class="era-events">{"".join(event_li(ev) for ev in related)}</ol>', "On the timeline", "Ar y llinell amser") if related else "")
             + section(f'<div class="people">{"".join(plaque(x) for x in same)}</div>', "Also in this age", "Hefyd yn yr oes hon")
             + section(f'<div class="pager">{pager}</div>'))
@@ -353,6 +355,7 @@ def place_page(pl):
             f'<a href="{osm}" target="_blank" rel="noopener">{bi("Open in a map", "Agor mewn map")} ↗</a><a href="index.html#lle-{pid}">{bi("On our map", "Ar ein map")} →</a></div>')
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', pl["ill"], era["en"], era["cy"], pl["en"], pl["cy"], pl["dEn"], pl["dCy"], art=ERA_ART[eid])
             + section(meta + photo_fig(PH.PLACE_PHOTOS.get(pid)) + paras(long_en, long_cy) + f'<p class="share no-print">{src(pl["src"])}</p>', top=True)
+            + story_feature("places", pid)
             + (section(f'<ol class="era-events">{"".join(event_li(ev) for ev in related)}</ol>', "What happened here", "Beth ddigwyddodd yma") if related else "")
             + section(f'<div class="era-places">{"".join(place_tile(x) for x in near)}</div>', "Nearby", "Gerllaw"))
     ld = {"@context": "https://schema.org", "@type": "TouristAttraction", "name": pl["en"], "alternateName": pl["cy"], "description": pl["dEn"],
@@ -466,10 +469,35 @@ STORY = {x["id"]: x for x in F.STORIES}
 
 
 def prose(pars, cls="prose"):
-    out = ""
-    for a in pars:
-        out += f"<h2>{e(a[3:])}</h2>" if a.startswith("## ") else f"<p>{e(a)}</p>"
+    # "## " sub-heading, "> quote | source" pull quote, "|| left | right" table row (rows in a run make one table)
+    out, rows = "", []
+    for a in pars + [""]:
+        if a.startswith("|| "):
+            rows.append(a[3:].split(" | ", 1))
+            continue
+        if rows:
+            out += '<table class="kv"><tbody>' + "".join(f"<tr><th scope=\"row\">{e(r[0])}</th><td>{e(r[-1])}</td></tr>" for r in rows) + "</tbody></table>"
+            rows = []
+        if not a:
+            continue
+        if a.startswith("## "):
+            out += f"<h2>{e(a[3:])}</h2>"
+        elif a.startswith("> "):
+            q, _, c = a[2:].partition(" | ")
+            out += f'<blockquote class="pq"><p>{e(q)}</p>' + (f"<cite>{e(c)}</cite>" if c else "") + "</blockquote>"
+        else:
+            out += f"<p>{e(a)}</p>"
     return out
+
+
+def story_links(kind, key):
+    # long reads that list this person / place / event (fields people=, places=, events= in a story)
+    return [x for x in F.STORIES if key in x.get(kind, [])]
+
+
+def story_feature(kind, key):
+    xs = story_links(kind, key)
+    return section(f'<div class="s-grid">{"".join(story_card(x, True) for x in xs)}</div>', "The full story", "Y stori lawn") if xs else ""
 
 
 def prose_bi(en, cy, cls="prose"):
@@ -620,6 +648,7 @@ DATA = dict(
     TRAILS=[dict(id=t["id"], en=t["en"], cy=t["cy"], ill=t["ill"], n=len(t["items"]), introEn=t["introEn"][0], introCy=t["introCy"][0]) for t in L.TRAILS],
     AUDIO=sorted(f[:-4] for f in os.listdir(os.path.join(SRC, 'static', 'audio')) if f.endswith('.mp3')) if os.path.isdir(os.path.join(SRC, 'static', 'audio')) else [],
     MAPC=dict(minx=geo["minx"], maxy=geo["maxy"], k=geo["k"], sc=geo["sc"]),
+    SL={i: x["id"] for i, ev in enumerate(D.EVENTS) for x in story_links("events", ev[5])},
     FACTS=F.FACTS, FEATURED=FEATURED, PPH={k: photo_url(v[0], 240) for k, v in PH.PERSON_PHOTOS.items()},
 )
 ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"]

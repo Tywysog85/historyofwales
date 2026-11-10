@@ -4,6 +4,8 @@
 # summary, minutes to read, and paragraphs in English and Welsh. A paragraph that starts with
 # "## " is a sub-heading.
 
+import hywel as _HY  # Hywel Dda long read (src/hywel.py)
+
 STORIES = [
  dict(id="castles", era="medieval", art="castle", mins=5,
   en="Why does Wales have so many castles?", cy="Pam mae cymaint o gestyll yng Nghymru?",
@@ -55,26 +57,7 @@ STORIES = [
    "Ym mis Chwefror 1962 traddododd y llenor Saunders Lewis ddarlith radio, Tynged yr Iaith, gan rybuddio y byddai’r Gymraeg wedi marw erbyn yr unfed ganrif ar hugain oni bai fod pobl yn barod i dorri’r gyfraith drosti. Sefydlwyd Cymdeithas yr Iaith yr haf hwnnw. Peintiodd ei haelodau dros arwyddion ffyrdd uniaith Saesneg, gwrthod talu biliau a mynd i’r carchar. Mynnodd rhieni ysgolion Cymraeg. Yn 1980 bygythiodd Gwynfor Evans ymprydio hyd farwolaeth oni bai fod y llywodraeth yn cadw ei haddewid i sefydlu sianel deledu Gymraeg; dechreuodd S4C ddarlledu yn 1982.",
    "Mae gan y Gymraeg statws swyddogol yng Nghymru er 2011, ac mae tua chwarter y plant bellach yn cael eu haddysg drwyddi. Cyfrifodd cyfrifiad 2021 538,300 o siaradwyr, 17.8 y cant o’r boblogaeth, a tharged Llywodraeth Cymru yw miliwn erbyn 2050. Nid yw’r iaith yn ddiogel. Ond mae wedi goroesi pob darogan am ei thranc hyd yma."]),
 
- dict(id="hywel", era="kings", art="cross", mins=4,
-  en="The laws of Hywel Dda", cy="Cyfraith Hywel Dda",
-  sumEn="A thousand years ago Welsh law preferred compensation to execution and gave a wife a share of the household. It lasted six centuries.",
-  sumCy="Fil o flynyddoedd yn ôl, roedd yn well gan gyfraith Cymru iawndal na dienyddio, a rhoddai gyfran o’r cartref i’r wraig. Parhaodd am chwe chanrif.",
-  pEn=["Hywel ap Cadell, who died in 950, ruled most of Wales from Deheubarth in the south-west. He is the only Welsh king to be called ‘Dda’, the Good, and the only one known to have struck his own coin. He made a pilgrimage to Rome in 928 and kept a careful peace with the kings of England. But he is remembered for one thing above all: the law.",
-   "## The meeting at Whitland",
-   "According to tradition, Hywel summoned six men from every part of his kingdom to Hendy-gwyn ar Daf, Whitland in Carmarthenshire, around the year 945. Under a lawyer named Blegywryd they spent weeks sorting the customs of Wales into a single code. The oldest surviving copies were written some three hundred years later, so historians cannot be sure how much goes back to Hywel himself. What is certain is that the lawyers of medieval Wales believed it did, and called their law Cyfraith Hywel.",
-   "## What the law said",
-   "The law was practical and often humane. A killing was settled by galanas, a payment from the killer’s kin to the victim’s, rather than by execution, which kept feuds from spreading. An insult or injury required sarhaed, compensation scaled to the victim’s standing. Contracts were sealed with sureties. Everything had a legal value, down to the household cat, which was worth more once it had proved it could catch mice.",
-   "Women had rights that were unusual for the age. A wife who left her husband after seven years of marriage was entitled to half of their shared goods, and the law set out exactly how the household was to be divided. A son born outside marriage could inherit alongside his brothers if his father acknowledged him, a rule the Church found scandalous.",
-   "## A mark of nationhood",
-   "By the thirteenth century the law was one of the things that made the Welsh a people. When Edward I conquered Gwynedd, the Statute of Rhuddlan of 1284 replaced Welsh criminal law with English, though Welsh rules on land and inheritance carried on in many places until the Acts of Union. Some forty manuscripts of the law survive, in Welsh and Latin. One of them, the thirteenth-century Peniarth 28 in the National Library of Wales, is illustrated with small drawings of the king and his court, and can be read online."],
-  pCy=["Roedd Hywel ap Cadell, a fu farw yn 950, yn rheoli’r rhan fwyaf o Gymru o Ddeheubarth yn y de-orllewin. Ef yw’r unig frenin Cymreig a elwir yn ‘Dda’, a’r unig un y gwyddys iddo fathu ei ddarn arian ei hun. Aeth ar bererindod i Rufain yn 928 a chadwodd heddwch gofalus â brenhinoedd Lloegr. Ond am un peth yn anad dim y cofir ef: y gyfraith.",
-   "## Y cyfarfod yn Hendy-gwyn",
-   "Yn ôl traddodiad, galwodd Hywel chwe gŵr o bob rhan o’i deyrnas i Hendy-gwyn ar Daf yn Sir Gaerfyrddin tua’r flwyddyn 945. Dan arweiniad cyfreithiwr o’r enw Blegywryd, treuliasant wythnosau’n rhoi trefn ar arferion Cymru mewn un llyfr cyfraith. Ysgrifennwyd y copïau hynaf sydd wedi goroesi ryw dri chan mlynedd yn ddiweddarach, felly ni all haneswyr fod yn sicr faint sy’n mynd yn ôl at Hywel ei hun. Yr hyn sy’n sicr yw bod cyfreithwyr Cymru’r Oesoedd Canol yn credu hynny, ac yn galw eu cyfraith yn Gyfraith Hywel.",
-   "## Beth ddywedai’r gyfraith",
-   "Roedd y gyfraith yn ymarferol ac yn aml yn drugarog. Setlid lladd drwy alanas, sef taliad gan dylwyth y lladdwr i dylwyth y sawl a laddwyd, yn hytrach na thrwy ddienyddio, a hynny’n atal cynnen rhag lledu. Am sarhad neu anaf rhaid oedd talu sarhaed, iawndal yn ôl statws y dioddefwr. Selid cytundebau â mechnïon. Roedd gwerth cyfreithiol i bopeth, hyd at gath y tŷ, a oedd yn werth mwy unwaith y profai y gallai ddal llygod.",
-   "Roedd gan fenywod hawliau anarferol i’r oes. Roedd gan wraig a adawai ei gŵr ar ôl saith mlynedd o briodas hawl i hanner eu heiddo cyffredin, a nodai’r gyfraith yn fanwl sut y dylid rhannu’r cartref. Gallai mab a aned y tu allan i briodas etifeddu ochr yn ochr â’i frodyr pe bai ei dad yn ei gydnabod, rheol a oedd yn warth yng ngolwg yr Eglwys.",
-   "## Arwydd o genedl",
-   "Erbyn y drydedd ganrif ar ddeg roedd y gyfraith yn un o’r pethau a wnâi’r Cymry’n bobl. Pan goncrodd Edward I Wynedd, rhoddodd Statud Rhuddlan yn 1284 gyfraith droseddol Lloegr yn lle un Cymru, er i reolau Cymreig ynghylch tir ac etifeddu barhau mewn llawer man hyd at y Deddfau Uno. Mae tua deugain llawysgrif o’r gyfraith wedi goroesi, yn Gymraeg a Lladin. Mae un ohonynt, Peniarth 28 o’r drydedd ganrif ar ddeg yn Llyfrgell Genedlaethol Cymru, wedi’i darlunio â lluniau bach o’r brenin a’i lys, a gellir ei darllen ar-lein."]),
+ _HY.STORY,
 
  dict(id="coal", era="industrial", art="pit", mins=6,
   en="Coal: the fuel of an empire, and its price", cy="Glo: tanwydd ymerodraeth, a’i bris",

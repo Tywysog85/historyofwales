@@ -141,6 +141,15 @@ To reword an existing line without hunting for it, add an `(old, new)` pair to `
 
 When a page is removed (the Arthur legend became a long read), leave a redirect page at the old address in `build.py` so old links still work.
 
+### Pull quotes, fact tables and "read the full story" links (November 2026)
+
+Learnt while building the Hywel Dda page (`src/hywel.py`). Long-read paragraphs now understand two more codes:
+
+- `> The quote | Where it comes from` makes a large pull quote with its source underneath.
+- `|| Left | Right` makes one row of a two-column table. Rows next to each other join into one table (used for "at a glance" facts and the value of a cat).
+
+A long read can also say who and what it is about, with `people=[...]`, `places=[...]` and `events=[...]` (event titles in English). `build.py` then adds a "The full story" card to those person and place pages, and a "Read the long read" link to those events on the age pages and on the timeline (the timeline gets them through `SL` in the page data). One list in the story does all the linking.
+
 ### The four notes in the top folder (November 2026)
 
 `README.md` says what the site is and where things live. `EDITORIAL.md` holds the owner's rules for how it is written. `TODO.md` lists the open jobs. `SKILLS.md` is this file. The owner wants them kept clean and tidy: when something changes, edit the line that is there instead of adding a new one at the bottom, delete finished jobs from `TODO.md`, and keep the counts in `README.md` true.
