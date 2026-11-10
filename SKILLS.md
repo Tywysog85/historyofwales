@@ -167,6 +167,10 @@ On wide screens (1100 pixels and up) the opening screen is capped at 60rem tall 
 
 Other effects in the same file: shooting stars (`drawMeteors`, night only), the dragon's fire (`fireAt`, every 9 to 16 seconds or when tapped; `DPOS` is where the dragon is for the tap test), and tilt (the `deviceorientation` listener feeds the same `mouse` value the pointer does; skipped on iOS, which asks permission). The glint on "Cymru" is CSS in `src/v6.css` (`@keyframes glint`), using a gradient clipped to the text; the letters need extra `padding-block` or their tails are cut off.
 
+### The site name (November 2026) above "Cymru" (home page)
+
+On the home page the words "History of Wales" (Welsh: "Hanes Cymru") sit above the big "Cymru", not in the top bar. `HERO_NAME` in `build.py` writes them one letter per box (`_letters()`), and the same CSS rule as "Cymru" (`.hero h1 span, .hero .hero-name b` in `src/head.html` and `src/v6.css`) makes every letter drop in and glint. The home top bar has no name or mountain; it starts with the links, and on screens wider than 1480 pixels it shows four more (`NAV_HOME_MORE` in `build.py`). Every other page keeps "History of Wales" in the top bar as the way home.
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
