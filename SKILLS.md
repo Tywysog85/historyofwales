@@ -150,6 +150,14 @@ Learnt while building the Hywel Dda page (`src/hywel.py`). Long-read paragraphs 
 
 A long read can also say who and what it is about, with `people=[...]`, `places=[...]` and `events=[...]` (event titles in English). `build.py` then adds a "The full story" card to those person and place pages, and a "Read the long read" link to those events on the age pages and on the timeline (the timeline gets them through `SL` in the page data). One list in the story does all the linking.
 
+### Kings and princes pages (November 2026)
+- All the royal lines live in `src/royal.py`: one entry per kingdom, each with a list of rulers. `R(...)` is a ruler (sort year, dates, name, English note, Welsh note, optional link), `H(...)` a heading inside the list, `N(...)` a short note between rulers.
+- `build.py` makes `kings.html` (all of Wales: Gruffudd ap Llywelyn first, then kings who ruled most of Wales, the Princes of Wales, the kingdoms, and every ruler in one list by century) and one `kings-<id>.html` per kingdom.
+- The combined list merges a ruler who held several kingdoms into one line, with a chip for each kingdom. `HOME_REALM` in `build.py` picks which note is shown.
+- Person and place pages link back to every kingdom list that names them, automatically. The kingdoms map legend links each realm to its page through `KGLINK` in `build.py`.
+- Welsh dates are made from the English ones by `cy_dates()`: "c." becomes "tua", "d." becomes "m.".
+- For the earliest kings, mark dates "c." and say the genealogies are the witness, rather than leaving people out.
+
 ### The four notes in the top folder (November 2026)
 
 `README.md` says what the site is and where things live. `EDITORIAL.md` holds the owner's rules for how it is written. `TODO.md` lists the open jobs. `SKILLS.md` is this file. The owner wants them kept clean and tidy: when something changes, edit the line that is there instead of adding a new one at the bottom, delete finished jobs from `TODO.md`, and keep the counts in `README.md` true.

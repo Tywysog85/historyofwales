@@ -23,6 +23,7 @@ import features as F  # noqa: E402
 import art as A  # noqa: E402
 L.TEACH.update(AG.TEACH)
 import ages9 as AG9
+import royal as RY  # noqa: E402
 L.TEACH.update(AG9.TEACH)
 from urllib.parse import quote as _q
 
@@ -167,7 +168,7 @@ PRINT_CSS = """
 
 NAV_MAIN = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#chapters", "Ages", "Oesoedd"), ("index.html#map", "Map", "Map"),
             ("index.html#people", "People", "Pobl"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("play.html", "Play", "Chwarae")]
-NAV_MORE = [("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"), ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"),
+NAV_MORE = [("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"), ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"),
             ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("journey.html", "Your journey", "Eich taith"), ("teachers.html", "For teachers", "I athrawon"),
             ("index.html#sources", "Sources", "Ffynonellau")]
 # extra links for the home page top bar, where the site name has moved into the opening screen and left room
@@ -204,7 +205,7 @@ def footer():
     def col(title_en, title_cy, links):
         return f'<div><p class="eyebrow">{bi(title_en, title_cy)}</p><ul>' + "".join(f'<li><a href="{h}">{bi(a, b)}</a></li>' for h, a, b in links) + "</ul></div>"
     eras = [(f'era-{x["id"]}.html', x["en"], x["cy"]) for x in D.ERAS]
-    explore = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#map", "Map of Wales", "Map Cymru"), ("index.html#people", "People", "Pobl"), ("trails.html", "Themed trails", "Llwybrau thema"),
+    explore = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#map", "Map of Wales", "Map Cymru"), ("index.html#people", "People", "Pobl"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("trails.html", "Themed trails", "Llwybrau thema"),
                ("gallery.html", "Photo gallery", "Oriel luniau"), ("index.html#language", "The Welsh language", "Yr iaith Gymraeg")]
     read = [("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
             ("teachers.html", "For teachers", "I athrawon"), ("index.html#sources", "Sources", "Ffynonellau")]
@@ -333,6 +334,8 @@ def person_page(p):
     pager = (f'<a class="btn" href="person-{prev_p[0]}.html">← {bi(prev_p[3], prev_p[4])}</a>' if prev_p else f'<a class="btn" href="era-{eid}.html">← {bi(era["en"], era["cy"])}</a>') + \
             (f'<a class="btn solid" href="person-{next_p[0]}.html">{bi(next_p[3], next_p[4])} →</a>' if next_p else '<a class="btn solid" href="index.html#people">' + bi("All people", "Pawb") + " →</a>")
     meta = (f'<div class="person-meta"><span>{e(p[2])}</span><span>{bi(p[5], p[6])}</span><a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a></div>')
+    rl = realm_links(f"person-{slug}.html")
+    meta += f'<p class="realm-links">{rl}</p>' if rl else ""
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', era["ill"], p[2], p[2], p[3], p[4], p[7], p[8], art=ERA_ART[eid])
             + section(meta + photo_fig(PH.PERSON_PHOTOS.get(slug), "portrait") + paras(long_en, long_cy) + f'<p class="share no-print"><button type="button" class="btn" data-copy="person-{slug}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button> {src(p[9])}</p>', top=True)
             + story_feature("people", slug)
@@ -353,6 +356,8 @@ def place_page(pl):
     osm = f'https://www.openstreetmap.org/?mlat={pl["lat"]}&mlon={pl["lon"]}#map=14/{pl["lat"]}/{pl["lon"]}'
     meta = (f'<div class="person-meta"><span>{e(pl["year"])}</span><span>{pl["lat"]:.3f}° N, {abs(pl["lon"]):.3f}° W</span>'
             f'<a href="{osm}" target="_blank" rel="noopener">{bi("Open in a map", "Agor mewn map")} ↗</a><a href="index.html#lle-{pid}">{bi("On our map", "Ar ein map")} →</a></div>')
+    rl = realm_links(f"place-{pid}.html")
+    meta += f'<p class="realm-links">{rl}</p>' if rl else ""
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', pl["ill"], era["en"], era["cy"], pl["en"], pl["cy"], pl["dEn"], pl["dCy"], art=ERA_ART[eid])
             + section(meta + photo_fig(PH.PLACE_PHOTOS.get(pid)) + paras(long_en, long_cy) + f'<p class="share no-print">{src(pl["src"])}</p>', top=True)
             + story_feature("places", pid)
@@ -640,6 +645,160 @@ def journey_page():
     return page("journey.html", "Your journey · History of Wales", "Track what you have read and the badges you have earned on History of Wales.", main, era="kings", og_type="website", extra=extra)
 
 
+# ---------- kings and princes (src/royal.py) ----------
+REALM = {r["id"]: r for r in RY.REALMS}
+
+
+def cy_dates(s):
+    return s.replace("fl. c. ", "fl. tua ").replace("c. ", "tua ").replace("d. ", "m. ")
+
+
+def realm_title(r):
+    return (f"Kings and princes of {r['en']}", f"Brenhinoedd a thywysogion {r['cy']}")
+
+
+# person and place pages link back to every kingdom list they appear in
+REALMS_OF = {}
+for _r in RY.REALMS:
+    for _x in _r["rulers"]:
+        if _x["k"] == "r" and _x["link"]:
+            REALMS_OF.setdefault(_x["link"], []).append(_r["id"])
+    for _pid in _r["places"]:
+        REALMS_OF.setdefault(f"place-{_pid}.html", []).append(_r["id"])
+
+
+def realm_links(href):
+    ids = list(dict.fromkeys(REALMS_OF.get(href, [])))
+    if not ids:
+        return ""
+    return "".join(f'<a href="kings-{i}.html">{bi(*realm_title(REALM[i]))} →</a>' for i in ids)
+
+
+def ruler_li(x, chips=""):
+    link = x["link"]
+    more = ""
+    if link:
+        lab = ("Read more", "Darllen mwy") if link.startswith(("person-", "legend-")) else ("See more", "Gweld mwy")
+        more = f'<a class="src" href="{link}">{bi(*lab)} →</a>'
+    note = f'<p>{bi(x["en"], x["cy"])}</p>' if x["en"] else ""
+    links = f'<div class="links">{more}{chips}</div>' if (more or chips) else ""
+    return (f'<li class="{"key" if x["key"] else ""}"><time>{bi(x["dates"], cy_dates(x["dates"]))}</time>'
+            f'<div><h3>{e(x["name"])}</h3>{note}{links}</div></li>')
+
+
+def ruler_list(items):
+    out, cur = "", []
+    def flush():
+        return f'<ol class="era-events royal">{"".join(cur)}</ol>' if cur else ""
+    for x in items:
+        if x["k"] == "h":
+            out += flush(); cur = []
+            out += f'<h2 class="sub-h royal-h">{bi(x["en"], x["cy"])}</h2>'
+        elif x["k"] == "n":
+            cur.append(f'<li class="gap"><time aria-hidden="true">· · ·</time><div><p>{bi(x["en"], x["cy"])}</p></div></li>')
+        else:
+            cur.append(ruler_li(x))
+    return out + flush()
+
+
+def realm_tile(r):
+    n = sum(1 for x in r["rulers"] if x["k"] == "r")
+    return (f'<a href="kings-{r["id"]}.html" data-era="{r["era"]}"><svg aria-hidden="true"><use href="#i-crown"/></svg>'
+            f'<span><b>{bi(r["en"], r["cy"])}</b><span>{bi(r["span"] + f" · {n} rulers", cy_dates(r["span"]) + f" · {n} o reolwyr")}</span></span></a>')
+
+
+ROYAL_NOTE = bi("Dates marked c. are approximate. For the earliest kings the old royal genealogies and the charters of the Book of Llandaff are the main witnesses, and their dates are estimates. Where kings shared a kingdom, both are listed.",
+                "Dyddiadau bras yw’r rhai a nodir ‘tua’. I’r brenhinoedd cynharaf, yr hen achau brenhinol a siarteri Llyfr Llandaf yw’r prif dystion, ac amcangyfrif yw eu dyddiadau. Lle rhannodd brenhinoedd deyrnas, rhestrir y ddau.")
+ROYAL_CSS = """
+.royal-h { margin-top: 2.6rem }
+.era-events.royal li.gap { padding: .7rem 0 }
+.era-events.royal li.gap p { font-style: italic; color: var(--muted) }
+.era-events.royal li.gap time { color: var(--muted) }
+.era-events .links .chip { font-family: var(--f-mono); font-size: .75rem; color: var(--muted); border: 1px solid var(--line); border-radius: 99px; padding: .1rem .6rem; text-decoration: none }
+.era-events .links .chip:hover { color: var(--ink); border-color: var(--c) }
+.one-king { margin-top: 0 }
+.one-king h2 { font-family: var(--f-display); font-weight: 400; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.1 }
+.one-king .go { font-weight: 700 }
+.realm-links { display: flex; flex-wrap: wrap; gap: .5rem 1.2rem; margin: -.8rem 0 1.5rem; font-size: .95rem }
+"""
+style += ROYAL_CSS
+CY_ORD = {5: "5ed", 6: "6ed", 7: "7fed", 8: "8fed", 9: "9fed", 10: "10fed", 11: "11eg", 12: "12fed", 13: "13eg", 14: "14eg", 15: "15fed"}
+
+
+def realm_page(r, i):
+    t_en, t_cy = realm_title(r)
+    nxt = RY.REALMS[(i + 1) % len(RY.REALMS)]
+    places = [PLACE[p] for p in r["places"] if p in PLACE]
+    main = (hero(r["era"], f'<a href="index.html">{SITE}</a> / <a href="kings.html">{bi("Kings and princes", "Brenhinoedd a thywysogion")}</a>', "crown",
+                 r["span"], cy_dates(r["span"]), t_en, t_cy, r["subEn"], r["subCy"], art=r["art"])
+            + section(paras(r["introEn"], r["introCy"]), top=True)
+            + section(ruler_list(r["rulers"]) + f'<p class="note-box" style="margin-top:2rem">{ROYAL_NOTE}</p>', *(() if r["rulers"][0]["k"] == "h" else ("The rulers, in order", "Y rheolwyr, yn eu trefn")))
+            + (section(f'<div class="era-places">{"".join(place_tile(p) for p in places)}</div>', "Places to visit", "Lleoedd i ymweld â nhw") if places else "")
+            + section(f'<div class="pager"><a class="btn" href="kings.html">← {bi("All the kings and princes of Wales", "Holl frenhinoedd a thywysogion Cymru")}</a>'
+                      f'<a class="btn solid" href="kings-{nxt["id"]}.html">{bi(nxt["en"], nxt["cy"])} →</a></div>'))
+    ld = {"@context": "https://schema.org", "@type": "Article", "headline": t_en, "description": r["subEn"], "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
+    return page(f"kings-{r['id']}.html", f"{t_en} · History of Wales", f"Every king and prince of {r['en']}, in order with their dates. {r['subEn']}", main, era=r["era"], ld=ld, active="kings.html", track=f"kings:{r['id']}")
+
+
+# where a ruler held several kingdoms, the entry shown in the combined list
+HOME_REALM = {"Hywel Dda": "deheubarth", "Maredudd ab Owain": "deheubarth", "Rhydderch ab Iestyn": "glywysing", "Gruffudd ap Rhydderch": "gwent"}
+
+
+def all_rulers():
+    """Every ruler from every kingdom, once each, oldest first, with the kingdoms they ruled."""
+    seen = {}
+    for r in RY.REALMS:
+        for x in r["rulers"]:
+            if x["k"] != "r":
+                continue
+            k = x["name"]
+            if k in seen:
+                if r["id"] not in seen[k][1]:
+                    seen[k][1].append(r["id"])
+                if HOME_REALM.get(k) == r["id"]:
+                    seen[k][0] = x
+            else:
+                seen[k] = [x, [r["id"]]]
+    return sorted(seen.values(), key=lambda v: v[0]["y"])
+
+
+def kings_page():
+    def lst(items):
+        return f'<ol class="era-events royal">{"".join(ruler_li(x) for x in items)}</ol>'
+    every = ""
+    cent = None
+    cur = []
+    for x, rids in all_rulers():
+        c = int(x["y"]) // 100 + 1
+        if c != cent:
+            if cur:
+                every += f'<ol class="era-events royal">{"".join(cur)}</ol>'
+            cur = []
+            cent = c
+            every += f'<h3 class="sub-h royal-h" style="font-size:1.5rem">{bi(f"{c}th century", f"Y {CY_ORD.get(c, str(c))} ganrif")}</h3>'
+        chips = "".join(f'<a class="chip" href="kings-{i}.html">{bi(REALM[i]["en"], REALM[i]["cy"])}</a>' for i in rids)
+        cur.append(ruler_li(x, chips))
+    every += f'<ol class="era-events royal">{"".join(cur)}</ol>' if cur else ""
+    n_all = len(all_rulers())
+    one = (f'<aside class="behind one-king"><p class="eyebrow">{bi("1055–1063 · One king of all Wales", "1055–1063 · Un brenin ar Gymru gyfan")}</p>'
+           f'<h2>{bi("Gruffudd ap Llywelyn, King of Wales", "Gruffudd ap Llywelyn, Brenin Cymru")}</h2>'
+           + paras(RY.GRUFFUDD["en"], RY.GRUFFUDD["cy"]) +
+           f'<p><a class="go" href="person-gruffudd-ap-llywelyn.html">{bi("Read his story", "Darllen ei hanes")} →</a> &nbsp; <a class="go" href="index.html#map">{bi("See his Wales on the kingdoms map", "Gweld ei Gymru ar fap y teyrnasoedd")} →</a></p></aside>')
+    main = (hero("kings", f'<a href="index.html">{SITE}</a>', "crown", "c. 450–1415", "tua 450–1415", "Kings and princes of Wales", "Brenhinoedd a thywysogion Cymru",
+                 "For a thousand years Wales was a land of kingdoms. Great kings brought most of it together, one king ruled it all, and its princes carried the title Prince of Wales.",
+                 "Am fil o flynyddoedd gwlad o deyrnasoedd oedd Cymru. Daeth brenhinoedd mawr â’r rhan fwyaf ohoni ynghyd, rheolodd un brenin y cyfan, a dygodd ei thywysogion y teitl Tywysog Cymru.", art="castle")
+            + section(one, top=True)
+            + section(lst(RY.MOST), "Kings who ruled most of Wales", "Brenhinoedd a reolodd y rhan fwyaf o Gymru")
+            + section('<span id="princes"></span>' + lst(RY.PRINCES) + f'<p class="lede" style="margin-top:1.5rem">{bi(RY.CODA["en"], RY.CODA["cy"])} <a href="person-harri-tudur.html">{bi("Harri Tudur", "Harri Tudur")} →</a></p>', "Princes of Wales", "Tywysogion Cymru")
+            + section(f'<div class="era-places">{"".join(realm_tile(r) for r in RY.REALMS)}</div>', "The kingdoms, one by one", "Y teyrnasoedd, fesul un")
+            + section(f'<p class="lede">{bi(f"All {n_all} kings, princes and lords on this site, from every kingdom, oldest first. Tap a kingdom to see its own line.", f"Pob un o’r {n_all} o frenhinoedd, tywysogion ac arglwyddi ar y wefan hon, o bob teyrnas, yr hynaf yn gyntaf. Tapiwch deyrnas i weld ei llinach ei hun.")}</p>'
+                      + every + f'<p class="note-box" style="margin-top:2rem">{ROYAL_NOTE}</p>', "Every king and prince, in order", "Pob brenin a thywysog, yn eu trefn"))
+    ld = {"@context": "https://schema.org", "@type": "Article", "headline": "Kings and princes of Wales", "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
+    return page("kings.html", "Kings and princes of Wales · History of Wales",
+                "Every king and prince of Wales, kingdom by kingdom: Gwynedd, Powys, Deheubarth, Dyfed, Gwent, Glywysing and more, and Gruffudd ap Llywelyn, king of all Wales.",
+                main, era="kings", ld=ld, og_type="website", active="kings.html", track="kings:all")
+
+
 # ---------- index ----------
 FEATURED = ["dewi-sant", "hywel-dda", "gwenllian", "llywelyn-fawr", "llywelyn-ap-gruffudd", "dafydd-ap-gwilym", "owain-glyndwr", "harri-tudur", "william-morgan", "lloyd-george", "aneurin-bevan", "betty-campbell"]
 DATA = dict(
@@ -649,6 +808,10 @@ DATA = dict(
     AUDIO=sorted(f[:-4] for f in os.listdir(os.path.join(SRC, 'static', 'audio')) if f.endswith('.mp3')) if os.path.isdir(os.path.join(SRC, 'static', 'audio')) else [],
     MAPC=dict(minx=geo["minx"], maxy=geo["maxy"], k=geo["k"], sc=geo["sc"]),
     SL={i: x["id"] for i, ev in enumerate(D.EVENTS) for x in story_links("events", ev[5])},
+    KGLINK={"Gwynedd": "kings-gwynedd.html", "Powys": "kings-powys.html", "Ceredigion": "kings-ceredigion.html", "Dyfed": "kings-dyfed.html", "Brycheiniog": "kings-brycheiniog.html",
+            "Rhwng Gwy a Hafren": "kings-gwy-a-hafren.html", "Glywysing": "kings-glywysing.html", "Morgannwg": "kings-glywysing.html", "Gwent": "kings-gwent.html", "Deheubarth": "kings-deheubarth.html",
+            "Rhodri Mawr": "person-rhodri-mawr.html", "Hywel Dda": "person-hywel-dda.html", "Gruffudd ap Llywelyn": "kings.html", "Principality of Wales": "kings.html#princes",
+            "Owain Glyndŵr, Prince of Wales": "person-owain-glyndwr.html"},
     FACTS=F.FACTS, FEATURED=FEATURED, PPH={k: photo_url(v[0], 240) for k, v in PH.PERSON_PHOTOS.items()},
 )
 ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"]
@@ -733,6 +896,8 @@ def search_index():
     items += [dict(k="legend", t=x["en"], c=x["cy"], u=f"legend-{x['id']}.html", y=[x["place"], x["place"]], b=[x["sumEn"], x["sumCy"]], e=x["era"]) for x in F.LEGENDS]
     items += [dict(k="page", t=s[3], c=s[1], u=f"symbols.html#{s[0]}", y=["Symbol", "Symbol"], b=[s[4], s[5]], e="modern") for s in F.SYMBOLS]
     items += [dict(k="page", t=g[2], c=g[3], u=g[0], y=["Game", "Gêm"], b=[g[4], g[5]], e=g[8]) for g in GAMES]
+    items.append(dict(k="page", t="Kings and princes of Wales", c="Brenhinoedd a thywysogion Cymru", u="kings.html", y=["Kings", "Brenhinoedd"], b=["Every king and prince of Wales, and Gruffudd ap Llywelyn, king of all Wales", "Pob brenin a thywysog yng Nghymru, a Gruffudd ap Llywelyn, brenin Cymru gyfan"], e="kings"))
+    items += [dict(k="page", t=realm_title(r)[0], c=realm_title(r)[1], u=f"kings-{r['id']}.html", y=[r["span"], cy_dates(r["span"])], b=[r["subEn"] + " " + ", ".join(x["name"] for x in r["rulers"] if x["k"] == "r"), r["subCy"]], e=r["era"]) for r in RY.REALMS]
     items.append(dict(k="page", t="For teachers", c="I athrawon", u="teachers.html", y=["", ""], b=["Lesson ideas and printable quizzes", "Syniadau gwersi a chwisiau i’w hargraffu"], e="industrial"))
     return items
 
@@ -764,6 +929,9 @@ def main():
     pages["legends.html"] = legends_index()
     for i, x in enumerate(F.LEGENDS):
         pages[f"legend-{x['id']}.html"] = legend_page(x, i)
+    pages["kings.html"] = kings_page()
+    for i, r in enumerate(RY.REALMS):
+        pages[f"kings-{r['id']}.html"] = realm_page(r, i)
     pages["symbols.html"] = symbols_page()
     pages["gallery.html"] = gallery_page()
     pages["play.html"] = play_index()

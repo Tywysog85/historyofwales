@@ -597,7 +597,8 @@
     $("#kg-labels").innerHTML = labels;
     var card = $("#kg-card");
     card.innerHTML = '<p class="eyebrow">' + T("The changing map", "Y map yn newid") + '</p><h3 class="kg-stage">' + esc(T(K.en, K.cy)) + "</h3><p class=\"desc\">" + esc(T(K.nEn, K.nCy)) + '</p><ul class="kg-legend">' +
-      K.groups.map(function (g) { return '<li style="--k:' + g[2] + '"><i></i>' + esc(T(g[0], g[1])) + "</li>"; }).join("") + "</ul>" +
+      K.groups.map(function (g) { var u = (D.KGLINK || {})[g[0]], n = esc(T(g[0], g[1])); return '<li style="--k:' + g[2] + '"><i></i>' + (u ? '<a href="' + u + '">' + n + "</a>" : n) + "</li>"; }).join("") + "</ul>" +
+      '<p class="kg-kings"><a href="kings.html">' + T("Every king and prince of Wales", "Pob brenin a thywysog yng Nghymru") + " →</a></p>" +
       '<div class="kg-range"><label for="kg-in" class="eyebrow">' + T("Move through time", "Symud drwy amser") + '</label><input type="range" id="kg-in" min="0" max="' + (D.KINGDOMS.length - 1) + '" step="1" value="' + kgStage + '"><div class="kg-ticks">' +
       D.KINGDOMS.map(function (k, n) { return "<span" + (n === kgStage ? ' class="on"' : "") + ">" + (k.id === "today" ? T("Now", "Nawr") : k.id.replace("c", "")) + "</span>"; }).join("") + '</div><div class="kg-btns"><button type="button" class="btn" id="kg-prev" aria-label="' + T("Earlier", "Cynharach") + '">←</button><button type="button" class="btn solid" id="kg-play">' + (kgTimer ? T("Pause", "Oedi") : "▶ " + T("Play through time", "Chwarae drwy amser")) + '</button><button type="button" class="btn" id="kg-next" aria-label="' + T("Later", "Diweddarach") + '">→</button></div></div><p class="kg-note">' + T("Approximate: borders are drawn using modern council areas as building blocks.", "Bras: lluniwyd y ffiniau gan ddefnyddio ardaloedd cynghorau modern.") + "</p>";
     $("#kg-in").oninput = function () { kgStop(); kgStage = +this.value; renderKg(); var i = $("#kg-in"); if (i) i.focus(); };
