@@ -156,3 +156,6 @@ a.chip { text-decoration: none; color: inherit }
 .kg-btns { display: flex; gap: .5rem; align-items: center; margin-top: .4rem }
 .kg-btns #kg-play { flex: 1; justify-content: center }
 @media (max-width: 900px) { .kg-ticks span:not(.on):not(:first-child):not(:last-child) { visibility: hidden } .kg-label { font-size: 24px } }
+.kg-legend a { color: inherit; text-decoration-color: var(--line); text-underline-offset: 3px }
+.kg-legend a:hover { text-decoration-color: currentColor }
+.kg-kings { margin-top: .9rem; font-weight: 700 }

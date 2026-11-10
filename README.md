@@ -8,6 +8,7 @@ A proud, bilingual (English and Cymraeg) history of Wales, live at [historyofwal
 - **A timeline** of about 160 events.
 - **A map** of 67 historic sites, and a Kingdoms view showing Wales at 13 moments in time.
 - **71 people**, from Caratacus to today.
+- **Kings and princes**: every royal line, kingdom by kingdom (12 kingdoms, about 190 rulers), and the kings and princes of all Wales.
 - **14 long reads**, 7 legends, symbols and traditions.
 - **Games**: a daily challenge, a quiz, a map game, Welsh names, word pairs and more.
 - Every page in **English and Cymraeg**.
@@ -29,6 +30,7 @@ Everything is plain HTML, CSS and JavaScript. There is no framework and nothing 
 | The nine ages | `src/ages.py`, `src/ages9.py` |
 | Long reads, legends, symbols, facts | `src/features.py`, `src/pride.py`, `src/pride2.py`, `src/pride3.py`, `src/hywel.py` |
 | The Kingdoms map | `src/kingdoms.py` |
+| Kings and princes of each kingdom (`kings.html`, `kings-*.html`) | `src/royal.py` |
 | Photos and their credits | `src/photos.py` |
 | Drawn pictures | `src/art.py` |
 | The home page and opening screen | `src/head.html`, `src/body.html`, `src/app.js`, `src/extra.css`, `src/v6.css` |
