@@ -36,7 +36,17 @@
     { y: 0.50, a: 0.16, c: "#232a3d", s: 0.05 }, { y: 0.60, a: 0.14, c: "#1d2433", s: 0.12 },
     { y: 0.70, a: 0.12, c: "#171d2a", s: 0.2 }, { y: 0.80, a: 0.09, c: "#121722", s: 0.3 }, { y: 0.92, a: 0.06, c: "#0e1118", s: 0.42 }
   ];
-  function size() { if (!HERO) return; var r = cv.getBoundingClientRect(); dpr = Math.min(window.devicePixelRatio || 1, 2); W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; draw(); }
+  /* where the words sit, so the scene can keep clear of them */
+  var M = { h1t: 40, h1h: 80, sub: 0, cta: 0, tick: 0 }, hEl = HERO ? document.getElementById("top") : null;
+  function measure() {
+    if (!HERO) return false;
+    var r = cv.getBoundingClientRect(), q = function (sel) { var el = hEl.querySelector(sel); return el ? el.getBoundingClientRect() : null; };
+    var a = q("h1"), b = q(".sub"), c = q(".ticker"), e = q(".cta"), old = M.h1t + "," + M.h1h + "," + M.sub + "," + M.tick + "," + M.cta;
+    if (a) { M.h1t = a.top - r.top; M.h1h = a.height; } if (b) M.sub = b.bottom - r.top; if (e) M.cta = e.bottom - r.top; M.tick = c ? c.top - r.top : r.height;
+    return old !== M.h1t + "," + M.h1h + "," + M.sub + "," + M.tick + "," + M.cta;
+  }
+  function size() { if (!HERO) return; var r = cv.getBoundingClientRect(); dpr = Math.min(window.devicePixelRatio || 1, 2); W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; measure(); draw(); }
+  if (HERO) setInterval(function () { var r = cv.getBoundingClientRect(); if (Math.abs(r.height - H) > 1 || Math.abs(r.width - W) > 1) size(); else if (measure() && reduce) draw(); }, 500);
   var t0 = 0;
   function draw(t) {
     if (!HERO) return;
@@ -46,38 +56,70 @@
     var g = cx.createLinearGradient(0, 0, 0, H);
     g.addColorStop(0, "#0b0e16"); g.addColorStop(0.55, "#1a2032"); g.addColorStop(0.8, "#3a2a35"); g.addColorStop(1, "#0e1118");
     cx.fillStyle = g; cx.fillRect(0, 0, W, H);
-    stars.forEach(function (s) { var tw = 0.5 + 0.5 * Math.sin(t / 900 + s[3] * 20); cx.fillStyle = "rgba(236,233,225," + (0.15 + 0.5 * tw * s[2] / 1.4) + ")"; cx.fillRect(s[0] * W, s[1] * H - sy * 0.02, s[2], s[2]); });
-    var narrow = W < 640;
-    /* Eryri: summit geometry */
-    var ex0 = narrow ? -W * 0.15 : W * 0.38, ew = narrow ? W * 1.35 : W * 0.7, eb = H * (narrow ? 0.62 : 0.72), eh = H * (narrow ? 0.3 : 0.5);
+    stars.forEach(function (s, i) {
+      var tw = 0.5 + 0.5 * Math.sin(t / 900 + s[3] * 20), X = s[0] * W, Y = s[1] * H - sy * 0.02;
+      cx.fillStyle = "rgba(236,233,225," + (0.15 + 0.5 * tw * s[2] / 1.4) + ")"; cx.fillRect(X, Y, s[2], s[2]);
+      if (i % 12 === 0 && !(Y > M.h1t - 6 && (W < 1100 ? Y < M.cta + 6 : X < W * 0.62))) { var a = 0.25 + 0.6 * tw, L2 = 2.5 + 3 * tw; cx.fillStyle = "rgba(244,238,226," + a + ")"; cx.fillRect(X - L2, Y, L2 * 2 + 1, 1); cx.fillRect(X, Y - L2, 1, L2 * 2 + 1); }
+    });
+    /* phones and tall, narrow windows: the mountain sits below the words. Wide screens: it stands to the right of them. */
+    var narrow = W < 640, stacked = W < 1100;
+    var ex0, ew, eb, eh;
+    if (stacked) {
+      var top = narrow ? M.cta + 18 : M.sub + 4, bot = Math.max(top + 120, M.tick + (narrow ? 26 : 10));
+      eh = Math.min(bot - top, W * 0.62); eb = top + eh; ew = Math.max(W * (narrow ? 1.05 : 0.8), eh * 2.3); ex0 = W * (narrow ? 0.6 : 0.7) - 0.53 * ew;
+    } else { ex0 = W * 0.38; ew = W * 0.7; eb = H * 0.72; eh = H * 0.5; }
     var sumX = ex0 + 0.53 * ew - mouse * 4, sumY = eb - eh - sy * 0.04;
-    var mx = narrow ? W * 0.86 : W * 0.9, my = H * (narrow ? 0.07 : 0.13) - sy * 0.03, mr = Math.max(18, Math.min(W, H) * 0.04);
+    var mr = Math.max(narrow ? 15 : 18, Math.min(W, H) * 0.04);
+    var mx = narrow ? W - mr - 14 : W * 0.9, my = (stacked ? Math.max(mr + 8, M.h1t - mr * 0.2) : H * 0.13) - sy * 0.03;
     var mg = cx.createRadialGradient(sumX, sumY, 10, sumX, sumY, Math.max(W, H) * 0.45); mg.addColorStop(0, "rgba(226,69,61,.26)"); mg.addColorStop(1, "rgba(226,69,61,0)");
     cx.fillStyle = mg; cx.fillRect(0, 0, W, H);
+    var halo = cx.createRadialGradient(mx, my, mr * 0.9, mx, my, mr * 4.2), pulse = 0.2 + 0.05 * Math.sin(t / 2600);
+    halo.addColorStop(0, "rgba(233,217,198," + pulse + ")"); halo.addColorStop(0.35, "rgba(233,217,198," + pulse * 0.3 + ")"); halo.addColorStop(1, "rgba(233,217,198,0)");
+    cx.fillStyle = halo; cx.fillRect(mx - mr * 4.5, my - mr * 4.5, mr * 9, mr * 9);
     cx.fillStyle = "#e9d9c6"; cx.beginPath(); cx.arc(mx, my, mr, 0, 7); cx.fill();
+    cx.fillStyle = "rgba(180,160,140,.22)"; [[-.3, -.25, .22], [.28, .1, .16], [-.1, .4, .12]].forEach(function (c) { cx.beginPath(); cx.arc(mx + c[0] * mr, my + c[1] * mr, c[2] * mr, 0, 7); cx.fill(); });
     LAYERS.forEach(function (L, i) {
-      if (i === 1) drawEryri(ex0 - mouse * 4, eb - sy * 0.04, ew, eh);
-      var w = ridges[i], base = H * L.y + sy * L.s * 0.6, off = mouse * (i + 1) * 6;
+      if (i === 1) { drawEryri(ex0 - ew * 0.34 - mouse * 2, eb - sy * 0.03, ew * 0.9, eh * 0.62, true); drawEryri(ex0 - mouse * 4, eb - sy * 0.04, ew, eh); }
+      var w = ridges[i], amp = stacked ? eh * (0.34 - i * 0.04) : H * L.a, base = (stacked ? eb - eh * (0.42 - i * 0.15) : H * L.y) + sy * L.s * 0.6, off = mouse * (i + 1) * 6 + (reduce ? 0 : t / 1000 * (i + 1) * 1.2);
       cx.beginPath(); cx.moveTo(0, H);
       for (var x = 0; x <= W + 8; x += 6) {
         var u = (x + off) / Math.max(W, 900) * 3, v = 0;
         for (var k = 0; k < w.length; k++) v += Math.sin(u * w[k][1] + w[k][0]) * w[k][2];
         v = Math.abs(v) * 0.6 + v * 0.4;
-        cx.lineTo(x, base - v * H * L.a);
+        cx.lineTo(x, base - v * amp);
       }
       cx.lineTo(W, H); cx.closePath(); cx.fillStyle = L.c; cx.fill();
-      if (i === 1 || i === 3) { var fg = cx.createLinearGradient(0, base - H * 0.08, 0, base + H * 0.05); fg.addColorStop(0, "rgba(160,170,200,0)"); fg.addColorStop(0.6, "rgba(160,170,200," + (0.06 + 0.02 * Math.sin(t / 2200 + i)) + ")"); fg.addColorStop(1, "rgba(160,170,200,0)"); cx.fillStyle = fg; cx.fillRect(0, base - H * 0.08, W, H * 0.13); }
+      if (i === 1 || i === 3) {
+        var fg = cx.createLinearGradient(0, base - H * 0.08, 0, base + H * 0.05); fg.addColorStop(0, "rgba(160,170,200,0)"); fg.addColorStop(0.6, "rgba(160,170,200," + (0.06 + 0.02 * Math.sin(t / 2200 + i)) + ")"); fg.addColorStop(1, "rgba(160,170,200,0)"); cx.fillStyle = fg; cx.fillRect(0, base - H * 0.08, W, H * 0.13);
+        /* mist: soft banks drifting across the valley */
+        for (var m = 0; m < 3; m++) {
+          var mw = W * (0.5 + m * 0.14), px = ((m * 0.41 + i * 0.17) * (W + mw) + (reduce ? 0 : t / 1000 * (5 + m * 3 + i))) % (W + mw) - mw / 2, py = base - H * 0.02 + m * 9, rg = cx.createRadialGradient(px, py, 0, px, py, mw / 2);
+          rg.addColorStop(0, "rgba(176,186,214,.11)"); rg.addColorStop(1, "rgba(176,186,214,0)");
+          cx.save(); cx.translate(0, py); cx.scale(1, 0.12); cx.translate(0, -py); cx.fillStyle = rg; cx.fillRect(px - mw / 2, py - mw / 2, mw, mw); cx.restore();
+        }
+      }
     });
-    drawDragon(t, sumX, sumY, narrow);
+    drawDragon(t, sumX, sumY, narrow, stacked);
   }
   /* Yr Wyddfa seen from the east: Crib Goch, Garnedd Ugain, the summit, then Y Lliwedd */
   var ERYRI = [[0,.04],[.07,.14],[.14,.3],[.2,.47],[.23,.55],[.245,.52],[.26,.6],[.275,.57],[.29,.64],[.31,.61],[.335,.71],[.37,.77],[.41,.82],[.445,.79],[.48,.86],[.51,.95],[.53,1],[.55,.95],[.575,.86],[.61,.76],[.64,.69],[.665,.73],[.685,.7],[.705,.74],[.725,.71],[.76,.6],[.82,.44],[.89,.27],[.95,.14],[1,.06]];
-  function drawEryri(x0, base, w, h) {
+  function drawEryri(x0, base, w, h, far) {
     cx.beginPath(); cx.moveTo(x0, base + h * 0.2);
     ERYRI.forEach(function (p) { cx.lineTo(x0 + p[0] * w, base - p[1] * h); });
     cx.lineTo(x0 + w, base + h * 0.2); cx.closePath();
-    var g = cx.createLinearGradient(0, base - h, 0, base); g.addColorStop(0, "#36405e"); g.addColorStop(1, "#1e2537");
+    var g = cx.createLinearGradient(0, base - h, 0, base); g.addColorStop(0, far ? "#2a3350" : "#36405e"); g.addColorStop(1, far ? "#1c2334" : "#1e2537");
     cx.fillStyle = g; cx.fill();
+    if (far) return;
+    /* snow on the tops: only above the snow line, with a ragged lower edge */
+    cx.save(); cx.clip();
+    var line = base - h * 0.8, sg = cx.createLinearGradient(0, base - h, 0, line + h * 0.08); sg.addColorStop(0, "rgba(240,236,228,.92)"); sg.addColorStop(0.7, "rgba(214,218,232,.5)"); sg.addColorStop(1, "rgba(214,218,232,0)");
+    cx.beginPath(); cx.moveTo(x0 + w * 0.3, base - h * 1.05); cx.lineTo(x0 + w * 0.75, base - h * 1.05);
+    for (var k = 0; k <= 18; k++) { var u = 0.75 - k * 0.025; cx.lineTo(x0 + w * u, line + h * (k % 2 ? 0.075 : -0.015) + h * 0.03 * Math.sin(k * 2.3)); }
+    cx.closePath(); cx.fillStyle = sg; cx.fill();
+    /* shaded eastern faces */
+    cx.beginPath(); cx.moveTo(x0 + w * 0.53, base - h); cx.lineTo(x0 + w * 0.6, base - h * 0.3); cx.lineTo(x0 + w * 0.9, base); cx.lineTo(x0 + w, base - h * 0.06); cx.lineTo(x0 + w, base - h * 1.1); cx.closePath();
+    cx.fillStyle = "rgba(11,14,22,.2)"; cx.fill();
+    cx.restore();
     cx.beginPath(); ERYRI.forEach(function (p, j) { var X = x0 + p[0] * w, Y = base - p[1] * h; if (j) cx.lineTo(X, Y); else cx.moveTo(X, Y); });
     cx.strokeStyle = "rgba(233,217,198,.28)"; cx.lineWidth = 1.4; cx.stroke();
   }
@@ -87,12 +129,13 @@
     far: new Path2D("M128 62C130 40 140 18 160 2C150 18 150 26 152 32C144 30 140 36 142 42C134 42 132 50 134 58Z"),
     near: new Path2D("M92 64C86 40 74 18 48 0C62 4 80 10 96 20L104 10C112 22 118 36 120 52C114 48 108 50 108 56C102 52 96 56 98 62Z")
   };
-  function drawDragon(t, sumX, sumY, narrow) {
+  function drawDragon(t, sumX, sumY, narrow, stacked) {
     var period = 26000, k = reduce ? 0.55 : (t % period) / period;
-    var sx = narrow ? W * 0.6 : W * 0.6, ex = narrow ? W * 0.82 : sumX - W * 0.06;
-    var sy0 = narrow ? H * 0.06 : H * 0.07, ey = narrow ? H * 0.12 : sumY - H * 0.05;
-    var x = sx + (ex - sx) * k, y = sy0 + (ey - sy0) * k + Math.sin(t / 900) * H * 0.008;
-    var size = (narrow ? W * 0.27 : Math.min(W * 0.17, 260)) * (1 - 0.3 * k), sc = size / 220;
+    var base = narrow ? W * 0.27 : Math.min(W * 0.17, 260);
+    var sx = narrow ? W * 0.61 : W * 0.6, ex = narrow ? W * 0.72 : stacked ? W * 0.78 : sumX - W * 0.06;
+    var sy0 = narrow ? M.h1t + M.h1h * 0.3 : stacked ? M.h1t + M.h1h * 0.1 : H * 0.07, ey = narrow ? M.h1t + M.h1h * 0.42 : stacked ? M.h1t + M.h1h * 0.45 : sumY - H * 0.05;
+    var x = sx + (ex - sx) * k, y = sy0 + (ey - sy0) * k + Math.sin(t / 900) * Math.min(H * 0.008, 6);
+    var size = base * (1 - (narrow ? 0.18 : 0.3) * k), sc = size / 220;
     var alpha = reduce ? 1 : Math.min(1, k / 0.08, (1 - k) / 0.12);
     var flap = reduce ? 1 : 0.62 + 0.38 * Math.cos(t / 260);
     cx.save(); cx.globalAlpha = alpha; cx.translate(x, y); cx.scale(sc, sc); cx.rotate(-0.06);

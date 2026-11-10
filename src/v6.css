@@ -65,11 +65,25 @@ html.js .rv.in, html.rv-all .rv { opacity: 1; transform: none }
 html.menu-open { overflow: hidden }
 
 /* ---------- home hero ---------- */
-.hero { min-height: calc(100svh - 3.6rem); display: flex; flex-direction: column }
+.hero { min-height: min(calc(100svh - 3.6rem), 88vw); display: flex; flex-direction: column }
 .hero > .wrap { width: 100%; flex: 1; display: flex; flex-direction: column; justify-content: center }
 .hero::after { content: ""; position: absolute; inset: auto 0 0 0; height: 30%; background: linear-gradient(transparent, var(--night)); z-index: -1; pointer-events: none }
 .ticker { position: relative; margin-top: auto; background: rgba(11,14,22,.5) }
 @media (min-width: 641px) { .hero .wrap { padding-bottom: clamp(3rem, 6vw, 5rem) } }
+@media (min-width: 641px) and (max-width: 1099px) { .hero .wrap { padding-bottom: 11rem } }
+@media (max-width: 640px) {
+  .hero .wrap { padding-bottom: 12.5rem }
+  .hero .cta { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem }
+  .hero .cta .btn { justify-content: center; text-align: center; padding-inline: .6rem }
+  .hero .cta .btn.ghost { grid-column: 1 / -1; border: 1px solid rgba(236,233,225,.16); background: rgba(11,14,22,.45); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px) }
+  .hero .cta .btn.ghost::before { content: ""; width: .5rem; height: .5rem; border-radius: 50%; background: #e2453d; margin-right: .55rem; box-shadow: 0 0 0 0 rgba(226,69,61,.6); animation: ping 2.2s infinite }
+}
+@keyframes ping { 70% { box-shadow: 0 0 0 .55rem rgba(226,69,61,0) } 100% { box-shadow: 0 0 0 0 rgba(226,69,61,0) } }
+.scroll-cue { position: absolute; left: 50%; bottom: 1.1rem; translate: -50% 0; width: 1.5rem; height: 2.4rem; border: 1.5px solid rgba(236,233,225,.45); border-radius: 1rem; display: none }
+.scroll-cue::after { content: ""; position: absolute; left: 50%; top: .45rem; width: 3px; height: .5rem; margin-left: -1.5px; border-radius: 2px; background: var(--ink, #ece9e1); animation: cue 1.9s var(--ease, ease) infinite }
+@keyframes cue { 0% { transform: translateY(0); opacity: 0 } 25% { opacity: 1 } 80%, 100% { transform: translateY(.8rem); opacity: 0 } }
+@media (min-width: 1100px) and (min-height: 620px) { .hero > .wrap { position: relative } .scroll-cue { display: block } }
+@media (prefers-reduced-motion: reduce) { .scroll-cue::after, .hero .cta .btn.ghost::before { animation: none; opacity: 1 } }
 
 /* ---------- marquee ---------- */
 .marquee { overflow: hidden; border-block: 1px solid var(--line); padding-block: 1.1rem; background: var(--night); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent) }
