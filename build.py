@@ -17,7 +17,7 @@ sys.path.insert(0, SRC)
 import data as D  # noqa: E402
 import long as L  # noqa: E402
 
-BASE_URL = os.environ.get("SITE_URL", "https://tywysog85.github.io/Hanes-Cymru/")
+BASE_URL = os.environ.get("SITE_URL", "https://tywysog85.github.io/historyofwales/")
 GOATCOUNTER = os.environ.get("GOATCOUNTER", "").strip()
 WIKI = "https://en.wikipedia.org/wiki/"
 
@@ -313,7 +313,7 @@ def teachers_page():
             + section(f'<p class="no-print"><button type="button" class="btn solid" data-print="1">{bi("Print the quiz sheets", "Argraffu’r taflenni cwis")}</button> '
                       f'<span class="muted">{bi("Prints in whichever language is selected. Answers are hidden until opened.", "Yn argraffu yn yr iaith a ddewiswyd. Mae’r atebion yn gudd nes eu hagor.")}</span></p>{sheets}', "Printable quiz sheets", "Taflenni cwis i’w hargraffu")
             + section(f'<p>{bi("Spotted a mistake, or have a resource to share? Contact the site owner through the GitHub repository.", "Wedi gweld camgymeriad, neu am rannu adnodd? Cysylltwch â pherchennog y wefan drwy’r ystorfa GitHub.")} '
-                      '<a href="https://github.com/Tywysog85/Hanes-Cymru/issues" target="_blank" rel="noopener">GitHub ↗</a></p>'))
+                      '<a href="https://github.com/Tywysog85/historyofwales/issues" target="_blank" rel="noopener">GitHub ↗</a></p>'))
     return page("teachers.html", "For teachers · Hanes Cymru", "Lesson ideas and printable quiz sheets on the history of Wales, in English and Welsh.", main, era="industrial", og_type="website", active="teachers.html")
 
 
