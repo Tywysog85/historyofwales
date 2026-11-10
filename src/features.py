@@ -386,4 +386,5 @@ for _s in STORIES:
             _s["pEn"] = [t.replace(_a, _b) for t in _s["pEn"]]
             _s["pCy"] = [t.replace(_a, _b) for t in _s["pCy"]]
         _s["mins"] = 8
-STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES
+import pride3 as _P3
+STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES

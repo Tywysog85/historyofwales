@@ -148,6 +148,10 @@ To reword an existing line without hunting for it, add an `(old, new)` pair to `
 
 When a page is removed (the Arthur legend became a long read), leave a redirect page at the old address in `build.py` so old links still work.
 
+### The four notes in the top folder (November 2026)
+
+`README.md` says what the site is and where things live. `EDITORIAL.md` holds the owner's rules for how it is written. `TODO.md` lists the open jobs. `SKILLS.md` is this file. The owner wants them kept clean and tidy: when something changes, edit the line that is there instead of adding a new one at the bottom, delete finished jobs from `TODO.md`, and keep the counts in `README.md` true.
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
@@ -171,5 +175,7 @@ With nine posters in a row, a closed poster is too narrow for its title, so clos
 The home page sky is drawn in `src/app.js`. `sunOverWales()` works out how high the sun is over mid Wales from the clock alone (no location permission, no network), and `setSky()` blends between four palettes in `SKIES` (night, dawn, day, dusk) once a minute. Every colour in the scene reads from `SKY`, so a new palette is one line. To preview one, add `?sky=night`, `?sky=dawn`, `?sky=day` or `?sky=dusk` to the home page address.
 
 Keep the day palette dark enough for the light text to stay readable: the words sit on the sky, so "day" is a deep blue, not a pale one.
+
+On wide screens (1100 pixels and up) the opening screen is capped at 60rem tall in `src/v6.css` so no empty band opens above the numbers, the mountain is sized to fit inside the right edge (`ew`, `ex0` in `draw()`), a Milky Way of faint stars (`milky`) fills the left of the night sky, and `drawCastle()` puts a keep with a lit window and a red flag on a crag at the right. Phones and tablets do not get the castle or the Milky Way.
 
 Other effects in the same file: shooting stars (`drawMeteors`, night only), the dragon's fire (`fireAt`, every 9 to 16 seconds or when tapped; `DPOS` is where the dragon is for the tap test), and tilt (the `deviceorientation` listener feeds the same `mouse` value the pointer does; skipped on iOS, which asks permission). The glint on "Cymru" is CSS in `src/v6.css` (`@keyframes glint`), using a gradient clipped to the text; the letters need extra `padding-block` or their tails are cut off.

@@ -1,18 +1,41 @@
 # History of Wales (Hanes Cymru)
 
-An interactive, bilingual (English / Cymraeg) history of Wales: a scroll-driven timeline, a map of historic sites and changing kingdoms, the people who shaped Wales, the Welsh language, a quiz, and a page for each age.
+A proud, bilingual (English and Cymraeg) history of Wales, live at [historyofwales.cymru](https://historyofwales.cymru).
+
+## What is on it
+
+- **Nine ages**, from the first people in the caves to Wales today, each with its own page.
+- **A timeline** of about 160 events.
+- **A map** of 67 historic sites, and a Kingdoms view showing Wales at 13 moments in time.
+- **71 people**, from Caratacus to today.
+- **14 long reads**, 7 legends, symbols and traditions.
+- **Games**: a daily challenge, a quiz, a map game, Welsh names, word pairs and more.
+- Every page in **English and Cymraeg**.
+
+## The other notes in this folder
+
+- `EDITORIAL.md`: the rules for how the site is written. Read this before changing any text.
+- `TODO.md`: the open jobs.
+- `SKILLS.md`: how things are done, step by step, added to each time something new is learnt.
 
 ## How it is built
 
-Everything is plain HTML, CSS and JavaScript. There is no framework and nothing to install.
+Everything is plain HTML, CSS and JavaScript. There is no framework and nothing to install. `build.py` reads the files in `src/` and writes the finished site to `_site/`.
 
-- `src/data.py` holds the core content: eras, events, places, people, sources and translations. `src/long.py` holds the longer person and place histories, the themed trails and the teacher notes. **Edit these files to change the history.**
-- `src/static/` holds the icons, share image, app manifest and offline support. `tools/make_images.js` regenerates the share image and icons.
-- `src/head.html`, `src/body.html`, `src/app.js` and `src/extra.css` are the home page.
-- `src/geo/` holds the outline of Wales and its 22 local authorities, drawn from public boundary data.
-- `build.py` turns these into the finished site in `_site/`.
+| To change | Edit |
+| --- | --- |
+| Events, people, places | `src/data.py`, `src/more.py`, `src/places2.py` |
+| Longer histories of people and places, trails, teacher notes | `src/long.py` |
+| The nine ages | `src/ages.py`, `src/ages9.py` |
+| Long reads, legends, symbols, facts | `src/features.py`, `src/pride.py`, `src/pride2.py`, `src/pride3.py` |
+| The Kingdoms map | `src/kingdoms.py` |
+| Photos and their credits | `src/photos.py` |
+| Drawn pictures | `src/art.py` |
+| The home page and opening screen | `src/head.html`, `src/body.html`, `src/app.js`, `src/extra.css`, `src/v6.css` |
+| Games, menu, badges, search | `src/static/play.js`, `src/static/site.js`, `src/static/search.js` |
+| Icons and the share picture | `src/static/`, made by `tools/make_images.js` |
 
-To build locally:
+To build and look at it on your own computer:
 
 ```
 python3 build.py
@@ -23,13 +46,11 @@ python3 -m http.server -d _site 8000   # then open http://localhost:8000
 
 Every push to `main` runs `.github/workflows/deploy.yml`, which builds the site and publishes it to GitHub Pages.
 
-One-time setup: in the repository, go to **Settings → Pages** and set **Source** to **GitHub Actions**.
-
-If you use your own domain, set `SITE_URL` in the workflow's build step (for example `SITE_URL=https://hanes.cymru/ python3 build.py`) so the sitemap and canonical links use it, and add the domain under **Settings → Pages → Custom domain**.
+The site's address is set by `SITE_URL` in the workflow and by `src/static/CNAME`. Changes are made on a branch and published by merging a pull request into `main`.
 
 ## Visitor statistics
 
-The site can count visitors with [GoatCounter](https://www.goatcounter.com), which is free for non-commercial sites, uses no cookies and needs no cookie banner. Sign up, choose a code (for example `hanescymru`), then add `GOATCOUNTER: hanescymru` under `env:` in the build step of `.github/workflows/deploy.yml`.
+Visitors are counted with [GoatCounter](https://www.goatcounter.com), which uses no cookies and needs no cookie banner. The dashboard is at [historyofwales.goatcounter.com](https://historyofwales.goatcounter.com).
 
 ## Adding photos
 
@@ -37,7 +58,7 @@ Photos are linked from Wikimedia Commons in `src/photos.py`, and scene illustrat
 
 ## Accuracy
 
-Dates and figures were written with care but should be checked against the linked sources. Welsh text should be proofread by a fluent speaker.
+Dates and figures were written with care but should be checked against sources, and the Welsh should be proofread by a fluent speaker. Both jobs are listed in `TODO.md`.
 
 ## Round 3 additions
 
