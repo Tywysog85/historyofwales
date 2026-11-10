@@ -17,7 +17,8 @@ function heightAt(h, x, z) { /* metres east and south of the map corner */
 const MIST = { value: new THREE.Vector3(0.2, 0.18, 0.24) }; /* the colour of the valley mist as it is painted on screen, set each frame from the sky */
 function buildLand(h, colour, normal, detail) {
   const seg = HN - 1, geo = new THREE.PlaneGeometry(KM, KM, seg, seg); geo.rotateX(-Math.PI / 2); geo.translate(KM / 2, 0, KM / 2);
-  const p = geo.attributes.position; for (let i = 0; i < p.count; i++) p.setY(i, h[i]);
+  const p = geo.attributes.position; /* the hill nearest the eye is levelled into the valley floor: it was too close and too low to read as anything but a blob */
+  for (let i = 0; i < p.count; i++) { const k = Math.min(1, Math.max(0, (p.getX(i) / KM - 0.55) / 0.08)), f = k * k * (3 - 2 * k); p.setY(i, h[i] * (1 - f) + Math.min(h[i], 600) * f); }
   geo.deleteAttribute("normal");
   colour.colorSpace = THREE.SRGBColorSpace; colour.anisotropy = normal.anisotropy = 8; colour.flipY = normal.flipY = true;
   const mat = new THREE.MeshStandardMaterial({ map: colour, normalMap: normal, normalMapType: THREE.ObjectSpaceNormalMap, roughness: 0.93, metalness: 0, transparent: true });
@@ -29,7 +30,7 @@ function buildLand(h, colour, normal, detail) {
     sh.fragmentShader = sh.fragmentShader.replace("uniform float opacity;", "uniform float opacity; uniform sampler2D detail; uniform vec3 mist; varying float vH;")
       .replace("#include <map_fragment>", "#include <map_fragment>\n float d1 = texture2D(detail, vMapUv * 61.0).g * 2.0, d2 = texture2D(detail, vMapUv * 17.3).g * 2.0; diffuseColor.rgb *= mix(1.0, d1 * mix(1.0, d2, 0.4), 0.45);")
       /* the low ground, the ground near the eye and the outlying spurs melt away, so that the horseshoe rises out of the valley mist */
-      .replace("#include <premultiplied_alpha_fragment>", "gl_FragColor.rgb = mix(mist, gl_FragColor.rgb, 0.3 + 0.7 * smoothstep(600.0, 960.0, vH)); gl_FragColor.a *= smoothstep(900.0, 2200.0, length(vViewPosition)) * smoothstep(560.0, 690.0, vH) * (1.0 - smoothstep(0.31, 0.44, distance(vMapUv, vec2(0.342, 0.494)))); if (gl_FragColor.a < 0.02) discard;\n#include <premultiplied_alpha_fragment>");
+      .replace("#include <premultiplied_alpha_fragment>", "gl_FragColor.rgb = mix(mist, gl_FragColor.rgb, 0.1 + 0.9 * smoothstep(610.0, 840.0, vH)); gl_FragColor.a *= smoothstep(900.0, 2200.0, length(vViewPosition)) * (1.0 - smoothstep(0.31, 0.44, distance(vMapUv, vec2(0.342, 0.494)))); if (gl_FragColor.a < 0.02) discard;\n#include <premultiplied_alpha_fragment>");
   };
   const g = new THREE.Group(), mesh = new THREE.Mesh(geo, mat); mesh.frustumCulled = false; g.add(mesh);
   return g;
