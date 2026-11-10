@@ -39,12 +39,13 @@
     { y: 0.70, a: 0.12, c: "#171d2a", s: 0.2 }, { y: 0.80, a: 0.09, c: "#121722", s: 0.3 }, { y: 0.92, a: 0.06, c: "#0e1118", s: 0.42 }
   ];
   /* where the words sit, so the scene can keep clear of them */
-  var M = { h1t: 40, h1h: 80, sub: 0, cta: 0, tick: 0 }, hEl = HERO ? document.getElementById("top") : null;
+  var M = { h1t: 40, h1h: 80, sub: 0, cta: 0, tick: 0, nav: 0 }, hEl = HERO ? document.getElementById("top") : null;
   function measure() {
     if (!HERO) return false;
     var r = cv.getBoundingClientRect(), q = function (sel) { var el = hEl.querySelector(sel); return el ? el.getBoundingClientRect() : null; };
     var a = q("h1"), b = q(".sub"), c = q(".ticker"), e = q(".cta"), old = M.h1t + "," + M.h1h + "," + M.sub + "," + M.tick + "," + M.cta;
-    if (a) { M.h1t = a.top - r.top; M.h1h = a.height; } if (b) M.sub = b.bottom - r.top; if (e) M.cta = e.bottom - r.top; M.tick = c ? c.top - r.top : r.height;
+    if (a) { M.h1t = a.top - r.top; M.h1h = a.height; } var nv = document.querySelector(".nav"); M.nav = nv && window.scrollY < 4 ? Math.max(0, nv.getBoundingClientRect().bottom - r.top) : M.nav;
+    if (b) M.sub = b.bottom - r.top; if (e) M.cta = e.bottom - r.top; M.tick = c ? c.top - r.top : r.height;
     return old !== M.h1t + "," + M.h1h + "," + M.sub + "," + M.tick + "," + M.cta;
   }
   var VIS = 0; /* how much of the hero the first screen shows */
@@ -128,8 +129,8 @@
     var L3 = window.HCL3 && HCL3.ready && performance.now() > 1200, noLand = L3 || window.HCL3_WANT;
     if (L3) {
       /* the valley mist the mountains rise out of, which also hides the stars below the skyline */
-      var vm = cx.createLinearGradient(0, eb - eh * 0.45, 0, H), mistC = mixHex(mixHex(SKY.sky[2], SKY.sky[1], 0.45), "#aab4d2", 0.12), vc = hex(mistC).join(",");
-      vm.addColorStop(0, "rgba(" + vc + ",0)"); vm.addColorStop(0.3, "rgba(" + vc + ",.9)"); vm.addColorStop(0.55, "rgba(" + vc + ",1)"); vm.addColorStop(1, SKY.sky[3]); cx.fillStyle = vm; cx.fillRect(0, eb - eh * 0.45, W, H);
+      var vm = cx.createLinearGradient(0, eb - eh * 0.7, 0, H), mistC = mixHex(mixHex(SKY.sky[2], SKY.sky[1], 0.45), "#6f7896", 0.62), vc = hex(mistC).join(",");
+      vm.addColorStop(0, "rgba(" + vc + ",0)"); vm.addColorStop(0.34, "rgba(" + vc + ",.9)"); vm.addColorStop(0.55, "rgba(" + vc + ",1)"); vm.addColorStop(1, SKY.sky[3]); cx.fillStyle = vm; cx.fillRect(0, eb - eh * 0.7, W, H);
       if (!FLAG) FLAG = flagArt(); HCL3.frame({ W: W, H: H, sumX: sumX - ew * 0.13, sumY: sumY + ew * 0.15, ppm: ew / 2000, ground: stacked ? { x: W * 0.5 - mouse * 9, y: eb + eh * 0.02 - sy * 0.1, ppm: ew * 0.007 } : { x: Math.min(W * 0.885, W - H * 0.3) - mouse * 9, y: H * 0.7 - sy * 0.1, ppm: H * 0.0098 }, castle: !stacked, t: t, sun: SKY.sun, fog: mixHex(SKY.sky[2], SKY.sky[1], 0.45), mist: mistC, flag: FLAG, flagV: FLAGV });
       if (HCL3.shown && !LANDT) LANDT = t;
     }
@@ -268,7 +269,7 @@
   }
   var FIRE_PREVIEW = /[?&]fire=1/.test(location.search);
   var DPOS = { x: -999, y: -999, r: 0 }, fireAt = 0, nextFire = 5000;
-  var LANDT = 0, DT0 = -1;
+  var LANDT = 0, DT0 = -1, WING_UP = /[?&]wing=([\d.]+)/.test(location.search) ? +RegExp.$1 : 0.62; /* how far the wingtips rise above the chest, as a share of the wingspan */
   function drawDragon(t, sumX, sumY, narrow, stacked) {
     /* the dragon waits for the land to finish fading in, then starts at the beginning of its flight */
     if (DT0 < 0 && !reduce) { if (window.HCD3_WANT && !(window.HCD3 && HCD3.ready)) return; if (window.HCL3_WANT && !(LANDT && t > LANDT + 1700)) return; DT0 = t; nextFire = t + 5000; }
@@ -278,6 +279,8 @@
     var sy0 = narrow ? M.h1t + M.h1h * 0.3 : stacked ? M.h1t + M.h1h * 0.1 : H * 0.07, ey = narrow ? M.h1t + M.h1h * 0.42 : stacked ? M.h1t + M.h1h * 0.45 : sumY - H * 0.05;
     var x = sx + (ex - sx) * k, y = sy0 + (ey - sy0) * k + Math.sin(t / 900) * Math.min(H * 0.008, 6);
     var size = base * (1 - (narrow ? 0.18 : 0.3) * k), sc = size / 220;
+    /* keep the whole dragon, wingtips included, below the menu bar */
+    var clear = M.nav + 10 + size * WING_UP - (y + 60 * sc); if (clear > 0) y += clear;
     var alpha = reduce ? 1 : Math.min(1, k / 0.08, (1 - k) / 0.12);
     DPOS.x = x + 110 * sc; DPOS.y = y + 60 * sc; DPOS.r = Math.max(44, 120 * sc);
     if (!reduce && t > nextFire && alpha >= 1) { fireAt = t; nextFire = t + 9000 + Math.random() * 7000; }
@@ -318,7 +321,7 @@
         window.HCD3_WANT = window.HCL3_WANT = 1;
         var c3 = document.createElement("canvas"); c3.id = "sky3d"; c3.setAttribute("aria-hidden", "true"); cv.after(c3);
         var cl = document.createElement("canvas"); cl.id = "land3d"; cl.setAttribute("aria-hidden", "true"); cv.after(cl);
-        var s3 = document.createElement("script"); s3.type = "module"; s3.src = "hero3d.js"; s3.onerror = function () { window.HCD3_WANT = window.HCL3_WANT = 0; c3.remove(); cl.remove(); }; document.head.appendChild(s3);
+        var s3 = document.createElement("script"); s3.type = "module"; s3.src = "hero3d.js?v=3"; /* raise the number whenever hero3d.js changes, so browsers fetch the new one */ s3.onerror = function () { window.HCD3_WANT = window.HCL3_WANT = 0; c3.remove(); cl.remove(); }; document.head.appendChild(s3);
         setTimeout(function () { if (!(window.HCD3 && HCD3.ready)) window.HCD3_WANT = 0; if (!(window.HCL3 && HCL3.ready)) { window.HCL3_WANT = 0; cl.remove(); } }, 15000);
       }
     } catch (e3) { window.HCD3_WANT = 0; }
