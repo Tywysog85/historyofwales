@@ -8,7 +8,7 @@ Environment:
   SITE_URL     public address of the site, ending in /   (default: the GitHub Pages address)
   GOATCOUNTER  your GoatCounter code, e.g. "hanescymru", to switch on visitor statistics
 """
-import html, json, os, re, sys, shutil
+import datetime, html, json, os, re, sys, shutil
 from xml.sax.saxutils import escape as xesc
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -195,6 +195,11 @@ def nav(active="", skip="#main", home=False):
             f'<p class="menu-note">{bi("230,000 years of history, in English and Cymraeg.", "230,000 o flynyddoedd o hanes, yn Gymraeg ac yn Saesneg.")}</p></div></div></div>')
 
 
+# Name shown in the copyright line at the bottom of every page.
+COPYRIGHT_OWNER = "History of Wales"
+COPYRIGHT_OWNER_CY = "Hanes Cymru"
+
+
 def footer():
     def col(title_en, title_cy, links):
         return f'<div><p class="eyebrow">{bi(title_en, title_cy)}</p><ul>' + "".join(f'<li><a href="{h}">{bi(a, b)}</a></li>' for h, a, b in links) + "</ul></div>"
@@ -205,11 +210,17 @@ def footer():
             ("teachers.html", "For teachers", "I athrawon"), ("index.html#sources", "Sources", "Ffynonellau")]
     play = [("daily.html", "Daily challenge", "Her y dydd"), ("quiz.html", "Quiz", "Cwis"), ("map-game.html", "Where in Wales?", "Ble yng Nghymru?"), ("names.html", "Welsh names", "Enwau Cymraeg"),
             ("play.html", "All games", "Pob gêm"), ("journey.html", "Your journey", "Eich taith")]
+    yr = datetime.date.today().year
+    yrs = "2026" if yr <= 2026 else f"2026–{yr}"
+    copy_en = (f"© {yrs} {COPYRIGHT_OWNER}. All rights reserved. The text and design of this site may not be copied without permission. "
+               "Photographs and the 3D dragon belong to their own creators and are used under their licences.")
+    copy_cy = (f"© {yrs} {COPYRIGHT_OWNER_CY}. Cedwir pob hawl. Ni chaniateir copïo testun na chynllun y wefan hon heb ganiatâd. "
+               "Mae’r ffotograffau a’r ddraig 3D yn eiddo i’w crewyr eu hunain ac fe’u defnyddir dan eu trwyddedau.")
     return ('<footer class="site-foot"><div class="wrap"><div class="foot-top"><p class="big">Diolch<span>.</span></p>'
             f'<p class="foot-tag">{bi("Thank you for reading. Wales is a small country with a long memory; this site is a way in.", "Diolch am ddarllen. Gwlad fach â chof hir yw Cymru; ffordd i mewn yw’r wefan hon.")}</p></div>'
             f'<div class="foot-cols">{col("The nine ages", "Y naw oes", eras)}{col("Explore", "Archwilio", explore)}{col("Read", "Darllen", read)}{col("Play", "Chwarae", play)}</div>'
             f'<div class="foot-base"><span>{bi("History of Wales · Hanes Cymru", "Hanes Cymru · History of Wales")}</span>'
-            f'<span>{bi("Event links go to Wikipedia, which lists academic sources. Dates marked c. are approximate. Original illustrations; photographs from Wikimedia Commons, credited on each page.", "Mae dolenni’r digwyddiadau’n mynd i Wicipedia, sy’n rhestru ffynonellau academaidd. Dyddiadau bras yw’r rhai a nodir c. Darluniau gwreiddiol; ffotograffau o Wikimedia Commons, gyda chydnabyddiaeth ar bob tudalen.")}</span></div></div></footer>'
+            f'<span>{bi("Event links go to Wikipedia, which lists academic sources. Dates marked c. are approximate. Original illustrations; photographs from Wikimedia Commons, credited on each page.", "Mae dolenni’r digwyddiadau’n mynd i Wicipedia, sy’n rhestru ffynonellau academaidd. Dyddiadau bras yw’r rhai a nodir c. Darluniau gwreiddiol; ffotograffau o Wikimedia Commons, gyda chydnabyddiaeth ar bob tudalen.")}</span></div><p class="foot-copy">{bi(copy_en, copy_cy)}</p></div></footer>'
             f'<button type="button" class="to-top" id="to-top" aria-label="Back to top / Yn ôl i’r brig" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>')
 
 

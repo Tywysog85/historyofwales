@@ -199,3 +199,8 @@ Behind the dragon, the mountains, the moor and the castle are real 3D too, drawn
 - To rebuild `src/static/hero3d.js` after changing anything in `tools/*.src.js`: in a folder with `three` (0.160) and `esbuild` from npm, run `npx esbuild hero3d.src.js --bundle --minify --format=esm --target=es2019 --outfile=hero3d.js` and copy the result to `src/static/`.
 - To test 3D without a graphics card, start Chromium with `--use-gl=swiftshader --enable-unsafe-swiftshader --ignore-gpu-blocklist`.
 
+## The copyright notice
+
+- In the UK copyright is automatic: nothing needs registering. The notice just makes ownership plain and helps if someone does copy.
+- The © line at the bottom of every page is made by `footer()` in `build.py`. The name in it is `COPYRIGHT_OWNER` (English) and `COPYRIGHT_OWNER_CY` (Welsh) just above that function; the year updates itself (2026, then 2026–2027 and so on).
+- It claims only the site's own text and design. Photos (Wikimedia Commons) and the 3D dragon stay credited to their creators, as listed in README.md.
