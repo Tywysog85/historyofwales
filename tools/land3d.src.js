@@ -2,7 +2,7 @@
    and a castle on its crag in front. Bundled with the dragon into src/static/hero3d.js. */
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import * as THREE from "three";
-const KM = 10333.4, HN = 384, VE = 1.3; /* the height map covers 10.3 km square; heights are drawn 1.3 times taller */
+const KM = 10333.4, HN = 512, VE = 1.3; /* the height map covers 10.3 km square; heights are drawn 1.3 times taller */
 function readHeights(img) {
   const c = document.createElement("canvas"); c.width = c.height = HN; const g = c.getContext("2d", { willReadFrequently: true }); g.drawImage(img, 0, 0, HN, HN);
   const d = g.getImageData(0, 0, HN, HN).data, h = new Float32Array(HN * HN);
@@ -15,7 +15,7 @@ function heightAt(h, x, z) { /* metres east and south of the map corner */
   return (h[i] * (1 - fx) + h[i + 1] * fx) * (1 - fy) + (h[i + HN] * (1 - fx) + h[i + HN + 1] * fx) * fy;
 }
 const MIST = { value: new THREE.Vector3(0.2, 0.18, 0.24) }; /* the colour of the valley mist as it is painted on screen, set each frame from the sky */
-function buildLand(h, colour, normal, detail) {
+function buildLand(h, colour, normal, detail, rock, rockN) {
   const seg = HN - 1, geo = new THREE.PlaneGeometry(KM, KM, seg, seg); geo.rotateX(-Math.PI / 2); geo.translate(KM / 2, 0, KM / 2);
   const p = geo.attributes.position; /* the hill nearest the eye is levelled into the valley floor: it was too close and too low to read as anything but a blob */
   for (let i = 0; i < p.count; i++) { const k = Math.min(1, Math.max(0, (p.getX(i) / KM - 0.55) / 0.08)), f = k * k * (3 - 2 * k); p.setY(i, h[i] * (1 - f) + Math.min(h[i], 600) * f); }
@@ -25,10 +25,20 @@ function buildLand(h, colour, normal, detail) {
   /* fine grain from a photograph of rock, so that the slopes hold up close to */
   detail.wrapS = detail.wrapT = THREE.RepeatWrapping; detail.anisotropy = 8;
   mat.onBeforeCompile = (sh) => {
-    sh.uniforms.detail = { value: detail }; sh.uniforms.mist = MIST;
-    sh.vertexShader = sh.vertexShader.replace("#include <common>", "varying float vH;\n#include <common>").replace("#include <begin_vertex>", "#include <begin_vertex>\n vH = position.y;");
-    sh.fragmentShader = sh.fragmentShader.replace("uniform float opacity;", "uniform float opacity; uniform sampler2D detail; uniform vec3 mist; varying float vH;")
-      .replace("#include <map_fragment>", "#include <map_fragment>\n float d1 = texture2D(detail, vMapUv * 61.0).g * 2.0, d2 = texture2D(detail, vMapUv * 17.3).g * 2.0; diffuseColor.rgb *= mix(1.0, d1 * mix(1.0, d2, 0.4), 0.45);")
+    sh.uniforms.detail = { value: detail }; sh.uniforms.rockT = { value: rock }; sh.uniforms.rockN = { value: rockN }; sh.uniforms.mist = MIST;
+    sh.vertexShader = sh.vertexShader.replace("#include <common>", "varying float vH; varying vec3 vWP;\n#include <common>").replace("#include <begin_vertex>", "#include <begin_vertex>\n vH = position.y; vWP = position;");
+    sh.fragmentShader = sh.fragmentShader.replace("uniform float opacity;", "#define CRAG_LO 0.10\n#define CRAG_HI 0.34\n#define CRAG_N 0.9\nuniform float opacity; uniform sampler2D detail, rockT, rockN; uniform vec3 mist; varying float vH; varying vec3 vWP;")
+      /* the crags: a photograph of rock laid on the steep ground from the side (not from above, which would smear it down the faces), at two sizes */
+      .replace("#include <map_fragment>", `#include <map_fragment>
+ float d1 = texture2D(detail, vMapUv * 61.0).g * 2.0, d2 = texture2D(detail, vMapUv * 17.3).g * 2.0; float snowK = smoothstep(0.25, 0.6, diffuseColor.g);
+ diffuseColor.rgb *= mix(1.0, d1 * mix(1.0, d2, 0.4), 0.45 * (1.0 - snowK));
+ vec3 oN = normalize(texture2D(normalMap, vNormalMapUv).xyz * 2.0 - 1.0); float steep = smoothstep(CRAG_LO, CRAG_HI, 1.0 - oN.y);
+ vec2 bw = abs(oN.xz) / (abs(oN.x) + abs(oN.z) + 0.0001); vec2 ux = vWP.zy * vec2(1.0, 1.0 / ${VE.toFixed(2)}), uz = vWP.xy * vec2(1.0, 1.0 / ${VE.toFixed(2)});
+ float rl = (texture2D(rockT, ux / 1300.0).g * bw.x + texture2D(rockT, uz / 1300.0).g * bw.y) * 0.6 + (texture2D(rockT, ux / 370.0 + 0.37).g * bw.x + texture2D(rockT, uz / 370.0 + 0.37).g * bw.y) * 0.4;
+ diffuseColor.rgb *= mix(1.0, clamp(rl / 0.12, 0.2, 2.2), steep * (1.0 - 0.5 * snowK));`)
+      .replace("#include <normal_fragment_maps>", `#include <normal_fragment_maps>
+ { vec3 tx = texture2D(rockN, ux / 1300.0).xyz * 2.0 - 1.0 + 0.6 * (texture2D(rockN, ux / 370.0 + 0.37).xyz * 2.0 - 1.0), tz = texture2D(rockN, uz / 1300.0).xyz * 2.0 - 1.0 + 0.6 * (texture2D(rockN, uz / 370.0 + 0.37).xyz * 2.0 - 1.0);
+   normal = normalize(normalMatrix * (oN + steep * CRAG_N * (bw.x * vec3(0.0, tx.y, tx.x) + bw.y * vec3(tz.x, tz.y, 0.0)))); }`)
       /* the low ground, the ground near the eye and the outlying spurs melt away, so that the horseshoe rises out of the valley mist */
       .replace("#include <premultiplied_alpha_fragment>", "gl_FragColor.rgb = mix(mist, gl_FragColor.rgb, 0.1 + 0.9 * smoothstep(610.0, 840.0, vH)); gl_FragColor.a *= smoothstep(900.0, 2200.0, length(vViewPosition)) * (1.0 - smoothstep(0.31, 0.44, distance(vMapUv, vec2(0.342, 0.494)))); if (gl_FragColor.a < 0.02) discard;\n#include <premultiplied_alpha_fragment>");
   };
@@ -197,7 +207,7 @@ try {
   /* the mountain */
   const land = new THREE.Scene(), camL = new THREE.PerspectiveCamera(30, 1, 20, 30000);
   land.fog = new THREE.FogExp2(0x2a2536, 0.0001);
-  const hemiL = new THREE.HemisphereLight(0x5a6a9a, 0x10121a, 0.55), moonL = new THREE.DirectionalLight(0xb8c8ff, 2.2); moonL.position.set(1, 0.5, -0.3); land.add(hemiL, moonL);
+  const hemiL = new THREE.HemisphereLight(0x5a6a9a, 0x10121a, 0.55), moonL = new THREE.DirectionalLight(0xb8c8ff, 2.2); moonL.position.set(-0.445, 0.35, -0.82); land.add(hemiL, moonL);
   const SUMMIT = new THREE.Vector3(3536, 1150, 5224), EYE = [9760, 3790]; /* looking at the summit from the Capel Curig side */
   /* the castle */
   const fort = new THREE.Scene(), camF = new THREE.PerspectiveCamera(20, 1, 5, 3000), FD = 190;
@@ -210,8 +220,8 @@ try {
   const img = new Image();
   let rockT = null;
   img.onload = () => Promise.all(["eryri-c.webp", "eryri-n.webp", "detail.webp", "rock.webp", "rock-n.webp"].map(ld)).then((t) => {
-    const h = readHeights(img); land.add(buildLand(h, t[0], t[1], t[2]));
-    rockT = { rock: t[3], rockN: t[4] }; [t[3], t[4]].forEach((q) => { q.wrapS = q.wrapT = THREE.RepeatWrapping; q.anisotropy = 8; }); t[3].colorSpace = THREE.SRGBColorSpace; fort.add(buildMoor(rockT));
+    [t[3], t[4]].forEach((q) => { q.wrapS = q.wrapT = THREE.RepeatWrapping; q.anisotropy = 8; }); t[3].colorSpace = THREE.SRGBColorSpace;
+    const h = readHeights(img); land.add(buildLand(h, t[0], t[1], t[2], t[3], t[4])); rockT = { rock: t[3], rockN: t[4] }; fort.add(buildMoor(rockT));
     camL.position.set(EYE[0], heightAt(h, EYE[0], EYE[1]) + 40, EYE[1]); camL.lookAt(SUMMIT); camL.updateMatrixWorld(true);
     api.ready = true; window.dispatchEvent(new Event("hcl3"));
   }).catch(fail);
