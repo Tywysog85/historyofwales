@@ -11,11 +11,14 @@
     if (!cy || en === cy) return "<" + tag + (cls ? ' class="' + cls + '"' : "") + attrs + ">" + esc(en) + "</" + tag + ">";
     return "<" + tag + ' class="' + c + 'l-en"' + attrs + ">" + esc(en) + "</" + tag + "><" + tag + ' class="' + c + 'l-cy"' + attrs + ">" + esc(cy) + "</" + tag + ">";
   }
+  /* the Kingdoms colours of the home page, made deeper and softer for this bigger map */
+  var PAL = { "#e2453d": "#c4473d", "#d39a62": "#c48a4f", "#7cc495": "#4f9a6c", "#93a0e0": "#6e7ec4", "#c38fd6": "#9a6cb2",
+    "#5b6478": "#4d566a", "#e8c65a": "#cfa944", "#62c6c4": "#3e9f9c", "#e58fb4": "#be6d92" };
   function bx(p) { if (!box[p.dataset.la]) box[p.dataset.la] = p.getBBox(); return box[p.dataset.la]; }
   function paintStage(id) {
     var K = W.stages[id], colour = {};
     K.groups.forEach(function (g) { (g[3] === "*" ? las.map(function (p) { return p.dataset.la; }) : g[3]).forEach(function (n) { colour[n] = g[2]; }); });
-    las.forEach(function (p) { p.style.fill = colour[p.dataset.la] || "#2a3142"; });
+    las.forEach(function (p) { var c = PAL[colour[p.dataset.la]] || colour[p.dataset.la] || "#2a3142"; p.style.fill = c; p.style.stroke = c; });
     labG.innerHTML = K.groups.map(function (g) {
       var en = g[4] ? g[4][0] : g[0], cy = g[4] ? g[4][1] : g[1]; if (!en) return "";
       var sx = 0, sy = 0, sa = 0;
