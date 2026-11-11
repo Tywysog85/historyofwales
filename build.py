@@ -584,7 +584,8 @@ def legend_page(x, i):
     nxt = F.LEGENDS[(i + 1) % len(F.LEGENDS)]
     main = (hero(x["era"], f'<a href="index.html">{SITE}</a> / <a href="legends.html">{bi("Legends", "Chwedlau")}</a>', "book", x["place"], x["place"], x["en"], x["cy"], x["sumEn"], x["sumCy"], art=x["art"])
             + f'<section class="article"><div class="wrap narrow">{prose_bi(x["pEn"], x["pCy"], "prose tale")}'
-              f'<aside class="behind"><p class="eyebrow">{bi("The history behind the legend", "Yr hanes y tu ôl i’r chwedl")}</p><p>{bi(x["hEn"], x["hCy"])}</p></aside>'
+              f'<aside class="behind"><p class="eyebrow">{bi(x.get("hLabelEn", "The history behind the legend"), x.get("hLabelCy", "Yr hanes y tu ôl i’r chwedl"))}</p><p>{bi(x["hEn"], x["hCy"])}</p></aside>'
+              + (f'<p class="l-links">' + "".join(f'<a class="btn" href="{h}">{bi(en, cy)} →</a>' for h, en, cy in x["links"]) + '</p>' if x.get("links") else "") +
               f'<p class="byline"><button type="button" class="copy" data-copy="legend-{x["id"]}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button></p></div></section>'
             + section(f'<div class="pager"><a class="btn" href="legends.html">← {bi("All legends", "Pob chwedl")}</a><a class="btn solid" href="legend-{nxt["id"]}.html">{bi(nxt["en"], nxt["cy"])} →</a></div>'))
     return page(f"legend-{x['id']}.html", f'{x["en"]} · History of Wales', x["sumEn"], main, era=x["era"], active="legends.html", track=f"legend:{x['id']}")
@@ -597,7 +598,7 @@ def legends_index():
             + "".join(f'<section{"" if k == 0 else " class=\"tight\""} id="{g["ids"][0]}-set"><div class="wrap"><h2 class="sub-h">{bi(g["en"], g["cy"])}</h2><p class="l-sum">{bi(g["sumEn"], g["sumCy"])}</p>'
                       f'<div class="l-grid">{"".join(legend_card(x) for x in g["items"])}</div></div></section>' for k, g in enumerate(F.LEGEND_GROUPS))
             + section(f'<div class="pager"><a class="btn" href="symbols.html">{bi("Symbols and traditions", "Symbolau a thraddodiadau")} →</a></div>'))
-    return page("legends.html", "Legends · History of Wales", "The legends of Wales retold: the red dragon, Gelert, the Four Branches of the Mabinogi, Macsen Wledig, Culhwch and Olwen, Dwynwen, Melangell, the Tylwyth Teg and more, with the history behind them.", main, era="medieval", og_type="website", active="legends.html")
+    return page("legends.html", "Legends · History of Wales", "The legends of Wales retold: the tales of King Arthur, the red dragon, Gelert, the Four Branches of the Mabinogi, Macsen Wledig, Culhwch and Olwen, Dwynwen, Melangell, the Tylwyth Teg and more, with the history behind them.", main, era="medieval", og_type="website", active="legends.html")
 
 
 def symbols_page():
@@ -1803,7 +1804,6 @@ def main():
     pages["stories.html"] = stories_index()
     for i, x in enumerate(F.STORIES):
         pages[f"story-{x['id']}.html"] = story_page(x, i)
-    pages["legend-arthur.html"] = '<!doctype html><html lang="en"><meta charset="utf-8"><title>Arthur, King of the Britons</title><link rel="canonical" href="story-arthur.html"><meta http-equiv="refresh" content="0; url=story-arthur.html"><a href="story-arthur.html">Arthur, King of the Britons</a></html>'
     pages["legends.html"] = legends_index()
     for i, x in enumerate(F.LEGENDS):
         pages[f"legend-{x['id']}.html"] = legend_page(x, i)
