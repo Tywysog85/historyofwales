@@ -42,7 +42,8 @@ html.js .rv.in, html.rv-all .rv { opacity: 1; transform: none }
 .journey-chip b { font: 600 .72rem var(--f-mono); color: var(--ink) }
 .journey-chip:hover .tr { stroke: var(--muted) }
 @media (max-width: 1180px) { .nav .nav-inline { display: none } }
-@media (max-width: 1480px) { .nav .nav-inline .x { display: none } }
+/* every topic stays in the bar on every page and at every desktop width, beside the site name: the words and gaps are kept small enough to fit the 1185 px row in both languages */
+@media (min-width: 1181px) { .nav .nav-inline { gap: 0 .95rem; margin-right: .3rem } .nav .nav-inline a { font-size: .9rem } .nav a.brand { font-size: 1.15rem } .nav .wrap { gap: .5rem } }
 @media (max-width: 560px) { .menu-btn .l-en, .menu-btn .l-cy { display: none !important } .menu-btn { padding: .7rem .75rem } .brand { font-size: 1.15rem } .brand svg { width: 1.3rem; height: 1.3rem } .lang button { padding: .2rem .5rem } .nav .wrap { gap: .4rem } }
 @media (max-width: 400px) { .journey-chip { display: none } }
 
