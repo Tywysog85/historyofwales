@@ -193,6 +193,9 @@ html.menu-open { overflow: hidden }
 
 /* ---------- legends ---------- */
 #legends { background: radial-gradient(80% 60% at 80% 0%, rgba(124,196,149,.08), transparent 70%), linear-gradient(var(--night), #0d1512 30%, #0d1512 70%, var(--night)) }
+.l-jump { margin-top: 1.4rem } .l-jump .chip { background: rgba(11,14,22,.55); backdrop-filter: blur(4px) }
+[id$="-set"] { scroll-margin-top: 4.5rem }
+.l-sum { color: var(--muted); max-width: 46rem; margin: -.8rem 0 1.6rem; font-size: 1.05rem }
 .l-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem }
 .l-card { position: relative; aspect-ratio: 3 / 4.2; border-radius: var(--r); overflow: hidden; text-decoration: none; color: #fff; isolation: isolate; display: grid; align-items: end; border: 1px solid var(--line); transition: transform .4s var(--ease) }
 .l-card:hover { transform: translateY(-5px) }

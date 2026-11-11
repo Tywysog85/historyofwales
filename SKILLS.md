@@ -185,6 +185,13 @@ Learnt while expanding Arthur's page (`src/arthur.py`).
 - The map is drawn at build time: each llan becomes a dot on the same outline of Wales as the home page map, using the same sums (`x = (lon - minx) * k * sc`, `y = (maxy - lat) * sc` from `src/geo/map.json`). `src/static/saints.js` adds the saint picker, the tap card, the llan name decoder (it undoes the soft mutation after "llan") and "today's saint".
 - Region pages link to the matching kings page and back; person and place pages link to their saints region automatically through `saints_links()` in `build.py`.
 
+### Adding a legend, and the sections of the Legends page (November 2026)
+- The first seven legends are in `LEGENDS` in `src/features.py`; the rest are in `src/legends2.py`, in the same shape (id, era, art, place, titles, summaries, tale `pEn`/`pCy` with `## ` sub-headings, and the history behind it `hEn`/`hCy`).
+- `GROUPS` in `src/legends2.py` sets the sections of `legends.html` and the order of the legend pages (the "next legend" button follows it). Every legend id must be in exactly one group: the build stops and names the missing or extra id if not. The home page shows the four in `LEGENDS_HOME` in `features.py`.
+- Every legend needs an `art` key. New legends use their own key (`horse`, `boar`, `hare` ...) which `_STAND_IN` in `src/art.py` points at an existing scene for now. To give one its own lifelike picture, add a scene function for that key; the legend text never changes.
+- Arthur is never put in the legends list (see `EDITORIAL.md`). Where he appears in an old tale, as in Culhwch ac Olwen, he is named as the tale names him, "chief of the princes of this island".
+- The "Storyteller" badge (`src/static/site.js`) is for reading ten legends, so it does not need changing when legends are added.
+
 ### The four notes in the top folder (November 2026)
 
 `README.md` says what the site is and where things live. `EDITORIAL.md` holds the owner's rules for how it is written. `TODO.md` lists the open jobs. `SKILLS.md` is this file. The owner wants them kept clean and tidy: when something changes, edit the line that is there instead of adding a new one at the bottom, delete finished jobs from `TODO.md`, and keep the counts in `README.md` true.
