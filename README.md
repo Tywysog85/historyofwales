@@ -37,6 +37,7 @@ Everything is plain HTML, CSS and JavaScript. There is no framework and nothing 
 | Kings and princes of each kingdom (`kings.html`, `kings-*.html`) | `src/royal.py` |
 | Saints of Wales (`saints.html`, `saints-*.html`) | `src/saints.py`; map and decoder in `src/static/saints.js` |
 | Photos and their credits | `src/photos.py`, `src/photos2.py` |
+| Photo gallery: categories, and its 258 pictures with credits | `src/gallery.py`, `src/gallery_photos.py`, `src/static/gallery/` |
 | Drawn pictures | `src/art.py` |
 | The home page and opening screen | `src/head.html`, `src/body.html`, `src/app.js`, `src/extra.css`, `src/v6.css`; the 3D dragon, mountains and castle in `tools/*.src.js`, built into `src/static/hero3d.js` |
 | Games, menu, badges, search | `src/static/play.js`, `src/static/site.js`, `src/static/search.js` |
@@ -62,7 +63,7 @@ Visitors are counted with [GoatCounter](https://www.goatcounter.com), which uses
 
 ## Adding photos
 
-Photos are linked from Wikimedia Commons in `src/photos.py`. Pages without a photo show a picture drawn in code by `src/art.py`. Use only photos you own or that carry a free licence, and credit the photographer and licence on the page.
+Photos are linked from Wikimedia Commons in `src/photos.py`. The gallery's pictures are stored on the site itself (`src/static/gallery/`), with the photographer and licence of each in `src/gallery_photos.py`; when a place or person has a gallery picture, their page uses it. Pages without a photo show a picture drawn in code by `src/art.py`. Use only photos you own or that carry a free licence, and credit the photographer and licence on the page.
 
 ## Credits for artwork
 
