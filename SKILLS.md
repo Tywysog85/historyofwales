@@ -327,6 +327,17 @@ With nine posters in a row, a closed poster is too narrow for its title, so clos
 - The © line at the bottom of every page is made by `footer()` in `build.py`. The name in it is `COPYRIGHT_OWNER` (English) and `COPYRIGHT_OWNER_CY` (Welsh) just above that function; the year updates itself (2026, then 2026–2027 and so on).
 - It claims only the site's own text and design. Photos (Wikimedia Commons) and the 3D dragon stay credited to their creators, as listed in README.md.
 
+### Welsh literature, the great books and the Triads (November 2026)
+
+Three pages: `literature.html` (the ages of Welsh literature, with a cynghanedd example), `books.html` (the manuscripts and first printed books) and `triads.html` (Trioedd Ynys Prydain).
+
+- **Where the words live.** All the text is in `src/literature.py`: `AGES`, `BOOK_GROUPS`, `TRIAD_GROUPS` and the intro lists. `literature_page()`, `books_page()` and `triads_page()` in `build.py` lay them out. To add a book or a triad, copy one entry in `literature.py`; it appears on the page and in search by itself.
+- **Quotes with a translation.** In an age's text, a line written `> Welsh words — English words | source` shows the Welsh in large italics with the English underneath (`lit_prose()`).
+- **Triads that open on a tap.** Each triad is a `<details>` box, so it works with no script. A tiny script copies one of them into "Triad of the day", chosen by the day of the year.
+- **Pictures.** A picture is either a gallery id (already on the site, with its credit) or a Commons tuple: file, author, licence, licence link, caption EN, caption CY, width, height. Commons files are kept on the site by the "Fetch photos" workflow (run it from the Actions tab after adding new ones).
+- **Picture research when Commons is blocked.** Put categories and search words in `tools/commons_research_in.json` and push it to a `claude/` branch. The "Look up pictures on Wikimedia Commons" workflow (`tools/commons_research.py`) commits a list with licences and small previews to `_research/<name>/`, which can be looked at before choosing. Delete the `_research` folder before merging. Keep `max` under about 400 and leave out search words that catch unrelated pictures (a search for "Yny lhyvyr hwnn" filled the list with book fairs).
+- **Poet pages link back.** Anyone listed in an age's `people` gets a "Welsh literature" link on their person page (`lit_link()`).
+
 ### The castles map (November 2026)
 
 `castles.html` shows every castle site in Wales on one map that you can drag and zoom, with who built each one. Welsh-built castles are red and drawn on top.
