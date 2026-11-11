@@ -54,6 +54,7 @@ FIRSTS.update({
  "william-grove": ("world", "Built the first fuel cell, 1842", "Adeiladodd y gell danwydd gyntaf, 1842", 1842),
  "alfred-russel-wallace": ("world", "Discovered evolution by natural selection, alongside Darwin, 1858", "Darganfu esblygiad drwy ddethol naturiol, ochr yn ochr â Darwin, 1858", 1858),
  "aneirin": ("world", "Y Gododdin: the oldest poetry of Britain in a language still spoken, c. 600", "Y Gododdin: barddoniaeth hynaf Prydain mewn iaith a siaredir o hyd, tua 600", 600),
+ "lloyd-george": ("wales", "Brought in Britain’s first state old-age pensions, 1908", "Cyflwynodd bensiynau henoed cyntaf y wladwriaeth ym Mhrydain, 1908", 1908),
  "aneurin-bevan": ("world", "Founded the NHS, 1948: health care free to everyone at the point of use", "Sefydlodd y Gwasanaeth Iechyd, 1948: gofal iechyd am ddim i bawb pan fo’i angen", 1948),
  "yr-arglwydd-rhys": ("wales", "Held the first recorded eisteddfod, Cardigan 1176", "Cynhaliodd yr eisteddfod gyntaf y gwyddys amdani, Aberteifi 1176", 1176),
  "gruffudd-ap-llywelyn": ("wales", "The only king ever to rule the whole of Wales, from 1055", "Yr unig frenin erioed i reoli Cymru gyfan, o 1055", 1055),
