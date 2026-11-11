@@ -28,6 +28,7 @@ import trees as TR  # noqa: E402
 import cymraeg as CYM  # noqa: E402
 import saints as SA  # noqa: E402
 import onthisday as OTD  # noqa: E402
+import arthur as AR  # noqa: E402
 L.TEACH.update(AG9.TEACH)
 from urllib.parse import quote as _q
 
@@ -328,6 +329,35 @@ def era_page(i, era):
 
 
 # ---------- person pages ----------
+def arthur_extra():
+    # Arthur's line and the map of Arthur's Wales (src/arthur.py)
+    him_cls = ' class="him"'
+    line = "".join(f'<li{him_cls if him else ""}><b>{e(n)}</b><span>{bi(a, c)}</span></li>' for n, a, c, him in AR.LINE)
+    links = ft_link_for_person("person-arthur.html") + realm_links("person-arthur.html")
+    line_html = (f'<ol class="ar-line">{line}</ol>' + (f'<p class="realm-links">{links}</p>' if links else ""))
+    sc, k, minx, maxy = geo["sc"], geo["k"], geo["minx"], geo["maxy"]
+    pins, items = "", ""
+    for i, (en, cy, lat, lon, ten, tcy, link) in enumerate(AR.PLACES, 1):
+        x0, y0 = (lon - minx) * k * sc, (maxy - lat) * sc
+        dx, dy = AR.NUDGE.get(i, (0, 0))   # move a crowded pin aside, with a short line back to the real spot
+        x, y = x0 + dx, y0 + dy
+        if dx or dy:
+            pins += f'<circle class="ar-dot" cx="{x0:.0f}" cy="{y0:.0f}" r="3" fill="#d43c34"/><line class="ar-lead" x1="{x0:.0f}" y1="{y0:.0f}" x2="{x:.0f}" y2="{y:.0f}"/>'
+        pins += (f'<a href="#ar-{i}" class="ar-pin"><circle cx="{x:.0f}" cy="{y:.0f}" r="13"/>'
+                 f'<text x="{x:.0f}" y="{y + 5:.0f}">{i}</text><title>{e(en)}</title></a>')
+        more = f' <a class="src" href="{link}">{bi("More", "Mwy")} →</a>' if link else ""
+        items += f'<li id="ar-{i}"><b>{bi(en, cy)}</b><p>{bi(ten, tcy)}{more}</p></li>'
+    svg = (f'<svg class="ar-map" viewBox="-10 -10 630 691" role="img" aria-label="Map of places in Wales linked to Arthur / Map o leoedd yng Nghymru sy’n gysylltiedig ag Arthur">'
+           f'<path class="land" d="{geo["outline"]}"/>{pins}</svg>')
+    intro = bi("Nineteen places in Wales, and in Ergyng on the old border, that carry Arthur’s name or his story. Tap a number to read about it.",
+               "Pedwar ar bymtheg o leoedd yng Nghymru, ac yn Ergyng ar yr hen ffin, sy’n dwyn enw Arthur neu ei hanes. Tapiwch rif i ddarllen amdano.")
+    return (section(line_html, "The line of Arthur", "Llinach Arthur")
+            + section(f'<p class="lede">{intro}</p><div class="ar-grid"><div class="ar-mapbox">{svg}</div><ol class="ar-list">{items}</ol></div>', "Arthur’s Wales", "Cymru Arthur"))
+
+
+PERSON_EXTRA = {"arthur": arthur_extra}
+
+
 def person_page(p):
     slug, eid = p[0], p[1]
     era = ERA[eid]
@@ -341,8 +371,11 @@ def person_page(p):
     meta = (f'<div class="person-meta"><span>{e(p[2])}</span><span>{bi(p[5], p[6])}</span><a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a></div>')
     rl = realm_links(f"person-{slug}.html") + ft_link_for_person(f"person-{slug}.html") + saints_links(f"person-{slug}.html")
     meta += f'<p class="realm-links">{rl}</p>' if rl else ""
+    coded = any(a.startswith(("## ", "> ", "|| ")) for a in long_en)
+    body = prose_bi(long_en, long_cy, cls="story prose") if coded else paras(long_en, long_cy)
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', era["ill"], p[2], p[2], p[3], p[4], p[7], p[8], art=ERA_ART[eid])
-            + section(meta + photo_fig(PH.PERSON_PHOTOS.get(slug), "portrait") + paras(long_en, long_cy) + f'<p class="share no-print"><button type="button" class="btn" data-copy="person-{slug}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button> {src(p[9])}</p>', top=True)
+            + section(meta + photo_fig(PH.PERSON_PHOTOS.get(slug), "portrait") + body + f'<p class="share no-print"><button type="button" class="btn" data-copy="person-{slug}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button> {src(p[9])}</p>', top=True)
+            + PERSON_EXTRA.get(slug, lambda: "")()
             + story_feature("people", slug)
             + (section(f'<ol class="era-events">{"".join(event_li(ev) for ev in related)}</ol>', "On the timeline", "Ar y llinell amser") if related else "")
             + section(f'<div class="people">{"".join(plaque(x) for x in same)}</div>', "Also in this age", "Hefyd yn yr oes hon")
@@ -363,6 +396,8 @@ def place_page(pl):
             f'<a href="{osm}" target="_blank" rel="noopener">{bi("Open in a map", "Agor mewn map")} ↗</a><a href="index.html#lle-{pid}">{bi("On our map", "Ar ein map")} →</a></div>')
     rl = realm_links(f"place-{pid}.html") + saints_links(f"place-{pid}.html")
     meta += f'<p class="realm-links">{rl}</p>' if rl else ""
+    coded = any(a.startswith(("## ", "> ", "|| ")) for a in long_en)
+    body = prose_bi(long_en, long_cy, cls="story prose") if coded else paras(long_en, long_cy)
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', pl["ill"], era["en"], era["cy"], pl["en"], pl["cy"], pl["dEn"], pl["dCy"], art=ERA_ART[eid])
             + section(meta + photo_fig(PH.PLACE_PHOTOS.get(pid)) + paras(long_en, long_cy) + f'<p class="share no-print">{src(pl["src"])}</p>', top=True)
             + story_feature("places", pid)

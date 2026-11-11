@@ -4,7 +4,7 @@
 # points are given in the tradition's own words ("Welsh tradition holds", "Owain wrote").
 # features.py, long.py and data.py pull these in at their ends.
 
-ARTHUR = dict(id="arthur", era="saints", art="sword", mins=6,
+ARTHUR = dict(id="arthur", era="saints", art="sword", mins=6, people=["arthur"],
   en="Arthur, King of the Britons", cy="Arthur, Brenin y Brythoniaid",
   sumEn="Welsh tradition holds that Arthur was a king of Gwent and Glywysing: Athrwys ap Meurig, grandson of the warrior saint Tewdrig.",
   sumCy="Yn ôl traddodiad Cymru, brenin Gwent a Glywysing oedd Arthur: Athrwys ap Meurig, ŵyr y sant a’r rhyfelwr Tewdrig.",
