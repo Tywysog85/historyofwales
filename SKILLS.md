@@ -144,6 +144,15 @@ Learnt while building the Hywel Dda page (`src/hywel.py`). Long-read paragraphs 
 
 A long read can also say who and what it is about, with `people=[...]`, `places=[...]` and `events=[...]` (event titles in English). `build.py` then adds a "The full story" card to those person and place pages, and a "Read the long read" link to those events on the age pages and on the timeline (the timeline gets them through `SL` in the page data). One list in the story does all the linking.
 
+
+### A long read in its own file, a new picture, and a sweep for banned words (November 2026)
+
+Learnt while building the Iolo Morganwg long read (`src/iolo.py`, `story-iolo.html`).
+
+- **Own file for a big long read.** Put the `STORY` dict in its own file (like `src/hywel.py` and `src/iolo.py`) and add it to the end of `STORIES` in `src/features.py`. The same file can hold a person's longer text and a new place: the place tuple is added to `MORE_PLACES` at the bottom of `src/places2.py`, and its longer text goes in `PLACE_LONG` in `src/long.py`.
+- **A new picture.** Each picture is a small function in `src/art.py` that returns SVG shapes. Add it to `MOTIF` and give it a moon position in `MOON`, then use its name as `art=` in the story. To look at it quickly, render `art.scene("name", "#b08a3e")` into a small HTML file and screenshot it with Playwright. `_gorsedd` (a stone circle under the three rays of the Nod Cyfrin) is the example.
+- **Fix wording at the source.** `REWORD` in `src/pride.py` hides old wording at build time, but the old words stay in the files. For a rule the owner feels strongly about (Iolo is never called a forger), change the original line in `data.py`, `more.py`, `long.py` or `features.py` and delete the `REWORD` pair.
+- **Sweep the built site.** After building, search every page and `_site/search.json` for the banned words (for Iolo: forger, forged, ffug, laudanum, invented, dyfeisiedig). Search with plain `grep -l "word" _site/*` rather than a long regular expression: the pages are single long lines and a regex with `.{0,120}` on both sides can run for minutes.
 ### A long person page with headings, and a map of places (November 2026)
 
 Learnt while expanding Arthur's page (`src/arthur.py`).

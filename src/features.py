@@ -252,8 +252,8 @@ SYMBOLS = [
   "The national anthem was written in Pontypridd in January 1856 by a weaver, Evan James, to a tune by his son James. It was sung before a rugby international for the first time in 1905, when Wales answered the New Zealand haka with it, and then beat them.",
   "Ysgrifennwyd yr anthem genedlaethol ym Mhontypridd ym mis Ionawr 1856 gan wehydd, Evan James, ar alaw gan ei fab James. Fe’i canwyd cyn gêm rygbi ryngwladol am y tro cyntaf yn 1905, pan atebodd Cymru haka Seland Newydd â hi, ac yna eu curo."),
  ("eisteddfod", "Yr Eisteddfod", "Yr Eisteddfod", "The Eisteddfod",
-  "The Lord Rhys held a contest of poets and musicians at Cardigan Castle in 1176, the first known eisteddfod. The modern National Eisteddfod dates from 1861 and moves between north and south each August. Its Gorsedd of bards, in white, blue and green robes, was invented by Iolo Morganwg in 1792.",
-  "Cynhaliodd yr Arglwydd Rhys ornest i feirdd a cherddorion yng Nghastell Aberteifi yn 1176, yr eisteddfod gyntaf y gwyddys amdani. Mae’r Eisteddfod Genedlaethol fodern yn dyddio o 1861 ac yn symud rhwng y gogledd a’r de bob mis Awst. Dyfeisiwyd Gorsedd y Beirdd, yn eu gwisgoedd gwyn, glas a gwyrdd, gan Iolo Morganwg yn 1792."),
+  "The Lord Rhys held a contest of poets and musicians at Cardigan Castle in 1176, the first known eisteddfod. The modern National Eisteddfod dates from 1861 and moves between north and south each August. Its Gorsedd of bards, in white, blue and green robes, was founded by Iolo Morganwg in 1792.",
+  "Cynhaliodd yr Arglwydd Rhys ornest i feirdd a cherddorion yng Nghastell Aberteifi yn 1176, yr eisteddfod gyntaf y gwyddys amdani. Mae’r Eisteddfod Genedlaethol fodern yn dyddio o 1861 ac yn symud rhwng y gogledd a’r de bob mis Awst. Sefydlwyd Gorsedd y Beirdd, yn eu gwisgoedd gwyn, glas a gwyrdd, gan Iolo Morganwg yn 1792."),
  ("lovespoon", "Llwyau caru", "Llwyau caru", "Lovespoons",
   "A young man would carve a wooden spoon for the woman he hoped to marry, working hearts, keys, wheels and chains into the handle to show his skill and his intentions. The oldest dated Welsh lovespoon, from 1667, is at St Fagans.",
   "Byddai dyn ifanc yn cerfio llwy bren i’r ferch y gobeithiai ei phriodi, gan weithio calonnau, allweddi, olwynion a chadwyni i’r goes i ddangos ei fedr a’i fwriad. Mae’r llwy garu Gymreig hynaf â dyddiad arni, o 1667, yn Sain Ffagan."),
@@ -378,4 +378,5 @@ for _s in STORIES:
             _s["pCy"] = [t.replace(_a, _b) for t in _s["pCy"]]
         _s["mins"] = 8
 import pride3 as _P3
-STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES
+import iolo as _IO  # Iolo Morganwg long read (src/iolo.py)
+STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY]

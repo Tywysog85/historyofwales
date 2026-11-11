@@ -121,12 +121,6 @@ PEOPLE_NEW = [
 
 # Rewordings of the short lines on people and events: (old, new). Applied to every text field.
 REWORD = [
- ("Stonemason, poet and inspired forger who created the Gorsedd of Bards, still part of every National Eisteddfod.",
-  "Stonemason, poet and visionary who founded the Gorsedd of the Bards, saved old Welsh manuscripts and taught Wales to see itself as a nation."),
- ("Saer maen, bardd a ffugiwr dawnus a greodd Orsedd y Beirdd, sy’n dal yn rhan o bob Eisteddfod Genedlaethol.",
-  "Saer maen, bardd a gweledydd a sefydlodd Orsedd y Beirdd, a achubodd hen lawysgrifau Cymraeg ac a ddysgodd i Gymru ei gweld ei hun yn genedl."),
- ("His invented ritual later becomes part of the National Eisteddfod.", "His ceremony later becomes the heart of the National Eisteddfod."),
- ("Yn ddiweddarach daw ei ddefod ddyfeisiedig yn rhan o’r Eisteddfod Genedlaethol.", "Yn ddiweddarach daw ei seremoni’n galon yr Eisteddfod Genedlaethol."),
  ("agree to divide England and Wales between them. French troops land", "agree to divide the realm: a greater Wales for Owain, reaching to the Severn, the Trent and the Mersey, the south of England for Mortimer and the north for Percy. French troops land"),
  ("yn cytuno i rannu Cymru a Lloegr rhyngddynt. Mae milwyr Ffrengig", "yn cytuno i rannu’r deyrnas: Cymru fwy i Owain, yn ymestyn at afonydd Hafren, Trent a Mersi, de Lloegr i Mortimer a’r gogledd i Percy. Mae milwyr Ffrengig"),
  ("names Arthur as a war leader who won twelve battles. The legend begins here.", "names Arthur as the leader who won twelve battles against the Saxons. It is the oldest account of his wars."),

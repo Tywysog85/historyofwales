@@ -245,9 +245,31 @@ def _terrace(c):
     return out + win + smoke
 
 
+def _gorsedd(c):
+    # a Gorsedd circle of stones round the maen llog, lit by the three rays of the Nod Cyfrin /|\
+    g = f"gr{abs(hash(c)) % 9973}"
+    rays = (f'<defs><linearGradient id="{g}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{c}" stop-opacity=".75"/><stop offset="1" stop-color="{c}" stop-opacity=".04"/></linearGradient></defs>'
+            f'<g fill="url(#{g})"><path d="M392 124L404 124L292 420L252 420Z"/><path d="M394 124L406 124L414 420L386 420Z"/><path d="M396 124L408 124L548 420L508 420Z"/></g>')
+    back, front = "", ""
+    n = 14
+    for k in range(n):
+        a = math.pi * 2 * k / n
+        x, y = 400 + math.cos(a) * 300, 424 + math.sin(a) * 30
+        s = 0.6 + (math.sin(a) + 1) * 0.3
+        w, h = 26 * s, (58 + (k * 37) % 20) * s
+        st = f'<path d="M{x - w / 2:.0f} {y:.0f}L{x - w / 2 + 3:.0f} {y - h + 6:.0f}Q{x:.0f} {y - h - 4:.0f} {x + w / 2 - 2:.0f} {y - h + 4:.0f}L{x + w / 2:.0f} {y:.0f}Z"/>'
+        if math.sin(a) < 0:
+            back += st
+        else:
+            front += st
+    maen = '<path d="M350 430L358 404L442 400L450 428Z"/>'
+    edge = f'<path d="M358 403L442 399" stroke="{c}" stroke-width="2.5" opacity=".9"/>'
+    return f'{rays}<g fill="#141926">{back}</g><g fill="{FRONT}">{maen}</g>{edge}<g fill="{FRONT}">{front}</g>'
+
+
 MOTIF = dict(fort=_fort, terrace=_terrace, castle=_castle, dolmen=_dolmen, cross=_cross, ship=lambda c: _sea(c, 446, 2) + _ship(c, 0, -10), pit=_pit, senedd=_senedd,
              dragons=_dragons, hound=_hound, sunken=_sunken, lady=_lady, bird=_bird, owl=_owl, sword=_sword, cauldron=_cauldron,
-             book=_book, arches=_arches, torch=_torch, amph=_amph)
+             book=_book, arches=_arches, torch=_torch, amph=_amph, gorsedd=_gorsedd)
 # Legends added 2026-11-11 (src/legends2.py) borrow an existing scene until each gets its own lifelike picture.
 # To give one its own picture, point its key at a new function here; the legend text never needs to change.
 _STAND_IN = dict(horse="fort", mist="castle", boar="hound", roman="amph", plague="dragons", island="cross", hare="book",
@@ -256,7 +278,7 @@ for _k, _v in _STAND_IN.items():
     MOTIF.setdefault(_k, MOTIF[_v])
 MOON = dict(fort=(650, 100, 30), terrace=(620, 110, 34), castle=(640, 110, 34), dolmen=(400, 190, 60), cross=(620, 120, 30), ship=(170, 120, 36), pit=(650, 110, 30), senedd=(650, 100, 30),
             dragons=(400, 120, 44), hound=(560, 120, 46), sunken=(640, 70, 26), lady=(600, 120, 40), bird=(180, 110, 34), owl=(620, 110, 50),
-            sword=(600, 110, 36), cauldron=(640, 100, 30), book=(650, 96, 28), arches=(140, 110, 32), torch=(660, 100, 30), amph=(160, 110, 30))
+            sword=(600, 110, 36), cauldron=(640, 100, 30), book=(650, 96, 28), arches=(140, 110, 32), torch=(660, 100, 30), amph=(160, 110, 30), gorsedd=(400, 96, 30))
 for _k, _v in _STAND_IN.items():
     MOON.setdefault(_k, MOON[_v])
 

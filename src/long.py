@@ -99,9 +99,9 @@ PEOPLE_LONG = {
    "Ysgrifennodd gannoedd o emynau a cherddi hir a roddodd lais i’r diwygiad. Mae ei emyn ‘Arglwydd, arwain trwy’r anialwch’ i’w glywed mewn gemau rygbi rhyngwladol hyd heddiw."]),
  "iolo-morganwg": (
   ["Edward Williams, a stonemason from the Vale of Glamorgan, was a gifted poet, antiquary and radical. In 1792 he held the first Gorsedd of the Bards of the Isle of Britain on Primrose Hill in London.",
-   "He also forged medieval poems and documents so skilfully that they fooled scholars for a century. His Gorsedd became part of the National Eisteddfod in 1819 and remains at its heart today."],
+   "He walked Wales collecting and copying old manuscripts, and with Owain Myfyr and William Owen Pughe edited The Myvyrian Archaiology of Wales. His Gorsedd became part of the National Eisteddfod in 1819 and remains at its heart today."],
   ["Saer maen o Fro Morgannwg oedd Edward Williams, bardd, hynafiaethydd a radical dawnus. Yn 1792 cynhaliodd Orsedd gyntaf Beirdd Ynys Prydain ar Fryn y Briallu yn Llundain.",
-   "Ffugiodd hefyd gerddi a dogfennau canoloesol mor fedrus nes twyllo ysgolheigion am ganrif. Daeth ei Orsedd yn rhan o’r Eisteddfod yn 1819 ac mae’n dal wrth ei chalon heddiw."]),
+   "Cerddodd Gymru yn casglu ac yn copïo hen lawysgrifau, a chydag Owain Myfyr a William Owen Pughe golygodd The Myvyrian Archaiology of Wales. Daeth ei Orsedd yn rhan o’r Eisteddfod yn 1819 ac mae’n dal wrth ei chalon heddiw."]),
  "jemima-nicholas": (
   ["Jemima Nicholas was a shoemaker in Fishguard. When about 1,400 French troops landed at Carregwastad Point in February 1797, local people turned out to resist.",
    "Tradition says Jemima marched into the fields armed with a pitchfork and rounded up twelve French soldiers. She was granted a pension, and a memorial stone stands at St Mary’s Church in Fishguard."],
@@ -270,6 +270,8 @@ PEOPLE_LONG.update(_P3.PEOPLE_LONG)
 import hywel as _HY
 PEOPLE_LONG["hywel-dda"] = _HY.PERSON_LONG
 PLACE_LONG["hendygwyn"] = _HY.WHITLAND_LONG
+import iolo as _IO
+PLACE_LONG["trefflemin"] = _IO.FLEMINGSTON_LONG
 import arthur as _AR
 PEOPLE_LONG["arthur"] = _AR.PERSON_LONG
 _fix = lambda t: [t := t.replace(a, b) for a, b in _P.REWORD][-1]
