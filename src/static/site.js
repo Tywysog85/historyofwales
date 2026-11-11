@@ -34,8 +34,8 @@
   var RANKS = [[0, "Newcomer", "Newydd-ddyfodiad"], [3, "Apprentice", "Prentis"], [12, "Storyteller", "Cyfarwydd"], [30, "Bard", "Bardd"], [60, "Chief bard", "Pencerdd"], [100, "Prince of history", "Tywysog hanes"]];
   function rank(n) { var r = RANKS[0]; RANKS.forEach(function (x) { if (n >= x[0]) r = x; }); return r; }
   function toast(b) {
-    var a = d.createElement("a"); a.className = "toast"; a.href = "journey.html"; a.setAttribute("role", "status");
-    a.innerHTML = "<i>" + b[1] + "</i><span>" + T("Badge earned: ", "Bathodyn newydd: ") + T(b[2], b[3]) + "</span>";
+    var a = d.createElement("div"); a.className = "toast"; a.setAttribute("role", "status");
+    a.innerHTML = '<a href="journey.html"><i aria-hidden="true">' + b[1] + "</i><span>" + T("Badge earned: ", "Bathodyn newydd: ") + T(b[2], b[3]) + "</span></a>";
     d.body.appendChild(a); setTimeout(function () { a.remove(); }, 4300);
   }
   function check(j, quiet) {
@@ -48,6 +48,8 @@
     var chip = $("#journey-chip"); if (!chip) return;
     var n = count(j), tot = +chip.dataset.total || 118;
     $("#journey-n").textContent = n;
+    chip.setAttribute("aria-label", n + T(n === 1 ? " page read: your journey" : " pages read: your journey", " tudalen wedi’u darllen: eich taith"));
+    chip.title = T("Pages you have read. Tap to see your journey and badges.", "Y tudalennau rydych wedi’u darllen. Tapiwch i weld eich taith a’ch bathodynnau.");
     $("#journey-ring").setAttribute("stroke-dasharray", Math.min(100, n / tot * 100).toFixed(1) + " 100");
   }
   var J = load();
@@ -123,4 +125,52 @@
   }
   renderJourney();
   d.addEventListener("click", function (e) { if (e.target.closest(".lang button")) setTimeout(function () { renderJourney(); d.dispatchEvent(new Event("hc-lang")); }, 0); });
+})();
+
+/* The one-time hint that explains the journey circle in the menu bar, and the invitation to put the site on the home screen
+   (on the third day someone visits; Android and desktop Chrome show the browser's own install box, iPhones get the two steps). */
+(function () {
+  var d = document, root = d.documentElement;
+  var T = function (en, c) { return root.classList.contains("cy") ? c : en; };
+  function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function put(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  var q = location.search;
+
+  /* ---------- the journey circle hint: shown once, on the second page someone reads ---------- */
+  var chip = d.getElementById("journey-chip"), n = 0;
+  try { var j = JSON.parse(get("hc-journey") || "{}"); n = Object.keys(j.v || {}).length; } catch (e) {}
+  if (chip && ((n >= 2 && !get("hc-hint")) || /[?&]hint=1/.test(q))) {
+    put("hc-hint", "1");
+    setTimeout(function () {
+      var r = chip.getBoundingClientRect(); if (!r.width) return;
+      var h = d.createElement("div"); h.className = "chip-hint"; h.setAttribute("role", "status");
+      h.innerHTML = "<b>" + T("Your journey", "Eich taith") + "</b>" + T("Every page you read is counted here, and games earn badges. Tap the circle to see them.", "Mae pob tudalen a ddarllenwch yn cael ei chyfrif yma, ac mae gemau’n ennill bathodynnau. Tapiwch y cylch i’w gweld.");
+      d.body.appendChild(h);
+      var w = h.offsetWidth, left = Math.max(12, Math.min(innerWidth - w - 12, r.left + r.width / 2 - w / 2));
+      h.style.left = left + "px"; h.style.top = (r.bottom + 12) + "px"; h.style.setProperty("--ax", (r.left + r.width / 2 - left - 6) + "px");
+      function bye() { h.remove(); removeEventListener("scroll", bye); }
+      h.addEventListener("click", bye); addEventListener("scroll", bye, { passive: true }); setTimeout(bye, 8000);
+    }, 1800);
+  }
+
+  /* ---------- add to home screen ---------- */
+  var standalone = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone;
+  if (standalone) return;
+  var today = new Date().toISOString().slice(0, 10), days = (get("hc-days") || "").split(",").filter(Boolean);
+  if (days.indexOf(today) < 0) { days.push(today); put("hc-days", days.slice(-30).join(",")); }
+  var force = /[?&]install=1/.test(q), ios = /iphone|ipad|ipod/i.test(navigator.userAgent) && !/crios|fxios/i.test(navigator.userAgent);
+  var want = force || (days.length >= 3 && !get("hc-install-no"));
+  var prompt = null;
+  function show() {
+    if (d.querySelector(".install-bar")) return;
+    var b = d.createElement("div"); b.className = "install-bar"; b.setAttribute("role", "dialog"); b.setAttribute("aria-label", T("Add to your home screen", "Ychwanegu at eich sgrin gartref"));
+    var how = ios ? T("Tap the Share button, then “Add to Home Screen”.", "Tapiwch y botwm Rhannu, yna “Add to Home Screen”.") : T("One tap puts it on your home screen, like an app. It works offline too.", "Un tap ac mae ar eich sgrin gartref, fel ap. Mae’n gweithio heb y we hefyd.");
+    b.innerHTML = '<img src="icon-192.png" alt=""><p><b>' + T("Keep Wales close", "Cadwch Gymru’n agos") + "</b>" + how + '</p><div class="row"><button type="button" class="no">' + T("Not now", "Dim nawr") + "</button>" + (prompt ? '<button type="button" class="go">' + T("Add it", "Ychwanegu") + "</button>" : "") + "</div>";
+    d.body.appendChild(b);
+    b.querySelector(".no").addEventListener("click", function () { put("hc-install-no", today); b.remove(); });
+    var go = b.querySelector(".go");
+    if (go) go.addEventListener("click", function () { b.remove(); prompt.prompt(); prompt.userChoice.then(function (c) { if (c.outcome !== "accepted") put("hc-install-no", today); }); prompt = null; });
+  }
+  addEventListener("beforeinstallprompt", function (e) { e.preventDefault(); prompt = e; if (want) setTimeout(show, 6000); });
+  if (want && (ios || force)) setTimeout(show, force ? 500 : 6000);
 })();
