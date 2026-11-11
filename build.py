@@ -1515,6 +1515,36 @@ import story10 as S10  # noqa: E402
 PLACE_BY_ID = {p["id"]: p for p in D.PLACES}
 
 
+def _soften(d, step=7.0):
+    """Turn the long straight cuts (the shire lines drawn by _split_la) into gently wandering borders, so the map looks drawn by
+    hand. Each long edge is split into short pieces and nudged sideways by an amount that depends only on the edge's two ends,
+    so the two areas either side of a border move it in exactly the same way and no gap opens between them."""
+    import math
+    out = []
+    for poly in re.findall(r"M([^MZ]+)Z", d):
+        p = [(float(a), float(b)) for a, b in re.findall(r"(-?[\d.]+) (-?[\d.]+)", poly)]
+        res = []
+        for i, a in enumerate(p):
+            b = p[(i + 1) % len(p)]
+            res.append(a)
+            L = math.dist(a, b)
+            if L < 24:
+                continue
+            c0, c1 = (a, b) if a <= b else (b, a)
+            h = (c0[0] * 12.9898 + c0[1] * 78.233 + c1[0] * 37.719 + c1[1] * 4.581) % 6.2832
+            nx, ny = -(c1[1] - c0[1]) / L, (c1[0] - c0[0]) / L
+            n = int(L // step)
+            amp = min(7.0, L * 0.05)
+            pts = []
+            for j in range(1, n):
+                t = j / n
+                w = math.sin(math.pi * t) * amp * (0.65 * math.sin(t * 9.1 + h) + 0.35 * math.sin(t * 23.7 + 2 * h))
+                pts.append((c0[0] + (c1[0] - c0[0]) * t + nx * w, c0[1] + (c1[1] - c0[1]) * t + ny * w))
+            res.extend(pts if a == c0 else pts[::-1])
+        out.append("M" + " L".join(f"{x:.1f} {y:.1f}" for x, y in res) + " Z")
+    return " ".join(out)
+
+
 def wales_in_10_page():
     sc, k, minx, maxy = geo["sc"], geo["k"], geo["minx"], geo["maxy"]
     kg = {x["id"]: x for x in D.KINGDOMS}
@@ -1548,9 +1578,32 @@ def wales_in_10_page():
                   + (f'<p class="w10-more">{more}</p>' if more else "")
                   + ('<p class="w10-hint" aria-hidden="true">↓ ' + bi("Scroll", "Sgroliwch") + "</p>" if i == 0 else "")
                   + "</div></article>")
-    las = "".join(f'<path class="la" data-la="{e(name)}" d="{d}"/>' for name, d in la.items())
-    svg = (f'<svg class="w10-svg" viewBox="-40 -30 680 735" role="img" aria-label="Map of Wales / Map o Gymru">'
-           f'<path class="land" d="{geo["outline"]}"/><g id="w10-las">{las}</g><g id="w10-pins"></g><g id="w10-labels"></g></svg>')
+    soft = {name: _soften(d) for name, d in la.items()}
+    xs, ys = [], []
+    for d in soft.values():
+        for a, b in re.findall(r"(-?[\d.]+) (-?[\d.]+)", d):
+            xs.append(float(a)); ys.append(float(b))
+    x0, y0, x1, y1 = min(xs) - 70, min(ys) - 45, max(xs) + 70, max(ys) + 45
+    vb = f"{x0:.0f} {y0:.0f} {x1 - x0:.0f} {y1 - y0:.0f}"
+    las = "".join(f'<path class="la" data-la="{e(name)}" d="{d}"/>' for name, d in soft.items())
+    shapes = "".join(f'<path d="{d}"/>' for d in soft.values())
+    sea_l = "".join(f'<text class="w10-sea-l" x="{x:.0f}" y="{y:.0f}">' + bi(en, cy, "tspan") + "</text>" for x, y, en, cy in [
+        (x0 + 85, y0 + 40, "Irish Sea", "Môr Iwerddon"), (x0 + 95, (y0 + y1) / 2 + 20, "Cardigan Bay", "Bae Ceredigion"),
+        (x0 + 150, y1 - 22, "Bristol Channel", "Môr Hafren"), (x1 - 62, (y0 + y1) / 2 - 60, "England", "Lloegr")])
+    svg = (f'<svg class="w10-svg" viewBox="{vb}" role="img" aria-label="Map of Wales / Map o Gymru"><defs>'
+           f'<radialGradient id="w10-sea" cx="35%" cy="40%" r="80%"><stop offset="0" stop-color="#1d3346"/><stop offset="1" stop-color="#0d1621"/></radialGradient>'
+           f'<pattern id="w10-waves" width="46" height="22" patternUnits="userSpaceOnUse"><path d="M0 11 q11.5 -7 23 0 t23 0" fill="none" stroke="#9cc3e0" stroke-opacity=".08" stroke-width="1.4"/></pattern>'
+           f'<filter id="w10-blur" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="9"/></filter>'
+           f'<filter id="w10-grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".035 .05" numOctaves="4" seed="7"/>'
+           f'<feColorMatrix values="0 0 0 0 1  0 0 0 0 .95  0 0 0 0 .85  0 0 0 -1.4 1.05"/></filter>'
+           f'<clipPath id="w10-clip">{shapes}</clipPath></defs>'
+           f'<rect x="{x0:.0f}" y="{y0:.0f}" width="{x1 - x0:.0f}" height="{y1 - y0:.0f}" fill="url(#w10-sea)"/>'
+           f'<rect x="{x0:.0f}" y="{y0:.0f}" width="{x1 - x0:.0f}" height="{y1 - y0:.0f}" fill="url(#w10-waves)"/>{sea_l}'
+           f'<g class="w10-glow" filter="url(#w10-blur)">{shapes}</g><g class="w10-shore">{shapes}</g>'
+           f'<g class="w10-coast">{shapes}</g><g id="w10-las">{las}</g>'
+           f'<rect class="w10-tex" clip-path="url(#w10-clip)" x="{x0:.0f}" y="{y0:.0f}" width="{x1 - x0:.0f}" height="{y1 - y0:.0f}" filter="url(#w10-grain)"/>'
+           f'<g id="w10-pins"></g><g id="w10-labels"></g>'
+           f'<g class="w10-compass" transform="translate({x1 - 42:.0f} {y0 + 48:.0f})"><path d="M0 -26 L7 0 L0 26 L-7 0Z"/><path class="n" d="M0 -26 L7 0 L-7 0Z"/><text y="-32">N</text></g></svg>')
     end = (f'<article class="w10-step w10-end" data-i="{n - 1}" data-stage="{S10.STEPS[-1][0]}"><div class="w10-card"><p class="eyebrow">{bi("You made it", "Da iawn")}</p>'
            f'<h2>{bi("Now go deeper", "Nawr ewch yn ddyfnach")}</h2><p>{bi("Every age has its own page, with the people, the places and the stories in full.", "Mae gan bob oes ei thudalen ei hun, gyda’r bobl, y lleoedd a’r straeon yn llawn.")}</p>'
            f'<p class="w10-more"><a href="timeline.html">{bi("The timeline", "Y llinell amser")} →</a><a href="index.html#chapters">{bi("The nine ages", "Y naw oes")} →</a>'
