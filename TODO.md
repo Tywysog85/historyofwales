@@ -21,5 +21,6 @@ Open jobs for History of Wales. Tick a job off by deleting it. Keep this list sh
 
 ## Ideas, not started
 
+- **Fill the last days of the year in On this day.** About 133 days still show the nearest dates instead of their own. Add only dates that can be checked (see SKILLS.md).
 - More people, events and places for every age.
 - An email address for the site (free forwarding was suggested).

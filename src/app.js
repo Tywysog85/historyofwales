@@ -465,18 +465,57 @@
   }
 
   /* ---------- On this day ---------- */
+  // Until onthisday.json arrives (or if it cannot load) the panel uses the dated timeline events.
+  // The JSON adds saints' days, traditions, births and deaths for nearly every day; ‹ › step through the year.
+  var OTD = null, otdDay = null, otdAll = false;
+  var OTD_TAG = { born: ["Born", "Ganed"], died: ["Died", "Bu farw"], feast: ["Feast day", "Dydd gŵyl"], custom: ["Tradition", "Traddodiad"] };
+  function mdOf(d) { return ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); }
+  function dateOf(md) { return new Date(2024, +md.slice(0, 2) - 1, +md.slice(3)); }  // a leap year, so 29 February is a day too
+  function stepDay(md, n) { var d = dateOf(md); d.setDate(d.getDate() + n); return mdOf(d); }
+  function dayLabel(md, short) { var m = +md.slice(0, 2) - 1, d = +md.slice(3); return d + " " + (short ? T(MONTHS_EN[m].slice(0, 3), MONTHS_CY[m]) : T(MONTHS_EN[m], MONTHS_CY[m])); }
+  var HAS_OTD = !!document.getElementById("today-box");
+  if (HAS_OTD) {
+    fetch("onthisday.json").then(function (r) { if (!r.ok) throw r; return r.json(); }).then(function (d) { OTD = d; renderToday(); }).catch(function () {});
+    $("#today-box").addEventListener("click", function (ev) {
+      var b = ev.target.closest("[data-otd]"); if (!b) return;
+      var v = b.dataset.otd, today = mdOf(new Date());
+      otdDay = v === "today" ? null : v === "more" ? otdDay : stepDay(otdDay || today, +v);
+      if (otdDay === today) otdDay = null;
+      otdAll = v === "more"; renderToday();
+      if (v !== "more") { var f = $("#today-box [data-otd='" + v + "']"); if (f) f.focus(); }
+    });
+  }
+  function otdLi(r, showDate) {
+    var tag = OTD_TAG[r[2]], when = (r[1] != null ? '<span class="y">' + r[1] + "</span>" : "") + (tag ? '<span class="k">' + T(tag[0], tag[1]) + "</span>" : "");
+    var t = esc(T(r[3], r[4]));
+    return '<div class="it" data-era="' + r[8] + '"><p class="when">' + (showDate ? '<span class="dt">' + dayLabel(r[0], true) + "</span>" : "") + when + "</p><div><h3>" + (r[7] ? '<a href="' + r[7] + '">' + t + "</a>" : t) + "</h3><p>" + esc(T(r[5], r[6])) + "</p></div></div>";
+  }
   function renderToday() {
-    var now = new Date(), md = ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2);
+    if (!HAS_OTD) return;
+    var now = new Date(), md = mdOf(now);
+    if (OTD) {
+      var day = otdDay || md, isToday = day === md, hit = OTD.filter(function (r) { return r[0] === day; }), near = null;
+      if (!hit.length) {  // nothing on this exact day: show the closest dates either side
+        for (var k = 1; k < 200 && !near; k++) {
+          var a = stepDay(day, -k), b = stepDay(day, k), ha = OTD.filter(function (r) { return r[0] === a; }), hb = OTD.filter(function (r) { return r[0] === b; });
+          if (ha.length || hb.length) near = ha.slice(0, 2).concat(hb.slice(0, 2));
+        }
+      }
+      var list = hit.length ? hit : near || [], shown = otdAll || list.length <= 3 ? list : list.slice(0, 3);
+      $("#today-box").innerHTML = '<div class="cal"><span class="d">' + +day.slice(3) + '</span><span class="m">' + T(MONTHS_EN[+day.slice(0, 2) - 1], MONTHS_CY[+day.slice(0, 2) - 1]) + '</span><span class="lab">' + (isToday ? T("Today", "Heddiw") : '<button type="button" class="otd-back" data-otd="today">' + T("Back to today", "Yn ôl i heddiw") + "</button>") + "</span>" +
+        '<span class="otd-nav"><button type="button" data-otd="-1" aria-label="' + T("Day before", "Y diwrnod cynt") + '">‹</button><button type="button" data-otd="1" aria-label="' + T("Next day", "Y diwrnod nesaf") + '">›</button></span></div>' +
+        '<div class="items" aria-live="polite">' + (hit.length ? "" : '<p class="otd-near">' + T("Nothing we know of happened on exactly this day. Here are the nearest dates.", "Ni wyddom am ddim a ddigwyddodd ar union y diwrnod hwn. Dyma’r dyddiadau agosaf.") + "</p>") +
+        shown.map(function (r) { return otdLi(r, !hit.length); }).join("") +
+        '<div class="more">' + (shown.length < list.length ? '<button type="button" class="chip" data-otd="more">+' + (list.length - shown.length) + " " + T("more on this day", "arall ar y dydd hwn") + "</button>" : "") +
+        '<a class="chip" href="onthisday.html#d-' + (hit.length ? day : list[0] ? list[0][0] : day) + '">' + T("The whole year", "Y flwyddyn gyfan") + " →</a></div></div>";
+      return;
+    }
     var dated = EVENTS.map(function (e, i) { return [e[E_DAY], i]; }).filter(function (x) { return x[0]; }).sort(function (a, b) { return a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0; });
-    var hit = dated.filter(function (x) { return x[0] === md; }), isToday = hit.length > 0, day = md;
-    if (!isToday) { var nx = dated.filter(function (x) { return x[0] > md; })[0] || dated[0]; day = nx[0]; hit = dated.filter(function (x) { return x[0] === day; }); }
-    var mm = +day.slice(0, 2) - 1, dd = +day.slice(3);
-    $("#today-box").innerHTML = '<div class="cal"><span class="d">' + dd + '</span><span class="m">' + T(MONTHS_EN[mm], MONTHS_CY[mm]) + '</span><span class="lab">' + (isToday ? T("Today", "Heddiw") : T("Next anniversary", "Y pen-blwydd nesaf")) + "</span></div>" +
-      '<div class="items">' + hit.map(function (x) { var e = EVENTS[x[1]]; return '<div class="it" data-era="' + e[E_ERA] + '"><time>' + e[E_Y] + "</time><div><h3>" + esc(T(e[E_TEN], e[E_TCY])) + "</h3><p>" + esc(T(e[E_BEN], e[E_BCY])) + "</p></div></div>"; }).join("") +
-      '<div class="more"><span class="eyebrow">' + T("Also coming up", "Hefyd ar y gorwel") + "</span>" + (function () {
-        var after = dated.filter(function (x) { return x[0] > day; }).concat(dated.filter(function (x) { return x[0] < day; })).slice(0, 3);
-        return after.map(function (x) { var e = EVENTS[x[1]], m = +x[0].slice(0, 2) - 1; return '<button type="button" class="chip" data-tl="' + x[1] + '">' + +x[0].slice(3) + " " + T(MONTHS_EN[m].slice(0, 3), MONTHS_CY[m]) + " · " + esc(T(e[E_TEN], e[E_TCY])) + "</button>"; }).join("");
-      })() + "</div></div>";
+    var hit0 = dated.filter(function (x) { return x[0] === md; }), isToday0 = hit0.length > 0, day0 = md;
+    if (!isToday0) { var nx = dated.filter(function (x) { return x[0] > md; })[0] || dated[0]; day0 = nx[0]; hit0 = dated.filter(function (x) { return x[0] === day0; }); }
+    $("#today-box").innerHTML = '<div class="cal"><span class="d">' + +day0.slice(3) + '</span><span class="m">' + T(MONTHS_EN[+day0.slice(0, 2) - 1], MONTHS_CY[+day0.slice(0, 2) - 1]) + '</span><span class="lab">' + (isToday0 ? T("Today", "Heddiw") : T("Next anniversary", "Y pen-blwydd nesaf")) + "</span></div>" +
+      '<div class="items">' + hit0.map(function (x) { var e = EVENTS[x[1]]; return '<div class="it" data-era="' + e[E_ERA] + '"><p class="when"><span class="y">' + e[E_Y] + "</span></p><div><h3>" + esc(T(e[E_TEN], e[E_TCY])) + "</h3><p>" + esc(T(e[E_BEN], e[E_BCY])) + "</p></div></div>"; }).join("") +
+      '<div class="more"><a class="chip" href="onthisday.html">' + T("The whole year", "Y flwyddyn gyfan") + " →</a></div></div>";
   }
 
   /* ---------- Timeline ---------- */

@@ -192,6 +192,15 @@ To add an age:
 
 With nine posters in a row, a closed poster is too narrow for its title, so closed posters print the title up the side (`writing-mode: vertical-rl` with `text-orientation: sideways`, so apostrophes turn with the letters) and the open one prints it normally.
 
+### On this day in Welsh history (November 2026)
+
+- The entries live in `src/onthisday.py`, one row each: day (`"MM-DD"`), year (or `None` for a saint's day or custom), kind (`ev`, `born`, `died`, `feast`, `custom`), title and one line in English and Welsh, and a link to a page on the site. Timeline events in `src/data.py` that have a day are added automatically, so never type one twice.
+- Saints' feast days are not typed here: `otd_rows()` adds every saint with a feast day in `src/saints.py`, so the Saints of Wales calendar and On this day always agree. A row in `onthisday.py` with the link `"saint:<id>"` gives that saint fuller words and links to their saint page.
+- `build.py` (`otd_rows()`) merges and sorts them and writes `onthisday.json` for the home page panel, plus `onthisday.html`, the whole year with today's card ringed in red.
+- The home panel (`renderToday()` in `src/app.js`) first shows the dated timeline events, then switches to the JSON once it loads. The ‹ › buttons step through the year (a leap year, so 29 February is a day too). On a day with no entry it says so and shows the nearest dates either side, so there is never an empty box.
+- To fill a gap: `python3 -c` over `onthisday.OTD` lists the empty days. Only add a date you can stand behind. Wikipedia's "<year> in Wales" pages (1700s onwards) list dated events, births and deaths, and the Catholic calendar for Wales (liturgyoffice.org) gives the saints' feast days; both can be read with Claude's web fetch tool even though the network blocks Wikipedia directly.
+- `$()` in `app.js` never returns null (it hands back a dummy element), so test for a home-page box with `document.getElementById`.
+
 ### The copyright notice
 
 - In the UK copyright is automatic: nothing needs registering. The notice just makes ownership plain and helps if someone does copy.
