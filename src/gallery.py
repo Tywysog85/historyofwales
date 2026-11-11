@@ -153,7 +153,7 @@ EXTRA = {
  "trea-caergwrle": ("treasures", "The Caergwrle Bowl", "Powlen Caergwrle", None),
  "trea-hendregadredd": ("treasures", "The Hendregadredd Manuscript", "Llawysgrif Hendregadredd", None),
  "trea-st-chad": ("treasures", "The Llandeilo Gospels", "Efengylau Llandeilo", None),
- "trea-llywelyn-seal": ("treasures", "A prince’s seal", "Sêl tywysog", None),
+ "trea-llywelyn-seal": ("treasures", "Llywelyn Fawr’s seal", "Sêl Llywelyn Fawr", "person-llywelyn-fawr.html"),
  "trea-welsh-harp": ("treasures", "The Welsh triple harp", "Y delyn deires", None),
  "trea-lovespoon": ("treasures", "A Welsh lovespoon", "Llwy garu", None),
 }

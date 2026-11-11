@@ -52,6 +52,15 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - Every photo has a fallback: if it fails to load, the illustration shows instead.
 - To find real file names, search the web limited to commons.wikimedia.org.
 
+### Gallery pictures from Wikimedia Commons (November 2026)
+- Wikimedia Commons is blocked from Claude's cloud computer, so the picture research ran on Ifan's Mini-PC through Remote Control, in a work folder inside `D:\Website\historyofwales.cymru\_work\` (deleted when finished).
+- How the PC found them: match each subject to its Wikipedia/Wikidata entry (lead image, Wikidata image, Commons category), gather candidates with the Commons API, keep only Public domain, CC0, CC BY and CC BY-SA (never NC or ND), look at every thumbnail, then download a 1400 px copy and record the author and licence.
+- `python tools/gallery_import.py <research folder>` turns that into web pictures: `src/static/gallery/<id>.webp` (fits 1280 x 1000, for the big-picture viewer) and `<id>-s.webp` (fits 600 x 800, for the grid), plus the credits in `src/gallery_photos.py`. Fitting in a box, not just a width, keeps tall portraits small: 260 pictures came to 48 MB.
+- The research record is `tools/gallery_research.json` (with a confidence and note for each pick) and `tools/gallery_research_notes.txt`. Welsh captions are in `tools/gallery_cy.json`; pictures left out are listed in `tools/gallery_skip.json`.
+- Categories, titles and links for pictures without a page of their own are in `src/gallery.py`. To add a picture, add its subject there, put its credit line in `src/gallery_photos.py` and its two WebP files in `src/static/gallery/`.
+- Each picture's credit (photographer, licence with link, Commons file page) shows in the viewer, under the photo on its place or person page, and in the full list at the bottom of the gallery.
+- Getting files from Ifan's PC into the repo: the PC's Git is not signed in for Claude, so Ifan commits and pushes with GitHub Desktop (File, Add local repository, pick the folder, type a summary, Commit, Push origin).
+
 ### Search
 - `build.py` writes `search.json`, an index of events, people, places and pages. `src/static/search.js` opens a search box from the magnifier button or the `/` key.
 

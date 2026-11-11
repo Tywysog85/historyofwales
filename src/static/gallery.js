@@ -41,7 +41,7 @@
     img.alt = a.dataset.wen;
     box.querySelector("h3").innerHTML = b ? b.innerHTML : "";
     box.querySelector(".g-what").innerHTML = '<span class="l-en" lang="en">' + esc(a.dataset.wen) + '</span><span class="l-cy" lang="cy">' + esc(a.dataset.wcy) + "</span>";
-    box.querySelector(".g-cred").innerHTML = (cy() ? "Llun: " : "Photo: ") + esc(a.dataset.by) + ', <a href="' + esc(a.dataset.licu) + '" target="_blank" rel="noopener license">' + esc(a.dataset.lic) + '</a>, <a href="' + esc(a.dataset.file) + '" target="_blank" rel="noopener">Wikimedia Commons</a>';
+    box.querySelector(".g-cred").innerHTML = (cy() ? "Llun: " : "Picture: ") + esc(a.dataset.by) + ', <a href="' + esc(a.dataset.licu) + '" target="_blank" rel="noopener license">' + esc(a.dataset.lic) + '</a>, <a href="' + esc(a.dataset.file) + '" target="_blank" rel="noopener">Wikimedia Commons</a>';
     box.querySelector(".g-count").textContent = (cur + 1) + " / " + list.length;
     var go = box.querySelector(".g-go");
     go.hidden = !a.dataset.go;
