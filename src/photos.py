@@ -49,3 +49,6 @@ PERSON_PHOTOS = {
  "shirley-bassey": ("Shirley_Bassey_(1971).jpg", "Shirley Bassey in 1971", "Shirley Bassey yn 1971"),
  "tanni-grey-thompson": ("Tanni_Grey-Thompson_(cropped).jpg", "Tanni Grey-Thompson", "Tanni Grey-Thompson"),
 }
+
+import photos2 as _P2
+PERSON_PHOTOS = {**_P2.PERSON_PHOTOS_MORE, **PERSON_PHOTOS}

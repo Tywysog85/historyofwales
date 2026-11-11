@@ -36,7 +36,7 @@ Everything is plain HTML, CSS and JavaScript. There is no framework and nothing 
 | On this day (`onthisday.html` and the home page panel) | `src/onthisday.py`, `src/onthisday.css` |
 | Kings and princes of each kingdom (`kings.html`, `kings-*.html`) | `src/royal.py` |
 | Saints of Wales (`saints.html`, `saints-*.html`) | `src/saints.py`; map and decoder in `src/static/saints.js` |
-| Photos and their credits | `src/photos.py` |
+| Photos and their credits | `src/photos.py`, `src/photos2.py` |
 | Drawn pictures | `src/art.py` |
 | The home page and opening screen | `src/head.html`, `src/body.html`, `src/app.js`, `src/extra.css`, `src/v6.css`; the 3D dragon, mountains and castle in `tools/*.src.js`, built into `src/static/hero3d.js` |
 | Games, menu, badges, search | `src/static/play.js`, `src/static/site.js`, `src/static/search.js` |
