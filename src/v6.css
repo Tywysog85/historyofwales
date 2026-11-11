@@ -288,14 +288,44 @@ html.menu-open { overflow: hidden }
 .sym p:last-child { color: #c9ccd4 }
 
 /* ---------- gallery ---------- */
+.g-bar { position: sticky; top: var(--nav-h, 3.6rem); z-index: 20; background: color-mix(in srgb, var(--night) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line) }
+.g-chips { display: flex; gap: .45rem; overflow-x: auto; padding: .7rem 0; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 92%, transparent) ; mask-image: linear-gradient(90deg, #000 92%, transparent) }
+.g-chips::-webkit-scrollbar { display: none }
+.g-chip { flex: none; font: 500 .85rem var(--f-body); color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: .42rem .85rem; cursor: pointer; white-space: nowrap; transition: background .2s, border-color .2s, color .2s }
+.g-chip i { font: 500 .7rem var(--f-mono); font-style: normal; color: var(--muted); margin-left: .2rem }
+.g-chip:hover { border-color: var(--gold) }
+.g-chip.on { background: var(--gold); border-color: var(--gold); color: #14100a } .g-chip.on i { color: #14100a }
+.g-secs { padding: 1rem 0 2rem }
+.g-sec { padding-top: 2.2rem; scroll-margin-top: 8rem }
+.g-sec[hidden] { display: none }
+.g-head { display: flex; align-items: baseline; gap: .8rem; border-bottom: 1px solid var(--line); padding-bottom: .4rem }
+.g-head h2 { margin: 0; font: 400 clamp(1.7rem, 3.4vw, 2.4rem) var(--f-display) }
+.g-cnt { font: 500 .78rem var(--f-mono); color: var(--gold) }
+.g-blurb { margin: .5rem 0 1.1rem }
 .gallery { columns: 3 17rem; column-gap: 1rem }
 .g-item { position: relative; display: block; break-inside: avoid; margin-bottom: 1rem; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); background: var(--card); text-decoration: none; color: #fff }
-.g-item img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform .8s var(--ease) }
-.g-item.tall img { aspect-ratio: 4 / 5; object-position: center 20% }
-.g-item:hover img { transform: scale(1.05) }
-.g-item .cap { position: absolute; inset: auto 0 0 0; padding: 2.2rem 1rem .9rem; background: linear-gradient(transparent, rgba(9,12,19,.92)); display: grid; gap: .1rem }
-.g-item .cap b { font: 400 1.25rem var(--f-display) } .g-item .cap span span, .g-item .cap > span { font: 500 .72rem var(--f-mono); color: var(--c) }
-.photo img { border-radius: var(--r) }
+.g-item img { display: block; width: 100%; height: auto; aspect-ratio: var(--ar, 4 / 3); object-fit: cover; transition: transform .8s var(--ease) }
+.g-item:hover img, .g-item:focus-visible img { transform: scale(1.04) }
+.g-item .cap { position: absolute; inset: auto 0 0 0; padding: 2.4rem 1rem .85rem; background: linear-gradient(transparent, rgba(9,12,19,.92)); display: grid; gap: .1rem }
+.g-item .cap b { font: 400 1.22rem/1.15 var(--f-display) } .g-item .cap span span, .g-item .cap > span { font: 500 .72rem var(--f-mono); color: var(--gold) }
+.g-credits summary { cursor: pointer; font-weight: 600 }
+.g-credits ol { columns: 2 22rem; column-gap: 2rem; font-size: .82rem; color: var(--muted); padding-left: 1.4rem } .g-credits li { break-inside: avoid; margin-bottom: .3rem }
+.g-credits a { color: var(--muted) }
+.g-box { width: min(1200px, 100vw); max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0 auto; padding: 0; border: 0; background: #07090e; color: #ece9e1; display: none; grid-template-rows: 1fr auto }
+.g-box[open] { display: grid }
+.g-box::backdrop { background: rgba(4,6,10,.94) }
+.g-stage { position: relative; min-height: 0; overflow: hidden; touch-action: pan-y }
+.g-stage img { position: absolute; inset: 0; margin: auto; max-width: 100%; max-height: 100%; object-fit: contain; display: block; transition: opacity .25s }
+.g-stage img.ld { opacity: .25 }
+.g-x, .g-prev, .g-next { position: absolute; border: 0; background: rgba(10,12,18,.6); color: #fff; width: 2.8rem; height: 2.8rem; border-radius: 50%; font-size: 1.7rem; line-height: 1; cursor: pointer; display: grid; place-items: center }
+.g-x { top: max(.8rem, env(safe-area-inset-top)); right: .8rem } .g-prev { left: .8rem; top: 50%; translate: 0 -50% } .g-next { right: .8rem; top: 50%; translate: 0 -50% }
+.g-x:hover, .g-prev:hover, .g-next:hover { background: var(--red) }
+.g-info { padding: 1rem clamp(1rem, 4vw, 2rem) max(1.2rem, env(safe-area-inset-bottom)); display: grid; gap: .35rem; max-width: 70rem }
+.g-info h3 { margin: 0; font: 400 1.6rem/1.1 var(--f-display) } .g-info p { margin: 0 } .g-what { color: #cfd3dc }
+.g-count { font: 500 .72rem var(--f-mono); color: var(--gold) } .g-cred { font-size: .8rem; color: #9aa1ae } .g-cred a { color: inherit }
+.g-go { justify-self: start; margin-top: .4rem } .g-go[hidden] { display: none }
+@media (max-width: 640px) { .gallery { columns: 2 9rem; column-gap: .6rem } .g-item { margin-bottom: .6rem; border-radius: 12px } .g-item .cap { padding: 1.8rem .6rem .55rem } .g-item .cap b { font-size: 1rem } .g-item .cap > span { font-size: .62rem } .g-prev, .g-next { display: none } .g-info h3 { font-size: 1.3rem } }
+.photo img { border-radius: var(--r); height: auto }
 
 /* ---------- footer ---------- */
 footer.site-foot { border-top: 1px solid var(--line); background: linear-gradient(var(--night), #090c13); padding-block: clamp(3rem, 7vw, 5rem) calc(2rem + env(safe-area-inset-bottom, 0px)) }

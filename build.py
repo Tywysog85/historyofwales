@@ -18,6 +18,8 @@ import data as D  # noqa: E402
 import long as L  # noqa: E402
 import towns as TW  # noqa: E402
 import photos as PH  # noqa: E402
+import gallery as G  # noqa: E402
+import gallery_photos as GP  # noqa: E402
 import ages as AG  # noqa: E402
 import features as F  # noqa: E402
 import art as A  # noqa: E402
@@ -280,7 +282,22 @@ def photo_url(f, w=1200):
     return f"{COMMONS}Special:FilePath/{_q(f, safe='')}?width={w}"
 
 
-def photo_fig(ph, cls=""):
+def place_ph(pid):
+    """Picture for a place on the home page map: [image, Commons page, caption EN, caption CY] or None."""
+    g = GP.GALLERY.get("place-" + pid)
+    if g:
+        return [f"gallery/place-{pid}-s.webp", COMMONS + "File:" + _q(g[0], safe=""), g[4], g[5]]
+    ph = PH.PLACE_PHOTOS.get(pid)
+    return [photo_url(ph[0], 640), COMMONS + "File:" + _q(ph[0], safe=""), ph[1], ph[2]] if ph else None
+
+
+def photo_fig(ph, cls="", gid=None):
+    g = GP.GALLERY.get(gid) if gid else None
+    if g:  # a checked picture from the gallery, stored on the site, with its full credit
+        f, by, lic, licu, wen, wcy, w, h = g
+        return (f'<figure class="photo {cls}"><img src="gallery/{gid}.webp" width="{min(w, 1400)}" height="{round(h * min(w, 1400) / w)}" alt="{e(wen)}" loading="lazy" decoding="async">'
+                f'<figcaption>{bi(wen, wcy)} · {bi("Photo", "Llun")}: {e(by)}, <a href="{e(licu)}" target="_blank" rel="noopener license">{e(lic)}</a>, '
+                f'<a href="{COMMONS}File:{_q(f, safe="")}" target="_blank" rel="noopener">Wikimedia Commons</a> · <a href="gallery.html">{bi("More in the gallery", "Mwy yn yr oriel")}</a></figcaption></figure>')
     if not ph:
         return ""
     f, cen, ccy = ph[:3]
@@ -379,7 +396,7 @@ def person_page(p):
     coded = any(a.startswith(("## ", "> ", "|| ")) for a in long_en)
     body = prose_bi(long_en, long_cy, cls="story prose") if coded else paras(long_en, long_cy)
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', era["ill"], p[2], p[2], p[3], p[4], p[7], p[8], art=ERA_ART[eid])
-            + section(meta + photo_fig(PH.PERSON_PHOTOS.get(slug), "portrait") + body + f'<p class="share no-print"><button type="button" class="btn" data-copy="person-{slug}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button> {src(p[9])}</p>', top=True)
+            + section(meta + photo_fig(PH.PERSON_PHOTOS.get(slug), "portrait", "person-" + slug) + body + f'<p class="share no-print"><button type="button" class="btn" data-copy="person-{slug}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button> {src(p[9])}</p>', top=True)
             + PERSON_EXTRA.get(slug, lambda: "")()
             + story_feature("people", slug)
             + (section(f'<ol class="era-events">{"".join(event_li(ev) for ev in related)}</ol>', "On the timeline", "Ar y llinell amser") if related else "")
@@ -404,7 +421,7 @@ def place_page(pl):
     coded = any(a.startswith(("## ", "> ", "|| ")) for a in long_en)
     body = prose_bi(long_en, long_cy, cls="story prose") if coded else paras(long_en, long_cy)
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', pl["ill"], era["en"], era["cy"], pl["en"], pl["cy"], pl["dEn"], pl["dCy"], art=ERA_ART[eid])
-            + section(meta + photo_fig(PH.PLACE_PHOTOS.get(pid)) + paras(long_en, long_cy) + f'<p class="share no-print">{src(pl["src"])}</p>', top=True)
+            + section(meta + photo_fig(PH.PLACE_PHOTOS.get(pid), "", "place-" + pid) + paras(long_en, long_cy) + f'<p class="share no-print">{src(pl["src"])}</p>', top=True)
             + story_feature("places", pid)
             + (section(f'<ol class="era-events">{"".join(event_li(ev) for ev in related)}</ol>', "What happened here", "Beth ddigwyddodd yma") if related else "")
             + section(f'<div class="era-places">{"".join(place_tile(x) for x in near)}</div>', "Nearby", "Gerllaw"))
@@ -640,22 +657,59 @@ def symbols_page():
     return page("symbols.html", "Symbols and traditions · History of Wales", "The red dragon, the leek, the daffodil, the harp, the Eisteddfod, lovespoons, the Mari Lwyd and more: where the symbols of Wales come from.", main, era="modern", og_type="website")
 
 
-def gallery_page():
-    figs = ""
-    for pl in D.PLACES:
-        ph = PH.PLACE_PHOTOS.get(pl["id"])
+def gallery_items():
+    """Every gallery picture as a dict, grouped by category, in page order."""
+    items = {c: [] for c in G.CAT_IDS}
+
+    def add(gid, cat, en, cy, sub, link):
+        ph = GP.GALLERY.get(gid)
         if ph:
-            figs += (f'<a class="g-item" href="place-{pl["id"]}.html" data-era="{pl["era"]}"><img src="{photo_url(ph[0], 800)}" alt="{e(ph[1])}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest(\'a\').remove()">'
-                     f'<span class="cap"><b>{bi(pl["en"], pl["cy"])}</b><span>{e(pl["year"])}</span></span></a>')
+            items[cat].append(dict(id=gid, en=en, cy=cy, sub=sub, link=link, ph=ph))
+    order = {x["id"]: i for i, x in enumerate(D.ERAS)}
+    for pl in sorted(D.PLACES, key=lambda x: order.get(x["era"], 0)):
+        add("place-" + pl["id"], G.PLACE_CAT.get(pl["id"], "buildings"), pl["en"], pl["cy"], pl["year"], f'place-{pl["id"]}.html')
+    for gid, (cat, en, cy, link) in G.EXTRA.items():
+        add(gid, cat, en, cy, "", link)
     for p in D.PEOPLE:
-        ph = PH.PERSON_PHOTOS.get(p[0])
-        if ph:
-            figs += (f'<a class="g-item tall" href="person-{p[0]}.html" data-era="{p[1]}"><img src="{photo_url(ph[0], 800)}" alt="{e(ph[1])}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest(\'a\').remove()">'
-                     f'<span class="cap"><b>{bi(p[3], p[4])}</b><span>{e(p[2])}</span></span></a>')
+        add("person-" + p[0], "people", p[3], p[4], p[2], f"person-{p[0]}.html")
+    return items
+
+
+def gallery_page():
+    items = gallery_items()
+    total = sum(len(v) for v in items.values())
+
+    def tile(it):
+        f, by, lic, licu, wen, wcy, w, h = it["ph"]
+        tall = h > w * 1.05
+        ratio = max(0.75, min(1.6, w / h))
+        th = round(600 / ratio)
+        return (f'<a class="g-item{" tall" if tall else ""}" href="{it["link"] or "gallery/" + it["id"] + ".webp"}" data-full="gallery/{it["id"]}.webp"'
+                f' data-go="{it["link"] or ""}" data-by="{e(by)}" data-lic="{e(lic)}" data-licu="{e(licu)}" data-file="{e(COMMONS + "File:" + _q(f, safe=""))}"'
+                f' data-wen="{e(wen)}" data-wcy="{e(wcy)}" style="--ar:{ratio:.3f}">'
+                f'<img src="gallery/{it["id"]}-s.webp" width="600" height="{th}" alt="{e(wen)}" loading="lazy" decoding="async">'
+                f'<span class="cap"><b>{bi(it["en"], it["cy"])}</b>' + (f'<span>{e(it["sub"])}</span>' if it["sub"] else "") + '</span></a>')
+
+    chips = (f'<button type="button" class="g-chip on" data-cat="all" aria-pressed="true">{bi("All", "Y cyfan")} <i>{total}</i></button>'
+             + "".join(f'<button type="button" class="g-chip" data-cat="{c[0]}" aria-pressed="false">{bi(c[1], c[2])} <i>{len(items[c[0]])}</i></button>' for c in G.CATS if items[c[0]]))
+    secs = "".join(f'<section class="g-sec" id="{c[0]}" data-cat="{c[0]}"><div class="g-head"><h2>{bi(c[1], c[2])}</h2><span class="g-cnt">{len(items[c[0]])}</span></div>'
+                   f'<p class="muted g-blurb">{bi(c[3], c[4])}</p><div class="gallery">{"".join(tile(it) for it in items[c[0]])}</div></section>' for c in G.CATS if items[c[0]])
+    credits = "".join(f'<li><b>{bi(it["en"], it["cy"])}</b>: {e(it["ph"][1])}, <a href="{e(it["ph"][3])}" target="_blank" rel="noopener license">{e(it["ph"][2])}</a>, '
+                      f'<a href="{COMMONS}File:{_q(it["ph"][0], safe="")}" target="_blank" rel="noopener">{bi("Wikimedia Commons", "Wikimedia Commons")}</a></li>'
+                      for c in G.CAT_IDS for it in items[c])
+    box = ('<dialog class="g-box" id="g-box" aria-label="Picture / Llun"><div class="g-stage"><img alt=""><button type="button" class="g-x" data-x aria-label="Close / Cau">×</button>'
+           '<button type="button" class="g-prev" aria-label="Previous / Blaenorol">‹</button><button type="button" class="g-next" aria-label="Next / Nesaf">›</button></div>'
+           '<div class="g-info"><p class="g-count"></p><h3></h3><p class="g-what"></p><p class="g-cred"></p><a class="btn solid g-go" href="#">' + bi("Read the story", "Darllen y stori") + ' →</a></div></dialog>')
     main = (hero("industrial", f'<a href="index.html">{SITE}</a>', "castle", "Photo gallery", "Oriel luniau", "Wales in pictures", "Cymru mewn lluniau",
-                 "Castles, cromlechs, quarries and faces. Choose a picture to read its story.", "Cestyll, cromlechi, chwareli ac wynebau. Dewiswch lun i ddarllen ei stori.", art="castle")
-            + section(f'<div class="gallery">{figs}</div><p class="muted" style="margin-top:1.5rem">{bi("Photographs from Wikimedia Commons under free licences. The photographer and licence are credited on each picture’s own page.", "Ffotograffau o Wikimedia Commons dan drwyddedau rhydd. Mae’r ffotograffydd a’r drwydded wedi’u cydnabod ar dudalen pob llun.")}</p>', top=True))
-    return page("gallery.html", "Photo gallery · History of Wales", "Photographs of the historic places and people of Wales.", main, era="industrial", og_type="website")
+                 f"{total} photographs of the castles, churches, ancient stones, mountains, treasures and people of Wales. Choose a picture to see it large.",
+                 f"{total} o ffotograffau o gestyll, eglwysi, hen feini, mynyddoedd, trysorau a phobl Cymru. Dewiswch lun i’w weld yn fawr.", art="castle")
+            + f'<div class="g-bar"><div class="wrap"><div class="g-chips" role="toolbar" aria-label="Categories / Categorïau">{chips}</div></div></div>'
+            + f'<div class="g-secs"><div class="wrap">{secs}</div></div>'
+            + section(f'<details class="g-credits"><summary>{bi("Picture credits", "Cydnabyddiaeth y lluniau")}</summary>'
+                      f'<p class="muted">{bi("Every photograph is from Wikimedia Commons under a free licence. Thank you to each photographer.", "Daw pob ffotograff o Wikimedia Commons dan drwydded rydd. Diolch i bob ffotograffydd.")}</p><ol>{credits}</ol></details>')
+            + box)
+    return page("gallery.html", "Photo gallery · History of Wales", f"{total} photographs of the castles, churches, ancient sites, landscapes, treasures and people of Wales.", main,
+                era="industrial", og_type="website", extra='<script src="gallery.js?v=1" defer></script>\n')
 
 
 GAMES = [
@@ -1563,7 +1617,7 @@ def firsts_page():
 # ---------- index ----------
 FEATURED = ["dewi-sant", "hywel-dda", "gwenllian", "llywelyn-fawr", "llywelyn-ap-gruffudd", "dafydd-ap-gwilym", "owain-glyndwr", "harri-tudur", "william-morgan", "lloyd-george", "aneurin-bevan", "betty-campbell"]
 DATA = dict(
-    ERAS=D.ERAS, EVENTS=D.EVENTS, PLACES=[dict(p, ph=[photo_url(PH.PLACE_PHOTOS[p['id']][0], 640), COMMONS + 'File:' + _q(PH.PLACE_PHOTOS[p['id']][0], safe=''), PH.PLACE_PHOTOS[p['id']][1], PH.PLACE_PHOTOS[p['id']][2]] if p['id'] in PH.PLACE_PHOTOS else None) for p in D.PLACES], PEOPLE=D.PEOPLE, READING=D.READING, ONLINE=D.ONLINE,
+    ERAS=D.ERAS, EVENTS=D.EVENTS, PLACES=[dict(p, ph=place_ph(p['id'])) for p in D.PLACES], PEOPLE=D.PEOPLE, READING=D.READING, ONLINE=D.ONLINE,
     CENSUS=D.CENSUS, KINGDOMS=D.KINGDOMS, LA=la, DICT=D.DICT, SAMPLES=D.SAMPLES, WORDS=D.WORDS,
     TRAILS=[dict(id=t["id"], en=t["en"], cy=t["cy"], ill=t["ill"], n=len(t["items"]), introEn=t["introEn"][0], introCy=t["introCy"][0]) for t in L.TRAILS],
     AUDIO=sorted(f[:-4] for f in os.listdir(os.path.join(SRC, 'static', 'audio')) if f.endswith('.mp3')) if os.path.isdir(os.path.join(SRC, 'static', 'audio')) else [],
@@ -1573,7 +1627,7 @@ DATA = dict(
             "Rhwng Gwy a Hafren": "kings-gwy-a-hafren.html", "Glywysing": "kings-glywysing.html", "Morgannwg": "kings-glywysing.html", "Gwent": "kings-gwent.html", "Deheubarth": "kings-deheubarth.html",
             "Rhodri Mawr": "person-rhodri-mawr.html", "Hywel Dda": "person-hywel-dda.html", "Gruffudd ap Llywelyn": "kings.html", "Principality of Wales": "kings.html#princes",
             "Owain Glyndŵr, Prince of Wales": "person-owain-glyndwr.html"},
-    FACTS=F.FACTS, FEATURED=FEATURED, PPH={k: photo_url(v[0], 240) for k, v in PH.PERSON_PHOTOS.items()},
+    FACTS=F.FACTS, FEATURED=FEATURED, PPH=dict({k: photo_url(v[0], 240) for k, v in PH.PERSON_PHOTOS.items()}, **{k[7:]: f'gallery/{k}-s.webp' for k in GP.GALLERY if k.startswith('person-')}),
     PFIELDS=P2.FIELDS, PFIELD=P2.FIELD, PFIRST={k: [v[0], v[1], v[2]] for k, v in P2.FIRSTS.items()},
 )
 ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"]
