@@ -25,6 +25,7 @@ L.TEACH.update(AG.TEACH)
 import ages9 as AG9
 import royal as RY  # noqa: E402
 import trees as TR  # noqa: E402
+import cymraeg as CYM  # noqa: E402
 L.TEACH.update(AG9.TEACH)
 from urllib.parse import quote as _q
 
@@ -170,7 +171,7 @@ PRINT_CSS = """
 NAV_MAIN = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#chapters", "Ages", "Oesoedd"), ("index.html#map", "Map", "Map"),
             ("index.html#people", "People", "Pobl"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("play.html", "Play", "Chwarae")]
 NAV_MORE = [("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"), ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"),
-            ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("journey.html", "Your journey", "Eich taith"), ("teachers.html", "For teachers", "I athrawon"),
+            ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg"), ("journey.html", "Your journey", "Eich taith"), ("teachers.html", "For teachers", "I athrawon"),
             ("index.html#sources", "Sources", "Ffynonellau")]
 # extra links for the home page top bar, where the site name has moved into the opening screen and left room
 NAV_HOME_MORE = [("symbols.html", "Symbols", "Symbolau"), ("trails.html", "Trails", "Llwybrau"), ("gallery.html", "Gallery", "Oriel"), ("index.html#language", "Language", "Iaith")]
@@ -207,7 +208,7 @@ def footer():
         return f'<div><p class="eyebrow">{bi(title_en, title_cy)}</p><ul>' + "".join(f'<li><a href="{h}">{bi(a, b)}</a></li>' for h, a, b in links) + "</ul></div>"
     eras = [(f'era-{x["id"]}.html', x["en"], x["cy"]) for x in D.ERAS]
     explore = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#map", "Map of Wales", "Map Cymru"), ("index.html#people", "People", "Pobl"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("trails.html", "Themed trails", "Llwybrau thema"),
-               ("gallery.html", "Photo gallery", "Oriel luniau"), ("index.html#language", "The Welsh language", "Yr iaith Gymraeg")]
+               ("gallery.html", "Photo gallery", "Oriel luniau"), ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg")]
     read = [("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
             ("teachers.html", "For teachers", "I athrawon"), ("index.html#sources", "Sources", "Ffynonellau")]
     play = [("daily.html", "Daily challenge", "Her y dydd"), ("quiz.html", "Quiz", "Cwis"), ("map-game.html", "Where in Wales?", "Ble yng Nghymru?"), ("names.html", "Welsh names", "Enwau Cymraeg"),
@@ -467,6 +468,7 @@ a.chap { text-decoration: none; color: inherit }
 .qs td:first-child { width: 2rem; color: var(--muted) } .qs td.blank { width: 6rem; border-bottom: 1px solid var(--muted) }
 .answers-key summary { cursor: pointer; color: var(--muted); font-size: .9rem }
 """
+EXTRA_PAGE_CSS += read("welsh.css")
 style += EXTRA_PAGE_CSS
 
 # ---------- new feature pages ----------
@@ -1043,6 +1045,59 @@ def family_trees_page():
                 "Family trees of the royal houses of Wales: Gwynedd, Deheubarth, Powys, Gwent and the Tudors, from Rhodri Mawr to Harri Tudur, and the marriages that joined them.",
                 main, era="kings", ld=ld, og_type="website", active="kings.html", track="kings:trees", extra=FT_JS)
 
+# ---------- Welsh word of the day and beginner's phrases (src/cymraeg.py, src/welsh.js) ----------
+WELSH_JS_VER = 1
+AUDIO_DIR = os.path.join(SRC, "static", "audio")
+AUDIO_FILES = sorted(f[:-4] for f in os.listdir(AUDIO_DIR) if f.endswith(".mp3")) if os.path.isdir(AUDIO_DIR) else []
+HEAR_SVG = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/>'
+            '<path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>')
+WELSH_SCRIPT = f'<script src="welsh.js?v={WELSH_JS_VER}" defer></script>\n'
+
+
+def welsh_js():
+    """The daily word: every word, a fixed shuffled order for ordinary days, and the fixed days."""
+    import random
+    ids = [w[0] for w in CYM.WORDS]
+    assert len(set(ids)) == len(ids), "word ids in src/cymraeg.py must be unique"
+    idx = {k: i for i, k in enumerate(ids)}
+    fixed = {d: idx[k] for d, k in CYM.FIXED_DAYS.items()}
+    order = [i for i in range(len(ids)) if i not in set(fixed.values())]
+    random.Random(1176).shuffle(order)  # seeded, so the order only changes when words are added
+    data = dict(W=[list(w) for w in CYM.WORDS], ORDER=order, DAYS=fixed, AUDIO=AUDIO_FILES)
+    return "var CYW = " + json.dumps(data, ensure_ascii=False, separators=(",", ":")) + ";\n" + read("welsh.js")
+
+
+def hear_btn(text, guide):
+    return f'<button type="button" class="hear" data-hear="{e(text)}" data-guide="{e(guide)}" aria-label="{e("Hear / Clywed: " + text)}">{HEAR_SVG}</button>'
+
+
+def welsh_page():
+    jump = "".join(f'<a class="chip" href="#{s[0]}">{bi(s[1], s[2])}</a>' for s in CYM.PHRASES)
+    secs = ""
+    for sid, ten, tcy, ien, icy, items in CYM.PHRASES:
+        lis = "".join(f'<li><b lang="cy">{e(cy)}</b><span class="say">{e(say)}</span><span class="mean" lang="en">{e(en)}</span>{hear_btn(cy, say)}</li>' for cy, say, en in items)
+        secs += (f'<div class="cyw-sec" id="{sid}"><h3>{bi(ten, tcy)}</h3><p>{bi(ien, icy)}</p>'
+                 f'<ul class="phr{" nums" if sid in ("numbers", "days") else ""}">{lis}</ul></div>')
+    letters = "".join(f'<div><b lang="cy">{e(l)}</b><p><span>{bi(en, cy)}</span><em>{bi("as in", "fel yn")} <i lang="cy">{e(ex)}</i></em></p></div>' for l, en, cy, ex in CYM.LETTERS)
+    credits = ""
+    if CYM.AUDIO_CREDITS:
+        credits = "<p>" + bi("Recordings:", "Recordiadau:") + " " + "; ".join(f'{e(f)}: <a href="{e(u)}">{e(who)}</a>, {e(lic)}' for f, (who, lic, u) in CYM.AUDIO_CREDITS.items()) + "</p>"
+    note = (f'<div class="cyw-note"><p>{bi("Where a real recording of a word is available, the speaker button plays it. Otherwise your device reads the word aloud: devices with a Welsh voice installed, such as Microsoft Edge on Windows, speak real Welsh, and others read the sound guide in English.", "Lle mae recordiad go iawn o air ar gael, mae’r botwm sain yn ei chwarae. Fel arall mae eich dyfais yn darllen y gair yn uchel: mae dyfeisiau sydd â llais Cymraeg, fel Microsoft Edge ar Windows, yn siarad Cymraeg go iawn, ac mae eraill yn darllen y canllaw sain yn Saesneg.")}</p>'
+            f'<p>{bi("In the sound guides, capital letters show the stressed syllable, kh is the ch of loch, and hl is the Welsh ll.", "Yn y canllawiau sain, mae priflythrennau’n dangos y sillaf acennog, kh yw ch yn loch, a hl yw’r ll Gymraeg.")}</p>{credits}</div>')
+    main = (hero("modern", f'<a href="index.html">{SITE}</a> / <a href="index.html#language">{bi("Language", "Iaith")}</a>', "book", "Learn Welsh", "Dysgu Cymraeg",
+                 "Speak a little Cymraeg", "Siaradwch ychydig o Gymraeg",
+                 "The language of Taliesin, Hywel Dda and Glyndŵr is spoken every day in Wales. Start with a word a day and the phrases every visitor needs.",
+                 "Mae iaith Taliesin, Hywel Dda a Glyndŵr i’w chlywed bob dydd yng Nghymru. Dechreuwch gyda gair y dydd a’r ymadroddion y mae pob ymwelydd eu hangen.", art="book")
+            + section('<div class="wotd" data-wotd aria-live="polite"><noscript>Word of the day needs JavaScript.</noscript></div>', top=True)
+            + section(f'<ul class="cyw-week" data-wotd-week></ul>', "The last seven days", "Y saith diwrnod diwethaf")
+            + section(f'<p class="lede" style="margin-bottom:1.4rem">{bi("Welsh is spelt the way it sounds. Learn these few letters and you can say any place name in Wales. The stress almost always falls on the last syllable but one.", "Mae’r Gymraeg yn cael ei sillafu fel y mae’n swnio. Dysgwch y llythrennau hyn a gallwch ddweud unrhyw enw lle yng Nghymru. Mae’r acen bron bob amser ar y sillaf olaf ond un.")}</p><div class="letters">{letters}</div>',
+                      "How Welsh sounds", "Sut mae’r Gymraeg yn swnio")
+            + section(f'<div class="chips cyw-jump">{jump}</div>{secs}', "Beginner’s phrases", "Ymadroddion i ddechreuwyr")
+            + section(note + f'<p class="more-row" style="margin-top:2rem"><a class="btn" href="index.html#language">{bi("Place-name decoder", "Datgodiwr enwau lleoedd")} →</a> '
+                      f'<a class="btn" href="story-language.html">{bi("How the language survived", "Sut y goroesodd yr iaith")} →</a> <a class="btn" href="pairs.html">{bi("Word pairs game", "Gêm parau geiriau")} →</a></p>'))
+    return page("welsh.html", "Learn Welsh · History of Wales", "A Welsh word of the day with its history, and the beginner’s phrases every visitor to Wales needs, with sound guides.",
+                main, era="modern", og_type="website", active="welsh.html", extra=WELSH_SCRIPT)
+
 
 # ---------- index ----------
 FEATURED = ["dewi-sant", "hywel-dda", "gwenllian", "llywelyn-fawr", "llywelyn-ap-gruffudd", "dafydd-ap-gwilym", "owain-glyndwr", "harri-tudur", "william-morgan", "lloyd-george", "aneurin-bevan", "betty-campbell"]
@@ -1096,7 +1151,7 @@ index_head = re.sub(r"<title>.*?</title>\n", "", index_head, count=1)
 index_head = re.sub(r'<meta name="description"[^>]*>\n', "", index_head, count=1)
 _bare_head = index_head
 index_head = head_tags("History of Wales", "The history of Wales, from the first people in the caves to the Senedd: an interactive timeline, map, people, legends and games, in English and Cymraeg.", "", "website") + index_head
-_body_filled = (body.replace("__WALES__", geo["outline"])
+_body_filled = (body.replace("__WALES__", geo["outline"]).replace("__WELSHV__", str(WELSH_JS_VER))
                 .replace("__DATA__", json.dumps(DATA, ensure_ascii=False, separators=(",", ":")))
                 .replace("__TOWNS__", json.dumps(TW.TOWNS, ensure_ascii=False, separators=(",", ":")))
                 .replace("__APP__", app)
@@ -1145,6 +1200,7 @@ def search_index():
     items += [dict(k="page", t=realm_title(r)[0], c=realm_title(r)[1], u=f"kings-{r['id']}.html", y=[r["span"], cy_dates(r["span"])], b=[r["subEn"] + " " + ", ".join(x["name"] for x in r["rulers"] if x["k"] == "r"), r["subCy"]], e=r["era"]) for r in RY.REALMS]
     items.append(dict(k="page", t="Royal family trees of Wales", c="Coed teulu brenhinol Cymru", u="family-trees.html", y=["Family trees", "Coed teulu"], b=["From Rhodri Mawr to Harri Tudur: the royal houses of Gwynedd, Deheubarth, Powys and Gwent, the Tudors, and the marriages that joined them. " + ", ".join(n["name"][0] for n in FT_IDS.values() if not n["gap"]), "O Rhodri Mawr i Harri Tudur: tai brenhinol Gwynedd, Deheubarth, Powys a Gwent, y Tuduriaid, a’r priodasau a’u hunodd."], e="kings"))
     items += [dict(k="page", t=t["en"], c=t["cy"], u=f"family-trees.html#tree-{t['id']}", y=["Family tree", "Coeden deulu"], b=[t["introEn"], t["introCy"]], e=t["era"]) for t in TR.TREES]
+    items.append(dict(k="page", t="Learn Welsh", c="Dysgu Cymraeg", u="welsh.html", y=["Language", "Iaith"], b=["A Welsh word of the day and beginner’s phrases with sound guides", "Gair Cymraeg y dydd ac ymadroddion i ddechreuwyr gyda chanllawiau sain"], e="modern"))
     items.append(dict(k="page", t="For teachers", c="I athrawon", u="teachers.html", y=["", ""], b=["Lesson ideas and printable quizzes", "Syniadau gwersi a chwisiau i’w hargraffu"], e="industrial"))
     return items
 
@@ -1188,12 +1244,14 @@ def main():
     pages["map-game.html"] = game_page("map-game.html", "map", "modern", "Where in Wales?", "Ble yng Nghymru?", "Tap the map where you think each place is. Five rounds, 100 points each.", "Tapiwch y map lle credwch fod pob lle. Pum rownd, 100 pwynt yr un.", "senedd", "A map game: place the castles, towns and historic sites of Wales on a blank map.", with_map=True)
     pages["names.html"] = game_page("names.html", "names", "saints", "Welsh names", "Enwau Cymraeg", "Jones, Powell, Lloyd, Vaughan: Welsh surnames are history in miniature. Look yours up, then find your name as the princes would have said it.", "Jones, Powell, Lloyd, Vaughan: mae cyfenwau Cymru’n hanes ar raddfa fach. Chwiliwch am eich un chi, yna gweld eich enw fel y byddai’r tywysogion wedi’i ddweud.", "cross", "What Welsh surnames mean and where they come from, and a patronymic name maker.")
     pages["hero.html"] = game_page("hero.html", "hero", "ancient", "Which figure from history are you?", "Pa ffigwr o hanes ydych chi?", "Six quick questions.", "Chwe chwestiwn cyflym.", "torch", "A short personality quiz: which figure from Welsh history are you most like?")
+    pages["welsh.html"] = welsh_page()
     pages["pairs.html"] = game_page("pairs.html", "pairs", "modern", "Word pairs", "Parau geiriau", "Turn over two cards at a time and match each Welsh word to its meaning.", "Trowch ddau gerdyn ar y tro a pharu pob gair Cymraeg â’i ystyr.", "owl", "A memory game: match Welsh words to their meanings.")
     for name, text in pages.items():
         write(os.path.join(out, name), text)
     for f in os.listdir(os.path.join(SRC, "static")):
         sp = os.path.join(SRC, "static", f)
         (shutil.copytree if os.path.isdir(sp) else shutil.copy)(sp, os.path.join(out, f))
+    write(os.path.join(out, "welsh.js"), welsh_js())
     write(os.path.join(out, "search.json"), json.dumps(search_index(), ensure_ascii=False, separators=(",", ":")))
     write(os.path.join(out, ".nojekyll"), "")
     write(os.path.join(out, "robots.txt"), f"User-agent: *\nAllow: /\nSitemap: {BASE_URL}sitemap.xml\n")
@@ -1210,6 +1268,7 @@ def main():
             if f.endswith((".png", ".svg", ".js")) and f != "sw.js":
                 shutil.copy(os.path.join(SRC, "static", f), os.path.join(a, f))
         shutil.copy(os.path.join(out, "search.json"), os.path.join(a, "search.json"))
+        shutil.copy(os.path.join(out, "welsh.js"), os.path.join(a, "welsh.js"))
     print(f"Built {len(pages)} pages -> {out}")
 
 
