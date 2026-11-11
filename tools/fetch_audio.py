@@ -71,22 +71,33 @@ def recordings():
         m = LL.match(title)
         if m:
             found.setdefault(key(m.group("w")), []).append((title, m.group("who")))
-            return
+            return True
         m = OLD.match(title)
         if m:
             found.setdefault(key(m.group("w")), []).append((title, ""))
+            return True
+        return False
 
-    for cat in ("Category:Lingua Libre pronunciation-cym", "Category:Welsh pronunciation"):
+    todo, done, odd = ["Category:Lingua Libre pronunciation-cym", "Category:Welsh pronunciation"], set(), []
+    while todo and len(done) < 60:
+        cat = todo.pop(0)
+        if cat in done:
+            continue
+        done.add(cat)
         cont = {}
         while True:
-            r = api(action="query", list="categorymembers", cmtitle=cat, cmtype="file", cmlimit="500", **cont)
+            r = api(action="query", list="categorymembers", cmtitle=cat, cmtype="file|subcat", cmlimit="500", **cont)
             for m in r.get("query", {}).get("categorymembers", []):
-                add(m["title"])
+                if m.get("ns") == 14:
+                    todo.append(m["title"])
+                elif not add(m["title"]) and len(odd) < 25:
+                    odd.append(m["title"])
             if "continue" not in r:
                 break
             cont = {"cmcontinue": r["continue"]["cmcontinue"]}
-            time.sleep(0.2)
+            time.sleep(0.3)
         print(f"{cat}: {sum(len(v) for v in found.values())} files so far")
+    print("Names not understood, for example:", odd)
     return found
 
 
@@ -141,17 +152,24 @@ def main():
             if credits.get(s, {}).get("file") == title and os.path.exists(os.path.join(OUT, s + ".mp3")):
                 continue
             raw = os.path.join(tmp, "in" + os.path.splitext(m["url"])[1])
-            try:
-                with urllib.request.urlopen(urllib.request.Request(m["url"], headers={"User-Agent": UA}), timeout=60) as r, open(raw, "wb") as f:
-                    f.write(r.read())
-                convert(raw, os.path.join(OUT, s + ".mp3"))
-            except Exception as ex:  # noqa: BLE001
-                print("  skipped", t, ex)
+            ok = False
+            for attempt in range(5):
+                try:
+                    with urllib.request.urlopen(urllib.request.Request(m["url"], headers={"User-Agent": UA}), timeout=60) as r, open(raw, "wb") as f:
+                        f.write(r.read())
+                    convert(raw, os.path.join(OUT, s + ".mp3"))
+                    ok = True
+                    break
+                except Exception as ex:  # noqa: BLE001  (Wikimedia answers 429 when we go too fast: wait and try again)
+                    print("  waiting:", t, ex)
+                    time.sleep(10 * (attempt + 1))
+            if not ok:
+                print("  skipped", t)
                 continue
             who = LL.match(title).group("who") if LL.match(title) else (m["artist"] or "Wikimedia Commons")
             credits[s] = dict(text=t, file=title, speaker=who, licence=m["licence"] or "CC BY-SA 4.0", page=m["page"])
             done += 1
-            time.sleep(0.2)
+            time.sleep(1.5)
     with open(CREDITS, "w", encoding="utf-8") as f:
         json.dump(dict(sorted(credits.items())), f, ensure_ascii=False, indent=1)
         f.write("\n")

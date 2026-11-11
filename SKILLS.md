@@ -80,6 +80,22 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - `paintSets()` in `src/static/site.js` marks the collected cards from the journey on the reader's device, shows "New card" and "Set complete" messages, and remembers finished sets in `j.s`. Two badges go with them: Collector (one set) and Keeper of treasures (five sets).
 - To test, put keys such as `person:owain-gwynedd` into `localStorage["hc-journey"].v` in Playwright, then open a page in that set.
 
+### Read further links: Dictionary of Welsh Biography, Coflein, Welsh Wikipedia (November 2026)
+- `tools/fetch_sources.py` asks English Wikipedia for each person's and place's Wikidata item (following redirects), then asks Wikidata for the Dictionary of Welsh Biography id, the Coflein id and the Welsh Wikipedia article. It writes `src/source_links.json`.
+- It runs on GitHub (`.github/workflows/fetch-sources.yml`), because Wikimedia is blocked from Claude's cloud computer. It runs when the script changes on a claude/ branch, on the 1st of each month, or from the Actions tab.
+- `further()` in `build.py` draws the "Read further" buttons. In Welsh the Dictionary link goes to bywgraffiadur.cymru and the Wikipedia link to cy.wikipedia.org.
+
+### Today's picture to share (November 2026)
+- `today.html` shows a square 1080 x 1080 picture for today's best On this day entry, in English and in Cymraeg (`_site/cards/today-en.jpg` and `today-cy.jpg`), with ready-to-paste words and hashtags.
+- `today_pick()` in `build.py` chooses the entry: events first, then entries that have a page, then entries whose page has a photo. The date is the date in Wales (Europe/London). `make_square()` in `tools/cards.py` draws the picture.
+- The daily 04:15 UTC rebuild remakes it, so it changes every morning. It needs Pillow, like the share pictures.
+
+### Real Welsh voices from Lingua Libre (November 2026)
+- `tools/fetch_audio.py` runs on GitHub (`.github/workflows/fetch-audio.yml`). It collects every Welsh word and phrase the site can play, finds Lingua Libre recordings of exactly that text on Commons, and saves trimmed MP3s in `src/static/audio/`. Speakers who recorded the most of our words are preferred, so voices stay consistent.
+- Credits go in `src/audio_credits.json` and show on `welsh.html`, grouped by speaker. MP3s not listed there are your own recordings and are never replaced.
+- Wikimedia answers "429 too many requests" if downloads go too fast, so the script waits between files and tries again.
+- Every workflow that commits back now runs `git pull --rebase` before `git push`, so it cannot collide with other work pushed at the same time.
+
 ### The page for addresses that do not exist (November 2026)
 - `not_found_page()` in `build.py` writes `404.html`. GitHub Pages shows it for any address that does not exist. It has `<base href="/">` so its links work from any depth, and `noindex` so Google leaves it out. It is left out of the sitemap.
 

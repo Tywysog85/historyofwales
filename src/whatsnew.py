@@ -7,6 +7,14 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-11", "Today’s picture to share", "Llun heddiw i’w rannu",
+     "Every morning a new On this day picture, in English and Cymraeg, with the words ready to paste into Facebook, Instagram, X or WhatsApp.",
+     "Bob bore, llun Ar y dydd hwn newydd, yn Saesneg ac yn Gymraeg, gyda’r geiriau’n barod i’w gludo i Facebook, Instagram, X neu WhatsApp.",
+     "today.html"),
+    ("2026-11-11", "Read further: the Dictionary of Welsh Biography and Coflein", "Darllen ymhellach: y Bywgraffiadur Cymreig a Coflein",
+     "People now link to their entry in the Dictionary of Welsh Biography, places to their Coflein record, and both to Welsh Wikipedia.",
+     "Mae pobl bellach yn cysylltu â’u cofnod yn y Bywgraffiadur Cymreig, lleoedd â’u cofnod Coflein, a’r ddau â Wicipedia.",
+     "person-llywelyn-ap-gruffudd.html"),
     ("2026-11-11", "Collect the cards: 220 cards in 29 sets", "Casglwch y cardiau: 220 o gardiau mewn 29 set",
      "Every person, place and legend you read is now a card. Collect the house of Gwynedd, the saints, the great castles, the Four Branches and 25 more sets.",
      "Mae pob person, lle a chwedl a ddarllenwch yn gerdyn nawr. Casglwch dŷ Gwynedd, y seintiau, y cestyll mawr, y Pedair Cainc a 25 set arall.",

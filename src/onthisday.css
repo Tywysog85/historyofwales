@@ -44,3 +44,12 @@ html.cy .otd-day.is-today h3::after { content: "Heddiw" }
 .otd-list li p { color: var(--muted); font-size: .92rem; margin: 0 }
 /* the long Llanfair… place name in "Did you know?" must wrap instead of running off the card */
 .b-fact .fact { overflow-wrap: anywhere }
+/* today.html: the daily picture to share */
+.otd-share { margin: .9rem 0 0 } .otd-share a { color: var(--gold); font-weight: 600 }
+.today-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: 1.6rem }
+.today-fig { margin: 0; display: grid; gap: 1rem; align-content: start }
+.today-fig img { width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line); box-shadow: 0 24px 60px -30px rgba(0,0,0,.7) }
+.today-fig figcaption { display: grid; gap: .6rem }
+.today-fig .eyebrow { margin: 0 }
+.today-fig textarea { width: 100%; resize: vertical; background: var(--card); color: var(--ink); border: 1px solid var(--line); border-radius: 12px; padding: .8rem .9rem; font: 400 .92rem/1.5 var(--f-body) }
+.today-fig .more-row { margin: 0 }
