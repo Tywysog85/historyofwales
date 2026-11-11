@@ -39,7 +39,7 @@ This file collects the techniques and lessons from building History of Wales. Ad
 ## Building the site
 
 ### Static site, no framework
-- Content lives in Python data files in `src/` (the table in `README.md` says which file holds what). `build.py` turns them into about 190 HTML pages.
+- Content lives in Python data files in `src/` (the table in `README.md` says which file holds what). `build.py` turns them into about 200 HTML pages.
 - The home page and the timeline page share one script (`src/app.js`). The script checks which parts exist on the page (the timeline, the hero sky, the map) and skips the rest.
 
 ### Bilingual pages (English / Cymraeg)
@@ -61,12 +61,6 @@ This file collects the techniques and lessons from building History of Wales. Ad
 ---
 
 ## Design and polish
-
-### Hero sky (canvas animation)
-- The background is drawn on a `<canvas>`: stars, rolling ridges, a moon, a silhouette of Yr Wyddfa (Eryri) and a red dragon flying towards the summit.
-- The dragon is drawn from vector paths (Path2D), and its wings flap by squashing them vertically.
-- Phones get their own flight path so the dragon never covers the text.
-- Visitors who turn on "reduce motion" see a still picture.
 
 ### Stopping things jumping on load (layout shift)
 - If an element's styling is added by a script, the element changes size after the page appears and pushes its neighbours. That is why the menu jumped.
@@ -174,6 +168,19 @@ To add an age:
 
 With nine posters in a row, a closed poster is too narrow for its title, so closed posters print the title up the side (`writing-mode: vertical-rl` with `text-orientation: sideways`, so apostrophes turn with the letters) and the open one prints it normally.
 
+### The copyright notice
+
+- In the UK copyright is automatic: nothing needs registering. The notice just makes ownership plain and helps if someone does copy.
+- The © line at the bottom of every page is made by `footer()` in `build.py`. The name in it is `COPYRIGHT_OWNER` (English) and `COPYRIGHT_OWNER_CY` (Welsh) just above that function; the year updates itself (2026, then 2026–2027 and so on).
+- It claims only the site's own text and design. Photos (Wikimedia Commons) and the 3D dragon stay credited to their creators, as listed in README.md.
+
+## The opening screen (November 2026)
+
+### How the opening screen is layered
+- Back to front: the painted sky on a `<canvas>` (`#sky`: stars, moon, Milky Way, mist), the 3D mountains, moor and castle (`#land3d`), then the 3D dragon (`#sky3d`). Details in the entries below.
+- Phones get their own flight path so the dragon never covers the text.
+- Visitors who turn on "reduce motion", or whose device cannot draw 3D, see the painted mountain, castle and flag dragon instead.
+
 ### A sky that follows the real time of day (November 2026)
 
 The home page sky is drawn in `src/app.js`. `sunOverWales()` works out how high the sun is over mid Wales from the clock alone (no location permission, no network), and `setSky()` blends between four palettes in `SKIES` (night, dawn, day, dusk) once a minute. Every colour in the scene reads from `SKY`, so a new palette is one line. To preview one, add `?sky=night`, `?sky=dawn`, `?sky=day` or `?sky=dusk` to the home page address.
@@ -188,30 +195,18 @@ Other effects in the same file: shooting stars (`drawMeteors`, night only), the 
 
 On the home page the words "History of Wales" (Welsh: "Hanes Cymru") sit above the big "Cymru", not in the top bar. `HERO_NAME` in `build.py` writes them one letter per box (`_letters()`), and the same CSS rule as "Cymru" (`.hero h1 span, .hero .hero-name b` in `src/head.html` and `src/v6.css`) makes every letter drop in and glint. The home top bar has no name or mountain; it starts with the links, and on screens wider than 1480 pixels it shows four more (`NAV_HOME_MORE` in `build.py`). Every other page keeps "History of Wales" in the top bar as the way home.
 
-## Working together
-
-- Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
-- Small visual tweaks are published one at a time so each can be seen live.
-
-## The lifelike dragon in the sky
+### The lifelike dragon in the sky
 
 The dragon that flies across the opening screen is a real 3D model with a skeleton, so its wings beat properly. It is drawn with three.js on its own see-through canvas (`#sky3d`) laid over the painted sky.
 
 - `src/static/dragon.glb` is the model: one mesh, its textures and one "flying" animation of 13 seconds. It came from the Ethereal Engine "Open Asset Kit, Basic" (`assets/fantasy/Dragon.glb`), which says its assets are Creative Commons but names no author. See the credit in README.md and the open question in TODO.md. The original is 35 MB; it was cut to 1.7 MB by keeping only the flying animation, shrinking the textures to 1024 pixels as WebP and converting the material (gltf-transform: `metalRough`, `resample`, `prune`, `textureCompress`, `quantize`).
-- `tools/dragon3d.src.js` is the code that loads and lights the model. It is bundled with three.js and the landscape code into `src/static/hero3d.js` (see "The 3D mountains and castle" below for how to rebuild).
+- `tools/dragon3d.src.js` is the code that loads and lights the model. It is bundled with three.js and the landscape code into `src/static/hero3d.js` (see "The 3D mountains and castle" for how to rebuild).
 - `src/app.js` still decides where the dragon is, how big, and when it breathes fire (`drawDragon()`), and hands that to `HCD3.frame()` each frame. `flames()` paints the fire on a small canvas of its own, which is handed over with the rest and shown as a glowing sheet at the dragon's mouth, so that the fire shows in front of the mountains.
 - The 3D files load only on the home page, after the page itself, and only when the device has WebGL, is not in data-saver mode and has not asked for reduced motion. Otherwise, or if loading fails or takes over 15 seconds, the flag dragon is shown.
 - To watch the fire without waiting, add `?fire=1` to the address (it works with `?sky=night` and the others).
 - To test with a headless browser, start Chromium with `--use-gl=swiftshader --enable-unsafe-swiftshader`; without WebGL you will only see the stand-in.
 
-## Dragon pictures for the legend pages
-
-- The red and white dragons on the legend, symbols and play pages are still pictures of the 3D dragon (`src/static/dragon-red.webp`, `dragon-white.webp`), placed in the scene by `_dragons` in `src/art.py`. Never draw dragons by hand.
-- To make them again: bundle `tools/render_dragons.src.js` with esbuild, put it beside `dragon.glb` with a page holding `<canvas id="c">`, open it in headless Chromium (`?t=0.3` for red, `?white=1&t=0.52&turn=1.2&tilt=0.2` for white) and screenshot the canvas with a see-through background. Crop, mirror the white one so they face each other, and save as WebP 760 px wide.
-- The white dragon is the same model with the red taken out of its skin in the shader, so the scales keep their light and dark.
-- The hero's dark veil dulls pictures on the left; `.hero-art:has(image)::after` in `src/v6.css` uses a lighter veil where the art holds a picture.
-
-## The 3D mountains and castle
+### The 3D mountains and castle
 
 Behind the dragon, the mountains, the moor and the castle are real 3D too, drawn on a second see-through canvas (`#land3d`) between the painted sky and the dragon. The code is `tools/land3d.src.js`.
 
@@ -222,7 +217,7 @@ Behind the dragon, the mountains, the moor and the castle are real 3D too, drawn
 - **Nothing in the opening picture may depend on the height of the window.** On Android the address bar hides as you scroll, the window grows, and anything sized from it jumps. On phones the mountains take a fixed share of the strip below the buttons (`eh` in `draw()` in `src/app.js`).
 - **Measure where things rest, not where they are mid-animation.** The buttons slide up 22 px as they arrive; measuring them mid-slide put the land 22 px low, and it then jumped up. `measure()` in `src/app.js` reads their resting place from the layout, and the land waits for the fonts. `node tools/hero_jump_check.js` (with the site served on port 8000) lists every position the land is drawn at while the page loads: there must be exactly one line.
 - **The dragon stays below the menu bar.** `drawDragon` in `src/app.js` measures the bottom of the menu bar and lowers the flight just enough for the raised wingtips to clear it (`WING_UP`; try other values with `?wing=0.5` on the address).
-- **When `hero3d.js` changes, raise the number in `hero3d.js?v=4`** in `src/app.js`, or visitors keep the old copy in their browser.
+- **When `hero3d.js` changes, raise the number after `hero3d.js?v=`** in `src/app.js`, or visitors keep the old copy in their browser.
 - **The castle is built from plain shapes in code** (`buildCastle`): keep, stair turret, round towers with spreading feet and battlements, curtain walls, twin-towered gatehouse. It is clad in a photograph of slate walling (`stone.webp`), darkened towards the foot, lit by the moon with real shadows, with firelight at the gate and windows. The flag is a 3D cloth that carries the same flag painting as before (`flagArt()` in `src/app.js`).
 - **The crag and the moor** use a photograph of mossy rock (`rock.webp`). `tools/bake_textures.py` makes the web-sized textures and their relief maps from the original photographs.
 - **Only the flag moves**, so after one full picture only the small patch of screen around the flag is drawn again each frame. A full picture is drawn again when the window, the sky, the mouse position or the scroll changes.
@@ -231,8 +226,14 @@ Behind the dragon, the mountains, the moor and the castle are real 3D too, drawn
 - To rebuild `src/static/hero3d.js` after changing anything in `tools/*.src.js`: in a folder with `three` (0.160) and `esbuild` from npm, run `npx esbuild hero3d.src.js --bundle --minify --format=esm --target=es2019 --outfile=hero3d.js` and copy the result to `src/static/`.
 - To test 3D without a graphics card, start Chromium with `--use-gl=swiftshader --enable-unsafe-swiftshader --ignore-gpu-blocklist`.
 
-## The copyright notice
+### Dragon pictures for the legend pages
 
-- In the UK copyright is automatic: nothing needs registering. The notice just makes ownership plain and helps if someone does copy.
-- The © line at the bottom of every page is made by `footer()` in `build.py`. The name in it is `COPYRIGHT_OWNER` (English) and `COPYRIGHT_OWNER_CY` (Welsh) just above that function; the year updates itself (2026, then 2026–2027 and so on).
-- It claims only the site's own text and design. Photos (Wikimedia Commons) and the 3D dragon stay credited to their creators, as listed in README.md.
+- The red and white dragons on the legend, symbols and play pages are still pictures of the 3D dragon (`src/static/dragon-red.webp`, `dragon-white.webp`), placed in the scene by `_dragons` in `src/art.py`. Never draw dragons by hand.
+- To make them again: bundle `tools/render_dragons.src.js` with esbuild, put it beside `dragon.glb` with a page holding `<canvas id="c">`, open it in headless Chromium (`?t=0.3` for red, `?white=1&t=0.52&turn=1.2&tilt=0.2` for white) and screenshot the canvas with a see-through background. Crop, mirror the white one so they face each other, and save as WebP 760 px wide.
+- The white dragon is the same model with the red taken out of its skin in the shader, so the scales keep their light and dark.
+- The hero's dark veil dulls pictures on the left; `.hero-art:has(image)::after` in `src/v6.css` uses a lighter veil where the art holds a picture.
+
+## Working together
+
+- Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
+- Small visual tweaks are published one at a time so each can be seen live.
