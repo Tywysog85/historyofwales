@@ -283,10 +283,12 @@ def photo_url(f, w=1200):
 def photo_fig(ph, cls=""):
     if not ph:
         return ""
-    f, cen, ccy = ph
+    f, cen, ccy = ph[:3]
+    cr = ph[3] if len(ph) > 3 else ""
+    cr = bi(cr, cr.replace("Public domain", "Parth cyhoeddus").replace("No known restrictions", "Dim cyfyngiadau hysbys")) if cr else ""
     return (f'<figure class="photo {cls}"><img src="{photo_url(f)}" alt="{e(cen)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" '
             f'onerror="this.closest(\'figure\').remove()">'
-            f'<figcaption>{bi(cen, ccy)} · <a href="{COMMONS}File:{_q(f, safe="")}" target="_blank" rel="noopener">{bi("Photo: Wikimedia Commons", "Llun: Wikimedia Commons")}</a></figcaption></figure>')
+            f'<figcaption>{bi(cen, ccy)} · <a href="{COMMONS}File:{_q(f, safe="")}" target="_blank" rel="noopener">{bi("Photo: Wikimedia Commons", "Llun: Wikimedia Commons")}</a>{" · " + cr if cr else ""}</figcaption></figure>')
 
 
 def event_li(ev, k=0):
