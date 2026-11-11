@@ -171,7 +171,7 @@ def further(key, wiki):
         links.append(_two(u, u.replace("://biography.wales/", "://bywgraffiadur.cymru/"), "Dictionary of Welsh Biography", "Y Bywgraffiadur Cymreig"))
     if rec.get("coflein"):
         u = rec["coflein"]
-        links.append(_two(u, u.replace("/en/", "/cy/"), "Coflein: the national record of this site", "Coflein: cofnod cenedlaethol y safle hwn"))
+        links.append(_two(u, u, "Coflein: the national record of this site", "Coflein: cofnod cenedlaethol y safle hwn"))
     if wiki:
         cyw = f'https://cy.wikipedia.org/wiki/{_q(rec["cy"].replace(" ", "_"), safe="")}' if rec.get("cy") else WIKI + wiki
         links.append(_two(WIKI + wiki, cyw, "Wikipedia", "Wicipedia" if rec.get("cy") else "Wikipedia (Saesneg)"))

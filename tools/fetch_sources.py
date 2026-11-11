@@ -1,5 +1,5 @@
 """Find each person's entry in the Dictionary of Welsh Biography, each place's record in Coflein, and the Welsh Wikipedia
-article for both, using Wikidata (which links all of them to the English Wikipedia article we already cite).
+article for both, using Wikipedia (to follow redirects to each article's Wikidata item) and Wikidata (which links the item to all of them).
 
 Writes src/source_links.json:
     {"person:<id>": {"dwb": "<url>", "cy": "<Welsh Wikipedia title>"}, "place:<id>": {"coflein": "<url>", "cy": "..."}}
@@ -14,14 +14,15 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "src"))
 OUT = os.path.join(ROOT, "src", "source_links.json")
 API = "https://www.wikidata.org/w/api.php"
+WP = "https://en.wikipedia.org/w/api.php"
 UA = "HistoryOfWalesSiteBuilder/1.0 (https://historyofwales.cymru; static site build)"
 # The Wikidata properties we want, found by name so a renumbering cannot break this.
 WANT = {"dwb": "Dictionary of Welsh Biography ID", "coflein": "Coflein ID"}
 
 
-def api(**params):
+def api(_base=API, **params):
     params.update(format="json", formatversion="2")
-    url = API + "?" + urllib.parse.urlencode(params)
+    url = _base + "?" + urllib.parse.urlencode(params)
     for attempt in range(5):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": UA})
@@ -52,22 +53,43 @@ def main():
     pages = {}
     for p in D.PEOPLE:
         if p[9]:
-            pages.setdefault(p[9].replace("_", " "), []).append("person:" + p[0])
+            pages.setdefault(urllib.parse.unquote(p[9]).replace("_", " "), []).append("person:" + p[0])
     for pl in D.PLACES:
         if pl.get("src"):
-            pages.setdefault(pl["src"].replace("_", " "), []).append("place:" + pl["id"])
+            pages.setdefault(urllib.parse.unquote(pl["src"]).replace("_", " "), []).append("place:" + pl["id"])
     props = {k: prop(v) for k, v in WANT.items()}
-    out, titles = {}, sorted(pages)
+    # 1. English Wikipedia turns each title (after following redirects) into its Wikidata item.
+    qid_keys, titles = {}, sorted(pages)
     for i in range(0, len(titles), 50):
         batch = titles[i:i + 50]
-        r = api(action="wbgetentities", sites="enwiki", titles="|".join(batch), props="claims|sitelinks", sitefilter="enwiki|cywiki", redirects="yes")
-        for ent in r.get("entities", {}).values():
-            if "missing" in ent:
-                continue
-            en = ent.get("sitelinks", {}).get("enwiki", {}).get("title")
-            keys = pages.get(en, [])
-            if not keys:  # reached through a redirect: match on the normalised title
-                keys = next((v for t, v in pages.items() if t.lower() == (en or "").lower()), [])
+        r = api(WP, action="query", titles="|".join(batch), redirects="1", prop="pageprops", ppprop="wikibase_item")
+        q = r.get("query", {})
+        step = {}
+        for n in q.get("normalized", []):
+            step[n["from"]] = n["to"]
+        for n in q.get("redirects", []):
+            step[n["from"]] = n["to"]
+        final = {}
+        for t in batch:
+            u, seen = t, set()
+            while u in step and u not in seen:
+                seen.add(u)
+                u = step[u]
+            final[t] = u
+        item = {pg["title"]: pg.get("pageprops", {}).get("wikibase_item") for pg in q.get("pages", [])}
+        for t in batch:
+            qid = item.get(final[t])
+            if qid:
+                qid_keys.setdefault(qid, []).extend(pages[t])
+            else:
+                print("  no Wikidata item for", t)
+        time.sleep(0.3)
+    # 2. Wikidata gives the Dictionary of Welsh Biography id, the Coflein id and the Welsh Wikipedia article.
+    out, qids = {}, sorted(qid_keys)
+    for i in range(0, len(qids), 50):
+        r = api(action="wbgetentities", ids="|".join(qids[i:i + 50]), props="claims|sitelinks", sitefilter="cywiki")
+        for qid, ent in r.get("entities", {}).items():
+            keys = qid_keys.get(qid, [])
             rec = {}
             cy = ent.get("sitelinks", {}).get("cywiki", {}).get("title")
             if cy:
