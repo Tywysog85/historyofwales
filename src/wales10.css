@@ -46,7 +46,7 @@
   .w10-grid { grid-template-columns: minmax(0, 1fr); gap: 0 }
   .w10-map { grid-column: 1; grid-row: 1; top: 3.4rem; z-index: 3; height: auto; padding: .4rem 0 .6rem; background: var(--night); margin-inline: calc(-1 * var(--gut-l)) calc(-1 * var(--gut-r)); padding-inline: var(--gut-l) var(--gut-r) }
   .w10-svg { max-height: 42vh; max-height: 42svh; width: auto; margin-inline: auto }
-  .w10-svg .kg-label { font-size: 32px; stroke-width: 7px }
+  .w10-svg .kg-label { font-size: 26px; stroke-width: 6px }
   .w10-sea-l { font-size: 22px }
   .w10-svg { border-radius: 14px }
   .w10-pin circle { r: 13; stroke-width: 4 }

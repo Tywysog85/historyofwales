@@ -19,13 +19,35 @@
     var K = W.stages[id], colour = {};
     K.groups.forEach(function (g) { (g[3] === "*" ? las.map(function (p) { return p.dataset.la; }) : g[3]).forEach(function (n) { colour[n] = g[2]; }); });
     las.forEach(function (p) { var c = PAL[colour[p.dataset.la]] || colour[p.dataset.la] || "#2a3142"; p.style.fill = c; p.style.stroke = c; });
-    labG.innerHTML = K.groups.map(function (g) {
-      var en = g[4] ? g[4][0] : g[0], cy = g[4] ? g[4][1] : g[1]; if (!en) return "";
+    /* a name for each realm at the middle of its land, nudged apart where two would touch */
+    var items = [];
+    K.groups.forEach(function (g) {
+      var en = g[4] ? g[4][0] : g[0], cy = g[4] ? g[4][1] : g[1]; if (!en) return;
       var sx = 0, sy = 0, sa = 0;
       las.forEach(function (p) { if (g[3] !== "*" && g[3].indexOf(p.dataset.la) < 0) return; var b = bx(p), a = b.width * b.height; sx += (b.x + b.width / 2) * a; sy += (b.y + b.height / 2) * a; sa += a; });
-      if (!sa) return "";
-      var at = ' x="' + (sx / sa).toFixed(0) + '" y="' + (sy / sa).toFixed(0) + '"';
-      return both("text", en, cy, at, "kg-label");
+      if (sa) items.push({ en: en, cy: cy || en, x: sx / sa, y: sy / sa });
+    });
+    var fs = matchMedia("(max-width: 900px)").matches ? 26 : 21;
+    function spread(key) {
+      var r = items.map(function (o) { return { x: o.x, y: o.y, w: o[key].length * fs * 0.56 + 6, h: fs * 1.15 }; });
+      for (var it = 0; it < 30; it++) {
+        var moved = false;
+        for (var i = 0; i < r.length; i++) for (var j = i + 1; j < r.length; j++) {
+          var A = r[i], B = r[j], dx = (A.w + B.w) / 2 - Math.abs(A.x - B.x), dy = (A.h + B.h) / 2 - Math.abs(A.y - B.y);
+          if (dx <= 0 || dy <= 0) continue;
+          moved = true;
+          if (dy < dx) { var s = B.y >= A.y ? 1 : -1; A.y -= s * (dy / 2 + 1); B.y += s * (dy / 2 + 1); }
+          else { var t = B.x >= A.x ? 1 : -1; A.x -= t * (dx / 2 + 1); B.x += t * (dx / 2 + 1); }
+        }
+        if (!moved) break;
+      }
+      return r;
+    }
+    var pe = spread("en"), pc = spread("cy");
+    labG.innerHTML = items.map(function (o, n) {
+      var ae = ' x="' + pe[n].x.toFixed(0) + '" y="' + pe[n].y.toFixed(0) + '"', ac = ' x="' + pc[n].x.toFixed(0) + '" y="' + pc[n].y.toFixed(0) + '"';
+      return o.en === o.cy ? '<text class="kg-label"' + ae + ">" + esc(o.en) + "</text>"
+        : '<text class="kg-label l-en"' + ae + ">" + esc(o.en) + '</text><text class="kg-label l-cy"' + ac + ">" + esc(o.cy) + "</text>";
     }).join("");
     cap.innerHTML = both("span", K.en, K.cy, "");
   }

@@ -75,7 +75,8 @@ la = json.loads(read("geo", "la.json"))
 
 def _split_la():
     """Cut Powys and Gwynedd into their historic shires, so the Kingdoms map can show Brycheiniog, Meirionnydd and the rest.
-    The cuts are straight lines of latitude and longitude, so the borders are approximate."""
+    The real old borders, along the Wye and the hills, come from src/geo/shires.json (made by tools/split_shires.py).
+    Without that file, straight lines of latitude and longitude are used."""
     import re as _re
     sc, k, minx, maxy = geo["sc"], geo["k"], geo["minx"], geo["maxy"]
     Y = lambda lat: (maxy - lat) * sc
@@ -99,6 +100,11 @@ def _split_la():
     def path(*polys):
         return " ".join("M" + " L".join(f"{x:.0f} {y:.0f}" for x, y in poly) + " Z" for poly in polys if len(poly) > 2)
 
+    shires = os.path.join(SRC, "geo", "shires.json")
+    if os.path.exists(shires):   # the real old borders, along the Wye and the hills (made by tools/split_shires.py)
+        la.pop("Powys"), la.pop("Gwynedd")
+        la.update(json.load(open(shires, encoding="utf-8")))
+        return
     powys, gwynedd = pts(la.pop("Powys")), pts(la.pop("Gwynedd"))
     la["Montgomeryshire"] = path(clip(powys, 1, Y(52.42), True))
     la["Radnorshire"] = path(clip(clip(powys, 1, Y(52.42), False), 1, Y(52.12), True))
