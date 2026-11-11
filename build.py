@@ -196,10 +196,10 @@ def nav(active="", skip="#main", home=False):
     return (f'<a class="skip" href="{skip}">{bi("Skip to content", "Neidio i’r cynnwys")}</a><div class="progress" aria-hidden="true"><i id="progress"></i></div>'
             f'<nav class="nav" aria-label="Main"><div class="wrap">' + f'<a class="brand" href="index.html">{bi("History of Wales", "Hanes Cymru")}</a>' +
             f'<ul class="nav-inline">{main}</ul>' +
-            f'<a class="journey-chip" href="journey.html" id="journey-chip" data-total="{JOURNEY_TOTAL}" aria-label="Your journey / Eich taith"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" class="tr"/><circle cx="18" cy="18" r="15" class="fg" id="journey-ring" pathLength="100" stroke-dasharray="0 100"/></svg><b id="journey-n">0</b></a>'
+            f'<a class="journey-chip" href="journey.html" id="journey-chip" data-total="{JOURNEY_TOTAL}" aria-label="0 pages read: your journey / Eich taith"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" class="tr"/><circle cx="18" cy="18" r="15" class="fg" id="journey-ring" pathLength="100" stroke-dasharray="0 100"/></svg><b id="journey-n">0</b></a>'
             f'<button type="button" class="search-btn" data-search aria-label="Search / Chwilio">{SEARCH_SVG}</button>'
              '<div class="lang" role="group" aria-label="Language / Iaith"><button type="button" id="lang-en" aria-pressed="true">EN</button><button type="button" id="lang-cy" aria-pressed="false">CY</button></div>'
-            f'<button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="menu"><span class="bars" aria-hidden="true"><i></i><i></i></span>{bi("Menu", "Dewislen")}</button></div></nav>'
+            f'<button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="menu" aria-label="Menu / Dewislen"><span class="bars" aria-hidden="true"><i></i><i></i></span>{bi("Menu", "Dewislen")}</button></div></nav>'
             f'<div class="menu" id="menu" hidden><div class="wrap"><ul class="menu-big">{big}</ul><div class="menu-side"><p class="eyebrow">{bi("More", "Rhagor")}</p><ul class="menu-more">{more}</ul>'
             f'<p class="menu-note">{bi("230,000 years of history, in English and Cymraeg.", "230,000 o flynyddoedd o hanes, yn Gymraeg ac yn Saesneg.")}</p></div></div></div>')
 
@@ -1663,6 +1663,7 @@ def fill(fragment, active="", skip="#chapters", home=False):
 
 
 index_head = head.replace("</style>", extra_css + PRINT_CSS + EXTRA_PAGE_CSS + "\n</style>", 1)
+_home_style = index_head[index_head.index("<style>") + 7: index_head.index("</style>")]
 index_head = re.sub(r"<title>.*?</title>\n", "", index_head, count=1)
 index_head = re.sub(r'<meta name="description"[^>]*>\n', "", index_head, count=1)
 _bare_head = index_head
@@ -1938,6 +1939,57 @@ def write(path, text):
         f.write(text)
 
 
+# ---------- shared files: the stylesheet and the home page's data and script are kept in files of their own ----------
+# Every page used to carry about 100 KB of the same CSS, and the home page, timeline and quiz each carried 430 KB of the
+# same data and script. Now the browser downloads them once and keeps them, so every page after the first opens faster.
+# The ?v= number is a fingerprint of the contents: it changes whenever they change, so nobody is left with an old copy.
+def _fp(text):
+    import hashlib
+    return hashlib.md5(text.encode("utf-8")).hexdigest()[:10]
+
+
+def shared_assets(pages):
+    files = {}
+    css = style + PRINT_CSS
+    css_tag = f'<link rel="stylesheet" href="site.css?v={_fp(css)}">\n'
+    files["site.css"] = css
+    data_re = re.compile(r'<script>var DATA = (.*?);</script>\n<script>var TOWNS = (.*?);</script>\n<script>(.*?)</script>', re.S)
+    data_js = app_js = None
+    for name, text in list(pages.items()):
+        home_css = "<style>" + _home_style + "</style>"
+        if home_css in text:  # the home page, timeline and quiz: the same rules in another order, all inside site.css
+            text = text.replace(home_css, css_tag.strip(), 1)
+        if "<style>" + css in text:
+            text = text.replace("<style>" + css, css_tag + "<style>", 1).replace("<style>\n</style>", "").replace("<style></style>", "")
+        m = data_re.search(text)
+        if m:
+            if data_js is None:
+                data_js = f"var DATA = {m.group(1)};\nvar TOWNS = {m.group(2)};\n"
+                app_js = m.group(3)
+            if data_js == f"var DATA = {m.group(1)};\nvar TOWNS = {m.group(2)};\n" and app_js == m.group(3):
+                text = text[:m.start()] + f'<script src="data.js?v={_fp(data_js)}"></script>\n<script src="app.js?v={_fp(app_js)}"></script>' + text[m.end():]
+        pages[name] = text
+    if data_js is not None:
+        files["data.js"] = data_js
+        files["app.js"] = app_js
+    return files
+
+
+# ---------- the page for addresses that do not exist ----------
+def not_found_page():
+    base = re.sub(r"^https?://[^/]+", "", BASE_URL) or "/"
+    links = [("timeline.html", "The timeline", "Y llinell amser"), ("index.html#people", "The people", "Y bobl"), ("index.html#map", "The map", "Y map"),
+             ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("daily.html", "Today’s challenge", "Her heddiw")]
+    main = (hero("medieval", f'<a href="index.html">{SITE}</a>', "book", "Page not found", "Heb ddod o hyd i’r dudalen", "This page has wandered off", "Mae’r dudalen hon wedi crwydro",
+                 "Like the lost land of Cantre’r Gwaelod, it may be under the sea. The rest of Welsh history is still here.",
+                 "Fel Cantre’r Gwaelod, efallai ei bod o dan y môr. Mae gweddill hanes Cymru yma o hyd.", art="ship")
+            + section('<p class="lede" style="margin-bottom:1.2rem">' + bi("Try a search, or start from one of these:", "Rhowch gynnig ar chwilio, neu dechreuwch o un o’r rhain:") + '</p>'
+                      + '<p style="display:flex;flex-wrap:wrap;gap:.6rem"><button type="button" class="btn solid" data-search>' + bi("Search the site", "Chwilio’r wefan") + "</button>"
+                      + "".join(f'<a class="btn" href="{h}">{bi(a, b)}</a>' for h, a, b in links) + "</p>", top=True))
+    doc = page("404.html", "Page not found · History of Wales", "This page could not be found. Search the history of Wales, or start from the timeline, the people or the map.", main, era="medieval", og_type="website")
+    return doc.replace("<head>\n", f'<head>\n<base href="{base}">\n<meta name="robots" content="noindex">\n', 1)
+
+
 def main():
     out = os.path.join(ROOT, "_site")
     shutil.rmtree(out, ignore_errors=True)
@@ -1979,7 +2031,11 @@ def main():
     pages["hero.html"] = game_page("hero.html", "hero", "ancient", "Which figure from history are you?", "Pa ffigwr o hanes ydych chi?", "Six quick questions.", "Chwe chwestiwn cyflym.", "torch", "A short personality quiz: which figure from Welsh history are you most like?")
     pages["welsh.html"] = welsh_page()
     pages["pairs.html"] = game_page("pairs.html", "pairs", "modern", "Word pairs", "Parau geiriau", "Turn over two cards at a time and match each Welsh word to its meaning.", "Trowch ddau gerdyn ar y tro a pharu pob gair Cymraeg â’i ystyr.", "owl", "A memory game: match Welsh words to their meanings.")
+    pages["404.html"] = not_found_page()
+    shared_files = shared_assets(pages)
     for name, text in pages.items():
+        write(os.path.join(out, name), text)
+    for name, text in shared_files.items():
         write(os.path.join(out, name), text)
     for f in os.listdir(os.path.join(SRC, "static")):
         sp = os.path.join(SRC, "static", f)
@@ -1990,7 +2046,7 @@ def main():
     write(os.path.join(out, ".nojekyll"), "")
     write(os.path.join(out, "robots.txt"), f"User-agent: *\nAllow: /\nSitemap: {BASE_URL}sitemap.xml\n")
     write(os.path.join(out, "sitemap.xml"), '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-          + "".join(f"  <url><loc>{xesc(BASE_URL + ('' if p == 'index.html' else p))}</loc></url>\n" for p in pages) + "</urlset>\n")
+          + "".join(f"  <url><loc>{xesc(BASE_URL + ('' if p == 'index.html' else p))}</loc></url>\n" for p in pages if p != "404.html") + "</urlset>\n")
     if "--artifact" in sys.argv:
         a = os.path.join(ROOT, "_artifact")
         shutil.rmtree(a, ignore_errors=True)

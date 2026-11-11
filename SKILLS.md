@@ -60,6 +60,19 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - Categories, titles and links for pictures without a page of their own are in `src/gallery.py`. To add a picture, add its subject there, put its credit line in `src/gallery_photos.py` and its two WebP files in `src/static/gallery/`.
 - Each picture's credit (photographer, licence with link, Commons file page) shows in the viewer, under the photo on its place or person page, and in the full list at the bottom of the gallery.
 - Getting files from Ifan's PC into the repo: the PC's Git is not signed in for Claude, so Ifan commits and pushes with GitHub Desktop (File, Add local repository, pick the folder, type a summary, Commit, Push origin).
+### Shared files keep pages small (November 2026)
+- Every page used to carry the same 100 KB of CSS inside it, and the home page, timeline and quiz each carried the same 430 KB of data and script. `shared_assets()` in `build.py` now moves them into `site.css`, `data.js` and `app.js` after the pages are built, so a browser downloads them once and keeps them. Pages became 60 to 70% smaller.
+- Each link ends in `?v=` and a fingerprint of the file, made from its contents, so a changed file always gets a new address and nobody keeps an old copy. Nothing to raise by hand.
+- Keep writing CSS in the same places (`src/head.html`, `src/*.css`, the `*_CSS` strings in `build.py`). The move happens by itself.
+- To check a change like this did not alter the look, screenshot each page before and after with reduced motion and compare the pictures pixel by pixel (Pillow `ImageChops.difference`).
+
+### The page for addresses that do not exist (November 2026)
+- `not_found_page()` in `build.py` writes `404.html`. GitHub Pages shows it for any address that does not exist. It has `<base href="/">` so its links work from any depth, and `noindex` so Google leaves it out. It is left out of the sitemap.
+
+### Install invitation and the journey hint (November 2026)
+- The end of `src/static/site.js` counts the days someone visits (`hc-days` in local storage). On the third day it invites them to put the site on their home screen: Android and desktop Chrome get the browser's own install box (the `beforeinstallprompt` event), iPhones get the two steps (Share, then Add to Home Screen). "Not now" is remembered (`hc-install-no`). Preview it with `?install=1` on any address.
+- The journey circle in the menu bar explains itself once, on the second page someone reads (`hc-hint`). Preview with `?hint=1`.
+- The journey circle's screen-reader name says how many pages have been read, and the menu button has a name even on phones where the word "Menu" is hidden.
 
 ### Search
 - `build.py` writes `search.json`, an index of events, people, places and pages. `src/static/search.js` opens a search box from the magnifier button or the `/` key.

@@ -460,7 +460,7 @@
   /* ---------- Chips ---------- */
   function chips(el, cur, onPick, counts) {
     el.innerHTML = '<button type="button" class="chip" data-v="all" aria-pressed="' + (cur === "all") + '">' + T("All", "Y cyfan") + "</button>" +
-      ERAS.filter(function (e) { return !counts || counts[e.id]; }).map(function (e) { return '<button type="button" class="chip" data-era="' + e.id + '" data-v="' + e.id + '" aria-pressed="' + (cur === e.id) + '"><i></i>' + T(e.en, e.cy) + (counts ? ' <span style="opacity:.6">' + counts[e.id] + "</span>" : "") + "</button>"; }).join("");
+      ERAS.filter(function (e) { return !counts || counts[e.id]; }).map(function (e) { return '<button type="button" class="chip" data-era="' + e.id + '" data-v="' + e.id + '" aria-pressed="' + (cur === e.id) + '"><i></i>' + T(e.en, e.cy) + (counts ? ' <span style="opacity:.7">' + counts[e.id] + "</span>" : "") + "</button>"; }).join("");
     el.onclick = function (ev) { var b = ev.target.closest(".chip"); if (b) onPick(b.dataset.v); };
   }
 
@@ -524,8 +524,8 @@
   function renderTimeline() {
     var counts = {}; EVENTS.forEach(function (e) { counts[e[E_ERA]] = (counts[e[E_ERA]] || 0) + 1; });
     if (!HAS_TL) {
-      $("#tl-teaser").innerHTML = '<a class="chip" href="timeline.html">' + T("All", "Y cyfan") + ' <span style="opacity:.6">' + EVENTS.length + "</span></a>" +
-        ERAS.map(function (e) { return '<a class="chip" data-era="' + e.id + '" href="timeline.html#era-' + e.id + '"><i></i>' + T(e.en, e.cy) + ' <span style="opacity:.6">' + counts[e.id] + "</span></a>"; }).join("");
+      $("#tl-teaser").innerHTML = '<a class="chip" href="timeline.html">' + T("All", "Y cyfan") + ' <span style="opacity:.7">' + EVENTS.length + "</span></a>" +
+        ERAS.map(function (e) { return '<a class="chip" data-era="' + e.id + '" href="timeline.html#era-' + e.id + '"><i></i>' + T(e.en, e.cy) + ' <span style="opacity:.7">' + counts[e.id] + "</span></a>"; }).join("");
       return;
     }
     chips($("#tl-filter"), tlEra, setTlEra, counts);
@@ -671,8 +671,8 @@
     var el = $("#people-field"); if (!el || !D.PFIELDS) return;
     var fc = {}, nf = 0; PEOPLE.forEach(function (p) { if (pEra !== "all" && p[1] !== pEra) return; var f = D.PFIELD[p[0]]; fc[f] = (fc[f] || 0) + 1; if (D.PFIRST[p[0]]) nf++; });
     el.innerHTML = '<button type="button" class="chip" data-v="all" aria-pressed="' + (pField === "all") + '">' + T("Every field", "Pob maes") + "</button>" +
-      '<button type="button" class="chip star" data-v="first" aria-pressed="' + (pField === "first") + '">★ ' + T("Firsts", "Y cyntaf") + ' <span style="opacity:.6">' + nf + "</span></button>" +
-      D.PFIELDS.filter(function (f) { return fc[f[0]]; }).map(function (f) { return '<button type="button" class="chip" data-v="' + f[0] + '" aria-pressed="' + (pField === f[0]) + '">' + esc(T(f[1], f[2])) + ' <span style="opacity:.6">' + fc[f[0]] + "</span></button>"; }).join("");
+      '<button type="button" class="chip star" data-v="first" aria-pressed="' + (pField === "first") + '">★ ' + T("Firsts", "Y cyntaf") + ' <span style="opacity:.7">' + nf + "</span></button>" +
+      D.PFIELDS.filter(function (f) { return fc[f[0]]; }).map(function (f) { return '<button type="button" class="chip" data-v="' + f[0] + '" aria-pressed="' + (pField === f[0]) + '">' + esc(T(f[1], f[2])) + ' <span style="opacity:.7">' + fc[f[0]] + "</span></button>"; }).join("");
     el.onclick = function (ev) { var b = ev.target.closest(".chip"); if (b) { pField = b.dataset.v; renderPeople(); } };
   }
   function initials(n) { var w = n.replace(/\b(ap|ab|ferch|the|of|yr|y)\b/gi, " ").trim().split(/\s+/); return (w[0].charAt(0) + (w.length > 1 ? w[w.length - 1].charAt(0) : "")).toUpperCase(); }
