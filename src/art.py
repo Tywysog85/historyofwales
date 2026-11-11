@@ -283,6 +283,29 @@ for _k, _v in _STAND_IN.items():
     MOON.setdefault(_k, MOON[_v])
 
 
+# Real photographs for the legend pictures (Wikimedia Commons, fetched by tools/fetch_legend_photos.py into src/static/legends/).
+# key -> (Commons file, author, licence, licence link, what it shows EN, CY, where the subject sits in the frame)
+_BYSA = "https://creativecommons.org/licenses/by-sa/"
+LEGEND_PHOTOS = dict(
+    hound=("Drew - Irish Wolfhound (20540782194).jpg", "Airwolfhound", "CC BY-SA 2.0", _BYSA + "2.0/", "An Irish wolfhound, the kind of great hound the princes kept", "Bleiddgi Gwyddelig, y math o helgi mawr a gadwai’r tywysogion", "30% 30%"),
+    owl=("Waldkauz-Strix aluco.jpg", "Andreas Trepte", "CC BY-SA 2.5", _BYSA + "2.5/", "A tawny owl", "Tylluan frech", "35% 45%"),
+    bird=("Sturnus vulgaris (European starling) at Bodega Head-1209.jpg", "Frank Schulenburg", "CC BY-SA 4.0", _BYSA + "4.0/", "A starling", "Drudwen", "50% 45%"),
+    lady=("Llyn y fan fach.jpg", "Andrew17899", "CC BY-SA 4.0", _BYSA + "4.0/", "Llyn y Fan Fach", "Llyn y Fan Fach", "50% 40%"),
+    sunken=("Submerged forest at Ynyslas, Ceredigion.jpg", "Richerman", "CC BY-SA 3.0", _BYSA + "3.0/", "The drowned forest at Ynyslas, uncovered at low tide", "Y goedwig foddedig yn Ynys-las, yn y golwg ar drai", "50% 60%"),
+    sword=("Llyn Ogwen Milky Way.jpg", "John Badham", "CC BY-SA 4.0", _BYSA + "4.0/", "Llyn Ogwen under the Milky Way", "Llyn Ogwen dan y Llwybr Llaethog", "50% 50%"),
+    cauldron=("Gundestrup cauldron.jpg", "Knud Winckelmann", "CC BY-SA 3.0", _BYSA + "3.0/", "The Gundestrup cauldron, made in the Iron Age", "Pair Gundestrup, a wnaed yn Oes yr Haearn", "50% 50%"),
+)
+
+
+def photo_scene(kind, small=False):
+    """The photograph for a legend picture, or None if the key has no photograph (stand-ins keep their drawn scene)."""
+    ph = LEGEND_PHOTOS.get(kind)
+    if not ph:
+        return None
+    return (f'<img class="scene photo" src="legends/{kind}{"-s" if small else ""}.webp" alt="" decoding="async"{" loading=lazy" if small else ""} '
+            f'style="object-fit:cover;object-position:{ph[6]}">')
+
+
 def scene(kind, colour, seed=None):
     rng = random.Random(seed if seed is not None else sum(map(ord, kind)) * 7 + 3)
     uid = f"{kind}{abs(hash(colour)) % 9973}"
