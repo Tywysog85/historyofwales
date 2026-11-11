@@ -151,6 +151,35 @@ def src(s):
     return f'<a class="src" href="{WIKI}{s}" target="_blank" rel="noopener">{bi("Source", "Ffynhonnell")} ↗<span class="sr-only"> (Wikipedia)</span></a>' if s else ""
 
 
+# ---------- read further: the Dictionary of Welsh Biography, Coflein and Welsh Wikipedia (tools/fetch_sources.py) ----------
+SOURCE_LINKS = json.loads(read("source_links.json")) if os.path.exists(os.path.join(SRC, "source_links.json")) else {}
+
+
+def _two(href_en, href_cy, en, cy):
+    """One link in English and one in Welsh (each shown in its own language)."""
+    if href_en == href_cy and en == cy:
+        return f'<a href="{e(href_en)}" target="_blank" rel="noopener">{e(en)} ↗</a>'
+    return (f'<a class="l-en" lang="en" href="{e(href_en)}" target="_blank" rel="noopener">{e(en)} ↗</a>'
+            f'<a class="l-cy" lang="cy" href="{e(href_cy)}" target="_blank" rel="noopener">{e(cy)} ↗</a>')
+
+
+def further(key, wiki):
+    rec = SOURCE_LINKS.get(key, {})
+    links = []
+    if rec.get("dwb"):
+        u = rec["dwb"]
+        links.append(_two(u, u.replace("://biography.wales/", "://bywgraffiadur.cymru/"), "Dictionary of Welsh Biography", "Y Bywgraffiadur Cymreig"))
+    if rec.get("coflein"):
+        u = rec["coflein"]
+        links.append(_two(u, u.replace("/en/", "/cy/"), "Coflein: the national record of this site", "Coflein: cofnod cenedlaethol y safle hwn"))
+    if wiki:
+        cyw = f'https://cy.wikipedia.org/wiki/{_q(rec["cy"].replace(" ", "_"), safe="")}' if rec.get("cy") else WIKI + wiki
+        links.append(_two(WIKI + wiki, cyw, "Wikipedia", "Wicipedia" if rec.get("cy") else "Wikipedia (Saesneg)"))
+    if not links:
+        return ""
+    return f'<div class="further no-print"><p class="eyebrow">{bi("Read further", "Darllen ymhellach")}</p><p>{"".join(links)}</p></div>'
+
+
 # ---------- shared head tags ----------
 def head_tags(title, desc, path, og_type="website", image=None):
     url = BASE_URL + path
@@ -489,7 +518,7 @@ def person_page(p):
     coded = any(a.startswith(("## ", "> ", "|| ")) for a in long_en)
     body = prose_bi(long_en, long_cy, cls="story prose") if coded else paras(long_en, long_cy)
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', era["ill"], p[2], p[2], p[3], p[4], p[7], p[8], art=ERA_ART[eid])
-            + section(meta + photo_fig(PH.PERSON_PHOTOS.get(slug), "portrait", "person-" + slug) + body + f'<p class="share no-print"><button type="button" class="btn" data-copy="person-{slug}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button> {src(p[9])}</p>', top=True)
+            + section(meta + photo_fig(PH.PERSON_PHOTOS.get(slug), "portrait", "person-" + slug) + body + f'<p class="share no-print"><button type="button" class="btn" data-copy="person-{slug}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button></p>' + further(f"person:{slug}", p[9]), top=True)
             + PERSON_EXTRA.get(slug, lambda: "")()
             + story_feature("people", slug)
             + (section(f'<ol class="era-events">{"".join(event_li(ev) for ev in related)}</ol>', "On the timeline", "Ar y llinell amser") if related else "")
@@ -515,7 +544,7 @@ def place_page(pl):
     coded = any(a.startswith(("## ", "> ", "|| ")) for a in long_en)
     body = prose_bi(long_en, long_cy, cls="story prose") if coded else paras(long_en, long_cy)
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', pl["ill"], era["en"], era["cy"], pl["en"], pl["cy"], pl["dEn"], pl["dCy"], art=ERA_ART[eid])
-            + section(meta + photo_fig(PH.PLACE_PHOTOS.get(pid), "", "place-" + pid) + paras(long_en, long_cy) + f'<p class="share no-print">{src(pl["src"])}</p>', top=True)
+            + section(meta + photo_fig(PH.PLACE_PHOTOS.get(pid), "", "place-" + pid) + paras(long_en, long_cy) + further(f"place:{pid}", pl["src"]), top=True)
             + story_feature("places", pid)
             + (section(f'<ol class="era-events">{"".join(event_li(ev) for ev in related)}</ol>', "What happened here", "Beth ddigwyddodd yma") if related else "")
             + set_block(f"place:{pid}")
