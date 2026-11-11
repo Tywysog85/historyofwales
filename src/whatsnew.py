@@ -7,6 +7,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-11", "Wales in 10 minutes", "Cymru mewn 10 munud",
+     "The whole story of Wales in seventeen short steps, from the first people to the Senedd, beside a map that changes as you scroll.",
+     "Holl stori Cymru mewn dau gam ar bymtheg byr, o’r bobl gyntaf i’r Senedd, wrth ymyl map sy’n newid wrth i chi sgrolio.",
+     "wales-in-10.html"),
     ("2026-11-11", "A fuller timeline: 402 events", "Llinell amser lawnach: 402 o ddigwyddiadau",
      "245 more moments in every age, from the bluestones of Preseli to the first Cabinet to meet in Welsh, with the Age of Kings now five times fuller.",
      "245 o eiliadau eraill ym mhob oes, o gerrig gleision y Preselau i’r Cabinet cyntaf i gwrdd yn Gymraeg, gydag Oes y Brenhinoedd bum gwaith yn llawnach.",

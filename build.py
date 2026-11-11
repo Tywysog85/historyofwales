@@ -220,7 +220,7 @@ PRINT_CSS = """
 
 NAV_MAIN = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#chapters", "Ages", "Oesoedd"), ("index.html#map", "Map", "Map"),
             ("index.html#people", "People", "Pobl"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("play.html", "Play", "Chwarae")]
-NAV_MORE = [("whatsnew.html", "What’s new", "Beth sy’n newydd"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("castles.html", "Castles map", "Map y cestyll"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"), ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"),
+NAV_MORE = [("whatsnew.html", "What’s new", "Beth sy’n newydd"), ("wales-in-10.html", "Wales in 10 minutes", "Cymru mewn 10 munud"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("castles.html", "Castles map", "Map y cestyll"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"), ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"),
             ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg"), ("journey.html", "Your journey", "Eich taith"), ("teachers.html", "For teachers", "I athrawon"),
             ("index.html#sources", "Sources", "Ffynonellau")]
 # extra links for the top bar (shown on every page, beside the site name)
@@ -1128,6 +1128,66 @@ def make_today(out):
         eyebrow = ("On this day" if lang == "en" else "Ar y dydd hwn") + (f" · {r[1]}" if r[1] is not None else "")
         CARDS.make_square(os.path.join(out, "cards", f"today-{lang}.jpg"), eyebrow, f"{dnum} {MONTHS[m - 1][0 if lang == 'en' else 1]}", title, line, col, photo, dragon,
                           name="History of Wales" if lang == "en" else "Hanes Cymru")
+
+
+# ---------- Wales in 10 minutes (src/story10.py): the whole story beside the changing map ----------
+import story10 as S10  # noqa: E402
+
+PLACE_BY_ID = {p["id"]: p for p in D.PLACES}
+
+
+def wales_in_10_page():
+    sc, k, minx, maxy = geo["sc"], geo["k"], geo["minx"], geo["maxy"]
+    kg = {x["id"]: x for x in D.KINGDOMS}
+    stages = {"land": dict(en="Wales", cy="Cymru", groups=[["Wales", "Cymru", "#3d7a55", "*", ["", ""]]]),
+              "first": dict(en="The oldest places", cy="Y lleoedd hynaf", groups=[["Wales", "Cymru", "#3d7a55", "*", ["", ""]]])}
+    for st in S10.STEPS:
+        if st[0] not in stages:
+            if st[0] not in kg:
+                raise SystemExit(f"src/story10.py: unknown map stage {st[0]!r}")
+            x = kg[st[0]]
+            stages[st[0]] = dict(en=x["en"], cy=x["cy"], groups=x["groups"])
+    pins = {}
+    for i, ids in S10.PINS.items():
+        out = []
+        for pid in ids:
+            if pid not in PLACE_BY_ID:
+                raise SystemExit(f"src/story10.py: unknown place {pid!r} in PINS")
+            p = PLACE_BY_ID[pid]
+            out.append([round((p["lon"] - minx) * k * sc), round((maxy - p["lat"]) * sc), p["en"], p["cy"], f"place-{pid}.html"])
+        pins[i] = out
+    n = len(S10.STEPS)
+    steps = ""
+    for i, (stage, when, ten, tcy, pen, pcy, links) in enumerate(S10.STEPS):
+        h = "h1" if i == 0 else "h2"
+        body = "".join(f"<p>{bi(a, b)}</p>" for a, b in zip(pen, pcy))
+        more = "".join(f'<a href="{u}">{bi(a, b)} →</a>' for u, a, b in links)
+        eyebrow = (f'<p class="eyebrow">{bi(when, when.replace("BC", "CC").replace("AD ", "").replace("today", "heddiw").replace("c. ", "tua "))}</p>' if when
+                   else f'<p class="eyebrow">{bi("Wales in 10 minutes", "Cymru mewn 10 munud")}</p>')
+        steps += (f'<article class="w10-step{" on" if i == 0 else ""}" data-i="{i}" data-stage="{stage}"><div class="w10-card">'
+                  f'<span class="w10-n">{i + 1} / {n}</span>{eyebrow}<{h}>{bi(ten, tcy)}</{h}>{body}'
+                  + (f'<p class="w10-more">{more}</p>' if more else "")
+                  + ('<p class="w10-hint" aria-hidden="true">↓ ' + bi("Scroll", "Sgroliwch") + "</p>" if i == 0 else "")
+                  + "</div></article>")
+    las = "".join(f'<path class="la" data-la="{e(name)}" d="{d}"/>' for name, d in la.items())
+    svg = (f'<svg class="w10-svg" viewBox="-40 -30 680 735" role="img" aria-label="Map of Wales / Map o Gymru">'
+           f'<path class="land" d="{geo["outline"]}"/><g id="w10-las">{las}</g><g id="w10-pins"></g><g id="w10-labels"></g></svg>')
+    end = (f'<article class="w10-step w10-end" data-i="{n - 1}" data-stage="{S10.STEPS[-1][0]}"><div class="w10-card"><p class="eyebrow">{bi("You made it", "Da iawn")}</p>'
+           f'<h2>{bi("Now go deeper", "Nawr ewch yn ddyfnach")}</h2><p>{bi("Every age has its own page, with the people, the places and the stories in full.", "Mae gan bob oes ei thudalen ei hun, gyda’r bobl, y lleoedd a’r straeon yn llawn.")}</p>'
+           f'<p class="w10-more"><a href="timeline.html">{bi("The timeline", "Y llinell amser")} →</a><a href="index.html#chapters">{bi("The nine ages", "Y naw oes")} →</a>'
+           f'<a href="quiz.html">{bi("Test yourself", "Profwch eich hun")} →</a></p>{SHARE_BTN}</div></article>')
+    main = (f'<div class="w10"><p class="crumbs wrap"><a href="index.html">{SITE}</a> / {bi("Wales in 10 minutes", "Cymru mewn 10 munud")}</p>'
+            f'<div class="w10-grid"><div class="w10-map" aria-hidden="false"><div class="w10-bar"><i id="w10-bar"></i></div>{svg}'
+            f'<p class="w10-stage" id="w10-stage" aria-live="polite"></p><p class="w10-places" id="w10-places"></p></div>'
+            f'<div class="w10-steps">{steps}{end}</div></div></div>')
+    data = json.dumps(dict(stages=stages, pins=pins), ensure_ascii=False, separators=(",", ":"))
+    extra = "<script>window.W10=" + data.replace("</", "<\\/") + ";</script><script>" + read("wales10.js") + "</script>\n"
+    return page("wales-in-10.html", "Wales in 10 minutes · History of Wales",
+                "The whole story of Wales in seventeen short steps, from the first people to the Senedd, told beside a map that changes as you scroll.",
+                main, era="medieval", extra=extra)
+
+
+style += read("wales10.css")
 
 
 # ---------- kings and princes (src/royal.py) ----------
@@ -2359,6 +2419,7 @@ def main():
     pages["journey.html"] = journey_page()
     pages["onthisday.html"] = onthisday_page()
     pages["today.html"] = today_page()
+    pages["wales-in-10.html"] = wales_in_10_page()
     pages["daily.html"] = game_page("daily.html", "daily", "medieval", "Daily challenge", "Her y dydd", "One event from Welsh history. Six guesses to find the year.", "Un digwyddiad o hanes Cymru. Chwe chynnig i ddyfalu’r flwyddyn.", "castle", "A daily history challenge: guess the year of an event from Welsh history in six tries.")
     pages["map-game.html"] = game_page("map-game.html", "map", "modern", "Where in Wales?", "Ble yng Nghymru?", "Tap the map where you think each place is. Five rounds, 100 points each.", "Tapiwch y map lle credwch fod pob lle. Pum rownd, 100 pwynt yr un.", "senedd", "A map game: place the castles, towns and historic sites of Wales on a blank map.", with_map=True)
     pages["names.html"] = game_page("names.html", "names", "saints", "Welsh names", "Enwau Cymraeg", "Jones, Powell, Lloyd, Vaughan: Welsh surnames are history in miniature. Look yours up, then find your name as the princes would have said it.", "Jones, Powell, Lloyd, Vaughan: mae cyfenwau Cymru’n hanes ar raddfa fach. Chwiliwch am eich un chi, yna gweld eich enw fel y byddai’r tywysogion wedi’i ddweud.", "cross", "What Welsh surnames mean and where they come from, and a patronymic name maker.")

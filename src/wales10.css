@@ -1,0 +1,54 @@
+/* Wales in 10 minutes (wales-in-10.html): the story scrolls past a map that stays in view */
+.w10 { padding-bottom: 3rem }
+.w10 .crumbs { padding-top: 1.1rem; font-size: .85rem; color: var(--muted) }
+.w10-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(1.5rem, 4vw, 4rem); max-width: var(--wrap); margin-inline: auto; padding-left: var(--gut-l); padding-right: var(--gut-r) }
+.w10-steps { grid-column: 1; grid-row: 1 }
+.w10-map { grid-column: 2; grid-row: 1; position: sticky; top: 4.6rem; align-self: start; height: calc(100vh - 5.6rem); display: flex; flex-direction: column; justify-content: center; gap: .6rem; min-width: 0 }
+.w10-svg { width: 100%; height: auto; max-height: calc(100vh - 10rem); display: block }
+.w10-svg .land { fill: #232b3c; stroke: #55617a }
+.w10-svg .la { fill: #3d7a55; stroke: #0e1118; stroke-width: 1; transition: fill .7s ease }
+.w10-svg .kg-label { font-size: 19px }
+.w10-pin circle { fill: #f2c94c; stroke: #0e1118; stroke-width: 3 }
+.w10-pin { animation: w10-pop .5s ease both }
+.w10-pin:hover circle, .w10-pin:focus circle { fill: #fff }
+@keyframes w10-pop { from { opacity: 0; transform: translateY(-8px) } to { opacity: 1; transform: none } }
+.w10-bar { height: 4px; border-radius: 4px; background: var(--line); overflow: hidden }
+.w10-bar i { display: block; height: 100%; width: 0; background: var(--dragon); transition: width .5s ease }
+.w10-stage { margin: 0; font-family: var(--f-mono); font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); text-align: center; min-height: 1.2em }
+.w10-places { display: flex; flex-wrap: wrap; justify-content: center; gap: .3rem 1rem; margin: 0; min-height: 1.5em; font-size: .9rem }
+.w10-places a { color: var(--ink); text-decoration: none; display: inline-flex; align-items: center; gap: .4rem }
+.w10-places a:hover { text-decoration: underline }
+.w10-places i { width: .6rem; height: .6rem; border-radius: 50%; background: #f2c94c; display: inline-block }
+.w10-step { min-height: 88vh; display: flex; align-items: center; padding: 6vh 0 }
+.w10-step:first-child { min-height: calc(100vh - 8rem); padding-top: 2vh }
+.w10-card { background: var(--slate); border: 1px solid var(--line); border-radius: 18px; padding: clamp(1.25rem, 3vw, 2.1rem); opacity: .4; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; width: 100% }
+.w10-step.on .w10-card, html:not(.js) .w10-card { opacity: 1; transform: none }
+.w10-card h1, .w10-card h2 { font-family: var(--f-display); font-size: clamp(1.7rem, 3.4vw, 2.5rem); line-height: 1.1; margin: .35rem 0 .9rem }
+.w10-step:first-child h1 { font-size: clamp(2.2rem, 5vw, 3.4rem) }
+.w10-card p { line-height: 1.65; margin: 0 0 .85rem }
+.w10-card .eyebrow { margin: 0; color: var(--dragon) }
+.w10-n { float: right; font-family: var(--f-mono); font-size: .72rem; color: var(--muted) }
+.w10-more { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; margin: 1rem 0 0 !important; font-weight: 600 }
+.w10-more a { color: var(--dragon); text-decoration: none }
+.w10-more a:hover { text-decoration: underline }
+.w10-hint { margin-top: 1.4rem !important; color: var(--muted); font-size: .9rem; animation: w10-nudge 1.8s ease-in-out infinite }
+@keyframes w10-nudge { 50% { transform: translateY(5px) } }
+.w10-end { min-height: 70vh }
+.w10-end .share-row { margin-top: 1.2rem }
+.w10-link { margin-top: .6rem }
+@media (max-width: 900px) {
+  .w10-grid { grid-template-columns: minmax(0, 1fr); gap: 0 }
+  .w10-map { grid-column: 1; grid-row: 1; top: 3.4rem; z-index: 3; height: auto; padding: .4rem 0 .6rem; background: var(--night); margin-inline: calc(-1 * var(--gut-l)) calc(-1 * var(--gut-r)); padding-inline: var(--gut-l) var(--gut-r) }
+  .w10-svg { max-height: 38vh; max-height: 38svh; width: auto; margin-inline: auto }
+  .w10-svg .kg-label { font-size: 30px }
+  .w10-pin circle { r: 13; stroke-width: 4 }
+  .w10-places { display: none }
+  .w10-map::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 1.2rem; background: linear-gradient(var(--night), rgba(14,17,24,0)); pointer-events: none }
+  .w10-steps { grid-row: 2 }
+  .w10-step { min-height: 75vh; min-height: 75svh; padding: 3vh 0 }
+  .w10-step:first-child { min-height: 50vh; padding-top: 1rem }
+}
+@media (prefers-reduced-motion: reduce) {
+  .w10-svg .la, .w10-card, .w10-bar i { transition: none }
+  .w10-pin, .w10-hint { animation: none }
+}

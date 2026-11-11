@@ -102,6 +102,12 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - For recent events, check the facts with a web search first (Wikipedia and most news sites are blocked from Claude's cloud computer, but search results still show headlines), and keep claims made by supporters worded as their claims.
 - Years under 10,000 are shown without a comma (2026, not 2,026): `fmt()` in `src/app.js`.
 
+### Wales in 10 minutes (November 2026)
+- `wales-in-10.html`: the whole story in short steps beside a map that stays in view (on the right on computers, at the top on phones). The words are in `src/story10.py` (`STEPS`), the places marked at each step in `PINS` (place ids from `data.py`).
+- Each step names a map stage: an id from `KINGDOMS` in `src/kingdoms.py`, or `land` (all Wales in one colour) or `first` (the oldest places). `build.py` stops if a stage or place id does not exist.
+- `src/wales10.js` recolours the council-area blocks as each step reaches the middle of the screen (an IntersectionObserver), names each realm at the middle of its land, and drops the pins in. Styles are in `src/wales10.css`; movement is switched off for people who ask for reduced motion.
+- Keep each step to about 120 words, and keep it proud (EDITORIAL.md).
+
 ### The page for addresses that do not exist (November 2026)
 - `not_found_page()` in `build.py` writes `404.html`. GitHub Pages shows it for any address that does not exist. It has `<base href="/">` so its links work from any depth, and `noindex` so Google leaves it out. It is left out of the sitemap.
 
