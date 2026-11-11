@@ -1,0 +1,50 @@
+History of Wales gallery - Wikimedia Commons picture research
+Finished: 2026-11-11
+
+Subjects: 261
+Picture found: 260  (high confidence: 227, medium confidence: 33)
+Not found: 1  (person-nest: No likeness, effigy or memorial of Nest ferch Rhys found on Commons. Suggest a picture of Carew Castle (built by her husband Gerald of Windsor on her dowry land) or Cilgerran Castle (traditional site of her abduction in 1109).)
+
+Files:
+  results.json  - one entry per subject (file, page_url, author, licence, licence_url, width, height, what, confidence, note)
+  img/<id>.jpg  - chosen picture, JPEG about 1400 px wide (smaller where the original is smaller)
+
+Licences used: Public domain, CC0, CC BY, CC BY-SA only (no NC/ND/fair use).
+Every pick was checked visually from its thumbnail.
+
+Medium-confidence picks (see the note in results.json for each):
+  place-merthyr
+  place-cerrigbach
+  place-epynt
+  place-hendygwyn
+  place-mathrafal
+  place-westgate
+  place-tonypandy
+  place-penyberth
+  person-illtud
+  person-rhodri-mawr
+  person-asser
+  person-gruffudd-ap-llywelyn
+  person-guto-r-glyn
+  person-joseph-parry
+  person-lloyd-george
+  person-jim-griffiths
+  person-kate-roberts
+  person-ifan-ab-owen-edwards
+  person-aneurin-bevan
+  person-megan-lloyd-george
+  person-gwynfor-evans
+  person-elaine-morgan
+  person-richard-burton
+  holy-tabernacl
+  anci-y-gaer
+  indu-llechwedd
+  trea-laws-hywel
+  trea-black-book
+  trea-book-aneirin
+  trea-book-taliesin
+  trea-bible-1588
+  trea-caergwrle
+  trea-hendregadredd
+
+Small originals (under 700 px wide): person-rhodri-mawr (660 px), person-gruffudd-ap-llywelyn (463 px), person-aneurin-bevan (580 px), person-elaine-morgan (366 px), trea-book-taliesin (619 px), trea-caergwrle (600 px), trea-hendregadredd (376 px)
