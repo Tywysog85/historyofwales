@@ -233,6 +233,12 @@ Behind the dragon, the mountains, the moor and the castle are real 3D too, drawn
 - The white dragon is the same model with the red taken out of its skin in the shader, so the scales keep their light and dark.
 - The hero's dark veil dulls pictures on the left; `.hero-art:has(image)::after` in `src/v6.css` uses a lighter veil where the art holds a picture.
 
+## Keeping the PC copy updated and tidy
+
+- Ifan's PC copy (`D:\Website\historyofwales.cymru`) updates itself every day through a Windows scheduled task, "History of Wales daily update", at 09:00 (or as soon as the PC is next on). It runs `D:\Website\historyofwales-daily\update-historyofwales.ps1`: pull main (fast-forward only, skipped if there are local changes), `python build.py`, then move leftover files that are neither in the repo nor made by the build to the Recycle Bin. Anything that could be Ifan's own (photos, documents) is only listed. Each run is written to `daily.log` in the same folder.
+- It was set up through a Remote Control session on the PC, because the remote folder tools can read and copy files but cannot delete them.
+- To stop it: Task Scheduler, then disable or delete "History of Wales daily update".
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
