@@ -174,3 +174,25 @@
   addEventListener("beforeinstallprompt", function (e) { e.preventDefault(); prompt = e; if (want) setTimeout(show, 6000); });
   if (want && (ios || force)) setTimeout(show, force ? 500 : 6000);
 })();
+
+/* What's new: "New" labels on news added since someone's last look, and a red dot on the menu until they have seen the
+   What's new page. First-time visitors start with nothing marked new. */
+(function () {
+  var d = document;
+  function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function put(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  var mb = d.getElementById("menu-btn"), latest = mb && mb.getAttribute("data-news");
+  if (!latest) return;
+  var seen = get("hc-news-seen");
+  if (!seen) {
+    var j = {}; try { j = JSON.parse(get("hc-journey") || "{}"); } catch (e) {}
+    var old = Object.keys(j.v || {}).length > 1;   /* visited before this feature: show what has arrived since */
+    seen = old ? "2026-11-10" : latest; put("hc-news-seen", seen);
+  }
+  Array.prototype.forEach.call(d.querySelectorAll(".news-item[data-date]"), function (li) { if (li.getAttribute("data-date") > seen) li.classList.add("is-new"); });
+  if (location.pathname.indexOf("whatsnew") >= 0) put("hc-news-seen", latest);
+  else if (latest > seen) {
+    mb.classList.add("has-news");
+    Array.prototype.forEach.call(d.querySelectorAll('.menu a[href="whatsnew.html"]'), function (a) { a.classList.add("has-news"); });
+  }
+})();

@@ -66,6 +66,15 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - The journey circle in the menu bar explains itself once, on the second page someone reads (`hc-hint`). Preview with `?hint=1`.
 - The journey circle's screen-reader name says how many pages have been read, and the menu button has a name even on phones where the word "Menu" is hidden.
 
+### What's new, the news feed and the weekly email (November 2026)
+- **Whenever something visitors would care about goes live, add a line at the top of `NEWS` in `src/whatsnew.py`** (date, English and Welsh title, one sentence each, link). It feeds `whatsnew.html`, the "New on the site" strip on the home page (first three lines) and the news feed `feed.xml`.
+- Returning visitors see "New" labels on lines added since their last look, and a red dot on the menu button until they open What's new (`hc-news-seen` in local storage, the newest date is on the menu button as `data-news`). First-time visitors see nothing marked new.
+- `feed.xml` is an Atom feed of the news plus today's anniversaries from On this day. `deploy.yml` now also rebuilds the site every morning at 04:15 UTC (`schedule`) so the feed carries each day's anniversaries.
+- **The weekly email** uses Kit (kit.com, free up to 10,000 subscribers). Two settings switch it on:
+  1. `KIT_FORM`: the number of a Kit sign-up form (in Kit, Grow → Landing pages and forms → the form → Embed → the number in its address). Set it in GitHub as a repository variable (Settings → Secrets and variables → Actions → Variables → New repository variable, name `KIT_FORM`), or in `build.py`. The sign-up box then appears on the home page, What's new and the foot of every page. Until then those places show "What's new" and "News feed" buttons instead.
+  2. `KIT_API_KEY`: a Kit API key (Kit → Settings → Developer → API keys → Add a new key), stored as a GitHub secret (same page, Secrets tab, name `KIT_API_KEY`). Never paste it anywhere else.
+- `.github/workflows/weekly-email.yml` runs every Monday at 07:00 UTC: it builds the site, and `tools/weekly_email.py` writes "This week in Welsh history" (the anniversaries of the next seven days and anything added in the last week) and asks Kit to send it. Run `python3 tools/weekly_email.py` after a build to preview the email. It can also be started by hand from the Actions tab (Run workflow).
+
 ### Search
 - `build.py` writes `search.json`, an index of events, people, places and pages. `src/static/search.js` opens a search box from the magnifier button or the `/` key.
 

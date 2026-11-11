@@ -23,6 +23,7 @@ import features as F  # noqa: E402
 import art as A  # noqa: E402
 L.TEACH.update(AG.TEACH)
 import ages9 as AG9
+import whatsnew as WN  # noqa: E402
 import royal as RY  # noqa: E402
 import trees as TR  # noqa: E402
 import cymraeg as CYM  # noqa: E402
@@ -36,6 +37,9 @@ from urllib.parse import quote as _q
 
 BASE_URL = os.environ.get("SITE_URL", "https://tywysog85.github.io/historyofwales/")
 GOATCOUNTER = os.environ.get("GOATCOUNTER", "").strip()
+# The email sign-up. Set to the number of the sign-up form made at kit.com (see SKILLS.md, "The weekly email") and the
+# sign-up box appears on the home page, the What's new page and the foot of every page. Empty: the box is not shown.
+KIT_FORM = os.environ.get("KIT_FORM", "").strip()
 WIKI = "https://en.wikipedia.org/wiki/"
 
 
@@ -146,7 +150,8 @@ def head_tags(title, desc, path, og_type="website"):
          f'<meta property="og:type" content="{og_type}">\n<meta property="og:url" content="{url}">\n'
          f'<meta property="og:image" content="{BASE_URL}og.png">\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n'
          '<meta property="og:locale" content="en_GB">\n<meta property="og:locale:alternate" content="cy_GB">\n'
-         '<meta name="twitter:card" content="summary_large_image">\n')
+         '<meta name="twitter:card" content="summary_large_image">\n'
+         f'<link rel="alternate" type="application/atom+xml" title="History of Wales: what’s new and on this day" href="{BASE_URL}feed.xml">\n')
     return t
 
 
@@ -175,12 +180,79 @@ PRINT_CSS = """
 
 NAV_MAIN = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#chapters", "Ages", "Oesoedd"), ("index.html#map", "Map", "Map"),
             ("index.html#people", "People", "Pobl"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("play.html", "Play", "Chwarae")]
-NAV_MORE = [("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("castles.html", "Castles map", "Map y cestyll"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"), ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"),
+NAV_MORE = [("whatsnew.html", "What’s new", "Beth sy’n newydd"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("castles.html", "Castles map", "Map y cestyll"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"), ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"),
             ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg"), ("journey.html", "Your journey", "Eich taith"), ("teachers.html", "For teachers", "I athrawon"),
             ("index.html#sources", "Sources", "Ffynonellau")]
 # extra links for the top bar (shown on every page, beside the site name)
 NAV_HOME_MORE = [("symbols.html", "Symbols", "Symbolau"), ("trails.html", "Trails", "Llwybrau"), ("gallery.html", "Gallery", "Oriel"), ("index.html#language", "Language", "Iaith")]
 SEARCH_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
+
+
+# ---------- what's new, the email sign-up and the news feed (src/whatsnew.py) ----------
+def _news_date(d, cy=False):
+    y, m, dd = (int(x) for x in d.split("-"))
+    if cy:
+        return f"{dd} {MONTHS_CY[m - 1]} {y}"
+    return f"{dd} {datetime.date(y, m, dd).strftime('%B')} {y}"
+
+
+MONTHS_CY = ["Ionawr", "Chwefror", "Mawrth", "Ebrill", "Mai", "Mehefin", "Gorffennaf", "Awst", "Medi", "Hydref", "Tachwedd", "Rhagfyr"]
+
+
+def follow_box(where):
+    """The email sign-up when a Kit form is set; otherwise the ways to follow that need no account."""
+    if KIT_FORM:
+        return (f'<form class="follow follow-{where}" action="https://app.kit.com/forms/{e(KIT_FORM)}/subscriptions" method="post" target="_blank">'
+                f'<p class="f-h">{bi("This week in Welsh history", "Yr wythnos hon yn hanes Cymru")}</p>'
+                f'<p class="f-sub">{bi("One short email every Monday: the anniversaries of the week ahead and anything new on the site. Free, and you can leave at any time.", "Un e-bost byr bob dydd Llun: pen-blwyddi’r wythnos i ddod ac unrhyw beth newydd ar y wefan. Am ddim, a gallwch adael unrhyw bryd.")}</p>'
+                f'<div class="f-row"><label class="sr-only" for="f-email-{where}">{bi("Your email address", "Eich cyfeiriad e-bost")}</label>'
+                f'<input id="f-email-{where}" name="email_address" type="email" required autocomplete="email" placeholder="you@example.com">'
+                f'<button type="submit" class="btn solid">{bi("Sign up", "Ymuno")}</button></div></form>')
+    return (f'<div class="follow follow-{where}"><p class="f-h">{bi("Keep up with the site", "Dilynwch y wefan")}</p>'
+            f'<p class="f-sub">{bi("New history is added every week. See what has arrived, or follow the news feed in any feed reader.", "Mae hanes newydd yn cael ei ychwanegu bob wythnos. Gwelwch beth sydd wedi cyrraedd, neu dilynwch y ffrwd newyddion mewn unrhyw ddarllenydd ffrydiau.")}</p>'
+            f'<div class="f-row"><a class="btn solid" href="whatsnew.html">{bi("What’s new", "Beth sy’n newydd")}</a><a class="btn" href="feed.xml">{bi("News feed", "Ffrwd newyddion")}</a></div></div>')
+
+
+def news_item(n, big=False):
+    d, te, tc, se, sc, link = n
+    return (f'<li class="news-item" data-date="{d}"><a href="{link}"><span class="n-date">{bi(_news_date(d), _news_date(d, True))}</span>'
+            f'<span class="n-t">{bi(te, tc)}</span>' + (f'<span class="n-s">{bi(se, sc)}</span>' if big else "") + "</a></li>")
+
+
+def news_strip():
+    return (f'<div class="news-row rv"><div class="news-box"><p class="eyebrow">{bi("New on the site", "Newydd ar y wefan")}</p>'
+            f'<ul class="news-list">{"".join(news_item(n) for n in WN.NEWS[:3])}</ul>'
+            f'<a class="n-all" href="whatsnew.html">{bi("Everything that is new", "Popeth sy’n newydd")} →</a></div>{follow_box("home")}</div>')
+
+
+def whatsnew_page():
+    main = (hero("today", f'<a href="index.html">{SITE}</a>', "book", "What’s new", "Beth sy’n newydd", "New on History of Wales", "Newydd ar Hanes Cymru",
+                 "Every page, long read, legend and game added to the site, newest first.", "Pob tudalen, erthygl, chwedl a gêm a ychwanegwyd at y wefan, y mwyaf newydd yn gyntaf.", art="senedd")
+            + section(f'<div class="news-page"><ul class="news-list big">{"".join(news_item(n, True) for n in WN.NEWS)}</ul>{follow_box("page")}</div>', top=True))
+    return page("whatsnew.html", "What’s new · History of Wales", "Everything new on History of Wales: new pages, long reads, legends, people and games, newest first.", main,
+                era="today", og_type="website", active="whatsnew.html")
+
+
+def feed_xml(otd):
+    """An Atom feed: today's anniversaries (the site is rebuilt every morning) and everything new, for feed readers and email services."""
+    now = datetime.datetime.now(datetime.timezone.utc)
+    md = now.strftime("%m-%d")
+    today = [r for r in otd if r[0] == md]
+    entries = []
+    if today:
+        body = "".join(f"<p><b>{xesc(str(r[1]) + ': ' if r[1] is not None else '')}{xesc(r[3])}.</b> {xesc(r[5])}</p>" for r in today)
+        stamp = now.strftime("%Y-%m-%dT06:00:00Z")
+        entries.append(("On this day in Welsh history: " + now.strftime("%-d %B"), BASE_URL + "onthisday.html", f"{BASE_URL}onthisday.html#{now.strftime('%Y-%m-%d')}", stamp, body))
+    for d, te, tc, se, sc, link in WN.NEWS:
+        entries.append((te, BASE_URL + link, f"{BASE_URL}whatsnew.html#{d}-{link}", d + "T12:00:00Z", f"<p>{xesc(se)}</p>"))
+    updated = max(x[3] for x in entries)
+    out = ['<?xml version="1.0" encoding="utf-8"?>\n<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-GB">',
+           "<title>History of Wales</title>", "<subtitle>New on the site, and this day in Welsh history</subtitle>",
+           f'<link href="{BASE_URL}"/>', f'<link rel="self" href="{BASE_URL}feed.xml"/>', f"<id>{BASE_URL}</id>", f"<updated>{updated}</updated>",
+           "<author><name>History of Wales</name></author>", f"<icon>{BASE_URL}icon-192.png</icon>"]
+    for t, link, i, when, body in entries:
+        out.append(f'<entry><title>{xesc(t)}</title><link href="{xesc(link)}"/><id>{xesc(i)}</id><updated>{when}</updated><content type="html">{xesc(body)}</content></entry>')
+    return "\n".join(out) + "\n</feed>\n"
 
 
 def nav(active="", skip="#main", home=False):
@@ -197,7 +269,7 @@ def nav(active="", skip="#main", home=False):
             f'<a class="journey-chip" href="journey.html" id="journey-chip" data-total="{JOURNEY_TOTAL}" aria-label="0 pages read: your journey / Eich taith"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" class="tr"/><circle cx="18" cy="18" r="15" class="fg" id="journey-ring" pathLength="100" stroke-dasharray="0 100"/></svg><b id="journey-n">0</b></a>'
             f'<button type="button" class="search-btn" data-search aria-label="Search / Chwilio">{SEARCH_SVG}</button>'
              '<div class="lang" role="group" aria-label="Language / Iaith"><button type="button" id="lang-en" aria-pressed="true">EN</button><button type="button" id="lang-cy" aria-pressed="false">CY</button></div>'
-            f'<button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="menu" aria-label="Menu / Dewislen"><span class="bars" aria-hidden="true"><i></i><i></i></span>{bi("Menu", "Dewislen")}</button></div></nav>'
+            f'<button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="menu" aria-label="Menu / Dewislen" data-news="{WN.NEWS[0][0]}"><span class="bars" aria-hidden="true"><i></i><i></i></span>{bi("Menu", "Dewislen")}</button></div></nav>'
             f'<div class="menu" id="menu" hidden><div class="wrap"><ul class="menu-big">{big}</ul><div class="menu-side"><p class="eyebrow">{bi("More", "Rhagor")}</p><ul class="menu-more">{more}</ul>'
             f'<p class="menu-note">{bi("230,000 years of history, in English and Cymraeg.", "230,000 o flynyddoedd o hanes, yn Gymraeg ac yn Saesneg.")}</p></div></div></div>')
 
@@ -213,7 +285,7 @@ def footer():
     eras = [(f'era-{x["id"]}.html', x["en"], x["cy"]) for x in D.ERAS]
     explore = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#map", "Map of Wales", "Map Cymru"), ("index.html#people", "People", "Pobl"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("castles.html", "Castles of Wales", "Cestyll Cymru"), ("trails.html", "Themed trails", "Llwybrau thema"),
                ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"), ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg")]
-    read = [("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
+    read = [("whatsnew.html", "What’s new", "Beth sy’n newydd"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
             ("teachers.html", "For teachers", "I athrawon"), ("index.html#sources", "Sources", "Ffynonellau")]
     play = [("daily.html", "Daily challenge", "Her y dydd"), ("quiz.html", "Quiz", "Cwis"), ("map-game.html", "Where in Wales?", "Ble yng Nghymru?"), ("names.html", "Welsh names", "Enwau Cymraeg"),
             ("play.html", "All games", "Pob gêm"), ("journey.html", "Your journey", "Eich taith")]
@@ -224,7 +296,7 @@ def footer():
     copy_cy = (f"© {yrs} {COPYRIGHT_OWNER_CY}. Cedwir pob hawl. Ni chaniateir copïo testun na chynllun y wefan hon heb ganiatâd. "
                "Mae’r ffotograffau a’r ddraig 3D yn eiddo i’w crewyr eu hunain ac fe’u defnyddir dan eu trwyddedau.")
     return ('<footer class="site-foot"><div class="wrap"><div class="foot-top"><p class="big">Diolch<span>.</span></p>'
-            f'<p class="foot-tag">{bi("Thank you for reading. Wales is a small country with a long memory; this site is a way in.", "Diolch am ddarllen. Gwlad fach â chof hir yw Cymru; ffordd i mewn yw’r wefan hon.")}</p></div>'
+            f'<p class="foot-tag">{bi("Thank you for reading. Wales is a small country with a long memory; this site is a way in.", "Diolch am ddarllen. Gwlad fach â chof hir yw Cymru; ffordd i mewn yw’r wefan hon.")}</p>{follow_box("foot")}</div>'
             f'<div class="foot-cols">{col("The nine ages", "Y naw oes", eras)}{col("Explore", "Archwilio", explore)}{col("Read", "Darllen", read)}{col("Play", "Chwarae", play)}</div>'
             f'<div class="foot-base"><span>{bi("History of Wales · Hanes Cymru", "Hanes Cymru · History of Wales")}</span>'
             f'<span>{bi("Event links go to Wikipedia, which lists academic sources. Dates marked c. are approximate. Original illustrations; photographs from Wikimedia Commons, credited on each page.", "Mae dolenni’r digwyddiadau’n mynd i Wicipedia, sy’n rhestru ffynonellau academaidd. Dyddiadau bras yw’r rhai a nodir c. Darluniau gwreiddiol; ffotograffau o Wikimedia Commons, gyda chydnabyddiaeth ar bob tudalen.")}</span></div><p class="foot-copy">{bi(copy_en, copy_cy)}</p></div></footer>'
@@ -1605,7 +1677,7 @@ HERO_NAME = (f'<p class="hero-name"><span class="l-en" lang="en" aria-label="His
 def fill(fragment, active="", skip="#chapters", home=False):
     return (fragment.replace("__NAV__", nav(active, skip, home)).replace("__HERONAME__", HERO_NAME).replace("__FOOTER__", footer()).replace("__AGES__", AGES_HTML).replace("__MARQUEE__", MARQUEE)
             .replace("__STORIES__", "".join(story_card(x, k == 0) for k, x in enumerate(F.STORIES)))
-            .replace("__LEGENDS__", "".join(legend_card(x) for x in F.LEGENDS_HOME)).replace("__PLAY__", play_cards()))
+            .replace("__NEWS__", news_strip()).replace("__LEGENDS__", "".join(legend_card(x) for x in F.LEGENDS_HOME)).replace("__PLAY__", play_cards()))
 
 
 index_head = head.replace("</style>", extra_css + PRINT_CSS + EXTRA_PAGE_CSS + "\n</style>", 1)
@@ -1978,6 +2050,7 @@ def main():
     pages["welsh.html"] = welsh_page()
     pages["pairs.html"] = game_page("pairs.html", "pairs", "modern", "Word pairs", "Parau geiriau", "Turn over two cards at a time and match each Welsh word to its meaning.", "Trowch ddau gerdyn ar y tro a pharu pob gair Cymraeg â’i ystyr.", "owl", "A memory game: match Welsh words to their meanings.")
     pages["404.html"] = not_found_page()
+    pages["whatsnew.html"] = whatsnew_page()
     shared_files = shared_assets(pages)
     for name, text in pages.items():
         write(os.path.join(out, name), text)
@@ -1988,6 +2061,8 @@ def main():
         (shutil.copytree if os.path.isdir(sp) else shutil.copy)(sp, os.path.join(out, f))
     write(os.path.join(out, "welsh.js"), welsh_js())
     write(os.path.join(out, "onthisday.json"), json.dumps(otd_rows(), ensure_ascii=False, separators=(",", ":")))
+    write(os.path.join(out, "feed.xml"), feed_xml(otd_rows()))
+    write(os.path.join(out, "whatsnew.json"), json.dumps(WN.NEWS, ensure_ascii=False))
     write(os.path.join(out, "search.json"), json.dumps(search_index(), ensure_ascii=False, separators=(",", ":")))
     write(os.path.join(out, ".nojekyll"), "")
     write(os.path.join(out, "robots.txt"), f"User-agent: *\nAllow: /\nSitemap: {BASE_URL}sitemap.xml\n")
