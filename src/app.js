@@ -741,7 +741,7 @@
   /* ---------- Words, with play buttons ---------- */
   var AUDIO = {}; (D.AUDIO || []).forEach(function (a) { AUDIO[a] = 1; });
   var canSpeak = "speechSynthesis" in window;
-  function slugW(w) { return w.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
+  function slugW(w) { return w.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
   function sayWord(w) {
     var slug = slugW(w[0]);
     if (AUDIO[slug]) { try { new Audio("audio/" + slug + ".mp3").play(); } catch (e) {} return; }

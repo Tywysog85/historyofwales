@@ -1461,6 +1461,7 @@ def family_trees_page():
 WELSH_JS_VER = 1
 AUDIO_DIR = os.path.join(SRC, "static", "audio")
 AUDIO_FILES = sorted(f[:-4] for f in os.listdir(AUDIO_DIR) if f.endswith(".mp3")) if os.path.isdir(AUDIO_DIR) else []
+LL_CREDITS = json.loads(read("audio_credits.json")) if os.path.exists(os.path.join(SRC, "audio_credits.json")) else {}
 HEAR_SVG = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/>'
             '<path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>')
 WELSH_SCRIPT = f'<script src="welsh.js?v={WELSH_JS_VER}" defer></script>\n'
@@ -1494,6 +1495,16 @@ def welsh_page():
     credits = ""
     if CYM.AUDIO_CREDITS:
         credits = "<p>" + bi("Recordings:", "Recordiadau:") + " " + "; ".join(f'{e(f)}: <a href="{e(u)}">{e(who)}</a>, {e(lic)}' for f, (who, lic, u) in CYM.AUDIO_CREDITS.items()) + "</p>"
+    if LL_CREDITS:  # Lingua Libre recordings (tools/fetch_audio.py), grouped by speaker
+        by = {}
+        for k, c in LL_CREDITS.items():
+            if k in AUDIO_FILES:
+                by.setdefault((c["speaker"], c["licence"]), []).append(c)
+        if by:
+            credits += ("<details class=\"cyw-credits\"><summary>" + bi(f"Real Welsh voices: {sum(len(v) for v in by.values())} recordings from Lingua Libre, with thanks to the speakers",
+                                                                         f"Lleisiau Cymraeg go iawn: {sum(len(v) for v in by.values())} o recordiadau o Lingua Libre, gyda diolch i’r siaradwyr") + "</summary><p>"
+                        + "</p><p>".join(f'<b>{e(who)}</b> ({e(lic)}): ' + ", ".join(f'<a href="{e(c["page"])}" lang="cy">{e(c["text"])}</a>' for c in sorted(cs, key=lambda c: c["text"].lower()))
+                                         for (who, lic), cs in sorted(by.items(), key=lambda x: -len(x[1]))) + "</p></details>")
     note = (f'<div class="cyw-note"><p>{bi("Where a real recording of a word is available, the speaker button plays it. Otherwise your device reads the word aloud: devices with a Welsh voice installed, such as Microsoft Edge on Windows, speak real Welsh, and others read the sound guide in English.", "Lle mae recordiad go iawn o air ar gael, mae’r botwm sain yn ei chwarae. Fel arall mae eich dyfais yn darllen y gair yn uchel: mae dyfeisiau sydd â llais Cymraeg, fel Microsoft Edge ar Windows, yn siarad Cymraeg go iawn, ac mae eraill yn darllen y canllaw sain yn Saesneg.")}</p>'
             f'<p>{bi("In the sound guides, capital letters show the stressed syllable, kh is the ch of loch, and hl is the Welsh ll.", "Yn y canllawiau sain, mae priflythrennau’n dangos y sillaf acennog, kh yw ch yn loch, a hl yw’r ll Gymraeg.")}</p>{credits}</div>')
     main = (hero("modern", f'<a href="index.html">{SITE}</a> / <a href="index.html#language">{bi("Language", "Iaith")}</a>', "book", "Learn Welsh", "Dysgu Cymraeg",
