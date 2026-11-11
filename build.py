@@ -26,6 +26,7 @@ import ages9 as AG9
 import royal as RY  # noqa: E402
 import trees as TR  # noqa: E402
 import cymraeg as CYM  # noqa: E402
+import saints as SA  # noqa: E402
 L.TEACH.update(AG9.TEACH)
 from urllib.parse import quote as _q
 
@@ -170,7 +171,7 @@ PRINT_CSS = """
 
 NAV_MAIN = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#chapters", "Ages", "Oesoedd"), ("index.html#map", "Map", "Map"),
             ("index.html#people", "People", "Pobl"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("play.html", "Play", "Chwarae")]
-NAV_MORE = [("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"), ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"),
+NAV_MORE = [("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"), ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"),
             ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg"), ("journey.html", "Your journey", "Eich taith"), ("teachers.html", "For teachers", "I athrawon"),
             ("index.html#sources", "Sources", "Ffynonellau")]
 # extra links for the home page top bar, where the site name has moved into the opening screen and left room
@@ -207,7 +208,7 @@ def footer():
     def col(title_en, title_cy, links):
         return f'<div><p class="eyebrow">{bi(title_en, title_cy)}</p><ul>' + "".join(f'<li><a href="{h}">{bi(a, b)}</a></li>' for h, a, b in links) + "</ul></div>"
     eras = [(f'era-{x["id"]}.html', x["en"], x["cy"]) for x in D.ERAS]
-    explore = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#map", "Map of Wales", "Map Cymru"), ("index.html#people", "People", "Pobl"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("trails.html", "Themed trails", "Llwybrau thema"),
+    explore = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#map", "Map of Wales", "Map Cymru"), ("index.html#people", "People", "Pobl"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("trails.html", "Themed trails", "Llwybrau thema"),
                ("gallery.html", "Photo gallery", "Oriel luniau"), ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg")]
     read = [("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
             ("teachers.html", "For teachers", "I athrawon"), ("index.html#sources", "Sources", "Ffynonellau")]
@@ -319,6 +320,7 @@ def era_page(i, era):
             + section(f'<ol class="era-events">{"".join(event_li(ev) for ev in evs)}</ol>', "Timeline", "Llinell amser")
             + section(f'<div class="people">{"".join(plaque(p) for p in ppl)}</div>', "People", "Pobl")
             + (section(f'<div class="era-places">{"".join(place_tile(p) for p in plc)}</div>', "Places to visit", "Lleoedd i ymweld â nhw") if plc else "")
+            + (section(f'<p class="lede">{bi("Dewi, Teilo, Illtud, Cadog, Beuno, Melangell and sixty more: every saint region by region, with the llannau that carry their names.", "Dewi, Teilo, Illtud, Cadog, Beuno, Melangell a thrigain arall: pob sant fesul rhanbarth, gyda’r llannau sy’n dwyn eu henwau.")}</p><p><a class="btn solid" href="saints.html">{bi("Meet the saints of Wales", "Cwrdd â seintiau Cymru")} →</a></p>', "The saints of Wales", "Seintiau Cymru") if eid == "saints" else "")
             + section(f'<div class="pager">{pager}</div>'))
     ld = {"@context": "https://schema.org", "@type": "Article", "headline": era["en"], "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
     return page(f"era-{eid}.html", f'{era["en"]} · History of Wales', era["blurbEn"], main, era=eid, ld=ld, track=f"era:{eid}")
@@ -336,7 +338,7 @@ def person_page(p):
     pager = (f'<a class="btn" href="person-{prev_p[0]}.html">← {bi(prev_p[3], prev_p[4])}</a>' if prev_p else f'<a class="btn" href="era-{eid}.html">← {bi(era["en"], era["cy"])}</a>') + \
             (f'<a class="btn solid" href="person-{next_p[0]}.html">{bi(next_p[3], next_p[4])} →</a>' if next_p else '<a class="btn solid" href="index.html#people">' + bi("All people", "Pawb") + " →</a>")
     meta = (f'<div class="person-meta"><span>{e(p[2])}</span><span>{bi(p[5], p[6])}</span><a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a></div>')
-    rl = realm_links(f"person-{slug}.html") + ft_link_for_person(f"person-{slug}.html")
+    rl = realm_links(f"person-{slug}.html") + ft_link_for_person(f"person-{slug}.html") + saints_links(f"person-{slug}.html")
     meta += f'<p class="realm-links">{rl}</p>' if rl else ""
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', era["ill"], p[2], p[2], p[3], p[4], p[7], p[8], art=ERA_ART[eid])
             + section(meta + photo_fig(PH.PERSON_PHOTOS.get(slug), "portrait") + paras(long_en, long_cy) + f'<p class="share no-print"><button type="button" class="btn" data-copy="person-{slug}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button> {src(p[9])}</p>', top=True)
@@ -358,7 +360,7 @@ def place_page(pl):
     osm = f'https://www.openstreetmap.org/?mlat={pl["lat"]}&mlon={pl["lon"]}#map=14/{pl["lat"]}/{pl["lon"]}'
     meta = (f'<div class="person-meta"><span>{e(pl["year"])}</span><span>{pl["lat"]:.3f}° N, {abs(pl["lon"]):.3f}° W</span>'
             f'<a href="{osm}" target="_blank" rel="noopener">{bi("Open in a map", "Agor mewn map")} ↗</a><a href="index.html#lle-{pid}">{bi("On our map", "Ar ein map")} →</a></div>')
-    rl = realm_links(f"place-{pid}.html")
+    rl = realm_links(f"place-{pid}.html") + saints_links(f"place-{pid}.html")
     meta += f'<p class="realm-links">{rl}</p>' if rl else ""
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', pl["ill"], era["en"], era["cy"], pl["en"], pl["cy"], pl["dEn"], pl["dCy"], art=ERA_ART[eid])
             + section(meta + photo_fig(PH.PLACE_PHOTOS.get(pid)) + paras(long_en, long_cy) + f'<p class="share no-print">{src(pl["src"])}</p>', top=True)
@@ -728,6 +730,11 @@ style += ROYAL_CSS
 CY_ORD = {5: "5ed", 6: "6ed", 7: "7fed", 8: "8fed", 9: "9fed", 10: "10fed", 11: "11eg", 12: "12fed", 13: "13eg", 14: "14eg", 15: "15fed"}
 
 
+def saints_btn(realm_id):
+    reg = [x for x in SA.REGIONS if x["realm"] == realm_id]
+    return "".join(f'<a class="btn" href="saints-{x["id"]}.html">{bi("Saints of " + x["en"], "Seintiau " + x["cy"])} →</a>' for x in reg)
+
+
 def realm_page(r, i):
     t_en, t_cy = realm_title(r)
     nxt = RY.REALMS[(i + 1) % len(RY.REALMS)]
@@ -737,7 +744,7 @@ def realm_page(r, i):
             + section(paras(r["introEn"], r["introCy"]) + ft_link_for_realm(r["id"]), top=True)
             + section(ruler_list(r["rulers"]) + f'<p class="note-box" style="margin-top:2rem">{ROYAL_NOTE}</p>', *(() if r["rulers"][0]["k"] == "h" else ("The rulers, in order", "Y rheolwyr, yn eu trefn")))
             + (section(f'<div class="era-places">{"".join(place_tile(p) for p in places)}</div>', "Places to visit", "Lleoedd i ymweld â nhw") if places else "")
-            + section(f'<div class="pager"><a class="btn" href="kings.html">← {bi("All the kings and princes of Wales", "Holl frenhinoedd a thywysogion Cymru")}</a>'
+            + section(f'<div class="pager"><a class="btn" href="kings.html">← {bi("All the kings and princes of Wales", "Holl frenhinoedd a thywysogion Cymru")}</a>{saints_btn(r["id"])}'
                       f'<a class="btn solid" href="kings-{nxt["id"]}.html">{bi(nxt["en"], nxt["cy"])} →</a></div>'))
     ld = {"@context": "https://schema.org", "@type": "Article", "headline": t_en, "description": r["subEn"], "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
     return page(f"kings-{r['id']}.html", f"{t_en} · History of Wales", f"Every king and prince of {r['en']}, in order with their dates. {r['subEn']}", main, era=r["era"], ld=ld, active="kings.html", track=f"kings:{r['id']}")
@@ -1097,6 +1104,255 @@ def welsh_page():
                       f'<a class="btn" href="story-language.html">{bi("How the language survived", "Sut y goroesodd yr iaith")} →</a> <a class="btn" href="pairs.html">{bi("Word pairs game", "Gêm parau geiriau")} →</a></p>'))
     return page("welsh.html", "Learn Welsh · History of Wales", "A Welsh word of the day with its history, and the beginner’s phrases every visitor to Wales needs, with sound guides.",
                 main, era="modern", og_type="website", active="welsh.html", extra=WELSH_SCRIPT)
+# ---------- saints of Wales (src/saints.py) ----------
+SREG = {r["id"]: r for r in SA.REGIONS}
+SAINT = {x["id"]: (x, r) for r in SA.REGIONS for x in r["saints"]}
+MONTHS = [("January", "Ionawr"), ("February", "Chwefror"), ("March", "Mawrth"), ("April", "Ebrill"), ("May", "Mai"), ("June", "Mehefin"),
+          ("July", "Gorffennaf"), ("August", "Awst"), ("September", "Medi"), ("October", "Hydref"), ("November", "Tachwedd"), ("December", "Rhagfyr")]
+# Llan places that have their own page on the site
+LL_PAGE = {"Tyddewi": "stdavids", "Llanilltud Fawr": "llanilltud", "Ynys Enlli": "enlli", "Treffynnon": "treffynnon", "Llanrhaeadr-ym-Mochnant": "llanrhaeadr",
+           "Llangollen": "llangollen", "Tyndyrn": "tintern", "Caer-went": "caerwent", "Llanfaches": "llanfaches", "Sain Ffagan": "stfagans",
+           "Aberffraw": "aberffraw", "Pumsaint": "dolaucothi", "Merthyr Tudful": "merthyr"}
+LL_PAGE = {k: v for k, v in LL_PAGE.items() if v in PLACE}
+
+
+def feast_txt(f):
+    d, m = f
+    return (f"{d} {MONTHS[m - 1][0]}", f"{d} {MONTHS[m - 1][1]}")
+
+
+def saint_href(sid):
+    return f'saints-{SAINT[sid][1]["id"]}.html#s-{sid}'
+
+
+def ll_chip(name):
+    lat, lon, en, away = SA.LL[name]
+    sub = f'<small class="l-en" lang="en"> · {e(en)}</small>' if en else ""
+    inner = f'{e(name)}{sub}'
+    cls = "chip ll" + (" away" if away else "")
+    if name in LL_PAGE:
+        return f'<a class="{cls}" href="place-{LL_PAGE[name]}.html">{inner}</a>'
+    return f'<span class="{cls}">{inner}</span>'
+
+
+def saint_li(x, r=None, chips=""):
+    link = x["link"]
+    more = ""
+    if link:
+        lab = ("Read more", "Darllen mwy") if link.startswith("person-") else ("See the kings", "Gweld y brenhinoedd")
+        more = f'<a class="src" href="{link}">{bi(*lab)} →</a>'
+    feast = f'<p class="feast">{bi("Feast day " + feast_txt(x["feast"])[0], "Dydd gŵyl " + feast_txt(x["feast"])[1])}</p>' if x["feast"] else ""
+    places = "".join(ll_chip(n) for n in x["places"])
+    places = f'<div class="ll-chips" aria-label="Places named after them">{places}</div>' if places else ""
+    links = f'<div class="links">{more}{chips}</div>' if (more or chips) else ""
+    return (f'<li id="s-{x["id"]}" class="{"key" if x["key"] else ""}"><time>{bi(x["dates"], cy_dates(x["dates"]))}</time>'
+            f'<div><h3>{bi(x["en"], x["cy"])}</h3>{feast}<p>{bi(x["nEn"], x["nCy"])}</p>{places}{links}</div></li>')
+
+
+def saints_map(focus=None):
+    """Every llan on the map of Wales, one dot per place, coloured by the region of its saint. focus: a region id to pick out."""
+    sc, k, minx, maxy = geo["sc"], geo["k"], geo["minx"], geo["maxy"]
+    at = {}
+    for r in SA.REGIONS:
+        for x in r["saints"]:
+            for n in x["places"]:
+                at.setdefault(n, []).append((x, r))
+    dots = []
+    for n, who in at.items():
+        lat, lon, en, away = SA.LL[n]
+        if away:
+            continue
+        cx, cy = (lon - minx) * k * sc, (maxy - lat) * sc
+        reg = who[0][1]
+        on = focus is None or any(rr["id"] == focus for _, rr in who)
+        ids = " ".join(x["id"] for x, _ in who)
+        dots.append((not on, f'<g class="sm-dot{"" if on else " dim"}" tabindex="0" role="button" data-n="{e(n)}" data-en="{e(en or "")}" data-s="{ids}" data-r="{reg["id"]}" style="--c:{reg["col"]}" transform="translate({cx:.1f} {cy:.1f})">'
+                     f'<circle class="h" r="15"/><circle class="d" r="6"/><title>{e(n)}: {e(", ".join(x["en"] for x, _ in who))}</title></g>'))
+    dots.sort(key=lambda d: d[0], reverse=True)  # dimmed dots first, so the region's own sit on top
+    return (f'<svg class="sm-map" viewBox="-20 -20 640 711" role="group" aria-label="Map of Wales showing the llannau named after the saints">'
+            f'<text class="sea-l" x="40" y="430">{bi("CARDIGAN BAY", "BAE CEREDIGION", "tspan")}</text><text class="sea-l" x="80" y="680">{bi("BRISTOL CHANNEL", "MÔR HAFREN", "tspan")}</text>'
+            f'<path class="land" d="{geo["outline"]}"/>{"".join(d[1] for d in dots)}</svg>')
+
+
+def saints_map_block(focus=None):
+    opts = "".join(f'<optgroup label="{e(r["en"])} / {e(r["cy"])}">' + "".join(f'<option value="{x["id"]}">{e(x["en"])} / {e(x["cy"])}</option>' for x in r["saints"] if any(not SA.LL[n][3] for n in x["places"])) + "</optgroup>"
+                   for r in SA.REGIONS if focus in (None, r["id"]))
+    legend = "" if focus else '<div class="chips sm-legend" role="group" aria-label="Regions">' + "".join(
+        f'<a class="chip" href="saints-{r["id"]}.html" style="--c:{r["col"]}"><i></i>{bi(r["en"], r["cy"])}</a>' for r in SA.REGIONS) + "</div>"
+    return (f'<div class="sm-grid"><div class="sm-box">{saints_map(focus)}</div><div class="sm-side">'
+            f'<label class="sm-pick"><span>{bi("Show the churches of", "Dangos eglwysi")}</span><select id="sm-saint"><option value="">{e("All the saints / Yr holl saint")}</option>{opts}</select></label>'
+            f'<div class="sm-card" id="sm-card" aria-live="polite"><p class="muted">{bi("Tap a dot to see whose llan it is.", "Tapiwch ddot i weld llan pwy yw hi.")}</p></div>{legend}</div></div>')
+
+
+def llan_decoder():
+    rows = "".join(f'<div class="mut"><b>{e(a)}</b><span>{e(b)}</span><i>{e(c)}</i></div>' for a, b, c in SA.MUTATIONS)
+    known = {}
+    for r in SA.REGIONS:
+        for x in r["saints"]:
+            for n in x["places"]:
+                if not SA.LL[n][3]:
+                    known.setdefault(n.split(" (")[0], [])
+                    if x["id"] not in known[n.split(" (")[0]]:
+                        known[n.split(" (")[0]].append(x["id"])
+    saints = {sid: [x["en"], x["cy"], saint_href(sid), r["en"], r["cy"]] for sid, (x, r) in SAINT.items()}
+    other = {a: [b, c, d] for a, b, c, d in SA.OTHER_LLAN}
+    data = json.dumps(dict(k=known, s=saints, o=other), ensure_ascii=False, separators=(",", ":"))
+    names = sorted(set(list(known) + list(other)))
+    return (f'<div class="mut-grid" aria-label="How llan changes a name">{rows}</div>'
+            f'<form class="ll-dec" id="ll-dec" autocomplete="off"><label for="ll-in">{bi("Unpick a place name", "Datod enw lle")}</label>'
+            f'<div class="near-form"><input id="ll-in" type="text" list="ll-names" placeholder="e.g. Llangollen" data-cy-ph="e.e. Llangollen">'
+            f'<datalist id="ll-names">{"".join(f"<option value=\"{e(n)}\">" for n in names)}</datalist><button type="submit" class="btn">{bi("Who is it?", "Pwy yw e?")}</button></div>'
+            f'<div class="ll-out" id="ll-out" aria-live="polite"></div></form><script>var LLDEC={data};</script>')
+
+
+def saints_calendar():
+    by = {m: [] for m in range(1, 13)}
+    for sid, (x, r) in SAINT.items():
+        if x["feast"]:
+            by[x["feast"][1]].append((x["feast"][0], x))
+    cells = ""
+    for m in range(1, 13):
+        items = "".join(f'<li data-d="{d}" data-m="{m}"><b>{d}</b><a href="{saint_href(x["id"])}">{bi(x["en"], x["cy"])}</a></li>' for d, x in sorted(by[m], key=lambda t: t[0]))
+        cells += f'<div class="cal-m"><h3>{bi(*MONTHS[m - 1])}</h3><ol>{items}</ol></div>'
+    return f'<div class="cal">{cells}</div>'
+
+
+def feasts_json():
+    out = [[x["feast"][1], x["feast"][0], x["en"], x["cy"], saint_href(sid), x["nEn"].split(". ")[0] + ".", x["nCy"].split(". ")[0] + "."] for sid, (x, r) in SAINT.items() if x["feast"]]
+    return json.dumps(sorted(out), ensure_ascii=False, separators=(",", ":"))
+
+
+SAINTS_JS = '<script src="saints.js?v=2" defer></script>\n'
+SAINTS_CSS = """
+.ll-chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .6rem }
+.chip.ll { font: 500 .8rem var(--f-body); padding: .22rem .7rem; cursor: default; color: var(--ink); border-color: color-mix(in srgb, var(--c) 45%, var(--line)) }
+.chip.ll small { color: var(--muted); font-size: .74rem }
+a.chip.ll { cursor: pointer } a.chip.ll:hover { border-color: var(--c) }
+.chip.ll.away { border-style: dashed }
+.era-events .feast { font: 500 .78rem var(--f-mono); color: var(--c); letter-spacing: .04em; margin-top: .15rem }
+.sm-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 2rem; align-items: start }
+.sm-map { width: 100%; height: auto; display: block; overflow: visible }
+.sm-map .sea-l { font-size: 15px }
+.sm-dot { cursor: pointer; outline: none }
+.sm-dot .d { fill: var(--c); stroke: var(--night); stroke-width: 2; transition: r .2s, opacity .2s }
+.sm-dot .h { fill: var(--c); opacity: 0; transition: opacity .2s }
+.sm-dot:hover .h, .sm-dot:focus-visible .h { opacity: .3 }
+.sm-dot.sel .h { opacity: .35; animation: pulse 2.2s ease-out infinite }
+.sm-dot.sel .d { r: 8 }
+.sm-dot.dim { opacity: .2 }
+.sm-dot.hit .d { r: 7.5 }
+.sm-side { display: grid; gap: 1.2rem }
+.sm-pick { display: grid; gap: .4rem; font: 500 .8rem var(--f-mono); color: var(--muted); text-transform: uppercase; letter-spacing: .08em }
+.sm-pick select { font: 500 1rem var(--f-body); color: var(--ink); background: var(--slate); border: 1px solid var(--line); border-radius: 12px; padding: .7rem .9rem; text-transform: none; letter-spacing: 0; width: 100% }
+.sm-card { background: var(--slate); border: 1px solid var(--line); border-left: 4px solid var(--c, var(--e-saints)); border-radius: 0 16px 16px 0; padding: 1.1rem 1.3rem; min-height: 6rem; display: grid; gap: .5rem; align-content: start }
+.sm-card h3 { font-family: var(--f-display); font-weight: 400; font-size: 1.7rem; line-height: 1.1 }
+.sm-card .en { color: var(--muted); font-size: .9rem }
+.sm-card ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .35rem }
+.sm-card .go { font-weight: 700 }
+.sm-legend { display: flex; flex-wrap: wrap; gap: .45rem }
+.sm-legend .chip { font-size: .82rem; padding: .3rem .8rem }
+.mut-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(46%, 12.5rem), 1fr)); gap: .7rem; margin: 1.6rem 0 }
+.mut { display: grid; grid-template-columns: auto 1fr; gap: .1rem .8rem; align-items: baseline; background: var(--slate); border: 1px solid var(--line); border-radius: 14px; padding: .8rem 1rem }
+.mut b { font: 500 .85rem var(--f-mono); color: var(--muted) } .mut b::before { content: "Llan + " }
+.mut span { grid-column: 1 / -1; font: 400 clamp(1.25rem, 4.2vw, 1.6rem)/1.1 var(--f-display); color: var(--ink) }
+.mut i { grid-column: 1 / -1; font: 500 .75rem var(--f-mono); font-style: normal; color: var(--c) }
+.ll-dec { display: grid; gap: .6rem; margin-top: 1rem }
+.ll-dec > label { font: 500 .8rem var(--f-mono); color: var(--muted); text-transform: uppercase; letter-spacing: .08em }
+.ll-out:empty { display: none }
+.ll-out { background: var(--slate); border: 1px solid var(--line); border-left: 4px solid var(--c); border-radius: 0 16px 16px 0; padding: 1.1rem 1.3rem; display: grid; gap: .4rem; animation: up .4s var(--ease) both }
+.ll-out .eq { font: 400 clamp(1.5rem, 4vw, 2.2rem)/1.15 var(--f-display) } .ll-out .eq em { color: var(--c); font-style: normal }
+.today-card { margin-top: 2rem; display: grid; gap: .4rem; background: radial-gradient(120% 140% at 100% 0%, color-mix(in srgb, var(--e-saints) 22%, transparent), transparent 60%), var(--slate); border: 1px solid color-mix(in srgb, var(--e-saints) 40%, var(--line)); border-radius: 18px; padding: 1.3rem 1.5rem }
+.today-card .eyebrow { color: var(--e-saints) }
+.today-card h3 { font: 400 clamp(1.8rem, 4.5vw, 2.6rem)/1.05 var(--f-display) }
+.today-card p { color: var(--muted) }
+.cal { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); gap: 1rem }
+.cal-m { background: var(--slate); border: 1px solid var(--line); border-radius: 14px; padding: 1rem 1.1rem }
+.cal-m h3 { font: 500 .8rem var(--f-mono); text-transform: uppercase; letter-spacing: .1em; color: var(--e-saints); margin-bottom: .5rem }
+.cal-m ol { list-style: none; margin: 0; padding: 0; display: grid; gap: .3rem }
+.cal-m li { display: grid; grid-template-columns: 1.8rem 1fr; gap: .5rem; align-items: baseline }
+.cal-m li b { font: 500 .85rem var(--f-mono); color: var(--muted) }
+.cal-m li a { color: var(--ink); text-decoration: none } .cal-m li a:hover { text-decoration: underline }
+.cal-m li.today { background: color-mix(in srgb, var(--e-saints) 18%, transparent); border-radius: 8px; margin: 0 -.4rem; padding: .1rem .4rem }
+.cal-m li.today b { color: var(--e-saints) }
+.saints-h { margin-top: 2.8rem; display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem 1rem; font-size: clamp(1.8rem, 4.5vw, 2.4rem) }
+.saints-h a { font: 600 .85rem var(--f-body); color: var(--c); text-decoration: none } .saints-h a:hover { text-decoration: underline }
+@media (max-width: 820px) { .sm-grid { grid-template-columns: 1fr; gap: 1.2rem } .sm-side { display: contents } .sm-pick { order: -1 } }
+"""
+style += SAINTS_CSS
+
+
+def saint_region_tile(r):
+    n = len(r["saints"])
+    return (f'<a href="saints-{r["id"]}.html" data-era="{r["era"]}" style="--c:{r["col"]}"><svg aria-hidden="true"><use href="#i-{"ship" if not r["realm"] else "cross"}"/></svg>'
+            f'<span><b>{bi(r["en"], r["cy"])}</b><span>{bi(f"{n} saints", f"{n} o saint")}</span></span></a>')
+
+
+# person and place pages link to the saints region that names them
+SAINTS_OF = {}
+for _r in SA.REGIONS:
+    for _x in _r["saints"]:
+        if _x["link"] and _x["link"].startswith("person-"):
+            SAINTS_OF.setdefault(_x["link"], []).append(_r["id"])
+        for _n in _x["places"]:
+            if _n in LL_PAGE:
+                SAINTS_OF.setdefault(f"place-{LL_PAGE[_n]}.html", []).append(_r["id"])
+    for _pid in _r["places"]:
+        SAINTS_OF.setdefault(f"place-{_pid}.html", []).append(_r["id"])
+
+
+def saints_links(href):
+    ids = list(dict.fromkeys(SAINTS_OF.get(href, [])))
+    return "".join(f'<a href="saints-{i}.html">{bi("Saints of " + SREG[i]["en"], "Seintiau " + SREG[i]["cy"])} →</a>' for i in ids)
+
+
+def saints_page():
+    every = ""
+    for r in SA.REGIONS:
+        every += (f'<h3 class="sub-h saints-h" style="--c:{r["col"]}">{bi(r["en"], r["cy"])}<a href="saints-{r["id"]}.html">{bi("The region’s page", "Tudalen y rhanbarth")} →</a></h3>'
+                  f'<ol class="era-events royal" data-era="{r["era"]}">{"".join(saint_li(x) for x in r["saints"])}</ol>')
+    dewi = SAINT["dewi"][0]
+    lead = (f'<aside class="behind one-king"><p class="eyebrow">{bi("Feast day 1 March · Patron saint of Wales", "Dydd gŵyl 1 Mawrth · Nawddsant Cymru")}</p>'
+            f'<h2>{bi("Dewi Sant, Saint David", "Dewi Sant")}</h2>' + paras(SA.DEWI["en"], SA.DEWI["cy"]) +
+            f'<p><a class="go" href="person-dewi-sant.html">{bi("Read his story", "Darllen ei hanes")} →</a> &nbsp; <a class="go" href="saints-dyfed.html">{bi("The saints of Dyfed", "Seintiau Dyfed")} →</a> &nbsp; <a class="go" href="place-stdavids.html">{bi("Visit St Davids", "Ymweld â Thyddewi")} →</a></p></aside>')
+    today = (f'<div class="today-card" id="today-saint"><p class="eyebrow">{bi("The saints’ calendar", "Calendr y saint")}</p>'
+             f'<h3>{bi(dewi["en"], dewi["cy"])}</h3><p>{bi("Every saint on this page has a feast day. Their days are listed in the calendar at the foot of the page.", "Mae gan bob sant ar y dudalen hon ddydd gŵyl. Rhestrir eu dyddiau yn y calendr ar waelod y dudalen.")}</p></div>')
+    n_all = len(SAINT)
+    n_ll = len({n for r in SA.REGIONS for x in r["saints"] for n in x["places"] if not SA.LL[n][3]})
+    main = (hero("saints", f'<a href="index.html">{SITE}</a>', "cross", "c. 400–700 · The Age of the Saints", "tua 400–700 · Oes y Saint", "Saints of Wales", "Seintiau Cymru",
+                 "Before the castles, there were the llannau. The saints of Wales founded the churches that still carry their names, taught at the oldest school in Britain, and carried the faith to Cornwall, Brittany and Ireland.",
+                 "Cyn y cestyll, roedd y llannau. Sefydlodd seintiau Cymru’r eglwysi sy’n dwyn eu henwau o hyd, dysgu yn ysgol hynaf Prydain, a chario’r ffydd i Gernyw, Llydaw ac Iwerddon.", art="cross")
+            + section(paras(SA.LEAD["en"], SA.LEAD["cy"]) + today, top=True)
+            + section(lead)
+            + section(paras(SA.LLAN["en"], SA.LLAN["cy"]) + llan_decoder(), "What is a llan?", "Beth yw llan?")
+            + section(f'<p class="lede">{bi(f"{n_ll} churches and holy places named after the saints on this page. Pick a saint to see how far their name spread.", f"{n_ll} o eglwysi a lleoedd sanctaidd a enwyd ar ôl y saint ar y dudalen hon. Dewiswch sant i weld pa mor bell yr ymledodd ei enw.")}</p>' + saints_map_block(), "The map of the llannau", "Map y llannau")
+            + section(f'<div class="era-places">{"".join(saint_region_tile(r) for r in SA.REGIONS)}</div>', "The saints, region by region", "Y saint, fesul rhanbarth")
+            + section(f'<p class="lede">{bi(f"All {n_all} saints on this site, with the places that carry their names.", f"Pob un o’r {n_all} sant ar y wefan hon, gyda’r lleoedd sy’n dwyn eu henwau.")}</p>' + every
+                      + f'<p class="note-box" style="margin-top:2rem">{bi(SA.NOTE["en"], SA.NOTE["cy"])}</p>', "Every saint", "Pob sant")
+            + section('<span id="cal"></span>' + saints_calendar(), "The saints’ calendar", "Calendr y saint")
+            + section(f'<div class="pager"><a class="btn" href="era-saints.html">← {bi("The Age of the Saints", "Oes y Saint")}</a><a class="btn solid" href="kings.html">{bi("Kings and princes of Wales", "Brenhinoedd a thywysogion Cymru")} →</a></div>'))
+    ld = {"@context": "https://schema.org", "@type": "Article", "headline": "Saints of Wales", "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
+    extra = f'<script>var FEASTS={feasts_json()};</script>\n' + SAINTS_JS
+    return page("saints.html", "Saints of Wales · History of Wales",
+                "The saints of Wales, region by region: Dewi, Teilo, Padarn, Illtud, Cadog, Beuno, Gwenffrewi, Melangell and more, with a map of the llannau named after them.",
+                main, era="saints", ld=ld, og_type="website", active="saints.html", track="saints:all", extra=extra)
+
+
+def saints_region_page(r, i):
+    nxt = SA.REGIONS[(i + 1) % len(SA.REGIONS)]
+    places = [PLACE[p] for p in r["places"] if p in PLACE]
+    t_en, t_cy = ("Saints of " + r["en"], "Seintiau " + r["cy"]) if r["realm"] else ("Saints across the sea", "Saint dros y môr")
+    kings = (f'<a class="btn" href="kings-{r["realm"]}.html">{bi("Kings of " + REALM[r["realm"]]["en"], "Brenhinoedd " + REALM[r["realm"]]["cy"])} →</a>' if r["realm"] in REALM else "")
+    main = (hero(r["era"], f'<a href="index.html">{SITE}</a> / <a href="saints.html">{bi("Saints of Wales", "Seintiau Cymru")}</a>', "cross",
+                 r["span"], cy_dates(r["span"]), t_en, t_cy, r["subEn"], r["subCy"], art=r["art"])
+            + section(paras(r["introEn"], r["introCy"]), top=True)
+            + section(f'<ol class="era-events royal">{"".join(saint_li(x, r) for x in r["saints"])}</ol><p class="note-box" style="margin-top:2rem">{bi(SA.NOTE["en"], SA.NOTE["cy"])}</p>', "The saints", "Y saint")
+            + section(saints_map_block(r["id"]), "Their llannau on the map", "Eu llannau ar y map")
+            + (section(f'<div class="era-places">{"".join(place_tile(p) for p in places)}</div>', "Places to visit", "Lleoedd i ymweld â nhw") if places else "")
+            + section(f'<div class="pager"><a class="btn" href="saints.html">← {bi("All the saints of Wales", "Holl seintiau Cymru")}</a>{kings}'
+                      f'<a class="btn solid" href="saints-{nxt["id"]}.html">{bi(nxt["en"], nxt["cy"])} →</a></div>'))
+    ld = {"@context": "https://schema.org", "@type": "Article", "headline": t_en, "description": r["subEn"], "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
+    return page(f"saints-{r['id']}.html", f"{t_en} · History of Wales", f"{r['subEn']} " + ", ".join(x["en"] for x in r["saints"]) + ".", main,
+                era=r["era"], ld=ld, active="saints.html", track=f"saints:{r['id']}", extra=SAINTS_JS)
 
 
 # ---------- index ----------
@@ -1119,7 +1375,7 @@ AGES_HTML = "".join(
     f'<a class="poster" href="era-{x["id"]}.html" data-era="{x["id"]}">{A.scene(ERA_ART[x["id"]], COL[x["id"]])}<span class="shade"></span><span class="rn">{ROMAN[i]}</span>'
     f'<span class="txt"><span class="span">{bi(x["spanEn"], x["spanCy"])}</span><h3>{bi(x["en"], x["cy"])}</h3><p>{bi(x["blurbEn"], x["blurbCy"])}</p><span class="go">{bi("Read the chapter", "Darllen y bennod")} →</span></span></a>'
     for i, x in enumerate(D.ERAS))
-MARQ = [("Castles", "Cestyll", "story-castles.html"), ("Poets", "Beirdd", "person-dafydd-ap-gwilym.html"), ("Saints", "Seintiau", "era-saints.html"),
+MARQ = [("Castles", "Cestyll", "story-castles.html"), ("Poets", "Beirdd", "person-dafydd-ap-gwilym.html"), ("Saints", "Seintiau", "saints.html"),
         ("Princes", "Tywysogion", "era-medieval.html"), ("Dragons", "Dreigiau", "legend-dragons.html"), ("Coal", "Glo", "story-coal.html"),
         ("Slate", "Llechi", "place-dinorwig.html"), ("Song", "Cân", "trail-song.html"), ("Rebels", "Gwrthryfelwyr", "story-protest.html"), ("Legends", "Chwedlau", "legends.html")]
 # two copies so the strip can loop for ever; the second copy is hidden from screen readers and the Tab key
@@ -1201,6 +1457,9 @@ def search_index():
     items.append(dict(k="page", t="Royal family trees of Wales", c="Coed teulu brenhinol Cymru", u="family-trees.html", y=["Family trees", "Coed teulu"], b=["From Rhodri Mawr to Harri Tudur: the royal houses of Gwynedd, Deheubarth, Powys and Gwent, the Tudors, and the marriages that joined them. " + ", ".join(n["name"][0] for n in FT_IDS.values() if not n["gap"]), "O Rhodri Mawr i Harri Tudur: tai brenhinol Gwynedd, Deheubarth, Powys a Gwent, y Tuduriaid, a’r priodasau a’u hunodd."], e="kings"))
     items += [dict(k="page", t=t["en"], c=t["cy"], u=f"family-trees.html#tree-{t['id']}", y=["Family tree", "Coeden deulu"], b=[t["introEn"], t["introCy"]], e=t["era"]) for t in TR.TREES]
     items.append(dict(k="page", t="Learn Welsh", c="Dysgu Cymraeg", u="welsh.html", y=["Language", "Iaith"], b=["A Welsh word of the day and beginner’s phrases with sound guides", "Gair Cymraeg y dydd ac ymadroddion i ddechreuwyr gyda chanllawiau sain"], e="modern"))
+    items.append(dict(k="page", t="Saints of Wales", c="Seintiau Cymru", u="saints.html", y=["Saints", "Seintiau"], b=["The saints of Wales region by region, the llannau named after them, a map and a saints’ calendar", "Seintiau Cymru fesul rhanbarth, y llannau a enwyd ar eu hôl, map a chalendr y saint"], e="saints"))
+    items += [dict(k="page", t=("Saints of " + r["en"]) if r["realm"] else "Saints across the sea", c=("Seintiau " + r["cy"]) if r["realm"] else "Saint dros y môr", u=f"saints-{r['id']}.html", y=["Saints", "Seintiau"], b=[r["subEn"] + " " + ", ".join(x["en"] for x in r["saints"]), r["subCy"]], e=r["era"]) for r in SA.REGIONS]
+    items += [dict(k="page", t=x["en"], c=x["cy"], u=saint_href(sid), y=[x["dates"], cy_dates(x["dates"])], b=[x["nEn"].split(". ")[0] + ". " + " ".join(x["places"]), x["nCy"].split(". ")[0] + "."], e=r["era"]) for sid, (x, r) in SAINT.items()]
     items.append(dict(k="page", t="For teachers", c="I athrawon", u="teachers.html", y=["", ""], b=["Lesson ideas and printable quizzes", "Syniadau gwersi a chwisiau i’w hargraffu"], e="industrial"))
     return items
 
@@ -1236,6 +1495,9 @@ def main():
     for i, r in enumerate(RY.REALMS):
         pages[f"kings-{r['id']}.html"] = realm_page(r, i)
     pages["family-trees.html"] = family_trees_page()
+    pages["saints.html"] = saints_page()
+    for i, r in enumerate(SA.REGIONS):
+        pages[f"saints-{r['id']}.html"] = saints_region_page(r, i)
     pages["symbols.html"] = symbols_page()
     pages["gallery.html"] = gallery_page()
     pages["play.html"] = play_index()

@@ -169,6 +169,13 @@ A long read can also say who and what it is about, with `people=[...]`, `places=
 - Sound: a matching MP3 in `src/static/audio/` is played first (file name = the Welsh in lower case, accents dropped, spaces as hyphens, e.g. `bore-da.mp3`, `gwyl-dewi.mp3`). Otherwise the device speaks: a Welsh voice if it has one (Microsoft Edge on Windows does), else an English voice reading the sound guide. Credit any freely licensed recording in `AUDIO_CREDITS`; the credit then shows on `welsh.html`.
 - Wikimedia Commons and Lingua Libre (free Welsh recordings) cannot be reached from Claude's cloud sessions, so recordings have to be downloaded on the PC or recorded by a Welsh speaker.
 
+### Saints of Wales pages (November 2026)
+- All the saints live in `src/saints.py`: one entry per region (the old kingdoms, plus "Across the sea" for Brittany and Cornwall), each with saints made by `S(...)`: id, English and Welsh names, dates, feast day as `(day, month)` or `None` when unsure, notes, and the llannau named after them.
+- Every llan is listed once in `LL` with its latitude and longitude. Places outside Wales are marked `away=True`: they show as dashed chips but are left off the map. The build stops with an error if a saint names a place missing from `LL`.
+- Coordinates came from the free GeoNames list of places with 500+ people (inside the Python package `geonamescache`, which can be downloaded from PyPI when Wikipedia and OpenStreetMap are blocked), plus map reading for the smallest hamlets.
+- The map is drawn at build time: each llan becomes a dot on the same outline of Wales as the home page map, using the same sums (`x = (lon - minx) * k * sc`, `y = (maxy - lat) * sc` from `src/geo/map.json`). `src/static/saints.js` adds the saint picker, the tap card, the llan name decoder (it undoes the soft mutation after "llan") and "today's saint".
+- Region pages link to the matching kings page and back; person and place pages link to their saints region automatically through `saints_links()` in `build.py`.
+
 ### The four notes in the top folder (November 2026)
 
 `README.md` says what the site is and where things live. `EDITORIAL.md` holds the owner's rules for how it is written. `TODO.md` lists the open jobs. `SKILLS.md` is this file. The owner wants them kept clean and tidy: when something changes, edit the line that is there instead of adding a new one at the bottom, delete finished jobs from `TODO.md`, and keep the counts in `README.md` true.

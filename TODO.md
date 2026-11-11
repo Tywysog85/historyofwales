@@ -11,7 +11,7 @@ Open jobs for History of Wales. Tick a job off by deleting it. Keep this list sh
 
 ## Needs a fluent Welsh speaker
 
-- **Proofread the Welsh.** All of it, and most of all the text added in November 2026: the long reads, the new people, the new places and the kingdoms map.
+- **Proofread the Welsh.** All of it, and most of all the text added in November 2026: the long reads, the new people, the new places, the kingdoms map and the saints pages.
 
 ## Checking and sources
 

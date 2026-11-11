@@ -9,6 +9,7 @@ A proud, bilingual (English and Cymraeg) history of Wales, live at [historyofwal
 - **A map** of 67 historic sites, and a Kingdoms view showing Wales at 13 moments in time.
 - **71 people**, from Caratacus to today.
 - **Kings and princes**: every royal line, kingdom by kingdom (12 kingdoms of Wales and 5 of the Old North), and the kings and princes of all Wales.
+- **Saints of Wales**: 68 saints in ten regions, with the 130 llannau and holy places named after them on a map, a llan name decoder and a saints’ calendar.
 - **14 long reads**, 7 legends, symbols and traditions.
 - **Games**: a daily challenge, a quiz, a map game, Welsh names, word pairs and more.
 - Every page in **English and Cymraeg**.
@@ -31,6 +32,7 @@ Everything is plain HTML, CSS and JavaScript. There is no framework and nothing 
 | Long reads, legends, symbols, facts | `src/features.py`, `src/pride.py`, `src/pride2.py`, `src/pride3.py`, `src/hywel.py` |
 | The Kingdoms map | `src/kingdoms.py` |
 | Kings and princes of each kingdom (`kings.html`, `kings-*.html`) | `src/royal.py` |
+| Saints of Wales (`saints.html`, `saints-*.html`) | `src/saints.py`; map and decoder in `src/static/saints.js` |
 | Photos and their credits | `src/photos.py` |
 | Drawn pictures | `src/art.py` |
 | The home page and opening screen | `src/head.html`, `src/body.html`, `src/app.js`, `src/extra.css`, `src/v6.css`; the 3D dragon, mountains and castle in `tools/*.src.js`, built into `src/static/hero3d.js` |
