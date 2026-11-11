@@ -295,7 +295,7 @@ def photo_fig(ph, cls="", gid=None):
     g = GP.GALLERY.get(gid) if gid else None
     if g:  # a checked picture from the gallery, stored on the site, with its full credit
         f, by, lic, licu, wen, wcy, w, h = g
-        return (f'<figure class="photo {cls}"><img src="gallery/{gid}.webp" width="{min(w, 1400)}" height="{round(h * min(w, 1400) / w)}" alt="{e(wen)}" loading="lazy" decoding="async">'
+        return (f'<figure class="photo {cls}"><img src="gallery/{gid}.webp" width="{w}" height="{h}" alt="{e(wen)}" loading="lazy" decoding="async">'
                 f'<figcaption>{bi(wen, wcy)} · {bi("Photo", "Llun")}: {e(by)}, <a href="{e(licu)}" target="_blank" rel="noopener license">{e(lic)}</a>, '
                 f'<a href="{COMMONS}File:{_q(f, safe="")}" target="_blank" rel="noopener">Wikimedia Commons</a> · <a href="gallery.html">{bi("More in the gallery", "Mwy yn yr oriel")}</a></figcaption></figure>')
     if not ph:

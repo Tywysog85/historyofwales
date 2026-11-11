@@ -8,8 +8,8 @@ from tools/gallery_cy.json (id -> Welsh sentence). Pictures listed in tools/gall
 are left out.
 
 Writes:
-  src/static/gallery/<id>.webp     1400 px wide, for the big-picture viewer
-  src/static/gallery/<id>-s.webp   600 px wide, for the grid
+  src/static/gallery/<id>.webp     fits 1280 x 1000, for the big-picture viewer
+  src/static/gallery/<id>-s.webp   fits 600 x 800, for the grid
   src/gallery_photos.py            the credits
 """
 import json
@@ -42,8 +42,10 @@ def main(folder):
             continue
         im = ImageOps.exif_transpose(Image.open(src)).convert("RGB")
         w, h = im.size
-        for suffix, width, q in (("", 1400, 78), ("-s", 600, 72)):
-            t = im if w <= width else im.resize((width, round(h * width / w)), Image.LANCZOS)
+        # big picture fits inside 1280 x 1000 (the viewer), grid picture inside 600 x 800
+        for suffix, box_w, box_h, q in (("", 1280, 1000, 72), ("-s", 600, 800, 70)):
+            k = min(1, box_w / w, box_h / h)
+            t = im if k == 1 else im.resize((round(w * k), round(h * k)), Image.LANCZOS)
             t.save(os.path.join(OUT, r["id"] + suffix + ".webp"), "WEBP", quality=q, method=6)
         what = r.get("what", "").strip()
         rows.append((r["id"], r["file"], r.get("author", "").strip() or "Unknown", r.get("licence", "").strip(), r.get("licence_url", "").strip(),
