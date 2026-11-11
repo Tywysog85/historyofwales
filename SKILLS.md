@@ -96,6 +96,12 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - Wikimedia answers "429 too many requests" if downloads go too fast, so the script waits between files and tries again.
 - Every workflow that commits back now runs `git pull --rebase` before `git push`, so it cannot collide with other work pushed at the same time.
 
+### A fuller timeline (November 2026)
+- New events go in `src/events2.py`, in the same shape as `EVENTS` in `data.py`, with the age written out (ancient, roman, saints, kings, medieval, tudor, industrial, modern, today). `data.py` adds them at the very end and stops if a place id does not exist.
+- Give a day ("MM-DD") only when it is certain: dated events also feed On this day and Today's picture.
+- For recent events, check the facts with a web search first (Wikipedia and most news sites are blocked from Claude's cloud computer, but search results still show headlines), and keep claims made by supporters worded as their claims.
+- Years under 10,000 are shown without a comma (2026, not 2,026): `fmt()` in `src/app.js`.
+
 ### The page for addresses that do not exist (November 2026)
 - `not_found_page()` in `build.py` writes `404.html`. GitHub Pages shows it for any address that does not exist. It has `<base href="/">` so its links work from any depth, and `noindex` so Google leaves it out. It is left out of the sitemap.
 

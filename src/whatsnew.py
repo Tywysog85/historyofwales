@@ -7,6 +7,14 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-11", "A fuller timeline: 402 events", "Llinell amser lawnach: 402 o ddigwyddiadau",
+     "245 more moments in every age, from the bluestones of Preseli to the first Cabinet to meet in Welsh, with the Age of Kings now five times fuller.",
+     "245 o eiliadau eraill ym mhob oes, o gerrig gleision y Preselau i’r Cabinet cyntaf i gwrdd yn Gymraeg, gydag Oes y Brenhinoedd bum gwaith yn llawnach.",
+     "timeline.html"),
+    ("2026-11-11", "Real Welsh voices", "Lleisiau Cymraeg go iawn",
+     "The play buttons for Welsh words now use real recordings by Welsh speakers from Lingua Libre where there is one.",
+     "Mae’r botymau chwarae ar gyfer geiriau Cymraeg bellach yn defnyddio recordiadau go iawn gan siaradwyr Cymraeg o Lingua Libre lle mae un ar gael.",
+     "welsh.html"),
     ("2026-11-11", "Today’s picture to share", "Llun heddiw i’w rannu",
      "Every morning a new On this day picture, in English and Cymraeg, with the words ready to paste into Facebook, Instagram, X or WhatsApp.",
      "Bob bore, llun Ar y dydd hwn newydd, yn Saesneg ac yn Gymraeg, gyda’r geiriau’n barod i’w gludo i Facebook, Instagram, X neu WhatsApp.",

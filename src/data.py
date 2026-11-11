@@ -634,3 +634,12 @@ PEOPLE_EXTRA_LONG = {k: ([_rw(t) for t in v[0]], [_rw(t) for t in v[1]]) for k, 
 # ---------- more famous people and Welsh firsts (src/people2.py) ----------
 import people2 as _P2
 PEOPLE = sorted(PEOPLE + _P2.PEOPLE_NEW, key=lambda p: (_ERA_ORDER[p[1]], _born(p)))
+
+
+# ---------- a fuller timeline (src/events2.py) ----------
+from events2 import EVENTS2 as _E2
+_pids = {p["id"] for p in PLACES}
+for _ev in _E2:
+    if _ev[10] and _ev[10] not in _pids:
+        raise SystemExit(f"src/events2.py: unknown place '{_ev[10]}' in {_ev[5]}")
+EVENTS = sorted(EVENTS + _E2, key=lambda ev: ev[1])

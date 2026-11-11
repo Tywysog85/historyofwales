@@ -116,9 +116,15 @@ def info(titles):
 
 
 def convert(src, dst):
-    af = ("silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.05,areverse,"
-          "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.1,areverse,loudnorm=I=-18:TP=-2")
+    """Even the loudness, then trim the silence (and any click at the very start) from both ends."""
+    af = ("loudnorm=I=-18:TP=-2,"
+          "silenceremove=start_periods=1:start_duration=0.12:start_threshold=-28dB:start_silence=0.15:detection=rms,areverse,"
+          "silenceremove=start_periods=1:start_duration=0.05:start_threshold=-38dB:start_silence=0.25:detection=rms,areverse")
     subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", src, "-af", af, "-ac", "1", "-ar", "44100", "-b:a", "64k", dst], check=True)
+    # A very short result means the trim was too keen: keep the evened, untrimmed sound instead.
+    out = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", dst], capture_output=True, text=True).stdout.strip()
+    if not out or float(out) < 0.45:
+        subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", src, "-af", "loudnorm=I=-18:TP=-2", "-ac", "1", "-ar", "44100", "-b:a", "64k", dst], check=True)
 
 
 def main():
