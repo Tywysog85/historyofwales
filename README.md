@@ -10,7 +10,7 @@ A proud, bilingual (English and Cymraeg) history of Wales, live at [historyofwal
 - **71 people**, from Caratacus to today.
 - **Kings and princes**: every royal line, kingdom by kingdom (12 kingdoms of Wales and 5 of the Old North), and the kings and princes of all Wales.
 - **Saints of Wales**: 68 saints in ten regions, with the 130 llannau and holy places named after them on a map, a llan name decoder and a saints’ calendar.
-- **14 long reads**, 20 legends in five sections, symbols and traditions.
+- **14 long reads**, 21 legends in five sections, symbols and traditions.
 - **On this day in Welsh history**: about 350 dates across 233 days of the year, on the home page and on `onthisday.html`.
 - **Games**: a daily challenge, a quiz, a map game, Welsh names, word pairs and more.
 - Every page in **English and Cymraeg**.

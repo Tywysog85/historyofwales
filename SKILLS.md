@@ -189,7 +189,7 @@ Learnt while expanding Arthur's page (`src/arthur.py`).
 - The first seven legends are in `LEGENDS` in `src/features.py`; the rest are in `src/legends2.py`, in the same shape (id, era, art, place, titles, summaries, tale `pEn`/`pCy` with `## ` sub-headings, and the history behind it `hEn`/`hCy`).
 - `GROUPS` in `src/legends2.py` sets the sections of `legends.html` and the order of the legend pages (the "next legend" button follows it). Every legend id must be in exactly one group: the build stops and names the missing or extra id if not. The home page shows the four in `LEGENDS_HOME` in `features.py`.
 - Every legend needs an `art` key. New legends use their own key (`horse`, `boar`, `hare` ...) which `_STAND_IN` in `src/art.py` points at an existing scene for now. To give one its own lifelike picture, add a scene function for that key; the legend text never changes.
-- Arthur is never put in the legends list (see `EDITORIAL.md`). Where he appears in an old tale, as in Culhwch ac Olwen, he is named as the tale names him, "chief of the princes of this island".
+- Arthur has a page among the legends (`legend-arthur.html`, "King Arthur, the sleeping king"), at the owner's request, but he is never called a myth, legend or fiction (see `EDITORIAL.md`): the page opens "Welsh tradition holds that Arthur was Athrwys ap Meurig", tells the tales Wales tells of him, and its history box is headed "The king behind the tales" (`hLabelEn`/`hLabelCy`). `links` adds buttons under the history box, here to `person-arthur.html`.
 - The "Storyteller" badge (`src/static/site.js`) is for reading ten legends, so it does not need changing when legends are added.
 
 ### The four notes in the top folder (November 2026)

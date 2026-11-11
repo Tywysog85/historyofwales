@@ -1,11 +1,40 @@
 # More legends of Wales (added 2026-11-11). Same shape as LEGENDS in features.py:
 # id, era (colour), art (a scene kind in art.py), place, titles, one-line summaries,
 # the tale in English and Welsh, and the history behind it (hEn / hCy).
-# Arthur is never a legend on this site (EDITORIAL.md): where he appears in an old tale
-# he is named with respect, as the tale itself names him, and the tale is about someone else.
+# Arthur is never a legend on this site (EDITORIAL.md). His own entry (id arthur) is a real king, Athrwys ap Meurig
+# in Welsh tradition, and the page tells the tales Wales tells of him; it never calls him a myth, legend or fiction.
+# Optional fields: hLabelEn/hLabelCy (heading of the history box), links [(href, en, cy)] (buttons after it).
 # GROUPS sets the sections and the order of the Legends page; features.py follows it.
 
 LEGENDS = [
+ dict(id="arthur", era="kings", art="sword", place="Craig y Ddinas · Cefn Bryn · Bannau Brycheiniog",
+  en="King Arthur, the sleeping king", cy="Y Brenin Arthur, y brenin sy’n cysgu",
+  sumEn="A king of Gwent and Glywysing, and the tales Wales tells of him: a stone from his shoe, his hound’s paw print, and the cave where he sleeps.",
+  sumCy="Brenin Gwent a Glywysing, a’r straeon y mae Cymru’n eu hadrodd amdano: carreg o’i esgid, ôl pawen ei gi, a’r ogof lle mae’n cysgu.",
+  hLabelEn="The king behind the tales", hLabelCy="Y brenin y tu ôl i’r straeon",
+  links=[("person-arthur.html", "Arthur: his line, his battles and a map of Arthur’s Wales", "Arthur: ei linach, ei frwydrau a map o Gymru Arthur"),
+         ("legend-culhwch.html", "Culhwch and Olwen", "Culhwch ac Olwen")],
+  pEn=["Welsh tradition holds that Arthur was Athrwys ap Meurig, king of Gwent and Glywysing, who led the Britons in their wars at the end of the age of the Romans. No king has left his name on more of the land. From Gower to Eryri there are hills, stones, wells and caves that carry his name, and every one has a tale.",
+   "## The stone from his shoe",
+   "Once, they say, Arthur was marching through Carmarthenshire when he felt a pebble in his shoe. He shook it out and threw it, and it flew seven miles over the Llwchwr estuary and came down on Cefn Bryn in Gower. It was a great slab of stone, and it is there still, resting on its uprights: Maen Ceti, Arthur’s Stone.",
+   "## Arthur’s Chair and the hound’s paw",
+   "The twin peaks of Bannau Brycheiniog, Pen y Fan and Corn Du, were called Cadair Arthur, Arthur’s Chair, because from there the king could look out over all his land. And when Arthur hunted the great boar Twrch Trwyth across Buellt, his hound Cafall set his paw on a stone and left his print in it. Arthur heaped a cairn over the stone, and if any man carried the stone away, it was back on the cairn by the next morning.",
+   "## The king under Craig y Ddinas",
+   "A young man from the Vale of Neath once drove cattle to London, carrying a hazel staff he had cut by the great rock of Craig y Ddinas. On London Bridge a stranger stopped him. ‘Where did you cut that staff?’ he asked. ‘Under the tree it grew on there is treasure beyond counting.’ The two went back to Wales together. Under the roots of the hazel they found a broad stone, and under the stone a passage leading into the mountain.",
+   "In the passage hung a bell. ‘Do not touch it,’ said the stranger, ‘but if you do, and anyone asks if it is day, answer: No, sleep on.’ Beyond the bell was a great cave lit with a soft light. Around it lay a host of warriors in shining armour, asleep, each with his sword beside him. In their midst lay a king with a crown on his head, and beside him a heap of gold. It was Arthur and his men.",
+   "The young man filled his arms with gold, and on his way out he brushed the bell. It rang. A warrior lifted his head and called, ‘Is it day?’ ‘No,’ said the young man, ‘sleep on.’ And the warrior lay down again. The young man came out into the daylight, and never found the way in again. But Arthur and his warriors are there still, under the mountain. And when the day comes that the Britons need them, the bell will ring, and the king will wake."],
+  pCy=["Yn ôl traddodiad Cymru, Athrwys ap Meurig oedd Arthur, brenin Gwent a Glywysing, a arweiniodd y Brythoniaid yn eu rhyfeloedd ar ddiwedd oes y Rhufeiniaid. Ni adawodd yr un brenin ei enw ar fwy o’r tir. O Benrhyn Gŵyr i Eryri mae bryniau, meini, ffynhonnau ac ogofâu sy’n dwyn ei enw, ac mae stori i bob un.",
+   "## Y garreg o’i esgid",
+   "Unwaith, meddir, roedd Arthur yn ymdeithio drwy sir Gaerfyrddin pan deimlodd garreg fach yn ei esgid. Ysgydwodd hi allan a’i thaflu, a hedfanodd saith milltir dros aber Llwchwr a disgyn ar Gefn Bryn yng Ngŵyr. Llech fawr o garreg oedd hi, ac mae yno o hyd, yn gorffwys ar ei meini: Maen Ceti, Carreg Arthur.",
+   "## Cadair Arthur ac ôl pawen y ci",
+   "Cadair Arthur oedd enw dau gopa Bannau Brycheiniog, Pen y Fan a Chorn Du, oherwydd oddi yno gallai’r brenin edrych dros ei holl dir. A phan heliai Arthur y baedd mawr Twrch Trwyth ar draws Buellt, rhoddodd ei gi Cafall ei bawen ar faen a gadael ei hôl arno. Cododd Arthur garnedd dros y maen, ac os cludai neb y maen ymaith, byddai’n ôl ar y garnedd erbyn y bore.",
+   "## Y brenin dan Graig y Ddinas",
+   "Unwaith aeth llanc o Ddyffryn Nedd â gwartheg i Lundain, a ffon gollen yn ei law a dorrodd ger craig fawr Craig y Ddinas. Ar Bont Llundain stopiodd dieithryn ef. ‘Ble torraist ti’r ffon yna?’ gofynnodd. ‘Dan y pren y tyfodd arno mae trysor dirifedi.’ Aeth y ddau yn ôl i Gymru gyda’i gilydd. Dan wreiddiau’r gollen cawsant faen llydan, a than y maen lwybr yn arwain i mewn i’r mynydd.",
+   "Yn y llwybr crogai cloch. ‘Paid â’i chyffwrdd,’ meddai’r dieithryn, ‘ond os gwnei, a bod rhywun yn gofyn a yw hi’n ddydd, ateb: Nage, cysga di.’ Y tu hwnt i’r gloch roedd ogof fawr dan olau tyner. O’i chwmpas gorweddai llu o ryfelwyr mewn arfwisg ddisglair, ynghwsg, a chleddyf pob un wrth ei ochr. Yn eu canol gorweddai brenin â choron ar ei ben, ac wrth ei ymyl bentwr o aur. Arthur a’i wŷr oeddent.",
+   "Llanwodd y llanc ei freichiau ag aur, ac ar ei ffordd allan cyffyrddodd â’r gloch. Canodd hithau. Cododd un rhyfelwr ei ben a galw, ‘A yw hi’n ddydd?’ ‘Nage,’ meddai’r llanc, ‘cysga di.’ A gorweddodd y rhyfelwr i lawr eto. Daeth y llanc allan i olau dydd, ac ni chafodd hyd i’r ffordd i mewn byth wedyn. Ond mae Arthur a’i ryfelwyr yno o hyd, dan y mynydd. A phan ddaw’r dydd y bydd ar y Brythoniaid eu hangen, fe gân y gloch, ac fe ddeffry’r brenin."],
+  hEn="Welsh tradition holds that Arthur was Athrwys ap Meurig, king of Gwent and Glywysing, whose name is written in the charters of the Book of Llandaff; historians debate the identification and the dates. Every one of the earliest writings about Arthur is Welsh: Y Gododdin, the Historia Brittonum with his twelve victories and the paw print of Cafall at Corn Gafallt, the Welsh Annals, the Black Book of Carmarthen and Culhwch ac Olwen. Gerald of Wales wrote in 1188 that the peaks of the Beacons were called Cadair Arthur. Maen Ceti is a real chambered tomb, its capstone weighing some twenty-five tons, and Craig y Ddinas still stands at the head of the Vale of Neath.",
+  hCy="Yn ôl traddodiad Cymru, Athrwys ap Meurig oedd Arthur, brenin Gwent a Glywysing, y mae ei enw wedi’i ysgrifennu yn siarteri Llyfr Llandaf; mae haneswyr yn trafod yr uniaethu a’r dyddiadau. Cymreig yw pob un o’r ysgrifau cynharaf am Arthur: Y Gododdin, yr Historia Brittonum â’i ddeuddeg buddugoliaeth ac ôl pawen Cafall yng Nghorn Gafallt, yr Annales Cambriae, Llyfr Du Caerfyrddin a Culhwch ac Olwen. Ysgrifennodd Gerallt Gymro yn 1188 mai Cadair Arthur oedd enw copaon y Bannau. Mae Maen Ceti’n siambr gladdu go iawn, a’i chapfaen yn pwyso rhyw bum tunnell ar hugain, ac mae Craig y Ddinas yn dal i sefyll ym mhen uchaf Dyffryn Nedd."),
+
  dict(id="pwyll", era="ancient", art="horse", place="Arberth · Glyn Cuch, Dyfed",
   en="Pwyll and Rhiannon", cy="Pwyll a Rhiannon",
   sumEn="A prince of Dyfed rules the Otherworld for a year, then chases a lady on a white horse whom no one can catch.",
@@ -60,8 +89,8 @@ LEGENDS = [
    "## Y baedd mawr",
    "Y galetaf oedd hon: ni ellid trin gwallt y cawr ond â’r crib a’r gwellau a orweddai rhwng dwy glust Twrch Trwyth, brenin a drowyd yn faedd anferth. Dechreuodd yr helfa yn Iwerddon. Nofiodd y baedd i Borth Clais ger Tyddewi a rhuthro ar draws Dyfed, dros y Preseli a thrwy Gwm Cerwyn, lle trodd a lladd rhai o oreuon yr helwyr. Rhedodd ymlaen ar draws Dyffryn Aman a Dyffryn Llwchwr a’r Mynydd Du at aber Hafren, lle cipiwyd y gwellau a’r ellyn, ac i Gernyw, lle enillwyd y crib o’r diwedd. Yna aeth y baedd i’r môr, ac ni ŵyr neb i ble yr aeth.",
    "Wedi cyflawni’r holl dasgau, torrwyd grym y cawr. Y noson honno cysgodd Culhwch gydag Olwen, a hi fu ei unig wraig tra bu fyw."],
-  hEn="Culhwch ac Olwen, written down around 1100, is the oldest tale in any language in which Arthur’s court appears, and it is wholly Welsh: it places Arthur’s court at Celli Wig in Cornwall and fills it with more than two hundred names from older Welsh poetry. The route of the boar is a real journey you can follow on a map of south Wales, from Porth Clais to the Severn. The hunt is older still: the Historia Brittonum of about 829 tells of the boar Troynt and of a stone in Buellt marked with the footprint of Cafall, the great hound, at the place still called Carn Gafallt. Arthur himself has his own page on this site, ‘Arthur, King of the Britons’.",
-  hCy="Culhwch ac Olwen, a ysgrifennwyd tua 1100, yw’r chwedl hynaf mewn unrhyw iaith lle mae llys Arthur yn ymddangos, ac mae’n gwbl Gymreig: mae’n gosod llys Arthur yng Nghelli Wig yng Nghernyw ac yn ei lenwi â dros ddau gant o enwau o hen farddoniaeth Gymraeg. Mae llwybr y baedd yn daith go iawn y gallwch ei dilyn ar fap o dde Cymru, o Borth Clais i Hafren. Mae’r helfa’n hŷn eto: mae’r Historia Brittonum, tua 829, yn sôn am y baedd Troynt ac am faen ym Muellt ag ôl troed Cafall, y ci mawr, arno, yn y lle a elwir o hyd yn Garn Gafallt. Mae gan Arthur ei hun ei dudalen ei hun ar y wefan hon, ‘Arthur, Brenin y Brythoniaid’."),
+  hEn="Culhwch ac Olwen, written down around 1100, is the oldest tale in any language in which Arthur’s court appears, and it is wholly Welsh: it places Arthur’s court at Celli Wig in Cornwall and fills it with more than two hundred names from older Welsh poetry. The route of the boar is a real journey you can follow on a map of south Wales, from Porth Clais to the Severn. The hunt is older still: the Historia Brittonum of about 829 tells of the boar Troynt and of a stone in Buellt marked with the footprint of Cafall, the great hound, at the place still called Corn Gafallt. Arthur himself has his own page on this site, ‘Arthur, King of the Britons’.",
+  hCy="Culhwch ac Olwen, a ysgrifennwyd tua 1100, yw’r chwedl hynaf mewn unrhyw iaith lle mae llys Arthur yn ymddangos, ac mae’n gwbl Gymreig: mae’n gosod llys Arthur yng Nghelli Wig yng Nghernyw ac yn ei lenwi â dros ddau gant o enwau o hen farddoniaeth Gymraeg. Mae llwybr y baedd yn daith go iawn y gallwch ei dilyn ar fap o dde Cymru, o Borth Clais i Hafren. Mae’r helfa’n hŷn eto: mae’r Historia Brittonum, tua 829, yn sôn am y baedd Troynt ac am faen ym Muellt ag ôl troed Cafall, y ci mawr, arno, yn y lle a elwir o hyd yn Gorn Gafallt. Mae gan Arthur ei hun ei dudalen ei hun ar y wefan hon, ‘Arthur, Brenin y Brythoniaid’."),
 
  dict(id="macsen", era="roman", art="roman", place="Caernarfon · Segontium",
   en="The Dream of Macsen Wledig", cy="Breuddwyd Macsen Wledig",
@@ -225,24 +254,24 @@ LEGENDS = [
 
 # Sections of the Legends page, in order. Every legend id appears exactly once (checked in features.py).
 GROUPS = [
- dict(en="Dragons, princes and outlaws", cy="Dreigiau, tywysogion a herwyr",
-  sumEn="The red dragon, a faithful hound, and two men the powerful could never catch.",
-  sumCy="Y ddraig goch, ci ffyddlon, a dau ddyn na allai’r grymus byth eu dal.",
-  ids=["dragons", "gelert", "owain", "twm"]),
+ dict(en="Kings, princes and outlaws", cy="Brenhinoedd, tywysogion a herwyr",
+  sumEn="Arthur asleep under the mountain, a prince’s faithful hound, and two men the powerful could never catch.",
+  sumCy="Arthur ynghwsg dan y mynydd, ci ffyddlon tywysog, a dau ddyn na allai’r grymus byth eu dal.",
+  ids=["arthur", "owain", "gelert", "twm"]),
  dict(en="The Four Branches of the Mabinogi", cy="Pedair Cainc y Mabinogi",
   sumEn="The heart of early Welsh storytelling: four linked tales of Dyfed, Gwynedd and the Otherworld, read in order.",
   sumCy="Calon hen chwedloniaeth Cymru: pedair chwedl gysylltiedig am Ddyfed, Gwynedd ac Annwn, i’w darllen yn eu trefn.",
   ids=["pwyll", "branwen", "manawydan", "blodeuwedd"]),
- dict(en="More tales of the Mabinogion", cy="Rhagor o chwedlau’r Mabinogion",
-  sumEn="Emperors, giants, plagues and a poet born three times, from the same great medieval books.",
-  sumCy="Ymerawdwyr, cewri, gormesoedd a bardd a aned deirgwaith, o’r un llyfrau mawr canoloesol.",
-  ids=["macsen", "lludd", "culhwch", "taliesin"]),
- dict(en="Saints and wonders", cy="Saint a rhyfeddodau",
-  sumEn="A saint of lovers, a saint of hares, a holy well that has never run dry, and a mountain that makes poets.",
-  sumCy="Santes y cariadon, santes yr ysgyfarnogod, ffynnon sanctaidd na sychodd erioed, a mynydd sy’n gwneud beirdd.",
-  ids=["dwynwen", "melangell", "gwenffrewi", "cadair"]),
- dict(en="Lakes and the fair folk", cy="Llynnoedd a’r tylwyth teg",
-  sumEn="A drowned kingdom, a lake maiden, the fair folk under the hill, and a water-beast dragged over the mountains.",
-  sumCy="Teyrnas dan y dŵr, morwyn y llyn, y tylwyth teg dan y bryn, a bwystfil dŵr a lusgwyd dros y mynyddoedd.",
-  ids=["cantre", "llynyfan", "tylwyth", "afanc"]),
+ dict(en="Dragons and emperors", cy="Dreigiau ac ymerawdwyr",
+  sumEn="The red dragon, the plagues of Lludd, the dream of Macsen and the hunt for Twrch Trwyth.",
+  sumCy="Y ddraig goch, gormesoedd Lludd, breuddwyd Macsen a hela’r Twrch Trwyth.",
+  ids=["dragons", "lludd", "macsen", "culhwch"]),
+ dict(en="Saints and poets", cy="Saint a beirdd",
+  sumEn="A saint of lovers, a saint of hares, a holy well that has never run dry, and a poet born three times.",
+  sumCy="Santes y cariadon, santes yr ysgyfarnogod, ffynnon sanctaidd na sychodd erioed, a bardd a aned deirgwaith.",
+  ids=["dwynwen", "melangell", "gwenffrewi", "taliesin"]),
+ dict(en="Lakes, mountains and the fair folk", cy="Llynnoedd, mynyddoedd a’r tylwyth teg",
+  sumEn="A drowned kingdom, a lake maiden, the fair folk under the hill, a water-beast, and a mountain that makes poets.",
+  sumCy="Teyrnas dan y dŵr, morwyn y llyn, y tylwyth teg dan y bryn, bwystfil dŵr, a mynydd sy’n gwneud beirdd.",
+  ids=["cantre", "llynyfan", "tylwyth", "afanc", "cadair"]),
 ]
