@@ -61,6 +61,13 @@
   "cy": "Betty Campbell",
   "dwb": "https://biography.wales/article/s14-CAMP-ELI-1934"
  },
+ "person:beuno": {
+  "cy": "Beuno",
+  "dwb": "https://biography.wales/article/s-BEUN-O00-0642"
+ },
+ "person:bill-frost": {
+  "cy": "William (Bill) Frost"
+ },
  "person:billy-hughes": {
   "cy": "William Morris Hughes"
  },
@@ -111,6 +118,9 @@
  "person:catherine-zeta-jones": {
   "cy": "Catherine Zeta-Jones"
  },
+ "person:catrin-glyndwr": {
+  "cy": "Catrin ferch Owain Glyn Dŵr"
+ },
  "person:catrin-o-ferain": {
   "cy": "Catrin o Ferain",
   "dwb": "https://biography.wales/article/s-CATR-BER-1534"
@@ -149,6 +159,10 @@
   "cy": "Cunedda",
   "dwb": "https://biography.wales/article/s-CUNE-WLE-0380"
  },
+ "person:cybi": {
+  "cy": "Cybi",
+  "dwb": "https://biography.wales/article/s-CYBI-APS-0490"
+ },
  "person:cynddelw": {
   "cy": "Cynddelw Brydydd Mawr",
   "dwb": "https://biography.wales/article/s-CYND-BRY-1155"
@@ -159,6 +173,10 @@
  "person:cyngen": {
   "cy": "Cyngen ap Cadell",
   "dwb": "https://biography.wales/article/s-CYNG-POW-0778"
+ },
+ "person:dafydd-ap-gruffudd": {
+  "cy": "Dafydd ap Gruffudd",
+  "dwb": "https://biography.wales/article/s-DAFY-APG-1283"
  },
  "person:dafydd-ap-gwilym": {
   "cy": "Dafydd ap Gwilym",
@@ -192,6 +210,10 @@
   "cy": "David Davies, Llandinam",
   "dwb": "https://biography.wales/article/s-DAVI-DAV-1818"
  },
+ "person:david-edward-hughes": {
+  "cy": "David Edward Hughes",
+  "dwb": "https://biography.wales/article/s-HUGH-EDW-1831"
+ },
  "person:david-griffiths-missionary": {
   "cy": "David Griffiths (cenhadwr)",
   "dwb": "https://biography.wales/article/s-GRIF-DAV-1792"
@@ -223,6 +245,9 @@
  "person:duffy": {
   "cy": "Duffy"
  },
+ "person:dwynwen": {
+  "cy": "Santes Dwynwen"
+ },
  "person:dylan-thomas": {
   "cy": "Dylan Thomas",
   "dwb": "https://biography.wales/article/s10-THOM-MAR-1914"
@@ -242,6 +267,10 @@
  "person:edward-lhuyd": {
   "cy": "Edward Lhuyd",
   "dwb": "https://biography.wales/article/s-LHUY-EDW-1660"
+ },
+ "person:elaine-morgan": {
+  "cy": "Elaine Morgan",
+  "dwb": "https://biography.wales/article/s12-MORG-NEV-1920"
  },
  "person:elihu-yale": {
   "cy": "Elihu Yale"
@@ -312,6 +341,10 @@
   "cy": "Grace Williams",
   "dwb": "https://biography.wales/article/s10-WILL-MAR-1906"
  },
+ "person:griffith-jones": {
+  "cy": "Griffith Jones, Llanddowror",
+  "dwb": "https://biography.wales/article/s-JONE-GRI-1683"
+ },
  "person:gruff-rhys": {
   "cy": "Gruff Rhys"
  },
@@ -319,13 +352,29 @@
   "cy": "Gruffudd ap Cynan",
   "dwb": "https://biography.wales/article/s-GRUF-APC-1055"
  },
+ "person:gruffudd-ap-llywelyn": {
+  "cy": "Gruffudd ap Llywelyn",
+  "dwb": "https://biography.wales/article/s12-GRUF-APL-1063"
+ },
  "person:gruffydd-robert": {
   "cy": "Gruffydd Robert",
   "dwb": "https://biography.wales/article/s12-ROBE-GRU-1522"
  },
+ "person:guto-r-glyn": {
+  "cy": "Guto'r Glyn",
+  "dwb": "https://biography.wales/article/s-GUTO-GLY-1440"
+ },
  "person:gwen-john": {
   "cy": "Gwen John",
   "dwb": "https://biography.wales/article/s3-JOHN-MAR-1876"
+ },
+ "person:gwenfrewi": {
+  "cy": "Gwenffrewi",
+  "dwb": "https://biography.wales/article/s-GWEN-FFR-0600"
+ },
+ "person:gwenllian": {
+  "cy": "Gwenllian ferch Gruffudd ap Cynan",
+  "dwb": "https://biography.wales/article/s-GWEN-FER-1100"
  },
  "person:gwenllian-ferch-llywelyn": {
   "cy": "Y Dywysoges Gwenllian"
@@ -540,6 +589,10 @@
   "cy": "Augusta Hall, Arglwyddes Llanofer",
   "dwb": "https://biography.wales/article/s10-HALL-AUG-1802"
  },
+ "person:lady-rhondda": {
+  "cy": "Margaret Haig Mackworth, 2il Is-iarlles Rhondda",
+  "dwb": "https://biography.wales/article/s12-THOM-HAI-1883"
+ },
  "person:laura-ashley": {
   "cy": "Laura Ashley"
  },
@@ -573,6 +626,10 @@
  "person:llywelyn-bren": {
   "cy": "Llywelyn Bren",
   "dwb": "https://biography.wales/article/s-LLYW-APG-1317"
+ },
+ "person:llywelyn-fawr": {
+  "cy": "Llywelyn Fawr",
+  "dwb": "https://biography.wales/article/s-LLYW-API-1173"
  },
  "person:luke-evans": {
   "cy": "Luke Evans"
@@ -617,6 +674,9 @@
  "person:mary-hopkin": {
   "cy": "Mary Hopkin"
  },
+ "person:mary-jones": {
+  "cy": "Mari Jones"
+ },
  "person:max-boyce": {
   "cy": "Max Boyce"
  },
@@ -632,6 +692,9 @@
  "person:meilyr-brydydd": {
   "cy": "Meilyr Brydydd",
   "dwb": "https://biography.wales/article/s-MEIL-BRY-1100"
+ },
+ "person:melangell": {
+  "cy": "Melangell"
  },
  "person:mererid-hopwood": {
   "cy": "Mererid Hopwood"
@@ -694,6 +757,10 @@
   "cy": "Owain Cyfeiliog",
   "dwb": "https://biography.wales/article/s-OWAI-CYF-1130"
  },
+ "person:owain-glyndwr": {
+  "cy": "Owain Glyn Dŵr",
+  "dwb": "https://biography.wales/article/s-OWAI-GLY-1354"
+ },
  "person:owain-gwynedd": {
   "cy": "Owain Gwynedd",
   "dwb": "https://biography.wales/article/s-OWAI-GWY-1100"
@@ -705,6 +772,10 @@
  "person:owain-tudur": {
   "cy": "Owain Tudur",
   "dwb": "https://biography.wales/article/s-OWAI-TUD-1400"
+ },
+ "person:padarn": {
+  "cy": "Padarn",
+  "dwb": "https://biography.wales/article/s-PADA-SAN-0560"
  },
  "person:pantycelyn": {
   "cy": "William Williams, Pantycelyn",
@@ -743,6 +814,10 @@
  "person:raymond-williams": {
   "cy": "Raymond Williams",
   "dwb": "https://biography.wales/article/s12-WILL-HEN-1921"
+ },
+ "person:rhodri-mawr": {
+  "cy": "Rhodri Mawr",
+  "dwb": "https://biography.wales/article/s-RHOD-MAW-0877"
  },
  "person:rhodri-morgan": {
   "cy": "Rhodri Morgan",
@@ -794,6 +869,10 @@
  },
  "person:rob-brydon": {
   "cy": "Rob Brydon"
+ },
+ "person:robert-jones-surgeon": {
+  "cy": "Robert Jones (llawfeddyg)",
+  "dwb": "https://biography.wales/article/s-JONE-ROB-1857"
  },
  "person:robert-owen": {
   "cy": "Robert Owen",
@@ -937,9 +1016,20 @@
  "person:tori-james": {
   "cy": "Tori James"
  },
+ "person:twm-carnabwth": {
+  "cy": "Thomas Rees (Twm Carnabwth)",
+  "dwb": "https://biography.wales/article/s-REES-THO-1806"
+ },
+ "person:twm-or-nant": {
+  "cy": "Twm o'r Nant",
+  "dwb": "https://biography.wales/article/s-EDWA-THO-1739"
+ },
  "person:twm-sion-cati": {
   "cy": "Twm Siôn Cati",
   "dwb": "https://biography.wales/article/s-JONE-THO-1530"
+ },
+ "person:urien-rheged": {
+  "cy": "Urien Rheged"
  },
  "person:w-h-davies": {
   "cy": "W. H. Davies",
@@ -964,6 +1054,14 @@
  "person:william-jones-orientalist": {
   "cy": "William Jones (ieithegwr)"
  },
+ "person:william-morgan": {
+  "cy": "William Morgan (esgob)",
+  "dwb": "https://biography.wales/article/s-MORG-WIL-1545"
+ },
+ "person:william-preece": {
+  "cy": "William Henry Preece",
+  "dwb": "https://biography.wales/article/s-PREE-HEN-1834"
+ },
  "person:william-price": {
   "cy": "William Price (meddyg)",
   "dwb": "https://biography.wales/article/s-PRIC-WIL-1800"
@@ -971,6 +1069,10 @@
  "person:william-salesbury": {
   "cy": "William Salesbury",
   "dwb": "https://biography.wales/article/s-SALE-WIL-1520"
+ },
+ "person:yr-arglwydd-rhys": {
+  "cy": "Rhys ap Gruffudd",
+  "dwb": "https://biography.wales/article/s-RHYS-APG-1132"
  },
  "place:aberfan": {
   "cy": "Trychineb Aberfan"
@@ -1035,6 +1137,9 @@
   "cy": "Castell Dinefwr",
   "coflein": "https://coflein.gov.uk/en/site/425"
  },
+ "place:dinorwig": {
+  "cy": "Diwydiant llechi Cymru"
+ },
  "place:dolaucothi": {
   "cy": "Mwynfeydd aur Dolaucothi",
   "coflein": "https://coflein.gov.uk/en/site/95142"
@@ -1083,6 +1188,10 @@
  "place:machynlleth": {
   "cy": "Machynlleth"
  },
+ "place:maenachwyfan": {
+  "cy": "Maen Achwyfan",
+  "coflein": "https://coflein.gov.uk/en/site/94449"
+ },
  "place:mathrafal": {
   "cy": "Mathrafal",
   "coflein": "https://coflein.gov.uk/en/site/306778"
@@ -1094,6 +1203,15 @@
  "place:merthyr": {
   "cy": "Merthyr Tudful",
   "coflein": "https://coflein.gov.uk/en/site/33136"
+ },
+ "place:mold": {
+  "cy": "Clogyn Aur yr Wyddgrug"
+ },
+ "place:offasdyke": {
+  "cy": "Clawdd Offa"
+ },
+ "place:orme": {
+  "cy": "Pen y Gogarth"
  },
  "place:parys": {
   "cy": "Mynydd Parys"
@@ -1109,6 +1227,9 @@
  "place:pontcysyllte": {
   "cy": "Dyfrbont Pontcysyllte",
   "coflein": "https://coflein.gov.uk/en/site/34410"
+ },
+ "place:pontnewydd": {
+  "cy": "Ogof Bontnewydd"
  },
  "place:rhaglan": {
   "cy": "Castell Rhaglan",
@@ -1159,6 +1280,10 @@
  "place:trefflemin": {
   "cy": "Trefflemin"
  },
+ "place:trerceiri": {
+  "cy": "Tre'r Ceiri",
+  "coflein": "https://coflein.gov.uk/en/site/95292"
+ },
  "place:westgate": {
   "cy": "Terfysg Casnewydd"
  },
@@ -1168,5 +1293,8 @@
  "place:ybere": {
   "cy": "Castell y Bere",
   "coflein": "https://coflein.gov.uk/en/site/93719"
+ },
+ "place:yrysgwrn": {
+  "cy": "Hedd Wyn"
  }
 }
