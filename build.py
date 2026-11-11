@@ -186,8 +186,7 @@ def nav(active="", skip="#main", home=False):
         num = f'<span class="n">{n:02d}</span>' if n else ""
         return f'<li><a href="{h}"{" class=on aria-current=page" if active == h else ""}>{num}{bi(a, b)}</a></li>'
     main = "".join(li(*x) for x in NAV_MAIN)
-    if home:
-        main += "".join(li(*x).replace("<li>", '<li class="x">', 1) for x in NAV_HOME_MORE)
+    main += "".join(li(*x) for x in NAV_HOME_MORE)  # every page shows every topic
     big = li("index.html", "Home", "Hafan", 1) + "".join(li(h, a, b, i + 2) for i, (h, a, b) in enumerate(NAV_MAIN))
     more = "".join(li(*x) for x in NAV_MORE)
     return (f'<a class="skip" href="{skip}">{bi("Skip to content", "Neidio i’r cynnwys")}</a><div class="progress" aria-hidden="true"><i id="progress"></i></div>'
