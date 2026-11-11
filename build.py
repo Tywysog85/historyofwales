@@ -27,6 +27,7 @@ import royal as RY  # noqa: E402
 import trees as TR  # noqa: E402
 import cymraeg as CYM  # noqa: E402
 import saints as SA  # noqa: E402
+import onthisday as OTD  # noqa: E402
 L.TEACH.update(AG9.TEACH)
 from urllib.parse import quote as _q
 
@@ -47,7 +48,7 @@ def e(s):
 head = read("head.html")
 body = read("body.html")
 app = read("app.js")
-extra_css = read("extra.css") + read("v6.css")
+extra_css = read("extra.css") + read("v6.css") + read("onthisday.css")
 geo = json.loads(read("geo", "map.json"))
 la = json.loads(read("geo", "la.json"))
 
@@ -171,7 +172,7 @@ PRINT_CSS = """
 
 NAV_MAIN = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#chapters", "Ages", "Oesoedd"), ("index.html#map", "Map", "Map"),
             ("index.html#people", "People", "Pobl"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("play.html", "Play", "Chwarae")]
-NAV_MORE = [("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"), ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"),
+NAV_MORE = [("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"), ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"),
             ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg"), ("journey.html", "Your journey", "Eich taith"), ("teachers.html", "For teachers", "I athrawon"),
             ("index.html#sources", "Sources", "Ffynonellau")]
 # extra links for the home page top bar, where the site name has moved into the opening screen and left room
@@ -209,7 +210,7 @@ def footer():
         return f'<div><p class="eyebrow">{bi(title_en, title_cy)}</p><ul>' + "".join(f'<li><a href="{h}">{bi(a, b)}</a></li>' for h, a, b in links) + "</ul></div>"
     eras = [(f'era-{x["id"]}.html', x["en"], x["cy"]) for x in D.ERAS]
     explore = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#map", "Map of Wales", "Map Cymru"), ("index.html#people", "People", "Pobl"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("trails.html", "Themed trails", "Llwybrau thema"),
-               ("gallery.html", "Photo gallery", "Oriel luniau"), ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg")]
+               ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"), ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg")]
     read = [("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
             ("teachers.html", "For teachers", "I athrawon"), ("index.html#sources", "Sources", "Ffynonellau")]
     play = [("daily.html", "Daily challenge", "Her y dydd"), ("quiz.html", "Quiz", "Cwis"), ("map-game.html", "Where in Wales?", "Ble yng Nghymru?"), ("names.html", "Welsh names", "Enwau Cymraeg"),
@@ -649,6 +650,80 @@ def journey_page():
     extra = f'<script>var JOURNEY={json.dumps(groups, ensure_ascii=False, separators=(",", ":"))};</script>\n'
     return page("journey.html", "Your journey · History of Wales", "Track what you have read and the badges you have earned on History of Wales.", main, era="kings", og_type="website", extra=extra)
 
+
+
+# ---------- On this day (src/onthisday.py + the dated EVENTS) ----------
+OTD_ORDER = {"feast": 0, "custom": 0, "ev": 1, "born": 2, "died": 2}
+OTD_TAG = {"born": ("Born", "Ganed"), "died": ("Died", "Bu farw"), "feast": ("Feast day", "Dydd gŵyl"), "custom": ("Tradition", "Traddodiad")}
+MONTHS = [("January", "Ionawr"), ("February", "Chwefror"), ("March", "Mawrth"), ("April", "Ebrill"), ("May", "Mai"), ("June", "Mehefin"),
+          ("July", "Gorffennaf"), ("August", "Awst"), ("September", "Medi"), ("October", "Hydref"), ("November", "Tachwedd"), ("December", "Rhagfyr")]
+_DAYS_IN = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+
+def era_of_year(y):
+    for lim, eid in ((48, "ancient"), (410, "roman"), (800, "saints"), (1100, "kings"), (1485, "medieval"), (1750, "tudor"), (1914, "industrial"), (1997, "modern")):
+        if y < lim:
+            return eid
+    return "today"
+
+
+def otd_rows():
+    """Every dated entry: [MM-DD, year or None, kind, titleEn, titleCy, lineEn, lineCy, link, era]."""
+    rows = []
+    for i, ev in enumerate(D.EVENTS):
+        if ev[4]:
+            st = story_links("events", ev[5])
+            rows.append([ev[4], ev[1], "ev", ev[5], ev[6], ev[7], ev[8], f'story-{st[0]["id"]}.html' if st else f"era-{ev[0]}.html#e{i}", ev[0]])
+    covered = {r[7][6:] for r in OTD.OTD if r[7].startswith("saint:")}
+    for md, y, k, te, tc, le, lc, link in OTD.OTD:
+        if link.startswith("saint:"):
+            link = saint_href(link[6:])
+        rows.append([md, y, k, te, tc, le, lc, link, era_of_year(y) if y is not None else "saints" if k == "feast" else "modern"])
+    for sid, (x, r) in SAINT.items():  # every other saint with a feast day on the Saints of Wales page
+        if x["feast"] and sid not in covered:
+            first = lambda t: t.split(". ")[0].rstrip(".") + "."
+            rows.append([f'{x["feast"][1]:02d}-{x["feast"][0]:02d}', None, "feast", x["en"], x["cy"], first(x["nEn"]), first(x["nCy"]), saint_href(sid), "saints"])
+    rows.sort(key=lambda r: (r[0], OTD_ORDER[r[2]], r[1] if r[1] is not None else -10 ** 6))
+    return rows
+
+
+def otd_item(r):
+    md, y, k, te, tc, le, lc, link, era = r
+    tag = OTD_TAG.get(k)
+    when = (f'<span class="y">{y}</span>' if y is not None else "") + (f'<span class="k">{bi(*tag)}</span>' if tag else "")
+    title = bi(te, tc)
+    if link:
+        title = f'<a href="{e(link)}">{title}</a>'
+    return f'<li data-era="{era}" class="k-{k}"><p class="when">{when}</p><div><h4>{title}</h4><p>{bi(le, lc)}</p></div></li>'
+
+
+def onthisday_page():
+    rows = otd_rows()
+    by_day = {}
+    for r in rows:
+        by_day.setdefault(r[0], []).append(r)
+    months = ""
+    for m, (en, cy) in enumerate(MONTHS):
+        days = ""
+        for d in range(1, _DAYS_IN[m] + 1):
+            md = f"{m + 1:02d}-{d:02d}"
+            if md in by_day:
+                days += (f'<article class="otd-day" id="d-{md}"><h3><span class="dn">{d}</span> {bi(en, cy)}</h3>'
+                         f'<ul class="otd-list">{"".join(otd_item(r) for r in by_day[md])}</ul></article>')
+        months += f'<section class="otd-month" id="m-{m + 1:02d}" aria-labelledby="mh-{m + 1:02d}"><div class="wrap"><h2 class="sub-h" id="mh-{m + 1:02d}">{bi(en, cy)}</h2><div class="otd-days">{days}</div></div></section>'
+    jump = "".join(f'<a class="chip" href="#m-{m + 1:02d}">{bi(en[:3], cy)}</a>' for m, (en, cy) in enumerate(MONTHS))
+    n_days = len(by_day)
+    main = (hero("medieval", f'<a href="index.html">{SITE}</a>', "book", "A year of Welsh history", "Blwyddyn o hanes Cymru", "On this day in Welsh history", "Ar y dydd hwn yn hanes Cymru",
+                 f"{len(rows)} dates from the history of Wales, across {n_days} days of the year: battles and treaties, saints’ days and old customs, and the births of the people who made Wales.",
+                 f"{len(rows)} o ddyddiadau o hanes Cymru, ar draws {n_days} o ddyddiau’r flwyddyn: brwydrau a chytundebau, gwyliau’r saint a hen arferion, a geni’r bobl a wnaeth Gymru.", art="book")
+            + f'<section class="tight otd-jump"><div class="wrap"><div class="otd-chips"><a class="chip solid" id="otd-today" href="#">{bi("Today", "Heddiw")}</a>{jump}</div></div></section>'
+            + months)
+    extra = ('<script>(function(){var n=new Date(),md=("0"+(n.getMonth()+1)).slice(-2)+"-"+("0"+n.getDate()).slice(-2),el=document.getElementById("d-"+md),b=document.getElementById("otd-today");'
+             'if(!el){var all=[].slice.call(document.querySelectorAll(".otd-day"));el=all.filter(function(a){return a.id.slice(2)>=md})[0]||all[0]}'
+             'if(el){el.classList.add("is-today");b.href="#"+el.id}else b.hidden=true})()</script>\n')
+    ld = {"@context": "https://schema.org", "@type": "CollectionPage", "name": "On this day in Welsh history", "inLanguage": ["en", "cy"], "url": BASE_URL + "onthisday.html"}
+    return page("onthisday.html", "On this day in Welsh history · History of Wales", "What happened on each day of the year in the history of Wales: events, saints’ days, traditions, births and deaths, in English and Cymraeg.",
+                main, era="medieval", og_type="website", ld=ld, extra=extra)
 
 # ---------- kings and princes (src/royal.py) ----------
 REALM = {r["id"]: r for r in RY.REALMS}
@@ -1460,6 +1535,7 @@ def search_index():
     items.append(dict(k="page", t="Saints of Wales", c="Seintiau Cymru", u="saints.html", y=["Saints", "Seintiau"], b=["The saints of Wales region by region, the llannau named after them, a map and a saints’ calendar", "Seintiau Cymru fesul rhanbarth, y llannau a enwyd ar eu hôl, map a chalendr y saint"], e="saints"))
     items += [dict(k="page", t=("Saints of " + r["en"]) if r["realm"] else "Saints across the sea", c=("Seintiau " + r["cy"]) if r["realm"] else "Saint dros y môr", u=f"saints-{r['id']}.html", y=["Saints", "Seintiau"], b=[r["subEn"] + " " + ", ".join(x["en"] for x in r["saints"]), r["subCy"]], e=r["era"]) for r in SA.REGIONS]
     items += [dict(k="page", t=x["en"], c=x["cy"], u=saint_href(sid), y=[x["dates"], cy_dates(x["dates"])], b=[x["nEn"].split(". ")[0] + ". " + " ".join(x["places"]), x["nCy"].split(". ")[0] + "."], e=r["era"]) for sid, (x, r) in SAINT.items()]
+    items.append(dict(k="page", t="On this day in Welsh history", c="Ar y dydd hwn yn hanes Cymru", u="onthisday.html", y=["Every day", "Bob dydd"], b=["What happened on each day of the year in Welsh history", "Beth ddigwyddodd ar bob diwrnod o’r flwyddyn yn hanes Cymru"], e="medieval"))
     items.append(dict(k="page", t="For teachers", c="I athrawon", u="teachers.html", y=["", ""], b=["Lesson ideas and printable quizzes", "Syniadau gwersi a chwisiau i’w hargraffu"], e="industrial"))
     return items
 
@@ -1502,6 +1578,7 @@ def main():
     pages["gallery.html"] = gallery_page()
     pages["play.html"] = play_index()
     pages["journey.html"] = journey_page()
+    pages["onthisday.html"] = onthisday_page()
     pages["daily.html"] = game_page("daily.html", "daily", "medieval", "Daily challenge", "Her y dydd", "One event from Welsh history. Six guesses to find the year.", "Un digwyddiad o hanes Cymru. Chwe chynnig i ddyfalu’r flwyddyn.", "castle", "A daily history challenge: guess the year of an event from Welsh history in six tries.")
     pages["map-game.html"] = game_page("map-game.html", "map", "modern", "Where in Wales?", "Ble yng Nghymru?", "Tap the map where you think each place is. Five rounds, 100 points each.", "Tapiwch y map lle credwch fod pob lle. Pum rownd, 100 pwynt yr un.", "senedd", "A map game: place the castles, towns and historic sites of Wales on a blank map.", with_map=True)
     pages["names.html"] = game_page("names.html", "names", "saints", "Welsh names", "Enwau Cymraeg", "Jones, Powell, Lloyd, Vaughan: Welsh surnames are history in miniature. Look yours up, then find your name as the princes would have said it.", "Jones, Powell, Lloyd, Vaughan: mae cyfenwau Cymru’n hanes ar raddfa fach. Chwiliwch am eich un chi, yna gweld eich enw fel y byddai’r tywysogion wedi’i ddweud.", "cross", "What Welsh surnames mean and where they come from, and a patronymic name maker.")
@@ -1514,6 +1591,7 @@ def main():
         sp = os.path.join(SRC, "static", f)
         (shutil.copytree if os.path.isdir(sp) else shutil.copy)(sp, os.path.join(out, f))
     write(os.path.join(out, "welsh.js"), welsh_js())
+    write(os.path.join(out, "onthisday.json"), json.dumps(otd_rows(), ensure_ascii=False, separators=(",", ":")))
     write(os.path.join(out, "search.json"), json.dumps(search_index(), ensure_ascii=False, separators=(",", ":")))
     write(os.path.join(out, ".nojekyll"), "")
     write(os.path.join(out, "robots.txt"), f"User-agent: *\nAllow: /\nSitemap: {BASE_URL}sitemap.xml\n")
@@ -1531,6 +1609,7 @@ def main():
                 shutil.copy(os.path.join(SRC, "static", f), os.path.join(a, f))
         shutil.copy(os.path.join(out, "search.json"), os.path.join(a, "search.json"))
         shutil.copy(os.path.join(out, "welsh.js"), os.path.join(a, "welsh.js"))
+        shutil.copy(os.path.join(out, "onthisday.json"), os.path.join(a, "onthisday.json"))
     print(f"Built {len(pages)} pages -> {out}")
 
 
