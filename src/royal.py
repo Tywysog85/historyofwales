@@ -126,7 +126,7 @@ REALMS = [
    R(500, "c. 500", "Cyngen Glodrydd ap Cadell", "‘The Renowned’.", "‘Y Clodrydd’."),
    R(550, "fl. c. 550", "Brochwel Ysgithrog", "Patron of Saint Melangell. When the hare he was hunting hid beneath her cloak, he gave her the valley of Pennant Melangell.",
      "Noddwr Santes Melangell. Pan guddiodd yr ysgyfarnog yr oedd yn ei hela dan ei mantell, rhoddodd iddi gwm Pennant Melangell."),
-   R(590, "fl. c. 590", "Cynan Garwyn ap Brochwel", "Praised by Taliesin for his victories across Wales.", "Canmolwyd ef gan Daliesin am ei fuddugoliaethau ar draws Cymru."),
+   R(590, "fl. c. 590", "Cynan Garwyn ap Brochwel", "Praised by Taliesin for his victories across Wales.", "Canmolwyd ef gan Daliesin am ei fuddugoliaethau ar draws Cymru.", P("taliesin")),
    R(613, "d. c. 616", "Selyf ap Cynan", "Called Sarffgadau, ‘serpent of battle’. He fell leading the Britons at the battle of Chester.", "Gelwid ef yn Sarffgadau. Syrthiodd yn arwain y Brythoniaid ym mrwydr Caer."),
    R(640, "fl. c. 640", "Eiludd Powys"),
    R(650, "fl. c. 650", "Cynddylan ap Cyndrwyn", "Lord of Pengwern, mourned by his sister in the great poems of Canu Heledd: ‘Stafell Gynddylan ys tywyll heno’.",
@@ -460,6 +460,109 @@ REALMS = [
    N("After Gwrgan, Ergyng was joined to Gwent through Meurig and Onbrawst.", "Ar ôl Gwrgan, unwyd Ergyng â Gwent drwy Feurig ac Onbrawst."),
   ]),
 ]
+
+# ---------- Yr Hen Ogledd, the Old North ----------
+# Kingdoms of the Britons in what is now northern England and southern Scotland. Their people spoke
+# the language that became Welsh, and the oldest Welsh poems were made for their kings.
+NORTH = [
+ dict(id="rheged", en="Rheged", cy="Rheged", era="saints", art="torch", span="c. 420–638", group="north",
+  subEn="The kingdom of Urien, hero of Taliesin, around the Solway and Caerliwelydd.",
+  subCy="Teyrnas Urien, arwr Taliesin, o gwmpas y Solway a Chaerliwelydd.",
+  introEn=["Rheged was a kingdom of the Britons in the north, around the Solway Firth and Caerliwelydd (Carlisle), reaching perhaps into Galloway and south towards Lancashire. Its people spoke the language that became Welsh.",
+           "Its king Urien is the hero of Taliesin’s poems, and his son Owain was mourned by the same poet. Those poems came south to Wales and were kept here, so that the memory of Rheged lives on in Welsh."],
+  introCy=["Teyrnas y Brythoniaid yn y gogledd oedd Rheged, o gwmpas Moryd Solway a Chaerliwelydd (Carlisle), gan ymestyn efallai i Galloway ac i’r de tuag at Swydd Gaerhirfryn. Siaradai ei phobl yr iaith a drodd yn Gymraeg.",
+           "Ei brenin Urien yw arwr cerddi Taliesin, a galarodd yr un bardd am ei fab Owain. Daeth y cerddi hynny i’r de i Gymru a’u cadw yma, fel bod cof Rheged yn byw yn Gymraeg."],
+  places=[],
+  rulers=[
+   R(420, "fl. c. 420", "Coel Hen", "Coel the Old. Welsh tradition holds him the forefather of many of the royal lines of the Old North.", "Yn ôl traddodiad Cymru, ef oedd cyndad llawer o linachau brenhinol yr Hen Ogledd.", key=True),
+   R(500, "c. 500", "Meirchion Gul"),
+   R(530, "c. 530", "Cynfarch ap Meirchion"),
+   R(570, "fl. c. 570–590", "Urien Rheged", "King of Rheged and lord of Catraeth, praised by Taliesin as the greatest of the Men of the North. He led the northern Britons against the Angles and held them under siege on Ynys Metcaud (Lindisfarne) for three days and three nights.",
+     "Brenin Rheged ac arglwydd Catraeth, a ganmolwyd gan Daliesin fel y mwyaf o Wŷr y Gogledd. Arweiniodd Frythoniaid y gogledd yn erbyn yr Eingl a’u gwarchae ar Ynys Fedcawd (Lindisfarne) am dri diwrnod a thair noson.", P("taliesin")),
+   R(560, "fl. c. 560–600", "Llywarch Hen", "Cousin of Urien and a prince of the north. Welsh tradition holds that he came to Powys, where the great englynion of Canu Llywarch Hen are set.",
+     "Cefnder Urien a thywysog o’r gogledd. Yn ôl traddodiad Cymru, daeth i Bowys, lle gosodir englynion mawr Canu Llywarch Hen.", key=True),
+   R(590, "fl. c. 590", "Owain ab Urien", "His father’s right hand, mourned in Taliesin’s elegy. Welsh tales remember him as the hero of Iarlles y Ffynnon, the Lady of the Fountain.",
+     "Llaw dde ei dad, a alarwyd yn marwnad Taliesin. Cofia chwedlau Cymru ef fel arwr Iarlles y Ffynnon.", key=True),
+   R(600, "fl. c. 600", "Rhun ab Urien", "The Historia Brittonum names him as the man who baptised King Edwin of Northumbria.", "Mae’r Historia Brittonum yn ei enwi fel y gŵr a fedyddiodd y Brenin Edwin o Northumbria."),
+   N("About 638 Rhiainfellt, great-granddaughter of Urien, married Oswiu of Northumbria, and Rheged passed by marriage to the Angles.",
+     "Tua 638 priododd Rhiainfellt, gor-wyres Urien, ag Oswiu o Northumbria, ac aeth Rheged drwy briodas i’r Eingl."),
+  ]),
+
+ dict(id="gododdin", en="Gododdin", cy="Gododdin", era="saints", art="sword", span="c. 450–638", group="north",
+  subEn="The kingdom of Din Eidyn, whose warriors are honoured in the oldest poem in Welsh.",
+  subCy="Teyrnas Din Eidyn, y mae ei rhyfelwyr yn cael eu hanrhydeddu yn y gerdd hynaf yn Gymraeg.",
+  introEn=["Gododdin, the Votadini of Roman times, held the land around the Firth of Forth, with its stronghold at Din Eidyn, Edinburgh. Welsh tradition holds that Cunedda came from Manaw Gododdin, at the head of the Forth, to found Gwynedd.",
+           "About 600 its lord Mynyddog Mwynfawr feasted his war-band for a year before they rode south to Catraeth. Aneirin’s poem Y Gododdin, the oldest poem in Welsh, honours each of them by name."],
+  introCy=["Daliai Gododdin, y Votadini yn oes Rhufain, y tir o gwmpas Moryd Forth, a’i chadarnle yn Din Eidyn, Caeredin. Yn ôl traddodiad Cymru, o Fanaw Gododdin, ym mhen draw’r Forth, y daeth Cunedda i sefydlu Gwynedd.",
+           "Tua 600 gwleddodd ei harglwydd Mynyddog Mwynfawr ei osgordd am flwyddyn cyn iddynt farchogaeth i’r de i Gatraeth. Mae cerdd Aneirin, Y Gododdin, y gerdd hynaf yn Gymraeg, yn anrhydeddu pob un ohonynt wrth ei enw."],
+  places=[],
+  rulers=[
+   R(450, "fl. c. 450", "Cunedda Wledig", "Welsh tradition holds that he left Manaw Gododdin with his sons and came south to found the kingdom of Gwynedd.", "Yn ôl traddodiad Cymru, gadawodd Fanaw Gododdin gyda’i feibion a dod i’r de i sefydlu teyrnas Gwynedd.", "kings-gwynedd.html", key=True),
+   R(560, "fl. c. 560", "Clydno Eidyn", "Named in the Welsh genealogies of the Men of the North as a lord of Eidyn.", "Fe’i henwir yn achau Cymraeg Gwŷr y Gogledd fel arglwydd Eidyn."),
+   R(600, "fl. c. 600", "Mynyddog Mwynfawr", "Lord of Din Eidyn. He feasted the three hundred of Y Gododdin for a year before they rode to Catraeth, and Aneirin made their names live for ever.",
+     "Arglwydd Din Eidyn. Gwleddodd drichant Y Gododdin am flwyddyn cyn iddynt farchogaeth i Gatraeth, a gwnaeth Aneirin i’w henwau fyw am byth.", P("aneirin")),
+   N("Din Eidyn was besieged in 638 and passed to the Angles. The poem of its warriors was carried to Wales, and kept there.", "Gwarchaewyd Din Eidyn yn 638 ac aeth i’r Eingl. Cariwyd cerdd ei rhyfelwyr i Gymru, a’i chadw yno."),
+  ]),
+
+ dict(id="ystrad-clud", en="Alt Clut and Ystrad Clud (Strathclyde)", cy="Alclud ac Ystrad Clud", era="kings", art="ship", span="c. 450–1018", group="north",
+  subEn="The longest-lived kingdom of the Old North, ruled from the Rock of the Clyde for six hundred years.",
+  subCy="Teyrnas hiraf yr Hen Ogledd, a reolwyd o Graig y Clud am chwe chan mlynedd.",
+  introEn=["Alt Clut, the Rock of the Clyde at Dumbarton, was the seat of a British kingdom that outlasted all the others of the Old North. Later it was ruled from Govan and called Ystrad Clud, Strathclyde, and it stretched south into Cumbria, whose very name comes from Cymry.",
+           "Its kings spoke the language that became Welsh, and they kept their kingdom for six hundred years, against Angles, Picts, Scots and Vikings alike."],
+  introCy=["Alclud, Craig y Clud yn Dumbarton, oedd sedd teyrnas Frythonig a oroesodd bob un arall o’r Hen Ogledd. Yn ddiweddarach fe’i rheolwyd o Govan a’i galw’n Ystrad Clud, ac ymestynnai i’r de i Cumbria, y daw ei henw o’r gair Cymry.",
+           "Siaradai ei brenhinoedd yr iaith a drodd yn Gymraeg, a chadwasant eu teyrnas am chwe chan mlynedd, yn erbyn Eingl, Pictiaid, Sgotiaid a Llychlynwyr fel ei gilydd."],
+  places=[],
+  rulers=[
+   R(450, "fl. c. 450", "Ceredig Wledig", "Named in the genealogies as the founder of the royal line of Alt Clut.", "Fe’i henwir yn yr achau fel sylfaenydd llinach frenhinol Alclud."),
+   R(530, "fl. c. 530", "Dyfnwal Hen", "Forefather of several royal lines of the north in the Welsh genealogies.", "Cyndad sawl llinach frenhinol yn y gogledd yn ôl yr achau Cymraeg."),
+   R(580, "fl. c. 580–614", "Rhydderch Hael", "Rhydderch the Generous, friend of Saint Cyndeyrn (Kentigern) and ally of Urien against the Angles. His dish is counted among the Thirteen Treasures of the Island of Britain.",
+     "Cyfaill Sant Cyndeyrn a chynghreiriad Urien yn erbyn yr Eingl. Cyfrifir ei ddysgl ymhlith Tri Thlws ar Ddeg Ynys Prydain.", key=True),
+   R(640, "fl. c. 642", "Owain ap Beli", "Defeated the king of Dál Riata at Strathcarron in 642. His brother Bridei, king of the Picts, beat the Northumbrians at Dun Nechtain in 685.",
+     "Trechodd frenin Dál Riata yn Strathcarron yn 642. Trechodd ei frawd Bridei, brenin y Pictiaid, Northumbria yn Dun Nechtain yn 685.", key=True),
+   R(700, "d. 722", "Beli ap Nwython"),
+   R(722, "d. 752", "Tewdwr ap Beli", "Beat the Picts at Mugdock in 750.", "Trechodd y Pictiaid ym Mugdock yn 750."),
+   R(752, "d. 760", "Dyfnwal ap Tewdwr"),
+   R(850, "d. 872", "Arthgal ap Dyfnwal", "Held the Rock of the Clyde for four months against the Viking kings of Dublin in 870.", "Daliodd Graig y Clud am bedwar mis yn erbyn brenhinoedd Llychlynnaidd Dulyn yn 870.", key=True),
+   R(872, "872–c. 878", "Rhun ab Arthgal"),
+   N("The kings now ruled from Govan, and the kingdom was called Ystrad Clud, Strathclyde, reaching south into Cumbria.", "Rheolai’r brenhinoedd yn awr o Govan, a galwyd y deyrnas yn Ystrad Clud, gan ymestyn i’r de i Cumbria."),
+   R(930, "fl. c. 934–937", "Owain ap Dyfnwal", "Fought beside the king of Scots and the Vikings of Dublin against Athelstan at Brunanburh in 937.", "Ymladdodd ochr yn ochr â brenin yr Alban a Llychlynwyr Dulyn yn erbyn Athelstan yn Brunanburh yn 937."),
+   R(940, "d. 975", "Dyfnwal ab Owain", "Ruled for many years, and died on pilgrimage in Rome in 975.", "Teyrnasodd am flynyddoedd lawer, a bu farw ar bererindod yn Rhufain yn 975."),
+   R(1015, "fl. 1018", "Owain Foel", "Owain the Bald, the last known king of Strathclyde. He fought beside the king of Scots and won at Carham on the Tweed in 1018.", "Owain Foel, brenin olaf hysbys Ystrad Clud. Ymladdodd ochr yn ochr â brenin yr Alban ac ennill yn Carham ar afon Tweed yn 1018.", key=True),
+  ]),
+
+ dict(id="elfed", en="Elfed (Elmet)", cy="Elfed", era="saints", art="dolmen", span="c. 500–617", group="north",
+  subEn="The British kingdom around Leeds, which kept its freedom into the seventh century.",
+  subCy="Y deyrnas Frythonig o gwmpas Leeds, a gadwodd ei rhyddid hyd y seithfed ganrif.",
+  introEn=["Elfed, Elmet, was a British kingdom in the vale of York, around what is now Leeds. It held out among the kingdoms of the Angles until about 617.",
+           "Its name lives on in villages such as Barwick-in-Elmet and Sherburn-in-Elmet, and Taliesin sang the praise of its king Gwallawg."],
+  introCy=["Teyrnas Frythonig yn nyffryn Efrog oedd Elfed, o gwmpas yr hyn sydd heddiw yn Leeds. Daliodd ei thir ymhlith teyrnasoedd yr Eingl hyd tua 617.",
+           "Mae ei henw’n byw mewn pentrefi fel Barwick-in-Elmet a Sherburn-in-Elmet, a chanodd Taliesin glod ei brenin Gwallawg."],
+  places=[],
+  rulers=[
+   R(540, "fl. c. 540", "Masgwid Gloff"),
+   R(580, "fl. c. 580", "Gwallawg ap Lleenog", "Praised by Taliesin, and one of the kings who fought beside Urien against the Angles.", "Canmolwyd gan Daliesin, ac un o’r brenhinoedd a ymladdodd ochr yn ochr ag Urien yn erbyn yr Eingl.", P("taliesin")),
+   R(610, "d. c. 617", "Ceredig ap Gwallawg", "The last king of Elfed.", "Brenin olaf Elfed.", key=True),
+  ]),
+
+ dict(id="efrog", en="Efrog (Ebrauc)", cy="Efrog", era="saints", art="fort", span="c. 550–580", group="north",
+  subEn="The British kingdom around York, remembered in the Welsh annals and tales.",
+  subCy="Y deyrnas Frythonig o gwmpas Efrog, a gofir yn yr annalau a’r chwedlau Cymraeg.",
+  introEn=["Efrog, Ebrauc, was the kingdom of the Britons around the old Roman city of York, Caer Efrog. Its kings were the sons of Eliffer of the Great Retinue, among the Men of the North in the Welsh genealogies.",
+           "The Welsh annals record the fall of its two kings in 580, after which the land passed to the Angles."],
+  introCy=["Efrog oedd teyrnas y Brythoniaid o gwmpas hen ddinas Rufeinig Caer Efrog. Meibion Eliffer Gosgorddfawr oedd ei brenhinoedd, ymhlith Gwŷr y Gogledd yn yr achau Cymraeg.",
+           "Mae’r Annales Cambriae yn cofnodi cwymp ei dau frenin yn 580, ac wedi hynny aeth y wlad i’r Eingl."],
+  places=[],
+  rulers=[
+   R(550, "fl. c. 550", "Eliffer Gosgorddfawr", "Eliffer of the Great Retinue, father of the kings of Efrog.", "Tad brenhinoedd Efrog."),
+   R(570, "d. 580", "Peredur ab Eliffer", "King of Efrog with his brother Gwrgi. Welsh tradition remembers the name Peredur as the hero of the tale Peredur fab Efrog.", "Brenin Efrog gyda’i frawd Gwrgi. Cofia traddodiad Cymru’r enw Peredur fel arwr y chwedl Peredur fab Efrog.", key=True),
+   R(570.1, "d. 580", "Gwrgi ab Eliffer"),
+  ]),
+]
+REALMS += NORTH
+
+NORTH_INTRO = dict(
+ en="Before Wales and Cumbria were cut apart, Britons ruled from the Clyde to the Severn. The kingdoms of the north, Yr Hen Ogledd, spoke the same language, and the oldest poems in Welsh, by Aneirin and Taliesin, were made for their kings. Welsh tradition remembers them as Gwŷr y Gogledd, the Men of the North.",
+ cy="Cyn i Gymru a Cumbria gael eu torri ar wahân, Brythoniaid oedd yn rheoli o’r Clud i Hafren. Siaradai teyrnasoedd y gogledd, yr Hen Ogledd, yr un iaith, a lluniwyd y cerddi hynaf yn Gymraeg, gan Aneirin a Thaliesin, i’w brenhinoedd. Cofia traddodiad Cymru hwy fel Gwŷr y Gogledd.")
 
 # ---------- the all-Wales page (kings.html) ----------
 GRUFFUDD = dict(

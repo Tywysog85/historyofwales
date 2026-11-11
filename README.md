@@ -8,7 +8,7 @@ A proud, bilingual (English and Cymraeg) history of Wales, live at [historyofwal
 - **A timeline** of about 160 events.
 - **A map** of 67 historic sites, and a Kingdoms view showing Wales at 13 moments in time.
 - **71 people**, from Caratacus to today.
-- **Kings and princes**: every royal line, kingdom by kingdom (12 kingdoms, about 190 rulers), and the kings and princes of all Wales.
+- **Kings and princes**: every royal line, kingdom by kingdom (12 kingdoms of Wales and 5 of the Old North), and the kings and princes of all Wales.
 - **14 long reads**, 7 legends, symbols and traditions.
 - **Games**: a daily challenge, a quiz, a map game, Welsh names, word pairs and more.
 - Every page in **English and Cymraeg**.
