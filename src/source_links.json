@@ -1,0 +1,1300 @@
+{
+ "person:alexander-cordell": {
+  "cy": "Alexander Cordell"
+ },
+ "person:alfred-russel-wallace": {
+  "cy": "Alfred Russel Wallace",
+  "dwb": "https://biography.wales/article/s6-WALL-RUS-1823"
+ },
+ "person:alun-wyn-jones": {
+  "cy": "Alun Wyn Jones"
+ },
+ "person:anarawd": {
+  "cy": "Anarawd ap Rhodri",
+  "dwb": "https://biography.wales/article/s-ANAR-APR-0857"
+ },
+ "person:andrew-vicari": {
+  "cy": "Andrew Vicari",
+  "dwb": "https://biography.wales/article/s15-VACC-GIO-1932"
+ },
+ "person:aneirin": {
+  "cy": "Aneirin",
+  "dwb": "https://biography.wales/article/s-ANEI-RIN-0550"
+ },
+ "person:aneurin-bevan": {
+  "cy": "Aneurin Bevan",
+  "dwb": "https://biography.wales/article/s2-BEVA-ANE-1897"
+ },
+ "person:ann-griffiths": {
+  "cy": "Ann Griffiths",
+  "dwb": "https://biography.wales/article/s-GRIF-ANN-1776"
+ },
+ "person:anthony-hopkins": {
+  "cy": "Anthony Hopkins"
+ },
+ "person:arthur": {
+  "cy": "Athrwys ap Meurig"
+ },
+ "person:asser": {
+  "cy": "Asser",
+  "dwb": "https://biography.wales/article/s-ASSE-JOH-0909"
+ },
+ "person:augustus-john": {
+  "cy": "Augustus John",
+  "dwb": "https://biography.wales/article/s2-JOHN-EDW-1878"
+ },
+ "person:barry-john": {
+  "cy": "Barry John"
+ },
+ "person:barti-ddu": {
+  "cy": "Bartholomew Roberts",
+  "dwb": "https://biography.wales/article/s-ROBE-BAR-1682"
+ },
+ "person:bertrand-russell": {
+  "cy": "Bertrand Russell"
+ },
+ "person:betsi-cadwaladr": {
+  "cy": "Betsi Cadwaladr",
+  "dwb": "https://biography.wales/article/s12-DAVI-ELI-1789"
+ },
+ "person:betty-campbell": {
+  "cy": "Betty Campbell",
+  "dwb": "https://biography.wales/article/s14-CAMP-ELI-1934"
+ },
+ "person:beuno": {
+  "cy": "Beuno",
+  "dwb": "https://biography.wales/article/s-BEUN-O00-0642"
+ },
+ "person:bill-frost": {
+  "cy": "William (Bill) Frost"
+ },
+ "person:billy-hughes": {
+  "cy": "William Morris Hughes"
+ },
+ "person:billy-meredith": {
+  "cy": "Billy Meredith",
+  "dwb": "https://biography.wales/article/s2-MERE-WIL-1874"
+ },
+ "person:bleddyn-ap-cynfyn": {
+  "cy": "Bleddyn ap Cynfyn",
+  "dwb": "https://biography.wales/article/s-BLED-APC-1025"
+ },
+ "person:bonnie-tyler": {
+  "cy": "Bonnie Tyler"
+ },
+ "person:brian-josephson": {
+  "cy": "Brian David Josephson"
+ },
+ "person:brychan": {
+  "cy": "Brychan",
+  "dwb": "https://biography.wales/article/s-BRYC-APA-0419"
+ },
+ "person:bryn-terfel": {
+  "cy": "Bryn Terfel"
+ },
+ "person:buddug": {
+  "cy": "Buddug (Boudica)"
+ },
+ "person:cadog": {
+  "cy": "Cadog",
+  "dwb": "https://biography.wales/article/s-CADO-G00-0497"
+ },
+ "person:cadwaladr": {
+  "cy": "Cadwaladr (gwahaniaethu)"
+ },
+ "person:cadwallon": {
+  "cy": "Cadwallon ap Cadfan",
+  "dwb": "https://biography.wales/article/s-CADW-APC-0591"
+ },
+ "person:caratacus": {
+  "cy": "Caradog"
+ },
+ "person:carwyn-jones": {
+  "cy": "Carwyn Jones"
+ },
+ "person:caswallon": {
+  "cy": "Caswallawn fab Beli"
+ },
+ "person:catherine-zeta-jones": {
+  "cy": "Catherine Zeta-Jones"
+ },
+ "person:catrin-glyndwr": {
+  "cy": "Catrin ferch Owain Glyn Dŵr"
+ },
+ "person:catrin-o-ferain": {
+  "cy": "Catrin o Ferain",
+  "dwb": "https://biography.wales/article/s-CATR-BER-1534"
+ },
+ "person:cayo-evans": {
+  "cy": "Julian Cayo-Evans",
+  "dwb": "https://biography.wales/article/s10-CAYO-JUL-1937"
+ },
+ "person:cerys-matthews": {
+  "cy": "Cerys Matthews"
+ },
+ "person:charlotte-church": {
+  "cy": "Charlotte Church"
+ },
+ "person:christmas-evans": {
+  "cy": "Christmas Evans",
+  "dwb": "https://biography.wales/article/s-EVAN-CHR-1766"
+ },
+ "person:clive-granger": {
+  "cy": "Clive Granger"
+ },
+ "person:clough-williams-ellis": {
+  "cy": "Clough Williams-Ellis"
+ },
+ "person:coel-hen": {
+  "cy": "Coel Hen"
+ },
+ "person:colin-jackson": {
+  "cy": "Colin Jackson"
+ },
+ "person:cranogwen": {
+  "cy": "Sarah Jane Rees (Cranogwen)",
+  "dwb": "https://biography.wales/article/s-REES-JAN-1839"
+ },
+ "person:cunedda": {
+  "cy": "Cunedda",
+  "dwb": "https://biography.wales/article/s-CUNE-WLE-0380"
+ },
+ "person:cybi": {
+  "cy": "Cybi",
+  "dwb": "https://biography.wales/article/s-CYBI-APS-0490"
+ },
+ "person:cynddelw": {
+  "cy": "Cynddelw Brydydd Mawr",
+  "dwb": "https://biography.wales/article/s-CYND-BRY-1155"
+ },
+ "person:cynfelyn": {
+  "cy": "Cynfelyn"
+ },
+ "person:cyngen": {
+  "cy": "Cyngen ap Cadell",
+  "dwb": "https://biography.wales/article/s-CYNG-POW-0778"
+ },
+ "person:dafydd-ap-gruffudd": {
+  "cy": "Dafydd ap Gruffudd",
+  "dwb": "https://biography.wales/article/s-DAFY-APG-1283"
+ },
+ "person:dafydd-ap-gwilym": {
+  "cy": "Dafydd ap Gwilym",
+  "dwb": "https://biography.wales/article/s12-DAFY-APG-1340"
+ },
+ "person:dafydd-ap-llywelyn": {
+  "cy": "Dafydd ap Llywelyn",
+  "dwb": "https://biography.wales/article/s-DAFY-APL-1246"
+ },
+ "person:dafydd-elis-thomas": {
+  "cy": "Dafydd Elis-Thomas"
+ },
+ "person:dafydd-iwan": {
+  "cy": "Dafydd Iwan"
+ },
+ "person:dafydd-wigley": {
+  "cy": "Dafydd Wigley"
+ },
+ "person:daniel-owen": {
+  "cy": "Daniel Owen",
+  "dwb": "https://biography.wales/article/s-OWEN-DAN-1836"
+ },
+ "person:dannie-abse": {
+  "cy": "Dannie Abse"
+ },
+ "person:david-brunt": {
+  "cy": "David Brunt",
+  "dwb": "https://biography.wales/article/s2-BRUN-DAV-1886"
+ },
+ "person:david-davies-llandinam": {
+  "cy": "David Davies, Llandinam",
+  "dwb": "https://biography.wales/article/s-DAVI-DAV-1818"
+ },
+ "person:david-edward-hughes": {
+  "cy": "David Edward Hughes",
+  "dwb": "https://biography.wales/article/s-HUGH-EDW-1831"
+ },
+ "person:david-griffiths-missionary": {
+  "cy": "David Griffiths (cenhadwr)",
+  "dwb": "https://biography.wales/article/s-GRIF-DAV-1792"
+ },
+ "person:david-thomas-iron": {
+  "cy": "David Thomas (metelegwr)",
+  "dwb": "https://biography.wales/article/s-THOM-DAV-1794"
+ },
+ "person:deiniol": {
+  "cy": "Deiniol",
+  "dwb": "https://biography.wales/article/s-DEIN-IOL-0584"
+ },
+ "person:dewi-sant": {
+  "cy": "Dewi Sant",
+  "dwb": "https://biography.wales/article/s-DEWI-SAN-0600"
+ },
+ "person:dic-aberdaron": {
+  "cy": "Richard Robert Jones",
+  "dwb": "https://biography.wales/article/s-JONE-ROB-1780"
+ },
+ "person:dic-penderyn": {
+  "cy": "Dic Penderyn",
+  "dwb": "https://biography.wales/article/s-LEWI-RIC-1807"
+ },
+ "person:donald-davies": {
+  "cy": "Donald Watts Davies",
+  "dwb": "https://biography.wales/article/s8-DAVI-WAT-1924"
+ },
+ "person:duffy": {
+  "cy": "Duffy"
+ },
+ "person:dwynwen": {
+  "cy": "Santes Dwynwen"
+ },
+ "person:dylan-thomas": {
+  "cy": "Dylan Thomas",
+  "dwb": "https://biography.wales/article/s10-THOM-MAR-1914"
+ },
+ "person:edmwnd-prys": {
+  "cy": "Edmwnd Prys",
+  "dwb": "https://biography.wales/article/s-PRYS-EDM-1544"
+ },
+ "person:ednyfed-fychan": {
+  "cy": "Ednyfed Fychan",
+  "dwb": "https://biography.wales/article/s-EDNY-FYC-1246"
+ },
+ "person:edward-bowen": {
+  "cy": "Edward George Bowen",
+  "dwb": "https://biography.wales/article/s8-BOWE-GEO-1911"
+ },
+ "person:edward-lhuyd": {
+  "cy": "Edward Lhuyd",
+  "dwb": "https://biography.wales/article/s-LHUY-EDW-1660"
+ },
+ "person:elaine-morgan": {
+  "cy": "Elaine Morgan",
+  "dwb": "https://biography.wales/article/s12-MORG-NEV-1920"
+ },
+ "person:elihu-yale": {
+  "cy": "Elihu Yale"
+ },
+ "person:elisedd": {
+  "cy": "Elisedd ap Gwylog"
+ },
+ "person:elizabeth-andrews": {
+  "cy": "Elizabeth Andrews"
+ },
+ "person:elizabeth-phillips-hughes": {
+  "cy": "Elizabeth Phillips Hughes",
+  "dwb": "https://biography.wales/article/s-HUGH-PHI-1851"
+ },
+ "person:ellis-wynne": {
+  "cy": "Ellis Wynne",
+  "dwb": "https://biography.wales/article/s-WYNN-ELL-1670"
+ },
+ "person:eluned-morgan": {
+  "cy": "Eluned Morgan (gwleidydd)"
+ },
+ "person:evan-james-williams": {
+  "cy": "Evan James Williams",
+  "dwb": "https://biography.wales/article/s14-WILL-JAM-1903"
+ },
+ "person:evan-roberts": {
+  "cy": "Evan Roberts, y diwygiwr",
+  "dwb": "https://biography.wales/article/s2-ROBE-JOH-1878"
+ },
+ "person:frances-hoggan": {
+  "cy": "Frances Elizabeth Morgan",
+  "dwb": "https://biography.wales/article/s11-HOGG-ELI-1843"
+ },
+ "person:freddie-welsh": {
+  "cy": "Freddie Welsh",
+  "dwb": "https://biography.wales/article/s-THOM-HAL-1886"
+ },
+ "person:gareth-bale": {
+  "cy": "Gareth Bale"
+ },
+ "person:geoffrey-of-monmouth": {
+  "cy": "Sieffre o Fynwy",
+  "dwb": "https://biography.wales/article/s-SIEF-OFY-1090"
+ },
+ "person:george-herbert": {
+  "cy": "George Herbert",
+  "dwb": "https://biography.wales/article/s-HERB-GEO-1593"
+ },
+ "person:geraint-evans": {
+  "cy": "Geraint Evans (canwr opera)",
+  "dwb": "https://biography.wales/article/s14-EVAN-LLE-1922"
+ },
+ "person:geraint-thomas": {
+  "cy": "Geraint Thomas"
+ },
+ "person:gerallt-gymro": {
+  "cy": "Gerallt Gymro",
+  "dwb": "https://biography.wales/article/s-GIRA-CAM-1146"
+ },
+ "person:gildas": {
+  "cy": "Gildas",
+  "dwb": "https://biography.wales/article/s-GILD-AS0-0495"
+ },
+ "person:gillian-clarke": {
+  "cy": "Gillian Clarke"
+ },
+ "person:grace-williams": {
+  "cy": "Grace Williams",
+  "dwb": "https://biography.wales/article/s10-WILL-MAR-1906"
+ },
+ "person:griffith-jones": {
+  "cy": "Griffith Jones, Llanddowror",
+  "dwb": "https://biography.wales/article/s-JONE-GRI-1683"
+ },
+ "person:gruff-rhys": {
+  "cy": "Gruff Rhys"
+ },
+ "person:gruffudd-ap-cynan": {
+  "cy": "Gruffudd ap Cynan",
+  "dwb": "https://biography.wales/article/s-GRUF-APC-1055"
+ },
+ "person:gruffudd-ap-llywelyn": {
+  "cy": "Gruffudd ap Llywelyn",
+  "dwb": "https://biography.wales/article/s12-GRUF-APL-1063"
+ },
+ "person:gruffydd-robert": {
+  "cy": "Gruffydd Robert",
+  "dwb": "https://biography.wales/article/s12-ROBE-GRU-1522"
+ },
+ "person:guto-r-glyn": {
+  "cy": "Guto'r Glyn",
+  "dwb": "https://biography.wales/article/s-GUTO-GLY-1440"
+ },
+ "person:gwen-john": {
+  "cy": "Gwen John",
+  "dwb": "https://biography.wales/article/s3-JOHN-MAR-1876"
+ },
+ "person:gwenfrewi": {
+  "cy": "Gwenffrewi",
+  "dwb": "https://biography.wales/article/s-GWEN-FFR-0600"
+ },
+ "person:gwenllian": {
+  "cy": "Gwenllian ferch Gruffudd ap Cynan",
+  "dwb": "https://biography.wales/article/s-GWEN-FER-1100"
+ },
+ "person:gwenllian-ferch-llywelyn": {
+  "cy": "Y Dywysoges Gwenllian"
+ },
+ "person:gwerful-mechain": {
+  "cy": "Gwerful Mechain",
+  "dwb": "https://biography.wales/article/s-GWER-MEC-1462"
+ },
+ "person:gwyneth-lewis": {
+  "cy": "Gwyneth Lewis"
+ },
+ "person:gwynfor-evans": {
+  "cy": "Gwynfor Evans",
+  "dwb": "https://biography.wales/article/s10-EVAN-RIC-1912"
+ },
+ "person:harri-tudur": {
+  "cy": "Harri VII, brenin Lloegr",
+  "dwb": "https://biography.wales/article/s-HENR-KIN-1457"
+ },
+ "person:harry-secombe": {
+  "cy": "Harry Secombe"
+ },
+ "person:hedd-wyn": {
+  "cy": "Hedd Wyn",
+  "dwb": "https://biography.wales/article/s-EVAN-HUM-1887"
+ },
+ "person:henry-morgan": {
+  "cy": "Harri Morgan",
+  "dwb": "https://biography.wales/article/s-MORG-HEN-1635"
+ },
+ "person:henry-morton-stanley": {
+  "cy": "Henry Morton Stanley"
+ },
+ "person:henry-richard": {
+  "cy": "Henry Richard",
+  "dwb": "https://biography.wales/article/s-RICH-HEN-1812"
+ },
+ "person:henry-v": {
+  "cy": "Harri V, brenin Lloegr"
+ },
+ "person:henry-vaughan": {
+  "cy": "Henry Vaughan",
+  "dwb": "https://biography.wales/article/s-VAUG-HEN-1621"
+ },
+ "person:howell-harris": {
+  "cy": "Howel Harris",
+  "dwb": "https://biography.wales/article/s-HARR-HOW-1714"
+ },
+ "person:hugh-griffith": {
+  "cy": "Hugh Griffith"
+ },
+ "person:hugh-myddelton": {
+  "cy": "Hugh Myddelton"
+ },
+ "person:hugh-owen-thomas": {
+  "cy": "Hugh Owen Thomas",
+  "dwb": "https://biography.wales/article/s-THOM-OWE-1834"
+ },
+ "person:hywel-ab-owain": {
+  "cy": "Hywel ab Owain Gwynedd",
+  "dwb": "https://biography.wales/article/s-HYWE-ABO-1170"
+ },
+ "person:hywel-dda": {
+  "cy": "Hywel Dda",
+  "dwb": "https://biography.wales/article/s-HYWE-DDA-0950"
+ },
+ "person:ian-rush": {
+  "cy": "Ian Rush"
+ },
+ "person:ian-woosnam": {
+  "cy": "Ian Woosnam"
+ },
+ "person:ieuan-fardd": {
+  "cy": "Evan Evans (Ieuan Fardd)",
+  "dwb": "https://biography.wales/article/s-EVAN-EVA-1731"
+ },
+ "person:ifan-ab-owen-edwards": {
+  "cy": "Ifan ab Owen Edwards",
+  "dwb": "https://biography.wales/article/s2-EDWA-OWE-1895"
+ },
+ "person:illtud": {
+  "cy": "Illtud",
+  "dwb": "https://biography.wales/article/s-ILLT-UD0-0475"
+ },
+ "person:ioan-gruffudd": {
+  "cy": "Ioan Gruffudd"
+ },
+ "person:iolo-goch": {
+  "cy": "Iolo Goch",
+  "dwb": "https://biography.wales/article/s-IOLO-GOC-1320"
+ },
+ "person:iolo-morganwg": {
+  "cy": "Iolo Morganwg",
+  "dwb": "https://biography.wales/article/s-WILL-EDW-1747"
+ },
+ "person:isaac-roberts": {
+  "cy": "Isaac Roberts",
+  "dwb": "https://biography.wales/article/s-ROBE-ISA-1829"
+ },
+ "person:ivor-novello": {
+  "cy": "Ivor Novello",
+  "dwb": "https://biography.wales/article/s2-NOVE-IVO-1893"
+ },
+ "person:james-dean-bradfield": {
+  "cy": "James Dean Bradfield"
+ },
+ "person:jan-morris": {
+  "cy": "Jan Morris",
+  "dwb": "https://biography.wales/article/s15-MORR-JAN-1926"
+ },
+ "person:jasper-tudor": {
+  "cy": "Siasbar Tudur",
+  "dwb": "https://biography.wales/article/s-TUDO-SIA-1431"
+ },
+ "person:jemima-nicholas": {
+  "cy": "Jemima Niclas"
+ },
+ "person:jim-griffiths": {
+  "cy": "Jim Griffiths",
+  "dwb": "https://biography.wales/article/s6-GRIF-JAM-1890"
+ },
+ "person:jimmy-wilde": {
+  "cy": "Jimmy Wilde",
+  "dwb": "https://biography.wales/article/s2-WILD-JAM-1892"
+ },
+ "person:joe-calzaghe": {
+  "cy": "Joe Calzaghe"
+ },
+ "person:john-cale": {
+  "cy": "John Cale"
+ },
+ "person:john-charles": {
+  "cy": "John Charles",
+  "dwb": "https://biography.wales/article/s12-CHAR-JOH-1931"
+ },
+ "person:john-davies-mallwyd": {
+  "cy": "John Davies, Mallwyd",
+  "dwb": "https://biography.wales/article/s-DAVI-JOH-1567"
+ },
+ "person:john-dee": {
+  "cy": "John Dee",
+  "dwb": "https://biography.wales/article/s-DEE0-JOH-1527"
+ },
+ "person:john-evans-waunfawr": {
+  "cy": "John Evans (fforiwr)",
+  "dwb": "https://biography.wales/article/s-EVAN-JOH-1770"
+ },
+ "person:john-frost": {
+  "cy": "John Frost",
+  "dwb": "https://biography.wales/article/s-FROS-JOH-1784"
+ },
+ "person:john-gibson": {
+  "cy": "John Gibson (cerflunydd)",
+  "dwb": "https://biography.wales/article/s-GIBS-JOH-1790"
+ },
+ "person:john-hughes-yuzovka": {
+  "cy": "John Hughes (diwydiannwr)",
+  "dwb": "https://biography.wales/article/s-HUGH-JOH-1814"
+ },
+ "person:john-jones-seryddwr": {
+  "cy": "John Jones (seryddwr)",
+  "dwb": "https://biography.wales/article/s-JONE-JHN-1818"
+ },
+ "person:john-meurig-thomas": {
+  "cy": "John Meurig Thomas"
+ },
+ "person:john-price": {
+  "cy": "John Price",
+  "dwb": "https://biography.wales/article/s-PRIC-JOH-1502"
+ },
+ "person:joseph-parry": {
+  "cy": "Joseph Parry",
+  "dwb": "https://biography.wales/article/s-PARR-JOS-1841"
+ },
+ "person:jpr-williams": {
+  "cy": "J. P. R. Williams"
+ },
+ "person:julia-gillard": {
+  "cy": "Julia Gillard"
+ },
+ "person:julien-macdonald": {
+  "cy": "Julien Macdonald"
+ },
+ "person:julius-and-aaron": {
+  "cy": "Julius ac Aaron"
+ },
+ "person:karl-jenkins": {
+  "cy": "Karl Jenkins"
+ },
+ "person:kate-roberts": {
+  "cy": "Kate Roberts",
+  "dwb": "https://biography.wales/article/s10-ROBE-KAT-1891"
+ },
+ "person:katherine-jenkins": {
+  "cy": "Katherine Jenkins"
+ },
+ "person:kelly-jones": {
+  "cy": "Kelly Jones"
+ },
+ "person:ken-follett": {
+  "cy": "Ken Follett"
+ },
+ "person:kyffin-williams": {
+  "cy": "Kyffin Williams",
+  "dwb": "https://biography.wales/article/s10-WILL-KYF-1918"
+ },
+ "person:lady-charlotte-guest": {
+  "cy": "Charlotte Guest",
+  "dwb": "https://biography.wales/article/s-GUES-ELI-1812"
+ },
+ "person:lady-llanover": {
+  "cy": "Augusta Hall, Arglwyddes Llanofer",
+  "dwb": "https://biography.wales/article/s10-HALL-AUG-1802"
+ },
+ "person:lady-rhondda": {
+  "cy": "Margaret Haig Mackworth, 2il Is-iarlles Rhondda",
+  "dwb": "https://biography.wales/article/s12-THOM-HAI-1883"
+ },
+ "person:laura-ashley": {
+  "cy": "Laura Ashley"
+ },
+ "person:lauren-price": {
+  "cy": "Lauren Price"
+ },
+ "person:lewis-jones-patagonia": {
+  "cy": "Lewis Jones, Patagonia",
+  "dwb": "https://biography.wales/article/s-JONE-LEW-1836"
+ },
+ "person:lewis-valentine": {
+  "cy": "Lewis Valentine",
+  "dwb": "https://biography.wales/article/s11-VALE-EDW-1893"
+ },
+ "person:lewys-glyn-cothi": {
+  "cy": "Lewys Glyn Cothi",
+  "dwb": "https://biography.wales/article/s-LEWI-GLY-1447"
+ },
+ "person:lloyd-george": {
+  "cy": "David Lloyd George",
+  "dwb": "https://biography.wales/article/s2-LLOY-DAV-1863"
+ },
+ "person:llywelyn-ap-gruffudd": {
+  "cy": "Llywelyn ap Gruffudd",
+  "dwb": "https://biography.wales/article/s-LLYW-APG-1200"
+ },
+ "person:llywelyn-ap-seisyll": {
+  "cy": "Llywelyn ap Seisyll",
+  "dwb": "https://biography.wales/article/s-LLYW-APS-1023"
+ },
+ "person:llywelyn-bren": {
+  "cy": "Llywelyn Bren",
+  "dwb": "https://biography.wales/article/s-LLYW-APG-1317"
+ },
+ "person:llywelyn-fawr": {
+  "cy": "Llywelyn Fawr",
+  "dwb": "https://biography.wales/article/s-LLYW-API-1173"
+ },
+ "person:luke-evans": {
+  "cy": "Luke Evans"
+ },
+ "person:lynn-davies": {
+  "cy": "Lynn Davies"
+ },
+ "person:macsen-wledig": {
+  "cy": "Macsen Wledig"
+ },
+ "person:madog": {
+  "cy": "Madog ab Owain Gwynedd"
+ },
+ "person:madog-ap-llywelyn": {
+  "cy": "Madog ap Llywelyn",
+  "dwb": "https://biography.wales/article/s-MADO-APL-1294"
+ },
+ "person:maelgwn-gwynedd": {
+  "cy": "Maelgwn Gwynedd",
+  "dwb": "https://biography.wales/article/s-MAEL-GWY-0547"
+ },
+ "person:maredudd-ab-owain": {
+  "cy": "Maredudd ab Owain",
+  "dwb": "https://biography.wales/article/s-MARE-ABO-0999"
+ },
+ "person:mark-drakeford": {
+  "cy": "Mark Drakeford"
+ },
+ "person:mark-hughes": {
+  "cy": "Mark Hughes"
+ },
+ "person:mark-williams-snooker": {
+  "cy": "Mark J. Williams"
+ },
+ "person:martyn-lloyd-jones": {
+  "cy": "Martyn Lloyd-Jones",
+  "dwb": "https://biography.wales/article/s12-LLOY-MAR-1899"
+ },
+ "person:mary-dillwyn": {
+  "cy": "Mary Dillwyn"
+ },
+ "person:mary-hopkin": {
+  "cy": "Mary Hopkin"
+ },
+ "person:mary-jones": {
+  "cy": "Mari Jones"
+ },
+ "person:max-boyce": {
+  "cy": "Max Boyce"
+ },
+ "person:meddygon-myddfai": {
+  "cy": "Meddygon Myddfai"
+ },
+ "person:megan-lloyd-george": {
+  "cy": "Megan Lloyd George"
+ },
+ "person:meic-stevens": {
+  "cy": "Meic Stevens"
+ },
+ "person:meilyr-brydydd": {
+  "cy": "Meilyr Brydydd",
+  "dwb": "https://biography.wales/article/s-MEIL-BRY-1100"
+ },
+ "person:melangell": {
+  "cy": "Melangell"
+ },
+ "person:mererid-hopwood": {
+  "cy": "Mererid Hopwood"
+ },
+ "person:merfyn-frych": {
+  "cy": "Merfyn Frych",
+  "dwb": "https://biography.wales/article/s-MERF-FRY-0844"
+ },
+ "person:michael-d-jones": {
+  "cy": "Michael D. Jones",
+  "dwb": "https://biography.wales/article/s-JONE-DAN-1822"
+ },
+ "person:michael-moritz": {
+  "cy": "Michael Moritz"
+ },
+ "person:michael-sheen": {
+  "cy": "Michael Sheen"
+ },
+ "person:mike-peters": {
+  "cy": "Mike Peters"
+ },
+ "person:morfydd-owen": {
+  "cy": "Morfydd Llwyn Owen",
+  "dwb": "https://biography.wales/article/s-OWEN-LLW-1891"
+ },
+ "person:morgan-john-rhys": {
+  "cy": "Morgan John Rhys",
+  "dwb": "https://biography.wales/article/s-RHYS-JOH-1760"
+ },
+ "person:morgan-llwyd": {
+  "cy": "Morgan Llwyd",
+  "dwb": "https://biography.wales/article/s-LLWY-MOR-1619"
+ },
+ "person:neil-kinnock": {
+  "cy": "Neil Kinnock"
+ },
+ "person:nennius": {
+  "cy": "Nennius",
+  "dwb": "https://biography.wales/article/s-NENN-IUS-0800"
+ },
+ "person:nest": {
+  "cy": "Nest ferch Rhys ap Tewdwr",
+  "dwb": "https://biography.wales/article/s-DEWI-NES-1120"
+ },
+ "person:neville-southall": {
+  "cy": "Neville Southall"
+ },
+ "person:nicole-cooke": {
+  "cy": "Nicole Cooke"
+ },
+ "person:non": {
+  "cy": "Non",
+  "dwb": "https://biography.wales/article/s-NONN-000-0450"
+ },
+ "person:om-edwards": {
+  "cy": "Owen Morgan Edwards",
+  "dwb": "https://biography.wales/article/s-EDWA-MOR-1858"
+ },
+ "person:owain-cyfeiliog": {
+  "cy": "Owain Cyfeiliog",
+  "dwb": "https://biography.wales/article/s-OWAI-CYF-1130"
+ },
+ "person:owain-glyndwr": {
+  "cy": "Owain Glyn Dŵr",
+  "dwb": "https://biography.wales/article/s-OWAI-GLY-1354"
+ },
+ "person:owain-gwynedd": {
+  "cy": "Owain Gwynedd",
+  "dwb": "https://biography.wales/article/s-OWAI-GWY-1100"
+ },
+ "person:owain-lawgoch": {
+  "cy": "Owain Lawgoch",
+  "dwb": "https://biography.wales/article/s-OWAI-APT-1378"
+ },
+ "person:owain-tudur": {
+  "cy": "Owain Tudur",
+  "dwb": "https://biography.wales/article/s-OWAI-TUD-1400"
+ },
+ "person:padarn": {
+  "cy": "Padarn",
+  "dwb": "https://biography.wales/article/s-PADA-SAN-0560"
+ },
+ "person:pantycelyn": {
+  "cy": "William Williams, Pantycelyn",
+  "dwb": "https://biography.wales/article/s-WILL-WIL-1717"
+ },
+ "person:patrick": {
+  "cy": "Sant Padrig"
+ },
+ "person:pelagius": {
+  "cy": "Pelagius"
+ },
+ "person:phil-bennett": {
+  "cy": "Phil Bennett"
+ },
+ "person:phil-campbell": {
+  "cy": "Phil Campbell"
+ },
+ "person:philip-jones-griffiths": {
+  "cy": "Philip Jones Griffiths",
+  "dwb": "https://biography.wales/article/s11-GRIF-JON-1936"
+ },
+ "person:pryce-pryce-jones": {
+  "cy": "Pryce Pryce-Jones",
+  "dwb": "https://biography.wales/article/s3-PRYC-PRY-1834"
+ },
+ "person:r-s-thomas": {
+  "cy": "R. S. Thomas",
+  "dwb": "https://biography.wales/article/s12-THOM-STU-1913"
+ },
+ "person:ray-milland": {
+  "cy": "Ray Milland"
+ },
+ "person:ray-reardon": {
+  "cy": "Ray Reardon"
+ },
+ "person:raymond-williams": {
+  "cy": "Raymond Williams",
+  "dwb": "https://biography.wales/article/s12-WILL-HEN-1921"
+ },
+ "person:rhodri-mawr": {
+  "cy": "Rhodri Mawr",
+  "dwb": "https://biography.wales/article/s-RHOD-MAW-0877"
+ },
+ "person:rhodri-morgan": {
+  "cy": "Rhodri Morgan",
+  "dwb": "https://biography.wales/article/s12-MORG-RHO-1939"
+ },
+ "person:rhygyfarch": {
+  "cy": "Rhygyfarch ap Sulien",
+  "dwb": "https://biography.wales/article/s-RHYG-YFA-1056"
+ },
+ "person:rhys-ap-tewdwr": {
+  "cy": "Rhys ap Tewdwr",
+  "dwb": "https://biography.wales/article/s11-RHYS-APT-1093"
+ },
+ "person:rhys-ap-thomas": {
+  "cy": "Rhys ap Thomas",
+  "dwb": "https://biography.wales/article/s-RHYS-APT-1449"
+ },
+ "person:rhys-gwilym-ap-tudur": {
+  "cy": "Castell Conwy"
+ },
+ "person:rhys-prichard": {
+  "cy": "Rhys Prichard",
+  "dwb": "https://biography.wales/article/s-PRIC-RHY-1579"
+ },
+ "person:richard-amerike": {
+  "cy": "Richard ap Meurig"
+ },
+ "person:richard-burton": {
+  "cy": "Richard Burton",
+  "dwb": "https://biography.wales/article/s8-BURT-RIC-1925"
+ },
+ "person:richard-davies": {
+  "cy": "Richard Davies",
+  "dwb": "https://biography.wales/article/s-DAVI-RIC-1501"
+ },
+ "person:richard-price": {
+  "cy": "Richard Price",
+  "dwb": "https://biography.wales/article/s-PRIC-RIC-1723"
+ },
+ "person:richard-wilson": {
+  "cy": "Richard Wilson (arlunydd)",
+  "dwb": "https://biography.wales/article/s-WILS-RIC-1713"
+ },
+ "person:richey-edwards": {
+  "cy": "Richey Edwards"
+ },
+ "person:roald-dahl": {
+  "cy": "Roald Dahl"
+ },
+ "person:rob-brydon": {
+  "cy": "Rob Brydon"
+ },
+ "person:robert-jones-surgeon": {
+  "cy": "Robert Jones (llawfeddyg)",
+  "dwb": "https://biography.wales/article/s-JONE-ROB-1857"
+ },
+ "person:robert-owen": {
+  "cy": "Robert Owen",
+  "dwb": "https://biography.wales/article/s-OWEN-ROB-1771"
+ },
+ "person:robert-recorde": {
+  "cy": "Robert Recorde",
+  "dwb": "https://biography.wales/article/s11-RECO-ROB-1558"
+ },
+ "person:ron-davies": {
+  "cy": "Ron Davies"
+ },
+ "person:rowan-williams": {
+  "cy": "Rowan Williams"
+ },
+ "person:roy-jenkins": {
+  "cy": "Roy Jenkins",
+  "dwb": "https://biography.wales/article/s14-JENK-HAR-1920"
+ },
+ "person:ruth-jones": {
+  "cy": "Ruth Jones"
+ },
+ "person:ryan-davies": {
+  "cy": "Ryan Davies"
+ },
+ "person:sam-warburton": {
+  "cy": "Sam Warburton"
+ },
+ "person:samson": {
+  "cy": "Samson (sant)",
+  "dwb": "https://biography.wales/article/s-SAMS-ON0-0485"
+ },
+ "person:sarah-siddons": {
+  "cy": "Sarah Siddons",
+  "dwb": "https://biography.wales/article/s-SIDD-SAR-1755"
+ },
+ "person:saunders-lewis": {
+  "cy": "Saunders Lewis",
+  "dwb": "https://biography.wales/article/s10-LEWI-SAU-1893"
+ },
+ "person:shane-williams": {
+  "cy": "Shane Williams"
+ },
+ "person:shirley-bassey": {
+  "cy": "Shirley Bassey"
+ },
+ "person:sian-phillips": {
+  "cy": "Siân Phillips"
+ },
+ "person:simon-weston": {
+  "cy": "Simon Weston"
+ },
+ "person:sir-john-williams": {
+  "cy": "John Williams (casglwr llawysgrifau)",
+  "dwb": "https://biography.wales/article/s-WILL-JOH-1840"
+ },
+ "person:siwan": {
+  "cy": "Y Dywysoges Siwan",
+  "dwb": "https://biography.wales/article/s12-JOAN-TYW-1237"
+ },
+ "person:steve-jones": {
+  "cy": "Steve Jones (biolegydd)"
+ },
+ "person:sulien": {
+  "cy": "Sulien",
+  "dwb": "https://biography.wales/article/s-SULI-EN0-1011"
+ },
+ "person:t-e-lawrence": {
+  "cy": "T. E. Lawrence"
+ },
+ "person:t-h-parry-williams": {
+  "cy": "T. H. Parry-Williams",
+  "dwb": "https://biography.wales/article/s10-PARR-HER-1887"
+ },
+ "person:t-llew-jones": {
+  "cy": "T. Llew Jones",
+  "dwb": "https://biography.wales/article/s8-JONE-LLE-1915"
+ },
+ "person:taliesin": {
+  "cy": "Taliesin",
+  "dwb": "https://biography.wales/article/s-TALI-ESI-0575"
+ },
+ "person:tanni-grey-thompson": {
+  "cy": "Tanni Grey-Thompson"
+ },
+ "person:taron-egerton": {
+  "cy": "Taron Egerton"
+ },
+ "person:tasker-watkins": {
+  "cy": "Tasker Watkins",
+  "dwb": "https://biography.wales/article/s11-WATK-TAS-1918"
+ },
+ "person:teilo": {
+  "cy": "Teilo",
+  "dwb": "https://biography.wales/article/s-TEIL-SAN-0500"
+ },
+ "person:terry-matthews": {
+  "cy": "Terry Matthews"
+ },
+ "person:theophilus-evans": {
+  "cy": "Theophilus Evans",
+  "dwb": "https://biography.wales/article/s-EVAN-THE-1693"
+ },
+ "person:thomas-button": {
+  "cy": "Thomas Button",
+  "dwb": "https://biography.wales/article/s-BUTT-THO-1634"
+ },
+ "person:thomas-charles": {
+  "cy": "Thomas Charles",
+  "dwb": "https://biography.wales/article/s-CHAR-THO-1755"
+ },
+ "person:thomas-gee": {
+  "cy": "Thomas Gee",
+  "dwb": "https://biography.wales/article/s-GEE0-THO-1815"
+ },
+ "person:thomas-jones-pencerrig": {
+  "cy": "Thomas Jones (arlunydd)",
+  "dwb": "https://biography.wales/article/s-JONE-THO-1742"
+ },
+ "person:thomas-lewis": {
+  "cy": "Thomas Lewis (cardiolegydd)",
+  "dwb": "https://biography.wales/article/s2-LEWI-THO-1881"
+ },
+ "person:thomas-pennant": {
+  "cy": "Thomas Pennant (awdur)",
+  "dwb": "https://biography.wales/article/s-PENN-THO-1726"
+ },
+ "person:tom-jones": {
+  "cy": "Tom Jones"
+ },
+ "person:tom-parry-jones": {
+  "cy": "Tom Parry Jones",
+  "dwb": "https://biography.wales/article/s12-JONE-PAR-1935"
+ },
+ "person:tommy-cooper": {
+  "cy": "Tommy Cooper"
+ },
+ "person:tommy-farr": {
+  "cy": "Tommy Farr"
+ },
+ "person:tori-james": {
+  "cy": "Tori James"
+ },
+ "person:twm-carnabwth": {
+  "cy": "Thomas Rees (Twm Carnabwth)",
+  "dwb": "https://biography.wales/article/s-REES-THO-1806"
+ },
+ "person:twm-or-nant": {
+  "cy": "Twm o'r Nant",
+  "dwb": "https://biography.wales/article/s-EDWA-THO-1739"
+ },
+ "person:twm-sion-cati": {
+  "cy": "Twm Siôn Cati",
+  "dwb": "https://biography.wales/article/s-JONE-THO-1530"
+ },
+ "person:urien-rheged": {
+  "cy": "Urien Rheged"
+ },
+ "person:w-h-davies": {
+  "cy": "W. H. Davies",
+  "dwb": "https://biography.wales/article/s-DAVI-HEN-1871"
+ },
+ "person:waldo-williams": {
+  "cy": "Waldo Williams",
+  "dwb": "https://biography.wales/article/s11-WILL-WAL-1904"
+ },
+ "person:william-edwards": {
+  "cy": "William Edwards (peiriannydd)",
+  "dwb": "https://biography.wales/article/s-EDWA-WIL-1719"
+ },
+ "person:william-grove": {
+  "cy": "William Robert Grove",
+  "dwb": "https://biography.wales/article/s-GROV-ROB-1811"
+ },
+ "person:william-jones": {
+  "cy": "William Jones (mathemategydd)",
+  "dwb": "https://biography.wales/article/s-JONE-WIL-1675"
+ },
+ "person:william-jones-orientalist": {
+  "cy": "William Jones (ieithegwr)"
+ },
+ "person:william-morgan": {
+  "cy": "William Morgan (esgob)",
+  "dwb": "https://biography.wales/article/s-MORG-WIL-1545"
+ },
+ "person:william-preece": {
+  "cy": "William Henry Preece",
+  "dwb": "https://biography.wales/article/s-PREE-HEN-1834"
+ },
+ "person:william-price": {
+  "cy": "William Price (meddyg)",
+  "dwb": "https://biography.wales/article/s-PRIC-WIL-1800"
+ },
+ "person:william-salesbury": {
+  "cy": "William Salesbury",
+  "dwb": "https://biography.wales/article/s-SALE-WIL-1520"
+ },
+ "person:yr-arglwydd-rhys": {
+  "cy": "Rhys ap Gruffudd",
+  "dwb": "https://biography.wales/article/s-RHYS-APG-1132"
+ },
+ "place:aberfan": {
+  "cy": "Trychineb Aberfan"
+ },
+ "place:aberffraw": {
+  "cy": "Aberffraw",
+  "coflein": "https://coflein.gov.uk/en/site/32986"
+ },
+ "place:beaumaris": {
+  "cy": "Castell Biwmares",
+  "coflein": "https://coflein.gov.uk/en/site/95769"
+ },
+ "place:blaenavon": {
+  "cy": "Tirlun Diwydiannol Blaenafon"
+ },
+ "place:brynceliddu": {
+  "cy": "Bryn Celli Ddu"
+ },
+ "place:caerffili": {
+  "cy": "Castell Caerffili",
+  "coflein": "https://coflein.gov.uk/en/site/94497"
+ },
+ "place:caerleon": {
+  "cy": "Caerllion"
+ },
+ "place:caernarfon": {
+  "cy": "Castell Caernarfon",
+  "coflein": "https://coflein.gov.uk/en/site/95318"
+ },
+ "place:caerwent": {
+  "cy": "Venta Silurum"
+ },
+ "place:cardigan": {
+  "cy": "Castell Aberteifi",
+  "coflein": "https://coflein.gov.uk/en/site/92314"
+ },
+ "place:castellhenllys": {
+  "cy": "Castell Henllys",
+  "coflein": "https://coflein.gov.uk/en/site/94989"
+ },
+ "place:celyn": {
+  "cy": "Capel Celyn"
+ },
+ "place:cerrigbach": {
+  "cy": "Llyn Cerrig Bach"
+ },
+ "place:chepstow": {
+  "cy": "Castell Cas-gwent",
+  "coflein": "https://coflein.gov.uk/en/site/95237"
+ },
+ "place:cilmeri": {
+  "cy": "Cilmeri"
+ },
+ "place:conwy": {
+  "cy": "Castell Conwy",
+  "coflein": "https://coflein.gov.uk/en/site/121"
+ },
+ "place:dale": {
+  "cy": "Harri VII, brenin Lloegr"
+ },
+ "place:dinefwr": {
+  "cy": "Castell Dinefwr",
+  "coflein": "https://coflein.gov.uk/en/site/425"
+ },
+ "place:dinorwig": {
+  "cy": "Diwydiant llechi Cymru"
+ },
+ "place:dolaucothi": {
+  "cy": "Mwynfeydd aur Dolaucothi",
+  "coflein": "https://coflein.gov.uk/en/site/95142"
+ },
+ "place:dolbadarn": {
+  "cy": "Castell Dolbadarn",
+  "coflein": "https://coflein.gov.uk/en/site/93541"
+ },
+ "place:eliseg": {
+  "cy": "Croes Eliseg",
+  "coflein": "https://coflein.gov.uk/en/site/165274"
+ },
+ "place:enlli": {
+  "cy": "Ynys Enlli"
+ },
+ "place:epynt": {
+  "cy": "Mynydd Epynt"
+ },
+ "place:fishguard": {
+  "cy": "Brwydr Abergwaun"
+ },
+ "place:harlech": {
+  "cy": "Castell Harlech",
+  "coflein": "https://coflein.gov.uk/en/site/93729"
+ },
+ "place:hendygwyn": {
+  "cy": "Hendy-gwyn",
+  "coflein": "https://coflein.gov.uk/en/site/462"
+ },
+ "place:library": {
+  "cy": "Llyfrgell Genedlaethol Cymru",
+  "coflein": "https://coflein.gov.uk/en/site/23293"
+ },
+ "place:llanfaches": {
+  "cy": "Llanfaches"
+ },
+ "place:llangollen": {
+  "cy": "Eisteddfod Ryngwladol Llangollen"
+ },
+ "place:llanilltud": {
+  "cy": "Llanilltud Fawr"
+ },
+ "place:llanrhaeadr": {
+  "cy": "Llanrhaeadr-ym-Mochnant"
+ },
+ "place:machynlleth": {
+  "cy": "Machynlleth"
+ },
+ "place:maenachwyfan": {
+  "cy": "Maen Achwyfan",
+  "coflein": "https://coflein.gov.uk/en/site/94449"
+ },
+ "place:mathrafal": {
+  "cy": "Mathrafal",
+  "coflein": "https://coflein.gov.uk/en/site/306778"
+ },
+ "place:menai": {
+  "cy": "Pont y Borth",
+  "coflein": "https://coflein.gov.uk/en/site/43063"
+ },
+ "place:merthyr": {
+  "cy": "Merthyr Tudful",
+  "coflein": "https://coflein.gov.uk/en/site/33136"
+ },
+ "place:mold": {
+  "cy": "Clogyn Aur yr Wyddgrug"
+ },
+ "place:offasdyke": {
+  "cy": "Clawdd Offa"
+ },
+ "place:orme": {
+  "cy": "Pen y Gogarth"
+ },
+ "place:parys": {
+  "cy": "Mynydd Parys"
+ },
+ "place:penfro": {
+  "cy": "Castell Penfro",
+  "coflein": "https://coflein.gov.uk/en/site/94945"
+ },
+ "place:pentreifan": {
+  "cy": "Pentre Ifan",
+  "coflein": "https://coflein.gov.uk/en/site/101450"
+ },
+ "place:pontcysyllte": {
+  "cy": "Dyfrbont Pontcysyllte",
+  "coflein": "https://coflein.gov.uk/en/site/34410"
+ },
+ "place:pontnewydd": {
+  "cy": "Ogof Bontnewydd"
+ },
+ "place:rhaglan": {
+  "cy": "Castell Rhaglan",
+  "coflein": "https://coflein.gov.uk/en/site/93387"
+ },
+ "place:rhuddlan": {
+  "cy": "Castell Rhuddlan",
+  "coflein": "https://coflein.gov.uk/en/site/92914"
+ },
+ "place:segontium": {
+  "cy": "Segontium"
+ },
+ "place:senedd": {
+  "cy": "Adeilad y Senedd"
+ },
+ "place:senghennydd": {
+  "cy": "Tanchwa Senghennydd"
+ },
+ "place:stadiwm": {
+  "cy": "Stadiwm y Mileniwm"
+ },
+ "place:stdavids": {
+  "cy": "Eglwys Gadeiriol Tyddewi",
+  "coflein": "https://coflein.gov.uk/en/site/306"
+ },
+ "place:stfagans": {
+  "cy": "Amgueddfa Werin Cymru",
+  "coflein": "https://coflein.gov.uk/en/site/31920"
+ },
+ "place:strataflorida": {
+  "cy": "Abaty Ystrad Fflur",
+  "coflein": "https://coflein.gov.uk/en/site/95764"
+ },
+ "place:sycharth": {
+  "cy": "Sycharth",
+  "coflein": "https://coflein.gov.uk/en/site/306999"
+ },
+ "place:talacharn": {
+  "coflein": "https://coflein.gov.uk/en/site/17122"
+ },
+ "place:tintern": {
+  "cy": "Abaty Tyndyrn",
+  "coflein": "https://coflein.gov.uk/en/site/359"
+ },
+ "place:tonypandy": {
+  "cy": "Terfysg Tonypandy"
+ },
+ "place:trefflemin": {
+  "cy": "Trefflemin"
+ },
+ "place:trerceiri": {
+  "cy": "Tre'r Ceiri",
+  "coflein": "https://coflein.gov.uk/en/site/95292"
+ },
+ "place:westgate": {
+  "cy": "Terfysg Casnewydd"
+ },
+ "place:ybala": {
+  "cy": "Y Bala"
+ },
+ "place:ybere": {
+  "cy": "Castell y Bere",
+  "coflein": "https://coflein.gov.uk/en/site/93719"
+ },
+ "place:yrysgwrn": {
+  "cy": "Hedd Wyn"
+ }
+}

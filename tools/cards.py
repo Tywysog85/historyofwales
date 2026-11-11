@@ -109,3 +109,55 @@ def make(out, eyebrow, title, sub, colour, photo=None, dragon=None):
     d.text((x + 262, H - 70), "historyofwales.cymru", font=font("Figtree.ttf", 24, 500), fill=MUTED)
     os.makedirs(os.path.dirname(out), exist_ok=True)
     img.save(out, "JPEG", quality=84, optimize=True, progressive=True)
+
+
+def make_square(out, eyebrow, date, title, line, colour, photo=None, dragon=None, site="historyofwales.cymru", name="History of Wales"):
+    """The daily "On this day" picture for Instagram, Facebook and X: 1080 x 1080, the day's photo at the top fading
+    into the night, the date large in the age's colour, then the title and one line."""
+    S = 1080
+    c = hexrgb(colour)
+    glow = Image.new("RGB", (S, S), NIGHT)
+    ImageDraw.Draw(glow).ellipse((420, -520, 1500, 520), fill=tuple(int(NIGHT[i] * 0.55 + c[i] * 0.45) for i in range(3)))
+    img = Image.blend(Image.new("RGB", (S, S), NIGHT), glow.filter(ImageFilter.GaussianBlur(160)), 0.9)
+    top = 72
+    if photo and os.path.exists(photo):
+        ph_h = 520
+        ph = _cover(Image.open(photo).convert("RGB"), S, ph_h)
+        mask = Image.new("L", (S, ph_h), 255)
+        md = ImageDraw.Draw(mask)
+        for y in range(220):  # fade the photo into the night at its foot
+            md.line([(0, ph_h - 1 - y), (S, ph_h - 1 - y)], fill=round(255 * (y / 220) ** 1.3))
+        img.paste(ph, (0, 0), mask)
+        top = ph_h - 90
+    elif dragon and os.path.exists(dragon):
+        dr = Image.open(dragon).convert("RGBA")
+        dr.thumbnail((520, 380), Image.LANCZOS)
+        img.paste(dr, (S - dr.width - 40, 60), dr)
+        top = 400
+    d = ImageDraw.Draw(img)
+    x, maxw = 80, S - 160
+    d.rectangle((x, top, x + 64, top + 7), fill=c)
+    d.text((x, top + 28), eyebrow.upper(), font=font("Figtree.ttf", 30, 700), fill=c)
+    d.text((x, top + 72), date, font=font("Gloock-Regular.ttf", 96), fill=c)
+    y = top + 200
+    size = 66
+    while True:
+        tf = font("Gloock-Regular.ttf", size)
+        lines = wrap(d, title, tf, maxw, 3)
+        if len(lines) <= 2 or size <= 50:
+            break
+        size -= 6
+    for ln in lines:
+        d.text((x, y), ln, font=tf, fill=INK)
+        y += round(size * 1.1)
+    sf = font("Figtree.ttf", 34, 400)
+    room = max(1, (S - 150 - y - 16) // 48)
+    for ln in wrap(d, line, sf, maxw, min(4, room)):
+        d.text((x, y + 16), ln, font=sf, fill=MUTED)
+        y += 48
+    d.line((x, S - 118, S - x, S - 118), fill=(48, 54, 66), width=2)
+    d.text((x, S - 92), name, font=font("Gloock-Regular.ttf", 38), fill=INK)
+    sw = d.textlength(site, font=font("Figtree.ttf", 28, 500))
+    d.text((S - x - sw, S - 84), site, font=font("Figtree.ttf", 28, 500), fill=MUTED)
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    img.save(out, "JPEG", quality=88, optimize=True, progressive=True)
