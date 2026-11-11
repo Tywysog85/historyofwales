@@ -107,6 +107,7 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - Each step names a map stage: an id from `KINGDOMS` in `src/kingdoms.py`, or `land` (all Wales in one colour) or `first` (the oldest places). `build.py` stops if a stage or place id does not exist.
 - `src/wales10.js` recolours the council-area blocks as each step reaches the middle of the screen (an IntersectionObserver), names each realm at the middle of its land, and drops the pins in. Styles are in `src/wales10.css`; movement is switched off for people who ask for reduced motion.
 - Keep each step to about 120 words, and keep it proud (EDITORIAL.md).
+- The map's look: `_soften()` in `build.py` turns the long straight shire cuts into gently wandering lines (the same nudge on both sides of a border, so no gaps). Each block's outline is drawn in its own fill colour so the modern council lines vanish and only the realms show. Under the blocks sit a soft sea glow and a cream coastline; over them a faint paper grain (an SVG noise filter). The sea has its own gradient, ripples, sea names and a compass. The colours are made deeper for this map by `PAL` in `src/wales10.js`.
 
 ### The page for addresses that do not exist (November 2026)
 - `not_found_page()` in `build.py` writes `404.html`. GitHub Pages shows it for any address that does not exist. It has `<base href="/">` so its links work from any depth, and `noindex` so Google leaves it out. It is left out of the sitemap.
