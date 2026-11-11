@@ -1,0 +1,30 @@
+name: Look up pictures on Wikimedia Commons
+
+# Picture research for Claude, whose cloud computer cannot reach Wikimedia (tools/commons_research.py).
+# Reads tools/commons_research_in.json and commits the results (file list, licences and small previews) to the branch.
+on:
+  workflow_dispatch:
+  push:
+    branches: ["claude/**"]
+    paths: ["tools/commons_research_in.json"]
+
+permissions:
+  contents: write
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pillow
+      - run: python3 tools/commons_research.py
+      - name: Commit the results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f _research
+          git diff --cached --quiet || git commit -m "Picture research results (tools/commons_research.py)"
+          git push
