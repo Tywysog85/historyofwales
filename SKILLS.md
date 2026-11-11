@@ -216,6 +216,17 @@ With nine posters in a row, a closed poster is too narrow for its title, so clos
 - The © line at the bottom of every page is made by `footer()` in `build.py`. The name in it is `COPYRIGHT_OWNER` (English) and `COPYRIGHT_OWNER_CY` (Welsh) just above that function; the year updates itself (2026, then 2026–2027 and so on).
 - It claims only the site's own text and design. Photos (Wikimedia Commons) and the 3D dragon stay credited to their creators, as listed in README.md.
 
+### The castles map (November 2026)
+
+`castles.html` shows every castle site in Wales on one map that you can drag and zoom, with who built each one. Welsh-built castles are red and drawn on top.
+
+- **The parts.** `src/castles_data.json` is the list of sites (827). `src/castles.py` holds the hand-written part: the five colour groups, the kinds of castle, and for the best-known castles who built them, when, a short note in English and Welsh, links and a photo. `src/castles.css` and `src/static/castles.js` draw the page; `castles_page()` in `build.py` puts it together. To add a story to a castle, add one `add(...)` line in `src/castles.py` (its Q-number is in `castles_data.json`). When `castles.js` changes, raise the number after `castles.js?v=` in `build.py`.
+- **Getting Wikidata when Wikidata is blocked.** The cloud machines cannot reach Wikidata, Wikipedia or Commons. A free (CC0) copy of Wikidata's medieval castles is kept on GitHub by the Shelf project, and GitHub can be reached. `tools/castles_from_wikidata.py` reads that copy, keeps only the sites inside Wales (tested against the county shapes in `src/geo/la.json`), drops ruins of other things that were tagged as castles, and writes `castles_data.json`. The lists `DROP` and `FORCE` at the top fix the odd mistake by hand.
+- **Shaded relief from real heights.** `tools/bake_relief.py` downloads open height tiles (Mapzen Terrarium, from Amazon S3, which can be reached), shades the hills as if lit from the north-west, darkens England and the sea, and saves two pictures in the site's own map projection (`relief-1200.webp`, and `relief-3600.webp` for close zoom). The projection numbers come from `src/geo/map.json`, so dots, county lines and relief all line up.
+- **Dates in Welsh.** `castle_date_cy()` in `build.py` turns "late 12th–13th century" into "diwedd y 12fed–13eg ganrif" and "1280s" into "1280au". The page is sent the Welsh form of each date; there is no second copy of the rule in the JavaScript.
+- **Photos are linked straight from Commons** with the author and licence beside each one. A photo that fails to load is hidden, and the card still works.
+- **Big maps stay light.** The county lines are joined into long lines and rounded to whole map units (`county_lines()`), which cut them from 146 KB to 25 KB.
+
 ## The opening screen (November 2026)
 
 ### How the opening screen is layered
