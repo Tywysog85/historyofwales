@@ -463,7 +463,8 @@ Behind the dragon, the mountains, the moor and the castle are real 3D too, drawn
 
 ## Keeping the PC copy updated and tidy
 
-- Ifan's PC copy (`D:\Website\historyofwales.cymru`) updates itself every day through a Windows scheduled task, "History of Wales daily update", at 09:00 (or as soon as the PC is next on). It runs `D:\Website\historyofwales-daily\update-historyofwales.ps1`: pull main (fast-forward only, skipped if there are local changes), `python build.py`, then move leftover files that are neither in the repo nor made by the build to the Recycle Bin. Anything that could be Ifan's own (photos, documents) is only listed. Each run is written to `daily.log` in the same folder.
+- Ifan's PC copy (`D:\Website\historyofwales.cymru`) updates itself every day through a Windows scheduled task, "History of Wales daily update", at 09:00 (or as soon as the PC is next on). It runs `_work\daily\update-historyofwales.ps1` inside the PC copy: pull main (fast-forward only, skipped if there are local changes), `python build.py`, then move leftover files that are neither in the repo nor made by the build to the Recycle Bin. Anything that could be Ifan's own (photos, documents) is only listed. Each run is written to `daily.log` in the same folder. The tidy only looks at files git would show as new (`git ls-files --others --exclude-standard`), and a whole untracked folder is only noted in the log, never emptied.
+- **Work folders on the PC go in `_work\` inside the PC copy**, and are deleted when finished. `_work/` is excluded from git through `.git/info/exclude` (not `.gitignore`), so it never shows as a change and never blocks the daily pull. Never edit tracked files in the PC copy by hand: the pull is skipped while they differ.
 - It was set up through a Remote Control session on the PC, because the remote folder tools can read and copy files but cannot delete them.
 - To stop it: Task Scheduler, then disable or delete "History of Wales daily update".
 
