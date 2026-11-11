@@ -369,6 +369,19 @@ Behind the dragon, the mountains, the moor and the castle are real 3D too, drawn
 - Getting the files: Commons is blocked from the cloud, but not from GitHub. `tools/fetch_legend_photos.py` runs in the "Fetch photos" workflow when it changes on a `claude/` branch and commits `src/static/legends/<key>.webp` (1600 px) and `<key>-s.webp` (700 px) to the branch; then `git pull`. Commons only serves standard widths (1920, 1280, 960 ...), so ask for one of those and shrink.
 - Choosing: fetch several candidates under temporary names the same way, look at them all on one contact sheet, keep the best and delete the rest before merging. Prefer Featured and Quality pictures; CC0, public domain, CC BY and CC BY-SA only.
 
+### Looking up Commons pictures from GitHub (November 2026)
+
+- Commons is blocked from Claude's cloud computer, so picture research runs on GitHub too. Write what to look for in `tools/commons_research_in.json` (Commons categories, searches, or exact file names, and an `out` folder) and push it to a `claude/` branch. The "Look up pictures on Wikimedia Commons" workflow runs `tools/commons_research.py` and commits `<out>/found.json` (title, size, licence, author, description of every file) and a small preview of each (`<out>/<n>.jpg`). `git pull`, make a contact sheet of the previews with Pillow, and pick by eye.
+- The first run also lists the subcategories it met; run it again on those to go deeper (that is how the Peniarth 28 drawings and the dragons in the margins of NLW MS 20143A were found).
+- The `_research/` folder is only for choosing. Delete it before merging.
+- To check a page before its Commons pictures are kept on the site, the Playwright screenshot script can answer the Commons links with the previews (`page.route`), so the page looks as it will live.
+
+### The Laws of Hywel Dda page (November 2026)
+
+- `laws.html` is built by `laws_page()` in `build.py` from `src/laws.py` (text, pictures, worth table, quiz, words) and styled by `src/laws.css`. Chapters use the same paragraph codes as long reads. A chapter can carry a block of its own: `books=True`, `officers=True`, `worth=True`, `gallery=True`, or `split=True` (the after-seven-years table, placed after the paragraph ending "item by item:").
+- Pictures are listed once in `FIGS` (Commons file, maker, licence, captions) and drawn by `law_fig()` with the full credit. They load from Commons until the "Fetch photos" workflow keeps copies on the site.
+- `LAW_LINKED` in `build.py` puts a card for the page in "The full story" on the people and places it names.
+
 ## Dragon pictures for the legend pages
 
 - The red and white dragons on the legend, symbols and play pages are still pictures of the 3D dragon (`src/static/dragon-red.webp`, `dragon-white.webp`), placed in the scene by `_dragons` in `src/art.py`. Never draw dragons by hand.

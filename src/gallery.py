@@ -142,7 +142,7 @@ EXTRA = {
  "buil-swansea-guildhall": ("buildings", "Swansea Guildhall", "Neuadd y Ddinas, Abertawe", None),
  "buil-aberaeron": ("buildings", "Aberaeron harbour", "Harbwr Aberaeron", None),
  "buil-smallest-house": ("buildings", "The smallest house, Conwy", "Y tŷ lleiaf, Conwy", "place-conwy.html"),
- "trea-laws-hywel": ("treasures", "The Laws of Hywel Dda", "Cyfraith Hywel Dda", "story-hywel.html"),
+ "trea-laws-hywel": ("treasures", "The Laws of Hywel Dda", "Cyfraith Hywel Dda", "laws.html"),
  "trea-black-book": ("treasures", "The Black Book of Carmarthen", "Llyfr Du Caerfyrddin", None),
  "trea-book-aneirin": ("treasures", "The Book of Aneirin", "Llyfr Aneirin", "person-aneirin.html"),
  "trea-book-taliesin": ("treasures", "The Book of Taliesin", "Llyfr Taliesin", "person-taliesin.html"),

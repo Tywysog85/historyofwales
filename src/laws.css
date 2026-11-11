@@ -1,0 +1,60 @@
+/* The Laws of Hywel Dda page (laws.html), built by laws_page() in build.py */
+.lw-top .lw-fig.lead { margin: 0 0 2rem }
+.lw-fig { margin: 0 0 1.6rem; display: grid; gap: .55rem }
+.lw-fig img { width: 100%; height: auto; display: block; border-radius: var(--r); border: 1px solid var(--line); background: var(--slate) }
+.lw-fig.lead img { max-height: 36rem; object-fit: contain; background: #1d1710 }
+.lw-fig figcaption { font-size: .88rem; line-height: 1.45; color: var(--muted) }
+.lw-cr, .lw-fig .lw-cr { display: block; font-size: .78rem; color: #8a909c; margin-top: .25rem } .lw-cr a { color: inherit }
+.lw-figs.n2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start } .lw-figs.n2 .lw-fig img { max-height: 26rem; object-fit: contain; background: #1d1710 }
+.lw-figs.n1 .lw-fig img { max-height: 34rem; object-fit: contain; background: #1d1710 }
+.lw-ch { scroll-margin-top: 4.5rem } .lw-ch + .lw-ch { border-top: 1px solid var(--line) }
+.lw-n { font: 500 .8rem var(--f-mono); letter-spacing: .12em; color: var(--c, var(--gold)); margin: 0 0 .3rem }
+.lw-h { font-family: var(--f-display); font-weight: 400; font-size: clamp(2rem, 4.4vw, 3rem); line-height: 1.08; margin: 0 0 1.4rem }
+.lw-h3 { font-family: var(--f-display); font-weight: 400; font-size: 1.7rem; margin: 2.4rem 0 .4rem }
+.lw-lede { color: var(--muted); margin: 0 0 1.2rem; max-width: 46rem }
+.lw-dates { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: .8rem }
+.lw-dates li { background: var(--slate); border: 1px solid var(--line); border-left: 3px solid var(--c, var(--gold)); border-radius: 14px; padding: .8rem 1rem; display: grid; gap: .25rem }
+.lw-dates b { font: 600 .82rem var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--c, var(--gold)) }
+.lw-dates span { font-size: .95rem; line-height: 1.45 }
+.lw-books { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 1.4rem 0 1rem }
+.lw-book { background: var(--slate); border: 1px solid var(--line); border-top: 3px solid var(--c, var(--gold)); border-radius: var(--r); padding: 1.2rem 1.3rem }
+.lw-book h3 { font-family: var(--f-display); font-weight: 400; font-size: 1.6rem; margin: .2rem 0 0 } .lw-book .lw-sub { font: 500 .72rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--c, var(--gold)); margin: .2rem 0 .6rem }
+.lw-book p { margin: 0; color: var(--muted); font-size: .95rem; line-height: 1.5 } .lw-book .eyebrow { font-size: .72rem }
+.lw-officers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; margin: 1.4rem 0 1rem }
+.lw-off { background: var(--slate); border: 1px solid var(--line); border-radius: 14px; padding: .7rem .9rem; display: grid; gap: .15rem }
+.lw-off b { font-family: var(--f-display); font-weight: 400; font-size: 1.25rem } .lw-off span { font-size: .9rem; color: var(--muted); line-height: 1.4 }
+.lw-split, .lw-wt { width: 100%; border-collapse: collapse; margin: 1rem 0 1.6rem; font-size: .98rem }
+.lw-split th, .lw-split td, .lw-wt th, .lw-wt td { text-align: left; vertical-align: top; padding: .55rem .7rem; border-bottom: 1px solid var(--line) }
+.lw-split thead th, .lw-wt thead th { font: 600 .75rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--c, var(--gold)); border-bottom: 2px solid var(--c, var(--gold)) }
+.lw-split td { width: 50% } .lw-wt tbody th { font-weight: 500 } .lw-wt td { color: var(--c, var(--gold)); font-weight: 600; width: 40% }
+.lw-worth { background: var(--slate); border: 1px solid var(--line); border-radius: var(--r); padding: 1.3rem 1.3rem .6rem; margin: 1.6rem 0 }
+.lw-worth h3 { font-family: var(--f-display); font-weight: 400; font-size: 1.7rem; margin: 0 0 .8rem }
+.lw-wchips { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: .4rem }
+.lw-note { font-size: .82rem; color: var(--muted) }
+.lw-mss { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.2rem; margin: 1.6rem 0 0 }
+.lw-ms { display: flex; flex-direction: column; gap: .4rem } .lw-ms .lw-fig { margin: 0 }
+.lw-ms .lw-fig img { aspect-ratio: 4 / 5; object-fit: cover; object-position: center top; background: #1d1710 }
+.lw-ms-t { margin: 0; display: grid; gap: .1rem } .lw-ms-t b { font-family: var(--f-display); font-weight: 400; font-size: 1.25rem } .lw-ms-t span { font: 500 .72rem var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--c, var(--gold)) }
+.lw-marts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem }
+.lw-mart { margin: 0; display: grid; gap: .35rem } .lw-mart img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); background: #1d1710 }
+.lw-mart figcaption { font-size: .85rem; color: var(--muted) }
+.lw-quiz { background: var(--slate); border: 1px solid var(--line); border-top: 3px solid var(--c, var(--gold)); border-radius: var(--r); padding: 1.4rem }
+.lw-q h3 { font-family: var(--f-display); font-weight: 400; font-size: clamp(1.4rem, 3vw, 1.9rem); line-height: 1.2; margin: .3rem 0 1rem }
+.lw-as { display: grid; gap: .55rem }
+.lw-a { text-align: left; font: 500 1rem var(--f-body); color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 14px; padding: .8rem 1rem; cursor: pointer; transition: border-color .2s, background .2s }
+.lw-a:hover:not(:disabled) { border-color: var(--muted) } .lw-a:disabled { cursor: default }
+.lw-a.right { border-color: #4fb477; background: rgba(79,180,119,.16) } .lw-a.wrong { border-color: var(--red); background: rgba(226,69,61,.14) }
+.lw-why { margin: 1rem 0 .8rem; color: var(--muted) } .lw-next { margin-top: .2rem }
+.lw-score { font-family: var(--f-display); font-size: 3.4rem; margin: .2rem 0 } .lw-rank { font-size: 1.1rem; margin: 0 0 1rem }
+.lw-words { display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: .8rem; margin: 0 }
+.lw-words > div { background: var(--slate); border: 1px solid var(--line); border-radius: 14px; padding: .8rem 1rem }
+.lw-words dt { display: flex; align-items: center; justify-content: space-between; gap: .6rem; font-family: var(--f-display); font-size: 1.45rem }
+.lw-words dd { margin: .2rem 0 0; color: var(--muted); font-size: .92rem; line-height: 1.45 } .lw-say { display: block; font: 500 .72rem var(--f-mono); letter-spacing: .06em; color: #8a909c; margin-top: .2rem }
+@media (max-width: 760px) {
+  .lw-books, .lw-officers, .lw-figs.n2 { grid-template-columns: 1fr }
+  .lw-mss { grid-template-columns: 1fr 1fr } .lw-marts { grid-template-columns: 1fr 1fr }
+  .lw-quiz { padding: 1.1rem } .lw-worth { padding: 1rem 1rem .4rem }
+  .lw-wt td { width: 45% }
+}
+.lw-quiz-sec { border-top: 1px solid var(--line); padding-top: clamp(3rem, 7vw, 5rem) !important }
+.lw-fig.lead { max-width: 30rem; margin-inline: auto }
