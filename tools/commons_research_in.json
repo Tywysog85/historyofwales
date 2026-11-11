@@ -1,6 +1,6 @@
-{"out": "_research/laws2",
- "max": 300,
- "categories": ["Category:Peniarth 28", "Category:NLW MS 20143A", "Category:Peniarth MS 33 Cyfraith Hywel Dda", "Category:Peniarth MS 34 Cyfraith Hywel Dda",
-                "Category:Peniarth MS 36 Cyfraith Hywel Dda", "Category:Peniarth MS 38 Cyfraith Hywel Dda", "Category:Welsh Medieval Law (Arthur Wade-Evans)",
-                "Category:Hywel Dda Centre, Whitland", "Category:Boston Manuscript", "Category:Laws of Hywel Dda (Boston Manuscript)", "Category:Black Book of Chirk"],
- "searches": ["Boston Welsh Law", "Peniarth MS 28", "Llyfr Du'r Waun", "Peniarth 29 Chirk", "Cyfraith Hywel Dda folio", "Laws of Hywel Dda (f.", "Hywel Dda coin", "Hywel Dda Centre enamel", "Welsh law manuscript illustration falconer", "NLW MS 20143A"]}
+{"branch": "",
+ "out": "_research/example",
+ "max": 200,
+ "categories": [],
+ "searches": [],
+ "files": []}
