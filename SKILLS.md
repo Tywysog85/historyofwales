@@ -348,7 +348,14 @@ Behind the dragon, the mountains, the moor and the castle are real 3D too, drawn
 - To rebuild `src/static/hero3d.js` after changing anything in `tools/*.src.js`: in a folder with `three` (0.160) and `esbuild` from npm, run `npx esbuild hero3d.src.js --bundle --minify --format=esm --target=es2019 --outfile=hero3d.js` and copy the result to `src/static/`.
 - To test 3D without a graphics card, start Chromium with `--use-gl=swiftshader --enable-unsafe-swiftshader --ignore-gpu-blocklist`.
 
-### Dragon pictures for the legend pages
+### Photographs for the legend pictures
+
+- Seven legends (the hound, owl, starling, Llyn y Fan Fach, the drowned forest, Arthur's lake, the cauldron) show a real photograph from Wikimedia Commons in place of the drawn scene: `LEGEND_PHOTOS` in `src/art.py` holds the file, photographer, licence, a line saying what the picture shows, and where the subject sits in the frame. `photo_scene()` draws it; the legend page prints the credit under the tale (`legend_credit` in `build.py`).
+- Only legend pages and legend cards use the photographs. Other pages that share an art key (and the newer legends that borrow a scene as a stand-in) keep the drawn scene. To give another legend a photograph, add its art key to `LEGEND_PHOTOS` and to `PICKS` in `tools/fetch_legend_photos.py`.
+- Getting the files: Commons is blocked from the cloud, but not from GitHub. `tools/fetch_legend_photos.py` runs in the "Fetch photos" workflow when it changes on a `claude/` branch and commits `src/static/legends/<key>.webp` (1600 px) and `<key>-s.webp` (700 px) to the branch; then `git pull`. Commons only serves standard widths (1920, 1280, 960 ...), so ask for one of those and shrink.
+- Choosing: fetch several candidates under temporary names the same way, look at them all on one contact sheet, keep the best and delete the rest before merging. Prefer Featured and Quality pictures; CC0, public domain, CC BY and CC BY-SA only.
+
+## Dragon pictures for the legend pages
 
 - The red and white dragons on the legend, symbols and play pages are still pictures of the 3D dragon (`src/static/dragon-red.webp`, `dragon-white.webp`), placed in the scene by `_dragons` in `src/art.py`. Never draw dragons by hand.
 - To make them again: bundle `tools/render_dragons.src.js` with esbuild, put it beside `dragon.glb` with a page holding `<canvas id="c">`, open it in headless Chromium (`?t=0.3` for red, `?white=1&t=0.52&turn=1.2&tilt=0.2` for white) and screenshot the canvas with a see-through background. Crop, mirror the white one so they face each other, and save as WebP 760 px wide.

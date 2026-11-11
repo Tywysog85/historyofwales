@@ -344,8 +344,8 @@ def page(path, title, desc, main_html, era=None, og_type="article", ld=None, act
 '''
 
 
-def hero(era_id, crumbs, ill, eyebrow_en, eyebrow_cy, h_en, h_cy, sub_en="", sub_cy="", art=None, extra=""):
-    bg = f'<div class="hero-art">{A.scene(art, COL[era_id])}</div>' if art else ""
+def hero(era_id, crumbs, ill, eyebrow_en, eyebrow_cy, h_en, h_cy, sub_en="", sub_cy="", art=None, extra="", photo=False):
+    bg = f'<div class="hero-art">{(photo and A.photo_scene(art)) or A.scene(art, COL[era_id])}</div>' if art else ""
     icon = "" if art else f'<svg class="ill" aria-hidden="true"><use href="#i-{ill}"/></svg>'
     return (f'<header class="era-hero{" has-art" if art else ""}" data-era="{era_id}">{bg}<div class="wrap"><p class="crumbs">{crumbs}</p>'
             f'{icon}<p class="span">{bi(eyebrow_en, eyebrow_cy)}</p>'
@@ -673,7 +673,7 @@ def story_card(x, lead=False):
 
 
 def legend_card(x):
-    return (f'<a class="l-card rv" href="legend-{x["id"]}.html" data-era="{x["era"]}"><span class="art">{A.scene(x["art"], COL[x["era"]])}</span>'
+    return (f'<a class="l-card rv" href="legend-{x["id"]}.html" data-era="{x["era"]}"><span class="art">{A.photo_scene(x["art"], small=True) or A.scene(x["art"], COL[x["era"]])}</span>'
             f'<span class="txt"><span class="span">{e(x["place"])}</span><h3>{bi(x["en"], x["cy"])}</h3><p>{bi(x["sumEn"], x["sumCy"])}</p></span></a>')
 
 
@@ -697,13 +697,21 @@ def stories_index():
     return page("stories.html", "Long reads · History of Wales", "Essays on Welsh history: castles, the language, the laws of Hywel Dda, coal, protest and the Welsh across the world.", main, era="kings", og_type="website", active="stories.html")
 
 
+def legend_credit(art):
+    ph = A.LEGEND_PHOTOS.get(art)
+    if not ph:
+        return ""
+    return (f'<p class="ph-credit">{bi("Picture", "Llun")}: {bi(ph[4], ph[5])}. {bi("Photo", "Ffotograff")}: <a href="{COMMONS}File:{_q(ph[0].replace(" ", "_"), safe="")}" rel="noopener">{e(ph[1])}</a>, '
+            f'<a href="{ph[3]}" rel="noopener license">{ph[2]}</a>, Wikimedia Commons.</p>')
+
+
 def legend_page(x, i):
     nxt = F.LEGENDS[(i + 1) % len(F.LEGENDS)]
-    main = (hero(x["era"], f'<a href="index.html">{SITE}</a> / <a href="legends.html">{bi("Legends", "Chwedlau")}</a>', "book", x["place"], x["place"], x["en"], x["cy"], x["sumEn"], x["sumCy"], art=x["art"])
+    main = (hero(x["era"], f'<a href="index.html">{SITE}</a> / <a href="legends.html">{bi("Legends", "Chwedlau")}</a>', "book", x["place"], x["place"], x["en"], x["cy"], x["sumEn"], x["sumCy"], art=x["art"], photo=True)
             + f'<section class="article"><div class="wrap narrow">{prose_bi(x["pEn"], x["pCy"], "prose tale")}'
               f'<aside class="behind"><p class="eyebrow">{bi(x.get("hLabelEn", "The history behind the legend"), x.get("hLabelCy", "Yr hanes y tu ôl i’r chwedl"))}</p><p>{bi(x["hEn"], x["hCy"])}</p></aside>'
               + (f'<p class="l-links">' + "".join(f'<a class="btn" href="{h}">{bi(en, cy)} →</a>' for h, en, cy in x["links"]) + '</p>' if x.get("links") else "") +
-              f'<p class="byline"><button type="button" class="copy" data-copy="legend-{x["id"]}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button></p></div></section>'
+              f'<p class="byline"><button type="button" class="copy" data-copy="legend-{x["id"]}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button></p>{legend_credit(x["art"])}</div></section>'
             + section(f'<div class="pager"><a class="btn" href="legends.html">← {bi("All legends", "Pob chwedl")}</a><a class="btn solid" href="legend-{nxt["id"]}.html">{bi(nxt["en"], nxt["cy"])} →</a></div>'))
     return page(f"legend-{x['id']}.html", f'{x["en"]} · History of Wales', x["sumEn"], main, era=x["era"], active="legends.html", track=f"legend:{x['id']}")
 
