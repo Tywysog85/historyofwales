@@ -552,3 +552,41 @@ html.cy .news-item.is-new .n-t::after { content: "Newydd" }
   #people .chips .chip { flex: none }
   #people .tl-tools { display: grid; gap: .6rem }
 }
+
+/* ---------- collectable cards (src/sets.py; painted by site.js) ---------- */
+.cset-lead { color: var(--muted); max-width: 46rem; margin: 0 0 1.6rem } .cset-lead b { color: var(--ink) } .cset-lead a { color: var(--gold); font-weight: 600 }
+.cset { border: 1px solid var(--line); border-radius: var(--r); background: var(--card); padding: 1.2rem 1.2rem 1.3rem; margin-bottom: 1rem }
+.cset + .cset { margin-top: 0 }
+.cset-h { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .3rem 1rem; align-items: baseline; margin-bottom: 1rem }
+.cset-h h3 { font: 400 clamp(1.3rem, 3vw, 1.6rem)/1.15 var(--f-display); margin: 0 }
+.cset-h p { grid-column: 1 / -1; margin: 0; color: var(--muted); font-size: .92rem }
+.cset-n { font: 500 .8rem var(--f-mono); color: var(--muted); white-space: nowrap } .cset-n b { color: var(--ink); font-weight: 700 }
+.cset .j-bar { margin-top: .4rem }
+.cset.full { border-color: color-mix(in srgb, var(--gold) 55%, var(--line)); background: linear-gradient(160deg, color-mix(in srgb, var(--gold) 9%, var(--card)), var(--card)) }
+.cset.full .cset-n::before { content: "★ "; color: var(--gold) }
+.cc-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(8.4rem, 1fr)); gap: .75rem }
+.cc { position: relative; display: grid; grid-template-rows: auto 1fr; border-radius: 14px; overflow: hidden; text-decoration: none; color: var(--ink);
+  background: linear-gradient(165deg, color-mix(in srgb, var(--c) 26%, var(--card)), var(--card) 70%); border: 1px solid color-mix(in srgb, var(--c) 30%, var(--line));
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease), opacity .25s }
+.cc-img { position: relative; aspect-ratio: 1 / 1.05; display: grid; place-items: center; overflow: hidden; background: radial-gradient(circle at 50% 35%, color-mix(in srgb, var(--c) 45%, #000), #0b0d12) }
+.cc-img i { font: 400 2.2rem var(--f-display); font-style: normal; color: color-mix(in srgb, var(--c) 70%, #fff) }
+.cc-img img, .cc-img svg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 25% }
+.cc-t { padding: .55rem .65rem .7rem; display: grid; gap: .15rem; align-content: start }
+.cc-t b { font: 400 1rem/1.15 var(--f-display) }
+.cc-t small { font: 500 .66rem var(--f-mono); color: var(--muted); letter-spacing: .02em }
+.cc-no { position: absolute; top: .45rem; left: .45rem; font: 600 .62rem var(--f-mono); background: rgba(8,10,14,.72); color: #ece9e1; padding: .18rem .45rem; border-radius: 999px; z-index: 1 }
+.cc:not(.got) { opacity: .55 }
+.cc:not(.got) .cc-img img, .cc:not(.got) .cc-img svg { filter: grayscale(1) brightness(.45) }
+.cc:not(.got) .cc-img::after { content: "Read to collect"; position: absolute; inset: auto 0 0; padding: .35rem; text-align: center; font: 600 .62rem var(--f-mono); letter-spacing: .04em; text-transform: uppercase; color: #ece9e1; background: rgba(8,10,14,.6) }
+:root.cy .cc:not(.got) .cc-img::after { content: "Darllenwch i’w gasglu" }
+.cc.got { box-shadow: 0 0 0 1px color-mix(in srgb, var(--gold) 45%, transparent), 0 10px 26px -14px color-mix(in srgb, var(--gold) 70%, transparent) }
+.cc.got::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, transparent 35%, rgba(255,240,200,.16) 48%, transparent 60%); background-size: 250% 100%; background-position: 100% 0; transition: background-position .8s var(--ease) }
+.cc.got .cc-no { background: linear-gradient(135deg, #f6dc85, #c79a2c); color: #2a1f05 }
+.cc:hover { transform: translateY(-3px); opacity: 1 } .cc.got:hover::after { background-position: 0 0 }
+.cc.here { outline: 2px solid var(--gold); outline-offset: 2px; opacity: 1 }
+@media (max-width: 700px) {
+  .cc-row { grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 7.6rem; overflow-x: auto; scrollbar-width: none; padding: 4px 2px 6px; margin-inline: -2px; scroll-snap-type: x proximity }
+  .cc-row::-webkit-scrollbar { display: none } .cc { scroll-snap-align: start }
+  .cset { padding: 1rem .9rem 1.1rem }
+}
+@media (prefers-reduced-motion: reduce) { .cc, .cc.got::after { transition: none } .cc:hover { transform: none } }

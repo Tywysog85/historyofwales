@@ -7,6 +7,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-11", "Collect the cards: 220 cards in 29 sets", "Casglwch y cardiau: 220 o gardiau mewn 29 set",
+     "Every person, place and legend you read is now a card. Collect the house of Gwynedd, the saints, the great castles, the Four Branches and 25 more sets.",
+     "Mae pob person, lle a chwedl a ddarllenwch yn gerdyn nawr. Casglwch dŷ Gwynedd, y seintiau, y cestyll mawr, y Pedair Cainc a 25 set arall.",
+     "journey.html#cards"),
     ("2026-11-11", "Share any page, with its own picture", "Rhannu unrhyw dudalen, gyda’i llun ei hun",
      "Every person, place, legend and long read now has a Share button and its own picture when it is shared on WhatsApp, Facebook or X.",
      "Mae gan bob person, lle, chwedl ac erthygl fotwm Rhannu nawr, a’i llun ei hun pan gaiff ei rhannu ar WhatsApp, Facebook neu X.",
