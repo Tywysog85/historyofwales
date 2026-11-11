@@ -144,6 +144,15 @@ Learnt while building the Hywel Dda page (`src/hywel.py`). Long-read paragraphs 
 
 A long read can also say who and what it is about, with `people=[...]`, `places=[...]` and `events=[...]` (event titles in English). `build.py` then adds a "The full story" card to those person and place pages, and a "Read the long read" link to those events on the age pages and on the timeline (the timeline gets them through `SL` in the page data). One list in the story does all the linking.
 
+### A long person page with headings, and a map of places (November 2026)
+
+Learnt while expanding Arthur's page (`src/arthur.py`).
+
+- A person page now understands the same codes as a long read (`## `, `> `, `|| `). If any line of the person's long text starts with one, `person_page()` in `build.py` lays it out like a long read; otherwise it stays as plain paragraphs. So any person can be given headings, pull quotes and a fact table just by writing them in.
+- `PERSON_EXTRA` in `build.py` adds extra sections to one person's page. Arthur's adds "The line of Arthur" (a row of boxes with arrows, which turns into a column on phones) and "Arthur's Wales", a numbered map.
+- A map of places needs no map library: draw `geo["outline"]` from `src/geo/map.json` in an SVG and place each pin with `x = (lon - minx) * k * sc`, `y = (maxy - lat) * sc` (the same sums the kingdoms map uses). Each pin links to its numbered entry in the list beside it, and `li:target` lights the entry up.
+- When two pins sit on top of each other, move one aside with `NUDGE` and draw a short line back to the real spot. Keep pins well inside the SVG's `viewBox`, or the edge cuts them off.
+
 ### Kings and princes pages (November 2026)
 - All the royal lines live in `src/royal.py`: one entry per kingdom, each with a list of rulers. `R(...)` is a ruler (sort year, dates, name, English note, Welsh note, optional link), `H(...)` a heading inside the list, `N(...)` a short note between rulers.
 - `build.py` makes `kings.html` (all of Wales: Gruffudd ap Llywelyn first, then kings who ruled most of Wales, the Princes of Wales, the kingdoms, and every ruler in one list by century) and one `kings-<id>.html` per kingdom.
