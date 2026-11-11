@@ -162,6 +162,13 @@ A long read can also say who and what it is about, with `people=[...]`, `places=
 - Person pages and kingdom pages link to the trees automatically (`ft_link_for_person`, `ft_link_for_realm`). If two trees show the same person, give the copy an `id` of its own, or the build stops.
 - Python checks brackets for you: if a long nested tree will not load, a short script with `tokenize` shows which opening bracket was never closed.
 
+### Welsh word of the day and Learn Welsh page (November 2026)
+- Everything is in `src/cymraeg.py`: `WORDS` (one per day: word, sound guide, meaning, a Welsh example with its English, a history note in both languages, and a link), `FIXED_DAYS` (dates that always get the same word, such as Gŵyl Dewi on 1 March), `PHRASES` (the sections on `welsh.html`) and `LETTERS` (how Welsh sounds).
+- `build.py` writes `welsh.js`: the words as data, then `src/welsh.js`. Ordinary days take the next word from a shuffled order that is fixed by a seed, so every visitor sees the same word on the same date and the order only changes when words are added. The day comes from the visitor's own clock. Raise `WELSH_JS_VER` in `build.py` when `src/welsh.js` changes, so phones fetch the new file.
+- Any element with `data-wotd` becomes a word-of-the-day card (home page language section and `welsh.html`); `data-wotd-week` lists the last seven days. Any button with `data-hear="Welsh text"` and `data-guide="sound guide"` plays it.
+- Sound: a matching MP3 in `src/static/audio/` is played first (file name = the Welsh in lower case, accents dropped, spaces as hyphens, e.g. `bore-da.mp3`, `gwyl-dewi.mp3`). Otherwise the device speaks: a Welsh voice if it has one (Microsoft Edge on Windows does), else an English voice reading the sound guide. Credit any freely licensed recording in `AUDIO_CREDITS`; the credit then shows on `welsh.html`.
+- Wikimedia Commons and Lingua Libre (free Welsh recordings) cannot be reached from Claude's cloud sessions, so recordings have to be downloaded on the PC or recorded by a Welsh speaker.
+
 ### The four notes in the top folder (November 2026)
 
 `README.md` says what the site is and where things live. `EDITORIAL.md` holds the owner's rules for how it is written. `TODO.md` lists the open jobs. `SKILLS.md` is this file. The owner wants them kept clean and tidy: when something changes, edit the line that is there instead of adding a new one at the bottom, delete finished jobs from `TODO.md`, and keep the counts in `README.md` true.

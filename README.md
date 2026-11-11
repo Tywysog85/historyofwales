@@ -71,6 +71,7 @@ Photos are linked from Wikimedia Commons in `src/photos.py`. Pages without a pho
 
 - **Search**: `build.py` writes `search.json`; `src/static/search.js` runs the magnifier button and the `/` shortcut.
 - **History near you**: the town list is in `src/towns.py`.
+- **Learn Welsh** (`welsh.html`) and the word of the day on the home page: words and phrases are in `src/cymraeg.py`.
 - **Pronunciation**: MP3s go in `src/static/audio/` (see the README there). Without them, the play buttons use the device's own voice.
 - **Your journey** (`journey.html`) shows what a visitor has read and the badges they have earned. It is stored only in their browser.
 - **The nine ages**: see "Adding or splitting an age" in `SKILLS.md`.
