@@ -146,7 +146,7 @@ PEOPLE = [
     "He was named PFA Players’ Player of the Year in 1989 and 1991, the first player to win it twice. He won 72 caps for Wales, and as manager from 1999 to 2004 he brought Wales to within one game of the European Championship finals."],
    ["Magwyd Mark Hughes yn Rhiwabon ger Wrecsam ac ymunodd â Manchester United yn fachgen. Yn gryf, yn ddewr ac yn gallu sgorio o onglau amhosibl, enillodd ‘Sparky’ ddwy bencampwriaeth a thri Chwpan FA gydag United, a Chwpan Enillwyr Cwpanau Ewrop yn 1991, gan sgorio’r ddwy gôl yn y rownd derfynol yn erbyn Barcelona, ei hen glwb.",
     "Fe’i henwyd yn Chwaraewr y Flwyddyn y PFA yn 1989 a 1991, y chwaraewr cyntaf i’w ennill ddwywaith. Enillodd 72 o gapiau dros Gymru, ac fel rheolwr o 1999 i 2004 daeth â Chymru o fewn un gêm i rowndiau terfynol Pencampwriaeth Ewrop."]),
- P("patrick-jones", "today", "b. 1965", "Patrick Jones", "Patrick Jones", "Poet and playwright of the valleys", "Bardd a dramodydd y cymoedd", "Patrick_Jones_(writer)", "words",
+ P("patrick-jones", "today", "b. 1965", "Patrick Jones", "Patrick Jones", "Poet and playwright of the valleys", "Bardd a dramodydd y cymoedd", "Patrick_Jones_(poet)", "words",
    "Blackwood poet, playwright and filmmaker whose fierce, tender work speaks for the valleys, and whose words have been sung by the Manic Street Preachers.",
    "Bardd, dramodydd a gwneuthurwr ffilmiau o’r Coed-duon y mae ei waith ffyrnig a thyner yn llefaru dros y cymoedd, ac y canwyd ei eiriau gan y Manic Street Preachers.",
    ["Patrick Jones grew up in Blackwood, the older brother of the Manics’ Nicky Wire. His play Everything Must Go (2000), set in a valleys town after the pits closed, was a hit at the Sherman Theatre in Cardiff.",
