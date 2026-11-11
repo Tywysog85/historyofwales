@@ -196,3 +196,34 @@
     Array.prototype.forEach.call(d.querySelectorAll('.menu a[href="whatsnew.html"]'), function (a) { a.classList.add("has-news"); });
   }
 })();
+
+/* The Share button: the phone's own share sheet where there is one, otherwise WhatsApp, Facebook, X, email or copy the link. */
+(function () {
+  var d = document, root = d.documentElement;
+  var T = function (en, c) { return root.classList.contains("cy") ? c : en; };
+  var pop = null;
+  function close() { if (pop) { pop.remove(); pop = null; } }
+  d.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-share]");
+    if (!b) { if (pop && !e.target.closest(".share-pop")) close(); return; }
+    var can = d.querySelector('link[rel="canonical"]'), url = can ? can.href : location.href.split("#")[0];
+    var title = d.title.replace(/ · History of Wales$/, ""), text = title + " · History of Wales";
+    if (navigator.share) { navigator.share({ title: text, url: url }).catch(function () {}); return; }
+    if (pop) { close(); return; }
+    var u = encodeURIComponent(url), t = encodeURIComponent(text);
+    pop = d.createElement("div"); pop.className = "share-pop"; pop.setAttribute("role", "menu");
+    pop.innerHTML = '<a role="menuitem" target="_blank" rel="noopener" href="https://wa.me/?text=' + t + "%20" + u + '">WhatsApp</a>' +
+      '<a role="menuitem" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=' + u + '">Facebook</a>' +
+      '<a role="menuitem" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?text=' + t + "&url=" + u + '">X</a>' +
+      '<a role="menuitem" href="mailto:?subject=' + t + "&body=" + u + '">' + T("Email", "E-bost") + "</a>" +
+      '<button type="button" role="menuitem" class="copy">' + T("Copy the link", "Copïo’r ddolen") + "</button>";
+    d.body.appendChild(pop);
+    var r = b.getBoundingClientRect(), left = Math.min(r.left, innerWidth - pop.offsetWidth - 12);
+    pop.style.left = Math.max(12, left) + "px"; pop.style.top = (r.bottom + 8 + pop.offsetHeight > innerHeight ? r.top - pop.offsetHeight - 8 : r.bottom + 8) + "px";
+    pop.querySelector(".copy").addEventListener("click", function () {
+      var c = this; (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(function () { c.textContent = T("Link copied", "Wedi copïo"); setTimeout(close, 900); }, function () { prompt(T("Copy this link", "Copïwch y ddolen hon"), url); close(); });
+    });
+  });
+  addEventListener("scroll", close, { passive: true });
+  d.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+})();

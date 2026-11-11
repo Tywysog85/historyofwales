@@ -42,6 +42,14 @@ GOATCOUNTER = os.environ.get("GOATCOUNTER", "").strip()
 # The email sign-up. Set to the number of the sign-up form made at kit.com (see SKILLS.md, "The weekly email") and the
 # sign-up box appears on the home page, the What's new page and the foot of every page. Empty: the box is not shown.
 KIT_FORM = os.environ.get("KIT_FORM", "").strip()
+# Share pictures (tools/cards.py): one per page, made when Pillow is installed (the GitHub build installs it). CARDS=0 skips them.
+try:
+    sys.path.insert(0, os.path.join(ROOT, "tools"))
+    import cards as CARDS  # noqa: E402
+    CARDS_ON = os.environ.get("CARDS", "1") != "0"
+except ImportError:
+    CARDS_ON = False
+CARD_JOBS = {}
 WIKI = "https://en.wikipedia.org/wiki/"
 
 
@@ -143,14 +151,14 @@ def src(s):
 
 
 # ---------- shared head tags ----------
-def head_tags(title, desc, path, og_type="website"):
+def head_tags(title, desc, path, og_type="website", image=None):
     url = BASE_URL + path
     t = (f'<title>{e(title)}</title>\n<meta name="description" content="{e(desc)}">\n<link rel="canonical" href="{url}">\n'
          '<meta name="theme-color" content="#0e1118">\n<link rel="icon" href="favicon.svg" type="image/svg+xml">\n'
          '<link rel="apple-touch-icon" href="apple-touch-icon.png">\n<link rel="manifest" href="manifest.webmanifest">\n'
          f'<meta property="og:title" content="{e(title)}">\n<meta property="og:description" content="{e(desc)}">\n'
          f'<meta property="og:type" content="{og_type}">\n<meta property="og:url" content="{url}">\n'
-         f'<meta property="og:image" content="{BASE_URL}og.png">\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n'
+         f'<meta property="og:image" content="{BASE_URL}{image or "og.png"}">\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n'
          '<meta property="og:locale" content="en_GB">\n<meta property="og:locale:alternate" content="cy_GB">\n'
          '<meta name="twitter:card" content="summary_large_image">\n'
          f'<link rel="alternate" type="application/atom+xml" title="History of Wales: what’s new and on this day" href="{BASE_URL}feed.xml">\n')
@@ -306,6 +314,10 @@ def footer():
 
 
 def page(path, title, desc, main_html, era=None, og_type="article", ld=None, active="", track="", extra=""):
+    card = None
+    if CARDS_ON and path != "404.html":
+        CARD_JOBS[path] = (title, desc, era)
+        card = "cards/" + path[:-5] + ".jpg"
     ld_html = f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>' if ld else ""
     return f'''<!doctype html>
 <html lang="en">
@@ -313,7 +325,7 @@ def page(path, title, desc, main_html, era=None, og_type="article", ld=None, act
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
-{head_tags(title, desc, path, og_type)}{LANG_BOOT}
+{head_tags(title, desc, path, og_type, card)}{LANG_BOOT}
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 {fonts}
 <style>{style}{PRINT_CSS}</style>
@@ -337,7 +349,11 @@ def hero(era_id, crumbs, ill, eyebrow_en, eyebrow_cy, h_en, h_cy, sub_en="", sub
     icon = "" if art else f'<svg class="ill" aria-hidden="true"><use href="#i-{ill}"/></svg>'
     return (f'<header class="era-hero{" has-art" if art else ""}" data-era="{era_id}">{bg}<div class="wrap"><p class="crumbs">{crumbs}</p>'
             f'{icon}<p class="span">{bi(eyebrow_en, eyebrow_cy)}</p>'
-            f'<h1>{bi(h_en, h_cy)}</h1>' + (f'<p class="lede">{bi(sub_en, sub_cy)}</p>' if sub_en else "") + extra + "</div></header>")
+            f'<h1>{bi(h_en, h_cy)}</h1>' + (f'<p class="lede">{bi(sub_en, sub_cy)}</p>' if sub_en else "") + extra + SHARE_BTN + "</div></header>")
+
+
+SHARE_BTN = ('<p class="share-row"><button type="button" class="share-btn" data-share><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M12 3v12M7 8l5-5 5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+             + bi("Share", "Rhannu") + "</button></p>")
 
 
 def section(inner, title_en=None, title_cy=None, top=False):
@@ -2017,6 +2033,43 @@ def write(path, text):
         f.write(text)
 
 
+# ---------- share pictures (tools/cards.py) ----------
+CARD_KIND = [("person-", "Person", "Person"), ("place-", "Place", "Lle"), ("legend-", "Legend", "Chwedl"), ("story-", "Long read", "Erthygl"),
+             ("era-", "An age of Welsh history", "Oes yn hanes Cymru"), ("kings", "Kings and princes", "Brenhinoedd"), ("saints", "Saints of Wales", "Seintiau"),
+             ("trail-", "Trail", "Llwybr"), ("family-trees", "Royal family trees", "Coed teulu"), ("castles", "Castles of Wales", "Cestyll"),
+             ("onthisday", "On this day", "Ar y dydd hwn"), ("firsts", "Welsh world firsts", "Y cyntaf"), ("mabinogion", "The Mabinogion", "Y Mabinogion")]
+GAME_PAGES = {"daily.html", "map-game.html", "names.html", "hero.html", "pairs.html", "play.html", "quiz.html"}
+
+
+def card_photo(path):
+    stem = path[:-5]
+    if stem in GP.GALLERY:
+        return os.path.join(SRC, "static", "gallery", stem + ".webp")
+    f = None
+    if stem.startswith("person-"):
+        f = (PH.PERSON_PHOTOS.get(stem[7:]) or [None])[0]
+    elif stem.startswith("place-"):
+        f = (PH.PLACE_PHOTOS.get(stem[6:]) or [None])[0]
+    if f and f in LOCAL_PHOTOS:
+        return os.path.join(SRC, "static", "photos", LOCAL_PHOTOS[f][0] + ".webp")
+    return None
+
+
+def make_cards(out):
+    done = 0
+    dragon = os.path.join(SRC, "static", "dragon-red.webp")
+    for path, (title, desc, era) in CARD_JOBS.items():
+        name = html.unescape(re.sub(r"\s*·\s*History of Wales$", "", title))
+        kind = "Play" if path in GAME_PAGES else next((k[1] for k in CARD_KIND if path.startswith(k[0])), "History of Wales")
+        if path.startswith("era-") and era in ERA:
+            kind = "The ages of Wales · " + ERA[era]["spanEn"]
+        elif era in ERA and kind in ("Person", "Place", "Legend", "Long read"):
+            kind += " · " + ERA[era]["en"]
+        CARDS.make(os.path.join(out, "cards", path[:-5] + ".jpg"), kind, name, html.unescape(desc), COL.get(era or "medieval", "#f26a62"), card_photo(path), dragon)
+        done += 1
+    return done
+
+
 # ---------- shared files: the stylesheet and the home page's data and script are kept in files of their own ----------
 # Every page used to carry about 100 KB of the same CSS, and the home page, timeline and quiz each carried 430 KB of the
 # same data and script. Now the browser downloads them once and keeps them, so every page after the first opens faster.
@@ -2116,6 +2169,8 @@ def main():
         write(os.path.join(out, name), text)
     for name, text in shared_files.items():
         write(os.path.join(out, name), text)
+    if CARDS_ON:
+        print(f"Made {make_cards(out)} share pictures")
     for f in os.listdir(os.path.join(SRC, "static")):
         sp = os.path.join(SRC, "static", f)
         (shutil.copytree if os.path.isdir(sp) else shutil.copy)(sp, os.path.join(out, f))

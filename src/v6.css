@@ -524,3 +524,13 @@ html.cy .news-item.is-new .n-t::after { content: "Newydd" }
 .menu a.has-news::after { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--dragon); margin-left: .45rem; vertical-align: .15em }
 @media (max-width: 860px) { .news-row, .news-page { grid-template-columns: 1fr } .news-page .follow { position: static } }
 @media (max-width: 520px) { .news-item a, .news-list.big .news-item a { grid-template-columns: 1fr } .n-s { grid-column: 1 } }
+
+/* ---------- the Share button at the top of each page ---------- */
+.share-row { margin-top: .3rem; animation: h-in .9s .2s var(--ease) both }
+.share-btn { display: inline-flex; align-items: center; gap: .5rem; border: 1px solid var(--line); background: rgba(14,17,24,.55); color: var(--ink); border-radius: 999px; padding: .45rem 1rem .45rem .85rem; font-weight: 700; font-size: .88rem; cursor: pointer; backdrop-filter: blur(6px) }
+.share-btn:hover { border-color: var(--ink) }
+.share-btn svg { width: 1.05rem; height: 1.05rem }
+.share-pop { position: fixed; z-index: 62; background: var(--slate); border: 1px solid var(--line); border-radius: 16px; padding: .5rem; display: grid; min-width: 13rem; box-shadow: 0 24px 60px rgba(0,0,0,.55); animation: h-in .3s var(--ease) both }
+.share-pop a, .share-pop button { font-family: var(--f-body); display: block; text-align: left; padding: .6rem .8rem; border-radius: 10px; color: var(--ink); text-decoration: none; background: none; border: 0; font-weight: 500; cursor: pointer; font-size: .95rem }
+.share-pop a:hover, .share-pop button:hover { background: var(--slate-2) }
+@media print { .share-row { display: none } }

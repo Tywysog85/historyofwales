@@ -24,6 +24,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Install Pillow (for the share pictures)
+        run: pip install pillow
       - name: Build site
         run: python3 build.py
         env:
