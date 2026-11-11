@@ -11,12 +11,12 @@ Open jobs for History of Wales. Tick a job off by deleting it. Keep this list sh
 
 ## Needs a fluent Welsh speaker
 
-- **Proofread the Welsh.** All of it, and most of all the text added in November 2026: the long reads, the new people, the new places, the kingdoms map, the saints pages, the castles map and the 207 people in `src/people2a.py` to `people2e.py`.
+- **Proofread the Welsh.** All of it, and most of all the text added in November 2026: the long reads, the new people, the new places, the kingdoms map, the saints pages, the castles map and the 251 people in `src/people2a.py` to `people2f.py`.
 
 ## Checking and sources
 
 - **Check the new history against sources.** The long reads and new people added in November 2026 were written from general knowledge. Dates, names and quotations should be checked, and sources linked.
-- **More photos.** Only 32 of the 67 places and 181 of the 278 people have a photo; the rest have drawn pictures or initials. Wikipedia has no free picture for 42 of them, so these need a new source.
+- **More photos.** Only 32 of the 67 places and 221 of the 322 people have a photo; the rest have drawn pictures or initials. About 55 have no free picture on Wikipedia, so these need a new source.
 - **Real recordings for the word buttons.** The words of the day, the phrases on `welsh.html` and the home page words use the device's own voice for now. MP3 files go in `src/static/audio/` (naming rules in `SKILLS.md`, "Welsh word of the day"). Own recordings, or free ones from Lingua Libre on Wikimedia Commons with credits.
 
 ## Ideas, not started
