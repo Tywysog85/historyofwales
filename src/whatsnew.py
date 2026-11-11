@@ -7,6 +7,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-11", "The Laws of Hywel Dda: the big page", "Cyfreithiau Hywel Dda: y dudalen fawr",
+     "Fifteen chapters on the law of Wales, with pictures from the medieval lawbooks, Hywel’s price list, the words of the law and a quiz: could you judge like Hywel?",
+     "Pymtheg pennod ar gyfraith Cymru, gyda lluniau o’r llyfrau cyfraith canoloesol, rhestr brisiau Hywel, geiriau’r gyfraith a chwis: allech chi farnu fel Hywel?",
+     "laws.html"),
     ("2026-11-11", "Wales in 10 minutes", "Cymru mewn 10 munud",
      "The whole story of Wales in seventeen short steps, from the first people to the Senedd, beside a map that changes as you scroll.",
      "Holl stori Cymru mewn dau gam ar bymtheg byr, o’r bobl gyntaf i’r Senedd, wrth ymyl map sy’n newid wrth i chi sgrolio.",

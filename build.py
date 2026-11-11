@@ -33,6 +33,7 @@ import saints as SA  # noqa: E402
 import onthisday as OTD  # noqa: E402
 import arthur as AR  # noqa: E402
 import mabinogion as MB  # noqa: E402
+import laws as LW  # noqa: E402  (the Laws of Hywel Dda page, laws.html)
 import people2 as P2  # noqa: E402
 import sets as SETS  # noqa: E402
 L.TEACH.update(AG9.TEACH)
@@ -220,7 +221,7 @@ PRINT_CSS = """
 
 NAV_MAIN = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#chapters", "Ages", "Oesoedd"), ("index.html#map", "Map", "Map"),
             ("index.html#people", "People", "Pobl"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("play.html", "Play", "Chwarae")]
-NAV_MORE = [("whatsnew.html", "What’s new", "Beth sy’n newydd"), ("wales-in-10.html", "Wales in 10 minutes", "Cymru mewn 10 munud"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("castles.html", "Castles map", "Map y cestyll"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"), ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"),
+NAV_MORE = [("whatsnew.html", "What’s new", "Beth sy’n newydd"), ("wales-in-10.html", "Wales in 10 minutes", "Cymru mewn 10 munud"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("castles.html", "Castles map", "Map y cestyll"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("laws.html", "The Laws of Hywel Dda", "Cyfreithiau Hywel Dda"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"), ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"),
             ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg"), ("journey.html", "Your journey", "Eich taith"), ("teachers.html", "For teachers", "I athrawon"),
             ("index.html#sources", "Sources", "Ffynonellau")]
 # extra links for the top bar (shown on every page, beside the site name)
@@ -323,7 +324,7 @@ def footer():
     eras = [(f'era-{x["id"]}.html', x["en"], x["cy"]) for x in D.ERAS]
     explore = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#map", "Map of Wales", "Map Cymru"), ("index.html#people", "People", "Pobl"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("castles.html", "Castles of Wales", "Cestyll Cymru"), ("trails.html", "Themed trails", "Llwybrau thema"),
                ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"), ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg")]
-    read = [("whatsnew.html", "What’s new", "Beth sy’n newydd"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
+    read = [("whatsnew.html", "What’s new", "Beth sy’n newydd"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"), ("laws.html", "The Laws of Hywel Dda", "Cyfreithiau Hywel Dda"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
             ("teachers.html", "For teachers", "I athrawon"), ("index.html#sources", "Sources", "Ffynonellau")]
     play = [("daily.html", "Daily challenge", "Her y dydd"), ("quiz.html", "Quiz", "Cwis"), ("map-game.html", "Where in Wales?", "Ble yng Nghymru?"), ("names.html", "Welsh names", "Enwau Cymraeg"),
             ("play.html", "All games", "Pob gêm"), ("journey.html", "Your journey", "Eich taith")]
@@ -431,7 +432,8 @@ def photo_fig(ph, cls="", gid=None):
 
 
 def event_li(ev, k=0):
-    links = ("".join(f'<a class="src" href="story-{x["id"]}.html">{bi("Read the long read", "Darllen yr erthygl")} →</a>' for x in story_links("events", ev[5]))
+    links = ((f'<a class="src" href="laws.html">{bi("The Laws of Hywel Dda: the big page", "Cyfreithiau Hywel Dda: y dudalen fawr")} →</a>' if ev[5] == "The laws of Hywel Dda" else "")
+             + "".join(f'<a class="src" href="story-{x["id"]}.html">{bi("Read the long read", "Darllen yr erthygl")} →</a>' for x in story_links("events", ev[5]))
              + (f'<a class="src" href="place-{ev[10]}.html">{bi("The place", "Y lle")} →</a>' if ev[10] else "") + src(ev[11]))
     return (f'<li id="e{EVI[ev]}" class="{"key" if ev[9] else ""}" data-era="{ev[0]}"><time>{bi(year_label(ev), year_label(ev, True))}</time>'
             f'<div><h3>{bi(ev[5], ev[6])}</h3><p>{bi(ev[7], ev[8])}</p><div class="links">{links}</div></div></li>')
@@ -653,6 +655,7 @@ a.chap { text-decoration: none; color: inherit }
 .answers-key summary { cursor: pointer; color: var(--muted); font-size: .9rem }
 """
 EXTRA_PAGE_CSS += read("welsh.css")
+EXTRA_PAGE_CSS += read("laws.css")  # laws.html
 style += EXTRA_PAGE_CSS
 
 # ---------- new feature pages ----------
@@ -687,9 +690,20 @@ def story_links(kind, key):
     return [x for x in F.STORIES if key in x.get(kind, [])]
 
 
+LAW_LINKED = {"people": {"hywel-dda", "llywelyn-ap-gruffudd"}, "places": {"hendygwyn", "library", "dinefwr", "aberffraw"}}
+
+
+def laws_card():
+    return (f'<a class="s-card rv lead" href="laws.html" data-era="kings"><span class="art">{A.scene("book", COL["kings"])}</span>'
+            f'<span class="txt"><span class="span">{bi("The big page", "Y dudalen fawr")} · {bi("15 chapters, pictures and a quiz", "15 pennod, lluniau a chwis")}</span><h3>{bi("The Laws of Hywel Dda", "Cyfreithiau Hywel Dda")}</h3>'
+            f'<p>{bi("Everything about Cyfraith Hywel: the gathering at Whitland, the three lawbooks, galanas and sarhaed, women and marriage, the worth of everything, and the manuscripts with their pictures.", "Popeth am Gyfraith Hywel: y cynulliad yn Hendy-gwyn, y tri llyfr cyfraith, galanas a sarhaed, menywod a phriodas, gwerth pob peth, a’r llawysgrifau a’u lluniau.")}</p>'
+            f'<span class="go">{bi("Read", "Darllen")} →</span></span></a>')
+
+
 def story_feature(kind, key):
     xs = story_links(kind, key)
-    return section(f'<div class="s-grid">{"".join(story_card(x, True) for x in xs)}</div>', "The full story", "Y stori lawn") if xs else ""
+    law = laws_card() if key in LAW_LINKED.get(kind, ()) else ""
+    return section(f'<div class="s-grid">{"".join(story_card(x, True) for x in xs)}{law}</div>', "The full story", "Y stori lawn") if xs or law else ""
 
 
 def prose_bi(en, cy, cls="prose"):
@@ -713,7 +727,8 @@ def story_page(x, i):
     era = ERA[x["era"]]
     meta = f'<p class="byline"><span>{x["mins"]} {bi("minute read", "munud o ddarllen")}</span><a href="era-{x["era"]}.html">{bi(era["en"], era["cy"])}</a><button type="button" class="copy" data-copy="story-{x["id"]}.html">{bi("Copy link", "Copïo’r ddolen")}</button></p>'
     main = (hero(x["era"], f'<a href="index.html">{SITE}</a> / <a href="stories.html">{bi("Long reads", "Erthyglau")}</a>', "book", "Long read", "Erthygl", x["en"], x["cy"], x["sumEn"], x["sumCy"], art=x["art"])
-            + f'<section class="article"><div class="wrap narrow">{meta}{prose_bi(x["pEn"], x["pCy"])}' + (f'<p><a class="btn solid" href="firsts.html">★ {bi("Every Welsh world first, with the people behind them", "Pob un o’r pethau a wnaeth Cymru gyntaf, a’r bobl y tu ôl iddynt")} →</a></p>' if x["id"] == "firsts" else "") + '</div></section>'
+            + f'<section class="article"><div class="wrap narrow">{meta}{prose_bi(x["pEn"], x["pCy"])}' + (f'<p><a class="btn solid" href="firsts.html">★ {bi("Every Welsh world first, with the people behind them", "Pob un o’r pethau a wnaeth Cymru gyntaf, a’r bobl y tu ôl iddynt")} →</a></p>' if x["id"] == "firsts" else "")
+              + (f'<p><a class="btn solid" href="laws.html">{bi("Much more on the law: the big page on the Laws of Hywel Dda, with the manuscripts and a quiz", "Llawer mwy am y gyfraith: y dudalen fawr ar Gyfreithiau Hywel Dda, gyda’r llawysgrifau a chwis")} →</a></p>' if x["id"] == "hywel" else "") + '</div></section>'
             + section(f'<div class="s-grid three">{"".join(story_card(y) for y in others)}</div>', "Keep reading", "Daliwch ati i ddarllen")
             + section(f'<div class="pager"><a class="btn" href="stories.html">← {bi("All long reads", "Pob erthygl")}</a><a class="btn solid" href="story-{nxt["id"]}.html">{bi(nxt["en"], nxt["cy"])} →</a></div>'))
     ld = {"@context": "https://schema.org", "@type": "Article", "headline": x["en"], "description": x["sumEn"], "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
@@ -778,6 +793,150 @@ def mabinogion_page():
     ld = {"@context": "https://schema.org", "@type": "Article", "headline": "The Mabinogion", "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
     return page("mabinogion.html", "The Mabinogion · History of Wales", "The Mabinogion: the eleven great tales of medieval Wales, the White Book of Rhydderch and the Red Book of Hergest, and Lady Charlotte Guest’s translation, in English and Cymraeg.",
                 main, era="medieval", ld=ld, active="legends.html", track="page:mabinogion")
+
+
+# ---------- the Laws of Hywel Dda (laws.html): text, pictures, worth table, quiz and words in src/laws.py ----------
+def law_fig(key, cls="", w=1200):
+    f, by, lic, licu, cen, ccy = LW.FIGS[key]
+    return (f'<figure class="lw-fig {cls}"><img src="{photo_url(f, w)}" alt="{e(cen)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest(\'figure\').remove()">'
+            f'<figcaption>{bi(cen, ccy)}<span class="lw-cr">{bi("Picture", "Llun")}: {e(by)} · <a href="{licu}" target="_blank" rel="noopener license">{e(lic)}</a> · '
+            f'<a href="{COMMONS}File:{_q(f.replace(" ", "_"), safe="")}" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure>')
+
+
+MARGIN_ART = [("F. 24r. Dragon with a fish tail.jpg", "A dragon with a fish’s tail", "Draig â chynffon pysgodyn"),
+              ("F. 24v. Mermaid.jpg", "A mermaid", "Môr-forwyn"),
+              ("F. 29r. Winged lion (symbol of Mark's Gospel.jpg", "A winged lion", "Llew asgellog"),
+              ("F. 40r. Peacock.jpg", "A peacock", "Paun"),
+              ("F. 65r. Dragon.jpg", "A dragon’s head", "Pen draig"),
+              ("F. 71r. Man with spear.jpg", "A man with a spear", "Gŵr â gwaywffon")]
+
+LAW_MSS = [("king", "Peniarth 28", "Latin · about 1250", "Lladin · tua 1250"),
+           ("chirk", "Peniarth 29 · Llyfr Du’r Waun", "Welsh · about 1250 · the law of Gwynedd", "Cymraeg · tua 1250 · cyfraith Gwynedd"),
+           ("welsh29", "NLW MS 20143A", "Welsh · fourteenth century · in its medieval wooden boards", "Cymraeg · y bedwaredd ganrif ar ddeg · yn ei chloriau pren canoloesol"),
+           ("boston", "NLW MS 24029A · Llawysgrif Boston", "Welsh · fourteenth century · Llyfr Blegywryd", "Cymraeg · y bedwaredd ganrif ar ddeg · Llyfr Blegywryd"),
+           ("pen38", "Peniarth 38", "Welsh · a lawyer’s copy", "Cymraeg · copi cyfreithiwr"),
+           ("pen36", "Peniarth 36", "Welsh · a lawyer’s copy", "Cymraeg · copi cyfreithiwr")]
+
+
+def laws_page():
+    def prose_at(ch, cut_en, cut_cy, extra):
+        # the chapter's paragraphs, with `extra` placed after the paragraph that ends with cut_en / cut_cy (or at the end)
+        def cut(ps, mark):
+            k = next((i + 1 for i, a in enumerate(ps) if mark and a.endswith(mark)), len(ps))
+            return ps[:k], ps[k:]
+        a1, a2 = cut(ch["pEn"], cut_en)
+        b1, b2 = cut(ch["pCy"], cut_cy)
+        return prose_bi(a1, b1) + extra + (prose_bi(a2, b2) if a2 or b2 else "")
+
+    def books():
+        return '<div class="lw-books">' + "".join(
+            f'<article class="lw-book rv"><p class="eyebrow">{bi(b["whereEn"], b["whereCy"])}</p><h3 lang="cy">{e(b["cy"])}</h3><p class="lw-sub l-en" lang="en">{e(b["en"])}</p><p>{bi(b["tEn"], b["tCy"])}</p></article>'
+            for b in LW.BOOKS) + "</div>"
+
+    def officers():
+        return ('<div class="lw-officers">' + "".join(f'<div class="lw-off rv"><b lang="cy">{e(n)}</b><span>{bi(en, cy)}</span></div>' for n, en, cy in LW.OFFICERS)
+                + "</div>")
+
+    def split():
+        head, rows = LW.SPLIT[0], LW.SPLIT[1:]
+        th = f'<thead><tr><th scope="col">{bi(head[0], head[2])}</th><th scope="col">{bi(head[1], head[3])}</th></tr></thead>'
+        return (f'<table class="lw-split">{th}<tbody>' + "".join(f'<tr><td>{bi(r[0], r[2])}</td><td>{bi(r[1], r[3])}</td></tr>' for r in rows) + "</tbody></table>")
+
+    def worth():
+        chips = (f'<div class="chips lw-wchips" role="group" aria-label="Show / Dangos"><button type="button" class="chip on" data-g="all" aria-pressed="true">{bi("Everything", "Popeth")}</button>'
+                 + "".join(f'<button type="button" class="chip" data-g="{k}" aria-pressed="false">{bi(g[0], g[1])}</button>' for k, g in enumerate(LW.WORTH)) + "</div>")
+        rows = "".join(f'<tr data-g="{k}"><th scope="row">{bi(r[0], r[1])}</th><td>{bi(r[2], r[3])}</td></tr>' for k, g in enumerate(LW.WORTH) for r in g[2])
+        note = bi("A penny was a silver penny. A ‘small penny’ was a lesser coin. Cows were the great measure of wealth: a pound was 240 pence.",
+                  "Ceiniog arian oedd ceiniog. Darn llai oedd ‘ceiniog cwta’. Gwartheg oedd mesur mawr cyfoeth: roedd punt yn 240 ceiniog.")
+        return (f'<div class="lw-worth" id="worth-table"><h3>{bi("Hywel’s price list", "Rhestr brisiau Hywel")}</h3>{chips}'
+                f'<table class="lw-wt"><thead><tr><th scope="col">{bi("What", "Beth")}</th><th scope="col">{bi("Its worth in law", "Ei werth yn y gyfraith")}</th></tr></thead><tbody>{rows}</tbody></table>'
+                f'<p class="lw-note">{note}</p></div>')
+
+    def gallery():
+        cards = "".join(f'<div class="lw-ms rv">{law_fig(key, "lw-ms-fig", 960)}<p class="lw-ms-t"><b>{e(t)}</b><span>{bi(en, cy)}</span></p></div>' for key, t, en, cy in LAW_MSS)
+        art = "".join(f'<figure class="lw-mart"><img src="{photo_url(f, 640)}" alt="{e(en)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest(\'figure\').remove()">'
+                      f'<figcaption>{bi(en, cy)}</figcaption></figure>' for f, en, cy in MARGIN_ART)
+        return (f'</div><div class="wrap"><div class="lw-mss">{cards}</div>'
+                f'<h3 class="lw-h3">{bi("Pictures in the margins", "Lluniau ar yr ymylon")}</h3>'
+                f'<p class="lw-lede">{bi("The scribe of NLW MS 20143A filled the bottom of his pages with creatures in red and green ink, drawn beside the laws they decorate.", "Llanwodd ysgrifydd NLW MS 20143A waelod ei dudalennau â chreaduriaid mewn inc coch a gwyrdd, wedi’u tynnu wrth ymyl y cyfreithiau a addurnant.")}</p>'
+                f'<div class="lw-marts">{art}</div><p class="lw-cr">{bi("Pictures", "Lluniau")}: {e(NLW_CREDIT)}, <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener license">CC0</a>, '
+                f'<a href="{COMMONS}Category:NLW_MS_20143A" target="_blank" rel="noopener">Wikimedia Commons</a></p></div><div class="wrap narrow">')
+
+    def chapter(ch, n):
+        figs = "".join(law_fig(k, "side" if len(ch["figs"]) > 1 else "") for k in ch["figs"])
+        figs = f'<div class="lw-figs n{len(ch["figs"])}">{figs}</div>' if ch["figs"] else ""
+        if ch.get("split"):
+            body = prose_at(ch, "item by item:", "fesul eitem:", split())
+        else:
+            extra = (books() if ch.get("books") else "") + (officers() if ch.get("officers") else "") + (worth() if ch.get("worth") else "") + (gallery() if ch.get("gallery") else "")
+            body = prose_bi(ch["pEn"], ch["pCy"]) + extra
+        return (f'<section class="article lw-ch" id="{ch["id"]}"><div class="wrap narrow"><p class="lw-n">{n:02d}</p><h2 class="lw-h">{bi(ch["en"], ch["cy"])}</h2>'
+                f'{figs}{body}</div></section>')
+
+    def dates():
+        def ycy(y):
+            fixed = {"late 1100s": "diwedd y 1100au", "early 1200s": "dechrau’r 1200au", "1300s and 1400s": "y 1300au a’r 1400au"}
+            return fixed.get(y) or y.replace("about ", "tua ").replace(" to ", " i ").replace(" and ", " a ")
+        return ('<ol class="lw-dates">' + "".join(f'<li class="rv"><b>{bi(y, ycy(y))}</b><span>{bi(en, cy)}</span></li>' for y, en, cy in LW.DATES) + "</ol>")
+
+    def quiz():
+        qs = ""
+        for k, (qen, qcy, ans, ok, wen, wcy) in enumerate(LW.QUIZ):
+            btns = "".join(f'<button type="button" class="lw-a" data-ok="{1 if j == ok else 0}">{bi(a, b)}</button>' for j, (a, b) in enumerate(ans))
+            qs += (f'<div class="lw-q" data-q="{k}"{"" if k == 0 else " hidden"}><p class="eyebrow">{bi(f"Case {k + 1} of {len(LW.QUIZ)}", f"Achos {k + 1} o {len(LW.QUIZ)}")}</p>'
+                   f'<h3>{bi(qen, qcy)}</h3><div class="lw-as">{btns}</div><p class="lw-why" hidden>{bi(wen, wcy)}</p>'
+                   f'<button type="button" class="btn solid lw-next" hidden>{bi("Next case", "Yr achos nesaf")} →</button></div>')
+        end = (f'<div class="lw-end" hidden><p class="eyebrow">{bi("Your verdict", "Eich dyfarniad")}</p><p class="lw-score"><span class="lw-s">0</span> / {len(LW.QUIZ)}</p>'
+               f'<p class="lw-rank"></p><button type="button" class="btn lw-again">{bi("Judge again", "Barnu eto")}</button></div>')
+        return f'<div class="lw-quiz" id="quiz-box">{qs}{end}</div>'
+
+    def words():
+        return ('<dl class="lw-words">' + "".join(f'<div class="rv"><dt><span lang="cy">{e(w)}</span>{hear_btn(w, g)}</dt><dd>{bi(en, cy)}<span class="lw-say">{e(g)}</span></dd></div>'
+                                            for w, en, cy, g in LW.WORDS) + "</dl>")
+
+    jump = ('<nav class="chips l-jump" aria-label="Chapters / Penodau">' + "".join(f'<a class="chip" href="#{c["id"]}">{bi(c["en"], c["cy"])}</a>' for c in LW.CHAPTERS)
+            + f'<a class="chip" href="#quiz">{bi("Quiz", "Cwis")}</a><a class="chip" href="#words">{bi("Words of the law", "Geiriau’r gyfraith")}</a></nav>')
+    main = (hero("kings", f'<a href="index.html">{SITE}</a> / <a href="kings.html">{bi("Kings and princes", "Brenhinoedd a thywysogion")}</a>', "book", "Cyfraith Hywel", "Cyfraith Hywel",
+                 "The Laws of Hywel Dda", "Cyfreithiau Hywel Dda",
+                 "The law that held Wales together for six hundred years: made at Whitland, carried in the books of the lawyers, fair to women, merciful to the hungry, and built on making peace.",
+                 "Y gyfraith a ddaliodd Gymru ynghyd am chwe chan mlynedd: wedi’i llunio yn Hendy-gwyn, wedi’i chario yn llyfrau’r cyfreithwyr, yn deg i fenywod, yn drugarog wrth y newynog, ac wedi’i hadeiladu ar wneud heddwch.",
+                 art="book", extra=jump)
+            + f'<section class="article lw-top"><div class="wrap narrow">{law_fig("kingc", "lead")}{prose_bi(LW.FACTS_EN, LW.FACTS_CY)}{prose_bi(LW.INTRO_EN, LW.INTRO_CY)}'
+              f'<p class="l-links"><a class="btn" href="story-hywel.html">{bi("Hywel’s own story: the long read", "Stori Hywel ei hun: yr erthygl")} →</a> <a class="btn" href="person-hywel-dda.html">{bi("Hywel Dda", "Hywel Dda")} →</a> '
+              f'<a class="btn" href="place-hendygwyn.html">{bi("Whitland", "Hendy-gwyn ar Daf")} →</a></p></div></section>'
+            + section(dates(), "The law in dates", "Y gyfraith mewn dyddiadau")
+            + "".join(chapter(c, n + 1) for n, c in enumerate(LW.CHAPTERS))
+            + f'<section class="tight lw-quiz-sec" id="quiz"><div class="wrap narrow"><h2 class="sub-h">{bi("What would Hywel’s law say?", "Beth fyddai cyfraith Hywel yn ei ddweud?")}</h2>'
+              f'<p class="lw-lede">{bi("You are the judge. Twelve cases from the lawbooks: choose the judgement the law of Hywel would give.", "Chi yw’r ynad. Deuddeg achos o’r llyfrau cyfraith: dewiswch y dyfarniad a roddai cyfraith Hywel.")}</p>{quiz()}</div></section>'
+            + f'<section class="tight" id="words"><div class="wrap"><h2 class="sub-h">{bi("Words of the law", "Geiriau’r gyfraith")}</h2>'
+              f'<p class="lw-lede">{bi("The Welsh words the lawyers used. Tap the speaker to hear each one.", "Y geiriau Cymraeg a ddefnyddiai’r cyfreithwyr. Tapiwch y seinydd i glywed pob un.")}</p>{words()}</div></section>'
+            + section(f'<p class="note-box">{bi(LW.SOURCES_EN, LW.SOURCES_CY)}</p>' + set_block("page:laws")
+                      + f'<div class="pager" style="margin-top:2rem"><a class="btn" href="story-hywel.html">← {bi("Hywel Dda and the laws of Wales", "Hywel Dda a chyfraith Cymru")}</a><a class="btn solid" href="kings.html">{bi("Kings and princes of Wales", "Brenhinoedd a thywysogion Cymru")} →</a></div>'))
+    ld = {"@context": "https://schema.org", "@type": "Article", "headline": "The Laws of Hywel Dda", "alternativeHeadline": "Cyfraith Hywel", "inLanguage": ["en", "cy"],
+          "image": f"{COMMONS}Special:FilePath/{_q(LW.FIGS['kingc'][0], safe='')}", "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
+    return page("laws.html", "The Laws of Hywel Dda · History of Wales",
+                "The Laws of Hywel Dda, Cyfraith Hywel: the gathering at Whitland, the three lawbooks, galanas and sarhaed, the king’s court, women and marriage, land, the worth of everything, the manuscripts and their pictures, and a quiz.",
+                main, era="kings", ld=ld, active="kings.html", track="page:laws", extra=LAWS_JS + WELSH_SCRIPT)
+
+
+NLW_CREDIT = "Unknown scribe, National Library of Wales (NLW MS 20143A)"
+LAWS_JS = r"""<script>(function(){
+var c=document.querySelector(".lw-wchips");if(c){c.onclick=function(ev){var b=ev.target.closest("button");if(!b)return;var g=b.dataset.g;
+[].forEach.call(c.querySelectorAll("button"),function(x){var on=x===b;x.classList.toggle("on",on);x.setAttribute("aria-pressed",on)});
+[].forEach.call(document.querySelectorAll(".lw-wt tbody tr"),function(r){r.hidden=g!=="all"&&r.dataset.g!==g})}}
+var box=document.getElementById("quiz-box");if(!box)return;var qs=box.querySelectorAll(".lw-q"),end=box.querySelector(".lw-end"),score=0;
+function cy(){return document.documentElement.classList.contains("cy")}
+box.onclick=function(ev){var a=ev.target.closest(".lw-a"),q=ev.target.closest(".lw-q");
+if(a&&q&&!q.dataset.done){q.dataset.done=1;var ok=a.dataset.ok==="1";if(ok)score++;a.classList.add(ok?"right":"wrong");
+[].forEach.call(q.querySelectorAll(".lw-a"),function(x){x.disabled=true;if(x.dataset.ok==="1")x.classList.add("right")});
+q.querySelector(".lw-why").hidden=false;q.querySelector(".lw-next").hidden=false;q.querySelector(".lw-next").focus();return}
+if(ev.target.closest(".lw-next")&&q){q.hidden=true;var n=q.nextElementSibling;if(n&&n.classList.contains("lw-q")){n.hidden=false;n.querySelector(".lw-a").focus()}else{
+end.hidden=false;end.querySelector(".lw-s").textContent=score;var r=score>=11?["A master of law, worthy of Blegywryd himself.","Athro yn y gyfraith, yn deilwng o Flegywryd ei hun."]:score>=8?["A judge of the king’s court. Hywel would give you the gaming board.","Ynad llys y brenin. Byddai Hywel yn rhoi’r bwrdd chwarae i chi."]:score>=5?["A good landowner of the south: you may sit with the judges.","Tirfeddiannwr da o’r de: cewch eistedd gyda’r ynadon."]:["Keep studying the Test Book before you judge again!","Daliwch ati i astudio Llyfr Prawf Ynad cyn barnu eto!"];
+end.querySelector(".lw-rank").innerHTML='<span class="l-en" lang="en">'+r[0]+'</span><span class="l-cy" lang="cy">'+r[1]+'</span>';end.querySelector(".lw-again").focus();
+try{if(window.goatcounter&&goatcounter.count)goatcounter.count({path:"quiz-laws-"+score,title:"Laws quiz score",event:true})}catch(e){}}return}
+if(ev.target.closest(".lw-again")){score=0;end.hidden=true;[].forEach.call(qs,function(x,k){x.hidden=k>0;delete x.dataset.done;x.querySelector(".lw-why").hidden=true;x.querySelector(".lw-next").hidden=true;
+[].forEach.call(x.querySelectorAll(".lw-a"),function(b){b.disabled=false;b.classList.remove("right","wrong")})});qs[0].querySelector(".lw-a").focus()}}})()</script>
+"""
 
 
 def symbols_page():
@@ -1397,6 +1556,9 @@ def kings_page():
             + section(f'<aside class="behind one-king"><p class="eyebrow">{bi("Rhodri Mawr to Harri Tudur", "Rhodri Mawr i Harri Tudur")}</p><h2>{bi("Royal family trees", "Coed teulu brenhinol")}</h2>'
                       f'<p>{bi("The royal houses of Wales were one great family. See how Gwynedd, Deheubarth, Powys and Gwent married into one another, and how their blood came to the throne at Bosworth with Harri Tudur. Tap anyone to light up their line.", "Un teulu mawr oedd tai brenhinol Cymru. Gwelwch sut y priododd Gwynedd, Deheubarth, Powys a Gwent â’i gilydd, a sut y daeth eu gwaed i’r orsedd yn Bosworth gyda Harri Tudur. Tapiwch unrhyw un i oleuo’i linach.")}</p>'
                       f'<p><a class="go" href="family-trees.html">{bi("See the family trees", "Gweld y coed teulu")} →</a></p></aside>')
+            + section(f'<aside class="behind one-king"><p class="eyebrow">{bi("Cyfraith Hywel · about 945 to 1543", "Cyfraith Hywel · tua 945 i 1543")}</p><h2>{bi("The Laws of Hywel Dda", "Cyfreithiau Hywel Dda")}</h2>'
+                      f'<p>{bi("The kings of Wales ruled by a law of their own for six hundred years. Read how it was made at Whitland, what it said about crime, honour, marriage and land, and see the manuscripts that carried it.", "Rheolai brenhinoedd Cymru dan eu cyfraith eu hunain am chwe chan mlynedd. Darllenwch sut y’i lluniwyd yn Hendy-gwyn, beth a ddywedai am drosedd, anrhydedd, priodas a thir, a gwelwch y llawysgrifau a’i cariodd.")}</p>'
+                      f'<p><a class="go" href="laws.html">{bi("Read about the laws", "Darllen am y cyfreithiau")} →</a></p></aside>')
             + section(f'<div class="era-places">{"".join(realm_tile(r) for r in RY.REALMS if r.get("group") != "north")}</div>', "The kingdoms, one by one", "Y teyrnasoedd, fesul un")
             + section(f'<span id="old-north"></span><p class="lede" style="margin-bottom:1.5rem">{bi(RY.NORTH_INTRO["en"], RY.NORTH_INTRO["cy"])}</p><div class="era-places">{"".join(realm_tile(r) for r in RY.REALMS if r.get("group") == "north")}</div>', "The Old North: Yr Hen Ogledd", "Yr Hen Ogledd")
             + section(f'<p class="lede">{bi(f"All {n_all} kings, princes and lords on this site, from every kingdom, oldest first. Tap a kingdom to see its own line.", f"Pob un o’r {n_all} o frenhinoedd, tywysogion ac arglwyddi ar y wefan hon, o bob teyrnas, yr hynaf yn gyntaf. Tapiwch deyrnas i weld ei llinach ei hun.")}</p>'
@@ -2123,6 +2285,10 @@ def search_index():
     items.append(dict(k="page", t="The Mabinogion", c="Y Mabinogion", u="mabinogion.html", y=["Eleven tales", "Un chwedl ar ddeg"],
                       b=["The eleven great tales of medieval Wales, the White Book and the Red Book, and Lady Charlotte Guest.", "Un chwedl fawr ar ddeg Cymru’r Oesoedd Canol, y Llyfr Gwyn a’r Llyfr Coch, a’r Arglwyddes Charlotte Guest."], e="medieval"))
     items += [dict(k="page", t=t["cy"], c=t["cy"], u="mabinogion.html#mab-" + str(k + 1), y=[t["en"], g["cy"]], b=[t["sumEn"], t["sumCy"]], e=g["era"]) for k, g in enumerate(MB.GROUPS) for t in g["tales"] if not t["link"]]
+    items.append(dict(k="page", t="The Laws of Hywel Dda", c="Cyfreithiau Hywel Dda", u="laws.html", y=["Cyfraith Hywel", "Cyfraith Hywel"],
+                      b=["The law of Wales for six hundred years: Whitland, the three lawbooks, galanas and sarhaed, women and marriage, land, the worth of everything, the manuscripts, and a quiz.",
+                         "Cyfraith Cymru am chwe chan mlynedd: Hendy-gwyn, y tri llyfr cyfraith, galanas a sarhaed, menywod a phriodas, tir, gwerth pob peth, y llawysgrifau, a chwis."], e="kings"))
+    items += [dict(k="page", t=c["en"], c=c["cy"], u=f'laws.html#{c["id"]}', y=["Cyfraith Hywel", "Cyfraith Hywel"], b=[c["pEn"][0][:160], c["pCy"][0][:160]], e="kings") for c in LW.CHAPTERS]
     items += [dict(k="page", t=s[3], c=s[1], u=f"symbols.html#{s[0]}", y=["Symbol", "Symbol"], b=[s[4], s[5]], e="modern") for s in F.SYMBOLS]
     items += [dict(k="page", t=g[2], c=g[3], u=g[0], y=["Game", "Gêm"], b=[g[4], g[5]], e=g[8]) for g in GAMES]
     items.append(dict(k="page", t="Kings and princes of Wales", c="Brenhinoedd a thywysogion Cymru", u="kings.html", y=["Kings", "Brenhinoedd"], b=["Every king and prince of Wales, and Gruffudd ap Llywelyn, king of all Wales", "Pob brenin a thywysog yng Nghymru, a Gruffudd ap Llywelyn, brenin Cymru gyfan"], e="kings"))
@@ -2455,6 +2621,7 @@ def main():
         pages[f"story-{x['id']}.html"] = story_page(x, i)
     pages["legends.html"] = legends_index()
     pages["mabinogion.html"] = mabinogion_page()
+    pages["laws.html"] = laws_page()
     for i, x in enumerate(F.LEGENDS):
         pages[f"legend-{x['id']}.html"] = legend_page(x, i)
     pages["kings.html"] = kings_page()
