@@ -33,7 +33,7 @@ Everything is plain HTML, CSS and JavaScript. There is no framework and nothing 
 | Kings and princes of each kingdom (`kings.html`, `kings-*.html`) | `src/royal.py` |
 | Photos and their credits | `src/photos.py` |
 | Drawn pictures | `src/art.py` |
-| The home page and opening screen | `src/head.html`, `src/body.html`, `src/app.js`, `src/extra.css`, `src/v6.css` |
+| The home page and opening screen | `src/head.html`, `src/body.html`, `src/app.js`, `src/extra.css`, `src/v6.css`; the 3D dragon, mountains and castle in `tools/*.src.js`, built into `src/static/hero3d.js` |
 | Games, menu, badges, search | `src/static/play.js`, `src/static/site.js`, `src/static/search.js` |
 | Menu and footer shared by every page | `nav()` and `footer()` in `build.py` |
 | Icons and the share picture | `src/static/`, made by `tools/make_images.js` |
