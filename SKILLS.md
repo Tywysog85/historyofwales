@@ -64,6 +64,8 @@ This file collects the techniques and lessons from building History of Wales. Ad
 ### Shared files keep pages small (November 2026)
 - Every page used to carry the same 100 KB of CSS inside it, and the home page, timeline and quiz each carried the same 430 KB of data and script. `shared_assets()` in `build.py` now moves them into `site.css`, `data.js` and `app.js` after the pages are built, so a browser downloads them once and keeps them. Pages became 60 to 70% smaller.
 - Each link ends in `?v=` and a fingerprint of the file, made from its contents, so a changed file always gets a new address and nobody keeps an old copy. Nothing to raise by hand.
+- `data.js` and `app.js` load with `defer`, so the opening screen paints before the home page's big script runs. After changing the opening, still run `node tools/hero_jump_check.js` (one land position).
+- Sections far down the home page use `content-visibility: auto` (end of `src/v6.css`), so the browser only lays them out as they come near.
 - Keep writing CSS in the same places (`src/head.html`, `src/*.css`, the `*_CSS` strings in `build.py`). The move happens by itself.
 - To check a change like this did not alter the look, screenshot each page before and after with reduced motion and compare the pictures pixel by pixel (Pillow `ImageChops.difference`).
 

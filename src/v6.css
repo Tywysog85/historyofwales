@@ -534,3 +534,6 @@ html.cy .news-item.is-new .n-t::after { content: "Newydd" }
 .share-pop a, .share-pop button { font-family: var(--f-body); display: block; text-align: left; padding: .6rem .8rem; border-radius: 10px; color: var(--ink); text-decoration: none; background: none; border: 0; font-weight: 500; cursor: pointer; font-size: .95rem }
 .share-pop a:hover, .share-pop button:hover { background: var(--slate-2) }
 @media print { .share-row { display: none } }
+
+/* home page: sections far below the opening are only laid out when they come near the screen */
+@supports (content-visibility: auto) { #stories, #legends, #language, #play, #sources { content-visibility: auto; contain-intrinsic-size: auto 1200px } }

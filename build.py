@@ -2098,7 +2098,7 @@ def shared_assets(pages):
                 data_js = f"var DATA = {m.group(1)};\nvar TOWNS = {m.group(2)};\n"
                 app_js = m.group(3)
             if data_js == f"var DATA = {m.group(1)};\nvar TOWNS = {m.group(2)};\n" and app_js == m.group(3):
-                text = text[:m.start()] + f'<script src="data.js?v={_fp(data_js)}"></script>\n<script src="app.js?v={_fp(app_js)}"></script>' + text[m.end():]
+                text = text[:m.start()] + f'<script src="data.js?v={_fp(data_js)}" defer></script>\n<script src="app.js?v={_fp(app_js)}" defer></script>' + text[m.end():]
         pages[name] = text
     if data_js is not None:
         files["data.js"] = data_js
