@@ -151,6 +151,7 @@ A long read can also say who and what it is about, with `people=[...]`, `places=
 - Person and place pages link back to every kingdom list that names them, automatically. The kingdoms map legend links each realm to its page through `KGLINK` in `build.py`.
 - Welsh dates are made from the English ones by `cy_dates()`: "c." becomes "tua", "d." becomes "m.".
 - For the earliest kings, mark dates "c." and say the genealogies are the witness, rather than leaving people out.
+- The kingdoms of the Old North (Rheged, Gododdin, Strathclyde, Elfed, Efrog) are in the `NORTH` list in `src/royal.py`, marked `group="north"`, so `kings.html` shows them in their own "Yr Hen Ogledd" section. A ruler linked to a poet's page (`P("taliesin")`) makes that poet's page link back to the kingdom.
 
 ### The four notes in the top folder (November 2026)
 

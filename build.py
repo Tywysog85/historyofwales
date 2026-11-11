@@ -741,7 +741,7 @@ def realm_page(r, i):
 
 
 # where a ruler held several kingdoms, the entry shown in the combined list
-HOME_REALM = {"Hywel Dda": "deheubarth", "Maredudd ab Owain": "deheubarth", "Rhydderch ab Iestyn": "glywysing", "Gruffudd ap Rhydderch": "gwent"}
+HOME_REALM = {"Cunedda Wledig": "gwynedd", "Hywel Dda": "deheubarth", "Maredudd ab Owain": "deheubarth", "Rhydderch ab Iestyn": "glywysing", "Gruffudd ap Rhydderch": "gwent"}
 
 
 def all_rulers():
@@ -790,7 +790,8 @@ def kings_page():
             + section(one, top=True)
             + section(lst(RY.MOST), "Kings who ruled most of Wales", "Brenhinoedd a reolodd y rhan fwyaf o Gymru")
             + section('<span id="princes"></span>' + lst(RY.PRINCES) + f'<p class="lede" style="margin-top:1.5rem">{bi(RY.CODA["en"], RY.CODA["cy"])} <a href="person-harri-tudur.html">{bi("Harri Tudur", "Harri Tudur")} →</a></p>', "Princes of Wales", "Tywysogion Cymru")
-            + section(f'<div class="era-places">{"".join(realm_tile(r) for r in RY.REALMS)}</div>', "The kingdoms, one by one", "Y teyrnasoedd, fesul un")
+            + section(f'<div class="era-places">{"".join(realm_tile(r) for r in RY.REALMS if r.get("group") != "north")}</div>', "The kingdoms, one by one", "Y teyrnasoedd, fesul un")
+            + section(f'<span id="old-north"></span><p class="lede" style="margin-bottom:1.5rem">{bi(RY.NORTH_INTRO["en"], RY.NORTH_INTRO["cy"])}</p><div class="era-places">{"".join(realm_tile(r) for r in RY.REALMS if r.get("group") == "north")}</div>', "The Old North: Yr Hen Ogledd", "Yr Hen Ogledd")
             + section(f'<p class="lede">{bi(f"All {n_all} kings, princes and lords on this site, from every kingdom, oldest first. Tap a kingdom to see its own line.", f"Pob un o’r {n_all} o frenhinoedd, tywysogion ac arglwyddi ar y wefan hon, o bob teyrnas, yr hynaf yn gyntaf. Tapiwch deyrnas i weld ei llinach ei hun.")}</p>'
                       + every + f'<p class="note-box" style="margin-top:2rem">{ROYAL_NOTE}</p>', "Every king and prince, in order", "Pob brenin a thywysog, yn eu trefn"))
     ld = {"@context": "https://schema.org", "@type": "Article", "headline": "Kings and princes of Wales", "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
