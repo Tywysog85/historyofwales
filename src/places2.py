@@ -94,3 +94,7 @@ MORE_PLACES = [
     "The national stadium opened in the heart of Cardiff in 1999. When seventy-four thousand voices sing Hen Wlad Fy Nhadau here, the whole city hears it.",
     "Agorodd y stadiwm cenedlaethol yng nghanol Caerdydd yn 1999. Pan fydd saith deg pedair mil o leisiau’n canu Hen Wlad Fy Nhadau yma, mae’r ddinas gyfan yn clywed."),
 ]
+
+# Flemingston, Iolo Morganwg's village (text in src/iolo.py)
+import iolo as _IO
+MORE_PLACES.append(_p(*_IO.FLEMINGSTON))
