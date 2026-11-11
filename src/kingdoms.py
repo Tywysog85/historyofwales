@@ -1,6 +1,7 @@
 # The changing map of Wales, stage by stage. Used by the Kingdoms view of the home page map.
 # Borders are approximate: each realm is built from modern council areas, with Powys and Gwynedd
-# split into their historic shires by build.py (Montgomeryshire, Radnorshire, Brecknockshire; Caernarfonshire, Meirionnydd).
+# split into their historic shires along the real old borders (the Wye, the hills) by tools/split_shires.py
+# (Montgomeryshire, Radnorshire, Brecknockshire; Caernarfonshire, Meirionnydd).
 # A group is [English name, Welsh name, colour, [blocks] or "*", optional [short English label, short Welsh label] for the map].
 
 AN, CAE, MEI, CON, DEN, FLI, WRE = "Isle of Anglesey", "Caernarfonshire", "Meirionnydd", "Conwy", "Denbighshire", "Flintshire", "Wrexham"
