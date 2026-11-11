@@ -29,6 +29,7 @@ import cymraeg as CYM  # noqa: E402
 import saints as SA  # noqa: E402
 import onthisday as OTD  # noqa: E402
 import arthur as AR  # noqa: E402
+import mabinogion as MB  # noqa: E402
 L.TEACH.update(AG9.TEACH)
 from urllib.parse import quote as _q
 
@@ -173,7 +174,7 @@ PRINT_CSS = """
 
 NAV_MAIN = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#chapters", "Ages", "Oesoedd"), ("index.html#map", "Map", "Map"),
             ("index.html#people", "People", "Pobl"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("play.html", "Play", "Chwarae")]
-NAV_MORE = [("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("castles.html", "Castles map", "Map y cestyll"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"), ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"),
+NAV_MORE = [("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("castles.html", "Castles map", "Map y cestyll"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"), ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"),
             ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg"), ("journey.html", "Your journey", "Eich taith"), ("teachers.html", "For teachers", "I athrawon"),
             ("index.html#sources", "Sources", "Ffynonellau")]
 # extra links for the top bar (shown on every page, beside the site name)
@@ -211,7 +212,7 @@ def footer():
     eras = [(f'era-{x["id"]}.html', x["en"], x["cy"]) for x in D.ERAS]
     explore = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#map", "Map of Wales", "Map Cymru"), ("index.html#people", "People", "Pobl"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("castles.html", "Castles of Wales", "Cestyll Cymru"), ("trails.html", "Themed trails", "Llwybrau thema"),
                ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"), ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg")]
-    read = [("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
+    read = [("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
             ("teachers.html", "For teachers", "I athrawon"), ("index.html#sources", "Sources", "Ffynonellau")]
     play = [("daily.html", "Daily challenge", "Her y dydd"), ("quiz.html", "Quiz", "Cwis"), ("map-game.html", "Where in Wales?", "Ble yng Nghymru?"), ("names.html", "Welsh names", "Enwau Cymraeg"),
             ("play.html", "All games", "Pob gêm"), ("journey.html", "Your journey", "Eich taith")]
@@ -596,9 +597,32 @@ def legends_index():
                  f"{len(F.LEGENDS)} old tales, retold for reading aloud, each with the real history behind it.", f"{len(F.LEGENDS)} o hen chwedlau, wedi’u hadrodd o’r newydd i’w darllen ar goedd, pob un â’r hanes go iawn y tu ôl iddi.", art="dragons",
                  extra='<nav class="chips l-jump" aria-label="Sections / Adrannau">' + "".join(f'<a class="chip" href="#{g["ids"][0]}-set">{bi(g["en"], g["cy"])}</a>' for g in F.LEGEND_GROUPS) + '</nav>')
             + "".join(f'<section{"" if k == 0 else " class=\"tight\""} id="{g["ids"][0]}-set"><div class="wrap"><h2 class="sub-h">{bi(g["en"], g["cy"])}</h2><p class="l-sum">{bi(g["sumEn"], g["sumCy"])}</p>'
-                      f'<div class="l-grid">{"".join(legend_card(x) for x in g["items"])}</div></div></section>' for k, g in enumerate(F.LEGEND_GROUPS))
+                      f'<div class="l-grid">{"".join(legend_card(x) for x in g["items"])}</div>'
+                      + (f'<p class="l-links"><a class="btn" href="mabinogion.html">{bi("About the Mabinogion: the books, the translation and all eleven tales", "Am y Mabinogion: y llyfrau, y cyfieithiad a’r un chwedl ar ddeg")} →</a></p>' if g["ids"][0] == "pwyll" else "")
+                      + '</div></section>' for k, g in enumerate(F.LEGEND_GROUPS))
             + section(f'<div class="pager"><a class="btn" href="symbols.html">{bi("Symbols and traditions", "Symbolau a thraddodiadau")} →</a></div>'))
     return page("legends.html", "Legends · History of Wales", "The legends of Wales retold: the tales of King Arthur, the red dragon, Gelert, the Four Branches of the Mabinogi, Macsen Wledig, Culhwch and Olwen, Dwynwen, Melangell, the Tylwyth Teg and more, with the history behind them.", main, era="medieval", og_type="website", active="legends.html")
+
+
+def mabinogion_page():
+    # src/mabinogion.py: the eleven tales, the White Book and the Red Book, Lady Charlotte Guest
+    def tale(t, era):
+        go = (f'<a class="btn" href="{t["link"]}">{bi("Read the tale", "Darllen y chwedl")} →</a>' if t["link"] else "")
+        return (f'<article class="mab-tale rv" data-era="{era}"><h3 lang="cy">{e(t["cy"])}</h3><p class="mab-en l-en" lang="en">{e(t["en"])}</p>'
+                f'<p>{bi(t["sumEn"], t["sumCy"])}</p>{go}</article>')
+    groups = "".join(f'<section class="tight" id="mab-{k + 1}"><div class="wrap"><h2 class="sub-h">{bi(g["en"], g["cy"])}</h2><p class="l-sum">{bi(g["sumEn"], g["sumCy"])}</p>'
+                     f'<div class="mab-grid">{"".join(tale(t, g["era"]) for t in g["tales"])}</div></div></section>' for k, g in enumerate(MB.GROUPS))
+    jump = '<nav class="chips l-jump" aria-label="Sections / Adrannau">' + "".join(f'<a class="chip" href="#mab-{k + 1}">{bi(g["en"], g["cy"])}</a>' for k, g in enumerate(MB.GROUPS)) + '</nav>'
+    main = (hero("medieval", f'<a href="index.html">{SITE}</a> / <a href="legends.html">{bi("Legends", "Chwedlau")}</a>', "book", "Eleven tales", "Un chwedl ar ddeg", "The Mabinogion", "Y Mabinogion",
+                 "The great tales of medieval Wales: the Four Branches of the Mabinogi, the native tales and the three romances, kept for six hundred years in the White Book and the Red Book.",
+                 "Chwedlau mawr Cymru’r Oesoedd Canol: Pedair Cainc y Mabinogi, y chwedlau brodorol a’r tair rhamant, a gadwyd am chwe chan mlynedd yn y Llyfr Gwyn a’r Llyfr Coch.", art="book", extra=jump)
+            + f'<section class="article"><div class="wrap narrow">{prose_bi(MB.INTRO_EN, MB.INTRO_CY)}'
+              f'<p class="l-links"><a class="btn" href="person-arthur.html">{bi("Arthur, King of the Britons", "Arthur, Brenin y Brythoniaid")} →</a></p></div></section>'
+            + groups
+            + section(f'<div class="pager"><a class="btn" href="legends.html">← {bi("All legends", "Pob chwedl")}</a><a class="btn solid" href="legend-pwyll.html">{bi("Begin with the First Branch", "Dechrau â’r Gainc Gyntaf")} →</a></div>'))
+    ld = {"@context": "https://schema.org", "@type": "Article", "headline": "The Mabinogion", "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
+    return page("mabinogion.html", "The Mabinogion · History of Wales", "The Mabinogion: the eleven great tales of medieval Wales, the White Book of Rhydderch and the Red Book of Hergest, and Lady Charlotte Guest’s translation, in English and Cymraeg.",
+                main, era="medieval", ld=ld, active="legends.html", track="page:mabinogion")
 
 
 def symbols_page():
@@ -1563,6 +1587,9 @@ def search_index():
     items += [dict(k="trail", t=t["en"], c=t["cy"], u=f"trail-{t['id']}.html", y=["Trail", "Llwybr"], b=[t["introEn"][0], t["introCy"][0]], e="medieval") for t in L.TRAILS]
     items += [dict(k="story", t=x["en"], c=x["cy"], u=f"story-{x['id']}.html", y=[f"{x['mins']} min", f"{x['mins']} mun"], b=[x["sumEn"], x["sumCy"]], e=x["era"]) for x in F.STORIES]
     items += [dict(k="legend", t=x["en"], c=x["cy"], u=f"legend-{x['id']}.html", y=[x["place"], x["place"]], b=[x["sumEn"], x["sumCy"]], e=x["era"]) for x in F.LEGENDS]
+    items.append(dict(k="page", t="The Mabinogion", c="Y Mabinogion", u="mabinogion.html", y=["Eleven tales", "Un chwedl ar ddeg"],
+                      b=["The eleven great tales of medieval Wales, the White Book and the Red Book, and Lady Charlotte Guest.", "Un chwedl fawr ar ddeg Cymru’r Oesoedd Canol, y Llyfr Gwyn a’r Llyfr Coch, a’r Arglwyddes Charlotte Guest."], e="medieval"))
+    items += [dict(k="page", t=t["cy"], c=t["cy"], u="mabinogion.html#mab-" + str(k + 1), y=[t["en"], g["cy"]], b=[t["sumEn"], t["sumCy"]], e=g["era"]) for k, g in enumerate(MB.GROUPS) for t in g["tales"] if not t["link"]]
     items += [dict(k="page", t=s[3], c=s[1], u=f"symbols.html#{s[0]}", y=["Symbol", "Symbol"], b=[s[4], s[5]], e="modern") for s in F.SYMBOLS]
     items += [dict(k="page", t=g[2], c=g[3], u=g[0], y=["Game", "Gêm"], b=[g[4], g[5]], e=g[8]) for g in GAMES]
     items.append(dict(k="page", t="Kings and princes of Wales", c="Brenhinoedd a thywysogion Cymru", u="kings.html", y=["Kings", "Brenhinoedd"], b=["Every king and prince of Wales, and Gruffudd ap Llywelyn, king of all Wales", "Pob brenin a thywysog yng Nghymru, a Gruffudd ap Llywelyn, brenin Cymru gyfan"], e="kings"))
@@ -1805,6 +1832,7 @@ def main():
     for i, x in enumerate(F.STORIES):
         pages[f"story-{x['id']}.html"] = story_page(x, i)
     pages["legends.html"] = legends_index()
+    pages["mabinogion.html"] = mabinogion_page()
     for i, x in enumerate(F.LEGENDS):
         pages[f"legend-{x['id']}.html"] = legend_page(x, i)
     pages["kings.html"] = kings_page()
