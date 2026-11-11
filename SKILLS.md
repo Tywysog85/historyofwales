@@ -69,6 +69,11 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - Keep writing CSS in the same places (`src/head.html`, `src/*.css`, the `*_CSS` strings in `build.py`). The move happens by itself.
 - To check a change like this did not alter the look, screenshot each page before and after with reduced motion and compare the pictures pixel by pixel (Pillow `ImageChops.difference`).
 
+### A shorter front page on phones (November 2026)
+- On phones (700px wide or less) the home page shows 4 long reads, 4 legends, 4 games and 6 people instead of 12, and hides "Words to know". Each section keeps its "All …" button, so nothing is lost. This took the phone home page from about 28,000 to 19,000 pixels tall.
+- The rules are at the end of `src/v6.css` ("Phones: a shorter front page"); the 6-or-12 people choice is in `renderPeople()` in `src/app.js`. The era and field filters for people scroll sideways on phones instead of wrapping onto many lines.
+- To measure, open the home page in Playwright as a Pixel 7, turn off `content-visibility` with an added style, and print each section's height.
+
 ### The page for addresses that do not exist (November 2026)
 - `not_found_page()` in `build.py` writes `404.html`. GitHub Pages shows it for any address that does not exist. It has `<base href="/">` so its links work from any depth, and `noindex` so Google leaves it out. It is left out of the sitemap.
 
