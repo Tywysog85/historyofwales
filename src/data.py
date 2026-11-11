@@ -530,6 +530,12 @@ _ERA_ORDER = {e["id"]: i for i, e in enumerate(ERAS)}
 
 def _born(p):
     d = p[2]
+    m = _re.search(r"([\d,]+) BC", d)
+    if m:
+        return -int(m.group(1).replace(",", ""))
+    m = _re.search(r"AD (\d+)", d)
+    if m:
+        return int(m.group(1))
     m = _re.search(r"(\d{3,4})", d)
     if m:
         y = int(m.group(1))
