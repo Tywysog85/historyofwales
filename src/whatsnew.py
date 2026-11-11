@@ -7,6 +7,14 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-11", "Share any page, with its own picture", "Rhannu unrhyw dudalen, gyda’i llun ei hun",
+     "Every person, place, legend and long read now has a Share button and its own picture when it is shared on WhatsApp, Facebook or X.",
+     "Mae gan bob person, lle, chwedl ac erthygl fotwm Rhannu nawr, a’i llun ei hun pan gaiff ei rhannu ar WhatsApp, Facebook neu X.",
+     "whatsnew.html"),
+    ("2026-11-11", "The gallery: 260 pictures of Wales", "Yr oriel: 260 o luniau o Gymru",
+     "Places, people, castles and treasures in eight sections, with a big-picture viewer and a credit for every photographer.",
+     "Lleoedd, pobl, cestyll a thrysorau mewn wyth adran, gyda gwyliwr lluniau mawr a chydnabyddiaeth i bob ffotograffydd.",
+     "gallery.html"),
     ("2026-11-11", "A faster site, and a page that tells you what is new", "Gwefan gyflymach, a thudalen sy’n dweud beth sy’n newydd",
      "Every page now opens faster, phones get straight to the story, and this page keeps a record of everything added.",
      "Mae pob tudalen yn agor yn gyflymach nawr, mae ffonau’n mynd yn syth at y stori, ac mae’r dudalen hon yn cofnodi popeth a ychwanegwyd.",

@@ -64,6 +64,8 @@ This file collects the techniques and lessons from building History of Wales. Ad
 ### Shared files keep pages small (November 2026)
 - Every page used to carry the same 100 KB of CSS inside it, and the home page, timeline and quiz each carried the same 430 KB of data and script. `shared_assets()` in `build.py` now moves them into `site.css`, `data.js` and `app.js` after the pages are built, so a browser downloads them once and keeps them. Pages became 60 to 70% smaller.
 - Each link ends in `?v=` and a fingerprint of the file, made from its contents, so a changed file always gets a new address and nobody keeps an old copy. Nothing to raise by hand.
+- `data.js` and `app.js` load with `defer`, so the opening screen paints before the home page's big script runs. After changing the opening, still run `node tools/hero_jump_check.js` (one land position).
+- Sections far down the home page use `content-visibility: auto` (end of `src/v6.css`), so the browser only lays them out as they come near.
 - Keep writing CSS in the same places (`src/head.html`, `src/*.css`, the `*_CSS` strings in `build.py`). The move happens by itself.
 - To check a change like this did not alter the look, screenshot each page before and after with reduced motion and compare the pictures pixel by pixel (Pillow `ImageChops.difference`).
 
@@ -83,6 +85,16 @@ This file collects the techniques and lessons from building History of Wales. Ad
   1. `KIT_FORM`: the number of a Kit sign-up form (in Kit, Grow → Landing pages and forms → the form → Embed → the number in its address). Set it in GitHub as a repository variable (Settings → Secrets and variables → Actions → Variables → New repository variable, name `KIT_FORM`), or in `build.py`. The sign-up box then appears on the home page, What's new and the foot of every page. Until then those places show "What's new" and "News feed" buttons instead.
   2. `KIT_API_KEY`: a Kit API key (Kit → Settings → Developer → API keys → Add a new key), stored as a GitHub secret (same page, Secrets tab, name `KIT_API_KEY`). Never paste it anywhere else.
 - `.github/workflows/weekly-email.yml` runs every Monday at 07:00 UTC: it builds the site, and `tools/weekly_email.py` writes "This week in Welsh history" (the anniversaries of the next seven days and anything added in the last week) and asks Kit to send it. Run `python3 tools/weekly_email.py` after a build to preview the email. It can also be started by hand from the Actions tab (Run workflow).
+
+### Share pictures and the Share button (November 2026)
+- Every page made by `page()` in `build.py` gets its own share picture, the 1200 x 630 card that WhatsApp, Facebook and X show: `_site/cards/<page>.jpg`, drawn by `tools/cards.py` with Pillow (the page's kind and age in the age's colour, its title in Gloock, its description, the site's address, and its photo on the right, or the red dragon where there is no photo). Fonts are in `tools/fonts/` (SIL Open Font Licence).
+- They are made during the build, so nothing is stored in the repo. The GitHub build installs Pillow first (`deploy.yml`). Without Pillow, or with `CARDS=0`, the build skips them and pages use `og.png`. Making all 490 takes about 20 seconds.
+- To see how a page will look when shared, open `_site/cards/<page>.jpg` after a build. Facebook keeps old pictures for a while: paste the address into the Facebook Sharing Debugger and press "Scrape again" to refresh one.
+- The Share button sits under each page's title (`SHARE_BTN` in `build.py`). Phones open their own share sheet (`navigator.share`); computers get WhatsApp, Facebook, X, email and "Copy the link" (end of `src/static/site.js`).
+
+### Photos kept on the site (November 2026)
+- `tools/fetch_photos.py` finds every photo the built pages still load from Wikimedia Commons, downloads each one once and saves `src/static/photos/<id>.webp` (fits 1280 x 1000) and `<id>-s.webp` (fits 600 x 800). `src/photo_files.json` says which Commons file each is. `photo_url()` in `build.py` then uses the local copy; the credit links still go to the Commons file page.
+- Wikimedia is blocked from Claude's cloud computer, so it runs on GitHub: `.github/workflows/fetch-photos.yml`. It runs by itself when the script changes on a `claude/` branch, or start it from the Actions tab (Fetch photos from Wikimedia Commons → Run workflow, pick the branch). It commits the pictures to that branch. Run it again whenever new Commons photos are added, so they too are kept on the site.
 
 ### Search
 - `build.py` writes `search.json`, an index of events, people, places and pages. `src/static/search.js` opens a search box from the magnifier button or the `/` key.
