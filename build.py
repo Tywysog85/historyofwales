@@ -39,9 +39,9 @@ from urllib.parse import quote as _q
 
 BASE_URL = os.environ.get("SITE_URL", "https://tywysog85.github.io/historyofwales/")
 GOATCOUNTER = os.environ.get("GOATCOUNTER", "").strip()
-# The email sign-up. Set to the number of the sign-up form made at kit.com (see SKILLS.md, "The weekly email") and the
-# sign-up box appears on the home page, the What's new page and the foot of every page. Empty: the box is not shown.
-KIT_FORM = os.environ.get("KIT_FORM", "").strip()
+# The weekly email sign-up: the link to the sign-up form made at brevo.com (see SKILLS.md, "The weekly email"). Once it is
+# set, a sign-up box appears on the home page, the What's new page and the foot of every page. Empty: the box is not shown.
+EMAIL_FORM = os.environ.get("EMAIL_FORM", "").strip() or ""
 # Share pictures (tools/cards.py): one per page, made when Pillow is installed (the GitHub build installs it). CARDS=0 skips them.
 try:
     sys.path.insert(0, os.path.join(ROOT, "tools"))
@@ -210,14 +210,12 @@ MONTHS_CY = ["Ionawr", "Chwefror", "Mawrth", "Ebrill", "Mai", "Mehefin", "Gorffe
 
 
 def follow_box(where):
-    """The email sign-up when a Kit form is set; otherwise the ways to follow that need no account."""
-    if KIT_FORM:
-        return (f'<form class="follow follow-{where}" action="https://app.kit.com/forms/{e(KIT_FORM)}/subscriptions" method="post" target="_blank">'
-                f'<p class="f-h">{bi("This week in Welsh history", "Yr wythnos hon yn hanes Cymru")}</p>'
+    """The weekly email sign-up when a Brevo form is set; otherwise the ways to follow that need no account."""
+    if EMAIL_FORM:
+        return (f'<div class="follow follow-{where}"><p class="f-h">{bi("This week in Welsh history", "Yr wythnos hon yn hanes Cymru")}</p>'
                 f'<p class="f-sub">{bi("One short email every Monday: the anniversaries of the week ahead and anything new on the site. Free, and you can leave at any time.", "Un e-bost byr bob dydd Llun: pen-blwyddi’r wythnos i ddod ac unrhyw beth newydd ar y wefan. Am ddim, a gallwch adael unrhyw bryd.")}</p>'
-                f'<div class="f-row"><label class="sr-only" for="f-email-{where}">{bi("Your email address", "Eich cyfeiriad e-bost")}</label>'
-                f'<input id="f-email-{where}" name="email_address" type="email" required autocomplete="email" placeholder="you@example.com">'
-                f'<button type="submit" class="btn solid">{bi("Sign up", "Ymuno")}</button></div></form>')
+                f'<div class="f-row"><a class="btn solid" href="{e(EMAIL_FORM)}" target="_blank" rel="noopener">{bi("Sign up for the weekly email", "Ymuno â’r e-bost wythnosol")}</a>'
+                f'<a class="btn" href="whatsnew.html">{bi("What’s new", "Beth sy’n newydd")}</a></div></div>')
     return (f'<div class="follow follow-{where}"><p class="f-h">{bi("Keep up with the site", "Dilynwch y wefan")}</p>'
             f'<p class="f-sub">{bi("New history is added every week. See what has arrived, or follow the news feed in any feed reader.", "Mae hanes newydd yn cael ei ychwanegu bob wythnos. Gwelwch beth sydd wedi cyrraedd, neu dilynwch y ffrwd newyddion mewn unrhyw ddarllenydd ffrydiau.")}</p>'
             f'<div class="f-row"><a class="btn solid" href="whatsnew.html">{bi("What’s new", "Beth sy’n newydd")}</a><a class="btn" href="feed.xml">{bi("News feed", "Ffrwd newyddion")}</a></div></div>')

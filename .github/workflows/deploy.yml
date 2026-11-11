@@ -31,7 +31,7 @@ jobs:
         env:
           GOATCOUNTER: historyofwales
           SITE_URL: https://historyofwales.cymru/
-          KIT_FORM: ${{ vars.KIT_FORM }}
+          EMAIL_FORM: ${{ vars.EMAIL_FORM }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
