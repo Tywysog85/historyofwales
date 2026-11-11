@@ -60,6 +60,7 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - Categories, titles and links for pictures without a page of their own are in `src/gallery.py`. To add a picture, add its subject there, put its credit line in `src/gallery_photos.py` and its two WebP files in `src/static/gallery/`.
 - Each picture's credit (photographer, licence with link, Commons file page) shows in the viewer, under the photo on its place or person page, and in the full list at the bottom of the gallery.
 - Getting files from Ifan's PC into the repo: the PC's Git is not signed in for Claude, so Ifan commits and pushes with GitHub Desktop (File, Add local repository, pick the folder, type a summary, Commit, Push origin).
+
 ### Shared files keep pages small (November 2026)
 - Every page used to carry the same 100 KB of CSS inside it, and the home page, timeline and quiz each carried the same 430 KB of data and script. `shared_assets()` in `build.py` now moves them into `site.css`, `data.js` and `app.js` after the pages are built, so a browser downloads them once and keeps them. Pages became 60 to 70% smaller.
 - Each link ends in `?v=` and a fingerprint of the file, made from its contents, so a changed file always gets a new address and nobody keeps an old copy. Nothing to raise by hand.
