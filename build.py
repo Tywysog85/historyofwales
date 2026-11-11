@@ -176,7 +176,7 @@ NAV_MAIN = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#chapter
 NAV_MORE = [("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("castles.html", "Castles map", "Map y cestyll"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"), ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"),
             ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg"), ("journey.html", "Your journey", "Eich taith"), ("teachers.html", "For teachers", "I athrawon"),
             ("index.html#sources", "Sources", "Ffynonellau")]
-# extra links for the home page top bar, where the site name has moved into the opening screen and left room
+# extra links for the top bar (shown on every page, beside the site name)
 NAV_HOME_MORE = [("symbols.html", "Symbols", "Symbolau"), ("trails.html", "Trails", "Llwybrau"), ("gallery.html", "Gallery", "Oriel"), ("index.html#language", "Language", "Iaith")]
 SEARCH_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
 
@@ -190,8 +190,8 @@ def nav(active="", skip="#main", home=False):
     big = li("index.html", "Home", "Hafan", 1) + "".join(li(h, a, b, i + 2) for i, (h, a, b) in enumerate(NAV_MAIN))
     more = "".join(li(*x) for x in NAV_MORE)
     return (f'<a class="skip" href="{skip}">{bi("Skip to content", "Neidio i’r cynnwys")}</a><div class="progress" aria-hidden="true"><i id="progress"></i></div>'
-            f'<nav class="nav" aria-label="Main"><div class="wrap">' + ("" if home else f'<a class="brand" href="index.html">{bi("History of Wales", "Hanes Cymru")}</a>') +
-            f'<ul class="nav-inline">{main}</ul>' + ('<span class="brand" aria-hidden="true"></span>' if home else "") +
+            f'<nav class="nav" aria-label="Main"><div class="wrap">' + f'<a class="brand" href="index.html">{bi("History of Wales", "Hanes Cymru")}</a>' +
+            f'<ul class="nav-inline">{main}</ul>' +
             f'<a class="journey-chip" href="journey.html" id="journey-chip" data-total="{JOURNEY_TOTAL}" aria-label="Your journey / Eich taith"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" class="tr"/><circle cx="18" cy="18" r="15" class="fg" id="journey-ring" pathLength="100" stroke-dasharray="0 100"/></svg><b id="journey-n">0</b></a>'
             f'<button type="button" class="search-btn" data-search aria-label="Search / Chwilio">{SEARCH_SVG}</button>'
              '<div class="lang" role="group" aria-label="Language / Iaith"><button type="button" id="lang-en" aria-pressed="true">EN</button><button type="button" id="lang-cy" aria-pressed="false">CY</button></div>'
