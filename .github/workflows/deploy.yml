@@ -3,6 +3,8 @@ name: Build and deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: "15 4 * * *"   # rebuild every morning so the news feed carries the day's anniversaries
   workflow_dispatch:
 
 permissions:
@@ -27,6 +29,7 @@ jobs:
         env:
           GOATCOUNTER: historyofwales
           SITE_URL: https://historyofwales.cymru/
+          KIT_FORM: ${{ vars.KIT_FORM }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

@@ -1,0 +1,28 @@
+name: Weekly email (This week in Welsh history)
+
+# Every Monday at 07:00 UTC. Sends only once the KIT_API_KEY secret is set (see SKILLS.md, "The weekly email").
+on:
+  schedule:
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build the site data
+        run: python3 build.py
+        env:
+          SITE_URL: https://historyofwales.cymru/
+      - name: Send the email
+        run: python3 tools/weekly_email.py
+        env:
+          SITE_URL: https://historyofwales.cymru/
+          KIT_API_KEY: ${{ secrets.KIT_API_KEY }}
