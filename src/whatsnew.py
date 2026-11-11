@@ -7,6 +7,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-11", "Welsh literature, the great old books and the Triads", "Llenyddiaeth Gymraeg, yr hen lyfrau mawr a’r Trioedd",
+     "Three new pages: fourteen centuries of Welsh poetry and prose from Taliesin to today, the great books of Wales with pictures of the manuscripts, and the Welsh Triads to tap open.",
+     "Tair tudalen newydd: pedair canrif ar ddeg o farddoniaeth a rhyddiaith Gymraeg o Daliesin hyd heddiw, llyfrau mawr Cymru gyda lluniau o’r llawysgrifau, a Thrioedd Ynys Prydain i’w hagor.",
+     "literature.html"),
     ("2026-11-11", "Collect the cards: 220 cards in 29 sets", "Casglwch y cardiau: 220 o gardiau mewn 29 set",
      "Every person, place and legend you read is now a card. Collect the house of Gwynedd, the saints, the great castles, the Four Branches and 25 more sets.",
      "Mae pob person, lle a chwedl a ddarllenwch yn gerdyn nawr. Casglwch dŷ Gwynedd, y seintiau, y cestyll mawr, y Pedair Cainc a 25 set arall.",
