@@ -1,6 +1,7 @@
 """Look up candidate pictures on Wikimedia Commons, on GitHub (Commons is blocked from Claude's cloud computer).
 
-Reads tools/commons_research_in.json: {"out": "<folder>", "categories": [...], "searches": [...], "files": [...]}.
+Reads tools/commons_research_in.json: {"branch": "<your claude/ branch>", "out": "<folder>", "categories": [...], "searches": [...], "files": [...]}.
+The workflow only runs it on the branch named in "branch" (or when started by hand), so set that to your own branch.
 For every file found it records the title, size, licence, author and description, and saves a small preview JPEG
 (fits 500 x 500) so the pictures can be looked at before any is used. Writes <folder>/found.json and <folder>/<n>.jpg.
 Runs from .github/workflows/commons-research.yml. Delete the folder when the research is finished.
