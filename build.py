@@ -1502,7 +1502,7 @@ FIELD_LABEL = {k: (en, cy) for k, en, cy in P2.FIELDS}
 
 
 def first_year(y):
-    return f"c. {y}" if y < 1000 else str(y)
+    return f"c. {-y:,} BC" if y < 0 else f"c. {y}" if y < 1000 else str(y)
 
 
 def first_badge(slug):
@@ -1518,7 +1518,7 @@ def first_card(slug=None, other=None):
         p = PERSON[slug]
         kind, en, cy, y = P2.FIRSTS[slug]
         ph = PH.PERSON_PHOTOS.get(slug)
-        ini = "".join(w[0] for w in re.sub(r"\b(ap|ab|ferch|the|of|Sir|Dame|Lady|Dr)\b", " ", p[3]).split()[:1] + re.sub(r"\b(ap|ab|ferch|the|of)\b", " ", p[3]).split()[-1:]).upper()
+        ini = "".join(w[0] for w in re.sub(r"\b(ap|ab|ferch|the|The|of|Sir|Dame|Lady|Dr)\b", " ", p[3]).split()[:1] + re.sub(r"\b(ap|ab|ferch|the|of)\b", " ", p[3]).split()[-1:]).upper()
         ava = (f'<span class="ava" aria-hidden="true">{e(ini)}' + (f'<img src="{photo_url(ph[0], 240)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' if ph else "") + "</span>")
         return (f'<a class="first-card" id="f-{slug}" href="person-{slug}.html" data-era="{p[1]}" data-kind="{kind}" data-field="{P2.FIELD.get(slug, "")}">'
                 f'<span class="fy">{first_year(y)}</span><span class="who">{ava}<span><b>{bi(p[3], p[4])}</b><small>{bi(p[5], p[6])}</small></span></span>'
