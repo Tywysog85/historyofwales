@@ -24,6 +24,7 @@ import art as A  # noqa: E402
 L.TEACH.update(AG.TEACH)
 import ages9 as AG9
 import royal as RY  # noqa: E402
+import trees as TR  # noqa: E402
 L.TEACH.update(AG9.TEACH)
 from urllib.parse import quote as _q
 
@@ -168,7 +169,7 @@ PRINT_CSS = """
 
 NAV_MAIN = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#chapters", "Ages", "Oesoedd"), ("index.html#map", "Map", "Map"),
             ("index.html#people", "People", "Pobl"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("play.html", "Play", "Chwarae")]
-NAV_MORE = [("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"), ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"),
+NAV_MORE = [("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"), ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"),
             ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("journey.html", "Your journey", "Eich taith"), ("teachers.html", "For teachers", "I athrawon"),
             ("index.html#sources", "Sources", "Ffynonellau")]
 # extra links for the home page top bar, where the site name has moved into the opening screen and left room
@@ -205,7 +206,7 @@ def footer():
     def col(title_en, title_cy, links):
         return f'<div><p class="eyebrow">{bi(title_en, title_cy)}</p><ul>' + "".join(f'<li><a href="{h}">{bi(a, b)}</a></li>' for h, a, b in links) + "</ul></div>"
     eras = [(f'era-{x["id"]}.html', x["en"], x["cy"]) for x in D.ERAS]
-    explore = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#map", "Map of Wales", "Map Cymru"), ("index.html#people", "People", "Pobl"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("trails.html", "Themed trails", "Llwybrau thema"),
+    explore = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#map", "Map of Wales", "Map Cymru"), ("index.html#people", "People", "Pobl"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("trails.html", "Themed trails", "Llwybrau thema"),
                ("gallery.html", "Photo gallery", "Oriel luniau"), ("index.html#language", "The Welsh language", "Yr iaith Gymraeg")]
     read = [("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
             ("teachers.html", "For teachers", "I athrawon"), ("index.html#sources", "Sources", "Ffynonellau")]
@@ -334,7 +335,7 @@ def person_page(p):
     pager = (f'<a class="btn" href="person-{prev_p[0]}.html">← {bi(prev_p[3], prev_p[4])}</a>' if prev_p else f'<a class="btn" href="era-{eid}.html">← {bi(era["en"], era["cy"])}</a>') + \
             (f'<a class="btn solid" href="person-{next_p[0]}.html">{bi(next_p[3], next_p[4])} →</a>' if next_p else '<a class="btn solid" href="index.html#people">' + bi("All people", "Pawb") + " →</a>")
     meta = (f'<div class="person-meta"><span>{e(p[2])}</span><span>{bi(p[5], p[6])}</span><a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a></div>')
-    rl = realm_links(f"person-{slug}.html")
+    rl = realm_links(f"person-{slug}.html") + ft_link_for_person(f"person-{slug}.html")
     meta += f'<p class="realm-links">{rl}</p>' if rl else ""
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', era["ill"], p[2], p[2], p[3], p[4], p[7], p[8], art=ERA_ART[eid])
             + section(meta + photo_fig(PH.PERSON_PHOTOS.get(slug), "portrait") + paras(long_en, long_cy) + f'<p class="share no-print"><button type="button" class="btn" data-copy="person-{slug}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button> {src(p[9])}</p>', top=True)
@@ -731,7 +732,7 @@ def realm_page(r, i):
     places = [PLACE[p] for p in r["places"] if p in PLACE]
     main = (hero(r["era"], f'<a href="index.html">{SITE}</a> / <a href="kings.html">{bi("Kings and princes", "Brenhinoedd a thywysogion")}</a>', "crown",
                  r["span"], cy_dates(r["span"]), t_en, t_cy, r["subEn"], r["subCy"], art=r["art"])
-            + section(paras(r["introEn"], r["introCy"]), top=True)
+            + section(paras(r["introEn"], r["introCy"]) + ft_link_for_realm(r["id"]), top=True)
             + section(ruler_list(r["rulers"]) + f'<p class="note-box" style="margin-top:2rem">{ROYAL_NOTE}</p>', *(() if r["rulers"][0]["k"] == "h" else ("The rulers, in order", "Y rheolwyr, yn eu trefn")))
             + (section(f'<div class="era-places">{"".join(place_tile(p) for p in places)}</div>', "Places to visit", "Lleoedd i ymweld â nhw") if places else "")
             + section(f'<div class="pager"><a class="btn" href="kings.html">← {bi("All the kings and princes of Wales", "Holl frenhinoedd a thywysogion Cymru")}</a>'
@@ -790,6 +791,9 @@ def kings_page():
             + section(one, top=True)
             + section(lst(RY.MOST), "Kings who ruled most of Wales", "Brenhinoedd a reolodd y rhan fwyaf o Gymru")
             + section('<span id="princes"></span>' + lst(RY.PRINCES) + f'<p class="lede" style="margin-top:1.5rem">{bi(RY.CODA["en"], RY.CODA["cy"])} <a href="person-harri-tudur.html">{bi("Harri Tudur", "Harri Tudur")} →</a></p>', "Princes of Wales", "Tywysogion Cymru")
+            + section(f'<aside class="behind one-king"><p class="eyebrow">{bi("Rhodri Mawr to Harri Tudur", "Rhodri Mawr i Harri Tudur")}</p><h2>{bi("Royal family trees", "Coed teulu brenhinol")}</h2>'
+                      f'<p>{bi("The royal houses of Wales were one great family. See how Gwynedd, Deheubarth, Powys and Gwent married into one another, and how their blood came to the throne at Bosworth with Harri Tudur. Tap anyone to light up their line.", "Un teulu mawr oedd tai brenhinol Cymru. Gwelwch sut y priododd Gwynedd, Deheubarth, Powys a Gwent â’i gilydd, a sut y daeth eu gwaed i’r orsedd yn Bosworth gyda Harri Tudur. Tapiwch unrhyw un i oleuo’i linach.")}</p>'
+                      f'<p><a class="go" href="family-trees.html">{bi("See the family trees", "Gweld y coed teulu")} →</a></p></aside>')
             + section(f'<div class="era-places">{"".join(realm_tile(r) for r in RY.REALMS if r.get("group") != "north")}</div>', "The kingdoms, one by one", "Y teyrnasoedd, fesul un")
             + section(f'<span id="old-north"></span><p class="lede" style="margin-bottom:1.5rem">{bi(RY.NORTH_INTRO["en"], RY.NORTH_INTRO["cy"])}</p><div class="era-places">{"".join(realm_tile(r) for r in RY.REALMS if r.get("group") == "north")}</div>', "The Old North: Yr Hen Ogledd", "Yr Hen Ogledd")
             + section(f'<p class="lede">{bi(f"All {n_all} kings, princes and lords on this site, from every kingdom, oldest first. Tap a kingdom to see its own line.", f"Pob un o’r {n_all} o frenhinoedd, tywysogion ac arglwyddi ar y wefan hon, o bob teyrnas, yr hynaf yn gyntaf. Tapiwch deyrnas i weld ei llinach ei hun.")}</p>'
@@ -798,6 +802,246 @@ def kings_page():
     return page("kings.html", "Kings and princes of Wales · History of Wales",
                 "Every king and prince of Wales, kingdom by kingdom: Gwynedd, Powys, Deheubarth, Dyfed, Gwent, Glywysing and more, and Gruffudd ap Llywelyn, king of all Wales.",
                 main, era="kings", ld=ld, og_type="website", active="kings.html", track="kings:all")
+
+
+# ---------- royal family trees (src/trees.py) ----------
+import re as _re
+
+
+def _ft_slug(s):
+    s = s.lower().replace("ŵ", "w").replace("â", "a").replace("ô", "o").replace("’", "")
+    return _re.sub(r"[^a-z0-9]+", "-", s).strip("-")
+
+
+FT_IDS = {}       # node id -> node
+FT_PERSON = {}    # person-x.html -> node id (first place the person appears with a link)
+FT_TREE_OF = {}   # node id -> tree id
+
+
+def _ft_index():
+    def walk(n, tid):
+        n["id"] = n["id"] or _ft_slug(n["name"][0])
+        assert n["id"] not in FT_IDS, n["id"]
+        FT_IDS[n["id"]] = n
+        FT_TREE_OF[n["id"]] = tid
+        if n["link"]:
+            FT_PERSON.setdefault(n["link"], n["id"])
+        for k in n["kids"]:
+            walk(k, tid)
+    for t in TR.TREES:
+        walk(t["root"], t["id"])
+
+
+_ft_index()
+FT_GEN = {"glyndyfrdwy": 2, "gwent-kings": 0}  # gap rows: how many generations they stand for (0 = not known)
+
+
+def ft_href(a):
+    a = a.lstrip("#")
+    return f"#ft-{a}" if a in FT_IDS else f"#{a}"
+
+
+def ft_card(n):
+    crown = '<svg class="ft-crown" aria-hidden="true"><use href="#i-crown"/></svg>' if n["crown"] else ""
+    d = f'<span class="ft-d">{bi(n["dates"], cy_dates(n["dates"]))}</span>' if n["dates"] else ""
+    role = f'<span class="ft-role">{bi(*n["role"])}</span>' if n["role"][0] else ""
+    note = f'<p class="ft-note">{bi(*n["note"])}</p>' if n["note"][0] else ""
+    links = ""
+    if n["link"]:
+        links += f'<a href="{n["link"]}">{bi("Read more", "Darllen mwy")} →</a>'
+    if n["goto"]:
+        a, en, cy = n["goto"]
+        links += f'<a class="ft-go" href="{ft_href(a)}">↪ {bi(en, cy)}</a>'
+    links = f'<span class="ft-links">{links}</span>' if links else ""
+    g = FT_GEN.get(n["id"], 1)
+    return (f'<div class="ft-card{" crown" if n["crown"] else ""}{" gap" if n["gap"] else ""}" id="ft-{n["id"]}" data-en="{e(n["name"][0])}" data-cy="{e(n["name"][1])}" data-g="{g}">'
+            f'{d}<button type="button" class="ft-nm" aria-label="{e(n["name"][0])}: show the line / dangos y llinach">{crown}{bi(*n["name"])}</button>{role}{note}{links}</div>')
+
+
+def ft_node(n):
+    kids = n["kids"]
+    sub = ""
+    if kids:
+        sub = f'<ul class="ft-kids{" one" if len(kids) == 1 else ""}">{"".join(ft_node(k) for k in kids)}</ul>'
+    return f'<li class="ft-n">{ft_card(n)}{sub}</li>'
+
+
+FT_CSS = """
+.ft-jump { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.4rem }
+.ft-jump a { font: 500 .8rem var(--f-mono); color: var(--ink); text-decoration: none; border: 1px solid var(--line); border-radius: 99px; padding: .35rem .85rem; background: var(--card) }
+.ft-jump a:hover { border-color: var(--gold); color: var(--gold) }
+.ft-how { display: flex; flex-wrap: wrap; gap: .4rem 1.4rem; margin-top: 1.2rem; font-size: .9rem; color: var(--muted) }
+.ft-how svg { width: 1em; height: 1em; vertical-align: -.12em; fill: var(--gold); color: var(--gold) }
+.ft-sec .lede { max-width: 46rem }
+.ft-tog { background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 99px; padding: .2rem .8rem; font: inherit; font-size: .85rem; cursor: pointer }
+.ft-tog[aria-pressed="true"] { border-color: var(--gold); color: var(--gold) }
+.ft-compact .ft-note, .ft-compact .ft-role { display: none }
+.ft-sec .realm-links { margin: .2rem 0 1.6rem }
+.ft-tree { --ind: .3rem; --arm: .75rem; margin-top: 1.4rem }
+.ft, .ft-kids { list-style: none; margin: 0; padding: 0 }
+.ft-kids { padding-left: var(--ind) }
+.ft-kids > li { position: relative; padding: .55rem 0 0 var(--arm) }
+.ft-kids > li::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; border-left: 2px solid color-mix(in srgb, var(--c) 45%, var(--line)) }
+.ft-kids > li:last-child::before { bottom: auto; height: 1.75rem }
+.ft-kids > li::after { content: ""; position: absolute; left: 0; top: 1.75rem; width: var(--arm); border-top: 2px solid color-mix(in srgb, var(--c) 45%, var(--line)) }
+.ft-kids.one { padding-left: 0 }
+.ft-kids.one > li { padding: 1.1rem 0 0 }
+.ft-kids.one > li::before { left: calc(var(--ind) + var(--arm) / 2); height: 1.1rem; bottom: auto }
+.ft-kids.one > li::after { display: none }
+.ft-card { position: relative; max-width: 36rem; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: .65rem .9rem .7rem; cursor: pointer;
+  transition: opacity .3s, border-color .3s, box-shadow .3s; scroll-margin-top: 6rem }
+.ft-card.crown { border-left: 3px solid var(--c) }
+.ft-card.gap { background: transparent; border-style: dashed }
+.ft-card.gap .ft-nm { font-style: italic; color: var(--muted) }
+.ft-d { display: block; font: 500 .7rem var(--f-mono); letter-spacing: .05em; color: var(--muted) }
+.ft-nm { all: unset; display: inline; cursor: pointer; font-family: var(--f-display); font-size: 1.22rem; line-height: 1.2; color: var(--ink); word-spacing: .04em }
+.ft-nm:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px }
+.ft-crown { width: .9em; height: .9em; margin-right: .3em; vertical-align: -.08em; color: var(--gold); fill: var(--gold) }
+.ft-role { display: block; font-size: .85rem; color: var(--c); margin-top: .1rem }
+.ft-note { margin: .35rem 0 0; font-size: .9rem; line-height: 1.55; color: #c9ccd4 }
+.ft-links { display: flex; flex-wrap: wrap; gap: .2rem 1rem; margin-top: .4rem; font-size: .85rem }
+.ft-links a { font-weight: 600 }
+.ft-tree.tracing .ft-card:not(.lit) { opacity: .4 }
+.ft-card.lit { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold), 0 6px 26px rgba(232,198,90,.18) }
+.ft-card.me { box-shadow: 0 0 0 2px var(--gold), 0 8px 34px rgba(232,198,90,.3) }
+.ft-card:target { animation: ftpulse 2.2s var(--ease) 1 }
+@keyframes ftpulse { 0%, 60% { box-shadow: 0 0 0 3px var(--gold) } 100% { box-shadow: none } }
+.ft-bar { position: fixed; left: 50%; bottom: max(1rem, env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 40; width: min(34rem, calc(100% - 2rem));
+  display: flex; gap: .8rem; align-items: center; background: #1d2333; border: 1px solid var(--gold); border-radius: 16px; padding: .7rem .8rem .7rem 1rem; box-shadow: 0 10px 40px rgba(0,0,0,.5); font-size: .92rem }
+.ft-bar[hidden] { display: none }
+.ft-bar p { margin: 0; flex: 1; line-height: 1.4 }
+.ft-bar button { flex: none; background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 99px; padding: .3rem .8rem; font: inherit; cursor: pointer }
+.ft-wed { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); gap: .9rem; margin-top: 1.2rem }
+.ft-wed a { display: grid; gap: .45rem; align-content: start; text-decoration: none; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 1rem 1.1rem; transition: transform .3s var(--ease), border-color .2s }
+.ft-wed a:hover { transform: translateY(-3px); border-color: var(--gold) }
+.ft-wed .hs { display: flex; align-items: center; gap: .45rem; font: 600 .7rem var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--gold) }
+.ft-wed .hs i { font-style: normal; color: var(--muted) }
+.ft-wed p { margin: 0; font-size: .92rem; line-height: 1.55; color: #c9ccd4 }
+.road { display: grid; gap: 0 1.2rem; margin-top: 1.6rem; grid-template-columns: 1fr;
+  grid-template-areas: "t" "r" "j1" "m" "l" "j2" "e" }
+.rd-col h3 { font: 600 .72rem var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--gold); margin: 1.4rem 0 .6rem; text-align: center }
+.rd-chain { list-style: none; margin: 0 auto; padding: 0; max-width: 21rem; display: grid; gap: 1.2rem }
+.rd-chain li { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: .5rem .8rem; text-align: center }
+.rd-chain li + li::before { content: ""; position: absolute; left: 50%; top: -1.25rem; height: 1.2rem; border-left: 2px solid var(--gold); opacity: .7 }
+.rd-chain li.gap { background: transparent; border-style: dashed; font-style: italic; color: var(--muted); font-size: .88rem }
+.rd-chain b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 1.1rem; line-height: 1.2 }
+.rd-chain b a { color: var(--ink); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--gold) 55%, transparent) }
+.rd-chain .dt { display: block; font: 500 .68rem var(--f-mono); color: var(--muted) }
+.rd-chain small { display: block; font-size: .8rem; color: #c9ccd4; margin-top: .1rem }
+.rd-join { position: relative; text-align: center; padding: 1.4rem 0 1.2rem; color: var(--gold); font-size: .9rem; font-style: italic }
+.rd-join::before { content: "↓"; display: block; font-style: normal; font-size: 1.2rem; line-height: 1; margin-bottom: .3rem }
+.rd-end { text-align: center; margin-top: .4rem; background: radial-gradient(ellipse at 50% 0, rgba(232,198,90,.14), transparent 70%), var(--card); border: 1px solid var(--gold); border-radius: 20px; padding: 1.4rem 1.2rem }
+.rd-end h3 { font-family: var(--f-display); font-weight: 400; font-size: clamp(1.5rem, 3.4vw, 2.2rem); line-height: 1.15; margin: 0 0 .5rem }
+.rd-end p { max-width: 40rem; margin: .4rem auto 0; color: #d0d3da; line-height: 1.65 }
+.rd-kids { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin-top: 1rem }
+.rd-kids > span { border: 1px solid var(--line); border-radius: 99px; padding: .3rem .9rem; font-size: .88rem; background: var(--slate) }
+@media (min-width: 860px) {
+  .ft-tree { --ind: 1.1rem; --arm: 1.3rem }
+  .road { grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-areas: "t r l l" "j1 j1 l l" "m m l l" "j2 j2 j2 j2" "e e e e" }
+  .rd-join { padding-top: 2.6rem }
+  .rd-join::before { content: ""; position: absolute; top: 0; left: 25%; right: 25%; height: 1.1rem; margin: 0; border: 2px solid var(--gold); border-top: 0; border-radius: 0 0 14px 14px; opacity: .8 }
+  .rd-join::after { content: ""; position: absolute; top: 1.1rem; left: 50%; height: 1.3rem; border-left: 2px solid var(--gold); opacity: .8 }
+  .rd-join.j2 { padding-top: 3rem }
+  .rd-join.j2::after { height: 1.7rem }
+  .rd-col.l .rd-chain { gap: 1.2rem }
+}
+@media print { .ft-bar { display: none !important } .ft-tree.tracing .ft-card { opacity: 1 } }
+"""
+style += FT_CSS
+
+FT_JS = r"""<script>(function(){var bar=document.getElementById("ft-bar"),msg=document.getElementById("ft-msg"),cur=null;
+function cy(){return document.documentElement.classList.contains("cy")}
+function clear(){document.querySelectorAll(".ft-tree.tracing").forEach(function(t){t.classList.remove("tracing")});document.querySelectorAll(".ft-card.lit").forEach(function(c){c.classList.remove("lit","me")});bar.hidden=true;cur=null}
+function trace(c,quiet){clear();var t=c.closest(".ft-tree");if(!t)return;var li=c.parentElement,n=0,known=true,root=c;c.classList.add("me");
+while(li&&li.classList.contains("ft-n")){var k=li.firstElementChild;k.classList.add("lit");root=k;if(k!==c){var g=+k.dataset.g;if(!g)known=false;n+=g}li=li.parentElement.closest(".ft-n")}
+t.classList.add("tracing");cur=c;var w=cy(),nm=c.dataset[w?"cy":"en"],rn=root.dataset[w?"cy":"en"];
+msg.textContent=c===root?(w?nm+": sylfaenydd y llinach hon.":nm+": the founder of this line."):(known?(w?nm+": "+n+" cenhedlaeth ar ôl "+rn+".":nm+": "+n+(n===1?" generation":" generations")+" from "+rn+"."):(w?nm+", o linach "+rn+".":nm+", of the line of "+rn+"."));
+bar.hidden=false}
+document.addEventListener("click",function(ev){var tg=ev.target.closest("#ft-compact");if(tg){var on=document.body.classList.toggle("ft-compact");tg.setAttribute("aria-pressed",on);return}if(ev.target.closest("#ft-clear")){clear();return}if(ev.target.closest("a"))return;var c=ev.target.closest(".ft-card");if(c){if(c===cur){clear()}else trace(c)}});
+document.addEventListener("keydown",function(ev){if(ev.key==="Escape"&&cur)clear()});
+function fromHash(){var h=location.hash.slice(1);if(!h)return;var c=document.getElementById(h);if(c&&c.classList.contains("ft-card"))trace(c)}
+addEventListener("hashchange",fromHash);fromHash();
+var lb=document.getElementById("lang-cy"),le=document.getElementById("lang-en");[lb,le].forEach(function(b){b&&b.addEventListener("click",function(){if(cur)trace(cur)})});})();</script>
+"""
+
+
+def ft_road():
+    R = TR.ROAD
+    def step(s):
+        en, cy, dates, nen, ncy, link = s
+        if dates is None:
+            return f'<li class="gap">{bi(en, cy)}</li>'
+        nm = bi(en, cy)
+        if link:
+            nm = f'<a href="{ft_href(link) if link.startswith("#") else link}">{nm}</a>'
+        return (f'<li><b>{nm}</b>' + (f'<span class="dt">{bi(dates, cy_dates(dates))}</span>' if dates else "")
+                + (f'<small>{bi(nen, ncy)}</small>' if nen else "") + "</li>")
+    def col(key, area):
+        c = R[key]
+        return f'<div class="rd-col {area}" style="grid-area:{area}"><h3>{bi(c["en"], c["cy"])}</h3><ol class="rd-chain">{"".join(step(s) for s in c["steps"])}</ol></div>'
+    joined = f'<div class="rd-col m" style="grid-area:m"><ol class="rd-chain">{"".join(step(s) for s in R["joined"])}</ol></div>'
+    j1 = f'<p class="rd-join" style="grid-area:j1">{bi("Tudur ap Goronwy married Marged ferch Tomas", "Priododd Tudur ap Goronwy â Marged ferch Tomas")}</p>'
+    j2 = f'<p class="rd-join j2" style="grid-area:j2">{bi("Harri Tudur married Elizabeth of York, 18 January 1486", "Priododd Harri Tudur ag Elisabeth o Efrog, 18 Ionawr 1486")}</p>'
+    kids = [("Arthur, Prince of Wales", "Arthur, Tywysog Cymru"), ("Margaret, Queen of Scots", "Marged, Brenhines yr Alban"), ("Henry VIII", "Harri VIII"), ("Mary, Queen of France", "Mari, Brenhines Ffrainc")]
+    end = (f'<div class="rd-end" style="grid-area:e"><h3>{bi("Three lines meet on the throne", "Tair llinach yn cwrdd ar yr orsedd")}</h3>'
+           f'<p>{bi("In the children of Harri Tudur and Elizabeth of York, the blood of Llywelyn Fawr, of the Lord Rhys and of Ednyfed Fychan came together. Their daughter Margaret was the great-grandmother of James VI and I, and every king and queen since 1603 descends from her, and so from the royal houses of Wales.", "Ym mhlant Harri Tudur ac Elisabeth o Efrog, daeth gwaed Llywelyn Fawr, yr Arglwydd Rhys ac Ednyfed Fychan ynghyd. Eu merch Marged oedd hen fam-gu Iago VI a I, ac mae pob brenin a brenhines ers 1603 yn disgyn ohoni hi, ac felly o dai brenhinol Cymru.")}</p>'
+           f'<div class="rd-kids">{"".join(f"<span>{bi(a, b)}</span>" for a, b in kids)}</div></div>')
+    return f'<div class="road">{col("tudur", "t")}{col("rhys", "r")}{j1}{joined}{col("llywelyn", "l")}{j2}{end}</div>'
+
+
+FT_REALM_TREE = {"gwynedd": "gwynedd", "deheubarth": "deheubarth", "ceredigion": "deheubarth", "powys": "powys", "glywysing": "gwent", "gwent": "gwent"}
+FT_TREE = {t["id"]: t for t in TR.TREES}
+
+
+def ft_link_for_realm(rid):
+    t = FT_TREE.get(FT_REALM_TREE.get(rid, ""))
+    if not t:
+        return ""
+    return f'<p class="realm-links" style="margin-top:1.4rem"><a href="family-trees.html#tree-{t["id"]}">{bi("Family tree of " + t["en"].split(": ")[-1], "Coeden deulu " + t["cy"].split(": ")[-1])} →</a></p>'
+
+
+def ft_link_for_person(href):
+    i = FT_PERSON.get(href)
+    return f'<a href="family-trees.html#ft-{i}">{bi("In the royal family trees", "Yn y coed teulu brenhinol")} →</a>' if i else ""
+
+
+def family_trees_page():
+    jump = "".join(f'<a href="#tree-{t["id"]}">{bi(t["en"].split(":")[0], t["cy"].split(":")[0])}</a>' for t in TR.TREES)
+    jump += f'<a href="#marriages">{bi("The marriages", "Y priodasau")}</a><a href="#bosworth">{bi("The road to Bosworth", "Y ffordd i Bosworth")}</a>'
+    how = (f'<p class="ft-how"><span><svg aria-hidden="true"><use href="#i-crown"/></svg> {bi("ruled a kingdom", "rheolodd deyrnas")}</span>'
+           f'<span>{bi("Tap a name to light up the line back to the founder", "Tapiwch enw i oleuo’r llinach yn ôl at y sylfaenydd")}</span>'
+           f'<span>↪ {bi("the same family in another tree", "yr un teulu mewn coeden arall")}</span>'
+           f'<button type="button" class="ft-tog" id="ft-compact" aria-pressed="false">{bi("Names only", "Enwau yn unig")}</button></p>')
+    intro = paras(["Wales was ruled for six hundred years by a handful of royal houses, and they were one great family. Rhodri Mawr’s sons founded the houses of Gwynedd and Deheubarth; his great-great-granddaughter Angharad was the mother of the first king of the house of Powys. Princes married princesses from the other kingdoms again and again, so that Llywelyn Fawr, the Lord Rhys and Owain Glyndŵr were all cousins many times over.",
+                   "Then, in 1485, a grandson of Owain Tudur of Ynys Môn, with the blood of Deheubarth in his veins, won the crown at Bosworth under the red dragon. These trees follow the lines that carried the crown, from Rhodri Mawr to Harri Tudur."],
+                  ["Am chwe chan mlynedd rheolwyd Cymru gan lond llaw o dai brenhinol, ac un teulu mawr oedden nhw. Sefydlodd meibion Rhodri Mawr dai Gwynedd a Deheubarth; ei or-or-wyres Angharad oedd mam brenin cyntaf tŷ Powys. Priododd tywysogion â thywysogesau o’r teyrnasoedd eraill dro ar ôl tro, fel bod Llywelyn Fawr, yr Arglwydd Rhys ac Owain Glyndŵr i gyd yn gefndryd lawer gwaith drosodd.",
+                   "Yna, yn 1485, enillodd ŵyr i Owain Tudur o Ynys Môn, a gwaed Deheubarth yn ei wythiennau, y goron yn Bosworth dan y ddraig goch. Mae’r coed hyn yn dilyn y llinachau a ddygodd y goron, o Rhodri Mawr i Harri Tudur."])
+    trees = ""
+    for t in TR.TREES:
+        kl = f'<p class="realm-links"><a href="kings-{t["realm"]}.html">{bi(*realm_title(REALM[t["realm"]]))}, {bi("in order", "yn eu trefn")} →</a></p>' if t["realm"] else ""
+        trees += (f'<section class="tight ft-sec" id="tree-{t["id"]}" data-era="{t["era"]}"><div class="wrap"><h2 class="sub-h">{bi(t["en"], t["cy"])}</h2>'
+                  f'<p class="lede">{bi(t["introEn"], t["introCy"])}</p>{kl}<div class="ft-tree"><ul class="ft">{ft_node(t["root"])}</ul></div></div></section>')
+    wed = "".join(f'<a href="{ft_href(a)}"><span class="hs">{e(x)} <i>+</i> {e(y)}</span><p>{bi(en, cy)}</p></a>' for x, y, en, cy, a in TR.MARRIAGES)
+    note = bi("The trees follow the medieval Welsh royal genealogies, such as those in Harley MS 3859 and Jesus College MS 20, and the chronicles. For the early generations they are the only witness, and dates marked c. are estimates. Not every child is shown: the trees follow the lines that carried the crown and the marriages that joined the houses.",
+              "Mae’r coed yn dilyn achau brenhinol Cymreig yr Oesoedd Canol, megis y rhai yn llawysgrif Harley 3859 a llawysgrif Coleg Iesu 20, a’r croniclau. I’r cenedlaethau cynnar hwy yw’r unig dyst, ac amcangyfrif yw’r dyddiadau a nodir ‘tua’. Ni ddangosir pob plentyn: mae’r coed yn dilyn y llinachau a ddygodd y goron a’r priodasau a unodd y tai.")
+    main = (hero("kings", f'<a href="index.html">{SITE}</a> / <a href="kings.html">{bi("Kings and princes", "Brenhinoedd a thywysogion")}</a>', "crown",
+                 "c. 825–1603", "tua 825–1603", "Royal family trees of Wales", "Coed teulu brenhinol Cymru",
+                 "From Rhodri Mawr to Harri Tudur: how the royal houses of Gwynedd, Deheubarth and Powys ran on for six hundred years, married into one another, and came to the throne at Bosworth.",
+                 "O Rhodri Mawr i Harri Tudur: sut y parhaodd tai brenhinol Gwynedd, Deheubarth a Phowys am chwe chan mlynedd, priodi â’i gilydd, a dod i’r orsedd yn Bosworth.", art="castle")
+            + section(intro + how + f'<nav class="ft-jump" aria-label="Trees">{jump}</nav>', top=True)
+            + trees
+            + f'<section class="tight" id="marriages"><div class="wrap"><h2 class="sub-h">{bi("One family: the marriages that joined the houses", "Un teulu: y priodasau a unodd y tai")}</h2>'
+              f'<p class="lede">{bi("Tap a marriage to find it in the trees.", "Tapiwch briodas i’w chanfod yn y coed.")}</p><div class="ft-wed">{wed}</div></div></section>'
+            + f'<section class="tight" id="bosworth" data-era="tudor"><div class="wrap"><h2 class="sub-h">{bi("The road to Bosworth", "Y ffordd i Bosworth")}</h2>'
+              f'<p class="lede">{bi("Three Welsh lines that met in Harri Tudur and his children: the Tudors of Penmynydd, the house of Dinefwr, and Llywelyn Fawr’s daughter Gwladus Ddu.", "Tair llinach Gymreig a gyfarfu yn Harri Tudur a’i blant: Tuduriaid Penmynydd, tŷ Dinefwr, a Gwladus Ddu, merch Llywelyn Fawr.")}</p>{ft_road()}</div></section>'
+            + section(f'<p class="note-box">{note}</p>')
+            + section(f'<div class="pager"><a class="btn" href="kings.html">← {bi("Kings and princes of Wales", "Brenhinoedd a thywysogion Cymru")}</a>'
+                      f'<a class="btn solid" href="person-harri-tudur.html">{bi("Harri Tudur", "Harri Tudur")} →</a></div>')
+            + f'<div class="ft-bar" id="ft-bar" role="status" hidden><p id="ft-msg"></p><button type="button" id="ft-clear">{bi("Clear", "Clirio")}</button></div>')
+    ld = {"@context": "https://schema.org", "@type": "Article", "headline": "Royal family trees of Wales", "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
+    return page("family-trees.html", "Royal family trees of Wales · History of Wales",
+                "Family trees of the royal houses of Wales: Gwynedd, Deheubarth, Powys, Gwent and the Tudors, from Rhodri Mawr to Harri Tudur, and the marriages that joined them.",
+                main, era="kings", ld=ld, og_type="website", active="kings.html", track="kings:trees", extra=FT_JS)
 
 
 # ---------- index ----------
@@ -899,6 +1143,8 @@ def search_index():
     items += [dict(k="page", t=g[2], c=g[3], u=g[0], y=["Game", "Gêm"], b=[g[4], g[5]], e=g[8]) for g in GAMES]
     items.append(dict(k="page", t="Kings and princes of Wales", c="Brenhinoedd a thywysogion Cymru", u="kings.html", y=["Kings", "Brenhinoedd"], b=["Every king and prince of Wales, and Gruffudd ap Llywelyn, king of all Wales", "Pob brenin a thywysog yng Nghymru, a Gruffudd ap Llywelyn, brenin Cymru gyfan"], e="kings"))
     items += [dict(k="page", t=realm_title(r)[0], c=realm_title(r)[1], u=f"kings-{r['id']}.html", y=[r["span"], cy_dates(r["span"])], b=[r["subEn"] + " " + ", ".join(x["name"] for x in r["rulers"] if x["k"] == "r"), r["subCy"]], e=r["era"]) for r in RY.REALMS]
+    items.append(dict(k="page", t="Royal family trees of Wales", c="Coed teulu brenhinol Cymru", u="family-trees.html", y=["Family trees", "Coed teulu"], b=["From Rhodri Mawr to Harri Tudur: the royal houses of Gwynedd, Deheubarth, Powys and Gwent, the Tudors, and the marriages that joined them. " + ", ".join(n["name"][0] for n in FT_IDS.values() if not n["gap"]), "O Rhodri Mawr i Harri Tudur: tai brenhinol Gwynedd, Deheubarth, Powys a Gwent, y Tuduriaid, a’r priodasau a’u hunodd."], e="kings"))
+    items += [dict(k="page", t=t["en"], c=t["cy"], u=f"family-trees.html#tree-{t['id']}", y=["Family tree", "Coeden deulu"], b=[t["introEn"], t["introCy"]], e=t["era"]) for t in TR.TREES]
     items.append(dict(k="page", t="For teachers", c="I athrawon", u="teachers.html", y=["", ""], b=["Lesson ideas and printable quizzes", "Syniadau gwersi a chwisiau i’w hargraffu"], e="industrial"))
     return items
 
@@ -933,6 +1179,7 @@ def main():
     pages["kings.html"] = kings_page()
     for i, r in enumerate(RY.REALMS):
         pages[f"kings-{r['id']}.html"] = realm_page(r, i)
+    pages["family-trees.html"] = family_trees_page()
     pages["symbols.html"] = symbols_page()
     pages["gallery.html"] = gallery_page()
     pages["play.html"] = play_index()

@@ -153,6 +153,15 @@ A long read can also say who and what it is about, with `people=[...]`, `places=
 - For the earliest kings, mark dates "c." and say the genealogies are the witness, rather than leaving people out.
 - The kingdoms of the Old North (Rheged, Gododdin, Strathclyde, Elfed, Efrog) are in the `NORTH` list in `src/royal.py`, marked `group="north"`, so `kings.html` shows them in their own "Yr Hen Ogledd" section. A ruler linked to a poet's page (`P("taliesin")`) makes that poet's page link back to the kingdom.
 
+### Royal family trees (November 2026)
+- The trees live in `src/trees.py` and become `family-trees.html`. Each person is `T(name, dates, role, note, link, crown, kids=[...])`; a person's children go in `kids`, so the tree is written exactly as it is shaped. Put the child who carries the line on **last**, so the main line runs to the bottom.
+- `goto=(anchor, English, Welsh)` links a person to the same family in another tree (Gwenllian of Gwynedd to her husband in Deheubarth). `gap=True` makes a dashed row standing for several generations; say how many in `FT_GEN` in `build.py`.
+- The tree is plain nested lists. The joining lines are CSS borders on each list item (`::before` for the upright, `::after` for the elbow); a person with only one child sits straight below with no indent, which keeps fifteen generations readable on a phone.
+- Tapping a name walks up the lists to the founder, lights that line and counts the generations. A link like `family-trees.html#ft-owain-glyndwr` opens the page with that line already lit.
+- "The road to Bosworth" is a CSS grid with named areas (`grid-template-areas`): four columns on wide screens so the lines meet in the middle, one column on phones.
+- Person pages and kingdom pages link to the trees automatically (`ft_link_for_person`, `ft_link_for_realm`). If two trees show the same person, give the copy an `id` of its own, or the build stops.
+- Python checks brackets for you: if a long nested tree will not load, a short script with `tokenize` shows which opening bracket was never closed.
+
 ### The four notes in the top folder (November 2026)
 
 `README.md` says what the site is and where things live. `EDITORIAL.md` holds the owner's rules for how it is written. `TODO.md` lists the open jobs. `SKILLS.md` is this file. The owner wants them kept clean and tidy: when something changes, edit the line that is there instead of adding a new one at the bottom, delete finished jobs from `TODO.md`, and keep the counts in `README.md` true.
