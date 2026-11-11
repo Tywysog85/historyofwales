@@ -590,3 +590,10 @@ html.cy .news-item.is-new .n-t::after { content: "Newydd" }
   .cset { padding: 1rem .9rem 1.1rem }
 }
 @media (prefers-reduced-motion: reduce) { .cc, .cc.got::after { transition: none } .cc:hover { transform: none } }
+
+/* ---------- read further (person and place pages) ---------- */
+.further { margin-top: 2rem; padding-top: 1.2rem; border-top: 1px solid var(--line); display: grid; gap: .6rem }
+.further .eyebrow { margin: 0 }
+.further p:last-child { margin: 0; display: flex; flex-wrap: wrap; gap: .5rem }
+.further a { display: inline-flex; align-items: center; gap: .35rem; padding: .5rem .85rem; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); text-decoration: none; font-size: .9rem; font-weight: 600; background: var(--card) }
+.further a:hover { border-color: var(--gold); color: var(--gold) }

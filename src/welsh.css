@@ -63,3 +63,5 @@
 .cyw-note p { margin: 0 }
 .lang-wotd { margin-top: clamp(2rem, 5vw, 3.5rem); display: grid; gap: 1rem }
 .lang-wotd .more-row { margin: 0 }
+.cyw-credits summary { cursor: pointer; color: var(--ink); font-weight: 600 }
+.cyw-credits p { margin: .6rem 0 0; font-size: .88rem; line-height: 1.7 } .cyw-credits a { color: inherit }

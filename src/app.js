@@ -10,7 +10,7 @@
   var ERA = {}; ERAS.forEach(function (e) { ERA[e.id] = e; });
   var PLACE = {}; PLACES.forEach(function (p) { PLACE[p.id] = p; });
   function T(en, cy) { return lang === "cy" ? cy : en; }
-  function fmt(n) { return Math.abs(n).toLocaleString("en-GB"); }
+  function fmt(n) { n = Math.abs(n); return n >= 10000 ? n.toLocaleString("en-GB") : String(n); }  /* 2026, not 2,026; 230,000 BC keeps its comma */
   /* event fields */
   var E_ERA = 0, E_Y = 1, E_C = 2, E_END = 3, E_DAY = 4, E_TEN = 5, E_TCY = 6, E_BEN = 7, E_BCY = 8, E_KEY = 9, E_PLACE = 10, E_SRC = 11;
   function yearLabel(e) {
@@ -545,7 +545,7 @@
   }
   function showYear(e) {
     var to = e[E_Y], from = shownYear, el = $("#dial-yr"), st = null;
-    function paint(v) { var neg = v < 0, a = Math.round(Math.abs(v)); el.innerHTML = (e[E_C] ? '<small style="margin:0 .2em 0 0">c.</small>' : "") + a.toLocaleString("en-GB") + (neg ? "<small>" + T("BC", "CC") + "</small>" : (a < 1000 ? "<small>" + T("AD", "OC") + "</small>" : "")); }
+    function paint(v) { var neg = v < 0, a = Math.round(Math.abs(v)); el.innerHTML = (e[E_C] ? '<small style="margin:0 .2em 0 0">c.</small>' : "") + fmt(a) + (neg ? "<small>" + T("BC", "CC") + "</small>" : (a < 1000 ? "<small>" + T("AD", "OC") + "</small>" : "")); }
     if (yrAnim) cancelAnimationFrame(yrAnim);
     if (reduce || from === to) { shownYear = to; paint(to); return; }
     function f(ts) { if (!st) st = ts; var p = Math.min(1, (ts - st) / 550), k = 1 - Math.pow(1 - p, 3); var v = from + (to - from) * k; shownYear = v; paint(v); if (p < 1) yrAnim = requestAnimationFrame(f); else { shownYear = to; paint(to); } }
@@ -741,7 +741,7 @@
   /* ---------- Words, with play buttons ---------- */
   var AUDIO = {}; (D.AUDIO || []).forEach(function (a) { AUDIO[a] = 1; });
   var canSpeak = "speechSynthesis" in window;
-  function slugW(w) { return w.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
+  function slugW(w) { return w.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
   function sayWord(w) {
     var slug = slugW(w[0]);
     if (AUDIO[slug]) { try { new Audio("audio/" + slug + ".mp3").play(); } catch (e) {} return; }

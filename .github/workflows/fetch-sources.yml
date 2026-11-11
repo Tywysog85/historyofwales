@@ -1,0 +1,33 @@
+name: Find Dictionary of Welsh Biography and Coflein links
+
+# Asks Wikidata for each person's Dictionary of Welsh Biography entry, each place's Coflein record and the Welsh Wikipedia
+# articles, and commits src/source_links.json (tools/fetch_sources.py). Start it from the Actions tab; it also runs when
+# the script changes on a claude/ branch, and on the 1st of each month to pick up new people and places.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 5 1 * *"
+  push:
+    branches: ["claude/**"]
+    paths: ["tools/fetch_sources.py", ".github/workflows/fetch-sources.yml"]
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 tools/fetch_sources.py
+      - name: Commit the links
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/source_links.json
+          git diff --cached --quiet || git commit -m "Dictionary of Welsh Biography and Coflein links (tools/fetch_sources.py)"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push

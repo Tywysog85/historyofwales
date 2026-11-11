@@ -151,6 +151,35 @@ def src(s):
     return f'<a class="src" href="{WIKI}{s}" target="_blank" rel="noopener">{bi("Source", "Ffynhonnell")} ↗<span class="sr-only"> (Wikipedia)</span></a>' if s else ""
 
 
+# ---------- read further: the Dictionary of Welsh Biography, Coflein and Welsh Wikipedia (tools/fetch_sources.py) ----------
+SOURCE_LINKS = json.loads(read("source_links.json")) if os.path.exists(os.path.join(SRC, "source_links.json")) else {}
+
+
+def _two(href_en, href_cy, en, cy):
+    """One link in English and one in Welsh (each shown in its own language)."""
+    if href_en == href_cy and en == cy:
+        return f'<a href="{e(href_en)}" target="_blank" rel="noopener">{e(en)} ↗</a>'
+    return (f'<a class="l-en" lang="en" href="{e(href_en)}" target="_blank" rel="noopener">{e(en)} ↗</a>'
+            f'<a class="l-cy" lang="cy" href="{e(href_cy)}" target="_blank" rel="noopener">{e(cy)} ↗</a>')
+
+
+def further(key, wiki):
+    rec = SOURCE_LINKS.get(key, {})
+    links = []
+    if rec.get("dwb"):
+        u = rec["dwb"]
+        links.append(_two(u, u.replace("://biography.wales/", "://bywgraffiadur.cymru/"), "Dictionary of Welsh Biography", "Y Bywgraffiadur Cymreig"))
+    if rec.get("coflein"):
+        u = rec["coflein"]
+        links.append(_two(u, u, "Coflein: the national record of this site", "Coflein: cofnod cenedlaethol y safle hwn"))
+    if wiki:
+        cyw = f'https://cy.wikipedia.org/wiki/{_q(rec["cy"].replace(" ", "_"), safe="")}' if rec.get("cy") else WIKI + wiki
+        links.append(_two(WIKI + wiki, cyw, "Wikipedia", "Wicipedia" if rec.get("cy") else "Wikipedia (Saesneg)"))
+    if not links:
+        return ""
+    return f'<div class="further no-print"><p class="eyebrow">{bi("Read further", "Darllen ymhellach")}</p><p>{"".join(links)}</p></div>'
+
+
 # ---------- shared head tags ----------
 def head_tags(title, desc, path, og_type="website", image=None):
     url = BASE_URL + path
@@ -489,7 +518,7 @@ def person_page(p):
     coded = any(a.startswith(("## ", "> ", "|| ")) for a in long_en)
     body = prose_bi(long_en, long_cy, cls="story prose") if coded else paras(long_en, long_cy)
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', era["ill"], p[2], p[2], p[3], p[4], p[7], p[8], art=ERA_ART[eid])
-            + section(meta + photo_fig(PH.PERSON_PHOTOS.get(slug), "portrait", "person-" + slug) + body + f'<p class="share no-print"><button type="button" class="btn" data-copy="person-{slug}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button> {src(p[9])}</p>', top=True)
+            + section(meta + photo_fig(PH.PERSON_PHOTOS.get(slug), "portrait", "person-" + slug) + body + f'<p class="share no-print"><button type="button" class="btn" data-copy="person-{slug}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button></p>' + further(f"person:{slug}", p[9]), top=True)
             + PERSON_EXTRA.get(slug, lambda: "")()
             + story_feature("people", slug)
             + (section(f'<ol class="era-events">{"".join(event_li(ev) for ev in related)}</ol>', "On the timeline", "Ar y llinell amser") if related else "")
@@ -515,7 +544,7 @@ def place_page(pl):
     coded = any(a.startswith(("## ", "> ", "|| ")) for a in long_en)
     body = prose_bi(long_en, long_cy, cls="story prose") if coded else paras(long_en, long_cy)
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', pl["ill"], era["en"], era["cy"], pl["en"], pl["cy"], pl["dEn"], pl["dCy"], art=ERA_ART[eid])
-            + section(meta + photo_fig(PH.PLACE_PHOTOS.get(pid), "", "place-" + pid) + paras(long_en, long_cy) + f'<p class="share no-print">{src(pl["src"])}</p>', top=True)
+            + section(meta + photo_fig(PH.PLACE_PHOTOS.get(pid), "", "place-" + pid) + paras(long_en, long_cy) + further(f"place:{pid}", pl["src"]), top=True)
             + story_feature("places", pid)
             + (section(f'<ol class="era-events">{"".join(event_li(ev) for ev in related)}</ol>', "What happened here", "Beth ddigwyddodd yma") if related else "")
             + set_block(f"place:{pid}")
@@ -1016,7 +1045,7 @@ def onthisday_page():
     main = (hero("medieval", f'<a href="index.html">{SITE}</a>', "book", "A year of Welsh history", "Blwyddyn o hanes Cymru", "On this day in Welsh history", "Ar y dydd hwn yn hanes Cymru",
                  f"{len(rows)} dates from the history of Wales, across {n_days} days of the year: battles and treaties, saints’ days and old customs, and the births of the people who made Wales.",
                  f"{len(rows)} o ddyddiadau o hanes Cymru, ar draws {n_days} o ddyddiau’r flwyddyn: brwydrau a chytundebau, gwyliau’r saint a hen arferion, a geni’r bobl a wnaeth Gymru.", art="book")
-            + f'<section class="tight otd-jump"><div class="wrap"><div class="otd-chips"><a class="chip solid" id="otd-today" href="#">{bi("Today", "Heddiw")}</a>{jump}</div></div></section>'
+            + f'<section class="tight otd-jump"><div class="wrap"><div class="otd-chips"><a class="chip solid" id="otd-today" href="#">{bi("Today", "Heddiw")}</a>{jump}</div><p class="otd-share"><a href="today.html">{bi("Today’s picture to share on social media", "Llun heddiw i’w rannu ar y cyfryngau cymdeithasol")} →</a></p></div></section>'
             + months)
     extra = ('<script>(function(){var n=new Date(),md=("0"+(n.getMonth()+1)).slice(-2)+"-"+("0"+n.getDate()).slice(-2),el=document.getElementById("d-"+md),b=document.getElementById("otd-today");'
              'if(!el){var all=[].slice.call(document.querySelectorAll(".otd-day"));el=all.filter(function(a){return a.id.slice(2)>=md})[0]||all[0]}'
@@ -1024,6 +1053,82 @@ def onthisday_page():
     ld = {"@context": "https://schema.org", "@type": "CollectionPage", "name": "On this day in Welsh history", "inLanguage": ["en", "cy"], "url": BASE_URL + "onthisday.html"}
     return page("onthisday.html", "On this day in Welsh history · History of Wales", "What happened on each day of the year in the history of Wales: events, saints’ days, traditions, births and deaths, in English and Cymraeg.",
                 main, era="medieval", og_type="website", ld=ld, extra=extra)
+
+# ---------- today's picture: the daily "On this day" post for social media (remade by the daily rebuild) ----------
+def _today():
+    try:
+        from zoneinfo import ZoneInfo
+        return datetime.datetime.now(ZoneInfo("Europe/London")).date()
+    except Exception:  # noqa: BLE001
+        return datetime.date.today()
+
+
+TODAY = _today()
+_KIND_RANK = {"ev": 0, "born": 1, "died": 2, "feast": 3, "custom": 3}
+
+
+def today_pick():
+    """Today's entries (or the next day that has some), best first: events with a page and a photo lead."""
+    rows = otd_rows()
+    md = TODAY.strftime("%m-%d")
+    days = sorted({r[0] for r in rows})
+    day = next((x for x in days if x >= md), days[0])
+    todays = [r for r in rows if r[0] == day]
+    todays.sort(key=lambda r: (_KIND_RANK.get(r[2], 4), not r[7], not (r[7] and card_photo(r[7].split("#")[0])), r[1] is None))
+    return day, todays
+
+
+def _today_text(day, r, lang):
+    m, dnum = int(day[:2]), int(day[3:])
+    mon = MONTHS[m - 1][0 if lang == "en" else 1]
+    y = f" {r[1]}" if r[1] is not None else ""
+    title, line = (r[3], r[5]) if lang == "en" else (r[4], r[6])
+    url = BASE_URL + (r[7] if r[7] else "onthisday.html")
+    if lang == "en":
+        return f"On this day in Welsh history, {dnum} {mon}{y}: {title}.\n\n{line}\n\nRead more: {url}\n\n#WelshHistory #OnThisDay #HanesCymru #Wales"
+    return f"Ar y dydd hwn yn hanes Cymru, {dnum} {mon}{y}: {title}.\n\n{line}\n\nDarllenwch fwy: {url}\n\n#HanesCymru #ArYDyddHwn #Cymru #WelshHistory"
+
+
+def today_page():
+    day, todays = today_pick()
+    r = todays[0]
+    m, dnum = int(day[:2]), int(day[3:])
+    stamp = TODAY.isoformat()
+
+    def fig(lang, label):
+        txt = _today_text(day, r, lang)
+        return (f'<figure class="today-fig"><img src="cards/today-{lang}.jpg?d={stamp}" width="1080" height="1080" alt="{e(txt.split(chr(10))[0])}" loading="lazy">'
+                f'<figcaption><p class="eyebrow">{label}</p><textarea readonly rows="7" id="cap-{lang}" lang="{"en" if lang == "en" else "cy"}">{e(txt)}</textarea>'
+                f'<p class="more-row"><a class="btn solid" href="cards/today-{lang}.jpg?d={stamp}" download="hanes-cymru-{day}-{lang}.jpg">{bi("Download the picture", "Lawrlwytho’r llun")}</a>'
+                f'<button type="button" class="btn" data-copytext="cap-{lang}">{bi("Copy the words", "Copïo’r geiriau")}</button></p></figcaption></figure>')
+    more = "".join(otd_item(x) for x in todays[1:])
+    main = (hero(r[8] if r[8] in ERA else "medieval", f'<a href="index.html">{SITE}</a> / <a href="onthisday.html">{bi("On this day", "Ar y dydd hwn")}</a>', "book",
+                 f"{dnum} {MONTHS[m - 1][0]}", f"{dnum} {MONTHS[m - 1][1]}", "Today’s picture to share", "Llun heddiw i’w rannu",
+                 "A new picture every morning from On this day in Welsh history, in English and in Cymraeg, with the words ready to paste. Share it on Facebook, Instagram, X or WhatsApp.",
+                 "Llun newydd bob bore o Ar y dydd hwn yn hanes Cymru, yn Saesneg ac yn Gymraeg, gyda’r geiriau’n barod i’w gludo. Rhannwch ef ar Facebook, Instagram, X neu WhatsApp.", art="book")
+            + section(f'<div class="today-grid">{fig("en", "English")}{fig("cy", "Cymraeg")}</div>', top=True)
+            + (section(f'<ul class="otd-list">{more}</ul>', "Also on this day", "Hefyd ar y dydd hwn") if more else "")
+            + section(f'<div class="pager"><a class="btn" href="onthisday.html">← {bi("The whole year", "Y flwyddyn gyfan")}</a></div>'))
+    extra = ('<script>document.addEventListener("click",function(e){var b=e.target.closest("[data-copytext]");if(!b)return;var t=document.getElementById(b.dataset.copytext);'
+             't.select();(navigator.clipboard?navigator.clipboard.writeText(t.value):Promise.reject()).catch(function(){document.execCommand("copy")});'
+             'var o=b.innerHTML;b.textContent=document.documentElement.classList.contains("cy")?"Wedi’i gopïo ✓":"Copied ✓";setTimeout(function(){b.innerHTML=o},1800)})</script>\n')
+    return page("today.html", "Today’s picture to share · History of Wales", "A new picture every morning from On this day in Welsh history, ready to share on social media, in English and Cymraeg.",
+                main, era=r[8] if r[8] in ERA else "medieval", og_type="website", extra=extra)
+
+
+def make_today(out):
+    day, todays = today_pick()
+    r = todays[0]
+    m, dnum = int(day[:2]), int(day[3:])
+    photo = card_photo(r[7].split("#")[0]) if r[7] else None
+    dragon = os.path.join(SRC, "static", "dragon-red.webp")
+    col = COL.get(r[8], "#f26a62")
+    for lang in ("en", "cy"):
+        title, line = (r[3], r[5]) if lang == "en" else (r[4], r[6])
+        eyebrow = ("On this day" if lang == "en" else "Ar y dydd hwn") + (f" · {r[1]}" if r[1] is not None else "")
+        CARDS.make_square(os.path.join(out, "cards", f"today-{lang}.jpg"), eyebrow, f"{dnum} {MONTHS[m - 1][0 if lang == 'en' else 1]}", title, line, col, photo, dragon,
+                          name="History of Wales" if lang == "en" else "Hanes Cymru")
+
 
 # ---------- kings and princes (src/royal.py) ----------
 REALM = {r["id"]: r for r in RY.REALMS}
@@ -1432,6 +1537,7 @@ def family_trees_page():
 WELSH_JS_VER = 1
 AUDIO_DIR = os.path.join(SRC, "static", "audio")
 AUDIO_FILES = sorted(f[:-4] for f in os.listdir(AUDIO_DIR) if f.endswith(".mp3")) if os.path.isdir(AUDIO_DIR) else []
+LL_CREDITS = json.loads(read("audio_credits.json")) if os.path.exists(os.path.join(SRC, "audio_credits.json")) else {}
 HEAR_SVG = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/>'
             '<path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>')
 WELSH_SCRIPT = f'<script src="welsh.js?v={WELSH_JS_VER}" defer></script>\n'
@@ -1465,6 +1571,16 @@ def welsh_page():
     credits = ""
     if CYM.AUDIO_CREDITS:
         credits = "<p>" + bi("Recordings:", "Recordiadau:") + " " + "; ".join(f'{e(f)}: <a href="{e(u)}">{e(who)}</a>, {e(lic)}' for f, (who, lic, u) in CYM.AUDIO_CREDITS.items()) + "</p>"
+    if LL_CREDITS:  # Lingua Libre recordings (tools/fetch_audio.py), grouped by speaker
+        by = {}
+        for k, c in LL_CREDITS.items():
+            if k in AUDIO_FILES:
+                by.setdefault((c["speaker"], c["licence"]), []).append(c)
+        if by:
+            credits += ("<details class=\"cyw-credits\"><summary>" + bi(f"Real Welsh voices: {sum(len(v) for v in by.values())} recordings from Lingua Libre, with thanks to the speakers",
+                                                                         f"Lleisiau Cymraeg go iawn: {sum(len(v) for v in by.values())} o recordiadau o Lingua Libre, gyda diolch i’r siaradwyr") + "</summary><p>"
+                        + "</p><p>".join(f'<b>{e(who)}</b> ({e(lic)}): ' + ", ".join(f'<a href="{e(c["page"])}" lang="cy">{e(c["text"])}</a>' for c in sorted(cs, key=lambda c: c["text"].lower()))
+                                         for (who, lic), cs in sorted(by.items(), key=lambda x: -len(x[1]))) + "</p></details>")
     note = (f'<div class="cyw-note"><p>{bi("Where a real recording of a word is available, the speaker button plays it. Otherwise your device reads the word aloud: devices with a Welsh voice installed, such as Microsoft Edge on Windows, speak real Welsh, and others read the sound guide in English.", "Lle mae recordiad go iawn o air ar gael, mae’r botwm sain yn ei chwarae. Fel arall mae eich dyfais yn darllen y gair yn uchel: mae dyfeisiau sydd â llais Cymraeg, fel Microsoft Edge ar Windows, yn siarad Cymraeg go iawn, ac mae eraill yn darllen y canllaw sain yn Saesneg.")}</p>'
             f'<p>{bi("In the sound guides, capital letters show the stressed syllable, kh is the ch of loch, and hl is the Welsh ll.", "Yn y canllawiau sain, mae priflythrennau’n dangos y sillaf acennog, kh yw ch yn loch, a hl yw’r ll Gymraeg.")}</p>{credits}</div>')
     main = (hero("modern", f'<a href="index.html">{SITE}</a> / <a href="index.html#language">{bi("Language", "Iaith")}</a>', "book", "Learn Welsh", "Dysgu Cymraeg",
@@ -2242,6 +2358,7 @@ def main():
     pages["play.html"] = play_index()
     pages["journey.html"] = journey_page()
     pages["onthisday.html"] = onthisday_page()
+    pages["today.html"] = today_page()
     pages["daily.html"] = game_page("daily.html", "daily", "medieval", "Daily challenge", "Her y dydd", "One event from Welsh history. Six guesses to find the year.", "Un digwyddiad o hanes Cymru. Chwe chynnig i ddyfalu’r flwyddyn.", "castle", "A daily history challenge: guess the year of an event from Welsh history in six tries.")
     pages["map-game.html"] = game_page("map-game.html", "map", "modern", "Where in Wales?", "Ble yng Nghymru?", "Tap the map where you think each place is. Five rounds, 100 points each.", "Tapiwch y map lle credwch fod pob lle. Pum rownd, 100 pwynt yr un.", "senedd", "A map game: place the castles, towns and historic sites of Wales on a blank map.", with_map=True)
     pages["names.html"] = game_page("names.html", "names", "saints", "Welsh names", "Enwau Cymraeg", "Jones, Powell, Lloyd, Vaughan: Welsh surnames are history in miniature. Look yours up, then find your name as the princes would have said it.", "Jones, Powell, Lloyd, Vaughan: mae cyfenwau Cymru’n hanes ar raddfa fach. Chwiliwch am eich un chi, yna gweld eich enw fel y byddai’r tywysogion wedi’i ddweud.", "cross", "What Welsh surnames mean and where they come from, and a patronymic name maker.")
@@ -2257,6 +2374,7 @@ def main():
         write(os.path.join(out, name), text)
     if CARDS_ON:
         print(f"Made {make_cards(out)} share pictures")
+        make_today(out)
     for f in os.listdir(os.path.join(SRC, "static")):
         sp = os.path.join(SRC, "static", f)
         (shutil.copytree if os.path.isdir(sp) else shutil.copy)(sp, os.path.join(out, f))
