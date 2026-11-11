@@ -173,7 +173,7 @@ PRINT_CSS = """
 
 NAV_MAIN = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#chapters", "Ages", "Oesoedd"), ("index.html#map", "Map", "Map"),
             ("index.html#people", "People", "Pobl"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("play.html", "Play", "Chwarae")]
-NAV_MORE = [("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"), ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"),
+NAV_MORE = [("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("castles.html", "Castles map", "Map y cestyll"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"), ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"),
             ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg"), ("journey.html", "Your journey", "Eich taith"), ("teachers.html", "For teachers", "I athrawon"),
             ("index.html#sources", "Sources", "Ffynonellau")]
 # extra links for the home page top bar, where the site name has moved into the opening screen and left room
@@ -209,7 +209,7 @@ def footer():
     def col(title_en, title_cy, links):
         return f'<div><p class="eyebrow">{bi(title_en, title_cy)}</p><ul>' + "".join(f'<li><a href="{h}">{bi(a, b)}</a></li>' for h, a, b in links) + "</ul></div>"
     eras = [(f'era-{x["id"]}.html', x["en"], x["cy"]) for x in D.ERAS]
-    explore = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#map", "Map of Wales", "Map Cymru"), ("index.html#people", "People", "Pobl"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("trails.html", "Themed trails", "Llwybrau thema"),
+    explore = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#map", "Map of Wales", "Map Cymru"), ("index.html#people", "People", "Pobl"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("castles.html", "Castles of Wales", "Cestyll Cymru"), ("trails.html", "Themed trails", "Llwybrau thema"),
                ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"), ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg")]
     read = [("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
             ("teachers.html", "For teachers", "I athrawon"), ("index.html#sources", "Sources", "Ffynonellau")]
@@ -836,7 +836,8 @@ ROYAL_CSS = """
 .realm-links { display: flex; flex-wrap: wrap; gap: .5rem 1.2rem; margin: -.8rem 0 1.5rem; font-size: .95rem }
 """
 style += ROYAL_CSS
-CY_ORD = {5: "5ed", 6: "6ed", 7: "7fed", 8: "8fed", 9: "9fed", 10: "10fed", 11: "11eg", 12: "12fed", 13: "13eg", 14: "14eg", 15: "15fed"}
+CY_ORD = {1: "1af", 2: "2il", 3: "3ydd", 4: "4ydd", 5: "5ed", 6: "6ed", 7: "7fed", 8: "8fed", 9: "9fed", 10: "10fed", 11: "11eg", 12: "12fed",
+          13: "13eg", 14: "14eg", 15: "15fed", 16: "16eg", 17: "17eg", 18: "18fed", 19: "19eg", 20: "20fed"}
 
 
 def saints_btn(realm_id):
@@ -1570,8 +1571,211 @@ def search_index():
     items += [dict(k="page", t=("Saints of " + r["en"]) if r["realm"] else "Saints across the sea", c=("Seintiau " + r["cy"]) if r["realm"] else "Saint dros y môr", u=f"saints-{r['id']}.html", y=["Saints", "Seintiau"], b=[r["subEn"] + " " + ", ".join(x["en"] for x in r["saints"]), r["subCy"]], e=r["era"]) for r in SA.REGIONS]
     items += [dict(k="page", t=x["en"], c=x["cy"], u=saint_href(sid), y=[x["dates"], cy_dates(x["dates"])], b=[x["nEn"].split(". ")[0] + ". " + " ".join(x["places"]), x["nCy"].split(". ")[0] + "."], e=r["era"]) for sid, (x, r) in SAINT.items()]
     items.append(dict(k="page", t="On this day in Welsh history", c="Ar y dydd hwn yn hanes Cymru", u="onthisday.html", y=["Every day", "Bob dydd"], b=["What happened on each day of the year in Welsh history", "Beth ddigwyddodd ar bob diwrnod o’r flwyddyn yn hanes Cymru"], e="medieval"))
+    items.append(dict(k="page", t="The castles of Wales: the map", c="Cestyll Cymru: y map", u="castles.html", y=["Map", "Map"], b=[f"All {len(CASTLES)} castle sites in Wales on one map, with who built them", f"Pob un o’r {len(CASTLES)} o safleoedd cestyll yng Nghymru ar un map, gyda phwy a’u cododd"], e="medieval"))
+    items += [dict(k="place", t=r["en"], c=r["cy"], u=f'castles.html#castle-{r["q"]}', y=[r["d"], castle_date_cy(r["d"])], b=[r["cur"][1] + ". " + r["cur"][4], r["cur"][2] + ". " + r["cur"][5]], e="medieval") for r in castle_rows() if r["cur"]]
     items.append(dict(k="page", t="For teachers", c="I athrawon", u="teachers.html", y=["", ""], b=["Lesson ideas and printable quizzes", "Syniadau gwersi a chwisiau i’w hargraffu"], e="industrial"))
     return items
+
+
+# ---------- the castles of Wales map (src/castles.py, src/castles_data.json, src/static/castles.js) ----------
+import castles as CS  # noqa: E402
+CASTLES = json.loads(read("castles_data.json"))
+_KIND_RE = [(re.compile(r"ringwork", re.I), "ring"), (re.compile(r"motte|mound|tomen|domen|mwnt|twmp|tump|mount\b", re.I), "motte"),
+            (re.compile(r"moat", re.I), "moat"), (re.compile(r"tower|\btwr\b|tŵr", re.I), "tower")]
+
+
+def castle_kind(c):
+    if c["kind"]:
+        return c["kind"]
+    for rx, k in _KIND_RE:
+        if rx.search(c["en"] + " " + c["cy"]):
+            return k
+    return ""
+
+
+def castle_group(c, kind):
+    if c["q"] in CS.C:
+        return CS.C[c["q"]][0]
+    if c["wp"]:
+        return "welsh"
+    if kind in ("house", "tower", "mansion", "moat"):
+        return "later"
+    return "other"
+
+
+def _link_label(h):
+    if h.startswith("person-"):
+        p = PERSON.get(h[7:-5])
+        return (p[3], p[4]) if p else None
+    if h.startswith("place-"):
+        p = PLACE.get(h[6:-5])
+        return (p["en"], p["cy"]) if p else None
+    if h.startswith("legend-"):
+        x = next((x for x in F.LEGENDS if x["id"] == h[7:-5]), None)
+        return (x["en"], x["cy"]) if x else None
+    if h.startswith("story-"):
+        x = next((x for x in F.STORIES if x["id"] == h[6:-5]), None)
+        return (x["en"], x["cy"]) if x else None
+    return None
+
+
+def castle_date_cy(s):
+    """A castle date such as 'late 12th–13th century' or '1093; keep c. 1200' in Welsh."""
+    def part(t):
+        t = t.strip()
+        t = re.sub(r"(\d+)(?:st|nd|rd|th)", lambda m: CY_ORD.get(int(m.group(1)), m.group(1)), t)
+        t = re.sub(r"\b(\d{3,4})s\b", r"\1au", t)
+        t = t.replace("c. ", "tua ").replace("keep ", "gorthwr ").replace("(stone tower)", "(tŵr carreg)")
+        if t.endswith(" century onwards"):
+            return "o’r " + t[:-16] + " ganrif ymlaen"
+        m = re.match(r"(early |late )?(.*?) century(.*)$", t)
+        if m:
+            lead = {"early ": "dechrau’r ", "late ": "diwedd y "}.get(m.group(1) or "", "y ")
+            return lead + m.group(2) + " ganrif" + m.group(3)
+        for en, cy in (("from ", "o "), ("by ", "erbyn "), ("after ", "wedi "), ("rebuilt ", "ailgodwyd yn y ")):
+            if t.startswith(en):
+                return cy + t[len(en):]
+        return t
+    return "; ".join(part(x) for x in s.split(";"))
+
+
+def castle_rows():
+    """Every castle, oldest-known story first within each group, with what the map needs."""
+    gi = {g["id"]: i for i, g in enumerate(CS.GROUPS)}
+    li = {n: i for i, n in enumerate(CS.LA_ORDER)}
+    rows = []
+    for c in CASTLES:
+        kind = castle_kind(c)
+        g = castle_group(c, kind)
+        x = round((c["lon"] - geo["minx"]) * geo["k"] * geo["sc"], 1)
+        y = round((geo["maxy"] - c["lat"]) * geo["sc"], 1)
+        cur = CS.C.get(c["q"])
+        rows.append(dict(q=c["q"], en=c["en"], cy=c["cy"], lat=c["lat"], lon=c["lon"], x=x, y=y, g=g, gi=gi[g], kind=kind, la=c["la"], li=li[c["la"]],
+                         d=(cur[3] if cur else (c["y"] if c["y"][:1] == "1" else "")), cur=cur, ph=CS.PHOTOS.get(c["q"])))
+    return rows
+
+
+def castle_photo(ph, w=900):
+    f, who, lic = ph
+    credit_en = "Photo: " + (f"{who}, {lic}, " if who else "") + "Wikimedia Commons"
+    credit_cy = "Llun: " + (f"{who}, {lic}, " if who else "") + "Wikimedia Commons"
+    return photo_url(f, w), f"{COMMONS}File:{_q(f, safe='')}", credit_en, credit_cy
+
+
+def county_lines():
+    """The old county borders from map.json as joined-up lines, rounded, so they weigh a third as much."""
+    segs = re.findall(r"M\s*(-?[\d.]+)[ ,](-?[\d.]+)\s*L\s*(-?[\d.]+)[ ,](-?[\d.]+)", geo["counties"])
+    out, end = [], None
+    for x1, y1, x2, y2 in segs:
+        a, b = (round(float(x1)), round(float(y1))), (round(float(x2)), round(float(y2)))
+        if a == b:
+            continue
+        if a != end:
+            out.append(f"M{a[0]} {a[1]}")
+        out.append(f"L{b[0]} {b[1]}")
+        end = b
+    return "".join(out)
+
+
+def castles_page():
+    rows = castle_rows()
+    by_q = {r["q"]: r for r in rows}
+    # place pages that stand at a castle
+    for r in rows:
+        r["place"] = next((p["id"] for p in D.PLACES if abs(p["lat"] - r["lat"]) < .006 and abs(p["lon"] - r["lon"]) < .009), None)
+    data_rows = [[r["q"], r["en"], r["cy"], r["x"], r["y"], r["gi"], r["kind"], r["d"], r["li"], r["lat"], r["lon"], 1 if r["cur"] else 0] for r in rows]
+    det = {}
+    for r in rows:
+        cur, ph = r["cur"], r["ph"]
+        if not (cur or ph or r["place"]):
+            continue
+        dd = {}
+        if cur:
+            dd.update(b=cur[1], bc=cur[2], n=cur[4], nc=cur[5])
+            links = list(cur[6])
+        else:
+            links = []
+        if r["place"] and f'place-{r["place"]}.html' not in links:
+            links.insert(0, f'place-{r["place"]}.html')
+        ls = [[h, *_link_label(h)] for h in links if _link_label(h)]
+        if ls:
+            dd["l"] = ls
+        if ph:
+            dd["ph"] = list(castle_photo(ph))
+        det[r["q"]] = dd
+    kinds = {k: [v[0], v[1], v[2], v[3]] for k, v in CS.KINDS.items()}
+    payload = dict(c=data_rows, d=det, k=kinds, g=[[g["en"], g["cy"], g["col"]] for g in CS.GROUPS],
+                   la=[[n, CS.LA_CY[n]] for n in CS.LA_ORDER], counties=county_lines(), W=geo["W"], H=geo["H"],
+                   P=[geo["minx"], geo["maxy"], geo["k"], geo["sc"]],
+                   dc={r["d"]: castle_date_cy(r["d"]) for r in rows if r["d"] and castle_date_cy(r["d"]) != r["d"]})
+    n_all = len(rows)
+    counts = {g["id"]: sum(1 for r in rows if r["g"] == g["id"]) for g in CS.GROUPS}
+
+    chips = "".join(f'<button type="button" class="cm-chip on" data-g="{i}" aria-pressed="true" style="--gc:{g["col"]}"><i></i>{bi(g["en"], g["cy"])} <b>{counts[g["id"]]}</b></button>'
+                    for i, g in enumerate(CS.GROUPS))
+    gcss = "".join(f".g{i}{{--gc:{g['col']}}}" for i, g in enumerate(CS.GROUPS))
+    legend = "".join(f'<li style="--gc:{g["col"]}"><i></i><span>{bi(g["en"], g["cy"])}</span><small>{bi(g["sumEn"], g["sumCy"])}</small></li>' for g in CS.GROUPS)
+    tool = (f'<div class="cm-tools">'
+            f'<div class="cm-search"><label class="sr-only" for="cm-q">{bi("Find a castle", "Chwilio am gastell")}</label>'
+            f'<input id="cm-q" type="search" autocomplete="off" placeholder="Find a castle…" data-ph-cy="Chwilio am gastell…" data-ph-en="Find a castle…">'
+            f'<ul id="cm-res" class="cm-res" role="listbox" hidden></ul></div>'
+            f'<div class="cm-btns"><button type="button" class="btn" id="cm-near">{bi("Castles near me", "Cestyll yn agos ataf")}</button>'
+            f'<button type="button" class="btn ghost" id="cm-rand">{bi("Surprise me", "Synnwch fi")}</button></div>'
+            f'<div class="cm-chips" role="group" aria-label="Who built them / Pwy a’u cododd">{chips}</div></div>')
+    mapbox = (f'<div class="cm-wrap">{tool}<div class="cm-map" id="cm-map" tabindex="0" aria-label="Map of the castles of Wales / Map o gestyll Cymru">'
+              f'<noscript><p>{bi("The map needs JavaScript. Every castle is listed below.", "Mae angen JavaScript ar y map. Rhestrir pob castell isod.")}</p></noscript>'
+              f'<div class="cm-zoom"><button type="button" id="cm-in" aria-label="Zoom in / Chwyddo i mewn">+</button><button type="button" id="cm-out" aria-label="Zoom out / Chwyddo allan">−</button>'
+              f'<button type="button" id="cm-home" aria-label="Whole of Wales / Cymru gyfan"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2"/></svg></button></div>'
+              f'<p class="cm-hint" id="cm-hint">{bi("Drag to move, pinch or scroll to zoom, tap a castle", "Llusgwch i symud, pinsiwch neu sgroliwch i chwyddo, tapiwch gastell")}</p></div>'
+              f'<aside class="cm-side"><div id="cm-card" class="cm-card" aria-live="polite">'
+              f'<p class="eyebrow">{bi(f"{n_all} castle sites", f"{n_all} o safleoedd cestyll")}</p>'
+              f'<h2>{bi("Choose a castle", "Dewiswch gastell")}</h2><p class="muted">{bi("Tap any dot on the map, search by name, or find the castles nearest to you. The red dots are castles built by the Welsh.", "Tapiwch unrhyw ddot ar y map, chwiliwch yn ôl enw, neu dewch o hyd i’r cestyll agosaf atoch. Cestyll a godwyd gan y Cymry yw’r dotiau coch.")}</p>'
+              f'<ul class="cm-legend">{legend}</ul></div></aside></div>')
+
+    def fcard(q):
+        r = by_q[q]
+        cur = r["cur"]
+        img = ""
+        if r["ph"]:
+            u, fu, ce, cc = castle_photo(r["ph"], 800)
+            img = (f'<img src="{u}" alt="{e(r["en"])}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">')
+        return (f'<article class="cm-feat rv">{img}<div class="cm-feat-t"><p class="eyebrow">{bi(cur[3], castle_date_cy(cur[3]))}</p><h3>{bi(r["en"], r["cy"])}</h3>'
+                f'<p class="cm-by">{bi(cur[1], cur[2])}</p><p>{bi(cur[4], cur[5])}</p>'
+                f'<button type="button" class="go cm-show" data-q="{q}">{bi("Show on the map", "Dangos ar y map")} →</button></div></article>')
+    feat = "".join(fcard(q) for q in CS.FEATURED)
+
+    lists = ""
+    for i, la in enumerate(CS.LA_ORDER):
+        rs = sorted([r for r in rows if r["la"] == la], key=lambda r: (-(r["cur"] is not None), r["en"]))
+        if not rs:
+            continue
+        items = "".join(f'<li><button class="cm-show g{r["gi"]}" data-q="{r["q"]}"><i></i>{bi(r["en"], r["cy"])}</button></li>' for r in rs)
+        lists += f'<details class="cm-la"><summary>{bi(la, CS.LA_CY[la])} <b>{len(rs)}</b></summary><ul>{items}</ul></details>'
+
+    intro_en = ["Wales is often called the castle capital of the world. More than six hundred castles were raised here in the Middle Ages, more for its size than in any other country in Europe.",
+                "Some were built to conquer Wales. Many were built by the Welsh to defend it: the princes of Gwynedd, Powys and Deheubarth raised stone castles in their own style, with D-shaped and round towers, on crags that guard the passes into their lands.",
+                "This map shows every castle site we could find in the records, from the great fortresses of Edward I to grassy mounds in a field. Tap a dot to see who built it."]
+    intro_cy = ["Gelwir Cymru’n aml yn brifddinas cestyll y byd. Codwyd mwy na chwe chant o gestyll yma yn yr Oesoedd Canol, mwy am ei maint nag mewn unrhyw wlad arall yn Ewrop.",
+                "Codwyd rhai i goncro Cymru. Codwyd llawer gan y Cymry i’w hamddiffyn: cododd tywysogion Gwynedd, Powys a Deheubarth gestyll carreg yn eu dull eu hunain, gyda thyrau siâp D a thyrau crwn, ar greigiau sy’n gwarchod y bylchau i mewn i’w tiroedd.",
+                "Mae’r map hwn yn dangos pob safle castell y gallem ei ganfod yn y cofnodion, o gaerau mawr Edward I i dwmpathau glaswelltog mewn cae. Tapiwch ddot i weld pwy a’i cododd."]
+    note = bi("Castle sites come from Wikidata, which draws on the Cadw and Coflein records of Wales (free CC0 data). Builders and stories are written for this site. Some early dates are approximate. Photographs are from Wikimedia Commons; each is credited beside it. Relief from open elevation data (Mapzen Terrarium).",
+              "Daw’r safleoedd cestyll o Wikidata, sy’n tynnu ar gofnodion Cadw a Coflein (data rhydd CC0). Ysgrifennwyd yr adeiladwyr a’r straeon ar gyfer y wefan hon. Mae rhai dyddiadau cynnar yn fras. Daw’r ffotograffau o Wikimedia Commons; mae cydnabyddiaeth wrth bob un. Tirwedd o ddata uchder agored (Mapzen Terrarium).")
+    main = (hero("medieval", f'<a href="index.html">{SITE}</a>', "castle", f"{n_all} castle sites", f"{n_all} o safleoedd cestyll", "The castles of Wales", "Cestyll Cymru",
+                 "Every castle in Wales on one map: who built it, when, and the story it tells. The castles of the Welsh princes are in red.",
+                 "Pob castell yng Nghymru ar un map: pwy a’i cododd, pryd, a’r stori sydd ganddo. Mae cestyll tywysogion Cymru mewn coch.", art="castle")
+            + f'<style>{read("castles.css")}{gcss}</style><section class="cm-sec" id="map"><div class="wrap">{mapbox}</div></section>'
+            + section(paras(intro_en, intro_cy), top=True)
+            + section(f'<p class="lede">{bi("From Dolwyddelan to Dinas Brân, the princes of Wales built in stone to guard their lands. These are the castles they left.", "O Ddolwyddelan i Ddinas Brân, cododd tywysogion Cymru mewn carreg i warchod eu tiroedd. Dyma’r cestyll a adawsant.")}</p><div class="cm-feats">{feat}</div>',
+                      "Castles of the Welsh princes", "Cestyll tywysogion Cymru")
+            + section(f'<p class="lede">{bi("Every castle site on the map, area by area.", "Pob safle castell ar y map, fesul ardal.")}</p><div class="cm-lists">{lists}</div><p class="note-box" style="margin-top:2rem">{note}</p>',
+                      "Every castle, by county", "Pob castell, fesul sir")
+            + section(f'<div class="pager"><a class="btn" href="kings.html">← {bi("Kings and princes", "Brenhinoedd a thywysogion")}</a><a class="btn solid" href="map-game.html">{bi("Play: Where in Wales?", "Chwarae: Ble yng Nghymru?")} →</a></div>'))
+    extra = (f'<script>var CASTLES={json.dumps(payload, ensure_ascii=False, separators=(",", ":"))};</script>\n<script src="castles.js?v=2" defer></script>\n')
+    ld = {"@context": "https://schema.org", "@type": "Map", "name": "The castles of Wales", "inLanguage": ["en", "cy"], "description": f"An interactive map of {n_all} castle sites in Wales, with who built them.",
+          "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
+    return page("castles.html", "The castles of Wales: interactive map · History of Wales",
+                f"An interactive map of {n_all} castles in Wales, from Caernarfon and Harlech to the castles of the Welsh princes: Dolwyddelan, Castell y Bere, Dinas Brân. Who built each one, and its story.",
+                main, era="medieval", ld=ld, og_type="website", active="castles.html", track="castles", extra=extra)
 
 
 def write(path, text):
@@ -1602,6 +1806,7 @@ def main():
     for i, x in enumerate(F.LEGENDS):
         pages[f"legend-{x['id']}.html"] = legend_page(x, i)
     pages["kings.html"] = kings_page()
+    pages["castles.html"] = castles_page()
     for i, r in enumerate(RY.REALMS):
         pages[f"kings-{r['id']}.html"] = realm_page(r, i)
     pages["family-trees.html"] = family_trees_page()

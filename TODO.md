@@ -7,11 +7,11 @@ Open jobs for History of Wales. Tick a job off by deleting it. Keep this list sh
 - **The Britons piece.** A long read on the first people of the island and their language ("Britons", not "Celts"). To be gone over together before it is written.
 - **The Coelbren piece.** Waiting for the poem, by a poet older than Iolo Morganwg, that mocks the Coelbren alphabet. Any name, line or photo of a marked stone will do to start.
 - **Lifelike dragon: who made it.** The 3D dragon comes from a kit that says its assets are Creative Commons but does not name the artist or the exact licence. If the artist is found, credit them by name in README.md. If anyone objects, swap the model (see SKILLS.md, "The lifelike dragon in the sky").
-- **Photo check.** The photos of places and people were picked by file name and have not been looked at. Any that are wrong should be swapped. The owner's own photos are welcome.
+- **Photo check.** The photos of places, people and castles were picked by file name and have not been looked at. Any that are wrong should be swapped. The owner's own photos are welcome.
 
 ## Needs a fluent Welsh speaker
 
-- **Proofread the Welsh.** All of it, and most of all the text added in November 2026: the long reads, the new people, the new places, the kingdoms map and the saints pages.
+- **Proofread the Welsh.** All of it, and most of all the text added in November 2026: the long reads, the new people, the new places, the kingdoms map the saints pages and the castles map.
 
 ## Checking and sources
 
