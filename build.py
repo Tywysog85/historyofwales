@@ -1651,7 +1651,7 @@ def realm_links(href):
     return "".join(f'<a href="kings-{i}.html">{bi(*realm_title(REALM[i]))} →</a>' for i in ids)
 
 
-def ruler_li(x, chips=""):
+def ruler_li(x, chips="", rid=""):
     link = x["link"]
     more = ""
     if link:
@@ -1659,12 +1659,23 @@ def ruler_li(x, chips=""):
         more = f'<a class="src" href="{link}">{bi(*lab)} →</a>'
     note = f'<p>{bi(x["en"], x["cy"])}</p>' if x["en"] else ""
     links = f'<div class="links">{more}{chips}</div>' if (more or chips) else ""
-    return (f'<li class="{"key" if x["key"] else ""}"><time>{bi(x["dates"], cy_dates(x["dates"]))}</time>'
+    return (f'<li{f' id="{rid}"' if rid else ""} class="{"key" if x["key"] else ""}"><time>{bi(x["dates"], cy_dates(x["dates"]))}</time>'
             f'<div><h3>{e(x["name"])}</h3>{note}{links}</div></li>')
 
 
+def ruler_anchor(name, seen):
+    """The anchor of a ruler on a kingdom page (kings-gwynedd.html#k-cadfan-ap-iago); search links to it."""
+    a = "k-" + _ft_slug(name)
+    n = 2
+    while a in seen:
+        a = f"k-{_ft_slug(name)}-{n}"
+        n += 1
+    seen.add(a)
+    return a
+
+
 def ruler_list(items):
-    out, cur = "", []
+    out, cur, seen = "", [], set()
     def flush():
         return f'<ol class="era-events royal">{"".join(cur)}</ol>' if cur else ""
     for x in items:
@@ -1674,7 +1685,7 @@ def ruler_list(items):
         elif x["k"] == "n":
             cur.append(f'<li class="gap"><time aria-hidden="true">· · ·</time><div><p>{bi(x["en"], x["cy"])}</p></div></li>')
         else:
-            cur.append(ruler_li(x))
+            cur.append(ruler_li(x, rid=ruler_anchor(x["name"], seen)))
     return out + flush()
 
 
@@ -1689,6 +1700,7 @@ ROYAL_NOTE = bi("Dates marked c. are approximate. For the earliest kings the old
 ROYAL_CSS = """
 .royal-h { margin-top: 2.6rem }
 .era-events.royal li.gap { padding: .7rem 0 }
+.era-events.royal li:target { scroll-margin-top: 6rem; background: color-mix(in srgb, var(--gold, #e8c65a) 12%, transparent); border-radius: 10px; outline: 1px solid color-mix(in srgb, var(--gold, #e8c65a) 45%, transparent); outline-offset: 4px }
 .era-events.royal li.gap p { font-style: italic; color: var(--muted) }
 .era-events.royal li.gap time { color: var(--muted) }
 .era-events .links .chip { font-family: var(--f-mono); font-size: .75rem; color: var(--muted); border: 1px solid var(--line); border-radius: 99px; padding: .1rem .6rem; text-decoration: none }
@@ -2532,6 +2544,23 @@ def search_index():
     items.append(dict(k="page", t="On this day in Welsh history", c="Ar y dydd hwn yn hanes Cymru", u="onthisday.html", y=["Every day", "Bob dydd"], b=["What happened on each day of the year in Welsh history", "Beth ddigwyddodd ar bob diwrnod o’r flwyddyn yn hanes Cymru"], e="medieval"))
     items.append(dict(k="page", t="The castles of Wales: the map", c="Cestyll Cymru: y map", u="castles.html", y=["Map", "Map"], b=[f"All {len(CASTLES)} castle sites in Wales on one map, with who built them", f"Pob un o’r {len(CASTLES)} o safleoedd cestyll yng Nghymru ar un map, gyda phwy a’u cododd"], e="medieval"))
     items += [dict(k="place", t=r["en"], c=r["cy"], u=f'castles.html#castle-{r["q"]}', y=[r["d"], castle_date_cy(r["d"])], b=[r["cur"][1] + ". " + r["cur"][4], r["cur"][2] + ". " + r["cur"][5]], e="medieval") for r in castle_rows() if r["cur"]]
+    for r in RY.REALMS:  # every king and prince, linked to their line on the kingdom page
+        seen = set()
+        for x in r["rulers"]:
+            if x["k"] != "r":
+                continue
+            a = ruler_anchor(x["name"], seen)
+            if (x["link"] or "").startswith("person-"):
+                continue  # the person page is already in the index
+            items.append(dict(k="ruler", t=x["name"], c=x["name"], u=f"kings-{r['id']}.html#{a}", y=[x["dates"], cy_dates(x["dates"])],
+                              b=[(x["en"] + " " if x["en"] else "") + f"Ruler of {realm_title(r)[0].replace('Kings and princes of ', '')}.",
+                                 (x["cy"] + " " if x["cy"] else "") + f"Rheolwr {r['cy']}."], e=r["era"]))
+    for r in castle_rows():  # every castle site, not only the ones with a story
+        if r["cur"]:
+            continue
+        kd = CS.KINDS.get(r["kind"], ("Castle", "Castell"))
+        items.append(dict(k="place", t=r["en"], c=r["cy"] or r["en"], u=f'castles.html#castle-{r["q"]}', y=[r["d"], castle_date_cy(r["d"])],
+                          b=[f'{kd[0]}, {r["la"]}. On the castles map.', f'{kd[1]}, {CS.LA_CY.get(r["la"], r["la"])}. Ar fap y cestyll.'], e="medieval"))
     items.append(dict(k="page", t="Welsh world firsts", c="Cymru oedd y cyntaf", u="firsts.html", y=["Firsts", "Y cyntaf"], b=["The equals sign, π, the fuel cell, the microphone, packet switching, mail order and more: everything Wales and the Welsh did first. " + ", ".join(PERSON[k][3] for k in P2.FIRSTS if k in PERSON), "Yr hafalnod, π, y gell danwydd, y meicroffon, newid pecynnau, archebu drwy’r post a rhagor: popeth a wnaeth Cymru a’r Cymry gyntaf."], e="industrial"))
     items.append(dict(k="page", t="For teachers", c="I athrawon", u="teachers.html", y=["", ""], b=["Lesson ideas and printable quizzes", "Syniadau gwersi a chwisiau i’w hargraffu"], e="industrial"))
     return items
