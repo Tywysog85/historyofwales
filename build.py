@@ -350,7 +350,13 @@ EVI = {ev: i for i, ev in enumerate(D.EVENTS)}
 COMMONS = "https://commons.wikimedia.org/wiki/"
 
 
+# Photos kept on the site by tools/fetch_photos.py: Commons file name -> [id, width, height]
+LOCAL_PHOTOS = json.loads(read("photo_files.json")) if os.path.exists(os.path.join(SRC, "photo_files.json")) else {}
+
+
 def photo_url(f, w=1200):
+    if f in LOCAL_PHOTOS:  # our own copy: faster, and it can never disappear from Wikimedia
+        return f"photos/{LOCAL_PHOTOS[f][0]}{'-s' if w <= 640 else ''}.webp"
     return f"{COMMONS}Special:FilePath/{_q(f, safe='')}?width={w}"
 
 
