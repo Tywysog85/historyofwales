@@ -10,7 +10,7 @@ A proud, bilingual (English and Cymraeg) history of Wales, live at [historyofwal
 - **71 people**, from Caratacus to today.
 - **Kings and princes**: every royal line, kingdom by kingdom (12 kingdoms of Wales and 5 of the Old North), and the kings and princes of all Wales.
 - **Saints of Wales**: 68 saints in ten regions, with the 130 llannau and holy places named after them on a map, a llan name decoder and a saints’ calendar.
-- **14 long reads**, 7 legends, symbols and traditions.
+- **14 long reads**, 20 legends in five sections, symbols and traditions.
 - **On this day in Welsh history**: about 350 dates across 233 days of the year, on the home page and on `onthisday.html`.
 - **Games**: a daily challenge, a quiz, a map game, Welsh names, word pairs and more.
 - Every page in **English and Cymraeg**.
@@ -30,7 +30,7 @@ Everything is plain HTML, CSS and JavaScript. There is no framework and nothing 
 | Events, people, places | `src/data.py`, `src/more.py`, `src/places2.py` (extra items are merged in and sorted by year) |
 | Longer histories of people and places, trails, teacher notes | `src/long.py` |
 | The nine ages | `src/ages.py`, `src/ages9.py` |
-| Long reads, legends, symbols, facts | `src/features.py`, `src/pride.py`, `src/pride2.py`, `src/pride3.py`, `src/hywel.py` |
+| Long reads, legends, symbols, facts | `src/features.py`, `src/legends2.py`, `src/pride.py`, `src/pride2.py`, `src/pride3.py`, `src/hywel.py` |
 | The Kingdoms map | `src/kingdoms.py` |
 | On this day (`onthisday.html` and the home page panel) | `src/onthisday.py`, `src/onthisday.css` |
 | Kings and princes of each kingdom (`kings.html`, `kings-*.html`) | `src/royal.py` |

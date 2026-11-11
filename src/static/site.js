@@ -20,7 +20,7 @@
     ["people10", "10", "Good company", "Cwmni da", "Meet 10 people", "Cwrdd â 10 o bobl", function (j) { return count(j, "person") >= 10; }],
     ["people30", "30", "Who’s who", "Pwy yw pwy", "Meet 30 people", "Cwrdd â 30 o bobl", function (j) { return count(j, "person") >= 30; }],
     ["places10", "⌖", "Pilgrim", "Pererin", "Visit 10 places", "Ymweld â 10 lle", function (j) { return count(j, "place") >= 10; }],
-    ["legends", "☾", "Storyteller", "Cyfarwydd", "Read all seven legends", "Darllen pob un o’r saith chwedl", function (j) { return count(j, "legend") >= 7; }],
+    ["legends", "☾", "Storyteller", "Cyfarwydd", "Read ten legends", "Darllen deg chwedl", function (j) { return count(j, "legend") >= 10; }],
     ["stories", "¶", "Scholar", "Ysgolhaig", "Read twelve long reads", "Darllen deuddeg erthygl", function (j) { return count(j, "story") >= 12; }],
     ["daily1", "?", "Day one", "Diwrnod un", "Solve a daily challenge", "Datrys her y dydd", function (j) { return j.d.wins >= 1; }],
     ["streak3", "3", "On a roll", "Ar rediad", "Play the daily challenge 3 days running", "Chwarae her y dydd 3 diwrnod yn olynol", function (j) { return j.d.best >= 3; }],

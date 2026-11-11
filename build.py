@@ -592,10 +592,12 @@ def legend_page(x, i):
 
 def legends_index():
     main = (hero("medieval", f'<a href="index.html">{SITE}</a>', "book", "Legends", "Chwedlau", "Legends of Wales", "Chwedlau Cymru",
-                 "Seven old tales, retold for reading aloud, each with the real history behind it.", "Saith hen chwedl, wedi’u hadrodd o’r newydd i’w darllen ar goedd, pob un â’r hanes go iawn y tu ôl iddi.", art="dragons")
-            + section(f'<h2 class="sr-only">{bi("All legends", "Pob chwedl")}</h2><div class="l-grid">{"".join(legend_card(x) for x in F.LEGENDS)}</div>', top=True)
+                 f"{len(F.LEGENDS)} old tales, retold for reading aloud, each with the real history behind it.", f"{len(F.LEGENDS)} o hen chwedlau, wedi’u hadrodd o’r newydd i’w darllen ar goedd, pob un â’r hanes go iawn y tu ôl iddi.", art="dragons",
+                 extra='<nav class="chips l-jump" aria-label="Sections / Adrannau">' + "".join(f'<a class="chip" href="#{g["ids"][0]}-set">{bi(g["en"], g["cy"])}</a>' for g in F.LEGEND_GROUPS) + '</nav>')
+            + "".join(f'<section{"" if k == 0 else " class=\"tight\""} id="{g["ids"][0]}-set"><div class="wrap"><h2 class="sub-h">{bi(g["en"], g["cy"])}</h2><p class="l-sum">{bi(g["sumEn"], g["sumCy"])}</p>'
+                      f'<div class="l-grid">{"".join(legend_card(x) for x in g["items"])}</div></div></section>' for k, g in enumerate(F.LEGEND_GROUPS))
             + section(f'<div class="pager"><a class="btn" href="symbols.html">{bi("Symbols and traditions", "Symbolau a thraddodiadau")} →</a></div>'))
-    return page("legends.html", "Legends · History of Wales", "The legends of Wales retold: the red dragon, Gelert, Cantre’r Gwaelod, Branwen, Blodeuwedd and Taliesin, with the history behind them.", main, era="medieval", og_type="website", active="legends.html")
+    return page("legends.html", "Legends · History of Wales", "The legends of Wales retold: the red dragon, Gelert, the Four Branches of the Mabinogi, Macsen Wledig, Culhwch and Olwen, Dwynwen, Melangell, the Tylwyth Teg and more, with the history behind them.", main, era="medieval", og_type="website", active="legends.html")
 
 
 def symbols_page():
@@ -1509,7 +1511,7 @@ HERO_NAME = (f'<p class="hero-name"><span class="l-en" lang="en" aria-label="His
 def fill(fragment, active="", skip="#chapters", home=False):
     return (fragment.replace("__NAV__", nav(active, skip, home)).replace("__HERONAME__", HERO_NAME).replace("__FOOTER__", footer()).replace("__AGES__", AGES_HTML).replace("__MARQUEE__", MARQUEE)
             .replace("__STORIES__", "".join(story_card(x, k == 0) for k, x in enumerate(F.STORIES)))
-            .replace("__LEGENDS__", "".join(legend_card(x) for x in F.LEGENDS[:4])).replace("__PLAY__", play_cards()))
+            .replace("__LEGENDS__", "".join(legend_card(x) for x in F.LEGENDS_HOME)).replace("__PLAY__", play_cards()))
 
 
 index_head = head.replace("</style>", extra_css + PRINT_CSS + EXTRA_PAGE_CSS + "\n</style>", 1)

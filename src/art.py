@@ -248,9 +248,17 @@ def _terrace(c):
 MOTIF = dict(fort=_fort, terrace=_terrace, castle=_castle, dolmen=_dolmen, cross=_cross, ship=lambda c: _sea(c, 446, 2) + _ship(c, 0, -10), pit=_pit, senedd=_senedd,
              dragons=_dragons, hound=_hound, sunken=_sunken, lady=_lady, bird=_bird, owl=_owl, sword=_sword, cauldron=_cauldron,
              book=_book, arches=_arches, torch=_torch, amph=_amph)
+# Legends added 2026-11-11 (src/legends2.py) borrow an existing scene until each gets its own lifelike picture.
+# To give one its own picture, point its key at a new function here; the legend text never needs to change.
+_STAND_IN = dict(horse="fort", mist="castle", boar="hound", roman="amph", plague="dragons", island="cross", hare="book",
+                 fairy="lady", afanc="sunken", chair="dolmen", cave="sword", outlaw="torch", well="arches")
+for _k, _v in _STAND_IN.items():
+    MOTIF.setdefault(_k, MOTIF[_v])
 MOON = dict(fort=(650, 100, 30), terrace=(620, 110, 34), castle=(640, 110, 34), dolmen=(400, 190, 60), cross=(620, 120, 30), ship=(170, 120, 36), pit=(650, 110, 30), senedd=(650, 100, 30),
             dragons=(400, 120, 44), hound=(560, 120, 46), sunken=(640, 70, 26), lady=(600, 120, 40), bird=(180, 110, 34), owl=(620, 110, 50),
             sword=(600, 110, 36), cauldron=(640, 100, 30), book=(650, 96, 28), arches=(140, 110, 32), torch=(660, 100, 30), amph=(160, 110, 30))
+for _k, _v in _STAND_IN.items():
+    MOON.setdefault(_k, MOON[_v])
 
 
 def scene(kind, colour, seed=None):
@@ -261,7 +269,7 @@ def scene(kind, colour, seed=None):
     ridges = ""
     for i, (base, amp, col) in enumerate([(330, 70, "#232a3d"), (390, 60, "#1b2231"), (440, 40, "#141926")]):
         ridges += f'<path d="{_ridge(rng, base, amp)}" fill="{col}"/>'
-    ground = f'<path d="M0 440h800v60H0z" fill="{INK}"/>' if kind not in ("ship", "lady", "bird", "sword", "sunken") else ""
+    ground = f'<path d="M0 440h800v60H0z" fill="{INK}"/>' if _STAND_IN.get(kind, kind) not in ("ship", "lady", "bird", "sword", "sunken") else ""
     return (f'<svg class="scene" viewBox="0 0 {W} {H}" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">'
             f'<defs><linearGradient id="sk{uid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#090c14"/><stop offset=".62" stop-color="#1a2032"/>'
             f'<stop offset="1" stop-color="{colour}" stop-opacity=".55"/></linearGradient>'

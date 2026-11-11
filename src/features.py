@@ -359,6 +359,14 @@ HERO_QS = [
 import pride as _P, pride2 as _P2
 _ar = [x for x in LEGENDS if x["id"] == "arthur"][0]
 LEGENDS = [x for x in LEGENDS if x["id"] != "arthur"]
+# more legends (src/legends2.py); the Legends page is grouped into sections and LEGENDS follows that order
+import legends2 as _L2
+_LBY = {x["id"]: x for x in LEGENDS + _L2.LEGENDS}
+_ids = [i for g in _L2.GROUPS for i in g["ids"]]
+assert sorted(_ids) == sorted(_LBY), (sorted(set(_LBY) - set(_ids)), sorted(set(_ids) - set(_LBY)))
+LEGEND_GROUPS = [dict(g, items=[_LBY[i] for i in g["ids"]]) for g in _L2.GROUPS]
+LEGENDS = [_LBY[i] for i in _ids]
+LEGENDS_HOME = [_LBY[i] for i in ("dragons", "gelert", "cantre", "llynyfan")]
 _arthur = dict(_P.ARTHUR, pEn=_P.ARTHUR["pEn"] + _ar["pEn"] + _P.ARTHUR["endEn"], pCy=_P.ARTHUR["pCy"] + _ar["pCy"] + _P.ARTHUR["endCy"])
 for _s in STORIES:
     if _s["id"] == "language":
