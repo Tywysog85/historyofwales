@@ -11,7 +11,7 @@
 
   /* ---------- journey store ---------- */
   var KEY = "hc-journey";
-  function load() { try { var j = JSON.parse(localStorage.getItem(KEY) || "{}"); j.v = j.v || {}; j.b = j.b || {}; j.f = j.f || {}; j.d = j.d || { streak: 0, best: 0, played: 0, wins: 0, last: "" }; return j; } catch (e) { return { v: {}, b: {}, f: {}, d: { streak: 0, best: 0, played: 0, wins: 0, last: "" } }; } }
+  function load() { try { var j = JSON.parse(localStorage.getItem(KEY) || "{}"); j.v = j.v || {}; j.b = j.b || {}; j.f = j.f || {}; j.s = j.s || {}; j.d = j.d || { streak: 0, best: 0, played: 0, wins: 0, last: "" }; return j; } catch (e) { return { v: {}, b: {}, f: {}, s: {}, d: { streak: 0, best: 0, played: 0, wins: 0, last: "" } }; } }
   function save(j) { try { localStorage.setItem(KEY, JSON.stringify(j)); } catch (e) {} }
   function count(j, kind) { var n = 0; for (var k in j.v) if (!kind || k.indexOf(kind + ":") === 0) n++; return n; }
   var BADGES = [
@@ -29,14 +29,40 @@
     ["quiz10", "★", "Pencampwr", "Pencampwr", "A perfect 10 in the quiz", "10 perffaith yn y cwis", function (j) { return j.f.quiz10; }],
     ["order15", "↕", "In good order", "Mewn trefn", "A perfect timeline challenge", "Her y llinell amser berffaith", function (j) { return j.f.order15; }],
     ["map300", "◎", "Map reader", "Darllenydd mapiau", "Score 300 or more in Where in Wales?", "Sgorio 300 neu fwy yn Ble yng Nghymru?", function (j) { return j.f.map300; }],
-    ["pairs", "Aa", "Good memory", "Cof da", "Finish a game of word pairs", "Gorffen gêm o barau geiriau", function (j) { return j.f.pairs; }]
+    ["pairs", "Aa", "Good memory", "Cof da", "Finish a game of word pairs", "Gorffen gêm o barau geiriau", function (j) { return j.f.pairs; }],
+    ["set1", "❖", "Collector", "Casglwr", "Complete a set of cards", "Cwblhau set o gardiau", function (j) { return Object.keys(j.s).length >= 1; }],
+    ["set5", "♛", "Keeper of treasures", "Ceidwad y trysorau", "Complete five sets of cards", "Cwblhau pum set o gardiau", function (j) { return Object.keys(j.s).length >= 5; }]
   ];
   var RANKS = [[0, "Newcomer", "Newydd-ddyfodiad"], [3, "Apprentice", "Prentis"], [12, "Storyteller", "Cyfarwydd"], [30, "Bard", "Bardd"], [60, "Chief bard", "Pencerdd"], [100, "Prince of history", "Tywysog hanes"]];
   function rank(n) { var r = RANKS[0]; RANKS.forEach(function (x) { if (n >= x[0]) r = x; }); return r; }
-  function toast(b) {
+  var toasts = [], toasting = false;
+  function say(icon, text, href) { toasts.push([icon, text, href || "journey.html"]); if (!toasting) nextToast(); }
+  function nextToast() {
+    var t = toasts.shift(); toasting = !!t; if (!t) return;
     var a = d.createElement("div"); a.className = "toast"; a.setAttribute("role", "status");
-    a.innerHTML = '<a href="journey.html"><i aria-hidden="true">' + b[1] + "</i><span>" + T("Badge earned: ", "Bathodyn newydd: ") + T(b[2], b[3]) + "</span></a>";
-    d.body.appendChild(a); setTimeout(function () { a.remove(); }, 4300);
+    a.innerHTML = '<a href="' + t[2] + '"><i aria-hidden="true">' + t[0] + "</i><span>" + t[1] + "</span></a>";
+    d.body.appendChild(a); setTimeout(function () { a.remove(); nextToast(); }, 4300);
+  }
+  function toast(b) { say(b[1], T("Badge earned: ", "Bathodyn newydd: ") + T(b[2], b[3])); }
+  /* ---------- collectable cards: each set on the page (.cset) is painted from the journey ---------- */
+  function paintSets(j, fresh) {
+    var sets = $$(".cset"); if (!sets.length) return;
+    var seen = {}, nGot = 0, nSets = 0, changed = false;
+    sets.forEach(function (el) {
+      var cards = $$(".cc", el), have = 0, full;
+      cards.forEach(function (c) { var g = !!j.v[c.dataset.k]; c.classList.toggle("got", g); if (g) have++; if (!seen[c.dataset.k]) { seen[c.dataset.k] = 1; if (g) nGot++; } });
+      full = have === cards.length; el.classList.toggle("full", full); if (full) nSets++;
+      var here = $(".cc.here", el), row = here && here.parentNode;
+      if (row && row.scrollWidth > row.clientWidth) row.scrollLeft += here.getBoundingClientRect().left - row.getBoundingClientRect().left - 8;
+      $(".cset-n b", el).textContent = have; $(".j-bar i", el).style.width = (have / cards.length * 100) + "%";
+      var name = $(".cset-h h3", el), nm = name ? T($(".l-en", name).textContent, $(".l-cy", name).textContent) : "";
+      if (full && !j.s[el.dataset.set]) { j.s[el.dataset.set] = 1; changed = true; if (fresh) say("❖", T("Set complete: ", "Set yn gyflawn: ") + nm, "journey.html#cards"); }
+      else if (fresh && $(".cc.here", el)) say("✦", T("New card for ", "Cerdyn newydd i ") + nm + " · " + have + " / " + cards.length, "journey.html#cards");
+    });
+    if (changed) save(j);
+    var sum = $("#cards-sum");
+    if (sum) sum.innerHTML = T("Every person, place and legend you read is a card. You have <b>" + nGot + "</b> of " + sum.dataset.total + " cards, and <b>" + nSets + "</b> of " + sum.dataset.sets + " sets are complete.",
+      "Mae pob person, lle a chwedl a ddarllenwch yn gerdyn. Mae gennych <b>" + nGot + "</b> o " + sum.dataset.total + " o gardiau, ac mae <b>" + nSets + "</b> o " + sum.dataset.sets + " set yn gyflawn.");
   }
   function check(j, quiet) {
     var fresh = [];
@@ -54,7 +80,9 @@
   }
   var J = load();
   var track = d.body.getAttribute("data-track");
-  if (track && !J.v[track]) { J.v[track] = 1; save(J); }
+  var freshCard = false;
+  if (track && !J.v[track]) { J.v[track] = 1; save(J); freshCard = true; }
+  paintSets(J, freshCard);
   check(J);
   window.HC = {
     T: T, load: load, save: save,
@@ -124,7 +152,7 @@
     $("#j-reset").onclick = function () { if (confirm(T("Clear your journey and badges on this device?", "Clirio eich taith a’ch bathodynnau ar y ddyfais hon?"))) { try { localStorage.removeItem(KEY); } catch (e) {} renderJourney(); paintChip(load()); } };
   }
   renderJourney();
-  d.addEventListener("click", function (e) { if (e.target.closest(".lang button")) setTimeout(function () { renderJourney(); d.dispatchEvent(new Event("hc-lang")); }, 0); });
+  d.addEventListener("click", function (e) { if (e.target.closest(".lang button")) setTimeout(function () { renderJourney(); paintSets(load()); d.dispatchEvent(new Event("hc-lang")); }, 0); });
 })();
 
 /* The one-time hint that explains the journey circle in the menu bar, and the invitation to put the site on the home screen

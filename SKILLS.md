@@ -74,6 +74,12 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - The rules are at the end of `src/v6.css` ("Phones: a shorter front page"); the 6-or-12 people choice is in `renderPeople()` in `src/app.js`. The era and field filters for people scroll sideways on phones instead of wrapping onto many lines.
 - To measure, open the home page in Playwright as a Pixel 7, turn off `content-visibility` with an added style, and print each section's height.
 
+### Collectable cards and sets (November 2026)
+- Every person, place and legend page is a card; reading the page collects it. The sets are in `src/sets.py` (29 sets, 220 cards): add a set by adding a line there. `build.py` stops with an error if a card in a set does not exist.
+- The cards are drawn by `card_html()` and `set_html()` in `build.py`: on the journey page ("Your cards", `journey.html#cards`) and in a "Collect the set" box on each page that belongs to a set. The card picture is the page's photo, the gallery picture, the legend picture, or the person's initials.
+- `paintSets()` in `src/static/site.js` marks the collected cards from the journey on the reader's device, shows "New card" and "Set complete" messages, and remembers finished sets in `j.s`. Two badges go with them: Collector (one set) and Keeper of treasures (five sets).
+- To test, put keys such as `person:owain-gwynedd` into `localStorage["hc-journey"].v` in Playwright, then open a page in that set.
+
 ### The page for addresses that do not exist (November 2026)
 - `not_found_page()` in `build.py` writes `404.html`. GitHub Pages shows it for any address that does not exist. It has `<base href="/">` so its links work from any depth, and `noindex` so Google leaves it out. It is left out of the sitemap.
 

@@ -34,6 +34,7 @@ import onthisday as OTD  # noqa: E402
 import arthur as AR  # noqa: E402
 import mabinogion as MB  # noqa: E402
 import people2 as P2  # noqa: E402
+import sets as SETS  # noqa: E402
 L.TEACH.update(AG9.TEACH)
 from urllib.parse import quote as _q
 
@@ -492,6 +493,7 @@ def person_page(p):
             + PERSON_EXTRA.get(slug, lambda: "")()
             + story_feature("people", slug)
             + (section(f'<ol class="era-events">{"".join(event_li(ev) for ev in related)}</ol>', "On the timeline", "Ar y llinell amser") if related else "")
+            + set_block(f"person:{slug}")
             + section(f'<div class="people">{"".join(plaque(x) for x in same)}</div>', "Also in this age", "Hefyd yn yr oes hon")
             + section(f'<div class="pager">{pager}</div>'))
     ld = {"@context": "https://schema.org", "@type": "Person", "name": p[3], "alternateName": p[4], "description": p[7], "sameAs": WIKI + p[9]}
@@ -516,6 +518,7 @@ def place_page(pl):
             + section(meta + photo_fig(PH.PLACE_PHOTOS.get(pid), "", "place-" + pid) + paras(long_en, long_cy) + f'<p class="share no-print">{src(pl["src"])}</p>', top=True)
             + story_feature("places", pid)
             + (section(f'<ol class="era-events">{"".join(event_li(ev) for ev in related)}</ol>', "What happened here", "Beth ddigwyddodd yma") if related else "")
+            + set_block(f"place:{pid}")
             + section(f'<div class="era-places">{"".join(place_tile(x) for x in near)}</div>', "Nearby", "Gerllaw"))
     ld = {"@context": "https://schema.org", "@type": "TouristAttraction", "name": pl["en"], "alternateName": pl["cy"], "description": pl["dEn"],
           "geo": {"@type": "GeoCoordinates", "latitude": pl["lat"], "longitude": pl["lon"]}}
@@ -710,6 +713,7 @@ def legend_page(x, i):
               f'<aside class="behind"><p class="eyebrow">{bi(x.get("hLabelEn", "The history behind the legend"), x.get("hLabelCy", "Yr hanes y tu ôl i’r chwedl"))}</p><p>{bi(x["hEn"], x["hCy"])}</p></aside>'
               + (f'<p class="l-links">' + "".join(f'<a class="btn" href="{h}">{bi(en, cy)} →</a>' for h, en, cy in x["links"]) + '</p>' if x.get("links") else "") +
               f'<p class="byline"><button type="button" class="copy" data-copy="legend-{x["id"]}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button></p>{legend_credit(x["art"])}</div></section>'
+            + set_block(f"legend:{x['id']}")
             + section(f'<div class="pager"><a class="btn" href="legends.html">← {bi("All legends", "Pob chwedl")}</a><a class="btn solid" href="legend-{nxt["id"]}.html">{bi(nxt["en"], nxt["cy"])} →</a></div>'))
     return page(f"legend-{x['id']}.html", f'{x["en"]} · History of Wales', x["sumEn"], main, era=x["era"], active="legends.html", track=f"legend:{x['id']}")
 
@@ -865,11 +869,87 @@ def journey_page():
         dict(k="place", en="Places", cy="Lleoedd", items=[[p["id"], p["en"], p["cy"], f'place-{p["id"]}.html'] for p in D.PLACES]),
     ]
     main = (hero("kings", f'<a href="index.html">{SITE}</a>', "crown", "Your journey", "Eich taith", "Your journey through Welsh history", "Eich taith drwy hanes Cymru",
-                 "Every age, person, place, legend and essay you read is ticked off here, and games earn badges. Nothing leaves your device.", "Mae pob oes, person, lle, chwedl ac erthygl a ddarllenwch yn cael ei thicio yma, ac mae gemau’n ennill bathodynnau. Nid oes dim yn gadael eich dyfais.", art="sword")
-            + f'<section><div class="wrap"><div id="journey-root"><noscript>Your journey needs JavaScript.</noscript></div></div></section>')
+                 "Every page you read is ticked off here, every person, place and legend is a card to collect in sets, and games earn badges. Nothing leaves your device.", "Mae pob tudalen a ddarllenwch yn cael ei thicio yma, mae pob person, lle a chwedl yn gerdyn i’w gasglu mewn setiau, ac mae gemau’n ennill bathodynnau. Nid oes dim yn gadael eich dyfais.", art="sword")
+            + f'<section><div class="wrap"><div id="journey-root"><noscript>Your journey needs JavaScript.</noscript></div></div></section>' + cards_section())
     extra = f'<script>var JOURNEY={json.dumps(groups, ensure_ascii=False, separators=(",", ":"))};</script>\n'
     return page("journey.html", "Your journey · History of Wales", "Track what you have read and the badges you have earned on History of Wales.", main, era="kings", og_type="website", extra=extra)
 
+
+
+# ---------- collectable cards (src/sets.py) ----------
+# Every person, place and legend page is a card; reading the page collects it. Sets are shown on the journey page and on
+# each page that belongs to one. Which cards someone has is worked out in site.js from the journey kept on their device.
+LEGEND = {x["id"]: x for x in F.LEGENDS}
+
+
+def _card_info(key):
+    kind, ref = key.split(":", 1)
+    if kind == "person":
+        p = PERSON[ref]
+        g = GP.GALLERY.get("person-" + ref)
+        ph = PH.PERSON_PHOTOS.get(ref)
+        img = f"gallery/person-{ref}-s.webp" if g else (photo_url(ph[0], 240) if ph else None)
+        return p[3], p[4], p[2], p[1], f"person-{ref}.html", img
+    if kind == "place":
+        pl = PLACE[ref]
+        ph = place_ph(ref)
+        return pl["en"], pl["cy"], pl["year"], pl["era"], f"place-{ref}.html", ph[0] if ph else None
+    x = LEGEND[ref]
+    img = f'legends/{x["art"]}-s.webp' if x["art"] in A.LEGEND_PHOTOS else None
+    return x["en"], x["cy"], x["place"], x["era"], f"legend-{ref}.html", img
+
+
+CARD_INFO = {}
+for _s in SETS.SETS:
+    for _k in _s[5]:
+        try:
+            CARD_INFO[_k] = _card_info(_k)
+        except KeyError:
+            raise SystemExit(f"src/sets.py: set '{_s[0]}' has a card that does not exist: {_k}")
+SET_OF = {}
+for _s in SETS.SETS:
+    for _k in _s[5]:
+        SET_OF.setdefault(_k, []).append(_s)
+CARD_TOTAL = len(CARD_INFO)
+
+
+def _initials(n):
+    w = [x for x in re.sub(r"\b(ap|ab|ferch|the|of|yr|y|St|Saint)\b", " ", n).split() if x[:1].isalpha()]
+    return ((w[0][0] + (w[-1][0] if len(w) > 1 else "")) if w else n[:1]).upper()
+
+
+def card_html(key, n, total, here=False):
+    en, cy, sub, era, link, img = CARD_INFO[key]
+    pic = f'<img src="{img}" alt="" loading="lazy" decoding="async">' if img else ""
+    if not img and key.startswith("legend:"):
+        pic = A.scene(LEGEND[key[7:]]["art"], COL[era])
+    return (f'<a class="cc{" here" if here else ""}" href="{link}" data-k="{key}" data-era="{era}">'
+            f'<span class="cc-img"><i aria-hidden="true">{e(_initials(en))}</i>{pic}</span><span class="cc-no">{n}/{total}</span>'
+            f'<span class="cc-t"><b>{bi(en, cy)}</b><small>{e(sub)}</small></span></a>')
+
+
+def set_html(st, here=None, tag="div"):
+    sid, en, cy, den, dcy, keys = st
+    cards = "".join(card_html(k, i + 1, len(keys), k == here) for i, k in enumerate(keys))
+    return (f'<{tag} class="cset" data-set="{sid}"><div class="cset-h"><h3>{bi(en, cy)}</h3><span class="cset-n"><b>0</b> / {len(keys)}</span>'
+            f'<p>{bi(den, dcy)}</p><div class="j-bar"><i style="width:0"></i></div></div><div class="cc-row">{cards}</div></{tag}>')
+
+
+def set_block(key):
+    sets = SET_OF.get(key)
+    if not sets:
+        return ""
+    return section('<p class="cset-lead">' + bi("Reading this page collects its card. Collect every card in the set.", "Mae darllen y dudalen hon yn casglu ei cherdyn. Casglwch bob cerdyn yn y set.")
+                   + f' <a href="journey.html#cards">{bi("All your cards", "Eich holl gardiau")} →</a></p>'
+                   + "".join(set_html(st, key) for st in sets), "Collect the set" if len(sets) == 1 else "Collect the sets", "Casglwch y set" if len(sets) == 1 else "Casglwch y setiau")
+
+
+def cards_section():
+    return (f'<section class="tight" id="cards"><div class="wrap"><h2 class="j-h">{bi("Your cards", "Eich cardiau")}</h2>'
+            f'<p class="cset-lead" id="cards-sum" data-total="{CARD_TOTAL}" data-sets="{len(SETS.SETS)}">'
+            + bi(f"Every person, place and legend you read is a card. There are {CARD_TOTAL} cards in {len(SETS.SETS)} sets.",
+                 f"Mae pob person, lle a chwedl a ddarllenwch yn gerdyn. Mae {CARD_TOTAL} o gardiau mewn {len(SETS.SETS)} set.")
+            + '</p>' + "".join(set_html(st) for st in SETS.SETS) + '</div></section>')
 
 
 # ---------- On this day (src/onthisday.py + the dated EVENTS) ----------
