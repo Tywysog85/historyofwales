@@ -7,7 +7,7 @@ A proud, bilingual (English and Cymraeg) history of Wales, live at [historyofwal
 - **Nine ages**, from the first people in the caves to Wales today, each with its own page.
 - **A timeline** of about 160 events.
 - **A map** of 68 historic sites, and a Kingdoms view showing Wales at 13 moments in time.
-- **278 people**, from the Red Lady of Paviland to today, each with a field (kings, poets, scientists, sport and more), and a **Welsh world firsts** page (`firsts.html`).
+- **322 people**, from the Red Lady of Paviland to today, each with a field (kings, poets, scientists, sport and more), and a **Welsh world firsts** page (`firsts.html`).
 - **Kings and princes**: every royal line, kingdom by kingdom (12 kingdoms of Wales and 5 of the Old North), and the kings and princes of all Wales.
 - **Saints of Wales**: 68 saints in ten regions, with the 130 llannau and holy places named after them on a map, a llan name decoder and a saints’ calendar.
 - **15 long reads**, 21 legends in five sections, a Mabinogion page with all eleven tales, symbols and traditions.
@@ -28,7 +28,7 @@ Everything is plain HTML, CSS and JavaScript. There is no framework and nothing 
 | To change | Edit |
 | --- | --- |
 | Events, people, places | `src/data.py`, `src/more.py`, `src/places2.py` (extra items are merged in and sorted by year) |
-| The 207 people added in November 2026, every person’s field, and the Welsh firsts | `src/people2a.py` to `src/people2e.py`, gathered by `src/people2.py` |
+| The 251 people added in November 2026, every person’s field, and the Welsh firsts | `src/people2a.py` to `src/people2f.py`, gathered by `src/people2.py` |
 | Longer histories of people and places, trails, teacher notes | `src/long.py` |
 | The nine ages | `src/ages.py`, `src/ages9.py` |
 | Long reads, legends, symbols, facts | `src/features.py`, `src/legends2.py`, `src/mabinogion.py`, `src/pride.py`, `src/pride2.py`, `src/pride3.py`, `src/hywel.py`, `src/iolo.py` |
