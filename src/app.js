@@ -460,7 +460,7 @@
   /* ---------- Chips ---------- */
   function chips(el, cur, onPick, counts) {
     el.innerHTML = '<button type="button" class="chip" data-v="all" aria-pressed="' + (cur === "all") + '">' + T("All", "Y cyfan") + "</button>" +
-      ERAS.map(function (e) { return '<button type="button" class="chip" data-era="' + e.id + '" data-v="' + e.id + '" aria-pressed="' + (cur === e.id) + '"><i></i>' + T(e.en, e.cy) + (counts ? ' <span style="opacity:.6">' + counts[e.id] + "</span>" : "") + "</button>"; }).join("");
+      ERAS.filter(function (e) { return !counts || counts[e.id]; }).map(function (e) { return '<button type="button" class="chip" data-era="' + e.id + '" data-v="' + e.id + '" aria-pressed="' + (cur === e.id) + '"><i></i>' + T(e.en, e.cy) + (counts ? ' <span style="opacity:.6">' + counts[e.id] + "</span>" : "") + "</button>"; }).join("");
     el.onclick = function (ev) { var b = ev.target.closest(".chip"); if (b) onPick(b.dataset.v); };
   }
 
@@ -664,19 +664,30 @@
   $("#mode-kg").onclick = function () { setMode("kg"); };
 
   /* ---------- People ---------- */
-  var pEra = "all", pAll = false;
+  var pEra = "all", pAll = false, pField = "all";
+  try { var qf = new URLSearchParams(location.search).get("field"); if (qf && (qf === "first" || (D.PFIELDS || []).some(function (f) { return f[0] === qf; }))) pField = qf; } catch (e) {}
+  function fieldOk(p) { return pField === "all" || (pField === "first" ? !!(D.PFIRST || {})[p[0]] : (D.PFIELD || {})[p[0]] === pField); }
+  function fieldChips() {
+    var el = $("#people-field"); if (!el || !D.PFIELDS) return;
+    var fc = {}, nf = 0; PEOPLE.forEach(function (p) { if (pEra !== "all" && p[1] !== pEra) return; var f = D.PFIELD[p[0]]; fc[f] = (fc[f] || 0) + 1; if (D.PFIRST[p[0]]) nf++; });
+    el.innerHTML = '<button type="button" class="chip" data-v="all" aria-pressed="' + (pField === "all") + '">' + T("Every field", "Pob maes") + "</button>" +
+      '<button type="button" class="chip star" data-v="first" aria-pressed="' + (pField === "first") + '">★ ' + T("Firsts", "Y cyntaf") + ' <span style="opacity:.6">' + nf + "</span></button>" +
+      D.PFIELDS.filter(function (f) { return fc[f[0]]; }).map(function (f) { return '<button type="button" class="chip" data-v="' + f[0] + '" aria-pressed="' + (pField === f[0]) + '">' + esc(T(f[1], f[2])) + ' <span style="opacity:.6">' + fc[f[0]] + "</span></button>"; }).join("");
+    el.onclick = function (ev) { var b = ev.target.closest(".chip"); if (b) { pField = b.dataset.v; renderPeople(); } };
+  }
   function initials(n) { var w = n.replace(/\b(ap|ab|ferch|the|of|yr|y)\b/gi, " ").trim().split(/\s+/); return (w[0].charAt(0) + (w.length > 1 ? w[w.length - 1].charAt(0) : "")).toUpperCase(); }
   function renderPeople() {
     var counts = {}; PEOPLE.forEach(function (p) { counts[p[1]] = (counts[p[1]] || 0) + 1; });
     chips($("#people-filter"), pEra, function (v) { pEra = v; renderPeople(); }, counts);
-    var list = PEOPLE.filter(function (p) { return pEra === "all" || p[1] === pEra; }), total = list.length;
-    var short = pEra === "all" && !pAll;
+    fieldChips();
+    var list = PEOPLE.filter(function (p) { return (pEra === "all" || p[1] === pEra) && fieldOk(p); }), total = list.length;
+    var short = pEra === "all" && pField === "all" && !pAll;
     if (short) list = D.FEATURED.map(function (s) { return PEOPLE.filter(function (p) { return p[0] === s; })[0]; }).filter(Boolean);
     $("#people-count").textContent = short ? T("12 of " + total + " people", "12 o " + total + " o bobl") : total + " " + T("people", "o bobl");
-    var more = $("#people-more"); more.hidden = pEra !== "all"; more.textContent = pAll ? T("Show fewer", "Dangos llai") : T("Show all " + PEOPLE.length + " people", "Dangos pob un o’r " + PEOPLE.length);
+    var more = $("#people-more"); more.hidden = pEra !== "all" || pField !== "all"; more.textContent = pAll ? T("Show fewer", "Dangos llai") : T("Show all " + PEOPLE.length + " people", "Dangos pob un o’r " + PEOPLE.length);
     $("#people-grid").innerHTML = list.map(function (p) {
       var name = T(p[3], p[4]), other = lang === "en" ? p[4] : p[3], link = "person-" + p[0] + ".html", ph = D.PPH[p[0]];
-      return '<article class="plaque" data-era="' + p[1] + '"><div class="top-row"><span class="ava" aria-hidden="true">' + initials(p[3]) + (ph ? '<img src="' + ph + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : "") + '</span><div><span class="dates">' + esc(p[2]) + "</span><h3>" + esc(name) + '</h3></div></div><span class="epi">' + esc(T(p[5], p[6])) + (other !== name ? " · " + esc(other) : "") + "</span><p>" + esc(T(p[7], p[8])) + '</p><div class="links"><a class="go" href="' + link + '">' + T("Read more", "Darllen mwy") + ' →</a><button type="button" class="copy" data-copy="' + link + '">' + T("Copy link", "Copïo’r ddolen") + "</button>" + srcLink(p[9]) + "</div></article>";
+      return '<article class="plaque" data-era="' + p[1] + '"><div class="top-row"><span class="ava" aria-hidden="true">' + initials(p[3]) + (ph ? '<img src="' + ph + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : "") + '</span><div><span class="dates">' + esc(p[2]) + "</span><h3>" + esc(name) + '</h3></div></div><span class="epi">' + esc(T(p[5], p[6])) + (other !== name ? " · " + esc(other) : "") + "</span>" + ((D.PFIRST || {})[p[0]] ? '<span class="first-tag">★ ' + esc(T(D.PFIRST[p[0]][1], D.PFIRST[p[0]][2])) + "</span>" : "") + "<p>" + esc(T(p[7], p[8])) + '</p><div class="links"><a class="go" href="' + link + '">' + T("Read more", "Darllen mwy") + ' →</a><button type="button" class="copy" data-copy="' + link + '">' + T("Copy link", "Copïo’r ddolen") + "</button>" + srcLink(p[9]) + "</div></article>";
     }).join("");
   }
   $("#people-more").onclick = function () { pAll = !pAll; renderPeople(); if (!pAll) goTo($("#people")); };

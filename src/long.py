@@ -274,3 +274,7 @@ import arthur as _AR
 PEOPLE_LONG["arthur"] = _AR.PERSON_LONG
 _fix = lambda t: [t := t.replace(a, b) for a, b in _P.REWORD][-1]
 PEOPLE_LONG = {k: ([_fix(t) for t in v[0]], [_fix(t) for t in v[1]]) for k, v in PEOPLE_LONG.items()}
+
+# ---------- more famous people (src/people2.py) ----------
+import people2 as _P2
+PEOPLE_LONG.update(_P2.PEOPLE_LONG)

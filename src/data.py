@@ -623,3 +623,8 @@ _all += " ".join(t for v in _LG.PEOPLE_LONG.values() for part in v for t in part
 EVENTS = sorted([tuple(_rw(f) for f in ev) for ev in EVENTS] + _PR.EVENTS_NEW, key=lambda ev: ev[1])
 PEOPLE = sorted([tuple(_rw(f) for f in p) for p in PEOPLE] + _PR.PEOPLE_NEW + __import__("pride3").PEOPLE_NEW, key=lambda p: (_ERA_ORDER[p[1]], _born(p)))
 PEOPLE_EXTRA_LONG = {k: ([_rw(t) for t in v[0]], [_rw(t) for t in v[1]]) for k, v in PEOPLE_EXTRA_LONG.items()}
+
+
+# ---------- more famous people and Welsh firsts (src/people2.py) ----------
+import people2 as _P2
+PEOPLE = sorted(PEOPLE + _P2.PEOPLE_NEW, key=lambda p: (_ERA_ORDER[p[1]], _born(p)))
