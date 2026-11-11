@@ -1,9 +1,11 @@
 """The weekly email, "This week in Welsh history", sent every Monday morning by .github/workflows/weekly-email.yml.
 
+It hands the email to Brevo (brevo.com, free plan: 300 emails a day, no time limit) to send to everyone on the sign-up list.
+It only sends when BREVO_API_KEY (a GitHub secret), BREVO_LIST_ID and BREVO_SENDER are set (see SKILLS.md, "The weekly
+email"). Without them it prints the email and stops, which is also how to preview it:   python3 tools/weekly_email.py
+
 It reads what build.py wrote (_site/onthisday.json and _site/whatsnew.json), picks the anniversaries of the seven days
-ahead and anything added to the site in the last week, and hands the email to Kit (kit.com) to send to everyone signed up.
-It only sends when the KIT_API_KEY secret is set in GitHub (see SKILLS.md, "The weekly email"). Without it, it prints the
-email and stops, which is also how to preview it:   python3 tools/weekly_email.py
+ahead and anything added to the site in the last week.
 """
 import datetime, html, json, os, sys, urllib.request
 
@@ -39,25 +41,32 @@ def build(today):
     return f"This week in Welsh history: {span}", "".join(parts)
 
 
+def api(path, body, key):
+    req = urllib.request.Request("https://api.brevo.com/v3" + path, data=json.dumps(body).encode(), method="POST",
+                                 headers={"api-key": key, "Content-Type": "application/json", "Accept": "application/json"})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        txt = r.read().decode()
+        return json.loads(txt) if txt.strip() else {}
+
+
 def main():
     today = datetime.datetime.now(datetime.timezone.utc).date()
     subject, content = build(today)
-    key = os.environ.get("KIT_API_KEY", "").strip()
-    if not key:
+    content += ('<p style="margin-top:30px;font-size:12px;color:#777">You are getting this because you signed up at historyofwales.cymru. '
+                '<a href="{{ unsubscribe }}">Unsubscribe</a></p>')
+    key, lst, sender = (os.environ.get(k, "").strip() for k in ("BREVO_API_KEY", "BREVO_LIST_ID", "BREVO_SENDER"))
+    if not (key and lst and sender):
         print(subject, "\n", content)
-        print("\nNo KIT_API_KEY set, so nothing was sent.")
+        print("\nBREVO_API_KEY, BREVO_LIST_ID and BREVO_SENDER are not all set, so nothing was sent.")
         return
-    now = datetime.datetime.now(datetime.timezone.utc)
-    body = {"subject": subject, "content": content, "description": subject, "preview_text": "The anniversaries of the week ahead, and what is new on History of Wales.",
-            "public": True, "published_at": now.isoformat(), "send_at": (now + datetime.timedelta(minutes=10)).isoformat(),
-            "email_address": None, "thumbnail_url": None, "thumbnail_alt": None}
-    req = urllib.request.Request("https://api.kit.com/v4/broadcasts", data=json.dumps(body).encode(), method="POST",
-                                 headers={"X-Kit-Api-Key": key, "Content-Type": "application/json", "Accept": "application/json"})
     try:
-        with urllib.request.urlopen(req, timeout=30) as r:
-            print("Kit accepted the email:", r.status, subject)
+        made = api("/emailCampaigns", {"name": subject, "subject": subject, "sender": {"name": "History of Wales", "email": sender},
+                                       "htmlContent": f'<div style="font-family:Georgia,serif;font-size:16px;line-height:1.55;max-width:600px">{content}</div>',
+                                       "recipients": {"listIds": [int(lst)]}, "previewText": "The anniversaries of the week ahead, and what is new on History of Wales."}, key)
+        api(f"/emailCampaigns/{made['id']}/sendNow", {}, key)
+        print("Brevo is sending:", subject)
     except urllib.error.HTTPError as err:
-        print("Kit refused the email:", err.code, err.read().decode()[:500])
+        print("Brevo refused the email:", err.code, err.read().decode()[:500])
         sys.exit(1)
 
 
