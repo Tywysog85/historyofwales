@@ -682,8 +682,8 @@
     fieldChips();
     var list = PEOPLE.filter(function (p) { return (pEra === "all" || p[1] === pEra) && fieldOk(p); }), total = list.length;
     var short = pEra === "all" && pField === "all" && !pAll;
-    if (short) list = D.FEATURED.map(function (s) { return PEOPLE.filter(function (p) { return p[0] === s; })[0]; }).filter(Boolean);
-    $("#people-count").textContent = short ? T("12 of " + total + " people", "12 o " + total + " o bobl") : total + " " + T("people", "o bobl");
+    if (short) list = D.FEATURED.slice(0, matchMedia("(max-width: 700px)").matches ? 6 : 12).map(function (s) { return PEOPLE.filter(function (p) { return p[0] === s; })[0]; }).filter(Boolean);
+    $("#people-count").textContent = short ? T(list.length + " of " + total + " people", list.length + " o " + total + " o bobl") : total + " " + T("people", "o bobl");
     var more = $("#people-more"); more.hidden = pEra !== "all" || pField !== "all"; more.textContent = pAll ? T("Show fewer", "Dangos llai") : T("Show all " + PEOPLE.length + " people", "Dangos pob un o’r " + PEOPLE.length);
     $("#people-grid").innerHTML = list.map(function (p) {
       var name = T(p[3], p[4]), other = lang === "en" ? p[4] : p[3], link = "person-" + p[0] + ".html", ph = D.PPH[p[0]];

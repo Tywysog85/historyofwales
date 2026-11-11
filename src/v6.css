@@ -540,3 +540,15 @@ html.cy .news-item.is-new .n-t::after { content: "Newydd" }
 
 /* home page: sections far below the opening are only laid out when they come near the screen */
 @supports (content-visibility: auto) { #stories, #legends, #language, #play, #sources { content-visibility: auto; contain-intrinsic-size: auto 1200px } }
+
+/* Phones: a shorter front page. The full lists are one tap away ("All long reads", "All legends", "All games", Learn Welsh). */
+.lang-words { margin-top: clamp(2rem, 5vw, 3.5rem); display: grid; gap: 1.25rem }
+.play-more { display: none }
+@media (max-width: 700px) {
+  #stories .s-grid > .s-card:nth-child(n+5), #legends .l-grid > .l-card:nth-child(n+5), #play .play-grid > .p-card:nth-child(n+5), #language .lang-words { display: none }
+  #play .play-more { display: flex }
+  #people .chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; max-width: 100%; -webkit-mask-image: linear-gradient(90deg, #000 90%, transparent); mask-image: linear-gradient(90deg, #000 90%, transparent); padding-bottom: 2px }
+  #people .chips::-webkit-scrollbar { display: none }
+  #people .chips .chip { flex: none }
+  #people .tl-tools { display: grid; gap: .6rem }
+}
