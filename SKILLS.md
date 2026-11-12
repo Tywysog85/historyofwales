@@ -696,10 +696,12 @@ Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.
 
 ### Themed trails (November 2026)
 - The trails are `TRAILS` in `src/long.py` (the first four) and `src/trails.py` (the newer ones, put in front, newest first). `build.py` makes `trails.html` and one `trail-<id>.html` per trail.
-- A stop can be an event (by its English title), a person, a place, a long read (`("story", id)`), a legend (`("legend", id)`) or any page (`("page", href, era, dates, titles, texts)`). Every stop gets a "The full story" link to its own page, and person and place stops also link any long read that names them.
+- A stop can be an event (by its English title), a person, a place, a long read (`("story", id)`), a legend (`("legend", id)`) or any page (`("page", href, era, dates, titles, texts)`). Every stop is one link to its own page (the whole row, see "Whole cards are links"), and person and place stops also link any long read that names them.
 - A long read that does not exist yet can already be named on a trail: it stays hidden until another thread publishes it (for example `story-welsh-not`, `story-mac`).
 - Keep 8 to 10 stops per trail, and keep the number of trails a multiple of 6, so the grid on `trails.html` is full at three columns and at two.
 - Every stop title has the same size and font: there is no bigger serif style for "key" events any more (removed from `.era-events li.key h3` and the timeline's `.ev.key h4`). Key events keep their coloured dot.
+- Full pages for the people and places on the trails are in `src/trail_people.py` and `src/trail_places.py` (headings with `## `, quotes with `> words | who`); `long.py` loads them last, so they replace the short text.
+- A drop cap must only catch a page's first paragraph: use `.story > p:first-child`, not `.story p:first-child`, or the first letter of every pull quote turns into a giant letter.
 - To check fonts across the site, load pages in Playwright and compare the computed font of headings in sibling cards or list items; flag any group with more than one style.
 
 ### The Mabinogi tale guides (November 2026)
@@ -709,6 +711,16 @@ Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.
 - A long read can show a "Pictures" section: give its STORY dict `figs=[...]` (Commons tuples as `lit_fig()` takes them).
 - Before adding a person, search all of `src/people2*.py`, `princes.py`, `sixth_century.py` and `arthur_circle.py` for the slug and other spellings (Hopcyn ap Tomos/Tomas was nearly added twice).
 - Pictures: ask `tools/commons_research.py` (set `tools/commons_research_in.json` to your branch), pick from the results, add the files as figures or `c:<file>` page tops (with an `EXTRA` credit in `src/pictures.py`), then run the "Fetch photos" workflow on the branch so the site keeps its own copies. Delete `_research/` and restore the research input file before merging.
+
+### Whole cards are links (November 2026)
+- Ifan wants every card and list row on the site to be one big link, with no "Read more", "Read →", "The full story" or "Source ↗" on it.
+- The card gets the class `wl-card`, and its link the class `wl`: `<a class="wl" href="...">Card name</a>`. The CSS at the end of `src/v6.css` stretches that link over the whole card and hides its words, so the card's name is still read out by screen readers.
+- A name that should stay visible (a heading link) gets `wl-go` instead: it stays as it is and only its click area is stretched.
+- Any other link or button inside the card (kingdom chips, "The place →", "See it on the map") stays clickable on its own: the CSS lifts them above the stretched link.
+- Rows in a list get a faint highlight on hover, boxes a thin coloured ring. Keyboard focus draws a gold outline round the whole card.
+- Cards that are already a single `<a>` (long reads, ages, trails, games) just lose their "Read →" line.
+- Family tree cards are left alone, because a tap on them lights up the family line.
+- To check: load the page in Playwright, and for each `.wl-card` use `document.elementFromPoint` at the corners and middle: it must hit the card's link, and every other link or button inside must still hit itself. Turn off smooth scrolling first, or the points are measured mid-scroll.
 
 ## Working together
 
