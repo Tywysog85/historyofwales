@@ -372,7 +372,7 @@ def battles_map(rows):
         if not b["geo"]:
             continue
         x, y = wales_xy(*b["geo"])
-        dots += (f'<a href="#b-{b["id"]}" class="bt-dot bt-{b["win"]}" aria-label="{e(b["en"])}, {e(b["dEn"])}"><g transform="translate({x:.1f} {y:.1f})"><circle class="h" r="14"/>'
+        dots += (f'<a href="#b-{b["id"]}" class="bt-dot bt-{b["win"]}" data-vs="{" ".join(b["vs"])}" aria-label="{e(b["en"])}, {e(b["dEn"])}"><g transform="translate({x:.1f} {y:.1f})"><circle class="h" r="14"/>'
                  f'<path class="d" d="M-6 -6L6 6M6 -6L-6 6"/></g><title>{e(b["en"])} · {e(b["dEn"])}</title></a>')
     return (f'<svg class="tw-map bt-map" viewBox="-20 -20 640 711" role="group" aria-label="Map of the battles of Wales">'
             f'<path class="land" d="{g["geo"]["outline"]}"/>{dots}</svg>')
@@ -385,23 +385,28 @@ def battles_page(have):
     cards = ""
     for b in rows:
         where = "" if b["geo"] else f'<span class="bt-nomap"> · {bi("not on the map", "nid ar y map")}</span>'
-        cards += (f'<article class="bt-card bt-{b["win"]}" id="b-{b["id"]}" data-ref-item style="--c:{g["COL"][b["era"]]}">'
+        vs = "".join(f'<span>{bi(*BT.AGAINST[v])}</span>' for v in b["vs"])
+        cards += (f'<article class="bt-card bt-{b["win"]}" id="b-{b["id"]}" data-ref-item data-vs="{" ".join(b["vs"])}" style="--c:{g["COL"][b["era"]]}">'
                   f'<p class="bt-date">{bi(b["dEn"], b["dCy"])} · <span class="bt-k">{bi(*WIN[b["win"]])}</span>{where}</p>'
-                  f'<h3>{bi(b["en"], b["cy"])}</h3><p class="bt-side">{bi(b["sEn"], b["sCy"])}</p><p>{bi(b["tEn"], b["tCy"])}</p>{link_chips(b["see"], have)}</article>')
+                  f'<h3>{bi(b["en"], b["cy"])}</h3><p class="bt-vs"><b>{bi("Against", "Yn erbyn")}:</b> {vs}</p><p class="bt-side">{bi(b["sEn"], b["sCy"])}</p><p>{bi(b["tEn"], b["tCy"])}</p>{link_chips(b["see"], have)}</article>')
     legend = (f'<ul class="bt-legend"><li class="bt-w">{bi(*WIN["w"])}</li><li class="bt-l">{bi(*WIN["l"])}</li><li class="bt-o">{bi(*WIN["o"])}</li></ul>')
     n = len(rows)
     nw = sum(1 for b in rows if b["win"] == "w")
+    count = {k: sum(1 for b in rows if k in b["vs"]) for k in BT.AGAINST}
+    chips = f'<button type="button" data-vs="" aria-pressed="true">{bi("All", "Y cyfan")} <small>{n}</small></button>' + "".join(
+        f'<button type="button" data-vs="{k}" aria-pressed="false">{bi(*lab)} <small>{count[k]}</small></button>' for k, lab in BT.AGAINST.items() if count[k])
     main = (g["hero"]("medieval", crumbs(), "book", "Reference", "Cyfeirlyfr", "Battles of Wales", "Brwydrau Cymru",
-                      f"{n} battles and risings, from the Druids on the Menai to the Welsh Division at Mametz Wood: who fought, what happened, and where.",
-                      f"{n} o frwydrau a gwrthryfeloedd, o’r Derwyddon ar y Fenai i’r Adran Gymreig yng Nghoed Mametz: pwy a ymladdodd, beth ddigwyddodd, a ble.", art="sword")
+                      f"{n} battles, sieges and risings, from the Druids on the Menai to the Falklands: who fought, who they fought against, what happened, and where.",
+                      f"{n} o frwydrau, gwarchaeau a gwrthryfeloedd, o’r Derwyddon ar y Fenai i’r Falklands: pwy a ymladdodd, yn erbyn pwy, beth ddigwyddodd, a ble.", art="sword")
             + g["section"](f'<div class="tw-top"><div class="tw-mapbox">{battles_map(rows)}{legend}</div><div>'
-                           f'<p>{bi(f"The Normans took England in five years; Wales held out for 216. These are the battles that made that story, {nw} of them Welsh victories. Tap a cross on the map to read about it.", f"Cymerodd y Normaniaid Loegr mewn pum mlynedd; daliodd Cymru allan am 216. Dyma’r brwydrau a wnaeth y stori honno, {nw} ohonynt yn fuddugoliaethau Cymreig. Tapiwch groes ar y map i ddarllen amdani.")}</p>'
+                           f'<p>{bi(f"The Normans took England in five years; Wales held out for 216. Here is every battle the chronicles let us name, against Rome, the Saxons, the Vikings, the Normans, the kings of England and more, {nw} of them Welsh victories. Pick who a battle was against below, or tap a cross on the map.", f"Cymerodd y Normaniaid Loegr mewn pum mlynedd; daliodd Cymru allan am 216. Dyma bob brwydr y mae’r croniclau’n gadael i ni ei henwi, yn erbyn Rhufain, y Saeson, y Llychlynwyr, y Normaniaid, brenhinoedd Lloegr a mwy, {nw} ohonynt yn fuddugoliaethau Cymreig. Dewiswch yn erbyn pwy y bu brwydr isod, neu tapiwch groes ar y map.")}</p>'
                            f'<input class="ref-filter" type="search" data-ref-filter placeholder="Find a battle, a leader or a year… / Chwilio am frwydr, arweinydd neu flwyddyn…" aria-label="Filter the battles / Hidlo’r brwydrau" autocomplete="off">'
                            f'<p style="margin-top:1rem"><a class="btn" href="castles.html">{bi("The castles map", "Map y cestyll")} →</a> <a class="btn" href="story-longbow.html">{bi("The Welsh longbow", "Y bwa hir Cymreig")} →</a></p></div></div>'
+                           f'<h2 class="bt-h">{bi("Who the battles were against", "Yn erbyn pwy y bu’r brwydrau")}</h2><nav class="bt-chips" aria-label="Who the battles were against / Yn erbyn pwy">{chips}</nav>'
                            f'<div class="bt-list" data-ref-group>{cards}</div><p class="ref-none" data-ref-none hidden>{bi("No battle matches that.", "Does dim brwydr yn cyfateb.")}</p>', top=True))
     return g["page"]("battles.html", "Battles of Wales: a map and list · History of Wales",
-                     f"{n} battles of Welsh history on a map: Catraeth, Crug Mawr, Crogen, Cymerau, Cilmeri, Mynydd Hyddgen, Bryn Glas, Bosworth, Fishguard and the Merthyr and Newport risings.",
-                     main, era="medieval", ld=ld_article("Battles of Wales", "The battles of Welsh history on a map"), active="reference.html", track="page:battles", extra=FILTER_JS)
+                     f"{n} battles of Welsh history on a map, and who each was against: Romans, Saxons, Vikings, Normans, English kings and more. Catraeth, Crug Mawr, Crogen, Cymerau, Cilmeri, Mynydd Hyddgen, Bryn Glas, Bosworth, Fishguard and the Merthyr and Newport risings.",
+                     main, era="medieval", ld=ld_article("Battles of Wales", "The battles of Welsh history on a map"), active="reference.html", track="page:battles", extra=FILTER_JS + VS_JS)
 
 
 BATTLE_CSS = """
@@ -419,6 +424,20 @@ BATTLE_CSS = """
 .bt-nomap{opacity:.7}
 .tw-top .ref-filter{width:100%;box-sizing:border-box;margin-top:.6rem}
 .bt-side{font-weight:600;color:var(--ink)}
+.bt-h{font:600 1.5rem var(--f-display);margin:2rem 0 .6rem}
+.bt-chips{display:flex;flex-wrap:wrap;gap:.45rem;margin:0 0 1.3rem;max-width:52rem}
+.bt-chips button{font:500 .88rem var(--f-body);background:var(--slate);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:.4rem .85rem;cursor:pointer}
+.bt-chips button small{color:var(--muted);font:500 .75rem var(--f-mono);margin-left:.2rem}
+.bt-chips button:hover{border-color:var(--gold,#e8c65a)}
+.bt-chips button[aria-pressed="true"]{background:var(--gold,#e8c65a);border-color:var(--gold,#e8c65a);color:#1a1a1a}.bt-chips button[aria-pressed="true"] small{color:#1a1a1a}
+.bt-vs{font-size:.85rem;color:var(--muted);margin:.25rem 0 0!important}.bt-vs span+span::before{content:" · "}
+.bt-off{display:none!important}.bt-map .bt-dot.bt-dim{opacity:.12;pointer-events:none}
+"""
+VS_JS = r"""<script>(function(){var bs=[].slice.call(document.querySelectorAll(".bt-chips button"));if(!bs.length)return;
+var cards=[].slice.call(document.querySelectorAll(".bt-card")),dots=[].slice.call(document.querySelectorAll(".bt-dot"));
+function has(x,v){return !v||(" "+x.getAttribute("data-vs")+" ").indexOf(" "+v+" ")>=0}
+bs.forEach(function(b){b.addEventListener("click",function(){var v=b.getAttribute("data-vs");bs.forEach(function(o){o.setAttribute("aria-pressed",o===b?"true":"false")});
+cards.forEach(function(c){c.classList.toggle("bt-off",!has(c,v))});dots.forEach(function(d){d.classList.toggle("bt-dim",!has(d,v))})})})})();</script>
 """
 
 
@@ -451,8 +470,8 @@ def documents_page(have):
                   f'<p class="dc-kept">{bi("Where to find it", "Ble i’w chael")}: {bi(d["kEn"], d["kCy"])}</p>{link_chips(d["see"], have)}</article>')
     n = len(rows)
     main = (g["hero"]("tudor", crumbs(), "book", "Reference", "Cyfeirlyfr", "Key documents", "Dogfennau allweddol",
-                      f"{n} documents that shaped Wales, from Caesar on the Druids to the vote for a Welsh parliament, each with its own words, what it did and where to find it.",
-                      f"{n} o ddogfennau a luniodd Gymru, o Gesar ar y Derwyddon i’r bleidlais dros senedd i Gymru, pob un gyda’i geiriau ei hun, beth a wnaeth a ble i’w chael.", art="book")
+                      f"{n} documents that shaped Wales, from Caesar on the Druids to the Senedd, each with its own words, what it did and where to find it.",
+                      f"{n} o ddogfennau a luniodd Gymru, o Gesar ar y Derwyddon i’r Senedd, pob un gyda’i geiriau ei hun, beth a wnaeth a ble i’w chael.", art="book")
             + g["section"](f'<p class="ref-intro">{bi("Where a document’s exact words are known, they are quoted from a published translation. Where they are not, we say what it says in our own words and mark it “in short”. The Laws of Hywel Dda have their own page.", "Lle mae union eiriau dogfen yn hysbys, fe’u dyfynnir o gyfieithiad cyhoeddedig. Lle nad ydynt, rydym yn dweud beth mae’n ei ddweud yn ein geiriau ein hunain ac yn ei nodi’n “yn fyr”. Mae gan Gyfreithiau Hywel Dda eu tudalen eu hunain.")} <a href="laws.html">{bi("The Laws of Hywel Dda", "Cyfreithiau Hywel Dda")} →</a></p>'
                            f'<input class="ref-filter dc-filter" type="search" data-ref-filter placeholder="Find a document, a person or a year… / Chwilio am ddogfen, person neu flwyddyn…" aria-label="Filter the documents / Hidlo’r dogfennau" autocomplete="off">'
                            f'<nav class="dc-jump" aria-label="Documents / Dogfennau">{jump}</nav>'
@@ -779,7 +798,7 @@ DESK = [  # href, English, Welsh, English line, Welsh line, era colour
     ("a-z.html", "The A–Z", "Yr A–Y", "Words, laws and ideas, each explained in a few lines.", "Geiriau, cyfreithiau a syniadau, pob un wedi’i egluro mewn ychydig linellau.", "kings"),
     ("questions.html", "Quick answers", "Atebion cyflym", "The questions people ask most about Welsh history, answered.", "Y cwestiynau a ofynnir amlaf am hanes Cymru, wedi’u hateb.", "today"),
     ("towns.html", "Towns and villages", "Trefi a phentrefi", "What every place name means, and what happened there.", "Beth mae pob enw lle’n ei olygu, a beth ddigwyddodd yno.", "saints"),
-    ("battles.html", "Battles of Wales", "Brwydrau Cymru", "Every battle from Catraeth to Fishguard, on a map.", "Pob brwydr o Gatraeth i Abergwaun, ar fap.", "medieval"),
+    ("battles.html", "Battles of Wales", "Brwydrau Cymru", "Every recorded battle, from the Romans to the Falklands, and who it was against.", "Pob brwydr a gofnodwyd, o’r Rhufeiniaid i’r Falklands, ac yn erbyn pwy.", "medieval"),
     ("documents.html", "Key documents", "Dogfennau allweddol", "The words of the treaties, letters and laws that shaped Wales.", "Geiriau’r cytundebau, y llythyrau a’r deddfau a luniodd Gymru.", "tudor"),
     ("sites.html", "Historic sites map", "Map safleoedd hanesyddol", "Hillforts, burial chambers, standing stones, Roman forts, abbeys and holy wells.", "Bryngaerau, cromlechi, meini hirion, caerau Rhufeinig, abatai a ffynhonnau sanctaidd.", "ancient"),
     ("maps.html", "Maps through time", "Mapiau drwy’r oesoedd", "Watch the map of Wales change from the four peoples to today.", "Gwyliwch fap Cymru’n newid o’r pedwar llwyth hyd heddiw.", "roman"),
