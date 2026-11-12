@@ -81,7 +81,6 @@ footer nav a:hover { color: var(--ink) }
 .era-events li { display: grid; grid-template-columns: 9rem minmax(0,1fr); gap: 1.25rem; padding: 1.1rem 0; border-bottom: 1px solid var(--line) }
 .era-events time { font-family: var(--f-mono); font-size: .82rem; color: var(--c); padding-top: .2rem }
 .era-events h3 { font-family: var(--f-body); font-weight: 700; font-size: 1.15rem; line-height: 1.3 }
-.era-events li.key h3 { font-family: var(--f-display); font-weight: 400; font-size: 1.6rem }
 .era-events p { color: var(--muted); margin-top: .2rem }
 @media (max-width: 560px) { .era-events li { grid-template-columns: 1fr; gap: .2rem } }
 .plaque { scroll-margin-top: 6rem }

@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Fourteen new trails through Welsh history", "Pedwar llwybr newydd ar ddeg drwy hanes Cymru",
+     "Eighteen trails now: kings and princes, Arthur’s Wales, saints and holy wells, the fight for the language, castles, Roman Wales, the Mabinogi landscape, rebels and risings, poets and bards, Wales and the world, the first people, Welsh firsts, the Welsh Tudors and sporting Wales, each with ten stops and the full story at every one.",
+     "Deunaw llwybr bellach: brenhinoedd a thywysogion, Cymru Arthur, seintiau a ffynhonnau sanctaidd, y frwydr dros yr iaith, cestyll, Cymru a Rhufain, tirwedd y Mabinogi, gwrthryfelwyr, beirdd, Cymru a’r byd, y bobl gyntaf, Cymru’n gyntaf, y Tuduriaid a Chymru’r campau, pob un â deg arhosfan a’r hanes llawn ym mhob un.",
+     "trails.html"),
     ("2026-11-12", "How Wales moved the world", "Sut y symudodd Cymru’r byd",
      "A new long read on the industrial revolution: Trevithick’s Penydarren engine of 1804, the first railway journey in the world; the first passenger railway at Swansea; Merthyr, iron capital of the world; Cardiff and Barry, the greatest coal ports on earth; the first million-pound cheque, signed at the Coal Exchange in 1904; Copperopolis, slate and the Ffestiniog Railway.",
      "Erthygl newydd ar y chwyldro diwydiannol: injan Penydarren Trevithick yn 1804, y daith reilffordd gyntaf yn y byd; y rheilffordd deithwyr gyntaf yn Abertawe; Merthyr, prifddinas haearn y byd; Caerdydd a’r Barri, porthladdoedd glo mwyaf y ddaear; y siec filiwn punt gyntaf, a lofnodwyd yn y Gyfnewidfa Lo yn 1904; Copperopolis, llechi a Rheilffordd Ffestiniog.",

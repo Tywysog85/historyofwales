@@ -694,6 +694,14 @@ Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.
 - For a smooth drag, use `step="any"`, change the map at the nearest stage while dragging, and glide the thumb onto that stage when the finger lets go. Arrow keys, Page Up/Down, Home and End are handled in a `keydown` listener.
 - Year labels are placed under the exact thumb positions with `left: calc(thumb/2 + (100% - thumb) * i / n)`; on a phone every other year drops to a second row so all of them fit. Test drags in Playwright with `page.mouse` and, for touch, CDP `Input.dispatchTouchEvent`.
 
+### Themed trails (November 2026)
+- The trails are `TRAILS` in `src/long.py` (the first four) and `src/trails.py` (the newer ones, put in front, newest first). `build.py` makes `trails.html` and one `trail-<id>.html` per trail.
+- A stop can be an event (by its English title), a person, a place, a long read (`("story", id)`), a legend (`("legend", id)`) or any page (`("page", href, era, dates, titles, texts)`). Every stop gets a "The full story" link to its own page, and person and place stops also link any long read that names them.
+- A long read that does not exist yet can already be named on a trail: it stays hidden until another thread publishes it (for example `story-welsh-not`, `story-mac`).
+- Keep 8 to 10 stops per trail, and keep the number of trails a multiple of 6, so the grid on `trails.html` is full at three columns and at two.
+- Every stop title has the same size and font: there is no bigger serif style for "key" events any more (removed from `.era-events li.key h3` and the timeline's `.ev.key h4`). Key events keep their coloured dot.
+- To check fonts across the site, load pages in Playwright and compare the computed font of headings in sibling cards or list items; flag any group with more than one style.
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
