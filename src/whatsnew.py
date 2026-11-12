@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Saint Patrick, the Briton from Wales", "Padrig Sant, y Brython o Gymru",
+     "A new long read: the patron saint of Ireland in his own words, a deacon’s son of the Britons taken by Irish raiders at sixteen, and the Welsh tradition that his home was Banwen in the Dulais valley, with Llanilltud, Glyn Rhosyn and Llanbadrig.",
+     "Erthygl newydd: nawddsant Iwerddon yn ei eiriau ei hun, mab i ddiacon o Frythoniaid a gipiwyd gan ysbeilwyr o Iwerddon yn un ar bymtheg oed, a thraddodiad Cymru mai Banwen yng nghwm Dulais oedd ei gartref, gyda Llanilltud, Glyn Rhosyn a Llanbadrig.",
+     "story-patrick.html"),
     ("2026-11-12", "Real pictures on every page", "Lluniau go iawn ar bob tudalen",
      "Every long read, legend, age, kingdom, saint, topic and game now opens with a real photograph or old artwork: Segontium for Macsen, the Pennal Letter for Glyndŵr, the Laws of Hywel Dda, the Pillar of Eliseg and many more, each with its credit.",
      "Mae pob erthygl, chwedl, oes, teyrnas, sant, pwnc a gêm bellach yn agor gyda ffotograff go iawn neu hen waith celf: Segontium i Facsen, Llythyr Pennal i Lyndŵr, Cyfreithiau Hywel Dda, Colofn Eliseg a llawer mwy, pob un gyda’i gydnabyddiaeth.",

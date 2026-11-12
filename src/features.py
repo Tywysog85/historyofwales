@@ -385,6 +385,7 @@ import brutus as _BR  # Brutus of Troy and the Britons long read (src/brutus.py)
 import celts as _CE  # Britons, not Celts: Edward Lhuyd and the name 'Celtic' (src/celts.py)
 import madog as _MD  # Prince Madog's voyage to America and the Welsh Indians (src/madog.py)
 import caradog as _CR  # King Caradog (Caratacus) against Rome, and his family in Rome (src/caradog.py)
+import patrick as _PT  # Saint Patrick, the Briton from Wales (src/patrick.py)
 import christianity as _CH  # The coming of Christianity: the first Christians, Joseph, Lucius, Brân (src/christianity.py)
 import macsen as _MX  # Macsen Wledig, the emperor from Britain (src/macsen.py)
-STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY] + _CH.STORIES
+STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY] + _CH.STORIES + [_PT.STORY]
