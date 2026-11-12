@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Castles, great houses and places of modern Wales to visit", "Cestyll, plastai a lleoedd Cymru fodern i ymweld â nhw",
+     "Thirteen new places, from Pilleth and Pennal in Owain Glyndŵr’s war to Plas Mawr, Tŷ Mawr Wybrnant, Chirk, Erddig, Penrhyn, Big Pit, Llanystumdwy, the Wales Millennium Centre and the National Botanic Garden; full pages for Sycharth, Conwy, Beaumaris, Rhuddlan, Caerphilly, Raglan, Chepstow and Pembroke; and Visiting boxes for the great castles.",
+     "Tri lle ar ddeg newydd, o Billeth a Phennal yn rhyfel Owain Glyndŵr i Blas Mawr, Tŷ Mawr Wybrnant, y Waun, Erddig, y Penrhyn, y Pwll Mawr, Llanystumdwy, Canolfan Mileniwm Cymru a’r Ardd Fotaneg Genedlaethol; tudalennau llawn ar Sycharth, Conwy, Biwmares, Rhuddlan, Caerffili, Rhaglan, Cas-gwent a Phenfro; a blychau Ymweld ar gyfer y cestyll mawr.",
+     "place-sycharth.html"),
     ("2026-11-12", "The writers who recorded early Wales", "Yr awduron a gofnododd Gymru gynnar",
      "A new long read and full pages on the writers who gave Wales its memory: Gerald of Wales and his journey of 1188, Nennius and the History of the Britons, Asser at Alfred’s court, Rhygyfarch and the Life of Saint David, Geoffrey of Monmouth, and new pages on Walter Map, Caradog of Llancarfan, Lifris, Elfoddw, Adam of Usk, Gutun Owain, Hywel Fychan of the Red Book and Elis Gruffydd, the soldier of Calais.",
      "Erthygl newydd a thudalennau llawn ar yr awduron a roddodd ei chof i Gymru: Gerallt Gymro a’i daith yn 1188, Nennius a Hanes y Brythoniaid, Asser yn llys Alffred, Rhygyfarch a Buchedd Dewi, Sieffre o Fynwy, a thudalennau newydd ar Wallter Map, Caradog o Lancarfan, Lifris, Elfoddw, Adda o Frynbuga, Gutun Owain, Hywel Fychan y Llyfr Coch ac Elis Gruffydd, milwr Calais.",
