@@ -1,0 +1,34 @@
+name: Fetch the historic sites (Cadw scheduled monuments)
+
+# Downloads Cadw's list of scheduled monuments from DataMapWales and commits tools/data/sites_cadw.json, which build.py
+# turns into the historic sites map (sites.html). Start it from the Actions tab; it also runs when the script changes
+# on a claude/ branch, and on the 2nd of each month to pick up newly scheduled monuments.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "40 5 2 * *"
+  push:
+    branches: ["claude/**"]
+    paths: ["tools/sites_fetch.py", ".github/workflows/fetch-sites.yml"]
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 tools/sites_fetch.py
+      - name: Commit the sites
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/data/sites_probe.txt
+          git add tools/data/sites_*.json 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "Historic sites from Cadw (tools/sites_fetch.py)"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push

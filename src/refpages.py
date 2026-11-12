@@ -14,6 +14,7 @@ import ref_battles as BT
 import ref_docs as DC
 import ref_topics as TP
 import ref_maps as MP
+import ref_sites as ST
 import os
 
 g = {}  # build.py's helpers (bi, e, page, hero, section ...), filled by setup()
@@ -661,6 +662,118 @@ MAP_CSS = """
 """
 
 
+# ---------- the historic sites map ----------
+def _sites_raw():
+    root = os.path.dirname(g["SRC"])
+    path = os.path.join(root, "tools", "data", "sites_cadw.json")
+    if not os.path.exists(path):
+        return [], {}
+    rows = json.load(open(path, encoding="utf-8"))
+    gp = os.path.join(root, "tools", "data", "sites_guardian.json")
+    guard = {}
+    if os.path.exists(gp):
+        for x in json.load(open(gp, encoding="utf-8")):
+            num = str(x["p"].get("sm_number", "")).strip()
+            if num:
+                guard[num] = x
+    return rows, guard
+
+
+def site_rows():
+    raw, guard = _sites_raw()
+    geo = g["geo"]
+    sc, k, minx, maxy = geo["sc"], geo["k"], geo["minx"], geo["maxy"]
+    out = []
+    for x in raw:
+        p = x["p"]
+        num = str(p.get("SAMNumber", "")).strip()
+        gd = guard.get(num)
+        en = (gd["p"].get("name") if gd else None) or x["n"].strip() or p.get("SiteType", "")
+        cy = (gd["p"].get("name_cy") if gd else None) or p.get("Name_cy") or en
+        en, cy = str(en).strip(), str(cy).strip()
+        typ, typ_cy = str(p.get("SiteType", "")).strip(), str(p.get("SiteType_cy", "") or p.get("SiteType", "")).strip()
+        per = str(p.get("Period", "")).strip()
+        cat = ST.classify(typ, per, p.get("BroadClass"))
+        out.append(dict(q=str(p.get("RecordNumber", num)), num=num, en=en, cy=cy, typ=typ, typ_cy=typ_cy, per=per, cat=cat,
+                        la=str(p.get("UnitaryAuthority", "")).replace("Rhondda Cynon Taff", "Rhondda Cynon Taf"),
+                        la_cy=str(p.get("UnitaryAuthority_cy", "")), comm=str(p.get("Community", "")), lat=x["lat"], lon=x["lon"],
+                        x=round((x["lon"] - minx) * k * sc, 1), y=round((maxy - x["lat"]) * sc, 1), visit=1 if gd else 0))
+    return out
+
+
+def sites_page(have):
+    rows = site_rows()
+    if not rows:
+        return None
+    las = sorted({(r["la"], r["la_cy"] or r["la"]) for r in rows}, key=lambda a: g["CS"].LA_ORDER.index(a[0]) if a[0] in g["CS"].LA_ORDER else 99)
+    lai = {a[0]: i for i, a in enumerate(las)}
+    kinds = {}
+    for r in rows:
+        kinds.setdefault(r["typ"], [r["typ"], r["typ_cy"], "", ""])
+    places = g["D"].PLACES
+    det = {}
+    for r in rows:
+        pl = next((p["id"] for p in places if abs(p["lat"] - r["lat"]) < .005 and abs(p["lon"] - r["lon"]) < .008), None)
+        if pl and exists(f"place-{pl}.html", have):
+            det[r["q"]] = {"l": [[f"place-{pl}.html", *TITLES.get(f"place-{pl}.html", (pl, pl))]]}
+    data_rows = [[r["q"], r["en"], r["cy"], r["x"], r["y"], ST.CAT_IX[r["cat"]], r["typ"], r["per"], lai[r["la"]], r["lat"], r["lon"], r["visit"]] for r in rows]
+    payload = dict(c=data_rows, d=det, k=kinds, g=[[c[1], c[2], c[3]] for c in ST.CATS], la=[list(a) for a in las], counties=g["county_lines"](),
+                   W=g["geo"]["W"], H=g["geo"]["H"], P=[g["geo"]["minx"], g["geo"]["maxy"], g["geo"]["k"], g["geo"]["sc"]],
+                   dc=ST.PERIOD_CY, order=list(range(len(ST.CATS) - 1, -1, -1)), hi0=False, hp="site-", aria="Map of Wales with its historic sites",
+                   rec="http://cadwpublic-api.azurewebsites.net/reports/sam/FullReport?lang={lang}&id={q}",
+                   t=dict(rec=["Cadw’s full record", "Cofnod llawn Cadw"],
+                          access=["The big dots are sites cared for by Cadw and open to visit. Most other monuments are on private land: please check access first.", "Safleoedd yng ngofal Cadw ac ar agor i ymwelwyr yw’r dotiau mawr. Mae’r rhan fwyaf o henebion eraill ar dir preifat: gwiriwch fynediad yn gyntaf."],
+                          none=["No site by that name", "Dim safle o’r enw hwnnw"], near=["The ten historic sites nearest to you", "Y deg safle hanesyddol agosaf atoch"],
+                          far=["You look to be a long way from Wales. Here are the nearest sites all the same.", "Mae’n ymddangos eich bod ymhell o Gymru. Dyma’r safleoedd agosaf er hynny."]))
+    n_all, n_visit = len(rows), sum(r["visit"] for r in rows)
+    counts = [sum(1 for r in rows if r["cat"] == c[0]) for c in ST.CATS]
+    chips = "".join(f'<button type="button" class="cm-chip on" data-g="{i}" aria-pressed="true" style="--gc:{c[3]}"><i></i>{bi(c[1], c[2])} <b>{counts[i]:,}</b></button>' for i, c in enumerate(ST.CATS))
+    gcss = "".join(f".g{i}{{--gc:{c[3]}}}" for i, c in enumerate(ST.CATS))
+    legend = "".join(f'<li style="--gc:{c[3]}"><i></i><span>{bi(c[1], c[2])}</span><small>{bi(c[4], c[5])}</small></li>' for c in ST.CATS)
+    tool = (f'<div class="cm-tools"><div class="cm-search"><label class="sr-only" for="cm-q">{bi("Find a site", "Chwilio am safle")}</label>'
+            f'<input id="cm-q" type="search" autocomplete="off" placeholder="Find a site…" data-ph-cy="Chwilio am safle…" data-ph-en="Find a site…">'
+            f'<ul id="cm-res" class="cm-res" role="listbox" hidden></ul></div>'
+            f'<div class="cm-btns"><button type="button" class="btn" id="cm-near">{bi("Sites near me", "Safleoedd yn agos ataf")}</button>'
+            f'<button type="button" class="btn ghost" id="cm-rand">{bi("Surprise me", "Synnwch fi")}</button></div>'
+            f'<div class="cm-chips" role="group" aria-label="Kinds of site / Mathau o safle">{chips}</div></div>')
+    mapbox = (f'<div class="cm-wrap">{tool}<div class="cm-map" id="cm-map" tabindex="0" aria-label="Map of the historic sites of Wales / Map o safleoedd hanesyddol Cymru">'
+              f'<noscript><p>{bi("The map needs JavaScript. The sites you can visit are listed below.", "Mae angen JavaScript ar y map. Rhestrir y safleoedd y gallwch ymweld â nhw isod.")}</p></noscript>'
+              f'<div class="cm-zoom"><button type="button" id="cm-in" aria-label="Zoom in / Chwyddo i mewn">+</button><button type="button" id="cm-out" aria-label="Zoom out / Chwyddo allan">−</button>'
+              f'<button type="button" id="cm-home" aria-label="Whole of Wales / Cymru gyfan"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2"/></svg></button></div>'
+              f'<p class="cm-hint" id="cm-hint">{bi("Drag to move, pinch or scroll to zoom, tap a dot", "Llusgwch i symud, pinsiwch neu sgroliwch i chwyddo, tapiwch ddot")}</p></div>'
+              f'<aside class="cm-side"><div id="cm-card" class="cm-card" aria-live="polite">'
+              f'<p class="eyebrow">{bi(f"{n_all:,} historic sites", f"{n_all:,} o safleoedd hanesyddol")}</p>'
+              f'<h2>{bi("Choose a site", "Dewiswch safle")}</h2><p class="muted">{bi(f"Every scheduled monument in Wales: tap a dot, search by name, or find the sites nearest to you. The {n_visit} big dots are the sites Cadw looks after and opens to visitors.", f"Pob heneb gofrestredig yng Nghymru: tapiwch ddot, chwiliwch yn ôl enw, neu dewch o hyd i’r safleoedd agosaf atoch. Y {n_visit} dot mawr yw’r safleoedd y mae Cadw’n gofalu amdanynt ac yn eu hagor i ymwelwyr.")}</p>'
+              f'<ul class="cm-legend">{legend}</ul></div></aside></div>')
+    visit = [r for r in rows if r["visit"]]
+    lists = ""
+    for la, la_cy in las:
+        rs = sorted([r for r in visit if r["la"] == la], key=lambda r: r["en"])
+        if rs:
+            items = "".join(f'<li><button class="cm-show g{ST.CAT_IX[r["cat"]]}" data-q="{r["q"]}"><i></i>{bi(r["en"], r["cy"])}</button></li>' for r in rs)
+            lists += f'<details class="cm-la"><summary>{bi(la, la_cy)} <b>{len(rs)}</b></summary><ul>{items}</ul></details>'
+    intro_en = ["Wales has one of the richest landscapes of monuments in Europe: burial chambers older than the pyramids, stone circles, more than a thousand hillforts, Roman forts, the carved stones of the early kings and saints, abbeys, castles and the works of the first industrial nation.",
+                f"This map shows all {n_all:,} scheduled monuments, the sites protected by law as the most important in Wales. Filter by kind, zoom in to your own area, or tap “Sites near me” to find what is on your doorstep."]
+    intro_cy = ["Mae gan Gymru un o dirweddau henebion cyfoethocaf Ewrop: siambrau claddu hŷn na’r pyramidiau, cylchoedd cerrig, mwy na mil o fryngaerau, caerau Rhufeinig, cerrig cerfiedig y brenhinoedd a’r seintiau cynnar, abatai, cestyll a gweithfeydd y genedl ddiwydiannol gyntaf.",
+                f"Mae’r map hwn yn dangos pob un o’r {n_all:,} o henebion cofrestredig, y safleoedd a warchodir gan y gyfraith fel y pwysicaf yng Nghymru. Hidlwch yn ôl math, chwyddwch i mewn i’ch ardal chi, neu tapiwch “Safleoedd yn agos ataf” i weld beth sydd ar garreg eich drws."]
+    note = bi("Contains public sector information licensed under the Open Government Licence v3.0: Cadw’s scheduled monuments and guardianship sites, from DataMapWales. The kinds are grouped for this site. Relief from open elevation data (Mapzen Terrarium).",
+              "Yn cynnwys gwybodaeth sector cyhoeddus a drwyddedir dan y Drwydded Llywodraeth Agored v3.0: henebion cofrestredig a safleoedd gwarcheidiaeth Cadw, o MapDataCymru. Grwpiwyd y mathau ar gyfer y wefan hon. Tirwedd o ddata uchder agored (Mapzen Terrarium).")
+    main = (g["hero"]("ancient", crumbs(), "dolmen", f"{n_all:,} sites", f"{n_all:,} o safleoedd", "Historic sites map", "Map safleoedd hanesyddol",
+                      "Every protected ancient monument in Wales on one map: cromlechs, standing stones, hillforts, Roman forts, carved stones, abbeys, castles and industry.",
+                      "Pob heneb hynafol warchodedig yng Nghymru ar un map: cromlechi, meini hirion, bryngaerau, caerau Rhufeinig, cerrig cerfiedig, abatai, cestyll a diwydiant.", art="dolmen")
+            + f'<style>{g["read"]("castles.css")}{gcss}</style><section class="cm-sec" id="map"><div class="wrap">{mapbox}</div></section>'
+            + g["section"]("".join(f"<p>{bi(a, b)}</p>" for a, b in zip(intro_en, intro_cy)), top=True)
+            + g["section"](f'<p class="lede">{bi(f"The {n_visit} sites in the care of Cadw, open to visit, area by area.", f"Y {n_visit} o safleoedd yng ngofal Cadw, ar agor i ymwelwyr, fesul ardal.")}</p><div class="cm-lists">{lists}</div>'
+                           f'<p style="margin-top:1.4rem"><a class="btn" href="castles.html">{bi("The castles map", "Map y cestyll")} →</a> <a class="btn" href="maps.html">{bi("Maps through time", "Mapiau drwy’r oesoedd")} →</a></p>'
+                           f'<p class="note-box" style="margin-top:2rem">{note}</p>', "Places you can visit", "Lleoedd y gallwch ymweld â nhw"))
+    extra = f'<script>var CMAP={json.dumps(payload, ensure_ascii=False, separators=(",", ":"))};</script>\n<script src="castles.js?v=3" defer></script>\n'
+    ld = {"@context": "https://schema.org", "@type": "Map", "name": "The historic sites of Wales", "inLanguage": ["en", "cy"],
+          "description": f"An interactive map of {n_all} scheduled monuments in Wales.", "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": g["BASE_URL"]}}
+    return g["page"]("sites.html", "Historic sites of Wales: interactive map · History of Wales",
+                     f"An interactive map of all {n_all:,} scheduled monuments in Wales: burial chambers, standing stones, hillforts, Roman forts, inscribed stones, abbeys, castles and industrial sites, with the sites near you.",
+                     main, era="ancient", ld=ld, og_type="website", active="reference.html", track="page:sites", extra=extra)
+
+
 # ---------- the look-it-up desk ----------
 DESK = [  # href, English, Welsh, English line, Welsh line, era colour
     ("a-z.html", "The A–Z", "Yr A–Y", "Words, laws and ideas, each explained in a few lines.", "Geiriau, cyfreithiau a syniadau, pob un wedi’i egluro mewn ychydig linellau.", "kings"),
@@ -710,10 +823,13 @@ def pages(have):
     out = {"a-z.html": az_page(have), "questions.html": questions_page(have), "towns.html": towns_page(have), "battles.html": battles_page(have), "documents.html": documents_page(have), "topics.html": topics_page(have), "maps.html": maps_page(have), "reference.html": desk_page(have)}
     for t in TP.TOPICS:
         out[f"topic-{t['id']}.html"] = topic_page(t, have)
+    sites = sites_page(have)
+    if sites:
+        out["sites.html"] = sites
     return out
 
 
-PAGE_NAMES = ["a-z.html", "questions.html", "towns.html", "battles.html", "documents.html", "topics.html", "maps.html", "reference.html"] + [f"topic-{t['id']}.html" for t in TP.TOPICS]
+PAGE_NAMES = ["a-z.html", "questions.html", "towns.html", "battles.html", "documents.html", "topics.html", "maps.html", "sites.html", "reference.html"] + [f"topic-{t['id']}.html" for t in TP.TOPICS]
 
 
 def search_items():
@@ -729,6 +845,8 @@ def search_items():
     items += [dict(k="topic", t=t["en"], c=t["cy"], u=f"topic-{t['id']}.html", y=["Topic guide", "Canllaw pwnc"], b=[t["sEn"], t["sCy"]], e=t["era"]) for t in TP.TOPICS]
     items += [dict(k="map", t=k["en"], c=k["cy"], u=f"maps.html#map-{k['id']}", y=["Maps through time", "Mapiau drwy’r oesoedd"], b=[k["nEn"], k["nCy"]], e="roman") for k in _map_stages()]
     items.append(dict(k="page", t="Maps of Wales through time", c="Mapiau o Gymru drwy’r oesoedd", u="maps.html", y=["Reference", "Cyfeirlyfr"], b=["How the map of Wales changed, from the four peoples who faced Rome to the twenty-two councils and the Senedd.", "Sut y newidiodd map Cymru, o’r pedwar llwyth a wynebodd Rufain i’r dau gyngor ar hugain a’r Senedd."], e="roman"))
+    items += [dict(k="site", t=r["en"], c=r["cy"], u=f"sites.html#site-{r['q']}", y=[r["typ"], r["typ_cy"]], b=[f"{r['typ']}, {r['la']}. In the care of Cadw and open to visit.", f"{r['typ_cy']}, {r['la_cy']}. Yng ngofal Cadw ac ar agor i ymwelwyr."], e="ancient") for r in site_rows() if r["visit"]]
+    items.append(dict(k="page", t="Historic sites map", c="Map safleoedd hanesyddol", u="sites.html", y=["Map", "Map"], b=["Every scheduled monument in Wales on one map: burial chambers, standing stones, hillforts, Roman forts, carved stones, abbeys and industry.", "Pob heneb gofrestredig yng Nghymru ar un map: siambrau claddu, meini hirion, bryngaerau, caerau Rhufeinig, cerrig cerfiedig, abatai a diwydiant."], e="ancient"))
     items.append(dict(k="page", t="The A–Z of Welsh history", c="A–Y hanes Cymru", u="a-z.html", y=["Reference", "Cyfeirlyfr"],
                       b=["Words, laws, places and ideas from Welsh history, each explained in a few lines.", "Geiriau, cyfreithiau, lleoedd a syniadau o hanes Cymru, pob un wedi’i egluro mewn ychydig linellau."], e="kings"))
     items.append(dict(k="page", t="Look it up: the reference desk", c="Chwilio’r hanes: y ddesg gyfeirio", u="reference.html", y=["Reference", "Cyfeirlyfr"],

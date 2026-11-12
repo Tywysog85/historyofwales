@@ -7,6 +7,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Every historic site in Wales on one map", "Pob safle hanesyddol yng Nghymru ar un map",
+     "All 4,239 scheduled monuments on one map: burial chambers, standing stones, hillforts, Roman forts, carved stones, abbeys, castles and industry, with the sites near you and the 130 places Cadw opens to visitors.",
+     "Pob un o’r 4,239 o henebion cofrestredig ar un map: siambrau claddu, meini hirion, bryngaerau, caerau Rhufeinig, cerrig cerfiedig, abatai, cestyll a diwydiant, gyda’r safleoedd yn agos atoch a’r 130 o leoedd y mae Cadw’n eu hagor i ymwelwyr.",
+     "sites.html"),
     ("2026-11-12", "Maps of Wales through time", "Mapiau o Gymru drwy’r oesoedd",
      "Fifteen maps on one page show how Wales changed, from the four peoples who faced Rome through the kingdoms, Glyndŵr’s Wales and the thirteen shires to the counties of 1974, the councils of 1996 and the Senedd today.",
      "Mae pymtheg map ar un dudalen yn dangos sut y newidiodd Cymru, o’r pedwar llwyth a wynebodd Rufain drwy’r teyrnasoedd, Cymru Glyndŵr a’r tair sir ar ddeg i siroedd 1974, cynghorau 1996 a’r Senedd heddiw.",
