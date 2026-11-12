@@ -719,3 +719,11 @@ section.page-top { padding-top: clamp(1.5rem, 4vw, 3rem) }
 .ar-circle .ppl .ava { width: 2rem; height: 2rem; font-size: .8rem }
 .ar-circle .ar-more { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.8rem }
 .ar-line b a { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--c) 60%, transparent); text-underline-offset: 3px }
+
+/* Long reads: pictures inside the text ("!! key") and the sources beside a claim ("^ Sources: ...") */
+.prose figure.in-prose { margin: 1.6rem 0 }
+.prose figure.in-prose img { width: 100%; height: auto; aspect-ratio: auto; max-height: 34rem; object-fit: contain; background: #0d1018; border-radius: 10px; display: block }
+.prose figure.in-prose figcaption { margin-top: .5rem; line-height: 1.45 }
+.prose .src-note { font-size: .82rem; line-height: 1.5; color: var(--muted); border-left: 2px solid var(--line); padding: .1rem 0 .1rem .8rem; margin: -.3rem 0 1.4rem }
+.prose .src-note b { font-weight: 600; letter-spacing: .03em }
+.prose .src-note a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px }

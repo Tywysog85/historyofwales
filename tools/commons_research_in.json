@@ -1,6 +1,6 @@
-{"branch": "claude/project-thread-1ll3op",
- "out": "_research/docks",
- "max": 300,
- "categories": ["Category:Port of Barry", "Category:Barry Dock", "Category:Cardiff Docks", "Category:Penarth Dock", "Category:Roath Dock", "Category:History of Barry", "Category:Docks of Cardiff", "Category:Port Penrhyn", "Category:Porthmadog Harbour"],
- "searches": ["Barry Dock coal tips old photograph", "Barry Docks 1900", "Bute Docks Cardiff old photograph", "Cardiff docks coal hoist", "Penarth Dock coal ships", "Cardiff coal trimmers", "Porthmadog harbour slate 1880", "Port Penrhyn slate ship", "steam collier Cardiff", "Swansea copper barque"],
+{"branch": "",
+ "out": "_research/example",
+ "max": 200,
+ "categories": [],
+ "searches": [],
  "files": []}

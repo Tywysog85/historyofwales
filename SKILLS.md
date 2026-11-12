@@ -636,6 +636,13 @@ Learnt while simplifying the home page.
 - The top picture loads at once (`fetchpriority="high"`, 600px copy for phones through `srcset`); card pictures load lazily from the small copy. The build stops if a named picture's file is missing.
 - Commons can't be reached from the cloud. New pictures have to be downloaded on the Mini-PC (Remote Control) and added to the gallery first.
 
+### Pictures and sources inside a long read (November 2026)
+
+- A long read can carry pictures in the middle of its text. Give the story a `figs` dict (key → a gallery id, or a Commons tuple: file, author, licence, licence link, caption EN, caption CY, width, height) and put a line `"!! key"` where the picture goes, in both `pEn` and `pCy`. `prose()` in `build.py` draws it with `lit_fig()`, credit and all. Example: `src/industry.py`.
+- To put the sources right beside a big claim (a world first, a "largest", a famous date), add a line `"^ Sources: Name = https://...; Name = https://..."` straight after the paragraph (Welsh: `"^ Ffynonellau: ..."`). It prints as a small line of links under the paragraph. The full reading list still goes in `src/refs.py`.
+- Where good sources disagree (the million-pound cheque: 1904, 1901 or 1908), give the usual date, say in one plain sentence that some tellings differ, and link the ones that differ.
+- New Commons files load straight from Wikimedia until the "Fetch photos from Wikimedia Commons" workflow is run on the branch; it then keeps copies on the site.
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.

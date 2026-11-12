@@ -387,4 +387,8 @@ import madog as _MD  # Prince Madog's voyage to America and the Welsh Indians (s
 import caradog as _CR  # King Caradog (Caratacus) against Rome, and his family in Rome (src/caradog.py)
 import christianity as _CH  # The coming of Christianity: the first Christians, Joseph, Lucius, Brân (src/christianity.py)
 import macsen as _MX  # Macsen Wledig, the emperor from Britain (src/macsen.py)
-STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY] + _CH.STORIES
+import industry as _IN  # How Wales moved the world: the industrial revolution (src/industry.py)
+STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY] + _CH.STORIES + [_IN.STORY]
+for _s in STORIES:  # the industrial revolution long read, linked from the long reads beside it
+    if _s["id"] in ("coal", "firsts", "world", "protest"):
+        _s["links"] = [("story-industry.html", "How Wales moved the world: the industrial revolution", "Sut y symudodd Cymru’r byd: y chwyldro diwydiannol")] + _s.get("links", [])

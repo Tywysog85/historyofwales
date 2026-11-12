@@ -768,8 +768,19 @@ JOURNEY_TOTAL = len(D.ERAS) + len(D.PEOPLE) + len(D.PLACES) + len(F.STORIES) + l
 STORY = {x["id"]: x for x in F.STORIES}
 
 
-def prose(pars, cls="prose"):
-    # "## " sub-heading, "> quote | source" pull quote, "|| left | right" table row (rows in a run make one table)
+def src_note(a):
+    """ "^ Sources: Name = https://...; Name = https://..." under a claim in a long read: the sources beside it."""
+    label, _, rest = a[2:].partition(": ")
+    items = []
+    for it in rest.split("; "):
+        name, _, url = it.rpartition(" = ")
+        items.append(f'<a href="{e(url)}" target="_blank" rel="noopener">{e(name)}</a>' if url.startswith("http") else e(it))
+    return f'<p class="src-note"><b>{e(label)}:</b> {" · ".join(items)}</p>'
+
+
+def prose(pars, cls="prose", figs=None):
+    # "## " sub-heading, "> quote | source" pull quote, "|| left | right" table row (rows in a run make one table),
+    # "!! key" a picture from figs (gallery id or Commons tuple, see lit_fig), "^ Sources: ..." a source note (src_note)
     out, rows = "", []
     for a in pars + [""]:
         if a.startswith("|| "):
@@ -782,6 +793,10 @@ def prose(pars, cls="prose"):
             continue
         if a.startswith("## "):
             out += f"<h2>{e(a[3:])}</h2>"
+        elif a.startswith("!! "):
+            out += lit_fig((figs or {}).get(a[3:].strip()), "in-prose")
+        elif a.startswith("^ "):
+            out += src_note(a)
         elif a.startswith("> "):
             q, _, c = a[2:].partition(" | ")
             out += f'<blockquote class="pq"><p>{e(q)}</p>' + (f"<cite>{e(c)}</cite>" if c else "") + "</blockquote>"
@@ -811,8 +826,8 @@ def story_feature(kind, key):
     return section(f'<div class="s-grid">{"".join(story_card(x, True) for x in xs)}{law}</div>', "The full story", "Y stori lawn") if xs or law else ""
 
 
-def prose_bi(en, cy, cls="prose"):
-    return f'<div class="{cls} l-en" lang="en">{prose(en)}</div><div class="{cls} l-cy" lang="cy">{prose(cy)}</div>'
+def prose_bi(en, cy, cls="prose", figs=None):
+    return f'<div class="{cls} l-en" lang="en">{prose(en, figs=figs)}</div><div class="{cls} l-cy" lang="cy">{prose(cy, figs=figs)}</div>'
 
 
 def story_card(x, lead=False):
@@ -925,7 +940,7 @@ SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes
     ("princes", "Princes, castles and Owain Glyndŵr", "Tywysogion, cestyll ac Owain Glyndŵr", ["era-medieval", "castles", "glyndwr", "longbow", "battles", "documents", "topic-war"]),
     ("lit", "Poets, old books and legends", "Beirdd, hen lyfrau a chwedlau", ["literature", "books", "triads", "mabinogion", "legends", "legend-*", "bran", "symbols", "iolo", "topic-music", "trail-song"]),
     ("tudor", "From the Tudors to the Methodists", "O’r Tuduriaid i’r Methodistiaid", ["era-tudor"]),
-    ("industry", "Iron, coal, slate and the sea", "Haearn, glo, llechi a’r môr", ["era-industrial", "coal", "protest", "topic-industry", "trail-coal", "trail-sea", "firsts", "topic-science"]),
+    ("industry", "Iron, coal, slate and the sea", "Haearn, glo, llechi a’r môr", ["era-industrial", "industry", "coal", "protest", "topic-industry", "trail-coal", "trail-sea", "firsts", "topic-science"]),
     ("modern", "Modern Wales and the Welsh abroad", "Cymru fodern a’r Cymry ar wasgar", ["era-modern", "era-today", "revival", "world", "madog", "topic-abroad", "topic-sport"]),
     ("lang", "The Welsh language, names and places", "Yr iaith Gymraeg, enwau a lleoedd", ["language", "topic-language", "welsh", "names", "towns", "maps", "sites"]),
     ("life", "Women and everyday life", "Menywod a bywyd bob dydd", ["topic-women", "trail-women", "topic-countryside"]),
@@ -1068,7 +1083,7 @@ def story_page(x, i):
     era = ERA[x["era"]]
     meta = f'<p class="byline">{AB.byline_top()}<span>{x["mins"]} {bi("minute read", "munud o ddarllen")}</span><a href="era-{x["era"]}.html">{bi(era["en"], era["cy"])}</a><button type="button" class="copy" data-copy="story-{x["id"]}.html">{bi("Copy link", "Copïo’r ddolen")}</button></p>'
     main = (hero(x["era"], f'<a href="index.html">{SITE}</a> / <a href="stories.html">{bi("Long reads", "Erthyglau")}</a>', "book", "Long read", "Erthygl", x["en"], x["cy"], x["sumEn"], x["sumCy"], art=x["art"])
-            + f'<section class="article"><div class="wrap narrow">{meta}{prose_bi(x["pEn"], x["pCy"])}' + (f'<p><a class="btn solid" href="firsts.html">★ {bi("Every Welsh world first, with the people behind them", "Pob un o’r pethau a wnaeth Cymru gyntaf, a’r bobl y tu ôl iddynt")} →</a></p>' if x["id"] == "firsts" else "")
+            + f'<section class="article"><div class="wrap narrow">{meta}{prose_bi(x["pEn"], x["pCy"], figs=x.get("figs"))}' + (f'<p><a class="btn solid" href="firsts.html">★ {bi("Every Welsh world first, with the people behind them", "Pob un o’r pethau a wnaeth Cymru gyntaf, a’r bobl y tu ôl iddynt")} →</a></p>' if x["id"] == "firsts" else "")
               + story_more_links(x)
               + (f'<p><a class="btn solid" href="laws.html">{bi("Much more on the law: the big page on the Laws of Hywel Dda, with the manuscripts and a quiz", "Llawer mwy am y gyfraith: y dudalen fawr ar Gyfreithiau Hywel Dda, gyda’r llawysgrifau a chwis")} →</a></p>' if x["id"] == "hywel" else "") + refs_block(x["id"]) + '</div></section>'
             + section(f'<div class="s-grid three">{"".join(story_card(y) for y in others)}</div>', "Keep reading", "Daliwch ati i ddarllen")

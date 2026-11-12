@@ -58,6 +58,7 @@ PAGE = {
     "story-caradog.html": "g:person-caratacus",
     "story-macsen.html": "g:place-segontium",
     "story-christianity.html": "g:holy-margam",
+    "story-industry.html": "g:indu-ffestiniog-rly",
     "story-lucius.html": "g:holy-llandaff",
     "story-bran.html": "g:place-harlech",
     "story-joseph.html": "g:person-dewi-sant",

@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "How Wales moved the world", "Sut y symudodd Cymru’r byd",
+     "A new long read on the industrial revolution: Trevithick’s Penydarren engine of 1804, the first railway journey in the world; the first passenger railway at Swansea; Merthyr, iron capital of the world; Cardiff and Barry, the greatest coal ports on earth; the first million-pound cheque, signed at the Coal Exchange in 1904; Copperopolis, slate and the Ffestiniog Railway.",
+     "Erthygl newydd ar y chwyldro diwydiannol: injan Penydarren Trevithick yn 1804, y daith reilffordd gyntaf yn y byd; y rheilffordd deithwyr gyntaf yn Abertawe; Merthyr, prifddinas haearn y byd; Caerdydd a’r Barri, porthladdoedd glo mwyaf y ddaear; y siec filiwn punt gyntaf, a lofnodwyd yn y Gyfnewidfa Lo yn 1904; Copperopolis, llechi a Rheilffordd Ffestiniog.",
+     "story-industry.html"),
     ("2026-11-12", "Real pictures on every page", "Lluniau go iawn ar bob tudalen",
      "Every long read, legend, age, kingdom, saint, topic and game now opens with a real photograph or old artwork: Segontium for Macsen, the Pennal Letter for Glyndŵr, the Laws of Hywel Dda, the Pillar of Eliseg and many more, each with its credit.",
      "Mae pob erthygl, chwedl, oes, teyrnas, sant, pwnc a gêm bellach yn agor gyda ffotograff go iawn neu hen waith celf: Segontium i Facsen, Llythyr Pennal i Lyndŵr, Cyfreithiau Hywel Dda, Colofn Eliseg a llawer mwy, pob un gyda’i gydnabyddiaeth.",
