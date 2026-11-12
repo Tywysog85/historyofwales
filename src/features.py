@@ -390,5 +390,4 @@ import christianity as _CH  # The coming of Christianity: the first Christians, 
 import macsen as _MX  # Macsen Wledig, the emperor from Britain (src/macsen.py)
 import nest as _NS  # Nest ferch Rhys, princess of Deheubarth (src/nest.py)
 import rhys as _RH  # Prince Rhys ap Gruffudd, the Lord Rhys (src/rhys.py)
-STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY, _NS.STORY, _RH.STORY] + _CH.STORIES
-STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY] + _CH.STORIES + [_PT.STORY]
+STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY, _NS.STORY, _RH.STORY] + _CH.STORIES + [_PT.STORY]
