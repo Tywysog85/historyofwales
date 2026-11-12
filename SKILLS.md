@@ -297,7 +297,7 @@ Learnt while expanding Arthur's page (`src/arthur.py`).
 
 ### Kings and princes pages (November 2026)
 - All the royal lines live in `src/royal.py`: one entry per kingdom, each with a list of rulers. `R(...)` is a ruler (sort year, dates, name, English note, Welsh note, optional link), `H(...)` a heading inside the list, `N(...)` a short note between rulers.
-- `build.py` makes `kings.html` (all of Wales: Gruffudd ap Llywelyn first, then kings who ruled most of Wales, the Princes of Wales, the kingdoms, and every ruler in one list by century) and one `kings-<id>.html` per kingdom.
+- `build.py` makes `kings.html` (all of Wales: Gruffudd ap Llywelyn first, then kings who ruled most or all of Wales, the Princes of Wales, the kingdoms, and every ruler in one list by century) and one `kings-<id>.html` per kingdom.
 - The combined list merges a ruler who held several kingdoms into one line, with a chip for each kingdom. `HOME_REALM` in `build.py` picks which note is shown.
 - Person and place pages link back to every kingdom list that names them, automatically. The kingdoms map legend links each realm to its page through `KGLINK` in `build.py`.
 - Welsh dates are made from the English ones by `cy_dates()`: "c." becomes "tua", "d." becomes "m.".
