@@ -13,6 +13,7 @@ import ref_towns as TWN
 import ref_battles as BT
 import ref_docs as DC
 import ref_topics as TP
+import ref_maps as MP
 import os
 
 g = {}  # build.py's helpers (bi, e, page, hero, section ...), filled by setup()
@@ -68,6 +69,13 @@ def _titles():
         TITLES[f"kings-{r['id']}.html"] = g["realm_title"](r)
     for t in TP.TOPICS:
         TITLES[f"topic-{t['id']}.html"] = (t["en"], t["cy"])
+    # links to one entry on a reference page are named after that entry
+    for x in AZ.TERMS:
+        TITLES[f"a-z.html#az-{x['id']}"] = (x["en"], x["cy"])
+    for x in DC.DOCS:
+        TITLES[f"documents.html#doc-{x['id']}"] = (x["en"], x["cy"])
+    for x in BT.BATTLES:
+        TITLES[f"battles.html#b-{x['id']}"] = (x["en"], x["cy"])
     for r in g["SA"].REGIONS:
         TITLES[f"saints-{r['id']}.html"] = (("Saints of " + r["en"]) if r["realm"] else "Saints across the sea", ("Seintiau " + r["cy"]) if r["realm"] else "Saint dros y môr")
 
@@ -83,7 +91,7 @@ def link_chips(hrefs, have, cls="ref-see"):
         if not exists(h, have):
             MISSING.add(h)
             continue
-        t = TITLES.get(h.split("#")[0])
+        t = TITLES.get(h) or TITLES.get(h.split("#")[0])
         if not t:
             MISSING.add(h)
             continue
@@ -571,6 +579,88 @@ TOPIC_CSS = """
 """
 
 
+# ---------- maps through time ----------
+def _map_stages():
+    st = list(g["D"].KINGDOMS)
+    i = next(n for n, k in enumerate(st) if k["id"] == "today")
+    return st[:i] + MP.MODERN + st[i:]
+
+
+def _block_centres():
+    """Area and centre of each map block (council area), from its outline, for placing names on the maps."""
+    out = {}
+    for n, d in g["la"].items():
+        xs, ys = [], []
+        for a, b in re.findall(r"(-?[\d.]+) (-?[\d.]+)", d):
+            xs.append(float(a)); ys.append(float(b))
+        w, h = max(xs) - min(xs), max(ys) - min(ys)
+        out[n] = (w * h, min(xs) + w / 2, min(ys) + h / 2)
+    return out
+
+
+def stage_svg(k, ids, cen):
+    names = list(g["la"].keys())
+    colour = {}
+    for gr in k["groups"]:
+        for n in (names if gr[3] == "*" else gr[3]):
+            colour[n] = gr[2]
+    uses = "".join(f'<use href="#mla-{ids[n]}" fill="{colour.get(n, "#2a3142")}" stroke="{colour.get(n, "#2a3142")}"/>' for n in names)
+    labels = ""
+    for gr in k["groups"]:
+        lab = gr[4] if len(gr) > 4 else [gr[0], gr[1]]
+        if not lab[0]:
+            continue
+        blocks = names if gr[3] == "*" else [n for n in gr[3] if n in cen]
+        sa = sum(cen[n][0] for n in blocks)
+        if not sa:
+            continue
+        x = sum(cen[n][0] * cen[n][1] for n in blocks) / sa
+        y = sum(cen[n][0] * cen[n][2] for n in blocks) / sa
+        labels += f'<text class="kg-label" x="{x:.0f}" y="{y:.0f}"><tspan class="l-en">{g["e"](lab[0])}</tspan><tspan class="l-cy">{g["e"](lab[1])}</tspan></text>'
+    return f'<svg class="mp-map" viewBox="-10 -10 620 691" role="img" aria-label="{g["e"](k["en"])}"><g class="mp-la">{uses}</g>{labels}</svg>'
+
+
+def maps_page(have):
+    stages = _map_stages()
+    names = list(g["la"].keys())
+    ids = {n: i for i, n in enumerate(names)}
+    cen = _block_centres()
+    defs = '<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>' + "".join(f'<path id="mla-{ids[n]}" d="{d}"/>' for n, d in g["la"].items()) + "</defs></svg>"
+    jump = "".join(f'<a href="#map-{k["id"]}">{bi(k["en"].split(":")[0], k["cy"].split(":")[0])}</a>' for k in stages)
+    cards = ""
+    for n, k in enumerate(stages):
+        legend = "".join(f'<li style="--k:{gr[2]}"><i></i>{bi(gr[0], gr[1])}</li>' for gr in k["groups"])
+        nav = ((f'<a href="#map-{stages[n - 1]["id"]}">← {bi("Earlier", "Cynharach")}</a>' if n else "")
+               + (f'<a href="#map-{stages[n + 1]["id"]}">{bi("Later", "Diweddarach")} →</a>' if n + 1 < len(stages) else ""))
+        cards += (f'<article class="mp-stage" id="map-{k["id"]}">{stage_svg(k, ids, cen)}<div class="mp-text">'
+                  f'<p class="bt-date">{bi("Map", "Map")} {n + 1} / {len(stages)}</p><h2>{bi(k["en"], k["cy"])}</h2><p>{bi(k["nEn"], k["nCy"])}</p>'
+                  f'<ul class="kg-legend mp-legend">{legend}</ul>{link_chips(MP.SEE.get(k["id"], []), have)}<p class="mp-nav">{nav}</p></div></article>')
+    main = (g["hero"]("roman", crumbs(), "book", "Reference", "Cyfeirlyfr", "Maps through time", "Mapiau drwy’r oesoedd",
+                      f"{len(stages)} maps of Wales, from the four peoples who faced Rome to the Senedd today: the kingdoms, the princes, the March, the shires and the councils.",
+                      f"{len(stages)} o fapiau o Gymru, o’r pedwar llwyth a wynebodd Rufain i’r Senedd heddiw: y teyrnasoedd, y tywysogion, y Mers, y siroedd a’r cynghorau.", art="roman")
+            + g["section"](defs + f'<p class="ref-intro">{bi("Scroll down to watch the map of Wales change, or jump to a year. Borders before 1974 are drawn with modern council areas as building blocks, so they are close rather than exact.", "Sgroliwch i lawr i wylio map Cymru’n newid, neu neidiwch i flwyddyn. Mae’r ffiniau cyn 1974 wedi’u llunio gydag ardaloedd cynghorau modern fel blociau adeiladu, felly maent yn agos yn hytrach nag yn union.")}</p>'
+                           f'<nav class="dc-jump mp-jump" aria-label="Maps / Mapiau">{jump}</nav>'
+                           f'<p><a class="btn" href="index.html#map">{bi("Play the moving map on the home page", "Chwarae’r map symudol ar yr hafan")} →</a></p>'
+                           f'<div class="mp-list">{cards}</div>', top=True))
+    return g["page"]("maps.html", "Maps of Wales through time · History of Wales",
+                     "Historical maps of Wales: the four peoples, Roman Wales, the early kingdoms, Rhodri Mawr, Hywel Dda, Gruffudd ap Llywelyn, Pura Wallia and the March, 1267, 1284, Glyndŵr, the 13 shires, 1974, 1996 and today.",
+                     main, era="roman", ld=ld_article("Maps of Wales through time", "How the map of Wales changed from the Roman conquest to today"), active="reference.html", track="page:maps")
+
+
+MAP_CSS = """
+.mp-list{display:grid;gap:2.2rem;margin-top:1.6rem}
+.mp-stage{display:grid;grid-template-columns:minmax(0,22rem) minmax(0,1fr);gap:1.6rem 2.4rem;align-items:center;padding-top:1.6rem;border-top:1px solid var(--line);scroll-margin-top:5rem}
+.mp-stage h2{font:600 clamp(1.5rem,3vw,2.1rem)/1.15 var(--f-display);margin:.2rem 0 .6rem}
+.mp-text>p{line-height:1.65;max-width:38rem}
+.mp-map{width:100%;height:auto;display:block}
+.mp-la use{stroke-width:1.2;stroke-opacity:.9;fill-opacity:.85;stroke-linejoin:round}
+.mp-map .kg-label{font-size:22px}
+.mp-legend{margin:1rem 0 .4rem;grid-template-columns:repeat(auto-fill,minmax(12rem,1fr))}
+.mp-nav{display:flex;gap:1.2rem;font-size:.9rem;margin-top:.8rem}.mp-nav a{color:var(--muted)}
+@media (max-width:760px){.mp-stage{grid-template-columns:1fr}.mp-map{max-width:22rem;margin:0 auto}}
+"""
+
+
 # ---------- the look-it-up desk ----------
 DESK = [  # href, English, Welsh, English line, Welsh line, era colour
     ("a-z.html", "The A–Z", "Yr A–Y", "Words, laws and ideas, each explained in a few lines.", "Geiriau, cyfreithiau a syniadau, pob un wedi’i egluro mewn ychydig linellau.", "kings"),
@@ -617,13 +707,13 @@ def pages(have):
     """have: the set of page names build.py is making (so links to pages that do not exist yet are left out)."""
     _titles()
     have = set(have) | set(PAGE_NAMES)
-    out = {"a-z.html": az_page(have), "questions.html": questions_page(have), "towns.html": towns_page(have), "battles.html": battles_page(have), "documents.html": documents_page(have), "topics.html": topics_page(have), "reference.html": desk_page(have)}
+    out = {"a-z.html": az_page(have), "questions.html": questions_page(have), "towns.html": towns_page(have), "battles.html": battles_page(have), "documents.html": documents_page(have), "topics.html": topics_page(have), "maps.html": maps_page(have), "reference.html": desk_page(have)}
     for t in TP.TOPICS:
         out[f"topic-{t['id']}.html"] = topic_page(t, have)
     return out
 
 
-PAGE_NAMES = ["a-z.html", "questions.html", "towns.html", "battles.html", "documents.html", "topics.html", "reference.html"] + [f"topic-{t['id']}.html" for t in TP.TOPICS]
+PAGE_NAMES = ["a-z.html", "questions.html", "towns.html", "battles.html", "documents.html", "topics.html", "maps.html", "reference.html"] + [f"topic-{t['id']}.html" for t in TP.TOPICS]
 
 
 def search_items():
@@ -637,6 +727,8 @@ def search_items():
     items += [dict(k="doc", t=d["en"], c=d["cy"], u=f"documents.html#doc-{d['id']}", y=[d["dEn"], d["dCy"]], b=[d["aEn"] + " " + d["wEn"], d["aCy"] + " " + d["wCy"]], e=d["era"]) for d in DC.DOCS]
     items.append(dict(k="page", t="Key documents of Welsh history", c="Dogfennau allweddol hanes Cymru", u="documents.html", y=["Reference", "Cyfeirlyfr"], b=["The treaties, letters and laws that shaped Wales, in their own words.", "Y cytundebau, y llythyrau a’r deddfau a luniodd Gymru, yn eu geiriau eu hunain."], e="tudor"))
     items += [dict(k="topic", t=t["en"], c=t["cy"], u=f"topic-{t['id']}.html", y=["Topic guide", "Canllaw pwnc"], b=[t["sEn"], t["sCy"]], e=t["era"]) for t in TP.TOPICS]
+    items += [dict(k="map", t=k["en"], c=k["cy"], u=f"maps.html#map-{k['id']}", y=["Maps through time", "Mapiau drwy’r oesoedd"], b=[k["nEn"], k["nCy"]], e="roman") for k in _map_stages()]
+    items.append(dict(k="page", t="Maps of Wales through time", c="Mapiau o Gymru drwy’r oesoedd", u="maps.html", y=["Reference", "Cyfeirlyfr"], b=["How the map of Wales changed, from the four peoples who faced Rome to the twenty-two councils and the Senedd.", "Sut y newidiodd map Cymru, o’r pedwar llwyth a wynebodd Rufain i’r dau gyngor ar hugain a’r Senedd."], e="roman"))
     items.append(dict(k="page", t="The A–Z of Welsh history", c="A–Y hanes Cymru", u="a-z.html", y=["Reference", "Cyfeirlyfr"],
                       b=["Words, laws, places and ideas from Welsh history, each explained in a few lines.", "Geiriau, cyfreithiau, lleoedd a syniadau o hanes Cymru, pob un wedi’i egluro mewn ychydig linellau."], e="kings"))
     items.append(dict(k="page", t="Look it up: the reference desk", c="Chwilio’r hanes: y ddesg gyfeirio", u="reference.html", y=["Reference", "Cyfeirlyfr"],
