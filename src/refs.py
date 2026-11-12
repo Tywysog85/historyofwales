@@ -16,9 +16,12 @@ dwb: person ids whose Dictionary of Welsh Biography article is linked (from sour
 
 P, B, W = "p", "b", "w"
 
+import ylolfa as YLF   # books from Y Lolfa, each linked to its page on ylolfa.com
+
 LAND_OF_MY_FATHERS = (B, "Gwynfor Evans", "Land of My Fathers: 2000 Years of Welsh History", "John Penry Press, 1974; later editions from Y Lolfa; first published in Welsh as Aros Mae, 1971",
                       "Two thousand years of the story of Wales, told with pride by the man who won S4C.",
-                      "Dwy fil o flynyddoedd o hanes Cymru, wedi’u hadrodd yn falch gan y gŵr a enillodd S4C.")
+                      "Dwy fil o flynyddoedd o hanes Cymru, wedi’u hadrodd yn falch gan y gŵr a enillodd S4C.",
+                      YLF.LAND_OF_MY_FATHERS_URL)
 R_R_DAVIES_AGE = (B, "R. R. Davies", "The Age of Conquest: Wales 1063–1415", "Oxford University Press, 1991; first published 1987 as Conquest, Coexistence, and Change",
                   "The great history of the princes and of the long fight with the Normans and the English crown.",
                   "Yr hanes mawr am y tywysogion a’r frwydr hir yn erbyn y Normaniaid a choron Lloegr.")
@@ -110,7 +113,9 @@ REFS = {
          "Cyfrol gyntaf cyfres Hanes Cymdeithasol yr Iaith Gymraeg."),
         (B, "Gwyneth Tyson Roberts", "The Language of the Blue Books", "University of Wales Press, 1998",
          "How the 1847 reports were written, and what they said about the Welsh and their language.",
-         "Sut yr ysgrifennwyd adroddiadau 1847, a’r hyn a ddywedent am y Cymry a’u hiaith.")]),
+         "Sut yr ysgrifennwyd adroddiadau 1847, a’r hyn a ddywedent am y Cymry a’u hiaith."),
+        YLF.CARDIFF_WELSH,
+        YLF.BRWYDR_IAITH]),
 
     "hywel": dict(dwb=["hywel-dda", "rhodri-mawr"], items=[
         (P, "Dafydd Jenkins (ed. and trans.)", "The Law of Hywel Dda: Law Texts from Medieval Wales", "Gomer, 1986",
@@ -159,7 +164,9 @@ REFS = {
          "Y ffermwyr y tu ôl i’r helynt a’r byd yr oeddent yn byw ynddo."),
         (B, "R. Merfyn Jones", "The North Wales Quarrymen, 1874–1922", "University of Wales Press, 1981",
          "The slate quarrymen and the great Penrhyn lock-out of 1900–03.",
-         "Chwarelwyr y llechi a Streic Fawr y Penrhyn, 1900–03.")]),
+         "Chwarelwyr y llechi a Streic Fawr y Penrhyn, 1900–03."),
+        YLF.DIC_PENDERYN,
+        YLF.TWM_CARNABWTH]),
 
     "world": dict(dwb=["michael-d-jones"], items=[
         (B, "Glyn Williams", "The Desert and the Dream: A Study of Welsh Colonization in Chubut, 1865–1915", "University of Wales Press, 1975",
@@ -168,9 +175,7 @@ REFS = {
         (P, "Alan Conway (ed.)", "The Welsh in America: Letters from the Immigrants", "University of Minnesota Press, 1961",
          "The emigrants in their own words, writing home from America.",
          "Yr ymfudwyr yn eu geiriau eu hunain, yn ysgrifennu adref o America."),
-        (B, "Colin Thomas", "Dreaming a City", "Y Lolfa, 2009",
-         "John Hughes of Merthyr and the city he founded in Ukraine, Hughesovka, now Donetsk.",
-         "John Hughes o Ferthyr a’r ddinas a sefydlodd yn Wcráin, Hughesovka, Donetsk heddiw."),
+        YLF.DREAMING_CITY,
         (B, "Theodore H. Friedgut", "Iuzovka and Revolution", "Princeton University Press, two volumes, 1989 and 1994",
          "The full scholarly history of Hughesovka.",
          "Hanes ysgolheigaidd llawn Hughesovka."),
@@ -204,7 +209,8 @@ REFS = {
          "Y cofiant modern llawn cyntaf i Owain."),
         (B, "Gideon Brough", "The Rise and Fall of Owain Glyn Dŵr: England, France and the Welsh Rebellion in the Late Middle Ages", "I. B. Tauris, 2017",
          "Owain’s alliance with France and the French army in Wales.",
-         "Cynghrair Owain â Ffrainc a byddin Ffrainc yng Nghymru.")]),
+         "Cynghrair Owain â Ffrainc a byddin Ffrainc yng Nghymru."),
+        YLF.GLYNDWR_PRINCE]),
 
     "longbow": dict(dwb=["gerallt-gymro", "gwenllian"], items=[
         GERALD, BRUT_Y_TYWYSOGYON,
@@ -280,9 +286,13 @@ REFS = {
     "revival": dict(dwb=["gwynfor-evans", "saunders-lewis", "ifan-ab-owen-edwards"], items=[
         TYNGED,
         LAND_OF_MY_FATHERS,
-        (B, "Rhys Evans", "Gwynfor: Portrait of a Patriot", "Y Lolfa, 2008; first published in Welsh as Rhag Pob Brad, 2005",
-         "The full life of Gwynfor Evans, from Barry to the fast for S4C.",
-         "Cofiant llawn Gwynfor Evans, o’r Barri i’r ympryd dros S4C."),
+        YLF.GWYNFOR_PORTRAIT,
+        YLF.FIGHT_FREEDOM,
+        YLF.TRYWERYN_DAWN,
+        YLF.TRYWERYN_AWAKES,
+        YLF.JOHN_JENKINS,
+        YLF.DREAM_FREEDOM,
+        YLF.DIM_CROESO,
         (B, "D. Hywel Davies", "The Welsh Nationalist Party, 1925–1945: A Call to Nationhood", "University of Wales Press, 1983",
          "The early years of Plaid Cymru, from Pwllheli to Penyberth and beyond.",
          "Blynyddoedd cynnar Plaid Cymru, o Bwllheli i Benyberth a thu hwnt."),
@@ -386,7 +396,8 @@ REFS = {
          "Yr astudiaeth ddwy ran o John Evans gan awdur ei erthygl yn y Bywgraffiadur."),
         (W, "Ronald H. Fritze", "Prince Madoc", "Encyclopedia of Alabama",
          "The Alabama story and the Mobile Bay plaque.",
-         "Stori Alabama a phlac Bae Mobile.", "https://encyclopediaofalabama.org/article/prince-madoc/")]),
+         "Stori Alabama a phlac Bae Mobile.", "https://encyclopediaofalabama.org/article/prince-madoc/"),
+        YLF.MADOG_CHILDREN]),
 
     "celts": dict(dwb=["edward-lhuyd", "lady-llanover"], items=[
         (P, "Julius Caesar", "The Gallic War", "translated by W. A. McDevitte and W. S. Bohn, 1869",
