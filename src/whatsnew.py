@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Dinefwr and the courts and castles of the princes", "Dinefwr a llysoedd a chestyll y tywysogion",
+     "Full pages on Dinefwr, Aberffraw and Mathrafal, the three royal seats of Wales, and on Garth Celyn, Llys Rhosyr, Dolwyddelan, Dolbadarn, Castell y Bere, Criccieth, Dolforwyn, Dryslwyn, Dinas Brân, Abbey Cwmhir, Cilmeri and more, each with the people linked to it and a Visiting box: who looks after it, the official page, postcode and directions.",
+     "Tudalennau llawn ar Ddinefwr, Aberffraw a Mathrafal, tri llys brenhinol Cymru, ac ar Lys Rhosyr, Garth Celyn, Dolwyddelan, Dolbadarn, Castell y Bere, Cricieth, Dolforwyn, Dryslwyn, Dinas Brân, Abaty Cwm-hir, Cilmeri a mwy, pob un gyda’r bobl sy’n gysylltiedig ag ef a blwch Ymweld: pwy sy’n gofalu amdano, y dudalen swyddogol, y cod post a chyfarwyddiadau.",
+     "place-dinefwr.html"),
     ("2026-11-12", "The Welsh Not: how they tried to wipe out our language", "Y Welsh Not: sut y ceisiwyd difa ein hiaith",
      "A new long read: Henry VIII’s Act of 1536 that shut Welsh out of the courts, the Treachery of the Blue Books, the block of wood hung round children’s necks, the English-only schools of 1870, and how Wales fought back, from Dan Isaac Davies and the Urdd to Tynged yr Iaith, Trefechan Bridge, S4C and official status in 2011.",
      "Erthygl newydd: Deddf Harri VIII yn 1536 a gaeodd y Gymraeg allan o’r llysoedd, Brad y Llyfrau Gleision, y blocyn pren a grogwyd am yddfau plant, ysgolion uniaith Saesneg 1870, a sut yr ymladdodd Cymru’n ôl, o Dan Isaac Davies a’r Urdd i Tynged yr Iaith, Pont Trefechan, S4C a statws swyddogol yn 2011.",
