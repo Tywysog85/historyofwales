@@ -1,6 +1,6 @@
-{"branch": "",
- "out": "_research/example",
- "max": 200,
- "categories": [],
- "searches": [],
+{"branch": "claude/project-thread-0cbvsw",
+ "out": "_research/mabinogi",
+ "max": 420,
+ "categories": ["Category:White Book of Rhydderch", "Category:Red Book of Hergest", "Category:Charlotte Guest", "Category:Bedd Branwen", "Category:Narberth Castle", "Category:Tomen y Mur", "Category:Dinas Dinlle", "Category:Gateholm Island", "Category:Grassholm", "Category:Llyn Morwynion", "Category:Christopher Williams (painter)"],
+ "searches": ["White Book of Rhydderch", "Llyfr Gwyn Rhydderch Peniarth", "Red Book of Hergest page", "Lady Charlotte Guest portrait", "Mabinogion Guest 1849 title page", "Mabinogion illustration", "Branwen Christopher Williams", "Ceridwen Christopher Williams", "Bedd Branwen", "Narberth Castle Pembrokeshire", "Gresholm Grassholm island", "Dinas Dinlle hillfort", "Llyn Morwynion Ffestiniog", "Llech Ronw Cynfal", "Maentwrog church", "Nantlle valley", "Caer Arianrhod", "Afon Cuch Cenarth", "Pool Quay Severn Welshpool", "Aber Menai Abermenai", "Mynydd Preseli Foel Cwmcerwyn", "Llyn Tegid Bala", "Afon Cynfal falls", "Peniarth 6 Branwen fragment", "Rhiannon horse Welsh"],
  "files": []}
