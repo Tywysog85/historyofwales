@@ -47,7 +47,7 @@ html.js .rv.in, html.rv-all .rv { opacity: 1; transform: none }
 @media (max-width: 1119px) { .nav .nav-inline { display: none } }
 /* every topic stays in the bar on every page and at every desktop width, beside the site name: the words and gaps are kept small enough to fit the 1185 px row in both languages */
 @media (min-width: 1120px) { .nav .nav-inline { gap: 0 .95rem; margin-right: .3rem } .nav .nav-inline a { font-size: .9rem } .nav a.brand { font-size: 1.15rem } .nav .wrap { gap: .5rem } }
-@media (max-width: 560px) { .menu-btn .l-en, .menu-btn .l-cy { display: none !important } .menu-btn { padding: .7rem .75rem } .brand { font-size: 1.15rem } .brand svg { width: 1.3rem; height: 1.3rem } .lang button { padding: .2rem .5rem } .nav .wrap { gap: .4rem } }
+@media (max-width: 560px) { .menu-btn .l-en, .menu-btn .l-cy { display: none !important } .menu-btn { padding: .7rem .75rem } .brand { font-size: 1.15rem } .brand svg { width: 1.3rem; height: 1.3rem } .lang button, .lang a { padding: .2rem .5rem } .nav .wrap { gap: .4rem } }
 @media (max-width: 400px) { .journey-chip { display: none } }
 
 .menu { position: fixed; inset: 0; z-index: 29; background: rgba(9,12,19,.97); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); overflow-y: auto; padding: calc(env(safe-area-inset-top, 0px) + 5.5rem) 0 3rem; animation: fade .25s ease both }
@@ -295,7 +295,9 @@ html.menu-open { overflow: hidden }
 .hero-art { position: absolute; inset: 0; z-index: -1 }
 .hero-art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(11,14,22,.9), rgba(11,14,22,.45) 55%, rgba(11,14,22,.1)), linear-gradient(transparent 55%, var(--night)) }
 .hero-art:has(.photo)::after { background: linear-gradient(90deg, rgba(11,14,22,.78), rgba(11,14,22,.3) 60%, rgba(11,14,22,.12)), linear-gradient(transparent 50%, var(--night)) } /* photographs: enough veil for the words, light enough to see the picture */
-.hero-art img.scene.photo, .l-card img.scene.photo { width: 100%; height: 100%; max-width: none; object-fit: cover }
+.hero-art img.scene.photo, .l-card img.scene.photo, .s-card img.scene.photo, .poster img.scene.photo, .cc-img img.scene.photo { width: 100%; height: 100%; max-width: none; object-fit: cover }
+.hero-credit { font-size: .72rem; line-height: 1.45; color: rgba(225,228,236,.66); margin: 1.1rem 0 0; max-width: 46rem }
+.hero-credit a { color: inherit; text-decoration: underline; text-underline-offset: 2px }
 .ph-credit { font-size: .8rem; color: var(--muted); margin-top: 1.2rem } .ph-credit a { color: inherit }
 .hero-art:has(image)::after { background: linear-gradient(90deg, rgba(11,14,22,.5), rgba(11,14,22,.15) 55%, rgba(11,14,22,.05)), linear-gradient(transparent 55%, var(--night)) } /* lighter veil where the art holds a picture (the dragons), so the picture is not dulled */
 .era-hero.has-art .wrap { width: 100%; padding-block: clamp(5rem, 12vw, 9rem) clamp(2.5rem, 6vw, 4rem) }
