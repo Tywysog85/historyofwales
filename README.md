@@ -10,7 +10,7 @@ A proud, bilingual (English and Cymraeg) history of Wales, live at [historyofwal
 - **322 people**, from the Red Lady of Paviland to today, each with a field (kings, poets, scientists, sport and more), and a **Welsh world firsts** page (`firsts.html`).
 - **Kings and princes**: every royal line, kingdom by kingdom (12 kingdoms of Wales and 5 of the Old North), and the kings and princes of all Wales.
 - **Saints of Wales**: 68 saints in ten regions, with the 130 llannau and holy places named after them on a map, a llan name decoder and a saints’ calendar.
-- **23 long reads**, 21 legends in five sections, a Mabinogion page with all eleven tales, symbols and traditions.
+- **24 long reads**, 21 legends in five sections, a Mabinogion page with all eleven tales, symbols and traditions.
 - **On this day in Welsh history**: about 350 dates across 233 days of the year, on the home page and on `onthisday.html`.
 - **Games**: a daily challenge, a quiz, a map game, Welsh names, word pairs and more, plus **Ride with Glyndŵr, 1400** (a story where you choose) and a walk through **Llys Rhosyr in 3D**.
 - **For teachers**: nine teacher packs for the Curriculum for Wales, one per age.
