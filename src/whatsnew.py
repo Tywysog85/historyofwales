@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Ride with Glyndŵr, 1400: a story where you choose", "Marchogaeth gyda Glyndŵr, 1400: stori lle rydych chi’n dewis",
+     "Answer Owain Glyndŵr’s call as an archer, a bard or a rider, and follow the rising from Glyndyfrdwy in 1400 to 1415: Conwy, Hyddgen, Bryn Glas, Machynlleth and the French march to Worcester. Every scene really happened, and a map traces your road.",
+     "Atebwch alwad Owain Glyndŵr fel saethydd, bardd neu farchog, a dilyn y gwrthryfel o Lyndyfrdwy yn 1400 hyd 1415: Conwy, Hyddgen, Bryn Glas, Machynlleth a’r daith gyda’r Ffrancwyr i Gaerwrangon. Digwyddodd pob golygfa go iawn, ac mae map yn dangos eich taith.",
+     "ride-glyndwr.html"),
     ("2026-11-12", "Nine free teacher packs for the Curriculum for Wales", "Naw pecyn athrawon am ddim ar gyfer y Cwricwlwm i Gymru",
      "One printable pack for each age of Welsh history: enquiry questions, key words, a timeline and card sort, people to know, places to visit near you, a source to study, activities for progression steps 2 to 4 and a quiz. In English and Cymraeg, free to print and adapt.",
      "Un pecyn i’w argraffu ar gyfer pob oes yn hanes Cymru: cwestiynau ymholi, geiriau allweddol, llinell amser a didoli cardiau, pobl i’w hadnabod, lleoedd i ymweld â nhw yn agos atoch, ffynhonnell i’w hastudio, gweithgareddau ar gyfer camau cynnydd 2 i 4 a chwis. Yn Gymraeg ac yn Saesneg, am ddim i’w hargraffu a’u haddasu.",

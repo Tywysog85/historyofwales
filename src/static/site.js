@@ -30,6 +30,7 @@
     ["order15", "↕", "In good order", "Mewn trefn", "A perfect timeline challenge", "Her y llinell amser berffaith", function (j) { return j.f.order15; }],
     ["map300", "◎", "Map reader", "Darllenydd mapiau", "Score 300 or more in Where in Wales?", "Sgorio 300 neu fwy yn Ble yng Nghymru?", function (j) { return j.f.map300; }],
     ["pairs", "Aa", "Good memory", "Cof da", "Finish a game of word pairs", "Gorffen gêm o barau geiriau", function (j) { return j.f.pairs; }],
+    ["ride", "♞", "Glyndŵr’s companion", "Cydymaith Glyndŵr", "Finish Ride with Glyndŵr, 1400", "Gorffen Marchogaeth gyda Glyndŵr, 1400", function (j) { return j.f.ride; }],
     ["set1", "❖", "Collector", "Casglwr", "Complete a set of cards", "Cwblhau set o gardiau", function (j) { return Object.keys(j.s).length >= 1; }],
     ["set5", "♛", "Keeper of treasures", "Ceidwad y trysorau", "Complete five sets of cards", "Cwblhau pum set o gardiau", function (j) { return Object.keys(j.s).length >= 5; }]
   ];
