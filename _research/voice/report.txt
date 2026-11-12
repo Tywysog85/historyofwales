@@ -1,0 +1,347 @@
+Speech recogniser: techiaith/wav2vec2-base-cy
+real recording   'Cymru'                            heard ''  error 1.00
+real recording   'Cymraeg'                          heard ''  error 1.00
+real recording   'Hiraeth'                          heard ''  error 1.00
+real recording   'Eisteddfod'                       heard ''  error 1.00
+real recording   'Senedd'                           heard ''  error 1.00
+Real recordings: average error 1.000
+
+gwryw_gogleddol              'Cymru'                            heard ''  error 1.00
+gwryw_gogleddol              'Cymraeg'                          heard ''  error 1.00
+gwryw_gogleddol              'Croeso'                           heard ''  error 1.00
+gwryw_gogleddol              'Diolch'                           heard ''  error 1.00
+gwryw_gogleddol              'Hiraeth'                          heard ''  error 1.00
+gwryw_gogleddol              'Iechyd da'                        heard ''  error 1.00
+gwryw_gogleddol              'Cwtch'                            heard ''  error 1.00
+gwryw_gogleddol              'Eisteddfod'                       heard ''  error 1.00
+gwryw_gogleddol              'Senedd'                           heard ''  error 1.00
+gwryw_gogleddol              'Cofiwch Dryweryn'                 heard ''  error 1.00
+gwryw_gogleddol              'Agweddi'                          heard ''  error 1.00
+gwryw_gogleddol              'Araf'                             heard ''  error 1.00
+gwryw_gogleddol              'Ble mae’r tŷ bach?'               heard ''  error 1.00
+gwryw_gogleddol              'Camlwrw'                          heard ''  error 1.00
+gwryw_gogleddol              'Cowyll'                           heard ''  error 1.00
+gwryw_gogleddol              'Cymru am byth'                    heard ''  error 1.00
+gwryw_gogleddol              'Dim problem'                      heard ''  error 1.00
+gwryw_gogleddol              'Dw i’n dysgu Cymraeg'             heard ''  error 1.00
+gwryw_gogleddol              'Dyfal donc a dyr y garreg'        heard ''  error 1.00
+gwryw_gogleddol              'Fy enw i yw …'                    heard ''  error 1.00
+gwryw_gogleddol              'Gorsedd'                          heard ''  error 1.00
+gwryw_gogleddol              'Ildiwch'                          heard ''  error 1.00
+gwryw_gogleddol              'Mae hi’n braf heddiw'             heard ''  error 1.00
+gwryw_gogleddol              'Mynedfa'                          heard ''  error 1.00
+gwryw_gogleddol              'Noswaith dda'                     heard ''  error 1.00
+gwryw_gogleddol              'Peint o gwrw'                     heard ''  error 1.00
+gwryw_gogleddol              'Prynhawn da'                      heard ''  error 1.00
+gwryw_gogleddol              'Sarhaed'                          heard ''  error 1.00
+gwryw_gogleddol              'Tylwyth'                          heard ''  error 1.00
+gwryw_gogleddol              'Y Ddraig Goch ddyry cychwyn'      heard ''  error 1.00
+gwryw_gogleddol              'Ynad'                             heard ''  error 1.00
+gwryw_gogleddol              'ap'                               heard ''  error 1.00
+gwryw_gogleddol              'bardd'                            heard ''  error 1.00
+gwryw_gogleddol              'cadair'                           heard ''  error 1.00
+gwryw_gogleddol              'castell'                          heard ''  error 1.00
+gwryw_gogleddol              'ci'                               heard ''  error 1.00
+gwryw_gogleddol              'cwrwgl'                           heard ''  error 1.00
+gwryw_gogleddol              'côr'                              heard ''  error 1.00
+gwryw_gogleddol              'ffynnon'                          heard ''  error 1.00
+gwryw_gogleddol              'haearn'                           heard ''  error 1.00
+== gwryw_gogleddol: average error 1.000
+
+bu_tts:benyw-de-pro          'Cymru'                            heard ''  error 1.00
+bu_tts:benyw-de-pro          'Cymraeg'                          heard ''  error 1.00
+bu_tts:benyw-de-pro          'Croeso'                           heard ''  error 1.00
+bu_tts:benyw-de-pro          'Diolch'                           heard ''  error 1.00
+bu_tts:benyw-de-pro          'Hiraeth'                          heard ''  error 1.00
+bu_tts:benyw-de-pro          'Iechyd da'                        heard ''  error 1.00
+bu_tts:benyw-de-pro          'Cwtch'                            heard ''  error 1.00
+bu_tts:benyw-de-pro          'Eisteddfod'                       heard ''  error 1.00
+bu_tts:benyw-de-pro          'Senedd'                           heard ''  error 1.00
+bu_tts:benyw-de-pro          'Cofiwch Dryweryn'                 heard ''  error 1.00
+bu_tts:benyw-de-pro          'Agweddi'                          heard ''  error 1.00
+bu_tts:benyw-de-pro          'Araf'                             heard ''  error 1.00
+bu_tts:benyw-de-pro          'Ble mae’r tŷ bach?'               heard ''  error 1.00
+bu_tts:benyw-de-pro          'Camlwrw'                          heard ''  error 1.00
+bu_tts:benyw-de-pro          'Cowyll'                           heard ''  error 1.00
+bu_tts:benyw-de-pro          'Cymru am byth'                    heard ''  error 1.00
+bu_tts:benyw-de-pro          'Dim problem'                      heard ''  error 1.00
+bu_tts:benyw-de-pro          'Dw i’n dysgu Cymraeg'             heard ''  error 1.00
+bu_tts:benyw-de-pro          'Dyfal donc a dyr y garreg'        heard ''  error 1.00
+bu_tts:benyw-de-pro          'Fy enw i yw …'                    heard ''  error 1.00
+bu_tts:benyw-de-pro          'Gorsedd'                          heard ''  error 1.00
+bu_tts:benyw-de-pro          'Ildiwch'                          heard ''  error 1.00
+bu_tts:benyw-de-pro          'Mae hi’n braf heddiw'             heard ''  error 1.00
+bu_tts:benyw-de-pro          'Mynedfa'                          heard ''  error 1.00
+bu_tts:benyw-de-pro          'Noswaith dda'                     heard ''  error 1.00
+bu_tts:benyw-de-pro          'Peint o gwrw'                     heard ''  error 1.00
+bu_tts:benyw-de-pro          'Prynhawn da'                      heard ''  error 1.00
+bu_tts:benyw-de-pro          'Sarhaed'                          heard ''  error 1.00
+bu_tts:benyw-de-pro          'Tylwyth'                          heard ''  error 1.00
+bu_tts:benyw-de-pro          'Y Ddraig Goch ddyry cychwyn'      heard ''  error 1.00
+bu_tts:benyw-de-pro          'Ynad'                             heard ''  error 1.00
+bu_tts:benyw-de-pro          'ap'                               heard ''  error 1.00
+bu_tts:benyw-de-pro          'bardd'                            heard ''  error 1.00
+bu_tts:benyw-de-pro          'cadair'                           heard ''  error 1.00
+bu_tts:benyw-de-pro          'castell'                          heard ''  error 1.00
+bu_tts:benyw-de-pro          'ci'                               heard ''  error 1.00
+bu_tts:benyw-de-pro          'cwrwgl'                           heard ''  error 1.00
+bu_tts:benyw-de-pro          'côr'                              heard ''  error 1.00
+bu_tts:benyw-de-pro          'ffynnon'                          heard ''  error 1.00
+bu_tts:benyw-de-pro          'haearn'                           heard ''  error 1.00
+== bu_tts:benyw-de-pro: average error 1.000
+
+bu_tts:benyw-gogledd-pro     'Cymru'                            heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Cymraeg'                          heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Croeso'                           heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Diolch'                           heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Hiraeth'                          heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Iechyd da'                        heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Cwtch'                            heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Eisteddfod'                       heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Senedd'                           heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Cofiwch Dryweryn'                 heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Agweddi'                          heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Araf'                             heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Ble mae’r tŷ bach?'               heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Camlwrw'                          heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Cowyll'                           heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Cymru am byth'                    heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Dim problem'                      heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Dw i’n dysgu Cymraeg'             heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Dyfal donc a dyr y garreg'        heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Fy enw i yw …'                    heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Gorsedd'                          heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Ildiwch'                          heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Mae hi’n braf heddiw'             heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Mynedfa'                          heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Noswaith dda'                     heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Peint o gwrw'                     heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Prynhawn da'                      heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Sarhaed'                          heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Tylwyth'                          heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Y Ddraig Goch ddyry cychwyn'      heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'Ynad'                             heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'ap'                               heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'bardd'                            heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'cadair'                           heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'castell'                          heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'ci'                               heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'cwrwgl'                           heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'côr'                              heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'ffynnon'                          heard ''  error 1.00
+bu_tts:benyw-gogledd-pro     'haearn'                           heard ''  error 1.00
+== bu_tts:benyw-gogledd-pro: average error 1.000
+
+bu_tts:gwryw-gogledd-pro     'Cymru'                            heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Cymraeg'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Croeso'                           heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Diolch'                           heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Hiraeth'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Iechyd da'                        heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Cwtch'                            heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Eisteddfod'                       heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Senedd'                           heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Cofiwch Dryweryn'                 heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Agweddi'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Araf'                             heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Ble mae’r tŷ bach?'               heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Camlwrw'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Cowyll'                           heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Cymru am byth'                    heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Dim problem'                      heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Dw i’n dysgu Cymraeg'             heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Dyfal donc a dyr y garreg'        heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Fy enw i yw …'                    heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Gorsedd'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Ildiwch'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Mae hi’n braf heddiw'             heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Mynedfa'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Noswaith dda'                     heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Peint o gwrw'                     heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Prynhawn da'                      heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Sarhaed'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Tylwyth'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Y Ddraig Goch ddyry cychwyn'      heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'Ynad'                             heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'ap'                               heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'bardd'                            heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'cadair'                           heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'castell'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'ci'                               heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'cwrwgl'                           heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'côr'                              heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'ffynnon'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-pro     'haearn'                           heard ''  error 1.00
+== bu_tts:gwryw-gogledd-pro: average error 1.000
+
+bu_tts:gwryw-gogledd-2       'Cymru'                            heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Cymraeg'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Croeso'                           heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Diolch'                           heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Hiraeth'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Iechyd da'                        heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Cwtch'                            heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Eisteddfod'                       heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Senedd'                           heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Cofiwch Dryweryn'                 heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Agweddi'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Araf'                             heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Ble mae’r tŷ bach?'               heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Camlwrw'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Cowyll'                           heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Cymru am byth'                    heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Dim problem'                      heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Dw i’n dysgu Cymraeg'             heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Dyfal donc a dyr y garreg'        heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Fy enw i yw …'                    heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Gorsedd'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Ildiwch'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Mae hi’n braf heddiw'             heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Mynedfa'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Noswaith dda'                     heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Peint o gwrw'                     heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Prynhawn da'                      heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Sarhaed'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Tylwyth'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Y Ddraig Goch ddyry cychwyn'      heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'Ynad'                             heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'ap'                               heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'bardd'                            heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'cadair'                           heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'castell'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'ci'                               heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'cwrwgl'                           heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'côr'                              heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'ffynnon'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-2       'haearn'                           heard ''  error 1.00
+== bu_tts:gwryw-gogledd-2: average error 1.000
+
+bu_tts:gwryw-de-1            'Cymru'                            heard ''  error 1.00
+bu_tts:gwryw-de-1            'Cymraeg'                          heard ''  error 1.00
+bu_tts:gwryw-de-1            'Croeso'                           heard ''  error 1.00
+bu_tts:gwryw-de-1            'Diolch'                           heard ''  error 1.00
+bu_tts:gwryw-de-1            'Hiraeth'                          heard ''  error 1.00
+bu_tts:gwryw-de-1            'Iechyd da'                        heard ''  error 1.00
+bu_tts:gwryw-de-1            'Cwtch'                            heard ''  error 1.00
+bu_tts:gwryw-de-1            'Eisteddfod'                       heard ''  error 1.00
+bu_tts:gwryw-de-1            'Senedd'                           heard ''  error 1.00
+bu_tts:gwryw-de-1            'Cofiwch Dryweryn'                 heard ''  error 1.00
+bu_tts:gwryw-de-1            'Agweddi'                          heard ''  error 1.00
+bu_tts:gwryw-de-1            'Araf'                             heard ''  error 1.00
+bu_tts:gwryw-de-1            'Ble mae’r tŷ bach?'               heard ''  error 1.00
+bu_tts:gwryw-de-1            'Camlwrw'                          heard ''  error 1.00
+bu_tts:gwryw-de-1            'Cowyll'                           heard ''  error 1.00
+bu_tts:gwryw-de-1            'Cymru am byth'                    heard ''  error 1.00
+bu_tts:gwryw-de-1            'Dim problem'                      heard ''  error 1.00
+bu_tts:gwryw-de-1            'Dw i’n dysgu Cymraeg'             heard ''  error 1.00
+bu_tts:gwryw-de-1            'Dyfal donc a dyr y garreg'        heard ''  error 1.00
+bu_tts:gwryw-de-1            'Fy enw i yw …'                    heard ''  error 1.00
+bu_tts:gwryw-de-1            'Gorsedd'                          heard ''  error 1.00
+bu_tts:gwryw-de-1            'Ildiwch'                          heard ''  error 1.00
+bu_tts:gwryw-de-1            'Mae hi’n braf heddiw'             heard ''  error 1.00
+bu_tts:gwryw-de-1            'Mynedfa'                          heard ''  error 1.00
+bu_tts:gwryw-de-1            'Noswaith dda'                     heard ''  error 1.00
+bu_tts:gwryw-de-1            'Peint o gwrw'                     heard ''  error 1.00
+bu_tts:gwryw-de-1            'Prynhawn da'                      heard ''  error 1.00
+bu_tts:gwryw-de-1            'Sarhaed'                          heard ''  error 1.00
+bu_tts:gwryw-de-1            'Tylwyth'                          heard ''  error 1.00
+bu_tts:gwryw-de-1            'Y Ddraig Goch ddyry cychwyn'      heard ''  error 1.00
+bu_tts:gwryw-de-1            'Ynad'                             heard ''  error 1.00
+bu_tts:gwryw-de-1            'ap'                               heard ''  error 1.00
+bu_tts:gwryw-de-1            'bardd'                            heard ''  error 1.00
+bu_tts:gwryw-de-1            'cadair'                           heard ''  error 1.00
+bu_tts:gwryw-de-1            'castell'                          heard ''  error 1.00
+bu_tts:gwryw-de-1            'ci'                               heard ''  error 1.00
+bu_tts:gwryw-de-1            'cwrwgl'                           heard ''  error 1.00
+bu_tts:gwryw-de-1            'côr'                              heard ''  error 1.00
+bu_tts:gwryw-de-1            'ffynnon'                          heard ''  error 1.00
+bu_tts:gwryw-de-1            'haearn'                           heard ''  error 1.00
+== bu_tts:gwryw-de-1: average error 1.000
+
+bu_tts:gwryw-gogledd-1       'Cymru'                            heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Cymraeg'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Croeso'                           heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Diolch'                           heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Hiraeth'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Iechyd da'                        heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Cwtch'                            heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Eisteddfod'                       heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Senedd'                           heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Cofiwch Dryweryn'                 heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Agweddi'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Araf'                             heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Ble mae’r tŷ bach?'               heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Camlwrw'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Cowyll'                           heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Cymru am byth'                    heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Dim problem'                      heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Dw i’n dysgu Cymraeg'             heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Dyfal donc a dyr y garreg'        heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Fy enw i yw …'                    heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Gorsedd'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Ildiwch'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Mae hi’n braf heddiw'             heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Mynedfa'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Noswaith dda'                     heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Peint o gwrw'                     heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Prynhawn da'                      heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Sarhaed'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Tylwyth'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Y Ddraig Goch ddyry cychwyn'      heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'Ynad'                             heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'ap'                               heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'bardd'                            heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'cadair'                           heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'castell'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'ci'                               heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'cwrwgl'                           heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'côr'                              heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'ffynnon'                          heard ''  error 1.00
+bu_tts:gwryw-gogledd-1       'haearn'                           heard ''  error 1.00
+== bu_tts:gwryw-gogledd-1: average error 1.000
+
+bu_tts:benyw-gogledd-1       'Cymru'                            heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Cymraeg'                          heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Croeso'                           heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Diolch'                           heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Hiraeth'                          heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Iechyd da'                        heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Cwtch'                            heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Eisteddfod'                       heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Senedd'                           heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Cofiwch Dryweryn'                 heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Agweddi'                          heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Araf'                             heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Ble mae’r tŷ bach?'               heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Camlwrw'                          heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Cowyll'                           heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Cymru am byth'                    heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Dim problem'                      heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Dw i’n dysgu Cymraeg'             heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Dyfal donc a dyr y garreg'        heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Fy enw i yw …'                    heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Gorsedd'                          heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Ildiwch'                          heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Mae hi’n braf heddiw'             heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Mynedfa'                          heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Noswaith dda'                     heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Peint o gwrw'                     heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Prynhawn da'                      heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Sarhaed'                          heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Tylwyth'                          heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Y Ddraig Goch ddyry cychwyn'      heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'Ynad'                             heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'ap'                               heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'bardd'                            heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'cadair'                           heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'castell'                          heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'ci'                               heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'cwrwgl'                           heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'côr'                              heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'ffynnon'                          heard ''  error 1.00
+bu_tts:benyw-gogledd-1       'haearn'                           heard ''  error 1.00
+== bu_tts:benyw-gogledd-1: average error 1.000
+
+Ranking: bu_tts:benyw-de-pro 1.000, bu_tts:benyw-gogledd-1 1.000, bu_tts:benyw-gogledd-pro 1.000, bu_tts:gwryw-de-1 1.000, bu_tts:gwryw-gogledd-1 1.000, bu_tts:gwryw-gogledd-2 1.000, bu_tts:gwryw-gogledd-pro 1.000, gwryw_gogleddol 1.000
+
+Chosen voice: gwryw_gogleddol
