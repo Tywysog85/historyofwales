@@ -598,7 +598,88 @@ S = {
         note=('In the 1870 trials, watched by the Imperial Russian Commissioners and the Commissioners of the Indian Government, Little Wonder hauled 112 wagons (206 tons) at an average of 12.5 mph.',
               'Yn nhreialon 1870, o flaen Comisiynwyr Ymerodrol Rwsia a Chomisiynwyr Llywodraeth India, tynnodd Little Wonder 112 o wagenni (206 tunnell) ar gyfartaledd o 12.5 milltir yr awr.'),
         url='https://en.wikipedia.org/wiki/Festiniog_Railway_Little_Wonder', lang='en'),
+    # ---------- the Welsh Not long read (src/welshnot.py), each source opened and read November 2026 ----------
+    "wn-hop": dict(
+        short=("History of Parliament", "Hanes y Senedd"),
+        t="St David’s Day: Parliament and the Welsh Language (Part One)", by=("The History of Parliament Trust, 1 March 2018", "Ymddiriedolaeth Hanes y Senedd, 1 Mawrth 2018"),
+        note=("The 1536 Act said the Welsh “daily use a speech nothing like nor consonant to the natural mother tongue used within this realm”, imposed English in the courts and barred those who spoke only Welsh from public office.",
+              "Dywedai Deddf 1536 fod y Cymry’n arfer “iaith nad yw’n debyg nac yn gydnaws â’r famiaith naturiol”, gosododd y Saesneg yn y llysoedd a gwahardd y rhai a siaradai Gymraeg yn unig rhag swyddi cyhoeddus."),
+        url="https://historyofparliament.com/2018/03/01/st-davids-day-parliament-and-the-welsh-language-part-one/", lang="en"),
+    "wn-act1536": dict(
+        short=("legislation.gov.uk", "legislation.gov.uk"),
+        t="Laws in Wales Act 1535 (27 Hen. 8 c. 26)", by=("The National Archives, legislation.gov.uk", "Yr Archifau Cenedlaethol, legislation.gov.uk"),
+        note=("The Act’s record: repealed on 21 December 1993 by the Welsh Language Act 1993.",
+              "Cofnod y Ddeddf: fe’i diddymwyd ar 21 Rhagfyr 1993 gan Ddeddf yr Iaith Gymraeg 1993."),
+        url="https://www.legislation.gov.uk/aep/Hen8/27/26/contents", lang="en"),
+    "wn-courts1942": dict(
+        short=("Welsh Courts Act 1942", "Deddf Llysoedd Cymru 1942"),
+        t="Welsh Courts Act 1942, section 1", by=("The National Archives, legislation.gov.uk", "Yr Archifau Cenedlaethol, legislation.gov.uk"),
+        note=("“Section seventeen of the statute 27 Hen. 8. c. 26 … is hereby repealed”, and Welsh “may be used in any court in Wales by any party or witness who considers that he would otherwise be at any disadvantage”.",
+              "Diddymwyd adran 17 o Ddeddf 27 Harri VIII p. 26, a chaniatawyd defnyddio’r Gymraeg “mewn unrhyw lys yng Nghymru” gan unrhyw un a fyddai fel arall dan anfantais."),
+        url="https://www.legislation.gov.uk/ukpga/Geo6/5-6/40/section/1/enacted", lang="en"),
+    "wn-symons": dict(
+        short=("Blue Books, 1847", "Y Llyfrau Gleision, 1847"),
+        t="Reports of the Commissioners of Inquiry into the State of Education in Wales (1847): J. C. Symons on the Welsh language", by=("Transcribed by GENUKI", "Trawsgrifiad gan GENUKI"),
+        note=("Symons’s own words: “The Welsh language is a vast drawback to Wales, and a manifold barrier to the moral progress and commercial prosperity of the people. It is not easy to over-estimate its evil effects.”",
+              "Geiriau Symons ei hun: “The Welsh language is a vast drawback to Wales…” (yr anfantais enfawr), a “Nid hawdd gorbwysleisio ei heffeithiau drwg.”"),
+        url="https://www.genuki.org.uk/big/wal/CGN/CommsEnq", lang="en"),
+    "wn-nlw-bluebooks": dict(
+        short=("National Library of Wales", "Llyfrgell Genedlaethol Cymru"),
+        t="The Blue Books of 1847", by=("National Library of Wales, digital gallery", "Llyfrgell Genedlaethol Cymru, oriel ddigidol"),
+        note=("The three commissioners, Lingen, Symons and Johnson, Anglicans who spoke no Welsh; the furore that named the reports Brad y Llyfrau Gleision; and Kenneth O. Morgan’s words, “the Glencoe and the Amritsar of Welsh history”.",
+              "Y tri chomisiynydd, Lingen, Symons a Johnson, Anglicaniaid di-Gymraeg; y cynnwrf a roddodd yr enw Brad y Llyfrau Gleision; a geiriau Kenneth O. Morgan, “Glencoe ac Amritsar hanes Cymru”."),
+        url="https://www.library.wales/discover/digital-gallery/printed-material/the-blue-books-of-1847/", lang="en"),
+    "wn-welshnot": dict(
+        short=("Welsh Not, Wikipedia", "Welsh Not, Wikipedia"),
+        t="Welsh Not", by=("Wikipedia, drawing on Martin Johnes, Welsh Not (University of Wales Press, 2024)", "Wikipedia, ar sail Martin Johnes, Welsh Not (Gwasg Prifysgol Cymru, 2024)"),
+        note=("Its many names; used from the 1790s to about 1900, most of all in the first half of the 1800s; brought in by teachers, not by any government; and Johnes’s finding that schools which shut Welsh out were poor at teaching English.",
+              "Ei enwau niferus; fe’i defnyddiwyd o’r 1790au hyd tua 1900, yn bennaf yn hanner cyntaf y 1800au; athrawon a’i cyflwynodd, nid llywodraeth; a chanfyddiad Johnes fod ysgolion a gaeai’r Gymraeg allan yn wael am ddysgu Saesneg."),
+        url="https://en.wikipedia.org/wiki/Welsh_Not", url_cy="https://cy.wikipedia.org/wiki/Welsh_Not"),
+    "wn-trysorfa": dict(
+        short=("Trysorfa y Plant, 1879", "Trysorfa y Plant, 1879"),
+        t="“Y Welsh Note”, Trysorfa y Plant, October 1879", by=("Scan on Wikimedia Commons", "Sgan ar Wikimedia Commons"),
+        note=("The page itself, with its picture: “forty or fifty years ago the children of the day schools of Wales knew well what the Welsh Note was.”",
+              "Y dudalen ei hun, a’i llun: “ddeugain a hanner can’ mlynedd yn ol, gwyddai plant ysgolion dyddiol Cymru yn dda beth oedd Welsh Note.”"),
+        url="https://commons.wikimedia.org/wiki/File:%22Y_Welsh_Note%22._Trysorfa_y_Plant.png"),
+    "wn-did": dict(
+        short=("Dictionary of Welsh Biography", "Y Bywgraffiadur"),
+        t="Davies, Dan Isaac (1839–1887), a pioneer of the teaching of Welsh in schools", by=("Dictionary of Welsh Biography, National Library of Wales", "Y Bywgraffiadur Cymreig, Llyfrgell Genedlaethol Cymru"),
+        note=("The society founded at the Aberdare National Eisteddfod in 1885; Tair Miliwn o Gymry Dwyieithawg; Welsh made a grant-earning subject in 1886; his evidence to the royal commission, which took up his ideas in 1888.",
+              "Y gymdeithas a sefydlwyd yn Eisteddfod Genedlaethol Aberdâr yn 1885; Tair Miliwn o Gymry Dwyieithawg; y Gymraeg yn bwnc a enillai grant yn 1886; ei dystiolaeth i’r comisiwn brenhinol, a fabwysiadodd ei syniadau yn 1888."),
+        url="https://biography.wales/article/s-DAVI-ISA-1839", url_cy="https://bywgraffiadur.cymru/article/s-DAVI-ISA-1839"),
+    "wn-beasley": dict(
+        short=("IWA, 2012", "IWA, 2012"),
+        t="The Rosa Parks of the Welsh language movement", by=("Institute of Welsh Affairs, Agenda, October 2012", "Sefydliad Materion Cymreig, Agenda, Hydref 2012"),
+        note=("Trefor and Eileen Beasley of Llangennech refused English-only rate demands from 1952 to 1960; bailiffs took their furniture, piano and food; Saunders Lewis praised them in Tynged yr Iaith.",
+              "Gwrthododd Trefor ac Eileen Beasley o Langennech filiau trethi uniaith Saesneg o 1952 hyd 1960; aeth y beilïaid â’u dodrefn, eu piano a’u bwyd; canmolodd Saunders Lewis hwy yn Tynged yr Iaith."),
+        url="https://www.iwa.wales/agenda/2012/10/the-rosa-parks-of-the-welsh-language-movement/", lang="en"),
+    "wn-tynged": dict(
+        short=("Tynged yr Iaith", "Tynged yr Iaith"),
+        t="Tynged yr Iaith", by=("Wikipedia", "Wikipedia"),
+        note=("Broadcast on 13 February 1962; Welsh would end as a living language “about the beginning of the twenty-first century” if the trend went on; the Beasleys held up as the model.",
+              "Fe’i darlledwyd ar 13 Chwefror 1962; byddai’r Gymraeg yn darfod fel iaith fyw “tua dechrau’r unfed ganrif ar hugain” pe parhâi’r duedd; y Beasleys yn batrwm."),
+        url="https://en.wikipedia.org/wiki/Tynged_yr_Iaith", url_cy="https://cy.wikipedia.org/wiki/Tynged_yr_Iaith"),
+    "wn-cymdeithas": dict(
+        short=("Cymdeithas yr Iaith", "Cymdeithas yr Iaith"),
+        t="Welsh Language Society", by=("Wikipedia", "Wikipedia"),
+        note=("Founded at Pontarddulais on 4 August 1962; the first protest on Trefechan Bridge, where about seventy people stopped the traffic for half an hour; over a thousand in court for its campaigns; S4C and the 2011 Measure.",
+              "Fe’i sefydlwyd ym Mhontarddulais ar 4 Awst 1962; y brotest gyntaf ar Bont Trefechan, lle ataliodd tua saith deg o bobl y drafnidiaeth am hanner awr; dros fil yn y llys dros ei hymgyrchoedd; S4C a Mesur 2011."),
+        url="https://en.wikipedia.org/wiki/Welsh_Language_Society", url_cy="https://cy.wikipedia.org/wiki/Cymdeithas_yr_Iaith_Gymraeg"),
+    "wn-act1967": dict(
+        short=("Welsh Language Act 1967", "Deddf yr Iaith 1967"),
+        t="Welsh Language Act 1967", by=("Wikipedia", "Wikipedia"),
+        note=("Royal Assent on 27 July 1967; Welsh in the courts and on official forms; the 1746 rule that ‘England’ included Wales repealed; partly based on the Hughes Parry report of 1965.",
+              "Cydsyniad Brenhinol ar 27 Gorffennaf 1967; y Gymraeg yn y llysoedd ac ar ffurflenni swyddogol; diddymu rheol 1746 fod ‘England’ yn cynnwys Cymru; yn rhannol ar sail adroddiad Hughes Parry yn 1965."),
+        url="https://en.wikipedia.org/wiki/Welsh_Language_Act_1967", lang="en"),
+    "wn-measure": dict(
+        short=("Welsh Language Measure 2011", "Mesur y Gymraeg 2011"),
+        t="Welsh Language (Wales) Measure 2011, section 1", by=("The National Archives, legislation.gov.uk", "Yr Archifau Cenedlaethol, legislation.gov.uk"),
+        note=("“(1) The Welsh language has official status in Wales.”", "“(1) Mae statws swyddogol i’r Gymraeg yng Nghymru.”"),
+        url="https://www.legislation.gov.uk/mwa/2011/1/section/1", lang="en"),
 }
+
+from princes import CITES as _PRINCES  # noqa: E402  (the kings and princes of Wales, src/princes.py)
+S.update(_PRINCES)
 
 MARK = re.compile(r"\[\[cite:([a-z0-9,\- ]+)\]\]")
 

@@ -29,6 +29,8 @@ import gallery_photos as GP  # noqa: E402
 import ages as AG  # noqa: E402
 import features as F  # noqa: E402
 import art as A  # noqa: E402
+import places3 as PL3  # noqa: E402  (historic places of importance: their people and links, src/places3.py)
+import visit as VS  # noqa: E402  (the Visiting box on place pages and the map card, src/visit.py)
 import pictures as PX  # noqa: E402  (a real picture at the top of every page and on its card: src/pictures.py)
 PX.check()
 L.TEACH.update(AG.TEACH)
@@ -44,6 +46,7 @@ import mabinogion as MB  # noqa: E402
 import literature as LT  # noqa: E402  (literature.html, books.html, triads.html)
 import laws as LW  # noqa: E402  (the Laws of Hywel Dda page, laws.html)
 import people2 as P2  # noqa: E402
+import princes as PRN  # noqa: E402  (the kings and princes of Wales: the block on each of their pages)
 import arthur_circle as AC  # noqa: E402  (Arthur's circle: the block on every page of the people of Arthur's story)
 import sets as SETS  # noqa: E402
 import seo as SEO  # noqa: E402  (search engine extras for every page)
@@ -501,7 +504,14 @@ def place_ph(pid):
     if g:
         return [f"gallery/place-{pid}-s.webp", COMMONS + "File:" + _q(g[0], safe=""), g[4], g[5]]
     ph = PH.PLACE_PHOTOS.get(pid)
-    return [photo_url(ph[0], 640), COMMONS + "File:" + _q(ph[0], safe=""), ph[1], ph[2]] if ph else None
+    if ph:
+        return [photo_url(ph[0], 640), COMMONS + "File:" + _q(ph[0], safe=""), ph[1], ph[2]]
+    ref = PX.PAGE.get(f"place-{pid}.html", "")
+    if ref.startswith("g:") and ref[2:].split("@")[0] in GP.GALLERY:  # a new place's own picture (src/pictures.py)
+        k = ref[2:].split("@")[0]
+        g = GP.GALLERY[k]
+        return [f"gallery/{k}-s.webp", COMMONS + "File:" + _q(g[0], safe=""), g[4], g[5]]
+    return None
 
 
 def photo_fig(ph, cls="", gid=None):
@@ -617,6 +627,26 @@ def arthur_circle(slug):
     return section(f'<div class="ar-circle"><p class="lede">{lead}</p>{out}<p class="ar-more">{more}</p></div>', "Arthur’s circle", "Cylch Arthur")
 
 
+def princes_circle(slug):
+    """The kings and princes of Wales (src/princes.py): the whole set, on each of their pages. Only people with a page are shown."""
+    if slug not in PRN.ALL_IDS:
+        return ""
+    out = ""
+    for en, cy, ids in PRN.GROUPS:
+        ids = [s for s in ids if s in PERSON]
+        if not ids:
+            continue
+        chips = ""
+        for s in ids:
+            c = lit_person_chip(s)
+            chips += c.replace("<a ", '<a aria-current="page" ', 1) if s == slug else c
+        out += f'<h3 class="sub-h">{bi(en, cy)}</h3><div class="ppl">{chips}</div>'
+    more = " ".join(f'<a class="btn" href="{u}">{bi(a, b)} →</a>' for u, a, b in PRN.LINKS)
+    lead = bi("The kings and princes of Wales, from Merfyn Frych and Rhodri Mawr to Llywelyn ein Llyw Olaf, each with a page of their own.",
+              "Brenhinoedd a thywysogion Cymru, o Ferfyn Frych a Rhodri Mawr hyd Lywelyn ein Llyw Olaf, pob un â’i dudalen ei hun.")
+    return section(f'<div class="ar-circle"><p class="lede">{lead}</p>{out}<p class="ar-more">{more}</p></div>', "Kings and princes of Wales", "Brenhinoedd a thywysogion Cymru")
+
+
 def person_page(p):
     slug, eid = p[0], p[1]
     era = ERA[eid]
@@ -638,7 +668,9 @@ def person_page(p):
             + section(meta + photo_fig(PH.PERSON_PHOTOS.get(slug), "portrait", "person-" + slug) + body + f'<p class="share no-print"><button type="button" class="btn" data-copy="person-{slug}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button></p>' + further(f"person:{slug}", p[9]), top=True)
             + PERSON_EXTRA.get(slug, lambda: "")()
             + arthur_circle(slug)
+            + princes_circle(slug)
             + story_feature("people", slug)
+            + person_places(slug)
             + (section(f'<ol class="era-events">{"".join(event_li(ev) for ev in related)}</ol>', "On the timeline", "Ar y llinell amser") if related else "")
             + set_block(f"person:{slug}")
             + section(f'<div class="people">{"".join(plaque(x) for x in same)}</div>', "Also in this age", "Hefyd yn yr oes hon")
@@ -650,6 +682,77 @@ def person_page(p):
 
 
 # ---------- place pages ----------
+def directions_url(pl):
+    return f'https://www.google.com/maps/dir/?api=1&destination={pl["lat"]},{pl["lon"]}'
+
+
+def visit_info(pid):
+    """(who en, who cy, official url, entry en, entry cy, postcode) for a place, or None (src/visit.py)."""
+    v = VS.VISIT.get(pid)
+    if not v:
+        return None
+    who = v["who"] if isinstance(v["who"], tuple) else VS.WHO[v["who"]]
+    ent = VS.ENTRY[v["entry"]]
+    return who[0], who[1], v["url"], ent[0], ent[1], v["pc"]
+
+
+def map_visit(p):
+    """The visiting line on the map card: [who en, who cy, official url, entry en, entry cy, postcode, directions url]."""
+    v = visit_info(p["id"])
+    return list(v) + [directions_url(p)] if v else None
+
+
+def visit_box(pl):
+    """The Visiting box: who looks after the place, the official page for times and prices, entry, postcode, directions."""
+    pid = pl["id"]
+    v = VS.VISIT.get(pid)
+    if not v:
+        return ""
+    who_en, who_cy, url, ent_en, ent_cy, pc = visit_info(pid)
+    off = (f' <a href="{e(url)}" target="_blank" rel="noopener">{bi("Opening times and prices", "Amseroedd agor a phrisiau")} ↗</a>' if url else "")
+    rows = f'<div><dt>{bi("Looked after by", "Yng ngofal")}</dt><dd>{bi(e(who_en[0].upper() + who_en[1:]), e(who_cy[0].upper() + who_cy[1:]))}{off}</dd></div>'
+    for w, u, wen, wcy in v["also"]:
+        wn = w if isinstance(w, tuple) else VS.WHO[w]
+        rows += (f'<div><dt>{bi("Also", "Hefyd")}</dt><dd>{bi(e(wn[0][0].upper() + wn[0][1:] + ": " + wen), e(wn[1][0].upper() + wn[1][1:] + ": " + wcy))}'
+                 + (f' <a href="{e(u)}" target="_blank" rel="noopener">{bi("Their page", "Eu tudalen")} ↗</a>' if u else "") + "</dd></div>")
+    rows += f'<div><dt>{bi("Entry", "Mynediad")}</dt><dd>{bi(ent_en, ent_cy)}</dd></div>'
+    where = (f'{bi("Postcode", "Cod post")} <b>{e(pc)}</b> · ' if pc else "") + \
+        (f'<a href="{directions_url(pl)}" target="_blank" rel="noopener">{bi("Directions", "Cyfarwyddiadau")} ↗</a> · '
+         f'<a href="map.html#lle-{pid}">{bi("On our map", "Ar ein map")} →</a>')
+    rows += f'<div><dt>{bi("Getting there", "Cyrraedd")}</dt><dd>{where}</dd></div>'
+    note = f'<p class="visit-note">{bi(*v["note"])}</p>' if v.get("note") else ""
+    return (f'<aside class="visit-box" aria-label="Visiting / Ymweld"><h2>{bi("Visiting", "Ymweld")}</h2><dl>{rows}</dl>{note}'
+            f'<p class="visit-small">{bi("Check the official page before you travel: times change, and some sites close in winter.", "Edrychwch ar y dudalen swyddogol cyn teithio: mae amseroedd yn newid, ac mae rhai safleoedd yn cau yn y gaeaf.")}</p></aside>')
+
+
+def place_people(pid):
+    """Links to the people of a place (src/places3.py PEOPLE). Slugs with no page yet are left out until they have one."""
+    xs = [PERSON[s] for s in PL3.PEOPLE.get(pid, []) if s in PERSON]
+    links = [(href, en, cy) for href, en, cy in PL3.LINKS.get(pid, [])]
+    if not xs and not links:
+        return ""
+    out = ""
+    if xs:
+        out += (f'<p class="eyebrow">{bi("People of this place", "Pobl y lle hwn")}</p><p class="pl-people">'
+                + "".join(f'<a href="person-{x[0]}.html">{bi(x[3], x[4])}</a>' for x in xs) + "</p>")
+    if links:
+        out += (f'<p class="eyebrow">{bi("More on this site", "Mwy ar y wefan hon")}</p><p class="pl-people">'
+                + "".join(f'<a href="{h}">{bi(en, cy)} →</a>' for h, en, cy in links) + "</p>")
+    return f'<div class="pl-links">{out}</div>'
+
+
+# person -> the places linked with them (src/places3.py PEOPLE), for "Places to visit" on person pages
+PERSON_PLACES = {}
+for _pid, _slugs in PL3.PEOPLE.items():
+    for _s in _slugs:
+        PERSON_PLACES.setdefault(_s, []).append(_pid)
+
+
+def person_places(slug):
+    xs = [PLACE[x] for x in PERSON_PLACES.get(slug, []) if x in PLACE]
+    return section(f'<div class="era-places">{"".join(place_tile(x) for x in xs)}</div>', "Places to visit", "Lleoedd i ymweld â nhw") if xs else ""
+
+
 def place_page(pl):
     pid, eid = pl["id"], pl["era"]
     era = ERA[eid]
@@ -664,7 +767,7 @@ def place_page(pl):
     coded = any(a.startswith(("## ", "> ", "|| ")) for a in long_en)
     body = prose_bi(long_en, long_cy, cls="story prose") if coded else paras(long_en, long_cy)
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', pl["ill"], era["en"], era["cy"], pl["en"], pl["cy"], pl["dEn"], pl["dCy"], art=ERA_ART[eid])
-            + section(meta + photo_fig(PH.PLACE_PHOTOS.get(pid), "", "place-" + pid) + paras(long_en, long_cy) + further(f"place:{pid}", pl["src"]), top=True)
+            + section(meta + photo_fig(PH.PLACE_PHOTOS.get(pid), "", "place-" + pid) + body + visit_box(pl) + place_people(pid) + further(f"place:{pid}", pl["src"]), top=True)
             + story_feature("places", pid)
             + (section(f'<ol class="era-events">{"".join(event_li(ev) for ev in related)}</ol>', "What happened here", "Beth ddigwyddodd yma") if related else "")
             + set_block(f"place:{pid}")
@@ -786,8 +889,8 @@ STORY = {x["id"]: x for x in F.STORIES}
 
 def prose(pars, cls="prose", figs=None):
     # "## " sub-heading, "> quote | source" pull quote, "|| left | right" table row (rows in a run make one table),
-    # "!! gallery-id" a credited picture from the gallery (src/gallery_photos.py), or "!! key" a picture from the
-    # long read's own figs (a gallery id, or a Commons tuple: file, author, licence, licence link, caption EN, CY, w, h)
+    # "!! key" a credited picture: from the long read's own figs={key: Commons tuple} (see lit_fig), or a gallery id
+    # (src/gallery_photos.py)
     out, rows = "", []
     for a in pars + [""]:
         if a.startswith("|| "):
@@ -798,17 +901,13 @@ def prose(pars, cls="prose", figs=None):
             rows = []
         if not a:
             continue
-        if a.startswith("!! "):  # a picture with its full credit (see photo_fig, lit_fig)
-            key = a[3:].strip()
-            pic = (figs or {}).get(key, key)
-            if not isinstance(pic, str):  # a Commons file, kept on the site by the Fetch photos workflow
-                w, h = pic[6], pic[7]
-                out += lit_fig(pic, "in-text portrait" if h > w else "in-text")
-                continue
-            if pic not in GP.GALLERY:
-                raise SystemExit(f"prose(): unknown gallery picture '{pic}' (see src/gallery_photos.py)")
-            g = GP.GALLERY[pic]
-            out += photo_fig(None, "in-text portrait" if g[7] > g[6] else "in-text", pic)  # tall pictures keep their faces
+        if a.startswith("!! ") and a[3:].strip() in (figs or {}):  # a picture from the long read's own list (see lit_fig)
+            out += lit_fig(figs[a[3:].strip()], "lr-fig")
+        elif a.startswith("!! "):  # a picture from the gallery, with its full credit (see photo_fig)
+            if a[3:].strip() not in GP.GALLERY:
+                raise SystemExit(f"prose(): unknown gallery picture '{a[3:].strip()}' (see src/gallery_photos.py)")
+            g = GP.GALLERY[a[3:].strip()]
+            out += photo_fig(None, "in-text portrait" if g[7] > g[6] else "in-text", a[3:].strip())  # tall pictures keep their faces
         elif a.startswith("## "):
             out += f"<h2>{e(a[3:])}</h2>"
         elif a.startswith("> "):
@@ -956,7 +1055,7 @@ SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes
     ("tudor", "From the Tudors to the Methodists", "O’r Tuduriaid i’r Methodistiaid", ["era-tudor"]),
     ("industry", "Iron, coal, slate and the sea", "Haearn, glo, llechi a’r môr", ["era-industrial", "industry", "coal", "aberfan", "protest", "topic-industry", "trail-coal", "trail-sea", "firsts", "topic-science"]),
     ("modern", "Modern Wales and the Welsh abroad", "Cymru fodern a’r Cymry ar wasgar", ["era-modern", "era-today", "revival", "mac", "fwa", "world", "madog", "tryweryn", "topic-abroad", "topic-sport"]),
-    ("lang", "The Welsh language, names and places", "Yr iaith Gymraeg, enwau a lleoedd", ["language", "topic-language", "welsh", "names", "towns", "maps", "sites"]),
+    ("lang", "The Welsh language, names and places", "Yr iaith Gymraeg, enwau a lleoedd", ["language", "welsh-not", "topic-language", "welsh", "names", "towns", "maps", "sites"]),
     ("life", "Women and everyday life", "Menywod a bywyd bob dydd", ["topic-women", "trail-women", "topic-countryside"]),
 ]
 
@@ -2810,7 +2909,7 @@ HOME_STORIES = 6  # long reads shown on the home page; the rest are on stories.h
 N_CASTLES = len(json.loads(read("castles_data.json")))  # the castle sites on castles.html, also the figure in the home page's opening
 FEATURED = ["dewi-sant", "hywel-dda", "gwenllian", "llywelyn-fawr", "llywelyn-ap-gruffudd", "dafydd-ap-gwilym", "owain-glyndwr", "harri-tudur", "william-morgan", "lloyd-george", "aneurin-bevan", "betty-campbell"]
 DATA = dict(
-    ERAS=D.ERAS, EVENTS=D.EVENTS, PLACES=[dict(p, ph=place_ph(p['id'])) for p in D.PLACES], PEOPLE=D.PEOPLE, READING=D.READING, ONLINE=D.ONLINE,
+    ERAS=D.ERAS, EVENTS=D.EVENTS, PLACES=[dict(p, ph=place_ph(p['id']), vis=map_visit(p)) for p in D.PLACES], PEOPLE=D.PEOPLE, READING=D.READING, ONLINE=D.ONLINE,
     CENSUS=D.CENSUS, KINGDOMS=D.KINGDOMS, LA=la, DICT=D.DICT, SAMPLES=D.SAMPLES, WORDS=D.WORDS,
     TRAILS=[dict(id=t["id"], en=t["en"], cy=t["cy"], ill=t["ill"], n=len(t["items"]), introEn=t["introEn"][0], introCy=t["introCy"][0]) for t in L.TRAILS],
     AUDIO=sorted(f[:-4] for f in os.listdir(os.path.join(SRC, 'static', 'audio')) if f.endswith('.mp3')) if os.path.isdir(os.path.join(SRC, 'static', 'audio')) else [],
@@ -2961,6 +3060,16 @@ def ssr_pins(sel="caernarfon", links=True, labels=True):
     return out
 
 
+def ssr_visit_line(p):
+    v = map_visit(p)
+    if not v:
+        return ""
+    return (f'<p class="pc-visit"><b>{bi("Visit", "Ymweld")}:</b> {bi(e(v[0][0].upper() + v[0][1:]), e(v[1][0].upper() + v[1][1:]))} · {bi(v[3], v[4])}'
+            + (f' · {e(v[5])}' if v[5] else "")
+            + (f' · <a href="{e(v[2])}" target="_blank" rel="noopener">{bi("Times and prices", "Amseroedd a phrisiau")} ↗</a>' if v[2] else "")
+            + f' · <a href="{e(v[6])}" target="_blank" rel="noopener">{bi("Directions", "Cyfarwyddiadau")} ↗</a></p>')
+
+
 def ssr_place_card(pid="caernarfon"):
     p = next(x for x in D.PLACES if x["id"] == pid)
     E = ERA[p["era"]]
@@ -2969,7 +3078,7 @@ def ssr_place_card(pid="caernarfon"):
            else f'<div class="art"><svg aria-hidden="true"><use href="#i-{p["ill"]}"/></svg></div>')
     return (art + f'<div style="display:grid;gap:.3rem"><h3>{bi(p["en"], p["cy"])}</h3></div>'
             f'<div class="meta"><span><b>{bi(E["en"], E["cy"])}</b></span><span>{e(p["year"])}</span><span>{p["lat"]:.3f}° N, {abs(p["lon"]):.3f}° W</span></div>'
-            f'<p class="desc">{bi(p["dEn"], p["dCy"])}</p><div style="display:flex;gap:1.2rem;flex-wrap:wrap;align-items:center">'
+            f'<p class="desc">{bi(p["dEn"], p["dCy"])}</p>{ssr_visit_line(p)}<div style="display:flex;gap:1.2rem;flex-wrap:wrap;align-items:center">'
             f'<a class="src" style="color:var(--ink)" href="place-{p["id"]}.html">{bi("Read the full story", "Darllen y stori lawn")} →</a>{src(p.get("src"))}</div>')
 
 
@@ -3468,6 +3577,7 @@ AB.setup(globals())
 SEO.AUTHOR = AB.author()[0] if AB.AUTHOR_EN else None
 style += AB.CSS
 style += CITE.CSS
+style += VS.CSS
 style += RP.REF_CSS + RP.TOWN_CSS + RP.BATTLE_CSS + RP.DOC_CSS + RP.TOPIC_CSS + RP.MAP_CSS
 
 

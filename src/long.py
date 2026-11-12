@@ -284,3 +284,10 @@ PEOPLE_LONG.update(_P2.PEOPLE_LONG)
 # ---------- Owain Gwynedd, the king who became prince (src/owain.py) ----------
 import owain as _OG
 PEOPLE_LONG["owain-gwynedd"] = _OG.PERSON_LONG
+
+# ---------- historic places of importance (src/places3.py) ----------
+import places3 as _PL3
+PLACE_LONG.update(_PL3.LONG)
+# ---------- the kings and princes of Wales, full-length pages (src/princes.py) ----------
+import princes as _PRN
+PEOPLE_LONG.update(_PRN.LONG)

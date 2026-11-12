@@ -159,3 +159,8 @@ a.chip { text-decoration: none; color: inherit }
 .kg-legend a { color: inherit; text-decoration-color: var(--line); text-underline-offset: 3px }
 .kg-legend a:hover { text-decoration-color: currentColor }
 .kg-kings { margin-top: .9rem; font-weight: 700 }
+
+/* pictures inside a long read ("!! key" in the text, src/welshnot.py) */
+.prose figure.lr-fig { margin: 1.8rem 0 }
+.prose figure.lr-fig img { display: block; width: 100%; height: auto; max-height: 30rem; aspect-ratio: auto; object-fit: contain; background: #0d1018; border-radius: 10px }
+.prose figure.lr-fig figcaption { margin-top: .55rem; line-height: 1.45 }

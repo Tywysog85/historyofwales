@@ -35,16 +35,30 @@ ERA = dict(
 )
 
 PAGE = {
+    # historic places of importance (src/places3.py)
+    "place-garthcelyn.html": "g:person-siwan",
+    "place-dolwyddelan.html": "g:cast-dolwyddelan",
+    "place-dinasemrys.html": "g:land-dinas-emrys",
+    "place-llysrhosyr.html": "g:anci-llys-rhosyr",
+    "place-cricieth.html": "g:cast-criccieth",
+    "place-dolforwyn.html": "g:person-llywelyn-ap-gruffudd",
+    "place-dryslwyn.html": "g:cast-dryslwyn",
+    "place-carregcennen.html": "g:cast-carreg-cennen",
+    "place-ewloe.html": "g:cast-ewloe",
+    "place-dinasbran.html": "g:cast-dinas-bran",
+    "place-cwmhir.html": "g:holy-cwmhir",
+    "place-powis.html": "g:cast-powis",
+    "place-kidwelly.html": "g:cast-kidwelly",
     # long reads
     "story-castles.html": "g:place-caernarfon",
     "story-language.html": "g:trea-bible-1588",
     "story-hywel.html": "g:trea-laws-hywel",
     "story-coal.html": "g:place-blaenavon",
     "story-protest.html": "g:place-westgate",
-    "story-world.html": "g:indu-coal-exchange",
+    "story-world.html": "c:Gaiman, Chubut ca.1911.jpg",
     "story-arthur.html": "g:person-arthur",
     "story-glyndwr.html": "g:trea-pennal-letter",
-    "story-longbow.html": "g:place-cardigan",
+    "story-longbow.html": "c:Longbowmen.jpg",
     "story-learning.html": "g:place-llanilltud",
     "story-unconquered.html": "g:cast-dolwyddelan",
     "story-firsts.html": "g:place-merthyr",
@@ -65,10 +79,11 @@ PAGE = {
     "person-dennis-coslett.html": "g:peop-celyn-line",
     "story-lucius.html": "g:holy-llandaff",
     "story-bran.html": "g:place-harlech",
-    "story-joseph.html": "g:person-dewi-sant",
+    "story-joseph.html": "c:Glastonbury Abbey Ruins 2.JPG",
     "story-aberfan.html": "g:place-aberfan",
     "story-patrick.html": "g:place-stdavids",
     "story-tryweryn.html": "g:place-celyn@50% 55%",
+    "story-welsh-not.html": "l:iaith-1966",  # Cymdeithas yr Iaith at Llangefni, 1966 (Geoff Charles), src/art.py LEGEND_PHOTOS
     # legends that have no photograph of their own yet
     "legend-dragons.html": "g:land-dinas-emrys",
     "legend-lludd.html": "g:land-dinas-emrys",
@@ -101,7 +116,7 @@ PAGE = {
     "kings-ergyng.html": "g:holy-llanthony",
     "kings-rheged.html": "g:trea-book-taliesin",
     "kings-gododdin.html": "g:trea-book-aneirin",
-    "kings-ystrad-clud.html": "g:person-aneirin",
+    "kings-ystrad-clud.html": "c:Castle from pier, Dumbarton, Scotland-LCCN2001705975.jpg",
     "kings-elfed.html": "g:land-tryfan",
     "kings-efrog.html": "g:anci-tomen-y-mur",
     "saints.html": "g:holy-st-govans",
@@ -117,7 +132,7 @@ PAGE = {
     "saints-llydaw.html": "g:person-illtud",
     # topic guides and trails
     "topics.html": "g:place-library",
-    "topic-abroad.html": "p:lewis-jones-patagonia",
+    "topic-abroad.html": "c:Vista de Gaiman.JPG",
     "topic-countryside.html": "g:place-stfagans",
     "topic-faith.html": "g:holy-soar-y-mynydd",
     "topic-industry.html": "g:place-dinorwig",
@@ -174,6 +189,24 @@ PAGE = {
     "llys-rhosyr.html": "g:anci-llys-rhosyr",
 }
 
+# More pictures, found on Commons for this (tools/commons_research.py) and kept on the site by tools/fetch_photos.py.
+# Commons file -> (author, licence, licence link, what it shows EN, CY). Use them as "c:<Commons file>".
+_BY = "https://creativecommons.org/licenses/by/"
+_BYSA = "https://creativecommons.org/licenses/by-sa/"
+_PD = "https://creativecommons.org/publicdomain/mark/1.0/"
+EXTRA = {
+    "Longbowmen.jpg": ("Luttrell Psalter, British Library", "Public domain", _PD,
+                       "Archers at practice with the longbow, from the Luttrell Psalter of about 1325", "Saethwyr yn ymarfer â’r bwa hir, o Sallwyr Luttrell, tua 1325"),
+    "Gaiman, Chubut ca.1911.jpg": ("Unknown photographer", "Public domain", _PD,
+                                   "Gaiman, in the Welsh settlement of Y Wladfa in Patagonia, about 1911", "Y Gaiman, yn y Wladfa ym Mhatagonia, tua 1911"),
+    "Vista de Gaiman.JPG": ("Gastón Cuello", "CC BY-SA 3.0", _BYSA + "3.0/",
+                            "Gaiman in the Chubut valley, Patagonia, founded by Welsh settlers", "Y Gaiman yn nyffryn Camwy, Patagonia, a sefydlwyd gan wladfawyr o Gymru"),
+    "Glastonbury Abbey Ruins 2.JPG": ("Mimihitam", "CC BY-SA 3.0", _BYSA + "3.0/",
+                                      "The ruins of Glastonbury Abbey, Ynys Wydrin", "Adfeilion Abaty Glastonbury, Ynys Wydrin"),
+    "Castle from pier, Dumbarton, Scotland-LCCN2001705975.jpg": ("Detroit Publishing Co., Library of Congress", "Public domain", _PD,
+                                                                 "Dumbarton Rock, Alt Clut, the old fortress of the kings of Ystrad Clud, about 1895", "Craig Dumbarton, Alclud, hen gaer brenhinoedd Ystrad Clud, tua 1895"),
+}
+
 # Pages that keep the picture they already have at the top (nothing to replace).
 SKIP = {"index.html"}
 
@@ -198,6 +231,14 @@ def _parse1(ref):
         cr = ph[3] if len(ph) > 3 else ""
         loc = _LOCAL[f]
         return dict(src=f"photos/{loc[0]}.webp", small=f"photos/{loc[0]}-s.webp", w=loc[1], h=loc[2], file=f, by=cr, lic="", licu="", en=en, cy=cy, pos="50% 30%")
+    if kind == "c":
+        by, lic, licu, en, cy = EXTRA[key]
+        loc = _LOCAL.get(key)
+        if loc:
+            return dict(src=f"photos/{loc[0]}.webp", small=f"photos/{loc[0]}-s.webp", w=loc[1], h=loc[2], file=key, by=by, lic=lic, licu=licu, en=en, cy=cy,
+                        pos="50% 30%" if loc[2] > loc[1] * .9 else "50% 50%")
+        u = COMMONS + "Special:FilePath/" + _q(key, safe="")  # until tools/fetch_photos.py has kept a copy on the site
+        return dict(src=u + "?width=1280", small=u + "?width=600", w=1280, h=853, file=key, by=by, lic=lic, licu=licu, en=en, cy=cy, pos="50% 50%", remote=True)
     if kind == "l":
         ph = A.LEGEND_PHOTOS[key]
         return dict(src=f"legends/{key}.webp", small=f"legends/{key}-s.webp", w=1280, h=853, file=ph[0], by=ph[1], lic=ph[2], licu=ph[3], en=ph[4], cy=ph[5], pos=ph[6])
@@ -208,6 +249,8 @@ def check():
     """Stop the build if a picture named here is missing (a typo, or a gallery picture taken out)."""
     for ref in list(ERA.values()) + list(PAGE.values()) + W10:
         p = _parse(ref)
+        if p.get("remote"):
+            continue
         for f in (p["src"], p["small"]):
             if not os.path.exists(os.path.join(_HERE, "static", f)):
                 raise SystemExit(f"src/pictures.py: {ref} has no file {f}")
