@@ -525,3 +525,11 @@ Learnt while adding "Britons, not Celts" (`src/celts.py`).
 - The dates for everything already on the site were worked out from the Git history: check out each commit in turn, import the lists, and keep the first time each id appears. Items that were on the site before this repository began share its first commit's time; for those, the one lower in the list counts as newer.
 - In `build.py`: `AD.newest(kind, items)` puts a list newest first (used for long reads, games, topic guides, gallery groups); `just_added(kind, items, href, title)` makes the "Just added" strip for lists that keep their own order (legends, documents, battles, questions, A–Z); `new_tag(kind, id)` gives the red "New" badge (the newest three in a list, for two weeks). `refpages.py` reaches them as `g["just_added"]`, `g["new_tag"]` and `g["AD"]`.
 - A new kind of list: give each item a fixed `id`, call `AD.track("kind", ids)` in `main()` (or `track_added()` in `refpages.py`), then use the helpers above.
+
+## Reference lists on long reads (November 2026)
+
+- Every long read, and Wales in 10 minutes, ends with "Further reading and references" ("Darllen pellach a chyfeiriadau"). The lists live in `src/refs.py`, keyed by the long read's id; `refs_block()` in `build.py` draws them in three groups: old sources and records, books by historians, online.
+- Each item is `(kind, author, title, details, note_en, note_cy[, url])`, with kind `"p"` (old text), `"b"` (historian's book) or `"w"` (website). Titles stay as published; only the short note is translated. `dwb=[person ids]` adds the Dictionary of Welsh Biography article for each person, taken from `src/source_links.json`, with the Welsh link going to bywgraffiadur.cymru.
+- The same list goes into the page's structured data as schema.org `citation`, so search engines see the sources too.
+- A new long read without a list makes `build.py` print a WARNING. Add one before publishing.
+- Checking a book is real: WebSearch for the exact title with the author and publisher. A publisher's page (uwp.co.uk, for example), a library catalogue or a bookseller with the ISBN is enough. If the year or publisher can't be confirmed, give only what can.
