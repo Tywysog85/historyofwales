@@ -685,6 +685,10 @@ EVENTS = sorted(EVENTS + _BRE, key=lambda ev: ev[1])
 from madog import EVENTS as _MDE
 EVENTS = sorted(EVENTS + _MDE, key=lambda ev: ev[1])
 
+# ---------- How Wales moved the world: the industrial revolution (src/industry.py) ----------
+from industry import EVENTS as _INE
+EVENTS = sorted(EVENTS + _INE, key=lambda ev: ev[1])
+
 # ---------- King Caradog against Rome (src/caradog.py) ----------
 from caradog import EVENTS as _CRE
 EVENTS = sorted(EVENTS + _CRE, key=lambda ev: ev[1])
