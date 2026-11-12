@@ -8,6 +8,14 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "The old books of Wales", "Hen lyfrau Cymru",
+     "Every great old book of Wales now has a page of its own, from the Llandeilo Gospels and the Black Book of Carmarthen to the Red Book of Hergest, the Book of the Anchorite, the Peniarth manuscripts and William Morgan’s Bible.",
+     "Mae gan bob un o hen lyfrau mawr Cymru dudalen ei hun bellach, o Efengylau Llandeilo a Llyfr Du Caerfyrddin hyd Lyfr Coch Hergest, Llyfr Ancr, llawysgrifau Peniarth a Beibl William Morgan.",
+     "books.html"),
+    ("2026-11-12", "The Bruts: the chronicles of Wales", "Y Brutiau: croniclau Cymru",
+     "A new long read on Brut y Brenhinedd and Brut y Tywysogion, the chronicles in which the Welsh wrote their history from Troy to the last prince, and ten more Welsh Triads.",
+     "Erthygl newydd ar Frut y Brenhinedd a Brut y Tywysogion, y croniclau lle ysgrifennodd y Cymry eu hanes o Gaerdroea hyd y tywysog olaf, a deg triawd arall.",
+     "story-bruts.html"),
     ("2026-11-12", "The writers who recorded early Wales", "Yr awduron a gofnododd Gymru gynnar",
      "A new long read and full pages on the writers who gave Wales its memory: Gerald of Wales and his journey of 1188, Nennius and the History of the Britons, Asser at Alfred’s court, Rhygyfarch and the Life of Saint David, Geoffrey of Monmouth, and new pages on Walter Map, Caradog of Llancarfan, Lifris, Elfoddw, Adam of Usk, Gutun Owain, Hywel Fychan of the Red Book and Elis Gruffydd, the soldier of Calais.",
      "Erthygl newydd a thudalennau llawn ar yr awduron a roddodd ei chof i Gymru: Gerallt Gymro a’i daith yn 1188, Nennius a Hanes y Brythoniaid, Asser yn llys Alffred, Rhygyfarch a Buchedd Dewi, Sieffre o Fynwy, a thudalennau newydd ar Wallter Map, Caradog o Lancarfan, Lifris, Elfoddw, Adda o Frynbuga, Gutun Owain, Hywel Fychan y Llyfr Coch ac Elis Gruffydd, milwr Calais.",

@@ -292,6 +292,9 @@ TRIADS_INTRO_EN = [
  "## What is a triad?",
  "A triad gathers three things under one title: the Three Generous Men of the Island of Britain, the Three Faithful War Bands, the Three Fortunate Concealments. The bards of Wales used them as a store for memory. Each name in a triad was a hook on which a whole story hung, and a poet who knew the triads knew the heroes and the history of the Island of Britain.",
  "The oldest collection, Trioedd Ynys Prydain, the Triads of the Island of Britain, is found in a manuscript of the thirteenth century, Peniarth 16, and in the White Book of Rhydderch and the Red Book of Hergest. What they remember is older still. The Poets of the Princes call on them in their poems, and the Mabinogion tells its listeners that a thing in the tale is ‘one of the Three Fortunate Concealments’ or ‘one of the Three Unhappy Blows’. The great modern edition, by the scholar Rachel Bromwich, first came out in 1961 and is still in print.",
+ "## The books that keep the triads",
+ "The oldest collection of the triads is in Peniarth 16, written in the third quarter of the thirteenth century and now in the National Library of Wales. It keeps forty-six of them. Another, Peniarth 45, was written about 1275. The White Book of Rhydderch and the Red Book of Hergest keep a longer collection of their own, and between them all Rachel Bromwich gathered and numbered ninety-six triads of the Island of Britain. The Black Book of Carmarthen, the oldest book written wholly in Welsh, keeps the triads of the horses.",
+ "Read beside the Bruts, the chronicles of Wales, the triads show what the bards held most worth remembering: not dates, but people. A king’s generosity, a war band’s loyalty, a hero’s horse and a magician’s art were all kept in threes, ready for the poet to call on in his song.",
  "Triads are found all through Welsh writing: in the laws of Hywel Dda, in the grammars that taught the poets their craft, in collections of wise sayings, and in Iolo Morganwg’s great gathering of the lore of Glamorgan. Other nations made triads too, the Irish among them, but none made more of them than the Welsh.",
  "## The Names of the Island of Britain",
  "Before the triads, the White Book and the Red Book give a short piece called Enwau Ynys Prydain, the Names of the Island of Britain. Its first name, before it was taken or settled, was Clas Myrddin, Myrddin’s Enclosure. After it was settled it was Y Fêl Ynys, the Island of Honey. And after it was won by Prydain son of Aedd the Great, it was called Ynys Prydain, the Island of Britain. It has three chief islands lying off it, Môn, Manaw and Wight, and three chief rivers, the Thames, the Severn and the Humber.",
@@ -300,6 +303,9 @@ TRIADS_INTRO_CY = [
  "## Beth yw triawd?",
  "Mae triawd yn casglu tri pheth dan un teitl: Tri Hael Ynys Prydain, Tri Diwair Deulu, Tri Matgudd. Defnyddiai beirdd Cymru hwy fel stôr i’r cof. Roedd pob enw mewn triawd yn fachyn i hongian stori gyfan arno, a gwyddai’r bardd a wyddai’r trioedd am arwyr a hanes Ynys Prydain.",
  "Ceir y casgliad hynaf, Trioedd Ynys Prydain, mewn llawysgrif o’r drydedd ganrif ar ddeg, Peniarth 16, ac yn Llyfr Gwyn Rhydderch a Llyfr Coch Hergest. Mae’r hyn a gofiant yn hŷn eto. Mae Beirdd y Tywysogion yn galw arnynt yn eu cerddi, ac mae’r Mabinogion yn dweud wrth ei wrandawyr fod peth yn y chwedl yn ‘un o’r Tri Matgudd’ neu’n ‘un o’r Tri Anfad Balfawd’. Daeth yr argraffiad modern mawr, gan yr ysgolhaig Rachel Bromwich, allan gyntaf yn 1961 ac mae mewn print o hyd.",
+ "## Y llyfrau sy’n cadw’r trioedd",
+ "Mae’r casgliad hynaf o’r trioedd yn Peniarth 16, a ysgrifennwyd yn nhrydydd chwarter y drydedd ganrif ar ddeg ac sydd heddiw yn Llyfrgell Genedlaethol Cymru. Mae’n cadw chwech a deugain ohonynt. Ysgrifennwyd un arall, Peniarth 45, tua 1275. Mae Llyfr Gwyn Rhydderch a Llyfr Coch Hergest yn cadw casgliad hwy eu hunain, a rhyngddynt oll casglodd Rachel Bromwich a rhifo chwech a phedwar ugain o drioedd Ynys Prydain. Mae Llyfr Du Caerfyrddin, y llyfr hynaf a ysgrifennwyd yn gyfan gwbl yn Gymraeg, yn cadw trioedd y meirch.",
+ "O’u darllen ochr yn ochr â’r Brutiau, croniclau Cymru, mae’r trioedd yn dangos beth a ystyriai’r beirdd yn fwyaf gwerth ei gofio: nid dyddiadau, ond pobl. Cadwyd haelioni brenin, ffyddlondeb gosgordd, march arwr a chelfyddyd dewin i gyd fesul tri, yn barod i’r bardd alw arnynt yn ei gân.",
  "Ceir trioedd drwy holl lên Cymru: yng nghyfraith Hywel Dda, yn y gramadegau a ddysgai eu crefft i’r beirdd, mewn casgliadau o ddywediadau doeth, ac yng nghasgliad mawr Iolo Morganwg o lên Morgannwg. Gwnaeth cenhedloedd eraill drioedd hefyd, y Gwyddyl yn eu plith, ond ni wnaeth neb fwy ohonynt na’r Cymry.",
  "## Enwau Ynys Prydain",
  "Cyn y trioedd, mae’r Llyfr Gwyn a’r Llyfr Coch yn rhoi darn byr o’r enw Enwau Ynys Prydain. Ei henw cyntaf, cyn ei chymryd na’i chyfanheddu, oedd Clas Myrddin. Wedi ei chyfanheddu, Y Fêl Ynys oedd hi. Ac wedi i Brydain fab Aedd Mawr ei hennill, fe’i galwyd yn Ynys Prydain. Mae tair prif ynys yn gorwedd ger ei glannau, Môn, Manaw a Gwyth, a thair prif afon, Tafwys, Hafren a Humyr.",
@@ -362,7 +368,7 @@ TRIADS_MORE_EN = [
  "## The triads of the law",
  "The law books of Hywel Dda hold collections of legal triads, which set out the law in threes so that a judge could carry it in his head: rules of proof and of witnesses, of land and of family, of the worth of things and of the duties of the king’s court. Short, clear and easy to remember, they were how the law was learned and taught.",
  "## The triads of the horses",
- "One whole set, Trioedd y Meirch, names the horses of the heroes: the swift, the strong and the faithful steeds on which the warriors of the Island rode to battle. A poet needed to know them, for a fine horse given by a patron was praised as warmly as the patron himself.",
+ "One whole set, Trioedd y Meirch, names the horses of the heroes: the swift, the strong and the faithful steeds on which the warriors of the Island rode to battle. A poet needed to know them, for a fine horse given by a patron was praised as warmly as the patron himself. Their oldest copy is in the Black Book of Carmarthen, written about 1250.",
  "## Iolo Morganwg’s triads",
  "The Myvyrian Archaiology printed a great new series of triads, from the manuscripts of Glamorgan in Iolo Morganwg’s own account. They tell of Hu Gadarn, who led the Cymry to the Island of Britain from the Summer Country, of the three pillars of the nation, and of the wisdom of the bards. Read and loved across Wales all through the nineteenth century, they gave the Gorsedd much of its language, and its motto, Y Gwir yn erbyn y Byd, the Truth against the World.",
  "## Make your own triad",
@@ -372,7 +378,7 @@ TRIADS_MORE_CY = [
  "## Trioedd y gyfraith",
  "Mae llyfrau cyfraith Hywel Dda yn cadw casgliadau o drioedd cyfreithiol, sy’n gosod y gyfraith fesul tri er mwyn i ynad ei chario yn ei ben: rheolau prawf a thystion, tir a theulu, gwerth pethau a dyletswyddau llys y brenin. Yn fyr, yn glir ac yn hawdd eu cofio, dyma sut y dysgid y gyfraith.",
  "## Trioedd y Meirch",
- "Mae un set gyfan, Trioedd y Meirch, yn enwi meirch yr arwyr: y meirch chwim, cryf a ffyddlon y marchogai rhyfelwyr yr Ynys arnynt i’r frwydr. Roedd yn rhaid i fardd eu hadnabod, oherwydd câi march gwych a roddwyd gan noddwr ei foli mor gynnes â’r noddwr ei hun.",
+ "Mae un set gyfan, Trioedd y Meirch, yn enwi meirch yr arwyr: y meirch chwim, cryf a ffyddlon y marchogai rhyfelwyr yr Ynys arnynt i’r frwydr. Roedd yn rhaid i fardd eu hadnabod, oherwydd câi march gwych a roddwyd gan noddwr ei foli mor gynnes â’r noddwr ei hun. Mae eu copi hynaf yn Llyfr Du Caerfyrddin, a ysgrifennwyd tua 1250.",
  "## Trioedd Iolo Morganwg",
  "Argraffodd y Myvyrian Archaiology gyfres fawr newydd o drioedd, o lawysgrifau Morgannwg yn ôl tystiolaeth Iolo Morganwg ei hun. Maent yn sôn am Hu Gadarn, a arweiniodd y Cymry i Ynys Prydain o Wlad yr Haf, am dair colofn y genedl, ac am ddoethineb y beirdd. Fe’u darllenwyd a’u caru ledled Cymru drwy’r bedwaredd ganrif ar bymtheg, a rhoesant i’r Orsedd lawer o’i hiaith, a’i harwyddair, Y Gwir yn erbyn y Byd.",
  "## Gwnewch eich triawd eich hun",
@@ -381,3 +387,65 @@ TRIADS_MORE_CY = [
 
 # The full page of the White Book shown beside the last part of the Triads page
 WHITE_BOOK_PAGE = ("Llyfr Gwyn Rhydderch f.61.r.png", "Unknown medieval scribe", *CC0, "A page of the White Book of Rhydderch, about 1350, one of the books that keep the Triads", "Tudalen o Lyfr Gwyn Rhydderch, tua 1350, un o’r llyfrau sy’n cadw’r Trioedd", 1597, 2370)
+
+# More triads (added 2026-11-12, Ifan asked for a detailed page on the Triads). Names as in the Red Book of Hergest
+# (maryjones.us, "The Hergest Triads") and Rachel Bromwich, Trioedd Ynys Prydein.
+TRIAD_GROUPS += [
+ dict(en="Princes of the Old North and of Wales", cy="Tywysogion yr Hen Ogledd a Chymru", triads=[
+  dict(cy="Tri Phost Cad Ynys Prydain", en="The Three Pillars of Battle of the Island of Britain", three=[
+    ("Dunawd son of Pabo, Pillar of Britain", "Dunawd fab Pabo Post Prydain"),
+    ("Gwallawg son of Lleenawg", "Gwallawg fab Lleenawg"),
+    ("Cynfelyn Drwsgl", "Cynfelyn Drwsgl"),
+   ], note=("Three warriors of the Old North in the sixth century, when the Britons still held the lands from the Clyde to the Mersey. Pabo, Dunawd’s father, was himself remembered as the Pillar of Britain.", "Tri rhyfelwr o’r Hen Ogledd yn y chweched ganrif, pan ddaliai’r Brythoniaid y tiroedd o Glud hyd Ferswy o hyd. Cofid Pabo, tad Dunawd, ei hun fel Post Prydain.")),
+  dict(cy="Tri Gwyndeyrn Ynys Prydain", en="The Three Fair Princes of the Island of Britain", three=[
+    ("Owain son of Urien", "Owain fab Urien"),
+    ("Rhun son of Maelgwn", "Rhun fab Maelgwn"),
+    ("Rhufawn the Radiant, son of Dewrarth Wledig", "Rhufawn Befr fab Dewrarth Wledig"),
+   ], note=("Owain son of Urien of Rheged was praised by Taliesin in his lifetime, and lives on as the hero of the tale of the Lady of the Fountain. Rhun son of Maelgwn Gwynedd ruled Gwynedd after his father.", "Moliannwyd Owain fab Urien Rheged gan Daliesin yn ei oes, ac mae’n fyw o hyd fel arwr chwedl Iarlles y Ffynnon. Teyrnasodd Rhun fab Maelgwn Gwynedd ar Wynedd ar ôl ei dad.")),
+  dict(cy="Tri Lleddf Unben Ynys Prydain", en="The Three Gentle Chieftains of the Island of Britain", three=[
+    ("Llywarch Hen, son of Elidir Lydanwyn", "Llywarch Hen fab Elidir Lydanwyn"),
+    ("Manawydan son of Llŷr Llediaith", "Manawydan fab Llŷr Llediaith"),
+    ("Gwgon Gwron, son of Peredur son of Eliffer of the Great War Band", "Gwgon Gwron fab Peredur fab Eliffer Gosgorddfawr"),
+   ], note=("Princes who would not seek a kingdom, though no one could have denied it to them. Manawydan is the patient, wise hero of the Third Branch of the Mabinogi, and Llywarch Hen the old prince of the englynion, who outlived all his sons.", "Tywysogion na cheisient deyrnas, er na allai neb ei gwrthod iddynt. Manawydan yw arwr amyneddgar, doeth Trydedd Gainc y Mabinogi, a Llywarch Hen yw hen dywysog yr englynion, a oroesodd ei feibion oll.")),
+ ]),
+ dict(en="Arthur’s court", cy="Llys Arthur", triads=[
+  dict(cy="Tri Unben Llys Arthur", en="The Three Chieftains of Arthur’s Court", three=[
+    ("Gobrwy son of Echel Forddwyd-twll", "Gobrwy fab Echel Forddwyd-twll"),
+    ("Ffleudur Fflam son of Godo", "Ffleudur Fflam fab Godo"),
+    ("Caedrieith son of Seidi", "Caedrieith fab Seidi"),
+   ], note=("All three are named among Arthur’s warriors in the tale of Culhwch and Olwen, in the great list of the men of his court.", "Enwir y tri ymhlith rhyfelwyr Arthur yn chwedl Culhwch ac Olwen, yn y rhestr fawr o wŷr ei lys.")),
+  dict(cy="Tri Oferfardd Ynys Prydain", en="The Three Free Poets of the Island of Britain", three=[
+    ("Arthur", "Arthur"),
+    ("Cadwallon son of Cadfan", "Cadwallon fab Cadfan"),
+    ("Rhahawd son of Morgant", "Rhahawd fab Morgant"),
+   ], note=("An oferfardd sang for the love of it, not for a living like the bards of the court. The triad remembers two of the greatest kings of the Britons, Arthur and Cadwallon, as poets too.", "Canai oferfardd er mwyn y gân, nid am fywoliaeth fel beirdd y llys. Mae’r triawd yn cofio dau o frenhinoedd mwyaf y Brythoniaid, Arthur a Chadwallon, fel beirdd hefyd.")),
+  dict(cy="Tri Eurgrydd Ynys Prydain", en="The Three Golden Shoemakers of the Island of Britain", three=[
+    ("Caswallon son of Beli, when he went to Rome to seek Fflur", "Caswallon fab Beli, pan aeth i Rufain i geisio Fflur"),
+    ("Manawydan son of Llŷr, when the enchantment was on Dyfed", "Manawydan fab Llŷr, pan oedd yr hud ar Ddyfed"),
+    ("Lleu Llaw Gyffes, when he and Gwydion sought a name and arms from Arianrhod", "Lleu Llaw Gyffes, pan geisiodd ef a Gwydion enw ac arfau gan Arianrhod"),
+   ], note=("Three heroes who made shoes of gold in disguise. The Third and Fourth Branches of the Mabinogi tell how Manawydan and Lleu did it, so well that the other shoemakers of the town could sell nothing.", "Tri arwr a wnaeth esgidiau aur mewn cuddwisg. Mae’r Drydedd a’r Bedwaredd Gainc yn adrodd sut y gwnaeth Manawydan a Lleu hynny, mor dda fel na allai cryddion eraill y dref werthu dim.")),
+  dict(cy="Tri Rhuddfoawg Ynys Prydain", en="The Three Red Ravagers of the Island of Britain", three=[
+    ("Rhun son of Beli", "Rhun fab Beli"),
+    ("Lleu Llaw Gyffes", "Lleu Llaw Gyffes"),
+    ("Morgant Mwynfawr", "Morgant Mwynfawr"),
+   ], more=("And there was one greater in battle than the three: Arthur.", "Ac roedd un mwy mewn brwydr na’r tri: Arthur."),
+   note=("Warriors whose anger left a red track across the land of their enemies, so that grass would not grow where they had passed.", "Rhyfelwyr y gadawai eu dicter ôl coch ar draws tir eu gelynion, fel na thyfai glaswellt lle buont.")),
+ ]),
+ dict(en="Ships, horses and enchantment", cy="Llongau, meirch a hud", triads=[
+  dict(cy="Tri Llynghesog Ynys Prydain", en="The Three Seafarers of the Island of Britain", three=[
+    ("Geraint son of Erbin", "Geraint fab Erbin"),
+    ("Gwenwynwyn son of Naf", "Gwenwynwyn fab Naf"),
+    ("March son of Meirchiawn", "March fab Meirchiawn"),
+   ], note=("Three lords of fleets. Geraint, prince of Dyfnaint, is mourned in a poem in the Black Book of Carmarthen for the battle of Llongborth, where his ships lay.", "Tri arglwydd llynges. Galerir am Geraint, tywysog Dyfnaint, mewn cerdd yn Llyfr Du Caerfyrddin am frwydr Llongborth, lle gorweddai ei longau.")),
+  dict(cy="Tri Phrif Hud Ynys Prydain", en="The Three Great Enchantments of the Island of Britain", three=[
+    ("The enchantment of Math son of Mathonwy, which he taught to Gwydion son of Dôn", "Hud Math fab Mathonwy, a ddysgodd i Wydion fab Dôn"),
+    ("The enchantment of Uthr Bendragon, which he taught to Menw son of Teirgwaedd", "Hud Uthr Bendragon, a ddysgodd i Fenw fab Teirgwaedd"),
+    ("The enchantment of Rhuddlwm the Dwarf, which he taught to Coll son of Collfrewy", "Hud Rhuddlwm Gorr, a ddysgodd i Goll fab Collfrewy"),
+   ], note=("Magic passed from master to pupil. Math and Gwydion are the great enchanters of the Fourth Branch of the Mabinogi, who made Blodeuwedd out of flowers.", "Hud a basiwyd o athro i ddisgybl. Math a Gwydion yw dewiniaid mawr y Bedwaredd Gainc, a wnaeth Flodeuwedd o flodau.")),
+  dict(cy="Tri Marchlwyth Ynys Prydain", en="The Three Horse-Burdens of the Island of Britain", three=[
+    ("Du y Moroedd, the horse of Elidir Mwynfawr, who carried seven people and a half from Penllech in the North to Penllech in Môn", "Du y Moroedd, march Elidir Mwynfawr, a gariodd saith dyn a hanner o Benllech yn y Gogledd hyd Benllech ym Môn"),
+    ("Corfan, the horse of the sons of Eliffer, who carried them to the battle of Arfderydd", "Corfan, march meibion Eliffer, a’u cariodd i frwydr Arfderydd"),
+    ("Heith, the horse of the sons of Gwrthmwl Wledig, who carried them up Maelawr in Ceredigion", "Heith, march meibion Gwrthmwl Wledig, a’u cariodd i fyny Maelawr yng Ngheredigion"),
+   ], note=("The three strongest horses of the Island, remembered for the loads they bore. Du y Moroedd, the Black of the Seas, carried his riders across the water to Môn.", "Tri march cryfaf yr Ynys, a gofir am y llwythi a gariasant. Cariodd Du y Moroedd ei farchogion dros y dŵr i Fôn.")),
+ ]),
+]
