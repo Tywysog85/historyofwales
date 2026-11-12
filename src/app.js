@@ -330,8 +330,12 @@
         window.HCD3_WANT = window.HCL3_WANT = 1;
         var c3 = document.createElement("canvas"); c3.id = "sky3d"; c3.setAttribute("aria-hidden", "true"); cv.after(c3);
         var cl = document.createElement("canvas"); cl.id = "land3d"; cl.setAttribute("aria-hidden", "true"); cv.after(cl);
-        var s3 = document.createElement("script"); s3.type = "module"; s3.src = "hero3d.js?v=6"; /* raise the number whenever hero3d.js changes, so browsers fetch the new one */ s3.onerror = function () { window.HCD3_WANT = window.HCL3_WANT = 0; c3.remove(); cl.remove(); }; document.head.appendChild(s3);
-        setTimeout(function () { if (!(window.HCD3 && HCD3.ready)) window.HCD3_WANT = 0; if (!(window.HCL3 && HCL3.ready)) { window.HCL3_WANT = 0; cl.remove(); } }, 15000);
+        /* the 3D scene starts downloading once the page itself has loaded, so the words, fonts and pictures come first on a slow phone */
+        var go3 = function () {
+          var s3 = document.createElement("script"); s3.type = "module"; s3.src = "hero3d.js?v=6"; /* raise the number whenever hero3d.js changes, so browsers fetch the new one */ s3.onerror = function () { window.HCD3_WANT = window.HCL3_WANT = 0; c3.remove(); cl.remove(); }; document.head.appendChild(s3);
+          setTimeout(function () { if (!(window.HCD3 && HCD3.ready)) window.HCD3_WANT = 0; if (!(window.HCL3 && HCL3.ready)) { window.HCL3_WANT = 0; cl.remove(); } }, 15000);
+        };
+        if (document.readyState === "complete") go3(); else window.addEventListener("load", go3, { once: true });
       }
     } catch (e3) { window.HCD3_WANT = 0; }
     window.addEventListener("pointermove", function (e) { if (e.pointerType === "mouse") mouse = (e.clientX / window.innerWidth - 0.5) * 2; }, { passive: true });
