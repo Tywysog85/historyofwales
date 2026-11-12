@@ -391,6 +391,15 @@ CITES = {
         url="https://en.wikipedia.org/wiki/Hywel_Dda", lang="en"),
 }
 
+# Batch 2 (Gruffudd ap Llywelyn, Gruffudd ap Cynan, the Llywelyns and the Dafydds) lives in princes2.py.
+import princes2 as _P2X  # noqa: E402
+LONG.update(_P2X.LONG)
+CITES.update(_P2X.CITES)
+# Batch 3 (Siwan, the two Gwenllians, Owain Lawgoch) lives in princes3.py.
+import princes3 as _P3X  # noqa: E402
+LONG.update(_P3X.LONG)
+CITES.update(_P3X.CITES)
+
 # ---------------------------------------------------------------- the block on every page of the set
 # Only people with a page on the site are shown, so ids for pages still to come can be listed already.
 GROUPS = [

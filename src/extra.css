@@ -32,7 +32,8 @@ html.cy .l-en, html:not(.cy) .l-cy { display: none !important }
 .kg-legend { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem }
 .kg-legend li { display: flex; gap: .7rem; align-items: center; font-size: .98rem }
 .kg-legend i { width: 1rem; height: 1rem; border-radius: 4px; background: var(--k); flex: none }
-.kg-range { display: grid; gap: .5rem; border-top: 1px solid var(--line); padding-top: 1rem }
+.kg-range { display: grid; gap: .5rem; border-bottom: 1px solid var(--line); padding-bottom: 1.2rem }
+.kg-body { display: grid; gap: 1rem; align-content: start }
 .kg-note { font-size: .82rem; color: var(--muted) }
 
 /* Quiz */
@@ -76,7 +77,7 @@ footer nav a:hover { color: var(--ink) }
 .crumbs { font-size: .9rem; color: var(--muted) }
 .crumbs a { color: var(--muted) }
 .story { display: grid; gap: 1.2rem; max-width: 64ch; font-size: 1.12rem }
-.story p:first-child::first-letter { font-family: var(--f-display); float: left; font-size: 3.8em; line-height: .85; padding: .05em .1em 0 0; color: var(--c) }
+.story > p:first-child::first-letter { font-family: var(--f-display); float: left; font-size: 3.8em; line-height: .85; padding: .05em .1em 0 0; color: var(--c) }
 .era-events { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line) }
 .era-events li { display: grid; grid-template-columns: 9rem minmax(0,1fr); gap: 1.25rem; padding: 1.1rem 0; border-bottom: 1px solid var(--line) }
 .era-events time { font-family: var(--f-mono); font-size: .82rem; color: var(--c); padding-top: .2rem }

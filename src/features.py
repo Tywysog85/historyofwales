@@ -418,7 +418,8 @@ import tryweryn as _TW  # Cofiwch Dryweryn: the drowning of Capel Celyn (src/try
 import industry as _IN  # How Wales moved the world: the industrial revolution (src/industry.py)
 import writers as _WRT  # The writers who recorded early Wales (src/writers.py)
 import welshnot as _WN  # The Welsh Not and how they tried to wipe out the language (src/welshnot.py)
-STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY, _NS.STORY, _RH.STORY] + _CH.STORIES + [_PT.STORY, _AF.STORY, _TW.STORY] + _MAC.STORIES + [_WN.STORY] + [_IN.STORY] + [_WRT.STORY]
+import mabinogi as _MBG  # The Mabinogi: the books that kept the tales (src/mabinogi.py)
+STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY, _NS.STORY, _RH.STORY] + _CH.STORIES + [_PT.STORY, _AF.STORY, _TW.STORY] + _MAC.STORIES + [_WN.STORY] + [_IN.STORY] + [_MBG.STORY] + [_WRT.STORY]
 # the long reads on the language and on protest point on to the Welsh Not long read (src/welshnot.py)
 for _s in STORIES:
     if _s["id"] in ("language", "revival", "protest"):
