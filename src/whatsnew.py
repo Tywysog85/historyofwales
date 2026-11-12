@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "The princes of Powys and Deheubarth", "Tywysogion Powys a Deheubarth",
+     "New pages on Gwenwynwyn, who raised the Welsh in 1198 to win back their ancient bounds; Madog ap Gruffudd Maelor, founder of Valle Crucis; Maelgwn ap Rhys and Rhys Gryg, sons of the Lord Rhys who rode with Llywelyn Fawr; and a full page on Owain Cyfeiliog, the poet-prince of the Hirlas horn.",
+     "Tudalennau newydd ar Wenwynwyn, a gododd y Cymry yn 1198 i ennill eu hen derfynau yn ôl; Madog ap Gruffudd Maelor, sylfaenydd Glyn y Groes; Maelgwn ap Rhys a Rhys Gryg, meibion yr Arglwydd Rhys a farchogodd gyda Llywelyn Fawr; a thudalen lawn ar Owain Cyfeiliog, tywysog-fardd yr Hirlas.",
+     "person-gwenwynwyn.html"),
     ("2026-11-12", "Siwan, the two Gwenllians and Owain Lawgoch", "Siwan, y ddwy Wenllian ac Owain Lawgoch",
      "Four more full pages from the royal houses of Wales: Siwan, Lady of Wales and the peacemaker of Gwynedd; Gwenllian ferch Gruffudd, who led an army against the Normans at Kidwelly in 1136; Gwenllian ferch Llywelyn, Princess of Wales, remembered on Carnedd Gwenllian; and Owain Lawgoch, the last heir of Gwynedd, who sailed with a French fleet in 1372 to win back Wales.",
      "Pedair tudalen lawn arall o dai brenhinol Cymru: Siwan, Arglwyddes Cymru a heddychwraig Gwynedd; Gwenllian ferch Gruffudd, a arweiniodd fyddin yn erbyn y Normaniaid yng Nghydweli yn 1136; Gwenllian ferch Llywelyn, Tywysoges Cymru, a gofir ar Garnedd Gwenllian; ac Owain Lawgoch, etifedd olaf Gwynedd, a hwyliodd gyda llynges Ffrengig yn 1372 i ennill Cymru yn ôl.",
