@@ -2177,8 +2177,7 @@ def ruler_li(x, chips="", rid=""):
     link = x["link"]
     more = ""
     if link:
-        lab = ("Read more", "Darllen mwy") if link.startswith(("person-", "legend-")) else ("See more", "Gweld mwy")
-        more = f'<a class="src" href="{link}">{bi(*lab)} →</a>'
+        more = f'<a class="src" href="{link}">{bi("Read more", "Darllen mwy")} →</a>'
     note = f'<p>{bi(x["en"], x["cy"])}</p>' if x["en"] else ""
     links = f'<div class="links">{more}{chips}</div>' if (more or chips) else ""
     return (f'<li{f' id="{rid}"' if rid else ""} class="{"key" if x["key"] else ""}"><time>{bi(x["dates"], cy_dates(x["dates"]))}</time>'
