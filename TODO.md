@@ -4,7 +4,7 @@ Open jobs for History of Wales. Tick a job off by deleting it. Keep this list sh
 
 ## Waiting on the owner
 
-- **The Britons piece.** A long read on the first people of the island and their language ("Britons", not "Celts"). To be gone over together before it is written.
+- **The Edward Lhuyd and "Celtic" page.** A page on how the name "Celtic" was put on the Welsh, Cornish, Bretons, Irish and Scots by Lhuyd in 1707, and that the Welsh called themselves Britons and Cymry before. Wording to be agreed with Ifan before it goes live.
 - **The Coelbren piece.** Waiting for the poem, by a poet older than Iolo Morganwg, that mocks the Coelbren alphabet. Any name, line or photo of a marked stone will do to start.
 - **Lifelike dragon: who made it.** The 3D dragon comes from a kit that says its assets are Creative Commons but does not name the artist or the exact licence. If the artist is found, credit them by name in README.md. If anyone objects, swap the model (see SKILLS.md, "The lifelike dragon in the sky").
 - **Photo check.** The photos of places, people and castles were picked by file name and have not been looked at. Any that are wrong should be swapped. The owner's own photos are welcome.

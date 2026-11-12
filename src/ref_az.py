@@ -156,8 +156,8 @@ TERMS = [
 
  # ---------- peoples, kingdoms and places ----------
  A("britons", "Britons (Brythoniaid)", "Brythoniaid",
-   "The people of this island in Roman times and before, in Caesar’s own word. Their language became Welsh, Cornish and Breton. ‘Celtic’ was first applied to them in 1707, by Edward Lhuyd.",
-   "Pobl yr ynys hon yn oes y Rhufeiniaid a chynt, yng ngair Cesar ei hun. Trodd eu hiaith yn Gymraeg, Cernyweg a Llydaweg. Edward Lhuyd a roddodd yr enw ‘Celtaidd’ arnynt gyntaf, yn 1707.",
+   "The people of this island in Roman times and before, in Caesar’s own word. Their language became Welsh, Cornish and Breton. They never called themselves Celts: that name was put on them in 1707, by Edward Lhuyd of Oxford.",
+   "Pobl yr ynys hon yn oes y Rhufeiniaid a chynt, yng ngair Cesar ei hun. Trodd eu hiaith yn Gymraeg, Cernyweg a Llydaweg. Ni alwasant eu hunain yn Geltiaid erioed: Edward Lhuyd o Rydychen a roddodd yr enw hwnnw arnynt, yn 1707.",
    ["person-edward-lhuyd.html", "era-ancient.html"]),
  A("cymry", "Cymry and Cymru", "Cymry a Chymru",
    "The Welsh name for the people and the land, from the old British word *combrogi, ‘fellow countrymen’. It is first found in a poem of about 633 in praise of Cadwallon.",

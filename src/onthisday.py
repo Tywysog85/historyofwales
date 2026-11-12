@@ -217,7 +217,7 @@ OTD = [
   "The rack railway to the summit of Yr Wyddfa opens.",
   "Agorir y rheilffordd rac i gopa’r Wyddfa.", ""),
  ("04-07", None, "feast", "Saint Brynach’s Day", "Gŵyl Brynach",
-  "Brynach founded the church at Nevern, where the great Celtic cross still stands.",
+  "Brynach founded the church at Nevern, where the great carved cross still stands.",
   "Sefydlodd Brynach eglwys Nanhyfer, lle saif y groes fawr o hyd.", "saint:brynach"),
  ("04-08", 1761, "died", "Griffith Jones", "Griffith Jones",
   "The founder of the circulating schools dies. They taught hundreds of thousands of Welsh people to read.",

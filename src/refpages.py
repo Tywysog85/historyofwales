@@ -710,6 +710,8 @@ def site_rows():
         en = (gd["p"].get("name") if gd else None) or x["n"].strip() or p.get("SiteType", "")
         cy = (gd["p"].get("name_cy") if gd else None) or p.get("Name_cy") or en
         en, cy = str(en).strip(), str(cy).strip()
+        # Britons, not Celts (EDITORIAL.md): Cadw's 'Llangan Celtic Cross' is shown as 'Llangan Cross'.
+        en, cy = en.replace(" Celtic Cross", " Cross"), cy.replace(" Celtic Cross", " Cross")
         typ, typ_cy = str(p.get("SiteType", "")).strip(), str(p.get("SiteType_cy", "") or p.get("SiteType", "")).strip()
         per = str(p.get("Period", "")).strip()
         cat = ST.classify(typ, per, p.get("BroadClass"))
