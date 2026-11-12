@@ -90,7 +90,7 @@ DOCS = [
     "Brutus, eich hynafiad mwyaf bonheddig chi a minnau, oedd y brenin coronog cyntaf a drigodd yn y deyrnas hon, a elwid gynt yn Brydain Fawr. Cenhedlodd y Brutus hwnnw dri mab, sef Albanact, Locrinus a Chamber; ac o’r Albanact hwnnw yr ydych chi’n disgyn mewn llinell union."),
    "Owain spoke for the whole island’s British past, and set Wales beside Scotland as an ancient kingdom. Camber, in Owain’s account, was the forefather of the Welsh.", "Siaradodd Owain dros orffennol Brythonig yr ynys gyfan, a gosod Cymru wrth ochr yr Alban fel teyrnas hynafol. Camber, yn ôl Owain, oedd hynafiad y Cymry.",
    "Copied by Adam of Usk in his chronicle (translation by E. M. Thompson, 1904)", "Wedi’i gopïo gan Adda o Frynbuga yn ei gronicl (cyfieithiad E. M. Thompson, 1904)",
-   ["person-owain-glyndwr.html", "story-glyndwr.html"]),
+   ["person-owain-glyndwr.html", "story-glyndwr.html", "story-brutus.html"]),
  D("indenture", 1405, "28 February 1405", "28 Chwefror 1405", "The Tripartite Indenture", "Y Cytundeb Tridarn",
    "The agreement of Owain Glyndŵr, Edmund Mortimer and Henry Percy, Earl of Northumberland, to share the kingdom between them.", "Cytundeb Owain Glyndŵr, Edmund Mortimer a Henry Percy, Iarll Northumberland, i rannu’r deyrnas rhyngddynt.",
    ("short", "Owain was to have the whole of Wales, with its border carried east to the Severn and the Mersey: from the Severn up to the north gate of Worcester, then to the ash trees called Onennau Meigion on the road from Bridgnorth to Kinver, then to the source of the Trent and on to the source of the Mersey, and down the Mersey to the sea.",

@@ -643,3 +643,8 @@ for _ev in _E2:
     if _ev[10] and _ev[10] not in _pids:
         raise SystemExit(f"src/events2.py: unknown place '{_ev[10]}' in {_ev[5]}")
 EVENTS = sorted(EVENTS + _E2, key=lambda ev: ev[1])
+
+
+# ---------- Brutus of Troy and the History of the Kings of Britain (src/brutus.py) ----------
+from brutus import EVENTS as _BRE
+EVENTS = sorted(EVENTS + _BRE, key=lambda ev: ev[1])

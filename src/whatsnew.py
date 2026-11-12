@@ -7,6 +7,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Brutus of Troy, father of the Britons", "Brutus o Gaerdroea, tad y Brythoniaid",
+     "A new long read tells how the Welsh knew themselves as the children of Brutus of Troy: his voyage to Totnes, his sons Locrinus, Camber and Albanactus, the Brut that kept the story, Owain Glyndŵr’s letter, and Harri Tudur, the son of prophecy.",
+     "Mae erthygl newydd yn adrodd sut yr oedd y Cymry’n eu hadnabod eu hunain fel plant Brutus o Gaerdroea: ei fordaith i Totnes, ei feibion Locrinus, Camber ac Albanactus, y Brut a gadwodd y stori, llythyr Owain Glyndŵr, a Harri Tudur, y mab darogan.",
+     "story-brutus.html"),
     ("2026-11-12", "Alan Wilson and Baram Blackett, the men who went looking for Arthur", "Alan Wilson a Baram Blackett, y dynion a aeth i chwilio am Arthur",
      "A new long read on the two researchers who gave forty years to the early history of the Britons: their books, their two Arthurs, Athrwys ap Meurig, St Peter’s on Mynydd-y-Gaer, the Brut and the Coelbren.",
      "Erthygl newydd am y ddau ymchwilydd a roddodd ddeugain mlynedd i hanes cynnar y Brythoniaid: eu llyfrau, eu dau Arthur, Athrwys ap Meurig, Sant Pedr ar Fynydd-y-Gaer, y Brut a’r Coelbren.",
