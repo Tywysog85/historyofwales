@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Every moment on the timeline now has its own page", "Mae gan bob eiliad ar y llinell amser ei thudalen ei hun bellach",
+     "All 405 events on the timeline now open their own page, with the date, the place, the people, the battles and documents of the time, and what came just before and after. The 41 biggest moments, from the bluestones of Preseli to the slate landscape, are told in full.",
+     "Mae pob un o’r 405 digwyddiad ar y llinell amser bellach yn agor ei dudalen ei hun, gyda’r dyddiad, y lle, y bobl, brwydrau a dogfennau’r cyfnod, a’r hyn a ddaeth yn union cyn ac wedyn. Adroddir y 41 eiliad fwyaf, o gerrig gleision y Preseli i dirwedd y llechi, yn llawn.",
+     "timeline.html"),
     ("2026-11-12", "Reading lists on every page", "Rhestrau darllen ar bob tudalen",
      "Reading lists now go beyond the long reads. The Laws, the Mabinogion, the kings and saints pages, every legend, age, kingdom, topic guide and trail, and every person and place page now end with the old sources and the historians’ books to read next.",
      "Mae’r rhestrau darllen bellach yn mynd y tu hwnt i’r erthyglau. Mae’r Cyfreithiau, y Mabinogion, tudalennau’r brenhinoedd a’r seintiau, pob chwedl, oes, teyrnas, canllaw pwnc a llwybr, a phob tudalen person a lle bellach yn gorffen â’r hen ffynonellau a llyfrau’r haneswyr i’w darllen nesaf.",

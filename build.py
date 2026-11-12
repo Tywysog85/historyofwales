@@ -18,6 +18,7 @@ import data as D  # noqa: E402
 import long as L  # noqa: E402
 import towns as TW  # noqa: E402
 import photos as PH  # noqa: E402
+import eventpages as EP  # noqa: E402  (a page for every timeline event: src/eventpages.py)
 import gallery as G  # noqa: E402
 import gallery_photos as GP  # noqa: E402
 import ages as AG  # noqa: E402
@@ -485,6 +486,7 @@ def event_li(ev, k=0):
     links = ((f'<a class="src" href="laws.html">{bi("The Laws of Hywel Dda: the big page", "Cyfreithiau Hywel Dda: y dudalen fawr")} →</a>' if ev[5] == "The laws of Hywel Dda" else "")
              + "".join(f'<a class="src" href="story-{x["id"]}.html">{bi("Read the long read", "Darllen yr erthygl")} →</a>' for x in story_links("events", ev[5]))
              + (f'<a class="src" href="place-{ev[10]}.html">{bi("The place", "Y lle")} →</a>' if ev[10] else "") + src(ev[11]))
+    links = f'<a class="src full" href="{EP.href(ev)}">{bi("The full story", "Yr hanes llawn")} →</a>' + links
     return (f'<li id="e{EVI[ev]}" class="{"key" if ev[9] else ""}" data-era="{ev[0]}"><time>{bi(year_label(ev), year_label(ev, True))}</time>'
             f'<div><h3>{bi(ev[5], ev[6])}</h3><p>{bi(ev[7], ev[8])}</p><div class="links">{links}</div></div></li>')
 
@@ -2580,6 +2582,7 @@ DATA = dict(
     AUDIO=sorted(f[:-4] for f in os.listdir(os.path.join(SRC, 'static', 'audio')) if f.endswith('.mp3')) if os.path.isdir(os.path.join(SRC, 'static', 'audio')) else [],
     MAPC=dict(minx=geo["minx"], maxy=geo["maxy"], k=geo["k"], sc=geo["sc"]),
     SL={i: x["id"] for i, ev in enumerate(D.EVENTS) for x in story_links("events", ev[5])},
+    EVS=EP.SLUG,  # the page of each event: event-<slug>.html (src/eventpages.py)
     KGLINK={"Gwynedd": "kings-gwynedd.html", "Powys": "kings-powys.html", "Ceredigion": "kings-ceredigion.html", "Dyfed": "kings-dyfed.html", "Brycheiniog": "kings-brycheiniog.html",
             "Rhwng Gwy a Hafren": "kings-gwy-a-hafren.html", "Glywysing": "kings-glywysing.html", "Morgannwg": "kings-glywysing.html", "Gwent": "kings-gwent.html", "Deheubarth": "kings-deheubarth.html",
             "Rhodri Mawr": "person-rhodri-mawr.html", "Hywel Dda": "person-hywel-dda.html", "Gruffudd ap Llywelyn": "kings.html", "Principality of Wales": "kings.html#princes",
@@ -2832,7 +2835,7 @@ def search_index():
     items = [dict(k="era", t=x["en"], c=x["cy"], u=f"era-{x['id']}.html", y=[x["spanEn"], x["spanCy"]], b=[x["blurbEn"], x["blurbCy"]], e=x["id"]) for x in D.ERAS]
     items += [dict(k="person", t=p[3], c=p[4], u=f"person-{p[0]}.html", y=[p[2], p[2]], b=[p[5] + ". " + p[7], p[6] + ". " + p[8]], e=p[1]) for p in D.PEOPLE]
     items += [dict(k="place", t=p["en"], c=p["cy"], u=f"place-{p['id']}.html", y=[p["year"], p["year"]], b=[p["dEn"], p["dCy"]], e=p["era"]) for p in D.PLACES]
-    items += [dict(k="event", t=ev[5], c=ev[6], u=f"era-{ev[0]}.html#e{i}", y=yl(ev), b=[ev[7], ev[8]], e=ev[0]) for i, ev in enumerate(D.EVENTS)]
+    items += EP.search_items()  # every event, each to its own page (src/eventpages.py)
     items += [dict(k="trail", t=t["en"], c=t["cy"], u=f"trail-{t['id']}.html", y=["Trail", "Llwybr"], b=[t["introEn"][0], t["introCy"][0]], e="medieval") for t in L.TRAILS]
     items += [dict(k="story", t=x["en"], c=x["cy"], u=f"story-{x['id']}.html", y=[f"{x['mins']} min", f"{x['mins']} mun"], b=[x["sumEn"], x["sumCy"]], e=x["era"]) for x in F.STORIES]
     items += [dict(k="legend", t=x["en"], c=x["cy"], u=f"legend-{x['id']}.html", y=[x["place"], x["place"]], b=[x["sumEn"], x["sumCy"]], e=x["era"]) for x in F.LEGENDS]
@@ -3101,7 +3104,7 @@ def write(path, text):
 
 
 # ---------- share pictures (tools/cards.py) ----------
-CARD_KIND = [("person-", "Person", "Person"), ("place-", "Place", "Lle"), ("legend-", "Legend", "Chwedl"), ("story-", "Long read", "Erthygl"),
+CARD_KIND = [("person-", "Person", "Person"), ("event-", "On the timeline", "Ar y llinell amser"), ("place-", "Place", "Lle"), ("legend-", "Legend", "Chwedl"), ("story-", "Long read", "Erthygl"),
              ("era-", "An age of Welsh history", "Oes yn hanes Cymru"), ("kings", "Kings and princes", "Brenhinoedd"), ("saints", "Saints of Wales", "Seintiau"),
              ("trail-", "Trail", "Llwybr"), ("family-trees", "Royal family trees", "Coed teulu"), ("castles", "Castles of Wales", "Cestyll"),
              ("onthisday", "On this day", "Ar y dydd hwn"), ("firsts", "Welsh world firsts", "Y cyntaf"), ("mabinogion", "The Mabinogion", "Y Mabinogion"),
@@ -3193,6 +3196,8 @@ def not_found_page():
 
 import refpages as RP  # noqa: E402  (the reference pages: reference.html, a-z.html ...)
 RP.setup(globals())
+EP.setup(globals())
+style += EP.CSS
 import about as AB  # noqa: E402  (the About page, the author and "last updated" lines, reporting a mistake)
 AB.setup(globals())
 SEO.AUTHOR = AB.author()[0] if AB.AUTHOR_EN else None
@@ -3253,6 +3258,7 @@ def main():
     pages["404.html"] = not_found_page()
     pages["whatsnew.html"] = whatsnew_page()
     pages["about.html"] = AB.about_page()
+    pages.update(EP.pages())  # a page for every event on the timeline (src/eventpages.py)
     pages.update(RP.pages(pages.keys()))  # the reference pages: look-it-up desk, A–Z and the rest (src/refpages.py)
     if RP.MISSING:
         print("Reference pages: links left out because the page does not exist:", ", ".join(sorted(RP.MISSING)))
