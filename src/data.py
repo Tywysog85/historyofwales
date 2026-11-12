@@ -697,3 +697,13 @@ EVENTS = sorted(EVENTS + _PTE, key=lambda ev: ev[1])
 # ---------- The Aberfan disaster, 1966 (src/aberfan.py) ----------
 from aberfan import EVENTS as _AFE
 EVENTS = sorted(EVENTS + _AFE, key=lambda ev: ev[1])
+
+# ---------- MAC and the Free Wales Army (src/mac.py) ----------
+from mac import EVENTS as _MACE
+EVENTS = sorted(EVENTS + _MACE, key=lambda ev: ev[1])
+# ---------- The drowning of Capel Celyn and Cwm Tryweryn (src/tryweryn.py) ----------
+from tryweryn import EVENTS as _TWE
+EVENTS = sorted(EVENTS + _TWE, key=lambda ev: ev[1])
+# ---------- The Welsh Not and the fight for the language (src/welshnot.py) ----------
+from welshnot import EVENTS as _WNE
+EVENTS = sorted(EVENTS + _WNE, key=lambda ev: ev[1])

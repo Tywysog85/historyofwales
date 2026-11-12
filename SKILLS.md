@@ -479,6 +479,7 @@ Behind the dragon, the mountains, the moor and the castle are real 3D too, drawn
 - Commons is blocked from Claude's cloud computer, so picture research runs on GitHub too. Write what to look for in `tools/commons_research_in.json` (your own branch name in `branch`, Commons categories, searches, or exact file names, and an `out` folder) and push it to that `claude/` branch. The look-up only runs on the branch named in `branch` (or when started by hand from the Actions tab), so other threads that merge main never run it; put `branch` back to `""` before merging. It never fails the run, so Ifan gets no failure emails. The "Look up pictures on Wikimedia Commons" workflow runs `tools/commons_research.py` and commits `<out>/found.json` (title, size, licence, author, description of every file) and a small preview of each (`<out>/<n>.jpg`). `git pull`, make a contact sheet of the previews with Pillow, and pick by eye.
 - The first run also lists the subcategories it met; run it again on those to go deeper (that is how the Peniarth 28 drawings and the dragons in the margins of NLW MS 20143A were found).
 - The `_research/` folder is only for choosing. Delete it before merging.
+- **Full-size copies too.** List the chosen files under `"download"` in the same JSON and the look-up also saves each one at up to 1400 px (`<out>/full/<k>.jpg`). Turn them into gallery pictures with Pillow (`src/static/gallery/<id>.webp` fitting 1280 x 1000 and `<id>-s.webp` fitting 600 x 800), add the credit line to `GALLERY` in `src/gallery_photos.py` and the group to `EXTRA` in `src/gallery.py`, then give the page its picture in `PAGE` in `src/pictures.py`. That is how the MAC and Free Wales Army pages got Geoff Charles's photographs of the Llyn Celyn protest (1965) and the Cofia 1282 rally (1969).
 - To check a page before its Commons pictures are kept on the site, the Playwright screenshot script can answer the Commons links with the previews (`page.route`), so the page looks as it will live.
 
 ### The Laws of Hywel Dda page (November 2026)
@@ -648,7 +649,7 @@ Learnt while simplifying the home page.
 - Pictures are only ones already kept on the site with their Commons credit: `g:<id>` from the gallery, `p:<id>` from the person photos, `l:<key>` from the legend photos. Add `@50% 15%` to a ref to move the crop (e.g. to keep a face in frame).
 - To change a page's picture, change its line in `PAGE`. Pages not listed use their place's own gallery picture, or the picture for their age (`ERA`). `build.py` runs `PX.dress()` on every page, so new pages get a picture automatically.
 - The top picture loads at once (`fetchpriority="high"`, 600px copy for phones through `srcset`); card pictures load lazily from the small copy. The build stops if a named picture's file is missing.
-- Commons can't be reached from the cloud. New pictures have to be downloaded on the Mini-PC (Remote Control) and added to the gallery first.
+- New pictures: Commons can't be reached from the cloud, so look them up on GitHub. Put the searches in `tools/commons_research_in.json` with your own branch name and push it; the Commons research workflow commits `_research/<folder>/found.json` and previews. Add the chosen file to `EXTRA` in `src/pictures.py` (credit and captions) and use it as `c:<Commons file>`. Then run the fetch-photos workflow on your branch, which saves the WebP copies. Delete `_research/` before merging.
 
 ### Sources beside the claims (November 2026)
 
@@ -657,6 +658,24 @@ Learnt while simplifying the home page.
 - The card opens on click (code at the end of `src/static/site.js`): under the chip on a computer, as a sheet along the bottom on a phone. Without JavaScript the chip is a plain link to the first source.
 - The home page's "Did you know?" fact is drawn again by `app.js` when "Another" is pressed, so `FACTS` goes into the page data already turned into HTML (`CITE.html_text`).
 - Check sources with the WebFetch tool when the cloud can't reach a site directly, and quote the source's own words in the note where you can.
+
+### A photograph inside a long read (November 2026)
+
+Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.html`).
+
+- A paragraph that is just `!! <gallery id>` (for example `!! person-gwynfor-evans`) puts that gallery picture into the text with its full credit: caption, photographer, licence and Commons link. It works anywhere `prose()` is used: long reads, person pages, chapters. Put the same line in the English and the Welsh paragraphs, in the same place.
+- The picture must already be in the gallery (`src/gallery_photos.py`, files in `src/static/gallery/`); an unknown id stops the build. A tall picture is shown as a portrait (narrower, cropped from near the top) so faces are not cut off.
+- The picture at the top of a long read comes from `PAGE` in `src/pictures.py` (`"story-tryweryn.html": "g:place-celyn@50% 55%"`), with its credit under the title, so don't repeat that picture in the text.
+
+### Full-length pages for the kings and princes, with sources beside the claims (November 2026)
+- `src/princes.py` holds the long texts for the kings and princes of Wales (`LONG`, put over the short texts by `src/long.py`), new rulers in the `people2a.py` format (`PEOPLE`, added in `src/people2.py`), and `GROUPS`/`LINKS` for the "Kings and princes of Wales" block that `princes_circle()` in `build.py` shows on each of their pages. A group can list people whose pages are still to come: only people with a page are shown.
+- Their sources go beside the claims as `[[cite:...]]` chips (see "Sources beside the claims"). The keys for these pages live in `CITES` in `src/princes.py`, which `src/cites.py` adds to its list, so other threads editing `cites.py` don't collide with them. Good free texts to link: the Annales Cambriae (Fordham Internet Medieval Sourcebook), the Annals of Ulster (CELT, one page per year: `T100001A/text426.html` is 856), Asser (Fordham) and Gerald's Description of Wales (A Vision of Britain). The Brut has no good free English text online: cite Thomas Jones's translation with no link.
+- Check every quote against a real edition before it goes in. Gerald of Wales (Description of Wales I.2) gives North Wales to Merfyn and Powys to Anarawd, not the other way round; only his I.4 names the three royal seats (Aberffraw, Dinefwr, Pengwern).
+
+### Pictures inside a long read, and a Commons photo for the top of the page (November 2026)
+- For a picture that is not in the gallery, a long read can carry its own list. Give the story `figs={key: (Commons file, maker, licence, licence link, caption EN, caption CY, width, height)}` and put a paragraph `"!! key"` where each picture goes, in both the English and the Welsh list. `prose()` in `build.py` looks in `figs` first, then in the gallery, and draws it with its full credit (`lit_fig`). First used in `src/welshnot.py`.
+- Search Commons from GitHub first (see "Looking up Commons pictures from GitHub"): the Welsh Not category held a real W.N. board, an 1879 magazine drawing and Geoff Charles's photographs of Cymdeithas yr Iaith, all free to use. The "Fetch photos" workflow then keeps copies on the site.
+- When the picture for the top of a page is not yet in the gallery, add it to `LEGEND_PHOTOS` in `src/art.py` and `PICKS` in `tools/fetch_legend_photos.py` under a key no legend uses. Pushing that file runs "Fetch photos", which saves `src/static/legends/<key>.webp`; pull, then add `"story-x.html": "l:<key>"` to `PAGE` in `src/pictures.py` (its check stops the build if the file is not there yet).
 
 ## Working together
 
