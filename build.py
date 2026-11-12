@@ -2770,7 +2770,7 @@ def castles_page():
             + section(f'<p class="lede">{bi("Every castle site on the map, area by area.", "Pob safle castell ar y map, fesul ardal.")}</p><div class="cm-lists">{lists}</div><p class="note-box" style="margin-top:2rem">{note}</p>',
                       "Every castle, by county", "Pob castell, fesul sir")
             + section(f'<div class="pager"><a class="btn" href="kings.html">← {bi("Kings and princes", "Brenhinoedd a thywysogion")}</a><a class="btn solid" href="map-game.html">{bi("Play: Where in Wales?", "Chwarae: Ble yng Nghymru?")} →</a></div>'))
-    extra = (f'<script>var CASTLES={json.dumps(payload, ensure_ascii=False, separators=(",", ":"))};</script>\n<script src="castles.js?v=2" defer></script>\n')
+    extra = (f'<script>var CASTLES={json.dumps(payload, ensure_ascii=False, separators=(",", ":"))};</script>\n<script src="castles.js?v=3" defer></script>\n')
     ld = {"@context": "https://schema.org", "@type": "Map", "name": "The castles of Wales", "inLanguage": ["en", "cy"], "description": f"An interactive map of {n_all} castle sites in Wales, with who built them.",
           "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
     return page("castles.html", "The castles of Wales: interactive map · History of Wales",

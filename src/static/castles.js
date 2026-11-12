@@ -6,7 +6,9 @@
    The picture under the dots is src/static/relief-1200.webp (relief-3600.webp once you zoom in), baked by tools/bake_relief.py. */
 (function () {
   "use strict";
-  var D = window.CASTLES;
+  var D = window.CASTLES || window.CMAP;   // window.CMAP: the same map with other sites (sites.html), see build.py and src/refpages.py
+  var TX = D.t || {}, HI0 = D.hi0 !== false, HP = D.hp || "castle-";
+  function tx(k, en, c) { var o = TX[k]; return o ? bi(o[0], o[1]) : bi(en, c); }
   var map = document.getElementById("cm-map");
   if (!D || !map) return;
   var NS = "http://www.w3.org/2000/svg";
@@ -20,7 +22,7 @@
   function el(tag, attrs, parent) { var n = document.createElementNS(NS, tag); for (var a in attrs) n.setAttribute(a, attrs[a]); if (parent) parent.appendChild(n); return n; }
 
   /* ---------- the picture ---------- */
-  var svg = el("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "Map of Wales with castles" });
+  var svg = el("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": D.aria || "Map of Wales with castles" });
   svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
   var defs = el("defs", {}, svg);
   var glow = el("radialGradient", { id: "cm-sel" }, defs);
@@ -31,16 +33,16 @@
   var hi = el("image", { x: 0, y: 0, width: W, height: H, preserveAspectRatio: "none" }, svg);
   el("path", { d: D.counties, fill: "none", stroke: "rgba(236,233,225,.16)", "stroke-width": ".6", "vector-effect": "non-scaling-stroke", "stroke-dasharray": "3 3" }, svg);
   var gLayer = [];
-  var order = [4, 3, 2, 1, 0];          // draw the red Welsh-built dots on top
+  var order = D.order || [4, 3, 2, 1, 0];          // draw the red Welsh-built dots on top
   var groupsG = el("g", {}, svg);
   order.forEach(function (gi) { gLayer[gi] = el("g", { "data-g": gi }, groupsG); });
   var dots = new Array(N);
   var BIG = [];
   for (var i = 0; i < N; i++) {
     var r = rows[i], g = r[5];
-    var big = g === 0 || r[11] === 1;
+    var big = (HI0 && g === 0) || r[11] === 1;
     BIG[i] = big;
-    var c = el("circle", { cx: r[3], cy: r[4], r: 1, fill: D.g[g][2], stroke: g === 0 ? "#f6d77a" : "rgba(10,12,20,.75)" }, gLayer[g]);
+    var c = el("circle", { cx: r[3], cy: r[4], r: 1, fill: D.g[g][2], stroke: HI0 && g === 0 ? "#f6d77a" : "rgba(10,12,20,.75)" }, gLayer[g]);
     dots[i] = c;
   }
   var selG = el("g", { "pointer-events": "none" }, svg);
@@ -54,7 +56,7 @@
   /* ---------- view: pan and zoom by moving the viewBox ---------- */
   var vb = { x: 0, y: 0, w: W, h: H };
   var MINW = 22;
-  var shown = [true, true, true, true, true];
+  var shown = D.g.map(function () { return true; });
   function aspect() { var b = map.getBoundingClientRect(); return b.width && b.height ? b.height / b.width : H / W; }
   function fit() {
     // keep the whole of Wales in view at the widest zoom, whatever the box shape
@@ -79,9 +81,9 @@
     var zoom = maxW() / vb.w;
     var boost = Math.pow(zoom, .45);
     for (var i = 0; i < N; i++) {
-      var rr = (BIG[i] ? (rows[i][5] === 0 ? 5 : 4.2) : 3) * boost * px;
+      var rr = (BIG[i] ? (HI0 && rows[i][5] === 0 ? 5 : 4.2) : 3) * boost * px;
       dots[i].setAttribute("r", rr.toFixed(3));
-      dots[i].setAttribute("stroke-width", ((rows[i][5] === 0 ? 1.4 : .8) * px).toFixed(3));
+      dots[i].setAttribute("stroke-width", ((HI0 && rows[i][5] === 0 ? 1.4 : .8) * px).toFixed(3));
     }
     if (sel >= 0) { var s0 = 5 * boost * px; selRing.setAttribute("r", (s0 + 4 * px).toFixed(3)); selRing.setAttribute("stroke-width", (2 * px).toFixed(3)); selHalo.setAttribute("r", (s0 * 4).toFixed(3)); }
     youDot.setAttribute("r", (6 * px).toFixed(3)); youDot.setAttribute("stroke-width", (2 * px).toFixed(3));
@@ -239,11 +241,11 @@
     (d.l || []).forEach(function (l) { h += '<a class="go" href="' + esc(l[0]) + '">' + bi(l[1], l[2]) + " →</a>"; });
     h += '<a href="https://www.google.com/maps/dir/?api=1&amp;destination=' + r[9] + "," + r[10] + '" target="_blank" rel="noopener">' + bi("Directions", "Cyfarwyddiadau") + " ↗</a>";
     h += '<a href="https://www.openstreetmap.org/?mlat=' + r[9] + "&amp;mlon=" + r[10] + "#map=16/" + r[9] + "/" + r[10] + '" target="_blank" rel="noopener">' + bi("Open in a map", "Agor mewn map") + " ↗</a>";
-    h += '<a href="https://www.wikidata.org/wiki/' + r[0] + '" target="_blank" rel="noopener">' + bi("Record", "Cofnod") + " ↗</a></p>";
-    h += '<p class="cm-access muted">' + bi("Many castle sites are on private land. Please check access before you visit.", "Mae llawer o safleoedd cestyll ar dir preifat. Gwiriwch fynediad cyn ymweld.") + "</p>";
+    h += '<a href="' + esc((D.rec || "https://www.wikidata.org/wiki/{q}").replace("{q}", r[0]).replace("{lang}", cy() ? "cy" : "en")) + '" target="_blank" rel="noopener">' + tx("rec", "Record", "Cofnod") + " ↗</a></p>";
+    h += '<p class="cm-access muted">' + tx("access", "Many castle sites are on private land. Please check access before you visit.", "Mae llawer o safleoedd cestyll ar dir preifat. Gwiriwch fynediad cyn ymweld.") + "</p>";
     card.innerHTML = h;
     card.classList.remove("pop"); void card.offsetWidth; card.classList.add("pop");
-    try { history.replaceState(null, "", "#castle-" + r[0]); } catch (e) { }
+    try { history.replaceState(null, "", "#" + HP + r[0]); } catch (e) { }
     if (fly) flyTo(r[3], r[4], Math.min(vb.w, maxW() / 5));
     else redraw();
     if (matchMedia("(max-width: 899px)").matches && fly !== "nos") {
@@ -276,7 +278,7 @@
       hits = hits.slice(0, 8);
     }
     act = -1;
-    if (!hits.length) { res.hidden = true; res.innerHTML = t.length >= 2 ? "" : ""; if (t.length >= 2) { res.innerHTML = '<li class="none">' + bi("No castle by that name", "Dim castell o’r enw hwnnw") + "</li>"; res.hidden = false; } return; }
+    if (!hits.length) { res.hidden = true; res.innerHTML = t.length >= 2 ? "" : ""; if (t.length >= 2) { res.innerHTML = '<li class="none">' + tx("none", "No castle by that name", "Dim castell o’r enw hwnnw") + "</li>"; res.hidden = false; } return; }
     res.innerHTML = hits.map(function (i, k) { var r = rows[i]; return '<li role="option" id="cm-o' + k + '" data-i="' + i + '" style="--gc:' + D.g[r[5]][2] + '"><i></i>' + bi(r[1], r[2]) + "<small>" + bi(D.la[r[8]][0], D.la[r[8]][1]) + "</small></li>"; }).join("");
     res.hidden = false;
   }
@@ -317,10 +319,10 @@
       var list = rows.map(function (r, i) { return [kmFrom(you.lat, you.lon, r[9], r[10]), i]; }).sort(function (a, b) { return a[0] - b[0]; }).slice(0, 10);
       var pt = project(you.lat, you.lon);
       youG.setAttribute("transform", "translate(" + pt.x + " " + pt.y + ")"); youG.setAttribute("opacity", 1);
-      var h = '<p class="eyebrow">' + bi("Near you", "Yn agos atoch") + "</p><h2>" + bi("The ten castles nearest to you", "Y deg castell agosaf atoch") + '</h2><ol class="cm-near">';
+      var h = '<p class="eyebrow">' + bi("Near you", "Yn agos atoch") + "</p><h2>" + tx("near", "The ten castles nearest to you", "Y deg castell agosaf atoch") + '</h2><ol class="cm-near">';
       list.forEach(function (x) { var r = rows[x[1]]; h += '<li><button type="button" class="cm-show" data-i="' + x[1] + '" style="--gc:' + D.g[r[5]][2] + '"><i></i>' + bi(r[1], r[2]) + "<small>" + (x[0] < 10 ? x[0].toFixed(1) : Math.round(x[0])) + " km</small></button></li>"; });
       h += "</ol>";
-      if (list[0][0] > 60) h += '<p class="muted">' + bi("You look to be a long way from Wales. Here are the nearest castles all the same.", "Mae’n ymddangos eich bod ymhell o Gymru. Dyma’r cestyll agosaf er hynny.") + "</p>";
+      if (list[0][0] > 60) h += '<p class="muted">' + tx("far", "You look to be a long way from Wales. Here are the nearest castles all the same.", "Mae’n ymddangos eich bod ymhell o Gymru. Dyma’r cestyll agosaf er hynny.") + "</p>";
       card.innerHTML = h;
       toMapView();
       var far = rows[list[list.length - 1][1]];
@@ -365,7 +367,7 @@
     vb.w = maxW() / Math.max(1, z); vb.h = vb.w * aspect(); vb.x = cx - vb.w / 2; vb.y = cy0 - vb.h / 2; clamp(); apply();
   }).observe(map);
   function fromHash() {
-    var m = /castle-(Q\d+)/.exec(location.hash);
+    var m = new RegExp(HP + "([A-Za-z0-9]+)").exec(location.hash);
     if (m && byQ[m[1]] != null) { select(byQ[m[1]], true); return true; }
     return false;
   }
