@@ -58,11 +58,16 @@ PAGE = {
     "story-caradog.html": "g:person-caratacus",
     "story-macsen.html": "g:place-segontium",
     "story-christianity.html": "g:holy-margam",
+    "story-mac.html": "g:peop-cofia-1282",
+    "story-fwa.html": "g:peop-celyn-protest",
+    "person-john-barnard-jenkins.html": "g:peop-liverpool-steals@50% 40%",
+    "person-dennis-coslett.html": "g:peop-celyn-line",
     "story-lucius.html": "g:holy-llandaff",
     "story-bran.html": "g:place-harlech",
     "story-joseph.html": "g:person-dewi-sant",
     "story-aberfan.html": "g:place-aberfan",
     "story-patrick.html": "g:place-stdavids",
+    "story-tryweryn.html": "g:place-celyn@50% 55%",
     "story-welsh-not.html": "l:iaith-1966",  # Cymdeithas yr Iaith at Llangefni, 1966 (Geoff Charles), src/art.py LEGEND_PHOTOS
     # legends that have no photograph of their own yet
     "legend-dragons.html": "g:land-dinas-emrys",

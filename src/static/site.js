@@ -291,3 +291,40 @@
   d.addEventListener("keydown", function (e) { if (e.key === "Escape" && open) shut(true); });
   Array.prototype.forEach.call(d.querySelectorAll(".cite"), function (c) { c.setAttribute("role", "button"); c.setAttribute("aria-expanded", "false"); });
 })();
+
+/* ---------- weekly email sign-up (the form in follow_box, build.py) ----------
+   Sends the form to Brevo in the background and says thank you in its place, so the reader stays on the page.
+   Brevo answers with JSON ({success: true} or a list of errors). If the browser will not let us read the answer,
+   the email has still been sent (a form post needs no permission), so that counts as done too. */
+(function () {
+  var d = document, cy = function () { return d.documentElement.classList.contains("cy"); };
+  var T = function (en, c) { return cy() ? c : en; };
+  Array.prototype.forEach.call(d.querySelectorAll("form[data-signup]"), function (f) {
+    var msg = f.querySelector(".f-msg"), btn = f.querySelector("button"), busy = false;
+    function say(text, kind) { msg.textContent = text; msg.className = "f-msg" + (kind ? " " + kind : ""); }
+    function done() {
+      f.classList.add("f-done");
+      say(T("Thank you, you’re signed up! The first email comes on Monday. If an email arrives asking you to confirm, press the button in it.",
+            "Diolch, rydych chi wedi ymuno! Daw’r e-bost cyntaf ddydd Llun. Os daw e-bost yn gofyn i chi gadarnhau, pwyswch y botwm ynddo."), "ok");
+      try { if (window.goatcounter && goatcounter.count) goatcounter.count({ path: "email-signup", title: "Weekly email sign-up", event: true }); } catch (e) {}
+    }
+    function fail() {
+      busy = false; btn.disabled = false; f.classList.remove("f-busy");
+      say(T("Sorry, that didn’t go through. Please check the address and try again.",
+            "Mae’n ddrwg gennym, ni weithiodd hynny. Gwiriwch y cyfeiriad a rhowch gynnig arall arni."), "err");
+    }
+    f.addEventListener("submit", function (ev) {
+      if (!window.fetch || !window.FormData) return;  /* very old browsers: the plain post to Brevo */
+      ev.preventDefault();
+      if (busy) return;
+      var email = f.querySelector("input[name=EMAIL]");
+      if (!email.value.trim()) { email.focus(); return; }
+      busy = true; btn.disabled = true; f.classList.add("f-busy");
+      say(T("Signing you up…", "Wrthi’n eich ychwanegu…"), "");
+      fetch(f.action + (f.action.indexOf("?") < 0 ? "?" : "&") + "isAjax=1", { method: "POST", body: new FormData(f) })
+        .then(function (r) { return r.json().catch(function () { return { success: r.ok }; }); })
+        .then(function (j) { if (j && j.success) done(); else fail(); })
+        .catch(function () { if (navigator.onLine === false) fail(); else done(); });
+    });
+  });
+})();
