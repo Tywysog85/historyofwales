@@ -245,6 +245,61 @@ S = {
         note=("Adam of Usk copied Owain Glyndŵr’s letter of 1401 to Robert III, King of Scots, into his chronicle. Free to read online.",
               "Copïodd Adda o Frynbuga lythyr Owain Glyndŵr at Robert III, brenin yr Alban, yn 1401 i’w gronicl. Am ddim i’w ddarllen ar-lein."),
         url="https://archive.org/details/chroniconadaedeu00adamuoft", lang="en"),
+    # ---------- the Aberfan disaster (story-aberfan.html) ----------
+    "aberfan-wiki": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Aberfan disaster", by=("Wikipedia, drawing on the Tribunal report (1967) and McLean and Johnes (2000)", "Wikipedia, ar sail adroddiad y Tribiwnlys (1967) a McLean a Johnes (2000)"),
+        note=("The tip, the morning of 21 October 1966, the rescue, the earlier slides and the council’s letters about the “Danger from Coal Slurry being tipped at the rear of the Pantglas Schools”, and the Tribunal’s 76 days and 136 witnesses.",
+              "Y domen, bore 21 Hydref 1966, yr achub, y llithriadau cynharach a llythyrau’r cyngor am y perygl o’r slyri glo a domennid y tu cefn i ysgolion Pantglas, a 76 diwrnod a 136 tyst y Tribiwnlys."),
+        url="https://en.wikipedia.org/wiki/Aberfan_disaster", url_cy="https://cy.wikipedia.org/wiki/Trychineb_Aberfan"),
+    "aberfan-bar": dict(
+        short=("British Academy Review", "British Academy Review"),
+        t="Lessons from the Aberfan disaster and its aftermath", by=("Iain McLean, British Academy Review", "Iain McLean, British Academy Review"),
+        note=("By the historian of the disaster: 109 children and five teachers died in the school, 144 in all; the Tribunal found the Coal Board wholly at fault; the fund reached £1.75m; the Charity Commission’s demands; the £150,000 taken for the tips, returned in 1997, and £1.5m in 2007.",
+              "Gan hanesydd y trychineb: bu farw 109 o blant a phump o athrawon yn yr ysgol, 144 i gyd; canfu’r Tribiwnlys mai’r Bwrdd Glo oedd yn llwyr ar fai; cyrhaeddodd y gronfa £1.75m; gofynion y Comisiwn Elusennau; y £150,000 a gymerwyd at y tomenni, a roddwyd yn ôl yn 1997, a £1.5m yn 2007."),
+        url="https://www.thebritishacademy.ac.uk/publishing/review/12/lessons-aberfan-disaster-and-its-aftermath/", lang="en"),
+    "aberfan-gov": dict(
+        short=("Tribunal report, 1967", "Adroddiad y Tribiwnlys, 1967"),
+        t="The Aberfan Disaster, 21 October 1966", by=("UK Government, from the Report of the Tribunal (HMSO, 1967)", "Llywodraeth y DU, o Adroddiad y Tribiwnlys (HMSO, 1967)"),
+        note=("Quotes the report: “a terrifying tale of bungling ineptitude”, and “Not villains but decent men, led astray by foolishness or by ignorance or by both in combination”.",
+              "Yn dyfynnu’r adroddiad: “hanes brawychus am anallu trwsgl”, a “Nid dihirod ond dynion gweddus, wedi’u camarwain gan ffolineb neu gan anwybodaeth neu gan y ddau ynghyd”."),
+        url="https://assets.publishing.service.gov.uk/media/5a790a75e5274a2acd18bbf6/InquiriesIncidentTheAberfanDisaster21October1966.pdf", lang="en"),
+    "aberfan-1967": dict(
+        short=("Commons debate, 1967", "Dadl Tŷ’r Cyffredin, 1967"),
+        t="1967 speech on the Aberfan Inquiry", by=("David Gibson-Watt MP, House of Commons", "David Gibson-Watt AS, Tŷ’r Cyffredin"),
+        note=("Tells of the 1963 letters from Mr Jones, the Borough Engineer, and quotes the Tribunal’s first finding: “Blame for the disaster rests upon the National Coal Board.”",
+              "Yn sôn am lythyrau 1963 gan Mr Jones, Peiriannydd y Fwrdeistref, ac yn dyfynnu canfyddiad cyntaf y Tribiwnlys: ar y Bwrdd Glo Cenedlaethol y mae’r bai am y trychineb."),
+        url="https://www.ukpol.co.uk/?p=49575", lang="en"),
+    "aberfan-hansard-1997": dict(
+        short=("Hansard, 1997", "Hansard, 1997"),
+        t="Aberfan: written answers, 31 July 1997", by=("Hansard, House of Commons: Ted Rowlands asks, Ron Davies answers", "Hansard, Tŷ’r Cyffredin: Ted Rowlands yn gofyn, Ron Davies yn ateb"),
+        note=("“I shall be making available a grant of £150,000 to repay the sum originally contributed.”",
+              "“Byddaf yn rhoi grant o £150,000 i ad-dalu’r swm a gyfrannwyd yn wreiddiol.”"),
+        url="https://api.parliament.uk/historic-hansard/written-answers/1997/jul/31/aberfan", lang="en"),
+    "aberfan-oxford-2007": dict(
+        short=("University of Oxford, 2007", "Prifysgol Rhydychen, 2007"),
+        t="Iain McLean, campaigner for Aberfan community, welcomes funding announcement", by=("Department of Politics and International Relations, University of Oxford, 2 February 2007", "Adran Gwleidyddiaeth a Chysylltiadau Rhyngwladol, Prifysgol Rhydychen, 2 Chwefror 2007"),
+        note=("£2m from the National Assembly for Wales: £1.5m for the Aberfan Memorial Charity and £500,000 for the Aberfan Education Charity.",
+              "£2m gan Gynulliad Cenedlaethol Cymru: £1.5m i Elusen Goffa Aberfan a £500,000 i Elusen Addysg Aberfan."),
+        url="https://politics.ox.ac.uk/news/iain-mclean-campaigner-aberfan-community-welcomes-funding-announcment", lang="en"),
+    "aberfan-cadw": dict(
+        short=("Cadw", "Cadw"),
+        t="Aberfan: Cemetery, Garden of Remembrance and Former Tip and Slide Area", by=("Cadw, Register of Parks and Gardens of Special Historic Interest in Wales, grade II*", "Cadw, Cofrestr Parciau a Gerddi o Ddiddordeb Hanesyddol Arbennig yng Nghymru, gradd II*"),
+        note=("Low walls of water-worn stone trace the plan of the school in the garden; in the cemetery two long rows of linked white arches mark the graves of 106 of the 144.",
+              "Mae waliau isel o gerrig afon yn dilyn cynllun yr ysgol yn yr ardd; yn y fynwent mae dwy res hir o fwâu gwyn ynghlwm yn nodi beddau 106 o’r 144."),
+        url="https://cadwpublic-api.azurewebsites.net/reports/parkgarden/FullReport?id=256", lang="en"),
+    "aberfan-merthyr-60": dict(
+        short=("Merthyr Tydfil council", "Cyngor Merthyr Tudful"),
+        t="60th anniversary of the Aberfan disaster: commemorative events", by=("Merthyr Tydfil County Borough Council, 2026", "Cyngor Bwrdeistref Sirol Merthyr Tudful, 2026"),
+        note=("The annual memorial service at Aberfan Cemetery at 9.15 on 21 October 2026, and the commemoration at the Memorial Garden.",
+              "Y gwasanaeth coffa blynyddol ym Mynwent Aberfan am 9.15 ar 21 Hydref 2026, a’r coffâd yn yr Ardd Goffa."),
+        url="https://www.merthyr.gov.uk/resident/60th-anniversary-of-the-aberfan-disaster/commemorative-events/", lang="en"),
+    "aberfan-pa-60": dict(
+        short=("PA report, 2026", "Adroddiad PA, 2026"),
+        t="‘Aberfan will always be in our hearts’, King tells survivors and families", by=("Press Association, in the Irish News, 21 October 2026", "Press Association, yn yr Irish News, 21 Hydref 2026"),
+        note=("The King, the Queen and the Prince of Wales at the memorial garden; “We have heard stories of heartbreak, but also of heroism”; the Memorial Tree at Ynysowen school with its clock at 9.13.",
+              "Y Brenin, y Frenhines a Thywysog Cymru yn yr ardd goffa; “Rydym wedi clywed straeon am dorcalon, ond hefyd am arwriaeth”; y Goeden Goffa yn ysgol Ynysowen a’i chloc ar 9.13."),
+        url="https://www.irishnews.com/news/uk/aberfan-will-always-be-in-our-hearts-king-tells-survivors-and-families-YXIEXH22O5NHFHVJZ5OHF3N77M/", lang="en"),
 }
 
 MARK = re.compile(r"\[\[cite:([a-z0-9,\- ]+)\]\]")

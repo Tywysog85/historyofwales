@@ -621,6 +621,7 @@ Learnt while simplifying the home page.
 - `arthur_circle(slug)` in `build.py` shows the whole circle as small name chips on Arthur's page and on every page in it, with the current person highlighted. To add someone, give them a `P(...)` entry and put their slug in a group. People who already have pages elsewhere can go in a group too.
 - People known only from the tales take the date "Age of Arthur": `data.py` sorts them just after Arthur, and `date_cy()` shows "Oes Arthur" on the Welsh side.
 - Their reference list is `PAGES["arthur-circle"]` in `src/refs2.py`. Saints who gain a person page get `link=P("slug")` in `src/saints.py`, so the saints pages link to them.
+- `src/sixth_century.py` does the same for the kings and saints of the sixth century. Its `LONG` dict gives a person a full coded long text (`## heading`, `> quote | source`, `|| left | right` tables) that replaces their short one: `people2.py` applies it with `PEOPLE_LONG.update(...)`. Illtud and Dewi Sant use it. A long read lists its people with `people=[...]` (as `pride2.py` does for the learning story), and the person page links back to it.
 
 ### Books from one publisher, checked when their site is blocked: Y Lolfa (November 2026)
 
