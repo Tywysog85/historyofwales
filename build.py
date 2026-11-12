@@ -40,6 +40,7 @@ import sets as SETS  # noqa: E402
 import seo as SEO  # noqa: E402  (search engine extras for every page)
 import added as AD  # noqa: E402  (when each item was added: newest first, "Just added" strips, "New" badges)
 import refs as REF  # noqa: E402  (further reading and references for every long read)
+import refs2 as REF2  # noqa: E402  (the same for every other content page)
 F.STORIES = AD.newest("story", F.STORIES)  # long reads: the newest first everywhere (index, home page, "Keep reading")
 L.TEACH.update(AG9.TEACH)
 from urllib.parse import quote as _q
@@ -375,6 +376,9 @@ def page(path, title, desc, main_html, era=None, og_type="article", ld=None, act
         card = "cards/" + path[:-5] + ".jpg"
     first = first_published(path)
     ld_html = SEO.ld_script(SEO.page_ld(BASE_URL, path, title, desc, og_type, ld, main_html, card, published=first))
+    rk, rintro = page_refs(path)
+    if rk and not path.startswith("story-") and path != "wales-in-10.html":
+        main_html += f'<section class="tight page-refs"><div class="wrap narrow">{refs_block(rk, rintro)}</div></section>'
     if path != "404.html":
         main_html += AB.page_info(path, title, first)   # written by, first published, last updated, report a mistake (src/about.py)
     return f'''<!doctype html>
@@ -799,10 +803,14 @@ def story_more_links(x):
 REF_KINDS = [("p", "Old sources and records", "Hen ffynonellau a chofnodion"), ("b", "Books by historians", "Llyfrau gan haneswyr"), ("w", "Online", "Ar-lein")]
 
 
-def refs_block(key):
-    """The "Further reading and references" list at the end of a long read (src/refs.py), with the
+REF_AGE_INTRO = ("Books on this age of Welsh history, for anyone who wants to go further. Any library in Wales can find them for you.",
+                 "Llyfrau ar yr oes hon yn hanes Cymru, i unrhyw un sydd am fynd ymhellach. Gall unrhyw lyfrgell yng Nghymru eu cael i chi.")
+
+
+def refs_block(key, intro=None):
+    """The "Further reading and references" list (src/refs.py for long reads, src/refs2.py for other pages), with the
     Dictionary of Welsh Biography articles for the people in it. Prints for teachers too."""
-    r = REF.REFS.get(key)
+    r = REF.REFS.get(key) or REF2.PAGES.get(key)
     if not r:
         return ""
     out = []
@@ -829,13 +837,32 @@ def refs_block(key):
     if not out:
         return ""
     return (f'<aside class="refs" id="references" aria-labelledby="refs-h"><h2 id="refs-h">{bi("Further reading and references", "Darllen pellach a chyfeiriadau")}</h2>'
-            f'<p class="refs-i">{bi("The old texts and the historians’ books behind this page, for anyone who wants to go further. Any library in Wales can find them for you.", "Yr hen destunau a llyfrau’r haneswyr y tu ôl i’r dudalen hon, i unrhyw un sydd am fynd ymhellach. Gall unrhyw lyfrgell yng Nghymru eu cael i chi.")}</p>'
+            f'<p class="refs-i">{bi(*(intro or ("The old texts and the historians’ books behind this page, for anyone who wants to go further. Any library in Wales can find them for you.", "Yr hen destunau a llyfrau’r haneswyr y tu ôl i’r dudalen hon, i unrhyw un sydd am fynd ymhellach. Gall unrhyw lyfrgell yng Nghymru eu cael i chi.")))}</p>'
             + "".join(out) + "</aside>")
+
+
+def page_refs(path):
+    """Which reference list (and intro) a page gets at its foot. Long reads carry theirs inside the article."""
+    name = path[:-5] if path.endswith(".html") else path
+    kind, _, rest = name.partition("-")
+    if name in REF2.PAGES:
+        return name, None
+    if name in REF2.GENERAL:
+        return "general", None
+    if kind in ("person", "place"):
+        rec = PERSON.get(rest) if kind == "person" else PLACE.get(rest)
+        era = (rec[1] if kind == "person" else rec["era"]) if rec else None
+        return (f"era-{era}", REF_AGE_INTRO) if era and f"era-{era}" in REF2.PAGES else (None, None)
+    if kind == "kings":
+        return REF2.KINGS_GROUP.get(rest, "kings"), None
+    if kind == "saints":
+        return "saints", None
+    return None, None
 
 
 def refs_ld(key):
     """The same list for search engines: schema.org citation entries."""
-    r = REF.REFS.get(key) or {}
+    r = REF.REFS.get(key) or REF2.PAGES.get(key) or {}
     return [{"@type": "CreativeWork", "name": it[2], "author": it[1]} for it in r.get("items", []) if it[0] in "pb"]
 
 

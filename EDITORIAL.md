@@ -41,7 +41,7 @@ Ifan asked on 12 November 2026 that new material goes at the top of a page, not 
 
 ## References
 
-Every long read ends with a short list of further reading and references (`src/refs.py`): the old texts it rests on and the historians' books that tell the story in full, plus the Dictionary of Welsh Biography. Wikipedia alone is not enough for a teaching resource.
+Every long read ends with a short list of further reading and references (`src/refs.py`), and so does every other content page: subject pages, legends, ages, kingdoms, saints, topic guides, trails, and each person and place page (the list for their age) (`src/refs2.py`): the old texts it rests on and the historians' books that tell the story in full, plus the Dictionary of Welsh Biography. Wikipedia alone is not enough for a teaching resource.
 
 - Cite only works that really exist, with the right author, title, publisher and year. Never invent one; if a detail can't be checked, leave it out.
 - Give the title as published, even when it uses a word the site avoids (for example "The Atlantic Celts"). The note in our own words follows the site's rules.

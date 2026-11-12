@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Reading lists on every page", "Rhestrau darllen ar bob tudalen",
+     "Reading lists now go beyond the long reads. The Laws, the Mabinogion, the kings and saints pages, every legend, age, kingdom, topic guide and trail, and every person and place page now end with the old sources and the historians’ books to read next.",
+     "Mae’r rhestrau darllen bellach yn mynd y tu hwnt i’r erthyglau. Mae’r Cyfreithiau, y Mabinogion, tudalennau’r brenhinoedd a’r seintiau, pob chwedl, oes, teyrnas, canllaw pwnc a llwybr, a phob tudalen person a lle bellach yn gorffen â’r hen ffynonellau a llyfrau’r haneswyr i’w darllen nesaf.",
+     "laws.html#references"),
     ("2026-11-12", "Every long read now has a reading list", "Rhestr ddarllen ar bob erthygl bellach",
      "Each long read now ends with further reading and references: the old texts behind it, the historians’ books that tell it in full, such as R. R. Davies and John Davies, and the Dictionary of Welsh Biography. Ideal for teachers and students.",
      "Mae pob erthygl bellach yn gorffen â darllen pellach a chyfeiriadau: yr hen destunau y tu ôl iddi, llyfrau’r haneswyr sy’n adrodd yr hanes yn llawn, megis R. R. Davies a John Davies, a’r Bywgraffiadur Cymreig. Delfrydol i athrawon a myfyrwyr.",
