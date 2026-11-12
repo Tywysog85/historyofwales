@@ -871,7 +871,7 @@ def page_refs(path):
 # ---------- the Bookshelf (bookshelf.html): every work from every reading list, gathered and grouped ----------
 SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes; the first section to claim a work keeps it)
     ("start", "Start here: the whole story", "Dechrau yma: yr hanes cyfan", ["general", "wales-in-10"]),
-    ("britons", "The Britons and Rome", "Y Brythoniaid a Rhufain", ["era-ancient", "era-roman", "celts", "brutus"]),
+    ("britons", "The Britons and Rome", "Y Brythoniaid a Rhufain", ["era-ancient", "era-roman", "celts", "brutus", "caradog", "macsen"]),
     ("kings", "Kings, kingdoms and the Old North", "Brenhinoedd, teyrnasoedd a’r Hen Ogledd", ["era-saints", "era-kings", "kings", "kings-*", "family-trees", "arthur", "wilson-blackett", "unconquered"]),
     ("law", "The laws of Hywel Dda", "Cyfreithiau Hywel Dda", ["laws", "hywel", "topic-law"]),
     ("saints", "Saints, learning and faith", "Seintiau, dysg a ffydd", ["saints", "saints-*", "learning", "brittany", "topic-faith"]),

@@ -8,6 +8,14 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Macsen Wledig: the emperor from Britain and the birth of Wales", "Macsen Wledig: yr ymerawdwr o Brydain a geni Cymru",
+     "A new long read: the general proclaimed emperor by the soldiers of Britain in 383, the Dream of Macsen and Elen of Caernarfon, the Britons who founded Brittany, the kings who traced their line to him, and the year that begins Yma o Hyd.",
+     "Erthygl newydd: y cadfridog a gyhoeddwyd yn ymerawdwr gan filwyr Prydain yn 383, Breuddwyd Macsen ac Elen o Gaernarfon, y Brythoniaid a sefydlodd Lydaw, y brenhinoedd a olrheiniodd eu llinach ato, a’r flwyddyn sy’n dechrau Yma o Hyd.",
+     "story-macsen.html"),
+    ("2026-11-12", "King Caradog: the Briton who stood against Rome", "Y Brenin Caradog: y Brython a safodd yn erbyn Rhufain",
+     "A new long read: nine years of war against the legions in the mountains of Wales, the last stand, his great speech before the Emperor Claudius, his life as a free man in Rome, and the Welsh tradition that his children are named in the Bible and that Brân the Blessed was his father.",
+     "Erthygl newydd: naw mlynedd o ryfel yn erbyn y llengoedd ym mynyddoedd Cymru, y safiad olaf, ei araith fawr gerbron yr Ymerawdwr Clawdiws, ei fywyd fel gŵr rhydd yn Rhufain, a thraddodiad Cymru fod ei blant wedi eu henwi yn y Beibl ac mai Brân Fendigaid oedd ei dad.",
+     "story-caradog.html"),
     ("2026-11-12", "The Welsh pages, spell-checked and polished", "Y tudalennau Cymraeg, wedi’u gwirio a’u caboli",
      "The Welsh version of the site has been run through Cysill, the Welsh spelling and grammar checker, and read line by line. Around fifty mutations, genders and sentences are now put right across the ages, people and Wales in 10 minutes.",
      "Mae fersiwn Gymraeg y wefan wedi’i gwirio gyda Cysill, y gwirydd sillafu a gramadeg Cymraeg, a’i darllen fesul llinell. Mae tua hanner cant o dreigladau, cenedlau a brawddegau wedi’u cywiro ar draws yr oesoedd, y bobl a Chymru mewn 10 munud.",
