@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "The Welsh Not: how they tried to wipe out our language", "Y Welsh Not: sut y ceisiwyd difa ein hiaith",
+     "A new long read: Henry VIII’s Act of 1536 that shut Welsh out of the courts, the Treachery of the Blue Books, the block of wood hung round children’s necks, the English-only schools of 1870, and how Wales fought back, from Dan Isaac Davies and the Urdd to Tynged yr Iaith, Trefechan Bridge, S4C and official status in 2011.",
+     "Erthygl newydd: Deddf Harri VIII yn 1536 a gaeodd y Gymraeg allan o’r llysoedd, Brad y Llyfrau Gleision, y blocyn pren a grogwyd am yddfau plant, ysgolion uniaith Saesneg 1870, a sut yr ymladdodd Cymru’n ôl, o Dan Isaac Davies a’r Urdd i Tynged yr Iaith, Pont Trefechan, S4C a statws swyddogol yn 2011.",
+     "story-welsh-not.html"),
     ("2026-11-12", "Real pictures on every page", "Lluniau go iawn ar bob tudalen",
      "Every long read, legend, age, kingdom, saint, topic and game now opens with a real photograph or old artwork: Segontium for Macsen, the Pennal Letter for Glyndŵr, the Laws of Hywel Dda, the Pillar of Eliseg and many more, each with its credit.",
      "Mae pob erthygl, chwedl, oes, teyrnas, sant, pwnc a gêm bellach yn agor gyda ffotograff go iawn neu hen waith celf: Segontium i Facsen, Llythyr Pennal i Lyndŵr, Cyfreithiau Hywel Dda, Colofn Eliseg a llawer mwy, pob un gyda’i gydnabyddiaeth.",

@@ -16,6 +16,8 @@ PICKS = {
  "hound": "Drew - Irish Wolfhound (20540782194).jpg", "owl": "Waldkauz-Strix aluco.jpg",
  "bird": "Sturnus vulgaris (European starling) at Bodega Head-1209.jpg", "lady": "Llyn y fan fach.jpg",
  "sunken": "Submerged forest at Ynyslas, Ceredigion.jpg", "sword": "Llyn Ogwen Milky Way.jpg", "cauldron": "Gundestrup cauldron.jpg",
+ # not a legend: the picture at the top of the Welsh Not long read (src/pictures.py PAGE uses "l:iaith-1966")
+ "iaith-1966": "Members of the Welsh Language Society protesting outside Llangefni Post Office (1502061).jpg",
 }
 
 

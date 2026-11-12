@@ -30,7 +30,7 @@ TOPICS = [
     "Mae wedi dod drwy bopeth a daflwyd ati. Caeodd Deddfau Uno 1536 hi allan o’r gyfraith a’r llywodraeth, galwodd y Llyfrau Gleision yn 1847 hi’n rhwystr i gynnydd, a chosbwyd plant â’r Welsh Not am ei siarad yn yr ysgol. Ond cadwodd Beibl William Morgan yn 1588, yr ysgolion cylchynol, yr ysgolion Sul a’r capeli hi’n iaith darllen, addoli a chân.",
     "Yn yr ugeinfed ganrif ymladdodd ei phobl drosti: yr Urdd yn 1922, Tynged yr Iaith yn 1962, ymgyrchoedd Cymdeithas yr Iaith dros arwyddion ffyrdd Cymraeg ac S4C, ac ysgolion Cymraeg ledled y wlad. Heddiw mae’r Gymraeg yn iaith swyddogol yng Nghymru, yn cael ei siarad gan gannoedd o filoedd a’i dysgu gan lawer mwy."],
    people=["william-salesbury", "william-morgan", "john-davies-mallwyd", "edward-lhuyd", "griffith-jones", "thomas-charles", "lady-llanover", "om-edwards", "ifan-ab-owen-edwards", "saunders-lewis", "gwynfor-evans", "dafydd-iwan", "t-llew-jones", "betty-campbell"],
-   reads=["story-language.html", "welsh.html", "story-protest.html", "story-revival.html", "names.html", "towns.html", "literature.html"],
+   reads=["story-welsh-not.html", "story-language.html", "welsh.html", "story-protest.html", "story-revival.html", "names.html", "towns.html", "literature.html"],
    az=["cymraeg", "brythonic", "mutations", "welsh-bible", "circulating-schools", "sunday-school", "welsh-not", "blue-books", "urdd", "cymdeithas", "welsh-language-acts", "s4c", "welsh-medium"],
    faq=["how-old", "related", "speakers", "survive", "welsh-not", "official", "road-signs", "tynged", "dydd", "learn-welsh"],
    docs=["pencader", "union", "bible-act", "blue-books", "tynged", "language-acts"], places=["library", "celyn"],

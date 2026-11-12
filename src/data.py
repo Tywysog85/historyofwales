@@ -662,3 +662,7 @@ EVENTS = sorted(EVENTS + _CRE, key=lambda ev: ev[1])
 # ---------- The coming of Christianity to Britain (src/christianity.py) ----------
 from christianity import EVENTS as _CHE
 EVENTS = sorted(EVENTS + _CHE, key=lambda ev: ev[1])
+
+# ---------- The Welsh Not and the fight for the language (src/welshnot.py) ----------
+from welshnot import EVENTS as _WNE
+EVENTS = sorted(EVENTS + _WNE, key=lambda ev: ev[1])

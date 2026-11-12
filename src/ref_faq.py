@@ -149,7 +149,7 @@ GROUPS = [
   Q("welsh-not", "What was the Welsh Not?", "Beth oedd y Welsh Not?",
     "A wooden board hung round the neck of a child caught speaking Welsh in some schools in the 1800s. The child passed it on to the next one heard speaking Welsh, and whoever wore it at the end of the day was punished. It stands for the attempt to drive Welsh out, and for the language’s survival in spite of it.",
     "Bwrdd pren a grogid am wddf plentyn a ddelid yn siarad Cymraeg mewn rhai ysgolion yn yr 1800au. Pasiai’r plentyn ef ymlaen i’r nesaf a glywid yn siarad Cymraeg, a chosbid pwy bynnag a’i gwisgai ar ddiwedd y dydd. Mae’n sefyll am yr ymgais i yrru’r Gymraeg allan, ac am oroesiad yr iaith er gwaethaf hynny.",
-    ["a-z.html#az-welsh-not", "story-language.html"]),
+    ["story-welsh-not.html", "a-z.html#az-welsh-not", "story-language.html"]),
   Q("related", "What languages is Welsh related to?", "I ba ieithoedd y mae’r Gymraeg yn perthyn?",
     "Its closest sisters are Breton and Cornish, which grew from the same language of the Britons. Further off it is related to Irish, Scottish Gaelic and Manx, and many scholars point to a close likeness with Latin too.",
     "Ei chwiorydd agosaf yw’r Llydaweg a’r Gernyweg, a dyfodd o’r un iaith Frythoneg. Ymhellach mae’n perthyn i’r Wyddeleg, Gaeleg yr Alban a Manaweg, ac mae llawer o ysgolheigion yn dangos tebygrwydd agos â’r Lladin hefyd.",

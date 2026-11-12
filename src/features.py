@@ -387,4 +387,9 @@ import madog as _MD  # Prince Madog's voyage to America and the Welsh Indians (s
 import caradog as _CR  # King Caradog (Caratacus) against Rome, and his family in Rome (src/caradog.py)
 import christianity as _CH  # The coming of Christianity: the first Christians, Joseph, Lucius, Brân (src/christianity.py)
 import macsen as _MX  # Macsen Wledig, the emperor from Britain (src/macsen.py)
-STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY] + _CH.STORIES
+import welshnot as _WN  # The Welsh Not and how they tried to wipe out the language (src/welshnot.py)
+STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY] + _CH.STORIES + [_WN.STORY]
+# the long reads on the language and on protest point on to the Welsh Not long read (src/welshnot.py)
+for _s in STORIES:
+    if _s["id"] in ("language", "revival", "protest"):
+        _s["links"] = _s.get("links", []) + [("story-welsh-not.html", "The Welsh Not: how they tried to wipe out our language", "Y Welsh Not: sut y ceisiwyd difa ein hiaith")]
