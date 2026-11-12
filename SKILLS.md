@@ -615,6 +615,12 @@ Learnt while simplifying the home page.
 - Fix the source in `src/*.py` with an exact find-and-replace that checks each phrase occurs the expected number of times, then rebuild.
 - A fluent proofreader is still the final check.
 
+### Adding people in batches, and checking quotations when a source site is blocked (November 2026)
+- New people go in a new part file (`src/people2g.py` and on), in the `P(...)` format of `people2a.py`, and are added to `ALL` in `src/people2.py`. build.py then makes the person page, the Welsh page, the People and age listings, the firsts page (if `first=` is set) and links timeline events whose text names them.
+- To find gaps, list everyone already on the site (`python3 -c "import data; ..."` in `src/`) and compare with the Dictionary of Welsh Biography; grep the other `claude/` branches so two threads don't write the same person.
+- Long reads for one person (`src/caradog.py`, `macsen.py`, `nest.py`, `rhys.py`) follow `src/madog.py`: a `STORY` dict in features.py, `EVENTS` in data.py, a reading list in refs.py, and the story id in a SHELF group in build.py (the build warns if a book is missing from the bookshelf).
+- Many sites are blocked from Claude's cloud computer for curl, but WebFetch can still read them. It will not print long passages, so check a quotation by giving it the exact sentences and asking "does each appear word for word?".
+
 ### A circle of linked people pages: Arthur's circle (November 2026)
 
 - `src/arthur_circle.py` holds the people of Arthur's story (same `P(...)` format as `people2a.py`; `people2.py` adds them to the site) and `GROUPS`, the headed lists of names.
