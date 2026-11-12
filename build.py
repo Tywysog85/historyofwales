@@ -20,6 +20,7 @@ import towns as TW  # noqa: E402
 import photos as PH  # noqa: E402
 import eventpages as EP  # noqa: E402
 import welshpages as WP  # noqa: E402
+import cites as CITE  # noqa: E402  (sources beside the claims: [[cite:...]] markers, src/cites.py)
 import llys as LLYS  # noqa: E402  (Llys Rhosyr in 3D: llys-rhosyr.html, src/llys.py, tools/llys3d.src.js -> src/static/llys3d.js)
 import ride as RIDE  # noqa: E402  (Ride with Glyndŵr, 1400: ride-glyndwr.html, src/ride.py, src/static/ride.js)
 import teachpacks as TPK  # noqa: E402  (teacher packs: pack-<age>.html, src/teachpacks.py)  (every page also in Welsh at cy/<page>.html: src/welshpages.py)  (a page for every timeline event: src/eventpages.py)
@@ -51,8 +52,11 @@ import added as AD  # noqa: E402  (when each item was added: newest first, "Just
 import refs as REF  # noqa: E402  (further reading and references for every long read)
 import refs2 as REF2  # noqa: E402  (the same for every other content page)
 import christianity as _CHR  # noqa: E402
-REF.REFS.update(_CHR.REFS)  # reading lists for the four long reads on the coming of Christianity
+REF.REFS.update(_CHR.REFS)
+import patrick as _PTR  # noqa: E402
+REF.REFS.update(_PTR.REFS)  # reading list for the Saint Patrick long read  # reading lists for the four long reads on the coming of Christianity
 import authors as AU  # noqa: E402  (the authors on the Books and authors page)
+import ylolfa as YLF  # noqa: E402  (Y Lolfa books: the "Y Lolfa" section of the Books and authors page)
 F.STORIES = AD.newest("story", F.STORIES)  # long reads: the newest first everywhere (index, home page, "Keep reading")
 L.TEACH.update(AG9.TEACH)
 from urllib.parse import quote as _q
@@ -221,7 +225,7 @@ def head_tags(title, desc, path, og_type="website", image=None):
     return t
 
 
-TAIL_JS = ('<script src="site.js?v=3" defer></script>\n<script src="search.js?v=2" defer></script>\n<script>if("serviceWorker" in navigator&&location.protocol==="https:"){addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>\n'
+TAIL_JS = ('<script src="site.js?v=5" defer></script>\n<script src="search.js?v=2" defer></script>\n<script>if("serviceWorker" in navigator&&location.protocol==="https:"){addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>\n'
            + (f'<script data-goatcounter="https://{GOATCOUNTER}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>\n' if GOATCOUNTER else ""))
 
 LANG_BOOT = '<script>(function(){var h=document.documentElement;h.classList.add("js");setTimeout(function(){if(!window.__site)h.classList.add("rv-all")},2500);try{if(localStorage.getItem("hc-lang")==="cy"){h.classList.add("cy");h.lang="cy"}}catch(e){}})()</script>'
@@ -637,7 +641,7 @@ def person_page(p):
             + (f'<a href="people.html?field={P2.FIELD[slug]}">{bi(*fld)}</a>' if fld else "") + '</div>' + first_badge(slug))
     rl = realm_links(f"person-{slug}.html") + ft_link_for_person(f"person-{slug}.html") + saints_links(f"person-{slug}.html") + lit_link(slug)
     meta += f'<p class="realm-links">{rl}</p>' if rl else ""
-    coded = any(a.startswith(("## ", "> ", "|| ", "^ ")) for a in long_en)
+    coded = any(a.startswith(("## ", "> ", "|| ")) for a in long_en)
     body = prose_bi(long_en, long_cy, cls="story prose") if coded else paras(long_en, long_cy)
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', era["ill"], p[2], date_cy(p[2]), p[3], p[4], p[7], p[8], art=ERA_ART[eid])
             + section(meta + photo_fig(PH.PERSON_PHOTOS.get(slug), "portrait", "person-" + slug) + body + f'<p class="share no-print"><button type="button" class="btn" data-copy="person-{slug}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button></p>' + further(f"person:{slug}", p[9]), top=True)
@@ -667,7 +671,7 @@ def place_page(pl):
             f'<a href="{osm}" target="_blank" rel="noopener">{bi("Open in a map", "Agor mewn map")} ↗</a><a href="map.html#lle-{pid}">{bi("On our map", "Ar ein map")} →</a></div>')
     rl = realm_links(f"place-{pid}.html") + saints_links(f"place-{pid}.html")
     meta += f'<p class="realm-links">{rl}</p>' if rl else ""
-    coded = any(a.startswith(("## ", "> ", "|| ", "^ ")) for a in long_en)
+    coded = any(a.startswith(("## ", "> ", "|| ")) for a in long_en)
     body = prose_bi(long_en, long_cy, cls="story prose") if coded else paras(long_en, long_cy)
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', pl["ill"], era["en"], era["cy"], pl["en"], pl["cy"], pl["dEn"], pl["dCy"], art=ERA_ART[eid])
             + section(meta + photo_fig(PH.PLACE_PHOTOS.get(pid), "", "place-" + pid) + paras(long_en, long_cy) + further(f"place:{pid}", pl["src"]), top=True)
@@ -804,8 +808,6 @@ def prose(pars, cls="prose"):
             continue
         if a.startswith("## "):
             out += f"<h2>{e(a[3:])}</h2>"
-        elif a.startswith("^ "):
-            out += f'<p class="src-note">{e(a[2:])}</p>'
         elif a.startswith("> "):
             q, _, c = a[2:].partition(" | ")
             out += f'<blockquote class="pq"><p>{e(q)}</p>' + (f"<cite>{e(c)}</cite>" if c else "") + "</blockquote>"
@@ -945,11 +947,11 @@ SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes
     ("britons", "The Britons and Rome", "Y Brythoniaid a Rhufain", ["era-ancient", "era-roman", "celts", "brutus", "caradog", "macsen"]),
     ("kings", "Kings, kingdoms and the Old North", "Brenhinoedd, teyrnasoedd a’r Hen Ogledd", ["era-saints", "era-kings", "kings", "kings-*", "family-trees", "arthur", "arthur-circle", "wilson-blackett", "unconquered"]),
     ("law", "The laws of Hywel Dda", "Cyfreithiau Hywel Dda", ["laws", "hywel", "topic-law"]),
-    ("saints", "Saints, learning and faith", "Seintiau, dysg a ffydd", ["christianity", "joseph", "lucius", "saints", "saints-*", "learning", "brittany", "topic-faith"]),
+    ("saints", "Saints, learning and faith", "Seintiau, dysg a ffydd", ["christianity", "joseph", "lucius", "patrick", "saints", "saints-*", "learning", "brittany", "topic-faith"]),
     ("princes", "Princes, castles and Owain Glyndŵr", "Tywysogion, cestyll ac Owain Glyndŵr", ["era-medieval", "castles", "glyndwr", "longbow", "battles", "documents", "topic-war"]),
     ("lit", "Poets, old books and legends", "Beirdd, hen lyfrau a chwedlau", ["literature", "books", "triads", "mabinogion", "legends", "legend-*", "bran", "symbols", "iolo", "topic-music", "trail-song"]),
     ("tudor", "From the Tudors to the Methodists", "O’r Tuduriaid i’r Methodistiaid", ["era-tudor"]),
-    ("industry", "Iron, coal, slate and the sea", "Haearn, glo, llechi a’r môr", ["era-industrial", "coal", "protest", "topic-industry", "trail-coal", "trail-sea", "firsts", "topic-science"]),
+    ("industry", "Iron, coal, slate and the sea", "Haearn, glo, llechi a’r môr", ["era-industrial", "coal", "aberfan", "protest", "topic-industry", "trail-coal", "trail-sea", "firsts", "topic-science"]),
     ("modern", "Modern Wales and the Welsh abroad", "Cymru fodern a’r Cymry ar wasgar", ["era-modern", "era-today", "revival", "world", "madog", "topic-abroad", "topic-sport"]),
     ("lang", "The Welsh language, names and places", "Yr iaith Gymraeg, enwau a lleoedd", ["language", "topic-language", "welsh", "names", "towns", "maps", "sites"]),
     ("life", "Women and everyday life", "Menywod a bywyd bob dydd", ["topic-women", "trail-women", "topic-countryside"]),
@@ -1066,8 +1068,17 @@ def bookshelf_page():
         au = (f'<h3 class="shelf-sub">{bi("The authors", "Yr awduron")}</h3><div class="author-grid">{"".join(cards[sid])}</div>' if cards[sid] else "")
         return (f'<section class="refs shelf" id="{sid}" aria-labelledby="h-{sid}"><h2 id="h-{sid}">{bi(en, cy)}</h2>{au}'
                 + f'{group(works[sid])}</section>')
-    chips = "".join(f'<a class="chip" href="#{sid}">{bi(*heads[sid])}</a>' for sid in order if works[sid]) + f'<a class="chip" href="#online">{bi("Online", "Ar-lein")}</a>'
-    body = "".join(shelf_sec(sid) for sid in order if works[sid])
+    # Y Lolfa, the Talybont press (src/ylolfa.py): every book on the shelf with a ylolfa.com link, each pointing to its place below
+    yl = [(sid, it) for sid in order for it in works[sid] if len(it) > 6 and "ylolfa.com/" in it[6]]
+    yl_lis = "".join(f'<li><span class="ref-w">{e(it[1])}</span>, <a href="{e(it[6])}" target="_blank" rel="noopener"><cite>{e(it[2])}</cite> ↗</a> '
+                     f'<span class="ref-d">({e(it[3])})</span><span class="ref-n">{bi(it[4], it[5])}</span>'
+                     f'<span class="ref-on">{bi("On this page:", "Ar y dudalen hon:")} <a href="#{bid(it)}">{bi(*heads[sid])}</a></span></li>' for sid, it in yl)
+    yl_sec = (f'<section class="refs shelf" id="ylolfa" aria-labelledby="h-ylolfa"><h2 id="h-ylolfa">{bi(*YLF.SECTION)}</h2>'
+              f'<p class="refs-i">{bi(*YLF.INTRO)}</p><p><a class="btn" href="https://www.ylolfa.com/" target="_blank" rel="noopener">ylolfa.com ↗</a></p>'
+              f'<h3>{bi(f"{len(yl)} books from Y Lolfa on this page", f"{len(yl)} o lyfrau’r Lolfa ar y dudalen hon")}</h3><ul>{yl_lis}</ul></section>') if yl else ""
+    yl_chip = f'<a class="chip" href="#ylolfa">{bi("Y Lolfa", "Y Lolfa")}</a>' if yl else ""
+    chips = "".join(f'<a class="chip" href="#{sid}">{bi(*heads[sid])}</a>' + (yl_chip if sid == "start" else "") for sid in order if works[sid]) + f'<a class="chip" href="#online">{bi("Online", "Ar-lein")}</a>'
+    body = "".join(shelf_sec(sid) + (yl_sec if sid == "start" else "") for sid in order if works[sid])
     body += f'<section class="refs shelf" id="online" aria-labelledby="h-online"><h2 id="h-online">{bi("Online", "Ar-lein")}</h2>{group(online)}</section>'
     intro = bi(f"{n_auth} writers who told the story of Wales and {total} books and old texts, from the Britons to today, grouped by period. In each period you meet the authors first, then their books. Under a book you will find the pages of this site that use it. Any library in Wales can find them for you.",
                f"{n_auth} o awduron a adroddodd stori Cymru a {total} o lyfrau a hen destunau, o’r Brythoniaid hyd heddiw, wedi’u trefnu fesul cyfnod. Ym mhob cyfnod fe gwrddwch â’r awduron yn gyntaf, ac yna eu llyfrau. O dan lyfr fe welwch dudalennau’r wefan hon sy’n ei ddefnyddio. Gall unrhyw lyfrgell yng Nghymru eu cael i chi.")
@@ -2807,7 +2818,7 @@ DATA = dict(
             "Rhwng Gwy a Hafren": "kings-gwy-a-hafren.html", "Glywysing": "kings-glywysing.html", "Morgannwg": "kings-glywysing.html", "Gwent": "kings-gwent.html", "Deheubarth": "kings-deheubarth.html",
             "Rhodri Mawr": "person-rhodri-mawr.html", "Hywel Dda": "person-hywel-dda.html", "Gruffudd ap Llywelyn": "kings.html", "Principality of Wales": "kings.html#princes",
             "Owain Glyndŵr, Prince of Wales": "person-owain-glyndwr.html"},
-    FACTS=F.FACTS, FEATURED=FEATURED, PPH=dict({k: photo_url(v[0], 240) for k, v in PH.PERSON_PHOTOS.items()}, **{k[7:]: f'gallery/{k}-s.webp' for k in GP.GALLERY if k.startswith('person-')}),
+    FACTS=[[CITE.html_text(en), CITE.html_text(cy, cy=True)] for en, cy in F.FACTS], FEATURED=FEATURED, PPH=dict({k: photo_url(v[0], 240) for k, v in PH.PERSON_PHOTOS.items()}, **{k[7:]: f'gallery/{k}-s.webp' for k in GP.GALLERY if k.startswith('person-')}),
     PFIELDS=P2.FIELDS, PFIELD=P2.FIELD, PFIRST={k: [v[0], v[1], v[2]] for k, v in P2.FIRSTS.items()},
 )
 # ---------- home page, map and people: content built into the HTML, so it shows without JavaScript ----------
@@ -3333,6 +3344,7 @@ def castles_page():
 
 
 def write(path, text):
+    text = CITE.strip(text)  # a [[cite:...]] marker that was not turned into a chip never reaches a file
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         f.write(text)
@@ -3373,7 +3385,7 @@ def make_cards(out):
             kind = "The ages of Wales · " + ERA[era]["spanEn"]
         elif era in ERA and kind in ("Person", "Place", "Legend", "Long read"):
             kind += " · " + ERA[era]["en"]
-        CARDS.make(os.path.join(out, "cards", path[:-5] + ".jpg"), kind, name, html.unescape(desc), COL.get(era or "medieval", "#f26a62"), card_photo(path), dragon)
+        CARDS.make(os.path.join(out, "cards", path[:-5] + ".jpg"), kind, CITE.strip(name), CITE.strip(html.unescape(desc)), COL.get(era or "medieval", "#f26a62"), card_photo(path), dragon)
         done += 1
     return done
 
@@ -3443,6 +3455,7 @@ import about as AB  # noqa: E402  (the About page, the author and "last updated"
 AB.setup(globals())
 SEO.AUTHOR = AB.author()[0] if AB.AUTHOR_EN else None
 style += AB.CSS
+style += CITE.CSS
 style += RP.REF_CSS + RP.TOWN_CSS + RP.BATTLE_CSS + RP.DOC_CSS + RP.TOPIC_CSS + RP.MAP_CSS
 
 
@@ -3509,6 +3522,7 @@ def main():
         print("Reference pages: links left out because the page does not exist:", ", ".join(sorted(RP.MISSING)))
     shared_files = shared_assets(pages)
     pages = WP.split(pages, BASE_URL, LANG_BOOT, LANG_TOGGLE, SEO.tidy_title, SEO.tidy_desc)  # English pages and their Welsh twins in cy/
+    pages = {name: CITE.render(text, cy=name.startswith("cy/")) for name, text in pages.items()}  # sources beside the claims
     sm, marks = SEO.sitemap(BASE_URL, pages)   # every page, with the date it last changed and its pictures
     today = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
     for name in pages:   # "Last updated" on each page, and dateModified for search engines (src/about.py)

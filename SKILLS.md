@@ -621,6 +621,12 @@ Learnt while simplifying the home page.
 - `arthur_circle(slug)` in `build.py` shows the whole circle as small name chips on Arthur's page and on every page in it, with the current person highlighted. To add someone, give them a `P(...)` entry and put their slug in a group. People who already have pages elsewhere can go in a group too.
 - People known only from the tales take the date "Age of Arthur": `data.py` sorts them just after Arthur, and `date_cy()` shows "Oes Arthur" on the Welsh side.
 - Their reference list is `PAGES["arthur-circle"]` in `src/refs2.py`. Saints who gain a person page get `link=P("slug")` in `src/saints.py`, so the saints pages link to them.
+- `src/sixth_century.py` does the same for the kings and saints of the sixth century. Its `LONG` dict gives a person a full coded long text (`## heading`, `> quote | source`, `|| left | right` tables) that replaces their short one: `people2.py` applies it with `PEOPLE_LONG.update(...)`. Illtud and Dewi Sant use it. A long read lists its people with `people=[...]` (as `pride2.py` does for the learning story), and the person page links back to it.
+
+### Books from one publisher, checked when their site is blocked: Y Lolfa (November 2026)
+
+- `src/ylolfa.py` holds each Y Lolfa book as a normal reading-list item whose last field is its ylolfa.com page. Put the name in the reading list of the page it belongs to (`src/refs.py`, `src/refs2.py`) or in `SHELF_EXTRA`; `bookshelf_page()` in `build.py` gathers every item with a ylolfa.com link into the "Y Lolfa" section of the Books and authors page, linking each to its place in its period.
+- ylolfa.com refuses automated fetches. To check a book: a web search limited to ylolfa.com gives the book's own page, whose title shows the exact title and ISBN (`/products/<ISBN>/<slug>`); then a search for that ISBN in quotes shows the author on booksellers' listings. Give a year only when a listing confirms it.
 
 ### Helping a first-time visitor choose where to begin (November 2026)
 - The three "Where to begin" cards sit in the home hero in `src/head.html` (`<nav class="begin">`), styled in `src/v6.css` under "where to begin". The hero's moving scene measures `.begin` (in `src/app.js`, `measure()`) to keep the mountain and stars clear of the words, so keep that class name if the cards change.
@@ -636,9 +642,17 @@ Learnt while simplifying the home page.
 - The top picture loads at once (`fetchpriority="high"`, 600px copy for phones through `srcset`); card pictures load lazily from the small copy. The build stops if a named picture's file is missing.
 - Commons can't be reached from the cloud. New pictures have to be downloaded on the Mini-PC (Remote Control) and added to the gallery first.
 
+### Sources beside the claims (November 2026)
+
+- Write `[[cite:key1,key2]]` straight after the full stop of any sentence in `src/` (English and Welsh copy), and add each key to `S` in `src/cites.py` with a short chip label, title, author, a note on what it shows, and the link (plus `url_cy` if the source has a Welsh page).
+- `build.py` turns markers into chips after the Welsh pages are split off, so each language gets its own labels. Markers inside page titles, descriptions, JSON-LD, scripts, links and buttons are removed, and `write()` removes any left in JSON, feeds and the search index, so a marker never shows as text. An unknown key stops the build.
+- The card opens on click (code at the end of `src/static/site.js`): under the chip on a computer, as a sheet along the bottom on a phone. Without JavaScript the chip is a plain link to the first source.
+- The home page's "Did you know?" fact is drawn again by `app.js` when "Another" is pressed, so `FACTS` goes into the page data already turned into HTML (`CITE.html_text`).
+- Check sources with the WebFetch tool when the cloud can't reach a site directly, and quote the source's own words in the note where you can.
+
 ### Full-length pages for the kings and princes, with sources beside the claims (November 2026)
 - `src/princes.py` holds the long texts for the kings and princes of Wales (`LONG`, put over the short texts by `src/long.py`), new rulers in the `people2a.py` format (`PEOPLE`, added in `src/people2.py`), and `GROUPS`/`LINKS` for the "Kings and princes of Wales" block that `princes_circle()` in `build.py` shows on each of their pages. A group can list people whose pages are still to come: only people with a page are shown.
-- A new paragraph code for any coded text (person pages, long reads): `"^ Source: ..."` prints a small source note under the paragraph it backs up (`.src-note` in `src/v6.css`). Name the old source and the year (Annales Cambriae, Brut y Tywysogion, Asser, Gerald), so a reader can check the claim.
+- Their sources go beside the claims as `[[cite:...]]` chips (see "Sources beside the claims"). The keys for these pages live in `CITES` in `src/princes.py`, which `src/cites.py` adds to its list, so other threads editing `cites.py` don't collide with them. Good free texts to link: the Annales Cambriae (Fordham Internet Medieval Sourcebook), the Annals of Ulster (CELT, one page per year: `T100001A/text426.html` is 856), Asser (Fordham) and Gerald's Description of Wales (A Vision of Britain). The Brut has no good free English text online: cite Thomas Jones's translation with no link.
 - Check every quote against a real edition before it goes in. Gerald of Wales (Description of Wales I.2) gives North Wales to Merfyn and Powys to Anarawd, not the other way round; only his I.4 names the three royal seats (Aberffraw, Dinefwr, Pengwern).
 
 ## Working together
