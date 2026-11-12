@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "27 more people: poets, harpers, rebels and campaigners", "27 yn rhagor o bobl: beirdd, telynorion, gwrthryfelwyr ac ymgyrchwyr",
+     "New pages on Hopcyn ap Tomos of the Red Book of Hergest, Dafydd ab Edmwnd and Tudur Aled, Blanche Parry who rocked Elizabeth’s cradle, John ap John the first Welsh Quaker, Marged ferch Ifan, Queen of the Lakes, the harpers Parri Ddall and Bardd y Brenin, Owain Myfyr and William Owen Pughe, the inventor Richard Roberts, Lewsyn yr Heliwr of the Merthyr Rising, Caradog and the Côr Mawr, Calon Lân’s Gwyrosydd, Emrys ap Iwan, Tom Ellis, Sir Samuel Griffith, Sir John Rhŷs, Amy Dillwyn, Llwyd ap Iwan, D. J. Williams, Iorwerth Peate, Eileen Beasley, Cynan, Idris Davies, Alun Lewis and Clive Sullivan.",
+     "Tudalennau newydd ar Hopcyn ap Tomos a Llyfr Coch Hergest, Dafydd ab Edmwnd a Thudur Aled, Blanche Parry a siglodd grud Elisabeth, John ap John y Crynwr Cymreig cyntaf, Marged ferch Ifan, Brenhines y Llynnoedd, y telynorion Parri Ddall a Bardd y Brenin, Owain Myfyr a William Owen Pughe, y dyfeisiwr Richard Roberts, Lewsyn yr Heliwr o Wrthryfel Merthyr, Caradog a’r Côr Mawr, Gwyrosydd awdur Calon Lân, Emrys ap Iwan, Tom Ellis, Syr Samuel Griffith, Syr John Rhŷs, Amy Dillwyn, Llwyd ap Iwan, D. J. Williams, Iorwerth Peate, Eileen Beasley, Cynan, Idris Davies, Alun Lewis a Clive Sullivan.",
+     "people.html"),
     ("2026-11-12", "Prince Rhys ap Gruffudd: the Lord Rhys and the first eisteddfod", "Y Tywysog Rhys ap Gruffudd: yr Arglwydd Rhys a’r eisteddfod gyntaf",
      "A new long read: the orphaned prince who won back Deheubarth, stood with Owain Gwynedd against Henry II, and at Christmas 1176 set two chairs for the best poet and musician at Cardigan Castle.",
      "Erthygl newydd: y tywysog amddifad a enillodd Ddeheubarth yn ôl, a safodd gydag Owain Gwynedd yn erbyn Harri II, ac a osododd ddwy gadair i’r bardd a’r cerddor gorau yng Nghastell Aberteifi adeg y Nadolig 1176.",
