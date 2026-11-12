@@ -29,11 +29,9 @@ CREDITS = FA.CREDITS
 REPORT = os.path.join(ROOT, "_research", "voice")
 CACHE = os.path.join(tempfile.gettempdir(), "piper-voices")
 HF = "https://huggingface.co/rhasspy/piper-voices/resolve/main/"
-VOICES = [  # Piper's Welsh voices (both trained on Bangor University techiaith recordings)
-    ("gwryw_gogleddol", "cy/cy_GB/gwryw_gogleddol/medium/cy_GB-gwryw_gogleddol-medium"),
+VOICES = [  # Piper's Welsh voices trained on Bangor University's BU-TTS recordings (dataset licence CC BY)
     ("bu_tts", "cy/cy_GB/bu_tts/medium/cy_GB-bu_tts-medium"),
 ]
-ASR_MODELS = ["techiaith/wav2vec2-xlsr-ft-cy", "techiaith/wav2vec2-xls-r-1b-ft-cy"]
 LENGTH = 1.15  # a touch slower than normal speech, for learners
 REDO = "--redo" in sys.argv  # make every voice clip again (after changing the voice or the settings)
 
@@ -112,14 +110,15 @@ def asr_candidates():
             ids = [m["id"] for m in json.loads(r.read())]
         print("techiaith wav2vec2 models:", ", ".join(ids))
         parts = {i: re.split(r"[-_]", i.lower().split("/")[1]) for i in ids}
-        welsh = [i for i in ids if "cy" in parts[i] and not any("lm" in p for p in parts[i])]
+        welsh = [i for i in ids if "cy" in parts[i] and "ft" in parts[i] and not any("lm" in p for p in parts[i])]
         found += sorted(welsh, key=lambda i: ("en" in parts[i], "1b" in parts[i], len(i)))
     except Exception as ex:  # noqa: BLE001
         print("Could not list techiaith models:", ex)
-    return found[:3] + ["openai/whisper-small"]
+    return found[:3] + ["openai/whisper-small", "openai/whisper-medium"]
 
 
-def recogniser():
+def recogniser(yard):
+    """The first recogniser that understands the real recordings (yard: [(text, mp3)]) well enough to judge voices."""
     try:
         from transformers import pipeline
     except Exception as ex:  # noqa: BLE001
@@ -131,8 +130,12 @@ def recogniser():
                 asr = pipeline("automatic-speech-recognition", model=m, generate_kwargs={"language": "welsh", "task": "transcribe"})
             else:
                 asr = pipeline("automatic-speech-recognition", model=m)
-            print("Speech recogniser:", m)
-            return (lambda wav, asr=asr: asr(wav)["text"]), m
+            fn = (lambda wav, asr=asr: asr(wav)["text"])
+            errs = [cer(t, fn(to_16k(mp3, os.path.join(tempfile.gettempdir(), "yard.wav")))) for t, mp3 in yard]
+            score = sum(errs) / len(errs) if errs else 0
+            print(f"Recogniser {m}: error {score:.3f} on {len(errs)} real recordings")
+            if score < 0.5:
+                return fn, f"{m} (error {score:.3f} on real recordings)"
         except Exception as ex:  # noqa: BLE001
             print(f"Recogniser {m} not available: {ex}")
     return None, ""
@@ -167,7 +170,9 @@ def main():
     voices = load_voices()
     if not voices:
         raise SystemExit("No Welsh voice could be loaded")
-    asr, asr_name = recogniser()
+    real = [(c["text"], os.path.join(OUT, k + ".mp3")) for k, c in sorted(credits.items())
+            if c.get("kind") != "voice" and " " not in c["text"] and os.path.exists(os.path.join(OUT, k + ".mp3"))]
+    asr, asr_name = recogniser(real[:: max(1, len(real) // 12)][:12])
     lines = [f"Speech recogniser: {asr_name or 'none'}"]
     with tempfile.TemporaryDirectory() as tmp:
         best = voices[0]
