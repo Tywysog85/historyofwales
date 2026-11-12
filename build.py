@@ -245,7 +245,7 @@ NAV_GROUPS = [
                          ("literature.html", "Literature and old books", "Llên a hen lyfrau"), ("triads.html", "The Welsh Triads", "Trioedd Ynys Prydain"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
                          ("whatsnew.html", "What’s new", "Beth sy’n newydd")]),
     ("Cymraeg", "Cymraeg", [("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg")]),
-    ("You", "Chi", [("journey.html", "Your journey", "Eich taith"), ("teachers.html", "For teachers", "I athrawon"), ("index.html#sources", "Sources", "Ffynonellau")]),
+    ("You", "Chi", [("journey.html", "Your journey", "Eich taith"), ("teachers.html", "For teachers", "I athrawon"), ("index.html#sources", "Sources", "Ffynonellau"), ("about.html", "About this site", "Am y wefan hon")]),
 ]
 NAV_MORE = [x for g in NAV_GROUPS for x in g[2]]  # the same links as one flat list
 SEARCH_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
@@ -346,7 +346,8 @@ def footer():
     explore = [("timeline.html", "Timeline", "Llinell amser"), ("map.html", "Map of Wales", "Map Cymru"), ("people.html", "People", "Pobl"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("castles.html", "Castles of Wales", "Cestyll Cymru"), ("trails.html", "Themed trails", "Llwybrau thema"),
                ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"), ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg")]
     read = [("whatsnew.html", "What’s new", "Beth sy’n newydd"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"), ("laws.html", "The Laws of Hywel Dda", "Cyfreithiau Hywel Dda"), ("literature.html", "Welsh literature", "Llenyddiaeth Gymraeg"), ("books.html", "The great books of Wales", "Llyfrau mawr Cymru"), ("triads.html", "The Welsh Triads", "Trioedd Ynys Prydain"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
-            ("teachers.html", "For teachers", "I athrawon"), ("index.html#sources", "Sources", "Ffynonellau")]
+            ("teachers.html", "For teachers", "I athrawon"), ("index.html#sources", "Sources", "Ffynonellau"),
+            ("about.html", "About this site", "Am y wefan hon"), ("about.html#corrections", "Report a mistake", "Rhoi gwybod am gamgymeriad")]
     play = [("daily.html", "Daily challenge", "Her y dydd"), ("quiz.html", "Quiz", "Cwis"), ("map-game.html", "Where in Wales?", "Ble yng Nghymru?"), ("names.html", "Welsh names", "Enwau Cymraeg"),
             ("play.html", "All games", "Pob gêm"), ("journey.html", "Your journey", "Eich taith")]
     yr = datetime.date.today().year
@@ -372,7 +373,10 @@ def page(path, title, desc, main_html, era=None, og_type="article", ld=None, act
     if CARDS_ON and path != "404.html":
         CARD_JOBS[path] = (title, desc, era)
         card = "cards/" + path[:-5] + ".jpg"
-    ld_html = SEO.ld_script(SEO.page_ld(BASE_URL, path, title, desc, og_type, ld, main_html, card))
+    first = first_published(path)
+    ld_html = SEO.ld_script(SEO.page_ld(BASE_URL, path, title, desc, og_type, ld, main_html, card, published=first))
+    if path != "404.html":
+        main_html += AB.page_info(path, title, first)   # written by, first published, last updated, report a mistake (src/about.py)
     return f'''<!doctype html>
 <html lang="en">
 <head>
@@ -396,6 +400,23 @@ def page(path, title, desc, main_html, era=None, og_type="article", ld=None, act
 {TAIL_JS}{extra}</body>
 </html>
 '''
+
+
+FIRST_KIND = (("story-", "story"), ("legend-", "legend"), ("person-", "person"), ("place-", "place"))
+
+
+# src/added.json was filled in from git history, which only goes back to 11 November 2026: items already on the site
+# then all carry that first time, which is not their real first day, so they show no "First published" date.
+ADDED_BASELINE = min((w for d in AD.DATA.values() for w in d.values()), default="")
+
+
+def first_published(path):
+    """The date a long read, legend, person or place first went up (src/added.json), or None for other pages."""
+    for pre, kind in FIRST_KIND:
+        if path.startswith(pre):
+            when = AD.DATA.get(kind, {}).get(path[len(pre):-5])
+            return when[:10] if when and when != ADDED_BASELINE else None
+    return None
 
 
 def hero(era_id, crumbs, ill, eyebrow_en, eyebrow_cy, h_en, h_cy, sub_en="", sub_cy="", art=None, extra="", photo=False):
@@ -822,7 +843,7 @@ def story_page(x, i):
     nxt = F.STORIES[(i + 1) % len(F.STORIES)]
     others = [y for y in F.STORIES if y["id"] != x["id"]][:3]
     era = ERA[x["era"]]
-    meta = f'<p class="byline"><span>{x["mins"]} {bi("minute read", "munud o ddarllen")}</span><a href="era-{x["era"]}.html">{bi(era["en"], era["cy"])}</a><button type="button" class="copy" data-copy="story-{x["id"]}.html">{bi("Copy link", "Copïo’r ddolen")}</button></p>'
+    meta = f'<p class="byline">{AB.byline_top()}<span>{x["mins"]} {bi("minute read", "munud o ddarllen")}</span><a href="era-{x["era"]}.html">{bi(era["en"], era["cy"])}</a><button type="button" class="copy" data-copy="story-{x["id"]}.html">{bi("Copy link", "Copïo’r ddolen")}</button></p>'
     main = (hero(x["era"], f'<a href="index.html">{SITE}</a> / <a href="stories.html">{bi("Long reads", "Erthyglau")}</a>', "book", "Long read", "Erthygl", x["en"], x["cy"], x["sumEn"], x["sumCy"], art=x["art"])
             + f'<section class="article"><div class="wrap narrow">{meta}{prose_bi(x["pEn"], x["pCy"])}' + (f'<p><a class="btn solid" href="firsts.html">★ {bi("Every Welsh world first, with the people behind them", "Pob un o’r pethau a wnaeth Cymru gyntaf, a’r bobl y tu ôl iddynt")} →</a></p>' if x["id"] == "firsts" else "")
               + story_more_links(x)
@@ -2788,6 +2809,8 @@ def search_index():
     items += [dict(k="trail", t=t["en"], c=t["cy"], u=f"trail-{t['id']}.html", y=["Trail", "Llwybr"], b=[t["introEn"][0], t["introCy"][0]], e="medieval") for t in L.TRAILS]
     items += [dict(k="story", t=x["en"], c=x["cy"], u=f"story-{x['id']}.html", y=[f"{x['mins']} min", f"{x['mins']} mun"], b=[x["sumEn"], x["sumCy"]], e=x["era"]) for x in F.STORIES]
     items += [dict(k="legend", t=x["en"], c=x["cy"], u=f"legend-{x['id']}.html", y=[x["place"], x["place"]], b=[x["sumEn"], x["sumCy"]], e=x["era"]) for x in F.LEGENDS]
+    items.append(dict(k="page", t="About this site", c="Am y wefan hon", u="about.html", y=["About", "Amdanom"],
+                      b=["Who writes History of Wales, how it is written, and how to report a mistake or a correction.", "Pwy sy’n ysgrifennu Hanes Cymru, sut y caiff ei hysgrifennu, a sut i roi gwybod am gamgymeriad neu gywiriad."], e="today"))
     items.append(dict(k="page", t="The Mabinogion", c="Y Mabinogion", u="mabinogion.html", y=["Eleven tales", "Un chwedl ar ddeg"],
                       b=["The eleven great tales of medieval Wales, the White Book and the Red Book, and Lady Charlotte Guest.", "Un chwedl fawr ar ddeg Cymru’r Oesoedd Canol, y Llyfr Gwyn a’r Llyfr Coch, a’r Arglwyddes Charlotte Guest."], e="medieval"))
     items += [dict(k="page", t=t["cy"], c=t["cy"], u="mabinogion.html#mab-" + str(k + 1), y=[t["en"], g["cy"]], b=[t["sumEn"], t["sumCy"]], e=g["era"]) for k, g in enumerate(MB.GROUPS) for t in g["tales"] if not t["link"]]
@@ -3143,6 +3166,10 @@ def not_found_page():
 
 import refpages as RP  # noqa: E402  (the reference pages: reference.html, a-z.html ...)
 RP.setup(globals())
+import about as AB  # noqa: E402  (the About page, the author and "last updated" lines, reporting a mistake)
+AB.setup(globals())
+SEO.AUTHOR = AB.author()[0] if AB.AUTHOR_EN else None
+style += AB.CSS
 style += RP.REF_CSS + RP.TOWN_CSS + RP.BATTLE_CSS + RP.DOC_CSS + RP.TOPIC_CSS + RP.MAP_CSS
 
 
@@ -3198,10 +3225,15 @@ def main():
     pages["pairs.html"] = game_page("pairs.html", "pairs", "modern", "Word pairs", "Parau geiriau", "Turn over two cards at a time and match each Welsh word to its meaning.", "Trowch ddau gerdyn ar y tro a pharu pob gair Cymraeg â’i ystyr.", "owl", "A memory game: match Welsh words to their meanings.")
     pages["404.html"] = not_found_page()
     pages["whatsnew.html"] = whatsnew_page()
+    pages["about.html"] = AB.about_page()
     pages.update(RP.pages(pages.keys()))  # the reference pages: look-it-up desk, A–Z and the rest (src/refpages.py)
     if RP.MISSING:
         print("Reference pages: links left out because the page does not exist:", ", ".join(sorted(RP.MISSING)))
     shared_files = shared_assets(pages)
+    sm, marks = SEO.sitemap(BASE_URL, pages)   # every page, with the date it last changed and its pictures
+    today = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
+    for name in pages:   # "Last updated" on each page, and dateModified for search engines (src/about.py)
+        pages[name] = AB.fill_dates(pages[name], marks.get(name, [None, today])[1])
     for name, text in pages.items():
         write(os.path.join(out, name), text)
     for name, text in shared_files.items():
@@ -3219,9 +3251,8 @@ def main():
     write(os.path.join(out, "search.json"), json.dumps(search_index(), ensure_ascii=False, separators=(",", ":")))
     write(os.path.join(out, ".nojekyll"), "")
     write(os.path.join(out, "robots.txt"), SEO.robots(BASE_URL))
-    sm, marks = SEO.sitemap(BASE_URL, pages)   # every page, with the date it last changed and its pictures
     write(os.path.join(out, "sitemap.xml"), sm)
-    write(os.path.join(out, SEO.LASTMOD_FILE), marks)
+    write(os.path.join(out, SEO.LASTMOD_FILE), json.dumps(marks, separators=(",", ":"), sort_keys=True))
     write(os.path.join(out, SEO.INDEXNOW_KEY + ".txt"), SEO.INDEXNOW_KEY)   # lets Bing know the site is ours (tools/indexnow.py)
     if "--artifact" in sys.argv:
         a = os.path.join(ROOT, "_artifact")
