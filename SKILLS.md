@@ -484,6 +484,14 @@ Learnt while writing Owain Gwynedd's "The king who became prince" (`src/owain.py
 - **Headings switch it on.** If any paragraph starts with `## `, `> ` or `|| `, the person page uses the long-read layout (sub-headings, pull quotes, a facts table). Plain paragraphs stay plain.
 - **Checking a fact when the PDF is blocked.** The container cannot download most PDFs, but WebFetch can read the Welsh Journals pages (journals.library.wales) one page at a time, which is how the Welsh History Review articles were checked. Quote only what a source says, and put the source in a comment at the top of the module.
 
+## Taking a word off the whole site (November 2026)
+Learnt while taking "Celtic" off the site (rule "Britons, not Celts" in `EDITORIAL.md`).
+
+- **Search the built site, not just `src/`.** Run `python build.py`, then grep `_site/*.html` for the word in both languages (`celt`, `geltaidd`, `celtaidd`, `cheltaidd`, `gelteg`). Some text is changed at build time (for example `LANG_FIX` in `src/pride.py`), so only the built pages show what visitors read.
+- **Fix the source line itself where you can,** and drop any build-time rewording that pointed at the old line: the `assert` in `src/features.py` stops the build if a `LANG_FIX` pair no longer matches.
+- **Names from outside data** (Cadw's monument names in `tools/data/sites_cadw.json`) are reworded in `site_rows()` in `src/refpages.py`, so the data file stays exactly as Cadw gives it.
+- Leave real names alone (the Celtic Manor) and words hidden inside picture links or file names.
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
