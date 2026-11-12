@@ -2886,13 +2886,22 @@ def ssr_chart():
 
 
 def ssr_books():
-    return "".join(f"<li><b>{e(r['t'])}</b><span>{bi(r['n'], r['nCy'])}</span></li>" for r in D.READING)
+    def title(r):
+        return f'<a href="{e(r["u"])}" target="_blank" rel="noopener"><b>{e(r["t"])}</b></a>' if r.get("u") else f"<b>{e(r['t'])}</b>"
+    return "".join(f"<li>{title(r)}<span>{bi(r['n'], r['nCy'])}</span></li>" for r in D.READING)
 
 
 def ssr_online():
     def short(u):
         return re.sub(r"/$", "", re.sub(r"^https://(www[.])?", "", u))
-    return "".join(f'<li><a href="{e(r["u"])}" target="_blank" rel="noopener"><b>{bi(r["t"], r.get("tCy", r["t"]))}</b></a><span>{e(short(r["u"]))}</span></li>' for r in D.ONLINE)
+    def li(r):
+        cy = r.get("uCy") or r["u"]
+        if cy == r["u"]:
+            return f'<li><a href="{e(r["u"])}" target="_blank" rel="noopener"><b>{bi(r["t"], r.get("tCy", r["t"]))}</b></a><span>{e(short(r["u"]))}</span></li>'
+        return (f'<li><a class="l-en" lang="en" href="{e(r["u"])}" target="_blank" rel="noopener"><b>{e(r["t"])}</b></a>'
+                f'<a class="l-cy" lang="cy" href="{e(cy)}" target="_blank" rel="noopener"><b>{e(r.get("tCy", r["t"]))}</b></a>'
+                f'<span>{bi(short(r["u"]), short(cy))}</span></li>')
+    return "".join(li(r) for r in D.ONLINE)
 
 
 def ssr_words():

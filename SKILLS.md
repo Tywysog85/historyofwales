@@ -626,6 +626,7 @@ Learnt while simplifying the home page.
 
 - `src/ylolfa.py` holds each Y Lolfa book as a normal reading-list item whose last field is its ylolfa.com page. Put the name in the reading list of the page it belongs to (`src/refs.py`, `src/refs2.py`) or in `SHELF_EXTRA`; `bookshelf_page()` in `build.py` gathers every item with a ylolfa.com link into the "Y Lolfa" section of the Books and authors page, linking each to its place in its period.
 - ylolfa.com refuses automated fetches. To check a book: a web search limited to ylolfa.com gives the book's own page, whose title shows the exact title and ISBN (`/products/<ISBN>/<slug>`); then a search for that ISBN in quotes shows the author on booksellers' listings. Give a year only when a listing confirms it.
+- The home page's Further reading lists are `READING` and `ONLINE` in `src/data.py`. A book with `u` gets a link; an online site with `uCy` links to its Welsh address on the Welsh page (e.g. biography.wales / bywgraffiadur.cymru). Gwales.com closed on 2 March 2026: the Books Council of Wales now sells through ffolio.wales / ffolio.cymru.
 
 ### Helping a first-time visitor choose where to begin (November 2026)
 - The three "Where to begin" cards sit in the home hero in `src/head.html` (`<nav class="begin">`), styled in `src/v6.css` under "where to begin". The hero's moving scene measures `.begin` (in `src/app.js`, `measure()`) to keep the mountain and stars clear of the words, so keep that class name if the cards change.
