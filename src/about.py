@@ -147,9 +147,9 @@ def about_page():
 
     what = g["paras"](
         ["History of Wales (Hanes Cymru) tells the story of Wales from the first people in the caves, 230,000 years ago, to the Senedd today, in English and in Cymraeg.",
-         "It is written for adults who want to know the history of their country, and for anyone, anywhere, who loves Wales. There are games and quizzes too, so that children enjoy it as well. The site is free to read and carries no adverts."],
+         "It is written for anyone who wants to know the history of Wales. The site is free to read and carries no adverts."],
         ["Mae Hanes Cymru yn adrodd stori Cymru o’r bobl gyntaf yn yr ogofâu, 230,000 o flynyddoedd yn ôl, hyd at y Senedd heddiw, yn Gymraeg ac yn Saesneg.",
-         "Fe’i hysgrifennwyd ar gyfer oedolion sydd am wybod hanes eu gwlad, ac i unrhyw un, yn unrhyw le, sy’n caru Cymru. Mae gemau a chwisiau hefyd, er mwyn i blant ei mwynhau. Mae’r wefan am ddim i’w darllen ac nid oes hysbysebion arni."], "ab-text")
+         "Fe’i hysgrifennwyd ar gyfer unrhyw un sydd am wybod hanes Cymru. Mae’r wefan am ddim i’w darllen ac nid oes hysbysebion arni."], "ab-text")
 
     who_en = [f"History of Wales is written and looked after by {en}."] if AUTHOR_EN else ["History of Wales is written and looked after by one person, for love of Wales."]
     who_cy = [f"{cy} sy’n ysgrifennu ac yn gofalu am Hanes Cymru."] if AUTHOR_EN else ["Un person sy’n ysgrifennu ac yn gofalu am Hanes Cymru, o gariad at Gymru."]

@@ -245,7 +245,187 @@ S = {
         note=("Adam of Usk copied Owain Glyndŵr’s letter of 1401 to Robert III, King of Scots, into his chronicle. Free to read online.",
               "Copïodd Adda o Frynbuga lythyr Owain Glyndŵr at Robert III, brenin yr Alban, yn 1401 i’w gronicl. Am ddim i’w ddarllen ar-lein."),
         url="https://archive.org/details/chroniconadaedeu00adamuoft", lang="en"),
+    # ---------- the Aberfan disaster (story-aberfan.html) ----------
+    "aberfan-wiki": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Aberfan disaster", by=("Wikipedia, drawing on the Tribunal report (1967) and McLean and Johnes (2000)", "Wikipedia, ar sail adroddiad y Tribiwnlys (1967) a McLean a Johnes (2000)"),
+        note=("The tip, the morning of 21 October 1966, the rescue, the earlier slides and the council’s letters about the “Danger from Coal Slurry being tipped at the rear of the Pantglas Schools”, and the Tribunal’s 76 days and 136 witnesses.",
+              "Y domen, bore 21 Hydref 1966, yr achub, y llithriadau cynharach a llythyrau’r cyngor am y perygl o’r slyri glo a domennid y tu cefn i ysgolion Pantglas, a 76 diwrnod a 136 tyst y Tribiwnlys."),
+        url="https://en.wikipedia.org/wiki/Aberfan_disaster", url_cy="https://cy.wikipedia.org/wiki/Trychineb_Aberfan"),
+    "aberfan-bar": dict(
+        short=("British Academy Review", "British Academy Review"),
+        t="Lessons from the Aberfan disaster and its aftermath", by=("Iain McLean, British Academy Review", "Iain McLean, British Academy Review"),
+        note=("By the historian of the disaster: 109 children and five teachers died in the school, 144 in all; the Tribunal found the Coal Board wholly at fault; the fund reached £1.75m; the Charity Commission’s demands; the £150,000 taken for the tips, returned in 1997, and £1.5m in 2007.",
+              "Gan hanesydd y trychineb: bu farw 109 o blant a phump o athrawon yn yr ysgol, 144 i gyd; canfu’r Tribiwnlys mai’r Bwrdd Glo oedd yn llwyr ar fai; cyrhaeddodd y gronfa £1.75m; gofynion y Comisiwn Elusennau; y £150,000 a gymerwyd at y tomenni, a roddwyd yn ôl yn 1997, a £1.5m yn 2007."),
+        url="https://www.thebritishacademy.ac.uk/publishing/review/12/lessons-aberfan-disaster-and-its-aftermath/", lang="en"),
+    "aberfan-gov": dict(
+        short=("Tribunal report, 1967", "Adroddiad y Tribiwnlys, 1967"),
+        t="The Aberfan Disaster, 21 October 1966", by=("UK Government, from the Report of the Tribunal (HMSO, 1967)", "Llywodraeth y DU, o Adroddiad y Tribiwnlys (HMSO, 1967)"),
+        note=("Quotes the report: “a terrifying tale of bungling ineptitude”, and “Not villains but decent men, led astray by foolishness or by ignorance or by both in combination”.",
+              "Yn dyfynnu’r adroddiad: “hanes brawychus am anallu trwsgl”, a “Nid dihirod ond dynion gweddus, wedi’u camarwain gan ffolineb neu gan anwybodaeth neu gan y ddau ynghyd”."),
+        url="https://assets.publishing.service.gov.uk/media/5a790a75e5274a2acd18bbf6/InquiriesIncidentTheAberfanDisaster21October1966.pdf", lang="en"),
+    "aberfan-1967": dict(
+        short=("Commons debate, 1967", "Dadl Tŷ’r Cyffredin, 1967"),
+        t="1967 speech on the Aberfan Inquiry", by=("David Gibson-Watt MP, House of Commons", "David Gibson-Watt AS, Tŷ’r Cyffredin"),
+        note=("Tells of the 1963 letters from Mr Jones, the Borough Engineer, and quotes the Tribunal’s first finding: “Blame for the disaster rests upon the National Coal Board.”",
+              "Yn sôn am lythyrau 1963 gan Mr Jones, Peiriannydd y Fwrdeistref, ac yn dyfynnu canfyddiad cyntaf y Tribiwnlys: ar y Bwrdd Glo Cenedlaethol y mae’r bai am y trychineb."),
+        url="https://www.ukpol.co.uk/?p=49575", lang="en"),
+    "aberfan-hansard-1997": dict(
+        short=("Hansard, 1997", "Hansard, 1997"),
+        t="Aberfan: written answers, 31 July 1997", by=("Hansard, House of Commons: Ted Rowlands asks, Ron Davies answers", "Hansard, Tŷ’r Cyffredin: Ted Rowlands yn gofyn, Ron Davies yn ateb"),
+        note=("“I shall be making available a grant of £150,000 to repay the sum originally contributed.”",
+              "“Byddaf yn rhoi grant o £150,000 i ad-dalu’r swm a gyfrannwyd yn wreiddiol.”"),
+        url="https://api.parliament.uk/historic-hansard/written-answers/1997/jul/31/aberfan", lang="en"),
+    "aberfan-oxford-2007": dict(
+        short=("University of Oxford, 2007", "Prifysgol Rhydychen, 2007"),
+        t="Iain McLean, campaigner for Aberfan community, welcomes funding announcement", by=("Department of Politics and International Relations, University of Oxford, 2 February 2007", "Adran Gwleidyddiaeth a Chysylltiadau Rhyngwladol, Prifysgol Rhydychen, 2 Chwefror 2007"),
+        note=("£2m from the National Assembly for Wales: £1.5m for the Aberfan Memorial Charity and £500,000 for the Aberfan Education Charity.",
+              "£2m gan Gynulliad Cenedlaethol Cymru: £1.5m i Elusen Goffa Aberfan a £500,000 i Elusen Addysg Aberfan."),
+        url="https://politics.ox.ac.uk/news/iain-mclean-campaigner-aberfan-community-welcomes-funding-announcment", lang="en"),
+    "aberfan-cadw": dict(
+        short=("Cadw", "Cadw"),
+        t="Aberfan: Cemetery, Garden of Remembrance and Former Tip and Slide Area", by=("Cadw, Register of Parks and Gardens of Special Historic Interest in Wales, grade II*", "Cadw, Cofrestr Parciau a Gerddi o Ddiddordeb Hanesyddol Arbennig yng Nghymru, gradd II*"),
+        note=("Low walls of water-worn stone trace the plan of the school in the garden; in the cemetery two long rows of linked white arches mark the graves of 106 of the 144.",
+              "Mae waliau isel o gerrig afon yn dilyn cynllun yr ysgol yn yr ardd; yn y fynwent mae dwy res hir o fwâu gwyn ynghlwm yn nodi beddau 106 o’r 144."),
+        url="https://cadwpublic-api.azurewebsites.net/reports/parkgarden/FullReport?id=256", lang="en"),
+    "aberfan-merthyr-60": dict(
+        short=("Merthyr Tydfil council", "Cyngor Merthyr Tudful"),
+        t="60th anniversary of the Aberfan disaster: commemorative events", by=("Merthyr Tydfil County Borough Council, 2026", "Cyngor Bwrdeistref Sirol Merthyr Tudful, 2026"),
+        note=("The annual memorial service at Aberfan Cemetery at 9.15 on 21 October 2026, and the commemoration at the Memorial Garden.",
+              "Y gwasanaeth coffa blynyddol ym Mynwent Aberfan am 9.15 ar 21 Hydref 2026, a’r coffâd yn yr Ardd Goffa."),
+        url="https://www.merthyr.gov.uk/resident/60th-anniversary-of-the-aberfan-disaster/commemorative-events/", lang="en"),
+    "aberfan-pa-60": dict(
+        short=("PA report, 2026", "Adroddiad PA, 2026"),
+        t="‘Aberfan will always be in our hearts’, King tells survivors and families", by=("Press Association, in the Irish News, 21 October 2026", "Press Association, yn yr Irish News, 21 Hydref 2026"),
+        note=("The King, the Queen and the Prince of Wales at the memorial garden; “We have heard stories of heartbreak, but also of heroism”; the Memorial Tree at Ynysowen school with its clock at 9.13.",
+              "Y Brenin, y Frenhines a Thywysog Cymru yn yr ardd goffa; “Rydym wedi clywed straeon am dorcalon, ond hefyd am arwriaeth”; y Goeden Goffa yn ysgol Ynysowen a’i chloc ar 9.13."),
+        url="https://www.irishnews.com/news/uk/aberfan-will-always-be-in-our-hearts-king-tells-survivors-and-families-YXIEXH22O5NHFHVJZ5OHF3N77M/", lang="en"),
+    # ---------- MAC and the Free Wales Army (story-mac.html, story-fwa.html, src/mac.py) ----------
+    "mac-wiki": dict(
+        short=("Wikipedia: MAC", "Wikipedia: MAC"),
+        t="Mudiad Amddiffyn Cymru",
+        by=("Wikipedia, drawing on John Humphries, Freedom Fighters (2008), and Wyn Thomas’s interviews", "Wikipedia, ar sail Freedom Fighters John Humphries (2008) a chyfweliadau Wyn Thomas"),
+        note=("MAC’s campaign date by date: Tryweryn and Gellilydan in 1963, Clywedog, the pipelines, the investiture targets, Abergele, the arrests and the trial at Mold.",
+              "Ymgyrch MAC fesul dyddiad: Tryweryn a Gellilydan yn 1963, Clywedog, y pibellau, targedau’r Arwisgo, Abergele, yr arestio a’r achos yn yr Wyddgrug."),
+        url="https://en.wikipedia.org/wiki/Mudiad_Amddiffyn_Cymru", lang="en"),
+    "jenkins-wiki": dict(
+        short=("Wikipedia: John Jenkins", "Wikipedia: John Jenkins"),
+        t="John Barnard Jenkins",
+        by=("Wikipedia, drawing mainly on Wyn Thomas, John Jenkins: The Reluctant Revolutionary? (Y Lolfa, 2019)", "Wikipedia, ar sail John Jenkins: The Reluctant Revolutionary? gan Wyn Thomas (Y Lolfa, 2019) yn bennaf"),
+        note=("His life from Cardiff and Penybryn to the army, his reasons, the campaign, the trial, prison and his death in 2020, with his own words to the police and to Wyn Thomas.",
+              "Ei fywyd o Gaerdydd a Phen-y-bryn i’r fyddin, ei resymau, yr ymgyrch, yr achos, y carchar a’i farw yn 2020, gyda’i eiriau ei hun wrth yr heddlu ac wrth Wyn Thomas."),
+        url="https://en.wikipedia.org/wiki/John_Barnard_Jenkins", lang="en"),
+    "temple-wcia": dict(
+        short=("WCIA", "WCIA"),
+        t="The Bombing of Wales’ Temple of Peace, November 1967",
+        by=("Welsh Centre for International Affairs, Cardiff", "Canolfan Materion Rhyngwladol Cymru, Caerdydd"),
+        note=("The bomb in the early hours of 17 November 1967, on the day civil servants were to meet there to plan the investiture, and the appeal that restored the building.",
+              "Y bom yn oriau mân 17 Tachwedd 1967, ar y diwrnod yr oedd gweision sifil i gwrdd yno i gynllunio’r Arwisgo, a’r apêl a adferodd yr adeilad."),
+        url="https://www.wcia.org.uk/?p=45986", lang="en"),
+    "post-abergele": dict(
+        short=("Daily Post, 2017", "Daily Post, 2017"),
+        t="The ‘Abergele Martyrs’ killed in bomb explosion",
+        by=("Daily Post, north Wales", "Daily Post, gogledd Cymru"),
+        note=("Alwyn Jones, 22, a labourer, and George Taylor, 37, a painter, both council workers; the inquest verdict of accidental death; George Taylor’s family’s doubts.",
+              "Alwyn Jones, 22, labrwr, a George Taylor, 37, paentiwr, y ddau’n gweithio i’r cyngor; dyfarniad y cwest mai damwain oedd hi; amheuon teulu George Taylor."),
+        url="https://www.dailypost.co.uk/news/north-wales-news/abergele-martyrs-killed-bomb-explosion-14852293", lang="en"),
+    "post-plots": dict(
+        short=("Daily Post, 2019", "Daily Post, 2019"),
+        t="The bizarre plots to stop Prince Charles’s investiture",
+        by=("Daily Post, north Wales, for the fiftieth anniversary", "Daily Post, gogledd Cymru, ar yr hanner canmlwyddiant"),
+        note=("MAC’s bombs on investiture day, Ian Cox, John Jenkins’s words that the bombs were ‘never planted or timed to hurt people’, and the Free Wales Army’s publicity, march at Machynlleth and 53-day trial.",
+              "Bomiau MAC ar ddydd yr Arwisgo, Ian Cox, geiriau John Jenkins na chafodd y bomiau ‘erioed eu gosod na’u hamseru i niweidio pobl’, a chyhoeddusrwydd Byddin Rhyddid Cymru, ei gorymdaith ym Machynlleth a’i hachos 53 diwrnod."),
+        url="https://dailypost.co.uk/news/north-wales-news/bizarre-plots-stop-prince-charles-16497777", lang="en"),
+    "post-parade-2009": dict(
+        short=("Daily Post, 2009", "Daily Post, 2009"),
+        t="Parade to commemorate Abergele Martyrs",
+        by=("Daily Post, north Wales", "Daily Post, gogledd Cymru"),
+        note=("The parade on the fortieth anniversary, and the yearly gatherings at Abergele from 1970 to 1999.",
+              "Yr orymdaith ar y deugeinfed pen-blwydd, a’r cynulliadau blynyddol yn Abergele o 1970 hyd 1999."),
+        url="https://www.dailypost.co.uk/news/north-wales-news/parade-commemorate-abergele-martyrs-2787304", lang="en"),
+    "vittle-review": dict(
+        short=("Arwel Vittle, 2023", "Arwel Vittle, 2023"),
+        t="Charles and the Welsh Revolt",
+        by=("Arwel Vittle, Y Lolfa, 2023; the link is Nation.Cymru’s review", "Arwel Vittle, Y Lolfa, 2023; adolygiad Nation.Cymru yw’r ddolen"),
+        note=("The protests against the investiture, peaceful and violent: John Jenkins’s campaign, Ian Cox, the Free Wales Army’s trial, and the police unit set up at Shrewsbury.",
+              "Y protestiadau yn erbyn yr Arwisgo, heddychlon a threisgar: ymgyrch John Jenkins, Ian Cox, achos Byddin Rhyddid Cymru, a’r uned heddlu a sefydlwyd yn Amwythig."),
+        url="https://nation.cymru/culture/monday-review-charles-and-the-welsh-revolt-by-arwel-vittle", lang="en"),
+    "investiture-wiki": dict(
+        short=("Wikipedia: the investiture", "Wikipedia: yr Arwisgo"),
+        t="Investiture of Charles, Prince of Wales",
+        by=("Wikipedia", "Wikipedia"),
+        note=("The ceremony of 1 July 1969, its television audience of about 19 million in Britain, and the protests against it, Dafydd Iwan’s Carlo among them.",
+              "Seremoni 1 Gorffennaf 1969, ei chynulleidfa deledu o tua 19 miliwn ym Mhrydain, a’r protestiadau yn ei herbyn, gan gynnwys Carlo Dafydd Iwan."),
+        url="https://en.wikipedia.org/wiki/Investiture_of_Charles,_Prince_of_Wales", lang="en"),
+    "cayo-dwb": dict(
+        short=("Dictionary of Welsh Biography", "Y Bywgraffiadur Cymreig"),
+        t="Cayo-Evans, William Edward Julian (1937–1995), political activist",
+        by=("Lyn Ebenezer, Dictionary of Welsh Biography, 2016", "Lyn Ebenezer, Y Bywgraffiadur Cymreig, 2016"),
+        note=("His life from Glandenys to Silian: Malaya, the horses, the Free Wales Army from Llyn Celyn in 1965 to the trial of 1969, the government papers of 1999, and how he is remembered.",
+              "Ei fywyd o Landenys i Silian: Malaya, y ceffylau, Byddin Rhyddid Cymru o Lyn Celyn yn 1965 hyd achos 1969, papurau’r llywodraeth yn 1999, a sut y’i cofir."),
+        url="https://biography.wales/article/s10-CAYO-JUL-1937", url_cy="https://bywgraffiadur.cymru/article/s10-CAYO-JUL-1937"),
+    "fwa-wiki": dict(
+        short=("Wikipedia: the FWA", "Wikipedia: y FWA"),
+        t="Free Wales Army",
+        by=("Wikipedia, drawing on Humphries (2008), Wyn Thomas (2019, 2022) and Vittle (2023)", "Wikipedia, ar sail Humphries (2008), Wyn Thomas (2019, 2022) a Vittle (2023)"),
+        note=("The badge and uniforms, Dublin in 1966, the arms found near Tregaron, the arrests of 26 February 1969, the trial: six convicted and three cleared, and the pub named after Cayo.",
+              "Y bathodyn a’r lifrai, Dulyn yn 1966, yr arfau a gafwyd ger Tregaron, arestio 26 Chwefror 1969, yr achos: chwech yn euog a thri’n rhydd, a’r dafarn a enwyd ar ôl Cayo."),
+        url="https://en.wikipedia.org/wiki/Free_Wales_Army", lang="en"),
+    "coslett-wiki": dict(
+        short=("Wikipedia: Dennis Coslett", "Wikipedia: Dennis Coslett"),
+        t="Dennis Coslett",
+        by=("Wikipedia, drawing on obituaries in The Independent, The Daily Telegraph and The Times, 2004", "Wikipedia, ar sail ysgrifau coffa yn The Independent, The Daily Telegraph a The Times, 2004"),
+        note=("His life from Carmarthen and Llangennech to the Free Wales Army, the trial, his books and his funeral.",
+              "Ei fywyd o Gaerfyrddin a Llangennech i Fyddin Rhyddid Cymru, yr achos, ei lyfrau a’i angladd."),
+        url="https://en.wikipedia.org/wiki/Dennis_Coslett", lang="en"),
+
+    # ---------- Tryweryn and Capel Celyn (story-tryweryn.html) ----------
+    "hansard-tryweryn": dict(
+        short=("Hansard, 1957", "Hansard, 1957"),
+        t="Liverpool Corporation Bill [Lords] (By Order), House of Commons, 3 July 1957", by=("Hansard, Parliamentary Debates, volume 572", "Hansard, Dadleuon Seneddol, cyfrol 572"),
+        note=("T. W. Jones, member for Merioneth, moves that the House “declines to give a Second Reading to a Bill which proposes to uproot an entire community”, and says the people of Wales have never felt so intense on any subject this century.",
+              "Mae T. W. Jones, aelod Meirionnydd, yn cynnig bod y Tŷ yn gwrthod rhoi Ail Ddarlleniad i fesur sy’n bwriadu diwreiddio cymuned gyfan, ac yn dweud na fu pobl Cymru erioed yn teimlo mor gryf am unrhyw bwnc yn y ganrif hon."),
+        url="https://api.parliament.uk/historic-hansard/commons/1957/jul/03/liverpool-corporation-bill-lords-by-order", lang="en"),
+    "nlw-tryweryn": dict(
+        short=("National Library of Wales", "Llyfrgell Genedlaethol Cymru"),
+        t="Tryweryn: learning resource", by=("National Library of Wales", "Llyfrgell Genedlaethol Cymru"),
+        note=("The Library’s timeline of the drowning: the Liverpool Daily Post of 22 December 1955, the march through Liverpool on 21 November 1956 and the council’s vote of 95 to 1, the third reading on 31 July 1957 by a majority of 96, the work begun on 2 August 1960, the chapel taken down in June 1964, the opening on 21 October 1965, and the vote of 1997.",
+              "Llinell amser y Llyfrgell o’r boddi: Liverpool Daily Post 22 Rhagfyr 1955, yr orymdaith drwy Lerpwl ar 21 Tachwedd 1956 a phleidlais y cyngor o 95 i 1, y trydydd darlleniad ar 31 Gorffennaf 1957 o fwyafrif o 96, dechrau’r gwaith ar 2 Awst 1960, tynnu’r capel i lawr ym Mehefin 1964, yr agoriad ar 21 Hydref 1965, a phleidlais 1997."),
+        url="https://www.library.wales/discover-learn/education/learning-resources/tryweryn", lang="en"),
+    "dwb-watkin-jones": dict(
+        short=("Dictionary of Welsh Biography", "Y Bywgraffiadur"),
+        t="Jones (Mrowiec), Elizabeth May Watkin (1907–1965), teacher and campaigner", by=("Ffion Mair Jones, Dictionary of Welsh Biography, 2022", "Ffion Mair Jones, Y Bywgraffiadur Cymreig, 2022"),
+        note=("Teacher at Capel Celyn school and secretary of the Capel Celyn Defence Committee, formed on 23 March 1956 with Dafydd Roberts as chairman; her letters, meetings and television appearances; the march through Liverpool led by Gwynfor Evans on 21 November 1956; her death on 21 June 1965.",
+              "Athrawes yn ysgol Capel Celyn ac ysgrifennydd Pwyllgor Amddiffyn Capel Celyn, a ffurfiwyd ar 23 Mawrth 1956 gyda Dafydd Roberts yn gadeirydd; ei llythyrau, ei chyfarfodydd a’i hymddangosiadau ar y teledu; yr orymdaith drwy Lerpwl dan arweiniad Gwynfor Evans ar 21 Tachwedd 1956; ei marw ar 21 Mehefin 1965."),
+        url="https://biography.wales/article/s14-JONE-WAT-1907", url_cy="https://bywgraffiadur.cymru/article/s14-JONE-WAT-1907"),
+    "dwb-dafydd-roberts": dict(
+        short=("Dictionary of Welsh Biography", "Y Bywgraffiadur"),
+        t="Roberts, Dafydd (1892–1965), chairman of Capel Celyn Defence Committee", by=("John Lewis Jones, Dictionary of Welsh Biography, 2001", "John Lewis Jones, Y Bywgraffiadur Cymreig, 2001"),
+        note=("Born at Weirglodd-ddu, later farmed Cae Fadog; a postman for more than forty years and a chapel elder; chairman of the Defence Committee to the end; died 11 October 1965, shortly before the opening of the reservoir, and buried at Llanycil.",
+              "Ganed yn Weirglodd-ddu, ffermiodd Gae Fadog yn ddiweddarach; postmon am fwy na deugain mlynedd a blaenor; cadeirydd y Pwyllgor Amddiffyn hyd y diwedd; bu farw 11 Hydref 1965, ychydig cyn agor y gronfa, a’i gladdu yn Llanycil."),
+        url="https://biography.wales/article/s2-ROBE-DAF-1892", url_cy="https://bywgraffiadur.cymru/article/s2-ROBE-DAF-1892"),
+    "bbc-tryweryn-2005": dict(
+        short=("BBC News, 2005", "BBC News, 2005"),
+        t="Official apology over Tryweryn", by=("BBC News, 19 October 2005", "BBC News, 19 Hydref 2005"),
+        note=("Liverpool City Council votes unanimously for the apology, quoted in full; the First Minister Rhodri Morgan welcomes it, and Elfyn Llwyd says it should be accepted in the way it is offered.",
+              "Mae Cyngor Dinas Lerpwl yn pleidleisio’n unfrydol dros yr ymddiheuriad, a ddyfynnir yn llawn; mae’r Prif Weinidog Rhodri Morgan yn ei groesawu, a dywed Elfyn Llwyd y dylid ei dderbyn yn y ffordd y’i cynigir."),
+        url="https://news.bbc.co.uk/2/hi/uk_news/wales/4354256.stm", lang="en"),
+    "bbc-tryweryn-roderick": dict(
+        short=("BBC News, 2005", "BBC News, 2005"),
+        t="City’s apology for drowned valley", by=("BBC News, 11 October 2005, with Vaughan Roderick", "BBC News, 11 Hydref 2005, gyda Vaughan Roderick"),
+        note=("Mike Storey: “What happened to the people in the valleys was wrong and I think now is the right time to say sorry.” Vaughan Roderick: “It would not be an exaggeration to say that the road to the National Assembly for Wales began in Tryweryn.”",
+              "Mike Storey: roedd yr hyn a ddigwyddodd i bobl y cymoedd yn anghywir, a nawr yw’r amser i ddweud sori. Vaughan Roderick: ni fyddai’n gor-ddweud mai yn Nhryweryn y dechreuodd y ffordd i Gynulliad Cenedlaethol Cymru."),
+        url="https://news.bbc.co.uk/2/hi/uk_news/wales/4331812.stm", lang="en"),
+    "pcw-cofiwch": dict(
+        short=("People’s Collection Wales", "Casgliad y Werin"),
+        t="Cofiwch Dryweryn: one hundred and counting!", by=("People’s Collection Wales", "Casgliad y Werin Cymru"),
+        note=("Meic Stephens painted the first Cofiwch Dryweryn at Llanrhystud; after the wall was attacked in 2019, more than a hundred new murals were painted across Wales.",
+              "Meic Stephens a baentiodd y Cofiwch Dryweryn cyntaf yn Llanrhystud; wedi i’r wal gael ei difrodi yn 2019, paentiwyd mwy na chant o furluniau newydd ledled Cymru."),
+        url="https://www.peoplescollection.wales/blogs/cofiwch-dryweryn-%E2%80%93-one-hundred-and-counting", lang="en"),
 }
+
+from princes import CITES as _PRINCES  # noqa: E402  (the kings and princes of Wales, src/princes.py)
+S.update(_PRINCES)
 
 MARK = re.compile(r"\[\[cite:([a-z0-9,\- ]+)\]\]")
 
