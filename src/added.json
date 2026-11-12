@@ -848,6 +848,7 @@
   "tylwyth": "2026-11-11T20:07:57Z"
  },
  "person": {
+  "adam-of-usk": "2026-11-12T23:20:19Z",
   "alexander-cordell": "2026-11-11T21:07:15Z",
   "alfred-russel-wallace": "2026-11-11T19:49:30Z",
   "alun-hoddinott": "2026-11-12T22:57:16Z",
@@ -901,6 +902,7 @@
   "cai": "2026-11-12T22:03:50Z",
   "caradog-freichfras": "2026-11-12T22:03:50Z",
   "caradog-griffith-rhys-jones": "2026-11-12T22:44:08Z",
+  "caradog-llancarfan": "2026-11-12T23:20:19Z",
   "caradog-prichard": "2026-11-12T22:57:16Z",
   "carannog": "2026-11-12T22:03:50Z",
   "caratacus": "2026-11-11T19:49:30Z",
@@ -984,7 +986,9 @@
   "eleanor-de-montfort": "2026-11-12T22:19:41Z",
   "elen-luyddog": "2026-11-11T20:28:37Z",
   "elffin": "2026-11-12T22:21:56Z",
+  "elfoddw": "2026-11-12T23:20:19Z",
   "elihu-yale": "2026-11-11T20:28:37Z",
+  "elis-gruffydd": "2026-11-12T23:20:19Z",
   "elisedd": "2026-11-11T20:54:05Z",
   "eliwlod": "2026-11-12T22:03:50Z",
   "elizabeth-andrews": "2026-11-11T21:07:15Z",
@@ -1030,6 +1034,7 @@
   "gruffudd-ap-rhys": "2026-11-12T22:19:41Z",
   "gruffydd-robert": "2026-11-11T20:28:37Z",
   "guto-r-glyn": "2026-11-11T19:49:30Z",
+  "gutun-owain": "2026-11-12T23:20:19Z",
   "gwalchmai": "2026-11-12T22:03:50Z",
   "gwallog": "2026-11-12T22:21:56Z",
   "gwen-john": "2026-11-11T19:49:30Z",
@@ -1079,6 +1084,7 @@
   "idris-davies": "2026-11-12T22:44:08Z",
   "idwal-foel": "2026-11-12T22:29:05Z",
   "iestyn-ap-gwrgant": "2026-11-12T22:19:41Z",
+  "ieuan-ap-sulien": "2026-11-12T23:20:19Z",
   "ieuan-fardd": "2026-11-11T21:07:15Z",
   "ifan-ab-owen-edwards": "2026-11-11T19:49:30Z",
   "ifor-williams": "2026-11-12T22:19:41Z",
@@ -1138,6 +1144,7 @@
   "lewis-valentine": "2026-11-11T20:54:05Z",
   "lewsyn-yr-heliwr": "2026-11-12T22:44:08Z",
   "lewys-glyn-cothi": "2026-11-11T20:28:37Z",
+  "lifris": "2026-11-12T23:20:19Z",
   "llacheu": "2026-11-12T22:03:50Z",
   "lleu": "2026-11-12T22:56:02Z",
   "lleurwg": "2026-11-12T22:06:06Z",
@@ -1333,6 +1340,7 @@
   "vernon-watkins": "2026-11-12T22:57:16Z",
   "w-h-davies": "2026-11-11T20:28:37Z",
   "waldo-williams": "2026-11-11T20:28:37Z",
+  "walter-map": "2026-11-12T23:20:19Z",
   "william-edwards": "2026-11-11T20:28:37Z",
   "william-grove": "2026-11-11T19:49:30Z",
   "william-herbert": "2026-11-12T22:19:41Z",
@@ -1553,7 +1561,8 @@
   "unconquered": "2026-11-11T19:49:30Z",
   "welsh-not": "2026-11-12T22:24:58Z",
   "wilson-blackett": "2026-11-12T12:51:57Z",
-  "world": "2026-11-11T19:49:30Z"
+  "world": "2026-11-11T19:49:30Z",
+  "writers": "2026-11-12T23:20:19Z"
  },
  "topic": {
   "abroad": "2026-11-12T00:41:01Z",
