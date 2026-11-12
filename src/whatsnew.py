@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "23 more people of twentieth-century Wales", "23 yn rhagor o bobl Cymru’r ugeinfed ganrif",
+     "New pages on the writers Caradog Prichard, T. Rowland Hughes, Vernon Watkins, Glyn Jones, Gwyn Thomas, Rhys Davies and David Jones, the painter Ceri Richards, Clara Novello Davies, Merêd, William Mathias, Alun Hoddinott, Dame Margaret Price, Emlyn Williams, Sir Stanley Baker, Desmond Llewelyn, the suffragette Rachel Barrett, the historian Gwyn Alf Williams, and the sporting heroes Cliff Morgan, Ray Gravell, Ivor Allchurch, Howard Winstone and Dai Rees.",
+     "Tudalennau newydd ar yr awduron Caradog Prichard, T. Rowland Hughes, Vernon Watkins, Glyn Jones, Gwyn Thomas, Rhys Davies a David Jones, yr arlunydd Ceri Richards, Clara Novello Davies, Merêd, William Mathias, Alun Hoddinott, y Fonesig Margaret Price, Emlyn Williams, Syr Stanley Baker, Desmond Llewelyn, y swffragét Rachel Barrett, yr hanesydd Gwyn Alf Williams, a’r arwyr chwaraeon Cliff Morgan, Ray Gravell, Ivor Allchurch, Howard Winstone a Dai Rees.",
+     "people.html"),
     ("2026-11-12", "Saints, abbeys and holy places to visit", "Seintiau, abatai a mannau sanctaidd i ymweld â nhw",
      "Twenty new places and fuller pages on others: Strata Florida, Valle Crucis, Tintern, Llanthony, Penmon, Basingwerk, Margam, Bardsey, Llanilltud Fawr, St Winefride’s Well, Pennant Melangell, Nevern, Clynnog Fawr, Llanddewi Brefi, Llancarfan, Llanbadarn Fawr and the cathedrals of Bangor, Llandaf and St Asaph, each with a Visiting box.",
      "Ugain lle newydd a thudalennau llawnach ar eraill: Ystrad Fflur, Glyn y Groes, Tyndyrn, Llanddewi Nant Hodni, Penmon, Dinas Basing, Margam, Enlli, Llanilltud Fawr, Ffynnon Gwenffrewi, Pennant Melangell, Nanhyfer, Clynnog Fawr, Llanddewi Brefi, Llancarfan, Llanbadarn Fawr ac eglwysi cadeiriol Bangor, Llandaf a Llanelwy, pob un gyda blwch Ymweld.",
