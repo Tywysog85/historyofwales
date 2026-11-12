@@ -798,7 +798,8 @@ def prose(pars, cls="prose"):
         if a.startswith("!! "):  # a picture from the gallery, with its full credit (see photo_fig)
             if a[3:].strip() not in GP.GALLERY:
                 raise SystemExit(f"prose(): unknown gallery picture '{a[3:].strip()}' (see src/gallery_photos.py)")
-            out += photo_fig(None, "in-text", a[3:].strip())
+            g = GP.GALLERY[a[3:].strip()]
+            out += photo_fig(None, "in-text portrait" if g[7] > g[6] else "in-text", a[3:].strip())  # tall pictures keep their faces
         elif a.startswith("## "):
             out += f"<h2>{e(a[3:])}</h2>"
         elif a.startswith("> "):
