@@ -93,13 +93,23 @@ class _NoRedirect(urllib.request.HTTPRedirectHandler):
         return None
 
 
+def archived(url):
+    """For a site that turns robots away (Britannica, Art UK): True if the Internet Archive has seen the page open."""
+    try:
+        r = api("https://archive.org/wayback/available", url=url)
+        snap = r.get("archived_snapshots", {}).get("closest", {})
+        return bool(snap.get("available")) and str(snap.get("status")) == "200"
+    except SystemExit:
+        return False
+
+
 def opens(url):
-    """(True if the link opens without an error, the answer's status code)."""
+    """(True if the link opens without an error, how it was checked)."""
     host = urllib.parse.urlsplit(url).netloc
     want = REDIRECTS_TO.get(host)
     opener = urllib.request.build_opener(_NoRedirect) if want else urllib.request.build_opener()
     code = 0
-    for attempt in range(3):
+    for attempt in range(6):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "text/html,*/*"})
             with opener.open(req, timeout=30) as r:
@@ -109,8 +119,10 @@ def opens(url):
             if want and 300 <= ex.code < 400:
                 return (ex.headers.get("Location") or "").startswith(want), ex.code
             if ex.code in (429, 500, 502, 503, 504):
-                time.sleep(3 * (attempt + 1))
+                time.sleep(10 * (attempt + 1))
                 continue
+            if ex.code in (401, 403):
+                return archived(url), f"{ex.code}, checked at the Internet Archive"
             return False, ex.code
         except Exception:  # noqa: BLE001
             time.sleep(2)
@@ -182,7 +194,7 @@ def main():
     # 3. Open every link once and drop any that doesn't open.
     from concurrent.futures import ThreadPoolExecutor
     urls = sorted({u for v in out.values() for k, u in v.items() if k != "cy"})
-    with ThreadPoolExecutor(8) as pool:
+    with ThreadPoolExecutor(4) as pool:
         res = dict(zip(urls, pool.map(opens, urls)))
     ok = {u: r[0] for u, r in res.items()}
     print(f"Opened {len(urls)} links: {sum(not v for v in ok.values())} did not open and are left out")
@@ -191,7 +203,8 @@ def main():
         mine = sorted({v[k] for v in out.values() if k in v})
         if mine:
             codes = Counter(res[u][1] for u in mine if not ok[u])
-            print(f"  {k}: {len(mine)} found, {sum(ok[u] for u in mine)} open; did not open: {dict(codes)}")
+            via = sum(1 for u in mine if ok[u] and "Archive" in str(res[u][1]))
+            print(f"  {k}: {len(mine)} found, {sum(ok[u] for u in mine)} open ({via} of them checked at the Internet Archive); did not open: {dict(codes)}")
             for u in [u for u in mine if not ok[u]][:5]:
                 print(f"    e.g. {res[u][1]} {u}")
     out = {key: {k: u for k, u in v.items() if k == "cy" or ok[u]} for key, v in out.items()}
