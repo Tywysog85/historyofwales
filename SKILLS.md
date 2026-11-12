@@ -467,6 +467,16 @@ Behind the dragon, the mountains, the moor and the castle are real 3D too, drawn
 - It was set up through a Remote Control session on the PC, because the remote folder tools can read and copy files but cannot delete them.
 - To stop it: Task Scheduler, then disable or delete "History of Wales daily update".
 
+## A site-wide title sweep (November 2026)
+
+Learnt while making sure every king on the site is called a king (rule "Kings are kings" in `EDITORIAL.md`).
+
+- **Find every title first.** Search `src/` and `build.py` for the words in both languages: `prince`, `chief`, `war leader`, `leader`, `lord`, `ruler` and `tywysog`, `arweinydd`, `arglwydd`, `rheolwr`, `rhyfelwr`. Save the hits with about 70 characters either side and read them all. Most are right (the medieval princes), so judge each one rather than replacing blindly.
+- **Check the short titles too.** The line under a person's name is the 6th and 7th field of each tuple in `data.py`, `more.py`, `people2*.py` and `pride.py`. List them with `awk -F'"'` and read down the rulers.
+- **Replace with a script of exact pairs.** Put every `(file, old, new)` pair, English and Welsh together, in one small Python script that counts each match and prints MISSING when a pair finds nothing. Nothing is changed by a loose pattern.
+- **Mind Welsh mutations.** After "yn", "tywysog" is "dywysog" and "brenin" is "frenin"; after "ei" (his) it is "ei frenin"; after "eu", "arglwydd" is "harglwydd" but "brenin" stays "brenin".
+
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.

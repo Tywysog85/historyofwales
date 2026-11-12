@@ -3,9 +3,9 @@
 
 PEOPLE_LONG = {
  "caratacus": (
-  ["Caratacus was a prince of the Catuvellauni, a tribe of south-east Britain. When Rome invaded in 43 AD he fled west and led the Silures of south Wales and the Ordovices of mid Wales in a long guerrilla war.",
+  ["Caratacus was a king of the Catuvellauni, the people of south-east Britain, and a son of the great King Cunobelinus. When Rome invaded in 43 AD he fled west and led the Silures of south Wales and the Ordovices of mid Wales in a long guerrilla war.",
    "Defeated in battle around 51 AD, he sought refuge with Cartimandua, queen of the Brigantes, who handed him to the Romans. Paraded in Rome, he spoke so boldly before the Emperor Claudius that he and his family were spared. Welsh tradition remembers him as Caradog."],
-  ["Tywysog o lwyth y Catuvellauni yn ne-ddwyrain Prydain oedd Caradog. Pan ymosododd Rhufain yn 43 OC ffodd i’r gorllewin, gan arwain Silwriaid y de a’r Ordofigiaid yng nghanolbarth Cymru mewn rhyfel herwfilwrol hir.",
+  ["Brenin y Catuvellauni yn ne-ddwyrain Prydain oedd Caradog, ac un o feibion y Brenin Cynfelyn mawr. Pan ymosododd Rhufain yn 43 OC ffodd i’r gorllewin, gan arwain Silwriaid y de a’r Ordofigiaid yng nghanolbarth Cymru mewn rhyfel herwfilwrol hir.",
    "Ar ôl colli brwydr tua 51 OC, ceisiodd loches gyda Cartimandua, brenhines y Brigantes, ond fe’i trosglwyddodd hi ef i’r Rhufeiniaid. Yn Rhufain siaradodd mor eofn gerbron yr Ymerawdwr Claudius nes iddo ef a’i deulu gael eu harbed."]),
  "dewi-sant": (
   ["Dewi was a 6th-century monk and bishop who founded a strict monastic community at Glyn Rhosyn, where St Davids Cathedral now stands. His monks ploughed by hand, drank only water and ate bread and herbs.",

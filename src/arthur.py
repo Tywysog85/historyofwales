@@ -65,7 +65,7 @@ PERSON_LONG = (
 
   "## The Triads",
   "Trioedd Ynys Prydain, the Triads of the Island of Britain, are the memory-lists of the Welsh poets, with the heroes of the island set out in threes. Arthur stands above them. The very first triad names the three royal seats of the island, and the first of all is in Wales:",
-  "> Arthur as chief prince in Mynyw, and Dewi as chief bishop, and Maelgwn Gwynedd as chief elder. | Trioedd Ynys Prydain, the first triad",
+  "> Arthur as chief king in Mynyw, and Dewi as chief bishop, and Maelgwn Gwynedd as chief elder. | Trioedd Ynys Prydain, the first triad",
   "When the triads name the Three Generous Men of the Island of Britain, Nudd, Mordaf and Rhydderch, they add one line more: ‘and Arthur himself was more generous than the three’. Several of the triads work this way. Three famous men are named, and then Arthur is set above them all.",
 
   "## Culhwch ac Olwen",

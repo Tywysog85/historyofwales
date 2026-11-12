@@ -171,10 +171,10 @@ add("Q39006486", "welsh", "Owain Glyndŵr", "Owain Glyndŵr", "14th century",
     "The moated platform of Owain Glyndŵr’s house at Glyndyfrdwy, beside his mount.",
     "Llwyfan ffosog tŷ Owain Glyndŵr yng Nglyndyfrdwy, wrth ymyl ei fwnt.",
     ["person-owain-glyndwr.html"])
-add("Q13131955", "welsh", "Probably Cadwgan ap Bleddyn, prince of Powys", "Cadwgan ap Bleddyn, tywysog Powys, yn ôl pob tebyg", "c. 1111",
+add("Q13131955", "welsh", "Probably Cadwgan ap Bleddyn, king of Powys", "Cadwgan ap Bleddyn, brenin Powys, yn ôl pob tebyg", "c. 1111",
     "Brut y Tywysogion says Cadwgan was building a castle at Welshpool in 1111. This motte in the town is thought to be it.",
     "Dywed Brut y Tywysogion fod Cadwgan yn codi castell yn y Trallwng yn 1111. Credir mai’r mwnt hwn yn y dref yw hwnnw.")
-add("Q13126890", "welsh", "Madog ap Maredudd, prince of Powys", "Madog ap Maredudd, tywysog Powys", "1156",
+add("Q13126890", "welsh", "Madog ap Maredudd, king of Powys", "Madog ap Maredudd, brenin Powys", "1156",
     "Brut y Tywysogion records Madog building a castle in Caereinion in 1156.",
     "Mae Brut y Tywysogion yn cofnodi Madog yn codi castell yng Nghaereinion yn 1156.")
 add("Q20600781", "welsh", "Owain Gwynedd", "Owain Gwynedd", "1149",

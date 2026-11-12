@@ -7,6 +7,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Kings called kings", "Galw brenhinoedd yn frenhinoedd",
+     "Caratacus, Cassivellaunus, Cunedda, Urien, Brochwel and the other early rulers of Britain and Wales are now called what they were: kings.",
+     "Mae Caradog, Caswallon, Cunedda, Urien, Brochwel a rheolwyr cynnar eraill Prydain a Chymru bellach yn cael eu galw’r hyn oeddent: brenhinoedd.",
+     "person-caratacus.html"),
     ("2026-11-12", "192 battles, raids and sieges, and who each was against", "192 o frwydrau, cyrchoedd a gwarchaeau, ac yn erbyn pwy",
      "The battles page now lists 192 battles, raids and sieges: every named battle in the Welsh chronicles, the raids they record (with the place where they give one), and the battles abroad where Welsh regiments fought, from Namur in 1695 to Helmand. Pick who they were against to see just those. Key documents has grown to 38.",
      "Mae tudalen y brwydrau bellach yn rhestru 192 o frwydrau, cyrchoedd a gwarchaeau: pob brwydr a enwir yng nghroniclau Cymru, y cyrchoedd a gofnodant (gyda’r lle lle maent yn ei roi), a’r brwydrau tramor lle ymladdodd catrodau Cymreig, o Namur yn 1695 i Helmand. Dewiswch yn erbyn pwy i weld y rheini’n unig. Mae’r dogfennau allweddol wedi tyfu i 38.",

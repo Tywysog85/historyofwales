@@ -58,8 +58,8 @@ EVENTS = [
   "Iron Age peoples, among them the Silures, Ordovices, Demetae and Deceangli, build hundreds of hillforts across Wales.",
   "Mae pobloedd Oes yr Haearn, yn eu plith y Silwriaid, yr Ordofigiaid, y Demetae a’r Deceangli, yn codi cannoedd o fryngaerau ledled Cymru.",0,"","Prehistoric_Wales"),
  ("ancient",51,0,0,"","Caratacus’s last stand","Brwydr olaf Caradog",
-  "The British war leader, fighting with the Silures and Ordovices, is defeated by Rome and later betrayed.",
-  "Mae’r arweinydd Brythonig, yn ymladd gyda’r Silwriaid a’r Ordofigiaid, yn cael ei drechu gan Rufain ac yna’n cael ei fradychu.",0,"","Caratacus"),
+  "The British king, fighting with the Silures and Ordovices, is defeated by Rome and later betrayed.",
+  "Mae’r brenin Brythonig, yn ymladd gyda’r Silwriaid a’r Ordofigiaid, yn cael ei drechu gan Rufain ac yna’n cael ei fradychu.",0,"","Caratacus"),
  ("ancient",60,0,0,"","Rome attacks Ynys Môn","Rhufain yn ymosod ar Ynys Môn",
   "Roman troops cross the Menai Strait to destroy the druids’ stronghold. Wales is under Roman control by about 78 AD.",
   "Mae milwyr Rhufain yn croesi’r Fenai i ddinistrio cadarnle’r derwyddon. Erbyn tua 78 OC mae Cymru dan reolaeth Rhufain.",1,"","Wales_in_the_Roman_era"),
@@ -85,8 +85,8 @@ EVENTS = [
   "Welsh law is gathered under Hywel the Good and stays in use for some six hundred years.",
   "Casglir cyfraith Cymru dan Hywel Dda, a bydd yn cael ei defnyddio am ryw chwe chan mlynedd.",1,"hendygwyn","Welsh_law"),
  ("medieval",1055,0,0,"","One king for all Wales","Un brenin i Gymru gyfan",
-  "Gruffudd ap Llywelyn becomes the only ruler ever to unite all of Wales, until his death in 1063.",
-  "Daw Gruffudd ap Llywelyn yr unig reolwr erioed i uno Cymru gyfan, hyd ei farwolaeth yn 1063.",0,"","Gruffydd_ap_Llywelyn"),
+  "Gruffudd ap Llywelyn becomes the only king ever to unite all of Wales, until his death in 1063.",
+  "Daw Gruffudd ap Llywelyn yr unig frenin erioed i uno Cymru gyfan, hyd ei farwolaeth yn 1063.",0,"","Gruffydd_ap_Llywelyn"),
  ("medieval",1081,0,0,"","Battle of Mynydd Carn","Brwydr Mynydd Carn",
   "Gruffudd ap Cynan and Rhys ap Tewdwr win back their kingdoms of Gwynedd and Deheubarth.",
   "Mae Gruffudd ap Cynan a Rhys ap Tewdwr yn adennill eu teyrnasoedd, Gwynedd a Deheubarth.",0,"","Battle_of_Mynydd_Carn"),
@@ -331,7 +331,7 @@ PLACES = [
 
 # (slug, era, dates, nameEn, nameCy, epithetEn, epithetCy, bioEn, bioCy, wikipediaTitle)
 PEOPLE = [
- ("caratacus","ancient","fl. 1st century","Caratacus","Caradog","British war leader","Arweinydd Brythonig",
+ ("caratacus","ancient","fl. 1st century","Caratacus","Caradog","British king who fought Rome","Y brenin Brythonig a ymladdodd Rufain",
   "Led British resistance to Rome alongside the Silures and Ordovices. Captured and taken to Rome, he won his freedom with a famous speech.",
   "Arweiniodd y gwrthwynebiad i Rufain gyda’r Silwriaid a’r Ordofigiaid. Ar ôl ei ddal a’i gludo i Rufain, enillodd ei ryddid ag araith enwog.","Caratacus"),
  ("dewi-sant","ancient","d. c. 589","Saint David","Dewi Sant","Patron saint of Wales","Nawddsant Cymru",
