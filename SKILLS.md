@@ -659,6 +659,15 @@ Learnt while simplifying the home page.
 - The home page's "Did you know?" fact is drawn again by `app.js` when "Another" is pressed, so `FACTS` goes into the page data already turned into HTML (`CITE.html_text`).
 - Check sources with the WebFetch tool when the cloud can't reach a site directly, and quote the source's own words in the note where you can.
 
+### Place pages people can visit: the Visiting box (November 2026)
+
+- New historic places, and longer text for existing ones, go in `src/places3.py`: `NEW` (same shape as `places2.py`), `LONG` (paragraphs, `## ` sub-headings, `[[cite:key]]` sources), `PEOPLE` (person slugs linked with the place) and `LINKS` (other pages on the site). The sources used there are in `CITES` at the bottom and are added to `cites.S`; keys start with `pl-`.
+- A person slug with no page yet is simply skipped, and shows up by itself once someone adds that person. Person pages list "Places to visit" back from the same `PEOPLE` lists.
+- `src/visit.py` holds, for each place, who looks after it (Cadw, the National Trust, a council, a church, private), the official page, the postcode and how you get in (free, ticketed, open land, private land). Never copy opening times or prices: they change. Link the official page instead.
+- Cadw's site lists every place at `cadw.gov.wales/visit/places-to-visit/find-a-place-to-visit/map`; each place page gives its postcode and whether entry is free. National Trust places are at `nationaltrust.org.uk/visit/wales/<name>`. Both sites are blocked from the cloud machine's own network, but the WebFetch tool can read them.
+- The Directions link is Google Maps with the place's latitude and longitude, so it works even where there is no postcode.
+- The map card shows the same in one line (`vis` in the page data, drawn in `selectPlace()` in `src/app.js` and `ssr_visit_line()` in `build.py`).
+- A new place's picture: one line in `PAGE` in `src/pictures.py`. The map card picks it up too.
 ### A photograph inside a long read (November 2026)
 
 Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.html`).

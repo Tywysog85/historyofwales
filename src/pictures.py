@@ -35,6 +35,20 @@ ERA = dict(
 )
 
 PAGE = {
+    # historic places of importance (src/places3.py)
+    "place-garthcelyn.html": "g:person-siwan",
+    "place-dolwyddelan.html": "g:cast-dolwyddelan",
+    "place-dinasemrys.html": "g:land-dinas-emrys",
+    "place-llysrhosyr.html": "g:anci-llys-rhosyr",
+    "place-cricieth.html": "g:cast-criccieth",
+    "place-dolforwyn.html": "g:person-llywelyn-ap-gruffudd",
+    "place-dryslwyn.html": "g:cast-dryslwyn",
+    "place-carregcennen.html": "g:cast-carreg-cennen",
+    "place-ewloe.html": "g:cast-ewloe",
+    "place-dinasbran.html": "g:cast-dinas-bran",
+    "place-cwmhir.html": "g:holy-cwmhir",
+    "place-powis.html": "g:cast-powis",
+    "place-kidwelly.html": "g:cast-kidwelly",
     # long reads
     "story-castles.html": "g:place-caernarfon",
     "story-language.html": "g:trea-bible-1588",
