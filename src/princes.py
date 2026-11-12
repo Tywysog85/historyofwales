@@ -395,6 +395,10 @@ CITES = {
 import princes2 as _P2X  # noqa: E402
 LONG.update(_P2X.LONG)
 CITES.update(_P2X.CITES)
+# Batch 3 (Siwan, the two Gwenllians, Owain Lawgoch) lives in princes3.py.
+import princes3 as _P3X  # noqa: E402
+LONG.update(_P3X.LONG)
+CITES.update(_P3X.CITES)
 
 # ---------------------------------------------------------------- the block on every page of the set
 # Only people with a page on the site are shown, so ids for pages still to come can be listed already.
