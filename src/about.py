@@ -146,9 +146,9 @@ def about_page():
     facts_html = '<ul class="about-facts">' + "".join(f'<li><b>{n}</b><span>{bi(a, b)}</span></li>' for n, a, b in facts) + "</ul>"
 
     what = g["paras"](
-        ["History of Wales (Hanes Cymru) tells the story of Wales from the first people in the caves, 230,000 years ago, to the Senedd today, in English and in Cymraeg.",
+        ["History of Wales (Hanes Cymru) tells the story of Wales from the first people living in caves 230,000 years ago, to the present day. It is written in both English and in Cymraeg.",
          "It is written for anyone who wants to know the history of Wales. The site is free to read and carries no adverts."],
-        ["Mae Hanes Cymru yn adrodd stori Cymru o’r bobl gyntaf yn yr ogofâu, 230,000 o flynyddoedd yn ôl, hyd at y Senedd heddiw, yn Gymraeg ac yn Saesneg.",
+        ["Mae Hanes Cymru yn adrodd stori Cymru o’r bobl gyntaf a fu’n byw mewn ogofâu 230,000 o flynyddoedd yn ôl, hyd heddiw. Mae wedi’i hysgrifennu yn Gymraeg ac yn Saesneg.",
          "Fe’i hysgrifennwyd ar gyfer unrhyw un sydd am wybod hanes Cymru. Mae’r wefan am ddim i’w darllen ac nid oes hysbysebion arni."], "ab-text")
 
     who_en = [f"History of Wales is written and looked after by {en}."] if AUTHOR_EN else ["History of Wales is written and looked after by one person, for love of Wales."]
