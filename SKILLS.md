@@ -667,9 +667,9 @@ Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.
 - The picture must already be in the gallery (`src/gallery_photos.py`, files in `src/static/gallery/`); an unknown id stops the build. A tall picture is shown as a portrait (narrower, cropped from near the top) so faces are not cut off.
 - The picture at the top of a long read comes from `PAGE` in `src/pictures.py` (`"story-tryweryn.html": "g:place-celyn@50% 55%"`), with its credit under the title, so don't repeat that picture in the text.
 
-### Pictures and sources inside a long read (November 2026)
+### Commons pictures inside a long read (November 2026)
 
-- A long read can carry pictures in the middle of its text. Give the story a `figs` dict (key → a gallery id, or a Commons tuple: file, author, licence, licence link, caption EN, caption CY, width, height) and put a line `"!! key"` where the picture goes, in both `pEn` and `pCy`. `prose()` in `build.py` draws it with `lit_fig()`, credit and all. Example: `src/industry.py`.
+- Besides `!! <gallery id>`, a long read can show a Commons picture that is not in the gallery: give the story a `figs` dict (key → a gallery id, or a Commons tuple: file, author, licence, licence link, caption EN, caption CY, width, height) and put a line `"!! key"` where the picture goes, in both `pEn` and `pCy`. `prose()` in `build.py` draws it with `lit_fig()`, credit and all. Example: `src/industry.py`.
 - New Commons files load straight from Wikimedia until the "Fetch photos from Wikimedia Commons" workflow is run on the branch; it then keeps copies on the site.
 
 ## Working together
