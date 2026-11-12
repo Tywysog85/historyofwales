@@ -652,3 +652,7 @@ EVENTS = sorted(EVENTS + _BRE, key=lambda ev: ev[1])
 # ---------- Prince Madog's voyage and the Welsh Indians (src/madog.py) ----------
 from madog import EVENTS as _MDE
 EVENTS = sorted(EVENTS + _MDE, key=lambda ev: ev[1])
+
+# ---------- King Caradog against Rome (src/caradog.py) ----------
+from caradog import EVENTS as _CRE
+EVENTS = sorted(EVENTS + _CRE, key=lambda ev: ev[1])
