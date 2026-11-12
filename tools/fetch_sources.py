@@ -84,21 +84,37 @@ def prop(guess, label):
     return pid, fmt
 
 
+# Sites that turn away robots but send a real reader on to the article: the first answer must be a redirect to here.
+REDIRECTS_TO = {"www.oxforddnb.com": "https://academic.oup.com/oxford-dictionary-of-national-biography/"}
+
+
+class _NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, *a, **k):
+        return None
+
+
 def opens(url):
-    """True if the link opens (after redirects) without an error."""
+    """(True if the link opens without an error, the answer's status code)."""
+    host = urllib.parse.urlsplit(url).netloc
+    want = REDIRECTS_TO.get(host)
+    opener = urllib.request.build_opener(_NoRedirect) if want else urllib.request.build_opener()
+    code = 0
     for attempt in range(3):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "text/html,*/*"})
-            with urllib.request.urlopen(req, timeout=30) as r:
-                return r.status < 400
+            with opener.open(req, timeout=30) as r:
+                return (not want and r.status < 400), r.status
         except urllib.error.HTTPError as ex:
+            code = ex.code
+            if want and 300 <= ex.code < 400:
+                return (ex.headers.get("Location") or "").startswith(want), ex.code
             if ex.code in (429, 500, 502, 503, 504):
                 time.sleep(3 * (attempt + 1))
                 continue
-            return False
+            return False, ex.code
         except Exception:  # noqa: BLE001
             time.sleep(2)
-    return False
+    return False, code
 
 
 def main():
@@ -167,11 +183,17 @@ def main():
     from concurrent.futures import ThreadPoolExecutor
     urls = sorted({u for v in out.values() for k, u in v.items() if k != "cy"})
     with ThreadPoolExecutor(8) as pool:
-        ok = dict(zip(urls, pool.map(opens, urls)))
-    bad = [u for u in urls if not ok[u]]
-    print(f"Opened {len(urls)} links: {len(bad)} did not open and are left out")
-    for u in bad:
-        print("  did not open:", u)
+        res = dict(zip(urls, pool.map(opens, urls)))
+    ok = {u: r[0] for u, r in res.items()}
+    print(f"Opened {len(urls)} links: {sum(not v for v in ok.values())} did not open and are left out")
+    from collections import Counter
+    for k in WANT:
+        mine = sorted({v[k] for v in out.values() if k in v})
+        if mine:
+            codes = Counter(res[u][1] for u in mine if not ok[u])
+            print(f"  {k}: {len(mine)} found, {sum(ok[u] for u in mine)} open; did not open: {dict(codes)}")
+            for u in [u for u in mine if not ok[u]][:5]:
+                print(f"    e.g. {res[u][1]} {u}")
     out = {key: {k: u for k, u in v.items() if k == "cy" or ok[u]} for key, v in out.items()}
     out = {key: v for key, v in out.items() if v}
     out = dict(sorted(out.items()))
