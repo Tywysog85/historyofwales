@@ -137,7 +137,12 @@ footer nav a:hover { color: var(--ink) }
 .g-y { font-family: var(--f-mono); font-size: .78rem; color: var(--muted) }
 .game-row { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; justify-content: space-between }
 .game-row .q-fb { margin: 0 }
-.words .play { margin-left: .4rem; background: none; border: 1px solid var(--line); color: var(--ink); border-radius: 999px; width: 1.9rem; height: 1.9rem; cursor: pointer; font-size: .7rem; vertical-align: middle }
+.words .say { display: flex; align-items: center; gap: .5rem }
+.words .say .g { font-size: inherit; color: inherit; flex: 0 1 auto; min-width: 0 }
+.words .say .g i { font-style: normal; white-space: nowrap }
+.words .play { flex: none; background: none; border: 1px solid var(--line); color: var(--ink); border-radius: 999px; width: 1.9rem; height: 1.9rem; cursor: pointer; font-size: .7rem; vertical-align: middle }
+.words-credit { margin: .7rem 0 0; font-size: .8rem; color: var(--muted) }
+.words-credit a { color: inherit; text-decoration: underline; text-underline-offset: 2px }
 .words .play:hover { border-color: var(--dragon); color: var(--dragon) }
 .photo { margin: 0 0 1.6rem; display: grid; gap: .55rem; max-width: 52rem }
 .photo img { width: 100%; max-width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); background: var(--slate) }

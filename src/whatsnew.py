@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Hear real Welsh on every play button", "Clywch Gymraeg go iawn ar bob botwm sain",
+     "Every Welsh word and phrase on the site now plays proper Welsh: real speakers from Lingua Libre where they have recorded it, and Bangor University’s Welsh voice for the rest, the same on every phone and computer.",
+     "Mae pob gair ac ymadrodd Cymraeg ar y wefan bellach yn chwarae Cymraeg iawn: siaradwyr go iawn o Lingua Libre lle maen nhw wedi’i recordio, a llais Cymraeg Prifysgol Bangor ar gyfer y gweddill, yr un fath ar bob ffôn a chyfrifiadur.",
+     "welsh.html#voices"),
     ("2026-11-12", "Saint Patrick, the Briton from Wales", "Padrig Sant, y Brython o Gymru",
      "A new long read: the patron saint of Ireland in his own words, a deacon’s son of the Britons taken by Irish raiders at sixteen, and the Welsh tradition that his home was Banwen in the Dulais valley, with Llanilltud, Glyn Rhosyn and Llanbadrig.",
      "Erthygl newydd: nawddsant Iwerddon yn ei eiriau ei hun, mab i ddiacon o Frythoniaid a gipiwyd gan ysbeilwyr o Iwerddon yn un ar bymtheg oed, a thraddodiad Cymru mai Banwen yng nghwm Dulais oedd ei gartref, gyda Llanilltud, Glyn Rhosyn a Llanbadrig.",
