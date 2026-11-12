@@ -617,6 +617,10 @@ from kingdoms import KINGDOMS
 from places2 import MORE_PLACES
 PLACES = PLACES + MORE_PLACES
 
+# ---------- historic places of importance: royal seats, abbeys, forts, and places to visit (src/places3.py) ----------
+import places3 as _PL3
+PLACES = PLACES + _PL3.NEW
+
 
 # ---------- proud history (src/pride.py): rewordings, new people and events ----------
 import pride as _PR

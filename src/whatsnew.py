@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Dinefwr and the courts and castles of the princes", "Dinefwr a llysoedd a chestyll y tywysogion",
+     "Full pages on Dinefwr, Aberffraw and Mathrafal, the three royal seats of Wales, and on Garth Celyn, Llys Rhosyr, Dolwyddelan, Dolbadarn, Castell y Bere, Criccieth, Dolforwyn, Dryslwyn, Dinas Brân, Abbey Cwmhir, Cilmeri and more, each with the people linked to it and a Visiting box: who looks after it, the official page, postcode and directions.",
+     "Tudalennau llawn ar Ddinefwr, Aberffraw a Mathrafal, tri llys brenhinol Cymru, ac ar Lys Rhosyr, Garth Celyn, Dolwyddelan, Dolbadarn, Castell y Bere, Cricieth, Dolforwyn, Dryslwyn, Dinas Brân, Abaty Cwm-hir, Cilmeri a mwy, pob un gyda’r bobl sy’n gysylltiedig ag ef a blwch Ymweld: pwy sy’n gofalu amdano, y dudalen swyddogol, y cod post a chyfarwyddiadau.",
+     "place-dinefwr.html"),
     ("2026-11-12", "Illtud, Dewi Sant and 34 kings and saints of the sixth century", "Illtud, Dewi Sant a 34 o frenhinoedd a saint y chweched ganrif",
      "Full pages on Saint Illtud and his school at Llanilltud Fawr, the oldest centre of learning in Britain, and on Dewi Sant, from Non and Glyn Rhosyn to Brefi and the little things; and a page each for the kings of the age, Maelgwn’s sons, Brochwel, Rhydderch Hael, Llywarch Hen, and saints from Brynach and Seiriol to Cadfan and Malo.",
      "Tudalennau llawn ar Sant Illtud a’i ysgol yn Llanilltud Fawr, canolfan ddysg hynaf Prydain, ac ar Dewi Sant, o Non a Glyn Rhosyn i Frefi a’r pethau bychain; a thudalen yr un i frenhinoedd yr oes, meibion Maelgwn, Brochwel, Rhydderch Hael, Llywarch Hen, a saint o Frynach a Seiriol i Gadfan a Malo.",
