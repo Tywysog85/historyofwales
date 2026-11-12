@@ -52,8 +52,8 @@ EVENTS = [
   "Farming communities raise stone tombs such as Pentre Ifan. Later, bluestones from the Preseli Hills are carried to Stonehenge.",
   "Mae cymunedau amaethyddol yn codi beddrodau cerrig fel Pentre Ifan. Yn ddiweddarach, cludir cerrig gleision o’r Preseli i Gôr y Cewri.",0,"pentreifan","Pentre_Ifan"),
  ("ancient",-2000,1,0,"","Copper from the Great Orme","Copr o’r Gogarth",
-  "Bronze Age miners begin digging what becomes one of the largest prehistoric mines in the world.",
-  "Mae mwynwyr Oes yr Efydd yn dechrau cloddio un o’r mwyngloddiau cynhanesyddol mwyaf yn y byd.",0,"orme","Great_Orme_Mines"),
+  "Bronze Age miners begin digging what becomes one of the largest prehistoric mines in the world.[[cite:orme-antiquity,orme-gsl,orme-guinness]]",
+  "Mae mwynwyr Oes yr Efydd yn dechrau cloddio un o’r mwyngloddiau cynhanesyddol mwyaf yn y byd.[[cite:orme-antiquity,orme-gsl,orme-guinness]]",0,"orme","Great_Orme_Mines"),
  ("ancient",-600,1,0,"","The hillfort tribes","Llwythau’r bryngaerau",
   "Iron Age peoples, among them the Silures, Ordovices, Demetae and Deceangli, build hundreds of hillforts across Wales.",
   "Mae pobloedd Oes yr Haearn, yn eu plith y Silwriaid, yr Ordofigiaid, y Demetae a’r Deceangli, yn codi cannoedd o fryngaerau ledled Cymru.",0,"","Prehistoric_Wales"),
@@ -277,8 +277,8 @@ PLACES = [
   dEn="A burial chamber whose 16-tonne capstone still balances on three uprights, looking out over the Preseli Hills where Stonehenge’s bluestones were quarried.",
   dCy="Siambr gladdu y mae ei maen capan 16 tunnell yn dal i gydbwyso ar dair carreg, gan edrych dros y Preseli lle chwarelwyd cerrig gleision Côr y Cewri."),
  dict(id="orme", en="Great Orme Mines", cy="Mwyngloddiau’r Gogarth", era="ancient", lat=53.333, lon=-3.851, year="c. 2000 BC", ill="cave", src="Great_Orme_Mines",
-  dEn="Bronze Age miners dug kilometres of tunnels for copper ore, using bone and stone tools. Many passages can still be walked.",
-  dCy="Cloddiodd mwynwyr Oes yr Efydd gilometrau o dwneli am fwyn copr gydag offer asgwrn a charreg. Gellir cerdded llawer o’r twneli hyd heddiw."),
+  dEn="Bronze Age miners dug kilometres of tunnels for copper ore, using bone and stone tools.[[cite:orme-antiquity,orme-guinness]] Many passages can still be walked.",
+  dCy="Cloddiodd mwynwyr Oes yr Efydd gilometrau o dwneli am fwyn copr gydag offer asgwrn a charreg.[[cite:orme-antiquity,orme-guinness]] Gellir cerdded llawer o’r twneli hyd heddiw."),
  dict(id="stdavids", en="St Davids", cy="Tyddewi", era="ancient", lat=51.882, lon=-5.269, year="6th century", ill="cross", src="St_Davids_Cathedral",
   dEn="Dewi Sant founded his monastery here. Two pilgrimages to St Davids were once said to equal one to Rome.",
   dCy="Sefydlodd Dewi Sant ei fynachlog yma. Dywedid gynt fod dwy bererindod i Dyddewi gystal ag un i Rufain."),
@@ -355,7 +355,7 @@ PEOPLE = [
  ("gwenllian","medieval","c. 1100–1136","Gwenllian ferch Gruffydd","Gwenllian ferch Gruffydd","Princess of Deheubarth","Tywysoges Deheubarth",
   "Led an army against the Normans at Kidwelly and died in battle. Her death sparked the Great Revolt.",
   "Arweiniodd fyddin yn erbyn y Normaniaid ger Cydweli a bu farw yn y frwydr. Taniodd ei marwolaeth y Gwrthryfel Mawr.","Gwenllian_ferch_Gruffydd"),
- ("yr-arglwydd-rhys","medieval","1132–1197","The Lord Rhys","Yr Arglwydd Rhys","Ruler of Deheubarth","Rheolwr Deheubarth",
+ ("yr-arglwydd-rhys","medieval","1132–1197","The Lord Rhys","Yr Arglwydd Rhys","Prince Rhys ap Gruffudd of Deheubarth","Y Tywysog Rhys ap Gruffudd o Ddeheubarth",
   "Patron of poets and host of the first recorded eisteddfod, at Cardigan in 1176.",
   "Noddwr beirdd a threfnydd yr eisteddfod gyntaf y gwyddys amdani, yn Aberteifi yn 1176.","Rhys_ap_Gruffydd"),
  ("gerallt-gymro","medieval","c. 1146–c. 1223","Gerald of Wales","Gerallt Gymro","Churchman and writer","Clerigwr ac awdur",
@@ -659,10 +659,21 @@ EVENTS = sorted(EVENTS + _MDE, key=lambda ev: ev[1])
 from caradog import EVENTS as _CRE
 EVENTS = sorted(EVENTS + _CRE, key=lambda ev: ev[1])
 
+# ---------- Nest ferch Rhys (src/nest.py) ----------
+from nest import EVENTS as _NSE
+EVENTS = sorted(EVENTS + _NSE, key=lambda ev: ev[1])
+
 # ---------- The coming of Christianity to Britain (src/christianity.py) ----------
 from christianity import EVENTS as _CHE
 EVENTS = sorted(EVENTS + _CHE, key=lambda ev: ev[1])
 
+# ---------- Saint Patrick, the Briton from Wales (src/patrick.py) ----------
+from patrick import EVENTS as _PTE
+EVENTS = sorted(EVENTS + _PTE, key=lambda ev: ev[1])
+
+# ---------- The Aberfan disaster, 1966 (src/aberfan.py) ----------
+from aberfan import EVENTS as _AFE
+EVENTS = sorted(EVENTS + _AFE, key=lambda ev: ev[1])
 # ---------- The Welsh Not and the fight for the language (src/welshnot.py) ----------
 from welshnot import EVENTS as _WNE
 EVENTS = sorted(EVENTS + _WNE, key=lambda ev: ev[1])

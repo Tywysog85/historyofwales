@@ -16,9 +16,12 @@ dwb: person ids whose Dictionary of Welsh Biography article is linked (from sour
 
 P, B, W = "p", "b", "w"
 
+import ylolfa as YLF   # books from Y Lolfa, each linked to its page on ylolfa.com
+
 LAND_OF_MY_FATHERS = (B, "Gwynfor Evans", "Land of My Fathers: 2000 Years of Welsh History", "John Penry Press, 1974; later editions from Y Lolfa; first published in Welsh as Aros Mae, 1971",
                       "Two thousand years of the story of Wales, told with pride by the man who won S4C.",
-                      "Dwy fil o flynyddoedd o hanes Cymru, wedi’u hadrodd yn falch gan y gŵr a enillodd S4C.")
+                      "Dwy fil o flynyddoedd o hanes Cymru, wedi’u hadrodd yn falch gan y gŵr a enillodd S4C.",
+                      YLF.LAND_OF_MY_FATHERS_URL)
 R_R_DAVIES_AGE = (B, "R. R. Davies", "The Age of Conquest: Wales 1063–1415", "Oxford University Press, 1991; first published 1987 as Conquest, Coexistence, and Change",
                   "The great history of the princes and of the long fight with the Normans and the English crown.",
                   "Yr hanes mawr am y tywysogion a’r frwydr hir yn erbyn y Normaniaid a choron Lloegr.")
@@ -110,7 +113,9 @@ REFS = {
          "Cyfrol gyntaf cyfres Hanes Cymdeithasol yr Iaith Gymraeg."),
         (B, "Gwyneth Tyson Roberts", "The Language of the Blue Books", "University of Wales Press, 1998",
          "How the 1847 reports were written, and what they said about the Welsh and their language.",
-         "Sut yr ysgrifennwyd adroddiadau 1847, a’r hyn a ddywedent am y Cymry a’u hiaith.")]),
+         "Sut yr ysgrifennwyd adroddiadau 1847, a’r hyn a ddywedent am y Cymry a’u hiaith."),
+        YLF.CARDIFF_WELSH,
+        YLF.BRWYDR_IAITH]),
 
     "hywel": dict(dwb=["hywel-dda", "rhodri-mawr"], items=[
         (P, "Dafydd Jenkins (ed. and trans.)", "The Law of Hywel Dda: Law Texts from Medieval Wales", "Gomer, 1986",
@@ -159,7 +164,9 @@ REFS = {
          "Y ffermwyr y tu ôl i’r helynt a’r byd yr oeddent yn byw ynddo."),
         (B, "R. Merfyn Jones", "The North Wales Quarrymen, 1874–1922", "University of Wales Press, 1981",
          "The slate quarrymen and the great Penrhyn lock-out of 1900–03.",
-         "Chwarelwyr y llechi a Streic Fawr y Penrhyn, 1900–03.")]),
+         "Chwarelwyr y llechi a Streic Fawr y Penrhyn, 1900–03."),
+        YLF.DIC_PENDERYN,
+        YLF.TWM_CARNABWTH]),
 
     "world": dict(dwb=["michael-d-jones"], items=[
         (B, "Glyn Williams", "The Desert and the Dream: A Study of Welsh Colonization in Chubut, 1865–1915", "University of Wales Press, 1975",
@@ -168,9 +175,7 @@ REFS = {
         (P, "Alan Conway (ed.)", "The Welsh in America: Letters from the Immigrants", "University of Minnesota Press, 1961",
          "The emigrants in their own words, writing home from America.",
          "Yr ymfudwyr yn eu geiriau eu hunain, yn ysgrifennu adref o America."),
-        (B, "Colin Thomas", "Dreaming a City", "Y Lolfa, 2009",
-         "John Hughes of Merthyr and the city he founded in Ukraine, Hughesovka, now Donetsk.",
-         "John Hughes o Ferthyr a’r ddinas a sefydlodd yn Wcráin, Hughesovka, Donetsk heddiw."),
+        YLF.DREAMING_CITY,
         (B, "Theodore H. Friedgut", "Iuzovka and Revolution", "Princeton University Press, two volumes, 1989 and 1994",
          "The full scholarly history of Hughesovka.",
          "Hanes ysgolheigaidd llawn Hughesovka."),
@@ -204,7 +209,8 @@ REFS = {
          "Y cofiant modern llawn cyntaf i Owain."),
         (B, "Gideon Brough", "The Rise and Fall of Owain Glyn Dŵr: England, France and the Welsh Rebellion in the Late Middle Ages", "I. B. Tauris, 2017",
          "Owain’s alliance with France and the French army in Wales.",
-         "Cynghrair Owain â Ffrainc a byddin Ffrainc yng Nghymru.")]),
+         "Cynghrair Owain â Ffrainc a byddin Ffrainc yng Nghymru."),
+        YLF.GLYNDWR_PRINCE]),
 
     "longbow": dict(dwb=["gerallt-gymro", "gwenllian"], items=[
         GERALD, BRUT_Y_TYWYSOGYON,
@@ -280,9 +286,13 @@ REFS = {
     "revival": dict(dwb=["gwynfor-evans", "saunders-lewis", "ifan-ab-owen-edwards"], items=[
         TYNGED,
         LAND_OF_MY_FATHERS,
-        (B, "Rhys Evans", "Gwynfor: Portrait of a Patriot", "Y Lolfa, 2008; first published in Welsh as Rhag Pob Brad, 2005",
-         "The full life of Gwynfor Evans, from Barry to the fast for S4C.",
-         "Cofiant llawn Gwynfor Evans, o’r Barri i’r ympryd dros S4C."),
+        YLF.GWYNFOR_PORTRAIT,
+        YLF.FIGHT_FREEDOM,
+        YLF.TRYWERYN_DAWN,
+        YLF.TRYWERYN_AWAKES,
+        YLF.JOHN_JENKINS,
+        YLF.DREAM_FREEDOM,
+        YLF.DIM_CROESO,
         (B, "D. Hywel Davies", "The Welsh Nationalist Party, 1925–1945: A Call to Nationhood", "University of Wales Press, 1983",
          "The early years of Plaid Cymru, from Pwllheli to Penyberth and beyond.",
          "Blynyddoedd cynnar Plaid Cymru, o Bwllheli i Benyberth a thu hwnt."),
@@ -352,6 +362,33 @@ REFS = {
          "How the Tudors and the scholars of Wales defended the British history.",
          "Sut yr amddiffynnodd y Tuduriaid ac ysgolheigion Cymru yr hanes Brytanaidd.")]),
 
+    "aberfan": dict(dwb=[], items=[
+        (P, "Tribunal appointed to inquire into the Disaster at Aberfan (chair: Lord Justice Edmund Davies)", "Report of the Tribunal appointed to inquire into the Disaster at Aberfan on October 21st, 1966", "HMSO, London, 1967",
+         "The official inquiry: 76 days of evidence and the finding that the blame rests upon the National Coal Board.",
+         "Yr ymchwiliad swyddogol: 76 diwrnod o dystiolaeth a’r canfyddiad mai ar y Bwrdd Glo Cenedlaethol y mae’r bai."),
+        (P, "Hansard", "Aberfan: written answer by Ron Davies, Secretary of State for Wales", "House of Commons, 31 July 1997",
+         "The answer that gave back the £150,000 taken from the Disaster Fund in 1968.",
+         "Yr ateb a roddodd yn ôl y £150,000 a gymerwyd o Gronfa’r Trychineb yn 1968.",
+         "https://api.parliament.uk/historic-hansard/written-answers/1997/jul/31/aberfan"),
+        (B, "Iain McLean and Martin Johnes", "Aberfan: Government and Disasters", "Welsh Academic Press, 2000; second edition as Aberfan: Government and Disaster, 2019",
+         "The history of the disaster, the Tribunal and the fund, from the government’s own papers.",
+         "Hanes y trychineb, y Tribiwnlys a’r gronfa, o bapurau’r llywodraeth ei hun."),
+        (B, "Gaynor Madgwick", "Aberfan: A Story of Survival, Love and Community in One of Britain’s Worst Disasters", "Y Lolfa",
+         "A survivor tells her own story and the stories of others from the village.",
+         "Un o’r goroeswyr yn adrodd ei hanes ei hun a hanesion eraill o’r pentref."),
+        (W, "Iain McLean", "Lessons from the Aberfan disaster and its aftermath", "British Academy Review",
+         "A short account of the Tribunal, the Charity Commission and the money taken from the fund.",
+         "Hanes byr y Tribiwnlys, y Comisiwn Elusennau a’r arian a gymerwyd o’r gronfa.",
+         "https://www.thebritishacademy.ac.uk/publishing/review/12/lessons-aberfan-disaster-and-its-aftermath/"),
+        (W, "Cadw", "Aberfan: Cemetery, Garden of Remembrance and Former Tip and Slide Area", "Register of Parks and Gardens of Special Historic Interest in Wales, grade II*",
+         "The official record of the garden, the cemetery and its white arches.",
+         "Y cofnod swyddogol o’r ardd, y fynwent a’i bwâu gwyn.",
+         "https://cadwpublic-api.azurewebsites.net/reports/parkgarden/FullReport?id=256"),
+        (W, "The National Archives", "Welsh Office: Tribunal of Inquiry into the Aberfan Disaster 1966: Records", "discovery.nationalarchives.gov.uk",
+         "The Tribunal’s own papers, kept at Kew.",
+         "Papurau’r Tribiwnlys ei hun, a gedwir yn Kew.",
+         "https://discovery.nationalarchives.gov.uk/details/r/C2828")]),
+
     "madog": dict(dwb=["owain-gwynedd", "john-evans-waunfawr", "john-dee", "iolo-morganwg", "morgan-john-rhys"], items=[
         BRUT_Y_TYWYSOGYON,
         (P, "David Powel", "The Historie of Cambria, now called Wales", "London, 1584",
@@ -386,7 +423,8 @@ REFS = {
          "Yr astudiaeth ddwy ran o John Evans gan awdur ei erthygl yn y Bywgraffiadur."),
         (W, "Ronald H. Fritze", "Prince Madoc", "Encyclopedia of Alabama",
          "The Alabama story and the Mobile Bay plaque.",
-         "Stori Alabama a phlac Bae Mobile.", "https://encyclopediaofalabama.org/article/prince-madoc/")]),
+         "Stori Alabama a phlac Bae Mobile.", "https://encyclopediaofalabama.org/article/prince-madoc/"),
+        YLF.MADOG_CHILDREN]),
 
     "welsh-not": dict(dwb=["om-edwards", "saunders-lewis", "henry-richard", "ifan-ab-owen-edwards", "gwynfor-evans", "lewis-valentine"], items=[
         (P, "Parliament of England", "An Acte for Lawes & Justice to be ministred in Wales in like fourme as it is in this Realme (27 Henry VIII, c. 26)", "1536; repealed by the Welsh Language Act 1993",
@@ -515,6 +553,34 @@ REFS = {
          "Gwynfor’s case that the Welsh nation was born when Macsen left in 383.",
          "Achos Gwynfor mai pan adawodd Macsen yn 383 y ganed cenedl y Cymry."),
         CHARLES_EDWARDS, LAND_OF_MY_FATHERS]),
+
+    "nest": dict(dwb=["gerallt-gymro", "yr-arglwydd-rhys"], items=[
+        BRUT_Y_TYWYSOGYON,
+        GERALD,
+        (P, "Gerald of Wales", "Expugnatio Hibernica: The Conquest of Ireland", "edited and translated by A. B. Scott and F. X. Martin, Royal Irish Academy, 1978",
+         "Gerald’s own history of how Nest’s sons and grandsons crossed to Ireland.",
+         "Hanes Gerallt ei hun am sut y croesodd meibion ac wyrion Nest i Iwerddon."),
+        (B, "Kari Maund", "Princess Nest of Wales: Seductress of the English", "Tempus, 2007",
+         "The full life of Nest, from the fall of her father to her children in Ireland.",
+         "Bywyd llawn Nest, o gwymp ei thad hyd ei phlant yn Iwerddon."),
+        (B, "Susan M. Johns", "Gender, Nation and Conquest in the High Middle Ages: Nest of Deheubarth", "Manchester University Press, 2013",
+         "Nest in the chronicles and in Gerald, and how her story has been told since.",
+         "Nest yn y croniclau ac yng Ngerallt, a sut yr adroddwyd ei stori byth ers hynny."),
+        R_R_DAVIES_AGE, JOHN_DAVIES]),
+
+    "rhys": dict(dwb=["yr-arglwydd-rhys", "gerallt-gymro"], items=[
+        BRUT_Y_TYWYSOGYON,
+        GERALD,
+        (B, "Roger Turvey", "The Lord Rhys: Prince of Deheubarth", "Gomer, 1997",
+         "The life of Rhys ap Gruffudd, from the fall of his mother to his tomb at St Davids.",
+         "Bywyd Rhys ap Gruffudd, o gwymp ei fam hyd ei fedd yn Nhyddewi."),
+        (B, "Nerys Ann Jones and Huw Pryce (eds)", "Yr Arglwydd Rhys", "Gwasg Prifysgol Cymru, 1996",
+         "Essays in Welsh on the prince, his poets, his abbeys and his castles, eight hundred years after his death.",
+         "Ysgrifau ar y tywysog, ei feirdd, ei abatai a’i gestyll, wyth can mlynedd wedi ei farw."),
+        (B, "J. E. Lloyd", "A History of Wales from the Earliest Times to the Edwardian Conquest", "Longmans, two volumes, 1911",
+         "The classic telling of the princes of Deheubarth and Gwynedd.",
+         "Yr hanes clasurol am dywysogion Deheubarth a Gwynedd."),
+        R_R_DAVIES_AGE]),
 
     "wales-in-10": dict(dwb=[], items=[
         JOHN_DAVIES, LAND_OF_MY_FATHERS,

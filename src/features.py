@@ -60,6 +60,7 @@ STORIES = [
  _HY.STORY,
 
  dict(id="coal", era="industrial", art="pit", mins=6,
+  links=[("story-aberfan.html", "Aberfan, 21 October 1966: the village that never forgot its children", "Aberfan, 21 Hydref 1966: y pentref nad anghofiodd ei blant")],
   en="Coal: the fuel of an empire, and its price", cy="Glo: tanwydd ymerodraeth, a’i bris",
   sumEn="In 1913 the valleys of south Wales powered navies and railways across the world. A century later the last deep mine had closed. This is what coal built, and what it cost.",
   sumCy="Yn 1913 roedd cymoedd y de’n gyrru llyngesau a rheilffyrdd ledled y byd. Ganrif yn ddiweddarach roedd y pwll dwfn olaf wedi cau. Dyma’r hyn a adeiladodd glo, a’r hyn a gostiodd.",
@@ -277,46 +278,46 @@ SYMBOLS = [
 
 # Quick facts: (English, Welsh)
 FACTS = [
- ("The equals sign (=) was invented in 1557 by Robert Recorde, a mathematician from Tenby, because ‘no two things can be more equal’ than two parallel lines.",
-  "Dyfeisiwyd yr hafalnod (=) yn 1557 gan Robert Recorde, mathemategydd o Ddinbych-y-pysgod, am na all ‘dim dau beth fod yn fwy hafal’ na dwy linell baralel."),
- ("William Jones, a farmer’s son from Ynys Môn, was the first person to use the symbol π for the ratio of a circle, in 1706.",
-  "William Jones, mab fferm o Fôn, oedd y cyntaf i ddefnyddio’r symbol π ar gyfer cymhareb y cylch, yn 1706."),
- ("The world’s first fare-paying passenger railway ran between Swansea and Mumbles from 1807, pulled by horses.",
-  "Rhedai rheilffordd deithwyr gyntaf y byd rhwng Abertawe a’r Mwmbwls o 1807 ymlaen, a cheffylau’n ei thynnu."),
- ("The bluestones of Stonehenge were dragged about 240 kilometres from the Preseli hills in Pembrokeshire some 5,000 years ago.",
-  "Llusgwyd cerrig gleision Côr y Cewri tua 240 cilometr o fynyddoedd y Preseli yn Sir Benfro ryw 5,000 o flynyddoedd yn ôl."),
- ("St Davids, with about 1,800 people, is the smallest city in Britain.",
-  "Tyddewi, â thua 1,800 o bobl, yw dinas leiaf Prydain."),
- ("Guglielmo Marconi sent the first radio message across open sea in 1897, from Lavernock Point near Penarth to the island of Flat Holm. It read: ‘Are you ready?’",
-  "Anfonodd Guglielmo Marconi y neges radio gyntaf dros fôr agored yn 1897, o Drwyn Larnog ger Penarth i Ynys Echni. Y neges oedd: ‘Are you ready?’"),
- ("The Welsh alphabet has 29 letters. Ch, dd, ff, ng, ll, ph, rh and th each count as a single letter.",
-  "Mae 29 llythyren yn yr wyddor Gymraeg. Mae ch, dd, ff, ng, ll, ph, rh a th bob un yn cyfrif fel un llythyren."),
- ("Pryce Pryce-Jones of Newtown started the world’s first mail-order business in 1861, selling Welsh flannel by post. Queen Victoria was a customer.",
-  "Dechreuodd Pryce Pryce-Jones o’r Drenewydd fusnes archebu drwy’r post cyntaf y byd yn 1861, gan werthu gwlanen Gymreig. Roedd y Frenhines Fictoria’n gwsmer."),
- ("The 58-letter name of Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch was made up in the 1860s to bring railway tourists to the village.",
-  "Dyfeisiwyd enw 58 llythyren Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch yn y 1860au i ddenu twristiaid y rheilffordd i’r pentref."),
- ("The Bronze Age copper mines on the Great Orme are among the largest prehistoric mines yet found anywhere in the world.",
-  "Mae mwyngloddiau copr Oes yr Efydd ar y Gogarth ymhlith y mwyngloddiau cynhanesyddol mwyaf a ddarganfuwyd yn unman yn y byd."),
- ("When it opened in 1826, Thomas Telford’s Menai Bridge had the longest span of any suspension bridge in the world.",
-  "Pan agorwyd hi yn 1826, Pont y Borth Thomas Telford oedd â’r rhychwant hiraf o unrhyw bont grog yn y byd."),
- ("The team that first climbed Everest in 1953 trained on Yr Wyddfa and stayed at the Pen-y-Gwryd Hotel, where their signatures are still on the ceiling.",
-  "Bu’r tîm a ddringodd Everest gyntaf yn 1953 yn ymarfer ar yr Wyddfa gan aros yng Ngwesty Pen-y-Gwryd, lle mae eu llofnodion ar y nenfwd o hyd."),
- ("In the nineteenth century, slate from Gwynedd roofed cities from Hamburg to Melbourne. The quarry landscape became a World Heritage Site in 2021.",
-  "Yn y bedwaredd ganrif ar bymtheg, llechi Gwynedd oedd ar doeau dinasoedd o Hamburg i Melbourne. Daeth tirwedd y chwareli’n Safle Treftadaeth y Byd yn 2021."),
- ("Under the medieval laws of Hywel Dda, a wife who separated from her husband after seven years could take half the household goods.",
-  "Dan gyfraith Hywel Dda yn yr Oesoedd Canol, gallai gwraig a ymwahanai oddi wrth ei gŵr ar ôl saith mlynedd gymryd hanner eiddo’r cartref."),
- ("Roald Dahl was born in Llandaff, Cardiff, in 1916 to Norwegian parents and was christened in the Norwegian Church in Cardiff Bay.",
-  "Ganed Roald Dahl yn Llandaf, Caerdydd, yn 1916 i rieni o Norwy, ac fe’i bedyddiwyd yn yr Eglwys Norwyaidd ym Mae Caerdydd."),
- ("Welsh is spoken in Argentina. Settlers from Wales founded a colony in Patagonia in 1865, and their descendants still hold an eisteddfod there every year.",
-  "Siaredir Cymraeg yn yr Ariannin. Sefydlodd ymfudwyr o Gymru wladfa ym Mhatagonia yn 1865, ac mae eu disgynyddion yn dal i gynnal eisteddfod yno bob blwyddyn."),
- ("Sir William Grove of Swansea built the first working fuel cell in 1842, the technology that now powers hydrogen vehicles.",
-  "Adeiladodd Syr William Grove o Abertawe y gell danwydd weithredol gyntaf yn 1842, y dechnoleg sydd heddiw’n gyrru cerbydau hydrogen."),
- ("Caerphilly Castle is the largest castle in Wales and the second largest in Britain. One of its towers leans further than the Tower of Pisa.",
-  "Castell Caerffili yw castell mwyaf Cymru a’r ail fwyaf ym Mhrydain. Mae un o’i dyrau’n gwyro’n fwy na Thŵr Pisa."),
- ("The oldest known ceremonial burial in western Europe is the ‘Red Lady’ of Paviland on Gower: in fact a young man, buried about 33,000 years ago.",
-  "Y gladdedigaeth seremonïol hynaf y gwyddys amdani yng ngorllewin Ewrop yw ‘Dynes Goch’ Pafiland ar Benrhyn Gŵyr: dyn ifanc mewn gwirionedd, a gladdwyd tua 33,000 o flynyddoedd yn ôl."),
- ("Wales has a place called Bethlehem, in Carmarthenshire. Thousands of people send their Christmas cards through its post office for the postmark.",
-  "Mae pentref o’r enw Bethlehem yn Sir Gaerfyrddin. Mae miloedd o bobl yn anfon eu cardiau Nadolig drwy ei swyddfa bost er mwyn cael y marc post."),
+ ("The equals sign (=) was invented in 1557 by Robert Recorde, a mathematician from Tenby, because ‘no two things can be more equal’ than two parallel lines.[[cite:dwb-recorde]]",
+  "Dyfeisiwyd yr hafalnod (=) yn 1557 gan Robert Recorde, mathemategydd o Ddinbych-y-pysgod, am na all ‘dim dau beth fod yn fwy hafal’ na dwy linell baralel.[[cite:dwb-recorde]]"),
+ ("William Jones, a farmer’s son from Ynys Môn, was the first person to use the symbol π for the ratio of a circle, in 1706.[[cite:dwb-wjones]]",
+  "William Jones, mab fferm o Fôn, oedd y cyntaf i ddefnyddio’r symbol π ar gyfer cymhareb y cylch, yn 1706.[[cite:dwb-wjones]]"),
+ ("The world’s first fare-paying passenger railway ran between Swansea and Mumbles from 1807, pulled by horses.[[cite:tfw-mumbles]]",
+  "Rhedai rheilffordd deithwyr gyntaf y byd rhwng Abertawe a’r Mwmbwls o 1807 ymlaen, a cheffylau’n ei thynnu.[[cite:tfw-mumbles]]"),
+ ("The bluestones of Stonehenge were dragged about 240 kilometres from the Preseli hills in Pembrokeshire some 5,000 years ago.[[cite:bluestones-antiquity]]",
+  "Llusgwyd cerrig gleision Côr y Cewri tua 240 cilometr o fynyddoedd y Preseli yn Sir Benfro ryw 5,000 o flynyddoedd yn ôl.[[cite:bluestones-antiquity]]"),
+ ("St Davids, with about 1,800 people, is the smallest city in Britain.[[cite:stdavids-wiki]]",
+  "Tyddewi, â thua 1,800 o bobl, yw dinas leiaf Prydain.[[cite:stdavids-wiki]]"),
+ ("Guglielmo Marconi sent the first radio message across open sea in 1897, between Lavernock Point near Penarth and the island of Flat Holm. It read: ‘Are you ready?’[[cite:marconi-veterans]]",
+  "Anfonodd Guglielmo Marconi y neges radio gyntaf dros fôr agored yn 1897, rhwng Trwyn Larnog ger Penarth ac Ynys Echni. Y neges oedd: ‘Are you ready?’[[cite:marconi-veterans]]"),
+ ("The Welsh alphabet has 29 letters. Ch, dd, ff, ng, ll, ph, rh and th each count as a single letter.[[cite:alphabet-parallel]]",
+  "Mae 29 llythyren yn yr wyddor Gymraeg. Mae ch, dd, ff, ng, ll, ph, rh a th bob un yn cyfrif fel un llythyren.[[cite:alphabet-parallel]]"),
+ ("Pryce Pryce-Jones of Newtown started the world’s first mail-order business in 1861, selling Welsh flannel by post. Queen Victoria was a customer.[[cite:pryce-storipowys,dwb-pryce]]",
+  "Dechreuodd Pryce Pryce-Jones o’r Drenewydd fusnes archebu drwy’r post cyntaf y byd yn 1861, gan werthu gwlanen Gymreig. Roedd y Frenhines Fictoria’n gwsmer.[[cite:pryce-storipowys,dwb-pryce]]"),
+ ("The 58-letter name of Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch was made up in the 1860s to bring railway tourists to the village.[[cite:llanfair-nasa]]",
+  "Dyfeisiwyd enw 58 llythyren Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch yn y 1860au i ddenu twristiaid y rheilffordd i’r pentref.[[cite:llanfair-nasa]]"),
+ ("The Bronze Age copper mines on the Great Orme are among the largest prehistoric mines yet found anywhere in the world.[[cite:orme-antiquity,orme-gsl,orme-guinness]]",
+  "Mae mwyngloddiau copr Oes yr Efydd ar y Gogarth ymhlith y mwyngloddiau cynhanesyddol mwyaf a ddarganfuwyd yn unman yn y byd.[[cite:orme-antiquity,orme-gsl,orme-guinness]]"),
+ ("When it opened in 1826, Thomas Telford’s Menai Bridge had the longest span of any suspension bridge in the world.[[cite:menai-graces,menai-ice]]",
+  "Pan agorwyd hi yn 1826, Pont y Borth Thomas Telford oedd â’r rhychwant hiraf o unrhyw bont grog yn y byd.[[cite:menai-graces,menai-ice]]"),
+ ("The team that first climbed Everest in 1953 trained on Yr Wyddfa and stayed at the Pen-y-Gwryd Hotel, where their signatures are still on the ceiling.[[cite:everest-pyg]]",
+  "Bu’r tîm a ddringodd Everest gyntaf yn 1953 yn ymarfer ar yr Wyddfa gan aros yng Ngwesty Pen-y-Gwryd, lle mae eu llofnodion ar y nenfwd o hyd.[[cite:everest-pyg]]"),
+ ("In the nineteenth century, slate from Gwynedd roofed cities from Hamburg to Melbourne. The quarry landscape became a World Heritage Site in 2021.[[cite:slate-unesco]]",
+  "Yn y bedwaredd ganrif ar bymtheg, llechi Gwynedd oedd ar doeau dinasoedd o Hamburg i Melbourne. Daeth tirwedd y chwareli’n Safle Treftadaeth y Byd yn 2021.[[cite:slate-unesco]]"),
+ ("Under the medieval laws of Hywel Dda, a wife who separated from her husband after seven years could take half the household goods.[[cite:hywel-jenkins,hywel-wiki]]",
+  "Dan gyfraith Hywel Dda yn yr Oesoedd Canol, gallai gwraig a ymwahanai oddi wrth ei gŵr ar ôl saith mlynedd gymryd hanner eiddo’r cartref.[[cite:hywel-jenkins,hywel-wiki]]"),
+ ("Roald Dahl was born in Llandaff, Cardiff, in 1916 to Norwegian parents and was christened in the Norwegian Church in Cardiff Bay.[[cite:dahl-visitwales]]",
+  "Ganed Roald Dahl yn Llandaf, Caerdydd, yn 1916 i rieni o Norwy, ac fe’i bedyddiwyd yn yr Eglwys Norwyaidd ym Mae Caerdydd.[[cite:dahl-visitwales]]"),
+ ("Welsh is spoken in Argentina. Settlers from Wales founded a colony in Patagonia in 1865, and their descendants still hold an eisteddfod there every year.[[cite:patagonia-wales]]",
+  "Siaredir Cymraeg yn yr Ariannin. Sefydlodd ymfudwyr o Gymru wladfa ym Mhatagonia yn 1865, ac mae eu disgynyddion yn dal i gynnal eisteddfod yno bob blwyddyn.[[cite:patagonia-wales]]"),
+ ("Sir William Grove of Swansea built the first working fuel cell in 1842, the technology that now powers hydrogen vehicles.[[cite:grove-aps,dwb-grove]]",
+  "Adeiladodd Syr William Grove o Abertawe y gell danwydd weithredol gyntaf yn 1842, y dechnoleg sydd heddiw’n gyrru cerbydau hydrogen.[[cite:grove-aps,dwb-grove]]"),
+ ("Caerphilly Castle is the largest castle in Wales and the second largest in Britain. One of its towers leans further than the Tower of Pisa.[[cite:caerphilly-cadw]]",
+  "Castell Caerffili yw castell mwyaf Cymru a’r ail fwyaf ym Mhrydain. Mae un o’i dyrau’n gwyro’n fwy na Thŵr Pisa.[[cite:caerphilly-cadw]]"),
+ ("The oldest known ceremonial burial in western Europe is the ‘Red Lady’ of Paviland on Gower: in fact a young man, buried about 33,000 years ago.[[cite:paviland-museum,paviland-oumnh]]",
+  "Y gladdedigaeth seremonïol hynaf y gwyddys amdani yng ngorllewin Ewrop yw ‘Dynes Goch’ Pafiland ar Benrhyn Gŵyr: dyn ifanc mewn gwirionedd, a gladdwyd tua 33,000 o flynyddoedd yn ôl.[[cite:paviland-museum,paviland-oumnh]]"),
+ ("Wales has a place called Bethlehem, in Carmarthenshire. Thousands of people send their Christmas cards through its post office for the postmark.[[cite:bethlehem-radio]]",
+  "Mae pentref o’r enw Bethlehem yn Sir Gaerfyrddin. Mae miloedd o bobl yn anfon eu cardiau Nadolig drwy ei swyddfa bost er mwyn cael y marc post.[[cite:bethlehem-radio]]"),
 ]
 
 # "Which figure from Welsh history are you?": people slugs and what each stands for.
@@ -385,10 +386,14 @@ import brutus as _BR  # Brutus of Troy and the Britons long read (src/brutus.py)
 import celts as _CE  # Britons, not Celts: Edward Lhuyd and the name 'Celtic' (src/celts.py)
 import madog as _MD  # Prince Madog's voyage to America and the Welsh Indians (src/madog.py)
 import caradog as _CR  # King Caradog (Caratacus) against Rome, and his family in Rome (src/caradog.py)
+import patrick as _PT  # Saint Patrick, the Briton from Wales (src/patrick.py)
 import christianity as _CH  # The coming of Christianity: the first Christians, Joseph, Lucius, Brân (src/christianity.py)
 import macsen as _MX  # Macsen Wledig, the emperor from Britain (src/macsen.py)
+import nest as _NS  # Nest ferch Rhys, princess of Deheubarth (src/nest.py)
+import rhys as _RH  # Prince Rhys ap Gruffudd, the Lord Rhys (src/rhys.py)
+import aberfan as _AF  # The Aberfan disaster, 21 October 1966 (src/aberfan.py)
 import welshnot as _WN  # The Welsh Not and how they tried to wipe out the language (src/welshnot.py)
-STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY] + _CH.STORIES + [_WN.STORY]
+STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY, _NS.STORY, _RH.STORY] + _CH.STORIES + [_PT.STORY, _AF.STORY, _WN.STORY]
 # the long reads on the language and on protest point on to the Welsh Not long read (src/welshnot.py)
 for _s in STORIES:
     if _s["id"] in ("language", "revival", "protest"):
