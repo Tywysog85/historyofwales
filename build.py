@@ -787,6 +787,7 @@ def legends_index():
             + "".join(f'<section{"" if k == 0 else " class=\"tight\""} id="{g["ids"][0]}-set"><div class="wrap"><h2 class="sub-h">{bi(g["en"], g["cy"])}</h2><p class="l-sum">{bi(g["sumEn"], g["sumCy"])}</p>'
                       f'<div class="l-grid">{"".join(legend_card(x) for x in g["items"])}</div>'
                       + (f'<p class="l-links"><a class="btn" href="mabinogion.html">{bi("About the Mabinogion: the books, the translation and all eleven tales", "Am y Mabinogion: y llyfrau, y cyfieithiad a’r un chwedl ar ddeg")} →</a></p>' if g["ids"][0] == "pwyll" else "")
+                      + (f'<p class="l-links"><a class="btn" href="story-brutus.html">{bi("Lludd, Macsen and the kings of the Brut: the story of Brutus of Troy, father of the Britons", "Lludd, Macsen a brenhinoedd y Brut: stori Brutus o Gaerdroea, tad y Brythoniaid")} →</a></p>' if g["ids"][0] == "dragons" else "")
                       + '</div></section>' for k, g in enumerate(F.LEGEND_GROUPS))
             + section(f'<div class="pager"><a class="btn" href="symbols.html">{bi("Symbols and traditions", "Symbolau a thraddodiadau")} →</a></div>'))
     return page("legends.html", "Legends · History of Wales", "The legends of Wales retold: the tales of King Arthur, the red dragon, Gelert, the Four Branches of the Mabinogi, Macsen Wledig, Culhwch and Olwen, Dwynwen, Melangell, the Tylwyth Teg and more, with the history behind them.", main, era="medieval", og_type="website", active="legends.html")

@@ -17,6 +17,7 @@ HUB_CY = [
 DOORS = [
  ("triads.html", "The Welsh Triads", "Trioedd Ynys Prydain", "The memory of the Island of Britain, kept in threes.", "Cof Ynys Prydain, wedi’i gadw fesul tri.", "trea-red-book"),
  ("books.html", "The great books of Wales", "Llyfrau mawr Cymru", "The Black Book, the Red Book, the Books of Aneirin and Taliesin, and the Bible of 1588.", "Y Llyfr Du, y Llyfr Coch, Llyfrau Aneirin a Thaliesin, a Beibl 1588.", "trea-black-book"),
+ ("story-brutus.html", "Brutus of Troy", "Brutus o Gaerdroea", "The first king of the Britons, and the Brut that told his story.", "Brenin cyntaf y Brythoniaid, a’r Brut a adroddodd ei hanes.", "person-maelgwn-gwynedd"),
  ("mabinogion.html", "The Mabinogion", "Y Mabinogion", "Eleven great tales of medieval Wales.", "Un chwedl fawr ar ddeg o Gymru’r Oesoedd Canol.", "trea-book-taliesin"),
  ("laws.html", "The Laws of Hywel Dda", "Cyfraith Hywel Dda", "The law books of Wales, and the place of the poet in them.", "Llyfrau cyfraith Cymru, a lle’r bardd ynddynt.", "trea-laws-hywel"),
 ]
@@ -184,7 +185,8 @@ BOOK_GROUPS = [
   dict(id="historia", en="The History of the Britons", cy="Historia Brittonum", date="c. 829; copy c. 1100", dateCy="tua 829; copi tua 1100", whereEn="British Library, London", whereCy="Y Llyfrgell Brydeinig, Llundain",
    pic=None,
    en_t="A history of the Island of Britain gathered in Gwynedd in the reign of Merfyn Frych, long known by the name of Nennius. It tells of Arthur and his twelve battles, of Gwrtheyrn and the two dragons at Dinas Emrys, and names the first poets. The oldest copy keeps with it the Annales Cambriae, the Welsh annals, and the family trees of the early Welsh kings.",
-   cy_t="Hanes Ynys Prydain a gasglwyd yng Ngwynedd yn nheyrnasiad Merfyn Frych, a adwaenir ers tro wrth enw Nennius. Mae’n sôn am Arthur a’i ddeuddeg brwydr, am Wrtheyrn a’r ddwy ddraig yn Ninas Emrys, ac yn enwi’r beirdd cyntaf. Mae’r copi hynaf yn cadw gydag ef yr Annales Cambriae, cronicl Cymru, ac achau brenhinoedd cynnar Cymru."),
+   cy_t="Hanes Ynys Prydain a gasglwyd yng Ngwynedd yn nheyrnasiad Merfyn Frych, a adwaenir ers tro wrth enw Nennius. Mae’n sôn am Arthur a’i ddeuddeg brwydr, am Wrtheyrn a’r ddwy ddraig yn Ninas Emrys, ac yn enwi’r beirdd cyntaf. Mae’r copi hynaf yn cadw gydag ef yr Annales Cambriae, cronicl Cymru, ac achau brenhinoedd cynnar Cymru.",
+   link=("story-brutus.html", "Brutus of Troy, whom it names as the father of the Britons", "Brutus o Gaerdroea, a enwir ynddo yn dad y Brythoniaid")),
   dict(id="llandaf", en="The Book of Llandaf", cy="Llyfr Llandaf", date="c. 1120–1134", dateCy="tua 1120–1134", whereEn="National Library of Wales", whereCy="Llyfrgell Genedlaethol Cymru",
    pic=("Liber Landavensis binding.png", "Unknown medieval craftsman", *CC0, "The binding of the Book of Llandaf, with the gilded figure on its cover", "Rhwymiad Llyfr Llandaf, gyda’r ddelw euraid ar ei glawr", 1058, 707),
    en_t="Written at Llandaf to tell the story of its church: the lives of the saints Dyfrig, Teilo and Euddogwy, and about a hundred and fifty charters by which kings gave land to the church. Among them are the grants of Meurig ap Tewdrig, king of Glywysing, and of his son Athrwys, who Welsh tradition holds was Arthur. Its boundary clauses, written in Welsh, name streams and hills still known today.",
@@ -237,7 +239,8 @@ BOOK_GROUPS = [
   dict(id="brut-brenhinedd", en="Brut y Brenhinedd, the History of the Kings", cy="Brut y Brenhinedd", date="13th century onwards", dateCy="o’r drydedd ganrif ar ddeg ymlaen", whereEn="Dozens of copies, in many libraries", whereCy="Dwsinau o gopïau, mewn llawer llyfrgell",
    pic="person-maelgwn-gwynedd",
    en_t="The Welsh versions of the History of the Kings of Britain, written about 1136 by Geoffrey of Monmouth, who said that he had turned into Latin ‘a very old book in the British tongue’. It tells the story of the Island from Brutus to Cadwaladr, of Lear and Cymbeline, of Macsen, Gwrtheyrn and Arthur. No book was copied more often in medieval Wales.",
-   cy_t="Y fersiynau Cymraeg o Hanes Brenhinoedd Prydain, a ysgrifennwyd tua 1136 gan Sieffre o Fynwy, a ddywedodd iddo droi i’r Lladin ‘hen lyfr yn yr iaith Frythoneg’. Mae’n adrodd hanes yr Ynys o Frutus hyd Gadwaladr, am Lŷr a Chynfelyn, am Facsen, Gwrtheyrn ac Arthur. Ni chopïwyd unrhyw lyfr yn amlach yng Nghymru’r Oesoedd Canol."),
+   cy_t="Y fersiynau Cymraeg o Hanes Brenhinoedd Prydain, a ysgrifennwyd tua 1136 gan Sieffre o Fynwy, a ddywedodd iddo droi i’r Lladin ‘hen lyfr yn yr iaith Frythoneg’. Mae’n adrodd hanes yr Ynys o Frutus hyd Gadwaladr, am Lŷr a Chynfelyn, am Facsen, Gwrtheyrn ac Arthur. Ni chopïwyd unrhyw lyfr yn amlach yng Nghymru’r Oesoedd Canol.",
+   link=("story-brutus.html", "Brutus of Troy, father of the Britons: the long read", "Brutus o Gaerdroea, tad y Brythoniaid: yr erthygl")),
  ]),
  dict(id="print", en="The first printed books", cy="Y llyfrau printiedig cyntaf", books=[
   dict(id="yny", en="Yny lhyvyr hwnn", cy="Yny lhyvyr hwnn", date="1546", dateCy="1546", whereEn="National Library of Wales", whereCy="Llyfrgell Genedlaethol Cymru",

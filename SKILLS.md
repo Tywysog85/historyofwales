@@ -502,3 +502,9 @@ Learnt while taking "Celtic" off the site (rule "Britons, not Celts" in `EDITORI
 - A long read (a `STORY` dict, e.g. `src/wilson_blackett.py`) can carry `links=[(href, en, cy), ...]`. `story_more_links()` in `build.py` shows them as buttons after the text, the same way legends use `links`.
 - A link to another long read (`story-….html`) is left out until that long read is built, so two threads can link their new pages to each other and merge in either order.
 - `people=[...]` on a long read puts its card under "The full story" on those people's pages, so listing `"arthur"` links it from Arthur's page with no other change.
+
+## Checking quotations from old books when the usual sites are blocked (November 2026)
+
+- From the cloud, Gutenberg, Wikisource and sacred-texts.com are blocked, but WebSearch often turns up a mirror (for example `neonvagabond.xyz/mirrors/sacred-texts/...`) that WebFetch can read. Geoffrey of Monmouth in Sebastian Evans's translation (1904) is there: Book I is `gem02.htm`, Book II `gem03.htm`, Book IV `gem05.htm`.
+- Only put words in quotation marks once they have been read in a named, published translation, and name the translator in the quote's source line. Where two translations differ (Brutus died in the "twenty-third" or "twenty-fourth" year), follow the one being quoted.
+- A long read can add its own timeline events: keep them in the long read's file (`EVENTS` in `src/brutus.py`), add them in `src/data.py`, and give them the same titles as the story's `events=[...]` so the age pages link to the long read.
