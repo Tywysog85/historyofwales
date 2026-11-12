@@ -641,6 +641,14 @@ Learnt while simplifying the home page.
 - The top picture loads at once (`fetchpriority="high"`, 600px copy for phones through `srcset`); card pictures load lazily from the small copy. The build stops if a named picture's file is missing.
 - Commons can't be reached from the cloud. New pictures have to be downloaded on the Mini-PC (Remote Control) and added to the gallery first.
 
+### Sources beside the claims (November 2026)
+
+- Write `[[cite:key1,key2]]` straight after the full stop of any sentence in `src/` (English and Welsh copy), and add each key to `S` in `src/cites.py` with a short chip label, title, author, a note on what it shows, and the link (plus `url_cy` if the source has a Welsh page).
+- `build.py` turns markers into chips after the Welsh pages are split off, so each language gets its own labels. Markers inside page titles, descriptions, JSON-LD, scripts, links and buttons are removed, and `write()` removes any left in JSON, feeds and the search index, so a marker never shows as text. An unknown key stops the build.
+- The card opens on click (code at the end of `src/static/site.js`): under the chip on a computer, as a sheet along the bottom on a phone. Without JavaScript the chip is a plain link to the first source.
+- The home page's "Did you know?" fact is drawn again by `app.js` when "Another" is pressed, so `FACTS` goes into the page data already turned into HTML (`CITE.html_text`).
+- Check sources with the WebFetch tool when the cloud can't reach a site directly, and quote the source's own words in the note where you can.
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.

@@ -256,3 +256,38 @@
   addEventListener("scroll", close, { passive: true });
   d.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
 })();
+
+/* Sources beside the claims (src/cites.py): tap the small § chip to see the sources for that sentence. */
+(function () {
+  var d = document, open = null;
+  function shut(back) {
+    if (!open) return;
+    open.pop.hidden = true; open.chip.setAttribute("aria-expanded", "false");
+    if (back) open.chip.focus();
+    open = null;
+  }
+  function show(chip) {
+    var pop = d.getElementById(chip.getAttribute("aria-controls"));
+    if (!pop) return false;
+    shut();
+    pop.hidden = false; pop.style.left = ""; chip.setAttribute("aria-expanded", "true");
+    open = { chip: chip, pop: pop };
+    if (getComputedStyle(pop).position === "absolute") {   /* keep the card on the screen */
+      var r = pop.getBoundingClientRect(), over = r.right - (innerWidth - 12);
+      if (over > 0) pop.style.left = -Math.min(over, r.left - 12) + "px";
+    }
+    return true;
+  }
+  d.addEventListener("click", function (e) {
+    var chip = e.target.closest(".cite");
+    if (chip) {
+      if (open && open.chip === chip) { e.preventDefault(); shut(); return; }
+      if (show(chip)) e.preventDefault();
+      return;
+    }
+    if (e.target.closest(".cite-x")) { shut(true); return; }
+    if (open && !e.target.closest(".cite-pop")) shut();
+  });
+  d.addEventListener("keydown", function (e) { if (e.key === "Escape" && open) shut(true); });
+  Array.prototype.forEach.call(d.querySelectorAll(".cite"), function (c) { c.setAttribute("role", "button"); c.setAttribute("aria-expanded", "false"); });
+})();
