@@ -7,6 +7,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Britons, not Celts: how Edward Lhuyd gave us a new name", "Brythoniaid, nid Celtiaid: sut y cawsom enw newydd gan Edward Lhuyd",
+     "A new long read: Caesar called us Britons and we called ourselves Brythoniaid and Cymry. ‘Celtic’ was Edward Lhuyd’s name for a family of languages in 1707, and only later was it put on the peoples who spoke them.",
+     "Erthygl newydd: Brythoniaid oeddem i Gesar, a Brythoniaid a Chymry oeddem i ni ein hunain. ‘Celtaidd’ oedd enw Edward Lhuyd ar deulu o ieithoedd yn 1707, ac yn ddiweddarach yn unig y rhoddwyd ef ar y bobloedd a’u siaradai.",
+     "story-celts.html"),
     ("2026-11-12", "Brutus of Troy, father of the Britons", "Brutus o Gaerdroea, tad y Brythoniaid",
      "A new long read tells how the Welsh knew themselves as the children of Brutus of Troy: his voyage to Totnes, his sons Locrinus, Camber and Albanactus, the Brut that kept the story, Owain Glyndŵr’s letter, and Harri Tudur, the son of prophecy.",
      "Mae erthygl newydd yn adrodd sut yr oedd y Cymry’n eu hadnabod eu hunain fel plant Brutus o Gaerdroea: ei fordaith i Totnes, ei feibion Locrinus, Camber ac Albanactus, y Brut a gadwodd y stori, llythyr Owain Glyndŵr, a Harri Tudur, y mab darogan.",

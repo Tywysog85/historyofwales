@@ -492,6 +492,14 @@ Learnt while taking "Celtic" off the site (rule "Britons, not Celts" in `EDITORI
 - **Names from outside data** (Cadw's monument names in `tools/data/sites_cadw.json`) are reworded in `site_rows()` in `src/refpages.py`, so the data file stays exactly as Cadw gives it.
 - Leave real names alone (the Celtic Manor) and words hidden inside picture links or file names.
 
+## Where a new long read shows up (November 2026)
+Learnt while adding "Britons, not Celts" (`src/celts.py`).
+
+- A long read added to `STORIES` in `src/features.py` appears by itself on the long reads page, in search, What's new and the Journey page.
+- `people=[...]` puts a "Read the long read" link on those person pages.
+- An era page links a long read only through its timeline: list the exact English title of a timeline event in that era in `events=[...]` (here "The peoples of Wales" for Ancient Wales).
+- Other pages (the A to Z, legends) need the link added by hand, for example in the `see` list of an A to Z entry in `src/ref_az.py`.
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
