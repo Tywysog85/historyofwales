@@ -33,6 +33,10 @@ PLACE_CAT["mold"] = "treasures"
 
 # Pictures of places that have no page of their own: id -> (category, English, Welsh, link or None)
 EXTRA = {
+ "peop-celyn-protest": ("people", "The protest at the opening of Llyn Celyn, 1965", "Y brotest yn agoriad Llyn Celyn, 1965", "story-fwa.html"),
+ "peop-celyn-line": ("people", "‘Stop robbing Wales’ at Llyn Celyn, 1965", "‘Stop robbing Wales’ yn Llyn Celyn, 1965", "place-celyn.html"),
+ "peop-liverpool-steals": ("people", "‘Liverpool steals Welsh water’, 1965", "‘Liverpool steals Welsh water’, 1965", "story-mac.html"),
+ "peop-cofia-1282": ("people", "The Cofia 1282 rally against the investiture, 1969", "Rali Cofia 1282 yn erbyn yr Arwisgo, 1969", "story-mac.html"),
  "cast-castell-coch": ("castles", "Castell Coch", "Castell Coch", None),
  "cast-cardiff-castle": ("castles", "Cardiff Castle", "Castell Caerdydd", None),
  "cast-carreg-cennen": ("castles", "Carreg Cennen Castle", "Castell Carreg Cennen", None),

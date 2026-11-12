@@ -702,7 +702,7 @@
 
   /* ---------- Did you know? + daily streak ---------- */
   var factI = Math.floor(Date.now() / 864e5) % D.FACTS.length;
-  function renderFact() { var f = D.FACTS[factI % D.FACTS.length]; $("#fact").textContent = T(f[0], f[1]); }
+  function renderFact() { var f = D.FACTS[factI % D.FACTS.length]; $("#fact").innerHTML = T(f[0], f[1]); }  /* our own text, escaped at build, with its source chip (src/cites.py) */
   $("#fact-next").onclick = function () { factI++; renderFact(); };
   function renderStreak() {
     var el = document.getElementById("daily-streak"); if (!el) return;
@@ -914,8 +914,8 @@
 
   /* ---------- Sources ---------- */
   function renderSources() {
-    $("#read-books").innerHTML = D.READING.map(function (r) { return "<li><b>" + esc(r.t) + "</b><span>" + esc(T(r.n, r.nCy)) + "</span></li>"; }).join("");
-    $("#read-online").innerHTML = D.ONLINE.map(function (r) { return '<li><a href="' + r.u + '" target="_blank" rel="noopener"><b>' + esc(T(r.t, r.tCy)) + "</b></a><span>" + esc(r.u.replace(/^https:\/\/(www\.)?/, "").replace(/\/$/, "")) + "</span></li>"; }).join("");
+    $("#read-books").innerHTML = D.READING.map(function (r) { var b = "<b>" + esc(r.t) + "</b>"; return "<li>" + (r.u ? '<a href="' + r.u + '" target="_blank" rel="noopener">' + b + "</a>" : b) + "<span>" + esc(T(r.n, r.nCy)) + "</span></li>"; }).join("");
+    $("#read-online").innerHTML = D.ONLINE.map(function (r) { var u = T(r.u, r.uCy || r.u); return '<li><a href="' + u + '" target="_blank" rel="noopener"><b>' + esc(T(r.t, r.tCy)) + "</b></a><span>" + esc(u.replace(/^https:\/\/(www\.)?/, "").replace(/\/$/, "")) + "</span></li>"; }).join("");
   }
 
   /* ---------- Language toggle ---------- */
