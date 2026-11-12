@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Rhodri the Great and the first royal house of Wales", "Rhodri Mawr a thŷ brenhinol cyntaf Cymru",
+     "Full pages for Rhodri Mawr, who beat the Vikings and brought most of Wales under one house, and for the kings around him: Merfyn Frych, Anarawd and Dial Rhodri, Cadell, Hywel Dda, Idwal Foel, Owain ap Hywel and Maredudd ab Owain, with the old chronicles quoted beside the story.",
+     "Tudalennau llawn i Rodri Mawr, a drechodd y Llychlynwyr a dod â’r rhan fwyaf o Gymru dan un tŷ, ac i’r brenhinoedd o’i gwmpas: Merfyn Frych, Anarawd a Dial Rhodri, Cadell, Hywel Dda, Idwal Foel, Owain ap Hywel a Maredudd ab Owain, gyda’r hen groniclau wrth ochr yr hanes.",
+     "person-rhodri-mawr.html"),
     ("2026-11-12", "Real pictures on every page", "Lluniau go iawn ar bob tudalen",
      "Every long read, legend, age, kingdom, saint, topic and game now opens with a real photograph or old artwork: Segontium for Macsen, the Pennal Letter for Glyndŵr, the Laws of Hywel Dda, the Pillar of Eliseg and many more, each with its credit.",
      "Mae pob erthygl, chwedl, oes, teyrnas, sant, pwnc a gêm bellach yn agor gyda ffotograff go iawn neu hen waith celf: Segontium i Facsen, Llythyr Pennal i Lyndŵr, Cyfreithiau Hywel Dda, Colofn Eliseg a llawer mwy, pob un gyda’i gydnabyddiaeth.",

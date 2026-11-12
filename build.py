@@ -43,6 +43,7 @@ import mabinogion as MB  # noqa: E402
 import literature as LT  # noqa: E402  (literature.html, books.html, triads.html)
 import laws as LW  # noqa: E402  (the Laws of Hywel Dda page, laws.html)
 import people2 as P2  # noqa: E402
+import princes as PRN  # noqa: E402  (the kings and princes of Wales: the block on each of their pages)
 import arthur_circle as AC  # noqa: E402  (Arthur's circle: the block on every page of the people of Arthur's story)
 import sets as SETS  # noqa: E402
 import seo as SEO  # noqa: E402  (search engine extras for every page)
@@ -601,6 +602,26 @@ def arthur_circle(slug):
     return section(f'<div class="ar-circle"><p class="lede">{lead}</p>{out}<p class="ar-more">{more}</p></div>', "Arthur’s circle", "Cylch Arthur")
 
 
+def princes_circle(slug):
+    """The kings and princes of Wales (src/princes.py): the whole set, on each of their pages. Only people with a page are shown."""
+    if slug not in PRN.ALL_IDS:
+        return ""
+    out = ""
+    for en, cy, ids in PRN.GROUPS:
+        ids = [s for s in ids if s in PERSON]
+        if not ids:
+            continue
+        chips = ""
+        for s in ids:
+            c = lit_person_chip(s)
+            chips += c.replace("<a ", '<a aria-current="page" ', 1) if s == slug else c
+        out += f'<h3 class="sub-h">{bi(en, cy)}</h3><div class="ppl">{chips}</div>'
+    more = " ".join(f'<a class="btn" href="{u}">{bi(a, b)} →</a>' for u, a, b in PRN.LINKS)
+    lead = bi("The kings and princes of Wales, from Merfyn Frych and Rhodri Mawr to Llywelyn ein Llyw Olaf, each with a page of their own.",
+              "Brenhinoedd a thywysogion Cymru, o Ferfyn Frych a Rhodri Mawr hyd Lywelyn ein Llyw Olaf, pob un â’i dudalen ei hun.")
+    return section(f'<div class="ar-circle"><p class="lede">{lead}</p>{out}<p class="ar-more">{more}</p></div>', "Kings and princes of Wales", "Brenhinoedd a thywysogion Cymru")
+
+
 def person_page(p):
     slug, eid = p[0], p[1]
     era = ERA[eid]
@@ -616,12 +637,13 @@ def person_page(p):
             + (f'<a href="people.html?field={P2.FIELD[slug]}">{bi(*fld)}</a>' if fld else "") + '</div>' + first_badge(slug))
     rl = realm_links(f"person-{slug}.html") + ft_link_for_person(f"person-{slug}.html") + saints_links(f"person-{slug}.html") + lit_link(slug)
     meta += f'<p class="realm-links">{rl}</p>' if rl else ""
-    coded = any(a.startswith(("## ", "> ", "|| ")) for a in long_en)
+    coded = any(a.startswith(("## ", "> ", "|| ", "^ ")) for a in long_en)
     body = prose_bi(long_en, long_cy, cls="story prose") if coded else paras(long_en, long_cy)
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', era["ill"], p[2], date_cy(p[2]), p[3], p[4], p[7], p[8], art=ERA_ART[eid])
             + section(meta + photo_fig(PH.PERSON_PHOTOS.get(slug), "portrait", "person-" + slug) + body + f'<p class="share no-print"><button type="button" class="btn" data-copy="person-{slug}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button></p>' + further(f"person:{slug}", p[9]), top=True)
             + PERSON_EXTRA.get(slug, lambda: "")()
             + arthur_circle(slug)
+            + princes_circle(slug)
             + story_feature("people", slug)
             + (section(f'<ol class="era-events">{"".join(event_li(ev) for ev in related)}</ol>', "On the timeline", "Ar y llinell amser") if related else "")
             + set_block(f"person:{slug}")
@@ -645,7 +667,7 @@ def place_page(pl):
             f'<a href="{osm}" target="_blank" rel="noopener">{bi("Open in a map", "Agor mewn map")} ↗</a><a href="map.html#lle-{pid}">{bi("On our map", "Ar ein map")} →</a></div>')
     rl = realm_links(f"place-{pid}.html") + saints_links(f"place-{pid}.html")
     meta += f'<p class="realm-links">{rl}</p>' if rl else ""
-    coded = any(a.startswith(("## ", "> ", "|| ")) for a in long_en)
+    coded = any(a.startswith(("## ", "> ", "|| ", "^ ")) for a in long_en)
     body = prose_bi(long_en, long_cy, cls="story prose") if coded else paras(long_en, long_cy)
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', pl["ill"], era["en"], era["cy"], pl["en"], pl["cy"], pl["dEn"], pl["dCy"], art=ERA_ART[eid])
             + section(meta + photo_fig(PH.PLACE_PHOTOS.get(pid), "", "place-" + pid) + paras(long_en, long_cy) + further(f"place:{pid}", pl["src"]), top=True)
@@ -782,6 +804,8 @@ def prose(pars, cls="prose"):
             continue
         if a.startswith("## "):
             out += f"<h2>{e(a[3:])}</h2>"
+        elif a.startswith("^ "):
+            out += f'<p class="src-note">{e(a[2:])}</p>'
         elif a.startswith("> "):
             q, _, c = a[2:].partition(" | ")
             out += f'<blockquote class="pq"><p>{e(q)}</p>' + (f"<cite>{e(c)}</cite>" if c else "") + "</blockquote>"

@@ -636,6 +636,11 @@ Learnt while simplifying the home page.
 - The top picture loads at once (`fetchpriority="high"`, 600px copy for phones through `srcset`); card pictures load lazily from the small copy. The build stops if a named picture's file is missing.
 - Commons can't be reached from the cloud. New pictures have to be downloaded on the Mini-PC (Remote Control) and added to the gallery first.
 
+### Full-length pages for the kings and princes, with sources beside the claims (November 2026)
+- `src/princes.py` holds the long texts for the kings and princes of Wales (`LONG`, put over the short texts by `src/long.py`), new rulers in the `people2a.py` format (`PEOPLE`, added in `src/people2.py`), and `GROUPS`/`LINKS` for the "Kings and princes of Wales" block that `princes_circle()` in `build.py` shows on each of their pages. A group can list people whose pages are still to come: only people with a page are shown.
+- A new paragraph code for any coded text (person pages, long reads): `"^ Source: ..."` prints a small source note under the paragraph it backs up (`.src-note` in `src/v6.css`). Name the old source and the year (Annales Cambriae, Brut y Tywysogion, Asser, Gerald), so a reader can check the claim.
+- Check every quote against a real edition before it goes in. Gerald of Wales (Description of Wales I.2) gives North Wales to Merfyn and Powys to Anarawd, not the other way round; only his I.4 names the three royal seats (Aberffraw, Dinefwr, Pengwern).
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.

@@ -319,6 +319,7 @@ html.menu-open { overflow: hidden }
 .prose .pq { margin: .6rem 0; padding: .4rem 0 .4rem 1.4rem; border-left: 3px solid var(--c) }
 .prose .pq p { font-family: var(--f-display); font-size: clamp(1.5rem, 3vw, 2.1rem); line-height: 1.25; color: var(--ink) }
 .prose .pq cite { display: block; margin-top: .6rem; font-style: normal; font-size: .9rem; letter-spacing: .04em; color: #9aa0ad }
+.prose .src-note { margin: -.4rem 0 1.1rem; padding-left: .8rem; border-left: 2px solid var(--line); font-size: .82rem; line-height: 1.45; color: #9aa0ad }
 .prose table.kv { width: 100%; border-collapse: collapse; font-size: 1rem; line-height: 1.5; border-top: 1px solid rgba(255,255,255,.14) }
 .prose table.kv th, .prose table.kv td { text-align: left; vertical-align: top; padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(255,255,255,.14) }
 .prose table.kv th { width: 42%; font-weight: 600; color: #9aa0ad }
