@@ -7,6 +7,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Topic guides: follow one thread through Welsh history", "Canllawiau pwnc: dilyn un edefyn drwy hanes Cymru",
+     "Eleven new guides, from the Welsh language, faith and law to industry, women of Wales, music and poetry, the Welsh abroad, science and sport, each with its people, key moments, words to know and places to visit.",
+     "Un ar ddeg o ganllawiau newydd, o’r Gymraeg, ffydd a chyfraith i ddiwydiant, menywod Cymru, cerdd a barddoniaeth, y Cymry ar wasgar, gwyddoniaeth a chwaraeon, pob un gyda’i bobl, ei eiliadau allweddol, geiriau i’w gwybod a lleoedd i ymweld â nhw.",
+     "topics.html"),
     ("2026-11-12", "Battles of Wales and the key documents", "Brwydrau Cymru a’r dogfennau allweddol",
      "Two new reference pages: 38 battles and risings on a map, from the Druids on the Menai to Mametz Wood, and 21 documents that shaped Wales in their own words, from the Treaty of Montgomery and Glyndŵr’s Pennal letter to Tynged yr Iaith.",
      "Dwy dudalen gyfeirio newydd: 38 o frwydrau a gwrthryfeloedd ar fap, o’r Derwyddon ar y Fenai i Goed Mametz, a 21 o ddogfennau a luniodd Gymru yn eu geiriau eu hunain, o Gytundeb Trefaldwyn a Llythyr Pennal Glyndŵr i Dynged yr Iaith.",
