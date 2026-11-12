@@ -18,7 +18,6 @@
     if (y < 1000) return c + y + " " + T("AD", "OC");
     return c + y + end;
   }
-  function srcLink(s) { return s ? '<a class="src" href="' + WIKI + s + '" target="_blank" rel="noopener">' + T("Source", "Ffynhonnell") + " ↗</a>" : ""; }
   var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   var MONTHS_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   var MONTHS_CY = ["Ionawr","Chwefror","Mawrth","Ebrill","Mai","Mehefin","Gorffennaf","Awst","Medi","Hydref","Tachwedd","Rhagfyr"];
@@ -396,7 +395,7 @@
   /* ---------- Chapters ---------- */
   function renderChapters() {
     $("#chap-list").innerHTML = ERAS.map(function (e) {
-      return '<button type="button" class="chap" data-era="' + e.id + '" data-open="' + e.id + '"><svg aria-hidden="true"><use href="#i-' + e.ill + '"/></svg><span class="span">' + T(e.spanEn, e.spanCy) + "</span><h3>" + T(e.en, e.cy) + "</h3><p>" + esc(T(e.blurbEn, e.blurbCy)) + '</p><span class="go">' + T("Read the chapter →", "Darllen y bennod →") + "</span></button>";
+      return '<button type="button" class="chap" data-era="' + e.id + '" data-open="' + e.id + '"><svg aria-hidden="true"><use href="#i-' + e.ill + '"/></svg><span class="span">' + T(e.spanEn, e.spanCy) + "</span><h3>" + T(e.en, e.cy) + "</h3><p>" + esc(T(e.blurbEn, e.blurbCy)) + "</p></button>";
     }).join("");
     $("#foot-eras").innerHTML = ERAS.map(function (e) { return '<a href="era-' + e.id + '.html">' + T(e.en, e.cy) + "</a>"; }).join("") + '<a href="trails.html">' + T("Trails", "Llwybrau") + '</a><a href="teachers.html">' + T("For teachers", "I athrawon") + '</a><a href="#sources">' + T("Sources", "Ffynonellau") + "</a>";
     $("#trail-list").innerHTML = D.TRAILS.map(function (t, i) { return '<a class="trail-card" href="trail-' + t.id + '.html" data-era="' + ERAS[i % ERAS.length].id + '"><svg aria-hidden="true"><use href="#i-' + t.ill + '"/></svg><span><b>' + esc(T(t.en, t.cy)) + "</b><span>" + t.n + " " + T("stops", "arhosfan") + "</span></span></a>"; }).join("");
@@ -540,9 +539,9 @@
       if (tlEra !== "all" && e[E_ERA] !== tlEra) return;
       n++;
       if (e[E_ERA] !== last) { var E = ERA[e[E_ERA]]; html += '<li class="era-head" id="era-' + E.id + '" data-era="' + E.id + '"><span class="eyebrow">' + T(E.spanEn, E.spanCy) + "</span><h3>" + T(E.en, E.cy) + '</h3><button type="button" data-open="' + E.id + '">' + T("Read the chapter", "Darllen y bennod") + "</button></li>"; last = e[E_ERA]; }
-      html += '<li class="ev' + (e[E_KEY] ? " key" : "") + '" id="ev-' + i + '" data-i="' + i + '" data-era="' + e[E_ERA] + '"><time>' + yearLabel(e) + "</time><h4>" + esc(T(e[E_TEN], e[E_TCY])) + "</h4><p>" + esc(T(e[E_BEN], e[E_BCY])) + '</p><div class="links">' +
-        (D.EVS ? '<a class="src full" href="event-' + D.EVS[i] + '.html">' + T("The full story", "Yr hanes llawn") + " →</a>" : "") +
-        (e[E_PLACE] ? '<button type="button" class="maplink" data-map="' + e[E_PLACE] + '"><svg aria-hidden="true"><use href="#i-pin"/></svg>' + T("See it on the map", "Gweld ar y map") + "</button>" : "") + (D.SL && D.SL[i] ? '<a class="src" href="story-' + D.SL[i] + '.html">' + T("Read the long read", "Darllen yr erthygl") + " →</a>" : "") + srcLink(e[E_SRC]) + "</div></li>";
+      html += '<li class="ev' + (D.EVS ? " wl-card" : "") + (e[E_KEY] ? " key" : "") + '" id="ev-' + i + '" data-i="' + i + '" data-era="' + e[E_ERA] + '"><time>' + yearLabel(e) + "</time><h4>" + esc(T(e[E_TEN], e[E_TCY])) + "</h4><p>" + esc(T(e[E_BEN], e[E_BCY])) + '</p><div class="links">' +
+        (D.EVS ? '<a class="wl" href="event-' + D.EVS[i] + '.html">' + esc(T(e[E_TEN], e[E_TCY])) + "</a>" : "") +
+        (e[E_PLACE] ? '<button type="button" class="maplink" data-map="' + e[E_PLACE] + '"><svg aria-hidden="true"><use href="#i-pin"/></svg>' + T("See it on the map", "Gweld ar y map") + "</button>" : "") + (D.SL && D.SL[i] ? '<a class="src" href="story-' + D.SL[i] + '.html">' + T("Read the long read", "Darllen yr erthygl") + " →</a>" : "") + "</div></li>";
     });
     $("#events").innerHTML = html;
     $("#tl-count").textContent = n + " " + T("events", "digwyddiad");
@@ -617,7 +616,7 @@
     card.innerHTML = art +
       '<div style="display:grid;gap:.3rem"><h3>' + esc(T(p.en, p.cy)) + "</h3>" + (other !== T(p.en, p.cy) ? '<span class="cy-name">' + esc(other) + "</span>" : "") + "</div>" +
       '<div class="meta"><span><b>' + T(E.en, E.cy) + "</b></span><span>" + esc(p.year) + "</span><span>" + p.lat.toFixed(3) + "° N, " + Math.abs(p.lon).toFixed(3) + "° W</span></div>" +
-      '<p class="desc">' + esc(T(p.dEn, p.dCy)) + "</p>" + (p.vis ? '<p class="pc-visit"><b>' + T("Visit", "Ymweld") + ':</b> ' + esc(cap(T(p.vis[0], p.vis[1]))) + " · " + esc(T(p.vis[3], p.vis[4])) + (p.vis[5] ? " · " + esc(p.vis[5]) : "") + (p.vis[2] ? ' · <a href="' + esc(p.vis[2]) + '" target="_blank" rel="noopener">' + T("Times and prices", "Amseroedd a phrisiau") + " ↗</a>" : "") + ' · <a href="' + esc(p.vis[6]) + '" target="_blank" rel="noopener">' + T("Directions", "Cyfarwyddiadau") + " ↗</a></p>" : "") + '<div style="display:flex;gap:1.2rem;flex-wrap:wrap;align-items:center"><a class="src" style="color:var(--ink)" href="place-' + p.id + '.html">' + T("Read the full story", "Darllen y stori lawn") + " →</a>" + srcLink(p.src) + (p.ph ? '<a class="credit" href="' + p.ph[1] + '" target="_blank" rel="noopener">' + T("Photo: Wikimedia Commons", "Llun: Wikimedia Commons") + " ↗</a>" : "") + "</div>" +
+      '<p class="desc">' + esc(T(p.dEn, p.dCy)) + "</p>" + (p.vis ? '<p class="pc-visit"><b>' + T("Visit", "Ymweld") + ':</b> ' + esc(cap(T(p.vis[0], p.vis[1]))) + " · " + esc(T(p.vis[3], p.vis[4])) + (p.vis[5] ? " · " + esc(p.vis[5]) : "") + (p.vis[2] ? ' · <a href="' + esc(p.vis[2]) + '" target="_blank" rel="noopener">' + T("Times and prices", "Amseroedd a phrisiau") + " ↗</a>" : "") + ' · <a href="' + esc(p.vis[6]) + '" target="_blank" rel="noopener">' + T("Directions", "Cyfarwyddiadau") + " ↗</a></p>" : "") + '<div style="display:flex;gap:1.2rem;flex-wrap:wrap;align-items:center"><a class="wl" href="place-' + p.id + '.html">' + esc(T(p.en, p.cy)) + "</a>" + (p.ph ? '<a class="credit" href="' + p.ph[1] + '" target="_blank" rel="noopener">' + T("Photo: Wikimedia Commons", "Llun: Wikimedia Commons") + " ↗</a>" : "") + "</div>" +
       '<div class="row">' + (evIdx >= 0 ? '<button type="button" class="btn" data-tl="' + evIdx + '">' + T("See it on the timeline", "Gweld ar y llinell amser") + "</button>" : "<span></span>") +
       '<div class="nav-btns"><button type="button" class="icon-btn" id="pl-prev" aria-label="' + T("Previous place", "Lle blaenorol") + '"><svg><use href="#i-left"/></svg></button><span class="people-count" style="align-self:center;min-width:3.2rem;text-align:center">' + (i + 1) + " / " + visible.length + '</span><button type="button" class="icon-btn" id="pl-next" aria-label="' + T("Next place", "Lle nesaf") + '"><svg><use href="#i-right"/></svg></button></div></div>';
     $("#pl-prev").onclick = function () { selectPlace(visible[(i - 1 + visible.length) % visible.length].id); };
@@ -752,7 +751,7 @@
     var more = $("#people-more"); more.hidden = P_PAGE || pEra !== "all" || pField !== "all"; more.textContent = pAll ? T("Show fewer", "Dangos llai") : T("Show all " + PEOPLE.length + " people", "Dangos pob un o’r " + PEOPLE.length);
     $("#people-grid").innerHTML = list.map(function (p) {
       var name = T(p[3], p[4]), other = lang === "en" ? p[4] : p[3], link = "person-" + p[0] + ".html", ph = D.PPH[p[0]];
-      return '<article class="plaque" data-era="' + p[1] + '"><div class="top-row"><span class="ava" aria-hidden="true">' + initials(p[3]) + (ph ? '<img src="' + ph + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : "") + '</span><div><span class="dates">' + esc(p[2]) + "</span><h3>" + esc(name) + '</h3></div></div><span class="epi">' + esc(T(p[5], p[6])) + (other !== name ? " · " + esc(other) : "") + "</span>" + ((D.PFIRST || {})[p[0]] ? '<span class="first-tag">★ ' + esc(T(D.PFIRST[p[0]][1], D.PFIRST[p[0]][2])) + "</span>" : "") + "<p>" + esc(T(p[7], p[8])) + '</p><div class="links"><a class="go" href="' + link + '">' + T("Read more", "Darllen mwy") + ' →</a><button type="button" class="copy" data-copy="' + link + '">' + T("Copy link", "Copïo’r ddolen") + "</button>" + srcLink(p[9]) + "</div></article>";
+      return '<article class="plaque wl-card" data-era="' + p[1] + '"><div class="top-row"><span class="ava" aria-hidden="true">' + initials(p[3]) + (ph ? '<img src="' + ph + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : "") + '</span><div><span class="dates">' + esc(p[2]) + "</span><h3>" + esc(name) + '</h3></div></div><span class="epi">' + esc(T(p[5], p[6])) + (other !== name ? " · " + esc(other) : "") + "</span>" + ((D.PFIRST || {})[p[0]] ? '<span class="first-tag">★ ' + esc(T(D.PFIRST[p[0]][1], D.PFIRST[p[0]][2])) + "</span>" : "") + "<p>" + esc(T(p[7], p[8])) + '</p><a class="wl" href="' + link + '">' + esc(name) + "</a></article>";
     }).join("");
   }
   $("#people-more").onclick = function () { pAll = !pAll; renderPeople(); if (!pAll) goTo($("#people")); };

@@ -732,3 +732,20 @@ section.page-top { padding-top: clamp(1.5rem, 4vw, 3rem) }
 .ar-circle .ppl .ava { width: 2rem; height: 2rem; font-size: .8rem }
 .ar-circle .ar-more { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.8rem }
 .ar-line b a { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--c) 60%, transparent); text-underline-offset: 3px }
+
+/* ---------- whole cards are links ----------
+   A card or list row with class wl-card is one link. Its link (a.wl) holds the card's name for screen readers,
+   shows no words, and is stretched over the whole card. a.wl-go is a link that stays visible (a name in a heading)
+   whose click area is stretched the same way. Anything else in the card that can be pressed sits above it. */
+.wl-card { position: relative; cursor: pointer }
+a.wl { position: absolute; inset: 0; z-index: 1; overflow: hidden; color: transparent; font-size: 0; line-height: 0; text-decoration: none; border-radius: 14px; margin: 0 }
+a.wl-go::after { content: ""; position: absolute; inset: 0; z-index: 1 }
+:where(.wl-card) :where(a:not(.wl):not(.wl-go), button, summary, input, select, label) { position: relative; z-index: 2 }
+a.wl:focus-visible, a.wl-go:focus-visible::after { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 14px }
+a.wl-go:focus-visible { outline: none }
+:is(.era-events > li, li.ev).wl-card { transition: background-color .25s, box-shadow .25s }
+:is(.era-events > li, li.ev).wl-card:hover { background-color: rgba(255,255,255,.035); box-shadow: -.8rem 0 0 rgba(255,255,255,.035), .8rem 0 0 rgba(255,255,255,.035) }
+.ar-list > li.wl-card:hover { background: rgba(255,255,255,.045) }
+:is(.behind, .mab-tale, .pk-person, .firsts-banner, .place-card).wl-card { transition: box-shadow .25s }
+:is(.behind, .mab-tale, .pk-person, .firsts-banner, .place-card).wl-card:hover { box-shadow: 0 0 0 1px color-mix(in srgb, var(--c, var(--gold)) 55%, transparent) }
+@media print { a.wl, a.wl-go::after { display: none } .wl-card { cursor: auto } }
