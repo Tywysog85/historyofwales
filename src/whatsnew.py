@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Nine free teacher packs for the Curriculum for Wales", "Naw pecyn athrawon am ddim ar gyfer y Cwricwlwm i Gymru",
+     "One printable pack for each age of Welsh history: enquiry questions, key words, a timeline and card sort, people to know, places to visit near you, a source to study, activities for progression steps 2 to 4 and a quiz. In English and Cymraeg, free to print and adapt.",
+     "Un pecyn i’w argraffu ar gyfer pob oes yn hanes Cymru: cwestiynau ymholi, geiriau allweddol, llinell amser a didoli cardiau, pobl i’w hadnabod, lleoedd i ymweld â nhw yn agos atoch, ffynhonnell i’w hastudio, gweithgareddau ar gyfer camau cynnydd 2 i 4 a chwis. Yn Gymraeg ac yn Saesneg, am ddim i’w hargraffu a’u haddasu.",
+     "teachers.html"),
     ("2026-11-12", "The whole site in Welsh, at its own address", "Y wefan gyfan yn Gymraeg, yn ei chyfeiriad ei hun",
      "Every page now has a Welsh twin under historyofwales.cymru/cy/, with a Welsh title and summary, so people searching in Cymraeg can find the Welsh page. Press CY on any page to go to it; the site remembers your choice.",
      "Mae gan bob tudalen efaill Cymraeg bellach dan historyofwales.cymru/cy/, gyda theitl a chrynodeb Cymraeg, fel y gall pobl sy’n chwilio yn Gymraeg ddod o hyd i’r dudalen Gymraeg. Pwyswch CY ar unrhyw dudalen i fynd ati; mae’r wefan yn cofio eich dewis.",

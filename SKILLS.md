@@ -583,3 +583,8 @@ Learnt while simplifying the home page.
 - Scripts that read text from a page must not expect both `.l-en` and `.l-cy` to be there (see `site.js`, the card sets).
 - Elements whose words a script swaps (`data-cy="..."`) start out in Welsh on the Welsh page.
 
+## Teacher packs (November 2026)
+- `src/teachpacks.py` makes `pack-<age>.html` for the nine ages, linked from the top of `teachers.html`. The written parts live in `PACKS` (big idea, three enquiry questions, key words as A–Z ids from `src/ref_az.py`, two activities for each of progression steps 2, 3 and 4, and the id of a document from `src/ref_docs.py` to study). The rest (timeline, card sort, people, places, long reads, quiz sheet) comes from the site's own data, so the packs grow with the site.
+- The "what matters" lines are the five Humanities statements of the Curriculum for Wales, put in short. Don't present them as the official wording.
+- Packs print cleanly (A4, about 8 pages): `PRINT_CSS` hides the menu, footer, buttons and the badge pop-ups. To check, render with Playwright's `page.pdf()` and look at the pages with `pdftoppm`.
+
