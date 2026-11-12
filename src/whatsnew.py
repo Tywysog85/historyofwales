@@ -8,6 +8,18 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Prince Rhys ap Gruffudd: the Lord Rhys and the first eisteddfod", "Y Tywysog Rhys ap Gruffudd: yr Arglwydd Rhys a’r eisteddfod gyntaf",
+     "A new long read: the orphaned prince who won back Deheubarth, stood with Owain Gwynedd against Henry II, and at Christmas 1176 set two chairs for the best poet and musician at Cardigan Castle.",
+     "Erthygl newydd: y tywysog amddifad a enillodd Ddeheubarth yn ôl, a safodd gydag Owain Gwynedd yn erbyn Harri II, ac a osododd ddwy gadair i’r bardd a’r cerddor gorau yng Nghastell Aberteifi adeg y Nadolig 1176.",
+     "story-rhys.html"),
+    ("2026-11-12", "Nest ferch Rhys: the princess of Deheubarth", "Nest ferch Rhys: tywysoges Deheubarth",
+     "A new long read: the daughter of the last king of Deheubarth, the night of fire at Cenarth Bychan when she saved her husband’s life, and the sons and grandsons who won Ireland and gave Wales Gerald of Wales.",
+     "Erthygl newydd: merch brenin olaf Deheubarth, y noson o dân yng Nghenarth Bychan pan achubodd fywyd ei gŵr, a’r meibion a’r wyrion a enillodd Iwerddon ac a roddodd Gerallt Gymro i Gymru.",
+     "story-nest.html"),
+    ("2026-11-12", "24 more people of Welsh history", "24 yn rhagor o bobl hanes Cymru",
+     "New pages on Morgan Hen and Iestyn ap Gwrgant, Madog ap Maredudd of Powys, Eleanor de Montfort, Prydydd y Moch, Gruffudd ab yr Ynad Coch, Llywelyn ap Gruffudd Fychan of Caeo, Humphrey Llwyd, Saint Richard Gwyn, John Penry, Daniel Rowland, Ceiriog, Islwyn, Sir John Morris-Jones, Sir Ifor Williams, Gwenallt and more.",
+     "Tudalennau newydd ar Forgan Hen ac Iestyn ap Gwrgant, Madog ap Maredudd o Bowys, Elinor de Montfort, Prydydd y Moch, Gruffudd ab yr Ynad Coch, Llywelyn ap Gruffudd Fychan o Gaeo, Humphrey Llwyd, Sant Richard Gwyn, John Penri, Daniel Rowland, Ceiriog, Islwyn, Syr John Morris-Jones, Syr Ifor Williams, Gwenallt a rhagor.",
+     "people.html"),
     ("2026-11-12", "Macsen Wledig: the emperor from Britain and the birth of Wales", "Macsen Wledig: yr ymerawdwr o Brydain a geni Cymru",
      "A new long read: the general proclaimed emperor by the soldiers of Britain in 383, the Dream of Macsen and Elen of Caernarfon, the Britons who founded Brittany, the kings who traced their line to him, and the year that begins Yma o Hyd.",
      "Erthygl newydd: y cadfridog a gyhoeddwyd yn ymerawdwr gan filwyr Prydain yn 383, Breuddwyd Macsen ac Elen o Gaernarfon, y Brythoniaid a sefydlodd Lydaw, y brenhinoedd a olrheiniodd eu llinach ato, a’r flwyddyn sy’n dechrau Yma o Hyd.",

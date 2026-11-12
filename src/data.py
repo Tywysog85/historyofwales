@@ -355,7 +355,7 @@ PEOPLE = [
  ("gwenllian","medieval","c. 1100–1136","Gwenllian ferch Gruffydd","Gwenllian ferch Gruffydd","Princess of Deheubarth","Tywysoges Deheubarth",
   "Led an army against the Normans at Kidwelly and died in battle. Her death sparked the Great Revolt.",
   "Arweiniodd fyddin yn erbyn y Normaniaid ger Cydweli a bu farw yn y frwydr. Taniodd ei marwolaeth y Gwrthryfel Mawr.","Gwenllian_ferch_Gruffydd"),
- ("yr-arglwydd-rhys","medieval","1132–1197","The Lord Rhys","Yr Arglwydd Rhys","Ruler of Deheubarth","Rheolwr Deheubarth",
+ ("yr-arglwydd-rhys","medieval","1132–1197","The Lord Rhys","Yr Arglwydd Rhys","Prince Rhys ap Gruffudd of Deheubarth","Y Tywysog Rhys ap Gruffudd o Ddeheubarth",
   "Patron of poets and host of the first recorded eisteddfod, at Cardigan in 1176.",
   "Noddwr beirdd a threfnydd yr eisteddfod gyntaf y gwyddys amdani, yn Aberteifi yn 1176.","Rhys_ap_Gruffydd"),
  ("gerallt-gymro","medieval","c. 1146–c. 1223","Gerald of Wales","Gerallt Gymro","Churchman and writer","Clerigwr ac awdur",
@@ -656,3 +656,7 @@ EVENTS = sorted(EVENTS + _MDE, key=lambda ev: ev[1])
 # ---------- King Caradog against Rome (src/caradog.py) ----------
 from caradog import EVENTS as _CRE
 EVENTS = sorted(EVENTS + _CRE, key=lambda ev: ev[1])
+
+# ---------- Nest ferch Rhys (src/nest.py) ----------
+from nest import EVENTS as _NSE
+EVENTS = sorted(EVENTS + _NSE, key=lambda ev: ev[1])
