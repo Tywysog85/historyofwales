@@ -676,6 +676,172 @@ S = {
         t="Welsh Language (Wales) Measure 2011, section 1", by=("The National Archives, legislation.gov.uk", "Yr Archifau Cenedlaethol, legislation.gov.uk"),
         note=("“(1) The Welsh language has official status in Wales.”", "“(1) Mae statws swyddogol i’r Gymraeg yng Nghymru.”"),
         url="https://www.legislation.gov.uk/mwa/2011/1/section/1", lang="en"),
+    # ---------- the full pages behind the home page facts (src/factplaces.py) ----------
+    "orme-visitwales": dict(
+        short=("Visit Wales", "Croeso Cymru"),
+        t="Great Orme Mines", by=("Visit Wales, Welsh Government", "Croeso Cymru, Llywodraeth Cymru"),
+        note=("The Great Cavern, “the largest prehistoric underground excavation in the world”, in “the oldest metal mine open to the public anywhere in the world”; open mid-March to the end of October.",
+              "Yr Ogof Fawr, y cloddiad tanddaearol cynhanesyddol mwyaf yn y byd, yn y mwynglawdd metel hynaf ar agor i’r cyhoedd yn unman yn y byd; ar agor o ganol Mawrth hyd ddiwedd Hydref."),
+        url="https://www.visitwales.com/attraction/historic-site/great-orme-mines-527987", lang="en"),
+    "orme-liverpool": dict(
+        short=("University of Liverpool", "Prifysgol Lerpwl"),
+        t="Britain’s earliest mining boom revealed", by=("University of Liverpool news, 15 October 2019", "Newyddion Prifysgol Lerpwl, 15 Hydref 2019"),
+        note=("The Orme gave “enough copper to dominate Britain’s metal supply for about two centuries”, with a golden age about 1600–1400 BC.",
+              "Rhoddodd y Gogarth ddigon o gopr i reoli cyflenwad metel Prydain am tua dwy ganrif, gydag oes aur tua 1600–1400 CC."),
+        url="https://news.liverpool.ac.uk/2019/10/15/britains-earliest-mining-boom-revealed/", lang="en"),
+    "orme-subbrit": dict(
+        short=("Subterranea Britannica", "Subterranea Britannica"),
+        t="Great Orme Mines", by=("Subterranea Britannica, the society for underground sites", "Subterranea Britannica, y gymdeithas safleoedd tanddaearol"),
+        note=("“Discovered in 1987 during a landscaping project”; a self-guided tour of a 200 m underground section.",
+              "Fe’i darganfuwyd yn 1987 yn ystod cynllun tirlunio; taith hunandywys drwy ran danddaearol 200 m."),
+        url="https://www.subbrit.org.uk/sites/great-orme-mines/", lang="en"),
+    "llanfair-bangor": dict(
+        short=("Bangor University", "Prifysgol Bangor"),
+        t="Archive of the month: the Women’s Institute", by=("Bangor University Archives", "Archifau Prifysgol Bangor"),
+        note=("“The First British WI was started in Llanfair PG, Anglesey on September 16th, 1915.”",
+              "Dechreuwyd Sefydliad y Merched cyntaf Prydain yn Llanfair PG, Ynys Môn, ar 16 Medi 1915."),
+        url="https://bangor.ac.uk/news/archive/archive-of-the-month-17963", lang="en"),
+    "llanfair-coflein": dict(
+        short=("Coflein", "Coflein"),
+        t="Llanfair PG Women’s Institute Hall", by=("Coflein, Royal Commission on the Ancient and Historical Monuments of Wales", "Coflein, Comisiwn Brenhinol Henebion Cymru"),
+        note=("“Established in September 1915, the branch of the Women’s Institute in Llanfairpwllgwyngyll is the oldest in Britain.” It met first in a cottage, then in the iron hall by the tollhouse.",
+              "Sefydlwyd y gangen ym mis Medi 1915, a hi yw’r hynaf ym Mhrydain. Cyfarfu gyntaf mewn bwthyn, yna yn y neuadd haearn wrth y tollty."),
+        url="https://coflein.gov.uk/en/site/420753"),
+    "bethlehem-wikishire": dict(
+        short=("Wikishire", "Wikishire"),
+        t="Bethlehem, Carmarthenshire", by=("Wikishire", "Wikishire"),
+        note=("Once Dyffryn Ceidrich; named after its chapel in the Methodist revival; the Christmas postmark gained national attention around 1965; Carn Goch hillfort above.",
+              "Dyffryn Ceidrych gynt; cafodd ei enw gan ei gapel yn y diwygiad Methodistaidd; daeth y stamp Nadolig i sylw’r genedl tua 1965; bryngaer Carn Goch uwchben."),
+        url="https://wikishire.co.uk/wiki/Bethlehem,_Carmarthenshire", lang="en"),
+    "pyg-wiki": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Pen-y-Gwryd", by=("Wikipedia", "Wikipedia"),
+        note=("The farmhouse of 1811 and the inn; Henry and Ann Owen; the Climbers’ Club founded here in May 1898; the 1953 Everest and 1955 Kangchenjunga signatures on the ceiling; the Roman marching camp.",
+              "Ffermdy 1811 a’r dafarn; Henry ac Ann Owen; sefydlu’r Climbers’ Club yma ym mis Mai 1898; llofnodion Everest 1953 a Kangchenjunga 1955 ar y nenfwd; y gwersyll ymdaith Rhufeinig."),
+        url="https://en.wikipedia.org/wiki/Pen-y-Gwryd", lang="en"),
+    "lavernock-wiki": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Lavernock", by=("Wikipedia, drawing on George Kemp’s diary", "Wikipedia, ar sail dyddiadur George Kemp"),
+        note=("Day by day, 10 to 13 May 1897: Preece’s apparatus on Flat Holm, Marconi’s at Lavernock, the longer aerial, and the messages ‘Are you ready?’, ‘Can you hear me?’, ‘Yes, loud and clear.’",
+              "Ddydd wrth ddydd, 10 i 13 Mai 1897: offer Preece ar Ynys Echni, offer Marconi yn Larnog, yr erial hirach, a’r negeseuon ‘Are you ready?’, ‘Can you hear me?’, ‘Yes, loud and clear.’"),
+        url="https://en.wikipedia.org/wiki/Lavernock", lang="en"),
+    "marconi-urban75": dict(
+        short=("urban75", "urban75"),
+        t="St Lawrence Church, Lavernock: Marconi and the birth of radio", by=("urban75", "urban75"),
+        note=("The church and the bronze plaque put up by the Cardiff Rotary Club in 1948, with photographs.",
+              "Yr eglwys a’r plac efydd a godwyd gan Glwb Rotari Caerdydd yn 1948, gyda lluniau."),
+        url="https://www.urban75.org/blog/st-lawrence-church-lavernock-south-wales-marconi-and-the-birth-of-radio/", lang="en"),
+    "dwb-preece": dict(
+        short=("Dictionary of Welsh Biography", "Y Bywgraffiadur"),
+        t="Preece, Sir William Henry (1834–1913), electrical engineer", by=("Dictionary of Welsh Biography, National Library of Wales", "Y Bywgraffiadur Cymreig, Llyfrgell Genedlaethol Cymru"),
+        note=("Born at Caernarfon; engineer-in-chief of the Post Office from 1892; in 1892 he sent messages through the air across the Bristol Channel between Penarth and Flat Holm.",
+              "Ganed yng Nghaernarfon; prif beiriannydd y Swyddfa Bost o 1892; yn 1892 anfonodd negeseuon drwy’r awyr ar draws Môr Hafren rhwng Penarth ac Ynys Echni."),
+        url="https://biography.wales/article/s-PREE-HEN-1834", url_cy="https://bywgraffiadur.cymru/article/s-PREE-HEN-1834"),
+    "preece-wiki": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="William Henry Preece", by=("Wikipedia", "Wikipedia"),
+        note=("“Preece became one of Marconi’s most ardent supporters” and gained help from the Post Office for his work.",
+              "Daeth Preece yn un o gefnogwyr mwyaf brwd Marconi ac ennill cymorth y Swyddfa Bost i’w waith."),
+        url="https://en.wikipedia.org/wiki/William_Henry_Preece", lang="en"),
+
+    # ---------- World firsts badges on person pages ----------
+    "dwb-parryjones": dict(
+        short=("Dictionary of Welsh Biography", "Y Bywgraffiadur"),
+        t="Jones, Thomas Parry (1935–2013), inventor", by=("Dictionary of Welsh Biography, National Library of Wales", "Y Bywgraffiadur Cymreig, Llyfrgell Genedlaethol Cymru"),
+        note=("In 1974 his company produced the first breathalyser with an electrochemical sensor.",
+              "Yn 1974 cynhyrchodd ei gwmni’r anadliedydd cyntaf â synhwyrydd electrocemegol."),
+        url="https://biography.wales/article/s12-JONE-PAR-1935", url_cy="https://bywgraffiadur.cymru/article/s12-JONE-PAR-1935"),
+    "dwb-wallace": dict(
+        short=("Dictionary of Welsh Biography", "Y Bywgraffiadur"),
+        t="Wallace, Alfred Russel (1823–1913), naturalist", by=("Dictionary of Welsh Biography, National Library of Wales", "Y Bywgraffiadur Cymreig, Llyfrgell Genedlaethol Cymru"),
+        note=("His theory of natural selection was “identical with that being developed by Darwin but independent of him”; their papers were read together at the Linnean Society on 1 July 1858.",
+              "Roedd ei ddamcaniaeth am ddethol naturiol yr un fath ag un Darwin ond yn annibynnol arni; darllenwyd eu papurau gyda’i gilydd yng Nghymdeithas Linnaeus ar 1 Gorffennaf 1858."),
+        url="https://biography.wales/article/s6-WALL-RUS-1823", url_cy="https://bywgraffiadur.cymru/article/s6-WALL-RUS-1823"),
+    "wiki-dillwyn": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Mary Dillwyn", by=("Wikipedia", "Wikipedia"),
+        note=("“She is also credited with taking the first known photograph of a snowman, circa 1853.”",
+              "Hi sy’n cael y clod am dynnu’r ffotograff cyntaf y gwyddys amdano o ddyn eira, tua 1853."),
+        url="https://en.wikipedia.org/wiki/Mary_Dillwyn", lang="en"),
+    "wiki-iroberts": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Isaac Roberts", by=("Wikipedia", "Wikipedia"),
+        note=("His photograph of the Great Nebula in Andromeda, taken on 29 December 1888, “revealed that the nebula had a spiral structure, which was quite unexpected at the time.”",
+              "Dangosodd ei ffotograff o Nifwl Mawr Andromeda, a dynnwyd ar 29 Rhagfyr 1888, fod gan y nifwl siâp troellog, peth annisgwyl iawn ar y pryd."),
+        url="https://en.wikipedia.org/wiki/Isaac_Roberts", lang="en"),
+    "wiki-josephson": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Brian Josephson", by=("Wikipedia", "Wikipedia"),
+        note=("As a PhD student in 1962 he did the research that led to the Josephson effect; Nobel Prize in Physics 1973.",
+              "Fel myfyriwr PhD yn 1962 gwnaeth yr ymchwil a arweiniodd at effaith Josephson; Gwobr Nobel mewn Ffiseg 1973."),
+        url="https://en.wikipedia.org/wiki/Brian_Josephson", lang="en"),
+    "wiki-cooke": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Nicole Cooke", by=("Wikipedia", "Wikipedia"),
+        note=("In 2008 she became the first cyclist, man or woman, to be road race World Champion and Olympic gold medallist in the same year.",
+              "Yn 2008 hi oedd y beiciwr cyntaf, yn ddyn neu’n fenyw, i fod yn Bencampwr y Byd yn y ras ffordd ac yn enillydd medal aur Olympaidd yn yr un flwyddyn."),
+        url="https://en.wikipedia.org/wiki/Nicole_Cooke", lang="en"),
+    "wiki-awjones": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Alun Wyn Jones", by=("Wikipedia", "Wikipedia"),
+        note=("“He is the world’s most-capped rugby union player, with 158 caps for Wales and 12 for the British & Irish Lions.”",
+              "Ef yw’r chwaraewr rygbi’r undeb â’r mwyaf o gapiau yn y byd: 158 i Gymru a 12 i’r Llewod."),
+        url="https://en.wikipedia.org/wiki/Alun_Wyn_Jones", lang="en"),
+    "wiki-wilde": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Jimmy Wilde", by=("Wikipedia", "Wikipedia"),
+        note=("“He was the first official world flyweight champion”, holding the title from 1916 to 1923.",
+              "Ef oedd pencampwr pwysau pry swyddogol cyntaf y byd, a daliodd y teitl o 1916 hyd 1923."),
+        url="https://en.wikipedia.org/wiki/Jimmy_Wilde", lang="en"),
+    "wiki-cjackson": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Colin Jackson", by=("Wikipedia", "Wikipedia"),
+        note=("He set the 110 metres hurdles world record, 12.91 s, on 20 August 1993; it stood for nearly thirteen years, until 11 July 2006.",
+              "Gosododd record y byd yn y 110 metr dros y clwydi, 12.91 eiliad, ar 20 Awst 1993; safodd am bron i dair blynedd ar ddeg, tan 11 Gorffennaf 2006."),
+        url="https://en.wikipedia.org/wiki/Colin_Jackson", lang="en"),
+    "wiki-rprice": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Richard Price", by=("Wikipedia", "Wikipedia"),
+        note=("“He edited Bayes’s major work An Essay Towards Solving a Problem in the Doctrine of Chances (1763).”",
+              "Ef a olygodd brif waith Bayes, An Essay Towards Solving a Problem in the Doctrine of Chances (1763)."),
+        url="https://en.wikipedia.org/wiki/Richard_Price", lang="en"),
+    "wiki-ejwilliams": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Evan James Williams", by=("Wikipedia", "Wikipedia"),
+        note=("“Williams was the first person who experimentally detected muon decay and managed to photograph it”, working with a cloud chamber at Aberystwyth.",
+              "Williams oedd y cyntaf i ganfod dadfeiliad mwon mewn arbrawf a llwyddo i’w ffotograffu, gyda siambr gwmwl yn Aberystwyth."),
+        url="https://en.wikipedia.org/wiki/Evan_James_Williams", lang="en"),
+    "wiki-thomas-splint": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Thomas splint", by=("Wikipedia", "Wikipedia"),
+        note=("Introduced by Hugh Owen Thomas; with it “the mortality rate dropped from 80% to 15.6%” for broken thigh bones.",
+              "Hugh Owen Thomas a’i cyflwynodd; gydag ef gostyngodd y gyfradd marwolaethau o 80% i 15.6% am glun wedi torri."),
+        url="https://en.wikipedia.org/wiki/Thomas_splint", lang="en"),
+    "wiki-rjones-surgeon": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Robert Jones (surgeon)", by=("Wikipedia", "Wikipedia"),
+        note=("In 1896 he took an X-ray of a boy’s wrist to find a bullet; published in The Lancet in February 1896, “the first published clinical radiograph”.",
+              "Yn 1896 tynnodd belydr-X o arddwrn bachgen i ddod o hyd i fwled; cyhoeddwyd yn The Lancet ym mis Chwefror 1896, y radiograff clinigol cyntaf i’w gyhoeddi."),
+        url="https://en.wikipedia.org/wiki/Robert_Jones_(surgeon)", lang="en"),
+    "wiki-ernestjones": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Ernest Jones", by=("Wikipedia", "Wikipedia"),
+        note=("“Jones was the first English-speaking practitioner of psychoanalysis”; he first met Freud in 1908.",
+              "Jones oedd y seicdreiddiwr cyntaf yn y byd Saesneg ei iaith; cyfarfu â Freud gyntaf yn 1908."),
+        url="https://en.wikipedia.org/wiki/Ernest_Jones_(psychoanalyst)", lang="en"),
+}
+
+# person id -> sources for the World first / Welsh first badge on that person's page
+FIRST_CITES = {
+    "robert-recorde": "dwb-recorde", "william-jones": "dwb-wjones",
+    "pryce-pryce-jones": "pryce-storipowys,dwb-pryce", "william-grove": "grove-aps,dwb-grove",
+    "william-preece": "lavernock-wiki,preece-wiki", "red-lady-of-paviland": "paviland-museum,paviland-oumnh",
+    "madog": "powel-1584", "tom-parry-jones": "dwb-parryjones", "alfred-russel-wallace": "dwb-wallace",
+    "mary-dillwyn": "wiki-dillwyn", "isaac-roberts": "wiki-iroberts", "brian-josephson": "wiki-josephson",
+    "nicole-cooke": "wiki-cooke", "alun-wyn-jones": "wiki-awjones", "jimmy-wilde": "wiki-wilde",
+    "colin-jackson": "wiki-cjackson", "richard-price": "wiki-rprice", "evan-james-williams": "wiki-ejwilliams",
+    "hugh-owen-thomas": "wiki-thomas-splint", "robert-jones-surgeon": "wiki-rjones-surgeon",
+    "ernest-jones": "wiki-ernestjones",
 }
 
 from princes import CITES as _PRINCES  # noqa: E402  (the kings and princes of Wales, src/princes.py)
@@ -738,6 +904,16 @@ def html_text(text, cy=False):
         pos = m.end()
     out.append(_html.escape(text[pos:], quote=False))
     return "".join(out)
+
+
+def linked(text, href, cy=False, js=False):
+    """A sentence as a link to its full page, with its source chips after the link (a chip can't sit inside a link).
+    js=True: chips already turned into HTML, for text a script puts on the page; otherwise the markers are kept for render()."""
+    words = _html.escape(strip(text), quote=False)
+    marks = "".join(m.group(0) for m in MARK.finditer(text))
+    if js:
+        marks = "".join(chip(keys(m.group(1)), cy, "citej") for m in MARK.finditer(text))
+    return f'<a class="fact-a" href="{_html.escape(href)}">{words}</a>{marks}'
 
 
 def render(doc, cy=False):

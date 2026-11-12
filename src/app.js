@@ -703,7 +703,7 @@
 
   /* ---------- Did you know? + daily streak ---------- */
   var factI = Math.floor(Date.now() / 864e5) % D.FACTS.length;
-  function renderFact() { var f = D.FACTS[factI % D.FACTS.length]; $("#fact").innerHTML = T(f[0], f[1]); }  /* our own text, escaped at build, with its source chip (src/cites.py) */
+  function renderFact() { var f = D.FACTS[factI % D.FACTS.length]; $("#fact").innerHTML = T(f[0], f[1]); var m = $("#fact-more"); if (m) m.setAttribute("href", f[2]); }  /* our own text, escaped at build, with its source chip (src/cites.py) */
   $("#fact-next").onclick = function () { factI++; renderFact(); };
   function renderStreak() {
     var el = document.getElementById("daily-streak"); if (!el) return;

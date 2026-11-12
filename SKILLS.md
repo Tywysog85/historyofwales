@@ -658,6 +658,8 @@ Learnt while simplifying the home page.
 - The card opens on click (code at the end of `src/static/site.js`): under the chip on a computer, as a sheet along the bottom on a phone. Without JavaScript the chip is a plain link to the first source.
 - The home page's "Did you know?" fact is drawn again by `app.js` when "Another" is pressed, so `FACTS` goes into the page data already turned into HTML (`CITE.html_text`).
 - Check sources with the WebFetch tool when the cloud can't reach a site directly, and quote the source's own words in the note where you can.
+- Every "Did you know?" fact links to a full page (third item of each `FACTS` tuple in `src/features.py`), with a "Read the full story" button that follows "Another". `CITE.linked()` makes the sentence the link and puts its chips after it. Where no page existed one was written: places in `src/factplaces.py` (their own `PLACES` and `LONG`), events in `src/events_more.py`.
+- World first and Welsh first badges on person pages take their sources from `FIRST_CITES` in `src/cites.py` (person id -> keys); the chip sits beside the badge because the badge is a link. Only add a badge source that says what the badge says.
 
 ### Place pages people can visit: the Visiting box (November 2026)
 
