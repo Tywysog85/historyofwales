@@ -291,3 +291,6 @@ PLACE_LONG.update(_PL3.LONG)
 # ---------- the kings and princes of Wales, full-length pages (src/princes.py) ----------
 import princes as _PRN
 PEOPLE_LONG.update(_PRN.LONG)
+# full pages behind the home page's "Did you know?" facts (src/factplaces.py)
+import factplaces as _FPL  # noqa: E402
+PLACE_LONG.update(_FPL.LONG)
