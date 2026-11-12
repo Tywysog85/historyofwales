@@ -37,7 +37,7 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - Each page carries structured data (JSON-LD). It holds the page's own type (Person, TouristAttraction, Article), the site's name "History of Wales" / "Hanes Cymru", and a breadcrumb trail read from the crumbs at the top of the page. Test a page at https://search.google.com/test/rich-results.
 - `sitemap.xml` gives each page the date it last really changed, and lists its pictures. The build compares each page with the fingerprints in the live `seo-lastmod.json`, so unchanged pages keep their old date. Set `SEO_OFFLINE=1` to skip that look-up.
 - Builds must give the same page every time, or every page looks changed. Don't use Python's `hash()` for ids, because it changes on every run. Use `zlib.crc32` instead.
-- After each deploy, `tools/indexnow.py` sends the pages that changed today to IndexNow, which Bing, Yandex and others share. The key file `<key>.txt` sits at the site root.
+- After each deploy, `tools/indexnow.py` sends the pages that changed today to IndexNow, which Bing, Yandex and others share. The key file `<key>.txt` sits at the site root. Send a plain User-Agent: IndexNow answered 403 to Python's default one. The deploy log shows "Sent N changed pages ... HTTP 200" when it works.
 - Bing Webmaster Tools: sign in at https://www.bing.com/webmasters with a Microsoft account and choose **Import from Google Search Console**. That brings the site and sitemap across with no new file.
 
 ### Visitor statistics (GoatCounter)
