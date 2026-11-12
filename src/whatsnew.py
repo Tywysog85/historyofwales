@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Saints, abbeys and holy places to visit", "Seintiau, abatai a mannau sanctaidd i ymweld â nhw",
+     "Twenty new places and fuller pages on others: Strata Florida, Valle Crucis, Tintern, Llanthony, Penmon, Basingwerk, Margam, Bardsey, Llanilltud Fawr, St Winefride’s Well, Pennant Melangell, Nevern, Clynnog Fawr, Llanddewi Brefi, Llancarfan, Llanbadarn Fawr and the cathedrals of Bangor, Llandaf and St Asaph, each with a Visiting box.",
+     "Ugain lle newydd a thudalennau llawnach ar eraill: Ystrad Fflur, Glyn y Groes, Tyndyrn, Llanddewi Nant Hodni, Penmon, Dinas Basing, Margam, Enlli, Llanilltud Fawr, Ffynnon Gwenffrewi, Pennant Melangell, Nanhyfer, Clynnog Fawr, Llanddewi Brefi, Llancarfan, Llanbadarn Fawr ac eglwysi cadeiriol Bangor, Llandaf a Llanelwy, pob un gyda blwch Ymweld.",
+     "place-strataflorida.html"),
     ("2026-11-12", "Llywelyn the Great, Llywelyn our Last Prince, and the princes of Gwynedd", "Llywelyn Fawr, Llywelyn ein Llyw Olaf, a thywysogion Gwynedd",
      "Six full pages, with sources beside the facts: Gruffudd ap Llywelyn, the one king of all Wales; Gruffudd ap Cynan, who escaped from prison to win back Gwynedd; Llywelyn the Great, who wrote the rights of the Welsh into Magna Carta; Dafydd ap Llywelyn, the first to call himself Prince of Wales; Llywelyn ap Gruffudd, Prince of Wales by the Treaty of Montgomery; and Dafydd ap Gruffudd, the last to fight on.",
      "Chwe thudalen lawn, gyda ffynonellau wrth ochr y ffeithiau: Gruffudd ap Llywelyn, unig frenin Cymru gyfan; Gruffudd ap Cynan, a ddihangodd o’r carchar i ennill Gwynedd yn ôl; Llywelyn Fawr, a ysgrifennodd hawliau’r Cymry i’r Magna Carta; Dafydd ap Llywelyn, y cyntaf i’w alw ei hun yn Dywysog Cymru; Llywelyn ap Gruffudd, Tywysog Cymru drwy Gytundeb Trefaldwyn; a Dafydd ap Gruffudd, yr olaf i ddal ati i ymladd.",
