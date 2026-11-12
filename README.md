@@ -74,7 +74,7 @@ Photos are linked from Wikimedia Commons in `src/photos.py`. The gallery's pictu
 - **Lifelike dragon** (`src/static/dragon.glb`): 3D model and animation from the Ethereal Engine "Open Asset Kit, Basic" (github.com/ir-engine/ir-engine-assets-basic, `assets/fantasy/Dragon.glb`), described there as Creative Commons. The author is not named there; see TODO.md.
 - **three.js** (inside `src/static/hero3d.js`): MIT licence, copyright three.js authors.
 - **Castle walls and crag** (`stone.webp`, `rock.webp`, `detail.webp` and their `-n` relief maps in `src/static/`): photographs "Castle Wall Slates" and "Aerial Rocks 02" from [Poly Haven](https://polyhaven.com), CC0 (free for any use, no credit required).
-- **The mountains** (`eryri-h.png`, `eryri-c.webp`, `eryri-n.webp`): made from Mapzen Terrain Tiles on AWS (terrarium format), whose height data for Wales comes from open survey sources such as SRTM and EU-DEM. Attribution asked for: "Mapzen, and the terrain data sources".
+- **The mountains** (`eryri-h.webp`, `eryri-c.webp`, `eryri-n.webp`): made from Mapzen Terrain Tiles on AWS (terrarium format), whose height data for Wales comes from open survey sources such as SRTM and EU-DEM. Attribution asked for: "Mapzen, and the terrain data sources".
 
 ## Other things worth knowing
 

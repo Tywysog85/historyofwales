@@ -3,6 +3,7 @@
    with a see-through background. See SKILLS.md, "Dragon pictures for the legend pages". Query: ?white=1&t=0.3&turn=1.0&tilt=0.1&exp=1.9 */
 import { WebGLRenderer, Scene, OrthographicCamera, HemisphereLight, DirectionalLight, AnimationMixer, Vector3, Box3, SRGBColorSpace, ACESFilmicToneMapping, Color } from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js"; /* dragon.glb is squeezed with meshopt (see SKILLS.md) */
 const q = new URLSearchParams(location.search), white = q.get("white") === "1", W = 1200, H = 900;
 const canvas = document.getElementById("c"); canvas.width = W; canvas.height = H;
 const renderer = new WebGLRenderer({ canvas, alpha: true, antialias: true, preserveDrawingBuffer: true });
@@ -10,7 +11,7 @@ renderer.setClearColor(0x000000, 0); renderer.outputColorSpace = SRGBColorSpace;
 const scene = new Scene(), cam = new OrthographicCamera(-W / 2, W / 2, H / 2, -H / 2, -4000, 4000);
 const hemi = new HemisphereLight(0xb9c8ff, white ? 0x30364a : 0x6a2420, 1.5), moon = new DirectionalLight(0xfff1e0, 3.2), rim = new DirectionalLight(white ? 0xb4c2f0 : 0xff5a3c, white ? 1.1 : 2.4);
 moon.position.set(0.7, 0.9, 0.8); rim.position.set(-0.8, -0.2, -0.7); scene.add(hemi, moon, rim);
-new GLTFLoader().load("dragon.glb", (g) => {
+new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).load("dragon.glb", (g) => {
   const m = g.scene, mixer = new AnimationMixer(m), clip = g.animations[0]; mixer.clipAction(clip).play();
   m.traverse((o) => {
     o.frustumCulled = false;
