@@ -290,6 +290,25 @@ EXTRA = {
                                                                  "Dumbarton Rock, Alt Clut, the old fortress of the kings of Ystrad Clud, about 1895", "Craig Dumbarton, Alclud, hen gaer brenhinoedd Ystrad Clud, tua 1895"),
 }
 
+# The writers who recorded early Wales (src/writers.py): their pictures, and the long read's.
+EXTRA["Ricemarch Psalter, Psalm 1.JPG"] = ("Ithael and Ieuan ap Sulien, Llanbadarn Fawr; Trinity College Dublin", "Public domain", _PD,
+                                         "The opening of Psalm 1 in the Rhygyfarch Psalter, made at Llanbadarn Fawr about 1080",
+                                         "Dechrau Salm 1 yn Sallwyr Rhygyfarch, a wnaed yn Llanbadarn Fawr tua 1080")
+PAGE.update({
+    "story-writers.html": "c:Ricemarch Psalter, Psalm 1.JPG@50% 20%",
+    "person-gerallt-gymro.html": "g:person-gerallt-gymro",
+    "person-asser.html": "g:person-asser",
+    "person-nennius.html": "g:land-dinas-emrys",
+    "person-rhygyfarch.html": "g:holy-llanbadarn",
+    "person-ieuan-ap-sulien.html": "c:Ricemarch Psalter, Psalm 1.JPG@50% 20%",
+    "person-elfoddw.html": "g:holy-bangor",
+    "person-lifris.html": "g:holy-llandaff",
+    "person-caradog-llancarfan.html": "c:Glastonbury Abbey Ruins 2.JPG",
+    "person-walter-map.html": "l:lady",
+    "person-adam-of-usk.html": "g:trea-pennal-letter",
+    "person-gutun-owain.html": "g:holy-basingwerk",
+})
+
 # Pages that keep the picture they already have at the top (nothing to replace).
 SKIP = {"index.html"}
 

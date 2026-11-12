@@ -304,3 +304,7 @@ TRAILS[:0] = _TR.TRAILS
 import trail_people as _TPP, trail_places as _TPL
 PEOPLE_LONG.update(_TPP.LONG)
 PLACE_LONG.update(_TPL.LONG)
+
+# ---------- the writers who recorded early Wales, full-length pages (src/writers.py); kept last so nothing overwrites them ----------
+import writers as _WRT  # noqa: E402
+PEOPLE_LONG.update(_WRT.LONG)

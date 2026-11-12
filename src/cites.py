@@ -846,6 +846,8 @@ FIRST_CITES = {
 
 from princes import CITES as _PRINCES  # noqa: E402  (the kings and princes of Wales, src/princes.py)
 S.update(_PRINCES)
+from writers import CITES as _WRITERS  # noqa: E402  (the writers who recorded early Wales, src/writers.py)
+S.update(_WRITERS)
 
 MARK = re.compile(r"\[\[cite:([a-z0-9,\- ]+)\]\]")
 

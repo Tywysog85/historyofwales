@@ -1,7 +1,7 @@
-{"branch": "",
- "out": "_research/example",
- "max": 200,
- "categories": [],
- "searches": [],
+{"branch": "claude/project-thread-eff0ku",
+ "out": "_research/writers",
+ "max": 300,
+ "categories": ["Gerald of Wales", "Topographia Hibernica", "Itinerarium Cambriae", "Walter Map", "Historia Brittonum", "Annales Cambriae", "Harley MS 3859", "Brut y Tywysogion", "Brut y Brenhinedd", "Peniarth MS 23", "Llyfr Ancr Llanddewibrefi", "Red Book of Hergest", "Black Book of Carmarthen", "Book of Taliesin", "Book of Aneirin", "White Book of Rhydderch", "Book of Llandaff", "Asser", "Life of King Alfred", "Llancarfan", "St Cadoc's Church, Llancarfan", "Llanbadarn Fawr Church, Ceredigion", "Strata Florida Abbey", "Adam of Usk", "Gutun Owain", "Rhygyfarch", "Ricemarch Psalter", "Geoffrey of Monmouth", "Historia Regum Britanniae", "Welsh Triads", "Peniarth Manuscripts"],
+ "searches": ["Giraldus Cambrensis manuscript", "Gerald of Wales Manorbier", "De nugis curialium", "Historia Brittonum manuscript", "Brut y Tywysogion manuscript", "Llyfr Ancr", "Ricemarch Psalter", "Rhygyfarch psalter", "Caradoc of Llancarfan", "Lifris", "Peniarth 20", "Trioedd Ynys Prydain", "Adam Usk chronicle brass", "Basingwerk Abbey"],
  "files": [],
  "download": []}
