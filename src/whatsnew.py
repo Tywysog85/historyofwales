@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Llywelyn the Great, Llywelyn our Last Prince, and the princes of Gwynedd", "Llywelyn Fawr, Llywelyn ein Llyw Olaf, a thywysogion Gwynedd",
+     "Six full pages, with sources beside the facts: Gruffudd ap Llywelyn, the one king of all Wales; Gruffudd ap Cynan, who escaped from prison to win back Gwynedd; Llywelyn the Great, who wrote the rights of the Welsh into Magna Carta; Dafydd ap Llywelyn, the first to call himself Prince of Wales; Llywelyn ap Gruffudd, Prince of Wales by the Treaty of Montgomery; and Dafydd ap Gruffudd, the last to fight on.",
+     "Chwe thudalen lawn, gyda ffynonellau wrth ochr y ffeithiau: Gruffudd ap Llywelyn, unig frenin Cymru gyfan; Gruffudd ap Cynan, a ddihangodd o’r carchar i ennill Gwynedd yn ôl; Llywelyn Fawr, a ysgrifennodd hawliau’r Cymry i’r Magna Carta; Dafydd ap Llywelyn, y cyntaf i’w alw ei hun yn Dywysog Cymru; Llywelyn ap Gruffudd, Tywysog Cymru drwy Gytundeb Trefaldwyn; a Dafydd ap Gruffudd, yr olaf i ddal ati i ymladd.",
+     "person-llywelyn-fawr.html"),
     ("2026-11-12", "Fourteen new trails through Welsh history", "Pedwar llwybr newydd ar ddeg drwy hanes Cymru",
      "Eighteen trails now: kings and princes, Arthur’s Wales, saints and holy wells, the fight for the language, castles, Roman Wales, the Mabinogi landscape, rebels and risings, poets and bards, Wales and the world, the first people, Welsh firsts, the Welsh Tudors and sporting Wales, each with ten stops and the full story at every one.",
      "Deunaw llwybr bellach: brenhinoedd a thywysogion, Cymru Arthur, seintiau a ffynhonnau sanctaidd, y frwydr dros yr iaith, cestyll, Cymru a Rhufain, tirwedd y Mabinogi, gwrthryfelwyr, beirdd, Cymru a’r byd, y bobl gyntaf, Cymru’n gyntaf, y Tuduriaid a Chymru’r campau, pob un â deg arhosfan a’r hanes llawn ym mhob un.",
