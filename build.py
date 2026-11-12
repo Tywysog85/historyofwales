@@ -52,6 +52,8 @@ import refs as REF  # noqa: E402  (further reading and references for every long
 import refs2 as REF2  # noqa: E402  (the same for every other content page)
 import christianity as _CHR  # noqa: E402
 REF.REFS.update(_CHR.REFS)  # reading lists for the four long reads on the coming of Christianity
+import mac as _MACR  # noqa: E402
+REF.REFS.update(_MACR.REFS)  # reading lists for the MAC and Free Wales Army long reads
 import authors as AU  # noqa: E402  (the authors on the Books and authors page)
 import ylolfa as YLF  # noqa: E402  (Y Lolfa books: the "Y Lolfa" section of the Books and authors page)
 F.STORIES = AD.newest("story", F.STORIES)  # long reads: the newest first everywhere (index, home page, "Keep reading")
@@ -928,7 +930,7 @@ SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes
     ("lit", "Poets, old books and legends", "Beirdd, hen lyfrau a chwedlau", ["literature", "books", "triads", "mabinogion", "legends", "legend-*", "bran", "symbols", "iolo", "topic-music", "trail-song"]),
     ("tudor", "From the Tudors to the Methodists", "O’r Tuduriaid i’r Methodistiaid", ["era-tudor"]),
     ("industry", "Iron, coal, slate and the sea", "Haearn, glo, llechi a’r môr", ["era-industrial", "coal", "protest", "topic-industry", "trail-coal", "trail-sea", "firsts", "topic-science"]),
-    ("modern", "Modern Wales and the Welsh abroad", "Cymru fodern a’r Cymry ar wasgar", ["era-modern", "era-today", "revival", "world", "madog", "topic-abroad", "topic-sport"]),
+    ("modern", "Modern Wales and the Welsh abroad", "Cymru fodern a’r Cymry ar wasgar", ["era-modern", "era-today", "revival", "mac", "fwa", "world", "madog", "topic-abroad", "topic-sport"]),
     ("lang", "The Welsh language, names and places", "Yr iaith Gymraeg, enwau a lleoedd", ["language", "topic-language", "welsh", "names", "towns", "maps", "sites"]),
     ("life", "Women and everyday life", "Menywod a bywyd bob dydd", ["topic-women", "trail-women", "topic-countryside"]),
 ]

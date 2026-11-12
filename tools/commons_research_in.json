@@ -1,10 +1,7 @@
-{"branch": "claude/project-thread-2cwxwu",
- "out": "_research/mac3",
- "max": 10,
+{"branch": "",
+ "out": "_research/example",
+ "max": 200,
  "categories": [],
  "searches": [],
  "files": [],
- "download": ["File:Cofia 1282- Rali Gŵyl Dewi, a protest against the investiture (1537987).jpg",
-              "File:Protest during the official opening ceremony of Llyn Celyn, Tryweryn (1460010).jpg",
-              "File:Protest during the official opening ceremony of Llyn Celyn, Tryweryn (1459988).jpg",
-              "File:Protest during the official opening ceremony of Llyn Celyn, Tryweryn (1459992).jpg"]}
+ "download": []}

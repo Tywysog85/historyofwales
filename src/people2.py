@@ -5,8 +5,9 @@ import people2a as _A, people2b as _B, people2c as _C, people2d as _D, people2e 
 import arthur_circle as _AC
 
 import christianity as _CH  # Brân Fendigaid and King Lleurwg (src/christianity.py)
+import mac as _MAC  # John Jenkins and Dennis Coslett (src/mac.py)
 
-ALL = _A.PEOPLE + _B.PEOPLE + _C.PEOPLE + _D.PEOPLE + _E.PEOPLE + _F.PEOPLE + _AC.PEOPLE + _CH.PEOPLE
+ALL = _A.PEOPLE + _B.PEOPLE + _C.PEOPLE + _D.PEOPLE + _E.PEOPLE + _F.PEOPLE + _AC.PEOPLE + _CH.PEOPLE + _MAC.PEOPLE
 
 # tuples in the site's people format: (slug, era, dates, nameEn, nameCy, epithetEn, epithetCy, bioEn, bioCy, wikipediaTitle)
 PEOPLE_NEW = [(p["id"], p["era"], p["d"], p["en"], p["cy"], p["eEn"], p["eCy"], p["bEn"], p["bCy"], p["w"]) for p in ALL]

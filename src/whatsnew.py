@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "MAC and the Free Wales Army", "MAC a Byddin Rhyddid Cymru",
+     "Two new long reads on the 1960s: Mudiad Amddiffyn Cymru, born of the drowning of Tryweryn, and its campaign against the water pipelines and the investiture, with the Abergele Martyrs; and the Free Wales Army of Cayo Evans and Dennis Coslett, from Llyn Celyn to the Swansea trial. With a new page on John Jenkins, the leader of MAC.",
+     "Dwy erthygl newydd am y 1960au: Mudiad Amddiffyn Cymru, a anwyd o foddi Tryweryn, a’i ymgyrch yn erbyn y pibellau dŵr a’r Arwisgo, gyda Merthyron Abergele; a Byddin Rhyddid Cymru Cayo Evans a Dennis Coslett, o Lyn Celyn i achos Abertawe. Gyda thudalen newydd ar John Jenkins, arweinydd MAC.",
+     "story-mac.html"),
     ("2026-11-12", "Books from Y Lolfa, the Talybont press", "Llyfrau’r Lolfa, gwasg Tal-y-bont",
      "24 Welsh history books from Y Lolfa on the Books and authors page, each linked to the publisher: Tryweryn, MAC and the Free Wales Army, Gwynfor Evans’s Land of My Fathers and The Fight for Welsh Freedom, Llywelyn the Great, the Lord Rhys, R. R. Davies on Owain Glyndŵr, Dic Penderyn, Twm Carnabwth and Dewi Sant.",
      "24 o lyfrau hanes Cymru o’r Lolfa ar y dudalen Llyfrau ac awduron, pob un â dolen at y cyhoeddwr: Tryweryn, MAC a Byddin Rhyddid Cymru, Land of My Fathers a The Fight for Welsh Freedom gan Gwynfor Evans, Llywelyn Fawr, yr Arglwydd Rhys, R. R. Davies ar Owain Glyndŵr, Dic Penderyn, Twm Carnabwth a Dewi Sant.",

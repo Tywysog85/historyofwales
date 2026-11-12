@@ -387,4 +387,5 @@ import madog as _MD  # Prince Madog's voyage to America and the Welsh Indians (s
 import caradog as _CR  # King Caradog (Caratacus) against Rome, and his family in Rome (src/caradog.py)
 import christianity as _CH  # The coming of Christianity: the first Christians, Joseph, Lucius, Brân (src/christianity.py)
 import macsen as _MX  # Macsen Wledig, the emperor from Britain (src/macsen.py)
-STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY] + _CH.STORIES
+import mac as _MAC  # MAC and the Free Wales Army (src/mac.py)
+STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY] + _CH.STORIES + _MAC.STORIES
