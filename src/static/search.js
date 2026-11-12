@@ -103,7 +103,7 @@
     var r = search(q);
     list.innerHTML = (fixed && r.length ? '<li class="sx-empty">' + T("Showing results for", "Yn dangos canlyniadau ar gyfer") + " <b>" + esc(fixed) + "</b></li>" : "") + (r.length ? r.map(function (x, i) {
       return '<li><a href="' + x.u + '" data-era="' + x.e + '"' + (i === 0 ? ' aria-selected="true"' : "") + '><span class="sx-meta">' + T(KIND[x.k][0], KIND[x.k][1]) + (x.y[0] ? " · " + esc(T(x.y[0], x.y[1])) : "") + "</span><b>" + esc(T(x.t, x.c)) + '</b><span class="sx-b">' + esc(T(x.b[0], x.b[1])) + "</span></a></li>";
-    }).join("") : '<li class="sx-empty">' + T("Nothing found. Try a shorter word.", "Dim byd wedi’i ganfod. Rhowch gynnig ar air byrrach.") + "</li>");
+    }).join("") : '<li class="sx-empty">' + T("Nothing found. Try a shorter word, or look in the <a href=\"a-z.html\">A–Z</a> or the <a href=\"questions.html\">quick answers</a>.", "Dim byd wedi’i ganfod. Rhowch gynnig ar air byrrach, neu edrychwch yn yr <a href=\"a-z.html\">A–Y</a> neu’r <a href=\"questions.html\">atebion cyflym</a>.") + "</li>");
   }
   function open() {
     last = document.activeElement;

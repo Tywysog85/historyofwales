@@ -29,6 +29,7 @@ Everything is plain HTML, CSS and JavaScript. There is no framework and nothing 
 | --- | --- |
 | Events, people, places | `src/data.py`, `src/more.py`, `src/places2.py` (extra items are merged in and sorted by year) |
 | The 251 people added in November 2026, every person’s field, and the Welsh firsts | `src/people2a.py` to `src/people2f.py`, gathered by `src/people2.py` |
+| The reference pages: Look it up, the A–Z and quick answers (and the pages still being added) | `src/refpages.py` lays them out; the words are in `src/ref_az.py` and `src/ref_faq.py` |
 | Longer histories of people and places, trails, teacher notes | `src/long.py` |
 | The nine ages | `src/ages.py`, `src/ages9.py` |
 | Long reads, legends, symbols, facts | `src/features.py`, `src/legends2.py`, `src/mabinogion.py`, `src/pride.py`, `src/pride2.py`, `src/pride3.py`, `src/hywel.py`, `src/iolo.py` |
