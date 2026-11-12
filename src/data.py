@@ -530,6 +530,8 @@ _ERA_ORDER = {e["id"]: i for i, e in enumerate(ERAS)}
 
 def _born(p):
     d = p[2]
+    if d == "Age of Arthur":  # people known from the tales of Arthur's court (src/arthur_circle.py): just after Arthur
+        return 640
     m = _re.search(r"([\d,]+) BC", d)
     if m:
         return -int(m.group(1).replace(",", ""))

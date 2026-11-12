@@ -41,6 +41,7 @@ import mabinogion as MB  # noqa: E402
 import literature as LT  # noqa: E402  (literature.html, books.html, triads.html)
 import laws as LW  # noqa: E402  (the Laws of Hywel Dda page, laws.html)
 import people2 as P2  # noqa: E402
+import arthur_circle as AC  # noqa: E402  (Arthur's circle: the block on every page of the people of Arthur's story)
 import sets as SETS  # noqa: E402
 import seo as SEO  # noqa: E402  (search engine extras for every page)
 import added as AD  # noqa: E402  (when each item was added: newest first, "Just added" strips, "New" badges)
@@ -497,7 +498,7 @@ def event_li(ev, k=0):
 
 
 def plaque(p, link=True):
-    return (f'<article class="plaque" id="{p[0]}" data-era="{p[1]}"><span class="dates">{e(p[2])}</span><h3>{bi(p[3], p[4])}</h3>'
+    return (f'<article class="plaque" id="{p[0]}" data-era="{p[1]}"><span class="dates">{bi(p[2], date_cy(p[2]))}</span><h3>{bi(p[3], p[4])}</h3>'
             f'<span class="epi">{bi(p[5], p[6])}</span><p>{bi(p[7], p[8])}</p><div class="links">'
             + (f'<a class="go" href="person-{p[0]}.html">{bi("Read more", "Darllen mwy")} →</a>' if link else "")
             + f'{src(p[9])}</div></article>')
@@ -533,7 +534,9 @@ def era_page(i, era):
 def arthur_extra():
     # Arthur's line and the map of Arthur's Wales (src/arthur.py)
     him_cls = ' class="him"'
-    line = "".join(f'<li{him_cls if him else ""}><b>{e(n)}</b><span>{bi(a, c)}</span></li>' for n, a, c, him in AR.LINE)
+    def nm(n, link):
+        return f'<a href="person-{link}.html">{e(n)}</a>' if link and link in PERSON else e(n)
+    line = "".join(f'<li{him_cls if him else ""}><b>{nm(n, link)}</b><span>{bi(a, c)}</span></li>' for n, a, c, him, link in AR.LINE)
     links = ft_link_for_person("person-arthur.html") + realm_links("person-arthur.html")
     line_html = (f'<ol class="ar-line">{line}</ol>' + (f'<p class="realm-links">{links}</p>' if links else ""))
     sc, k, minx, maxy = geo["sc"], geo["k"], geo["minx"], geo["maxy"]
@@ -559,6 +562,28 @@ def arthur_extra():
 PERSON_EXTRA = {"arthur": arthur_extra}
 
 
+def date_cy(d):
+    """The Welsh side of a person's dates, where it differs (most dates read the same in both languages)."""
+    return "Oes Arthur" if d == "Age of Arthur" else d
+
+
+def arthur_circle(slug):
+    """Arthur's circle (src/arthur_circle.py): every person of Arthur's story, on Arthur's page and on each of theirs."""
+    if slug not in AC.ALL_IDS:
+        return ""
+    out = ""
+    for en, cy, ids in AC.GROUPS:
+        chips = ""
+        for s in ids:
+            c = lit_person_chip(s)
+            chips += c.replace("<a ", '<a aria-current="page" ', 1) if s == slug else c
+        out += f'<h3 class="sub-h">{bi(en, cy)}</h3><div class="ppl">{chips}</div>'
+    more = " ".join(f'<a class="btn" href="{u}">{bi(a, b)} →</a>' for u, a, b in AC.LINKS if u != f"person-{slug}.html")
+    lead = bi(f"{len(AC.ALL_IDS)} people of Arthur’s story in Welsh tradition, each with a page of their own: his line in the charters of Llandaff, his family and warriors in the poems, the Triads and the tales, and the saints and bards who knew him.",
+              f"{len(AC.ALL_IDS)} o bobl hanes Arthur yn nhraddodiad Cymru, pob un â’i dudalen ei hun: ei linach yn siarteri Llandaf, ei deulu a’i ryfelwyr yn y cerddi, y Trioedd a’r chwedlau, a’r saint a’r beirdd a’i hadwaenai.")
+    return section(f'<div class="ar-circle"><p class="lede">{lead}</p>{out}<p class="ar-more">{more}</p></div>', "Arthur’s circle", "Cylch Arthur")
+
+
 def person_page(p):
     slug, eid = p[0], p[1]
     era = ERA[eid]
@@ -570,21 +595,24 @@ def person_page(p):
     pager = (f'<a class="btn" href="person-{prev_p[0]}.html">← {bi(prev_p[3], prev_p[4])}</a>' if prev_p else f'<a class="btn" href="era-{eid}.html">← {bi(era["en"], era["cy"])}</a>') + \
             (f'<a class="btn solid" href="person-{next_p[0]}.html">{bi(next_p[3], next_p[4])} →</a>' if next_p else '<a class="btn solid" href="people.html">' + bi("All people", "Pawb") + " →</a>")
     fld = FIELD_LABEL.get(P2.FIELD.get(slug))
-    meta = (f'<div class="person-meta"><span>{e(p[2])}</span><span>{bi(p[5], p[6])}</span><a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>'
+    meta = (f'<div class="person-meta"><span>{bi(p[2], date_cy(p[2]))}</span><span>{bi(p[5], p[6])}</span><a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>'
             + (f'<a href="people.html?field={P2.FIELD[slug]}">{bi(*fld)}</a>' if fld else "") + '</div>' + first_badge(slug))
     rl = realm_links(f"person-{slug}.html") + ft_link_for_person(f"person-{slug}.html") + saints_links(f"person-{slug}.html") + lit_link(slug)
     meta += f'<p class="realm-links">{rl}</p>' if rl else ""
     coded = any(a.startswith(("## ", "> ", "|| ")) for a in long_en)
     body = prose_bi(long_en, long_cy, cls="story prose") if coded else paras(long_en, long_cy)
-    main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', era["ill"], p[2], p[2], p[3], p[4], p[7], p[8], art=ERA_ART[eid])
+    main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', era["ill"], p[2], date_cy(p[2]), p[3], p[4], p[7], p[8], art=ERA_ART[eid])
             + section(meta + photo_fig(PH.PERSON_PHOTOS.get(slug), "portrait", "person-" + slug) + body + f'<p class="share no-print"><button type="button" class="btn" data-copy="person-{slug}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button></p>' + further(f"person:{slug}", p[9]), top=True)
             + PERSON_EXTRA.get(slug, lambda: "")()
+            + arthur_circle(slug)
             + story_feature("people", slug)
             + (section(f'<ol class="era-events">{"".join(event_li(ev) for ev in related)}</ol>', "On the timeline", "Ar y llinell amser") if related else "")
             + set_block(f"person:{slug}")
             + section(f'<div class="people">{"".join(plaque(x) for x in same)}</div>', "Also in this age", "Hefyd yn yr oes hon")
             + section(f'<div class="pager">{pager}</div>'))
-    ld = {"@context": "https://schema.org", "@type": "Person", "name": p[3], "alternateName": p[4], "description": p[7], "sameAs": WIKI + p[9]}
+    ld = {"@context": "https://schema.org", "@type": "Person", "name": p[3], "alternateName": p[4], "description": p[7]}
+    if p[9]:
+        ld["sameAs"] = WIKI + p[9]
     return page(f"person-{slug}.html", f"{p[3]} · History of Wales", p[7], main, era=eid, ld=ld, og_type="profile", track=f"person:{slug}")
 
 
@@ -857,6 +885,8 @@ def page_refs(path):
         return name, None
     if name in REF2.GENERAL:
         return "general", None
+    if kind == "person" and rest in AC.ALL_IDS and rest != "arthur" and "arthur-circle" in REF2.PAGES:
+        return "arthur-circle", None
     if kind in ("person", "place"):
         rec = PERSON.get(rest) if kind == "person" else PLACE.get(rest)
         era = (rec[1] if kind == "person" else rec["era"]) if rec else None
@@ -872,7 +902,7 @@ def page_refs(path):
 SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes; the first section to claim a work keeps it)
     ("start", "Start here: the whole story", "Dechrau yma: yr hanes cyfan", ["general", "wales-in-10"]),
     ("britons", "The Britons and Rome", "Y Brythoniaid a Rhufain", ["era-ancient", "era-roman", "celts", "brutus", "caradog", "macsen"]),
-    ("kings", "Kings, kingdoms and the Old North", "Brenhinoedd, teyrnasoedd a’r Hen Ogledd", ["era-saints", "era-kings", "kings", "kings-*", "family-trees", "arthur", "wilson-blackett", "unconquered"]),
+    ("kings", "Kings, kingdoms and the Old North", "Brenhinoedd, teyrnasoedd a’r Hen Ogledd", ["era-saints", "era-kings", "kings", "kings-*", "family-trees", "arthur", "arthur-circle", "wilson-blackett", "unconquered"]),
     ("law", "The laws of Hywel Dda", "Cyfreithiau Hywel Dda", ["laws", "hywel", "topic-law"]),
     ("saints", "Saints, learning and faith", "Seintiau, dysg a ffydd", ["saints", "saints-*", "learning", "brittany", "topic-faith"]),
     ("princes", "Princes, castles and Owain Glyndŵr", "Tywysogion, cestyll ac Owain Glyndŵr", ["era-medieval", "castles", "glyndwr", "longbow", "battles", "documents", "topic-war"]),
@@ -2754,7 +2784,7 @@ def ssr_person(p):
     first = P2.FIRSTS.get(slug)
     return (f'<article class="plaque" data-era="{p[1]}"><div class="top-row"><span class="ava" aria-hidden="true">{e(_initials(p[3]))}'
             + (f'<img src="{e(ph)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' if ph else "")
-            + f'</span><div><span class="dates">{e(p[2])}</span><h3>{bi(p[3], p[4])}</h3></div></div>'
+            + f'</span><div><span class="dates">{bi(p[2], date_cy(p[2]))}</span><h3>{bi(p[3], p[4])}</h3></div></div>'
             f'<span class="epi">{bi(p[5], p[6])}{(" · " + e(other)) if other else ""}</span>'
             + (f'<span class="first-tag">★ {bi(first[1], first[2])}</span>' if first else "")
             + f'<p>{bi(p[7], p[8])}</p><div class="links"><a class="go" href="person-{slug}.html">{bi("Read more", "Darllen mwy")} →</a>{src(p[9])}</div></article>')
