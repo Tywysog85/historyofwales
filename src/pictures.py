@@ -72,6 +72,7 @@ PAGE = {
     "story-caradog.html": "g:person-caratacus",
     "story-macsen.html": "g:place-segontium",
     "story-christianity.html": "g:holy-margam",
+    "story-industry.html": "g:indu-ffestiniog-rly",
     "story-mac.html": "g:peop-cofia-1282",
     "story-fwa.html": "g:peop-celyn-protest",
     "person-john-barnard-jenkins.html": "g:peop-liverpool-steals@50% 40%",
