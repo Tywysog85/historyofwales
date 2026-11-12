@@ -46,10 +46,17 @@ This file collects the techniques and lessons from building History of Wales. Ad
 
 ---
 
+### Keeping the PC copy updated and tidy
+
+- Ifan's PC copy (`D:\Website\historyofwales.cymru`) updates itself every day through a Windows scheduled task, "History of Wales daily update", at 09:00 (or as soon as the PC is next on). It runs `_work\daily\update-historyofwales.ps1` inside the PC copy: pull main (fast-forward only, skipped if there are local changes), `python build.py`, then move leftover files that are neither in the repo nor made by the build to the Recycle Bin. Anything that could be Ifan's own (photos, documents) is only listed. Each run is written to `daily.log` in the same folder. The tidy only looks at files git would show as new (`git ls-files --others --exclude-standard`), and a whole untracked folder is only noted in the log, never emptied.
+- **Work folders on the PC go in `_work\` inside the PC copy**, and are deleted when finished. `_work/` is excluded from git through `.git/info/exclude` (not `.gitignore`), so it never shows as a change and never blocks the daily pull. Never edit tracked files in the PC copy by hand: the pull is skipped while they differ.
+- It was set up through a Remote Control session on the PC, because the remote folder tools can read and copy files but cannot delete them.
+- To stop it: Task Scheduler, then disable or delete "History of Wales daily update".
+
 ## Building the site
 
 ### Static site, no framework
-- Content lives in Python data files in `src/` (the table in `README.md` says which file holds what). `build.py` turns them into about 200 HTML pages.
+- Content lives in Python data files in `src/` (the table in `README.md` says which file holds what). `build.py` turns them into about 1,900 pages (every page in English and again in Welsh under `cy/`).
 - The home page and the timeline page share one script (`src/app.js`). The script checks which parts exist on the page (the timeline, the hero sky, the map) and skips the rest.
 
 ### Bilingual pages (English / Cymraeg)
@@ -266,7 +273,6 @@ Learnt while building the Hywel Dda page (`src/hywel.py`). Long-read paragraphs 
 
 A long read can also say who and what it is about, with `people=[...]`, `places=[...]` and `events=[...]` (event titles in English). `build.py` then adds a "The full story" card to those person and place pages, and a "Read the long read" link to those events on the age pages and on the timeline (the timeline gets them through `SL` in the page data). One list in the story does all the linking.
 
-
 ### A long read in its own file, a new picture, and a sweep for banned words (November 2026)
 
 Learnt while building the Iolo Morganwg long read (`src/iolo.py`, `story-iolo.html`).
@@ -283,6 +289,8 @@ Learnt while expanding Arthur's page (`src/arthur.py`).
 - `PERSON_EXTRA` in `build.py` adds extra sections to one person's page. Arthur's adds "The line of Arthur" (a row of boxes with arrows, which turns into a column on phones) and "Arthur's Wales", a numbered map.
 - A map of places needs no map library: draw `geo["outline"]` from `src/geo/map.json` in an SVG and place each pin with `x = (lon - minx) * k * sc`, `y = (maxy - lat) * sc` (the same sums the kingdoms map uses). Each pin links to its numbered entry in the list beside it, and `li:target` lights the entry up.
 - When two pins sit on top of each other, move one aside with `NUDGE` and draw a short line back to the real spot. Keep pins well inside the SVG's `viewBox`, or the edge cuts them off.
+- **A longer person page can live in its own module** (like `src/owain.py`): put the English and Welsh paragraphs in `PERSON_LONG = ([...], [...])` and set `PEOPLE_LONG["<slug>"]` at the very end of `src/long.py`, so nothing later overwrites it.
+- **Checking a fact when the PDF is blocked.** WebFetch can read the Welsh Journals pages (journals.library.wales) one page at a time, which is how the Welsh History Review articles were checked. Quote only what a source says, and put the source in a comment at the top of the module.
 
 ### Kings and princes pages (November 2026)
 - All the royal lines live in `src/royal.py`: one entry per kingdom, each with a list of rulers. `R(...)` is a ruler (sort year, dates, name, English note, Welsh note, optional link), `H(...)` a heading inside the list, `N(...)` a short note between rulers.
@@ -439,6 +447,23 @@ Behind the dragon, the mountains, the moor and the castle are real 3D too, drawn
 - To rebuild `src/static/hero3d.js` after changing anything in `tools/*.src.js`: in a folder with `three` (0.160) and `esbuild` from npm, run `npx esbuild hero3d.src.js --bundle --minify --format=esm --target=es2019 --outfile=hero3d.js` and copy the result to `src/static/`.
 - To test 3D without a graphics card, start Chromium with `--use-gl=swiftshader --enable-unsafe-swiftshader --ignore-gpu-blocklist`.
 
+### Dragon pictures for the legend pages
+
+- The red and white dragons on the legend, symbols and play pages are still pictures of the 3D dragon (`src/static/dragon-red.webp`, `dragon-white.webp`), placed in the scene by `_dragons` in `src/art.py`. Never draw dragons by hand.
+- To make them again: bundle `tools/render_dragons.src.js` with esbuild, put it beside `dragon.glb` with a page holding `<canvas id="c">`, open it in headless Chromium (`?t=0.3` for red, `?white=1&t=0.52&turn=1.2&tilt=0.2` for white) and screenshot the canvas with a see-through background. Crop, mirror the white one so they face each other, and save as WebP 760 px wide.
+- The white dragon is the same model with the red taken out of its skin in the shader, so the scales keep their light and dark.
+- The hero's dark veil dulls pictures on the left; `.hero-art:has(image)::after` in `src/v6.css` uses a lighter veil where the art holds a picture.
+
+### Keeping the front page light (November 2026)
+- Measure first: load `index.html` on a Pixel 7 window in Playwright and list every response by size. The 3D scene is most of the weight.
+- **The dragon file** (`dragon.glb`) is squeezed with glTF-Transform: `npx gltf-transform resize in.glb a.glb --width 512 --height 512`, then `webp a.glb b.glb --quality 88`, then drop animation tracks that never move (bake the value into the bone), then `meshopt b.glb dragon.glb --level high`. 1.76 MB became 0.63 MB and looks the same, because the dragon is never drawn bigger than about 300 pixels. A meshopt file needs `new GLTFLoader().setMeshoptDecoder(MeshoptDecoder)` (from `three/addons/libs/meshopt_decoder.module.js`), in `tools/dragon3d.src.js` and `tools/render_dragons.src.js`.
+- **Phones get half-size castle stone** (`stone-m.webp`, `stone-n-m.webp`; chosen in `tools/land3d.src.js` when the screen's short side is 600 px or less). The mountain pictures stay full size on every screen: half-size ones visibly softened the snow on the slopes in side-by-side shots.
+- **The height map is a lossless WebP** (`eryri-h.webp`). Red and green hold the height, blue the roughness. It must be lossless, or the mountain changes shape. Never zero a channel to save bytes: the shot changes.
+- **The 3D starts loading after the page has loaded** (`go3` in `src/app.js`), so the words and pictures come first on a slow connection.
+- To check nothing changed, screenshot the old and the new site side by side at `?sky=night` after 9 seconds and compare the mountain area pixel by pixel with Pillow's `ImageChops.difference`: two runs of the same site differ by about 0.05, a real change by 1 or more. Then run `node tools/hero_jump_check.js` (it must log one land position).
+
+## More pages and techniques (November 2026)
+
 ### Photographs for the legend pictures
 
 - Seven legends (the hound, owl, starling, Llyn y Fan Fach, the drowned forest, Arthur's lake, the cauldron) show a real photograph from Wikimedia Commons in place of the drawn scene: `LEGEND_PHOTOS` in `src/art.py` holds the file, photographer, licence, a line saying what the picture shows, and where the subject sits in the frame. `photo_scene()` draws it; the legend page prints the credit under the tale (`legend_credit` in `build.py`).
@@ -459,21 +484,7 @@ Behind the dragon, the mountains, the moor and the castle are real 3D too, drawn
 - Pictures are listed once in `FIGS` (Commons file, maker, licence, captions) and drawn by `law_fig()` with the full credit. They load from Commons until the "Fetch photos" workflow keeps copies on the site.
 - `LAW_LINKED` in `build.py` puts a card for the page in "The full story" on the people and places it names.
 
-## Dragon pictures for the legend pages
-
-- The red and white dragons on the legend, symbols and play pages are still pictures of the 3D dragon (`src/static/dragon-red.webp`, `dragon-white.webp`), placed in the scene by `_dragons` in `src/art.py`. Never draw dragons by hand.
-- To make them again: bundle `tools/render_dragons.src.js` with esbuild, put it beside `dragon.glb` with a page holding `<canvas id="c">`, open it in headless Chromium (`?t=0.3` for red, `?white=1&t=0.52&turn=1.2&tilt=0.2` for white) and screenshot the canvas with a see-through background. Crop, mirror the white one so they face each other, and save as WebP 760 px wide.
-- The white dragon is the same model with the red taken out of its skin in the shader, so the scales keep their light and dark.
-- The hero's dark veil dulls pictures on the left; `.hero-art:has(image)::after` in `src/v6.css` uses a lighter veil where the art holds a picture.
-
-## Keeping the PC copy updated and tidy
-
-- Ifan's PC copy (`D:\Website\historyofwales.cymru`) updates itself every day through a Windows scheduled task, "History of Wales daily update", at 09:00 (or as soon as the PC is next on). It runs `_work\daily\update-historyofwales.ps1` inside the PC copy: pull main (fast-forward only, skipped if there are local changes), `python build.py`, then move leftover files that are neither in the repo nor made by the build to the Recycle Bin. Anything that could be Ifan's own (photos, documents) is only listed. Each run is written to `daily.log` in the same folder. The tidy only looks at files git would show as new (`git ls-files --others --exclude-standard`), and a whole untracked folder is only noted in the log, never emptied.
-- **Work folders on the PC go in `_work\` inside the PC copy**, and are deleted when finished. `_work/` is excluded from git through `.git/info/exclude` (not `.gitignore`), so it never shows as a change and never blocks the daily pull. Never edit tracked files in the PC copy by hand: the pull is skipped while they differ.
-- It was set up through a Remote Control session on the PC, because the remote folder tools can read and copy files but cannot delete them.
-- To stop it: Task Scheduler, then disable or delete "History of Wales daily update".
-
-## A site-wide title sweep (November 2026)
+### A site-wide title sweep (November 2026)
 
 Learnt while making sure every king on the site is called a king (rule "Kings are kings" in `EDITORIAL.md`).
 
@@ -482,15 +493,7 @@ Learnt while making sure every king on the site is called a king (rule "Kings ar
 - **Replace with a script of exact pairs.** Put every `(file, old, new)` pair, English and Welsh together, in one small Python script that counts each match and prints MISSING when a pair finds nothing. Nothing is changed by a loose pattern.
 - **Mind Welsh mutations.** After "yn", "tywysog" is "dywysog" and "brenin" is "frenin"; after "ei" (his) it is "ei frenin"; after "eu", "arglwydd" is "harglwydd" but "brenin" stays "brenin".
 
-
-## A person page with headed sections (November 2026)
-Learnt while writing Owain Gwynedd's "The king who became prince" (`src/owain.py`).
-
-- **A longer person page lives in its own module.** Put the English and Welsh paragraphs in `PERSON_LONG = ([...], [...])` and set `PEOPLE_LONG["<slug>"]` at the very end of `src/long.py`, so nothing later overwrites it.
-- **Headings switch it on.** If any paragraph starts with `## `, `> ` or `|| `, the person page uses the long-read layout (sub-headings, pull quotes, a facts table). Plain paragraphs stay plain.
-- **Checking a fact when the PDF is blocked.** The container cannot download most PDFs, but WebFetch can read the Welsh Journals pages (journals.library.wales) one page at a time, which is how the Welsh History Review articles were checked. Quote only what a source says, and put the source in a comment at the top of the module.
-
-## Taking a word off the whole site (November 2026)
+### Taking a word off the whole site (November 2026)
 Learnt while taking "Celtic" off the site (rule "Britons, not Celts" in `EDITORIAL.md`).
 
 - **Search the built site, not just `src/`.** Run `python build.py`, then grep `_site/*.html` for the word in both languages (`celt`, `geltaidd`, `celtaidd`, `cheltaidd`, `gelteg`). Some text is changed at build time (for example `LANG_FIX` in `src/pride.py`), so only the built pages show what visitors read.
@@ -498,7 +501,7 @@ Learnt while taking "Celtic" off the site (rule "Britons, not Celts" in `EDITORI
 - **Names from outside data** (Cadw's monument names in `tools/data/sites_cadw.json`) are reworded in `site_rows()` in `src/refpages.py`, so the data file stays exactly as Cadw gives it.
 - Leave real names alone (the Celtic Manor) and words hidden inside picture links or file names.
 
-## Where a new long read shows up (November 2026)
+### Where a new long read shows up (November 2026)
 Learnt while adding "Britons, not Celts" (`src/celts.py`).
 
 - A long read added to `STORIES` in `src/features.py` appears by itself on the long reads page, in search, What's new and the Journey page.
@@ -506,24 +509,19 @@ Learnt while adding "Britons, not Celts" (`src/celts.py`).
 - An era page links a long read only through its timeline: list the exact English title of a timeline event in that era in `events=[...]` (here "The peoples of Wales" for Ancient Wales).
 - Other pages (the A to Z, legends) need the link added by hand, for example in the `see` list of an A to Z entry in `src/ref_az.py`.
 
-## Working together
-
-- Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
-- Small visual tweaks are published one at a time so each can be seen live.
-
-## Buttons at the end of a long read
+### Buttons at the end of a long read
 
 - A long read (a `STORY` dict, e.g. `src/wilson_blackett.py`) can carry `links=[(href, en, cy), ...]`. `story_more_links()` in `build.py` shows them as buttons after the text, the same way legends use `links`.
 - A link to another long read (`story-….html`) is left out until that long read is built, so two threads can link their new pages to each other and merge in either order.
 - `people=[...]` on a long read puts its card under "The full story" on those people's pages, so listing `"arthur"` links it from Arthur's page with no other change.
 
-## Checking quotations from old books when the usual sites are blocked (November 2026)
+### Checking quotations from old books when the usual sites are blocked (November 2026)
 
 - From the cloud, Gutenberg, Wikisource and sacred-texts.com are blocked, but WebSearch often turns up a mirror (for example `neonvagabond.xyz/mirrors/sacred-texts/...`) that WebFetch can read. Geoffrey of Monmouth in Sebastian Evans's translation (1904) is there: Book I is `gem02.htm`, Book II `gem03.htm`, Book IV `gem05.htm`.
 - Only put words in quotation marks once they have been read in a named, published translation, and name the translator in the quote's source line. Where two translations differ (Brutus died in the "twenty-third" or "twenty-fourth" year), follow the one being quoted.
 - A long read can add its own timeline events: keep them in the long read's file (`EVENTS` in `src/brutus.py`), add them in `src/data.py`, and give them the same titles as the story's `events=[...]` so the age pages link to the long read.
 
-## Newest first on listing pages (November 2026)
+### Newest first on listing pages (November 2026)
 
 - `src/added.json` records when every long read, legend, document, battle, question, A–Z word, topic guide, game, person, place, gallery picture and card set first appeared. `src/added.py` reads it.
 - Nothing to do by hand: when `build.py` meets an item that is not in the file, it stamps it with the time of the build, saves the file and prints "New on the site, stamped in src/added.json (commit it)". Commit `src/added.json` with the change. If a change forgets, the deploy on GitHub stamps it and commits the file back itself.
@@ -531,7 +529,7 @@ Learnt while adding "Britons, not Celts" (`src/celts.py`).
 - In `build.py`: `AD.newest(kind, items)` puts a list newest first (used for long reads, games, topic guides, gallery groups); `just_added(kind, items, href, title)` makes the "Just added" strip for lists that keep their own order (legends, documents, battles, questions, A–Z); `new_tag(kind, id)` gives the red "New" badge (the newest three in a list, for two weeks). `refpages.py` reaches them as `g["just_added"]`, `g["new_tag"]` and `g["AD"]`.
 - A new kind of list: give each item a fixed `id`, call `AD.track("kind", ids)` in `main()` (or `track_added()` in `refpages.py`), then use the helpers above.
 
-## Reference lists on long reads (November 2026)
+### Reference lists on long reads (November 2026)
 
 - Every long read, and Wales in 10 minutes, ends with "Further reading and references" ("Darllen pellach a chyfeiriadau"). The lists live in `src/refs.py`, keyed by the long read's id; `refs_block()` in `build.py` draws them in three groups: old sources and records, books by historians, online.
 - Each item is `(kind, author, title, details, note_en, note_cy[, url])`, with kind `"p"` (old text), `"b"` (historian's book) or `"w"` (website). Titles stay as published; only the short note is translated. `dwb=[person ids]` adds the Dictionary of Welsh Biography article for each person, taken from `src/source_links.json`, with the Welsh link going to bywgraffiadur.cymru.
@@ -541,7 +539,7 @@ Learnt while adding "Britons, not Celts" (`src/celts.py`).
 - The Books and authors page (`books-and-authors.html`, `bookshelf_page()` in `build.py`) is made from those same lists, so it grows by itself. `SHELF` gives its sections and which lists each takes (the first section to claim a book keeps it; websites all go under Online). Each book shows the pages that cite it. The build warns if a list's books land in no section: add the list's key to a section in `SHELF`. The author notes are in `src/authors.py`: a note per writer and the names to match in a book's author line, and their books are found by themselves. An author with no books on the shelf prints a warning. Every reading list ends with a link to this page.
 - Checking a book is real: WebSearch for the exact title with the author and publisher. A publisher's page (uwp.co.uk, for example), a library catalogue or a bookseller with the ISBN is enough. If the year or publisher can't be confirmed, give only what can.
 
-## A home page that shows the main things, and content that shows without JavaScript (November 2026)
+### A home page that shows the main things, and content that shows without JavaScript (November 2026)
 Learnt while simplifying the home page.
 
 - **Pages that reuse the home page's script.** `app_page()` in `build.py` makes a page from one section file plus the home page's script and data: `timeline.html`, `quiz.html`, and now `people.html` (`src/people_section.html`) and `map.html` (`src/map_section.html`). `app.js` only draws the boxes that exist on the page, so the same script runs everywhere.
@@ -552,7 +550,7 @@ Learnt while simplifying the home page.
 - **Numbers that must agree.** The castles figure in the opening comes from `castles_data.json` (`N_CASTLES`), so it always matches the castles map.
 - **What's new is for history.** Notes about how the site works (layout, ordering) don't go in `src/whatsnew.py`; they push real articles off the home page.
 
-## Author lines, "Last updated" dates and the About page (November 2026)
+### Author lines, "Last updated" dates and the About page (November 2026)
 
 - `src/about.py` holds the author's name (`AUTHOR_EN`, `AUTHOR_CY`), a line about them, the corrections email or form, and the list of corrections made. It also makes `about.html` (#corrections is the "Spotted a mistake?" part).
 - `page()` in `build.py` adds a strip at the foot of every page: written by, first published, last updated, and a "Spotted a mistake? Tell us" link that opens an email with the page's address already filled in. Long reads also get "By ... · Updated ..." at the top (`AB.byline_top()`).
@@ -561,21 +559,13 @@ Learnt while simplifying the home page.
 - "First published" comes from `src/added.json`. Git history only reaches back to 11 November 2026, so anything already on the site then shares one first time; those pages show no "First published" date rather than a wrong one (`ADDED_BASELINE` in `build.py`).
 - To check the dates locally, build with `SEO_OFFLINE=1` (every page then shows today, because the live fingerprints can't be read).
 
-## Keeping the front page light (November 2026)
-- Measure first: load `index.html` on a Pixel 7 window in Playwright and list every response by size. The 3D scene is most of the weight.
-- **The dragon file** (`dragon.glb`) is squeezed with glTF-Transform: `npx gltf-transform resize in.glb a.glb --width 512 --height 512`, then `webp a.glb b.glb --quality 88`, then drop animation tracks that never move (bake the value into the bone), then `meshopt b.glb dragon.glb --level high`. 1.76 MB became 0.63 MB and looks the same, because the dragon is never drawn bigger than about 300 pixels. A meshopt file needs `new GLTFLoader().setMeshoptDecoder(MeshoptDecoder)` (from `three/addons/libs/meshopt_decoder.module.js`), in `tools/dragon3d.src.js` and `tools/render_dragons.src.js`.
-- **Phones get half-size castle stone** (`stone-m.webp`, `stone-n-m.webp`; chosen in `tools/land3d.src.js` when the screen's short side is 600 px or less). The mountain pictures stay full size on every screen: half-size ones visibly softened the snow on the slopes in side-by-side shots.
-- **The height map is a lossless WebP** (`eryri-h.webp`). Red and green hold the height, blue the roughness. It must be lossless, or the mountain changes shape. Never zero a channel to save bytes: the shot changes.
-- **The 3D starts loading after the page has loaded** (`go3` in `src/app.js`), so the words and pictures come first on a slow connection.
-- To check nothing changed, screenshot the old and the new site side by side at `?sky=night` after 9 seconds and compare the mountain area pixel by pixel with Pillow's `ImageChops.difference`: two runs of the same site differ by about 0.05, a real change by 1 or more. Then run `node tools/hero_jump_check.js` (it must log one land position).
-
-## A page for every timeline event (November 2026)
+### A page for every timeline event (November 2026)
 - `src/eventpages.py` makes `event-<slug>.html` for every event in `D.EVENTS` (405). The slug comes from the English title; a clash gets the year added. `EP.href(ev)` gives the page of an event, and `DATA["EVS"]` hands the slugs to `app.js` so the timeline can link "The full story".
 - Each page gathers what the site already has: date (with the day and an On this day link when known), age, place, people named in the text (whole names only, so "Henry V" does not match "Henry VII"), battles and documents of the same year, long reads, the two events before and after, Read further links, and a share picture (`CARD_KIND` "event-").
 - The big moments get a longer telling in `src/events_more.py`, keyed by the event's exact English title: two paragraphs in English and two in Welsh. Add more there; the page picks them up by itself.
 - Changing an event's English title changes its page address. Avoid it once a page is live, or old links break.
 
-## Welsh pages with their own address (November 2026)
+### Welsh pages with their own address (November 2026)
 - Every page is written twice: `<page>.html` in English and `cy/<page>.html` in Welsh. `src/welshpages.py` does it at the end of the build (`WP.split`, called in `main()` after `shared_assets`). Write pages as before with `bi()`: nothing else is needed.
 - The English page has the Welsh copies (class `l-cy`) taken out, and the Welsh page the English ones (`l-en`), so each address is in one language only. That also halves the size of most pages.
 - The Welsh page gets `lang="cy"`, a Welsh `<title>` from its own `<h1>` (plus "· Hanes Cymru"), a Welsh description from its first `class="lede"` line, `og:locale` cy_GB and its own canonical. Both pages carry `hreflang` links (en, cy, x-default = English). For a page whose heading isn't a good title, special-case it in `split()`.
@@ -584,21 +574,26 @@ Learnt while simplifying the home page.
 - Scripts that read text from a page must not expect both `.l-en` and `.l-cy` to be there (see `site.js`, the card sets).
 - Elements whose words a script swaps (`data-cy="..."`) start out in Welsh on the Welsh page.
 
-## Teacher packs (November 2026)
+### Teacher packs (November 2026)
 - `src/teachpacks.py` makes `pack-<age>.html` for the nine ages, linked from the top of `teachers.html`. The written parts live in `PACKS` (big idea, three enquiry questions, key words as A–Z ids from `src/ref_az.py`, two activities for each of progression steps 2, 3 and 4, and the id of a document from `src/ref_docs.py` to study). The rest (timeline, card sort, people, places, long reads, quiz sheet) comes from the site's own data, so the packs grow with the site.
 - The "what matters" lines are the five Humanities statements of the Curriculum for Wales, put in short. Don't present them as the official wording.
 - Packs print cleanly (A4, about 8 pages): `PRINT_CSS` hides the menu, footer, buttons and the badge pop-ups. To check, render with Playwright's `page.pdf()` and look at the pages with `pdftoppm`.
 
-## Stories where you choose (November 2026)
+### Stories where you choose (November 2026)
 - `src/ride.py` makes `ride-glyndwr.html`: "Ride with Glyndŵr, 1400". The story is data (`NODES`): each scene has a date, a place (with a spot on the map), the words in both languages, a line for each role, a "What really happened" box linking to event pages, and the choices. `src/static/ride.js` is a small engine that plays any story in that shape, so another one (say, Llywelyn in 1282) needs only new data and a page.
 - Choices change what you do and your renown, never what happened. The build checks every choice leads to a real scene and every event link exists. Renown ranks are fractions of the most each role can earn, worked out by the build, so adding scenes doesn't break them.
 - Your place is saved on the device (`hc-ride`), and finishing earns the "Glyndŵr's companion" badge through `HC.flag("ride")` in `site.js`.
 - To test: play it through in Playwright for each role in English and in `cy/`, and run axe on the finished page.
 
-## Llys Rhosyr in 3D (November 2026)
+### Llys Rhosyr in 3D (November 2026)
 - `llys-rhosyr.html` comes from `src/llys.py` (the words for the eight stops, the page, and the CSS). The 3D court is `tools/llys3d.src.js`, bundled with three.js into `src/static/llys3d.js` the same way as the front page 3D (see "The 3D mountains and castle"): `npx esbuild llys3d.src.js --bundle --minify --format=esm --target=es2019 --outfile=llys3d.js`.
 - Nothing is downloaded but the code (about 0.5 MB, loaded only when the visitor presses "Enter the court"). The stone, lime-wash, thatch, wood and the arms of Gwynedd are drawn on canvases in code, and the land, dunes, sea and Eryri are made from a height function (`ground()`), so the walker's eye height follows the same ground.
 - Each stop's words live in `STOPS` in `src/llys.py`; where you stand and look for it is in `STOPS` in the JS, under the same id. To add a stop, add both. The words are also printed as ordinary text under the 3D, for readers without 3D and for search engines.
 - Walls you bump into are recorded as they are built (`walls`, `posts`), so new buildings made with `building()` are solid automatically. Doors are gaps in the walls.
 - When `llys3d.js` changes, raise `llys3d.js?v=` in `src/llys.py`.
 - To test in the cloud: Chromium with `--use-gl=swiftshader --enable-unsafe-swiftshader`. Software drawing is slow, so wait several seconds after each "Next" before a screenshot.
+
+## Working together
+
+- Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
+- Small visual tweaks are published one at a time so each can be seen live.
