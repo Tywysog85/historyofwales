@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Llywelyn the Great, Llywelyn our Last Prince, and the princes of Gwynedd", "Llywelyn Fawr, Llywelyn ein Llyw Olaf, a thywysogion Gwynedd",
+     "Six full pages, with sources beside the facts: Gruffudd ap Llywelyn, the one king of all Wales; Gruffudd ap Cynan, who escaped from prison to win back Gwynedd; Llywelyn the Great, who wrote the rights of the Welsh into Magna Carta; Dafydd ap Llywelyn, the first to call himself Prince of Wales; Llywelyn ap Gruffudd, Prince of Wales by the Treaty of Montgomery; and Dafydd ap Gruffudd, the last to fight on.",
+     "Chwe thudalen lawn, gyda ffynonellau wrth ochr y ffeithiau: Gruffudd ap Llywelyn, unig frenin Cymru gyfan; Gruffudd ap Cynan, a ddihangodd o’r carchar i ennill Gwynedd yn ôl; Llywelyn Fawr, a ysgrifennodd hawliau’r Cymry i’r Magna Carta; Dafydd ap Llywelyn, y cyntaf i’w alw ei hun yn Dywysog Cymru; Llywelyn ap Gruffudd, Tywysog Cymru drwy Gytundeb Trefaldwyn; a Dafydd ap Gruffudd, yr olaf i ddal ati i ymladd.",
+     "person-llywelyn-fawr.html"),
     ("2026-11-12", "How Wales moved the world", "Sut y symudodd Cymru’r byd",
      "A new long read on the industrial revolution: Trevithick’s Penydarren engine of 1804, the first railway journey in the world; the first passenger railway at Swansea; Merthyr, iron capital of the world; Cardiff and Barry, the greatest coal ports on earth; the first million-pound cheque, signed at the Coal Exchange in 1904; Copperopolis, slate and the Ffestiniog Railway.",
      "Erthygl newydd ar y chwyldro diwydiannol: injan Penydarren Trevithick yn 1804, y daith reilffordd gyntaf yn y byd; y rheilffordd deithwyr gyntaf yn Abertawe; Merthyr, prifddinas haearn y byd; Caerdydd a’r Barri, porthladdoedd glo mwyaf y ddaear; y siec filiwn punt gyntaf, a lofnodwyd yn y Gyfnewidfa Lo yn 1904; Copperopolis, llechi a Rheilffordd Ffestiniog.",
