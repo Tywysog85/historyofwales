@@ -44,9 +44,9 @@ html.js .rv.in, html.rv-all .rv { opacity: 1; transform: none }
 .journey-chip .jc-l { font-size: .78rem; color: var(--muted); white-space: nowrap }
 .journey-chip:hover .tr { stroke: var(--muted) } .journey-chip:hover .jc-l { color: var(--ink) }
 @media (max-width: 640px) { .journey-chip .jc-l { display: none } }
-@media (max-width: 1000px) { .nav .nav-inline { display: none } }
+@media (max-width: 1119px) { .nav .nav-inline { display: none } }
 /* every topic stays in the bar on every page and at every desktop width, beside the site name: the words and gaps are kept small enough to fit the 1185 px row in both languages */
-@media (min-width: 1001px) { .nav .nav-inline { gap: 0 .95rem; margin-right: .3rem } .nav .nav-inline a { font-size: .9rem } .nav a.brand { font-size: 1.15rem } .nav .wrap { gap: .5rem } }
+@media (min-width: 1120px) { .nav .nav-inline { gap: 0 .95rem; margin-right: .3rem } .nav .nav-inline a { font-size: .9rem } .nav a.brand { font-size: 1.15rem } .nav .wrap { gap: .5rem } }
 @media (max-width: 560px) { .menu-btn .l-en, .menu-btn .l-cy { display: none !important } .menu-btn { padding: .7rem .75rem } .brand { font-size: 1.15rem } .brand svg { width: 1.3rem; height: 1.3rem } .lang button { padding: .2rem .5rem } .nav .wrap { gap: .4rem } }
 @media (max-width: 400px) { .journey-chip { display: none } }
 
@@ -59,7 +59,7 @@ html.js .rv.in, html.rv-all .rv { opacity: 1; transform: none }
 .menu-big a.on { color: var(--dragon) }
 .menu-big .n { font: 500 .72rem var(--f-mono); color: var(--muted); letter-spacing: .1em; width: 1.6rem }
 .menu-big li { animation: menu-in .5s var(--ease) both; animation-delay: calc(var(--k, 0) * 40ms) }
-.menu-big li:nth-child(1) { --k: 1 } .menu-big li:nth-child(2) { --k: 2 } .menu-big li:nth-child(3) { --k: 3 } .menu-big li:nth-child(4) { --k: 4 } .menu-big li:nth-child(5) { --k: 5 } .menu-big li:nth-child(6) { --k: 6 } .menu-big li:nth-child(7) { --k: 7 } .menu-big li:nth-child(8) { --k: 8 }
+.menu-big li:nth-child(1) { --k: 1 } .menu-big li:nth-child(2) { --k: 2 } .menu-big li:nth-child(3) { --k: 3 } .menu-big li:nth-child(4) { --k: 4 } .menu-big li:nth-child(5) { --k: 5 } .menu-big li:nth-child(6) { --k: 6 } .menu-big li:nth-child(7) { --k: 7 } .menu-big li:nth-child(8) { --k: 8 } .menu-big li:nth-child(9) { --k: 9 }
 @keyframes menu-in { from { opacity: 0; transform: translateY(18px) } }
 .menu-side { display: grid; gap: 1rem; padding-top: .8rem }
 .menu-more { display: grid; gap: .1rem }
