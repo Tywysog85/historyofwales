@@ -7,6 +7,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Owain Gwynedd: the king who became prince", "Owain Gwynedd: y brenin a ddaeth yn dywysog",
+     "King Owain Gwynedd’s page now tells his whole reign and how he became the first to call himself Prince of Wales: why he chose princeps, the title of Augustus, why it was a step up from king, why it fitted the Welsh idea of a tywysog, and why Henry II was so angry.",
+     "Mae tudalen y Brenin Owain Gwynedd bellach yn adrodd ei holl deyrnasiad a sut y daeth y cyntaf i’w alw ei hun yn Dywysog Cymru: pam y dewisodd princeps, teitl Awgwstws, pam yr oedd yn gam i fyny o frenin, pam yr oedd yn cyd-fynd â syniad y Cymry am dywysog, a pham yr oedd Harri’r Ail mor ddig.",
+     "person-owain-gwynedd.html"),
     ("2026-11-12", "255 battles, raids and sieges, and who each was against", "255 o frwydrau, cyrchoedd a gwarchaeau, ac yn erbyn pwy",
      "The battles page now lists 255 battles, raids and sieges: every battle and raid the Welsh Annals and the Brut record up to 1122, the best-known raids after that (with the place where they give one), and the battles abroad where Welsh regiments fought, from Namur in 1695 to Helmand. Pick who they were against to see just those. Key documents has grown to 38.",
      "Mae tudalen y brwydrau bellach yn rhestru 255 o frwydrau, cyrchoedd a gwarchaeau: pob brwydr a chyrch a gofnodir yn Annales Cambriae a’r Brut hyd 1122, y cyrchoedd enwocaf wedi hynny (gyda’r lle lle maent yn ei roi), a’r brwydrau tramor lle ymladdodd catrodau Cymreig, o Namur yn 1695 i Helmand. Dewiswch yn erbyn pwy i weld y rheini’n unig. Mae’r dogfennau allweddol wedi tyfu i 38.",

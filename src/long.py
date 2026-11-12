@@ -280,3 +280,7 @@ PEOPLE_LONG = {k: ([_fix(t) for t in v[0]], [_fix(t) for t in v[1]]) for k, v in
 # ---------- more famous people (src/people2.py) ----------
 import people2 as _P2
 PEOPLE_LONG.update(_P2.PEOPLE_LONG)
+
+# ---------- Owain Gwynedd, the king who became prince (src/owain.py) ----------
+import owain as _OG
+PEOPLE_LONG["owain-gwynedd"] = _OG.PERSON_LONG
