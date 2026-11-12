@@ -1,39 +1,6 @@
-{
- "branch": "",
- "out": "_research/princes",
- "max": 160,
- "categories": [
-  "Historie of Cambria",
-  "Dafydd ap Gruffydd",
-  "Eleanor de Montfort, Princess of Wales",
-  "Valle Crucis Abbey",
-  "Gwenwynwyn ab Owain",
-  "Rhys Gryg",
-  "Madog ap Maredudd",
-  "Strata Marcella Abbey",
-  "Maes Gwenllian"
- ],
- "searches": [
-  "Historie of Cambria woodcut",
-  "Dafydd ap Gruffudd",
-  "Idwal Foel",
-  "Cadell ap Rhodri",
-  "Owain ap Hywel",
-  "Eleanor de Montfort",
-  "Rhys Gryg effigy St Davids",
-  "Gruffydd ap Rhys",
-  "Madog ap Gruffudd Maelor",
-  "Gwenwynwyn",
-  "Llywelyn coffin Llanrwst",
-  "Joan coffin Beaumaris",
-  "Abergwyngregyn Pen y Bryn",
-  "Cilmeri memorial",
-  "Dinefwr castle",
-  "Mathrafal",
-  "Aberffraw",
-  "Bamberg cryptogram",
-  "Hywel Dda penny",
-  "Owain Lawgoch Mortagne"
- ],
- "files": []
-}
+{"branch": "",
+ "out": "_research/example",
+ "max": 200,
+ "categories": [],
+ "searches": [],
+ "files": []}
