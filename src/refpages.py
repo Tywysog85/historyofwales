@@ -10,6 +10,8 @@ import re
 import ref_az as AZ
 import ref_faq as FAQ
 import ref_towns as TWN
+import ref_battles as BT
+import ref_docs as DC
 import os
 
 g = {}  # build.py's helpers (bi, e, page, hero, section ...), filled by setup()
@@ -347,6 +349,124 @@ TOWN_CSS = """
 """
 
 
+# ---------- battles of Wales ----------
+WIN = {"w": ("Welsh victory", "Buddugoliaeth Gymreig"), "l": ("A Welsh stand", "Safiad Cymreig"), "o": ("Battle or rising", "Brwydr neu wrthryfel")}
+
+
+def battles_map(rows):
+    dots = ""
+    for b in rows:
+        if not b["geo"]:
+            continue
+        x, y = wales_xy(*b["geo"])
+        dots += (f'<a href="#b-{b["id"]}" class="bt-dot bt-{b["win"]}" aria-label="{e(b["en"])}, {e(b["dEn"])}"><g transform="translate({x:.1f} {y:.1f})"><circle class="h" r="14"/>'
+                 f'<path class="d" d="M-6 -6L6 6M6 -6L-6 6"/></g><title>{e(b["en"])} · {e(b["dEn"])}</title></a>')
+    return (f'<svg class="tw-map bt-map" viewBox="-20 -20 640 711" role="group" aria-label="Map of the battles of Wales">'
+            f'<path class="land" d="{g["geo"]["outline"]}"/>{dots}</svg>')
+
+
+def battles_page(have):
+    rows = sorted(BT.BATTLES, key=lambda b: b["year"])
+    ids = [b["id"] for b in rows]
+    assert len(ids) == len(set(ids)), "two battles share an id"
+    cards = ""
+    for b in rows:
+        where = "" if b["geo"] else f'<span class="bt-nomap"> · {bi("not on the map", "nid ar y map")}</span>'
+        cards += (f'<article class="bt-card bt-{b["win"]}" id="b-{b["id"]}" data-ref-item style="--c:{g["COL"][b["era"]]}">'
+                  f'<p class="bt-date">{bi(b["dEn"], b["dCy"])} · <span class="bt-k">{bi(*WIN[b["win"]])}</span>{where}</p>'
+                  f'<h3>{bi(b["en"], b["cy"])}</h3><p class="bt-side">{bi(b["sEn"], b["sCy"])}</p><p>{bi(b["tEn"], b["tCy"])}</p>{link_chips(b["see"], have)}</article>')
+    legend = (f'<ul class="bt-legend"><li class="bt-w">{bi(*WIN["w"])}</li><li class="bt-l">{bi(*WIN["l"])}</li><li class="bt-o">{bi(*WIN["o"])}</li></ul>')
+    n = len(rows)
+    nw = sum(1 for b in rows if b["win"] == "w")
+    main = (g["hero"]("medieval", crumbs(), "book", "Reference", "Cyfeirlyfr", "Battles of Wales", "Brwydrau Cymru",
+                      f"{n} battles and risings, from the Druids on the Menai to the Welsh Division at Mametz Wood: who fought, what happened, and where.",
+                      f"{n} o frwydrau a gwrthryfeloedd, o’r Derwyddon ar y Fenai i’r Adran Gymreig yng Nghoed Mametz: pwy a ymladdodd, beth ddigwyddodd, a ble.", art="sword")
+            + g["section"](f'<div class="tw-top"><div class="tw-mapbox">{battles_map(rows)}{legend}</div><div>'
+                           f'<p>{bi(f"The Normans took England in five years; Wales held out for 216. These are the battles that made that story, {nw} of them Welsh victories. Tap a cross on the map to read about it.", f"Cymerodd y Normaniaid Loegr mewn pum mlynedd; daliodd Cymru allan am 216. Dyma’r brwydrau a wnaeth y stori honno, {nw} ohonynt yn fuddugoliaethau Cymreig. Tapiwch groes ar y map i ddarllen amdani.")}</p>'
+                           f'<input class="ref-filter" type="search" data-ref-filter placeholder="Find a battle, a leader or a year… / Chwilio am frwydr, arweinydd neu flwyddyn…" aria-label="Filter the battles / Hidlo’r brwydrau" autocomplete="off">'
+                           f'<p style="margin-top:1rem"><a class="btn" href="castles.html">{bi("The castles map", "Map y cestyll")} →</a> <a class="btn" href="story-longbow.html">{bi("The Welsh longbow", "Y bwa hir Cymreig")} →</a></p></div></div>'
+                           f'<div class="bt-list" data-ref-group>{cards}</div><p class="ref-none" data-ref-none hidden>{bi("No battle matches that.", "Does dim brwydr yn cyfateb.")}</p>', top=True))
+    return g["page"]("battles.html", "Battles of Wales: a map and list · History of Wales",
+                     f"{n} battles of Welsh history on a map: Catraeth, Crug Mawr, Crogen, Cymerau, Cilmeri, Mynydd Hyddgen, Bryn Glas, Bosworth, Fishguard and the Merthyr and Newport risings.",
+                     main, era="medieval", ld=ld_article("Battles of Wales", "The battles of Welsh history on a map"), active="reference.html", track="page:battles", extra=FILTER_JS)
+
+
+BATTLE_CSS = """
+.bt-map .bt-dot .d{stroke:var(--gold,#e8c65a);stroke-width:3.2;stroke-linecap:round;fill:none}.bt-map .bt-dot .h{fill:transparent}
+.bt-map .bt-dot.bt-l .d{stroke:#e9d9c6}.bt-map .bt-dot.bt-o .d{stroke:#93a0e0}.bt-map .bt-dot:hover .d,.bt-map .bt-dot:focus .d{stroke:var(--red,#e2453d)}
+.bt-legend{list-style:none;padding:0;margin:.6rem 0 0;display:flex;flex-wrap:wrap;gap:.4rem 1rem;font-size:.82rem;color:var(--muted)}
+.bt-legend li::before{content:"✕";font-weight:700;margin-right:.35rem;color:var(--gold,#e8c65a)}.bt-legend li.bt-l::before{color:#e9d9c6}.bt-legend li.bt-o::before{color:#93a0e0}
+.bt-list{display:grid;gap:1rem;max-width:52rem}
+.bt-card{background:var(--slate);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:12px;padding:1rem 1.2rem 1.15rem;scroll-margin-top:5.5rem}
+.bt-card:target{border-color:var(--gold,#e8c65a);box-shadow:0 0 0 2px color-mix(in srgb,var(--gold,#e8c65a) 35%,transparent)}
+.bt-card h3{font:600 1.4rem/1.2 var(--f-display);margin:.2rem 0 .3rem}
+.bt-card p{margin:.35rem 0 0;line-height:1.6}
+.bt-date{font:500 .78rem var(--f-mono);color:var(--muted);letter-spacing:.03em;text-transform:uppercase;margin:0!important}
+.bt-k{color:var(--gold,#e8c65a)}.bt-l .bt-k{color:#e9d9c6}.bt-o .bt-k{color:#93a0e0}
+.bt-nomap{opacity:.7}
+.tw-top .ref-filter{width:100%;box-sizing:border-box;margin-top:.6rem}
+.bt-side{font-weight:600;color:var(--ink)}
+"""
+
+
+# ---------- key documents ----------
+WORDS = {"quote": ("In its own words", "Yn ei geiriau ei hun"), "welsh": ("In Welsh, with English", "Yn Gymraeg, gyda Saesneg"), "short": ("What it says, in short", "Beth mae’n ei ddweud, yn fyr")}
+
+
+def doc_words(d):
+    kind, en, cy = d["words"]
+    label = bi(*WORDS[kind])
+    if kind == "welsh":  # the Welsh original is shown in both languages, the English beneath it
+        body = f'<blockquote lang="cy">{e(cy)}</blockquote><p class="dc-tr">{bi(en, en)}</p>'
+    elif kind == "quote":
+        body = f'<blockquote>{bi(en, cy)}</blockquote>'
+    else:
+        body = f'<p class="dc-short">{bi(en, cy)}</p>'
+    return f'<div class="dc-words dc-{kind}"><p class="dc-lab">{label}</p>{body}</div>'
+
+
+def documents_page(have):
+    rows = sorted(DC.DOCS, key=lambda d: d["year"])
+    ids = [d["id"] for d in rows]
+    assert len(ids) == len(set(ids)), "two documents share an id"
+    jump = "".join(f'<a href="#doc-{d["id"]}">{bi(d["en"], d["cy"])}</a>' for d in rows)
+    cards = ""
+    for d in rows:
+        cards += (f'<article class="dc-card" id="doc-{d["id"]}" data-ref-item style="--c:{g["COL"][d["era"]]}">'
+                  f'<p class="bt-date">{bi(d["dEn"], d["dCy"])}</p><h3>{bi(d["en"], d["cy"])}</h3><p>{bi(d["aEn"], d["aCy"])}</p>'
+                  f'{doc_words(d)}<p><b>{bi("Why it matters", "Pam mae’n bwysig")}:</b> {bi(d["wEn"], d["wCy"])}</p>'
+                  f'<p class="dc-kept">{bi("Where to find it", "Ble i’w chael")}: {bi(d["kEn"], d["kCy"])}</p>{link_chips(d["see"], have)}</article>')
+    n = len(rows)
+    main = (g["hero"]("tudor", crumbs(), "book", "Reference", "Cyfeirlyfr", "Key documents", "Dogfennau allweddol",
+                      f"{n} documents that shaped Wales, from Caesar on the Druids to the vote for a Welsh parliament, each with its own words, what it did and where to find it.",
+                      f"{n} o ddogfennau a luniodd Gymru, o Gesar ar y Derwyddon i’r bleidlais dros senedd i Gymru, pob un gyda’i geiriau ei hun, beth a wnaeth a ble i’w chael.", art="book")
+            + g["section"](f'<p class="ref-intro">{bi("Where a document’s exact words are known, they are quoted from a published translation. Where they are not, we say what it says in our own words and mark it “in short”. The Laws of Hywel Dda have their own page.", "Lle mae union eiriau dogfen yn hysbys, fe’u dyfynnir o gyfieithiad cyhoeddedig. Lle nad ydynt, rydym yn dweud beth mae’n ei ddweud yn ein geiriau ein hunain ac yn ei nodi’n “yn fyr”. Mae gan Gyfreithiau Hywel Dda eu tudalen eu hunain.")} <a href="laws.html">{bi("The Laws of Hywel Dda", "Cyfreithiau Hywel Dda")} →</a></p>'
+                           f'<input class="ref-filter dc-filter" type="search" data-ref-filter placeholder="Find a document, a person or a year… / Chwilio am ddogfen, person neu flwyddyn…" aria-label="Filter the documents / Hidlo’r dogfennau" autocomplete="off">'
+                           f'<nav class="dc-jump" aria-label="Documents / Dogfennau">{jump}</nav>'
+                           f'<div class="bt-list" data-ref-group>{cards}</div><p class="ref-none" data-ref-none hidden>{bi("No document matches that.", "Does dim dogfen yn cyfateb.")}</p>', top=True))
+    return g["page"]("documents.html", "Key documents of Welsh history · History of Wales",
+                     f"{n} key documents of Welsh history in their own words: the Treaty of Montgomery, Owain Glyndŵr’s Pennal letter, the Acts of Union, the Blue Books, Hen Wlad fy Nhadau, Tynged yr Iaith and more.",
+                     main, era="tudor", ld=ld_article("Key documents of Welsh history", "The treaties, letters and laws that shaped Wales"), active="reference.html", track="page:documents", extra=FILTER_JS)
+
+
+DOC_CSS = """
+.dc-card{background:var(--slate);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:12px;padding:1rem 1.2rem 1.15rem;scroll-margin-top:5.5rem}
+.dc-card:target{border-color:var(--gold,#e8c65a)}
+.dc-card h3{font:600 1.4rem/1.2 var(--f-display);margin:.2rem 0 .3rem}.dc-card p{margin:.45rem 0 0;line-height:1.6}
+.dc-words{margin:.8rem 0 .2rem;padding:.8rem 1rem;border-radius:10px;background:color-mix(in srgb,var(--c) 10%,transparent)}
+.dc-lab{font:500 .72rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0!important}
+.dc-words blockquote{margin:.4rem 0 0;padding:0;border:0;font:italic 1.08rem/1.6 var(--f-display)}
+.dc-words blockquote::before{content:"“"}.dc-words blockquote::after{content:"”"}
+.dc-tr{color:var(--muted);font-size:.95rem}.dc-short{font-size:1.02rem}
+.dc-kept{font-size:.88rem;color:var(--muted)}
+.dc-jump{display:flex;flex-wrap:wrap;gap:.35rem;margin:1rem 0 1.4rem;max-width:52rem}
+.dc-jump a{font-size:.8rem;padding:.25rem .6rem;border:1px solid var(--line);border-radius:99px;color:var(--ink);text-decoration:none}
+.dc-jump a:hover{border-color:var(--gold,#e8c65a)}
+.ref-intro{max-width:52rem;color:var(--muted)}
+.dc-filter{width:100%;max-width:52rem;box-sizing:border-box;margin-top:.8rem}
+"""
+
+
 # ---------- the look-it-up desk ----------
 DESK = [  # href, English, Welsh, English line, Welsh line, era colour
     ("a-z.html", "The A–Z", "Yr A–Y", "Words, laws and ideas, each explained in a few lines.", "Geiriau, cyfreithiau a syniadau, pob un wedi’i egluro mewn ychydig linellau.", "kings"),
@@ -393,11 +513,11 @@ def pages(have):
     """have: the set of page names build.py is making (so links to pages that do not exist yet are left out)."""
     _titles()
     have = set(have) | set(PAGE_NAMES)
-    out = {"a-z.html": az_page(have), "questions.html": questions_page(have), "towns.html": towns_page(have), "reference.html": desk_page(have)}
+    out = {"a-z.html": az_page(have), "questions.html": questions_page(have), "towns.html": towns_page(have), "battles.html": battles_page(have), "documents.html": documents_page(have), "reference.html": desk_page(have)}
     return out
 
 
-PAGE_NAMES = ["a-z.html", "questions.html", "towns.html", "reference.html"]
+PAGE_NAMES = ["a-z.html", "questions.html", "towns.html", "battles.html", "documents.html", "reference.html"]
 
 
 def search_items():
@@ -406,6 +526,10 @@ def search_items():
     items += [dict(k="town", t=r["cy"], c=r["cy"], u=f"towns.html#{r['id']}", y=[r["en"] if r["en"] != r["cy"] else r["la"], r["laCy"]], b=[r["mEn"].capitalize() + ". " + r["hEn"], r["mCy"].capitalize() + ". " + r["hCy"]], e="saints", a=r["en"]) for r in town_rows()]
     items.append(dict(k="page", t="Towns and villages: what Welsh place names mean", c="Trefi a phentrefi: ystyr enwau lleoedd", u="towns.html", y=["Place names", "Enwau lleoedd"],
                       b=["What Welsh place names mean, with a decoder for any name: aber, llan, caer, pen, tre and more.", "Ystyr enwau lleoedd Cymru, gyda datgodiwr i unrhyw enw: aber, llan, caer, pen, tre a rhagor."], e="saints"))
+    items += [dict(k="battle", t=b["en"], c=b["cy"], u=f"battles.html#b-{b['id']}", y=[b["dEn"], b["dCy"]], b=[b["sEn"] + ". " + b["tEn"], b["sCy"] + ". " + b["tCy"]], e=b["era"]) for b in BT.BATTLES]
+    items.append(dict(k="page", t="Battles of Wales", c="Brwydrau Cymru", u="battles.html", y=["Map", "Map"], b=["Every battle of Welsh history on a map, from Catraeth to Mametz Wood.", "Pob brwydr yn hanes Cymru ar fap, o Gatraeth i Goed Mametz."], e="medieval"))
+    items += [dict(k="doc", t=d["en"], c=d["cy"], u=f"documents.html#doc-{d['id']}", y=[d["dEn"], d["dCy"]], b=[d["aEn"] + " " + d["wEn"], d["aCy"] + " " + d["wCy"]], e=d["era"]) for d in DC.DOCS]
+    items.append(dict(k="page", t="Key documents of Welsh history", c="Dogfennau allweddol hanes Cymru", u="documents.html", y=["Reference", "Cyfeirlyfr"], b=["The treaties, letters and laws that shaped Wales, in their own words.", "Y cytundebau, y llythyrau a’r deddfau a luniodd Gymru, yn eu geiriau eu hunain."], e="tudor"))
     items.append(dict(k="page", t="The A–Z of Welsh history", c="A–Y hanes Cymru", u="a-z.html", y=["Reference", "Cyfeirlyfr"],
                       b=["Words, laws, places and ideas from Welsh history, each explained in a few lines.", "Geiriau, cyfreithiau, lleoedd a syniadau o hanes Cymru, pob un wedi’i egluro mewn ychydig linellau."], e="kings"))
     items.append(dict(k="page", t="Look it up: the reference desk", c="Chwilio’r hanes: y ddesg gyfeirio", u="reference.html", y=["Reference", "Cyfeirlyfr"],
