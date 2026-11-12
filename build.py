@@ -37,6 +37,7 @@ import literature as LT  # noqa: E402  (literature.html, books.html, triads.html
 import laws as LW  # noqa: E402  (the Laws of Hywel Dda page, laws.html)
 import people2 as P2  # noqa: E402
 import sets as SETS  # noqa: E402
+import seo as SEO  # noqa: E402  (search engine extras for every page)
 L.TEACH.update(AG9.TEACH)
 from urllib.parse import quote as _q
 
@@ -191,12 +192,13 @@ def further(key, wiki):
 # ---------- shared head tags ----------
 def head_tags(title, desc, path, og_type="website", image=None):
     url = BASE_URL + path
+    title, desc = SEO.tidy_title(SEO.title_for(path, title)), SEO.tidy_desc(desc)
     t = (f'<title>{e(title)}</title>\n<meta name="description" content="{e(desc)}">\n<link rel="canonical" href="{url}">\n'
          '<meta name="theme-color" content="#0e1118">\n<link rel="icon" href="favicon.svg" type="image/svg+xml">\n'
          '<link rel="apple-touch-icon" href="apple-touch-icon.png">\n<link rel="manifest" href="manifest.webmanifest">\n'
          f'<meta property="og:title" content="{e(title)}">\n<meta property="og:description" content="{e(desc)}">\n'
-         f'<meta property="og:type" content="{og_type}">\n<meta property="og:url" content="{url}">\n'
-         f'<meta property="og:image" content="{BASE_URL}{image or "og.png"}">\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n'
+         f'<meta property="og:type" content="{og_type}">\n<meta property="og:url" content="{url}">\n<meta property="og:site_name" content="History of Wales">\n'
+         f'<meta property="og:image" content="{BASE_URL}{image or "og.png"}">\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n<meta property="og:image:alt" content="{e(title)}">\n'
          '<meta property="og:locale" content="en_GB">\n<meta property="og:locale:alternate" content="cy_GB">\n'
          '<meta name="twitter:card" content="summary_large_image">\n'
          f'<link rel="alternate" type="application/atom+xml" title="History of Wales: what’s new and on this day" href="{BASE_URL}feed.xml">\n')
@@ -354,7 +356,7 @@ def page(path, title, desc, main_html, era=None, og_type="article", ld=None, act
     if CARDS_ON and path != "404.html":
         CARD_JOBS[path] = (title, desc, era)
         card = "cards/" + path[:-5] + ".jpg"
-    ld_html = f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>' if ld else ""
+    ld_html = SEO.ld_script(SEO.page_ld(BASE_URL, path, title, desc, og_type, ld, main_html, card))
     return f'''<!doctype html>
 <html lang="en">
 <head>
@@ -2476,7 +2478,9 @@ _home_style = index_head[index_head.index("<style>") + 7: index_head.index("</st
 index_head = re.sub(r"<title>.*?</title>\n", "", index_head, count=1)
 index_head = re.sub(r'<meta name="description"[^>]*>\n', "", index_head, count=1)
 _bare_head = index_head
-index_head = head_tags("History of Wales", "The history of Wales, from the first people in the caves to the Senedd: an interactive timeline, map, people, legends and games, in English and Cymraeg.", "", "website") + index_head
+index_head = (head_tags("History of Wales · Hanes Cymru: Welsh history, people and places",
+                        "Welsh history from the first people in the caves to the Senedd: the kings, princes, castles, saints and poets of Wales. A timeline, map and games, in English and Cymraeg.",
+                        "", "website") + SEO.ld_script(SEO.home_ld(BASE_URL)) + "\n" + index_head)
 _body_filled = (body.replace("__WALES__", geo["outline"]).replace("__WELSHV__", str(WELSH_JS_VER))
                 .replace("__DATA__", json.dumps(DATA, ensure_ascii=False, separators=(",", ":")))
                 .replace("__TOWNS__", json.dumps(TW.TOWNS, ensure_ascii=False, separators=(",", ":")))
@@ -2488,7 +2492,7 @@ index_fragment = fill(index_head + _body_filled, home=True)  # no document skele
 def app_page(path, title, desc, hero_html, section_file, active, skip):
     """A page that reuses the home page's script with only one of its sections (timeline, quiz)."""
     h = re.sub(r'<header class="hero" id="top">.*?</header>', lambda m: hero_html, _bare_head, count=1, flags=re.S)
-    h = head_tags(title, desc, path) + h
+    h = head_tags(title, desc, path) + SEO.ld_script(SEO.page_ld(BASE_URL, path, title, desc, "website", None, hero_html)) + "\n" + h
     b = "<main>\n" + read(section_file) + "</main>\n" + _body_filled[_body_filled.index("__FOOTER__"):]
     return fill(h + b, active, skip)
 
@@ -2945,9 +2949,11 @@ def main():
     write(os.path.join(out, "whatsnew.json"), json.dumps(WN.NEWS, ensure_ascii=False))
     write(os.path.join(out, "search.json"), json.dumps(search_index(), ensure_ascii=False, separators=(",", ":")))
     write(os.path.join(out, ".nojekyll"), "")
-    write(os.path.join(out, "robots.txt"), f"User-agent: *\nAllow: /\nSitemap: {BASE_URL}sitemap.xml\n")
-    write(os.path.join(out, "sitemap.xml"), '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-          + "".join(f"  <url><loc>{xesc(BASE_URL + ('' if p == 'index.html' else p))}</loc></url>\n" for p in pages if p != "404.html") + "</urlset>\n")
+    write(os.path.join(out, "robots.txt"), SEO.robots(BASE_URL))
+    sm, marks = SEO.sitemap(BASE_URL, pages)   # every page, with the date it last changed and its pictures
+    write(os.path.join(out, "sitemap.xml"), sm)
+    write(os.path.join(out, SEO.LASTMOD_FILE), marks)
+    write(os.path.join(out, SEO.INDEXNOW_KEY + ".txt"), SEO.INDEXNOW_KEY)   # lets Bing know the site is ours (tools/indexnow.py)
     if "--artifact" in sys.argv:
         a = os.path.join(ROOT, "_artifact")
         shutil.rmtree(a, ignore_errors=True)

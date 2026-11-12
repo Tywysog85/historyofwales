@@ -45,3 +45,13 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+      # Tell Bing and other IndexNow search engines which pages changed today (see tools/indexnow.py).
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            tools/indexnow.py
+            src/seo.py
+          sparse-checkout-cone-mode: false
+      - name: Tell search engines about changed pages
+        continue-on-error: true
+        run: python3 tools/indexnow.py https://historyofwales.cymru/

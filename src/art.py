@@ -2,7 +2,7 @@
 # site's own style (sky, moon, rolling ridges) with one paper-cut motif in the foreground.
 # scene(kind, colour) returns an <svg> string that fills its container.
 import math
-import random
+import random, zlib
 
 W, H = 800, 500
 DRAGON_BODY = "M186 34C190 33 196 35 200 38L193 40C196 42 199 44 200 46C194 47 188 46 184 45C178 47 172 52 168 58C163 66 156 72 146 74C132 77 116 78 102 77C88 76 76 74 66 76C52 79 40 88 28 96C20 101 12 102 6 98C10 98 16 95 22 90C34 80 46 70 60 66C74 62 90 64 104 63C118 62 132 62 142 58C152 54 158 46 164 38C168 32 174 28 180 28L176 20L184 27L186 18L189 29C189 31 188 32 186 34ZM8 99L-6 92L0 104L-4 112L12 102ZM138 72C142 80 144 86 150 90L156 90L152 94L158 96L146 96C138 92 134 84 130 76ZM76 74C76 84 72 92 66 98L72 100L64 102L68 106L58 104C62 96 64 86 64 76Z"
@@ -247,7 +247,7 @@ def _terrace(c):
 
 def _gorsedd(c):
     # a Gorsedd circle of stones round the maen llog, lit by the three rays of the Nod Cyfrin /|\
-    g = f"gr{abs(hash(c)) % 9973}"
+    g = f"gr{zlib.crc32(c.encode()) % 9973}"
     rays = (f'<defs><linearGradient id="{g}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{c}" stop-opacity=".75"/><stop offset="1" stop-color="{c}" stop-opacity=".04"/></linearGradient></defs>'
             f'<g fill="url(#{g})"><path d="M392 124L404 124L292 420L252 420Z"/><path d="M394 124L406 124L414 420L386 420Z"/><path d="M396 124L408 124L548 420L508 420Z"/></g>')
     back, front = "", ""
@@ -308,7 +308,7 @@ def photo_scene(kind, small=False):
 
 def scene(kind, colour, seed=None):
     rng = random.Random(seed if seed is not None else sum(map(ord, kind)) * 7 + 3)
-    uid = f"{kind}{abs(hash(colour)) % 9973}"
+    uid = f"{kind}{zlib.crc32(colour.encode()) % 9973}"  # crc32, not hash(): same on every build
     mx, my, mr = MOON.get(kind, (640, 110, 32))
     stars = "".join(f'<circle cx="{rng.random() * W:.0f}" cy="{rng.random() * H * .6:.0f}" r="{rng.random() * 1.1 + .4:.1f}" opacity="{rng.random() * .6 + .2:.2f}"/>' for _ in range(60))
     ridges = ""

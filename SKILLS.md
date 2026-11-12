@@ -30,6 +30,16 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - Put the file in `src/static/` so it is published at the site root. Then click **Verify**. Keep the file there for good.
 - Submit `sitemap.xml` under **Sitemaps**. `build.py` writes it, along with `robots.txt`.
 
+### Showing up in Google and Bing (November 2026)
+- `src/seo.py` does it for every page, so new pages need nothing extra. `page()` in `build.py` calls it.
+- Titles are cut to about 65 characters and descriptions to 160, at a word. Long titles drop the " · History of Wales" ending first.
+- Hub pages get titles in the words people search for, such as "Welsh history timeline" and "Welsh legends, myths and folk tales". They are set in `TITLES` in `seo.py`. The page itself does not change.
+- Each page carries structured data (JSON-LD). It holds the page's own type (Person, TouristAttraction, Article), the site's name "History of Wales" / "Hanes Cymru", and a breadcrumb trail read from the crumbs at the top of the page. Test a page at https://search.google.com/test/rich-results.
+- `sitemap.xml` gives each page the date it last really changed, and lists its pictures. The build compares each page with the fingerprints in the live `seo-lastmod.json`, so unchanged pages keep their old date. Set `SEO_OFFLINE=1` to skip that look-up.
+- Builds must give the same page every time, or every page looks changed. Don't use Python's `hash()` for ids, because it changes on every run. Use `zlib.crc32` instead.
+- After each deploy, `tools/indexnow.py` sends the pages that changed today to IndexNow, which Bing, Yandex and others share. The key file `<key>.txt` sits at the site root.
+- Bing Webmaster Tools: sign in at https://www.bing.com/webmasters with a Microsoft account and choose **Import from Google Search Console**. That brings the site and sitemap across with no new file.
+
 ### Visitor statistics (GoatCounter)
 - Free and doesn't use cookies, so no cookie banner is needed. Sign up with the code `historyofwales`; the dashboard is https://historyofwales.goatcounter.com.
 - The site adds the counting script only when the `GOATCOUNTER` variable is set at build time.
