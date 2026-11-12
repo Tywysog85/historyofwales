@@ -1196,13 +1196,10 @@ def page_refs(path):
         return "arthur-circle", None
     if kind == "person" and rest in MP.OWN_IDS and "mabinogi-people" in REF2.PAGES:
         return "mabinogi-people", None
-<<<<<<< HEAD
     if kind == "book":  # the old books (src/oldbooks.py): a book's own list, or the list for all the books
         return ("books" if name not in REF2.PAGES else name), None
-=======
     if kind == "mabinogi" and f"mabinogi-{rest}" in REF2.PAGES:  # a tale with its own reading list (src/refs2.py)
         return f"mabinogi-{rest}", None
->>>>>>> origin/main
     if kind == "mabinogi" and "mabinogi-tales" in REF2.PAGES:
         return "mabinogi-tales", None
     if kind in ("person", "place"):
