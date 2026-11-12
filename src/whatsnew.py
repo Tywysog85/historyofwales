@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Siwan, the two Gwenllians and Owain Lawgoch", "Siwan, y ddwy Wenllian ac Owain Lawgoch",
+     "Four more full pages from the royal houses of Wales: Siwan, Lady of Wales and the peacemaker of Gwynedd; Gwenllian ferch Gruffudd, who led an army against the Normans at Kidwelly in 1136; Gwenllian ferch Llywelyn, Princess of Wales, remembered on Carnedd Gwenllian; and Owain Lawgoch, the last heir of Gwynedd, who sailed with a French fleet in 1372 to win back Wales.",
+     "Pedair tudalen lawn arall o dai brenhinol Cymru: Siwan, Arglwyddes Cymru a heddychwraig Gwynedd; Gwenllian ferch Gruffudd, a arweiniodd fyddin yn erbyn y Normaniaid yng Nghydweli yn 1136; Gwenllian ferch Llywelyn, Tywysoges Cymru, a gofir ar Garnedd Gwenllian; ac Owain Lawgoch, etifedd olaf Gwynedd, a hwyliodd gyda llynges Ffrengig yn 1372 i ennill Cymru yn ôl.",
+     "person-gwenllian.html"),
     ("2026-11-12", "23 more people of twentieth-century Wales", "23 yn rhagor o bobl Cymru’r ugeinfed ganrif",
      "New pages on the writers Caradog Prichard, T. Rowland Hughes, Vernon Watkins, Glyn Jones, Gwyn Thomas, Rhys Davies and David Jones, the painter Ceri Richards, Clara Novello Davies, Merêd, William Mathias, Alun Hoddinott, Dame Margaret Price, Emlyn Williams, Sir Stanley Baker, Desmond Llewelyn, the suffragette Rachel Barrett, the historian Gwyn Alf Williams, and the sporting heroes Cliff Morgan, Ray Gravell, Ivor Allchurch, Howard Winstone and Dai Rees.",
      "Tudalennau newydd ar yr awduron Caradog Prichard, T. Rowland Hughes, Vernon Watkins, Glyn Jones, Gwyn Thomas, Rhys Davies a David Jones, yr arlunydd Ceri Richards, Clara Novello Davies, Merêd, William Mathias, Alun Hoddinott, y Fonesig Margaret Price, Emlyn Williams, Syr Stanley Baker, Desmond Llewelyn, y swffragét Rachel Barrett, yr hanesydd Gwyn Alf Williams, a’r arwyr chwaraeon Cliff Morgan, Ray Gravell, Ivor Allchurch, Howard Winstone a Dai Rees.",
