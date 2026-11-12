@@ -1,8 +1,7 @@
 (function () {
   var D = DATA, ERAS = D.ERAS, EVENTS = D.EVENTS, PLACES = D.PLACES, PEOPLE = D.PEOPLE, MAPC = D.MAPC;
   var WIKI = "https://en.wikipedia.org/wiki/";
-  var lang = "en";
-  try { if (localStorage.getItem("hc-lang") === "cy") lang = "cy"; } catch (e) {}
+  var lang = document.documentElement.classList.contains("cy") ? "cy" : "en";  /* each page is one language: /cy/ pages are Welsh */
   var $ = function (s, r) { return (r || document).querySelector(s) || document.createElement("input"); };
   var HAS_TL = !!document.getElementById("events"), HERO = !!document.getElementById("sky"), HAS_MAP = !!document.getElementById("pins");
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
@@ -924,15 +923,12 @@
   $$("[data-cy-svg]").forEach(function (el) { el.dataset.enSvg = el.textContent; });
   function applyLang() {
     document.documentElement.lang = lang; document.documentElement.classList.toggle("cy", lang === "cy");
-    $("#lang-en").setAttribute("aria-pressed", lang === "en"); $("#lang-cy").setAttribute("aria-pressed", lang === "cy");
     $$("[data-cy]").forEach(function (el) { el.textContent = lang === "cy" ? el.dataset.cy : el.dataset.en; });
     $$("[data-cy-svg]").forEach(function (el) { el.textContent = lang === "cy" ? el.dataset.cySvg : el.dataset.enSvg; });
     renderChapters(); renderToday(); renderTimeline(); renderPeople(); renderFact(); renderStreak(); renderChart(); renderDecoder(); renderWords(); renderSources(); renderNear(); renderGame(); selectPlace(sel); if (mode === "kg") renderKg(); renderQuiz();
     if (!ov.hidden) { var m = /^#pennod-(\w+)/.exec(location.hash); if (m) openChapter(m[1], false); }
   }
-  function setLang(l) { lang = l; try { localStorage.setItem("hc-lang", l); } catch (e) {} applyLang(); }
-  $("#lang-en").onclick = function () { setLang("en"); };
-  $("#lang-cy").onclick = function () { setLang("cy"); };
+  /* the EN / CY switch is a pair of links to the other language's page (see welshpages.py) */
 
   renderGrat(); renderLAs();
   applyLang();

@@ -222,8 +222,12 @@ TAIL_JS = ('<script src="site.js?v=3" defer></script>\n<script src="search.js?v=
            + (f'<script data-goatcounter="https://{GOATCOUNTER}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>\n' if GOATCOUNTER else ""))
 
 LANG_BOOT = '<script>(function(){var h=document.documentElement;h.classList.add("js");setTimeout(function(){if(!window.__site)h.classList.add("rv-all")},2500);try{if(localStorage.getItem("hc-lang")==="cy"){h.classList.add("cy");h.lang="cy"}}catch(e){}})()</script>'
-LANG_JS = '''<script>(function(){var d=document.documentElement;function s(l){d.classList.toggle("cy",l==="cy");d.lang=l;document.getElementById("lang-en").setAttribute("aria-pressed",l==="en");document.getElementById("lang-cy").setAttribute("aria-pressed",l==="cy");try{localStorage.setItem("hc-lang",l)}catch(e){}}
-s(d.classList.contains("cy")?"cy":"en");document.getElementById("lang-en").onclick=function(){s("en")};document.getElementById("lang-cy").onclick=function(){s("cy")};
+# LANG_TOGGLE swaps the words in place. Only pages without a Welsh twin keep it (the 404 page); welshpages.split() swaps it
+# for links to the other language's address. The choice is saved only when a reader presses a button, never just by visiting.
+LANG_TOGGLE = '''<script>(function(){var d=document.documentElement;function s(l,k){d.classList.toggle("cy",l==="cy");d.lang=l;document.getElementById("lang-en").setAttribute("aria-pressed",l==="en");document.getElementById("lang-cy").setAttribute("aria-pressed",l==="cy");if(k)try{localStorage.setItem("hc-lang",l)}catch(e){}}
+s(d.classList.contains("cy")?"cy":"en");document.getElementById("lang-en").onclick=function(){s("en",1)};document.getElementById("lang-cy").onclick=function(){s("cy",1)}})()</script>'''
+LANG_JS = LANG_TOGGLE + '''
+<script>(function(){var d=document.documentElement;
 document.addEventListener("click",function(ev){var p=ev.target.closest("[data-print]");if(p){window.print();return}var b=ev.target.closest("[data-copy]");if(!b)return;var u=new URL(b.dataset.copy,location.href).href,o=b.innerHTML;try{navigator.clipboard.writeText(u).then(function(){b.textContent=d.classList.contains("cy")?"Wedi copïo":"Copied";setTimeout(function(){b.innerHTML=o},1600)})}catch(e){}});})();</script>'''
 
 PRINT_CSS = """
@@ -2983,7 +2987,7 @@ index_head = re.sub(r"<title>.*?</title>\n", "", index_head, count=1)
 index_head = re.sub(r'<meta name="description"[^>]*>\n', "", index_head, count=1)
 _bare_head = index_head
 index_head = (head_tags("History of Wales · Hanes Cymru: Welsh history, people and places",
-                        "Welsh history from the first people in the caves to the Senedd: the kings, princes, castles, saints and poets of Wales. A timeline, map and games, in English and Cymraeg.",
+                        "Welsh history from the first people to the Senedd: kings, princes, castles, saints and poets, with a timeline, map and games. In English and Cymraeg.",
                         "", "website") + SEO.ld_script(SEO.home_ld(BASE_URL)) + "\n" + index_head)
 _body_filled = (body.replace("__WALES__", geo["outline"]).replace("__WELSHV__", str(WELSH_JS_VER))
                 .replace("__DATA__", json.dumps(DATA, ensure_ascii=False, separators=(",", ":")))
@@ -3476,7 +3480,7 @@ def main():
     if RP.MISSING:
         print("Reference pages: links left out because the page does not exist:", ", ".join(sorted(RP.MISSING)))
     shared_files = shared_assets(pages)
-    pages = WP.split(pages, BASE_URL, LANG_BOOT, LANG_JS, SEO.tidy_title, SEO.tidy_desc)  # English pages and their Welsh twins in cy/
+    pages = WP.split(pages, BASE_URL, LANG_BOOT, LANG_TOGGLE, SEO.tidy_title, SEO.tidy_desc)  # English pages and their Welsh twins in cy/
     sm, marks = SEO.sitemap(BASE_URL, pages)   # every page, with the date it last changed and its pictures
     today = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
     for name in pages:   # "Last updated" on each page, and dateModified for search engines (src/about.py)
