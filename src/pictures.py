@@ -63,6 +63,7 @@ PAGE = {
     "story-joseph.html": "g:person-dewi-sant",
     "story-aberfan.html": "g:place-aberfan",
     "story-patrick.html": "g:place-stdavids",
+    "story-tryweryn.html": "g:place-celyn@50% 55%",
     # legends that have no photograph of their own yet
     "legend-dragons.html": "g:land-dinas-emrys",
     "legend-lludd.html": "g:land-dinas-emrys",

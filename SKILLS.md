@@ -658,6 +658,14 @@ Learnt while simplifying the home page.
 - The home page's "Did you know?" fact is drawn again by `app.js` when "Another" is pressed, so `FACTS` goes into the page data already turned into HTML (`CITE.html_text`).
 - Check sources with the WebFetch tool when the cloud can't reach a site directly, and quote the source's own words in the note where you can.
 
+### A photograph inside a long read (November 2026)
+
+Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.html`).
+
+- A paragraph that is just `!! <gallery id>` (for example `!! person-gwynfor-evans`) puts that gallery picture into the text with its full credit: caption, photographer, licence and Commons link. It works anywhere `prose()` is used: long reads, person pages, chapters. Put the same line in the English and the Welsh paragraphs, in the same place.
+- The picture must already be in the gallery (`src/gallery_photos.py`, files in `src/static/gallery/`); an unknown id stops the build. A tall picture is shown as a portrait (narrower, cropped from near the top) so faces are not cut off.
+- The picture at the top of a long read comes from `PAGE` in `src/pictures.py` (`"story-tryweryn.html": "g:place-celyn@50% 55%"`), with its credit under the title, so don't repeat that picture in the text.
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.

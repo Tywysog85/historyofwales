@@ -783,7 +783,8 @@ STORY = {x["id"]: x for x in F.STORIES}
 
 
 def prose(pars, cls="prose"):
-    # "## " sub-heading, "> quote | source" pull quote, "|| left | right" table row (rows in a run make one table)
+    # "## " sub-heading, "> quote | source" pull quote, "|| left | right" table row (rows in a run make one table),
+    # "!! gallery-id" a credited picture from the gallery (src/gallery_photos.py)
     out, rows = "", []
     for a in pars + [""]:
         if a.startswith("|| "):
@@ -794,7 +795,12 @@ def prose(pars, cls="prose"):
             rows = []
         if not a:
             continue
-        if a.startswith("## "):
+        if a.startswith("!! "):  # a picture from the gallery, with its full credit (see photo_fig)
+            if a[3:].strip() not in GP.GALLERY:
+                raise SystemExit(f"prose(): unknown gallery picture '{a[3:].strip()}' (see src/gallery_photos.py)")
+            g = GP.GALLERY[a[3:].strip()]
+            out += photo_fig(None, "in-text portrait" if g[7] > g[6] else "in-text", a[3:].strip())  # tall pictures keep their faces
+        elif a.startswith("## "):
             out += f"<h2>{e(a[3:])}</h2>"
         elif a.startswith("> "):
             q, _, c = a[2:].partition(" | ")
@@ -940,7 +946,7 @@ SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes
     ("lit", "Poets, old books and legends", "Beirdd, hen lyfrau a chwedlau", ["literature", "books", "triads", "mabinogion", "legends", "legend-*", "bran", "symbols", "iolo", "topic-music", "trail-song"]),
     ("tudor", "From the Tudors to the Methodists", "O’r Tuduriaid i’r Methodistiaid", ["era-tudor"]),
     ("industry", "Iron, coal, slate and the sea", "Haearn, glo, llechi a’r môr", ["era-industrial", "coal", "aberfan", "protest", "topic-industry", "trail-coal", "trail-sea", "firsts", "topic-science"]),
-    ("modern", "Modern Wales and the Welsh abroad", "Cymru fodern a’r Cymry ar wasgar", ["era-modern", "era-today", "revival", "world", "madog", "topic-abroad", "topic-sport"]),
+    ("modern", "Modern Wales and the Welsh abroad", "Cymru fodern a’r Cymry ar wasgar", ["era-modern", "era-today", "revival", "world", "madog", "tryweryn", "topic-abroad", "topic-sport"]),
     ("lang", "The Welsh language, names and places", "Yr iaith Gymraeg, enwau a lleoedd", ["language", "topic-language", "welsh", "names", "towns", "maps", "sites"]),
     ("life", "Women and everyday life", "Menywod a bywyd bob dydd", ["topic-women", "trail-women", "topic-countryside"]),
 ]

@@ -572,7 +572,7 @@ TERMS = [
  A("tryweryn", "Tryweryn", "Tryweryn",
    "The valley near Bala where the village of Capel Celyn was drowned in 1965 to make a reservoir for Liverpool, though every Welsh MP but one voted against. ‘Cofiwch Dryweryn’ is painted on walls across Wales.",
    "Y cwm ger y Bala lle boddwyd pentref Capel Celyn yn 1965 i wneud cronfa ddŵr i Lerpwl, er i bob AS o Gymru ond un bleidleisio yn erbyn. Mae ‘Cofiwch Dryweryn’ wedi’i baentio ar waliau ledled Cymru.",
-   ["place-celyn.html", "story-protest.html"]),
+   ["story-tryweryn.html", "place-celyn.html", "story-protest.html"]),
  A("penyberth", "Penyberth (1936)", "Penyberth (1936)",
    "The burning of the bombing school at Penyberth in Llŷn by Saunders Lewis, Lewis Valentine and D. J. Williams, who gave themselves up. Their trial and imprisonment stirred the nation.",
    "Llosgi’r ysgol fomio ym Mhenyberth yn Llŷn gan Saunders Lewis, Lewis Valentine a D. J. Williams, a ildiodd eu hunain. Cynhyrfodd eu hachos a’u carcharu’r genedl.",
