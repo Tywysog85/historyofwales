@@ -12,7 +12,7 @@ PERSON_PHOTOS_MORE = {
  'illtud': ('St_Illtyd_in_Holy_Trinity_Church,_Abergavenny.jpg', 'St Illtud in Holy Trinity Church, Abergavenny', 'Sant Illtud yn Eglwys y Drindod Sanctaidd, y Fenni', 'Gwenddwr, CC BY-SA 3.0'),
  'dewi-sant': ('Castell_Coch_stained_glass_panel_2.JPG', 'St David in stained glass at Castell Coch', 'Dewi Sant mewn gwydr lliw yng Nghastell Coch', 'Hchc2009, CC BY-SA 4.0'),
  'taliesin': ('The_finding_of_Taliesin.jpg', 'The finding of Taliesin, by F. H. Townsend', 'Darganfod Taliesin, gan F. H. Townsend', 'F. H. Townsend, Public domain'),
- 'urien-rheged': ('Urbgen,_from_Harley_MS_3859_f._188v.png', 'Urien’s name (Urbgen) in an early manuscript of the History of the Britons', 'Enw Urien (Urbgen) mewn llawysgrif gynnar o Hanes y Brytaniaid', 'Public domain'),
+ 'urien-rheged': ('Urbgen,_from_Harley_MS_3859_f._188v.png', 'Urien’s name (Urbgen) in an early manuscript of the History of the Britons', 'Enw Urien (Urbgen) mewn llawysgrif gynnar o Hanes y Brythoniaid', 'Public domain'),
  'cadwallon': ('Cadwallon_ap_Cadfan_Peniarth_MS_23C_(f.99.v)_transparency.png', 'Cadwallon in a medieval Welsh manuscript', 'Cadwallon mewn llawysgrif Gymraeg ganoloesol', 'Public domain'),
  'merfyn-frych': ('Merfynfrych_historieofcambria.png', 'Merfyn Frych, from the Historie of Cambria (1584)', 'Merfyn Frych, o Historie of Cambria (1584)', 'David Powel and Humphrey Llwyd, Public domain'),
  'rhodri-mawr': ('Rhodri_Mawr_-_Historiae_Cambriae.png', 'Rhodri Mawr, from the Historie of Cambria (1584)', 'Rhodri Mawr, o Historie of Cambria (1584)', 'David Powel, CC0'),

@@ -371,7 +371,7 @@ NODES = {
             "but the seers said he had not. Welsh tradition holds that he sleeps with his men in a cave, until Wales needs him again."],
            ["Am flynyddoedd mae Owain yn ymladd ymlaen o’r bryniau. Yn 1415 mae’r brenin newydd, Harri V, yn cynnig pardwn iddo. Nid yw Owain yn ei gymryd. Y flwyddyn wedyn cynigir eto, ac nid oes ateb yn dod.",
             "Yna ni chlywir dim mwy amdano. Ni chaiff ei ddal byth, ac yn yr holl flynyddoedd hynny nid oes neb yn ei fradychu. Ysgrifennodd un croniclydd fod llawer iawn yn dweud ei fod wedi marw, "
-            "ond fod y daroganwyr yn dweud nad oedd. Mae traddodiad Cymru’n dal ei fod yn cysgu gyda’i wŷr mewn ogof, hyd nes y bydd Cymru ei angen eto."]),
+            "ond fod y daroganwyr yn dweud nad oedd. Mae traddodiad Cymru’n dal ei fod yn cysgu gyda’i wŷr mewn ogof, hyd nes y bydd ar Gymru ei angen eto."]),
         f=("Owain Glyndŵr disappears from the record after 1415. He was never captured and never betrayed. His rising day, 16 September, is Owain Glyndŵr Day.",
            "Mae Owain Glyndŵr yn diflannu o’r cofnodion wedi 1415. Ni chafodd ei ddal ac ni chafodd ei fradychu. Dydd ei wrthryfel, 16 Medi, yw Diwrnod Owain Glyndŵr.",
            ["owain-is-never-taken"]),

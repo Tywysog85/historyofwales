@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "The Welsh pages, spell-checked and polished", "Y tudalennau Cymraeg, wedi’u gwirio a’u caboli",
+     "The Welsh version of the site has been run through Cysill, the Welsh spelling and grammar checker, and read line by line. Around fifty mutations, genders and sentences are now put right across the ages, people and Wales in 10 minutes.",
+     "Mae fersiwn Gymraeg y wefan wedi’i gwirio gyda Cysill, y gwirydd sillafu a gramadeg Cymraeg, a’i darllen fesul llinell. Mae tua hanner cant o dreigladau, cenedlau a brawddegau wedi’u cywiro ar draws yr oesoedd, y bobl a Chymru mewn 10 munud.",
+     "cy/index.html"),
     ("2026-11-12", "Prince Madog’s voyage to America, and the Welsh Indians", "Mordaith y Tywysog Madog i America, a’r Indiaid Cymreig",
      "A new long read: the Welsh tradition that Madog ab Owain Gwynedd sailed west in 1170, how it became Elizabeth I’s claim to America, the Welsh Indians said to live on the Missouri, and John Evans of Waunfawr, who went 1,800 miles upriver to find them.",
      "Erthygl newydd: y traddodiad Cymreig i Fadog ab Owain Gwynedd hwylio tua’r gorllewin yn 1170, sut y daeth yn hawl Elisabeth I ar America, yr Indiaid Cymreig y dywedid eu bod yn byw ar y Missouri, a John Evans o’r Waunfawr, a aeth 1,800 o filltiroedd i fyny’r afon i chwilio amdanynt.",
