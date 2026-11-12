@@ -6,7 +6,7 @@ leave out any detail that could not be checked. build.py's page_refs() picks the
 """
 from refs import (P, B, W, R_R_DAVIES_AGE, JOHN_DAVIES, BRUT_Y_TYWYSOGYON, GERALD, NENNIUS, GEOFFREY, ADAM_USK,
                   CHARLES_EDWARDS, LLANDAFF, LLANDAFF_WD, CAESAR, SAMSON, MABINOGION, TRIADS, JOHNES, TYNGED, LHUYD, CADW,
-                  COFLEIN, REFS)
+                  COFLEIN, REFS, LAND_OF_MY_FATHERS)
 
 # ---------- shared items ----------
 DWB = (W, "National Library of Wales", "Dictionary of Welsh Biography", "biography.wales",
@@ -214,7 +214,10 @@ PAGES = {
                 "Where Welsh surnames come from, from ap and ab to Jones and Pritchard.", "O ble y daw cyfenwau Cymreig, o ap ac ab i Jones a Pritchard."),
                PLACENAMES, BARTRUM_EWGT),
     "legends": L(MABINOGION, GUEST, RHYS_FOLK, TREVELYAN, SIKES, TRIADS),
-    "general": L(JOHN_DAVIES, GWYN_WILLIAMS, CONCISE, ENCYC, DWB),
+    "general": L(JOHN_DAVIES, LAND_OF_MY_FATHERS, GWYN_WILLIAMS, CONCISE,
+                 (B, "Jan Morris", "The Matter of Wales: Epic Views of a Small Country", "Oxford University Press, 1984",
+                  "Wales, its history and its people, by a writer who loved them.", "Cymru, ei hanes a’i phobl, gan awdur a’u carai."),
+                 ENCYC, DWB),
 
     # ---------- the ages; also used on every person and place page of that age ----------
     "era-ancient": L(PREHIST, CAESAR,

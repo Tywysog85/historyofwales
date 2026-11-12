@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Books and authors", "Llyfrau ac awduron",
+     "A new page gathers every book in the site’s reading lists, 188 in all, from John Davies’s A History of Wales and Gwynfor Evans’s Land of My Fathers to the Mabinogion, with notes on the historians and writers behind them, Alan Wilson and Baram Blackett among them.",
+     "Mae tudalen newydd yn casglu pob llyfr yn rhestrau darllen y wefan, 188 i gyd, o Hanes Cymru John Davies ac Aros Mae Gwynfor Evans i’r Mabinogion, gyda nodiadau ar yr haneswyr a’r awduron y tu ôl iddynt, Alan Wilson a Baram Blackett yn eu plith.",
+     "books-and-authors.html"),
     ("2026-11-12", "Walk through Llys Rhosyr in 3D", "Cerdded drwy Lys Rhosyr mewn 3D",
      "Step inside a royal court of the princes of Gwynedd on Ynys Môn as it might have looked in the days of Llywelyn Fawr: the gate, the great hall, the hearth, the prince’s seat, the chamber and the kitchen, with eight stops that tell what happened there, from the Laws of Hywel Dda to the sands that buried it.",
      "Camwch i mewn i un o lysoedd brenhinol tywysogion Gwynedd ar Ynys Môn fel y gallai fod wedi edrych yn nyddiau Llywelyn Fawr: y porth, y neuadd fawr, yr aelwyd, sedd y tywysog, yr ystafell a’r gegin, gydag wyth arhosfan sy’n adrodd beth ddigwyddodd yno, o Gyfreithiau Hywel Dda i’r tywod a’i claddodd.",

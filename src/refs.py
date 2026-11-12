@@ -16,6 +16,9 @@ dwb: person ids whose Dictionary of Welsh Biography article is linked (from sour
 
 P, B, W = "p", "b", "w"
 
+LAND_OF_MY_FATHERS = (B, "Gwynfor Evans", "Land of My Fathers: 2000 Years of Welsh History", "John Penry Press, 1974; later editions from Y Lolfa; first published in Welsh as Aros Mae, 1971",
+                      "Two thousand years of the story of Wales, told with pride by the man who won S4C.",
+                      "Dwy fil o flynyddoedd o hanes Cymru, wedi’u hadrodd yn falch gan y gŵr a enillodd S4C.")
 R_R_DAVIES_AGE = (B, "R. R. Davies", "The Age of Conquest: Wales 1063–1415", "Oxford University Press, 1991; first published 1987 as Conquest, Coexistence, and Change",
                   "The great history of the princes and of the long fight with the Normans and the English crown.",
                   "Yr hanes mawr am y tywysogion a’r frwydr hir yn erbyn y Normaniaid a choron Lloegr.")
@@ -276,9 +279,7 @@ REFS = {
 
     "revival": dict(dwb=["gwynfor-evans", "saunders-lewis", "ifan-ab-owen-edwards"], items=[
         TYNGED,
-        (P, "Gwynfor Evans", "Land of My Fathers: 2000 Years of Welsh History", "1974; first published in Welsh as Aros Mae, 1971",
-         "The history of Wales as Gwynfor himself told it.",
-         "Hanes Cymru fel yr adroddodd Gwynfor ef ei hun."),
+        LAND_OF_MY_FATHERS,
         (B, "Rhys Evans", "Gwynfor: Portrait of a Patriot", "Y Lolfa, 2008; first published in Welsh as Rhag Pob Brad, 2005",
          "The full life of Gwynfor Evans, from Barry to the fast for S4C.",
          "Cofiant llawn Gwynfor Evans, o’r Barri i’r ympryd dros S4C."),
@@ -335,8 +336,8 @@ REFS = {
     "brutus": dict(dwb=["geoffrey-of-monmouth", "gerallt-gymro", "harri-tudur"], items=[
         NENNIUS, GEOFFREY,
         (P, "Sebastian Evans (trans.)", "Histories of the Kings of Britain, by Geoffrey of Monmouth", "J. M. Dent, 1904",
-         "The translation quoted on this page.",
-         "Y cyfieithiad a ddyfynnir ar y dudalen hon."),
+         "The translation quoted in the long read on Brutus.",
+         "Y cyfieithiad a ddyfynnir yn yr erthygl ar Brutus."),
         (P, "Brynley F. Roberts (ed.)", "Brut y Brenhinedd: Llanstephan MS. 1 Version", "Dublin Institute for Advanced Studies, 1971",
          "One of the oldest Welsh texts of the Brut, with an introduction on the Welsh versions.",
          "Un o destunau Cymraeg hynaf y Brut, gyda chyflwyniad i’r fersiynau Cymraeg."),
@@ -353,8 +354,8 @@ REFS = {
 
     "celts": dict(dwb=["edward-lhuyd", "lady-llanover"], items=[
         (P, "Julius Caesar", "The Gallic War", "translated by W. A. McDevitte and W. S. Bohn, 1869",
-         "The translation quoted on this page: Celts in Gaul, Britons in Britain.",
-         "Y cyfieithiad a ddyfynnir ar y dudalen hon: Celtiaid yng Ngâl, Brythoniaid ym Mhrydain."),
+         "The translation quoted in the long read on Britons and Celts: Celts in Gaul, Britons in Britain.",
+         "Y cyfieithiad a ddyfynnir yn yr erthygl ar y Brythoniaid a’r Celtiaid: Celtiaid yng Ngâl, Brythoniaid ym Mhrydain."),
         (P, "George Buchanan", "Rerum Scoticarum Historia", "Edinburgh, 1582",
          "The Scottish history that first guessed at a link between the languages.",
          "Yr hanes Albanaidd a ddyfalodd gyntaf fod cysylltiad rhwng yr ieithoedd."),
@@ -373,7 +374,7 @@ REFS = {
          "Sut y crëwyd ac y lledodd yr enw, o’r Groegiaid i’r bedwaredd ganrif ar bymtheg.")]),
 
     "wales-in-10": dict(dwb=[], items=[
-        JOHN_DAVIES,
+        JOHN_DAVIES, LAND_OF_MY_FATHERS,
         (B, "Gwyn A. Williams", "When Was Wales? A History of the Welsh", "Penguin, 1985",
          "A passionate, unforgettable history of the Welsh as a people.",
          "Hanes angerddol a bythgofiadwy o’r Cymry fel pobl."),

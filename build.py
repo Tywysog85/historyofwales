@@ -46,6 +46,7 @@ import seo as SEO  # noqa: E402  (search engine extras for every page)
 import added as AD  # noqa: E402  (when each item was added: newest first, "Just added" strips, "New" badges)
 import refs as REF  # noqa: E402  (further reading and references for every long read)
 import refs2 as REF2  # noqa: E402  (the same for every other content page)
+import authors as AU  # noqa: E402  (the authors on the Books and authors page)
 F.STORIES = AD.newest("story", F.STORIES)  # long reads: the newest first everywhere (index, home page, "Keep reading")
 L.TEACH.update(AG9.TEACH)
 from urllib.parse import quote as _q
@@ -249,7 +250,7 @@ NAV_GROUPS = [
                               ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn")]),
     ("Read", "Darllen", [("wales-in-10.html", "Wales in 10 minutes", "Cymru mewn 10 munud"), ("laws.html", "The Laws of Hywel Dda", "Cyfreithiau Hywel Dda"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"),
                          ("literature.html", "Literature and old books", "Llên a hen lyfrau"), ("triads.html", "The Welsh Triads", "Trioedd Ynys Prydain"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
-                         ("whatsnew.html", "What’s new", "Beth sy’n newydd")]),
+                         ("books-and-authors.html", "Books and authors", "Llyfrau ac awduron"), ("whatsnew.html", "What’s new", "Beth sy’n newydd")]),
     ("Cymraeg", "Cymraeg", [("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg")]),
     ("You", "Chi", [("journey.html", "Your journey", "Eich taith"), ("teachers.html", "For teachers", "I athrawon"), ("index.html#sources", "Sources", "Ffynonellau"), ("about.html", "About this site", "Am y wefan hon")]),
 ]
@@ -845,7 +846,7 @@ def refs_block(key, intro=None):
         return ""
     return (f'<aside class="refs" id="references" aria-labelledby="refs-h"><h2 id="refs-h">{bi("Further reading and references", "Darllen pellach a chyfeiriadau")}</h2>'
             f'<p class="refs-i">{bi(*(intro or ("The old texts and the historians’ books behind this page, for anyone who wants to go further. Any library in Wales can find them for you.", "Yr hen destunau a llyfrau’r haneswyr y tu ôl i’r dudalen hon, i unrhyw un sydd am fynd ymhellach. Gall unrhyw lyfrgell yng Nghymru eu cael i chi.")))}</p>'
-            + "".join(out) + "</aside>")
+            + "".join(out) + f'<p class="refs-all"><a href="books-and-authors.html">{bi("Every book on the site, with its authors", "Pob llyfr ar y wefan, gyda’u hawduron")} →</a></p></aside>')
 
 
 def page_refs(path):
@@ -865,6 +866,124 @@ def page_refs(path):
     if kind == "saints":
         return "saints", None
     return None, None
+
+
+# ---------- the Bookshelf (bookshelf.html): every work from every reading list, gathered and grouped ----------
+SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes; the first section to claim a work keeps it)
+    ("start", "Start here: the whole story", "Dechrau yma: yr hanes cyfan", ["general", "wales-in-10"]),
+    ("britons", "The Britons and Rome", "Y Brythoniaid a Rhufain", ["era-ancient", "era-roman", "celts", "brutus"]),
+    ("kings", "Kings, kingdoms and the Old North", "Brenhinoedd, teyrnasoedd a’r Hen Ogledd", ["era-saints", "era-kings", "kings", "kings-*", "family-trees", "arthur", "wilson-blackett", "unconquered"]),
+    ("law", "The laws of Hywel Dda", "Cyfreithiau Hywel Dda", ["laws", "hywel", "topic-law"]),
+    ("saints", "Saints, learning and faith", "Seintiau, dysg a ffydd", ["saints", "saints-*", "learning", "brittany", "topic-faith"]),
+    ("princes", "Princes, castles and Owain Glyndŵr", "Tywysogion, cestyll ac Owain Glyndŵr", ["era-medieval", "castles", "glyndwr", "longbow", "battles", "documents", "topic-war"]),
+    ("lit", "Poets, old books and legends", "Beirdd, hen lyfrau a chwedlau", ["literature", "books", "triads", "mabinogion", "legends", "legend-*", "symbols", "iolo", "topic-music", "trail-song"]),
+    ("tudor", "From the Tudors to the Methodists", "O’r Tuduriaid i’r Methodistiaid", ["era-tudor"]),
+    ("industry", "Iron, coal, slate and the sea", "Haearn, glo, llechi a’r môr", ["era-industrial", "coal", "protest", "topic-industry", "trail-coal", "trail-sea", "firsts", "topic-science"]),
+    ("modern", "Modern Wales and the Welsh abroad", "Cymru fodern a’r Cymry ar wasgar", ["era-modern", "era-today", "revival", "world", "topic-abroad", "topic-sport"]),
+    ("lang", "The Welsh language, names and places", "Yr iaith Gymraeg, enwau a lleoedd", ["language", "topic-language", "welsh", "names", "towns", "maps", "sites"]),
+    ("life", "Women and everyday life", "Menywod a bywyd bob dydd", ["topic-women", "trail-women", "topic-countryside"]),
+]
+
+
+def _shelf_pages():
+    """Every reading list, as (key, page it appears on, title EN, title CY)."""
+    out = [(x["id"], f'story-{x["id"]}.html', x["en"], x["cy"]) for x in F.STORIES]
+    out.append(("wales-in-10", "wales-in-10.html", "Wales in 10 minutes", "Cymru mewn 10 munud"))
+    out += [(f'legend-{x["id"]}', f'legend-{x["id"]}.html', x["en"], x["cy"]) for x in F.LEGENDS]
+    out += [(f'era-{x["id"]}', f'era-{x["id"]}.html', x["en"], x["cy"]) for x in D.ERAS]
+    out += [(f'topic-{t["id"]}', f'topic-{t["id"]}.html', t["en"], t["cy"]) for t in RP.TP.TOPICS]
+    out += [(f'trail-{t["id"]}', f'trail-{t["id"]}.html', t["en"], t["cy"]) for t in L.TRAILS]
+    named = {"laws": ("The Laws of Hywel Dda", "Cyfreithiau Hywel Dda"), "mabinogion": ("The Mabinogion", "Y Mabinogion"), "kings": ("Kings and princes of Wales", "Brenhinoedd a thywysogion Cymru"),
+             "saints": ("Saints of Wales", "Seintiau Cymru"), "literature": ("The literature of Wales", "Llenyddiaeth Cymru"), "books": ("The great books of Wales", "Llyfrau mawr Cymru"),
+             "triads": ("The Welsh Triads", "Trioedd Ynys Prydain"), "symbols": ("Symbols and traditions", "Symbolau a thraddodiadau"), "firsts": ("Welsh world firsts", "Cymru oedd y cyntaf"),
+             "castles": ("The castles of Wales", "Cestyll Cymru"), "family-trees": ("Royal family trees", "Coed teulu brenhinol"), "battles": ("Battles of Wales", "Brwydrau Cymru"),
+             "documents": ("Key documents", "Dogfennau allweddol"), "towns": ("Towns and villages", "Trefi a phentrefi"), "sites": ("Historic sites map", "Map safleoedd hanesyddol"),
+             "maps": ("Maps through time", "Mapiau drwy’r oesoedd"), "welsh": ("Learn Welsh", "Dysgu Cymraeg"), "names": ("Welsh names", "Enwau Cymraeg"), "legends": ("Legends", "Chwedlau")}
+    out += [(k, f"{k}.html", en, cy) for k, (en, cy) in named.items()]
+    out += [(g, "kings.html", "Kings and princes of Wales", "Brenhinoedd a thywysogion Cymru") for g in sorted(set(REF2.KINGS_GROUP.values()))]
+    out.append(("saints-llydaw", "saints-llydaw.html", "Saints of Brittany", "Seintiau Llydaw"))
+    return out
+
+
+def bookshelf_page():
+    import fnmatch
+    lists = {}
+    for k, v in list(REF.REFS.items()) + list(REF2.PAGES.items()):
+        if v:
+            lists[k] = v
+    where = {}   # work -> pages that cite it
+    for key, href, en, cy in _shelf_pages():
+        for it in (lists.get(key) or {}).get("items", []):
+            w = where.setdefault((it[1], it[2]), [])
+            if href not in [h for h, _, _ in w]:
+                w.append((href, en, cy))
+    works, taken = {}, set()
+    for sid, *_ , keys in SHELF:
+        works[sid] = []
+        for key in [k for pat in keys for k in lists if fnmatch.fnmatch(k, pat)]:
+            for it in lists[key]["items"]:
+                wid = (it[1], it[2])
+                if it[0] == "w" or wid in taken:
+                    continue
+                taken.add(wid)
+                works[sid].append(it)
+    online, seen = [], set()
+    for v in lists.values():
+        for it in v["items"]:
+            if it[0] == "w" and it[2] not in seen:
+                seen.add(it[2])
+                online.append(it)
+    missing = [k for v in lists.values() for k in [(it[1], it[2]) for it in v["items"]] if k not in taken and k[1] not in seen]
+    if missing:
+        print("WARNING: bookshelf leaves out", sorted(set(missing))[:5], "- add their list to SHELF in build.py")
+
+    def li(it):
+        _, who, title, det, nen, ncy = it[:6]
+        url = it[6] if len(it) > 6 else ""
+        t = f'<a href="{e(url)}" target="_blank" rel="noopener"><cite>{e(title)}</cite> ↗</a>' if url else f"<cite>{e(title)}</cite>"
+        on = where.get((who, title), [])
+        more = (f'<span class="ref-on">{bi("On this site:", "Ar y wefan hon:")} ' + ", ".join(f'<a href="{h}">{bi(en, cy)}</a>' for h, en, cy in on[:4])
+                + (f' {bi(f"and {len(on) - 4} more", f"a {len(on) - 4} arall")}' if len(on) > 4 else "") + "</span>") if on else ""
+        return f'<li id="{bid(it)}"><span class="ref-w">{e(who)}</span>, {t} <span class="ref-d">({e(det)})</span><span class="ref-n">{bi(nen, ncy)}</span>{more}</li>'
+
+    def bid(it):
+        return "b-" + re.sub(r"[^a-z0-9]+", "-", it[2].lower())[:48].strip("-")
+
+    def group(items):
+        out = ""
+        for kind, en, cy in REF_KINDS:
+            xs = [it for it in items if it[0] == kind]
+            if xs:
+                out += f'<h3>{bi(en, cy)}</h3><ul>{"".join(li(it) for it in xs)}</ul>'
+        return out
+
+    total = sum(len(v) for v in works.values())
+    shelf_items = [it for v in works.values() for it in v]
+    cards = []
+    for a in AU.AUTHORS:
+        mine = [it for it in shelf_items if any(m in it[1] for m in a["match"])]
+        if not mine:
+            print(f"WARNING: author {a['name']} has no books on the shelf")
+            continue
+        nm = f'<a href="{a["link"]}">{e(a["name"])}</a>' if a["link"] else e(a["name"])
+        books = "".join(f'<li><a href="#{bid(it)}"><cite>{e(it[2])}</cite></a></li>' for it in mine)
+        cards.append(f'<article class="author" id="a-{a["id"]}"><h3>{nm}</h3>' + (f'<p class="au-d">{e(a["dates"])}</p>' if a["dates"] else "")
+                     + f'<p>{bi(a["en"], a["cy"])}</p><p class="au-b">{bi("Their books here", "Eu llyfrau yma")}</p><ul>{books}</ul></article>')
+    authors_html = (f'<section class="authors-sec" id="authors" aria-labelledby="h-authors"><h2 id="h-authors">{bi("The authors", "Yr awduron")}</h2>'
+                    f'<p class="refs-i">{bi("The historians, scholars and writers behind the books, and what each gave to the story of Wales.", "Yr haneswyr, yr ysgolheigion a’r awduron y tu ôl i’r llyfrau, a’r hyn a roddodd pob un i stori Cymru.")}</p>'
+                    f'<div class="author-grid">{"".join(cards)}</div></section>')
+    chips = f'<a class="chip" href="#authors">{bi("The authors", "Yr awduron")}</a>' + "".join(f'<a class="chip" href="#{sid}">{bi(en, cy)}</a>' for sid, en, cy, _ in SHELF if works[sid]) + f'<a class="chip" href="#online">{bi("Online", "Ar-lein")}</a>'
+    body = "".join(f'<section class="refs shelf" id="{sid}" aria-labelledby="h-{sid}"><h2 id="h-{sid}">{bi(en, cy)}</h2>{group(works[sid])}</section>' for sid, en, cy, _ in SHELF if works[sid])
+    body += f'<section class="refs shelf" id="online" aria-labelledby="h-online"><h2 id="h-online">{bi("Online", "Ar-lein")}</h2>{group(online)}</section>'
+    intro = bi(f"The writers who told the story of Wales, and every book and old text named in the reading lists across this site, {total} in all, gathered in one place. Under each one you will find the pages that use it. Any library in Wales can find them for you.",
+               f"Yr awduron a adroddodd stori Cymru, a phob llyfr a hen destun a enwir yn y rhestrau darllen ar draws y wefan, {total} i gyd, wedi’u casglu mewn un lle. O dan bob un fe welwch y tudalennau sy’n ei ddefnyddio. Gall unrhyw lyfrgell yng Nghymru eu cael i chi.")
+    main = (hero("tudor", f'<a href="index.html">{SITE}</a>', "book", "Books and authors", "Llyfrau ac awduron", "Books and authors of Welsh history", "Llyfrau ac awduron hanes Cymru",
+                 "The old sources and the historians’ books behind this site, chosen to read next.", "Yr hen ffynonellau a llyfrau’r haneswyr y tu ôl i’r wefan hon, i’w darllen nesaf.", art="book")
+            + section(f'<div class="narrow"><p class="lede">{intro}</p><nav class="chips shelf-chips" aria-label="{bi("Sections", "Adrannau", "span")}">{chips}</nav>{authors_html}<h2 class="shelf-h">{bi("The books", "Y llyfrau")}</h2>{body}</div>', top=True))
+    ld = {"@context": "https://schema.org", "@type": "CollectionPage", "name": "Books and authors of Welsh history", "inLanguage": ["en", "cy"],
+          "hasPart": [{"@type": "Book" if it[0] == "b" else "CreativeWork", "name": it[2], "author": it[1]} for v in works.values() for it in v]}
+    return page("books-and-authors.html", "Books and authors of Welsh history · History of Wales",
+                f"Every book and old source in the reading lists of History of Wales, {total} in all, from John Davies and R. R. Davies to the Mabinogion and the laws of Hywel Dda.", main, era="tudor", ld=ld, track="books-and-authors")
 
 
 def refs_ld(key):
@@ -3242,6 +3361,7 @@ def main():
     pages["mabinogion.html"] = mabinogion_page()
     pages["literature.html"] = literature_page()
     pages["books.html"] = books_page()
+    pages["books-and-authors.html"] = bookshelf_page()
     pages["triads.html"] = triads_page()
     pages["laws.html"] = laws_page()
     for i, x in enumerate(F.LEGENDS):
