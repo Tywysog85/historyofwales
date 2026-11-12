@@ -798,7 +798,7 @@ def _stop(era, date_en, date_cy, href, en, cy, text_en, text_cy, extra=""):
 
 
 def _reads(kind, key):
-    return "".join(f'<a class="src" href="story-{x["id"]}.html">{bi("Long read: " + x["en"], "Erthygl: " + x["cy"])} →</a>' for x in story_links(kind, key))
+    return "".join(f'<a class="src" href="story-{x["id"]}.html">{bi("Long read: " + x["en"], "Erthygl: " + x["cy"])} →</a>' for x in sorted(story_links(kind, key), key=lambda x: len(x.get(kind, [])))[:1])
 
 
 def trail_item(item):
