@@ -635,6 +635,13 @@ Learnt while simplifying the home page.
 - The home page question for each age is `ERA_Q` in `build.py`; the build stops if an age has no question.
 - On phones (640px and under) the nine posters become one list to choose from, with the question shown and the longer blurb hidden.
 
+### A real picture on every page (November 2026)
+- `src/pictures.py` gives every page a photograph or old artwork at the top, in place of the drawn scenes, with a credit line under the title. It also gives the long read, legend and age cards their pictures, and one picture to each step of Wales in 10 minutes.
+- Pictures are only ones already kept on the site with their Commons credit: `g:<id>` from the gallery, `p:<id>` from the person photos, `l:<key>` from the legend photos. Add `@50% 15%` to a ref to move the crop (e.g. to keep a face in frame).
+- To change a page's picture, change its line in `PAGE`. Pages not listed use their place's own gallery picture, or the picture for their age (`ERA`). `build.py` runs `PX.dress()` on every page, so new pages get a picture automatically.
+- The top picture loads at once (`fetchpriority="high"`, 600px copy for phones through `srcset`); card pictures load lazily from the small copy. The build stops if a named picture's file is missing.
+- Commons can't be reached from the cloud. New pictures have to be downloaded on the Mini-PC (Remote Control) and added to the gallery first.
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
