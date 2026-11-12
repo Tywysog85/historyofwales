@@ -9,6 +9,7 @@
 #   "|| Left | Right"       a row of a two-column table (rows next to each other make one table)
 
 STORY = dict(id="iolo", era="industrial", art="gorsedd", mins=12,
+  links=[("story-wilson-blackett.html", "Alan Wilson and Baram Blackett, champions of the Coelbren", "Alan Wilson a Baram Blackett, pleidwyr y Coelbren")],
   people=["iolo-morganwg"], places=["trefflemin"], events=["The first Gorsedd", "The Gorsedd joins the Eisteddfod"],
   en="Iolo Morganwg, the Bard of Liberty", cy="Iolo Morganwg, Bardd Rhyddid",
   sumEn="A stonemason from the Vale of Glamorgan who never went to school, and gave Wales the Gorsedd of the Bards, a library of saved manuscripts, three thousand hymns and a voice against slavery.",

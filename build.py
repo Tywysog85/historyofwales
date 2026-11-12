@@ -730,6 +730,14 @@ def legend_card(x):
             f'<span class="txt"><span class="span">{e(x["place"])}</span><h3>{bi(x["en"], x["cy"])}</h3><p>{bi(x["sumEn"], x["sumCy"])}</p></span></a>')
 
 
+def story_more_links(x):
+    # optional links=[(href, en, cy)] on a long read: buttons at the end of the text. A story- link whose long read
+    # is not built (yet) is left out, so threads can link to each other's pages in any order.
+    ids = {y["id"] for y in F.STORIES}
+    ls = [(h, en, cy) for h, en, cy in x.get("links", []) if not h.startswith("story-") or h[6:-5] in ids]
+    return (f'<p class="l-links">' + " ".join(f'<a class="btn" href="{h}">{bi(en, cy)} →</a>' for h, en, cy in ls) + '</p>') if ls else ""
+
+
 def story_page(x, i):
     nxt = F.STORIES[(i + 1) % len(F.STORIES)]
     others = [y for y in F.STORIES if y["id"] != x["id"]][:3]
@@ -737,6 +745,7 @@ def story_page(x, i):
     meta = f'<p class="byline"><span>{x["mins"]} {bi("minute read", "munud o ddarllen")}</span><a href="era-{x["era"]}.html">{bi(era["en"], era["cy"])}</a><button type="button" class="copy" data-copy="story-{x["id"]}.html">{bi("Copy link", "Copïo’r ddolen")}</button></p>'
     main = (hero(x["era"], f'<a href="index.html">{SITE}</a> / <a href="stories.html">{bi("Long reads", "Erthyglau")}</a>', "book", "Long read", "Erthygl", x["en"], x["cy"], x["sumEn"], x["sumCy"], art=x["art"])
             + f'<section class="article"><div class="wrap narrow">{meta}{prose_bi(x["pEn"], x["pCy"])}' + (f'<p><a class="btn solid" href="firsts.html">★ {bi("Every Welsh world first, with the people behind them", "Pob un o’r pethau a wnaeth Cymru gyntaf, a’r bobl y tu ôl iddynt")} →</a></p>' if x["id"] == "firsts" else "")
+              + story_more_links(x)
               + (f'<p><a class="btn solid" href="laws.html">{bi("Much more on the law: the big page on the Laws of Hywel Dda, with the manuscripts and a quiz", "Llawer mwy am y gyfraith: y dudalen fawr ar Gyfreithiau Hywel Dda, gyda’r llawysgrifau a chwis")} →</a></p>' if x["id"] == "hywel" else "") + '</div></section>'
             + section(f'<div class="s-grid three">{"".join(story_card(y) for y in others)}</div>', "Keep reading", "Daliwch ati i ddarllen")
             + section(f'<div class="pager"><a class="btn" href="stories.html">← {bi("All long reads", "Pob erthygl")}</a><a class="btn solid" href="story-{nxt["id"]}.html">{bi(nxt["en"], nxt["cy"])} →</a></div>'))

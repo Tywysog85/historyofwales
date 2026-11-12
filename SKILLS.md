@@ -496,3 +496,9 @@ Learnt while taking "Celtic" off the site (rule "Britons, not Celts" in `EDITORI
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
 - Small visual tweaks are published one at a time so each can be seen live.
+
+## Buttons at the end of a long read
+
+- A long read (a `STORY` dict, e.g. `src/wilson_blackett.py`) can carry `links=[(href, en, cy), ...]`. `story_more_links()` in `build.py` shows them as buttons after the text, the same way legends use `links`.
+- A link to another long read (`story-….html`) is left out until that long read is built, so two threads can link their new pages to each other and merge in either order.
+- `people=[...]` on a long read puts its card under "The full story" on those people's pages, so listing `"arthur"` links it from Arthur's page with no other change.
