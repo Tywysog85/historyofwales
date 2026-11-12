@@ -550,3 +550,11 @@ Learnt while simplifying the home page.
 - **Numbers that must agree.** The castles figure in the opening comes from `castles_data.json` (`N_CASTLES`), so it always matches the castles map.
 - **What's new is for history.** Notes about how the site works (layout, ordering) don't go in `src/whatsnew.py`; they push real articles off the home page.
 
+## Author lines, "Last updated" dates and the About page (November 2026)
+
+- `src/about.py` holds the author's name (`AUTHOR_EN`, `AUTHOR_CY`), a line about them, the corrections email or form, and the list of corrections made. It also makes `about.html` (#corrections is the "Spotted a mistake?" part).
+- `page()` in `build.py` adds a strip at the foot of every page: written by, first published, last updated, and a "Spotted a mistake? Tell us" link that opens an email with the page's address already filled in. Long reads also get "By ... · Updated ..." at the top (`AB.byline_top()`).
+- The "Last updated" date comes from the same fingerprints as the sitemap (`src/seo.py`): each page's words and pictures are fingerprinted, compared with `seo-lastmod.json` on the live site, and the date only moves when the fingerprint changes. The page is built with `@@LM@@` markers; `main()` works out the sitemap first, then `AB.fill_dates()` puts the real date in before the files are written. The same date goes into the structured data as `dateModified`.
+- The author and date lines sit between `<!--pi-->` and `<!--/pi-->`. `_fingerprint()` leaves those out (and the red New badges), so changing the author line never makes every page look updated.
+- "First published" comes from `src/added.json`. Git history only reaches back to 11 November 2026, so anything already on the site then shares one first time; those pages show no "First published" date rather than a wrong one (`ADDED_BASELINE` in `build.py`).
+- To check the dates locally, build with `SEO_OFFLINE=1` (every page then shows today, because the live fingerprints can't be read).

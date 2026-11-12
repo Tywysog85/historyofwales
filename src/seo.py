@@ -10,13 +10,14 @@ Nothing here needs filling in by hand. Any page made with page() in build.py get
 The home page also says, in structured data, that the site is called
 "History of Wales" (Hanes Cymru), so Google can show that name in results.
 """
-import hashlib, html, json, os, re, urllib.request, datetime
+import hashlib, html, json, os, re, time, urllib.request, datetime
 
 SITE_EN = "History of Wales"
 SITE_CY = "Hanes Cymru"
 SUFFIX = " · History of Wales"
 INDEXNOW_KEY = "0f018dbe52162810deccbb68ce860fd8"   # public by design: the key file sits at the site root
 LASTMOD_FILE = "seo-lastmod.json"                    # page -> [content fingerprint, date it last changed]
+AUTHOR = None   # the author's name (set by build.py from src/about.py); None: articles are credited to the site
 
 
 def _strip(s):
@@ -141,7 +142,13 @@ def first_image(base, main_html):
     return None
 
 
-def page_ld(base, path, title, desc, og_type, ld, main_html, card=None):
+def author_ld(base):
+    if not AUTHOR:
+        return {"@id": base + "#org"}
+    return {"@type": "Person", "@id": base + "#author", "name": AUTHOR, "url": base + "about.html"}
+
+
+def page_ld(base, path, title, desc, og_type, ld, main_html, card=None, published=None):
     """Structured data for one page: its own data, filled out, plus the site and the breadcrumb trail."""
     url = base + path
     title = title_for(path, title)
@@ -155,16 +162,21 @@ def page_ld(base, path, title, desc, og_type, ld, main_html, card=None):
     main.setdefault("description", desc)
     main.setdefault("url", url)
     main.setdefault("inLanguage", ["en-GB", "cy"])
+    main["dateModified"] = "@@LM@@"   # build.py puts in the date the page last really changed (sitemap() below)
+    if published:
+        main.setdefault("datePublished", published)
     img = first_image(base, main_html) or (base + card if card else None)
     if img:
         main.setdefault("image", img)
     if main.get("@type") in ("Article",):
         main.setdefault("mainEntityOfPage", url)
-        main.setdefault("author", {"@id": base + "#org"})
+        main.setdefault("author", author_ld(base))
         main.setdefault("publisher", {"@id": base + "#org"})
         main["isPartOf"] = {"@id": base + "#website"}
-    elif main.get("@type") in ("WebPage", "CollectionPage", "ProfilePage", "Map"):
+    elif main.get("@type") in ("WebPage", "CollectionPage", "ProfilePage", "Map", "AboutPage"):
         main["isPartOf"] = {"@id": base + "#website"}
+        if AUTHOR:
+            main.setdefault("author", author_ld(base))
     else:  # a Person, a Place...: say which page of ours is about them
         main.setdefault("mainEntityOfPage", url)
     if main.get("@type") in ("Article", "WebPage", "CollectionPage", "ProfilePage", "Map"):
@@ -187,6 +199,8 @@ def _fingerprint(doc):
     m = re.search(r"<main\b.*?</main>", doc, re.S) or re.search(r"<body\b.*?</body>", doc, re.S)
     s = m.group(0) if m else doc
     s = re.sub(r"<script\b.*?</script>", "", s, flags=re.S)
+    s = re.sub(r"<!--pi-->.*?<!--/pi-->", "", s, flags=re.S)       # the author and date lines (src/about.py)
+    s = re.sub(r' <span class="new-tag">.*?</span></span>', "", s)  # "New" badges come off by themselves after two weeks
     s = re.sub(r"\?v=[0-9a-f]+", "", s)
     return hashlib.sha1(s.encode("utf-8")).hexdigest()[:16]
 
@@ -195,16 +209,21 @@ def _previous(base):
     """The dates from the live site, so unchanged pages keep their old date."""
     if os.environ.get("SEO_OFFLINE"):
         return {}
-    try:
-        req = urllib.request.Request(base + LASTMOD_FILE, headers={"User-Agent": "historyofwales-build"})
-        with urllib.request.urlopen(req, timeout=6) as r:
-            return json.loads(r.read().decode("utf-8"))
-    except Exception:
-        return {}
+    # Tried three times: if it can't be read, every page would show today as its "Last updated" date.
+    for wait in (0, 5, 15):
+        time.sleep(wait)
+        try:
+            req = urllib.request.Request(base + LASTMOD_FILE, headers={"User-Agent": "historyofwales-build"})
+            with urllib.request.urlopen(req, timeout=10) as r:
+                return json.loads(r.read().decode("utf-8"))
+        except Exception:
+            continue
+    print("Could not read the live " + LASTMOD_FILE + ": every page is dated today")
+    return {}
 
 
 def sitemap(base, pages, skip=("404.html",)):
-    """Returns (sitemap.xml text, lastmod json text)."""
+    """Returns (sitemap.xml text, {page: [fingerprint, date it last changed]})."""
     today = datetime.datetime.utcnow().strftime("%Y-%m-%d")
     prev = _previous(base)
     marks, rows = {}, []
@@ -229,7 +248,7 @@ def sitemap(base, pages, skip=("404.html",)):
         rows.append(f"  <url><loc>{_x(loc)}</loc><lastmod>{when}</lastmod>{img_xml}</url>\n")
     xml = ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
            'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n' + "".join(rows) + "</urlset>\n")
-    return xml, json.dumps(marks, separators=(",", ":"), sort_keys=True)
+    return xml, marks
 
 
 def _x(s):

@@ -46,6 +46,14 @@ Every long read ends with a short list of further reading and references (`src/r
 - Cite only works that really exist, with the right author, title, publisher and year. Never invent one; if a detail can't be checked, leave it out.
 - Give the title as published, even when it uses a word the site avoids (for example "The Atlantic Celts"). The note in our own words follows the site's rules.
 
+## Author, dates and corrections
+
+Ifan asked on 12 November 2026 that readers can see who writes the site and how fresh each page is.
+
+- Every page ends with who wrote it, when it was first published (long reads, legends, people and places added since 11 November 2026) and when it was last updated. Long reads also say "By ..." and "Updated ..." at the top. The name and the way to report a mistake are set at the top of `src/about.py`.
+- "Last updated" is never typed in: it moves on by itself when the words or pictures on a page change.
+- When a reader reports a mistake: check it against the sources, fix it, and if it was more than a typo, add a line to `CORRECTIONS` in `src/about.py` so it is listed on the About page.
+
 ## Before publishing
 
 - New Welsh text should be read by a fluent speaker when one is available.
