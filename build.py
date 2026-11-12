@@ -292,7 +292,7 @@ def feed_xml(otd):
     if today:
         body = "".join(f"<p><b>{xesc(str(r[1]) + ': ' if r[1] is not None else '')}{xesc(r[3])}.</b> {xesc(r[5])}</p>" for r in today)
         stamp = now.strftime("%Y-%m-%dT06:00:00Z")
-        entries.append(("On this day in Welsh history: " + now.strftime("%-d %B"), BASE_URL + "onthisday.html", f"{BASE_URL}onthisday.html#{now.strftime('%Y-%m-%d')}", stamp, body))
+        entries.append(("On this day in Welsh history: " + f"{now.day} {now.strftime('%B')}", BASE_URL + "onthisday.html", f"{BASE_URL}onthisday.html#{now.strftime('%Y-%m-%d')}", stamp, body))
     for d, te, tc, se, sc, link in WN.NEWS:
         entries.append((te, BASE_URL + link, f"{BASE_URL}whatsnew.html#{d}-{link}", d + "T12:00:00Z", f"<p>{xesc(se)}</p>"))
     updated = max(x[3] for x in entries)
