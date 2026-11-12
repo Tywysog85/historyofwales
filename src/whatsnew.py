@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Walk through Llys Rhosyr in 3D", "Cerdded drwy Lys Rhosyr mewn 3D",
+     "Step inside a royal court of the princes of Gwynedd on Ynys Môn as it might have looked in the days of Llywelyn Fawr: the gate, the great hall, the hearth, the prince’s seat, the chamber and the kitchen, with eight stops that tell what happened there, from the Laws of Hywel Dda to the sands that buried it.",
+     "Camwch i mewn i un o lysoedd brenhinol tywysogion Gwynedd ar Ynys Môn fel y gallai fod wedi edrych yn nyddiau Llywelyn Fawr: y porth, y neuadd fawr, yr aelwyd, sedd y tywysog, yr ystafell a’r gegin, gydag wyth arhosfan sy’n adrodd beth ddigwyddodd yno, o Gyfreithiau Hywel Dda i’r tywod a’i claddodd.",
+     "llys-rhosyr.html"),
     ("2026-11-12", "Ride with Glyndŵr, 1400: a story where you choose", "Marchogaeth gyda Glyndŵr, 1400: stori lle rydych chi’n dewis",
      "Answer Owain Glyndŵr’s call as an archer, a bard or a rider, and follow the rising from Glyndyfrdwy in 1400 to 1415: Conwy, Hyddgen, Bryn Glas, Machynlleth and the French march to Worcester. Every scene really happened, and a map traces your road.",
      "Atebwch alwad Owain Glyndŵr fel saethydd, bardd neu farchog, a dilyn y gwrthryfel o Lyndyfrdwy yn 1400 hyd 1415: Conwy, Hyddgen, Bryn Glas, Machynlleth a’r daith gyda’r Ffrancwyr i Gaerwrangon. Digwyddodd pob golygfa go iawn, ac mae map yn dangos eich taith.",

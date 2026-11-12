@@ -20,6 +20,7 @@ import towns as TW  # noqa: E402
 import photos as PH  # noqa: E402
 import eventpages as EP  # noqa: E402
 import welshpages as WP  # noqa: E402
+import llys as LLYS  # noqa: E402  (Llys Rhosyr in 3D: llys-rhosyr.html, src/llys.py, tools/llys3d.src.js -> src/static/llys3d.js)
 import ride as RIDE  # noqa: E402  (Ride with Glyndŵr, 1400: ride-glyndwr.html, src/ride.py, src/static/ride.js)
 import teachpacks as TPK  # noqa: E402  (teacher packs: pack-<age>.html, src/teachpacks.py)  (every page also in Welsh at cy/<page>.html: src/welshpages.py)  (a page for every timeline event: src/eventpages.py)
 import gallery as G  # noqa: E402
@@ -1380,6 +1381,7 @@ def gallery_page():
 
 
 GAMES = [
+ ("llys-rhosyr.html", "llys", "Llys Rhosyr in 3D", "Llys Rhosyr mewn 3D", "Walk through a royal court of the princes of Gwynedd: the great hall, the hearth, the prince’s seat.", "Cerddwch drwy un o lysoedd brenhinol tywysogion Gwynedd: y neuadd fawr, yr aelwyd, sedd y tywysog.", "Explore in 3D", "Crwydro mewn 3D", "medieval"),
  ("ride-glyndwr.html", "ride", "Ride with Glyndŵr, 1400", "Marchogaeth gyda Glyndŵr, 1400", "Answer Owain Glyndŵr’s call as an archer, a bard or a rider, and choose your way through the rising.", "Atebwch alwad Owain Glyndŵr fel saethydd, bardd neu farchog, a dewiswch eich ffordd drwy’r gwrthryfel.", "A story you choose", "Stori rydych chi’n ei dewis", "medieval"),
  ("daily.html", "daily", "Daily challenge", "Her y dydd", "One event, six guesses to find the year. A new one every day, and a streak to keep.", "Un digwyddiad, chwe chynnig i ddyfalu’r flwyddyn. Un newydd bob dydd, a rhediad i’w gadw.", "Every day", "Bob dydd", "medieval"),
  ("quiz.html", "quiz", "The quiz", "Y cwis", "Ten questions drawn from the timeline and the people. Every round is different.", "Deg cwestiwn o’r llinell amser a’r bobl. Mae pob rownd yn wahanol.", "10 questions", "10 cwestiwn", "kings"),
@@ -1420,7 +1422,7 @@ def game_page(path, kind, era, title_en, title_cy, sub_en, sub_cy, art, desc, wi
 
 def play_index():
     main = (hero("medieval", f'<a href="index.html">{SITE}</a>', "book", "Play", "Chwarae", "Test yourself", "Profwch eich hun",
-                 "Eight games drawn from the history on this site. Scores, streaks and badges are kept on your own device.", "Wyth gêm wedi’u seilio ar yr hanes ar y wefan hon. Cedwir sgoriau, rhediadau a bathodynnau ar eich dyfais eich hun.", art="dragons")
+                 "Games and adventures drawn from the history on this site. Scores, streaks and badges are kept on your own device.", "Gemau ac anturiaethau wedi’u seilio ar yr hanes ar y wefan hon. Cedwir sgoriau, rhediadau a bathodynnau ar eich dyfais eich hun.", art="dragons")
             + section(f'<h2 class="sr-only">{bi("All games", "Pob gêm")}</h2><div class="play-grid">{play_cards()}</div>', top=True)
             + section(f'<div class="pager"><a class="btn" href="journey.html">{bi("See your journey and badges", "Gweld eich taith a’ch bathodynnau")} →</a></div>'))
     return page("play.html", "Play · History of Wales", "Games on the history of Wales: a daily year challenge, quiz, map game, Welsh names and more.", main, era="medieval", og_type="website", active="play.html")
@@ -3115,7 +3117,7 @@ CARD_KIND = [("person-", "Person", "Person"), ("event-", "On the timeline", "Ar 
              ("onthisday", "On this day", "Ar y dydd hwn"), ("firsts", "Welsh world firsts", "Y cyntaf"), ("mabinogion", "The Mabinogion", "Y Mabinogion"),
              ("literature", "The literature of Wales", "Llenyddiaeth Cymru"), ("books", "The great books of Wales", "Llyfrau mawr Cymru"), ("triads", "The Welsh Triads", "Trioedd Ynys Prydain")]
 CARD_GALLERY = {"literature": "trea-book-aneirin", "books": "trea-black-book", "triads": "trea-red-book"}
-GAME_PAGES = {"ride-glyndwr.html", "daily.html", "map-game.html", "names.html", "hero.html", "pairs.html", "play.html", "quiz.html"}
+GAME_PAGES = {"llys-rhosyr.html", "ride-glyndwr.html", "daily.html", "map-game.html", "names.html", "hero.html", "pairs.html", "play.html", "quiz.html"}
 
 
 def card_photo(path):
@@ -3205,6 +3207,8 @@ EP.setup(globals())
 style += EP.CSS
 TPK.setup(globals())
 RIDE.setup(globals())
+LLYS.setup(globals())
+style += LLYS.CSS
 style += RIDE.CSS
 style += TPK.CSS
 import about as AB  # noqa: E402  (the About page, the author and "last updated" lines, reporting a mistake)
@@ -3267,6 +3271,7 @@ def main():
     pages["404.html"] = not_found_page()
     pages["whatsnew.html"] = whatsnew_page()
     pages["about.html"] = AB.about_page()
+    pages["llys-rhosyr.html"] = LLYS.page()  # Llys Rhosyr in 3D (src/llys.py)
     pages["ride-glyndwr.html"] = RIDE.page()  # Ride with Glyndŵr, 1400 (src/ride.py)
     pages.update(TPK.pages())  # teacher packs, one for each age (src/teachpacks.py)
     pages.update(EP.pages())  # a page for every event on the timeline (src/eventpages.py)
