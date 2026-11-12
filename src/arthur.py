@@ -10,7 +10,7 @@
 
 PERSON_LONG = (
  [
-  "Welsh tradition holds that Arthur was Athrwys ap Meurig, king of Gwent and Glywysing, the two kingdoms of the south-east between the Tawe and the Wye. His name is written in the charters of the Book of Llandaff, his line is set down in the old royal pedigrees, and every one of the earliest writings about Arthur, in any language, was made in Wales or by Welshmen. Long before he became the most famous king in Europe, Arthur was a king of the Britons, and his people still live in the land he ruled.",
+  "Welsh tradition holds that Arthur was Athrwys ap Meurig, king of Gwent and Glywysing, the two kingdoms of the south-east between the Tawe and the Wye.[[cite:holy-kingdom]] His name is written in the charters of the Book of Llandaff[[cite:llandav-text,llandav-nlw]], his line is set down in the old royal pedigrees, and every one of the earliest writings about Arthur, in any language, was made in Wales or by Welshmen. Long before he became the most famous king in Europe, Arthur was a king of the Britons, and his people still live in the land he ruled.",
   "|| Name in the charters | Athrwys ap Meurig",
   "|| His kingdoms | Gwent and Glywysing, between the Tawe and the Wye",
   "|| Father | Meurig ap Tewdrig, king of Gwent and Glywysing",
@@ -29,7 +29,7 @@ PERSON_LONG = (
   "His son was Morgan Mwynfawr, and Welsh tradition holds that Morgannwg, Glamorgan, takes its name from him. Morgan’s son Ithel and Ithel’s sons reigned after him, and for more than three hundred years the kings of the south-east were the heirs of Arthur’s line.",
 
   "## The king in the charters",
-  "The Book of Llandaff, Liber Landavensis, was written at Llandaff cathedral in the 1120s and 1130s. Into it the clergy copied about 150 charters: records of gifts of land made to the bishops of the south-east by its kings, from the age of the saints to the eleventh century. Each charter names the king who gave the land, the bishop who received it, and the witnesses who stood by, clergy and laymen alike.",
+  "The Book of Llandaff, Liber Landavensis, was written at Llandaff cathedral in the 1120s and 1130s.[[cite:llandav-nlw,llandav-text]] Into it the clergy copied about 150 charters: records of gifts of land made to the bishops of the south-east by its kings, from the age of the saints to the eleventh century. Each charter names the king who gave the land, the bishop who received it, and the witnesses who stood by, clergy and laymen alike.",
   "Here, among the grants of his grandfather Tewdrig and his father Meurig, is Athrwys. The scholars who have studied the charters most closely, from the eighteenth century to the present day, have used them to set out the line of the kings of Gwent and Glywysing generation by generation, and Athrwys stands in the middle of it, son of Meurig and father of Morgan. The book itself survives, and is kept today in the National Library of Wales at Aberystwyth.",
 
   "## Why Wales holds that Athrwys was Arthur",
@@ -92,7 +92,7 @@ PERSON_LONG = (
   "Fifteen centuries on, the king is still ours: a king of the Britons, of Gwent and Glywysing, whose name is on the hills of every part of Wales, and whose people still speak his language.",
  ],
  [
-  "Yn ôl traddodiad Cymru, Athrwys ap Meurig oedd Arthur, brenin Gwent a Glywysing, dwy deyrnas y de-ddwyrain rhwng afon Tawe ac afon Gwy. Mae ei enw wedi’i ysgrifennu yn siarteri Llyfr Llandaf, mae ei linach wedi’i chofnodi yn yr hen achau brenhinol, ac fe luniwyd pob un o’r ysgrifau cynharaf am Arthur, mewn unrhyw iaith, yng Nghymru neu gan Gymry. Ymhell cyn iddo ddod yn frenin enwocaf Ewrop, brenin y Brythoniaid oedd Arthur, ac mae ei bobl yn dal i fyw yn y wlad a reolodd.",
+  "Yn ôl traddodiad Cymru, Athrwys ap Meurig oedd Arthur, brenin Gwent a Glywysing, dwy deyrnas y de-ddwyrain rhwng afon Tawe ac afon Gwy.[[cite:holy-kingdom]] Mae ei enw wedi’i ysgrifennu yn siarteri Llyfr Llandaf[[cite:llandav-text,llandav-nlw]], mae ei linach wedi’i chofnodi yn yr hen achau brenhinol, ac fe luniwyd pob un o’r ysgrifau cynharaf am Arthur, mewn unrhyw iaith, yng Nghymru neu gan Gymry. Ymhell cyn iddo ddod yn frenin enwocaf Ewrop, brenin y Brythoniaid oedd Arthur, ac mae ei bobl yn dal i fyw yn y wlad a reolodd.",
   "|| Ei enw yn y siarteri | Athrwys ap Meurig",
   "|| Ei deyrnasoedd | Gwent a Glywysing, rhwng Tawe a Gwy",
   "|| Tad | Meurig ap Tewdrig, brenin Gwent a Glywysing",
@@ -111,7 +111,7 @@ PERSON_LONG = (
   "Ei fab oedd Morgan Mwynfawr, ac yn ôl traddodiad Cymru, ar ei ôl ef yr enwyd Morgannwg. Teyrnasodd Ithel fab Morgan a meibion Ithel ar ei ôl, ac am fwy na thri chan mlynedd brenhinoedd y de-ddwyrain oedd etifeddion llinach Arthur.",
 
   "## Y brenin yn y siarteri",
-  "Ysgrifennwyd Llyfr Llandaf, Liber Landavensis, yn eglwys gadeiriol Llandaf yn y 1120au a’r 1130au. Copïodd y clerigwyr iddo tua 150 o siarteri: cofnodion o roddion tir a wnaed i esgobion y de-ddwyrain gan ei brenhinoedd, o oes y saint hyd yr unfed ganrif ar ddeg. Mae pob siarter yn enwi’r brenin a roddodd y tir, yr esgob a’i derbyniodd, a’r tystion a safai gerllaw, yn glerigwyr ac yn lleygwyr.",
+  "Ysgrifennwyd Llyfr Llandaf, Liber Landavensis, yn eglwys gadeiriol Llandaf yn y 1120au a’r 1130au.[[cite:llandav-nlw,llandav-text]] Copïodd y clerigwyr iddo tua 150 o siarteri: cofnodion o roddion tir a wnaed i esgobion y de-ddwyrain gan ei brenhinoedd, o oes y saint hyd yr unfed ganrif ar ddeg. Mae pob siarter yn enwi’r brenin a roddodd y tir, yr esgob a’i derbyniodd, a’r tystion a safai gerllaw, yn glerigwyr ac yn lleygwyr.",
   "Yma, ymhlith rhoddion ei daid Tewdrig a’i dad Meurig, y mae Athrwys. Mae’r ysgolheigion a astudiodd y siarteri fanylaf, o’r ddeunawfed ganrif hyd heddiw, wedi’u defnyddio i osod allan linach brenhinoedd Gwent a Glywysing genhedlaeth wrth genhedlaeth, ac mae Athrwys yn sefyll yn ei chanol, yn fab i Feurig ac yn dad i Forgan. Mae’r llyfr ei hun wedi goroesi, ac fe’i cedwir heddiw yn Llyfrgell Genedlaethol Cymru yn Aberystwyth.",
 
   "## Pam y cred Cymru mai Arthur oedd Athrwys",
