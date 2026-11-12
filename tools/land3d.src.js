@@ -218,6 +218,8 @@ try {
   let castle = null, wantCastle = false, W = 0, H = 0, key = "", flagV = -1;
   const cA = new THREE.Color(), cB = new THREE.Color(), v = new THREE.Vector3();
   const img = new Image();
+  /* phones get half-size castle stone pictures (the same look on a small screen). The mountain pictures stay full size: smaller ones visibly soften the snow. */
+  const SM = Math.min(screen.width, screen.height) <= 600 ? "-m" : "";
   let rockT = null;
   img.onload = () => Promise.all(["eryri-c.webp", "eryri-n.webp", "detail.webp", "rock.webp", "rock-n.webp"].map(ld)).then((t) => {
     [t[3], t[4]].forEach((q) => { q.wrapS = q.wrapT = THREE.RepeatWrapping; q.anisotropy = 8; }); t[3].colorSpace = THREE.SRGBColorSpace;
@@ -225,12 +227,12 @@ try {
     camL.position.set(EYE[0], heightAt(h, EYE[0], EYE[1]) + 40, EYE[1]); camL.lookAt(SUMMIT); camL.updateMatrixWorld(true);
     api.ready = true; window.dispatchEvent(new Event("hcl3"));
   }).catch(fail);
-  img.onerror = fail; img.src = "eryri-h.png";
+  img.onerror = fail; img.src = "eryri-h.webp"; /* lossless WebP: heights in red and green, roughness in blue, all must come back exact */
   /* the castle's stone is fetched straight away, and nothing is shown until the castle stands, so the scene arrives whole */
-  let noCastle = false; const stoneP = true ? Promise.all(["stone.webp", "stone-n.webp"].map(ld)) : null; if (stoneP) stoneP.catch(() => {});
+  let noCastle = false; const stoneP = true ? Promise.all(["stone" + SM + ".webp", "stone-n" + SM + ".webp"].map(ld)) : null; if (stoneP) stoneP.catch(() => {});
   function loadCastle(flag) {
     wantCastle = true;
-    (stoneP || Promise.all(["stone.webp", "stone-n.webp"].map(ld))).then((t) => {
+    (stoneP || Promise.all(["stone" + SM + ".webp", "stone-n" + SM + ".webp"].map(ld))).then((t) => {
       castle = buildCastle({ stone: t[0], stoneN: t[1], rock: rockT.rock, rockN: rockT.rockN, flag }); castle.group.rotation.y = 0.42; fort.add(castle.group);
       castle.base = castle.lights.map((l) => l.intensity); renderer.shadowMap.needsUpdate = true; key = "";
     }).catch(() => { noCastle = true; });

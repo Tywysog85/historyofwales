@@ -2,7 +2,7 @@
 
     python3 -I tools/bake_eryri.py <dir with h.npy> <out dir> [height scale, 1.3]
 
-Writes eryri-h.png (heights), eryri-c.webp (colour, with the moon's shadows and
+Writes eryri-h.webp (heights, lossless), eryri-c.webp (colour, with the moon's shadows and
 the shade of hollows baked in) and eryri-n.webp (fine relief for the light).
 
 What makes it read as a real mountain rather than a smooth model:
@@ -114,5 +114,5 @@ rough = np.where(water, 0.12, 0.96 - 0.3 * sn)
 hm = resize(blur(det, 2.0), M, Image.BILINEAR)
 v = np.clip(hm * 56, 0, 65535).astype(np.uint16); rgb = np.zeros((M, M, 3), np.uint8); rgb[:, :, 0] = v >> 8; rgb[:, :, 1] = v & 255
 rgb[:, :, 2] = np.asarray(Image.fromarray((rough * 255).astype(np.uint8)).resize((M, M), Image.BILINEAR))
-Image.fromarray(rgb).save(out + '/eryri-h.png', optimize=True)
+Image.fromarray(rgb).save(out + '/eryri-h.webp', lossless=True, quality=100, method=6)  # lossless, so the heights come back exact
 print('max', det.max(), 'water px', water.sum(), 'lit', lit.mean(), 'snow', sn.mean())

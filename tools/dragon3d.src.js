@@ -2,6 +2,7 @@
    above the painted sky. src/app.js decides where the dragon is each frame and calls HCD3.frame(). */
 import { WebGLRenderer, Scene, OrthographicCamera, HemisphereLight, DirectionalLight, PointLight, AnimationMixer, Vector3, Group, Box3, SRGBColorSpace, ACESFilmicToneMapping, Color, Mesh, MeshBasicMaterial, PlaneGeometry, CanvasTexture, AdditiveBlending } from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js"; /* dragon.glb is squeezed with meshopt (see SKILLS.md) */
 
 const api = (window.HCD3 = window.HCD3 || {});
 const canvas = document.getElementById("sky3d");
@@ -18,7 +19,7 @@ try {
   fMesh.visible = false; fMesh.renderOrder = 10; scene.add(fMesh);
   let mixer = null, dur = 1, head = null, snout = null, neck = null, span = 1, W = 0, H = 0;
   const v1 = new Vector3(), v2 = new Vector3();
-  new GLTFLoader().load("dragon.glb", (g) => {
+  new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).load("dragon.glb", (g) => {
     const m = g.scene; mixer = new AnimationMixer(m); const clip = g.animations[0]; dur = clip.duration; mixer.clipAction(clip).play();
     m.traverse((o) => { o.frustumCulled = false; if (o.isMesh) { o.material.color = new Color(1.7, 0.95, 0.9); o.material.emissive = new Color(0x2a0503); o.material.roughness = Math.min(o.material.roughness, 0.75); } if (o.isBone && /^head/.test(o.name)) head = o; if (o.isBone && /^jaw_02/.test(o.name)) snout = o; if (o.isBone && /^neck_09/.test(o.name)) neck = o; });
     /* centre the model on its chest and measure it, so that app.js can size it in pixels */
