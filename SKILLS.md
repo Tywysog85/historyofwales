@@ -618,6 +618,13 @@ Learnt while simplifying the home page.
 - People known only from the tales take the date "Age of Arthur": `data.py` sorts them just after Arthur, and `date_cy()` shows "Oes Arthur" on the Welsh side.
 - Their reference list is `PAGES["arthur-circle"]` in `src/refs2.py`. Saints who gain a person page get `link=P("slug")` in `src/saints.py`, so the saints pages link to them.
 
+### Helping a first-time visitor choose where to begin (November 2026)
+- The three "Where to begin" cards sit in the home hero in `src/head.html` (`<nav class="begin">`), styled in `src/v6.css` under "where to begin". The hero's moving scene measures `.begin` (in `src/app.js`, `measure()`) to keep the mountain and stars clear of the words, so keep that class name if the cards change.
+- Section order on the home page is simply the order in `src/body.html`: the nine ages (`#chapters`) first, then `#today`.
+- Age names always travel with their dates: `spanEn`/`spanCy` from `src/ages9.py`/`data.py`. In Python use a `<span class="m-dates">` (Menu, footer, pager) or `c-dates` (chips); in `app.js` the shared `chips()` filter adds them on the timeline, map and people pages.
+- The home page question for each age is `ERA_Q` in `build.py`; the build stops if an age has no question.
+- On phones (640px and under) the nine posters become one list to choose from, with the question shown and the longer blurb hidden.
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
