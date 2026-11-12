@@ -19,7 +19,8 @@ import long as L  # noqa: E402
 import towns as TW  # noqa: E402
 import photos as PH  # noqa: E402
 import eventpages as EP  # noqa: E402
-import welshpages as WP  # noqa: E402  (every page also in Welsh at cy/<page>.html: src/welshpages.py)  (a page for every timeline event: src/eventpages.py)
+import welshpages as WP  # noqa: E402
+import teachpacks as TPK  # noqa: E402  (teacher packs: pack-<age>.html, src/teachpacks.py)  (every page also in Welsh at cy/<page>.html: src/welshpages.py)  (a page for every timeline event: src/eventpages.py)
 import gallery as G  # noqa: E402
 import gallery_photos as GP  # noqa: E402
 import ages as AG  # noqa: E402
@@ -226,7 +227,7 @@ PRINT_CSS = """
 @media print {
   :root { --night: #fff; --slate: #fff; --slate-2: #f2f2f2; --ink: #111; --muted: #444; --line: #bbb; color-scheme: light }
   body { background: #fff; color: #111; font-size: 11pt }
-  .nav, footer, .no-print, .pager, .era-hero svg.ill { display: none !important }
+  .nav, footer, .no-print, .pager, .era-hero svg.ill, .toast { display: none !important }
   section { padding-block: 12pt !important; break-inside: avoid-page }
   .sheet-print { break-before: page }
   a { color: #111; text-decoration: none }
@@ -673,8 +674,9 @@ def teachers_page():
                 "Rhennir y testun dan drwydded Creative Commons BY-NC 4.0, felly gallwch ei gopïo, ei argraffu a’i addasu ar gyfer gwersi a thaflenni gwaith, cyn belled â’ch bod yn cydnabod Hanes Cymru ac yn rhoi dolen i’r dudalen. Mae gan y ffotograffau eu trwyddedau eu hunain, a ddangosir gyda phob un.",
                 "Mae’r syniadau isod yn addas ar gyfer Maes Dysgu a Phrofiad y Dyniaethau yng Nghwricwlwm i Gymru, gyda’i bwyslais ar gynefin, ymholi a straeon amrywiol Cymru. Addaswch nhw fel y mynnwch."]
     main = (hero("industrial", f'<a href="index.html">{SITE}</a>', "book", "For teachers", "I athrawon", "History of Wales in the classroom", "Hanes Cymru yn y dosbarth",
-                 "Lesson ideas, enquiry questions and printable quiz sheets for each age.", "Syniadau gwersi, cwestiynau ymholi a thaflenni cwis i’w hargraffu ar gyfer pob oes.", art="book")
+                 "Nine free teacher packs for the Curriculum for Wales, lesson ideas, enquiry questions and printable quiz sheets for each age.", "Naw pecyn athrawon am ddim ar gyfer y Cwricwlwm i Gymru, syniadau gwersi, cwestiynau ymholi a thaflenni cwis i’w hargraffu ar gyfer pob oes.", art="book")
             + section(paras(intro_en, intro_cy), top=True)
+            + section(TPK.packs_grid(), "Teacher packs, one for each age", "Pecynnau athrawon, un ar gyfer pob oes")
             + section(f'<div class="lessons">{blocks}</div>', "Lesson ideas", "Syniadau gwersi")
             + section(f'<p class="no-print"><button type="button" class="btn solid" data-print="1">{bi("Print the quiz sheets", "Argraffu’r taflenni cwis")}</button> '
                       f'<span class="muted">{bi("Prints in whichever language is selected. Answers are hidden until opened.", "Yn argraffu yn yr iaith a ddewiswyd. Mae’r atebion yn gudd nes eu hagor.")}</span></p>{sheets}', "Printable quiz sheets", "Taflenni cwis i’w hargraffu")
@@ -3199,6 +3201,8 @@ import refpages as RP  # noqa: E402  (the reference pages: reference.html, a-z.h
 RP.setup(globals())
 EP.setup(globals())
 style += EP.CSS
+TPK.setup(globals())
+style += TPK.CSS
 import about as AB  # noqa: E402  (the About page, the author and "last updated" lines, reporting a mistake)
 AB.setup(globals())
 SEO.AUTHOR = AB.author()[0] if AB.AUTHOR_EN else None
@@ -3259,6 +3263,7 @@ def main():
     pages["404.html"] = not_found_page()
     pages["whatsnew.html"] = whatsnew_page()
     pages["about.html"] = AB.about_page()
+    pages.update(TPK.pages())  # teacher packs, one for each age (src/teachpacks.py)
     pages.update(EP.pages())  # a page for every event on the timeline (src/eventpages.py)
     pages.update(RP.pages(pages.keys()))  # the reference pages: look-it-up desk, A–Z and the rest (src/refpages.py)
     if RP.MISSING:
