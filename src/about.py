@@ -15,14 +15,17 @@ import urllib.parse
 
 # ---------- settings ----------
 # The name shown as the author on every page, in English and in Welsh ("By Ifan" / "Gan Ifan").
-AUTHOR_EN = ""          # waiting for Ifan's answer; while empty the byline says "History of Wales"
-AUTHOR_CY = ""
+AUTHOR_EN = "Ifan"   # Ifan's choice (12 November 2026); while empty the byline says "History of Wales"
+AUTHOR_CY = "Ifan"
 # A line or two about the author for the About page (English, Welsh). Leave empty for none.
 BIO_EN = ""
 BIO_CY = ""
+# How the site is researched (Ifan's words, 12 November 2026), shown under "Who writes it".
+METHOD_EN = "It is researched with the help of AI and checked against real sources: the chronicles, the Dictionary of Welsh Biography, Cadw, Coflein and the published histories of Wales."
+METHOD_CY = "Caiff ei hymchwilio gyda chymorth deallusrwydd artiffisial (AI) a’i gwirio yn erbyn ffynonellau go iawn: y cronicl, y Bywgraffiadur Cymreig, Cadw, Coflein a’r llyfrau hanes a gyhoeddwyd am Gymru."
 # How people report a mistake. Set ONE of these:
 CORRECTIONS_EMAIL = ""  # e.g. "corrections@historyofwales.cymru" (a free forwarding address to your own inbox)
-CORRECTIONS_FORM = ""   # or the link to an online form
+CORRECTIONS_FORM = ""   # or the link to an online form (Ifan chose a form, 12 November 2026: waiting for its link)
 # Corrections worth telling readers about, newest first: ("YYYY-MM-DD", page, what changed EN, what changed CY)
 CORRECTIONS = []
 
@@ -117,8 +120,8 @@ def page_info(path, title, first=None):
     if first:
         pub = sep + bi("First published", "Cyhoeddwyd gyntaf") + f' <time datetime="{first}">{bi(g["_news_date"](first), g["_news_date"](first, True))}</time>'
     upd = sep + bi("Last updated", "Diweddarwyd ddiwethaf") + f' <time datetime="{LM_ISO}">{bi(LM_EN, LM_CY)}</time>'
-    links = (f'<a href="{e(report_href(path, t))}" rel="nofollow">{bi("Spotted a mistake? Tell us", "Wedi gweld camgymeriad? Rhowch wybod")}</a>'
-             f'<a href="about.html">{bi("About this site", "Am y wefan hon")}</a>')
+    links = ((f'<a href="{e(report_href(path, t))}" rel="nofollow">{bi("Spotted a mistake? Tell us", "Wedi gweld camgymeriad? Rhowch wybod")}</a>' if has_contact() else "")
+             + f'<a href="about.html">{bi("About this site", "Am y wefan hon")}</a>')
     if path == "about.html":
         links = ""
     return (f'{OPEN}<section class="pinfo"><div class="wrap"><p class="pi-who">{who}{pub}{upd}</p>'
@@ -153,6 +156,9 @@ def about_page():
     if BIO_EN:
         who_en.append(BIO_EN)
         who_cy.append(BIO_CY or BIO_EN)
+    if METHOD_EN:
+        who_en.append(METHOD_EN)
+        who_cy.append(METHOD_CY or METHOD_EN)
     who = g["paras"](who_en, who_cy, "ab-text")
 
     how = [("Every page is built on published sources: the Welsh chronicles (Brut y Tywysogion and the Welsh Annals), the Dictionary of Welsh Biography, Coflein and Cadw for places and monuments, and the standard histories of Wales. Many pages end with <em>Read further</em> links to these, so you can check for yourself.",
@@ -176,7 +182,7 @@ def about_page():
         tell_cy = "Llenwch y ffurflen fer. Mae dolen <em>Wedi gweld camgymeriad?</em> ar waelod pob tudalen hefyd sy’n mynd â chi ati."
         btn = f'<a class="btn solid" href="{e(CORRECTIONS_FORM)}" target="_blank" rel="noopener">{bi("Report a mistake", "Rhoi gwybod am gamgymeriad")}</a>'
     else:
-        tell_en, tell_cy, btn = "A way to report mistakes is being set up.", "Mae ffordd o roi gwybod am gamgymeriadau yn cael ei threfnu.", ""
+        tell_en, tell_cy, btn = "A short form for reporting mistakes will be here very soon.", "Bydd ffurflen fer i roi gwybod am gamgymeriadau yma cyn bo hir.", ""
     fix = (f'<div class="ab-text"><p>{bi("We want every page to be right. If you find a mistake, a wrong date, a misspelt Welsh name or a link that no longer works, please tell us.", "Rydym am i bob tudalen fod yn gywir. Os dewch o hyd i gamgymeriad, dyddiad anghywir, enw Cymraeg wedi’i gamsillafu neu ddolen nad yw’n gweithio mwyach, rhowch wybod i ni.")}</p></div>'
            f'<div class="fix-box"><p><b>{bi("How to tell us", "Sut i roi gwybod")}</b></p><p>{rbi(tell_en, tell_cy)}</p>'
            f'<p style="margin-top:.8rem">{bi("It helps if you can tell us:", "Mae’n help os gallwch ddweud wrthym:")}</p><ol>'
