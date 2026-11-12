@@ -1,4 +1,4 @@
-name: Find Dictionary of Welsh Biography and Coflein links
+name: Find sources (Dictionary of Welsh Biography, Coflein, Cadw, Oxford DNB and more)
 
 # Asks Wikidata for each person's Dictionary of Welsh Biography entry, each place's Coflein record and the Welsh Wikipedia
 # articles, and commits src/source_links.json (tools/fetch_sources.py). Start it from the Actions tab; it also runs when
@@ -28,6 +28,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add src/source_links.json
-          git diff --cached --quiet || git commit -m "Dictionary of Welsh Biography and Coflein links (tools/fetch_sources.py)"
+          git diff --cached --quiet || git commit -m "Source links from Wikidata, each checked to open (tools/fetch_sources.py)"
           git pull --rebase origin "${GITHUB_REF_NAME}"
           git push

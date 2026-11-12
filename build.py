@@ -200,21 +200,36 @@ def _two(href_en, href_cy, en, cy):
             f'<a class="l-cy" lang="cy" href="{e(href_cy)}" target="_blank" rel="noopener">{e(cy)} ↗</a>')
 
 
+# The sources tools/fetch_sources.py finds for a person, place or event, in the order they are shown (Wikipedia comes last).
+# key: (English name, Welsh name, how to make the Welsh-language address, or None to use the same one)
+SOURCES = {
+    "dwb": ("Dictionary of Welsh Biography", "Y Bywgraffiadur Cymreig", lambda u: u.replace("://biography.wales/", "://bywgraffiadur.cymru/")),
+    "odnb": ("Oxford Dictionary of National Biography", "Oxford Dictionary of National Biography (Saesneg)", None),
+    "histparl": ("The History of Parliament", "The History of Parliament (Saesneg)", None),
+    "ukparl": ("UK Parliament", "Senedd y DU (Saesneg)", None),
+    "coflein": ("Coflein: the national record of this site", "Coflein: cofnod cenedlaethol y safle hwn", None),
+    "cadwm": ("Cadw: scheduled monument record", "Cadw: cofnod yr heneb gofrestredig", None),
+    "cadwb": ("Cadw: listed building record", "Cadw: cofnod yr adeilad rhestredig", None),
+    "artuk": ("Art UK: their paintings", "Art UK: eu paentiadau (Saesneg)", None),
+    "olympedia": ("Olympedia", "Olympedia (Saesneg)", None),
+    "athletics": ("World Athletics", "World Athletics (Saesneg)", None),
+    "britannica": ("Encyclopaedia Britannica", "Encyclopaedia Britannica (Saesneg)", None),
+}
+
+
 def further(key, wiki):
     rec = SOURCE_LINKS.get(key, {})
     links = []
-    if rec.get("dwb"):
-        u = rec["dwb"]
-        links.append(_two(u, u.replace("://biography.wales/", "://bywgraffiadur.cymru/"), "Dictionary of Welsh Biography", "Y Bywgraffiadur Cymreig"))
-    if rec.get("coflein"):
-        u = rec["coflein"]
-        links.append(_two(u, u, "Coflein: the national record of this site", "Coflein: cofnod cenedlaethol y safle hwn"))
+    for k, (en, cy, to_cy) in SOURCES.items():
+        if rec.get(k):
+            u = rec[k]
+            links.append(_two(u, to_cy(u) if to_cy else u, en, cy))
     if wiki:
         cyw = f'https://cy.wikipedia.org/wiki/{_q(rec["cy"].replace(" ", "_"), safe="")}' if rec.get("cy") else WIKI + wiki
         links.append(_two(WIKI + wiki, cyw, "Wikipedia", "Wicipedia" if rec.get("cy") else "Wikipedia (Saesneg)"))
     if not links:
         return ""
-    return f'<div class="further no-print"><p class="eyebrow">{bi("Read further", "Darllen ymhellach")}</p><p>{"".join(links)}</p></div>'
+    return f'<div class="further no-print"><p class="eyebrow">{bi("Sources and further reading", "Ffynonellau a darllen pellach")}</p><p>{"".join(links)}</p></div>'
 
 
 # ---------- shared head tags ----------
