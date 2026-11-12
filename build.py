@@ -52,9 +52,9 @@ import added as AD  # noqa: E402  (when each item was added: newest first, "Just
 import refs as REF  # noqa: E402  (further reading and references for every long read)
 import refs2 as REF2  # noqa: E402  (the same for every other content page)
 import christianity as _CHR  # noqa: E402
-REF.REFS.update(_CHR.REFS)
+REF.REFS.update(_CHR.REFS)  # reading lists for the four long reads on the coming of Christianity
 import patrick as _PTR  # noqa: E402
-REF.REFS.update(_PTR.REFS)  # reading list for the Saint Patrick long read  # reading lists for the four long reads on the coming of Christianity
+REF.REFS.update(_PTR.REFS)  # reading list for the Saint Patrick long read
 import authors as AU  # noqa: E402  (the authors on the Books and authors page)
 import ylolfa as YLF  # noqa: E402  (Y Lolfa books: the "Y Lolfa" section of the Books and authors page)
 F.STORIES = AD.newest("story", F.STORIES)  # long reads: the newest first everywhere (index, home page, "Keep reading")
@@ -225,7 +225,7 @@ def head_tags(title, desc, path, og_type="website", image=None):
     return t
 
 
-TAIL_JS = ('<script src="site.js?v=5" defer></script>\n<script src="search.js?v=2" defer></script>\n<script>if("serviceWorker" in navigator&&location.protocol==="https:"){addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>\n'
+TAIL_JS = ('<script src="site.js?v=6" defer></script>\n<script src="search.js?v=2" defer></script>\n<script>if("serviceWorker" in navigator&&location.protocol==="https:"){addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>\n'
            + (f'<script data-goatcounter="https://{GOATCOUNTER}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>\n' if GOATCOUNTER else ""))
 
 LANG_BOOT = '<script>(function(){var h=document.documentElement;h.classList.add("js");setTimeout(function(){if(!window.__site)h.classList.add("rv-all")},2500);try{if(localStorage.getItem("hc-lang")==="cy"){h.classList.add("cy");h.lang="cy"}}catch(e){}})()</script>'
@@ -286,12 +286,22 @@ MONTHS_CY = ["Ionawr", "Chwefror", "Mawrth", "Ebrill", "Mai", "Mehefin", "Gorffe
 
 
 def follow_box(where):
-    """The weekly email sign-up when a Brevo form is set; otherwise the ways to follow that need no account."""
+    """The weekly email sign-up when a Brevo form is set; otherwise the ways to follow that need no account.
+
+    The sign-up happens right here on the page: site.js sends the form to Brevo in the background and shows the thank-you
+    in its place, so nobody is taken to Brevo's own page. Without JavaScript the form still posts to Brevo the plain way.
+    email_address_check is Brevo's trap for robots (people never see it, so it stays empty)."""
     if EMAIL_FORM:
         return (f'<div class="follow follow-{where}"><p class="f-h">{bi("This week in Welsh history", "Yr wythnos hon yn hanes Cymru")}</p>'
                 f'<p class="f-sub">{bi("One short email every Monday: the anniversaries of the week ahead and anything new on the site. Free, and you can leave at any time.", "Un e-bost byr bob dydd Llun: pen-blwyddi’r wythnos i ddod ac unrhyw beth newydd ar y wefan. Am ddim, a gallwch adael unrhyw bryd.")}</p>'
-                f'<div class="f-row"><a class="btn solid" href="{e(EMAIL_FORM)}" target="_blank" rel="noopener">{bi("Sign up for the weekly email", "Ymuno â’r e-bost wythnosol")}</a>'
-                f'<a class="btn" href="whatsnew.html">{bi("What’s new", "Beth sy’n newydd")}</a></div></div>')
+                f'<form class="f-form" action="{e(EMAIL_FORM)}" method="post" data-signup>'
+                f'<div class="f-row"><label class="f-field"><span class="vh">{bi("Your email address", "Eich cyfeiriad e-bost")}</span>'
+                f'<input type="email" name="EMAIL" required autocomplete="email" inputmode="email" placeholder="you@example.com"></label>'
+                f'<input class="f-trap" type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true">'
+                f'<input type="hidden" name="locale" value="en">'
+                f'<button class="btn solid" type="submit">{bi("Sign up", "Ymuno")}</button></div>'
+                f'<p class="f-msg" role="status" aria-live="polite"></p></form>'
+                f'<a class="f-more" href="whatsnew.html">{bi("See what’s new on the site", "Gweld beth sy’n newydd ar y wefan")} →</a></div>')
     return (f'<div class="follow follow-{where}"><p class="f-h">{bi("Keep up with the site", "Dilynwch y wefan")}</p>'
             f'<p class="f-sub">{bi("New history is added every week. See what has arrived, or follow the news feed in any feed reader.", "Mae hanes newydd yn cael ei ychwanegu bob wythnos. Gwelwch beth sydd wedi cyrraedd, neu dilynwch y ffrwd newyddion mewn unrhyw ddarllenydd ffrydiau.")}</p>'
             f'<div class="f-row"><a class="btn solid" href="whatsnew.html">{bi("What’s new", "Beth sy’n newydd")}</a><a class="btn" href="feed.xml">{bi("News feed", "Ffrwd newyddion")}</a></div></div>')
@@ -948,7 +958,7 @@ SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes
     ("kings", "Kings, kingdoms and the Old North", "Brenhinoedd, teyrnasoedd a’r Hen Ogledd", ["era-saints", "era-kings", "kings", "kings-*", "family-trees", "arthur", "arthur-circle", "wilson-blackett", "unconquered"]),
     ("law", "The laws of Hywel Dda", "Cyfreithiau Hywel Dda", ["laws", "hywel", "topic-law"]),
     ("saints", "Saints, learning and faith", "Seintiau, dysg a ffydd", ["christianity", "joseph", "lucius", "patrick", "saints", "saints-*", "learning", "brittany", "topic-faith"]),
-    ("princes", "Princes, castles and Owain Glyndŵr", "Tywysogion, cestyll ac Owain Glyndŵr", ["era-medieval", "castles", "glyndwr", "longbow", "battles", "documents", "topic-war"]),
+    ("princes", "Princes, castles and Owain Glyndŵr", "Tywysogion, cestyll ac Owain Glyndŵr", ["era-medieval", "castles", "glyndwr", "longbow", "battles", "documents", "topic-war", "nest", "rhys"]),
     ("lit", "Poets, old books and legends", "Beirdd, hen lyfrau a chwedlau", ["literature", "books", "triads", "mabinogion", "legends", "legend-*", "bran", "symbols", "iolo", "topic-music", "trail-song"]),
     ("tudor", "From the Tudors to the Methodists", "O’r Tuduriaid i’r Methodistiaid", ["era-tudor"]),
     ("industry", "Iron, coal, slate and the sea", "Haearn, glo, llechi a’r môr", ["era-industrial", "coal", "aberfan", "protest", "topic-industry", "trail-coal", "trail-sea", "firsts", "topic-science"]),
@@ -2908,13 +2918,22 @@ def ssr_chart():
 
 
 def ssr_books():
-    return "".join(f"<li><b>{e(r['t'])}</b><span>{bi(r['n'], r['nCy'])}</span></li>" for r in D.READING)
+    def title(r):
+        return f'<a href="{e(r["u"])}" target="_blank" rel="noopener"><b>{e(r["t"])}</b></a>' if r.get("u") else f"<b>{e(r['t'])}</b>"
+    return "".join(f"<li>{title(r)}<span>{bi(r['n'], r['nCy'])}</span></li>" for r in D.READING)
 
 
 def ssr_online():
     def short(u):
         return re.sub(r"/$", "", re.sub(r"^https://(www[.])?", "", u))
-    return "".join(f'<li><a href="{e(r["u"])}" target="_blank" rel="noopener"><b>{bi(r["t"], r.get("tCy", r["t"]))}</b></a><span>{e(short(r["u"]))}</span></li>' for r in D.ONLINE)
+    def li(r):
+        cy = r.get("uCy") or r["u"]
+        if cy == r["u"]:
+            return f'<li><a href="{e(r["u"])}" target="_blank" rel="noopener"><b>{bi(r["t"], r.get("tCy", r["t"]))}</b></a><span>{e(short(r["u"]))}</span></li>'
+        return (f'<li><a class="l-en" lang="en" href="{e(r["u"])}" target="_blank" rel="noopener"><b>{e(r["t"])}</b></a>'
+                f'<a class="l-cy" lang="cy" href="{e(cy)}" target="_blank" rel="noopener"><b>{e(r.get("tCy", r["t"]))}</b></a>'
+                f'<span>{bi(short(r["u"]), short(cy))}</span></li>')
+    return "".join(li(r) for r in D.ONLINE)
 
 
 def ssr_words():

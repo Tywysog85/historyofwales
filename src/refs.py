@@ -508,6 +508,34 @@ REFS = {
          "Achos Gwynfor mai pan adawodd Macsen yn 383 y ganed cenedl y Cymry."),
         CHARLES_EDWARDS, LAND_OF_MY_FATHERS]),
 
+    "nest": dict(dwb=["gerallt-gymro", "yr-arglwydd-rhys"], items=[
+        BRUT_Y_TYWYSOGYON,
+        GERALD,
+        (P, "Gerald of Wales", "Expugnatio Hibernica: The Conquest of Ireland", "edited and translated by A. B. Scott and F. X. Martin, Royal Irish Academy, 1978",
+         "Gerald’s own history of how Nest’s sons and grandsons crossed to Ireland.",
+         "Hanes Gerallt ei hun am sut y croesodd meibion ac wyrion Nest i Iwerddon."),
+        (B, "Kari Maund", "Princess Nest of Wales: Seductress of the English", "Tempus, 2007",
+         "The full life of Nest, from the fall of her father to her children in Ireland.",
+         "Bywyd llawn Nest, o gwymp ei thad hyd ei phlant yn Iwerddon."),
+        (B, "Susan M. Johns", "Gender, Nation and Conquest in the High Middle Ages: Nest of Deheubarth", "Manchester University Press, 2013",
+         "Nest in the chronicles and in Gerald, and how her story has been told since.",
+         "Nest yn y croniclau ac yng Ngerallt, a sut yr adroddwyd ei stori byth ers hynny."),
+        R_R_DAVIES_AGE, JOHN_DAVIES]),
+
+    "rhys": dict(dwb=["yr-arglwydd-rhys", "gerallt-gymro"], items=[
+        BRUT_Y_TYWYSOGYON,
+        GERALD,
+        (B, "Roger Turvey", "The Lord Rhys: Prince of Deheubarth", "Gomer, 1997",
+         "The life of Rhys ap Gruffudd, from the fall of his mother to his tomb at St Davids.",
+         "Bywyd Rhys ap Gruffudd, o gwymp ei fam hyd ei fedd yn Nhyddewi."),
+        (B, "Nerys Ann Jones and Huw Pryce (eds)", "Yr Arglwydd Rhys", "Gwasg Prifysgol Cymru, 1996",
+         "Essays in Welsh on the prince, his poets, his abbeys and his castles, eight hundred years after his death.",
+         "Ysgrifau ar y tywysog, ei feirdd, ei abatai a’i gestyll, wyth can mlynedd wedi ei farw."),
+        (B, "J. E. Lloyd", "A History of Wales from the Earliest Times to the Edwardian Conquest", "Longmans, two volumes, 1911",
+         "The classic telling of the princes of Deheubarth and Gwynedd.",
+         "Yr hanes clasurol am dywysogion Deheubarth a Gwynedd."),
+        R_R_DAVIES_AGE]),
+
     "wales-in-10": dict(dwb=[], items=[
         JOHN_DAVIES, LAND_OF_MY_FATHERS,
         (B, "Gwyn A. Williams", "When Was Wales? A History of the Welsh", "Penguin, 1985",

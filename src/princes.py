@@ -402,6 +402,8 @@ GROUPS = [
    "dafydd-ap-gruffudd", "gwenllian-ferch-llywelyn", "madog-ap-llywelyn", "owain-lawgoch"]),
  ("The princes of Deheubarth", "Tywysogion Deheubarth",
   ["rhys-ap-tewdwr", "nest", "gruffudd-ap-rhys", "gwenllian", "yr-arglwydd-rhys", "rhys-gryg"]),
+ ("The kings of Morgannwg and Gwent", "Brenhinoedd Morgannwg a Gwent",
+  ["morgan-hen", "iestyn-ap-gwrgant"]),
  ("The kings and princes of Powys", "Brenhinoedd a thywysogion Powys",
   ["elisedd", "cyngen", "bleddyn-ap-cynfyn", "madog-ap-maredudd", "owain-cyfeiliog", "gwenwynwyn", "madog-ap-gruffudd-maelor"]),
 ]
