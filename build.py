@@ -812,7 +812,7 @@ def prose_bi(en, cy, cls="prose"):
 
 
 def story_card(x, lead=False):
-    return (f'<a class="s-card rv{" lead" if lead else ""}" href="story-{x["id"]}.html" data-era="{x["era"]}"><span class="art">{PX.card_img(f"story-{x['id']}.html") or A.scene(x["art"], COL[x["era"]])}</span>'
+    return (f'<a class="s-card rv{" lead" if lead else ""}" href="story-{x["id"]}.html" data-era="{x["era"]}"><span class="art">{PX.card_img(f"story-{x['id']}.html", x["era"]) or A.scene(x["art"], COL[x["era"]])}</span>'
             f'<span class="txt"><span class="span">{bi("Long read", "Erthygl")} · {x["mins"]} {bi("min", "mun")}{new_tag("story", x["id"])}</span><h3>{bi(x["en"], x["cy"])}</h3><p>{bi(x["sumEn"], x["sumCy"])}</p>'
             f'<span class="go">{bi("Read", "Darllen")} →</span></span></a>')
 
@@ -837,7 +837,7 @@ def just_added(kind, items, href, title, key=lambda x: x["id"], n=4, h_en="Just 
 
 
 def legend_card(x):
-    return (f'<a class="l-card rv" href="legend-{x["id"]}.html" data-era="{x["era"]}"><span class="art">{A.photo_scene(x["art"], small=True) or PX.card_img(f"legend-{x['id']}.html") or A.scene(x["art"], COL[x["era"]])}</span>'
+    return (f'<a class="l-card rv" href="legend-{x["id"]}.html" data-era="{x["era"]}"><span class="art">{A.photo_scene(x["art"], small=True) or PX.card_img(f"legend-{x['id']}.html", x["era"]) or A.scene(x["art"], COL[x["era"]])}</span>'
             f'<span class="txt"><span class="span">{e(x["place"])}{new_tag("legend", x["id"])}</span><h3>{bi(x["en"], x["cy"])}</h3><p>{bi(x["sumEn"], x["sumCy"])}</p></span></a>')
 
 

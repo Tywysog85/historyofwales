@@ -57,6 +57,10 @@ PAGE = {
     "story-madog.html": "g:land-south-stack",
     "story-caradog.html": "g:person-caratacus",
     "story-macsen.html": "g:place-segontium",
+    "story-christianity.html": "g:holy-margam",
+    "story-lucius.html": "g:holy-llandaff",
+    "story-bran.html": "g:place-harlech",
+    "story-joseph.html": "g:person-dewi-sant",
     # legends that have no photograph of their own yet
     "legend-dragons.html": "g:land-dinas-emrys",
     "legend-lludd.html": "g:land-dinas-emrys",
