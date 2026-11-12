@@ -194,3 +194,9 @@ a.chip { text-decoration: none; color: inherit }
   .kg-ticks span:nth-child(even)::before { height: 1.55rem; opacity: .35 }
   .kg-ticks span.on:nth-child(even)::before { height: 1.6rem }
 }
+/* "Did you know?": the fact links to its full page (Ifan, November 2026) */
+.fact-a { color: inherit; text-decoration: none; background-image: linear-gradient(var(--dragon), var(--dragon)); background-size: 0 2px; background-position: 0 100%; background-repeat: no-repeat; transition: background-size .25s }
+.fact-a:hover, .fact-a:focus-visible { background-size: 100% 2px }
+.fact-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0 }
+.fact-actions .chip.solid { background: var(--dragon); border-color: var(--dragon); color: #1a0d0c; font-weight: 600; text-decoration: none }
+.fact-actions .chip.solid:hover { background: #ff8178 }

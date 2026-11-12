@@ -649,7 +649,7 @@ Learnt while simplifying the home page.
 - Pictures are only ones already kept on the site with their Commons credit: `g:<id>` from the gallery, `p:<id>` from the person photos, `l:<key>` from the legend photos. Add `@50% 15%` to a ref to move the crop (e.g. to keep a face in frame).
 - To change a page's picture, change its line in `PAGE`. Pages not listed use their place's own gallery picture, or the picture for their age (`ERA`). `build.py` runs `PX.dress()` on every page, so new pages get a picture automatically.
 - The top picture loads at once (`fetchpriority="high"`, 600px copy for phones through `srcset`); card pictures load lazily from the small copy. The build stops if a named picture's file is missing.
-- Commons can't be reached from the cloud. New pictures have to be downloaded on the Mini-PC (Remote Control) and added to the gallery first.
+- New pictures: Commons can't be reached from the cloud, so look them up on GitHub. Put the searches in `tools/commons_research_in.json` with your own branch name and push it; the Commons research workflow commits `_research/<folder>/found.json` and previews. Add the chosen file to `EXTRA` in `src/pictures.py` (credit and captions) and use it as `c:<Commons file>`. Then run the fetch-photos workflow on your branch, which saves the WebP copies. Delete `_research/` before merging.
 
 ### Sources beside the claims (November 2026)
 
@@ -658,7 +658,18 @@ Learnt while simplifying the home page.
 - The card opens on click (code at the end of `src/static/site.js`): under the chip on a computer, as a sheet along the bottom on a phone. Without JavaScript the chip is a plain link to the first source.
 - The home page's "Did you know?" fact is drawn again by `app.js` when "Another" is pressed, so `FACTS` goes into the page data already turned into HTML (`CITE.html_text`).
 - Check sources with the WebFetch tool when the cloud can't reach a site directly, and quote the source's own words in the note where you can.
+- Every "Did you know?" fact links to a full page (third item of each `FACTS` tuple in `src/features.py`), with a "Read the full story" button that follows "Another". `CITE.linked()` makes the sentence the link and puts its chips after it. Where no page existed one was written: places in `src/factplaces.py` (their own `PLACES` and `LONG`), events in `src/events_more.py`.
+- World first and Welsh first badges on person pages take their sources from `FIRST_CITES` in `src/cites.py` (person id -> keys); the chip sits beside the badge because the badge is a link. Only add a badge source that says what the badge says.
 
+### Place pages people can visit: the Visiting box (November 2026)
+
+- New historic places, and longer text for existing ones, go in `src/places3.py`: `NEW` (same shape as `places2.py`), `LONG` (paragraphs, `## ` sub-headings, `[[cite:key]]` sources), `PEOPLE` (person slugs linked with the place) and `LINKS` (other pages on the site). The sources used there are in `CITES` at the bottom and are added to `cites.S`; keys start with `pl-`.
+- A person slug with no page yet is simply skipped, and shows up by itself once someone adds that person. Person pages list "Places to visit" back from the same `PEOPLE` lists.
+- `src/visit.py` holds, for each place, who looks after it (Cadw, the National Trust, a council, a church, private), the official page, the postcode and how you get in (free, ticketed, open land, private land). Never copy opening times or prices: they change. Link the official page instead.
+- Cadw's site lists every place at `cadw.gov.wales/visit/places-to-visit/find-a-place-to-visit/map`; each place page gives its postcode and whether entry is free. National Trust places are at `nationaltrust.org.uk/visit/wales/<name>`. Both sites are blocked from the cloud machine's own network, but the WebFetch tool can read them.
+- The Directions link is Google Maps with the place's latitude and longitude, so it works even where there is no postcode.
+- The map card shows the same in one line (`vis` in the page data, drawn in `selectPlace()` in `src/app.js` and `ssr_visit_line()` in `build.py`).
+- A new place's picture: one line in `PAGE` in `src/pictures.py`. The map card picks it up too.
 ### A photograph inside a long read (November 2026)
 
 Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.html`).

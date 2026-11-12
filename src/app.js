@@ -603,6 +603,7 @@
         '<circle class="halo" r="20"/><circle class="dot" r="7"/><text class="lbl" x="' + (right ? -14 : 14) + '" y="4" text-anchor="' + (right ? "end" : "start") + '">' + esc(T(p.en, p.cy)) + "</text></g>";
     }).join("");
   }
+  function cap(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
   function selectPlace(id) {
     if (!PLACE[id]) return;
     sel = id; var p = PLACE[id], E = ERA[p.era];
@@ -616,7 +617,7 @@
     card.innerHTML = art +
       '<div style="display:grid;gap:.3rem"><h3>' + esc(T(p.en, p.cy)) + "</h3>" + (other !== T(p.en, p.cy) ? '<span class="cy-name">' + esc(other) + "</span>" : "") + "</div>" +
       '<div class="meta"><span><b>' + T(E.en, E.cy) + "</b></span><span>" + esc(p.year) + "</span><span>" + p.lat.toFixed(3) + "° N, " + Math.abs(p.lon).toFixed(3) + "° W</span></div>" +
-      '<p class="desc">' + esc(T(p.dEn, p.dCy)) + "</p>" + '<div style="display:flex;gap:1.2rem;flex-wrap:wrap;align-items:center"><a class="src" style="color:var(--ink)" href="place-' + p.id + '.html">' + T("Read the full story", "Darllen y stori lawn") + " →</a>" + srcLink(p.src) + (p.ph ? '<a class="credit" href="' + p.ph[1] + '" target="_blank" rel="noopener">' + T("Photo: Wikimedia Commons", "Llun: Wikimedia Commons") + " ↗</a>" : "") + "</div>" +
+      '<p class="desc">' + esc(T(p.dEn, p.dCy)) + "</p>" + (p.vis ? '<p class="pc-visit"><b>' + T("Visit", "Ymweld") + ':</b> ' + esc(cap(T(p.vis[0], p.vis[1]))) + " · " + esc(T(p.vis[3], p.vis[4])) + (p.vis[5] ? " · " + esc(p.vis[5]) : "") + (p.vis[2] ? ' · <a href="' + esc(p.vis[2]) + '" target="_blank" rel="noopener">' + T("Times and prices", "Amseroedd a phrisiau") + " ↗</a>" : "") + ' · <a href="' + esc(p.vis[6]) + '" target="_blank" rel="noopener">' + T("Directions", "Cyfarwyddiadau") + " ↗</a></p>" : "") + '<div style="display:flex;gap:1.2rem;flex-wrap:wrap;align-items:center"><a class="src" style="color:var(--ink)" href="place-' + p.id + '.html">' + T("Read the full story", "Darllen y stori lawn") + " →</a>" + srcLink(p.src) + (p.ph ? '<a class="credit" href="' + p.ph[1] + '" target="_blank" rel="noopener">' + T("Photo: Wikimedia Commons", "Llun: Wikimedia Commons") + " ↗</a>" : "") + "</div>" +
       '<div class="row">' + (evIdx >= 0 ? '<button type="button" class="btn" data-tl="' + evIdx + '">' + T("See it on the timeline", "Gweld ar y llinell amser") + "</button>" : "<span></span>") +
       '<div class="nav-btns"><button type="button" class="icon-btn" id="pl-prev" aria-label="' + T("Previous place", "Lle blaenorol") + '"><svg><use href="#i-left"/></svg></button><span class="people-count" style="align-self:center;min-width:3.2rem;text-align:center">' + (i + 1) + " / " + visible.length + '</span><button type="button" class="icon-btn" id="pl-next" aria-label="' + T("Next place", "Lle nesaf") + '"><svg><use href="#i-right"/></svg></button></div></div>';
     $("#pl-prev").onclick = function () { selectPlace(visible[(i - 1 + visible.length) % visible.length].id); };
@@ -758,7 +759,7 @@
 
   /* ---------- Did you know? + daily streak ---------- */
   var factI = Math.floor(Date.now() / 864e5) % D.FACTS.length;
-  function renderFact() { var f = D.FACTS[factI % D.FACTS.length]; $("#fact").innerHTML = T(f[0], f[1]); }  /* our own text, escaped at build, with its source chip (src/cites.py) */
+  function renderFact() { var f = D.FACTS[factI % D.FACTS.length]; $("#fact").innerHTML = T(f[0], f[1]); var m = $("#fact-more"); if (m) m.setAttribute("href", f[2]); }  /* our own text, escaped at build, with its source chip (src/cites.py) */
   $("#fact-next").onclick = function () { factI++; renderFact(); };
   function renderStreak() {
     var el = document.getElementById("daily-streak"); if (!el) return;
