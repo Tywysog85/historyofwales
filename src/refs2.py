@@ -403,6 +403,23 @@ KINGS_GROUP = {
 }
 
 # pages that simply get the general list
+# ---------- Arthur's circle: every person page of src/arthur_circle.py except Arthur's own ----------
+PAGES["arthur-circle"] = L(
+    TRIADS, MABINOGION, NENNIUS, LLANDAFF, WADE_EVANS,
+    (P, "A. O. H. Jarman (ed.)", "Llyfr Du Caerfyrddin", "Gwasg Prifysgol Cymru, 1982",
+     "The Black Book of Carmarthen: Pa Gŵr, the Stanzas of the Graves, the elegy for Geraint and the poems of Myrddin.",
+     "Llyfr Du Caerfyrddin: Pa Gŵr, Englynion y Beddau, marwnad Geraint a cherddi Myrddin."),
+    (P, "Marged Haycock (ed. and trans.)", "Legendary Poems from the Book of Taliesin", "CMCS Publications, 2007",
+     "The poems of the Book of Taliesin about Arthur, Uthr and the Spoils of Annwfn, in Welsh and English.",
+     "Cerddi Llyfr Taliesin am Arthur, Uthr a Phreiddeu Annwfn, yn Gymraeg ac yn Saesneg."),
+    (B, "Rachel Bromwich and D. Simon Evans (eds)", "Culhwch and Olwen: An Edition and Study of the Oldest Arthurian Tale", "University of Wales Press, 1992",
+     "The tale with full notes on every one of Arthur’s warriors.", "Y chwedl gyda nodiadau llawn ar bob un o ryfelwyr Arthur."),
+    (B, "P. C. Bartrum", "A Welsh Classical Dictionary: People in History and Legend up to about A.D. 1000", "National Library of Wales, 1993",
+     "Every person of early Welsh history and story, from the pedigrees, Lives, poems and tales.", "Pob person o hanes a chwedlau cynnar Cymru, o’r achau, y bucheddau, y cerddi a’r chwedlau."),
+    BROMWICH_ARTHUR, GEOFFREY,
+    (B, "Adrian Gilbert, Alan Wilson and Baram Blackett", "The Holy Kingdom", "Bantam Press, 1998",
+     "The case for Arthur as a king of Gwent and Glamorgan, set out at length.", "Yr achos dros Arthur fel brenin Gwent a Morgannwg, wedi’i osod allan yn llawn."))
+
 GENERAL = {"timeline", "a-z", "questions", "onthisday", "people", "reference", "topics", "trails", "teachers", "stories", "journey"}
 
 

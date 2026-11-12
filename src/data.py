@@ -68,7 +68,7 @@ EVENTS = [
   "Cyhoeddir Magnus Maximus, cadlywydd ym Mhrydain, yn ymerawdwr. Daw’n un o arwyr sylfaenol chwedloniaeth Cymru.",0,"","Magnus_Maximus"),
  ("ancient",589,1,0,"03-01","Death of Saint David","Marw Dewi Sant",
   "Dewi dies, traditionally on 1 March, at the monastery that becomes St Davids, the smallest city in Britain.",
-  "Bu farw Dewi, yn ôl traddodiad ar 1 Mawrth, yn y fynachlog a ddaeth yn Dyddewi, dinas leiaf Prydain.",0,"stdavids","Saint_David"),
+  "Bu farw Dewi, yn ôl traddodiad ar 1 Mawrth, yn ei fynachlog, lle saif Tyddewi heddiw, dinas leiaf Prydain.",0,"stdavids","Saint_David"),
  ("medieval",600,1,0,"","Y Gododdin","Y Gododdin",
   "Aneirin’s elegy for warriors who fell at Catraeth, among the oldest poetry in any language of Britain.",
   "Marwnad Aneirin i’r rhyfelwyr a syrthiodd yng Nghatraeth, ymhlith y farddoniaeth hynaf mewn unrhyw iaith ym Mhrydain.",1,"","Y_Gododdin"),
@@ -86,7 +86,7 @@ EVENTS = [
   "Casglir cyfraith Cymru dan Hywel Dda, a bydd yn cael ei defnyddio am ryw chwe chan mlynedd.",1,"hendygwyn","Welsh_law"),
  ("medieval",1055,0,0,"","One king for all Wales","Un brenin i Gymru gyfan",
   "Gruffudd ap Llywelyn becomes the only king ever to unite all of Wales, until his death in 1063.",
-  "Daw Gruffudd ap Llywelyn yr unig frenin erioed i uno Cymru gyfan, hyd ei farwolaeth yn 1063.",0,"","Gruffydd_ap_Llywelyn"),
+  "Mae Gruffudd ap Llywelyn yn uno Cymru gyfan dan ei goron, yr unig frenin erioed i wneud hynny, hyd ei farwolaeth yn 1063.",0,"","Gruffydd_ap_Llywelyn"),
  ("medieval",1081,0,0,"","Battle of Mynydd Carn","Brwydr Mynydd Carn",
   "Gruffudd ap Cynan and Rhys ap Tewdwr win back their kingdoms of Gwynedd and Deheubarth.",
   "Mae Gruffudd ap Cynan a Rhys ap Tewdwr yn adennill eu teyrnasoedd, Gwynedd a Deheubarth.",0,"","Battle_of_Mynydd_Carn"),
@@ -233,7 +233,7 @@ EVENTS = [
   "Mae tomen lo yn llithro ar ysgol y pentref ar 21 Hydref, gan ladd 144 o bobl, 116 ohonynt yn blant.",1,"aberfan","Aberfan_disaster"),
  ("modern",1966,0,0,"07-14","Gwynfor Evans elected","Ethol Gwynfor Evans",
   "Plaid Cymru wins its first seat in Parliament, at the Carmarthen by-election.",
-  "Mae Plaid Cymru yn ennill ei sedd gyntaf yn y Senedd, yn isetholiad Caerfyrddin.",0,"","Gwynfor_Evans"),
+  "Mae Plaid Cymru yn ennill ei sedd gyntaf yn San Steffan, yn isetholiad Caerfyrddin.",0,"","Gwynfor_Evans"),
  ("modern",1967,0,0,"","Welsh Language Act","Deddf yr Iaith Gymraeg",
   "Welsh may be used in court, and official forms can appear in Welsh.",
   "Caniateir defnyddio’r Gymraeg yn y llys, a gall ffurflenni swyddogol ymddangos yn Gymraeg.",0,"","Welsh_Language_Act_1967"),
@@ -530,6 +530,8 @@ _ERA_ORDER = {e["id"]: i for i, e in enumerate(ERAS)}
 
 def _born(p):
     d = p[2]
+    if d == "Age of Arthur":  # people known from the tales of Arthur's court (src/arthur_circle.py): just after Arthur
+        return 640
     m = _re.search(r"([\d,]+) BC", d)
     if m:
         return -int(m.group(1).replace(",", ""))
@@ -652,6 +654,10 @@ EVENTS = sorted(EVENTS + _BRE, key=lambda ev: ev[1])
 # ---------- Prince Madog's voyage and the Welsh Indians (src/madog.py) ----------
 from madog import EVENTS as _MDE
 EVENTS = sorted(EVENTS + _MDE, key=lambda ev: ev[1])
+
+# ---------- King Caradog against Rome (src/caradog.py) ----------
+from caradog import EVENTS as _CRE
+EVENTS = sorted(EVENTS + _CRE, key=lambda ev: ev[1])
 
 # ---------- The coming of Christianity to Britain (src/christianity.py) ----------
 from christianity import EVENTS as _CHE

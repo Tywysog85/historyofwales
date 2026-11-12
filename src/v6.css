@@ -668,3 +668,13 @@ section.page-top { padding-top: clamp(1.5rem, 4vw, 3rem) }
 .shelf .author h3 { margin: 0; font-size: 1.15rem; letter-spacing: normal; text-transform: none; color: var(--ink) }
 .shelf .author ul { list-style: disc; padding-left: 1.1rem; gap: .2rem }
 .shelf .author li { padding-left: 0; border-left: 0; font-size: .95rem }
+
+/* Arthur's circle (build.py arthur_circle): the people of Arthur's story, on each of their pages */
+.ar-circle .sub-h { margin: 1.6rem 0 .2rem; font-size: 1.15rem }
+.ar-circle .ppl { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .7rem }
+.ar-circle .ppl a { display: inline-flex; align-items: center; gap: .5rem; padding: .3rem .8rem .3rem .3rem; border: 1px solid var(--line); border-radius: 999px; text-decoration: none; color: inherit; font-size: .92rem; background: var(--slate) }
+.ar-circle .ppl a:hover { border-color: var(--c) }
+.ar-circle .ppl a[aria-current] { border-color: var(--c); background: color-mix(in srgb, var(--c) 22%, var(--slate)); font-weight: 600 }
+.ar-circle .ppl .ava { width: 2rem; height: 2rem; font-size: .8rem }
+.ar-circle .ar-more { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.8rem }
+.ar-line b a { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--c) 60%, transparent); text-underline-offset: 3px }

@@ -603,6 +603,21 @@ Learnt while simplifying the home page.
 - When `llys3d.js` changes, raise `llys3d.js?v=` in `src/llys.py`.
 - To test in the cloud: Chromium with `--use-gl=swiftshader --enable-unsafe-swiftshader`. Software drawing is slow, so wait several seconds after each "Next" before a screenshot.
 
+### Checking the Welsh with Cysill (November 2026)
+- Cysill (part of the free Cysgliad package from Bangor University) runs on Ifan's Mini-PC. Claude drives it with computer use: gather the site's Welsh into plain-text chunks, paste a chunk into Cysill, click **Gwirio**, then step through each flag with **Anwybyddu**.
+- Most flags are names (Ordofigiaid, Clawdiws, Llyn Fawr). The useful ones are mutations and genders: `dwy heneb` not `dau heneb`, `chaer lengol`, `o leiniau`, `yn Nhyddewi`.
+- Cysill misses sentence-level grammar, so read every line as well. Common slips in our Welsh: `Daw X y …` (needs `yn`, or rewrite as `X yw'r …`), `a ddaeth, yn 2007, y fenyw gyntaf` (same problem), `helpodd sefydlu` (needs `i`), `a Penda` (needs `a Phenda`), `nes y bydd Cymru ei angen` (`nes y bydd ar Gymru ei angen`).
+- Use `Brythoniaid` for the Britons, not `Brytaniaid`, except inside a quotation.
+- Fix the source in `src/*.py` with an exact find-and-replace that checks each phrase occurs the expected number of times, then rebuild.
+- A fluent proofreader is still the final check.
+
+### A circle of linked people pages: Arthur's circle (November 2026)
+
+- `src/arthur_circle.py` holds the people of Arthur's story (same `P(...)` format as `people2a.py`; `people2.py` adds them to the site) and `GROUPS`, the headed lists of names.
+- `arthur_circle(slug)` in `build.py` shows the whole circle as small name chips on Arthur's page and on every page in it, with the current person highlighted. To add someone, give them a `P(...)` entry and put their slug in a group. People who already have pages elsewhere can go in a group too.
+- People known only from the tales take the date "Age of Arthur": `data.py` sorts them just after Arthur, and `date_cy()` shows "Oes Arthur" on the Welsh side.
+- Their reference list is `PAGES["arthur-circle"]` in `src/refs2.py`. Saints who gain a person page get `link=P("slug")` in `src/saints.py`, so the saints pages link to them.
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
