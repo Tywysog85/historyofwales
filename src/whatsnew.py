@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Cofiwch Dryweryn: the drowning of Capel Celyn", "Cofiwch Dryweryn: boddi Capel Celyn",
+     "A new long read: the Welsh-speaking village above Bala drowned for Liverpool’s water, the Defence Committee and the march through Liverpool, the Act of 1957 that 35 of Wales’s 36 MPs opposed, the opening of 1965, Cofiwch Dryweryn, Liverpool’s apology of 2005, and how Tryweryn woke a nation.",
+     "Erthygl newydd: y pentref Cymraeg uwchben y Bala a foddwyd i roi dŵr i Lerpwl, y Pwyllgor Amddiffyn a’r orymdaith drwy Lerpwl, Deddf 1957 a wrthwynebwyd gan 35 o 36 AS Cymru, agoriad 1965, Cofiwch Dryweryn, ymddiheuriad Lerpwl yn 2005, a sut y deffrodd Tryweryn genedl.",
+     "story-tryweryn.html"),
     ("2026-11-12", "Prince Rhys ap Gruffudd: the Lord Rhys and the first eisteddfod", "Y Tywysog Rhys ap Gruffudd: yr Arglwydd Rhys a’r eisteddfod gyntaf",
      "A new long read: the orphaned prince who won back Deheubarth, stood with Owain Gwynedd against Henry II, and at Christmas 1176 set two chairs for the best poet and musician at Cardigan Castle.",
      "Erthygl newydd: y tywysog amddifad a enillodd Ddeheubarth yn ôl, a safodd gydag Owain Gwynedd yn erbyn Harri II, ac a osododd ddwy gadair i’r bardd a’r cerddor gorau yng Nghastell Aberteifi adeg y Nadolig 1176.",
