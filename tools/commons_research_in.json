@@ -1,6 +1,6 @@
-{"branch": "",
- "out": "_research/example",
- "max": 200,
- "categories": [],
- "searches": [],
+{"branch": "claude/project-thread-1ll3op",
+ "out": "_research/industry",
+ "max": 380,
+ "categories": ["Category:Penydarren locomotive", "Category:Barry Docks", "Category:Glamorganshire Canal", "Category:Coal Exchange, Cardiff", "Category:Cyfarthfa Ironworks", "Category:Dowlais Ironworks", "Category:Hafod Copperworks", "Category:Oystermouth Railway", "Category:Bute Docks", "Category:Little Wonder (locomotive)", "Category:Penry Williams"],
+ "searches": ["Penydarren locomotive replica", "Trevithick locomotive 1804", "Cyfarthfa ironworks painting", "Dowlais ironworks George Childs", "Cardiff docks photochrom", "Cardiff docks 1890s coal ships", "Barry Docks coal hoist", "Swansea copper works painting", "Hafod copper works Swansea 19th century", "Ffestiniog Railway Fairlie Little Wonder", "Porthmadog harbour slate schooners", "Glamorganshire Canal Merthyr", "Coal Exchange Cardiff 1890", "Penrhyn slate quay Port Penrhyn", "coal tips Cardiff docks", "Neath Abbey Ironworks", "Swansea Canal"],
  "files": []}
