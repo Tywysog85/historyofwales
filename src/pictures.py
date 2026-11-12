@@ -65,6 +65,8 @@ PAGE = {
     "story-lucius.html": "g:holy-llandaff",
     "story-bran.html": "g:place-harlech",
     "story-joseph.html": "g:person-dewi-sant",
+    "story-aberfan.html": "g:place-aberfan",
+    "story-patrick.html": "g:place-stdavids",
     # legends that have no photograph of their own yet
     "legend-dragons.html": "g:land-dinas-emrys",
     "legend-lludd.html": "g:land-dinas-emrys",

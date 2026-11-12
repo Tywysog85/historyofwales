@@ -31,7 +31,7 @@ STORIES = [
    "Dysgodd brenhinoedd Lloegr y wers. Llanwodd Edward I, a oedd wedi wynebu’r bwa yng Nghymru, ei fyddinoedd ei hun â saethwyr o Gymru. Yn Crécy yn 1346 safai saethwyr a gwaywffonwyr Cymreig mewn gwyrdd a gwyn gyda’r Tywysog Du, ymhlith y milwyr cyntaf yn Ewrop i wisgo lifrai; cofir gwŷr Llantrisant yno hyd heddiw. Roedd saethwyr o Gymru yn Poitiers yn 1356, a gorymdeithiodd tua phum cant ohonynt i Agincourt yn 1415.",
    "Defnyddiodd saethwyr Owain Glyndŵr ef dros Gymru unwaith eto ym Mryn Glas yn 1402. Am dair canrif y bwa hir a reolai feysydd brwydr Ewrop, a dechreuodd fel ffon lwyfen yn nwylo gŵr o Went."]),
 
- dict(id="learning", era="saints", art="dolmen", mins=6,
+ dict(id="learning", era="saints", art="dolmen", mins=6, people=["illtud", "dewi-sant"],
   en="The oldest schools in Britain", cy="Ysgolion hynaf Prydain",
   sumEn="Caesar wrote that the learning of the Druids began in Britain and that students crossed the sea to master it. After Rome, Llanilltud Fawr became the oldest centre of learning in Britain.",
   sumCy="Ysgrifennodd Cesar mai ym Mhrydain y dechreuodd dysg y Derwyddon a bod myfyrwyr yn croesi’r môr i’w meistroli. Wedi Rhufain, daeth Llanilltud Fawr yn ganolfan ddysg hynaf Prydain.",

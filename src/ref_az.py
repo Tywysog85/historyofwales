@@ -580,7 +580,7 @@ TERMS = [
  A("aberfan", "Aberfan (1966)", "Aberfan (1966)",
    "On 21 October 1966 a coal tip slid onto the village school, and 144 people died, 116 of them children. Wales has never forgotten them.",
    "Ar 21 Hydref 1966 llithrodd tomen lo ar ysgol y pentref, a bu farw 144 o bobl, 116 ohonynt yn blant. Nid yw Cymru erioed wedi’u hanghofio.",
-   ["place-aberfan.html"]),
+   ["story-aberfan.html", "place-aberfan.html"]),
  A("plaid", "Plaid Cymru", "Plaid Cymru",
    "The party of Wales, founded at Pwllheli in 1925. Gwynfor Evans won its first seat at Westminster in 1966, and in 2026 it formed the government of Wales.",
    "Plaid Cymru, a sefydlwyd ym Mhwllheli yn 1925. Enillodd Gwynfor Evans ei sedd gyntaf yn San Steffan yn 1966, ac yn 2026 ffurfiodd lywodraeth Cymru.",
