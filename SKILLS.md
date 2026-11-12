@@ -595,6 +595,14 @@ Learnt while simplifying the home page.
 - When `llys3d.js` changes, raise `llys3d.js?v=` in `src/llys.py`.
 - To test in the cloud: Chromium with `--use-gl=swiftshader --enable-unsafe-swiftshader`. Software drawing is slow, so wait several seconds after each "Next" before a screenshot.
 
+### Checking the Welsh with Cysill (November 2026)
+- Cysill (part of the free Cysgliad package from Bangor University) runs on Ifan's Mini-PC. Claude drives it with computer use: gather the site's Welsh into plain-text chunks, paste a chunk into Cysill, click **Gwirio**, then step through each flag with **Anwybyddu**.
+- Most flags are names (Ordofigiaid, Clawdiws, Llyn Fawr). The useful ones are mutations and genders: `dwy heneb` not `dau heneb`, `chaer lengol`, `o leiniau`, `yn Nhyddewi`.
+- Cysill misses sentence-level grammar, so read every line as well. Common slips in our Welsh: `Daw X y …` (needs `yn`, or rewrite as `X yw'r …`), `a ddaeth, yn 2007, y fenyw gyntaf` (same problem), `helpodd sefydlu` (needs `i`), `a Penda` (needs `a Phenda`), `nes y bydd Cymru ei angen` (`nes y bydd ar Gymru ei angen`).
+- Use `Brythoniaid` for the Britons, not `Brytaniaid`, except inside a quotation.
+- Fix the source in `src/*.py` with an exact find-and-replace that checks each phrase occurs the expected number of times, then rebuild.
+- A fluent proofreader is still the final check.
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.

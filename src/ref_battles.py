@@ -45,7 +45,7 @@ BATTLES = [
    "Daeth mynachod Bangor Is-coed i weddïo dros fyddin y Brythoniaid a’u lladd yn gyntaf. Syrthiodd Selyf ap Cynan o Bowys, a gwahanwyd Brythoniaid Cymru oddi wrth rai’r gogledd ar dir.",
    ["kings-powys.html"], "l"),
  B("meigen", "Meigen (Hatfield Chase)", "Meigen", 633, "633 · in Yorkshire", "633 · yn Swydd Efrog", None, "saints",
-   "Cadwallon ap Cadfan of Gwynedd with Penda of Mercia against Edwin of Northumbria", "Cadwallon ap Cadfan o Wynedd gyda Penda o Fersia yn erbyn Edwin o Northumbria",
+   "Cadwallon ap Cadfan of Gwynedd with Penda of Mercia against Edwin of Northumbria", "Cadwallon ap Cadfan o Wynedd gyda Phenda o Fersia yn erbyn Edwin o Northumbria",
    "Cadwallon, who had been driven out of Gwynedd, came back and destroyed the power of Northumbria, killing its king. For a year he held Northumbria, the last British king to march so far; the poem Moliant Cadwallon praises him.",
    "Daeth Cadwallon, a yrrwyd o Wynedd, yn ôl a dinistrio grym Northumbria, gan ladd ei brenin. Am flwyddyn daliodd Northumbria, y brenin Brythonig olaf i fynd mor bell; mae’r gerdd Moliant Cadwallon yn ei ganmol.",
    ["person-cadwallon.html", "kings-gwynedd.html"]),
