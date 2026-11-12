@@ -5,15 +5,17 @@ A proud, bilingual (English and Cymraeg) history of Wales, live at [historyofwal
 ## What is on it
 
 - **Nine ages**, from the first people in the caves to Wales today, each with its own page.
-- **A timeline** of about 160 events.
+- **A timeline** of 405 events, each with its own page, and a fuller telling of the 41 biggest moments.
 - **A map** of 68 historic sites, and a Kingdoms view showing Wales at 13 moments in time.
 - **322 people**, from the Red Lady of Paviland to today, each with a field (kings, poets, scientists, sport and more), and a **Welsh world firsts** page (`firsts.html`).
 - **Kings and princes**: every royal line, kingdom by kingdom (12 kingdoms of Wales and 5 of the Old North), and the kings and princes of all Wales.
 - **Saints of Wales**: 68 saints in ten regions, with the 130 llannau and holy places named after them on a map, a llan name decoder and a saints’ calendar.
-- **15 long reads**, 21 legends in five sections, a Mabinogion page with all eleven tales, symbols and traditions.
+- **18 long reads**, 21 legends in five sections, a Mabinogion page with all eleven tales, symbols and traditions.
 - **On this day in Welsh history**: about 350 dates across 233 days of the year, on the home page and on `onthisday.html`.
-- **Games**: a daily challenge, a quiz, a map game, Welsh names, word pairs and more.
-- Every page in **English and Cymraeg**.
+- **Games**: a daily challenge, a quiz, a map game, Welsh names, word pairs and more, plus **Ride with Glyndŵr, 1400** (a story where you choose) and a walk through **Llys Rhosyr in 3D**.
+- **For teachers**: nine teacher packs for the Curriculum for Wales, one per age.
+- **Books and authors**: every book in the reading lists, with notes on the authors.
+- Every page in **English and Cymraeg**; the Welsh pages have their own address under `cy/`.
 
 ## The other notes in this folder
 
@@ -34,6 +36,11 @@ Everything is plain HTML, CSS and JavaScript. There is no framework and nothing 
 | The nine ages | `src/ages.py`, `src/ages9.py` |
 | Long reads, legends, symbols, facts | `src/features.py`, `src/legends2.py`, `src/mabinogion.py`, `src/pride.py`, `src/pride2.py`, `src/pride3.py`, `src/hywel.py`, `src/iolo.py` |
 | The Kingdoms map | `src/kingdoms.py` |
+| A page for every timeline event, and the fuller telling of the big ones | `src/eventpages.py`, `src/events_more.py` |
+| The castles map | `src/castles.py`, `src/castles_data.json`, `src/static/castles.js` |
+| Teacher packs (`pack-*.html`) | `src/teachpacks.py` |
+| Ride with Glyndŵr (`ride-glyndwr.html`) and Llys Rhosyr in 3D (`llys-rhosyr.html`) | `src/ride.py`, `src/llys.py` (3D code in `tools/llys3d.src.js`) |
+| The Welsh pages under `cy/` | `src/welshpages.py` (made by itself from every page) |
 | On this day (`onthisday.html` and the home page panel) | `src/onthisday.py`, `src/onthisday.css` |
 | Kings and princes of each kingdom (`kings.html`, `kings-*.html`) | `src/royal.py` |
 | Saints of Wales (`saints.html`, `saints-*.html`) | `src/saints.py`; map and decoder in `src/static/saints.js` |
