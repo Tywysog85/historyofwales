@@ -51,7 +51,9 @@ import added as AD  # noqa: E402  (when each item was added: newest first, "Just
 import refs as REF  # noqa: E402  (further reading and references for every long read)
 import refs2 as REF2  # noqa: E402  (the same for every other content page)
 import christianity as _CHR  # noqa: E402
-REF.REFS.update(_CHR.REFS)  # reading lists for the four long reads on the coming of Christianity
+REF.REFS.update(_CHR.REFS)
+import patrick as _PTR  # noqa: E402
+REF.REFS.update(_PTR.REFS)  # reading list for the Saint Patrick long read  # reading lists for the four long reads on the coming of Christianity
 import authors as AU  # noqa: E402  (the authors on the Books and authors page)
 import ylolfa as YLF  # noqa: E402  (Y Lolfa books: the "Y Lolfa" section of the Books and authors page)
 F.STORIES = AD.newest("story", F.STORIES)  # long reads: the newest first everywhere (index, home page, "Keep reading")
@@ -925,6 +927,8 @@ SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes
     ("law", "The laws of Hywel Dda", "Cyfreithiau Hywel Dda", ["laws", "hywel", "topic-law"]),
     ("saints", "Saints, learning and faith", "Seintiau, dysg a ffydd", ["christianity", "joseph", "lucius", "saints", "saints-*", "learning", "brittany", "topic-faith"]),
     ("princes", "Princes, castles and Owain Glyndŵr", "Tywysogion, cestyll ac Owain Glyndŵr", ["era-medieval", "castles", "glyndwr", "longbow", "battles", "documents", "topic-war", "nest", "rhys"]),
+    ("saints", "Saints, learning and faith", "Seintiau, dysg a ffydd", ["christianity", "joseph", "lucius", "patrick", "saints", "saints-*", "learning", "brittany", "topic-faith"]),
+    ("princes", "Princes, castles and Owain Glyndŵr", "Tywysogion, cestyll ac Owain Glyndŵr", ["era-medieval", "castles", "glyndwr", "longbow", "battles", "documents", "topic-war"]),
     ("lit", "Poets, old books and legends", "Beirdd, hen lyfrau a chwedlau", ["literature", "books", "triads", "mabinogion", "legends", "legend-*", "bran", "symbols", "iolo", "topic-music", "trail-song"]),
     ("tudor", "From the Tudors to the Methodists", "O’r Tuduriaid i’r Methodistiaid", ["era-tudor"]),
     ("industry", "Iron, coal, slate and the sea", "Haearn, glo, llechi a’r môr", ["era-industrial", "coal", "protest", "topic-industry", "trail-coal", "trail-sea", "firsts", "topic-science"]),
