@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Full stories for nineteen people and places on the trails", "Hanesion llawn i bedwar ar bymtheg o bobl a lleoedd y llwybrau",
+     "New full pages on Gwenllian, Jemima Nicholas, Betsi Cadwaladr, Lady Llanover, Gwen John, Megan Lloyd George, Taliesin, Dafydd ap Gwilym, William Morgan, Pantycelyn, Dic Penderyn and Aneurin Bevan, and on Paviland, St Davids, Mill Bay, Carregwastad, the slate landscape, the Senedd and Blaenavon.",
+     "Tudalennau llawn newydd ar Wenllian, Jemima Nicholas, Betsi Cadwaladr, Arglwyddes Llanofer, Gwen John, Megan Lloyd George, Taliesin, Dafydd ap Gwilym, William Morgan, Pantycelyn, Dic Penderyn ac Aneurin Bevan, ac ar Paviland, Tyddewi, Mill Bay, Carregwastad, tirwedd y llechi, y Senedd a Blaenafon.",
+     "trails.html"),
     ("2026-11-12", "Siwan, the two Gwenllians and Owain Lawgoch", "Siwan, y ddwy Wenllian ac Owain Lawgoch",
      "Four more full pages from the royal houses of Wales: Siwan, Lady of Wales and the peacemaker of Gwynedd; Gwenllian ferch Gruffudd, who led an army against the Normans at Kidwelly in 1136; Gwenllian ferch Llywelyn, Princess of Wales, remembered on Carnedd Gwenllian; and Owain Lawgoch, the last heir of Gwynedd, who sailed with a French fleet in 1372 to win back Wales.",
      "Pedair tudalen lawn arall o dai brenhinol Cymru: Siwan, Arglwyddes Cymru a heddychwraig Gwynedd; Gwenllian ferch Gruffudd, a arweiniodd fyddin yn erbyn y Normaniaid yng Nghydweli yn 1136; Gwenllian ferch Llywelyn, Tywysoges Cymru, a gofir ar Garnedd Gwenllian; ac Owain Lawgoch, etifedd olaf Gwynedd, a hwyliodd gyda llynges Ffrengig yn 1372 i ennill Cymru yn ôl.",

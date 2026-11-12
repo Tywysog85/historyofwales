@@ -700,6 +700,8 @@ Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.
 - A long read that does not exist yet can already be named on a trail: it stays hidden until another thread publishes it (for example `story-welsh-not`, `story-mac`).
 - Keep 8 to 10 stops per trail, and keep the number of trails a multiple of 6, so the grid on `trails.html` is full at three columns and at two.
 - Every stop title has the same size and font: there is no bigger serif style for "key" events any more (removed from `.era-events li.key h3` and the timeline's `.ev.key h4`). Key events keep their coloured dot.
+- Full pages for the people and places on the trails are in `src/trail_people.py` and `src/trail_places.py` (headings with `## `, quotes with `> words | who`); `long.py` loads them last, so they replace the short text.
+- A drop cap must only catch a page's first paragraph: use `.story > p:first-child`, not `.story p:first-child`, or the first letter of every pull quote turns into a giant letter.
 - To check fonts across the site, load pages in Playwright and compare the computed font of headings in sibling cards or list items; flag any group with more than one style.
 
 ### The Mabinogi tale guides (November 2026)
