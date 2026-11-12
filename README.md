@@ -10,7 +10,7 @@ A proud, bilingual (English and Cymraeg) history of Wales, live at [historyofwal
 - **322 people**, from the Red Lady of Paviland to today, each with a field (kings, poets, scientists, sport and more), and a **Welsh world firsts** page (`firsts.html`).
 - **Kings and princes**: every royal line, kingdom by kingdom (12 kingdoms of Wales and 5 of the Old North), and the kings and princes of all Wales.
 - **Saints of Wales**: 68 saints in ten regions, with the 130 llannau and holy places named after them on a map, a llan name decoder and a saints’ calendar.
-- **23 long reads**, 21 legends in five sections, a Mabinogion page with all eleven tales, symbols and traditions.
+- **24 long reads**, 21 legends in five sections, a Mabinogion page with all eleven tales, symbols and traditions.
 - **On this day in Welsh history**: about 350 dates across 233 days of the year, on the home page and on `onthisday.html`.
 - **Games**: a daily challenge, a quiz, a map game, Welsh names, word pairs and more, plus **Ride with Glyndŵr, 1400** (a story where you choose) and a walk through **Llys Rhosyr in 3D**.
 - **For teachers**: nine teacher packs for the Curriculum for Wales, one per age.
@@ -32,7 +32,7 @@ Everything is plain HTML, CSS and JavaScript. There is no framework and nothing 
 | Events, people, places | `src/data.py`, `src/more.py`, `src/places2.py` (extra items are merged in and sorted by year) |
 | The 251 people added in November 2026, every person’s field, and the Welsh firsts | `src/people2a.py` to `src/people2f.py`, gathered by `src/people2.py` |
 | The reference pages: Look it up, the A–Z, quick answers, towns, battles, key documents, topic guides, maps through time and the historic sites map | `src/refpages.py` lays them out; the words are in `src/ref_az.py`, `src/ref_faq.py`, `src/ref_towns.py`, `src/ref_battles.py`, `src/ref_docs.py`, `src/ref_topics.py`, `src/ref_maps.py` and `src/ref_sites.py` (data from `tools/sites_fetch.py`) |
-| Longer histories of people and places, trails, teacher notes | `src/long.py` |
+| Longer histories of people and places, trails, teacher notes | `src/long.py`, `src/trails.py` (the newer trails) |
 | The nine ages | `src/ages.py`, `src/ages9.py` |
 | Long reads, legends, symbols, facts | `src/features.py`, `src/legends2.py`, `src/mabinogion.py`, `src/pride.py`, `src/pride2.py`, `src/pride3.py`, `src/hywel.py`, `src/iolo.py`, `src/christianity.py` |
 | The Kingdoms map | `src/kingdoms.py` |

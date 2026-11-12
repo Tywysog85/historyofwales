@@ -256,3 +256,75 @@
   addEventListener("scroll", close, { passive: true });
   d.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
 })();
+
+/* Sources beside the claims (src/cites.py): tap the small § chip to see the sources for that sentence. */
+(function () {
+  var d = document, open = null;
+  function shut(back) {
+    if (!open) return;
+    open.pop.hidden = true; open.chip.setAttribute("aria-expanded", "false");
+    if (back) open.chip.focus();
+    open = null;
+  }
+  function show(chip) {
+    var pop = d.getElementById(chip.getAttribute("aria-controls"));
+    if (!pop) return false;
+    shut();
+    pop.hidden = false; pop.style.left = ""; chip.setAttribute("aria-expanded", "true");
+    open = { chip: chip, pop: pop };
+    if (getComputedStyle(pop).position === "absolute") {   /* keep the card on the screen */
+      var r = pop.getBoundingClientRect(), over = r.right - (innerWidth - 12);
+      if (over > 0) pop.style.left = -Math.min(over, r.left - 12) + "px";
+    }
+    return true;
+  }
+  d.addEventListener("click", function (e) {
+    var chip = e.target.closest(".cite");
+    if (chip) {
+      if (open && open.chip === chip) { e.preventDefault(); shut(); return; }
+      if (show(chip)) e.preventDefault();
+      return;
+    }
+    if (e.target.closest(".cite-x")) { shut(true); return; }
+    if (open && !e.target.closest(".cite-pop")) shut();
+  });
+  d.addEventListener("keydown", function (e) { if (e.key === "Escape" && open) shut(true); });
+  Array.prototype.forEach.call(d.querySelectorAll(".cite"), function (c) { c.setAttribute("role", "button"); c.setAttribute("aria-expanded", "false"); });
+})();
+
+/* ---------- weekly email sign-up (the form in follow_box, build.py) ----------
+   Sends the form to Brevo in the background and says thank you in its place, so the reader stays on the page.
+   Brevo answers with JSON ({success: true} or a list of errors). If the browser will not let us read the answer,
+   the email has still been sent (a form post needs no permission), so that counts as done too. */
+(function () {
+  var d = document, cy = function () { return d.documentElement.classList.contains("cy"); };
+  var T = function (en, c) { return cy() ? c : en; };
+  Array.prototype.forEach.call(d.querySelectorAll("form[data-signup]"), function (f) {
+    var msg = f.querySelector(".f-msg"), btn = f.querySelector("button"), busy = false;
+    function say(text, kind) { msg.textContent = text; msg.className = "f-msg" + (kind ? " " + kind : ""); }
+    function done() {
+      f.classList.add("f-done");
+      say(T("Thank you, you’re signed up! The first email comes on Monday. If an email arrives asking you to confirm, press the button in it.",
+            "Diolch, rydych chi wedi ymuno! Daw’r e-bost cyntaf ddydd Llun. Os daw e-bost yn gofyn i chi gadarnhau, pwyswch y botwm ynddo."), "ok");
+      try { if (window.goatcounter && goatcounter.count) goatcounter.count({ path: "email-signup", title: "Weekly email sign-up", event: true }); } catch (e) {}
+    }
+    function fail() {
+      busy = false; btn.disabled = false; f.classList.remove("f-busy");
+      say(T("Sorry, that didn’t go through. Please check the address and try again.",
+            "Mae’n ddrwg gennym, ni weithiodd hynny. Gwiriwch y cyfeiriad a rhowch gynnig arall arni."), "err");
+    }
+    f.addEventListener("submit", function (ev) {
+      if (!window.fetch || !window.FormData) return;  /* very old browsers: the plain post to Brevo */
+      ev.preventDefault();
+      if (busy) return;
+      var email = f.querySelector("input[name=EMAIL]");
+      if (!email.value.trim()) { email.focus(); return; }
+      busy = true; btn.disabled = true; f.classList.add("f-busy");
+      say(T("Signing you up…", "Wrthi’n eich ychwanegu…"), "");
+      fetch(f.action + (f.action.indexOf("?") < 0 ? "?" : "&") + "isAjax=1", { method: "POST", body: new FormData(f) })
+        .then(function (r) { return r.json().catch(function () { return { success: r.ok }; }); })
+        .then(function (j) { if (j && j.success) done(); else fail(); })
+        .catch(function () { if (navigator.onLine === false) fail(); else done(); });
+    });
+  });
+})();

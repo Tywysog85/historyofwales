@@ -7,6 +7,7 @@ leave out any detail that could not be checked. build.py's page_refs() picks the
 from refs import (P, B, W, R_R_DAVIES_AGE, JOHN_DAVIES, BRUT_Y_TYWYSOGYON, GERALD, NENNIUS, GEOFFREY, ADAM_USK,
                   CHARLES_EDWARDS, LLANDAFF, LLANDAFF_WD, CAESAR, SAMSON, MABINOGION, TRIADS, JOHNES, TYNGED, LHUYD, CADW,
                   COFLEIN, REFS, LAND_OF_MY_FATHERS)
+import ylolfa as YLF   # books from Y Lolfa (ylolfa.com)
 
 # ---------- shared items ----------
 DWB = (W, "National Library of Wales", "Dictionary of Welsh Biography", "biography.wales",
@@ -154,7 +155,7 @@ PAGES = {
                     SDAVIES_4B, dwb=["lady-llanover"]),
     "kings": L(BARTRUM_EWGT, BRUT_Y_TYWYSOGYON, LLOYD, CHARLES_EDWARDS, MAUND, TURVEY, R_R_DAVIES_AGE, JBS,
                dwb=["rhodri-mawr", "hywel-dda", "gruffudd-ap-llywelyn", "llywelyn-fawr", "llywelyn-ap-gruffudd"]),
-    "saints": L(WADE_EVANS, SAMSON, GILDAS, ST_DAVID, HENKEN, BARING, WD_EMW, dwb=["dewi-sant", "illtud", "cadog", "samson"]),
+    "saints": L(WADE_EVANS, SAMSON, GILDAS, ST_DAVID, HENKEN, BARING, WD_EMW, YLF.PURSUIT_DAVID, YLF.DEPICTING_DAVID, YLF.SAINTS_CAME, dwb=["dewi-sant", "illtud", "cadog", "samson"]),
     "literature": L(OXF_VERSE, CLANCY, PARRY, GUIDE, JOHNSTON,
                     (P, "Gwyn Jones (ed.)", "The Oxford Book of Welsh Verse in English", "Oxford University Press, 1977",
                      "Welsh poetry in English, from the earliest poets to the twentieth century.", "Barddoniaeth Gymreig yn Saesneg, o’r beirdd cynharaf i’r ugeinfed ganrif."),
@@ -229,7 +230,7 @@ PAGES = {
     "era-roman": L(TACITUS_ANN, TACITUS_AGR, ROMAN_FR, PREHIST, CADW),
     "era-saints": L(GILDAS, NENNIUS, SAMSON, GODODDIN, CHARLES_EDWARDS, WD_EMW, HENKEN),
     "era-kings": L(NENNIUS, BRUT_Y_TYWYSOGYON, LAW_JENKINS, CHARLES_EDWARDS, WD_POWER, MAUND, LLOYD),
-    "era-medieval": L(BRUT_Y_TYWYSOGYON, GERALD, PRYCE_ACTS, ADAM_USK, R_R_DAVIES_AGE, TURVEY, JBS, REVOLT),
+    "era-medieval": L(BRUT_Y_TYWYSOGYON, GERALD, PRYCE_ACTS, ADAM_USK, R_R_DAVIES_AGE, TURVEY, JBS, REVOLT, YLF.LLYWELYN_GREAT, YLF.GLYNDWR_PRINCE),
     "era-tudor": L((P, "William Morgan (trans.)", "Y Beibl Cyssegr-lan", "London, 1588",
                     "The Welsh Bible that gave the language its standard written form.", "Y Beibl Cymraeg a roddodd i’r iaith ei ffurf ysgrifenedig safonol."),
                    BOWEN, GLANMOR,
@@ -240,7 +241,7 @@ PAGES = {
     "era-modern": L(KOM, JOHNES, FED,
                     (B, "John Davies", "Broadcasting and the BBC in Wales", "University of Wales Press, 1994",
                      "How Wales won a voice on radio and television.", "Sut yr enillodd Cymru lais ar y radio a’r teledu."),
-                    TYNGED),
+                    TYNGED, YLF.TRYWERYN_DAWN, YLF.TRYWERYN_AWAKES),
     "era-today": L(JOHNES,
                    (B, "Richard Wyn Jones and Roger Scully", "Wales Says Yes: Devolution and the 2011 Welsh Referendum", "University of Wales Press, 2012",
                     "How Wales voted for law-making powers for its parliament.", "Sut y pleidleisiodd Cymru dros bwerau deddfu i’w senedd."),
@@ -257,14 +258,13 @@ PAGES = {
                          (B, "Wendy Davies", "An Early Welsh Microcosm: Studies in the Llandaff Charters", "Royal Historical Society, 1978",
                           "The kings, land and churches of the south-east in the Llandaff charters.", "Brenhinoedd, tir ac eglwysi’r de-ddwyrain yn siarteri Llandaf."),
                          BARTRUM_EWGT, CHARLES_EDWARDS, LLOYD),
-    "kings-gwynedd": L(BRUT_Y_TYWYSOGYON, BARTRUM_EWGT, LLOYD, MAUND, TURVEY, JBS, R_R_DAVIES_AGE),
+    "kings-gwynedd": L(BRUT_Y_TYWYSOGYON, BARTRUM_EWGT, LLOYD, MAUND, TURVEY, YLF.LLYWELYN_GREAT, JBS, R_R_DAVIES_AGE),
     "kings-powys": L(BRUT_Y_TYWYSOGYON, BARTRUM_EWGT, LLOYD,
                      (B, "David Stephenson", "Medieval Powys: Kingdom, Principality and Lordships, 1132–1293", "Boydell Press, 2016",
                       "The kingdom and princes of Powys in their great age.", "Teyrnas a thywysogion Powys yn eu hoes fawr."),
                      MAUND, R_R_DAVIES_AGE),
     "kings-southwest": L(BRUT_Y_TYWYSOGYON, GERALD, BARTRUM_EWGT, LLOYD,
-                         (B, "Roger Turvey", "The Lord Rhys: Prince of Deheubarth", "Y Lolfa, 2023",
-                          "The prince who made Deheubarth great and held the first eisteddfod.", "Y tywysog a wnaeth Ddeheubarth yn fawr ac a gynhaliodd yr eisteddfod gyntaf."),
+                         YLF.LORD_RHYS,
                          MAUND, R_R_DAVIES_AGE),
     # ---------- saints by region ----------
     "saints-llydaw": L(SAMSON, WADE_EVANS, HENKEN, BARING,
@@ -387,7 +387,7 @@ PAGES = {
                     "The little ports of Cardigan Bay and the ships they built.", "Porthladdoedd bach Bae Ceredigion a’r llongau a adeiladwyd ynddynt."),
                    (B, "David Jenkins", "Shipowners of Cardiff: A Class by Themselves", "University of Wales Press, 1997",
                     "The men who made Cardiff the coal port of the world.", "Y dynion a wnaeth Gaerdydd yn borthladd glo’r byd."),
-                   REFS["world"]["items"][0], ENCYC),
+                   REFS["world"]["items"][0], YLF.WALES_SEA, ENCYC),
 }
 PAGES["topic-law"] = PAGES["laws"]
 PAGES["trail-song"] = PAGES["topic-music"]
@@ -427,6 +427,7 @@ GENERAL = {"timeline", "a-z", "questions", "onthisday", "people", "reference", "
 # keyed by the page's section ids (SHELF in build.py). Same rules: real works, details checked.
 SHELF_EXTRA = {
     "start": [
+        YLF.CHRONOLOGY, YLF.BRIEF_HISTORY, YLF.HIGHLIGHTS,
         (B, "Prys Morgan and David Thomas", "Wales: The Shaping of a Nation", "David and Charles, 1984",
          "How Wales became a nation, told in pictures and plain words.", "Sut y daeth Cymru’n genedl, mewn lluniau a geiriau plaen."),
         (B, "Prys Morgan (ed.)", "The Tempus History of Wales, 25,000 BC – AD 2000", "Tempus, 2001",
@@ -577,3 +578,10 @@ SHELF_EXTRA = {
          "The Welsh women writers of the 1800s.", "Llenorion benywaidd Cymru’r 1800au."),
     ],
 }
+
+# The Mabinogi section (src/mabinogi_tales.py, src/mabinogi_people.py): the tale guides and the people of the tales.
+import refs as _R  # noqa: E402
+PAGES["mabinogi-tales"] = L(_R.MABINOGION, _R.PEDEIR_KEINC, _R.GUEST_MABINOGION, _R.IFANS_MABINOGION, _R.TRIADS, _R.DAVIES_FOUR_BRANCHES,
+    (B, "Hywel Wyn Owen and Richard Morgan", "Dictionary of the Place-Names of Wales", "Gomer, 2007",
+     "The meaning of the place names the tales explain, from Nantlle to Mochdre.", "Ystyr yr enwau lleoedd a eglurir yn y chwedlau, o Nantlle i Fochdre."))
+PAGES["mabinogi-people"] = PAGES["mabinogi-tales"]

@@ -569,6 +569,19 @@ html.cy .news-item.is-new .n-t::after { content: "Newydd" }
 .follow .f-row { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .2rem }
 .follow input { flex: 1 1 12rem; min-width: 0; font: inherit; color: var(--ink); background: var(--night); border: 1px solid var(--line); border-radius: 999px; padding: .65rem 1.1rem }
 .follow input:focus-visible { outline: 2px solid var(--dragon); outline-offset: 2px }
+.f-form { display: grid; gap: .5rem; margin: .2rem 0 0 }
+.f-form .f-row { margin-top: 0 }
+.f-field { display: flex; flex: 1 1 13rem; min-width: 0 }
+.f-field input { width: 100% }
+.f-trap { position: absolute !important; left: -9999px; width: 1px; height: 1px; opacity: 0 }
+.f-busy button { opacity: .7; cursor: progress }
+.f-msg { margin: 0; font-size: .95rem; line-height: 1.5 }
+.f-msg:empty { display: none }
+.f-msg.ok { color: var(--ink); background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--gold); border-radius: 12px; padding: .8rem 1rem }
+.f-msg.err { color: var(--dragon) }
+.f-done .f-row { display: none }
+.follow .f-more { font-size: .92rem; color: var(--muted); text-decoration: none; justify-self: start }
+.follow .f-more:hover { color: var(--dragon) }
 .follow-foot { margin-top: 1.4rem; max-width: 34rem }
 .follow-foot .f-h { font-size: 1.3rem }
 .menu-btn.has-news { position: relative }
@@ -719,3 +732,9 @@ section.page-top { padding-top: clamp(1.5rem, 4vw, 3rem) }
 .ar-circle .ppl .ava { width: 2rem; height: 2rem; font-size: .8rem }
 .ar-circle .ar-more { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.8rem }
 .ar-line b a { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--c) 60%, transparent); text-underline-offset: 3px }
+
+/* Mabinogi tale guides: pictures of the tale (mabinogi-*.html) */
+.mb-figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: 1.4rem; align-items: start }
+.mb-figs figure.photo { margin: 0 }
+.mb-figs figure.photo img { width: 100%; height: 18rem; object-fit: contain; background: #0d1018; border-radius: 10px; display: block }
+.mb-figs figure.photo figcaption { font-size: .82rem; margin-top: .5rem }

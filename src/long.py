@@ -224,13 +224,13 @@ TRAILS = [
            "This trail follows some of them, from a princess on the battlefield to the first woman to sit for a Welsh seat."],
   introCy=["Prin yw’r menywod yn yr hen groniclau, ond fe luniasant Gymru bob cam o’r ffordd: arwain byddinoedd, nyrsio’r clwyfedig, achub yr iaith a newid gwleidyddiaeth.",
            "Mae’r llwybr hwn yn dilyn rhai ohonynt, o dywysoges ar faes y gad i’r fenyw gyntaf i gynrychioli sedd yng Nghymru."],
-  items=[("person","gwenllian"),("event","Gwenllian and the Great Revolt"),("person","jemima-nicholas"),("event","The last invasion of Britain"),("person","betsi-cadwaladr"),("person","lady-llanover"),("person","gwen-john"),("person","megan-lloyd-george")]),
+  items=[("person","buddug"),("person","gwenllian"),("event","Gwenllian and the Great Revolt"),("person","jemima-nicholas"),("event","The last invasion of Britain"),("person","betsi-cadwaladr"),("person","lady-llanover"),("event","Cranogwen edits Y Frythones"),("person","gwen-john"),("person","megan-lloyd-george")]),
  dict(id="sea", en="Wales and the sea", cy="Cymru a’r môr", ill="ship",
   introEn=["Wales has more than 2,700 kilometres of coast, and the sea has brought saints, invaders, kings and trade.",
            "Follow the coast from a Stone Age cave on Gower to the docks that once shipped the world’s coal."],
   introCy=["Mae gan Gymru fwy na 2,700 cilometr o arfordir, a daeth y môr â seintiau, goresgynwyr, brenhinoedd a masnach.",
            "Dilynwch yr arfordir o ogof Oes y Cerrig ar Benrhyn Gŵyr i’r dociau a fu unwaith yn allforio glo’r byd."],
-  items=[("place","paviland"),("event","Rome attacks Ynys Môn"),("place","stdavids"),("event","Rhodri Mawr defeats the Vikings"),("place","dale"),("place","fishguard"),("event","Y Wladfa"),("place","dinorwig"),("place","senedd")]),
+  items=[("place","paviland"),("event","Rome attacks Ynys Môn"),("place","stdavids"),("event","Rhodri Mawr defeats the Vikings"),("place","dale"),("place","fishguard"),("event","Y Wladfa"),("place","dinorwig"),("place","senedd"),("event","The Wales Coast Path")]),
  dict(id="song", en="Chapel and song", cy="Capel a chân", ill="harp",
   introEn=["Wales is called the land of song, and much of that song came from faith: hymns, Bible translation, revival and the eisteddfod.",
            "This trail follows the words and music that kept Welsh alive."],
@@ -284,3 +284,18 @@ PEOPLE_LONG.update(_P2.PEOPLE_LONG)
 # ---------- Owain Gwynedd, the king who became prince (src/owain.py) ----------
 import owain as _OG
 PEOPLE_LONG["owain-gwynedd"] = _OG.PERSON_LONG
+
+# ---------- historic places of importance (src/places3.py) ----------
+import places3 as _PL3
+PLACE_LONG.update(_PL3.LONG)
+# ---------- the kings and princes of Wales, full-length pages (src/princes.py) ----------
+import princes as _PRN
+PEOPLE_LONG.update(_PRN.LONG)
+# full pages behind the home page's "Did you know?" facts (src/factplaces.py)
+import factplaces as _FPL  # noqa: E402
+PLACE_LONG.update(_FPL.LONG)
+
+
+# ---------- the trails added in November 2026 (src/trails.py), newest first ----------
+import trails as _TR
+TRAILS[:0] = _TR.TRAILS

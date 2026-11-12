@@ -52,8 +52,8 @@ EVENTS = [
   "Farming communities raise stone tombs such as Pentre Ifan. Later, bluestones from the Preseli Hills are carried to Stonehenge.",
   "Mae cymunedau amaethyddol yn codi beddrodau cerrig fel Pentre Ifan. Yn ddiweddarach, cludir cerrig gleision o’r Preseli i Gôr y Cewri.",0,"pentreifan","Pentre_Ifan"),
  ("ancient",-2000,1,0,"","Copper from the Great Orme","Copr o’r Gogarth",
-  "Bronze Age miners begin digging what becomes one of the largest prehistoric mines in the world.",
-  "Mae mwynwyr Oes yr Efydd yn dechrau cloddio un o’r mwyngloddiau cynhanesyddol mwyaf yn y byd.",0,"orme","Great_Orme_Mines"),
+  "Bronze Age miners begin digging what becomes one of the largest prehistoric mines in the world.[[cite:orme-antiquity,orme-gsl,orme-guinness]]",
+  "Mae mwynwyr Oes yr Efydd yn dechrau cloddio un o’r mwyngloddiau cynhanesyddol mwyaf yn y byd.[[cite:orme-antiquity,orme-gsl,orme-guinness]]",0,"orme","Great_Orme_Mines"),
  ("ancient",-600,1,0,"","The hillfort tribes","Llwythau’r bryngaerau",
   "Iron Age peoples, among them the Silures, Ordovices, Demetae and Deceangli, build hundreds of hillforts across Wales.",
   "Mae pobloedd Oes yr Haearn, yn eu plith y Silwriaid, yr Ordofigiaid, y Demetae a’r Deceangli, yn codi cannoedd o fryngaerau ledled Cymru.",0,"","Prehistoric_Wales"),
@@ -277,8 +277,8 @@ PLACES = [
   dEn="A burial chamber whose 16-tonne capstone still balances on three uprights, looking out over the Preseli Hills where Stonehenge’s bluestones were quarried.",
   dCy="Siambr gladdu y mae ei maen capan 16 tunnell yn dal i gydbwyso ar dair carreg, gan edrych dros y Preseli lle chwarelwyd cerrig gleision Côr y Cewri."),
  dict(id="orme", en="Great Orme Mines", cy="Mwyngloddiau’r Gogarth", era="ancient", lat=53.333, lon=-3.851, year="c. 2000 BC", ill="cave", src="Great_Orme_Mines",
-  dEn="Bronze Age miners dug kilometres of tunnels for copper ore, using bone and stone tools. Many passages can still be walked.",
-  dCy="Cloddiodd mwynwyr Oes yr Efydd gilometrau o dwneli am fwyn copr gydag offer asgwrn a charreg. Gellir cerdded llawer o’r twneli hyd heddiw."),
+  dEn="Bronze Age miners dug kilometres of tunnels for copper ore, using bone and stone tools.[[cite:orme-antiquity,orme-guinness]] Many passages can still be walked.",
+  dCy="Cloddiodd mwynwyr Oes yr Efydd gilometrau o dwneli am fwyn copr gydag offer asgwrn a charreg.[[cite:orme-antiquity,orme-guinness]] Gellir cerdded llawer o’r twneli hyd heddiw."),
  dict(id="stdavids", en="St Davids", cy="Tyddewi", era="ancient", lat=51.882, lon=-5.269, year="6th century", ill="cross", src="St_Davids_Cathedral",
   dEn="Dewi Sant founded his monastery here. Two pilgrimages to St Davids were once said to equal one to Rome.",
   dCy="Sefydlodd Dewi Sant ei fynachlog yma. Dywedid gynt fod dwy bererindod i Dyddewi gystal ag un i Rufain."),
@@ -355,7 +355,7 @@ PEOPLE = [
  ("gwenllian","medieval","c. 1100–1136","Gwenllian ferch Gruffydd","Gwenllian ferch Gruffydd","Princess of Deheubarth","Tywysoges Deheubarth",
   "Led an army against the Normans at Kidwelly and died in battle. Her death sparked the Great Revolt.",
   "Arweiniodd fyddin yn erbyn y Normaniaid ger Cydweli a bu farw yn y frwydr. Taniodd ei marwolaeth y Gwrthryfel Mawr.","Gwenllian_ferch_Gruffydd"),
- ("yr-arglwydd-rhys","medieval","1132–1197","The Lord Rhys","Yr Arglwydd Rhys","Ruler of Deheubarth","Rheolwr Deheubarth",
+ ("yr-arglwydd-rhys","medieval","1132–1197","The Lord Rhys","Yr Arglwydd Rhys","Prince Rhys ap Gruffudd of Deheubarth","Y Tywysog Rhys ap Gruffudd o Ddeheubarth",
   "Patron of poets and host of the first recorded eisteddfod, at Cardigan in 1176.",
   "Noddwr beirdd a threfnydd yr eisteddfod gyntaf y gwyddys amdani, yn Aberteifi yn 1176.","Rhys_ap_Gruffydd"),
  ("gerallt-gymro","medieval","c. 1146–c. 1223","Gerald of Wales","Gerallt Gymro","Churchman and writer","Clerigwr ac awdur",
@@ -437,19 +437,42 @@ PEOPLE = [
 
 READING = [
  dict(t="John Davies, A History of Wales", n="Penguin, revised 2007. The standard one-volume history.", nCy="Penguin, argraffiad diwygiedig 2007. Y safon mewn un gyfrol."),
+ dict(t="Gwynfor Evans, Land of My Fathers: 2000 Years of Welsh History", n="John Penry Press, 1974; now from Y Lolfa. Two thousand years of the story of Wales, told with pride.", nCy="Gwasg John Penry, 1974; bellach gan y Lolfa. Dwy fil o flynyddoedd o stori Cymru, wedi’u hadrodd gyda balchder. Yn Gymraeg: Aros Mae.", u="YL9780862432652/land-of-my-fathers"),
+ dict(t="Gwynfor Evans, The Fight for Welsh Freedom", n="Y Lolfa. The long struggle of the Welsh to stay a free nation.", nCy="Y Lolfa. Brwydr hir y Cymry i aros yn genedl rydd.", u="YL9780862435158/the-fight-for-welsh-freedom"),
  dict(t="Gwyn A. Williams, When Was Wales?", n="Penguin, 1985. A passionate, provocative history.", nCy="Penguin, 1985. Hanes angerddol a phryfoclyd."),
+ dict(t="Geraint H. Jenkins, A Concise History of Wales", n="Cambridge University Press, 2007. The whole story in one short, well-illustrated book.", nCy="Gwasg Prifysgol Caergrawnt, 2007. Yr hanes cyfan mewn un llyfr byr, llawn lluniau."),
+ dict(t="Gerald Morgan, A Brief History of Wales", n="Y Lolfa, 2008. The whole story in one short, clear book.", nCy="Y Lolfa, 2008. Yr hanes cyfan mewn un llyfr byr a chlir.", u="YL9781847710185/a-brief-history-of-wales"),
+ dict(t="Wendy Davies, Wales in the Early Middle Ages", n="Leicester University Press, 1982. Land, kings, church and people from Rome to the Normans.", nCy="Gwasg Prifysgol Caerlŷr, 1982. Tir, brenhinoedd, eglwys a phobl o Rufain hyd y Normaniaid."),
+ dict(t="Roger Turvey, The Welsh Princes, 1063–1283", n="Longman, 2002. The princes of Gwynedd, Powys and Deheubarth and how they ruled.", nCy="Longman, 2002. Tywysogion Gwynedd, Powys a Deheubarth a’u dull o reoli."),
+ dict(t="Roger Turvey, The Lord Rhys: Prince of Deheubarth", n="Y Lolfa, 2023. The prince who held the first eisteddfod.", nCy="Y Lolfa, 2023. Y tywysog a gynhaliodd yr eisteddfod gyntaf.", u="YL9781800993143/the-lord-rhys-prince-of-deheubarth"),
+ dict(t="Roger Turvey, Llywelyn the Great", n="Y Lolfa, 2023. The prince who ruled almost all of Wales.", nCy="Y Lolfa, 2023. Y tywysog a reolodd bron y cyfan o Gymru.", u="YL9781800993150/llywelyn-the-great"),
+ dict(t="J. Beverley Smith, Llywelyn ap Gruffudd, Prince of Wales", n="University of Wales Press, 1998. The great life of the last native Prince of Wales.", nCy="Gwasg Prifysgol Cymru, 1998. Y cofiant mawr i dywysog brodorol olaf Cymru."),
  dict(t="R. R. Davies, The Age of Conquest: Wales 1063–1415", n="Oxford University Press, 1991. The princes and the conquest.", nCy="Gwasg Prifysgol Rhydychen, 1991. Y tywysogion a’r goncwest."),
  dict(t="R. R. Davies, The Revolt of Owain Glyn Dŵr", n="Oxford University Press, 1995.", nCy="Gwasg Prifysgol Rhydychen, 1995."),
+ dict(t="R. R. Davies, Owain Glyn Dŵr: Prince of Wales", n="Y Lolfa. Owain’s story in a short book for everyone.", nCy="Y Lolfa. Hanes Owain mewn llyfr byr i bawb.", u="YL9781847711274/owain-glyndwr-prince-of-wales"),
+ dict(t="Kenneth O. Morgan, Rebirth of a Nation: Wales 1880–1980", n="Oxford University Press and University of Wales Press, 1981. Modern Wales, from the Liberal age to the eve of devolution.", nCy="Gwasg Prifysgol Rhydychen a Gwasg Prifysgol Cymru, 1981. Cymru fodern, o oes y Rhyddfrydwyr hyd at drothwy datganoli."),
+ dict(t="Rhys Evans, Gwynfor Evans: A Portrait of a Patriot", n="Y Lolfa, 2008. The full life of the man who won S4C.", nCy="Y Lolfa, 2008. Cofiant llawn y gŵr a enillodd S4C. Yn Gymraeg: Rhag Pob Brad.", u="YL9780862439187/gwynfor-evans-a-portrait-of-a-patriot"),
+ dict(t="Wyn Thomas, Tryweryn: A New Dawn?", n="Y Lolfa. The drowning of Capel Celyn and how it woke a nation.", nCy="Y Lolfa. Boddi Capel Celyn a sut y deffrodd genedl.", u="YL9781912631483/tryweryn-a-new-dawn"),
  dict(t="Martin Johnes, Wales since 1939", n="Manchester University Press, 2012.", nCy="Gwasg Prifysgol Manceinion, 2012."),
  dict(t="Jan Morris, Wales: Epic Views of a Small Country", n="Penguin, 1998. History as travel writing.", nCy="Penguin, 1998. Hanes drwy lenyddiaeth teithio."),
 ]
-ONLINE = [
- dict(t="Dictionary of Welsh Biography", tCy="Y Bywgraffiadur Cymreig", u="https://biography.wales/"),
- dict(t="National Library of Wales", tCy="Llyfrgell Genedlaethol Cymru", u="https://www.library.wales/"),
- dict(t="Amgueddfa Cymru – Museum Wales", tCy="Amgueddfa Cymru", u="https://museum.wales/"),
- dict(t="Cadw, historic monuments", tCy="Cadw, henebion", u="https://cadw.gov.wales/"),
- dict(t="People’s Collection Wales", tCy="Casgliad y Werin Cymru", u="https://www.peoplescollection.wales/"),
- dict(t="Coflein, the national monuments record", tCy="Coflein, cofnod henebion cenedlaethol", u="https://coflein.gov.uk/"),
+for _r in READING:
+    if _r.get("u", "").startswith("YL"):
+        _r["u"] = "https://www.ylolfa.com/products/" + _r["u"][2:]
+ONLINE = [  # u: the English site, uCy: its Welsh address (each checked 2026-11-12)
+ dict(t="Dictionary of Welsh Biography", tCy="Y Bywgraffiadur Cymreig", u="https://biography.wales/", uCy="https://bywgraffiadur.cymru/"),
+ dict(t="National Library of Wales", tCy="Llyfrgell Genedlaethol Cymru", u="https://www.library.wales/", uCy="https://www.llyfrgell.cymru/"),
+ dict(t="Welsh Newspapers", tCy="Papurau Newydd Cymru", u="https://newspapers.library.wales/", uCy="https://papuraunewydd.llyfrgell.cymru/"),
+ dict(t="Welsh Journals", tCy="Cylchgronau Cymru", u="https://journals.library.wales/"),
+ dict(t="Archives Wales", tCy="Archifau Cymru", u="https://archives.wales/"),
+ dict(t="Amgueddfa Cymru – Museum Wales", tCy="Amgueddfa Cymru", u="https://museum.wales/", uCy="https://amgueddfa.cymru/"),
+ dict(t="Cadw, historic monuments", tCy="Cadw, henebion", u="https://cadw.gov.wales/", uCy="https://cadw.llyw.cymru/"),
+ dict(t="People’s Collection Wales", tCy="Casgliad y Werin Cymru", u="https://www.peoplescollection.wales/", uCy="https://www.casgliadywerin.cymru/"),
+ dict(t="Royal Commission on the Ancient and Historical Monuments of Wales", tCy="Comisiwn Brenhinol Henebion Cymru", u="https://rcahmw.gov.uk/", uCy="https://cbhc.gov.uk/"),
+ dict(t="Coflein, the national monuments record", tCy="Coflein, cofnod henebion cenedlaethol", u="https://coflein.gov.uk/", uCy="https://coflein.gov.uk/cy/"),
+ dict(t="Cymdeithas yr Iaith: its story since 1962", tCy="Cymdeithas yr Iaith: ei hanes ers 1962", u="https://archif.cymdeithas.cymru/what-is-cymdeithas-yr-iaith"),
+ dict(t="Y Lolfa, the Talybont press", tCy="Y Lolfa, gwasg Tal-y-bont", u="https://www.ylolfa.com/"),
+ dict(t="ffolio: Welsh books from the Books Council of Wales", tCy="ffolio: llyfrau Cymru gan Gyngor Llyfrau Cymru", u="https://www.ffolio.wales/", uCy="https://www.ffolio.cymru/"),
 ]
 
 CENSUS = [[1891,54.4],[1901,49.9],[1911,43.5],[1921,37.1],[1931,36.8],[1951,28.9],[1961,26.0],[1971,20.8],[1981,18.9],[1991,18.7],[2001,20.8],[2011,19.0],[2021,17.8]]
@@ -532,6 +555,8 @@ def _born(p):
     d = p[2]
     if d == "Age of Arthur":  # people known from the tales of Arthur's court (src/arthur_circle.py): just after Arthur
         return 640
+    if d == "The Four Branches":  # people of the Four Branches of the Mabinogi (src/mabinogi_people.py): the age of Brân, before Caradog
+        return 1
     m = _re.search(r"([\d,]+) BC", d)
     if m:
         return -int(m.group(1).replace(",", ""))
@@ -617,6 +642,13 @@ from kingdoms import KINGDOMS
 from places2 import MORE_PLACES
 PLACES = PLACES + MORE_PLACES
 
+# ---------- historic places of importance: royal seats, abbeys, forts, and places to visit (src/places3.py) ----------
+import places3 as _PL3
+PLACES = PLACES + _PL3.NEW
+# ---------- full pages behind the home page facts (src/factplaces.py) ----------
+from factplaces import PLACES as _FACT_PLACES
+PLACES = PLACES + _FACT_PLACES
+
 
 # ---------- proud history (src/pride.py): rewordings, new people and events ----------
 import pride as _PR
@@ -655,10 +687,36 @@ EVENTS = sorted(EVENTS + _BRE, key=lambda ev: ev[1])
 from madog import EVENTS as _MDE
 EVENTS = sorted(EVENTS + _MDE, key=lambda ev: ev[1])
 
+# ---------- How Wales moved the world: the industrial revolution (src/industry.py) ----------
+from industry import EVENTS as _INE
+EVENTS = sorted(EVENTS + _INE, key=lambda ev: ev[1])
+
 # ---------- King Caradog against Rome (src/caradog.py) ----------
 from caradog import EVENTS as _CRE
 EVENTS = sorted(EVENTS + _CRE, key=lambda ev: ev[1])
 
+# ---------- Nest ferch Rhys (src/nest.py) ----------
+from nest import EVENTS as _NSE
+EVENTS = sorted(EVENTS + _NSE, key=lambda ev: ev[1])
+
 # ---------- The coming of Christianity to Britain (src/christianity.py) ----------
 from christianity import EVENTS as _CHE
 EVENTS = sorted(EVENTS + _CHE, key=lambda ev: ev[1])
+
+# ---------- Saint Patrick, the Briton from Wales (src/patrick.py) ----------
+from patrick import EVENTS as _PTE
+EVENTS = sorted(EVENTS + _PTE, key=lambda ev: ev[1])
+
+# ---------- The Aberfan disaster, 1966 (src/aberfan.py) ----------
+from aberfan import EVENTS as _AFE
+EVENTS = sorted(EVENTS + _AFE, key=lambda ev: ev[1])
+
+# ---------- MAC and the Free Wales Army (src/mac.py) ----------
+from mac import EVENTS as _MACE
+EVENTS = sorted(EVENTS + _MACE, key=lambda ev: ev[1])
+# ---------- The drowning of Capel Celyn and Cwm Tryweryn (src/tryweryn.py) ----------
+from tryweryn import EVENTS as _TWE
+EVENTS = sorted(EVENTS + _TWE, key=lambda ev: ev[1])
+# ---------- The Welsh Not and the fight for the language (src/welshnot.py) ----------
+from welshnot import EVENTS as _WNE
+EVENTS = sorted(EVENTS + _WNE, key=lambda ev: ev[1])
