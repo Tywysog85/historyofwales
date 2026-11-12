@@ -885,6 +885,9 @@ SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes
 ]
 
 
+SHELF_ORDER = ["start", "britons", "kings", "saints", "law", "princes", "tudor", "industry", "modern", "lit", "lang", "life"]  # the order on the page: by period, then the themes
+
+
 def _shelf_pages():
     """Every reading list, as (key, page it appears on, title EN, title CY)."""
     out = [(x["id"], f'story-{x["id"]}.html', x["en"], x["cy"]) for x in F.STORIES]
@@ -927,6 +930,11 @@ def bookshelf_page():
                     continue
                 taken.add(wid)
                 works[sid].append(it)
+    for sid, extra in REF2.SHELF_EXTRA.items():   # more good books that no page lists yet
+        for it in extra:
+            if (it[1], it[2]) not in taken:
+                taken.add((it[1], it[2]))
+                works[sid].append(it)
     online, seen = [], set()
     for v in lists.values():
         for it in v["items"]:
@@ -946,8 +954,16 @@ def bookshelf_page():
                 + (f' {bi(f"and {len(on) - 4} more", f"a {len(on) - 4} arall")}' if len(on) > 4 else "") + "</span>") if on else ""
         return f'<li id="{bid(it)}"><span class="ref-w">{e(who)}</span>, {t} <span class="ref-d">({e(det)})</span><span class="ref-n">{bi(nen, ncy)}</span>{more}</li>'
 
-    def bid(it):
-        return "b-" + re.sub(r"[^a-z0-9]+", "-", it[2].lower())[:48].strip("-")
+    def slug(x, n):
+        return re.sub(r"[^a-z0-9]+", "-", x.lower())[:n].strip("-")
+    title_n = {}
+    for v in list(works.values()) + [online]:
+        for it in v:
+            title_n[slug(it[2], 48)] = title_n.get(slug(it[2], 48), 0) + 1
+
+    def bid(it):   # one anchor per book; two books with the same title (three Mabinogions) get the author too
+        t = slug(it[2], 48)
+        return "b-" + t + ("-" + slug(it[1], 24) if title_n[t] > 1 else "")
 
     def group(items):
         out = ""
@@ -958,28 +974,35 @@ def bookshelf_page():
         return out
 
     total = sum(len(v) for v in works.values())
-    shelf_items = [it for v in works.values() for it in v]
-    cards = []
+    shelf_items = [(sid, it) for sid in works for it in works[sid]]
+    order = [x[0] for x in sorted(SHELF, key=lambda x: SHELF_ORDER.index(x[0]))]
+    cards = {sid: [] for sid in order}
     for a in AU.AUTHORS:
-        mine = [it for it in shelf_items if any(m in it[1] for m in a["match"])]
+        mine = [(sid, it) for sid, it in shelf_items if any(m in it[1] for m in a["match"])]
         if not mine:
             print(f"WARNING: author {a['name']} has no books on the shelf")
             continue
+        home = a.get("shelf") or max(order, key=lambda sid: (sum(1 for s2, _ in mine if s2 == sid), -order.index(sid)))
         nm = f'<a href="{a["link"]}">{e(a["name"])}</a>' if a["link"] else e(a["name"])
-        books = "".join(f'<li><a href="#{bid(it)}"><cite>{e(it[2])}</cite></a></li>' for it in mine)
-        cards.append(f'<article class="author" id="a-{a["id"]}"><h3>{nm}</h3>' + (f'<p class="au-d">{e(a["dates"])}</p>' if a["dates"] else "")
-                     + f'<p>{bi(a["en"], a["cy"])}</p><p class="au-b">{bi("Their books here", "Eu llyfrau yma")}</p><ul>{books}</ul></article>')
-    authors_html = (f'<section class="authors-sec" id="authors" aria-labelledby="h-authors"><h2 id="h-authors">{bi("The authors", "Yr awduron")}</h2>'
-                    f'<p class="refs-i">{bi("The historians, scholars and writers behind the books, and what each gave to the story of Wales.", "Yr haneswyr, yr ysgolheigion a’r awduron y tu ôl i’r llyfrau, a’r hyn a roddodd pob un i stori Cymru.")}</p>'
-                    f'<div class="author-grid">{"".join(cards)}</div></section>')
-    chips = f'<a class="chip" href="#authors">{bi("The authors", "Yr awduron")}</a>' + "".join(f'<a class="chip" href="#{sid}">{bi(en, cy)}</a>' for sid, en, cy, _ in SHELF if works[sid]) + f'<a class="chip" href="#online">{bi("Online", "Ar-lein")}</a>'
-    body = "".join(f'<section class="refs shelf" id="{sid}" aria-labelledby="h-{sid}"><h2 id="h-{sid}">{bi(en, cy)}</h2>{group(works[sid])}</section>' for sid, en, cy, _ in SHELF if works[sid])
+        books = "".join(f'<li><a href="#{bid(it)}"><cite>{e(it[2])}</cite></a></li>' for _, it in mine)
+        cards[home].append(f'<article class="author" id="a-{a["id"]}"><h3>{nm}</h3>' + (f'<p class="au-d">{e(a["dates"])}</p>' if a["dates"] else "")
+                           + f'<p>{bi(a["en"], a["cy"])}</p><p class="au-b">{bi("Their books here", "Eu llyfrau yma")}</p><ul>{books}</ul></article>')
+    n_auth = sum(len(v) for v in cards.values())
+    heads = {sid: (en, cy) for sid, en, cy, _ in SHELF}
+
+    def shelf_sec(sid):
+        en, cy = heads[sid]
+        au = (f'<h3 class="shelf-sub">{bi("The authors", "Yr awduron")}</h3><div class="author-grid">{"".join(cards[sid])}</div>' if cards[sid] else "")
+        return (f'<section class="refs shelf" id="{sid}" aria-labelledby="h-{sid}"><h2 id="h-{sid}">{bi(en, cy)}</h2>{au}'
+                + f'{group(works[sid])}</section>')
+    chips = "".join(f'<a class="chip" href="#{sid}">{bi(*heads[sid])}</a>' for sid in order if works[sid]) + f'<a class="chip" href="#online">{bi("Online", "Ar-lein")}</a>'
+    body = "".join(shelf_sec(sid) for sid in order if works[sid])
     body += f'<section class="refs shelf" id="online" aria-labelledby="h-online"><h2 id="h-online">{bi("Online", "Ar-lein")}</h2>{group(online)}</section>'
-    intro = bi(f"The writers who told the story of Wales, and every book and old text named in the reading lists across this site, {total} in all, gathered in one place. Under each one you will find the pages that use it. Any library in Wales can find them for you.",
-               f"Yr awduron a adroddodd stori Cymru, a phob llyfr a hen destun a enwir yn y rhestrau darllen ar draws y wefan, {total} i gyd, wedi’u casglu mewn un lle. O dan bob un fe welwch y tudalennau sy’n ei ddefnyddio. Gall unrhyw lyfrgell yng Nghymru eu cael i chi.")
+    intro = bi(f"{n_auth} writers who told the story of Wales and {total} books and old texts, from the Britons to today, grouped by period. In each period you meet the authors first, then their books. Under a book you will find the pages of this site that use it. Any library in Wales can find them for you.",
+               f"{n_auth} o awduron a adroddodd stori Cymru a {total} o lyfrau a hen destunau, o’r Brythoniaid hyd heddiw, wedi’u trefnu fesul cyfnod. Ym mhob cyfnod fe gwrddwch â’r awduron yn gyntaf, ac yna eu llyfrau. O dan lyfr fe welwch dudalennau’r wefan hon sy’n ei ddefnyddio. Gall unrhyw lyfrgell yng Nghymru eu cael i chi.")
     main = (hero("tudor", f'<a href="index.html">{SITE}</a>', "book", "Books and authors", "Llyfrau ac awduron", "Books and authors of Welsh history", "Llyfrau ac awduron hanes Cymru",
                  "The old sources and the historians’ books behind this site, chosen to read next.", "Yr hen ffynonellau a llyfrau’r haneswyr y tu ôl i’r wefan hon, i’w darllen nesaf.", art="book")
-            + section(f'<div class="narrow"><p class="lede">{intro}</p><nav class="chips shelf-chips" aria-label="{bi("Sections", "Adrannau", "span")}">{chips}</nav>{authors_html}<h2 class="shelf-h">{bi("The books", "Y llyfrau")}</h2>{body}</div>', top=True))
+            + section(f'<div class="narrow"><p class="lede">{intro}</p><nav class="chips shelf-chips" aria-label="{bi("Sections", "Adrannau", "span")}">{chips}</nav>{body}</div>', top=True))
     ld = {"@context": "https://schema.org", "@type": "CollectionPage", "name": "Books and authors of Welsh history", "inLanguage": ["en", "cy"],
           "hasPart": [{"@type": "Book" if it[0] == "b" else "CreativeWork", "name": it[2], "author": it[1]} for v in works.values() for it in v]}
     return page("books-and-authors.html", "Books and authors of Welsh history · History of Wales",

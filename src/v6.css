@@ -648,8 +648,6 @@ html.cy .news-item.is-new .n-t::after { content: "Newydd" }
 section.page-top { padding-top: clamp(1.5rem, 4vw, 3rem) }
 /* Books and authors page (books-and-authors.html, bookshelf_page in build.py, src/authors.py) */
 .shelf-chips { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.2rem 0 2rem }
-.authors-sec h2, .shelf-h { font-size: clamp(1.6rem, 3.2vw, 2.2rem); margin: 0 0 .6rem; color: var(--ink) }
-.shelf-h { margin-top: 3rem }
 .author-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 1rem; margin-top: 1rem }
 .author { padding: 1.1rem 1.2rem; border: 1px solid var(--line); border-radius: var(--r); background: var(--card); font-size: .95rem; line-height: 1.55; color: #dcdee4; scroll-margin-top: 5rem }
 .author h3 { margin: 0; font-size: 1.15rem; color: var(--ink) }
@@ -664,3 +662,9 @@ section.page-top { padding-top: clamp(1.5rem, 4vw, 3rem) }
 @media print { .author { border-color: #999; background: none; color: #000 } .shelf-chips { display: none } }
 .author h3 + p:not(.au-d) { margin-top: .5rem }
 .refs .refs-all { margin: 1.3rem 0 0; font-size: .92rem } .refs .refs-all a { color: var(--gold); text-decoration: none; font-weight: 600 }
+/* authors sit inside each period's box on the Books and authors page */
+.shelf .author-grid { margin: .4rem 0 .6rem }
+.shelf .author { background: color-mix(in srgb, var(--ink) 4%, transparent) }
+.shelf .author h3 { margin: 0; font-size: 1.15rem; letter-spacing: normal; text-transform: none; color: var(--ink) }
+.shelf .author ul { list-style: disc; padding-left: 1.1rem; gap: .2rem }
+.shelf .author li { padding-left: 0; border-left: 0; font-size: .95rem }

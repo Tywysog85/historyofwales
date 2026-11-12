@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "More books and authors, by period", "Rhagor o lyfrau ac awduron, fesul cyfnod",
+     "The Books and authors page now holds 251 books and 75 writers, grouped by period from the Britons to today. New here: Norman Davies, Prys Morgan, Wynford Vaughan-Thomas, Leslie Alcock, Kenneth Jackson on Y Gododdin, Dai Smith, Peter Lord, and Daniel Owen, Hedd Wyn, Kate Roberts, Dylan Thomas, Waldo Williams and R. S. Thomas.",
+     "Mae’r dudalen Llyfrau ac awduron bellach yn cynnwys 251 o lyfrau a 75 o awduron, fesul cyfnod o’r Brythoniaid hyd heddiw. Yn newydd yma: Norman Davies, Prys Morgan, Wynford Vaughan-Thomas, Leslie Alcock, Kenneth Jackson ar y Gododdin, Dai Smith, Peter Lord, a Daniel Owen, Hedd Wyn, Kate Roberts, Dylan Thomas, Waldo Williams ac R. S. Thomas.",
+     "books-and-authors.html"),
     ("2026-11-12", "Books and authors", "Llyfrau ac awduron",
      "A new page gathers every book in the site’s reading lists, 188 in all, from John Davies’s A History of Wales and Gwynfor Evans’s Land of My Fathers to the Mabinogion, with notes on the historians and writers behind them, Alan Wilson and Baram Blackett among them.",
      "Mae tudalen newydd yn casglu pob llyfr yn rhestrau darllen y wefan, 188 i gyd, o Hanes Cymru John Davies ac Aros Mae Gwynfor Evans i’r Mabinogion, gyda nodiadau ar yr haneswyr a’r awduron y tu ôl iddynt, Alan Wilson a Baram Blackett yn eu plith.",
