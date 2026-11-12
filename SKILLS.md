@@ -114,6 +114,12 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - Wikimedia answers "429 too many requests" if downloads go too fast, so the script waits between files and tries again.
 - Every workflow that commits back now runs `git pull --rebase` before `git push`, so it cannot collide with other work pushed at the same time.
 
+### A Welsh voice for every play button (November 2026)
+- `.github/workflows/welsh-voice.yml` runs on GitHub (Wikimedia and Hugging Face are blocked from Claude's cloud computer). Start it from the Actions tab, or set `branch` in `tools/voice_request.json` to your `claude/` branch and push. It builds the site, runs `tools/fetch_audio.py` (real Lingua Libre speakers, now also found by Commons search when a file is named some other way), then `tools/make_voice.py` for whatever is still missing.
+- `make_voice.py` speaks the missing words with Piper's Welsh voices (trained on Bangor University techiaith recordings). A Welsh speech recogniser (techiaith wav2vec2) writes down what each test clip says; the voice whose clips come back closest to the spelling wins. The real recordings go through the same test as a yardstick. Scores: `_research/voice/report.txt`.
+- Voice clips are credited in `src/audio_credits.json` with `"kind": "voice"`. A real recording always replaces a voice clip when one appears; your own MP3s are never touched. Set `"redo": true` in `tools/voice_request.json` to remake every voice clip.
+- New Welsh words or phrases added to the site get their sound the next time the workflow runs; until then the play button falls back to the device's own voice.
+
 ### A fuller timeline (November 2026)
 - New events go in `src/events2.py`, in the same shape as `EVENTS` in `data.py`, with the age written out (ancient, roman, saints, kings, medieval, tudor, industrial, modern, today). `data.py` adds them at the very end and stops if a place id does not exist.
 - Give a day ("MM-DD") only when it is certain: dated events also feed On this day and Today's picture.
@@ -318,7 +324,7 @@ Learnt while expanding Arthur's page (`src/arthur.py`).
 - Everything is in `src/cymraeg.py`: `WORDS` (one per day: word, sound guide, meaning, a Welsh example with its English, a history note in both languages, and a link), `FIXED_DAYS` (dates that always get the same word, such as Gŵyl Dewi on 1 March), `PHRASES` (the sections on `welsh.html`) and `LETTERS` (how Welsh sounds).
 - `build.py` writes `welsh.js`: the words as data, then `src/welsh.js`. Ordinary days take the next word from a shuffled order that is fixed by a seed, so every visitor sees the same word on the same date and the order only changes when words are added. The day comes from the visitor's own clock. Raise `WELSH_JS_VER` in `build.py` when `src/welsh.js` changes, so phones fetch the new file.
 - Any element with `data-wotd` becomes a word-of-the-day card (home page language section and `welsh.html`); `data-wotd-week` lists the last seven days. Any button with `data-hear="Welsh text"` and `data-guide="sound guide"` plays it.
-- Sound: a matching MP3 in `src/static/audio/` is played first (file name = the Welsh in lower case, accents dropped, spaces as hyphens, e.g. `bore-da.mp3`, `gwyl-dewi.mp3`). Otherwise the device speaks: a Welsh voice if it has one (Microsoft Edge on Windows does), else an English voice reading the sound guide. Credit any freely licensed recording in `AUDIO_CREDITS`; the credit then shows on `welsh.html`.
+- Sound: a matching MP3 in `src/static/audio/` is played first (file name = the Welsh in lower case, accents dropped, spaces as hyphens, e.g. `bore-da.mp3`, `gwyl-dewi.mp3`). Every button has one (see "A Welsh voice for every play button"); only a brand-new word without an MP3 falls back to the device's voice. Credit any freely licensed recording in `AUDIO_CREDITS`; the credit then shows on `welsh.html`.
 - Wikimedia Commons and Lingua Libre (free Welsh recordings) cannot be reached from Claude's cloud sessions, so recordings have to be downloaded on the PC or recorded by a Welsh speaker.
 
 ### Saints of Wales pages (November 2026)

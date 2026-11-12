@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Hear real Welsh on every play button", "Clywch Gymraeg go iawn ar bob botwm sain",
+     "Every Welsh word and phrase on the site now plays proper Welsh: real speakers from Lingua Libre where they have recorded it, and Bangor University’s Welsh voice for the rest, the same on every phone and computer.",
+     "Mae pob gair ac ymadrodd Cymraeg ar y wefan bellach yn chwarae Cymraeg iawn: siaradwyr go iawn o Lingua Libre lle maen nhw wedi’i recordio, a llais Cymraeg Prifysgol Bangor ar gyfer y gweddill, yr un fath ar bob ffôn a chyfrifiadur.",
+     "welsh.html#voices"),
     ("2026-11-12", "Every tale of the Mabinogion, with a guide and a map", "Pob chwedl yn y Mabinogion, gyda thywysydd a map",
      "Guides to Culhwch and Olwen, the Dream of Macsen Wledig, Lludd and Llefelys, the Dream of Rhonabwy, the three romances of Owain, Peredur and Geraint, and the Tale of Taliesin, each with its places in Wales on a map; and 11 more people, from Ceridwen and Ysbaddaden Bencawr to Lludd, Llefelys and Luned.",
      "Tywysyddion i Culhwch ac Olwen, Breuddwyd Macsen Wledig, Lludd a Llefelys, Breuddwyd Rhonabwy, tair rhamant Owain, Peredur a Geraint, a Hanes Taliesin, pob un â’i lleoedd yng Nghymru ar fap; ac 11 yn rhagor o bobl, o Geridwen ac Ysbaddaden Bencawr i Ludd, Llefelys a Luned.",

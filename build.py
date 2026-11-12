@@ -2753,17 +2753,29 @@ def welsh_page():
     credits = ""
     if CYM.AUDIO_CREDITS:
         credits = "<p>" + bi("Recordings:", "Recordiadau:") + " " + "; ".join(f'{e(f)}: <a href="{e(u)}">{e(who)}</a>, {e(lic)}' for f, (who, lic, u) in CYM.AUDIO_CREDITS.items()) + "</p>"
-    if LL_CREDITS:  # Lingua Libre recordings (tools/fetch_audio.py), grouped by speaker
-        by = {}
+    if LL_CREDITS:  # real speakers (tools/fetch_audio.py), grouped by speaker; then the Welsh voice (tools/make_voice.py)
+        by, made = {}, []
         for k, c in LL_CREDITS.items():
-            if k in AUDIO_FILES:
+            if k not in AUDIO_FILES:
+                continue
+            if c.get("kind") == "voice":
+                made.append(c)
+            else:
                 by.setdefault((c["speaker"], c["licence"]), []).append(c)
+        n = sum(len(v) for v in by.values())
         if by:
-            credits += ("<details class=\"cyw-credits\"><summary>" + bi(f"Real Welsh voices: {sum(len(v) for v in by.values())} recordings from Lingua Libre, with thanks to the speakers",
-                                                                         f"Lleisiau Cymraeg go iawn: {sum(len(v) for v in by.values())} o recordiadau o Lingua Libre, gyda diolch i’r siaradwyr") + "</summary><p>"
+            credits += ("<details class=\"cyw-credits\" id=\"voices\" open><summary>" + bi(f"Real Welsh voices: {n} recordings from Lingua Libre, with thanks to the speakers",
+                                                                         f"Lleisiau Cymraeg go iawn: {n} o recordiadau o Lingua Libre, gyda diolch i’r siaradwyr") + "</summary><p>"
                         + "</p><p>".join(f'<b>{e(who)}</b> ({e(lic)}): ' + ", ".join(f'<a href="{e(c["page"])}" lang="cy">{e(c["text"])}</a>' for c in sorted(cs, key=lambda c: c["text"].lower()))
-                                         for (who, lic), cs in sorted(by.items(), key=lambda x: -len(x[1]))) + "</p></details>")
-    note = (f'<div class="cyw-note"><p>{bi("Where a real recording of a word is available, the speaker button plays it. Otherwise your device reads the word aloud: devices with a Welsh voice installed, such as Microsoft Edge on Windows, speak real Welsh, and others read the sound guide in English.", "Lle mae recordiad go iawn o air ar gael, mae’r botwm sain yn ei chwarae. Fel arall mae eich dyfais yn darllen y gair yn uchel: mae dyfeisiau sydd â llais Cymraeg, fel Microsoft Edge ar Windows, yn siarad Cymraeg go iawn, ac mae eraill yn darllen y canllaw sain yn Saesneg.")}</p>'
+                                         for (who, lic), cs in sorted(by.items(), key=lambda x: -len(x[1]))) + "</p>")
+            if made:
+                c0 = made[0]
+                credits += ("<p>" + bi(f"The other {len(made)} words and phrases are spoken by a Welsh computer voice trained by Bangor University’s language technology unit (techiaith), run with the open Piper speech engine",
+                                       f"Mae’r {len(made)} o eiriau ac ymadroddion eraill yn cael eu dweud gan lais cyfrifiadur Cymraeg a hyfforddwyd gan Uned Technolegau Iaith Prifysgol Bangor (techiaith), drwy’r peiriant lleferydd agored Piper")
+                            + f' (<a href="https://huggingface.co/datasets/techiaith/bu-tts-cy-en">BU-TTS</a>, {e(c0.get("licence", "").replace("CC-BY", "CC BY"))}; <a href="{e(c0["page"])}">Piper</a>). '
+                            + bi("A real speaker’s recording replaces it whenever one is shared on Lingua Libre.", "Daw recordiad siaradwr go iawn yn ei le pan rennir un ar Lingua Libre.") + "</p>")
+            credits += "</details>"
+    note = (f'<div class="cyw-note"><p>{bi("Every speaker button plays real Welsh: a Welsh speaker’s own recording where one has been shared on Lingua Libre, and otherwise Bangor University’s Welsh voice. You hear the same sound on every phone and computer.", "Mae pob botwm sain yn chwarae Cymraeg go iawn: recordiad siaradwr Cymraeg lle mae un wedi’i rannu ar Lingua Libre, a llais Cymraeg Prifysgol Bangor fel arall. Rydych chi’n clywed yr un sain ar bob ffôn a chyfrifiadur.")}</p>'
             f'<p>{bi("In the sound guides, capital letters show the stressed syllable, kh is the ch of loch, and hl is the Welsh ll.", "Yn y canllawiau sain, mae priflythrennau’n dangos y sillaf acennog, kh yw ch yn loch, a hl yw’r ll Gymraeg.")}</p>{credits}</div>')
     main = (hero("modern", f'<a href="index.html">{SITE}</a> / <a href="index.html#language">{bi("Language", "Iaith")}</a>', "book", "Learn Welsh", "Dysgu Cymraeg",
                  "Speak a little Cymraeg", "Siaradwch ychydig o Gymraeg",

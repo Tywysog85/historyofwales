@@ -6,7 +6,8 @@ for a Lingua Libre recording of exactly that text, preferring the speakers who r
 voices stay consistent. Each file is trimmed of silence, evened in loudness and saved as <slug>.mp3, named the same way
 the play buttons look for it (lower case, accents dropped, spaces and punctuation as hyphens). The speaker, licence and
 Commons page of each go into src/audio_credits.json, which welsh.html shows. MP3s that are not in that file (your own
-recordings) are never touched.
+recordings) are never touched. A clip made by the Welsh computer voice (tools/make_voice.py, "kind": "voice") is
+replaced as soon as a real recording of the same words turns up.
 
 Wikimedia is blocked from Claude's cloud computer, so this runs on GitHub: .github/workflows/fetch-audio.yml (start it
 from the Actions tab, or it runs by itself when this file changes on a claude/ branch). Needs ffmpeg.
@@ -101,6 +102,33 @@ def recordings():
     return found
 
 
+AUDIO_EXT = re.compile(r"\.(?:wav|ogg|oga|flac|mp3)$", re.I)
+PREFIX = re.compile(r"^(?:LL-Q9309 \(cym\)-[^-]+-|Cy-gb-|Cy-|Welsh[- ]|cy[- ])", re.I)
+FREE = re.compile(r"^(?:CC0|CC BY(?:-SA)? [\d.]+|Public domain|PD)", re.I)
+
+
+def search_more(texts, have):
+    """Recordings named some other way (e.g. "Cy-diolch.ogg" outside the categories): ask Commons search for each text
+    that has none yet, and keep only audio files whose name, without prefix and ending, is exactly that text."""
+    added = 0
+    for t in texts:
+        if key(t) in have or len(key(t)) < 2:
+            continue
+        r = api(action="query", list="search", srsearch=f'intitle:"{key(t)}" filetype:audio', srnamespace="6", srlimit="20")
+        for m in r.get("query", {}).get("search", []):
+            title = m["title"]
+            name = title[5:] if title.startswith("File:") else title
+            if not AUDIO_EXT.search(name):
+                continue
+            core = PREFIX.sub("", AUDIO_EXT.sub("", name)).replace("_", " ")
+            if key(core) == key(t):
+                lm = LL.match(title)
+                have.setdefault(key(t), []).append((title, lm.group("who") if lm else ""))
+                added += 1
+        time.sleep(0.4)
+    print(f"Commons search found {added} more recordings")
+
+
 def info(titles):
     out = {}
     for i in range(0, len(titles), 40):
@@ -132,6 +160,7 @@ def main():
     credits = json.load(open(CREDITS, encoding="utf-8")) if os.path.exists(CREDITS) else {}
     texts = wanted()
     have = recordings()
+    search_more(texts, have)
     # Speakers who recorded most of our words come first, so neighbouring buttons tend to share a voice.
     score = {}
     for t in texts:
@@ -154,6 +183,9 @@ def main():
         for s, (t, title) in sorted(picks.items()):
             m = meta.get(title)
             if not m or not m["url"]:
+                continue
+            if m["licence"] and not FREE.match(m["licence"]):
+                print("  not a free licence, skipped:", title, m["licence"])
                 continue
             if credits.get(s, {}).get("file") == title and os.path.exists(os.path.join(OUT, s + ".mp3")):
                 continue
@@ -180,7 +212,9 @@ def main():
         json.dump(dict(sorted(credits.items())), f, ensure_ascii=False, indent=1)
         f.write("\n")
     print(f"Saved {done} new recordings; {len(credits)} recordings credited in {CREDITS}")
-    missing = [t for t in texts if slug(t) not in credits and not os.path.exists(os.path.join(OUT, slug(t) + ".mp3"))]
+    def real(s):
+        return (s in credits and credits[s].get("kind") != "voice") or (s not in credits and os.path.exists(os.path.join(OUT, s + ".mp3")))
+    missing = [t for t in texts if not real(slug(t))]
     print(f"Still no recording for {len(missing)}: " + ", ".join(missing[:80]))
 
 
