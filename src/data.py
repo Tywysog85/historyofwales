@@ -530,6 +530,8 @@ _ERA_ORDER = {e["id"]: i for i, e in enumerate(ERAS)}
 
 def _born(p):
     d = p[2]
+    if d == "Age of Arthur":  # people known from the tales of Arthur's court (src/arthur_circle.py): just after Arthur
+        return 640
     m = _re.search(r"([\d,]+) BC", d)
     if m:
         return -int(m.group(1).replace(",", ""))
@@ -660,3 +662,7 @@ EVENTS = sorted(EVENTS + _CRE, key=lambda ev: ev[1])
 # ---------- Nest ferch Rhys (src/nest.py) ----------
 from nest import EVENTS as _NSE
 EVENTS = sorted(EVENTS + _NSE, key=lambda ev: ev[1])
+
+# ---------- The coming of Christianity to Britain (src/christianity.py) ----------
+from christianity import EVENTS as _CHE
+EVENTS = sorted(EVENTS + _CHE, key=lambda ev: ev[1])

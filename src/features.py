@@ -186,6 +186,7 @@ LEGENDS = [
   hCy="Roedd Meddygon Myddfai’n bobl go iawn. Roedd Rhiwallon a’i feibion yn feddygon i Rys Gryg, tywysog Deheubarth, ar ddechrau’r drydedd ganrif ar ddeg, ac mae eu meddyginiaethau llysieuol ar glawr yn Llyfr Coch Hergest. Bu teuluoedd a hawliai eu bod yn ddisgynyddion iddynt yn ymarfer meddygaeth o gwmpas Myddfai hyd at y 1800au. Rhoddodd y chwedl i linach o feddygon gwlad darddiad teilwng o’u dawn."),
 
  dict(id="branwen", era="ancient", art="bird", place="Harlech · Ynys Môn",
+  links=[("story-bran.html", "Brân Fendigaid, the Blessed: the long read", "Bendigeidfran: yr erthygl"), ("person-bran-fendigaid.html", "Brân the Blessed", "Bendigeidfran")],
   en="Branwen and the starling", cy="Branwen a’r ddrudwen",
   sumEn="A marriage meant to bring peace between Wales and Ireland ends in the ruin of both.", sumCy="Mae priodas a oedd i ddod â heddwch rhwng Cymru ac Iwerddon yn gorffen mewn distryw i’r ddwy.",
   pEn=["Bendigeidfran, Brân the Blessed, was king of the Island of the Mighty, and so huge that no house could hold him. From the rock of Harlech he saw the ships of Matholwch, king of Ireland, who had come to ask for the hand of his sister Branwen. The match was made. But Branwen’s half-brother Efnysien, who had not been asked, mutilated the Irish king’s horses in his fury, and though Brân paid for the insult with gifts, it was not forgotten.",
@@ -384,7 +385,8 @@ import brutus as _BR  # Brutus of Troy and the Britons long read (src/brutus.py)
 import celts as _CE  # Britons, not Celts: Edward Lhuyd and the name 'Celtic' (src/celts.py)
 import madog as _MD  # Prince Madog's voyage to America and the Welsh Indians (src/madog.py)
 import caradog as _CR  # King Caradog (Caratacus) against Rome, and his family in Rome (src/caradog.py)
+import christianity as _CH  # The coming of Christianity: the first Christians, Joseph, Lucius, Brân (src/christianity.py)
 import macsen as _MX  # Macsen Wledig, the emperor from Britain (src/macsen.py)
 import nest as _NS  # Nest ferch Rhys, princess of Deheubarth (src/nest.py)
 import rhys as _RH  # Prince Rhys ap Gruffudd, the Lord Rhys (src/rhys.py)
-STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY, _NS.STORY, _RH.STORY]
+STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY, _NS.STORY, _RH.STORY] + _CH.STORIES

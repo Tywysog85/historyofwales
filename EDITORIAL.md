@@ -29,6 +29,8 @@ A Welsh person anywhere in the world, or anyone with a link to Wales, should fin
 | Llanilltud Fawr | The oldest centre of learning in Britain. |
 | Vikings and Normans | No Viking kingdom took root in Wales. The Normans took England in five years and needed 216 for Wales (1067 to 1283). |
 | The front page tagline | "A land of kings, princes, castles, poets, and saints. Built on coal, slate, iron, copper, and wool." Lower case, as written. |
+| The nine ages | Wherever visitors choose between the ages (home page, Menu, footer, filters, next/previous buttons), each name goes with its dates, e.g. "The Age of Kings 800 – 1100", "The Age of Princes 1100 – 1485" (Ifan, 12 November 2026). Each age has one short question on the home page, in both languages (`ERA_Q` in `build.py`). |
+| Where to begin | The home page opens with three ways in beside the introduction: "Explore the nine ages", "Find a place on the map" and "Follow a themed trail". The Today section (On this day, daily challenge, Did you know, New on the site) comes after the nine ages (Ifan, 12 November 2026). |
 
 ## Newest first
 
