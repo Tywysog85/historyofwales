@@ -1,6 +1,10 @@
 {"branch": "claude/project-thread-2cwxwu",
- "out": "_research/mac2",
- "max": 120,
- "categories": ["Category:Protest at the official opening of Llyn Celyn", "Category:Protest in Liverpool against flooding of the Tryweryn Valley", "Category:Flags associated with Welsh nationalism", "Category:Temple of Peace and Health", "Category:Cofiwch Dryweryn"],
- "searches": ["Free Wales Army", "Abergele 1969", "Clywedog dam", "Vyrnwy aqueduct", "Elan aqueduct"],
- "files": ["File:Flag of the Free Wales Army.png", "File:Temple of Peace and Health, Cardiff.JPG"]}
+ "out": "_research/mac3",
+ "max": 10,
+ "categories": [],
+ "searches": [],
+ "files": [],
+ "download": ["File:Cofia 1282- Rali Gŵyl Dewi, a protest against the investiture (1537987).jpg",
+              "File:Protest during the official opening ceremony of Llyn Celyn, Tryweryn (1460010).jpg",
+              "File:Protest during the official opening ceremony of Llyn Celyn, Tryweryn (1459988).jpg",
+              "File:Protest during the official opening ceremony of Llyn Celyn, Tryweryn (1459992).jpg"]}

@@ -1,6 +1,8 @@
 """Look up candidate pictures on Wikimedia Commons, on GitHub (Commons is blocked from Claude's cloud computer).
 
-Reads tools/commons_research_in.json: {"branch": "<your claude/ branch>", "out": "<folder>", "categories": [...], "searches": [...], "files": [...]}.
+Reads tools/commons_research_in.json: {"branch": "<your claude/ branch>", "out": "<folder>", "categories": [...], "searches": [...], "files": [...],
+"download": [...]}. Files listed under "download" are also saved full size (fits 1400 x 1400) as <folder>/full/<k>.jpg, ready to be
+made into gallery pictures.
 The workflow only runs it on the branch named in "branch" (or when started by hand), so set that to your own branch.
 For every file found it records the title, size, licence, author and description, and saves a small preview JPEG
 (fits 500 x 500) so the pictures can be looked at before any is used. Writes <folder>/found.json and <folder>/<n>.jpg.
@@ -86,6 +88,20 @@ def main():
             except Exception as err:  # noqa: BLE001
                 f["thumb_error"] = str(err)
             time.sleep(0.3)
+    for k, f in enumerate(cfg.get("download", [])):  # full-size copies (fits 1400 x 1400) of the pictures chosen, for the site
+        f = f if f.startswith("File:") else "File:" + f
+        try:
+            r = api(action="query", prop="imageinfo", titles=f, iiprop="url", iiurlwidth="1400")
+            u = r["query"]["pages"][0]["imageinfo"][0]["thumburl"]
+            from PIL import Image
+            im = Image.open(io.BytesIO(get(u, raw=True))).convert("RGB")
+            im.thumbnail((1400, 1400))
+            os.makedirs(os.path.join(out, "full"), exist_ok=True)
+            im.save(os.path.join(out, "full", f"{k}.jpg"), quality=90)
+            found.append(dict(title=f, why="download", full=f"full/{k}.jpg", w=im.width, h=im.height))
+        except Exception as err:  # noqa: BLE001
+            found.append(dict(title=f, why="download", error=str(err)))
+        time.sleep(0.5)
     json.dump(dict(found=found, subcats=where.get("_subcats", {})), open(os.path.join(out, "found.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(len(found), "files")
 
