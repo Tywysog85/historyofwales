@@ -477,6 +477,396 @@ CITES["pl-adam-usk-caeo"] = dict(short=("Adam of Usk", "Adda o Frynbuga"), t="Ch
           "Mae Adda o Frynbuga, a ysgrifennai ar y pryd, yn adrodd hanes Llywelyn ap Gruffudd Fychan o Gaeo, a roddwyd i farwolaeth yn Llanymddyfri yn 1401, ac a ddewisodd farw o’i wirfodd yn hytrach na bradychu."),
     url="https://archive.org/details/chroniconadaedeu00adamuoft", lang="en")
 
+
+
+# ======================================================================================================
+# Batch 2: saints, abbeys and holy places
+# ======================================================================================================
+NEW += [
+ P("vallecrucis", "Valle Crucis Abbey", "Abaty Glyn y Groes", "medieval", 52.985, -3.187, "1201", "cross", "Valle_Crucis_Abbey",
+   "The Cistercian abbey of the princes of northern Powys, founded in 1201 near Llangollen and named after the Pillar of Eliseg. Poets praised its feasts, and Guto’r Glyn spent his last years here.",
+   "Abaty Sistersaidd tywysogion gogledd Powys, a sefydlwyd yn 1201 ger Llangollen ac a enwyd ar ôl Colofn Eliseg. Canmolai’r beirdd ei wleddoedd, a threuliodd Guto’r Glyn ei flynyddoedd olaf yma."),
+ P("penmon", "Penmon Priory and St Seiriol’s Well", "Priordy Penmon a Ffynnon Seiriol", "saints", 53.305, -4.056, "6th century", "cross", "Penmon_Priory",
+   "Saint Seiriol founded a monastery here at the eastern tip of Ynys Môn in the 500s. His holy well, a carved cross of the 900s and a church of the 1100s still stand.",
+   "Sefydlodd Seiriol Sant fynachlog yma ym mhen dwyreiniol Ynys Môn yn y 500au. Mae ei ffynnon sanctaidd, croes gerfiedig o’r 900au ac eglwys o’r 1100au yn dal i sefyll."),
+ P("talley", "Talley Abbey", "Abaty Talyllychau", "medieval", 51.977, -3.990, "1180s", "cross", "Talley_Abbey",
+   "The abbey founded by the Lord Rhys in the 1180s between two lakes north of Llandeilo, the only house of the White Canons in Wales.",
+   "Yr abaty a sefydlodd yr Arglwydd Rhys yn yr 1180au rhwng dau lyn i’r gogledd o Landeilo, yr unig dŷ o’r Canoniaid Gwyn yng Nghymru."),
+ P("basingwerk", "Basingwerk Abbey", "Abaty Dinas Basing", "medieval", 53.287, -3.209, "1131", "cross", "Basingwerk_Abbey",
+   "A Cistercian abbey near Holywell, founded in 1131, which cared for the pilgrims to St Winefride’s Well. Today it is the start of the North Wales Pilgrim’s Way to Enlli.",
+   "Abaty Sistersaidd ger Treffynnon, a sefydlwyd yn 1131, a ofalai am y pererinion at Ffynnon Gwenffrewi. Heddiw dyma fan cychwyn Llwybr Pererinion Gogledd Cymru i Enlli."),
+ P("margam", "Margam Stones", "Meini Margam", "kings", 51.563, -3.728, "500s–900s", "cross", "Margam_Stones_Museum",
+   "Nearly thirty carved stones and crosses from the first Christian centuries of Glamorgan, gathered in an old school beside Margam Abbey church.",
+   "Bron i ddeg ar hugain o feini a chroesau cerfiedig o ganrifoedd Cristnogol cyntaf Morgannwg, wedi’u casglu mewn hen ysgol wrth ymyl eglwys Abaty Margam."),
+ P("stnons", "St Non’s Chapel", "Capel Non", "saints", 51.873, -5.268, "6th century", "cross", "St_Non%27s_Chapel",
+   "On the clifftop south of St Davids, the place where, Welsh tradition holds, Non gave birth to Dewi during a great storm. Her holy well still flows beside the path.",
+   "Ar ben y clogwyn i’r de o Dyddewi, y lle y ganed Dewi i Non, yn ôl traddodiad Cymru, yn ystod storm fawr. Mae ei ffynnon sanctaidd yn dal i lifo wrth ymyl y llwybr."),
+ P("caergybi", "Caer Gybi, Holyhead", "Caer Gybi", "roman", 53.311, -4.633, "200s", "arches", "Caer_Gybi_(fort)",
+   "A Roman fort by the harbour at Holyhead, with walls still four metres high. Welsh tradition holds that Maelgwn Gwynedd gave it to Saint Cybi, whose church stands inside it.",
+   "Caer Rufeinig ger yr harbwr yng Nghaergybi, a’i muriau’n dal yn bedwar metr o uchder. Yn ôl traddodiad Cymru rhoddodd Maelgwn Gwynedd hi i Gybi Sant, y mae ei eglwys yn sefyll y tu mewn iddi."),
+ P("neathabbey", "Neath Abbey", "Abaty Nedd", "medieval", 51.661, -3.826, "1130", "cross", "Neath_Abbey",
+   "One of the richest abbeys in Wales, praised by Lewys Morgannwg as the fairest in the land. Its ruins are among the finest monastic remains in south Wales.",
+   "Un o abatai cyfoethocaf Cymru, a ganmolwyd gan Lewys Morgannwg fel y tecaf yn y wlad. Mae ei adfeilion ymhlith olion mynachaidd gorau de Cymru."),
+ P("llanthony", "Llanthony Priory", "Priordy Llanddewi Nant Hodni", "medieval", 51.945, -3.036, "1118", "cross", "Llanthony_Priory",
+   "A priory in the Vale of Ewyas in the Black Mountains, begun at a hermit’s chapel of Saint David. Gerald of Wales called it truly suited to the monastic life.",
+   "Priordy yn Nyffryn Ewias yn y Mynyddoedd Duon, a ddechreuodd mewn capel meudwy i Ddewi Sant. Dywedodd Gerallt Gymro ei fod yn wir addas i’r bywyd mynachaidd."),
+ P("cymer", "Cymer Abbey", "Abaty Cymer", "medieval", 52.757, -3.885, "1198", "cross", "Cymer_Abbey",
+   "A small Cistercian abbey near Dolgellau where the Mawddach meets the Wnion, founded in 1198 under the princes of Gwynedd.",
+   "Abaty Sistersaidd bychan ger Dolgellau lle mae afon Mawddach yn cwrdd ag afon Wnion, a sefydlwyd yn 1198 dan dywysogion Gwynedd."),
+ P("nanhyfer", "Nevern", "Nanhyfer", "saints", 52.025, -4.795, "6th century", "cross", "Nevern",
+   "Saint Brynach’s church in a wooded valley in Pembrokeshire, with one of the finest carved crosses in Wales, stones inscribed in Latin and ogham, and a ‘bleeding’ yew.",
+   "Eglwys Brynach Sant mewn cwm coediog yn Sir Benfro, gydag un o’r croesau cerfiedig gorau yng Nghymru, meini ag arysgrifau Lladin ac ogam, ac ywen sy’n ‘gwaedu’."),
+ P("clynnog", "Clynnog Fawr", "Clynnog Fawr", "saints", 53.022, -4.366, "7th century", "cross", "St_Beuno%27s_Church,_Clynnog_Fawr",
+   "The great church of Saint Beuno on the coast of Arfon, where pilgrims on their way to Enlli stopped to pray at his grave.",
+   "Eglwys fawr Beuno Sant ar arfordir Arfon, lle arhosai pererinion ar eu ffordd i Enlli i weddïo wrth ei fedd."),
+ P("pennantmelangell", "Pennant Melangell", "Pennant Melangell", "saints", 52.825, -3.451, "c. 600", "cross", "Pennant_Melangell",
+   "The church at the head of a valley in the Berwyn where Melangell sheltered a hare from the hounds of Brochwel Ysgithrog. Her shrine of the 1100s is the oldest of its kind in northern Europe.",
+   "Yr eglwys ym mhen cwm yn y Berwyn lle cysgododd Melangell ysgyfarnog rhag cŵn Brochwel Ysgithrog. Ei chysegrfa o’r 1100au yw’r hynaf o’i bath yng ngogledd Ewrop."),
+ P("llanddewibrefi", "Llanddewi Brefi", "Llanddewi Brefi", "saints", 52.180, -3.957, "c. 545", "cross", "Llanddewi_Brefi",
+   "Here, Welsh tradition holds, the ground rose beneath Dewi Sant as he preached to the great synod of Brefi, so that all could see and hear him.",
+   "Yma, yn ôl traddodiad Cymru, cododd y tir dan draed Dewi Sant wrth iddo bregethu i synod fawr Brefi, fel y gallai pawb ei weld a’i glywed."),
+ P("llancarfan", "Llancarfan", "Llancarfan", "saints", 51.430, -3.358, "6th century", "cross", "Llancarfan",
+   "Saint Cadog’s monastery in the Vale of Glamorgan, famed for its learning. Its church hides some of the finest medieval wall paintings in Wales.",
+   "Mynachlog Cadog Sant ym Mro Morgannwg, a oedd yn enwog am ei dysg. Mae ei heglwys yn cuddio rhai o’r paentiadau wal canoloesol gorau yng Nghymru."),
+ P("llanbadarn", "Llanbadarn Fawr", "Llanbadarn Fawr", "saints", 52.408, -4.065, "6th century", "cross", "St_Padarn%27s_Church,_Llanbadarn_Fawr",
+   "Saint Padarn’s church above Aberystwyth, one of the leading centres of learning of early Wales, where Sulien and his sons wrote and copied books in the 1000s.",
+   "Eglwys Padarn Sant uwchben Aberystwyth, un o brif ganolfannau dysg Cymru gynnar, lle bu Sulien a’i feibion yn ysgrifennu a chopïo llyfrau yn yr 1000au."),
+ P("bangor", "Bangor Cathedral", "Eglwys Gadeiriol Bangor", "saints", 53.227, -4.129, "c. 530", "cross", "Bangor_Cathedral",
+   "Founded by Saint Deiniol about 530 on land given by Maelgwn Gwynedd, and the burial place of Gruffudd ap Cynan and Owain Gwynedd.",
+   "Sefydlwyd gan Ddeiniol Sant tua 530 ar dir a roddwyd gan Faelgwn Gwynedd, a dyma fan claddu Gruffudd ap Cynan ac Owain Gwynedd."),
+ P("llandaf", "Llandaff Cathedral", "Eglwys Gadeiriol Llandaf", "saints", 51.495, -3.218, "6th century", "cross", "Llandaff_Cathedral",
+   "The cathedral of the saints Dyfrig, Teilo and Euddogwy beside the Taf in Cardiff. Its Book of Llandaf traces the church back to King Lleurwg.",
+   "Eglwys gadeiriol y saint Dyfrig, Teilo ac Euddogwy ger afon Taf yng Nghaerdydd. Mae ei Llyfr Llandaf yn olrhain yr eglwys yn ôl i’r Brenin Lleurwg."),
+ P("llanelwy", "St Asaph Cathedral", "Eglwys Gadeiriol Llanelwy", "saints", 53.257, -3.442, "6th century", "cross", "St_Asaph_Cathedral",
+   "The smallest ancient cathedral in Britain, founded by Saint Cyndeyrn, where Bishop William Morgan, who gave Wales the Bible in Welsh, is remembered.",
+   "Yr eglwys gadeiriol hynafol leiaf ym Mhrydain, a sefydlwyd gan Gyndeyrn Sant, lle cofir yr Esgob William Morgan, a roddodd y Beibl yn Gymraeg i Gymru."),
+ P("carewcross", "Carew Cross", "Croes Caeriw", "kings", 51.698, -4.828, "c. 1035", "cross", "Carew_Cross",
+   "A tall carved cross of the 1000s raised for Maredudd ab Edwin, king of Deheubarth and descendant of Hywel Dda, who fell in battle in 1035.",
+   "Croes gerfiedig dal o’r 1000au a godwyd er cof am Faredudd ab Edwin, brenin Deheubarth a disgynnydd Hywel Dda, a syrthiodd mewn brwydr yn 1035."),
+]
+
+LONG.update({
+ "strataflorida": (
+  ["## The Westminster Abbey of Wales",
+   "Strata Florida, Ystrad Fflur, the Vale of Flowers, has stood on the meadows beside the Teifi since 1184. Its white-robed Cistercian monks came under the protection of the Lord Rhys, and the abbey soon became the most famous church in Wales after St Davids.[[cite:pl-cadw-strataflorida]] The Dictionary of Welsh Biography calls it virtually his creation.[[cite:pl-dwb-rhys]]",
+   "Generations of the princes of Deheubarth were buried here, and the abbey has been called the Westminster Abbey of Wales.[[cite:pl-cadw-strataflorida]] In 1238 Llywelyn the Great called the princes of Wales to Strata Florida to swear loyalty to his son Dafydd, the first time all Wales was asked to recognise one heir.",
+   "## Books and poets",
+   "The monks kept a chronicle of Welsh history, and Strata Florida is linked with Brut y Tywysogion, the Chronicle of the Princes, and with the copying of Welsh books. Dafydd ap Gwilym, the greatest poet of medieval Wales, is said to be buried under a yew in the churchyard.[[cite:pl-cadw-strataflorida]]",
+   "## Visiting",
+   "The great west doorway still stands, and the floor tiles of the 1300s include the Man with the Mirror. Cadw cares for the ruins, and the farmhouse next door, Mynachlog Fawr, is being restored by the Strata Florida Trust."],
+  ["## Abaty Westminster Cymru",
+   "Mae Ystrad Fflur, Strata Florida, Dyffryn y Blodau, wedi sefyll ar y dolydd ger afon Teifi ers 1184. Daeth ei fynachod Sistersaidd mewn gwisg wen dan nawdd yr Arglwydd Rhys, a buan y daeth yr abaty’n eglwys enwocaf Cymru ar ôl Tyddewi.[[cite:pl-cadw-strataflorida]] Mae’r Bywgraffiadur yn ei alw bron yn greadigaeth iddo.[[cite:pl-dwb-rhys]]",
+   "Claddwyd cenedlaethau o dywysogion Deheubarth yma, a galwyd yr abaty’n Abaty Westminster Cymru.[[cite:pl-cadw-strataflorida]] Yn 1238 galwodd Llywelyn Fawr dywysogion Cymru i Ystrad Fflur i dyngu llw o ffyddlondeb i’w fab Dafydd, y tro cyntaf y gofynnwyd i Gymru gyfan gydnabod un etifedd.",
+   "## Llyfrau a beirdd",
+   "Cadwai’r mynachod gronicl o hanes Cymru, a chysylltir Ystrad Fflur â Brut y Tywysogion ac â chopïo llyfrau Cymraeg. Dywedir bod Dafydd ap Gwilym, bardd mwyaf Cymru’r Oesoedd Canol, wedi’i gladdu dan ywen yn y fynwent.[[cite:pl-cadw-strataflorida]]",
+   "## Ymweld",
+   "Mae’r drws gorllewinol mawr yn dal i sefyll, ac mae teils llawr y 1300au yn cynnwys y Dyn â’r Drych. Cadw sy’n gofalu am yr adfeilion, ac mae’r ffermdy drws nesaf, Mynachlog Fawr, yn cael ei adfer gan Ymddiriedolaeth Ystrad Fflur."]),
+
+ "llanilltud": (
+  ["## The oldest centre of learning in Britain",
+   "Llanilltud Fawr, Llantwit Major, lies in a hollow near the coast of the Vale of Glamorgan. Here, around the year 500, Saint Illtud founded a monastery and school. Welsh tradition holds that Dewi Sant, Samson of Dol, Gildas and Paulinus all studied under him, and the Life of Samson, written within a century or so of his death, calls Illtud the most learned of all the Britons.",
+   "From this school the saints went out to Wales, Cornwall and Brittany, and Llanilltud is counted the oldest centre of learning in Britain.",
+   "## The stones of the kings",
+   "In the Galilee Chapel at the west end of St Illtud’s Church stands a remarkable group of carved stones. One cross was raised by Hywel ap Rhys, king of Glywysing in the 800s, for the soul of his father Rhys; another bears the name of Samson. They show that this was a place where kings chose to be remembered.",
+   "## Visiting",
+   "St Illtud’s Church is open most days, and the stones are shown in the restored Galilee Chapel. The town keeps its medieval streets, and the coast path runs close by."],
+  ["## Canolfan ddysg hynaf Prydain",
+   "Mae Llanilltud Fawr mewn pant ger arfordir Bro Morgannwg. Yma, tua’r flwyddyn 500, sefydlodd Illtud Sant fynachlog ac ysgol. Yn ôl traddodiad Cymru astudiodd Dewi Sant, Samson o Dol, Gildas a Pheulin i gyd dano, ac mae Buchedd Samson, a ysgrifennwyd o fewn canrif neu ddwy i’w farw, yn galw Illtud y mwyaf dysgedig o’r holl Frythoniaid.",
+   "O’r ysgol hon aeth y saint allan i Gymru, Cernyw a Llydaw, a chyfrifir Llanilltud yn ganolfan ddysg hynaf Prydain.",
+   "## Meini’r brenhinoedd",
+   "Yng Nghapel Galilea ym mhen gorllewinol Eglwys Illtud saif casgliad hynod o feini cerfiedig. Codwyd un groes gan Hywel ap Rhys, brenin Glywysing yn yr 800au, er enaid ei dad Rhys; mae enw Samson ar un arall. Maent yn dangos mai dyma le y dewisai brenhinoedd gael eu cofio.",
+   "## Ymweld",
+   "Mae Eglwys Illtud ar agor y rhan fwyaf o ddyddiau, a dangosir y meini yng Nghapel Galilea a adferwyd. Mae’r dref yn cadw ei strydoedd canoloesol, ac mae llwybr yr arfordir gerllaw."]),
+
+ "enlli": (
+  ["Ynys Enlli, Bardsey, lies two miles off the tip of Llŷn across a fierce tide race. Saint Cadfan is said to have founded a monastery here in the 500s, and Welsh tradition holds that twenty thousand saints are buried on the island.",
+   "For centuries pilgrims walked the length of Llŷn to Aberdaron and crossed to Enlli. In the Middle Ages three pilgrimages to Enlli were counted equal to one to Rome. The ruined tower of the abbey of St Mary still stands near the island’s farmhouses.",
+   "The island is cared for by the Bardsey Island Trust. Boats sail from Porth Meudwy near Aberdaron in good weather; you can go for the day or stay in one of the island’s cottages."],
+  ["Mae Ynys Enlli ddwy filltir oddi ar ben Llŷn, dros swnt o lanw ffyrnig. Dywedir i Gadfan Sant sefydlu mynachlog yma yn y 500au, ac yn ôl traddodiad Cymru mae ugain mil o saint wedi’u claddu ar yr ynys.",
+   "Am ganrifoedd cerddai pererinion hyd Llŷn i Aberdaron a chroesi i Enlli. Yn yr Oesoedd Canol cyfrifid tair pererindod i Enlli yn gyfwerth ag un i Rufain. Mae tŵr adfeiliedig abaty Santes Fair yn dal i sefyll ger ffermdai’r ynys.",
+   "Ymddiriedolaeth Ynys Enlli sy’n gofalu am yr ynys. Mae cychod yn hwylio o Borth Meudwy ger Aberdaron pan fo’r tywydd yn deg; gallwch fynd am y dydd neu aros yn un o fythynnod yr ynys."]),
+
+ "treffynnon": (
+  ["The story is told that in the 600s Gwenffrewi (Winefride) was struck down by Caradog when she refused him, and where her head fell a spring burst from the ground. Her uncle Saint Beuno brought her back to life, and she lived on as an abbess at Gwytherin.",
+   "The well has been a place of pilgrimage since at least 1115, and it is reputed to be the oldest continually visited pilgrim site in Britain.[[cite:pl-cadw-treffynnon]] The beautiful chapel over the spring was built in the late 1400s, and pilgrims still bathe in the pool.",
+   "The chapel is in Cadw’s care; the well and its small museum are run by St Winefride’s Well shrine. Basingwerk Abbey, whose monks cared for the pilgrims, is a short walk down the valley."],
+  ["Adroddir i Wenffrewi, yn y 600au, gael ei tharo i lawr gan Garadog pan wrthododd hi ef, ac yn y fan lle syrthiodd ei phen tarddodd ffynnon o’r ddaear. Adferodd ei hewythr Beuno Sant hi’n fyw, a bu fyw wedyn yn abades yng Ngwytherin.",
+   "Bu’r ffynnon yn gyrchfan pererinion ers o leiaf 1115, a dywedir mai hi yw’r safle pererindod hynaf ym Mhrydain a gafodd ymwelwyr yn ddi-dor.[[cite:pl-cadw-treffynnon]] Codwyd y capel hardd dros y ffynnon ar ddiwedd y 1400au, ac mae pererinion yn dal i ymdrochi yn y pwll.",
+   "Mae’r capel yng ngofal Cadw; cysegrfa Ffynnon Gwenffrewi sy’n rhedeg y ffynnon a’i hamgueddfa fach. Mae Abaty Dinas Basing, y gofalai ei fynachod am y pererinion, dro byr i lawr y cwm."]),
+
+ "eliseg": (
+  ["The Pillar of Eliseg stands on an ancient burial mound near Valle Crucis. It was put up in the first half of the 800s by Cyngen, king of Powys, in memory of his great-grandfather Elisedd, who drove the English out of this part of Wales.[[cite:pl-cadw-eliseg]]",
+   "Its long Latin inscription, now worn away, was copied in 1696 by Edward Lhuyd. It named the kings of Powys and traced their line back to Gwrtheyrn and to Macsen Wledig. It used the language of law and was probably meant to be read aloud, perhaps at the place where the kings of Powys were made.[[cite:pl-cadw-eliseg]]",
+   "Only the round lower shaft survives, but it gave its name to the valley and to the abbey: Valle Crucis, Glyn y Groes, the Valley of the Cross. Cadw cares for it, and it is free to visit."],
+  ["Saif Colofn Eliseg ar hen domen gladdu ger Glyn y Groes. Fe’i codwyd yn hanner cyntaf yr 800au gan Gyngen, brenin Powys, er cof am ei hen daid Elisedd, a yrrodd y Saeson allan o’r rhan hon o Gymru.[[cite:pl-cadw-eliseg]]",
+   "Copïwyd ei harysgrif Ladin hir, sydd wedi treulio erbyn hyn, yn 1696 gan Edward Lhuyd. Enwai frenhinoedd Powys gan olrhain eu llinach yn ôl i Wrtheyrn ac i Facsen Wledig. Defnyddiai iaith y gyfraith ac roedd i’w darllen yn uchel, mae’n debyg, efallai yn y fan lle gwneid brenhinoedd Powys.[[cite:pl-cadw-eliseg]]",
+   "Dim ond rhan isaf grwn y golofn sydd ar ôl, ond rhoddodd ei henw i’r cwm ac i’r abaty: Valle Crucis, Glyn y Groes. Cadw sy’n gofalu amdani, ac mae am ddim i ymweld â hi."]),
+
+ "maenachwyfan": (
+  ["Maen Achwyfan stands in a field near Whitford in Flintshire: at nearly three and a half metres, the tallest wheel-headed cross in Britain. It probably dates from the late 900s and was raised in memory of a person or event now forgotten.[[cite:pl-cadw-maenachwyfan]]",
+   "Its carving of knots and plaits shows the influence of the Norse seafarers who knew this coast, side by side with the Christian art of Wales.[[cite:pl-cadw-maenachwyfan]] It is free to visit, a short walk from the lane."],
+  ["Saif Maen Achwyfan mewn cae ger Chwitffordd yn Sir y Fflint: bron yn dri metr a hanner o uchder, y groes olwyn dalaf ym Mhrydain. Mae’n dyddio o ddiwedd y 900au yn ôl pob tebyg, ac fe’i codwyd er cof am berson neu ddigwyddiad sydd wedi’i anghofio.[[cite:pl-cadw-maenachwyfan]]",
+   "Mae ei cherfiadau o glymau a phlethau yn dangos dylanwad morwyr Llychlyn a adwaenai’r arfordir hwn, ochr yn ochr â chelfyddyd Gristnogol Cymru.[[cite:pl-cadw-maenachwyfan]] Mae am ddim i ymweld â hi, dro byr o’r lôn."]),
+
+ "tintern": (
+  ["Tintern was founded in 1131 by Cistercian monks, who made do with timber buildings at first. In 1269 they began the great abbey church whose walls still stand, one of the finest Gothic buildings in Britain.[[cite:pl-cadw-tintern]]",
+   "The abbey surrendered in 1536, in the first round of the closing of the monasteries, and slowly became a ruin.[[cite:pl-cadw-tintern]] Two hundred years later it drew poets and painters to the Wye valley: Wordsworth wrote his Lines Composed a Few Miles above Tintern Abbey in 1798, and Turner painted it.",
+   "Cadw cares for the abbey; see the official page for times and prices."],
+  ["Sefydlwyd Tyndyrn yn 1131 gan fynachod Sistersaidd, a fodlonai ar adeiladau pren ar y dechrau. Yn 1269 dechreuasant godi’r eglwys abaty fawr y mae ei muriau’n dal i sefyll, un o adeiladau Gothig gorau Prydain.[[cite:pl-cadw-tintern]]",
+   "Ildiodd yr abaty yn 1536, yn y don gyntaf o gau’r mynachlogydd, ac aeth yn adfail yn araf.[[cite:pl-cadw-tintern]] Ddau gan mlynedd yn ddiweddarach denodd feirdd ac arlunwyr i ddyffryn Gwy: ysgrifennodd Wordsworth ei gerdd Lines Composed a Few Miles above Tintern Abbey yn 1798, a pheintiodd Turner ef.",
+   "Cadw sy’n gofalu am yr abaty; gweler y dudalen swyddogol am amseroedd a phrisiau."]),
+
+ "vallecrucis": (
+  ["Valle Crucis, Glyn y Groes, was founded in 1201 by Madog ap Gruffudd Maelor, prince of northern Powys, for Cistercian monks, and it was truly Welsh from the moment it was founded. Its name, the Valley of the Cross, comes from the Pillar of Eliseg up the road.[[cite:pl-cadw-vallecrucis]]",
+   "Its monks had names like Tudur and Hywel, and the families of the rulers of northern Powys were buried in its church; the grave slab of Madog himself survives.[[cite:pl-cadw-vallecrucis]] The poets loved it. They praised feasts served on silver and ale that flowed like a river, and Guto’r Glyn, one of the greatest of them, spent his last years here as the guest of Abbot Dafydd ab Ieuan.",
+   "When the abbey was closed in 1537, only Tintern in Wales was richer. It has the only surviving monastic fishpond in Wales.[[cite:pl-cadw-vallecrucis]] Cadw cares for it, and it is free to visit."],
+  ["Sefydlwyd Glyn y Groes yn 1201 gan Fadog ap Gruffudd Maelor, tywysog gogledd Powys, i fynachod Sistersaidd, ac roedd yn wirioneddol Gymreig o’r dechrau. Daw ei enw, Valle Crucis, Glyn y Groes, o Golofn Eliseg i fyny’r ffordd.[[cite:pl-cadw-vallecrucis]]",
+   "Roedd gan ei fynachod enwau fel Tudur a Hywel, a chladdwyd teuluoedd rheolwyr gogledd Powys yn ei eglwys; mae carreg fedd Madog ei hun wedi goroesi.[[cite:pl-cadw-vallecrucis]] Carai’r beirdd y lle. Canmolent wleddoedd ar lestri arian a chwrw’n llifo fel afon, a threuliodd Guto’r Glyn, un o’r mwyaf ohonynt, ei flynyddoedd olaf yma yn westai i’r Abad Dafydd ab Ieuan.",
+   "Pan gaewyd yr abaty yn 1537, dim ond Tyndyrn yng Nghymru oedd yn gyfoethocach. Yma mae’r unig bysgodlyn mynachaidd sydd wedi goroesi yng Nghymru.[[cite:pl-cadw-vallecrucis]] Cadw sy’n gofalu amdano, ac mae am ddim i ymweld ag ef."]),
+
+ "penmon": (
+  ["At Penmon, on the eastern tip of Ynys Môn looking out to Ynys Seiriol, Saint Seiriol founded a monastery in the 500s. His holy well, with its healing waters, is thought to go back to his time, though the little building over it is much later.[[cite:pl-cadw-penmon]]",
+   "Welsh tradition tells of Seiriol and his friend Cybi of Holyhead meeting each week in the middle of the island. Cybi walked east in the morning and west in the evening with the sun in his face, and was called Cybi Felyn, the tanned; Seiriol walked with the sun behind him and was Seiriol Wyn, the fair.",
+   "The priory ruins date mostly from the 1200s, when it became a house of Augustinian canons. Inside the church stands the Penmon Cross of the 900s, carved with frets and plaits, and nearby is a great dovecote of the 1400s.[[cite:pl-cadw-penmon]] All are free to visit."],
+  ["Ym Mhenmon, ym mhen dwyreiniol Ynys Môn yn edrych allan at Ynys Seiriol, sefydlodd Seiriol Sant fynachlog yn y 500au. Credir bod ei ffynnon sanctaidd, â’i dyfroedd iachusol, yn mynd yn ôl i’w amser ef, er bod yr adeilad bach drosti yn llawer diweddarach.[[cite:pl-cadw-penmon]]",
+   "Mae traddodiad Cymru yn sôn am Seiriol a’i gyfaill Cybi o Gaergybi yn cwrdd bob wythnos yng nghanol yr ynys. Cerddai Cybi tua’r dwyrain yn y bore a thua’r gorllewin gyda’r hwyr a’r haul yn ei wyneb, a’i alw’n Gybi Felyn; cerddai Seiriol a’r haul y tu ôl iddo, a’i alw’n Seiriol Wyn.",
+   "Mae adfeilion y priordy’n dyddio’n bennaf o’r 1200au, pan ddaeth yn dŷ i ganoniaid Awstinaidd. Y tu mewn i’r eglwys saif Croes Penmon o’r 900au, wedi’i cherfio â phlethau, a gerllaw mae colomendy mawr o’r 1400au.[[cite:pl-cadw-penmon]] Mae’r cyfan am ddim i ymweld ag ef."]),
+
+ "talley": (
+  ["Talley lies between two lakes in the hills north of Llandeilo; its Welsh name, Talyllychau, means the head of the lakes. The Lord Rhys founded the abbey in the 1180s for the White Canons, the Premonstratensians, and it was the first and only abbey of that order in Wales.[[cite:pl-cadw-talley]] The Dictionary of Welsh Biography calls it his special and unique foundation.[[cite:pl-dwb-rhys]]",
+   "The money ran short and the church was never finished as planned, but one great wall of its tower stands almost to its full height, and the footings show how ambitious it was meant to be.[[cite:pl-cadw-talley]] Cadw cares for it, and it is free to visit."],
+  ["Mae Talyllychau rhwng dau lyn yn y bryniau i’r gogledd o Landeilo; ystyr yr enw yw pen y llynnoedd. Sefydlodd yr Arglwydd Rhys yr abaty yn yr 1180au i’r Canoniaid Gwyn, y Premonstratensiaid, a dyma’r cyntaf a’r unig abaty o’r urdd honno yng Nghymru.[[cite:pl-cadw-talley]] Mae’r Bywgraffiadur yn ei alw’n sefydliad arbennig ac unigryw iddo.[[cite:pl-dwb-rhys]]",
+   "Aeth yr arian yn brin ac ni orffennwyd yr eglwys fel y bwriadwyd, ond mae un mur mawr o’i thŵr yn sefyll bron i’w lawn uchder, ac mae’r sylfeini’n dangos mor uchelgeisiol y bwriadwyd iddi fod.[[cite:pl-cadw-talley]] Cadw sy’n gofalu amdano, ac mae am ddim i ymweld ag ef."]),
+
+ "basingwerk": (
+  ["Basingwerk Abbey stands at the foot of the Greenfield valley below Holywell. It was founded in 1131 and later joined the Cistercians, part of a network of their abbeys across Wales; it was remodelled in the 1200s.[[cite:pl-cadw-basingwerk]]",
+   "Its monks cared for the pilgrims who came to St Winefride’s Well, and the Welsh poets praised the welcome of its abbots. The oldest part is the chapter house of the 1100s, and the finest room is the monks’ dining hall.[[cite:pl-cadw-basingwerk]]",
+   "Today the abbey is the start of the North Wales Pilgrim’s Way, which runs 130 miles to Enlli, the island of twenty thousand saints.[[cite:pl-cadw-basingwerk]] It is free to visit, beside the Greenfield Valley Heritage Park."],
+  ["Saif Abaty Dinas Basing wrth droed Dyffryn Maes-glas islaw Treffynnon. Fe’i sefydlwyd yn 1131 ac yn ddiweddarach ymunodd â’r Sistersiaid, yn rhan o rwydwaith o’u habatai ledled Cymru; fe’i hailwampiwyd yn y 1200au.[[cite:pl-cadw-basingwerk]]",
+   "Gofalai ei fynachod am y pererinion a ddeuai i Ffynnon Gwenffrewi, a chanmolai beirdd Cymru groeso ei abadau. Y rhan hynaf yw’r cabidyldy o’r 1100au, a’r ystafell orau yw ffreutur y mynachod.[[cite:pl-cadw-basingwerk]]",
+   "Heddiw yr abaty yw man cychwyn Llwybr Pererinion Gogledd Cymru, sy’n rhedeg 130 milltir i Enlli, ynys yr ugain mil o saint.[[cite:pl-cadw-basingwerk]] Mae am ddim i ymweld ag ef, wrth ymyl Parc Treftadaeth Dyffryn Maes-glas."]),
+
+ "margam": (
+  ["In an old school beside the church of Margam Abbey, Cadw keeps nearly thirty carved stones and crosses. Some date from the first days of Christianity in Wales in the 500s. Several began life as milestones on Roman roads, and were later carved again to remember the local rulers.[[cite:pl-cadw-margam]]",
+   "The great disc-headed and wheel crosses of the 800s and 900s are among the finest in Wales, among them the Cross of Cynfelin with its hunting scene. Upstairs are carvings from Margam Abbey itself, including a knight of the 1300s with a small dragon at the foot of his shield.[[cite:pl-cadw-margam]]",
+   "The museum opens on set days in summer only; check Cadw’s page before you go. Margam Country Park, with the abbey ruins and the orangery, is next door."],
+  ["Mewn hen ysgol wrth ymyl eglwys Abaty Margam, mae Cadw yn cadw bron i ddeg ar hugain o feini a chroesau cerfiedig. Mae rhai’n dyddio o ddyddiau cyntaf Cristnogaeth yng Nghymru yn y 500au. Dechreuodd sawl un fel cerrig milltir ar ffyrdd Rhufeinig, a’u cerfio eto wedyn er cof am reolwyr lleol.[[cite:pl-cadw-margam]]",
+   "Mae croesau olwyn a chroesau pen disg mawr yr 800au a’r 900au ymhlith y gorau yng Nghymru, yn eu plith Croes Cynfelin â’i golygfa hela. Ar y llawr uchaf mae cerfiadau o Abaty Margam ei hun, gan gynnwys marchog o’r 1300au gyda draig fach wrth droed ei darian.[[cite:pl-cadw-margam]]",
+   "Dim ond ar ddyddiau penodol yn yr haf y mae’r amgueddfa ar agor; edrychwch ar dudalen Cadw cyn mynd. Mae Parc Gwledig Margam, gydag adfeilion yr abaty a’r orendy, drws nesaf."]),
+
+ "stnons": (
+  ["On the cliffs a short walk south of St Davids, the ruin of a small chapel stands in a field above the sea. It is named after Non, mother of Dewi Sant, and Welsh tradition holds that Dewi was born here in the 500s, during a great storm.[[cite:pl-cadw-stnons]]",
+   "Its few walls are of uncertain date, but the place has drawn pilgrims ever since. Beside the path is Non’s holy well, believed to have healing powers.[[cite:pl-cadw-stnons]] A later chapel to Our Lady and St Non stands nearby. The ruin is cared for by Cadw and free to visit at any time."],
+  ["Ar y clogwyni, dro byr i’r de o Dyddewi, saif adfail capel bach mewn cae uwchben y môr. Fe’i henwir ar ôl Non, mam Dewi Sant, ac yn ôl traddodiad Cymru ganed Dewi yma yn y 500au, yn ystod storm fawr.[[cite:pl-cadw-stnons]]",
+   "Ansicr yw oed ei ychydig furiau, ond mae’r lle wedi denu pererinion byth ers hynny. Wrth ymyl y llwybr mae ffynnon sanctaidd Non, y credir bod ganddi rym i iacháu.[[cite:pl-cadw-stnons]] Saif capel diweddarach i Fair a Non gerllaw. Cadw sy’n gofalu am yr adfail, ac mae am ddim i ymweld ag ef ar unrhyw adeg."]),
+
+ "caergybi": (
+  ["## A Roman fort",
+   "Caer Gybi is a small Roman fort of the 200s on the cliff above Holyhead harbour. Its walls are remarkably well preserved, up to four metres high and a metre and a half thick, with round towers at the corners. It was probably part of a chain of coastal defences against raiders from the sea, linked with the watchtower on top of Holyhead Mountain.[[cite:pl-cadw-caergybi]]",
+   "## Cybi’s church",
+   "Welsh tradition holds that in the 500s Maelgwn Gwynedd gave the empty fort to Saint Cybi, who founded a monastery inside its walls. The town’s Welsh name, Caergybi, means Cybi’s fort, and St Cybi’s church still stands within the Roman walls. The fort is free to visit, in the town centre."],
+  ["## Caer Rufeinig",
+   "Caer Rufeinig fechan o’r 200au yw Caer Gybi, ar y clogwyn uwchben harbwr Caergybi. Mae ei muriau mewn cyflwr rhyfeddol, hyd at bedwar metr o uchder a metr a hanner o drwch, gyda thyrau crwn yn y corneli. Roedd yn rhan, mae’n debyg, o gadwyn o amddiffynfeydd arfordirol rhag ysbeilwyr o’r môr, ynghyd â’r tŵr gwylio ar ben Mynydd Twr.[[cite:pl-cadw-caergybi]]",
+   "## Eglwys Cybi",
+   "Yn ôl traddodiad Cymru rhoddodd Maelgwn Gwynedd y gaer wag i Gybi Sant yn y 500au, a sefydlodd ef fynachlog o fewn ei muriau. Ystyr enw’r dref yw caer Cybi, ac mae eglwys Cybi yn dal i sefyll o fewn y muriau Rhufeinig. Mae’r gaer am ddim i ymweld â hi, yng nghanol y dref."]),
+
+ "neathabbey": (
+  ["Neath Abbey was founded in 1130, and by the late 1200s it was one of the wealthiest abbeys in Wales, with some fifty monks and many more lay brothers working its lands.[[cite:pl-cadw-neathabbey]] In the 1500s the poet Lewys Morgannwg praised it as the fairest abbey in all Wales.",
+   "Long after the monks left it was turned into a copper works, with furnaces and workers’ houses, and an ironworks was built next door, yet it survived. Almost the whole plan of the abbey can still be seen, and with Tintern and Llanthony its ruins are the finest monastic remains in south Wales.[[cite:pl-cadw-neathabbey]] It is free to visit."],
+  ["Sefydlwyd Abaty Nedd yn 1130, ac erbyn diwedd y 1200au roedd yn un o abatai cyfoethocaf Cymru, gyda thua hanner cant o fynachod a llawer mwy o frodyr lleyg yn gweithio’i diroedd.[[cite:pl-cadw-neathabbey]] Yn y 1500au canmolodd y bardd Lewys Morgannwg ef fel yr abaty tecaf yng Nghymru gyfan.",
+   "Ymhell wedi i’r mynachod adael, troed ef yn waith copr, gyda ffwrneisi a thai gweithwyr, a chodwyd gwaith haearn drws nesaf, ond goroesodd. Gellir gweld bron holl gynllun yr abaty o hyd, a chyda Thyndyrn a Llanddewi Nant Hodni ei adfeilion yw olion mynachaidd gorau de Cymru.[[cite:pl-cadw-neathabbey]] Mae am ddim i ymweld ag ef."]),
+
+ "llanthony": (
+  ["Llanthony lies deep in the Vale of Ewyas in the Black Mountains. Its full Welsh name, Llanddewi Nant Hodni, remembers a chapel of Saint David by the Honddu stream, where the knight William de Lacy gave up war to live as a hermit. By 1118 it had become a priory of Augustinian canons.[[cite:pl-cadw-llanthony]]",
+   "Gerald of Wales, who knew it well, called it truly suited to the monastic life, a wilderness far from the bustle of mankind.[[cite:pl-cadw-llanthony]] The tall arches of its church still frame the hills. It was closed in 1539, and the view has changed little since. It is free to visit."],
+  ["Mae Llanddewi Nant Hodni yn ddwfn yn Nyffryn Ewias yn y Mynyddoedd Duon. Mae’r enw’n cofio capel i Ddewi Sant ger nant Hodni, lle rhoddodd y marchog William de Lacy y gorau i ryfel i fyw fel meudwy. Erbyn 1118 roedd wedi dod yn briordy i ganoniaid Awstinaidd.[[cite:pl-cadw-llanthony]]",
+   "Dywedodd Gerallt Gymro, a’i hadwaenai’n dda, ei fod yn wir addas i’r bywyd mynachaidd, yn anialwch ymhell o brysurdeb dynion.[[cite:pl-cadw-llanthony]] Mae bwâu tal ei eglwys yn dal i fframio’r bryniau. Caewyd ef yn 1539, ac ychydig a newidiodd yr olygfa ers hynny. Mae am ddim i ymweld ag ef."]),
+
+ "cymer": (
+  ["Cymer Abbey stands where the Mawddach and the Wnion meet, just outside Dolgellau. It was founded in 1198 by the princes of Gwynedd for Cistercian monks, one of the smaller houses of the order.[[cite:pl-cadw-cymer]] The Cistercians were farmers as well as monks, pioneers of sheep farming in the Welsh hills.",
+   "The abbey suffered greatly in the wars between Wales and England in the 1200s, and its church was never finished, but substantial parts of it still stand.[[cite:pl-cadw-cymer]] It is free to visit."],
+  ["Saif Abaty Cymer lle mae afon Mawddach ac afon Wnion yn cwrdd, ychydig y tu allan i Ddolgellau. Fe’i sefydlwyd yn 1198 gan dywysogion Gwynedd i fynachod Sistersaidd, un o dai lleiaf yr urdd.[[cite:pl-cadw-cymer]] Roedd y Sistersiaid yn ffermwyr yn ogystal â mynachod, arloeswyr ffermio defaid ym mryniau Cymru.",
+   "Dioddefodd yr abaty’n fawr yn rhyfeloedd Cymru a Lloegr yn y 1200au, ac ni orffennwyd ei eglwys erioed, ond mae rhannau sylweddol ohoni’n dal i sefyll.[[cite:pl-cadw-cymer]] Mae am ddim i ymweld ag ef."]),
+
+ "nanhyfer": (
+  ["Nevern church, in a wooded valley below the Preseli hills, was founded by Saint Brynach in the 500s. It was a stopping place for pilgrims on their way to St Davids, and a cross carved in the rock on the path nearby is known as the Pilgrims’ Cross.",
+   "In the churchyard stands the Great Cross of Nevern, some four metres tall and covered in knotwork, one of the finest carved crosses in Wales, from around the year 1000. Near the porch is the Vitalianus stone, inscribed in both Latin and ogham in the 400s or 500s, and inside the church another stone carries the name Maglocunus, son of Clutorius, in both scripts.",
+   "One of the old yews in the avenue to the church weeps a red sap, and the story is told that it will bleed until a Welshman again rules Nevern castle. The church is usually open in daytime."],
+  ["Sefydlwyd eglwys Nanhyfer, mewn cwm coediog islaw’r Preseli, gan Frynach Sant yn y 500au. Roedd yn fan aros i bererinion ar eu ffordd i Dyddewi, a gelwir croes a gerfiwyd yn y graig ar y llwybr gerllaw yn Groes y Pererinion.",
+   "Yn y fynwent saif Croes Fawr Nanhyfer, tua phedwar metr o uchder ac wedi’i gorchuddio â chlymwaith, un o’r croesau cerfiedig gorau yng Nghymru, o tua’r flwyddyn 1000. Ger y porth mae carreg Vitalianus, ag arysgrif mewn Lladin ac ogam o’r 400au neu’r 500au, ac y tu mewn i’r eglwys mae carreg arall ag enw Maglocunus fab Clutorius yn y ddwy wyddor.",
+   "Mae un o’r hen ywennod yn y rhodfa at yr eglwys yn wylo nodd coch, ac adroddir y bydd yn gwaedu nes y bydd Cymro eto’n rheoli castell Nanhyfer. Mae’r eglwys ar agor fel arfer yn ystod y dydd."]),
+
+ "clynnog": (
+  ["Saint Beuno, the great saint of north Wales in the 600s, founded a clas, a community of clergy, at Clynnog Fawr on the coast of Arfon, and he was buried here.[[cite:pl-wiki-clynnog]] His tomb made Clynnog one of the main stopping places for pilgrims on the road to Enlli.",
+   "The church that stands today was built around 1480 to 1500, large and full of light, the finest late medieval church in Gwynedd.[[cite:pl-wiki-clynnog]] A passage joins it to St Beuno’s Chapel, on the site of his grave. Just outside the village is Ffynnon Beuno, his holy well. The church is usually open in daytime."],
+  ["Sefydlodd Beuno Sant, sant mawr gogledd Cymru yn y 600au, glas, cymuned o glerigwyr, yng Nghlynnog Fawr ar arfordir Arfon, ac fe’i claddwyd yma.[[cite:pl-wiki-clynnog]] Gwnaeth ei fedd Glynnog yn un o brif fannau aros pererinion ar y ffordd i Enlli.",
+   "Codwyd yr eglwys bresennol tua 1480 i 1500, yn fawr ac yn llawn goleuni, yr eglwys orau o ddiwedd yr Oesoedd Canol yng Ngwynedd.[[cite:pl-wiki-clynnog]] Mae rhodfa’n ei chysylltu â Chapel Beuno, ar safle ei fedd. Ychydig y tu allan i’r pentref mae Ffynnon Beuno, ei ffynnon sanctaidd. Mae’r eglwys ar agor fel arfer yn ystod y dydd."]),
+
+ "pennantmelangell": (
+  ["At the head of the Tanat valley in the Berwyn mountains stands the little church of Pennant Melangell. The story is told that Melangell, a king’s daughter from Ireland, lived here alone in prayer for fifteen years. One day Brochwel Ysgithrog, king of Powys, was hunting, and his hounds chased a hare into a thicket. There he found Melangell at prayer with the hare safe under the hem of her dress, and the hounds would not go near. Moved, he gave her the valley as a place of refuge for ever.[[cite:pl-wiki-melangell]]",
+   "Her shrine, carved in the 1100s, is the oldest surviving Romanesque shrine in northern Europe; it was pieced together again from fragments in the 1950s and restored once more in 1991.[[cite:pl-wiki-melangell]] For centuries no one in the parish would kill a hare, and hares are still called Melangell’s lambs. The church is open daily, a peaceful place at the end of a long lane."],
+  ["Ym mhen dyffryn Tanat ym mynyddoedd y Berwyn saif eglwys fach Pennant Melangell. Adroddir i Felangell, merch i frenin o Iwerddon, fyw yma ar ei phen ei hun mewn gweddi am bymtheng mlynedd. Un diwrnod roedd Brochwel Ysgithrog, brenin Powys, yn hela, ac erlidiodd ei gŵn ysgyfarnog i lwyn. Yno cafodd Felangell yn gweddïo a’r ysgyfarnog yn ddiogel dan odre ei gwisg, ac nid âi’r cŵn yn agos. Wedi’i gyffwrdd, rhoddodd y cwm iddi yn noddfa am byth.[[cite:pl-wiki-melangell]]",
+   "Ei chysegrfa, a gerfiwyd yn y 1100au, yw’r gysegrfa Romanésg hynaf sydd wedi goroesi yng ngogledd Ewrop; fe’i hailosodwyd o ddarnau yn y 1950au a’i hadfer eto yn 1991.[[cite:pl-wiki-melangell]] Am ganrifoedd ni laddai neb yn y plwyf ysgyfarnog, a gelwir ysgyfarnogod o hyd yn ŵyn Melangell. Mae’r eglwys ar agor bob dydd, yn lle tawel ym mhen lôn hir."]),
+
+ "llanddewibrefi": (
+  ["Llanddewi Brefi lies in the Teifi valley below the hills of Ceredigion. In the 500s, the story goes, the bishops and clergy of Wales met here in the great synod of Brefi. The crowd was so large that no one could hear the speakers, until Dewi rose to preach and the ground beneath him lifted into a hill, so that all could see and hear him.[[cite:pl-wiki-brefi]]",
+   "The church of St David stands on that hill, a place of worship since at least the 600s. Bishop Thomas Bek of St Davids made it a college of priests in 1287, and stones from the old church and from a Roman fort nearby are built into it.[[cite:pl-wiki-brefi]] The church is usually open in daytime."],
+  ["Mae Llanddewi Brefi yn nyffryn Teifi islaw bryniau Ceredigion. Yn y 500au, yn ôl y stori, cyfarfu esgobion a chlerigwyr Cymru yma yn synod fawr Brefi. Roedd y dyrfa mor fawr fel na allai neb glywed y siaradwyr, nes i Ddewi godi i bregethu a’r tir dano’n codi’n fryn, fel y gallai pawb ei weld a’i glywed.[[cite:pl-wiki-brefi]]",
+   "Saif eglwys Dewi ar y bryn hwnnw, man addoli ers o leiaf y 600au. Gwnaeth yr Esgob Thomas Bek o Dyddewi hi’n goleg o offeiriaid yn 1287, ac mae cerrig o’r hen eglwys ac o gaer Rufeinig gerllaw wedi’u codi i mewn iddi.[[cite:pl-wiki-brefi]] Mae’r eglwys ar agor fel arfer yn ystod y dydd."]),
+
+ "llancarfan": (
+  ["Llancarfan, in a quiet valley of the Vale of Glamorgan, is the site of Saint Cadog’s monastery of the 500s, famed for its learning.[[cite:pl-wiki-llancarfan]] Cadog, son of King Gwynllyw and Gwladys, was one of the greatest of the Welsh saints, and Welsh tradition holds that Gildas taught and wrote here. In the 1100s Caradog of Llancarfan wrote lives of the saints here.",
+   "In 2008, under layers of whitewash in St Cadoc’s church, workmen found medieval wall paintings, among them a great Saint George, one of only three in the churches of Wales. They were fully uncovered by 2013.[[cite:pl-wiki-llancarfan]] The church is usually open in daytime."],
+  ["Llancarfan, mewn cwm tawel ym Mro Morgannwg, yw safle mynachlog Cadog Sant o’r 500au, a oedd yn enwog am ei dysg.[[cite:pl-wiki-llancarfan]] Roedd Cadog, mab y Brenin Gwynllyw a Gwladys, yn un o’r mwyaf o saint Cymru, ac yn ôl traddodiad Cymru bu Gildas yn dysgu ac yn ysgrifennu yma. Yn y 1100au ysgrifennodd Caradog o Lancarfan fucheddau’r saint yma.",
+   "Yn 2008, dan haenau o wyngalch yn eglwys Cadog, daeth gweithwyr o hyd i baentiadau wal canoloesol, yn eu plith San Siôr mawr, un o ddim ond tri yn eglwysi Cymru. Datgelwyd hwy’n llawn erbyn 2013.[[cite:pl-wiki-llancarfan]] Mae’r eglwys ar agor fel arfer yn ystod y dydd."]),
+
+ "llanbadarn": (
+  ["Saint Padarn founded a church at Llanbadarn Fawr in the early 500s, and it became one of the leading clasau, communities of learned clergy, of early Wales.[[cite:pl-wiki-llanbadarn]]",
+   "In the 1000s Sulien, twice bishop of St Davids, made Llanbadarn a home of scholarship. His son Rhygyfarch wrote here the Life of Saint David, around 1090, and the beautiful Psalter of Rhygyfarch was made here around 1079.[[cite:pl-wiki-llanbadarn]] In the 1300s Dafydd ap Gwilym wrote his poem The Girls of Llanbadarn, complaining that not one of them would look at him in church.",
+   "The church that stands today was rebuilt in the 1200s, and two carved stone crosses of the 900s and 1000s stand inside.[[cite:pl-wiki-llanbadarn]] It is usually open in daytime."],
+  ["Sefydlodd Padarn Sant eglwys yn Llanbadarn Fawr ar ddechrau’r 500au, a daeth yn un o brif glasau, cymunedau o glerigwyr dysgedig, Cymru gynnar.[[cite:pl-wiki-llanbadarn]]",
+   "Yn yr 1000au gwnaeth Sulien, esgob Tyddewi ddwywaith, Lanbadarn yn gartref dysg. Ysgrifennodd ei fab Rhygyfarch Fuchedd Dewi Sant yma tua 1090, a gwnaed Sallwyr hardd Rhygyfarch yma tua 1079.[[cite:pl-wiki-llanbadarn]] Yn y 1300au ysgrifennodd Dafydd ap Gwilym ei gerdd Merched Llanbadarn, yn cwyno na edrychai’r un ohonynt arno yn yr eglwys.",
+   "Ailgodwyd yr eglwys bresennol yn y 1200au, ac mae dwy groes garreg gerfiedig o’r 900au a’r 1000au y tu mewn iddi.[[cite:pl-wiki-llanbadarn]] Mae ar agor fel arfer yn ystod y dydd."]),
+
+ "bangor": (
+  ["Saint Deiniol founded a monastery at Bangor around 530, on land given by Maelgwn Gwynedd, and he is said to have been consecrated its first bishop.[[cite:pl-wiki-bangor]] The word bangor itself means a wattled fence, the kind that ringed an early monastery. Christians have worshipped on this site ever since.",
+   "Gruffudd ap Cynan, who won back Gwynedd, was buried by the high altar in 1137, and his son Owain Gwynedd was laid beside him.[[cite:pl-wiki-bangor]] The oldest parts of the present cathedral date from the 1120s; the nave was rebuilt in the 1300s and the tower finished in 1532. It is usually open to visitors in daytime."],
+  ["Sefydlodd Deiniol Sant fynachlog ym Mangor tua 530, ar dir a roddwyd gan Faelgwn Gwynedd, a dywedir iddo gael ei gysegru’n esgob cyntaf yno.[[cite:pl-wiki-bangor]] Ystyr y gair bangor yw clawdd plethedig, y math a amgylchynai fynachlog gynnar. Mae Cristnogion wedi addoli ar y safle hwn byth ers hynny.",
+   "Claddwyd Gruffudd ap Cynan, a enillodd Wynedd yn ôl, ger yr allor fawr yn 1137, a gosodwyd ei fab Owain Gwynedd wrth ei ymyl.[[cite:pl-wiki-bangor]] Mae rhannau hynaf yr eglwys gadeiriol bresennol yn dyddio o’r 1120au; ailgodwyd corff yr eglwys yn y 1300au a gorffennwyd y tŵr yn 1532. Mae ar agor i ymwelwyr fel arfer yn ystod y dydd."]),
+
+ "llandaf": (
+  ["Llandaff Cathedral stands in a hollow by the River Taf in north Cardiff, dedicated to Saints Peter and Paul and to three Welsh saints: Dyfrig, Teilo and Euddogwy.[[cite:pl-wiki-llandaf]] The Book of Llandaf, written in the 1100s, gathers the charters and lives of these saints, and Welsh tradition, as the Book tells it, holds that King Lleurwg sent to Rome in the 100s for teachers of the faith, and that the first church here grew from his time.",
+   "The present cathedral was begun in 1120 by Bishop Urban. On 2 January 1941 a German parachute mine blew the roof off the nave; it was rebuilt and back in use by 1958, with Jacob Epstein’s great figure of Christ in Majesty raised above the nave on a concrete arch.[[cite:pl-wiki-llandaf]] It is open daily."],
+  ["Saif Eglwys Gadeiriol Llandaf mewn pant ger afon Taf yng ngogledd Caerdydd, wedi’i chysegru i Bedr a Paul ac i dri sant o Gymru: Dyfrig, Teilo ac Euddogwy.[[cite:pl-wiki-llandaf]] Mae Llyfr Llandaf, a ysgrifennwyd yn y 1100au, yn casglu siarteri a bucheddau’r saint hyn, ac mae traddodiad Cymru, fel yr adroddir yn y Llyfr, yn dal i’r Brenin Lleurwg anfon i Rufain yn y 100au am athrawon y ffydd, ac i’r eglwys gyntaf yma dyfu o’i amser ef.",
+   "Dechreuwyd yr eglwys gadeiriol bresennol yn 1120 gan yr Esgob Urban. Ar 2 Ionawr 1941 chwythodd ffrwydryn parasiwt Almaenig do corff yr eglwys i ffwrdd; fe’i hailgodwyd ac roedd yn cael ei defnyddio eto erbyn 1958, gyda ffigwr mawr Jacob Epstein o Grist mewn Mawrhydi wedi’i godi uwchben corff yr eglwys ar fwa concrit.[[cite:pl-wiki-llandaf]] Mae ar agor bob dydd."]),
+
+ "llanelwy": (
+  ["St Asaph, Llanelwy, by the River Elwy in Denbighshire, has one of the oldest bishoprics in Wales. Welsh tradition holds that Saint Cyndeyrn (Kentigern) founded a monastery here in the 500s and left it to his pupil Asaph, after whom the town is named in English.",
+   "Its cathedral, the smallest ancient cathedral in Britain, holds a special place in the story of the Welsh language. William Morgan, who translated the whole Bible into Welsh in 1588, was bishop here from 1601 to 1604. Outside stands the Translators’ Memorial of 1888, honouring him and the others who gave Wales its Bible. The cathedral is open daily."],
+  ["Mae gan Lanelwy, ger afon Elwy yn Sir Ddinbych, un o esgobaethau hynaf Cymru. Yn ôl traddodiad Cymru sefydlodd Cyndeyrn Sant fynachlog yma yn y 500au a’i gadael i’w ddisgybl Asa, y caiff y dref ei henw Saesneg ar ei ôl.",
+   "Mae gan ei heglwys gadeiriol, yr eglwys gadeiriol hynafol leiaf ym Mhrydain, le arbennig yn hanes yr iaith Gymraeg. Roedd William Morgan, a gyfieithodd y Beibl cyfan i’r Gymraeg yn 1588, yn esgob yma o 1601 hyd 1604. Y tu allan saif Cofeb y Cyfieithwyr o 1888, sy’n ei anrhydeddu ef a’r lleill a roddodd ei Beibl i Gymru. Mae’r eglwys gadeiriol ar agor bob dydd."]),
+
+ "carewcross": (
+  ["Carew Cross stands beside the road at the entrance to Carew Castle in Pembrokeshire, more than four metres tall and carved with knots and plaits. It is believed to be the memorial of a fallen Welsh king.[[cite:pl-cadw-carewcross]]",
+   "Its Latin inscription reads ‘the cross of Margiteut son of Etguin’: Maredudd ab Edwin, a descendant of the lawgiver Hywel Dda, who ruled Deheubarth and died in battle in 1035.[[cite:pl-cadw-carewcross]] Its shape inspired Cadw’s own badge. It is free to see at any time."],
+  ["Saif Croes Caeriw wrth ymyl y ffordd wrth fynedfa Castell Caeriw yn Sir Benfro, dros bedwar metr o uchder ac wedi’i cherfio â chlymau a phlethau. Credir mai cofeb brenin o Gymro a syrthiodd mewn brwydr yw hi.[[cite:pl-cadw-carewcross]]",
+   "Mae ei harysgrif Ladin yn darllen ‘croes Margiteut fab Etguin’: Maredudd ab Edwin, disgynnydd Hywel Dda y deddfwr, a reolai Ddeheubarth ac a fu farw mewn brwydr yn 1035.[[cite:pl-cadw-carewcross]] Ei siâp a ysbrydolodd fathodyn Cadw ei hun. Mae am ddim i’w gweld ar unrhyw adeg."]),
+})
+
+PEOPLE.update({
+ "strataflorida": ["yr-arglwydd-rhys", "llywelyn-fawr", "dafydd-ap-llywelyn", "dafydd-ap-gwilym"],
+ "llanilltud": ["illtud", "samson", "gildas", "dewi-sant"],
+ "enlli": ["cadfan", "dyfrig", "beuno"],
+ "treffynnon": ["gwenfrewi", "beuno"],
+ "eliseg": ["elisedd", "cyngen", "macsen-wledig", "edward-lhuyd"],
+ "vallecrucis": ["guto-r-glyn", "elisedd"],
+ "penmon": ["seiriol", "cybi"],
+ "talley": ["yr-arglwydd-rhys"],
+ "basingwerk": ["gwenfrewi"],
+ "stnons": ["non", "dewi-sant"],
+ "caergybi": ["cybi", "maelgwn-gwynedd", "seiriol"],
+ "llanthony": ["gerallt-gymro", "dewi-sant"],
+ "nanhyfer": ["brynach", "dewi-sant"],
+ "clynnog": ["beuno", "gwenfrewi"],
+ "pennantmelangell": ["melangell", "brochwel-ysgithrog"],
+ "llanddewibrefi": ["dewi-sant"],
+ "llancarfan": ["cadog", "gwynllyw", "gwladys", "gildas"],
+ "llanbadarn": ["padarn", "sulien", "rhygyfarch", "dafydd-ap-gwilym"],
+ "bangor": ["deiniol", "maelgwn-gwynedd", "gruffudd-ap-cynan", "owain-gwynedd"],
+ "llandaf": ["dyfrig", "teilo", "euddogwy", "lleurwg"],
+ "llanelwy": ["cyndeyrn", "william-morgan"],
+ "carewcross": ["hywel-dda"],
+})
+
+LINKS.update({
+ "eliseg": [("kings-powys.html", "The kings of Powys", "Brenhinoedd Powys")],
+ "treffynnon": [("legend-gwenffrewi.html", "The legend of Gwenffrewi", "Chwedl Gwenffrewi")],
+ "llanilltud": [("story-learning.html", "The oldest centre of learning", "Y ganolfan ddysg hynaf")],
+})
+
+CITES.update(dict([
+ _cadw("pl-cadw-strataflorida", "Strata Florida Abbey", "Abaty Ystrad Fflur", "strata-florida-abbey",
+       "Cadw’s page: on the banks of the Teifi since 1184; soon the most famous church in Wales after St Davids; resting place of generations of Welsh princes, the ‘Westminster Abbey of Wales’; Dafydd ap Gwilym said to lie under a yew in the churchyard.",
+       "Tudalen Cadw: ar lannau Teifi ers 1184; buan yr eglwys enwocaf yng Nghymru ar ôl Tyddewi; gorweddfan cenedlaethau o dywysogion; ‘Abaty Westminster Cymru’; dywedir bod Dafydd ap Gwilym dan ywen yn y fynwent."),
+ _cadw("pl-cadw-vallecrucis", "Valle Crucis Abbey", "Abaty Glyn y Groes", "valle-crucis-abbey",
+       "Cadw’s page: founded in 1201 by Prince Madog ap Gruffydd, truly Welsh from the start; named after the Pillar of Eliseg; feasts praised by poets; only Tintern richer in 1537; the only surviving monastic fishpond in Wales.",
+       "Tudalen Cadw: sefydlwyd yn 1201 gan y Tywysog Madog ap Gruffudd, yn Gymreig o’r dechrau; enwyd ar ôl Colofn Eliseg; gwleddoedd a ganmolwyd gan feirdd; dim ond Tyndyrn yn gyfoethocach yn 1537; yr unig bysgodlyn mynachaidd sydd ar ôl yng Nghymru."),
+ _cadw("pl-cadw-penmon", "Penmon Priory, Cross and St Seiriol’s Well", "Priordy, Croes a Ffynnon Seiriol, Penmon", "penmon-priory-cross-and-st-seiriols-well",
+       "Cadw’s page: a monastery founded by St Seiriol in the 500s; his holy well; priory ruins of the 1200s; the Penmon Cross of the 900s; the dovecote of the 1400s.",
+       "Tudalen Cadw: mynachlog a sefydlwyd gan Seiriol yn y 500au; ei ffynnon sanctaidd; adfeilion priordy o’r 1200au; Croes Penmon o’r 900au; colomendy o’r 1400au."),
+ _cadw("pl-cadw-talley", "Talley Abbey", "Abaty Talyllychau", "talley-abbey",
+       "Cadw’s page: founded in the 1180s by Rhys ap Gruffydd, the Lord Rhys, the first and only Premonstratensian abbey in Wales; never completed; the tower stands almost to full height.",
+       "Tudalen Cadw: sefydlwyd yn yr 1180au gan Rys ap Gruffudd, yr Arglwydd Rhys, yr abaty Premonstratensaidd cyntaf ac unig yng Nghymru; ni orffennwyd; mae’r tŵr bron yn ei lawn uchder."),
+ _cadw("pl-cadw-basingwerk", "Basingwerk Abbey", "Abaty Dinas Basing", "basingwerk-abbey",
+       "Cadw’s page: founded in 1131, part of the Cistercian network in Wales, remodelled in the 1200s; the chapter house of the 1100s and the monks’ dining hall; start of the North Wales Pilgrim’s Way to Bardsey.",
+       "Tudalen Cadw: sefydlwyd yn 1131, yn rhan o rwydwaith y Sistersiaid yng Nghymru, ailwampiwyd yn y 1200au; cabidyldy’r 1100au a ffreutur y mynachod; man cychwyn Llwybr Pererinion Gogledd Cymru i Enlli."),
+ _cadw("pl-cadw-margam", "Margam Stones Museum", "Amgueddfa Meini Margam", "margam-stones-museum",
+       "Cadw’s page: nearly 30 inscribed stones and crosses, some from the 500s, some first used as Roman milestones; disc-headed and wheel crosses of the 800s and 900s, the Cross of Cynfelin; a knight of the 1300s.",
+       "Tudalen Cadw: bron i 30 o feini a chroesau ag arysgrifau, rhai o’r 500au, rhai’n gerrig milltir Rhufeinig yn gyntaf; croesau pen disg ac olwyn o’r 800au a’r 900au, Croes Cynfelin; marchog o’r 1300au."),
+ _cadw("pl-cadw-stnons", "St Non’s Chapel", "Capel Non", "st-nons-chapel",
+       "Cadw’s page: said to be the birthplace of St David in the 500s, named after his mother St Non; walls of uncertain date; still a place of pilgrimage, with a holy well.",
+       "Tudalen Cadw: dywedir mai yma y ganed Dewi Sant yn y 500au, ac fe’i henwir ar ôl ei fam Non; muriau o oed ansicr; yn dal yn gyrchfan pererinion, gyda ffynnon sanctaidd."),
+ _cadw("pl-cadw-treffynnon", "St Winefride’s Chapel and Well", "Capel a Ffynnon Gwenffrewi", "st-winefrides-chapel-and-well",
+       "Cadw’s page: a place of pilgrimage since at least 1115; the spring rises where St Beuno brought Winefride back to life; the chapel dates from the late 1400s; reputedly the oldest continually visited pilgrim site in Britain.",
+       "Tudalen Cadw: cyrchfan pererinion ers o leiaf 1115; mae’r ffynnon yn tarddu lle’r adferodd Beuno Wenffrewi’n fyw; mae’r capel o ddiwedd y 1400au; dywedir mai dyma’r safle pererindod hynaf ym Mhrydain a gafodd ymwelwyr yn ddi-dor."),
+ _cadw("pl-cadw-eliseg", "Eliseg’s Pillar", "Colofn Eliseg", "elisegs-pillar",
+       "Cadw’s page: raised in the first half of the 800s by Cyngen in memory of his great-grandfather Eliseg, who drove the English out of this part of Wales; the inscription named the rulers of Powys and was probably read aloud; it gave Valle Crucis its name.",
+       "Tudalen Cadw: codwyd yn hanner cyntaf yr 800au gan Gyngen er cof am ei hen daid Eliseg, a yrrodd y Saeson allan o’r rhan hon o Gymru; enwai’r arysgrif reolwyr Powys ac roedd i’w darllen yn uchel; rhoddodd ei enw i Lyn y Groes."),
+ _cadw("pl-cadw-maenachwyfan", "Maen Achwyfan Cross", "Croes Maen Achwyfan", "maen-achwyfan-cross",
+       "Cadw’s page: probably late 900s, made in commemoration of a person or event; its design heavily influenced by Viking seafarers on this coast.",
+       "Tudalen Cadw: diwedd y 900au yn ôl pob tebyg, er cof am berson neu ddigwyddiad; ei chynllun dan ddylanwad trwm morwyr Llychlyn ar yr arfordir hwn."),
+ _cadw("pl-cadw-tintern", "Tintern Abbey", "Abaty Tyndyrn", "tintern-abbey",
+       "Cadw’s page: founded in 1131 by Cistercian monks; the new abbey church begun in 1269; surrendered in 1536 in the first round of the dissolution.",
+       "Tudalen Cadw: sefydlwyd yn 1131 gan fynachod Sistersaidd; dechreuwyd yr eglwys abaty newydd yn 1269; ildiodd yn 1536 yn y don gyntaf o ddiddymu’r mynachlogydd."),
+ _cadw("pl-cadw-caergybi", "Caer Gybi Roman Fort", "Caer Rufeinig Caergybi", "caer-gybi-roman-fort",
+       "Cadw’s page: a fort of the 200s, part of a coastal network of defences, perhaps linked to the watchtower on Holyhead Mountain; walls up to 4 m high and 1.5 m thick, with four corner towers.",
+       "Tudalen Cadw: caer o’r 200au, yn rhan o rwydwaith o amddiffynfeydd arfordirol, efallai’n gysylltiedig â’r tŵr gwylio ar Fynydd Twr; muriau hyd at 4 m o uchder a 1.5 m o drwch, gyda phedwar tŵr cornel."),
+ _cadw("pl-cadw-neathabbey", "Neath Abbey", "Abaty Nedd", "neath-abbey",
+       "Cadw’s page: founded in 1130; one of Wales’s wealthiest abbeys by the late 1200s, with about 50 monks; later a copper smelting works; with Llanthony and Tintern the most important monastic remains in south Wales.",
+       "Tudalen Cadw: sefydlwyd yn 1130; un o abatai cyfoethocaf Cymru erbyn diwedd y 1200au, gyda thua 50 o fynachod; gwaith toddi copr yn ddiweddarach; gyda Llanddewi Nant Hodni a Thyndyrn, yr olion mynachaidd pwysicaf yn ne Cymru."),
+ _cadw("pl-cadw-llanthony", "Llanthony Priory", "Priordy Llanddewi Nant Hodni", "llanthony-priory",
+       "Cadw’s page: William de Lacy founded a hermitage here; a priory of Augustinian canons by 1118; Gerald of Wales called it truly suited to the monastic life; suppressed in 1539.",
+       "Tudalen Cadw: sefydlodd William de Lacy feudwyfa yma; priordy i ganoniaid Awstinaidd erbyn 1118; dywedodd Gerallt Gymro ei fod yn wir addas i’r bywyd mynachaidd; diddymwyd yn 1539."),
+ _cadw("pl-cadw-cymer", "Cymer Abbey", "Abaty Cymer", "cymer-abbey",
+       "Cadw’s page: founded in 1198, one of the lesser Cistercian houses; suffered greatly in the wars between Wales and England in the 1200s; substantial remains of the church survive.",
+       "Tudalen Cadw: sefydlwyd yn 1198, un o dai lleiaf y Sistersiaid; dioddefodd yn fawr yn rhyfeloedd Cymru a Lloegr yn y 1200au; mae rhannau sylweddol o’r eglwys wedi goroesi."),
+ _cadw("pl-cadw-carewcross", "Carew Cross", "Croes Caeriw", "carew-cross",
+       "Cadw’s page: believed to be the memorial of a fallen Welsh king; inscribed ‘the cross of Margiteut son of Etguin’, Maredudd, descendant of Hywel Dda, who ruled Deheubarth and died in battle in 1035; it inspired the Cadw logo.",
+       "Tudalen Cadw: credir mai cofeb brenin o Gymro a syrthiodd mewn brwydr yw hi; arysgrif ‘croes Margiteut fab Etguin’, Maredudd, disgynnydd Hywel Dda, a reolai Ddeheubarth ac a fu farw mewn brwydr yn 1035; ysbrydolodd logo Cadw."),
+]))
+
+
+def _wiki(key, title, slug, note_en, note_cy):
+    return key, dict(short=("Wikipedia", "Wikipedia"), t=title, by=("Wikipedia, drawing on Cadw’s listing and the Coflein record", "Wikipedia, yn seiliedig ar restriad Cadw a chofnod Coflein"),
+                     note=(note_en, note_cy), url="https://en.wikipedia.org/wiki/" + slug, lang="en")
+
+
+CITES.update(dict([
+ _wiki("pl-wiki-clynnog", "St Beuno’s Church, Clynnog Fawr", "St_Beuno%27s_Church,_Clynnog_Fawr",
+       "Beuno founded a clas on the site and was buried there; the chancel and transepts c. 1480 to 1486, the nave c. 1500; St Beuno’s Chapel joined to the church; Ffynnon Beuno near the village.",
+       "Sefydlodd Beuno glas ar y safle a’i gladdu yno; y gangell a’r croesfreichiau tua 1480 i 1486, corff yr eglwys tua 1500; Capel Beuno ynghlwm wrth yr eglwys; Ffynnon Beuno ger y pentref."),
+ _wiki("pl-wiki-melangell", "Pennant Melangell", "Pennant_Melangell",
+       "Melangell and the hare under her hem, and Prince Brochwel’s gift of the land; the shrine of c. 1160 to 1170, the oldest surviving Romanesque shrine in northern Europe; rebuilt in 1958 and restored in 1991.",
+       "Melangell a’r ysgyfarnog dan ei gwisg, a rhodd Brochwel o’r tir; y gysegrfa o tua 1160 i 1170, y gysegrfa Romanésg hynaf sydd wedi goroesi yng ngogledd Ewrop; ailgodwyd yn 1958 a’i hadfer yn 1991."),
+ _wiki("pl-wiki-brefi", "Llanddewi Brefi", "Llanddewi_Brefi",
+       "The synod of Brefi in the 500s, when the ground rose under David so that all could hear him; worship on the site since the 600s; Bishop Thomas Bek’s collegiate church; Roman stones from the nearby fort.",
+       "Synod Brefi yn y 500au, pan gododd y tir dan Ddewi fel y gallai pawb ei glywed; addoli ar y safle ers y 600au; eglwys golegol yr Esgob Thomas Bek; cerrig Rhufeinig o’r gaer gerllaw."),
+ _wiki("pl-wiki-llancarfan", "Llancarfan", "Llancarfan",
+       "The site of St Cadoc’s 6th-century clas, famed for its learning; medieval wall paintings found under whitewash in 2008, including one of only three depictions of St George in Welsh churches, uncovered by 2013.",
+       "Safle clas Cadog o’r chweched ganrif, a oedd yn enwog am ei dysg; paentiadau wal canoloesol a gafwyd dan wyngalch yn 2008, gan gynnwys un o ddim ond tri llun o San Siôr yn eglwysi Cymru, wedi’u datgelu erbyn 2013."),
+ _wiki("pl-wiki-llanbadarn", "St Padarn’s Church, Llanbadarn Fawr", "St_Padarn%27s_Church,_Llanbadarn_Fawr",
+       "Founded in the early 500s, probably by Padarn; one of the leading clasau of early Wales; Sulien and his son Rhygyfarch, who wrote the Life of St David; the Psalter made here c. 1079; two carved crosses; rebuilt in the 1200s.",
+       "Sefydlwyd ar ddechrau’r 500au, gan Badarn yn ôl pob tebyg; un o brif glasau Cymru gynnar; Sulien a’i fab Rhygyfarch, awdur Buchedd Dewi; y Sallwyr a wnaed yma tua 1079; dwy groes gerfiedig; ailgodwyd yn y 1200au."),
+ _wiki("pl-wiki-bangor", "Bangor Cathedral", "Bangor_Cathedral",
+       "Deiniol’s monastery of about 530 on land given by Maelgwn Gwynedd; Gruffudd ap Cynan buried by the high altar in 1137 and Owain Gwynedd beside him; building from the 1120s, nave of the 1300s, tower 1532.",
+       "Mynachlog Deiniol tua 530 ar dir a roddwyd gan Faelgwn Gwynedd; claddwyd Gruffudd ap Cynan ger yr allor fawr yn 1137 ac Owain Gwynedd wrth ei ymyl; adeiladu o’r 1120au, corff yr eglwys o’r 1300au, y tŵr 1532."),
+ _wiki("pl-wiki-llandaf", "Llandaff Cathedral", "Llandaff_Cathedral",
+       "Dedicated to Saints Peter and Paul and to Dyfrig, Teilo and Euddogwy; the Book of Llandaf of the 1100s; begun under Bishop Urban in 1120; the parachute mine of 2 January 1941; Epstein’s Christ in Majesty; back in use in 1958.",
+       "Wedi’i chysegru i Bedr a Paul ac i Ddyfrig, Teilo ac Euddogwy; Llyfr Llandaf o’r 1100au; dechreuwyd dan yr Esgob Urban yn 1120; ffrwydryn parasiwt 2 Ionawr 1941; Crist mewn Mawrhydi gan Epstein; yn ôl mewn defnydd yn 1958."),
+]))
+
+
+# Every batch above adds to CITES; this hands them all to src/cites.py, so it must stay at the end.
 import cites as _CITES  # noqa: E402
 for _k in CITES:
     if _k in _CITES.S and _CITES.S[_k] is not CITES[_k]:
