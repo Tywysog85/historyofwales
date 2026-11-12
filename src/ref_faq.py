@@ -235,7 +235,7 @@ GROUPS = [
   Q("tryweryn", "What happened at Tryweryn?", "Beth ddigwyddodd yn Nhryweryn?",
     "In 1965 the Welsh-speaking village of Capel Celyn near Bala was drowned to make a reservoir for Liverpool, though 35 of Wales’s 36 MPs voted against the bill and no Welsh MP voted for it. ‘Cofiwch Dryweryn’, remember Tryweryn, is painted on walls across Wales.",
     "Yn 1965 boddwyd pentref Cymraeg Capel Celyn ger y Bala i wneud cronfa ddŵr i Lerpwl, er i 35 o 36 AS Cymru bleidleisio yn erbyn y mesur ac na phleidleisiodd yr un AS o Gymru drosto. Mae ‘Cofiwch Dryweryn’ wedi’i baentio ar waliau ledled Cymru.",
-    ["place-celyn.html", "a-z.html#az-tryweryn"]),
+    ["story-tryweryn.html", "place-celyn.html", "a-z.html#az-tryweryn"]),
   Q("aberfan", "What happened at Aberfan?", "Beth ddigwyddodd yn Aberfan?",
     "On the morning of 21 October 1966 a coal tip above the village slid down onto Pantglas school and nearby homes. 144 people died, 116 of them children. Wales remembers them every year.",
     "Fore 21 Hydref 1966 llithrodd tomen lo uwchben y pentref i lawr ar ysgol Pantglas a thai cyfagos. Bu farw 144 o bobl, 116 ohonynt yn blant. Mae Cymru’n eu cofio bob blwyddyn.",

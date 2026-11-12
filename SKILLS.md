@@ -141,10 +141,11 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - Returning visitors see "New" labels on lines added since their last look, and a red dot on the menu button until they open What's new (`hc-news-seen` in local storage, the newest date is on the menu button as `data-news`). First-time visitors see nothing marked new.
 - `feed.xml` is an Atom feed of the news plus today's anniversaries from On this day. `deploy.yml` now also rebuilds the site every morning at 04:15 UTC (`schedule`) so the feed carries each day's anniversaries.
 - **The weekly email** uses Brevo (brevo.com). Its free plan has no time limit and no card: up to 300 emails a day, with a small Brevo logo at the foot of each email. (Kit and MailerLite were ruled out: Kit's sign-up pushes a paid trial, and MailerLite's free plan cannot send our own email design through its API.) Four settings switch it on:
-  1. `EMAIL_FORM`: the link to the Brevo sign-up form (Brevo → Contacts → Forms → the form → Share → copy link). Repository variable in GitHub (Settings → Secrets and variables → Actions → Variables → New repository variable). The site then shows a "Sign up for the weekly email" button on the home page, What's new and the foot of every page. Until then those places show "What's new" and "News feed".
+  1. `EMAIL_FORM`: the link to the Brevo sign-up form (Brevo → Contacts → Forms → the form → Share → copy link). Repository variable in GitHub (Settings → Secrets and variables → Actions → Variables → New repository variable). The site then shows a sign-up box (email address and a Sign up button) on the home page, What's new and the foot of every page. Until then those places show "What's new" and "News feed".
   2. `BREVO_LIST_ID`: the number of the Brevo list the form adds people to (Brevo → Contacts → Lists, the ID column). Repository variable.
   3. `BREVO_SENDER`: the email address the weekly email comes from. It must be added and confirmed in Brevo first (Settings → Senders, domains and dedicated IPs → Senders → Add a sender). Repository variable.
   4. `BREVO_API_KEY`: a Brevo API key (Brevo → your name, top right → SMTP & API → API keys → Generate a new API key). Stored as a GitHub **secret** (same page, Secrets tab, New repository secret). Never paste it anywhere else.
+- **Signing up happens on our own page** (November 2026). The box in `follow_box()` in `build.py` is a real form whose address is the `EMAIL_FORM` link, with Brevo's field names: `EMAIL`, `email_address_check` (Brevo's robot trap, hidden and left empty) and `locale`. The end of `src/static/site.js` sends it to that address with `?isAjax=1` in the background; Brevo answers `{"success": true}` and the box shows a thank-you in English or Welsh in place of the form, so nobody leaves the site. If the browser won't let the page read Brevo's answer, the form has still reached Brevo, so it says thank you then too; a real error answer shows "Sorry, that didn't go through". Without JavaScript the form posts to Brevo the plain way. Each sign-up is counted in GoatCounter as the event `email-signup`. If the Brevo form ever gets a new field (a name, or a tick box), add an input with the same name to `follow_box()`.
 - When more than about 300 people have signed up, the free plan's 300 a day is no longer enough for one send, and the email needs Brevo's cheapest paid plan or a split send.
 - `.github/workflows/weekly-email.yml` runs every Monday at 07:00 UTC: it builds the site, and `tools/weekly_email.py` writes "This week in Welsh history" (the anniversaries of the next seven days and anything added in the last week) and asks Brevo to send it (it makes a campaign for the list and sends it at once). Run `python3 tools/weekly_email.py` after a build to preview the email (it writes `email-preview.html`; give a date such as `2027-03-01` to see another week, and `SITE_URL=file://$PWD/_site/` with a local build that made the share pictures to see the pictures offline). It can also be started by hand from the Actions tab (Run workflow).
 - **How the email looks** (November 2026): like the site, night blue with gold and dragon red, Gloock headings. A banner (`src/static/email/head.jpg`, drawn by `tools/email_header.py`, committed so no Pillow is needed), a Story of the week with its share picture (the anniversary whose picture fits best; `GREAT_DAYS` makes Saint David's Day, Owain Glyndŵr Day, 11 December and Saint Dwynwen's Day always lead), the week day by day with dates in the colour of their age, New on the site with pictures, a Welsh word of the week from `src/cymraeg.py`, and buttons to the daily challenge and quiz. Email programs ignore most modern CSS, so it is built from tables with the style written on every element; pictures load from the live site (`cards/<page>.jpg`), so only pages the deploy made a share picture for get one. Keep it under about 100 KB or Gmail cuts it short (it is about 20 KB).
@@ -616,6 +617,12 @@ Learnt while simplifying the home page.
 - Fix the source in `src/*.py` with an exact find-and-replace that checks each phrase occurs the expected number of times, then rebuild.
 - A fluent proofreader is still the final check.
 
+### Adding people in batches, and checking quotations when a source site is blocked (November 2026)
+- New people go in a new part file (`src/people2g.py` and on), in the `P(...)` format of `people2a.py`, and are added to `ALL` in `src/people2.py`. build.py then makes the person page, the Welsh page, the People and age listings, the firsts page (if `first=` is set) and links timeline events whose text names them.
+- To find gaps, list everyone already on the site (`python3 -c "import data; ..."` in `src/`) and compare with the Dictionary of Welsh Biography; grep the other `claude/` branches so two threads don't write the same person.
+- Long reads for one person (`src/caradog.py`, `macsen.py`, `nest.py`, `rhys.py`) follow `src/madog.py`: a `STORY` dict in features.py, `EVENTS` in data.py, a reading list in refs.py, and the story id in a SHELF group in build.py (the build warns if a book is missing from the bookshelf).
+- Many sites are blocked from Claude's cloud computer for curl, but WebFetch can still read them. It will not print long passages, so check a quotation by giving it the exact sentences and asking "does each appear word for word?".
+
 ### A circle of linked people pages: Arthur's circle (November 2026)
 
 - `src/arthur_circle.py` holds the people of Arthur's story (same `P(...)` format as `people2a.py`; `people2.py` adds them to the site) and `GROUPS`, the headed lists of names.
@@ -628,6 +635,7 @@ Learnt while simplifying the home page.
 
 - `src/ylolfa.py` holds each Y Lolfa book as a normal reading-list item whose last field is its ylolfa.com page. Put the name in the reading list of the page it belongs to (`src/refs.py`, `src/refs2.py`) or in `SHELF_EXTRA`; `bookshelf_page()` in `build.py` gathers every item with a ylolfa.com link into the "Y Lolfa" section of the Books and authors page, linking each to its place in its period.
 - ylolfa.com refuses automated fetches. To check a book: a web search limited to ylolfa.com gives the book's own page, whose title shows the exact title and ISBN (`/products/<ISBN>/<slug>`); then a search for that ISBN in quotes shows the author on booksellers' listings. Give a year only when a listing confirms it.
+- The home page's Further reading lists are `READING` and `ONLINE` in `src/data.py`. A book with `u` gets a link; an online site with `uCy` links to its Welsh address on the Welsh page (e.g. biography.wales / bywgraffiadur.cymru). Gwales.com closed on 2 March 2026: the Books Council of Wales now sells through ffolio.wales / ffolio.cymru.
 
 ### Helping a first-time visitor choose where to begin (November 2026)
 - The three "Where to begin" cards sit in the home hero in `src/head.html` (`<nav class="begin">`), styled in `src/v6.css` under "where to begin". The hero's moving scene measures `.begin` (in `src/app.js`, `measure()`) to keep the mountain and stars clear of the words, so keep that class name if the cards change.
@@ -650,6 +658,14 @@ Learnt while simplifying the home page.
 - The card opens on click (code at the end of `src/static/site.js`): under the chip on a computer, as a sheet along the bottom on a phone. Without JavaScript the chip is a plain link to the first source.
 - The home page's "Did you know?" fact is drawn again by `app.js` when "Another" is pressed, so `FACTS` goes into the page data already turned into HTML (`CITE.html_text`).
 - Check sources with the WebFetch tool when the cloud can't reach a site directly, and quote the source's own words in the note where you can.
+
+### A photograph inside a long read (November 2026)
+
+Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.html`).
+
+- A paragraph that is just `!! <gallery id>` (for example `!! person-gwynfor-evans`) puts that gallery picture into the text with its full credit: caption, photographer, licence and Commons link. It works anywhere `prose()` is used: long reads, person pages, chapters. Put the same line in the English and the Welsh paragraphs, in the same place.
+- The picture must already be in the gallery (`src/gallery_photos.py`, files in `src/static/gallery/`); an unknown id stops the build. A tall picture is shown as a portrait (narrower, cropped from near the top) so faces are not cut off.
+- The picture at the top of a long read comes from `PAGE` in `src/pictures.py` (`"story-tryweryn.html": "g:place-celyn@50% 55%"`), with its credit under the title, so don't repeat that picture in the text.
 
 ## Working together
 

@@ -33,6 +33,7 @@ STORIES = [
    "Cipiodd Owain Glyndŵr Harlech ac Aberystwyth yn 1404 a chynnal ei lys ynddynt. Daeth y gwarchaeau olaf yn y Rhyfel Cartref; syrthiodd Rhaglan yn 1646 a gorchmynnodd y Senedd ddifrodi llawer o gestyll fel na ellid eu hamddiffyn byth eto. Aeth yr hyn oedd ar ôl yn chwareli, yna’n adfeilion rhamantaidd i arlunwyr fel Turner, ac yn y pen draw yn henebion. Yn 1986 gwnaed cestyll a muriau trefi Edward I yng Ngwynedd yn Safle Treftadaeth y Byd UNESCO: mae adeiladau a godwyd i ddarostwng Cymru bellach ymhlith ei symbolau mwyaf adnabyddus."]),
 
  dict(id="language", era="saints", art="book", mins=6,
+  links=[("story-tryweryn.html", "Cofiwch Dryweryn: the drowning of Capel Celyn", "Cofiwch Dryweryn: boddi Capel Celyn")],
   en="How the Welsh language survived", cy="Sut y goroesodd y Gymraeg",
   sumEn="Banned from the courts, beaten out of schoolchildren and written off by government inspectors, Welsh is still spoken by more than half a million people. How?",
   sumCy="Fe’i gwaharddwyd o’r llysoedd, ei churo o blant ysgol a’i diystyru gan arolygwyr y llywodraeth, ond mae mwy na hanner miliwn yn dal i siarad Cymraeg. Sut?",
@@ -389,6 +390,9 @@ import caradog as _CR  # King Caradog (Caratacus) against Rome, and his family i
 import patrick as _PT  # Saint Patrick, the Briton from Wales (src/patrick.py)
 import christianity as _CH  # The coming of Christianity: the first Christians, Joseph, Lucius, Brân (src/christianity.py)
 import macsen as _MX  # Macsen Wledig, the emperor from Britain (src/macsen.py)
-import mac as _MAC  # MAC and the Free Wales Army (src/mac.py)
+import nest as _NS  # Nest ferch Rhys, princess of Deheubarth (src/nest.py)
+import rhys as _RH  # Prince Rhys ap Gruffudd, the Lord Rhys (src/rhys.py)
 import aberfan as _AF  # The Aberfan disaster, 21 October 1966 (src/aberfan.py)
-STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY] + _CH.STORIES + [_PT.STORY, _AF.STORY] + _MAC.STORIES
+import mac as _MAC  # MAC and the Free Wales Army (src/mac.py)
+import tryweryn as _TW  # Cofiwch Dryweryn: the drowning of Capel Celyn (src/tryweryn.py)
+STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY, _NS.STORY, _RH.STORY] + _CH.STORIES + [_PT.STORY, _AF.STORY, _TW.STORY] + _MAC.STORIES
