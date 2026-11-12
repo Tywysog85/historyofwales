@@ -103,20 +103,39 @@ def cer(ref, hyp):
     return min(1.0, prev[-1] / len(a))
 
 
+def asr_candidates():
+    """techiaith's Welsh speech recognisers on Hugging Face (names change, so ask), then Whisper, which knows Welsh."""
+    found = []
+    try:
+        url = "https://huggingface.co/api/models?author=techiaith&search=wav2vec2&limit=100"
+        with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": FA.UA}), timeout=60) as r:
+            ids = [m["id"] for m in json.loads(r.read())]
+        print("techiaith wav2vec2 models:", ", ".join(ids))
+        parts = {i: re.split(r"[-_]", i.lower().split("/")[1]) for i in ids}
+        welsh = [i for i in ids if "cy" in parts[i] and not any("lm" in p for p in parts[i])]
+        found += sorted(welsh, key=lambda i: ("en" in parts[i], "1b" in parts[i], len(i)))
+    except Exception as ex:  # noqa: BLE001
+        print("Could not list techiaith models:", ex)
+    return found[:3] + ["openai/whisper-small"]
+
+
 def recogniser():
     try:
         from transformers import pipeline
     except Exception as ex:  # noqa: BLE001
         print("No speech recogniser (transformers not installed):", ex)
-        return None
-    for m in ASR_MODELS:
+        return None, ""
+    for m in asr_candidates():
         try:
-            asr = pipeline("automatic-speech-recognition", model=m)
+            if "whisper" in m:
+                asr = pipeline("automatic-speech-recognition", model=m, generate_kwargs={"language": "welsh", "task": "transcribe"})
+            else:
+                asr = pipeline("automatic-speech-recognition", model=m)
             print("Speech recogniser:", m)
-            return lambda wav, asr=asr: asr(wav)["text"]
+            return (lambda wav, asr=asr: asr(wav)["text"]), m
         except Exception as ex:  # noqa: BLE001
             print(f"Recogniser {m} not available: {ex}")
-    return None
+    return None, ""
 
 
 def to_16k(src, dst):
@@ -148,8 +167,8 @@ def main():
     voices = load_voices()
     if not voices:
         raise SystemExit("No Welsh voice could be loaded")
-    asr = recogniser()
-    lines = []
+    asr, asr_name = recogniser()
+    lines = [f"Speech recogniser: {asr_name or 'none'}"]
     with tempfile.TemporaryDirectory() as tmp:
         best = voices[0]
         if asr and len(voices) > 1:
