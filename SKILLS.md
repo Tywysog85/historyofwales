@@ -153,6 +153,15 @@ This file collects the techniques and lessons from building History of Wales. Ad
 
 ### Search
 - `build.py` writes `search.json`, an index of events, people, places and pages. `src/static/search.js` opens a search box from the magnifier button or the `/` key.
+- Every king and prince is in it: each ruler on a kingdom page has an anchor (`kings-gwynedd.html#k-cadfan-ap-iago`, made by `ruler_anchor()`), and the line lights up when opened from search. All 827 castle sites are in it too, not only those with a story.
+- Old spellings and English names find the Welsh ones through `ALIAS` in `search.js` (Llewellyn → Llywelyn, Caernarvon → Caernarfon). Add a line there when someone searches for a spelling that finds nothing.
+- When a word finds nothing as typed, search undoes Welsh mutations (`MUT`: Nghymru → Cymru, Fangor → Bangor), then tries the nearest word in the index (one letter out for short words, two for long), and says "Showing results for …".
+
+### The reference pages: Look it up, the A–Z and quick answers (November 2026)
+- `reference.html` (Look it up), `a-z.html` and `questions.html` are built by `src/refpages.py`, which `build.py` loads with `RP.setup(globals())` so it can use `bi()`, `page()`, `hero()` and the rest. Keeping the new pages in their own file means other work on `build.py` rarely clashes with them.
+- The words are in `src/ref_az.py` (`A(id, English, Welsh, text, text, see)`) and the questions in `src/ref_faq.py` (`Q(...)` in sections). `see` lists pages to read more; a link to a page the site does not have is left out and named at the end of the build, so entries can point at pages that are still to come.
+- `questions.html` carries FAQPage data and `a-z.html` DefinedTermSet data, so search engines can show the answers directly.
+- Each entry is in search as its own result (kinds `term` and `question`), and the filter box on each page hides what does not match as you type.
 
 ### Offline support
 - `src/static/sw.js` caches pages. **Change the cache name** (`history-of-wales-vN`, now v6) whenever the site's look changes a lot, so returning visitors get the new version.
