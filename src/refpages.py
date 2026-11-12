@@ -12,6 +12,7 @@ import ref_faq as FAQ
 import ref_towns as TWN
 import ref_battles as BT
 import ref_docs as DC
+import ref_topics as TP
 import os
 
 g = {}  # build.py's helpers (bi, e, page, hero, section ...), filled by setup()
@@ -41,6 +42,7 @@ _GENERAL = {
     "a-z.html": ("The A–Z of Welsh history", "A–Y hanes Cymru"), "questions.html": ("Quick answers", "Atebion cyflym"), "towns.html": ("Towns and villages", "Trefi a phentrefi"),
     "battles.html": ("Battles of Wales", "Brwydrau Cymru"), "documents.html": ("Key documents", "Dogfennau allweddol"), "sites.html": ("Historic sites map", "Map safleoedd hanesyddol"),
     "maps.html": ("Maps through time", "Mapiau drwy’r oesoedd"), "reference.html": ("Look it up", "Chwilio’r hanes"),
+    "topics.html": ("Topic guides", "Canllawiau pwnc"),
 }
 TITLES = {}  # href -> (English, Welsh), filled in pages()
 MISSING = set()
@@ -64,6 +66,8 @@ def _titles():
         TITLES[f"era-{x['id']}.html"] = (x["en"], x["cy"])
     for r in g["RY"].REALMS:
         TITLES[f"kings-{r['id']}.html"] = g["realm_title"](r)
+    for t in TP.TOPICS:
+        TITLES[f"topic-{t['id']}.html"] = (t["en"], t["cy"])
     for r in g["SA"].REGIONS:
         TITLES[f"saints-{r['id']}.html"] = (("Saints of " + r["en"]) if r["realm"] else "Saints across the sea", ("Seintiau " + r["cy"]) if r["realm"] else "Saint dros y môr")
 
@@ -467,6 +471,106 @@ DOC_CSS = """
 """
 
 
+# ---------- topic guides ----------
+def _topic_events(t, most=24):
+    if not t["ev"]:
+        return []
+    rx, drop = re.compile(t["ev"]), re.compile(t["xev"]) if t["xev"] else None
+    hits = sorted((ev for ev in g["D"].EVENTS if rx.search(ev[5] + " " + ev[7]) and not (drop and drop.search(ev[5]))), key=lambda ev: ev[1])
+    if len(hits) > most:  # spread the picks evenly through time, so every age of the topic is shown
+        step = (len(hits) - 1) / (most - 1)
+        hits = [hits[round(i * step)] for i in range(most)]
+    return hits
+
+
+def topic_page(t, have):
+    D = g["D"]
+    person = {p[0]: p for p in D.PEOPLE}
+    place = {p["id"]: p for p in D.PLACES}
+    terms = {x["id"]: x for x in AZ.TERMS}
+    qs = {q["id"]: q for gr in FAQ.GROUPS for q in gr["qs"]}
+    docs = {d["id"]: d for d in DC.DOCS}
+    bats = {b["id"]: b for b in BT.BATTLES}
+    col = g["COL"][t["era"]]
+    intro = "".join(f"<p>{bi(en, cy)}</p>" for en, cy in zip(t["iEn"], t["iCy"]))
+    reads = "".join(f'<a href="{h}"><span class="n">{bi("Read", "Darllen")}</span><b>{bi(*TITLES[h.split("#")[0]])}</b></a>'
+                    for h in t["reads"] if exists(h, have) and h.split("#")[0] in TITLES)
+    for h in t["reads"]:
+        if not exists(h, have):
+            MISSING.add(h)
+    body = f'<div class="tp-intro">{intro}</div>' + (f'<div class="ref-desk tp-reads">{reads}</div>' if reads else "")
+    out = g["section"](body, top=True)
+    ppl = [person[s] for s in t["people"] if s in person and exists(f"person-{s}.html", have)]
+    if ppl:
+        cards = "".join(f'<a href="person-{p[0]}.html" data-era="{p[1]}"><b>{bi(p[3], p[4])}</b><span class="dt">{g["e"](p[2])}</span><span class="d">{bi(p[5], p[6])}</span></a>' for p in ppl)
+        out += g["section"](f'<div class="tp-people">{cards}</div>', "People", "Pobl")
+    evs = _topic_events(t)
+    if evs:
+        lis = "".join(f'<li><time>{bi(g["year_label"](ev), g["year_label"](ev, True))}</time><div><b>{bi(ev[5], ev[6])}</b><p>{bi(ev[7], ev[8])}</p></div></li>' for ev in evs)
+        out += g["section"](f'<ol class="tp-ev">{lis}</ol><p><a class="btn" href="timeline.html">{bi("The whole timeline", "Y llinell amser gyfan")} →</a></p>', "Key moments", "Eiliadau allweddol")
+    side = ""
+    dl = [terms[i] for i in t["az"] if i in terms]
+    if dl:
+        side += (f'<div><h3 class="tp-h">{bi("Words to know", "Geiriau i’w gwybod")}</h3><dl class="tp-az">'
+                 + "".join(f'<dt><a href="a-z.html#az-{x["id"]}">{bi(x["en"], x["cy"])}</a></dt><dd>{bi(x["dEn"], x["dCy"])}</dd>' for x in dl) + "</dl></div>")
+    ql = [qs[i] for i in t["faq"] if i in qs]
+    if ql:
+        side += (f'<div><h3 class="tp-h">{bi("Quick answers", "Atebion cyflym")}</h3>'
+                 + "".join(f'<details class="ref-q"><summary>{bi(q["qEn"], q["qCy"])}</summary><div class="ref-a"><p>{bi(q["aEn"], q["aCy"])}</p></div></details>' for q in ql) + "</div>")
+    if side:
+        out += g["section"](f'<div class="tp-two">{side}</div>', "Look it up", "Chwilio’r hanes")
+    more = ""
+    dd = [docs[i] for i in t["docs"] if i in docs]
+    if dd:
+        more += f'<div><h3 class="tp-h">{bi("Key documents", "Dogfennau allweddol")}</h3><p class="ref-see">' + "".join(f'<a href="documents.html#doc-{d["id"]}">{bi(d["en"], d["cy"])} · {bi(d["dEn"], d["dCy"])}</a>' for d in dd) + "</p></div>"
+    bb = [bats[i] for i in t["battles"] if i in bats]
+    if bb:
+        more += f'<div><h3 class="tp-h">{bi("Battles", "Brwydrau")}</h3><p class="ref-see">' + "".join(f'<a href="battles.html#b-{b["id"]}">{bi(b["en"], b["cy"])} · {bi(b["dEn"], b["dCy"])}</a>' for b in bb) + "</p></div>"
+    pp = [place[i] for i in t["places"] if i in place and exists(f"place-{i}.html", have)]
+    if pp:
+        more += f'<div><h3 class="tp-h">{bi("Places to visit", "Lleoedd i ymweld â nhw")}</h3><p class="ref-see">' + "".join(f'<a href="place-{p["id"]}.html">{bi(p["en"], p["cy"])}</a>' for p in pp) + "</p></div>"
+    if more:
+        out += g["section"](more, "Documents, battles and places", "Dogfennau, brwydrau a lleoedd")
+    others = "".join(f'<a href="topic-{o["id"]}.html" style="--c:{g["COL"][o["era"]]}"><b>{bi(o["en"], o["cy"])}</b></a>' for o in TP.TOPICS if o["id"] != t["id"])
+    out += g["section"](f'<div class="tp-others">{others}</div>', "More topic guides", "Rhagor o ganllawiau pwnc")
+    crumb = crumbs() + f' / <a href="topics.html">{bi("Topic guides", "Canllawiau pwnc")}</a>'
+    main = g["hero"](t["era"], crumb, "book", "Topic guide", "Canllaw pwnc", t["en"], t["cy"], t["sEn"], t["sCy"], art=t["art"]) + out
+    return g["page"](f"topic-{t['id']}.html", f"{t['en']}: a guide · History of Wales", f"{t['en']} in Welsh history: {t['sEn']} The people, key moments, words, documents and places in one guide.",
+                     main, era=t["era"], ld=ld_article(f"{t['en']} in Welsh history", t["sEn"]), active="reference.html", track=f"page:topic-{t['id']}")
+
+
+def topics_page(have):
+    cards = "".join(f'<a href="topic-{t["id"]}.html" style="--c:{g["COL"][t["era"]]}"><span class="n">{bi("Topic guide", "Canllaw pwnc")}</span><b>{bi(t["en"], t["cy"])}</b><span class="d">{bi(t["sEn"], t["sCy"])}</span></a>' for t in TP.TOPICS)
+    main = (g["hero"]("industrial", crumbs(), "book", "Reference", "Cyfeirlyfr", "Topic guides", "Canllawiau pwnc",
+                      "Follow one thread through the whole of Welsh history: the language, faith, law, war, industry, the countryside, women, music and poetry, the Welsh abroad, science and sport.",
+                      "Dilynwch un edefyn drwy hanes Cymru i gyd: yr iaith, ffydd, cyfraith, rhyfel, diwydiant, cefn gwlad, menywod, cerdd a barddoniaeth, y Cymry ar wasgar, gwyddoniaeth a chwaraeon.", art="book")
+            + g["section"](f'<div class="ref-desk">{cards}</div>', top=True))
+    return g["page"]("topics.html", "Topic guides to Welsh history · History of Wales",
+                     "Guides to the big themes of Welsh history: the Welsh language, faith, law, war, industry, farming, women, music and poetry, the Welsh abroad, science and sport.",
+                     main, era="industrial", og_type="website", ld=ld_article("Topic guides to Welsh history", "The big themes of Welsh history"), active="reference.html", track="page:topics")
+
+
+TOPIC_CSS = """
+.tp-intro{max-width:46rem;font-size:1.12rem;line-height:1.7}.tp-intro p{margin:0 0 1rem}
+.tp-reads{margin-top:1.4rem}
+.tp-people{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,14rem),1fr));gap:.7rem}
+.tp-people a{display:grid;gap:.15rem;align-content:start;background:var(--slate);border:1px solid var(--line);border-radius:10px;padding:.75rem .9rem;text-decoration:none;color:var(--ink)}
+.tp-people a:hover{border-color:var(--gold,#e8c65a)}
+.tp-people b{font:600 1.05rem/1.25 var(--f-display)}.tp-people .dt{font:500 .74rem var(--f-mono);color:var(--muted)}.tp-people .d{font:400 .85rem/1.4 var(--f-body);color:var(--muted)}
+.tp-ev{list-style:none;margin:0 0 1.2rem;padding:0;max-width:52rem;border-left:2px solid var(--line)}
+.tp-ev li{display:grid;grid-template-columns:7.5rem 1fr;gap:.2rem 1rem;padding:.7rem 0 .7rem 1rem;position:relative}
+.tp-ev li::before{content:"";position:absolute;left:-6px;top:1.05rem;width:10px;height:10px;border-radius:50%;background:var(--gold,#e8c65a)}
+.tp-ev time{font:500 .8rem var(--f-mono);color:var(--muted);padding-top:.2rem}.tp-ev b{font:600 1.08rem var(--f-display)}.tp-ev p{margin:.2rem 0 0;line-height:1.55}
+@media (max-width:560px){.tp-ev li{grid-template-columns:1fr}}
+.tp-two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:2rem;align-items:start}
+.tp-h{font:600 1.35rem var(--f-display);margin:0 0 .6rem}
+.tp-az dt{font-weight:600;margin:.8rem 0 .15rem}.tp-az dt a{color:var(--ink)}.tp-az dd{margin:0;color:var(--muted);line-height:1.55}
+.tp-others{display:flex;flex-wrap:wrap;gap:.5rem}
+.tp-others a{border:1px solid var(--line);border-left:3px solid var(--c);border-radius:10px;padding:.5rem .9rem;text-decoration:none;color:var(--ink)}
+.tp-others a:hover{border-color:var(--gold,#e8c65a)}
+"""
+
+
 # ---------- the look-it-up desk ----------
 DESK = [  # href, English, Welsh, English line, Welsh line, era colour
     ("a-z.html", "The A–Z", "Yr A–Y", "Words, laws and ideas, each explained in a few lines.", "Geiriau, cyfreithiau a syniadau, pob un wedi’i egluro mewn ychydig linellau.", "kings"),
@@ -513,11 +617,13 @@ def pages(have):
     """have: the set of page names build.py is making (so links to pages that do not exist yet are left out)."""
     _titles()
     have = set(have) | set(PAGE_NAMES)
-    out = {"a-z.html": az_page(have), "questions.html": questions_page(have), "towns.html": towns_page(have), "battles.html": battles_page(have), "documents.html": documents_page(have), "reference.html": desk_page(have)}
+    out = {"a-z.html": az_page(have), "questions.html": questions_page(have), "towns.html": towns_page(have), "battles.html": battles_page(have), "documents.html": documents_page(have), "topics.html": topics_page(have), "reference.html": desk_page(have)}
+    for t in TP.TOPICS:
+        out[f"topic-{t['id']}.html"] = topic_page(t, have)
     return out
 
 
-PAGE_NAMES = ["a-z.html", "questions.html", "towns.html", "battles.html", "documents.html", "reference.html"]
+PAGE_NAMES = ["a-z.html", "questions.html", "towns.html", "battles.html", "documents.html", "topics.html", "reference.html"] + [f"topic-{t['id']}.html" for t in TP.TOPICS]
 
 
 def search_items():
@@ -530,6 +636,7 @@ def search_items():
     items.append(dict(k="page", t="Battles of Wales", c="Brwydrau Cymru", u="battles.html", y=["Map", "Map"], b=["Every battle of Welsh history on a map, from Catraeth to Mametz Wood.", "Pob brwydr yn hanes Cymru ar fap, o Gatraeth i Goed Mametz."], e="medieval"))
     items += [dict(k="doc", t=d["en"], c=d["cy"], u=f"documents.html#doc-{d['id']}", y=[d["dEn"], d["dCy"]], b=[d["aEn"] + " " + d["wEn"], d["aCy"] + " " + d["wCy"]], e=d["era"]) for d in DC.DOCS]
     items.append(dict(k="page", t="Key documents of Welsh history", c="Dogfennau allweddol hanes Cymru", u="documents.html", y=["Reference", "Cyfeirlyfr"], b=["The treaties, letters and laws that shaped Wales, in their own words.", "Y cytundebau, y llythyrau a’r deddfau a luniodd Gymru, yn eu geiriau eu hunain."], e="tudor"))
+    items += [dict(k="topic", t=t["en"], c=t["cy"], u=f"topic-{t['id']}.html", y=["Topic guide", "Canllaw pwnc"], b=[t["sEn"], t["sCy"]], e=t["era"]) for t in TP.TOPICS]
     items.append(dict(k="page", t="The A–Z of Welsh history", c="A–Y hanes Cymru", u="a-z.html", y=["Reference", "Cyfeirlyfr"],
                       b=["Words, laws, places and ideas from Welsh history, each explained in a few lines.", "Geiriau, cyfreithiau, lleoedd a syniadau o hanes Cymru, pob un wedi’i egluro mewn ychydig linellau."], e="kings"))
     items.append(dict(k="page", t="Look it up: the reference desk", c="Chwilio’r hanes: y ddesg gyfeirio", u="reference.html", y=["Reference", "Cyfeirlyfr"],
