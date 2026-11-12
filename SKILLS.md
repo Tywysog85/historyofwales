@@ -672,6 +672,11 @@ Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.
 - Their sources go beside the claims as `[[cite:...]]` chips (see "Sources beside the claims"). The keys for these pages live in `CITES` in `src/princes.py`, which `src/cites.py` adds to its list, so other threads editing `cites.py` don't collide with them. Good free texts to link: the Annales Cambriae (Fordham Internet Medieval Sourcebook), the Annals of Ulster (CELT, one page per year: `T100001A/text426.html` is 856), Asser (Fordham) and Gerald's Description of Wales (A Vision of Britain). The Brut has no good free English text online: cite Thomas Jones's translation with no link.
 - Check every quote against a real edition before it goes in. Gerald of Wales (Description of Wales I.2) gives North Wales to Merfyn and Powys to Anarawd, not the other way round; only his I.4 names the three royal seats (Aberffraw, Dinefwr, Pengwern).
 
+### Pictures inside a long read, and a Commons photo for the top of the page (November 2026)
+- For a picture that is not in the gallery, a long read can carry its own list. Give the story `figs={key: (Commons file, maker, licence, licence link, caption EN, caption CY, width, height)}` and put a paragraph `"!! key"` where each picture goes, in both the English and the Welsh list. `prose()` in `build.py` looks in `figs` first, then in the gallery, and draws it with its full credit (`lit_fig`). First used in `src/welshnot.py`.
+- Search Commons from GitHub first (see "Looking up Commons pictures from GitHub"): the Welsh Not category held a real W.N. board, an 1879 magazine drawing and Geoff Charles's photographs of Cymdeithas yr Iaith, all free to use. The "Fetch photos" workflow then keeps copies on the site.
+- When the picture for the top of a page is not yet in the gallery, add it to `LEGEND_PHOTOS` in `src/art.py` and `PICKS` in `tools/fetch_legend_photos.py` under a key no legend uses. Pushing that file runs "Fetch photos", which saves `src/static/legends/<key>.webp`; pull, then add `"story-x.html": "l:<key>"` to `PAGE` in `src/pictures.py` (its check stops the build if the file is not there yet).
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.

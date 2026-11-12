@@ -395,4 +395,9 @@ import rhys as _RH  # Prince Rhys ap Gruffudd, the Lord Rhys (src/rhys.py)
 import aberfan as _AF  # The Aberfan disaster, 21 October 1966 (src/aberfan.py)
 import mac as _MAC  # MAC and the Free Wales Army (src/mac.py)
 import tryweryn as _TW  # Cofiwch Dryweryn: the drowning of Capel Celyn (src/tryweryn.py)
-STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY, _NS.STORY, _RH.STORY] + _CH.STORIES + [_PT.STORY, _AF.STORY, _TW.STORY] + _MAC.STORIES
+import welshnot as _WN  # The Welsh Not and how they tried to wipe out the language (src/welshnot.py)
+STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY, _NS.STORY, _RH.STORY] + _CH.STORIES + [_PT.STORY, _AF.STORY, _TW.STORY] + _MAC.STORIES + [_WN.STORY]
+# the long reads on the language and on protest point on to the Welsh Not long read (src/welshnot.py)
+for _s in STORIES:
+    if _s["id"] in ("language", "revival", "protest"):
+        _s["links"] = _s.get("links", []) + [("story-welsh-not.html", "The Welsh Not: how they tried to wipe out our language", "Y Welsh Not: sut y ceisiwyd difa ein hiaith")]

@@ -294,6 +294,10 @@ LEGEND_PHOTOS = dict(
     sunken=("Submerged forest at Ynyslas, Ceredigion.jpg", "Richerman", "CC BY-SA 3.0", _BYSA + "3.0/", "The drowned forest at Ynyslas, uncovered at low tide", "Y goedwig foddedig yn Ynys-las, yn y golwg ar drai", "50% 60%"),
     sword=("Llyn Ogwen Milky Way.jpg", "John Badham", "CC BY-SA 4.0", _BYSA + "4.0/", "Llyn Ogwen under the Milky Way", "Llyn Ogwen dan y Llwybr Llaethog", "50% 50%"),
     cauldron=("Gundestrup cauldron.jpg", "Knud Winckelmann", "CC BY-SA 3.0", _BYSA + "3.0/", "The Gundestrup cauldron, made in the Iron Age", "Pair Gundestrup, a wnaed yn Oes yr Haearn", "50% 50%"),
+    # not a legend: the picture at the top of the Welsh Not long read (story-welsh-not.html, src/welshnot.py)
+    **{"iaith-1966": ("Members of the Welsh Language Society protesting outside Llangefni Post Office (1502061).jpg", "Geoff Charles, National Library of Wales", "CC BY-SA 4.0", _BYSA + "4.0/",
+                      "Members of Cymdeithas yr Iaith protest for the Welsh language outside the Post Office in Llangefni, 23 February 1966",
+                      "Aelodau Cymdeithas yr Iaith yn protestio dros y Gymraeg y tu allan i Swyddfa’r Post yn Llangefni, 23 Chwefror 1966", "50% 45%")},
 )
 
 
