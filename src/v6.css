@@ -47,7 +47,7 @@ html.js .rv.in, html.rv-all .rv { opacity: 1; transform: none }
 @media (max-width: 1119px) { .nav .nav-inline { display: none } }
 /* every topic stays in the bar on every page and at every desktop width, beside the site name: the words and gaps are kept small enough to fit the 1185 px row in both languages */
 @media (min-width: 1120px) { .nav .nav-inline { gap: 0 .95rem; margin-right: .3rem } .nav .nav-inline a { font-size: .9rem } .nav a.brand { font-size: 1.15rem } .nav .wrap { gap: .5rem } }
-@media (max-width: 560px) { .menu-btn .l-en, .menu-btn .l-cy { display: none !important } .menu-btn { padding: .7rem .75rem } .brand { font-size: 1.15rem } .brand svg { width: 1.3rem; height: 1.3rem } .lang button { padding: .2rem .5rem } .nav .wrap { gap: .4rem } }
+@media (max-width: 560px) { .menu-btn .l-en, .menu-btn .l-cy { display: none !important } .menu-btn { padding: .7rem .75rem } .brand { font-size: 1.15rem } .brand svg { width: 1.3rem; height: 1.3rem } .lang button, .lang a { padding: .2rem .5rem } .nav .wrap { gap: .4rem } }
 @media (max-width: 400px) { .journey-chip { display: none } }
 
 .menu { position: fixed; inset: 0; z-index: 29; background: rgba(9,12,19,.97); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); overflow-y: auto; padding: calc(env(safe-area-inset-top, 0px) + 5.5rem) 0 3rem; animation: fade .25s ease both }
