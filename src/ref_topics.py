@@ -156,7 +156,7 @@ TOPICS = [
     "O’r 1680au ymlaen ymsefydlodd Crynwyr o Gymru yn y Rhandir Cymreig ym Mhennsylvania, ac yn y 1800au dilynodd miloedd y glo a’r llechi i Scranton, Utica a threfi mwyngloddio America. Aeth cenhadon o Gymru â’r Beibl i Fadagasgar a Bryniau Khasia yn India, a chododd peirianwyr o Gymru Yuzovka yn Wcráin.",
     "Yn 1865 glaniodd y Mimosa 153 o ymsefydlwyr ym Mhatagonia, lle codasant y Wladfa, trefedigaeth Gymraeg ei hiaith, a gwneud i’r anialwch flodeuo drwy ddyfrhau. Siaredir Cymraeg yn nyffryn Camwy o hyd, ac mae pobl o dras Gymreig ledled y byd, o Awstralia i Ohio, yn cofio o ble y daethant."],
    people=["samson", "madog", "richard-amerike", "thomas-button", "elihu-yale", "morgan-john-rhys", "john-evans-waunfawr", "david-griffiths-missionary", "michael-d-jones", "lewis-jones-patagonia", "john-hughes-yuzovka", "henry-morton-stanley", "edgar-evans", "billy-hughes", "julia-gillard", "tori-james"],
-   reads=["story-world.html", "story-brittany.html", "trail-sea.html", "saints-llydaw.html"],
+   reads=["story-madog.html", "story-world.html", "story-brittany.html", "trail-sea.html", "saints-llydaw.html"],
    az=["llydaw", "welsh-tract", "y-wladfa"],
    faq=["patagonia", "abroad", "ancestors", "surname"],
    ev=r"Patagonia|America|Pennsylvania|emigra|Mimosa|Wladfa|Yuzovka|Brittany|Australia|Madagascar|India|Ohio|Canada|New Zealand|South Africa", xev=r"Illtud|Teilo|Tenby|Royal Charter|All Blacks"),

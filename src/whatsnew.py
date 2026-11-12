@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Prince Madog’s voyage to America, and the Welsh Indians", "Mordaith y Tywysog Madog i America, a’r Indiaid Cymreig",
+     "A new long read: the Welsh tradition that Madog ab Owain Gwynedd sailed west in 1170, how it became Elizabeth I’s claim to America, the Welsh Indians said to live on the Missouri, and John Evans of Waunfawr, who went 1,800 miles upriver to find them.",
+     "Erthygl newydd: y traddodiad Cymreig i Fadog ab Owain Gwynedd hwylio tua’r gorllewin yn 1170, sut y daeth yn hawl Elisabeth I ar America, yr Indiaid Cymreig y dywedid eu bod yn byw ar y Missouri, a John Evans o’r Waunfawr, a aeth 1,800 o filltiroedd i fyny’r afon i chwilio amdanynt.",
+     "story-madog.html"),
     ("2026-11-12", "More books and authors, by period", "Rhagor o lyfrau ac awduron, fesul cyfnod",
      "The Books and authors page now holds 251 books and 75 writers, grouped by period from the Britons to today. New here: Norman Davies, Prys Morgan, Wynford Vaughan-Thomas, Leslie Alcock, Kenneth Jackson on Y Gododdin, Dai Smith, Peter Lord, and Daniel Owen, Hedd Wyn, Kate Roberts, Dylan Thomas, Waldo Williams and R. S. Thomas.",
      "Mae’r dudalen Llyfrau ac awduron bellach yn cynnwys 251 o lyfrau a 75 o awduron, fesul cyfnod o’r Brythoniaid hyd heddiw. Yn newydd yma: Norman Davies, Prys Morgan, Wynford Vaughan-Thomas, Leslie Alcock, Kenneth Jackson ar y Gododdin, Dai Smith, Peter Lord, a Daniel Owen, Hedd Wyn, Kate Roberts, Dylan Thomas, Waldo Williams ac R. S. Thomas.",

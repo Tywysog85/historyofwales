@@ -648,3 +648,7 @@ EVENTS = sorted(EVENTS + _E2, key=lambda ev: ev[1])
 # ---------- Brutus of Troy and the History of the Kings of Britain (src/brutus.py) ----------
 from brutus import EVENTS as _BRE
 EVENTS = sorted(EVENTS + _BRE, key=lambda ev: ev[1])
+
+# ---------- Prince Madog's voyage and the Welsh Indians (src/madog.py) ----------
+from madog import EVENTS as _MDE
+EVENTS = sorted(EVENTS + _MDE, key=lambda ev: ev[1])
