@@ -477,6 +477,13 @@ Learnt while making sure every king on the site is called a king (rule "Kings ar
 - **Mind Welsh mutations.** After "yn", "tywysog" is "dywysog" and "brenin" is "frenin"; after "ei" (his) it is "ei frenin"; after "eu", "arglwydd" is "harglwydd" but "brenin" stays "brenin".
 
 
+## A person page with headed sections (November 2026)
+Learnt while writing Owain Gwynedd's "The king who became prince" (`src/owain.py`).
+
+- **A longer person page lives in its own module.** Put the English and Welsh paragraphs in `PERSON_LONG = ([...], [...])` and set `PEOPLE_LONG["<slug>"]` at the very end of `src/long.py`, so nothing later overwrites it.
+- **Headings switch it on.** If any paragraph starts with `## `, `> ` or `|| `, the person page uses the long-read layout (sub-headings, pull quotes, a facts table). Plain paragraphs stay plain.
+- **Checking a fact when the PDF is blocked.** The container cannot download most PDFs, but WebFetch can read the Welsh Journals pages (journals.library.wales) one page at a time, which is how the Welsh History Review articles were checked. Quote only what a source says, and put the source in a comment at the top of the module.
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
