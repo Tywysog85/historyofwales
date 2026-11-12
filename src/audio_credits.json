@@ -2,186 +2,186 @@
  "aber": {
   "text": "aber",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "afon": {
   "text": "afon",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "agweddi": {
   "text": "Agweddi",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "allanfa": {
   "text": "Allanfa",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "ap": {
   "text": "ap",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "ar-agor": {
   "text": "Ar agor",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "ar-gau": {
   "text": "Ar gau",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "araf": {
   "text": "Araf",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "arwr": {
   "text": "arwr",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "aur": {
   "text": "aur",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "bara-brith": {
   "text": "bara brith",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "bardd": {
   "text": "bardd",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "beibl": {
   "text": "Beibl",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "beth-yw-dy-enw-di": {
   "text": "Beth yw dy enw di?",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "ble-mae-r-castell": {
   "text": "Ble mae’r castell?",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "ble-mae-r-ty-bach": {
   "text": "Ble mae’r tŷ bach?",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "blwyddyn-newydd-dda": {
   "text": "Blwyddyn newydd dda",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "bore-da": {
   "text": "Bore da",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "brenin": {
   "text": "brenin",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "brython": {
   "text": "Brython",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "buddugoliaeth": {
   "text": "buddugoliaeth",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "bwa-hir": {
   "text": "bwa hir",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "cadair": {
   "text": "cadair",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "cadw": {
   "text": "Cadw",
@@ -193,18 +193,18 @@
  "caer": {
   "text": "caer",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "calennig": {
   "text": "calennig",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "calon": {
   "text": "calon",
@@ -216,74 +216,74 @@
  "camlwrw": {
   "text": "Camlwrw",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "can": {
   "text": "cân",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "canol-y-dref": {
   "text": "Canol y dref",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "cantref": {
   "text": "Cantref",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "capel": {
   "text": "capel",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "castell": {
   "text": "castell",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "cawl": {
   "text": "cawl",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "cenedl-heb-iaith-cenedl-heb-galon": {
   "text": "Cenedl heb iaith, cenedl heb galon",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "cenhinen": {
   "text": "cenhinen",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "chwech": {
   "text": "Chwech",
@@ -295,74 +295,74 @@
  "chwedl": {
   "text": "chwedl",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "ci": {
   "text": "ci",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "cofio": {
   "text": "cofio",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "cofiwch-dryweryn": {
   "text": "Cofiwch Dryweryn",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "copr": {
   "text": "copr",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "cor": {
   "text": "côr",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "cowyll": {
   "text": "Cowyll",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "croeso": {
   "text": "Croeso",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "cromlech": {
   "text": "cromlech",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "cwm": {
   "text": "cwm",
@@ -374,50 +374,50 @@
  "cwmwd": {
   "text": "Cwmwd",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "cwrwgl": {
   "text": "cwrwgl",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "cwtch": {
   "text": "Cwtch",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "cwtsh": {
   "text": "cwtsh",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "cyfraith": {
   "text": "Cyfraith",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "cyfran": {
   "text": "Cyfran",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "cymraeg": {
   "text": "Cymraeg",
@@ -436,34 +436,34 @@
  "cymru-am-byth": {
   "text": "Cymru am byth",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "cymry": {
   "text": "Cymry",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "cynefin": {
   "text": "cynefin",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "da-iawn-diolch": {
   "text": "Da iawn, diolch",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "dau": {
   "text": "Dau",
@@ -475,42 +475,42 @@
  "deg": {
   "text": "Deg",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "dewin": {
   "text": "dewin",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "dim-problem": {
   "text": "Dim problem",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "diolch": {
   "text": "Diolch",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "diolch-yn-fawr": {
   "text": "Diolch yn fawr",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "dirwy": {
   "text": "Dirwy",
@@ -522,34 +522,34 @@
  "draig": {
   "text": "draig",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "dw-i-ddim-yn-deall": {
   "text": "Dw i ddim yn deall",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "dw-i-n-dod-o": {
   "text": "Dw i’n dod o …",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "dw-i-n-dysgu-cymraeg": {
   "text": "Dw i’n dysgu Cymraeg",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "dydd-gwener": {
   "text": "Dydd Gwener",
@@ -561,10 +561,10 @@
  "dydd-gwyl-dewi-hapus": {
   "text": "Dydd Gŵyl Dewi hapus",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "dydd-iau": {
   "text": "Dydd Iau",
@@ -576,10 +576,10 @@
  "dydd-llun": {
   "text": "Dydd Llun",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "dydd-mawrth": {
   "text": "Dydd Mawrth",
@@ -605,10 +605,10 @@
  "dydd-santes-dwynwen-hapus": {
   "text": "Dydd Santes Dwynwen hapus",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "dydd-sul": {
   "text": "Dydd Sul",
@@ -620,18 +620,18 @@
  "dyfal-donc-a-dyr-y-garreg": {
   "text": "Dyfal donc a dyr y garreg",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "edling": {
   "text": "Edling",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "eisteddfod": {
   "text": "Eisteddfod",
@@ -643,98 +643,98 @@
  "emyn": {
   "text": "emyn",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "esgusodwch-fi": {
   "text": "Esgusodwch fi",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "faint-yw-hwn": {
   "text": "Faint yw hwn?",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "ffynnon": {
   "text": "ffynnon",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "fy-enw-i-yw": {
   "text": "Fy enw i yw …",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "galanas": {
   "text": "Galanas",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "glo": {
   "text": "glo",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "gorau-chwarae-cyd-chwarae": {
   "text": "Gorau chwarae, cyd-chwarae",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "gorsaf": {
   "text": "Gorsaf",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "gorsedd": {
   "text": "Gorsedd",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "gwaddol": {
   "text": "Gwaddol",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "gwerin": {
   "text": "gwerin",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "gwlad": {
   "text": "gwlad",
@@ -746,26 +746,26 @@
  "gwlan": {
   "text": "gwlân",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "gwyl-dewi": {
   "text": "Gŵyl Dewi",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "haearn": {
   "text": "haearn",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "heddlu": {
   "text": "Heddlu",
@@ -777,10 +777,10 @@
  "heddwch": {
   "text": "heddwch",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "hiraeth": {
   "text": "Hiraeth",
@@ -792,18 +792,18 @@
  "hwyl": {
   "text": "hwyl",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "hwyl-fawr": {
   "text": "Hwyl fawr",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "iaith": {
   "text": "iaith",
@@ -822,66 +822,66 @@
  "iechyd-da": {
   "text": "Iechyd da",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "ildiwch": {
   "text": "Ildiwch",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "llan": {
   "text": "llan",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "llechen": {
   "text": "llechen",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "llong": {
   "text": "llong",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "llongyfarchiadau": {
   "text": "Llongyfarchiadau",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "llwy-garu": {
   "text": "llwy garu",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "llyfr": {
   "text": "llyfr",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "llys": {
   "text": "llys",
@@ -893,42 +893,42 @@
  "mabinogi": {
   "text": "Mabinogi",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "mach": {
   "text": "Mach",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "mae-hi-n-braf-heddiw": {
   "text": "Mae hi’n braf heddiw",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "mae-hi-n-bwrw-glaw": {
   "text": "Mae hi’n bwrw glaw",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "mae-n-ddrwg-gen-i": {
   "text": "Mae’n ddrwg gen i",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "maen": {
   "text": "maen",
@@ -940,106 +940,106 @@
  "mari-lwyd": {
   "text": "Mari Lwyd",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "merch": {
   "text": "merch",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "mor": {
   "text": "môr",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "mynedfa": {
   "text": "Mynedfa",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "mynydd": {
   "text": "mynydd",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "nadolig-llawen": {
   "text": "Nadolig llawen",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "naw": {
   "text": "Naw",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "nos-da": {
   "text": "Nos da",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "noswaith-dda": {
   "text": "Noswaith dda",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "o-ble-wyt-ti-n-dod": {
   "text": "O ble wyt ti’n dod?",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "ogof": {
   "text": "ogof",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "os-gwelwch-yn-dda": {
   "text": "Os gwelwch yn dda",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "paned-o-de-plis": {
   "text": "Paned o de, plîs",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "pedwar": {
   "text": "Pedwar",
@@ -1051,50 +1051,50 @@
  "peint-o-gwrw": {
   "text": "Peint o gwrw",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "penblwydd-hapus": {
   "text": "Penblwydd hapus",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "penteulu": {
   "text": "Penteulu",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "plygain": {
   "text": "plygain",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "pob-lwc": {
   "text": "Pob lwc",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "prynhawn-da": {
   "text": "Prynhawn da",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "pump": {
   "text": "Pump",
@@ -1106,26 +1106,26 @@
  "rhaith": {
   "text": "Rhaith",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "rhyddid": {
   "text": "rhyddid",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "rwy-n-dy-garu-di": {
   "text": "Rwy’n dy garu di",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "saith": {
   "text": "Saith",
@@ -1137,26 +1137,26 @@
  "sant": {
   "text": "sant",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "santes-dwynwen": {
   "text": "Santes Dwynwen",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "sarhaed": {
   "text": "Sarhaed",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "senedd": {
   "text": "Senedd",
@@ -1168,42 +1168,42 @@
  "shwmae": {
   "text": "Shwmae",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "sut-mae": {
   "text": "Sut mae?",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "teithi": {
   "text": "Teithi",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "telyn": {
   "text": "telyn",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "teulu": {
   "text": "teulu",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "tri": {
   "text": "Tri",
@@ -1215,26 +1215,26 @@
  "tylwyth": {
   "text": "Tylwyth",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "tylwyth-teg": {
   "text": "tylwyth teg",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "tywysog": {
   "text": "tywysog",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "un": {
   "text": "Un",
@@ -1246,26 +1246,26 @@
  "urdd": {
   "text": "Urdd",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "wela-i-di": {
   "text": "Wela i di",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "wyt-ti-n-siarad-cymraeg": {
   "text": "Wyt ti’n siarad Cymraeg?",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "wyth": {
   "text": "Wyth",
@@ -1277,42 +1277,42 @@
  "y-ddraig-goch-ddyry-cychwyn": {
   "text": "Y Ddraig Goch ddyry cychwyn",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "ychydig-bach": {
   "text": "Ychydig bach",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "yma-o-hyd": {
   "text": "Yma o hyd",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "yn-araf-os-gwelwch-yn-dda": {
   "text": "Yn araf, os gwelwch yn dda",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "ynad": {
   "text": "Ynad",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "ynys": {
   "text": "ynys",
@@ -1324,10 +1324,10 @@
  "yr-hen-ogledd": {
   "text": "Yr Hen Ogledd",
   "kind": "voice",
-  "voice": "gwryw_gogleddol",
+  "voice": "bu_tts:gwryw-gogledd-pro",
   "speaker": "Welsh voice from Bangor University (techiaith), via Piper",
-  "licence": "See URL",
-  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/gwryw_gogleddol/medium"
+  "licence": "CC-BY",
+  "page": "https://huggingface.co/rhasspy/piper-voices/tree/main/cy/cy_GB/bu_tts/medium"
  },
  "ysbyty": {
   "text": "Ysbyty",
