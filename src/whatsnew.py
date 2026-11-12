@@ -7,6 +7,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "133 battles, and who each was against", "133 o frwydrau, ac yn erbyn pwy",
+     "The battles page now has 133 battles, sieges and risings from the Welsh chronicles and beyond, against Rome, Saxons, Vikings, the Irish, Normans, English kings, each other and more. Pick who they were against to see just those. Key documents has grown to 38, from Gildas and Magna Carta to Tryweryn and the Senedd.",
+     "Mae gan dudalen y brwydrau 133 o frwydrau, gwarchaeau a gwrthryfeloedd o groniclau Cymru a thu hwnt, yn erbyn Rhufain, y Saeson, y Llychlynwyr, y Gwyddelod, y Normaniaid, brenhinoedd Lloegr, ei gilydd a mwy. Dewiswch yn erbyn pwy i weld y rheini’n unig. Mae’r dogfennau allweddol wedi tyfu i 38, o Gildas a Magna Carta i Dryweryn a’r Senedd.",
+     "battles.html"),
     ("2026-11-12", "Every historic site in Wales on one map", "Pob safle hanesyddol yng Nghymru ar un map",
      "All 4,239 scheduled monuments on one map: burial chambers, standing stones, hillforts, Roman forts, carved stones, abbeys, castles and industry, with the sites near you and the 130 places Cadw opens to visitors.",
      "Pob un o’r 4,239 o henebion cofrestredig ar un map: siambrau claddu, meini hirion, bryngaerau, caerau Rhufeinig, cerrig cerfiedig, abatai, cestyll a diwydiant, gyda’r safleoedd yn agos atoch a’r 130 o leoedd y mae Cadw’n eu hagor i ymwelwyr.",
