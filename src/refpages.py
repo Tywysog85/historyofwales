@@ -675,7 +675,7 @@ def maps_page(have):
                       f"{len(stages)} o fapiau o Gymru, o’r pedwar llwyth a wynebodd Rufain i’r Senedd heddiw: y teyrnasoedd, y tywysogion, y Mers, y siroedd a’r cynghorau.", art="roman")
             + g["section"](defs + f'<p class="ref-intro">{bi("Scroll down to watch the map of Wales change, or jump to a year. Borders before 1974 are drawn with modern council areas as building blocks, so they are close rather than exact.", "Sgroliwch i lawr i wylio map Cymru’n newid, neu neidiwch i flwyddyn. Mae’r ffiniau cyn 1974 wedi’u llunio gydag ardaloedd cynghorau modern fel blociau adeiladu, felly maent yn agos yn hytrach nag yn union.")}</p>'
                            f'<nav class="dc-jump mp-jump" aria-label="Maps / Mapiau">{jump}</nav>'
-                           f'<p><a class="btn" href="index.html#map">{bi("Play the moving map on the home page", "Chwarae’r map symudol ar yr hafan")} →</a></p>'
+                           f'<p><a class="btn" href="map.html">{bi("Play the moving map", "Chwarae’r map symudol")} →</a></p>'
                            f'<div class="mp-list">{cards}</div>', top=True))
     return g["page"]("maps.html", "Maps of Wales through time · History of Wales",
                      "Historical maps of Wales: the four peoples, Roman Wales, the early kingdoms, Rhodri Mawr, Hywel Dda, Gruffudd ap Llywelyn, Pura Wallia and the March, 1267, 1284, Glyndŵr, the 13 shires, 1974, 1996 and today.",
@@ -825,7 +825,7 @@ DESK = [  # href, English, Welsh, English line, Welsh line, era colour
     ("castles.html", "Castles map", "Map y cestyll", "All 827 castle sites in Wales and who built them.", "Pob un o’r 827 o safleoedd cestyll yng Nghymru a phwy a’u cododd.", "medieval"),
     ("saints.html", "Saints of Wales", "Seintiau Cymru", "The saints, their feast days and the llannau named after them.", "Y seintiau, eu gwyliau a’r llannau a enwyd ar eu hôl.", "saints"),
     ("timeline.html", "The timeline", "Y llinell amser", "Over 400 events from 230,000 years ago to today.", "Dros 400 o ddigwyddiadau o 230,000 o flynyddoedd yn ôl hyd heddiw.", "modern"),
-    ("index.html#people", "Famous people", "Pobl enwog", "322 people from every age of Welsh history.", "322 o bobl o bob oes yn hanes Cymru.", "industrial"),
+    ("people.html", "Famous people", "Pobl enwog", "322 people from every age of Welsh history.", "322 o bobl o bob oes yn hanes Cymru.", "industrial"),
     ("laws.html", "The Laws of Hywel Dda", "Cyfreithiau Hywel Dda", "The law of Wales for six hundred years.", "Cyfraith Cymru am chwe chan mlynedd.", "kings"),
     ("onthisday.html", "On this day", "Ar y dydd hwn", "What happened on every day of the year.", "Beth ddigwyddodd ar bob diwrnod o’r flwyddyn.", "medieval"),
     ("names.html", "Welsh surnames", "Cyfenwau Cymraeg", "What Welsh surnames mean and where they come from.", "Beth mae cyfenwau Cymraeg yn ei olygu ac o ble maent yn dod.", "saints"),

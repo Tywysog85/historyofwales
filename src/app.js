@@ -430,7 +430,7 @@
     var o = ev.target.closest("[data-open]"); if (o) { openChapter(o.dataset.open); return; }
     var j = ev.target.closest("[data-jump]"); if (j) { var id = j.dataset.jump; if (!HAS_TL) { location.href = "timeline.html#era-" + id; return; } closeChapter(); goTo($("#era-" + id)); return; }
     if (ev.target.closest("[data-close]") && (ev.target.dataset.close || ev.target.closest(".close"))) closeChapter();
-    var m = ev.target.closest("[data-map]"); if (m) { if (!HAS_MAP) { location.href = "index.html#lle-" + m.dataset.map; return; } setMode("sites"); selectPlace(m.dataset.map); goTo($("#map")); }
+    var m = ev.target.closest("[data-map]"); if (m) { if (!HAS_MAP) { location.href = "map.html#lle-" + m.dataset.map; return; } setMode("sites"); selectPlace(m.dataset.map); goTo($("#map")); }
     var t = ev.target.closest("[data-tl]"); if (t) { if (!HAS_TL) { location.href = "timeline.html#ev-" + t.dataset.tl; return; } if (tlEra !== "all") setTlEra("all"); goTo($("#ev-" + t.dataset.tl), "center"); }
     var c = ev.target.closest("[data-copy]"); if (c) copyLink(c);
   });
@@ -448,6 +448,9 @@
     }
   });
   function route() {
+    if (HERO && !HAS_MAP && /^#lle-/.test(location.hash)) { location.replace("map.html" + location.hash); return; }
+    if (HERO && /[?&]field=/.test(location.search)) { location.replace("people.html" + location.search); return; }
+    if (HAS_MAP && /^#(kingdoms|teyrnasoedd)$/.test(location.hash)) { setMode("kg"); }
     var m = /^#pennod-(\w+)/.exec(location.hash); if (m && ERA[m[1]]) { openChapter(m[1], false); return; }
     closeChapter();
     if (HERO && /^#(quiz|game)$/.test(location.hash)) { location.replace("quiz.html" + location.hash); return; }
@@ -664,7 +667,8 @@
   $("#mode-kg").onclick = function () { setMode("kg"); };
 
   /* ---------- People ---------- */
-  var pEra = "all", pAll = false, pField = "all";
+  var P_PAGE = !!(document.getElementById("people-grid") && document.getElementById("people-grid").dataset.all);  /* people.html: show everyone */
+  var pEra = "all", pAll = P_PAGE, pField = "all";
   try { var qf = new URLSearchParams(location.search).get("field"); if (qf && (qf === "first" || (D.PFIELDS || []).some(function (f) { return f[0] === qf; }))) pField = qf; } catch (e) {}
   function fieldOk(p) { return pField === "all" || (pField === "first" ? !!(D.PFIRST || {})[p[0]] : (D.PFIELD || {})[p[0]] === pField); }
   function fieldChips() {
@@ -684,7 +688,7 @@
     var short = pEra === "all" && pField === "all" && !pAll;
     if (short) list = D.FEATURED.slice(0, matchMedia("(max-width: 700px)").matches ? 6 : 12).map(function (s) { return PEOPLE.filter(function (p) { return p[0] === s; })[0]; }).filter(Boolean);
     $("#people-count").textContent = short ? T(list.length + " of " + total + " people", list.length + " o " + total + " o bobl") : total + " " + T("people", "o bobl");
-    var more = $("#people-more"); more.hidden = pEra !== "all" || pField !== "all"; more.textContent = pAll ? T("Show fewer", "Dangos llai") : T("Show all " + PEOPLE.length + " people", "Dangos pob un o’r " + PEOPLE.length);
+    var more = $("#people-more"); more.hidden = P_PAGE || pEra !== "all" || pField !== "all"; more.textContent = pAll ? T("Show fewer", "Dangos llai") : T("Show all " + PEOPLE.length + " people", "Dangos pob un o’r " + PEOPLE.length);
     $("#people-grid").innerHTML = list.map(function (p) {
       var name = T(p[3], p[4]), other = lang === "en" ? p[4] : p[3], link = "person-" + p[0] + ".html", ph = D.PPH[p[0]];
       return '<article class="plaque" data-era="' + p[1] + '"><div class="top-row"><span class="ava" aria-hidden="true">' + initials(p[3]) + (ph ? '<img src="' + ph + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : "") + '</span><div><span class="dates">' + esc(p[2]) + "</span><h3>" + esc(name) + '</h3></div></div><span class="epi">' + esc(T(p[5], p[6])) + (other !== name ? " · " + esc(other) : "") + "</span>" + ((D.PFIRST || {})[p[0]] ? '<span class="first-tag">★ ' + esc(T(D.PFIRST[p[0]][1], D.PFIRST[p[0]][2])) + "</span>" : "") + "<p>" + esc(T(p[7], p[8])) + '</p><div class="links"><a class="go" href="' + link + '">' + T("Read more", "Darllen mwy") + ' →</a><button type="button" class="copy" data-copy="' + link + '">' + T("Copy link", "Copïo’r ddolen") + "</button>" + srcLink(p[9]) + "</div></article>";

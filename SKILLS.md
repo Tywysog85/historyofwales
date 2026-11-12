@@ -357,11 +357,13 @@ With nine posters in a row, a closed poster is too narrow for its title, so clos
 - To fill a gap: `python3 -c` over `onthisday.OTD` lists the empty days. Only add a date you can stand behind. Wikipedia's "<year> in Wales" pages (1700s onwards) list dated events, births and deaths, and the Catholic calendar for Wales (liturgyoffice.org) gives the saints' feast days; both can be read with Claude's web fetch tool even though the network blocks Wikipedia directly.
 - `$()` in `app.js` never returns null (it hands back a dummy element), so test for a home-page box with `document.getElementById`.
 
-### The copyright notice
+### The copyright notice and the licence (CC BY-NC 4.0)
 
-- In the UK copyright is automatic: nothing needs registering. The notice just makes ownership plain and helps if someone does copy.
-- The © line at the bottom of every page is made by `footer()` in `build.py`. The name in it is `COPYRIGHT_OWNER` (English) and `COPYRIGHT_OWNER_CY` (Welsh) just above that function; the year updates itself (2026, then 2026–2027 and so on).
-- It claims only the site's own text and design. Photos (Wikimedia Commons) and the 3D dragon stay credited to their creators, as listed in README.md.
+- In the UK copyright is automatic: nothing needs registering. The notice makes ownership plain.
+- Since 12 November 2026 the site's own text is shared under **Creative Commons Attribution-NonCommercial 4.0** (CC BY-NC 4.0), so schools and teachers may copy, print and adapt it for non-commercial use if they credit History of Wales and link to the page. Ifan chose this because "all rights reserved" worked against the For teachers page.
+- The © line at the bottom of every page is made by `footer()` in `build.py` (it is HTML, with a `rel="license"` link). The name in it is `COPYRIGHT_OWNER` / `COPYRIGHT_OWNER_CY`; the year updates itself.
+- Search engines are told too: `LICENSE` in `src/seo.py` goes into the structured data of the site and of every page.
+- Photos (Wikimedia Commons) and the 3D dragon keep their own licences, credited with each one and listed in README.md.
 
 ### Welsh literature, the great books and the Triads (November 2026)
 
@@ -536,3 +538,15 @@ Learnt while adding "Britons, not Celts" (`src/celts.py`).
 - The same list goes into the page's structured data as schema.org `citation`, so search engines see the sources too.
 - A new long read without a list makes `build.py` print a WARNING. Add one before publishing.
 - Checking a book is real: WebSearch for the exact title with the author and publisher. A publisher's page (uwp.co.uk, for example), a library catalogue or a bookseller with the ISBN is enough. If the year or publisher can't be confirmed, give only what can.
+
+## A home page that shows the main things, and content that shows without JavaScript (November 2026)
+Learnt while simplifying the home page.
+
+- **Pages that reuse the home page's script.** `app_page()` in `build.py` makes a page from one section file plus the home page's script and data: `timeline.html`, `quiz.html`, and now `people.html` (`src/people_section.html`) and `map.html` (`src/map_section.html`). `app.js` only draws the boxes that exist on the page, so the same script runs everywhere.
+- **Build the content into the HTML.** Anything `app.js` draws (On this day, Did you know, the timeline chips, the census chart, Books/Online, Words to know, people cards, map pins and the first place card) is also written into the page at build time by the `ssr_*` functions in `build.py`, through `__PLACEHOLDERS__` that `fill()` replaces. Search engines, link previews and people with scripts off see it; `app.js` redraws the same boxes when it runs. When you change how `app.js` draws one of these, change its `ssr_*` twin too.
+- **The home page shows a few of each.** `HOME_STORIES` (6) long reads, six featured people (`FEATURED`), and a small map that links to `map.html`; the full lists are one tap away. Old addresses still work: `index.html#lle-x` and `index.html?field=x` are sent on to the new pages by `route()` in `app.js`, and `map.html#kingdoms` opens the kingdoms map.
+- **The menu is in groups.** The top bar shows `NAV_TOP` (six links); the Menu shows the big list `NAV_MAIN` and the groups in `NAV_GROUPS` (Explore, Read, Cymraeg, You). Add a new page to one of the groups.
+- **No letters inside decorative pictures.** Text inside an SVG (like the "C" on the book picture) is read out and copied as page text, even with `aria-hidden`, so draw the shape instead.
+- **Numbers that must agree.** The castles figure in the opening comes from `castles_data.json` (`N_CASTLES`), so it always matches the castles map.
+- **What's new is for history.** Notes about how the site works (layout, ordering) don't go in `src/whatsnew.py`; they push real articles off the home page.
+

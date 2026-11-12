@@ -179,7 +179,7 @@ def _book(c):
     return (f'<g fill="{FRONT}"><path d="M400 250 C330 214 250 212 170 236 V420 C250 396 330 398 400 434 C470 398 550 396 630 420 V236 C550 212 470 214 400 250Z"/></g>'
             f'<path d="M400 250 C330 214 250 212 170 236 V420 C250 396 330 398 400 434 C470 398 550 396 630 420 V236 C550 212 470 214 400 250ZM400 250V434" fill="none" stroke="{c}" stroke-width="2.5" stroke-linejoin="round" opacity=".85"/>'
             f'<g stroke="{c}" stroke-width="2" opacity=".45" fill="none"><path d="M204 272c56-14 110-10 164 12M204 304c56-14 110-10 164 12M204 336c56-14 110-10 164 12M204 368c56-14 110-10 164 12M432 284c54-22 108-26 164-12M432 316c54-22 108-26 164-12M432 348c54-22 108-26 164-12M432 380c54-22 108-26 164-12"/></g>'
-            f'<text x="214" y="262" font-family="Gloock,Georgia,serif" font-size="54" fill="{c}">C</text>')
+            f'<path d="M262 226a22 22 0 1 0 0 30" fill="none" stroke="{c}" stroke-width="7" stroke-linecap="round"/>')  # a drawn initial, not a letter, so no stray "C" in the page text
 
 
 def _arches(c):

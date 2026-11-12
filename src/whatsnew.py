@@ -1,7 +1,8 @@
 """What's new on the site: whatsnew.html, the "New on the site" strip on the home page, and the news feed (feed.xml).
 
 Add a line at the TOP of NEWS whenever something visitors would care about goes live (a new page, a long read, a batch of
-people, a new game). Keep it short and proud. Each line is:
+people, a new game). Keep it short and proud. Only history and things to read or play: no notes about how the site itself
+works (layout, ordering, menus), because the home page shows only the first three and those would push an article out. Each line is:
     (date "YYYY-MM-DD", title in English, title in Cymraeg, one sentence in English, one sentence in Cymraeg, link)
 The newest line must come first. The home page shows the first three.
 """
@@ -11,10 +12,6 @@ NEWS = [
      "Each long read now ends with further reading and references: the old texts behind it, the historians’ books that tell it in full, such as R. R. Davies and John Davies, and the Dictionary of Welsh Biography. Ideal for teachers and students.",
      "Mae pob erthygl bellach yn gorffen â darllen pellach a chyfeiriadau: yr hen destunau y tu ôl iddi, llyfrau’r haneswyr sy’n adrodd yr hanes yn llawn, megis R. R. Davies a John Davies, a’r Bywgraffiadur Cymreig. Delfrydol i athrawon a myfyrwyr.",
      "story-glyndwr.html#references"),
-    ("2026-11-12", "The newest things now come first", "Y pethau mwyaf newydd sy’n dod gyntaf bellach",
-     "New long reads now go at the top of the long reads page and the home page, and the legends, key documents, battles and quick answers each open with a “Just added” strip, so you see what is new first. The newest wear a red New badge.",
-     "Mae erthyglau newydd bellach yn mynd ar frig tudalen yr erthyglau a’r hafan, ac mae’r chwedlau, y dogfennau allweddol, y brwydrau a’r atebion cyflym i gyd yn agor â stribed “Newydd ei ychwanegu”, er mwyn i chi weld beth sy’n newydd yn gyntaf. Mae bathodyn coch Newydd ar y rhai diweddaraf.",
-     "stories.html"),
     ("2026-11-12", "Britons, not Celts: how Edward Lhuyd gave us a new name", "Brythoniaid, nid Celtiaid: sut y cawsom enw newydd gan Edward Lhuyd",
      "A new long read: Caesar called us Britons and we called ourselves Brythoniaid and Cymry. ‘Celtic’ was Edward Lhuyd’s name for a family of languages in 1707, and only later was it put on the peoples who spoke them.",
      "Erthygl newydd: Brythoniaid oeddem i Gesar, a Brythoniaid a Chymry oeddem i ni ein hunain. ‘Celtaidd’ oedd enw Edward Lhuyd ar deulu o ieithoedd yn 1707, ac yn ddiweddarach yn unig y rhoddwyd ef ar y bobloedd a’u siaradai.",

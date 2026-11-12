@@ -231,13 +231,23 @@ PRINT_CSS = """
 """
 
 
-NAV_MAIN = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#chapters", "Ages", "Oesoedd"), ("index.html#map", "Map", "Map"),
-            ("index.html#people", "People", "Pobl"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("play.html", "Play", "Chwarae")]
-NAV_MORE = [("whatsnew.html", "What’s new", "Beth sy’n newydd"), ("reference.html", "Look it up", "Chwilio’r hanes"), ("wales-in-10.html", "Wales in 10 minutes", "Cymru mewn 10 munud"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("castles.html", "Castles map", "Map y cestyll"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("laws.html", "The Laws of Hywel Dda", "Cyfreithiau Hywel Dda"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"), ("literature.html", "Literature and old books", "Llên a hen lyfrau"), ("triads.html", "The Welsh Triads", "Trioedd Ynys Prydain"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"), ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"),
-            ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg"), ("journey.html", "Your journey", "Eich taith"), ("teachers.html", "For teachers", "I athrawon"),
-            ("index.html#sources", "Sources", "Ffynonellau")]
-# extra links for the top bar (shown on every page, beside the site name)
-NAV_HOME_MORE = [("symbols.html", "Symbols", "Symbolau"), ("trails.html", "Trails", "Llwybrau"), ("gallery.html", "Gallery", "Oriel"), ("index.html#language", "Language", "Iaith")]
+NAV_MAIN = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#chapters", "Ages", "Oesoedd"), ("map.html", "Map", "Map"),
+            ("people.html", "People", "Pobl"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("play.html", "Play", "Chwarae")]
+# the short row of links in the top bar on wide screens; everything else is in the Menu, in groups
+NAV_TOP = [("timeline.html", "Timeline", "Llinell amser"), ("map.html", "Map", "Map"), ("people.html", "People", "Pobl"),
+           ("stories.html", "Read", "Darllen"), ("play.html", "Play", "Chwarae"), ("welsh.html", "Cymraeg", "Cymraeg")]
+# the Menu's side panel: (heading EN, heading CY, links)
+NAV_GROUPS = [
+    ("Explore", "Archwilio", [("reference.html", "Look it up", "Chwilio’r hanes"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"),
+                              ("castles.html", "Castles map", "Map y cestyll"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"),
+                              ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn")]),
+    ("Read", "Darllen", [("wales-in-10.html", "Wales in 10 minutes", "Cymru mewn 10 munud"), ("laws.html", "The Laws of Hywel Dda", "Cyfreithiau Hywel Dda"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"),
+                         ("literature.html", "Literature and old books", "Llên a hen lyfrau"), ("triads.html", "The Welsh Triads", "Trioedd Ynys Prydain"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
+                         ("whatsnew.html", "What’s new", "Beth sy’n newydd")]),
+    ("Cymraeg", "Cymraeg", [("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg")]),
+    ("You", "Chi", [("journey.html", "Your journey", "Eich taith"), ("teachers.html", "For teachers", "I athrawon"), ("index.html#sources", "Sources", "Ffynonellau")]),
+]
+NAV_MORE = [x for g in NAV_GROUPS for x in g[2]]  # the same links as one flat list
 SEARCH_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
 
 
@@ -271,9 +281,9 @@ def news_item(n, big=False):
 
 
 def news_strip():
-    return (f'<div class="news-row rv"><div class="news-box"><p class="eyebrow">{bi("New on the site", "Newydd ar y wefan")}</p>'
+    return (f'<div class="news-row one rv"><div class="news-box"><p class="eyebrow">{bi("New on the site", "Newydd ar y wefan")}</p>'
             f'<ul class="news-list">{"".join(news_item(n) for n in WN.NEWS[:3])}</ul>'
-            f'<a class="n-all" href="whatsnew.html">{bi("Everything that is new", "Popeth sy’n newydd")} →</a></div>{follow_box("home")}</div>')
+            f'<a class="n-all" href="whatsnew.html">{bi("Everything that is new", "Popeth sy’n newydd")} →</a></div></div>')  # "Keep up with the site" is in the footer of every page, so not here as well
 
 
 def whatsnew_page():
@@ -310,18 +320,17 @@ def nav(active="", skip="#main", home=False):
     def li(h, a, b, n=None):
         num = f'<span class="n">{n:02d}</span>' if n else ""
         return f'<li><a href="{h}"{" class=on aria-current=page" if active == h else ""}>{num}{bi(a, b)}</a></li>'
-    main = "".join(li(*x) for x in NAV_MAIN)
-    main += "".join(li(*x) for x in NAV_HOME_MORE)  # every page shows every topic
+    main = "".join(li(*x) for x in NAV_TOP)
     big = li("index.html", "Home", "Hafan", 1) + "".join(li(h, a, b, i + 2) for i, (h, a, b) in enumerate(NAV_MAIN))
-    more = "".join(li(*x) for x in NAV_MORE)
+    more = "".join(f'<div class="menu-group"><p class="eyebrow">{bi(ge, gc)}</p><ul class="menu-more">' + "".join(li(*x) for x in links) + "</ul></div>" for ge, gc, links in NAV_GROUPS)
     return (f'<a class="skip" href="{skip}">{bi("Skip to content", "Neidio i’r cynnwys")}</a><div class="progress" aria-hidden="true"><i id="progress"></i></div>'
             f'<nav class="nav" aria-label="Main"><div class="wrap">' + f'<a class="brand" href="index.html">{bi("History of Wales", "Hanes Cymru")}</a>' +
             f'<ul class="nav-inline">{main}</ul>' +
-            f'<a class="journey-chip" href="journey.html" id="journey-chip" data-total="{JOURNEY_TOTAL}" aria-label="0 pages read: your journey / Eich taith"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" class="tr"/><circle cx="18" cy="18" r="15" class="fg" id="journey-ring" pathLength="100" stroke-dasharray="0 100"/></svg><b id="journey-n">0</b></a>'
+            f'<a class="journey-chip" href="journey.html" id="journey-chip" data-total="{JOURNEY_TOTAL}" title="Your journey: pages you have read / Eich taith: y tudalennau a ddarllenoch" aria-label="0 pages read: your journey / Eich taith"><span class="jc-ring"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" class="tr"/><circle cx="18" cy="18" r="15" class="fg" id="journey-ring" pathLength="100" stroke-dasharray="0 100"/></svg><b id="journey-n">0</b></span><span class="jc-l" aria-hidden="true">{bi("read", "wedi’u darllen")}</span></a>'
             f'<button type="button" class="search-btn" data-search aria-label="Search / Chwilio">{SEARCH_SVG}</button>'
              '<div class="lang" role="group" aria-label="Language / Iaith"><button type="button" id="lang-en" aria-pressed="true">EN</button><button type="button" id="lang-cy" aria-pressed="false">CY</button></div>'
             f'<button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="menu" aria-label="Menu / Dewislen" data-news="{WN.NEWS[0][0]}"><span class="bars" aria-hidden="true"><i></i><i></i></span>{bi("Menu", "Dewislen")}</button></div></nav>'
-            f'<div class="menu" id="menu" hidden><div class="wrap"><ul class="menu-big">{big}</ul><div class="menu-side"><p class="eyebrow">{bi("More", "Rhagor")}</p><ul class="menu-more">{more}</ul>'
+            f'<div class="menu" id="menu" hidden><div class="wrap"><ul class="menu-big">{big}</ul><div class="menu-side"><div class="menu-groups">{more}</div>'
             f'<p class="menu-note">{bi("230,000 years of history, in English and Cymraeg.", "230,000 o flynyddoedd o hanes, yn Gymraeg ac yn Saesneg.")}</p></div></div></div>')
 
 
@@ -334,7 +343,7 @@ def footer():
     def col(title_en, title_cy, links):
         return f'<div><p class="eyebrow">{bi(title_en, title_cy)}</p><ul>' + "".join(f'<li><a href="{h}">{bi(a, b)}</a></li>' for h, a, b in links) + "</ul></div>"
     eras = [(f'era-{x["id"]}.html', x["en"], x["cy"]) for x in D.ERAS]
-    explore = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#map", "Map of Wales", "Map Cymru"), ("index.html#people", "People", "Pobl"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("castles.html", "Castles of Wales", "Cestyll Cymru"), ("trails.html", "Themed trails", "Llwybrau thema"),
+    explore = [("timeline.html", "Timeline", "Llinell amser"), ("map.html", "Map of Wales", "Map Cymru"), ("people.html", "People", "Pobl"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("castles.html", "Castles of Wales", "Cestyll Cymru"), ("trails.html", "Themed trails", "Llwybrau thema"),
                ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"), ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg")]
     read = [("whatsnew.html", "What’s new", "Beth sy’n newydd"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"), ("laws.html", "The Laws of Hywel Dda", "Cyfreithiau Hywel Dda"), ("literature.html", "Welsh literature", "Llenyddiaeth Gymraeg"), ("books.html", "The great books of Wales", "Llyfrau mawr Cymru"), ("triads.html", "The Welsh Triads", "Trioedd Ynys Prydain"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
             ("teachers.html", "For teachers", "I athrawon"), ("index.html#sources", "Sources", "Ffynonellau")]
@@ -342,15 +351,19 @@ def footer():
             ("play.html", "All games", "Pob gêm"), ("journey.html", "Your journey", "Eich taith")]
     yr = datetime.date.today().year
     yrs = "2026" if yr <= 2026 else f"2026–{yr}"
-    copy_en = (f"© {yrs} {COPYRIGHT_OWNER}. All rights reserved. The text and design of this site may not be copied without permission. "
-               "Photographs and the 3D dragon belong to their own creators and are used under their licences.")
-    copy_cy = (f"© {yrs} {COPYRIGHT_OWNER_CY}. Cedwir pob hawl. Ni chaniateir copïo testun na chynllun y wefan hon heb ganiatâd. "
-               "Mae’r ffotograffau a’r ddraig 3D yn eiddo i’w crewyr eu hunain ac fe’u defnyddir dan eu trwyddedau.")
+    # The text is shared under Creative Commons BY-NC 4.0 so schools and teachers may reuse it; photos and the 3D dragon keep their own licences.
+    cc = '<a rel="license noopener" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">'  # the copy lines below are HTML, not escaped
+    copy_en = (f"© {yrs} {COPYRIGHT_OWNER}. The text of this site is shared under a {cc}Creative Commons Attribution-NonCommercial 4.0 licence (CC BY-NC 4.0)</a>: "
+               f"you may copy, print and adapt it for any non-commercial use, such as in schools, as long as you credit {COPYRIGHT_OWNER} and link to the page. "
+               "Photographs and the 3D dragon belong to their own creators and are used under their own licences, shown with each one.")
+    copy_cy = (f"© {yrs} {COPYRIGHT_OWNER_CY}. Rhennir testun y wefan hon dan {cc}drwydded Creative Commons Cydnabyddiaeth-AnFasnachol 4.0 (CC BY-NC 4.0)</a>: "
+               f"gallwch ei gopïo, ei argraffu a’i addasu at unrhyw ddefnydd anfasnachol, megis mewn ysgolion, cyn belled â’ch bod yn cydnabod {COPYRIGHT_OWNER_CY} ac yn rhoi dolen i’r dudalen. "
+               "Mae’r ffotograffau a’r ddraig 3D yn eiddo i’w crewyr eu hunain ac fe’u defnyddir dan eu trwyddedau eu hunain, a ddangosir gyda phob un.")
     return ('<footer class="site-foot"><div class="wrap"><div class="foot-top"><p class="big">Diolch<span>.</span></p>'
             f'<p class="foot-tag">{bi("Thank you for reading. Wales is a small country with a long memory; this site is a way in.", "Diolch am ddarllen. Gwlad fach â chof hir yw Cymru; ffordd i mewn yw’r wefan hon.")}</p>{follow_box("foot")}</div>'
             f'<div class="foot-cols">{col("The nine ages", "Y naw oes", eras)}{col("Explore", "Archwilio", explore)}{col("Read", "Darllen", read)}{col("Play", "Chwarae", play)}</div>'
             f'<div class="foot-base"><span>{bi("History of Wales · Hanes Cymru", "Hanes Cymru · History of Wales")}</span>'
-            f'<span>{bi("Event links go to Wikipedia, which lists academic sources. Dates marked c. are approximate. Original illustrations; photographs from Wikimedia Commons, credited on each page.", "Mae dolenni’r digwyddiadau’n mynd i Wicipedia, sy’n rhestru ffynonellau academaidd. Dyddiadau bras yw’r rhai a nodir c. Darluniau gwreiddiol; ffotograffau o Wikimedia Commons, gyda chydnabyddiaeth ar bob tudalen.")}</span></div><p class="foot-copy">{bi(copy_en, copy_cy)}</p></div></footer>'
+            f'<span>{bi("Event links go to Wikipedia, which lists academic sources. Dates marked c. are approximate. Original illustrations; photographs from Wikimedia Commons, credited on each page.", "Mae dolenni’r digwyddiadau’n mynd i Wicipedia, sy’n rhestru ffynonellau academaidd. Dyddiadau bras yw’r rhai a nodir c. Darluniau gwreiddiol; ffotograffau o Wikimedia Commons, gyda chydnabyddiaeth ar bob tudalen.")}</span></div><p class="foot-copy"><span class="l-en" lang="en">{copy_en}</span><span class="l-cy" lang="cy">{copy_cy}</span></p></div></footer>'
             f'<button type="button" class="to-top" id="to-top" aria-label="Back to top / Yn ôl i’r brig" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>')
 
 
@@ -523,10 +536,10 @@ def person_page(p):
     idx = D.PEOPLE.index(p)
     prev_p, next_p = D.PEOPLE[idx - 1] if idx > 0 else None, D.PEOPLE[idx + 1] if idx + 1 < len(D.PEOPLE) else None
     pager = (f'<a class="btn" href="person-{prev_p[0]}.html">← {bi(prev_p[3], prev_p[4])}</a>' if prev_p else f'<a class="btn" href="era-{eid}.html">← {bi(era["en"], era["cy"])}</a>') + \
-            (f'<a class="btn solid" href="person-{next_p[0]}.html">{bi(next_p[3], next_p[4])} →</a>' if next_p else '<a class="btn solid" href="index.html#people">' + bi("All people", "Pawb") + " →</a>")
+            (f'<a class="btn solid" href="person-{next_p[0]}.html">{bi(next_p[3], next_p[4])} →</a>' if next_p else '<a class="btn solid" href="people.html">' + bi("All people", "Pawb") + " →</a>")
     fld = FIELD_LABEL.get(P2.FIELD.get(slug))
     meta = (f'<div class="person-meta"><span>{e(p[2])}</span><span>{bi(p[5], p[6])}</span><a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>'
-            + (f'<a href="index.html?field={P2.FIELD[slug]}#people">{bi(*fld)}</a>' if fld else "") + '</div>' + first_badge(slug))
+            + (f'<a href="people.html?field={P2.FIELD[slug]}">{bi(*fld)}</a>' if fld else "") + '</div>' + first_badge(slug))
     rl = realm_links(f"person-{slug}.html") + ft_link_for_person(f"person-{slug}.html") + saints_links(f"person-{slug}.html") + lit_link(slug)
     meta += f'<p class="realm-links">{rl}</p>' if rl else ""
     coded = any(a.startswith(("## ", "> ", "|| ")) for a in long_en)
@@ -552,7 +565,7 @@ def place_page(pl):
     near = sorted([x for x in D.PLACES if x["id"] != pid], key=lambda x: (x["lat"] - pl["lat"]) ** 2 + ((x["lon"] - pl["lon"]) * 0.61) ** 2)[:3]
     osm = f'https://www.openstreetmap.org/?mlat={pl["lat"]}&mlon={pl["lon"]}#map=14/{pl["lat"]}/{pl["lon"]}'
     meta = (f'<div class="person-meta"><span>{e(pl["year"])}</span><span>{pl["lat"]:.3f}° N, {abs(pl["lon"]):.3f}° W</span>'
-            f'<a href="{osm}" target="_blank" rel="noopener">{bi("Open in a map", "Agor mewn map")} ↗</a><a href="index.html#lle-{pid}">{bi("On our map", "Ar ein map")} →</a></div>')
+            f'<a href="{osm}" target="_blank" rel="noopener">{bi("Open in a map", "Agor mewn map")} ↗</a><a href="map.html#lle-{pid}">{bi("On our map", "Ar ein map")} →</a></div>')
     rl = realm_links(f"place-{pid}.html") + saints_links(f"place-{pid}.html")
     meta += f'<p class="realm-links">{rl}</p>' if rl else ""
     coded = any(a.startswith(("## ", "> ", "|| ")) for a in long_en)
@@ -626,8 +639,10 @@ def teachers_page():
                    f'<ol class="l-en" lang="en">{acts_en}</ol><ol class="l-cy" lang="cy">{acts_cy}</ol></article>')
     sheets = "".join(quiz_sheet(era) for era in D.ERAS)
     intro_en = ["History of Wales is free to use in the classroom. Every page works in English and Welsh, and every event links to a source, so pupils can practise checking evidence.",
+                "The text is shared under a Creative Commons BY-NC 4.0 licence, so you may copy, print and adapt it for lessons and worksheets, as long as you credit History of Wales and link to the page. Photographs keep their own licences, shown with each one.",
                 "The ideas below fit the Humanities Area of Learning and Experience in the Curriculum for Wales, with its focus on cynefin, enquiry and the diverse stories of Wales. Adapt them freely."]
     intro_cy = ["Mae Hanes Cymru am ddim i’w ddefnyddio yn y dosbarth. Mae pob tudalen yn gweithio yn Gymraeg ac yn Saesneg, ac mae pob digwyddiad yn cysylltu â ffynhonnell, fel y gall disgyblion ymarfer gwirio tystiolaeth.",
+                "Rhennir y testun dan drwydded Creative Commons BY-NC 4.0, felly gallwch ei gopïo, ei argraffu a’i addasu ar gyfer gwersi a thaflenni gwaith, cyn belled â’ch bod yn cydnabod Hanes Cymru ac yn rhoi dolen i’r dudalen. Mae gan y ffotograffau eu trwyddedau eu hunain, a ddangosir gyda phob un.",
                 "Mae’r syniadau isod yn addas ar gyfer Maes Dysgu a Phrofiad y Dyniaethau yng Nghwricwlwm i Gymru, gyda’i bwyslais ar gynefin, ymholi a straeon amrywiol Cymru. Addaswch nhw fel y mynnwch."]
     main = (hero("industrial", f'<a href="index.html">{SITE}</a>', "book", "For teachers", "I athrawon", "History of Wales in the classroom", "Hanes Cymru yn y dosbarth",
                  "Lesson ideas, enquiry questions and printable quiz sheets for each age.", "Syniadau gwersi, cwestiynau ymholi a thaflenni cwis i’w hargraffu ar gyfer pob oes.", art="book")
@@ -1867,7 +1882,7 @@ def kings_page():
     one = (f'<div class="behind one-king"><p class="eyebrow">{bi("1055–1063 · One king of all Wales", "1055–1063 · Un brenin ar Gymru gyfan")}</p>'
            f'<h2>{bi("Gruffudd ap Llywelyn, King of Wales", "Gruffudd ap Llywelyn, Brenin Cymru")}</h2>'
            + paras(RY.GRUFFUDD["en"], RY.GRUFFUDD["cy"]) +
-           f'<p><a class="go" href="person-gruffudd-ap-llywelyn.html">{bi("Read his story", "Darllen ei hanes")} →</a> &nbsp; <a class="go" href="index.html#map">{bi("See his Wales on the kingdoms map", "Gweld ei Gymru ar fap y teyrnasoedd")} →</a></p></div>')
+           f'<p><a class="go" href="person-gruffudd-ap-llywelyn.html">{bi("Read his story", "Darllen ei hanes")} →</a> &nbsp; <a class="go" href="map.html#kingdoms">{bi("See his Wales on the kingdoms map", "Gweld ei Gymru ar fap y teyrnasoedd")} →</a></p></div>')
     main = (hero("kings", f'<a href="index.html">{SITE}</a>', "crown", "c. 450–1415", "tua 450–1415", "Kings and princes of Wales", "Brenhinoedd a thywysogion Cymru",
                  "For a thousand years Wales was a land of kingdoms. Great kings brought most of it together, one king ruled it all, and its princes carried the title Prince of Wales.",
                  "Am fil o flynyddoedd gwlad o deyrnasoedd oedd Cymru. Daeth brenhinoedd mawr â’r rhan fwyaf ohoni ynghyd, rheolodd un brenin y cyfan, a dygodd ei thywysogion y teitl Tywysog Cymru.", art="castle")
@@ -2487,16 +2502,16 @@ def firsts_page():
                        if any(P2.FIELD.get(s) == k for s in P2.FIRSTS)) + "</div>")
     lede = (f'<p class="lede">{bi("For a country of three million people, Wales has given the world a remarkable list of firsts: the equals sign and the symbol π, the fuel cell, the microphone, the first steam locomotive, mail order, packet switching that carries the internet, and the spare wheel. Here they all are, in order, with the people who made them.", "I wlad o dair miliwn o bobl, mae Cymru wedi rhoi rhestr ryfeddol o bethau cyntaf i’r byd: yr hafalnod a’r symbol π, y gell danwydd, y meicroffon, y locomotif stêm cyntaf, archebu drwy’r post, newid pecynnau sy’n cario’r rhyngrwyd, a’r olwyn sbâr. Dyma nhw i gyd, yn eu trefn, gyda’r bobl a’u gwnaeth.")}</p>'
             f'<p class="firsts-count"><span><b>{nw}</b> {bi("world firsts and records", "o bethau cyntaf a recordiau byd")}</span><span><b>{nh}</b> {bi("firsts for Wales, and Welsh firsts abroad", "o bethau cyntaf i Gymru, a Chymry cyntaf dramor")}</span></p>'
-            f'<p><a class="go" href="story-firsts.html">{bi("Read the long read: Wales did it first", "Darllen yr erthygl: Cymru oedd y cyntaf")} →</a> &nbsp; <a class="go" href="index.html?field=first#people">{bi("See them among all the famous Welsh people", "Eu gweld ymhlith holl enwogion Cymru")} →</a></p>')
+            f'<p><a class="go" href="story-firsts.html">{bi("Read the long read: Wales did it first", "Darllen yr erthygl: Cymru oedd y cyntaf")} →</a> &nbsp; <a class="go" href="people.html?field=first">{bi("See them among all the famous Welsh people", "Eu gweld ymhlith holl enwogion Cymru")} →</a></p>')
     note = bi("Some firsts are firsts for the world, some for Britain, and some are records. Where a claim rests on tradition, as with Madog, we say so. Tap any card to read the full story.",
               "Mae rhai’n bethau cyntaf i’r byd, rhai i Brydain, a rhai’n recordiau. Lle mae honiad yn dibynnu ar draddodiad, fel gyda Madog, rydym yn dweud hynny. Tapiwch unrhyw gerdyn i ddarllen yr hanes llawn.")
-    main = (hero("industrial", f'<a href="index.html">{SITE}</a> / <a href="index.html#people">{bi("People", "Pobl")}</a>', "book", "From c. 410 to today", "O tua 410 hyd heddiw",
+    main = (hero("industrial", f'<a href="index.html">{SITE}</a> / <a href="people.html">{bi("People", "Pobl")}</a>', "book", "From c. 410 to today", "O tua 410 hyd heddiw",
                  "Welsh world firsts", "Cymru oedd y cyntaf", "The things Wales and the Welsh gave the world first, and the people who did them.",
                  "Y pethau a roddodd Cymru a’r Cymry i’r byd gyntaf, a’r bobl a’u gwnaeth.", art="terrace")
             + section(lede + chips, top=True)
             + section(world, "World firsts and records", "Pethau cyntaf a recordiau’r byd")
             + section(home, "Firsts for Wales, and Welsh firsts abroad", "Pethau cyntaf i Gymru, a Chymry cyntaf dramor")
-            + section(f'<p class="note-box">{note}</p><div class="pager" style="margin-top:2rem"><a class="btn" href="story-firsts.html">← {bi("Wales did it first", "Cymru oedd y cyntaf")}</a><a class="btn solid" href="index.html#people">{bi("All the people", "Yr holl bobl")} →</a></div>'))
+            + section(f'<p class="note-box">{note}</p><div class="pager" style="margin-top:2rem"><a class="btn" href="story-firsts.html">← {bi("Wales did it first", "Cymru oedd y cyntaf")}</a><a class="btn solid" href="people.html">{bi("All the people", "Yr holl bobl")} →</a></div>'))
     ld = {"@context": "https://schema.org", "@type": "Article", "headline": "Welsh world firsts", "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
     js = ("<script>(function(){var b=document.querySelector('.firsts-filter');if(!b)return;b.onclick=function(ev){var c=ev.target.closest('.chip');if(!c)return;var v=c.dataset.v;"
           "b.querySelectorAll('.chip').forEach(function(x){x.setAttribute('aria-pressed',x===c)});"
@@ -2507,6 +2522,8 @@ def firsts_page():
 
 
 # ---------- index ----------
+HOME_STORIES = 6  # long reads shown on the home page; the rest are on stories.html
+N_CASTLES = len(json.loads(read("castles_data.json")))  # the castle sites on castles.html, also the figure in the home page's opening
 FEATURED = ["dewi-sant", "hywel-dda", "gwenllian", "llywelyn-fawr", "llywelyn-ap-gruffudd", "dafydd-ap-gwilym", "owain-glyndwr", "harri-tudur", "william-morgan", "lloyd-george", "aneurin-bevan", "betty-campbell"]
 DATA = dict(
     ERAS=D.ERAS, EVENTS=D.EVENTS, PLACES=[dict(p, ph=place_ph(p['id'])) for p in D.PLACES], PEOPLE=D.PEOPLE, READING=D.READING, ONLINE=D.ONLINE,
@@ -2522,9 +2539,155 @@ DATA = dict(
     FACTS=F.FACTS, FEATURED=FEATURED, PPH=dict({k: photo_url(v[0], 240) for k, v in PH.PERSON_PHOTOS.items()}, **{k[7:]: f'gallery/{k}-s.webp' for k in GP.GALLERY if k.startswith('person-')}),
     PFIELDS=P2.FIELDS, PFIELD=P2.FIELD, PFIRST={k: [v[0], v[1], v[2]] for k, v in P2.FIRSTS.items()},
 )
+# ---------- home page, map and people: content built into the HTML, so it shows without JavaScript ----------
+# (search engines, link previews and people with scripts off see it; app.js then redraws the same boxes when it runs)
+def _initials(n):
+    w = re.sub(r"\b(ap|ab|ferch|the|of|yr|y)\b", " ", n, flags=re.I).split()
+    return (w[0][0] + (w[-1][0] if len(w) > 1 else "")).upper() if w else ""
+
+
+def ssr_person(p):
+    """One person card, the same markup app.js draws."""
+    slug = p[0]
+    other = p[4] if p[4] != p[3] else ""
+    ph = DATA["PPH"].get(slug)
+    first = P2.FIRSTS.get(slug)
+    return (f'<article class="plaque" data-era="{p[1]}"><div class="top-row"><span class="ava" aria-hidden="true">{e(_initials(p[3]))}'
+            + (f'<img src="{e(ph)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' if ph else "")
+            + f'</span><div><span class="dates">{e(p[2])}</span><h3>{bi(p[3], p[4])}</h3></div></div>'
+            f'<span class="epi">{bi(p[5], p[6])}{(" · " + e(other)) if other else ""}</span>'
+            + (f'<span class="first-tag">★ {bi(first[1], first[2])}</span>' if first else "")
+            + f'<p>{bi(p[7], p[8])}</p><div class="links"><a class="go" href="person-{slug}.html">{bi("Read more", "Darllen mwy")} →</a>{src(p[9])}</div></article>')
+
+
+def ssr_people(slugs=None):
+    ppl = {p[0]: p for p in D.PEOPLE}
+    return "".join(ssr_person(ppl[s]) for s in slugs if s in ppl) if slugs else "".join(ssr_person(p) for p in D.PEOPLE)
+
+
+def ssr_fact():
+    days = (datetime.datetime.now(datetime.timezone.utc) - datetime.datetime(1970, 1, 1, tzinfo=datetime.timezone.utc)).days
+    f = F.FACTS[days % len(F.FACTS)]  # the same fact app.js picks for today
+    return bi(f[0], f[1])
+
+
+def ssr_today():
+    """On this day: the build day's anniversaries (the site is rebuilt every morning)."""
+    day = _today()
+    md = day.strftime("%m-%d")
+    rows = otd_rows()
+    hit = [r for r in rows if r[0] == md]
+    note = ""
+    if not hit:  # nothing on this exact day: the next dates after it
+        later = [r for r in rows if r[0] > md] or rows
+        hit = [r for r in later if r[0] == later[0][0]]
+        note = f'<p class="otd-near">{bi("Nothing we know of happened on exactly this day. Here is the next date.", "Ni wyddom am ddim a ddigwyddodd ar union y diwrnod hwn. Dyma’r dyddiad nesaf.")}</p>'
+    items = ""
+    for md_, y, k, te, tc, le, lc, link, era in hit[:3]:
+        tag = OTD_TAG.get(k)
+        when = (f'<span class="y">{y}</span>' if y is not None else "") + (f'<span class="k">{bi(*tag)}</span>' if tag else "")
+        t = bi(te, tc)
+        if link:
+            t = f'<a href="{e(link)}">{t}</a>'
+        items += f'<div class="it" data-era="{era}"><p class="when">{when}</p><div><h3>{t}</h3><p>{bi(le, lc)}</p></div></div>'
+    m = int(md[:2]) - 1
+    return (f'<div class="cal"><span class="d">{day.day}</span><span class="m">{bi(*MONTHS[m])}</span><span class="lab">{bi("Today", "Heddiw")}</span></div>'
+            f'<div class="items">{note}{items}<div class="more"><a class="chip" href="onthisday.html#d-{md}">{bi("The whole year", "Y flwyddyn gyfan")} →</a></div></div>')
+
+
+def ssr_tl_teaser():
+    counts = {}
+    for ev in D.EVENTS:
+        counts[ev[0]] = counts.get(ev[0], 0) + 1
+    return (f'<a class="chip" href="timeline.html">{bi("All", "Y cyfan")} <span style="opacity:.7">{len(D.EVENTS)}</span></a>'
+            + "".join(f'<a class="chip" data-era="{x["id"]}" href="timeline.html#era-{x["id"]}"><i></i>{bi(x["en"], x["cy"])} <span style="opacity:.7">{counts.get(x["id"], 0)}</span></a>' for x in D.ERAS))
+
+
+def ssr_chart():
+    """The census chart as a picture in the page (app.js draws the same one)."""
+    C, w, h, l, r, t, b, x0, x1, ymax = D.CENSUS, 560, 260, 34, 16, 18, 28, 1891, 2021, 60
+    X = lambda y: l + (y - x0) / (x1 - x0) * (w - l - r)
+    Y = lambda v: t + (1 - v / ymax) * (h - t - b)
+    n = lambda v: f"{v:.1f}".rstrip("0").rstrip(".")
+    s = (f'<svg class="chart" viewBox="0 0 {w} {h}" width="100%" style="min-width:420px" role="img" aria-label="Line chart: Welsh speakers fell from {C[0][1]}% in {C[0][0]} to {C[-1][1]}% in {C[-1][0]}">'
+         '<defs><linearGradient id="gArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2453d" stop-opacity=".35"/><stop offset="1" stop-color="#e2453d" stop-opacity="0"/></linearGradient></defs>')
+    for v in (0, 20, 40, 60):
+        s += f'<line class="grid" x1="{l}" x2="{w - r}" y1="{n(Y(v))}" y2="{n(Y(v))}"/><text x="{l - 6}" y="{n(Y(v) + 3.5)}" text-anchor="end">{v}%</text>'
+    for yv in (1891, 1921, 1951, 1981, 2021):
+        s += f'<text x="{n(X(yv))}" y="{h - 8}" text-anchor="middle">{yv}</text>'
+    pts = [f"{X(c[0]):.1f},{Y(c[1]):.1f}" for c in C]
+    s += f'<path class="area" d="M{" L".join(pts)} L{n(X(2021))},{n(Y(0))} L{n(X(1891))},{n(Y(0))}Z"/><polyline class="ln" points="{" ".join(pts)}"/>'
+    for i, c in enumerate(C):
+        end = i == 0 or i == len(C) - 1
+        s += f'<circle class="{"end" if end else ""}" cx="{n(X(c[0]))}" cy="{n(Y(c[1]))}" r="{4.5 if end else 3}"><title>{c[0]}: {c[1]}%</title></circle>'
+        if end or c[0] == 2001:
+            s += f'<text class="val" x="{n(X(c[0]) + (8 if i == 0 else -6))}" y="{n(Y(c[1]) - 10)}" text-anchor="{"start" if i == 0 else "end"}">{c[1]}%</text>'
+    return s + "</svg>"
+
+
+def ssr_books():
+    return "".join(f"<li><b>{e(r['t'])}</b><span>{bi(r['n'], r['nCy'])}</span></li>" for r in D.READING)
+
+
+def ssr_online():
+    def short(u):
+        return re.sub(r"/$", "", re.sub(r"^https://(www[.])?", "", u))
+    return "".join(f'<li><a href="{e(r["u"])}" target="_blank" rel="noopener"><b>{bi(r["t"], r.get("tCy", r["t"]))}</b></a><span>{e(short(r["u"]))}</span></li>' for r in D.ONLINE)
+
+
+def ssr_words():
+    return "".join(f'<li><b>{e(w[0])}</b><span class="say">{e(w[1])}</span><span>{bi(w[2], w[3])}</span></li>' for w in D.WORDS)
+
+
+def _proj(lat, lon):
+    return ((lon - geo["minx"]) * geo["k"] * geo["sc"], (geo["maxy"] - lat) * geo["sc"])
+
+
+def ssr_grat():
+    g = ""
+    for la in (51.5, 52, 52.5, 53):
+        y = _proj(la, 0)[1]
+        g += f'<path class="grat" d="M-30 {y:.1f}H640"/><text class="grat-l" x="640" y="{y - 5:.1f}" text-anchor="end">{la:.1f}°N</text>'
+    for lo in (-5, -4, -3):
+        x = _proj(52, lo)[0]
+        g += f'<path class="grat" d="M{x:.1f} -20V700"/><text class="grat-l" x="{x + 5:.1f}" y="-12">{abs(lo)}°W</text>'
+    return g
+
+
+def ssr_pins(sel="caernarfon", links=True, labels=True):
+    """Every place on the map. With links, each pin opens its own page when scripts are off."""
+    out = ""
+    for p in D.PLACES:
+        x, y = _proj(p["lat"], p["lon"])
+        right = x > 430
+        lbl = f'<text class="lbl" x="{-14 if right else 14}" y="4" text-anchor="{"end" if right else "start"}">{e(p["en"])}</text>' if labels else ""
+        g = (f'<g class="pin{" sel" if p["id"] == sel else ""}" data-era="{p["era"]}" data-pid="{p["id"]}" transform="translate({x:.1f} {y:.1f})">'
+             f'<circle class="halo" r="20"/><circle class="dot" r="7"/>{lbl}</g>')
+        out += f'<a href="place-{p["id"]}.html" aria-label="{e(p["en"])}">{g}</a>' if links else g
+    return out
+
+
+def ssr_place_card(pid="caernarfon"):
+    p = next(x for x in D.PLACES if x["id"] == pid)
+    E = ERA[p["era"]]
+    ph = place_ph(pid)
+    art = (f'<div class="art has-photo"><img src="{e(ph[0])}" alt="{e(ph[2])}" referrerpolicy="no-referrer"></div>' if ph
+           else f'<div class="art"><svg aria-hidden="true"><use href="#i-{p["ill"]}"/></svg></div>')
+    return (art + f'<div style="display:grid;gap:.3rem"><h3>{bi(p["en"], p["cy"])}</h3></div>'
+            f'<div class="meta"><span><b>{bi(E["en"], E["cy"])}</b></span><span>{e(p["year"])}</span><span>{p["lat"]:.3f}° N, {abs(p["lon"]):.3f}° W</span></div>'
+            f'<p class="desc">{bi(p["dEn"], p["dCy"])}</p><div style="display:flex;gap:1.2rem;flex-wrap:wrap;align-items:center">'
+            f'<a class="src" style="color:var(--ink)" href="place-{p["id"]}.html">{bi("Read the full story", "Darllen y stori lawn")} →</a>{src(p.get("src"))}</div>')
+
+
+def ssr_map_teaser():
+    """The home page's small map: Wales and every place, as one link to the full map page."""
+    return (f'<a class="map-teaser" href="map.html" aria-label="Open the map of Wales / Agor map Cymru">'
+            f'<svg viewBox="-40 -30 680 735" aria-hidden="true" focusable="false"><path class="land" d="{geo["outline"]}"/><g class="pins">{ssr_pins(None, links=False, labels=False)}</g></svg></a>')
+
+
 ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"]
 AGES_HTML = "".join(
-    f'<a class="poster" href="era-{x["id"]}.html" data-era="{x["id"]}">{A.scene(ERA_ART[x["id"]], COL[x["id"]])}<span class="shade"></span><span class="rn">{ROMAN[i]}</span>'
+    f'<a class="poster" href="era-{x["id"]}.html" data-era="{x["id"]}">{A.scene(ERA_ART[x["id"]], COL[x["id"]])}<span class="shade"></span><span class="rn"><span class="vh">{bi("Age", "Oes")} </span>{ROMAN[i]}<span class="vh">: </span></span>'
     f'<span class="txt"><span class="span">{bi(x["spanEn"], x["spanCy"])}</span><h3>{bi(x["en"], x["cy"])}</h3><p>{bi(x["blurbEn"], x["blurbCy"])}</p><span class="go">{bi("Read the chapter", "Darllen y bennod")} →</span></span></a>'
     for i, x in enumerate(D.ERAS))
 MARQ = [("Castles", "Cestyll", "story-castles.html"), ("Poets", "Beirdd", "person-dafydd-ap-gwilym.html"), ("Saints", "Seintiau", "saints.html"),
@@ -2550,7 +2713,13 @@ HERO_NAME = (f'<p class="hero-name"><span class="l-en" lang="en" aria-label="His
 
 def fill(fragment, active="", skip="#chapters", home=False):
     return (fragment.replace("__NAV__", nav(active, skip, home)).replace("__HERONAME__", HERO_NAME).replace("__FOOTER__", footer()).replace("__AGES__", AGES_HTML).replace("__MARQUEE__", MARQUEE)
-            .replace("__STORIES__", "".join(story_card(x, k == 0) for k, x in enumerate(F.STORIES)))
+            .replace("__STORIES__", "".join(story_card(x, k == 0) for k, x in enumerate(F.STORIES[:HOME_STORIES])))
+            .replace("__NSTORIES__", str(len(F.STORIES))).replace("__NPEOPLE__", str(len(D.PEOPLE))).replace("__NPLACES__", str(len(D.PLACES)))
+            .replace("__NCASTLES_FMT__", f"{N_CASTLES:,}").replace("__NCASTLES__", str(N_CASTLES))
+            .replace("__TODAY__", ssr_today()).replace("__FACT__", ssr_fact()).replace("__TLTEASER__", ssr_tl_teaser()).replace("__CHART__", ssr_chart())
+            .replace("__BOOKS__", ssr_books()).replace("__ONLINE__", ssr_online()).replace("__WORDS__", ssr_words())
+            .replace("__PEOPLEHOME__", ssr_people(FEATURED[:6])).replace("__PEOPLEALL__", ssr_people()).replace("__MAPTEASER__", ssr_map_teaser())
+            .replace("__WALES__", geo["outline"]).replace("__GRAT__", ssr_grat()).replace("__PINS__", ssr_pins()).replace("__PLACECARD__", ssr_place_card())
             .replace("__NEWS__", news_strip()).replace("__LEGENDS__", "".join(legend_card(x) for x in F.LEGENDS_HOME)).replace("__PLAY__", play_cards()))
 
 
@@ -2586,6 +2755,20 @@ _qz_hero = (f'<header class="era-hero has-art" id="top" data-era="kings"><div cl
             '<p class="span" data-cy="Cwis">Quiz</p>'
             '<h1 data-cy="Faint wyddoch chi?">How much do you know?</h1><p class="lede" data-cy="Deg cwestiwn o’r llinell amser a’r bobl. Mae pob cwis yn wahanol.">Ten questions drawn from the timeline and the people. Every round is different.</p></div></header>')
 quiz_fragment = app_page("quiz.html", "Quiz · History of Wales", "A quiz on the history of Wales: ten questions, different every time, plus the timeline challenge.", _qz_hero, "quiz_section.html", "play.html", "#quiz")
+_pp_hero = (f'<header class="era-hero has-art" id="top" data-era="industrial"><div class="hero-art">{A.scene("terrace", COL["industrial"])}</div><div class="wrap"><p class="crumbs"><a href="index.html" data-cy="Hanes Cymru">History of Wales</a></p>'
+            '<p class="span" data-cy="O tua 31,000 CC hyd heddiw">From c. 31,000 BC to today</p>'
+            '<h1 data-cy="Y rhai a luniodd Gymru">The people who shaped Wales</h1>'
+            f'<p class="lede"><span class="l-en" lang="en">{len(D.PEOPLE)} people from every age: kings and princes, poets, saints, scientists, inventors, explorers, singers, actors, sporting heroes and reformers. Each one has a page of their own and a link you can share.</span>'
+            f'<span class="l-cy" lang="cy">{len(D.PEOPLE)} o bobl o bob oes: brenhinoedd a thywysogion, beirdd, seintiau, gwyddonwyr, dyfeiswyr, fforwyr, cantorion, actorion, arwyr y campau a diwygwyr. Mae gan bob un ei dudalen ei hun a dolen y gallwch ei rhannu.</span></p></div></header>')
+people_fragment = app_page("people.html", "Famous Welsh people · History of Wales", f"{len(D.PEOPLE)} famous Welsh people from every age of Welsh history: kings, princes, poets, saints, scientists, inventors, singers and sporting heroes, each with their own page.",
+                           _pp_hero, "people_section.html", "people.html", "#people")
+_mp_hero = (f'<header class="era-hero has-art" id="top" data-era="medieval"><div class="hero-art">{A.scene("castle", COL["medieval"])}</div><div class="wrap"><p class="crumbs"><a href="index.html" data-cy="Hanes Cymru">History of Wales</a></p>'
+            '<p class="span" data-cy="Map">Map</p>'
+            '<h1 data-cy="Lle digwyddodd">Where it happened</h1>'
+            f'<p class="lede"><span class="l-en" lang="en">{len(D.PLACES)} historic places on one map of Wales. Choose a pin to read the story behind the place, switch to Kingdoms to watch the map of Wales change, or type your town to find the history near you.</span>'
+            f'<span class="l-cy" lang="cy">{len(D.PLACES)} o leoedd hanesyddol ar un map o Gymru. Dewiswch bin i ddarllen y stori y tu ôl i’r lle, newidiwch i’r teyrnasoedd i weld map Cymru’n newid, neu teipiwch eich tref i ganfod yr hanes yn eich ymyl.</span></p></div></header>')
+map_fragment = app_page("map.html", "Map of Wales · History of Wales", f"An interactive map of Welsh history: {len(D.PLACES)} historic places with their stories, the kingdoms of Wales through time, and the history near you.",
+                        _mp_hero, "map_section.html", "map.html", "#map")
 
 
 def wrap_doc(fragment):
@@ -2633,6 +2816,8 @@ def search_index():
     items += [dict(k="page", t=("Saints of " + r["en"]) if r["realm"] else "Saints across the sea", c=("Seintiau " + r["cy"]) if r["realm"] else "Saint dros y môr", u=f"saints-{r['id']}.html", y=["Saints", "Seintiau"], b=[r["subEn"] + " " + ", ".join(x["en"] for x in r["saints"]), r["subCy"]], e=r["era"]) for r in SA.REGIONS]
     items += [dict(k="page", t=x["en"], c=x["cy"], u=saint_href(sid), y=[x["dates"], cy_dates(x["dates"])], b=[x["nEn"].split(". ")[0] + ". " + " ".join(x["places"]), x["nCy"].split(". ")[0] + "."], e=r["era"]) for sid, (x, r) in SAINT.items()]
     items.append(dict(k="page", t="On this day in Welsh history", c="Ar y dydd hwn yn hanes Cymru", u="onthisday.html", y=["Every day", "Bob dydd"], b=["What happened on each day of the year in Welsh history", "Beth ddigwyddodd ar bob diwrnod o’r flwyddyn yn hanes Cymru"], e="medieval"))
+    items.append(dict(k="page", t="Famous Welsh people", c="Pobl enwog Cymru", u="people.html", y=["People", "Pobl"], b=[f"All {len(D.PEOPLE)} people who shaped Wales, from every age, with filters by age and field", f"Pob un o’r {len(D.PEOPLE)} o bobl a luniodd Gymru, o bob oes, gyda hidlwyr yn ôl oes a maes"], e="industrial"))
+    items.append(dict(k="page", t="Map of Wales: where it happened", c="Map Cymru: lle digwyddodd", u="map.html", y=["Map", "Map"], b=[f"{len(D.PLACES)} historic places on one map, the kingdoms through time, and history near you", f"{len(D.PLACES)} o leoedd hanesyddol ar un map, y teyrnasoedd drwy amser, a hanes yn eich ymyl"], e="medieval"))
     items.append(dict(k="page", t="The castles of Wales: the map", c="Cestyll Cymru: y map", u="castles.html", y=["Map", "Map"], b=[f"All {len(CASTLES)} castle sites in Wales on one map, with who built them", f"Pob un o’r {len(CASTLES)} o safleoedd cestyll yng Nghymru ar un map, gyda phwy a’u cododd"], e="medieval"))
     items += [dict(k="place", t=r["en"], c=r["cy"], u=f'castles.html#castle-{r["q"]}', y=[r["d"], castle_date_cy(r["d"])], b=[r["cur"][1] + ". " + r["cur"][4], r["cur"][2] + ". " + r["cur"][5]], e="medieval") for r in castle_rows() if r["cur"]]
     for r in RY.REALMS:  # every king and prince, linked to their line on the kingdom page
@@ -2944,7 +3129,7 @@ def shared_assets(pages):
 # ---------- the page for addresses that do not exist ----------
 def not_found_page():
     base = re.sub(r"^https?://[^/]+", "", BASE_URL) or "/"
-    links = [("timeline.html", "The timeline", "Y llinell amser"), ("index.html#people", "The people", "Y bobl"), ("index.html#map", "The map", "Y map"),
+    links = [("timeline.html", "The timeline", "Y llinell amser"), ("people.html", "The people", "Y bobl"), ("map.html", "The map", "Y map"),
              ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("daily.html", "Today’s challenge", "Her heddiw")]
     main = (hero("medieval", f'<a href="index.html">{SITE}</a>', "book", "Page not found", "Heb ddod o hyd i’r dudalen", "This page has wandered off", "Mae’r dudalen hon wedi crwydro",
                  "Like the lost land of Cantre’r Gwaelod, it may be under the sea. The rest of Welsh history is still here.",
@@ -2964,7 +3149,8 @@ style += RP.REF_CSS + RP.TOWN_CSS + RP.BATTLE_CSS + RP.DOC_CSS + RP.TOPIC_CSS + 
 def main():
     out = os.path.join(ROOT, "_site")
     shutil.rmtree(out, ignore_errors=True)
-    pages = {"index.html": wrap_doc(index_fragment), "timeline.html": wrap_doc(tl_fragment), "quiz.html": wrap_doc(quiz_fragment)}
+    pages = {"index.html": wrap_doc(index_fragment), "timeline.html": wrap_doc(tl_fragment), "quiz.html": wrap_doc(quiz_fragment),
+             "people.html": wrap_doc(people_fragment), "map.html": wrap_doc(map_fragment)}
     for i, era in enumerate(D.ERAS):
         pages[f"era-{era['id']}.html"] = era_page(i, era)
     for p in D.PEOPLE:
