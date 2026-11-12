@@ -700,7 +700,17 @@ Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.
 - A long read that does not exist yet can already be named on a trail: it stays hidden until another thread publishes it (for example `story-welsh-not`, `story-mac`).
 - Keep 8 to 10 stops per trail, and keep the number of trails a multiple of 6, so the grid on `trails.html` is full at three columns and at two.
 - Every stop title has the same size and font: there is no bigger serif style for "key" events any more (removed from `.era-events li.key h3` and the timeline's `.ev.key h4`). Key events keep their coloured dot.
+- Full pages for the people and places on the trails are in `src/trail_people.py` and `src/trail_places.py` (headings with `## `, quotes with `> words | who`); `long.py` loads them last, so they replace the short text.
+- A drop cap must only catch a page's first paragraph: use `.story > p:first-child`, not `.story p:first-child`, or the first letter of every pull quote turns into a giant letter.
 - To check fonts across the site, load pages in Playwright and compare the computed font of headings in sibling cards or list items; flag any group with more than one style.
+
+### The Mabinogi tale guides (November 2026)
+- Each tale of the Mabinogion has a guide page, `mabinogi-<id>.html`, made by `tale_page()` in `build.py` from `TALES` in `src/mabinogi_tales.py`: facts table, the tale part by part, "People of the tale" chips, "Pictures of the tale" (`figs`, Commons tuples shown with `lit_fig()`) and a numbered map of its places.
+- `pin_map(places, prefix, label)` draws a numbered map of Wales with a list beside it (the look of Arthur's Wales). A place with `lat=None` is listed but not pinned. Pins that would overlap move aside (`NUDGES`), with a short line and a dot back to the real spot.
+- The people of the tales are in `src/mabinogi_people.py` (the `P()` format of people2a.py); `GROUPS` gives the "People of the Mabinogi" block on each of their pages, `PHOTOS` adds their pictures to `PERSON_PHOTOS`.
+- A long read can show a "Pictures" section: give its STORY dict `figs=[...]` (Commons tuples as `lit_fig()` takes them).
+- Before adding a person, search all of `src/people2*.py`, `princes.py`, `sixth_century.py` and `arthur_circle.py` for the slug and other spellings (Hopcyn ap Tomos/Tomas was nearly added twice).
+- Pictures: ask `tools/commons_research.py` (set `tools/commons_research_in.json` to your branch), pick from the results, add the files as figures or `c:<file>` page tops (with an `EXTRA` credit in `src/pictures.py`), then run the "Fetch photos" workflow on the branch so the site keeps its own copies. Delete `_research/` and restore the research input file before merging.
 
 ### Whole cards are links (November 2026)
 - Ifan wants every card and list row on the site to be one big link, with no "Read more", "Read →", "The full story" or "Source ↗" on it.

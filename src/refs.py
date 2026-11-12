@@ -670,3 +670,35 @@ REFS = {
          "Everything Welsh from A to Z; also in Welsh as Gwyddoniadur Cymru.",
          "Popeth Cymreig o A i Y; hefyd yn Gymraeg fel Gwyddoniadur Cymru.")]),
 }
+
+# The Mabinogi long read (src/mabinogi.py). The tale guides and the people of the tales use MABINOGI_TALES / MABINOGI_PEOPLE in refs2.py.
+GUEST_MABINOGION = (P, "Lady Charlotte Guest (trans.)", "The Mabinogion, from the Llyfr Coch o Hergest, and other ancient Welsh manuscripts", "Longman, London, and William Rees, Llandovery, in seven parts 1838–1845; three volumes 1849",
+                    "The first translation into English, with the Welsh text and long notes on the places and the people.",
+                    "Y cyfieithiad cyntaf i’r Saesneg, gyda’r testun Cymraeg a nodiadau hir ar y lleoedd a’r bobl.")
+PEDEIR_KEINC = (P, "Ifor Williams (ed.)", "Pedeir Keinc y Mabinogi", "Gwasg Prifysgol Cymru, 1930",
+                "The Four Branches in the Welsh of the White Book, with the great study that dated them.",
+                "Y Pedair Cainc yng Nghymraeg y Llyfr Gwyn, gyda’r astudiaeth fawr a’u dyddiodd.")
+IFANS_MABINOGION = (P, "Dafydd Ifans and Rhiannon Ifans (eds)", "Y Mabinogion", "Gwasg Gomer, 1980",
+                    "All the tales retold in modern Welsh.", "Yr holl chwedlau wedi’u hadrodd mewn Cymraeg diweddar.")
+DAVIES_FOUR_BRANCHES = (B, "Sioned Davies", "The Four Branches of the Mabinogi", "Gomer, 1993",
+                        "A short, clear guide to the Four Branches and the art of the storyteller.", "Arweiniad byr a chlir i’r Pedair Cainc a chelfyddyd y cyfarwydd.")
+REFS["mabinogi"] = dict(dwb=["lady-charlotte-guest", "rhydderch-ab-ieuan-llwyd", "hopcyn-ap-tomos", "tegid", "carnhuanawc"], items=[
+    MABINOGION, GUEST_MABINOGION, PEDEIR_KEINC,
+    (P, "J. Gwenogvryn Evans (ed.)", "The White Book Mabinogion", "Pwllheli, 1907",
+     "The exact text of the White Book of Rhydderch, letter for letter.", "Union destun Llyfr Gwyn Rhydderch, lythyren am lythyren."),
+    (P, "Gwyn Jones and Thomas Jones (trans.)", "The Mabinogion", "Golden Cockerel Press, 1948; Everyman’s Library, 1949",
+     "The translation that replaced Lady Charlotte’s for most English readers in the twentieth century.", "Y cyfieithiad a ddisodlodd un yr Arglwyddes Charlotte i’r rhan fwyaf o ddarllenwyr Saesneg yn yr ugeinfed ganrif."),
+    (P, "Patrick K. Ford (trans.)", "The Mabinogi and Other Medieval Welsh Tales", "University of California Press, 1977",
+     "The Four Branches with other tales, including the Tale of Taliesin.", "Y Pedair Cainc gyda chwedlau eraill, gan gynnwys Hanes Taliesin."),
+    IFANS_MABINOGION, TRIADS, DAVIES_FOUR_BRANCHES,
+    (B, "Sioned Davies", "Crefft y Cyfarwydd", "Gwasg Prifysgol Cymru, 1995",
+     "The craft of the medieval Welsh storyteller, shown in the tales themselves.", "Crefft y storïwr Cymraeg yn yr Oesoedd Canol, fel y’i gwelir yn y chwedlau eu hunain."),
+    (B, "Daniel Huws", "Medieval Welsh Manuscripts", "University of Wales Press and the National Library of Wales, 2000",
+     "The White Book, the Red Book and the scribes who wrote them.", "Y Llyfr Gwyn, y Llyfr Coch a’r copïwyr a’u hysgrifennodd."),
+    (B, "T. M. Charles-Edwards", "The Date of the Four Branches of the Mabinogi", "Transactions of the Honourable Society of Cymmrodorion, 1970",
+     "The article that weighed every argument for the date of the Four Branches.", "Yr erthygl a bwysodd bob dadl dros ddyddiad y Pedair Cainc."),
+    (B, "Andrew Breeze", "The Origins of the Four Branches of the Mabinogi", "Gracewing, 2009",
+     "The case that Gwenllian, daughter of Gruffudd ap Cynan, wrote the Four Branches.", "Yr achos mai Gwenllian ferch Gruffudd ap Cynan a ysgrifennodd y Pedair Cainc."),
+    (B, "Revel Guest and Angela V. John", "Lady Charlotte: A Biography of the Nineteenth Century", "Weidenfeld and Nicolson, 1989",
+     "The life of Lady Charlotte Guest, from her own journals.", "Bywyd yr Arglwyddes Charlotte Guest, o’i dyddiaduron ei hun."),
+])
