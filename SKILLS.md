@@ -588,3 +588,8 @@ Learnt while simplifying the home page.
 - The "what matters" lines are the five Humanities statements of the Curriculum for Wales, put in short. Don't present them as the official wording.
 - Packs print cleanly (A4, about 8 pages): `PRINT_CSS` hides the menu, footer, buttons and the badge pop-ups. To check, render with Playwright's `page.pdf()` and look at the pages with `pdftoppm`.
 
+## Stories where you choose (November 2026)
+- `src/ride.py` makes `ride-glyndwr.html`: "Ride with Glyndŵr, 1400". The story is data (`NODES`): each scene has a date, a place (with a spot on the map), the words in both languages, a line for each role, a "What really happened" box linking to event pages, and the choices. `src/static/ride.js` is a small engine that plays any story in that shape, so another one (say, Llywelyn in 1282) needs only new data and a page.
+- Choices change what you do and your renown, never what happened. The build checks every choice leads to a real scene and every event link exists. Renown ranks are fractions of the most each role can earn, worked out by the build, so adding scenes doesn't break them.
+- Your place is saved on the device (`hc-ride`), and finishing earns the "Glyndŵr's companion" badge through `HC.flag("ride")` in `site.js`.
+- To test: play it through in Playwright for each role in English and in `cy/`, and run axe on the finished page.
