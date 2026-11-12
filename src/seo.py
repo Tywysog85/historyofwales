@@ -28,6 +28,8 @@ def _strip(s):
 TITLES = {
     "timeline.html": "Welsh history timeline: 230,000 BC to today",
     "quiz.html": "Welsh history quiz",
+    "people.html": "Famous Welsh people from every age",
+    "map.html": "Map of Welsh history: historic places and kingdoms",
     "play.html": "Welsh history games and quizzes",
     "daily.html": "Daily Welsh history challenge",
     "stories.html": "Long reads on Welsh history",
@@ -74,11 +76,15 @@ def tidy_desc(desc, limit=160):
     return cut.rstrip(" ,;:–—-") + "…"
 
 
+# The site's own text is shared under Creative Commons BY-NC 4.0 (see footer() in build.py); photos keep their own licences.
+LICENSE = "https://creativecommons.org/licenses/by-nc/4.0/"
+
+
 def website_ld(base):
     return {"@type": "WebSite", "@id": base + "#website", "name": SITE_EN, "alternateName": [SITE_CY, "historyofwales.cymru"],
             "url": base, "inLanguage": ["en-GB", "cy"],
             "description": "Welsh history from the first people to the present day, in English and Cymraeg.",
-            "publisher": {"@id": base + "#org"}}
+            "publisher": {"@id": base + "#org"}, "license": LICENSE}
 
 
 def org_ld(base):
@@ -91,7 +97,7 @@ def home_ld(base):
             {"@type": "WebPage", "@id": base + "#webpage", "url": base, "name": "History of Wales · Hanes Cymru",
              "isPartOf": {"@id": base + "#website"}, "about": {"@type": "Country", "name": "Wales", "alternateName": "Cymru",
                                                                "sameAs": "https://en.wikipedia.org/wiki/Wales"},
-             "inLanguage": ["en-GB", "cy"], "primaryImageOfPage": {"@type": "ImageObject", "url": base + "og.png"}}]}
+             "inLanguage": ["en-GB", "cy"], "primaryImageOfPage": {"@type": "ImageObject", "url": base + "og.png"}, "license": LICENSE}]}
 
 
 def _crumbs(base, path, main_html, title):
@@ -161,6 +167,8 @@ def page_ld(base, path, title, desc, og_type, ld, main_html, card=None):
         main["isPartOf"] = {"@id": base + "#website"}
     else:  # a Person, a Place...: say which page of ours is about them
         main.setdefault("mainEntityOfPage", url)
+    if main.get("@type") in ("Article", "WebPage", "CollectionPage", "ProfilePage", "Map"):
+        main.setdefault("license", LICENSE)
     graph = [main, website_ld(base), org_ld(base)]
     bc = _crumbs(base, path, main_html, title)
     if bc:

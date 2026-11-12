@@ -37,7 +37,7 @@ Ifan asked on 12 November 2026 that new material goes at the top of a page, not 
 - **Lists that simply grow** show the newest first: long reads (and the long reads on the home page), topic guides, games, and new pictures within each gallery group.
 - **Lists whose order carries meaning keep it**: the timeline, battles and key documents by date, people and places by age, the A–Z, the questions by subject, the legends in their sections (the Four Branches stay in their order), family trees, and the chapters inside a long read. These get a **Just added** strip at the top with the newest few instead, linking down to each one.
 - The newest few things added in the last two weeks wear a small red **New** badge.
-- A big addition still gets a line at the top of What's new (`src/whatsnew.py`).
+- A big addition still gets a line at the top of What's new (`src/whatsnew.py`). Only history goes there: no notes about how the site works (Ifan, 12 November 2026).
 
 ## References
 

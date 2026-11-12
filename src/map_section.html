@@ -1,0 +1,40 @@
+<section id="map" class="page-top">
+  <div class="wrap">
+    <div class="seg" role="group" aria-label="Map mode">
+      <button type="button" id="mode-sites" aria-pressed="true" data-cy="Safleoedd hanesyddol">Historic sites</button>
+      <button type="button" id="mode-kg" aria-pressed="false" data-cy="Teyrnasoedd">Kingdoms</button>
+    </div>
+    <div class="map-grid">
+      <div class="map-box">
+        <svg id="wales" viewBox="-40 -30 680 735" role="group" aria-label="Map of Wales">
+          <g id="grat">__GRAT__</g>
+          <text class="sea-l" x="40" y="430" data-cy-svg="BAE ABERTEIFI">CARDIGAN BAY</text>
+          <text class="sea-l" x="80" y="680" data-cy-svg="MÔR HAFREN">BRISTOL CHANNEL</text>
+          <path class="land" id="land" d="__WALES__"/>
+          <g id="las" hidden></g>
+          <g id="kg-labels" hidden></g>
+          <g id="pins">__PINS__</g>
+        </svg>
+        <div class="chips map-legend" id="map-filter" role="group" aria-label="Filter places by era"></div>
+      </div>
+      <article class="place-card" id="place-card" aria-live="polite">__PLACECARD__</article>
+      <article class="place-card kg-panel" id="kg-card" aria-live="polite" hidden></article>
+    </div>
+    <div class="near" id="near">
+      <div class="near-head">
+        <p class="eyebrow" data-cy="Hanes yn eich ymyl">History near you</p>
+        <h3 data-cy="Beth sydd gerllaw?">What’s near you?</h3>
+      </div>
+      <form class="near-form" id="near-form" autocomplete="off">
+        <label for="near-in" class="sr-only" data-cy="Eich tref">Your town</label>
+        <input id="near-in" type="text" list="near-towns" placeholder="Type your town, e.g. Bala" data-cy-ph="Teipiwch eich tref, e.e. Bala">
+        <datalist id="near-towns"></datalist>
+        <button type="submit" class="btn" data-cy="Chwilio">Find</button>
+        <button type="button" class="btn" id="near-geo" data-cy="Defnyddio fy lleoliad">Use my location</button>
+      </form>
+      <p class="near-msg" id="near-msg" aria-live="polite"></p>
+      <ol class="near-list" id="near-list"></ol>
+    </div>
+  </div>
+</section>
+

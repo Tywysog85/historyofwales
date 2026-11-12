@@ -8,7 +8,7 @@
     <div class="bento-today">
       <div class="b-day rv">
         <p class="eyebrow" data-cy="Ar y dydd hwn yn hanes Cymru">On this day in Welsh history</p>
-        <div class="today" id="today-box"></div>
+        <div class="today" id="today-box">__TODAY__</div>
       </div>
       <a class="b-daily rv" href="daily.html">
         <p class="eyebrow" data-cy="Her y dydd">Daily challenge</p>
@@ -19,7 +19,7 @@
       </a>
       <div class="b-fact rv">
         <p class="eyebrow" data-cy="Wyddech chi?">Did you know?</p>
-        <p class="fact" id="fact" aria-live="polite"></p>
+        <p class="fact" id="fact" aria-live="polite">__FACT__</p>
         <button type="button" class="chip" id="fact-next"><span data-cy="Un arall">Another</span> ↻</button>
       </div>
     </div>
@@ -42,7 +42,7 @@
         <p class="muted" data-cy="Dros 400 o ddigwyddiadau mewn trefn, pob un â ffynhonnell.">Over 400 events in order, every one with a source.</p>
       </div>
       <div class="tl-band-r">
-        <div class="chips" id="tl-teaser" role="group" aria-label="Ages"></div>
+        <div class="chips" id="tl-teaser" role="group" aria-label="Ages">__TLTEASER__</div>
         <a class="btn solid" href="timeline.html" data-cy="Agor y llinell amser →">Open the timeline →</a>
         <a class="btn" href="wales-in-10.html" data-cy="Cymru mewn 10 munud →">Wales in 10 minutes →</a>
       </div>
@@ -58,70 +58,33 @@
       <p data-cy="Erthyglau pum munud ar y cwestiynau mawr: pam cymaint o gestyll, sut y goroesodd yr iaith, beth a gostiodd glo.">Five-minute essays on the big questions: why so many castles, how the language survived, what coal cost.</p>
     </div>
     <div class="s-grid">__STORIES__</div>
-    <p class="more-row rv"><a class="btn" href="stories.html" data-cy="Pob erthygl →">All long reads →</a></p>
+    <p class="more-row rv"><a class="btn" href="stories.html"><span class="l-en" lang="en">All __NSTORIES__ long reads →</span><span class="l-cy" lang="cy">Pob un o’r __NSTORIES__ erthygl →</span></a></p>
   </div>
 </section>
 
 <section id="map">
   <div class="wrap">
-    <div class="head">
-      <p class="eyebrow"><span class="num">03</span> · <span data-cy="Map">Map</span></p>
-      <h2 data-cy="Lle digwyddodd">Where it happened</h2>
-      <p data-cy="Dewiswch bin i weld y stori y tu ôl i’r lle, neu newidiwch i’r teyrnasoedd i weld sut newidiodd ffiniau Cymru.">Choose a pin to see the story behind the place, or switch to Kingdoms to watch the political map of Wales change.</p>
-    </div>
-    <div class="seg" role="group" aria-label="Map mode">
-      <button type="button" id="mode-sites" aria-pressed="true" data-cy="Safleoedd hanesyddol">Historic sites</button>
-      <button type="button" id="mode-kg" aria-pressed="false" data-cy="Teyrnasoedd">Kingdoms</button>
-    </div>
-    <div class="map-grid">
-      <div class="map-box">
-        <svg id="wales" viewBox="-40 -30 680 735" role="group" aria-label="Map of Wales">
-          <g id="grat"></g>
-          <text class="sea-l" x="40" y="430" data-cy-svg="BAE ABERTEIFI">CARDIGAN BAY</text>
-          <text class="sea-l" x="80" y="680" data-cy-svg="MÔR HAFREN">BRISTOL CHANNEL</text>
-          <path class="land" id="land" d="__WALES__"/>
-          <g id="las" hidden></g>
-          <g id="kg-labels" hidden></g>
-          <g id="pins"></g>
-        </svg>
-        <div class="chips map-legend" id="map-filter" role="group" aria-label="Filter places by era"></div>
+    <div class="map-home">
+      __MAPTEASER__
+      <div class="head rv">
+        <p class="eyebrow"><span class="num">03</span> · <span data-cy="Map">Map</span></p>
+        <h2 data-cy="Lle digwyddodd">Where it happened</h2>
+        <p><span class="l-en" lang="en">__NPLACES__ historic places on one map of Wales, each with its story, and the kingdoms of Wales changing through time. Type your town to find the history near you.</span><span class="l-cy" lang="cy">__NPLACES__ o leoedd hanesyddol ar un map o Gymru, pob un â’i stori, a theyrnasoedd Cymru’n newid drwy amser. Teipiwch eich tref i ganfod yr hanes yn eich ymyl.</span></p>
+        <p class="more-row"><a class="btn solid" href="map.html" data-cy="Agor y map →">Open the map →</a> <a class="btn" href="map.html#kingdoms" data-cy="Y teyrnasoedd">The kingdoms</a> <a class="btn" href="castles.html" data-cy="Map y cestyll">Castles map</a></p>
       </div>
-      <article class="place-card" id="place-card" aria-live="polite"></article>
-      <article class="place-card kg-panel" id="kg-card" aria-live="polite" hidden></article>
-    </div>
-    <div class="near" id="near">
-      <div class="near-head">
-        <p class="eyebrow" data-cy="Hanes yn eich ymyl">History near you</p>
-        <h3 data-cy="Beth sydd gerllaw?">What’s near you?</h3>
-      </div>
-      <form class="near-form" id="near-form" autocomplete="off">
-        <label for="near-in" class="sr-only" data-cy="Eich tref">Your town</label>
-        <input id="near-in" type="text" list="near-towns" placeholder="Type your town, e.g. Bala" data-cy-ph="Teipiwch eich tref, e.e. Bala">
-        <datalist id="near-towns"></datalist>
-        <button type="submit" class="btn" data-cy="Chwilio">Find</button>
-        <button type="button" class="btn" id="near-geo" data-cy="Defnyddio fy lleoliad">Use my location</button>
-      </form>
-      <p class="near-msg" id="near-msg" aria-live="polite"></p>
-      <ol class="near-list" id="near-list"></ol>
     </div>
   </div>
 </section>
 
 <section id="people">
   <div class="wrap">
-    <div class="head">
+    <div class="head rv">
       <p class="eyebrow"><span class="num">04</span> · <span data-cy="Pobl">People</span></p>
       <h2 data-cy="Y rhai a luniodd Gymru">The people who shaped Wales</h2>
-      <p data-cy="Tywysogion, beirdd, seintiau, gwyddonwyr, dyfeiswyr, fforwyr, cantorion, actorion, sêr y campau a diwygwyr. Mae gan bob un ddolen y gallwch ei rhannu.">Princes, poets, saints, scientists, inventors, explorers, singers, actors, sporting heroes and reformers. Each one has a link you can share.</p>
-      <p class="firsts-banner"><b data-cy="★ Cymru oedd y cyntaf">★ Welsh world firsts</b><span data-cy="Yr hafalnod, π, y gell danwydd, y meicroffon, y locomotif stêm, archebu drwy’r post, newid pecynnau’r rhyngrwyd a’r olwyn sbâr.">The equals sign, π, the fuel cell, the microphone, the steam locomotive, mail order, the packet switching of the internet and the spare wheel.</span><a href="firsts.html" data-cy="Gweld y cyfan →">See them all →</a></p>
+      <p><span class="l-en" lang="en">Princes, poets, saints, scientists, inventors, singers and sporting heroes: __NPEOPLE__ people from every age, each with a page you can share.</span><span class="l-cy" lang="cy">Tywysogion, beirdd, seintiau, gwyddonwyr, dyfeiswyr, cantorion ac arwyr y campau: __NPEOPLE__ o bobl o bob oes, pob un â thudalen y gallwch ei rhannu.</span></p>
     </div>
-    <div class="tl-tools">
-      <div class="chips" id="people-filter" role="group" aria-label="Filter people by era"></div>
-      <span class="people-count" id="people-count"></span>
-    </div>
-    <div class="chips people-field" id="people-field" role="group" aria-label="Filter people by field"></div>
-    <div class="people" id="people-grid"></div>
-    <p class="more-row"><button type="button" class="btn" id="people-more"></button></p>
+    <div class="people people-home">__PEOPLEHOME__</div>
+    <p class="more-row rv"><a class="btn solid" href="people.html"><span class="l-en" lang="en">All __NPEOPLE__ people →</span><span class="l-cy" lang="cy">Pob un o’r __NPEOPLE__ o bobl →</span></a> <a class="btn" href="firsts.html" data-cy="Cymru oedd y cyntaf">Welsh world firsts</a></p>
   </div>
 </section>
 
@@ -149,7 +112,7 @@
         <p class="eyebrow" data-cy="Siaradwyr Cymraeg yn ôl y cyfrifiad">Welsh speakers by census</p>
         <h3 data-cy="Canrif o ddirywiad, a’r frwydr yn ôl">A century of decline, and a fight back</h3>
         <p data-cy="Canran y bobl tair oed a hŷn a allai siarad Cymraeg. Ni chynhaliwyd cyfrifiad yn 1941.">Share of people aged three and over who could speak Welsh. No census was taken in 1941.</p>
-        <div class="chart-wrap" id="chart"></div>
+        <div class="chart-wrap" id="chart">__CHART__</div>
         <p data-cy="Nod strategaeth Cymraeg 2050 Llywodraeth Cymru yw miliwn o siaradwyr erbyn canol y ganrif.">The Welsh Government’s Cymraeg 2050 strategy aims for a million speakers by mid-century.</p>
       </div>
       <div class="panel decoder">
@@ -171,7 +134,7 @@
     <script src="welsh.js?v=__WELSHV__" defer></script>
     <div class="lang-words">
       <p class="eyebrow" data-cy="Geiriau i’w dysgu">Words to know</p>
-      <ul class="words" id="words"></ul>
+      <ul class="words" id="words">__WORDS__</ul>
     </div>
   </div>
 </section>
@@ -196,8 +159,8 @@
       <p data-cy="Mae pob digwyddiad, lle a pherson ar y wefan hon yn cysylltu â ffynhonnell. Dyma’r llyfrau a’r casgliadau gorau i fynd ymhellach.">Every event, place and person on this site links to a source. These are the best books and collections for going further.</p>
     </div>
     <div class="reading">
-      <div><p class="eyebrow" style="margin-bottom:.5rem" data-cy="Llyfrau">Books</p><ul id="read-books"></ul></div>
-      <div><p class="eyebrow" style="margin-bottom:.5rem" data-cy="Ar-lein">Online</p><ul id="read-online"></ul></div>
+      <div><p class="eyebrow" style="margin-bottom:.5rem" data-cy="Llyfrau">Books</p><ul id="read-books">__BOOKS__</ul></div>
+      <div><p class="eyebrow" style="margin-bottom:.5rem" data-cy="Ar-lein">Online</p><ul id="read-online">__ONLINE__</ul></div>
     </div>
     <p class="note-box" style="margin-top:2rem" data-cy="Mae’r dolenni i ddigwyddiadau unigol yn mynd i Wicipedia, sydd yn ei dro yn rhestru ffynonellau academaidd. Dyddiadau bras yw’r rhai a nodir ‘c.’ (circa). Map yn seiliedig ar ffiniau awdurdodau lleol; mae’r map teyrnasoedd yn fras.">Links on individual events go to Wikipedia, which in turn lists academic sources. Dates marked c. (circa) are approximate. The map is drawn from local authority boundaries, and the kingdoms map is an approximation.</p>
   </div>
