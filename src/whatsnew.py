@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Rhodri the Great and the first royal house of Wales", "Rhodri Mawr a thŷ brenhinol cyntaf Cymru",
+     "Full pages for Rhodri Mawr, who beat the Vikings and brought most of Wales under one house, and for the kings around him: Merfyn Frych, Anarawd and Dial Rhodri, Cadell, Hywel Dda, Idwal Foel, Owain ap Hywel and Maredudd ab Owain, with the old chronicles quoted beside the story.",
+     "Tudalennau llawn i Rodri Mawr, a drechodd y Llychlynwyr a dod â’r rhan fwyaf o Gymru dan un tŷ, ac i’r brenhinoedd o’i gwmpas: Merfyn Frych, Anarawd a Dial Rhodri, Cadell, Hywel Dda, Idwal Foel, Owain ap Hywel a Maredudd ab Owain, gyda’r hen groniclau wrth ochr yr hanes.",
+     "person-rhodri-mawr.html"),
     ("2026-11-12", "MAC and the Free Wales Army", "MAC a Byddin Rhyddid Cymru",
      "Two new long reads on the 1960s: Mudiad Amddiffyn Cymru, born of the drowning of Tryweryn, and its campaign against the water pipelines and the investiture, with the Abergele Martyrs; and the Free Wales Army of Cayo Evans and Dennis Coslett, from Llyn Celyn to the Swansea trial. With a new page on John Jenkins, the leader of MAC.",
      "Dwy erthygl newydd am y 1960au: Mudiad Amddiffyn Cymru, a anwyd o foddi Tryweryn, a’i ymgyrch yn erbyn y pibellau dŵr a’r Arwisgo, gyda Merthyron Abergele; a Byddin Rhyddid Cymru Cayo Evans a Dennis Coslett, o Lyn Celyn i achos Abertawe. Gyda thudalen newydd ar John Jenkins, arweinydd MAC.",
