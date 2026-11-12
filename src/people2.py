@@ -2,15 +2,16 @@
 # and the Welsh firsts. data.py adds PEOPLE_NEW to the people list, long.py adds PEOPLE_LONG,
 # build.py uses FIELDS, FIELD, FIRSTS and OTHER_FIRSTS for the people filter, person badges and firsts.html.
 import people2a as _A, people2b as _B, people2c as _C, people2d as _D, people2e as _E, people2f as _F
-import arthur_circle as _AC
+import arthur_circle as _AC, sixth_century as _SC
 
 import christianity as _CH  # Brân Fendigaid and King Lleurwg (src/christianity.py)
 
-ALL = _A.PEOPLE + _B.PEOPLE + _C.PEOPLE + _D.PEOPLE + _E.PEOPLE + _F.PEOPLE + _AC.PEOPLE + _CH.PEOPLE
+ALL = _A.PEOPLE + _B.PEOPLE + _C.PEOPLE + _D.PEOPLE + _E.PEOPLE + _F.PEOPLE + _AC.PEOPLE + _CH.PEOPLE + _SC.PEOPLE
 
 # tuples in the site's people format: (slug, era, dates, nameEn, nameCy, epithetEn, epithetCy, bioEn, bioCy, wikipediaTitle)
 PEOPLE_NEW = [(p["id"], p["era"], p["d"], p["en"], p["cy"], p["eEn"], p["eCy"], p["bEn"], p["bCy"], p["w"]) for p in ALL]
 PEOPLE_LONG = {p["id"]: (p["lEn"], p["lCy"]) for p in ALL}
+PEOPLE_LONG.update(_SC.LONG)  # full pages for Illtud and Dewi Sant (src/sixth_century.py)
 
 # What each person is famous for. Order here is the order of the chips.
 FIELDS = [

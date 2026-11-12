@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Illtud, Dewi Sant and 34 kings and saints of the sixth century", "Illtud, Dewi Sant a 34 o frenhinoedd a saint y chweched ganrif",
+     "Full pages on Saint Illtud and his school at Llanilltud Fawr, the oldest centre of learning in Britain, and on Dewi Sant, from Non and Glyn Rhosyn to Brefi and the little things; and a page each for the kings of the age, Maelgwn’s sons, Brochwel, Rhydderch Hael, Llywarch Hen, and saints from Brynach and Seiriol to Cadfan and Malo.",
+     "Tudalennau llawn ar Sant Illtud a’i ysgol yn Llanilltud Fawr, canolfan ddysg hynaf Prydain, ac ar Dewi Sant, o Non a Glyn Rhosyn i Frefi a’r pethau bychain; a thudalen yr un i frenhinoedd yr oes, meibion Maelgwn, Brochwel, Rhydderch Hael, Llywarch Hen, a saint o Frynach a Seiriol i Gadfan a Malo.",
+     "person-illtud.html"),
     ("2026-11-12", "Saint Patrick, the Briton from Wales", "Padrig Sant, y Brython o Gymru",
      "A new long read: the patron saint of Ireland in his own words, a deacon’s son of the Britons taken by Irish raiders at sixteen, and the Welsh tradition that his home was Banwen in the Dulais valley, with Llanilltud, Glyn Rhosyn and Llanbadrig.",
      "Erthygl newydd: nawddsant Iwerddon yn ei eiriau ei hun, mab i ddiacon o Frythoniaid a gipiwyd gan ysbeilwyr o Iwerddon yn un ar bymtheg oed, a thraddodiad Cymru mai Banwen yng nghwm Dulais oedd ei gartref, gyda Llanilltud, Glyn Rhosyn a Llanbadrig.",
