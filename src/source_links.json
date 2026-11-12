@@ -1195,11 +1195,13 @@
  },
  "person:amy-dillwyn": {
   "cy": "Amy Dillwyn",
-  "dwb": "https://biography.wales/article/s12-DILL-AMY-1845"
+  "dwb": "https://biography.wales/article/s12-DILL-AMY-1845",
+  "odnb": "https://www.oxforddnb.com/view/article/37358"
  },
  "person:anarawd": {
   "cy": "Anarawd ap Rhodri",
-  "dwb": "https://biography.wales/article/s-ANAR-APR-0857"
+  "dwb": "https://biography.wales/article/s-ANAR-APR-0857",
+  "odnb": "https://www.oxforddnb.com/view/article/458"
  },
  "person:andrew-vicari": {
   "cy": "Andrew Vicari",
@@ -1207,7 +1209,8 @@
  },
  "person:aneirin": {
   "cy": "Aneirin",
-  "dwb": "https://biography.wales/article/s-ANEI-RIN-0550"
+  "dwb": "https://biography.wales/article/s-ANEI-RIN-0550",
+  "odnb": "https://www.oxforddnb.com/view/article/535"
  },
  "person:aneurin-bevan": {
   "cy": "Aneurin Bevan",
@@ -1215,7 +1218,8 @@
  },
  "person:ann-griffiths": {
   "cy": "Ann Griffiths",
-  "dwb": "https://biography.wales/article/s-GRIF-ANN-1776"
+  "dwb": "https://biography.wales/article/s-GRIF-ANN-1776",
+  "odnb": "https://www.oxforddnb.com/view/article/11614"
  },
  "person:anthony-hopkins": {
   "cy": "Anthony Hopkins"
@@ -1225,22 +1229,26 @@
  },
  "person:asser": {
   "cy": "Asser",
-  "dwb": "https://biography.wales/article/s-ASSE-JOH-0909"
+  "dwb": "https://biography.wales/article/s-ASSE-JOH-0909",
+  "odnb": "https://www.oxforddnb.com/view/article/810"
  },
  "person:augustus-john": {
   "cy": "Augustus John",
-  "dwb": "https://biography.wales/article/s2-JOHN-EDW-1878"
+  "dwb": "https://biography.wales/article/s2-JOHN-EDW-1878",
+  "odnb": "https://www.oxforddnb.com/view/article/34196"
  },
  "person:bardd-y-brenin": {
   "cy": "Edward Jones (Bardd y Brenin)",
-  "dwb": "https://biography.wales/article/s-JONE-EDW-1752"
+  "dwb": "https://biography.wales/article/s-JONE-EDW-1752",
+  "odnb": "https://www.oxforddnb.com/view/article/14997"
  },
  "person:barry-john": {
   "cy": "Barry John"
  },
  "person:barti-ddu": {
   "cy": "Bartholomew Roberts",
-  "dwb": "https://biography.wales/article/s-ROBE-BAR-1682"
+  "dwb": "https://biography.wales/article/s-ROBE-BAR-1682",
+  "odnb": "https://www.oxforddnb.com/view/article/23744"
  },
  "person:bedwyr": {
   "cy": "Bedwyr"
@@ -1250,33 +1258,40 @@
  },
  "person:betsi-cadwaladr": {
   "cy": "Betsi Cadwaladr",
-  "dwb": "https://biography.wales/article/s12-DAVI-ELI-1789"
+  "dwb": "https://biography.wales/article/s12-DAVI-ELI-1789",
+  "odnb": "https://www.oxforddnb.com/view/article/48650"
  },
  "person:betty-campbell": {
   "cy": "Betty Campbell",
-  "dwb": "https://biography.wales/article/s14-CAMP-ELI-1934"
+  "dwb": "https://biography.wales/article/s14-CAMP-ELI-1934",
+  "odnb": "https://www.oxforddnb.com/view/article/90000380193"
  },
  "person:beuno": {
   "cy": "Beuno",
-  "dwb": "https://biography.wales/article/s-BEUN-O00-0642"
+  "dwb": "https://biography.wales/article/s-BEUN-O00-0642",
+  "odnb": "https://www.oxforddnb.com/view/article/2317"
  },
  "person:bill-frost": {
   "cy": "William (Bill) Frost"
  },
  "person:billy-hughes": {
-  "cy": "William Morris Hughes"
+  "cy": "William Morris Hughes",
+  "odnb": "https://www.oxforddnb.com/view/article/34046"
  },
  "person:billy-meredith": {
   "cy": "Billy Meredith",
-  "dwb": "https://biography.wales/article/s2-MERE-WIL-1874"
+  "dwb": "https://biography.wales/article/s2-MERE-WIL-1874",
+  "odnb": "https://www.oxforddnb.com/view/article/58286"
  },
  "person:blanche-parry": {
   "cy": "Blanche Parry",
-  "dwb": "https://biography.wales/article/s7-PARR-BLA-1508"
+  "dwb": "https://biography.wales/article/s7-PARR-BLA-1508",
+  "odnb": "https://www.oxforddnb.com/view/article/65989"
  },
  "person:bleddyn-ap-cynfyn": {
   "cy": "Bleddyn ap Cynfyn",
-  "dwb": "https://biography.wales/article/s-BLED-APC-1025"
+  "dwb": "https://biography.wales/article/s-BLED-APC-1025",
+  "odnb": "https://www.oxforddnb.com/view/article/48537"
  },
  "person:bonnie-tyler": {
   "cy": "Bonnie Tyler"
@@ -1293,39 +1308,46 @@
  },
  "person:brochwel-ysgithrog": {
   "cy": "Brochwel Ysgithrog",
-  "dwb": "https://biography.wales/article/s-BROC-YSG-0502"
+  "dwb": "https://biography.wales/article/s-BROC-YSG-0502",
+  "odnb": "https://www.oxforddnb.com/view/article/3466"
  },
  "person:brychan": {
   "cy": "Brychan",
-  "dwb": "https://biography.wales/article/s-BRYC-APA-0419"
+  "dwb": "https://biography.wales/article/s-BRYC-APA-0419",
+  "odnb": "https://www.oxforddnb.com/view/article/51949"
  },
  "person:bryn-terfel": {
   "cy": "Bryn Terfel"
  },
  "person:brynach": {
   "cy": "Brynach Wyddel",
-  "dwb": "https://biography.wales/article/s-BRYN-ACH-0500"
+  "dwb": "https://biography.wales/article/s-BRYN-ACH-0500",
+  "odnb": "https://www.oxforddnb.com/view/article/51950"
  },
  "person:buddug": {
   "cy": "Buddug (Boudica)"
  },
  "person:cadell-ap-rhodri": {
-  "cy": "Cadell ap Rhodri"
+  "cy": "Cadell ap Rhodri",
+  "odnb": "https://www.oxforddnb.com/view/article/4296"
  },
  "person:cadfan": {
   "cy": "Cadfan (sant)",
-  "dwb": "https://biography.wales/article/s-CADF-AN0-0550"
+  "dwb": "https://biography.wales/article/s-CADF-AN0-0550",
+  "odnb": "https://www.oxforddnb.com/view/article/4313"
  },
  "person:cadog": {
   "cy": "Cadog",
-  "dwb": "https://biography.wales/article/s-CADO-G00-0497"
+  "dwb": "https://biography.wales/article/s-CADO-G00-0497",
+  "odnb": "https://www.oxforddnb.com/view/article/4306"
  },
  "person:cadwaladr": {
   "cy": "Cadwaladr (gwahaniaethu)"
  },
  "person:cadwallon": {
   "cy": "Cadwallon ap Cadfan",
-  "dwb": "https://biography.wales/article/s-CADW-APC-0591"
+  "dwb": "https://biography.wales/article/s-CADW-APC-0591",
+  "odnb": "https://www.oxforddnb.com/view/article/4322"
  },
  "person:cadwallon-lawhir": {
   "cy": "Cadwallon Lawhir"
@@ -1338,11 +1360,13 @@
  },
  "person:caradog-griffith-rhys-jones": {
   "cy": "Griffith Rhys Jones",
-  "dwb": "https://biography.wales/article/s-JONE-RHY-1834"
+  "dwb": "https://biography.wales/article/s-JONE-RHY-1834",
+  "odnb": "https://www.oxforddnb.com/view/article/52650"
  },
  "person:carannog": {
   "cy": "Carranog",
-  "dwb": "https://biography.wales/article/s-CARA-APC-0550"
+  "dwb": "https://biography.wales/article/s-CARA-APC-0550",
+  "odnb": "https://www.oxforddnb.com/view/article/4343"
  },
  "person:caratacus": {
   "cy": "Caradog"
@@ -1351,7 +1375,8 @@
   "cy": "Carwyn Jones"
  },
  "person:caswallon": {
-  "cy": "Caswallawn fab Beli"
+  "cy": "Caswallawn fab Beli",
+  "odnb": "https://www.oxforddnb.com/view/article/4863"
  },
  "person:catherine-zeta-jones": {
   "cy": "Catherine Zeta-Jones"
@@ -1361,7 +1386,8 @@
  },
  "person:catrin-o-ferain": {
   "cy": "Catrin o Ferain",
-  "dwb": "https://biography.wales/article/s-CATR-BER-1534"
+  "dwb": "https://biography.wales/article/s-CATR-BER-1534",
+  "odnb": "https://www.oxforddnb.com/view/article/67988"
  },
  "person:cayo-evans": {
   "cy": "Julian Cayo-Evans",
@@ -1369,7 +1395,8 @@
  },
  "person:ceiriog": {
   "cy": "John Ceiriog Hughes",
-  "dwb": "https://biography.wales/article/s-HUGH-CEI-1832"
+  "dwb": "https://biography.wales/article/s-HUGH-CEI-1832",
+  "odnb": "https://www.oxforddnb.com/view/article/14082"
  },
  "person:cennydd": {
   "cy": "Sant Cennydd"
@@ -1385,7 +1412,8 @@
   "dwb": "https://biography.wales/article/s-EVAN-CHR-1766"
  },
  "person:clive-granger": {
-  "cy": "Clive Granger"
+  "cy": "Clive Granger",
+  "odnb": "https://www.oxforddnb.com/view/article/101749"
  },
  "person:clive-sullivan": {
   "cy": "Clive Sullivan",
@@ -1407,18 +1435,21 @@
  },
  "person:cranogwen": {
   "cy": "Sarah Jane Rees (Cranogwen)",
-  "dwb": "https://biography.wales/article/s-REES-JAN-1839"
+  "dwb": "https://biography.wales/article/s-REES-JAN-1839",
+  "odnb": "https://www.oxforddnb.com/view/article/48648"
  },
  "person:culhwch": {
   "cy": "Culhwch ac Olwen"
  },
  "person:cunedda": {
   "cy": "Cunedda",
-  "dwb": "https://biography.wales/article/s-CUNE-WLE-0380"
+  "dwb": "https://biography.wales/article/s-CUNE-WLE-0380",
+  "odnb": "https://www.oxforddnb.com/view/article/39297"
  },
  "person:cybi": {
   "cy": "Cybi",
-  "dwb": "https://biography.wales/article/s-CYBI-APS-0490"
+  "dwb": "https://biography.wales/article/s-CYBI-APS-0490",
+  "odnb": "https://www.oxforddnb.com/view/article/6987"
  },
  "person:cynan": {
   "cy": "Cynan (bardd)",
@@ -1429,14 +1460,17 @@
  },
  "person:cynddelw": {
   "cy": "Cynddelw Brydydd Mawr",
-  "dwb": "https://biography.wales/article/s-CYND-BRY-1155"
+  "dwb": "https://biography.wales/article/s-CYND-BRY-1155",
+  "odnb": "https://www.oxforddnb.com/view/article/48540"
  },
  "person:cyndeyrn": {
   "cy": "Cyndeyrn",
-  "dwb": "https://biography.wales/article/s1-CYND-EYR-0518"
+  "dwb": "https://biography.wales/article/s1-CYND-EYR-0518",
+  "odnb": "https://www.oxforddnb.com/view/article/15426"
  },
  "person:cynfelyn": {
-  "cy": "Cynfelyn"
+  "cy": "Cynfelyn",
+  "odnb": "https://www.oxforddnb.com/view/article/6939"
  },
  "person:cyngen": {
   "cy": "Cyngen ap Cadell",
@@ -1444,23 +1478,28 @@
  },
  "person:d-j-williams": {
   "cy": "D. J. Williams",
-  "dwb": "https://biography.wales/article/s2-WILL-JOH-1885"
+  "dwb": "https://biography.wales/article/s2-WILL-JOH-1885",
+  "odnb": "https://www.oxforddnb.com/view/article/61285"
  },
  "person:dafydd-ab-edmwnd": {
   "cy": "Dafydd ab Edmwnd",
-  "dwb": "https://biography.wales/article/s-DAFY-ABE-1450"
+  "dwb": "https://biography.wales/article/s-DAFY-ABE-1450",
+  "odnb": "https://www.oxforddnb.com/view/article/48541"
  },
  "person:dafydd-ap-gruffudd": {
   "cy": "Dafydd ap Gruffudd",
-  "dwb": "https://biography.wales/article/s-DAFY-APG-1283"
+  "dwb": "https://biography.wales/article/s-DAFY-APG-1283",
+  "odnb": "https://www.oxforddnb.com/view/article/7324"
  },
  "person:dafydd-ap-gwilym": {
   "cy": "Dafydd ap Gwilym",
-  "dwb": "https://biography.wales/article/s12-DAFY-APG-1340"
+  "dwb": "https://biography.wales/article/s12-DAFY-APG-1340",
+  "odnb": "https://www.oxforddnb.com/view/article/7210"
  },
  "person:dafydd-ap-llywelyn": {
   "cy": "Dafydd ap Llywelyn",
-  "dwb": "https://biography.wales/article/s-DAFY-APL-1246"
+  "dwb": "https://biography.wales/article/s-DAFY-APL-1246",
+  "odnb": "https://www.oxforddnb.com/view/article/7323"
  },
  "person:dafydd-elis-thomas": {
   "cy": "Dafydd Elis-Thomas"
@@ -1477,10 +1516,12 @@
  },
  "person:daniel-owen": {
   "cy": "Daniel Owen",
-  "dwb": "https://biography.wales/article/s-OWEN-DAN-1836"
+  "dwb": "https://biography.wales/article/s-OWEN-DAN-1836",
+  "odnb": "https://www.oxforddnb.com/view/article/45943"
  },
  "person:dannie-abse": {
-  "cy": "Dannie Abse"
+  "cy": "Dannie Abse",
+  "odnb": "https://www.oxforddnb.com/view/article/108587"
  },
  "person:david-brunt": {
   "cy": "David Brunt",
@@ -1488,15 +1529,18 @@
  },
  "person:david-davies-llandinam": {
   "cy": "David Davies, Llandinam",
-  "dwb": "https://biography.wales/article/s-DAVI-DAV-1818"
+  "dwb": "https://biography.wales/article/s-DAVI-DAV-1818",
+  "odnb": "https://www.oxforddnb.com/view/article/37343"
  },
  "person:david-edward-hughes": {
   "cy": "David Edward Hughes",
-  "dwb": "https://biography.wales/article/s-HUGH-EDW-1831"
+  "dwb": "https://biography.wales/article/s-HUGH-EDW-1831",
+  "odnb": "https://www.oxforddnb.com/view/article/14066"
  },
  "person:david-griffiths-missionary": {
   "cy": "David Griffiths (cenhadwr)",
-  "dwb": "https://biography.wales/article/s-GRIF-DAV-1792"
+  "dwb": "https://biography.wales/article/s-GRIF-DAV-1792",
+  "odnb": "https://www.oxforddnb.com/view/article/11615"
  },
  "person:david-thomas-iron": {
   "cy": "David Thomas (metelegwr)",
@@ -1504,23 +1548,28 @@
  },
  "person:deiniol": {
   "cy": "Deiniol",
-  "dwb": "https://biography.wales/article/s-DEIN-IOL-0584"
+  "dwb": "https://biography.wales/article/s-DEIN-IOL-0584",
+  "odnb": "https://www.oxforddnb.com/view/article/7110"
  },
  "person:dewi-sant": {
   "cy": "Dewi Sant",
-  "dwb": "https://biography.wales/article/s-DEWI-SAN-0600"
+  "dwb": "https://biography.wales/article/s-DEWI-SAN-0600",
+  "odnb": "https://www.oxforddnb.com/view/article/7206"
  },
  "person:dic-aberdaron": {
   "cy": "Richard Robert Jones",
-  "dwb": "https://biography.wales/article/s-JONE-ROB-1780"
+  "dwb": "https://biography.wales/article/s-JONE-ROB-1780",
+  "odnb": "https://www.oxforddnb.com/view/article/15076"
  },
  "person:dic-penderyn": {
   "cy": "Dic Penderyn",
-  "dwb": "https://biography.wales/article/s-LEWI-RIC-1807"
+  "dwb": "https://biography.wales/article/s-LEWI-RIC-1807",
+  "odnb": "https://www.oxforddnb.com/view/article/48760"
  },
  "person:dogfael": {
   "cy": "Dogfael",
-  "dwb": "https://biography.wales/article/s-DOGM-SAN-0500"
+  "dwb": "https://biography.wales/article/s-DOGM-SAN-0500",
+  "odnb": "https://www.oxforddnb.com/view/article/7769"
  },
  "person:donald-davies": {
   "cy": "Donald Watts Davies",
@@ -1534,33 +1583,40 @@
  },
  "person:dyfrig": {
   "cy": "Dyfrig",
-  "dwb": "https://biography.wales/article/s-DYFR-SAN-0475"
+  "dwb": "https://biography.wales/article/s-DYFR-SAN-0475",
+  "odnb": "https://www.oxforddnb.com/view/article/8124"
  },
  "person:dylan-thomas": {
   "cy": "Dylan Thomas",
-  "dwb": "https://biography.wales/article/s10-THOM-MAR-1914"
+  "dwb": "https://biography.wales/article/s10-THOM-MAR-1914",
+  "odnb": "https://www.oxforddnb.com/view/article/36471"
  },
  "person:edmwnd-prys": {
   "cy": "Edmwnd Prys",
-  "dwb": "https://biography.wales/article/s-PRYS-EDM-1544"
+  "dwb": "https://biography.wales/article/s-PRYS-EDM-1544",
+  "odnb": "https://www.oxforddnb.com/view/article/22856"
  },
  "person:ednyfed-fychan": {
   "cy": "Ednyfed Fychan",
-  "dwb": "https://biography.wales/article/s-EDNY-FYC-1246"
+  "dwb": "https://biography.wales/article/s-EDNY-FYC-1246",
+  "odnb": "https://www.oxforddnb.com/view/article/8509"
  },
  "person:edward-bowen": {
   "cy": "Edward George Bowen",
-  "dwb": "https://biography.wales/article/s8-BOWE-GEO-1911"
+  "dwb": "https://biography.wales/article/s8-BOWE-GEO-1911",
+  "odnb": "https://www.oxforddnb.com/view/article/49587"
  },
  "person:edward-lhuyd": {
   "cy": "Edward Lhuyd",
-  "dwb": "https://biography.wales/article/s-LHUY-EDW-1660"
+  "dwb": "https://biography.wales/article/s-LHUY-EDW-1660",
+  "odnb": "https://www.oxforddnb.com/view/article/16633"
  },
  "person:eigr": {
   "cy": "Eigr"
  },
  "person:eileen-beasley": {
-  "cy": "Eileen Beasley"
+  "cy": "Eileen Beasley",
+  "odnb": "https://www.oxforddnb.com/view/article/105629"
  },
  "person:elaine-morgan": {
   "cy": "Elaine Morgan",
@@ -1580,7 +1636,8 @@
   "cy": "Elisedd ap Gwylog"
  },
  "person:elizabeth-andrews": {
-  "cy": "Elizabeth Andrews"
+  "cy": "Elizabeth Andrews",
+  "odnb": "https://www.oxforddnb.com/view/article/55090"
  },
  "person:elizabeth-phillips-hughes": {
   "cy": "Elizabeth Phillips Hughes",
@@ -1588,7 +1645,8 @@
  },
  "person:ellis-wynne": {
   "cy": "Ellis Wynne",
-  "dwb": "https://biography.wales/article/s-WYNN-ELL-1670"
+  "dwb": "https://biography.wales/article/s-WYNN-ELL-1670",
+  "odnb": "https://www.oxforddnb.com/view/article/30158"
  },
  "person:eluned-morgan": {
   "cy": "Eluned Morgan (gwleidydd)"
@@ -1599,7 +1657,8 @@
  },
  "person:emrys-wledig": {
   "cy": "Emrys Wledig",
-  "dwb": "https://biography.wales/article/s-AMBR-AUR-0475"
+  "dwb": "https://biography.wales/article/s-AMBR-AUR-0475",
+  "odnb": "https://www.oxforddnb.com/view/article/436"
  },
  "person:enid": {
   "cy": "Y Tair Rhamant"
@@ -1622,22 +1681,26 @@
  },
  "person:freddie-welsh": {
   "cy": "Freddie Welsh",
-  "dwb": "https://biography.wales/article/s-THOM-HAL-1886"
+  "dwb": "https://biography.wales/article/s-THOM-HAL-1886",
+  "odnb": "https://www.oxforddnb.com/view/article/72753"
  },
  "person:gareth-bale": {
   "cy": "Gareth Bale"
  },
  "person:geoffrey-of-monmouth": {
   "cy": "Sieffre o Fynwy",
-  "dwb": "https://biography.wales/article/s-SIEF-OFY-1090"
+  "dwb": "https://biography.wales/article/s-SIEF-OFY-1090",
+  "odnb": "https://www.oxforddnb.com/view/article/10530"
  },
  "person:george-herbert": {
   "cy": "George Herbert",
-  "dwb": "https://biography.wales/article/s-HERB-GEO-1593"
+  "dwb": "https://biography.wales/article/s-HERB-GEO-1593",
+  "odnb": "https://www.oxforddnb.com/view/article/13025"
  },
  "person:geraint-evans": {
   "cy": "Geraint Evans (canwr opera)",
-  "dwb": "https://biography.wales/article/s14-EVAN-LLE-1922"
+  "dwb": "https://biography.wales/article/s14-EVAN-LLE-1922",
+  "odnb": "https://www.oxforddnb.com/view/article/51027"
  },
  "person:geraint-fab-erbin": {
   "cy": "Geraint"
@@ -1648,11 +1711,13 @@
  },
  "person:gerallt-gymro": {
   "cy": "Gerallt Gymro",
-  "dwb": "https://biography.wales/article/s-GIRA-CAM-1146"
+  "dwb": "https://biography.wales/article/s-GIRA-CAM-1146",
+  "odnb": "https://www.oxforddnb.com/view/article/10769"
  },
  "person:gildas": {
   "cy": "Gildas",
-  "dwb": "https://biography.wales/article/s-GILD-AS0-0495"
+  "dwb": "https://biography.wales/article/s-GILD-AS0-0495",
+  "odnb": "https://www.oxforddnb.com/view/article/10718"
  },
  "person:gillian-clarke": {
   "cy": "Gillian Clarke"
@@ -1665,11 +1730,13 @@
  },
  "person:grace-williams": {
   "cy": "Grace Williams",
-  "dwb": "https://biography.wales/article/s10-WILL-MAR-1906"
+  "dwb": "https://biography.wales/article/s10-WILL-MAR-1906",
+  "odnb": "https://www.oxforddnb.com/view/article/55453"
  },
  "person:griffith-jones": {
   "cy": "Griffith Jones, Llanddowror",
-  "dwb": "https://biography.wales/article/s-JONE-GRI-1683"
+  "dwb": "https://biography.wales/article/s-JONE-GRI-1683",
+  "odnb": "https://www.oxforddnb.com/view/article/15006"
  },
  "person:gruff-rhys": {
   "cy": "Gruff Rhys"
@@ -1680,30 +1747,36 @@
  },
  "person:gruffudd-ap-cynan": {
   "cy": "Gruffudd ap Cynan",
-  "dwb": "https://biography.wales/article/s-GRUF-APC-1055"
+  "dwb": "https://biography.wales/article/s-GRUF-APC-1055",
+  "odnb": "https://www.oxforddnb.com/view/article/11693"
  },
  "person:gruffudd-ap-llywelyn": {
   "cy": "Gruffudd ap Llywelyn",
-  "dwb": "https://biography.wales/article/s12-GRUF-APL-1063"
+  "dwb": "https://biography.wales/article/s12-GRUF-APL-1063",
+  "odnb": "https://www.oxforddnb.com/view/article/11695"
  },
  "person:gruffudd-ap-llywelyn-fawr": {
   "cy": "Gruffudd ap Llywelyn Fawr",
-  "dwb": "https://biography.wales/article/s-GRUF-APL-1244"
+  "dwb": "https://biography.wales/article/s-GRUF-APL-1244",
+  "odnb": "https://www.oxforddnb.com/view/article/11696"
  },
  "person:gruffydd-robert": {
   "cy": "Gruffydd Robert",
-  "dwb": "https://biography.wales/article/s12-ROBE-GRU-1522"
+  "dwb": "https://biography.wales/article/s12-ROBE-GRU-1522",
+  "odnb": "https://www.oxforddnb.com/view/article/23752"
  },
  "person:guto-r-glyn": {
   "cy": "Guto'r Glyn",
-  "dwb": "https://biography.wales/article/s-GUTO-GLY-1440"
+  "dwb": "https://biography.wales/article/s-GUTO-GLY-1440",
+  "odnb": "https://www.oxforddnb.com/view/article/11794"
  },
  "person:gwalchmai": {
   "cy": "Gwalchmai ap Gwyar"
  },
  "person:gwen-john": {
   "cy": "Gwen John",
-  "dwb": "https://biography.wales/article/s3-JOHN-MAR-1876"
+  "dwb": "https://biography.wales/article/s3-JOHN-MAR-1876",
+  "odnb": "https://www.oxforddnb.com/view/article/37610"
  },
  "person:gwenallt": {
   "cy": "David James Jones (Gwenallt)",
@@ -1714,7 +1787,8 @@
  },
  "person:gwenfrewi": {
   "cy": "Gwenffrewi",
-  "dwb": "https://biography.wales/article/s-GWEN-FFR-0600"
+  "dwb": "https://biography.wales/article/s-GWEN-FFR-0600",
+  "odnb": "https://www.oxforddnb.com/view/article/29729"
  },
  "person:gwenhwyfar": {
   "cy": "Gwenhwyfar"
@@ -1728,7 +1802,8 @@
  },
  "person:gwerful-mechain": {
   "cy": "Gwerful Mechain",
-  "dwb": "https://biography.wales/article/s-GWER-MEC-1462"
+  "dwb": "https://biography.wales/article/s-GWER-MEC-1462",
+  "odnb": "https://www.oxforddnb.com/view/article/90000369563"
  },
  "person:gwladys": {
   "cy": "Santes Gwladys"
@@ -1747,21 +1822,25 @@
  },
  "person:gwynfor-evans": {
   "cy": "Gwynfor Evans",
-  "dwb": "https://biography.wales/article/s10-EVAN-RIC-1912"
+  "dwb": "https://biography.wales/article/s10-EVAN-RIC-1912",
+  "odnb": "https://www.oxforddnb.com/view/article/95754"
  },
  "person:gwynllyw": {
-  "dwb": "https://biography.wales/article/s-GWYN-FAR-0466"
+  "dwb": "https://biography.wales/article/s-GWYN-FAR-0466",
+  "odnb": "https://www.oxforddnb.com/view/article/11818"
  },
  "person:harri-tudur": {
   "cy": "Harri VII, brenin Lloegr",
-  "dwb": "https://biography.wales/article/s-HENR-KIN-1457"
+  "dwb": "https://biography.wales/article/s-HENR-KIN-1457",
+  "odnb": "https://www.oxforddnb.com/view/article/12954"
  },
  "person:harry-secombe": {
   "cy": "Harry Secombe"
  },
  "person:hedd-wyn": {
   "cy": "Hedd Wyn",
-  "dwb": "https://biography.wales/article/s-EVAN-HUM-1887"
+  "dwb": "https://biography.wales/article/s-EVAN-HUM-1887",
+  "odnb": "https://www.oxforddnb.com/view/article/60745"
  },
  "person:henry-morgan": {
   "cy": "Harri Morgan",
@@ -1772,21 +1851,26 @@
  },
  "person:henry-richard": {
   "cy": "Henry Richard",
-  "dwb": "https://biography.wales/article/s-RICH-HEN-1812"
+  "dwb": "https://biography.wales/article/s-RICH-HEN-1812",
+  "odnb": "https://www.oxforddnb.com/view/article/23527"
  },
  "person:henry-v": {
-  "cy": "Harri V, brenin Lloegr"
+  "cy": "Harri V, brenin Lloegr",
+  "odnb": "https://www.oxforddnb.com/view/article/12952"
  },
  "person:henry-vaughan": {
   "cy": "Henry Vaughan",
-  "dwb": "https://biography.wales/article/s-VAUG-HEN-1621"
+  "dwb": "https://biography.wales/article/s-VAUG-HEN-1621",
+  "odnb": "https://www.oxforddnb.com/view/article/28130"
  },
  "person:howell-harris": {
   "cy": "Howel Harris",
-  "dwb": "https://biography.wales/article/s-HARR-HOW-1714"
+  "dwb": "https://biography.wales/article/s-HARR-HOW-1714",
+  "odnb": "https://www.oxforddnb.com/view/article/12392"
  },
  "person:hugh-griffith": {
-  "cy": "Hugh Griffith"
+  "cy": "Hugh Griffith",
+  "odnb": "https://www.oxforddnb.com/view/article/55467"
  },
  "person:hugh-myddelton": {
   "cy": "Hugh Myddelton"
@@ -1797,15 +1881,18 @@
  },
  "person:humphrey-llwyd": {
   "cy": "Humphrey Lhuyd",
-  "dwb": "https://biography.wales/article/s12-LLWY-HUM-1527"
+  "dwb": "https://biography.wales/article/s12-LLWY-HUM-1527",
+  "odnb": "https://www.oxforddnb.com/view/article/16867"
  },
  "person:hywel-ab-owain": {
   "cy": "Hywel ab Owain Gwynedd",
-  "dwb": "https://biography.wales/article/s-HYWE-ABO-1170"
+  "dwb": "https://biography.wales/article/s-HYWE-ABO-1170",
+  "odnb": "https://www.oxforddnb.com/view/article/13971"
  },
  "person:hywel-dda": {
   "cy": "Hywel Dda",
-  "dwb": "https://biography.wales/article/s-HYWE-DDA-0950"
+  "dwb": "https://biography.wales/article/s-HYWE-DDA-0950",
+  "odnb": "https://www.oxforddnb.com/view/article/13968"
  },
  "person:ian-rush": {
   "cy": "Ian Rush"
@@ -1815,41 +1902,50 @@
  },
  "person:idris-davies": {
   "cy": "Idris Davies",
-  "dwb": "https://biography.wales/article/s2-DAVI-IDR-1905"
+  "dwb": "https://biography.wales/article/s2-DAVI-IDR-1905",
+  "odnb": "https://www.oxforddnb.com/view/article/58768"
  },
  "person:idwal-foel": {
   "cy": "Idwal Foel",
-  "dwb": "https://biography.wales/article/s-IDWA-FOE-0942"
+  "dwb": "https://biography.wales/article/s-IDWA-FOE-0942",
+  "odnb": "https://www.oxforddnb.com/view/article/14355"
  },
  "person:iestyn-ap-gwrgant": {
   "cy": "Iestyn ap Gwrgant",
-  "dwb": "https://biography.wales/article/s-IEST-APG-1045"
+  "dwb": "https://biography.wales/article/s-IEST-APG-1045",
+  "odnb": "https://www.oxforddnb.com/view/article/14357"
  },
  "person:ieuan-fardd": {
   "cy": "Evan Evans (Ieuan Fardd)",
-  "dwb": "https://biography.wales/article/s-EVAN-EVA-1731"
+  "dwb": "https://biography.wales/article/s-EVAN-EVA-1731",
+  "odnb": "https://www.oxforddnb.com/view/article/8955"
  },
  "person:ifan-ab-owen-edwards": {
   "cy": "Ifan ab Owen Edwards",
-  "dwb": "https://biography.wales/article/s2-EDWA-OWE-1895"
+  "dwb": "https://biography.wales/article/s2-EDWA-OWE-1895",
+  "odnb": "https://www.oxforddnb.com/view/article/55464"
  },
  "person:ifor-williams": {
   "cy": "Ifor Williams",
-  "dwb": "https://biography.wales/article/s2-WILL-IFO-1881"
+  "dwb": "https://biography.wales/article/s2-WILL-IFO-1881",
+  "odnb": "https://www.oxforddnb.com/view/article/55457"
  },
  "person:illtud": {
   "cy": "Illtud",
-  "dwb": "https://biography.wales/article/s-ILLT-UD0-0475"
+  "dwb": "https://biography.wales/article/s-ILLT-UD0-0475",
+  "odnb": "https://www.oxforddnb.com/view/article/14365"
  },
  "person:ioan-gruffudd": {
   "cy": "Ioan Gruffudd"
  },
  "person:iolo-goch": {
-  "cy": "Iolo Goch"
+  "cy": "Iolo Goch",
+  "odnb": "https://www.oxforddnb.com/view/article/14440"
  },
  "person:iolo-morganwg": {
   "cy": "Iolo Morganwg",
-  "dwb": "https://biography.wales/article/s-WILL-EDW-1747"
+  "dwb": "https://biography.wales/article/s-WILL-EDW-1747",
+  "odnb": "https://www.oxforddnb.com/view/article/29498"
  },
  "person:iorwerth-peate": {
   "cy": "Iorwerth Cyfeiliog Peate",
@@ -1857,15 +1953,18 @@
  },
  "person:isaac-roberts": {
   "cy": "Isaac Roberts",
-  "dwb": "https://biography.wales/article/s-ROBE-ISA-1829"
+  "dwb": "https://biography.wales/article/s-ROBE-ISA-1829",
+  "odnb": "https://www.oxforddnb.com/view/article/35770"
  },
  "person:islwyn": {
   "cy": "William Thomas (Islwyn)",
-  "dwb": "https://biography.wales/article/s-THOM-WIL-1832"
+  "dwb": "https://biography.wales/article/s-THOM-WIL-1832",
+  "odnb": "https://www.oxforddnb.com/view/article/27247"
  },
  "person:ivor-novello": {
   "cy": "Ivor Novello",
-  "dwb": "https://biography.wales/article/s2-NOVE-IVO-1893"
+  "dwb": "https://biography.wales/article/s2-NOVE-IVO-1893",
+  "odnb": "https://www.oxforddnb.com/view/article/35264"
  },
  "person:j-e-lloyd": {
   "cy": "John Edward Lloyd",
@@ -1887,11 +1986,13 @@
  },
  "person:jim-griffiths": {
   "cy": "Jim Griffiths",
-  "dwb": "https://biography.wales/article/s6-GRIF-JAM-1890"
+  "dwb": "https://biography.wales/article/s6-GRIF-JAM-1890",
+  "odnb": "https://www.oxforddnb.com/view/article/31175"
  },
  "person:jimmy-wilde": {
   "cy": "Jimmy Wilde",
-  "dwb": "https://biography.wales/article/s2-WILD-JAM-1892"
+  "dwb": "https://biography.wales/article/s2-WILD-JAM-1892",
+  "odnb": "https://www.oxforddnb.com/view/article/36896"
  },
  "person:joe-calzaghe": {
   "cy": "Joe Calzaghe"
@@ -1904,7 +2005,8 @@
  },
  "person:john-charles": {
   "cy": "John Charles",
-  "dwb": "https://biography.wales/article/s12-CHAR-JOH-1931"
+  "dwb": "https://biography.wales/article/s12-CHAR-JOH-1931",
+  "odnb": "https://www.oxforddnb.com/view/article/94244"
  },
  "person:john-davies-mallwyd": {
   "cy": "John Davies, Mallwyd",
@@ -1912,19 +2014,23 @@
  },
  "person:john-dee": {
   "cy": "John Dee",
-  "dwb": "https://biography.wales/article/s-DEE0-JOH-1527"
+  "dwb": "https://biography.wales/article/s-DEE0-JOH-1527",
+  "odnb": "https://www.oxforddnb.com/view/article/7418"
  },
  "person:john-evans-waunfawr": {
   "cy": "John Evans (fforiwr)",
-  "dwb": "https://biography.wales/article/s-EVAN-JOH-1770"
+  "dwb": "https://biography.wales/article/s-EVAN-JOH-1770",
+  "odnb": "https://www.oxforddnb.com/view/article/41228"
  },
  "person:john-frost": {
   "cy": "John Frost",
-  "dwb": "https://biography.wales/article/s-FROS-JOH-1784"
+  "dwb": "https://biography.wales/article/s-FROS-JOH-1784",
+  "odnb": "https://www.oxforddnb.com/view/article/10198"
  },
  "person:john-gibson": {
   "cy": "John Gibson (cerflunydd)",
-  "dwb": "https://biography.wales/article/s-GIBS-JOH-1790"
+  "dwb": "https://biography.wales/article/s-GIBS-JOH-1790",
+  "odnb": "https://www.oxforddnb.com/view/article/10625"
  },
  "person:john-hughes-yuzovka": {
   "cy": "John Hughes (diwydiannwr)",
@@ -1939,11 +2045,13 @@
  },
  "person:john-morris-jones": {
   "cy": "John Morris-Jones",
-  "dwb": "https://biography.wales/article/s-MORR-JOH-1864"
+  "dwb": "https://biography.wales/article/s-MORR-JOH-1864",
+  "odnb": "https://www.oxforddnb.com/view/article/35120"
  },
  "person:john-penry": {
   "cy": "John Penry",
-  "dwb": "https://biography.wales/article/s-PENR-JOH-1563"
+  "dwb": "https://biography.wales/article/s-PENR-JOH-1563",
+  "odnb": "https://www.oxforddnb.com/view/article/21894"
  },
  "person:john-price": {
   "cy": "John Price",
@@ -1955,7 +2063,8 @@
  },
  "person:joseph-parry": {
   "cy": "Joseph Parry",
-  "dwb": "https://biography.wales/article/s-PARR-JOS-1841"
+  "dwb": "https://biography.wales/article/s-PARR-JOS-1841",
+  "odnb": "https://www.oxforddnb.com/view/article/35394"
  },
  "person:jpr-williams": {
   "cy": "J. P. R. Williams"
@@ -1987,19 +2096,23 @@
  },
  "person:kyffin-williams": {
   "cy": "Kyffin Williams",
-  "dwb": "https://biography.wales/article/s10-WILL-KYF-1918"
+  "dwb": "https://biography.wales/article/s10-WILL-KYF-1918",
+  "odnb": "https://www.oxforddnb.com/view/article/96842"
  },
  "person:lady-charlotte-guest": {
   "cy": "Charlotte Guest",
-  "dwb": "https://biography.wales/article/s-GUES-ELI-1812"
+  "dwb": "https://biography.wales/article/s-GUES-ELI-1812",
+  "odnb": "https://www.oxforddnb.com/view/article/24832"
  },
  "person:lady-llanover": {
   "cy": "Augusta Hall, Arglwyddes Llanofer",
-  "dwb": "https://biography.wales/article/s10-HALL-AUG-1802"
+  "dwb": "https://biography.wales/article/s10-HALL-AUG-1802",
+  "odnb": "https://www.oxforddnb.com/view/article/39088"
  },
  "person:lady-rhondda": {
   "cy": "Margaret Haig Mackworth, 2il Is-iarlles Rhondda",
-  "dwb": "https://biography.wales/article/s12-THOM-HAI-1883"
+  "dwb": "https://biography.wales/article/s12-THOM-HAI-1883",
+  "odnb": "https://www.oxforddnb.com/view/article/36479"
  },
  "person:laura-ashley": {
   "cy": "Laura Ashley"
@@ -2010,42 +2123,54 @@
  },
  "person:lewis-jones-patagonia": {
   "cy": "Lewis Jones, Patagonia",
-  "dwb": "https://biography.wales/article/s-JONE-LEW-1836"
+  "dwb": "https://biography.wales/article/s-JONE-LEW-1836",
+  "odnb": "https://www.oxforddnb.com/view/article/89948"
  },
  "person:lewis-valentine": {
   "cy": "Lewis Valentine",
-  "dwb": "https://biography.wales/article/s11-VALE-EDW-1893"
+  "dwb": "https://biography.wales/article/s11-VALE-EDW-1893",
+  "odnb": "https://www.oxforddnb.com/view/article/95349"
  },
  "person:lewys-glyn-cothi": {
   "cy": "Lewys Glyn Cothi",
-  "dwb": "https://biography.wales/article/s-LEWI-GLY-1447"
+  "dwb": "https://biography.wales/article/s-LEWI-GLY-1447",
+  "odnb": "https://www.oxforddnb.com/view/article/16571"
+ },
+ "person:lleurwg": {
+  "odnb": "https://www.oxforddnb.com/view/article/17145"
  },
  "person:lloyd-george": {
   "cy": "David Lloyd George",
-  "dwb": "https://biography.wales/article/s2-LLOY-DAV-1863"
+  "dwb": "https://biography.wales/article/s2-LLOY-DAV-1863",
+  "odnb": "https://www.oxforddnb.com/view/article/34570"
  },
  "person:llywarch-hen": {
   "cy": "Llywarch Hen",
-  "dwb": "https://biography.wales/article/s-LLYW-HEN-0550"
+  "dwb": "https://biography.wales/article/s-LLYW-HEN-0550",
+  "odnb": "https://www.oxforddnb.com/view/article/16872"
  },
  "person:llywelyn-ap-gruffudd": {
   "cy": "Llywelyn ap Gruffudd",
-  "dwb": "https://biography.wales/article/s-LLYW-APG-1200"
+  "dwb": "https://biography.wales/article/s-LLYW-APG-1200",
+  "odnb": "https://www.oxforddnb.com/view/article/16875"
  },
  "person:llywelyn-ap-gruffudd-fychan": {
   "cy": "Llywelyn ap Gruffudd Fychan"
  },
  "person:llywelyn-ap-seisyll": {
   "cy": "Llywelyn ap Seisyll",
-  "dwb": "https://biography.wales/article/s-LLYW-APS-1023"
+  "dwb": "https://biography.wales/article/s-LLYW-APS-1023",
+  "odnb": "https://www.oxforddnb.com/view/article/16873"
  },
  "person:llywelyn-bren": {
   "cy": "Llywelyn Bren",
-  "dwb": "https://biography.wales/article/s-LLYW-APG-1317"
+  "dwb": "https://biography.wales/article/s-LLYW-APG-1317",
+  "odnb": "https://www.oxforddnb.com/view/article/16876"
  },
  "person:llywelyn-fawr": {
   "cy": "Llywelyn Fawr",
-  "dwb": "https://biography.wales/article/s-LLYW-API-1173"
+  "dwb": "https://biography.wales/article/s-LLYW-API-1173",
+  "odnb": "https://www.oxforddnb.com/view/article/16874"
  },
  "person:luke-evans": {
   "cy": "Luke Evans"
@@ -2059,22 +2184,27 @@
   "cy": "Mabon fab Modron"
  },
  "person:macsen-wledig": {
-  "cy": "Macsen Wledig"
+  "cy": "Macsen Wledig",
+  "odnb": "https://www.oxforddnb.com/view/article/48295"
  },
  "person:madog": {
-  "cy": "Madog ab Owain Gwynedd"
+  "cy": "Madog ab Owain Gwynedd",
+  "odnb": "https://www.oxforddnb.com/view/article/17763"
  },
  "person:madog-ap-llywelyn": {
   "cy": "Madog ap Llywelyn",
-  "dwb": "https://biography.wales/article/s-MADO-APL-1294"
+  "dwb": "https://biography.wales/article/s-MADO-APL-1294",
+  "odnb": "https://www.oxforddnb.com/view/article/17765"
  },
  "person:madog-ap-maredudd": {
   "cy": "Madog ap Maredudd",
-  "dwb": "https://biography.wales/article/s-MADO-APM-1160"
+  "dwb": "https://biography.wales/article/s-MADO-APM-1160",
+  "odnb": "https://www.oxforddnb.com/view/article/17762"
  },
  "person:maelgwn-gwynedd": {
   "cy": "Maelgwn Gwynedd",
-  "dwb": "https://biography.wales/article/s-MAEL-GWY-0547"
+  "dwb": "https://biography.wales/article/s-MAEL-GWY-0547",
+  "odnb": "https://www.oxforddnb.com/view/article/17768"
  },
  "person:malo": {
   "cy": "Malo",
@@ -2082,11 +2212,13 @@
  },
  "person:maredudd-ab-owain": {
   "cy": "Maredudd ab Owain",
-  "dwb": "https://biography.wales/article/s-MARE-ABO-0999"
+  "dwb": "https://biography.wales/article/s-MARE-ABO-0999",
+  "odnb": "https://www.oxforddnb.com/view/article/18040"
  },
  "person:marged-ferch-ifan": {
   "cy": "Marged uch Ifan",
-  "dwb": "https://biography.wales/article/s-MARG-VCH-1696"
+  "dwb": "https://biography.wales/article/s-MARG-VCH-1696",
+  "odnb": "https://www.oxforddnb.com/view/article/62908"
  },
  "person:mark-drakeford": {
   "cy": "Mark Drakeford"
@@ -2108,7 +2240,8 @@
   "cy": "Mary Hopkin"
  },
  "person:mary-jones": {
-  "cy": "Mari Jones"
+  "cy": "Mari Jones",
+  "odnb": "https://www.oxforddnb.com/view/article/70976"
  },
  "person:max-boyce": {
   "cy": "Max Boyce"
@@ -2120,14 +2253,16 @@
   "cy": "Medrawd"
  },
  "person:megan-lloyd-george": {
-  "cy": "Megan Lloyd George"
+  "cy": "Megan Lloyd George",
+  "odnb": "https://www.oxforddnb.com/view/article/34572"
  },
  "person:meic-stevens": {
   "cy": "Meic Stevens"
  },
  "person:meilyr-brydydd": {
   "cy": "Meilyr Brydydd",
-  "dwb": "https://biography.wales/article/s-MEIL-BRY-1100"
+  "dwb": "https://biography.wales/article/s-MEIL-BRY-1100",
+  "odnb": "https://www.oxforddnb.com/view/article/18520"
  },
  "person:melangell": {
   "cy": "Melangell"
@@ -2137,7 +2272,8 @@
  },
  "person:merfyn-frych": {
   "cy": "Merfyn Frych",
-  "dwb": "https://biography.wales/article/s-MERF-FRY-0844"
+  "dwb": "https://biography.wales/article/s-MERF-FRY-0844",
+  "odnb": "https://www.oxforddnb.com/view/article/18587"
  },
  "person:meurig-ap-tewdrig": {
   "cy": "Meurig ap Tewdrig"
@@ -2157,7 +2293,8 @@
  },
  "person:morfydd-owen": {
   "cy": "Morfydd Llwyn Owen",
-  "dwb": "https://biography.wales/article/s-OWEN-LLW-1891"
+  "dwb": "https://biography.wales/article/s-OWEN-LLW-1891",
+  "odnb": "https://www.oxforddnb.com/view/article/52649"
  },
  "person:morgan-hen": {
   "cy": "Morgan Hen ab Owain",
@@ -2165,11 +2302,13 @@
  },
  "person:morgan-john-rhys": {
   "cy": "Morgan John Rhys",
-  "dwb": "https://biography.wales/article/s-RHYS-JOH-1760"
+  "dwb": "https://biography.wales/article/s-RHYS-JOH-1760",
+  "odnb": "https://www.oxforddnb.com/view/article/23447"
  },
  "person:morgan-llwyd": {
   "cy": "Morgan Llwyd",
-  "dwb": "https://biography.wales/article/s-LLWY-MOR-1619"
+  "dwb": "https://biography.wales/article/s-LLWY-MOR-1619",
+  "odnb": "https://www.oxforddnb.com/view/article/16869"
  },
  "person:morgan-mwynfawr": {
   "cy": "Morgan Mwynfawr",
@@ -2205,7 +2344,8 @@
  },
  "person:om-edwards": {
   "cy": "Owen Morgan Edwards",
-  "dwb": "https://biography.wales/article/s-EDWA-MOR-1858"
+  "dwb": "https://biography.wales/article/s-EDWA-MOR-1858",
+  "odnb": "https://www.oxforddnb.com/view/article/32984"
  },
  "person:owain-ab-urien": {
   "cy": "Owain ab Urien"
@@ -2216,7 +2356,8 @@
  },
  "person:owain-glyndwr": {
   "cy": "Owain Glyn Dŵr",
-  "dwb": "https://biography.wales/article/s-OWAI-GLY-1354"
+  "dwb": "https://biography.wales/article/s-OWAI-GLY-1354",
+  "odnb": "https://www.oxforddnb.com/view/article/10816"
  },
  "person:owain-gwynedd": {
   "cy": "Owain Gwynedd",
@@ -2228,7 +2369,8 @@
  },
  "person:owain-myfyr": {
   "cy": "Owen Jones (Owain Myfyr)",
-  "dwb": "https://biography.wales/article/s-JONE-OWE-1741"
+  "dwb": "https://biography.wales/article/s-JONE-OWE-1741",
+  "odnb": "https://www.oxforddnb.com/view/article/15065"
  },
  "person:owain-tudur": {
   "cy": "Owain Tudur",
@@ -2243,7 +2385,8 @@
  },
  "person:pantycelyn": {
   "cy": "William Williams, Pantycelyn",
-  "dwb": "https://biography.wales/article/s-WILL-WIL-1717"
+  "dwb": "https://biography.wales/article/s-WILL-WIL-1717",
+  "odnb": "https://www.oxforddnb.com/view/article/29556"
  },
  "person:parri-ddall": {
   "cy": "John Parry (Y Telynor Dall)",
@@ -2253,7 +2396,8 @@
   "cy": "Sant Padrig"
  },
  "person:pelagius": {
-  "cy": "Pelagius"
+  "cy": "Pelagius",
+  "odnb": "https://www.oxforddnb.com/view/article/21784"
  },
  "person:peredur": {
   "cy": "Peredur fab Efrawg"
@@ -2266,7 +2410,8 @@
  },
  "person:philip-jones-griffiths": {
   "cy": "Philip Jones Griffiths",
-  "dwb": "https://biography.wales/article/s11-GRIF-JON-1936"
+  "dwb": "https://biography.wales/article/s11-GRIF-JON-1936",
+  "odnb": "https://www.oxforddnb.com/view/article/99901"
  },
  "person:pol": {
   "cy": "Paulinus Aurelianus",
@@ -2274,11 +2419,13 @@
  },
  "person:pryce-pryce-jones": {
   "cy": "Pryce Pryce-Jones",
-  "dwb": "https://biography.wales/article/s3-PRYC-PRY-1834"
+  "dwb": "https://biography.wales/article/s3-PRYC-PRY-1834",
+  "odnb": "https://www.oxforddnb.com/view/article/53210"
  },
  "person:prydydd-y-moch": {
   "cy": "Llywarch ap Llywelyn",
-  "dwb": "https://biography.wales/article/s-LLYW-APL-1173"
+  "dwb": "https://biography.wales/article/s-LLYW-APL-1173",
+  "odnb": "https://www.oxforddnb.com/view/article/16871"
  },
  "person:r-s-thomas": {
   "cy": "R. S. Thomas",
@@ -2289,49 +2436,62 @@
   "dwb": "https://biography.wales/article/s2-PARR-WIL-1884"
  },
  "person:ray-milland": {
-  "cy": "Ray Milland"
+  "cy": "Ray Milland",
+  "odnb": "https://www.oxforddnb.com/view/article/57315"
  },
  "person:ray-reardon": {
   "cy": "Ray Reardon"
  },
  "person:raymond-williams": {
   "cy": "Raymond Williams",
-  "dwb": "https://biography.wales/article/s12-WILL-HEN-1921"
+  "dwb": "https://biography.wales/article/s12-WILL-HEN-1921",
+  "odnb": "https://www.oxforddnb.com/view/article/39847"
+ },
+ "person:red-lady-of-paviland": {
+  "odnb": "https://www.oxforddnb.com/view/article/106753"
  },
  "person:rhodri-mawr": {
   "cy": "Rhodri Mawr",
-  "dwb": "https://biography.wales/article/s-RHOD-MAW-0877"
+  "dwb": "https://biography.wales/article/s-RHOD-MAW-0877",
+  "odnb": "https://www.oxforddnb.com/view/article/23456"
  },
  "person:rhodri-morgan": {
   "cy": "Rhodri Morgan",
-  "dwb": "https://biography.wales/article/s12-MORG-RHO-1939"
+  "dwb": "https://biography.wales/article/s12-MORG-RHO-1939",
+  "odnb": "https://www.oxforddnb.com/view/article/90000380313"
  },
  "person:rhun-ap-maelgwn": {
   "cy": "Rhun ap Maelgwn Gwynedd",
-  "dwb": "https://biography.wales/article/s-RHUN-APM-0550"
+  "dwb": "https://biography.wales/article/s-RHUN-APM-0550",
+  "odnb": "https://www.oxforddnb.com/view/article/23458"
  },
  "person:rhydderch-hael": {
   "cy": "Rhydderch Hael",
-  "dwb": "https://biography.wales/article/s-RHYD-HAE-0590"
+  "dwb": "https://biography.wales/article/s-RHYD-HAE-0590",
+  "odnb": "https://www.oxforddnb.com/view/article/23459"
  },
  "person:rhygyfarch": {
   "cy": "Rhygyfarch ap Sulien",
-  "dwb": "https://biography.wales/article/s-RHYG-YFA-1056"
+  "dwb": "https://biography.wales/article/s-RHYG-YFA-1056",
+  "odnb": "https://www.oxforddnb.com/view/article/23461"
  },
  "person:rhys-ap-tewdwr": {
   "cy": "Rhys ap Tewdwr",
-  "dwb": "https://biography.wales/article/s11-RHYS-APT-1093"
+  "dwb": "https://biography.wales/article/s11-RHYS-APT-1093",
+  "odnb": "https://www.oxforddnb.com/view/article/23463"
  },
  "person:rhys-ap-thomas": {
   "cy": "Rhys ap Thomas",
-  "dwb": "https://biography.wales/article/s-RHYS-APT-1449"
+  "dwb": "https://biography.wales/article/s-RHYS-APT-1449",
+  "odnb": "https://www.oxforddnb.com/view/article/23467"
  },
  "person:rhys-gwilym-ap-tudur": {
   "cy": "Castell Conwy"
  },
  "person:rhys-prichard": {
   "cy": "Rhys Prichard",
-  "dwb": "https://biography.wales/article/s-PRIC-RHY-1579"
+  "dwb": "https://biography.wales/article/s-PRIC-RHY-1579",
+  "odnb": "https://www.oxforddnb.com/view/article/22777"
  },
  "person:richard-amerike": {
   "cy": "Richard ap Meurig"
@@ -2342,11 +2502,13 @@
  },
  "person:richard-davies": {
   "cy": "Richard Davies",
-  "dwb": "https://biography.wales/article/s-DAVI-RIC-1501"
+  "dwb": "https://biography.wales/article/s-DAVI-RIC-1501",
+  "odnb": "https://www.oxforddnb.com/view/article/7255"
  },
  "person:richard-gwyn": {
   "cy": "Rhisiart Gwyn",
-  "dwb": "https://biography.wales/article/s-GWYN-RIC-1557"
+  "dwb": "https://biography.wales/article/s-GWYN-RIC-1557",
+  "odnb": "https://www.oxforddnb.com/view/article/29264"
  },
  "person:richard-price": {
   "cy": "Richard Price",
@@ -2354,24 +2516,28 @@
  },
  "person:richard-roberts-engineer": {
   "cy": "Richard Roberts (peiriannydd)",
-  "dwb": "https://biography.wales/article/s-ROBE-RIC-1789"
+  "dwb": "https://biography.wales/article/s-ROBE-RIC-1789",
+  "odnb": "https://www.oxforddnb.com/view/article/23770"
  },
  "person:richard-wilson": {
   "cy": "Richard Wilson (arlunydd)",
-  "dwb": "https://biography.wales/article/s-WILS-RIC-1713"
+  "dwb": "https://biography.wales/article/s-WILS-RIC-1713",
+  "odnb": "https://www.oxforddnb.com/view/article/29680"
  },
  "person:richey-edwards": {
   "cy": "Richey Edwards"
  },
  "person:roald-dahl": {
-  "cy": "Roald Dahl"
+  "cy": "Roald Dahl",
+  "odnb": "https://www.oxforddnb.com/view/article/39827"
  },
  "person:rob-brydon": {
   "cy": "Rob Brydon"
  },
  "person:robert-jones-surgeon": {
   "cy": "Robert Jones (llawfeddyg)",
-  "dwb": "https://biography.wales/article/s-JONE-ROB-1857"
+  "dwb": "https://biography.wales/article/s-JONE-ROB-1857",
+  "odnb": "https://www.oxforddnb.com/view/article/34237"
  },
  "person:robert-owen": {
   "cy": "Robert Owen",
@@ -2379,7 +2545,8 @@
  },
  "person:robert-recorde": {
   "cy": "Robert Recorde",
-  "dwb": "https://biography.wales/article/s11-RECO-ROB-1558"
+  "dwb": "https://biography.wales/article/s11-RECO-ROB-1558",
+  "odnb": "https://www.oxforddnb.com/view/article/23241"
  },
  "person:ron-davies": {
   "cy": "Ron Davies"
@@ -2395,14 +2562,16 @@
   "cy": "Ruth Jones"
  },
  "person:ryan-davies": {
-  "cy": "Ryan Davies"
+  "cy": "Ryan Davies",
+  "odnb": "https://www.oxforddnb.com/view/article/101155"
  },
  "person:sam-warburton": {
   "cy": "Sam Warburton"
  },
  "person:samson": {
   "cy": "Samson (sant)",
-  "dwb": "https://biography.wales/article/s-SAMS-ON0-0485"
+  "dwb": "https://biography.wales/article/s-SAMS-ON0-0485",
+  "odnb": "https://www.oxforddnb.com/view/article/24599"
  },
  "person:samuel-griffith": {
   "cy": "Samuel Griffith",
@@ -2410,11 +2579,13 @@
  },
  "person:sarah-siddons": {
   "cy": "Sarah Siddons",
-  "dwb": "https://biography.wales/article/s-SIDD-SAR-1755"
+  "dwb": "https://biography.wales/article/s-SIDD-SAR-1755",
+  "odnb": "https://www.oxforddnb.com/view/article/25516"
  },
  "person:saunders-lewis": {
   "cy": "Saunders Lewis",
-  "dwb": "https://biography.wales/article/s10-LEWI-SAU-1893"
+  "dwb": "https://biography.wales/article/s10-LEWI-SAU-1893",
+  "odnb": "https://www.oxforddnb.com/view/article/55454"
  },
  "person:seiriol": {
   "cy": "Seiriol",
@@ -2434,11 +2605,13 @@
  },
  "person:sir-john-williams": {
   "cy": "John Williams (casglwr llawysgrifau)",
-  "dwb": "https://biography.wales/article/s-WILL-JOH-1840"
+  "dwb": "https://biography.wales/article/s-WILL-JOH-1840",
+  "odnb": "https://www.oxforddnb.com/view/article/95028"
  },
  "person:siwan": {
   "cy": "Y Dywysoges Siwan",
-  "dwb": "https://biography.wales/article/s12-JOAN-TYW-1237"
+  "dwb": "https://biography.wales/article/s12-JOAN-TYW-1237",
+  "odnb": "https://www.oxforddnb.com/view/article/14819"
  },
  "person:steve-jones": {
   "cy": "Steve Jones (biolegydd)"
@@ -2448,11 +2621,13 @@
   "dwb": "https://biography.wales/article/s-SULI-EN0-1011"
  },
  "person:t-e-lawrence": {
-  "cy": "T. E. Lawrence"
+  "cy": "T. E. Lawrence",
+  "odnb": "https://www.oxforddnb.com/view/article/34440"
  },
  "person:t-gwynn-jones": {
   "cy": "Thomas Gwynn Jones",
-  "dwb": "https://biography.wales/article/s2-JONE-GWY-1871"
+  "dwb": "https://biography.wales/article/s2-JONE-GWY-1871",
+  "odnb": "https://www.oxforddnb.com/view/article/37616"
  },
  "person:t-h-parry-williams": {
   "cy": "T. H. Parry-Williams",
@@ -2464,7 +2639,8 @@
  },
  "person:taliesin": {
   "cy": "Taliesin",
-  "dwb": "https://biography.wales/article/s-TALI-ESI-0575"
+  "dwb": "https://biography.wales/article/s-TALI-ESI-0575",
+  "odnb": "https://www.oxforddnb.com/view/article/26952"
  },
  "person:tanni-grey-thompson": {
   "cy": "Tanni Grey-Thompson",
@@ -2475,7 +2651,8 @@
  },
  "person:tasker-watkins": {
   "cy": "Tasker Watkins",
-  "dwb": "https://biography.wales/article/s11-WATK-TAS-1918"
+  "dwb": "https://biography.wales/article/s11-WATK-TAS-1918",
+  "odnb": "https://www.oxforddnb.com/view/article/99120"
  },
  "person:tathan": {
   "dwb": "https://biography.wales/article/s-TATH-AN0-0450"
@@ -2485,7 +2662,8 @@
  },
  "person:teilo": {
   "cy": "Teilo",
-  "dwb": "https://biography.wales/article/s-TEIL-SAN-0500"
+  "dwb": "https://biography.wales/article/s-TEIL-SAN-0500",
+  "odnb": "https://www.oxforddnb.com/view/article/27104"
  },
  "person:terry-matthews": {
   "cy": "Terry Matthews"
@@ -2495,23 +2673,28 @@
  },
  "person:theophilus-evans": {
   "cy": "Theophilus Evans",
-  "dwb": "https://biography.wales/article/s-EVAN-THE-1693"
+  "dwb": "https://biography.wales/article/s-EVAN-THE-1693",
+  "odnb": "https://www.oxforddnb.com/view/article/8980"
  },
  "person:thomas-button": {
   "cy": "Thomas Button",
-  "dwb": "https://biography.wales/article/s-BUTT-THO-1634"
+  "dwb": "https://biography.wales/article/s-BUTT-THO-1634",
+  "odnb": "https://www.oxforddnb.com/view/article/4235"
  },
  "person:thomas-charles": {
   "cy": "Thomas Charles",
-  "dwb": "https://biography.wales/article/s-CHAR-THO-1755"
+  "dwb": "https://biography.wales/article/s-CHAR-THO-1755",
+  "odnb": "https://www.oxforddnb.com/view/article/5151"
  },
  "person:thomas-gee": {
   "cy": "Thomas Gee",
-  "dwb": "https://biography.wales/article/s-GEE0-THO-1815"
+  "dwb": "https://biography.wales/article/s-GEE0-THO-1815",
+  "odnb": "https://www.oxforddnb.com/view/article/46663"
  },
  "person:thomas-jones-pencerrig": {
   "cy": "Thomas Jones (arlunydd)",
-  "dwb": "https://biography.wales/article/s-JONE-THO-1742"
+  "dwb": "https://biography.wales/article/s-JONE-THO-1742",
+  "odnb": "https://www.oxforddnb.com/view/article/15091"
  },
  "person:thomas-lewis": {
   "cy": "Thomas Lewis (cardiolegydd)",
@@ -2519,7 +2702,8 @@
  },
  "person:thomas-pennant": {
   "cy": "Thomas Pennant (awdur)",
-  "dwb": "https://biography.wales/article/s-PENN-THO-1726"
+  "dwb": "https://biography.wales/article/s-PENN-THO-1726",
+  "odnb": "https://www.oxforddnb.com/view/article/21860"
  },
  "person:thomas-williams-llanidan": {
   "cy": "Thomas Williams, Llanidan",
@@ -2527,7 +2711,8 @@
  },
  "person:tom-ellis": {
   "cy": "Thomas Edward Ellis",
-  "dwb": "https://biography.wales/article/s-ELLI-EDW-1859"
+  "dwb": "https://biography.wales/article/s-ELLI-EDW-1859",
+  "odnb": "https://www.oxforddnb.com/view/article/37394"
  },
  "person:tom-jones": {
   "cy": "Tom Jones"
@@ -2537,7 +2722,8 @@
   "dwb": "https://biography.wales/article/s12-JONE-PAR-1935"
  },
  "person:tommy-cooper": {
-  "cy": "Tommy Cooper"
+  "cy": "Tommy Cooper",
+  "odnb": "https://www.oxforddnb.com/view/article/30966"
  },
  "person:tommy-farr": {
   "cy": "Tommy Farr"
@@ -2550,7 +2736,8 @@
  },
  "person:tudur-aled": {
   "cy": "Tudur Aled",
-  "dwb": "https://biography.wales/article/s-TUDU-ALE-1480"
+  "dwb": "https://biography.wales/article/s-TUDU-ALE-1480",
+  "odnb": "https://www.oxforddnb.com/view/article/318"
  },
  "person:tudwal": {
   "cy": "Tudwal"
@@ -2561,11 +2748,13 @@
  },
  "person:twm-or-nant": {
   "cy": "Twm o'r Nant",
-  "dwb": "https://biography.wales/article/s-EDWA-THO-1739"
+  "dwb": "https://biography.wales/article/s-EDWA-THO-1739",
+  "odnb": "https://www.oxforddnb.com/view/article/62647"
  },
  "person:twm-sion-cati": {
   "cy": "Twm Siôn Cati",
-  "dwb": "https://biography.wales/article/s-JONE-THO-1530"
+  "dwb": "https://biography.wales/article/s-JONE-THO-1530",
+  "odnb": "https://www.oxforddnb.com/view/article/15087"
  },
  "person:tysul": {
   "cy": "Tysul"
@@ -2574,15 +2763,18 @@
   "cy": "Urien Rheged"
  },
  "person:uthr-bendragon": {
-  "cy": "Uthyr Pen Ddraig"
+  "cy": "Uthyr Pen Ddraig",
+  "odnb": "https://www.oxforddnb.com/view/article/28038"
  },
  "person:w-h-davies": {
   "cy": "W. H. Davies",
-  "dwb": "https://biography.wales/article/s-DAVI-HEN-1871"
+  "dwb": "https://biography.wales/article/s-DAVI-HEN-1871",
+  "odnb": "https://www.oxforddnb.com/view/article/32742"
  },
  "person:waldo-williams": {
   "cy": "Waldo Williams",
-  "dwb": "https://biography.wales/article/s11-WILL-WAL-1904"
+  "dwb": "https://biography.wales/article/s11-WILL-WAL-1904",
+  "odnb": "https://www.oxforddnb.com/view/article/58905"
  },
  "person:william-edwards": {
   "cy": "William Edwards (peiriannydd)",
@@ -2590,18 +2782,22 @@
  },
  "person:william-grove": {
   "cy": "William Robert Grove",
-  "dwb": "https://biography.wales/article/s-GROV-ROB-1811"
+  "dwb": "https://biography.wales/article/s-GROV-ROB-1811",
+  "odnb": "https://www.oxforddnb.com/view/article/11685"
  },
  "person:william-herbert": {
   "cy": "William Herbert, Iarll 1af Penfro (1423–1469)",
-  "dwb": "https://biography.wales/article/s-HERB-WIL-1469"
+  "dwb": "https://biography.wales/article/s-HERB-WIL-1469",
+  "odnb": "https://www.oxforddnb.com/view/article/13053"
  },
  "person:william-jones": {
   "cy": "William Jones (mathemategydd)",
-  "dwb": "https://biography.wales/article/s-JONE-WIL-1675"
+  "dwb": "https://biography.wales/article/s-JONE-WIL-1675",
+  "odnb": "https://www.oxforddnb.com/view/article/15104"
  },
  "person:william-jones-orientalist": {
-  "cy": "William Jones (ieithegwr)"
+  "cy": "William Jones (ieithegwr)",
+  "odnb": "https://www.oxforddnb.com/view/article/15105"
  },
  "person:william-morgan": {
   "cy": "William Morgan (esgob)",
@@ -2609,7 +2805,8 @@
  },
  "person:william-owen-pughe": {
   "cy": "William Owen Pughe",
-  "dwb": "https://biography.wales/article/s-PUGH-OWE-1759"
+  "dwb": "https://biography.wales/article/s-PUGH-OWE-1759",
+  "odnb": "https://www.oxforddnb.com/view/article/22867"
  },
  "person:william-preece": {
   "cy": "William Henry Preece",
@@ -2621,14 +2818,17 @@
  },
  "person:william-salesbury": {
   "cy": "William Salesbury",
-  "dwb": "https://biography.wales/article/s-SALE-WIL-1520"
+  "dwb": "https://biography.wales/article/s-SALE-WIL-1520",
+  "odnb": "https://www.oxforddnb.com/view/article/24546"
  },
  "person:william-wroth": {
-  "dwb": "https://biography.wales/article/s-WROT-WIL-1576"
+  "dwb": "https://biography.wales/article/s-WROT-WIL-1576",
+  "odnb": "https://www.oxforddnb.com/view/article/30086"
  },
  "person:yr-arglwydd-rhys": {
   "cy": "Rhys ap Gruffudd",
-  "dwb": "https://biography.wales/article/s-RHYS-APG-1132"
+  "dwb": "https://biography.wales/article/s-RHYS-APG-1132",
+  "odnb": "https://www.oxforddnb.com/view/article/23464"
  },
  "place:aberfan": {
   "cy": "Trychineb Aberfan"
