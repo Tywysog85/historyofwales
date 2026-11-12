@@ -578,3 +578,10 @@ SHELF_EXTRA = {
          "The Welsh women writers of the 1800s.", "Llenorion benywaidd Cymru’r 1800au."),
     ],
 }
+
+# The Mabinogi section (src/mabinogi_tales.py, src/mabinogi_people.py): the tale guides and the people of the tales.
+import refs as _R  # noqa: E402
+PAGES["mabinogi-tales"] = L(_R.MABINOGION, _R.PEDEIR_KEINC, _R.GUEST_MABINOGION, _R.IFANS_MABINOGION, _R.TRIADS, _R.DAVIES_FOUR_BRANCHES,
+    (B, "Hywel Wyn Owen and Richard Morgan", "Dictionary of the Place-Names of Wales", "Gomer, 2007",
+     "The meaning of the place names the tales explain, from Nantlle to Mochdre.", "Ystyr yr enwau lleoedd a eglurir yn y chwedlau, o Nantlle i Fochdre."))
+PAGES["mabinogi-people"] = PAGES["mabinogi-tales"]

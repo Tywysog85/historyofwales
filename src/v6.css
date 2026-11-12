@@ -732,3 +732,9 @@ section.page-top { padding-top: clamp(1.5rem, 4vw, 3rem) }
 .ar-circle .ppl .ava { width: 2rem; height: 2rem; font-size: .8rem }
 .ar-circle .ar-more { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.8rem }
 .ar-line b a { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--c) 60%, transparent); text-underline-offset: 3px }
+
+/* Mabinogi tale guides: pictures of the tale (mabinogi-*.html) */
+.mb-figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: 1.4rem; align-items: start }
+.mb-figs figure.photo { margin: 0 }
+.mb-figs figure.photo img { width: 100%; height: 18rem; object-fit: contain; background: #0d1018; border-radius: 10px; display: block }
+.mb-figs figure.photo figcaption { font-size: .82rem; margin-top: .5rem }

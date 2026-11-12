@@ -555,6 +555,8 @@ def _born(p):
     d = p[2]
     if d == "Age of Arthur":  # people known from the tales of Arthur's court (src/arthur_circle.py): just after Arthur
         return 640
+    if d == "The Four Branches":  # people of the Four Branches of the Mabinogi (src/mabinogi_people.py): the age of Brân, before Caradog
+        return 1
     m = _re.search(r"([\d,]+) BC", d)
     if m:
         return -int(m.group(1).replace(",", ""))
