@@ -55,7 +55,7 @@
       var here = $(".cc.here", el), row = here && here.parentNode;
       if (row && row.scrollWidth > row.clientWidth) row.scrollLeft += here.getBoundingClientRect().left - row.getBoundingClientRect().left - 8;
       $(".cset-n b", el).textContent = have; $(".j-bar i", el).style.width = (have / cards.length * 100) + "%";
-      var name = $(".cset-h h3", el), nm = name ? T($(".l-en", name).textContent, $(".l-cy", name).textContent) : "";
+      var name = $(".cset-h h3", el), en = name && $(".l-en", name), cy = name && $(".l-cy", name), nm = name ? (en || cy ? T((en || cy).textContent, (cy || en).textContent) : name.textContent) : "";
       if (full && !j.s[el.dataset.set]) { j.s[el.dataset.set] = 1; changed = true; if (fresh) say("❖", T("Set complete: ", "Set yn gyflawn: ") + nm, "journey.html#cards"); }
       else if (fresh && $(".cc.here", el)) say("✦", T("New card for ", "Cerdyn newydd i ") + nm + " · " + have + " / " + cards.length, "journey.html#cards");
     });

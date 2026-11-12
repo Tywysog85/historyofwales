@@ -574,3 +574,12 @@ Learnt while simplifying the home page.
 - The big moments get a longer telling in `src/events_more.py`, keyed by the event's exact English title: two paragraphs in English and two in Welsh. Add more there; the page picks them up by itself.
 - Changing an event's English title changes its page address. Avoid it once a page is live, or old links break.
 
+## Welsh pages with their own address (November 2026)
+- Every page is written twice: `<page>.html` in English and `cy/<page>.html` in Welsh. `src/welshpages.py` does it at the end of the build (`WP.split`, called in `main()` after `shared_assets`). Write pages as before with `bi()`: nothing else is needed.
+- The English page has the Welsh copies (class `l-cy`) taken out, and the Welsh page the English ones (`l-en`), so each address is in one language only. That also halves the size of most pages.
+- The Welsh page gets `lang="cy"`, a Welsh `<title>` from its own `<h1>` (plus "· Hanes Cymru"), a Welsh description from its first `class="lede"` line, `og:locale` cy_GB and its own canonical. Both pages carry `hreflang` links (en, cy, x-default = English). For a page whose heading isn't a good title, special-case it in `split()`.
+- Welsh pages sit in `cy/` with `<base href="../">`, so pictures, scripts and styles still load from the one shared copy. Links between pages are rewritten to `cy/...` when the page is built; a small script in the head does the same for links that scripts make, fixes `#` links and `history.replaceState("#...")`, and remembers the reader chose Cymraeg.
+- The EN and CY buttons go to the other address. An English page opened by someone who chose Cymraeg sends them to the Welsh page.
+- Scripts that read text from a page must not expect both `.l-en` and `.l-cy` to be there (see `site.js`, the card sets).
+- Elements whose words a script swaps (`data-cy="..."`) start out in Welsh on the Welsh page.
+
