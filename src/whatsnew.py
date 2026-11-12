@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "The princes of Powys and Deheubarth", "Tywysogion Powys a Deheubarth",
+     "New pages on Gwenwynwyn, who raised the Welsh in 1198 to win back their ancient bounds; Madog ap Gruffudd Maelor, founder of Valle Crucis; Maelgwn ap Rhys and Rhys Gryg, sons of the Lord Rhys who rode with Llywelyn Fawr; and a full page on Owain Cyfeiliog, the poet-prince of the Hirlas horn.",
+     "Tudalennau newydd ar Wenwynwyn, a gododd y Cymry yn 1198 i ennill eu hen derfynau yn ôl; Madog ap Gruffudd Maelor, sylfaenydd Glyn y Groes; Maelgwn ap Rhys a Rhys Gryg, meibion yr Arglwydd Rhys a farchogodd gyda Llywelyn Fawr; a thudalen lawn ar Owain Cyfeiliog, tywysog-fardd yr Hirlas.",
+     "person-gwenwynwyn.html"),
     ("2026-11-12", "Roman forts, hillforts and ancient tombs", "Caerau Rhufeinig, bryngaerau a hen siambrau claddu",
      "Thirteen new places on the map, including Y Gaer at Brecon, Tomen y Mur, Moridunum, Din Lligwy, Caer y Twr, Caer Drewyn, Barclodiad y Gawres, Tinkinswood, Maen Ceti and Carreg Samson, and full pages for Caerleon, Caerwent, Segontium, Dolaucothi, Tre’r Ceiri, Castell Henllys, Bryn Celli Ddu, the Mold cape and Llyn Cerrig Bach.",
      "Tri lle ar ddeg newydd ar y map, gan gynnwys Y Gaer yn Aberhonddu, Tomen y Mur, Moridunum, Din Lligwy, Caer y Twr, Caer Drewyn, Barclodiad y Gawres, Tinkinswood, Maen Ceti a Charreg Samson, a thudalennau llawn ar Gaerllion, Caer-went, Segontium, Dolaucothi, Tre’r Ceiri, Castell Henllys, Bryn Celli Ddu, mantell aur yr Wyddgrug a Llyn Cerrig Bach.",
