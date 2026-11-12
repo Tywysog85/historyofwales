@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Aberfan, 21 October 1966", "Aberfan, 21 Hydref 1966",
+     "A new long read, written with care: the tip that fell on Pantglas school, the 144 who died, 116 of them children, the warnings no one heeded, the Tribunal, the fight for the Disaster Fund’s money, and the garden and white arches where Aberfan remembers.",
+     "Erthygl newydd, wedi’i hysgrifennu’n ofalus: y domen a syrthiodd ar ysgol Pantglas, y 144 a fu farw, 116 ohonynt yn blant, y rhybuddion na wrandawodd neb arnynt, y Tribiwnlys, y frwydr am arian Cronfa’r Trychineb, a’r ardd a’r bwâu gwyn lle mae Aberfan yn cofio.",
+     "story-aberfan.html"),
     ("2026-11-12", "Real pictures on every page", "Lluniau go iawn ar bob tudalen",
      "Every long read, legend, age, kingdom, saint, topic and game now opens with a real photograph or old artwork: Segontium for Macsen, the Pennal Letter for Glyndŵr, the Laws of Hywel Dda, the Pillar of Eliseg and many more, each with its credit.",
      "Mae pob erthygl, chwedl, oes, teyrnas, sant, pwnc a gêm bellach yn agor gyda ffotograff go iawn neu hen waith celf: Segontium i Facsen, Llythyr Pennal i Lyndŵr, Cyfreithiau Hywel Dda, Colofn Eliseg a llawer mwy, pob un gyda’i gydnabyddiaeth.",

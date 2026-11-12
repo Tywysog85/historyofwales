@@ -636,6 +636,10 @@ Learnt while simplifying the home page.
 - The top picture loads at once (`fetchpriority="high"`, 600px copy for phones through `srcset`); card pictures load lazily from the small copy. The build stops if a named picture's file is missing.
 - Commons can't be reached from the cloud. New pictures have to be downloaded on the Mini-PC (Remote Control) and added to the gallery first.
 
+### Sources beside the key claims in a long read (November 2026)
+- In a long read's `pEn` / `pCy`, a paragraph that starts with `^ ` is a source note: `prose()` in `build.py` shows it small, just under the paragraph it backs up, headed "Source:" / "Ffynhonnell:" (or "Sources:" / "Ffynonellau:" when several are split by `; `).
+- Name the real work and where the claim comes from (report, Hansard date, Cadw record). The full list still goes in `src/refs.py`. First used on the Aberfan long read (`src/aberfan.py`).
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.

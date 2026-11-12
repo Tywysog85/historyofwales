@@ -768,8 +768,9 @@ JOURNEY_TOTAL = len(D.ERAS) + len(D.PEOPLE) + len(D.PLACES) + len(F.STORIES) + l
 STORY = {x["id"]: x for x in F.STORIES}
 
 
-def prose(pars, cls="prose"):
-    # "## " sub-heading, "> quote | source" pull quote, "|| left | right" table row (rows in a run make one table)
+def prose(pars, cls="prose", cy=False):
+    # "## " sub-heading, "> quote | source" pull quote, "|| left | right" table row (rows in a run make one table),
+    # "^ " a source note set just under the paragraph it backs up (several sources split by "; ")
     out, rows = "", []
     for a in pars + [""]:
         if a.startswith("|| "):
@@ -785,6 +786,10 @@ def prose(pars, cls="prose"):
         elif a.startswith("> "):
             q, _, c = a[2:].partition(" | ")
             out += f'<blockquote class="pq"><p>{e(q)}</p>' + (f"<cite>{e(c)}</cite>" if c else "") + "</blockquote>"
+        elif a.startswith("^ "):
+            many = "; " in a
+            lab = ("Ffynonellau" if many else "Ffynhonnell") if cy else ("Sources" if many else "Source")
+            out += f'<p class="src-note"><b>{lab}:</b> {e(a[2:])}</p>'
         else:
             out += f"<p>{e(a)}</p>"
     return out
@@ -812,7 +817,7 @@ def story_feature(kind, key):
 
 
 def prose_bi(en, cy, cls="prose"):
-    return f'<div class="{cls} l-en" lang="en">{prose(en)}</div><div class="{cls} l-cy" lang="cy">{prose(cy)}</div>'
+    return f'<div class="{cls} l-en" lang="en">{prose(en)}</div><div class="{cls} l-cy" lang="cy">{prose(cy, cy=True)}</div>'
 
 
 def story_card(x, lead=False):
@@ -925,7 +930,7 @@ SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes
     ("princes", "Princes, castles and Owain Glyndŵr", "Tywysogion, cestyll ac Owain Glyndŵr", ["era-medieval", "castles", "glyndwr", "longbow", "battles", "documents", "topic-war"]),
     ("lit", "Poets, old books and legends", "Beirdd, hen lyfrau a chwedlau", ["literature", "books", "triads", "mabinogion", "legends", "legend-*", "bran", "symbols", "iolo", "topic-music", "trail-song"]),
     ("tudor", "From the Tudors to the Methodists", "O’r Tuduriaid i’r Methodistiaid", ["era-tudor"]),
-    ("industry", "Iron, coal, slate and the sea", "Haearn, glo, llechi a’r môr", ["era-industrial", "coal", "protest", "topic-industry", "trail-coal", "trail-sea", "firsts", "topic-science"]),
+    ("industry", "Iron, coal, slate and the sea", "Haearn, glo, llechi a’r môr", ["era-industrial", "coal", "aberfan", "protest", "topic-industry", "trail-coal", "trail-sea", "firsts", "topic-science"]),
     ("modern", "Modern Wales and the Welsh abroad", "Cymru fodern a’r Cymry ar wasgar", ["era-modern", "era-today", "revival", "world", "madog", "topic-abroad", "topic-sport"]),
     ("lang", "The Welsh language, names and places", "Yr iaith Gymraeg, enwau a lleoedd", ["language", "topic-language", "welsh", "names", "towns", "maps", "sites"]),
     ("life", "Women and everyday life", "Menywod a bywyd bob dydd", ["topic-women", "trail-women", "topic-countryside"]),

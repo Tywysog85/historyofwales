@@ -239,7 +239,7 @@ GROUPS = [
   Q("aberfan", "What happened at Aberfan?", "Beth ddigwyddodd yn Aberfan?",
     "On the morning of 21 October 1966 a coal tip above the village slid down onto Pantglas school and nearby homes. 144 people died, 116 of them children. Wales remembers them every year.",
     "Fore 21 Hydref 1966 llithrodd tomen lo uwchben y pentref i lawr ar ysgol Pantglas a thai cyfagos. Bu farw 144 o bobl, 116 ohonynt yn blant. Mae Cymru’n eu cofio bob blwyddyn.",
-    ["place-aberfan.html"]),
+    ["story-aberfan.html", "place-aberfan.html"]),
   Q("firsts", "What did Wales give the world first?", "Beth a roddodd Cymru i’r byd gyntaf?",
     "The equals sign (Robert Recorde, 1557), the symbol π (William Jones, 1706), the fuel cell (William Grove, 1842), the first radio signals across water (Preece and Marconi, 1897), packet switching that underpins the internet (Donald Davies), mail-order shopping (Pryce Pryce-Jones) and much more.",
     "Yr hafalnod (Robert Recorde, 1557), y symbol π (William Jones, 1706), y gell danwydd (William Grove, 1842), y signalau radio cyntaf dros ddŵr (Preece a Marconi, 1897), newid pecynnau sy’n sail i’r rhyngrwyd (Donald Davies), siopa drwy’r post (Pryce Pryce-Jones) a llawer mwy.",

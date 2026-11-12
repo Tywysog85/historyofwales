@@ -318,6 +318,8 @@ html.menu-open { overflow: hidden }
 .prose.tale { font-size: 1.24rem; line-height: 1.8 }
 .prose .pq { margin: .6rem 0; padding: .4rem 0 .4rem 1.4rem; border-left: 3px solid var(--c) }
 .prose .pq p { font-family: var(--f-display); font-size: clamp(1.5rem, 3vw, 2.1rem); line-height: 1.25; color: var(--ink) }
+.prose .src-note { margin: -.4rem 0 1.4rem; padding: .1rem 0 .1rem .9rem; border-left: 2px solid var(--line, #3a4150); font-size: .82rem; line-height: 1.5; color: #9aa0ad }
+.prose .src-note b { font-weight: 600; letter-spacing: .03em }
 .prose .pq cite { display: block; margin-top: .6rem; font-style: normal; font-size: .9rem; letter-spacing: .04em; color: #9aa0ad }
 .prose table.kv { width: 100%; border-collapse: collapse; font-size: 1rem; line-height: 1.5; border-top: 1px solid rgba(255,255,255,.14) }
 .prose table.kv th, .prose table.kv td { text-align: left; vertical-align: top; padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(255,255,255,.14) }

@@ -60,6 +60,7 @@ STORIES = [
  _HY.STORY,
 
  dict(id="coal", era="industrial", art="pit", mins=6,
+  links=[("story-aberfan.html", "Aberfan, 21 October 1966: the village that never forgot its children", "Aberfan, 21 Hydref 1966: y pentref nad anghofiodd ei blant")],
   en="Coal: the fuel of an empire, and its price", cy="Glo: tanwydd ymerodraeth, a’i bris",
   sumEn="In 1913 the valleys of south Wales powered navies and railways across the world. A century later the last deep mine had closed. This is what coal built, and what it cost.",
   sumCy="Yn 1913 roedd cymoedd y de’n gyrru llyngesau a rheilffyrdd ledled y byd. Ganrif yn ddiweddarach roedd y pwll dwfn olaf wedi cau. Dyma’r hyn a adeiladodd glo, a’r hyn a gostiodd.",
@@ -387,4 +388,5 @@ import madog as _MD  # Prince Madog's voyage to America and the Welsh Indians (s
 import caradog as _CR  # King Caradog (Caratacus) against Rome, and his family in Rome (src/caradog.py)
 import christianity as _CH  # The coming of Christianity: the first Christians, Joseph, Lucius, Brân (src/christianity.py)
 import macsen as _MX  # Macsen Wledig, the emperor from Britain (src/macsen.py)
-STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY] + _CH.STORIES
+import aberfan as _AF  # The Aberfan disaster, 21 October 1966 (src/aberfan.py)
+STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY] + _CH.STORIES + [_AF.STORY]
