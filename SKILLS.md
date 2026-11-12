@@ -567,3 +567,10 @@ Learnt while simplifying the home page.
 - **The height map is a lossless WebP** (`eryri-h.webp`). Red and green hold the height, blue the roughness. It must be lossless, or the mountain changes shape. Never zero a channel to save bytes: the shot changes.
 - **The 3D starts loading after the page has loaded** (`go3` in `src/app.js`), so the words and pictures come first on a slow connection.
 - To check nothing changed, screenshot the old and the new site side by side at `?sky=night` after 9 seconds and compare the mountain area pixel by pixel with Pillow's `ImageChops.difference`: two runs of the same site differ by about 0.05, a real change by 1 or more. Then run `node tools/hero_jump_check.js` (it must log one land position).
+
+## A page for every timeline event (November 2026)
+- `src/eventpages.py` makes `event-<slug>.html` for every event in `D.EVENTS` (405). The slug comes from the English title; a clash gets the year added. `EP.href(ev)` gives the page of an event, and `DATA["EVS"]` hands the slugs to `app.js` so the timeline can link "The full story".
+- Each page gathers what the site already has: date (with the day and an On this day link when known), age, place, people named in the text (whole names only, so "Henry V" does not match "Henry VII"), battles and documents of the same year, long reads, the two events before and after, Read further links, and a share picture (`CARD_KIND` "event-").
+- The big moments get a longer telling in `src/events_more.py`, keyed by the event's exact English title: two paragraphs in English and two in Welsh. Add more there; the page picks them up by itself.
+- Changing an event's English title changes its page address. Avoid it once a page is live, or old links break.
+
