@@ -658,6 +658,14 @@ Learnt while simplifying the home page.
 - The home page's "Did you know?" fact is drawn again by `app.js` when "Another" is pressed, so `FACTS` goes into the page data already turned into HTML (`CITE.html_text`).
 - Check sources with the WebFetch tool when the cloud can't reach a site directly, and quote the source's own words in the note where you can.
 
+### A photograph inside a long read (November 2026)
+
+Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.html`).
+
+- A paragraph that is just `!! <gallery id>` (for example `!! person-gwynfor-evans`) puts that gallery picture into the text with its full credit: caption, photographer, licence and Commons link. It works anywhere `prose()` is used: long reads, person pages, chapters. Put the same line in the English and the Welsh paragraphs, in the same place.
+- The picture must already be in the gallery (`src/gallery_photos.py`, files in `src/static/gallery/`); an unknown id stops the build. A tall picture is shown as a portrait (narrower, cropped from near the top) so faces are not cut off.
+- The picture at the top of a long read comes from `PAGE` in `src/pictures.py` (`"story-tryweryn.html": "g:place-celyn@50% 55%"`), with its credit under the title, so don't repeat that picture in the text.
+
 ### Full-length pages for the kings and princes, with sources beside the claims (November 2026)
 - `src/princes.py` holds the long texts for the kings and princes of Wales (`LONG`, put over the short texts by `src/long.py`), new rulers in the `people2a.py` format (`PEOPLE`, added in `src/people2.py`), and `GROUPS`/`LINKS` for the "Kings and princes of Wales" block that `princes_circle()` in `build.py` shows on each of their pages. A group can list people whose pages are still to come: only people with a page are shown.
 - Their sources go beside the claims as `[[cite:...]]` chips (see "Sources beside the claims"). The keys for these pages live in `CITES` in `src/princes.py`, which `src/cites.py` adds to its list, so other threads editing `cites.py` don't collide with them. Good free texts to link: the Annales Cambriae (Fordham Internet Medieval Sourcebook), the Annals of Ulster (CELT, one page per year: `T100001A/text426.html` is 856), Asser (Fordham) and Gerald's Description of Wales (A Vision of Britain). The Brut has no good free English text online: cite Thomas Jones's translation with no link.

@@ -266,7 +266,7 @@ DOCS += [
     "Mae’n rhoi’r grym i Lerpwl argáu cwm Tryweryn a boddi pentref Capel Celyn ar gyfer cronfa ddŵr. O’r 36 AS Cymreig, pleidleisiodd 35 yn ei herbyn ac ni phleidleisiodd yr un o’i phlaid."),
    "It showed that Wales could be overruled even when its MPs stood together, and turned many people towards self-government. ‘Cofiwch Dryweryn’ is still painted on walls today.", "Dangosodd y gellid diystyru Cymru hyd yn oed pan safai ei haelodau seneddol gyda’i gilydd, a throdd lawer at hunanlywodraeth. Mae ‘Cofiwch Dryweryn’ yn dal i gael ei baentio ar furiau heddiw.",
    "Parliamentary Archives, London", "Archifau Seneddol, Llundain",
-   ["place-celyn.html", "a-z.html#az-tryweryn", "story-protest.html"], "modern"),
+   ["story-tryweryn.html", "place-celyn.html", "a-z.html#az-tryweryn", "story-protest.html"], "modern"),
  D("gowa-2006", 2006, "2006", "2006", "The Government of Wales Act 2006", "Deddf Llywodraeth Cymru 2006",
    "The Act that rebuilt Welsh devolution.", "Y Ddeddf a ailadeiladodd ddatganoli Cymru.",
    ("short", "It separates the Welsh Government from the Assembly, and allows the Assembly to make full laws in twenty subject areas once the people of Wales vote for it in a referendum.",
