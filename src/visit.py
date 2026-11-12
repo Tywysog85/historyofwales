@@ -22,6 +22,7 @@ WHO = {
     "nrw": ("Natural Resources Wales", "Cyfoeth Naturiol Cymru"),
     "private": ("private owners", "perchnogion preifat"),
     "town": ("the town, open to all", "y dref, yn agored i bawb"),
+    "land": ("open land; the monument is protected by Cadw", "tir agored; mae’r heneb wedi’i gwarchod gan Cadw"),
 }
 
 ENTRY = {
@@ -115,6 +116,44 @@ VISIT = {
     "llanddewibrefi": V("church", "", "", "church"),
     "llancarfan": V("church", "", "", "church"),
     "llanbadarn": V("church", "", "", "church"),
+
+    # ---------- Roman Wales, hillforts and tombs ----------
+    "caerleon": V("cadw", CADW + "caerleon-roman-fortress-and-baths", "NP18 1AE", "ticket",
+                  also=[("amg", "https://museum.wales/roman/", "the National Roman Legion Museum (free)", "Amgueddfa Lleng Rufeinig Cymru (am ddim)")],
+                  note=("The amphitheatre and barracks are free to walk round; the baths are paid.", "Mae’r amffitheatr a’r barics am ddim; mae tâl am y baddonau.")),
+    "caerwent": V("cadw", CADW + "caerwent-roman-town", "NP26 5BA", "free"),
+    "segontium": V("cadw", CADW + "segontium-roman-fort", "LL55 2LN", "free",
+                   note=("Parking is limited to a few spaces on the main road beside the fort.", "Dim ond ychydig o leoedd parcio sydd ar y brif ffordd wrth ymyl y gaer.")),
+    "dolaucothi": V("nt", NT + "dolaucothi", "SA19 8US", "ticket",
+                    note=("The mine closes in winter; the woodland walks stay open all year.", "Mae’r gloddfa ar gau yn y gaeaf; mae’r llwybrau coed ar agor drwy’r flwyddyn.")),
+    "ygaer": V("cadw", CADW + "brecon-gaer-roman-fort", "LD3 9NT", "free",
+               note=("On a working farm with no car park: walk in along the lane.", "Ar fferm weithiol heb faes parcio: cerddwch i mewn ar hyd y lôn.")),
+    "tomenymur": V("land", "", "", "open",
+                   note=("A one-mile waymarked walk starts from the small car park on a lane off the A487.", "Mae taith filltir ag arwyddion yn dechrau o’r maes parcio bach ar lôn oddi ar yr A487.")),
+    "moridunum": V("council", "", "", "open", note=("The amphitheatre is on Priory Street, east of the town centre.", "Mae’r amffitheatr ar Heol y Prior, i’r dwyrain o ganol y dref.")),
+    "dinlligwy": V("cadw", CADW + "din-lligwy-hut-group", "", "free",
+                   note=("Off the A5025 about a mile north of Llanallgo; Capel Lligwy and the Lligwy tomb are a few minutes’ walk.", "Oddi ar yr A5025 tua milltir i’r gogledd o Lanallgo; mae Capel Lligwy a siambr Lligwy ychydig funudau o gerdded.")),
+    "llanmelin": V("cadw", CADW + "llanmelin-wood-hillfort", "NP16 6LN", "free"),
+    "caerytwr": V("cadw", CADW + "caer-y-twr", "", "open",
+                  note=("A climb to the summit of Holyhead Mountain from the South Stack road.", "Dringfa i gopa Mynydd Twr o ffordd Ynys Lawd.")),
+    "tymawr": V("cadw", CADW + "holyhead-mountain-hut-circles", "LL65 1YH", "free"),
+    "caerdrewyn": V("private", "", "", "outside"),
+    "trerceiri": V("land", "", "", "open",
+                   note=("A steep path from the B4417 between Llanaelhaearn and Llithfaen. Please don’t move any stones.", "Llwybr serth o’r B4417 rhwng Llanaelhaearn a Llithfaen. Peidiwch â symud cerrig, os gwelwch yn dda.")),
+    "castellhenllys": V(("the Pembrokeshire Coast National Park Authority", "Awdurdod Parc Cenedlaethol Arfordir Penfro"),
+                        "https://www.pembrokeshirecoast.wales/castell-henllys/about-castell-henllys", "SA41 3UR", "ticket"),
+    "brynceliddu": V("cadw", CADW + "bryn-celli-ddu-burial-chamber", "LL61 6EQ", "free"),
+    "pentreifan": V("cadw", CADW + "pentre-ifan-burial-chamber", "SA41 3TZ", "free"),
+    "barclodiad": V("cadw", CADW + "barclodiad-y-gawres-burial-chamber", "LL63 5TE", "free",
+                    note=("Park at Porth Trecastell. You can see the tomb from outside all year; Cadw opens it for guided tours on some summer days.", "Parciwch ym Mhorth Trecastell. Gallwch weld y siambr o’r tu allan drwy’r flwyddyn; mae Cadw’n ei hagor ar gyfer teithiau tywys ar rai dyddiau yn yr haf.")),
+    "tinkinswood": V("cadw", CADW + "tinkinswood-burial-chamber", "CF5 6TA", "free"),
+    "parclebreos": V("cadw", CADW + "parc-le-breos-burial-chamber", "SA3 2HA", "free"),
+    "maenceti": V("land", "", "", "open", note=("On common land on Cefn Bryn, a short walk north from the Reynoldston road.", "Ar dir comin ar Gefn Bryn, taith fer i’r gogledd o ffordd Reynoldston.")),
+    "carregsamson": V("private", "", "", "open", note=("Near the Coast Path, about half a mile west of Abercastle.", "Ger Llwybr yr Arfordir, tua hanner milltir i’r gorllewin o Abercastell.")),
+    "mold": V("town", "", "", "outside",
+              note=("The cape is in the British Museum in London; small pieces are at the Daniel Owen Centre in Mold.", "Mae’r fantell yn yr Amgueddfa Brydeinig yn Llundain; mae darnau bach yng Nghanolfan Daniel Owen yn yr Wyddgrug.")),
+    "cerrigbach": V("amg", "", "", "outside",
+                    note=("The finds are at National Museum Cardiff (free).", "Mae’r darganfyddiadau yn Amgueddfa Genedlaethol Caerdydd (am ddim).")),
 }
 
 

@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Roman forts, hillforts and ancient tombs", "Caerau Rhufeinig, bryngaerau a hen siambrau claddu",
+     "Thirteen new places on the map, including Y Gaer at Brecon, Tomen y Mur, Moridunum, Din Lligwy, Caer y Twr, Caer Drewyn, Barclodiad y Gawres, Tinkinswood, Maen Ceti and Carreg Samson, and full pages for Caerleon, Caerwent, Segontium, Dolaucothi, Tre’r Ceiri, Castell Henllys, Bryn Celli Ddu, the Mold cape and Llyn Cerrig Bach.",
+     "Tri lle ar ddeg newydd ar y map, gan gynnwys Y Gaer yn Aberhonddu, Tomen y Mur, Moridunum, Din Lligwy, Caer y Twr, Caer Drewyn, Barclodiad y Gawres, Tinkinswood, Maen Ceti a Charreg Samson, a thudalennau llawn ar Gaerllion, Caer-went, Segontium, Dolaucothi, Tre’r Ceiri, Castell Henllys, Bryn Celli Ddu, mantell aur yr Wyddgrug a Llyn Cerrig Bach.",
+     "place-caerleon.html"),
     ("2026-11-12", "Saints, abbeys and holy places to visit", "Seintiau, abatai a mannau sanctaidd i ymweld â nhw",
      "Twenty new places and fuller pages on others: Strata Florida, Valle Crucis, Tintern, Llanthony, Penmon, Basingwerk, Margam, Bardsey, Llanilltud Fawr, St Winefride’s Well, Pennant Melangell, Nevern, Clynnog Fawr, Llanddewi Brefi, Llancarfan, Llanbadarn Fawr and the cathedrals of Bangor, Llandaf and St Asaph, each with a Visiting box.",
      "Ugain lle newydd a thudalennau llawnach ar eraill: Ystrad Fflur, Glyn y Groes, Tyndyrn, Llanddewi Nant Hodni, Penmon, Dinas Basing, Margam, Enlli, Llanilltud Fawr, Ffynnon Gwenffrewi, Pennant Melangell, Nanhyfer, Clynnog Fawr, Llanddewi Brefi, Llancarfan, Llanbadarn Fawr ac eglwysi cadeiriol Bangor, Llandaf a Llanelwy, pob un gyda blwch Ymweld.",
