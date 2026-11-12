@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Castles, great houses and places of modern Wales to visit", "Cestyll, plastai a lleoedd Cymru fodern i ymweld â nhw",
+     "Thirteen new places, from Pilleth and Pennal in Owain Glyndŵr’s war to Plas Mawr, Tŷ Mawr Wybrnant, Chirk, Erddig, Penrhyn, Big Pit, Llanystumdwy, the Wales Millennium Centre and the National Botanic Garden; full pages for Sycharth, Conwy, Beaumaris, Rhuddlan, Caerphilly, Raglan, Chepstow and Pembroke; and Visiting boxes for the great castles.",
+     "Tri lle ar ddeg newydd, o Billeth a Phennal yn rhyfel Owain Glyndŵr i Blas Mawr, Tŷ Mawr Wybrnant, y Waun, Erddig, y Penrhyn, y Pwll Mawr, Llanystumdwy, Canolfan Mileniwm Cymru a’r Ardd Fotaneg Genedlaethol; tudalennau llawn ar Sycharth, Conwy, Biwmares, Rhuddlan, Caerffili, Rhaglan, Cas-gwent a Phenfro; a blychau Ymweld ar gyfer y cestyll mawr.",
+     "place-sycharth.html"),
     ("2026-11-12", "Roman forts, hillforts and ancient tombs", "Caerau Rhufeinig, bryngaerau a hen siambrau claddu",
      "Thirteen new places on the map, including Y Gaer at Brecon, Tomen y Mur, Moridunum, Din Lligwy, Caer y Twr, Caer Drewyn, Barclodiad y Gawres, Tinkinswood, Maen Ceti and Carreg Samson, and full pages for Caerleon, Caerwent, Segontium, Dolaucothi, Tre’r Ceiri, Castell Henllys, Bryn Celli Ddu, the Mold cape and Llyn Cerrig Bach.",
      "Tri lle ar ddeg newydd ar y map, gan gynnwys Y Gaer yn Aberhonddu, Tomen y Mur, Moridunum, Din Lligwy, Caer y Twr, Caer Drewyn, Barclodiad y Gawres, Tinkinswood, Maen Ceti a Charreg Samson, a thudalennau llawn ar Gaerllion, Caer-went, Segontium, Dolaucothi, Tre’r Ceiri, Castell Henllys, Bryn Celli Ddu, mantell aur yr Wyddgrug a Llyn Cerrig Bach.",
