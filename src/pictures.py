@@ -35,6 +35,11 @@ ERA = dict(
 )
 
 PAGE = {
+    # the princes of Powys and Deheubarth (src/princes4.py)
+    "person-gwenwynwyn.html": "g:cast-powis",
+    "person-madog-ap-gruffudd-maelor.html": "g:holy-valle-crucis",
+    "person-maelgwn-ap-rhys.html": "g:place-strataflorida",
+    "person-rhys-gryg.html": "g:place-dinefwr",
     # historic places of importance (src/places3.py)
     "place-garthcelyn.html": "g:person-siwan",
     "place-dolwyddelan.html": "g:cast-dolwyddelan",
