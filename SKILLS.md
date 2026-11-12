@@ -593,3 +593,11 @@ Learnt while simplifying the home page.
 - Choices change what you do and your renown, never what happened. The build checks every choice leads to a real scene and every event link exists. Renown ranks are fractions of the most each role can earn, worked out by the build, so adding scenes doesn't break them.
 - Your place is saved on the device (`hc-ride`), and finishing earns the "Glyndŵr's companion" badge through `HC.flag("ride")` in `site.js`.
 - To test: play it through in Playwright for each role in English and in `cy/`, and run axe on the finished page.
+
+## Llys Rhosyr in 3D (November 2026)
+- `llys-rhosyr.html` comes from `src/llys.py` (the words for the eight stops, the page, and the CSS). The 3D court is `tools/llys3d.src.js`, bundled with three.js into `src/static/llys3d.js` the same way as the front page 3D (see "The 3D mountains and castle"): `npx esbuild llys3d.src.js --bundle --minify --format=esm --target=es2019 --outfile=llys3d.js`.
+- Nothing is downloaded but the code (about 0.5 MB, loaded only when the visitor presses "Enter the court"). The stone, lime-wash, thatch, wood and the arms of Gwynedd are drawn on canvases in code, and the land, dunes, sea and Eryri are made from a height function (`ground()`), so the walker's eye height follows the same ground.
+- Each stop's words live in `STOPS` in `src/llys.py`; where you stand and look for it is in `STOPS` in the JS, under the same id. To add a stop, add both. The words are also printed as ordinary text under the 3D, for readers without 3D and for search engines.
+- Walls you bump into are recorded as they are built (`walls`, `posts`), so new buildings made with `building()` are solid automatically. Doors are gaps in the walls.
+- When `llys3d.js` changes, raise `llys3d.js?v=` in `src/llys.py`.
+- To test in the cloud: Chromium with `--use-gl=swiftshader --enable-unsafe-swiftshader`. Software drawing is slow, so wait several seconds after each "Next" before a screenshot.

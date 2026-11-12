@@ -238,7 +238,7 @@ html.menu-open { overflow: hidden }
 .p-card::before { position: absolute; top: -.18em; right: .1em; font: 400 8.5rem/1 var(--f-display); color: color-mix(in srgb, var(--c) 22%, transparent); z-index: -1; transition: transform .6s var(--ease) }
 .p-card:hover::before { transform: rotate(-6deg) scale(1.08) }
 .p-daily::before { content: "?" } .p-quiz::before { content: "10" } .p-map::before { content: "⌖" } .p-order::before { content: "1→5"; font-size: 5.5rem; top: .1em }
-.p-names::before { content: "ap"; font-style: italic } .p-hero::before { content: "♛" } .p-pairs::before { content: "Aa" } .p-ride::before { content: "♞" }
+.p-names::before { content: "ap"; font-style: italic } .p-hero::before { content: "♛" } .p-pairs::before { content: "Aa" } .p-ride::before { content: "♞" } .p-llys::before { content: "3D"; font-size: 6rem; top: .1em }
 .p-card h3 { font-size: 1.6rem; line-height: 1.08 }
 .p-card p { color: #c3c7cf; font-size: .93rem }
 .p-card .go { font-weight: 700; font-size: .9rem }
