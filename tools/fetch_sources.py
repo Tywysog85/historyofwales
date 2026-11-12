@@ -1,14 +1,17 @@
-"""Find each person's entry in the Dictionary of Welsh Biography, each place's record in Coflein, and the Welsh Wikipedia
-article for both, using Wikipedia (to follow redirects to each article's Wikidata item) and Wikidata (which links the item to all of them).
+"""Find better sources than Wikipedia for every person, place and event: the Dictionary of Welsh Biography, the Oxford
+Dictionary of National Biography, Britannica, the History of Parliament and UK Parliament, Art UK, Olympedia, World Athletics,
+Coflein and Cadw, plus the Welsh Wikipedia article. English Wikipedia leads to each article's Wikidata item, and Wikidata
+links the item to all of them.
 
 Writes src/source_links.json:
-    {"person:<id>": {"dwb": "<url>", "cy": "<Welsh Wikipedia title>"}, "place:<id>": {"coflein": "<url>", "cy": "..."}}
-build.py adds the links to the person and place pages. Anything Wikidata does not know is simply left out.
+    {"person:<id>": {"dwb": "<url>", "odnb": "<url>", ..., "cy": "<Welsh Wikipedia title>"}, "place:<id>": {...}, "event:<slug>": {...}}
+Every link is opened before it is kept, so a link that does not open is left out. build.py shows them on the person, place
+and event pages and on the cards (SOURCES in build.py sets the order and the names). Anything Wikidata does not know is left out.
 
 Wikidata is blocked from Claude's cloud computer, so this runs on GitHub: .github/workflows/fetch-sources.yml (start it
 from the Actions tab; it also runs by itself when this file changes on a claude/ branch, and on the 1st of each month).
 """
-import json, os, sys, time, urllib.parse, urllib.request
+import json, os, sys, time, urllib.error, urllib.parse, urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "src"))
@@ -16,8 +19,27 @@ OUT = os.path.join(ROOT, "src", "source_links.json")
 API = "https://www.wikidata.org/w/api.php"
 WP = "https://en.wikipedia.org/w/api.php"
 UA = "HistoryOfWalesSiteBuilder/1.0 (https://historyofwales.cymru; static site build)"
-# The Wikidata properties we want, found by name so a renumbering cannot break this.
-WANT = {"dwb": "Dictionary of Welsh Biography ID", "coflein": "Coflein ID"}
+# The Wikidata properties we want: (property id, its English label). The id is checked against the label, and if they
+# don't match the property is found by its label, so a renumbering cannot break this.
+WANT = {
+    "dwb": ("P1648", "Dictionary of Welsh Biography ID"),
+    "odnb": ("P1415", "Oxford Dictionary of National Biography ID"),
+    "britannica": ("P1417", "Encyclopædia Britannica Online ID"),
+    "histparl": ("P1614", "History of Parliament ID"),
+    "ukparl": ("P6213", "UK Parliament identifier"),
+    "artuk": ("P1367", "Art UK artist ID"),
+    "olympedia": ("P8286", "Olympedia people ID"),
+    "athletics": ("P1146", "World Athletics athlete ID"),
+    "coflein": (None, "Coflein ID"),
+    "cadwb": ("P1459", "Cadw Building ID"),
+    "cadwm": ("P3007", "Cadw Monument ID"),
+}
+# Which sources belong on which kind of page.
+KINDS = {
+    "person": {"dwb", "odnb", "britannica", "histparl", "ukparl", "artuk", "olympedia", "athletics"},
+    "place": {"coflein", "cadwb", "cadwm", "britannica"},
+    "event": {"coflein", "cadwm", "britannica"},
+}
 
 
 def api(_base=API, **params):
@@ -34,18 +56,77 @@ def api(_base=API, **params):
     raise SystemExit("Wikidata did not answer")
 
 
-def prop(label):
+def _norm(t):
+    return t.lower().replace("æ", "ae").replace("–", "-")
+
+
+def prop(guess, label):
     """The property id for a label, and its formatter URL (what turns an id into a link)."""
-    r = api(action="wbsearchentities", search=label, type="property", language="en", limit=5)
-    hit = next((x for x in r.get("search", []) if x.get("label", "").lower() == label.lower()), None)
-    if not hit:
-        print(f"No Wikidata property called {label!r}")
-        return None, None
-    e = api(action="wbgetentities", ids=hit["id"], props="claims")["entities"][hit["id"]]
+    pid = None
+    if guess:
+        ent = api(action="wbgetentities", ids=guess, props="labels", languages="en").get("entities", {}).get(guess, {})
+        got = ent.get("labels", {}).get("en", {}).get("value", "")
+        if _norm(got) == _norm(label):
+            pid = guess
+        else:
+            print(f"  {guess} is {got!r}, not {label!r}: searching by label")
+    if not pid:
+        r = api(action="wbsearchentities", search=label, type="property", language="en", limit=10)
+        hit = next((x for x in r.get("search", []) if _norm(x.get("label", "")) == _norm(label)), None)
+        if not hit:
+            print(f"No Wikidata property called {label!r}")
+            return None, None
+        pid = hit["id"]
+    e = api(action="wbgetentities", ids=pid, props="claims")["entities"][pid]
     fmts = [c["mainsnak"]["datavalue"]["value"] for c in e.get("claims", {}).get("P1630", []) if c["mainsnak"].get("datavalue")]
     fmt = next((f for f in fmts if "https" in f), fmts[0] if fmts else None)
-    print(f"{label}: {hit['id']} -> {fmt}")
-    return hit["id"], fmt
+    print(f"{label}: {pid} -> {fmt}")
+    return pid, fmt
+
+
+# Sites that turn away robots but send a real reader on to the article: the first answer must be a redirect to here.
+REDIRECTS_TO = {"www.oxforddnb.com": "https://academic.oup.com/oxford-dictionary-of-national-biography/"}
+
+
+class _NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, *a, **k):
+        return None
+
+
+def archived(url):
+    """For a site that turns robots away (Britannica, Art UK): True if the Internet Archive has seen the page open."""
+    try:
+        r = api("https://archive.org/wayback/available", url=url)
+        snap = r.get("archived_snapshots", {}).get("closest", {})
+        return bool(snap.get("available")) and str(snap.get("status")) == "200"
+    except SystemExit:
+        return False
+
+
+def opens(url):
+    """(True if the link opens without an error, how it was checked)."""
+    host = urllib.parse.urlsplit(url).netloc
+    want = REDIRECTS_TO.get(host)
+    opener = urllib.request.build_opener(_NoRedirect) if want else urllib.request.build_opener()
+    code = 0
+    for attempt in range(6):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "text/html,*/*"})
+            with opener.open(req, timeout=30) as r:
+                return (not want and r.status < 400), r.status
+        except urllib.error.HTTPError as ex:
+            code = ex.code
+            if want and 300 <= ex.code < 400:
+                return (ex.headers.get("Location") or "").startswith(want), ex.code
+            if ex.code in (429, 500, 502, 503, 504):
+                time.sleep(10 * (attempt + 1))
+                continue
+            if ex.code in (401, 403):
+                return archived(url), f"{ex.code}, checked at the Internet Archive"
+            return False, ex.code
+        except Exception:  # noqa: BLE001
+            time.sleep(2)
+    return False, code
 
 
 def main():
@@ -57,7 +138,11 @@ def main():
     for pl in D.PLACES:
         if pl.get("src"):
             pages.setdefault(urllib.parse.unquote(pl["src"]).replace("_", " "), []).append("place:" + pl["id"])
-    props = {k: prop(v) for k, v in WANT.items()}
+    import eventpages as EP
+    for i, ev in enumerate(D.EVENTS):
+        if ev[11]:
+            pages.setdefault(urllib.parse.unquote(ev[11]).split("#")[0].replace("_", " "), []).append("event:" + EP.SLUG[i])
+    props = {k: prop(*v) for k, v in WANT.items()}
     # 1. English Wikipedia turns each title (after following redirects) into its Wikidata item.
     qid_keys, titles = {}, sorted(pages)
     for i in range(0, len(titles), 50):
@@ -102,16 +187,34 @@ def main():
                     rec[k] = fmt.replace("$1", urllib.parse.quote(str(vals[0]), safe="-_.~/"))
             for key in keys:
                 kind = key.split(":")[0]
-                keep = {a: b for a, b in rec.items() if a == "cy" or (kind == "person" and a == "dwb") or (kind == "place" and a == "coflein")}
+                keep = {a: b for a, b in rec.items() if a == "cy" or a in KINDS[kind]}
                 if keep:
                     out[key] = keep
         time.sleep(0.5)
+    # 3. Open every link once and drop any that doesn't open.
+    from concurrent.futures import ThreadPoolExecutor
+    urls = sorted({u for v in out.values() for k, u in v.items() if k != "cy"})
+    with ThreadPoolExecutor(4) as pool:
+        res = dict(zip(urls, pool.map(opens, urls)))
+    ok = {u: r[0] for u, r in res.items()}
+    print(f"Opened {len(urls)} links: {sum(not v for v in ok.values())} did not open and are left out")
+    from collections import Counter
+    for k in WANT:
+        mine = sorted({v[k] for v in out.values() if k in v})
+        if mine:
+            codes = Counter(res[u][1] for u in mine if not ok[u])
+            via = sum(1 for u in mine if ok[u] and "Archive" in str(res[u][1]))
+            print(f"  {k}: {len(mine)} found, {sum(ok[u] for u in mine)} open ({via} of them checked at the Internet Archive); did not open: {dict(codes)}")
+            for u in [u for u in mine if not ok[u]][:5]:
+                print(f"    e.g. {res[u][1]} {u}")
+    out = {key: {k: u for k, u in v.items() if k == "cy" or ok[u]} for key, v in out.items()}
+    out = {key: v for key, v in out.items() if v}
     out = dict(sorted(out.items()))
     with open(OUT, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=1)
         f.write("\n")
     n = lambda k: sum(1 for v in out.values() if k in v)  # noqa: E731
-    print(f"Wrote {OUT}: {n('dwb')} Dictionary of Welsh Biography links, {n('coflein')} Coflein links, {n('cy')} Welsh Wikipedia links")
+    print(f"Wrote {OUT}: " + ", ".join(f"{n(k)} {k}" for k in list(WANT) + ["cy"]))
 
 
 if __name__ == "__main__":

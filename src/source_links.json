@@ -1,133 +1,1578 @@
 {
+ "event:18-poems": {
+  "cy": "Dylan Thomas"
+ },
+ "event:a-bigger-senedd": {
+  "cy": "Etholiad Senedd Cymru, 2026"
+ },
+ "event:a-fort-at-cardiff": {
+  "cy": "Castell Caerdydd",
+  "britannica": "https://www.britannica.com/place/Cardiff-Castle",
+  "coflein": "https://coflein.gov.uk/en/site/33"
+ },
+ "event:a-fortress-at-usk": {
+  "cy": "Caer Rufeinig Brynbuga",
+  "coflein": "https://coflein.gov.uk/en/site/93470"
+ },
+ "event:a-million-welsh-speakers": {
+  "cy": "Cymraeg",
+  "britannica": "https://www.britannica.com/topic/Welsh-language"
+ },
+ "event:a-prince-called-arthur": {
+  "cy": "Arthur Tudur"
+ },
+ "event:a-society-for-welsh-in-the-schools": {
+  "cy": "Dan Isaac Davies"
+ },
+ "event:a-university-for-wales": {
+  "cy": "Prifysgol Aberystwyth"
+ },
+ "event:a-welsh-grammar-in-milan": {
+  "cy": "Gruffydd Robert",
+  "britannica": "https://www.britannica.com/biography/Gruffydd-Robert"
+ },
+ "event:a-welsh-king": {
+  "cy": "Harri VII, brenin Lloegr",
+  "britannica": "https://www.britannica.com/biography/Henry-VII-king-of-England"
+ },
+ "event:a-welsh-prime-minister": {
+  "cy": "David Lloyd George",
+  "britannica": "https://www.britannica.com/biography/David-Lloyd-George"
+ },
+ "event:a-world-record": {
+  "cy": "Colin Jackson"
+ },
+ "event:aberfan": {
+  "cy": "Trychineb Aberfan"
+ },
+ "event:aberfans-money-returned": {
+  "cy": "Trychineb Aberfan"
+ },
+ "event:agricola-completes-the-conquest": {
+  "cy": "Agricola",
+  "britannica": "https://www.britannica.com/biography/Gnaeus-Julius-Agricola"
+ },
+ "event:an-act-for-the-bible-in-welsh": {
+  "cy": "Cyfieithu'r Beibl i'r Gymraeg"
+ },
+ "event:an-english-prince-of-wales": {
+  "cy": "Edward II, brenin Lloegr",
+  "britannica": "https://www.britannica.com/biography/Edward-II-king-of-England"
+ },
+ "event:another-grand-slam": {
+  "cy": "Pencampwriaeth y Chwe Gwlad 2019"
+ },
+ "event:armes-prydein": {
+  "cy": "Armes Prydein"
+ },
+ "event:art-in-kendricks-cave": {
+  "cy": "Ogof Kendrick"
+ },
+ "event:asser-writes-alfreds-life": {
+  "cy": "Asser",
+  "britannica": "https://www.britannica.com/biography/Asser"
+ },
+ "event:back-at-the-world-cup": {
+  "cy": "Tîm pêl-droed cenedlaethol Cymru"
+ },
+ "event:barclodiad-y-gawres": {
+  "cy": "Barclodiad y Gawres"
+ },
+ "event:barry-docks-open": {
+  "cy": "Doc y Barri"
+ },
+ "event:barti-ddu": {
+  "cy": "Bartholomew Roberts",
+  "britannica": "https://www.britannica.com/biography/Bartholomew-Roberts"
+ },
+ "event:battle-of-bryn-glas": {
+  "cy": "Brwydr Bryn Glas"
+ },
+ "event:battle-of-chester": {
+  "cy": "Brwydr Caer"
+ },
+ "event:battle-of-mynydd-carn": {
+  "cy": "Brwydr Mynydd Carn"
+ },
+ "event:battle-of-st-fagans": {
+  "cy": "Brwydr Sain Ffagan"
+ },
+ "event:beuno-at-clynnog-fawr": {
+  "cy": "Clynnog Fawr"
+ },
+ "event:bleddyn-ap-cynfyn": {
+  "cy": "Bleddyn ap Cynfyn"
+ },
+ "event:bomb-at-the-temple-of-peace": {
+  "cy": "Y Deml Heddwch",
+  "coflein": "https://coflein.gov.uk/en/site/11820"
+ },
+ "event:bran-fendigaid-brings-the-faith-from-rome": {
+  "cy": "Bendigeidfran fab Llŷr"
+ },
+ "event:brutus-comes-to-the-island-of-britain": {
+  "cy": "Brutus"
+ },
+ "event:brychans-kingdom": {
+  "cy": "Brychan"
+ },
+ "event:bryn-cader-faner": {
+  "cy": "Bryn Cader Faner",
+  "coflein": "https://coflein.gov.uk/en/site/302869"
+ },
+ "event:bryn-celli-ddu": {
+  "cy": "Bryn Celli Ddu"
+ },
+ "event:bryn-terfel-in-cardiff": {
+  "cy": "Bryn Terfel",
+  "britannica": "https://www.britannica.com/biography/Bryn-Terfel"
+ },
+ "event:builders-of-the-dolmens": {
+  "cy": "Pentre Ifan",
+  "coflein": "https://coflein.gov.uk/en/site/101450"
+ },
+ "event:cadog-at-llancarfan": {
+  "cy": "Llancarfan"
+ },
+ "event:cadwaladr": {
+  "cy": "Cadwaladr (gwahaniaethu)"
+ },
+ "event:cadwallon-defeats-northumbria": {
+  "cy": "Cadwallon ap Cadfan",
+  "britannica": "https://www.britannica.com/biography/Cadwallon"
+ },
+ "event:caer-gybi": {
+  "cy": "Caergybi",
+  "coflein": "https://coflein.gov.uk/en/site/32990"
+ },
+ "event:caerwent-town-of-the-silures": {
+  "cy": "Caer-went",
+  "coflein": "https://coflein.gov.uk/en/site/33166"
+ },
+ "event:camlann": {
+  "cy": "Brwydr Camlan"
+ },
+ "event:canwyll-y-cymry": {
+  "cy": "Rhys Prichard",
+  "britannica": "https://www.britannica.com/biography/Rhys-Prichard"
+ },
+ "event:caratacus-speaks-in-rome": {
+  "cy": "Caradog",
+  "britannica": "https://www.britannica.com/biography/Caratacus"
+ },
+ "event:caratacuss-last-stand": {
+  "cy": "Caradog",
+  "britannica": "https://www.britannica.com/biography/Caratacus"
+ },
+ "event:cardiff-becomes-a-city": {
+  "cy": "Caerdydd"
+ },
+ "event:cardiff-named-capital": {
+  "cy": "Caerdydd"
+ },
+ "event:cardiffs-first-dock": {
+  "cy": "Bae Caerdydd"
+ },
+ "event:castell-henllys": {
+  "cy": "Castell Henllys",
+  "coflein": "https://coflein.gov.uk/en/site/94989"
+ },
+ "event:cofiwch-dryweryn-across-wales": {
+  "cy": "Cofiwch Dryweryn"
+ },
+ "event:colleges-at-cardiff-and-bangor": {
+  "cy": "Prifysgol Bangor"
+ },
+ "event:conwy-taken-on-good-friday": {
+  "cy": "Castell Conwy",
+  "britannica": "https://www.britannica.com/place/Conwy-Castle",
+  "coflein": "https://coflein.gov.uk/en/site/121"
+ },
+ "event:copper-at-parys-mountain": {
+  "cy": "Mynydd Parys"
+ },
+ "event:copper-at-parys-mountain-1768": {
+  "cy": "Mynydd Parys"
+ },
+ "event:copper-from-the-great-orme": {
+  "cy": "Pen y Gogarth",
+  "britannica": "https://www.britannica.com/place/Great-Orme"
+ },
+ "event:counties-with-welsh-names": {
+  "cy": "Deddf Llywodraeth Leol 1972",
+  "britannica": "https://www.britannica.com/topic/Local-Government-Act-United-Kingdom-1972-effective-1974"
+ },
+ "event:cranogwen-edits-y-frythones": {
+  "cy": "Sarah Jane Rees (Cranogwen)"
+ },
+ "event:cunedda-comes-to-gwynedd": {
+  "cy": "Cunedda",
+  "britannica": "https://www.britannica.com/biography/Cunedda-Wledig"
+ },
+ "event:cwmbran": {
+  "cy": "Cwmbrân",
+  "britannica": "https://www.britannica.com/place/Cwmbran"
+ },
+ "event:cyfarthfa": {
+  "cy": "Gwaith Haearn Cyfarthfa"
+ },
+ "event:cymru-fydd": {
+  "cy": "Cymru Fydd"
+ },
+ "event:dafydd-ap-gwilym": {
+  "cy": "Dafydd ap Gwilym",
+  "britannica": "https://www.britannica.com/biography/Dafydd-ap-Gwilym"
+ },
+ "event:dafydd-fights-on": {
+  "cy": "Dafydd ap Gruffudd",
+  "britannica": "https://www.britannica.com/biography/David-ap-Gruffudd"
+ },
+ "event:dafydd-prince-of-wales": {
+  "cy": "Dafydd ap Llywelyn",
+  "britannica": "https://www.britannica.com/biography/David-ap-Llywelyn"
+ },
+ "event:death-at-cilmeri": {
+  "cy": "Llywelyn ap Gruffudd",
+  "britannica": "https://www.britannica.com/biography/Llywelyn-ap-Gruffudd"
+ },
+ "event:death-of-saint-david": {
+  "cy": "Dewi Sant",
+  "britannica": "https://www.britannica.com/biography/Saint-David"
+ },
+ "event:deiniol-at-bangor": {
+  "cy": "Eglwys Gadeiriol Bangor",
+  "britannica": "https://www.britannica.com/place/Bangor-Cathedral",
+  "coflein": "https://coflein.gov.uk/en/site/43727"
+ },
+ "event:devolution-rejected": {
+  "cy": "Refferendwm datganoli i Gymru, 1979"
+ },
+ "event:dowlais-biggest-in-the-world": {
+  "cy": "Gwaith Haearn Dowlais"
+ },
+ "event:dr-william-price-and-cremation": {
+  "cy": "William Price (meddyg)"
+ },
+ "event:early-written-welsh": {
+  "cy": "Llyfr Sant Chad"
+ },
+ "event:edwards-ring-of-iron": {
+  "cy": "Cestyll a Muriau Trefi'r Brenin Edward yng Ngwynedd"
+ },
+ "event:escape-from-tenby": {
+  "cy": "Siasbar Tudur",
+  "britannica": "https://www.britannica.com/biography/Jasper-Tudor-duke-of-Bedford"
+ },
+ "event:fire-at-penyberth": {
+  "cy": "Penyberth",
+  "coflein": "https://coflein.gov.uk/en/site/16699"
+ },
+ "event:football-association-of-wales": {
+  "cy": "Cymdeithas Bêl-droed Cymru"
+ },
+ "event:footprints-in-the-severn-mud": {
+  "cy": "Allteuryn"
+ },
+ "event:frances-hoggan-doctor": {
+  "cy": "Frances Elizabeth Morgan"
+ },
+ "event:freddie-welsh-world-champion": {
+  "cy": "Freddie Welsh"
+ },
+ "event:frontinus-and-the-silures": {
+  "cy": "Sextus Julius Frontinus",
+  "britannica": "https://www.britannica.com/biography/Sextus-Julius-Frontinus"
+ },
+ "event:geraint-thomas-wins-the-tour": {
+  "cy": "Geraint Thomas"
+ },
+ "event:geralds-journey": {
+  "cy": "Gerallt Gymro",
+  "britannica": "https://www.britannica.com/biography/Giraldus-Cambrensis"
+ },
+ "event:gildas-writes": {
+  "cy": "De Excidio Britanniae",
+  "britannica": "https://www.britannica.com/topic/De-excidio-et-conquestu-Britanniae"
+ },
+ "event:glyndwrs-rising": {
+  "cy": "Owain Glyn Dŵr",
+  "britannica": "https://www.britannica.com/biography/Owain-Glyn-Dwr"
+ },
+ "event:grand-slam": {
+  "cy": "Pencampwriaeth y Chwe Gwlad 2005"
+ },
+ "event:grand-slam-2008": {
+  "cy": "Pencampwriaeth y Chwe Gwlad 2008"
+ },
+ "event:green-and-white-at-crecy": {
+  "cy": "Brwydr Crécy",
+  "britannica": "https://www.britannica.com/event/Battle-of-Crecy"
+ },
+ "event:gruffudd-ap-cynan-rebuilds-gwynedd": {
+  "cy": "Gruffudd ap Cynan",
+  "britannica": "https://www.britannica.com/biography/Gruffudd-ap-Cynan"
+ },
+ "event:gwenllian-and-the-great-revolt": {
+  "cy": "Gwenllian ferch Gruffudd ap Cynan"
+ },
+ "event:gwynfor-and-s4c": {
+  "cy": "Gwynfor Evans",
+  "britannica": "https://www.britannica.com/biography/Richard-Gwynfor-Evans"
+ },
+ "event:gwynfor-evans-elected": {
+  "cy": "Gwynfor Evans",
+  "britannica": "https://www.britannica.com/biography/Richard-Gwynfor-Evans"
+ },
+ "event:half-and-half": {
+  "cy": "Etholiad Cynulliad Cenedlaethol Cymru, 2003"
+ },
+ "event:harlech-and-aberystwyth": {
+  "cy": "Castell Harlech",
+  "coflein": "https://coflein.gov.uk/en/site/93729"
+ },
+ "event:harri-tudur-is-born": {
+  "cy": "Harri VII, brenin Lloegr",
+  "britannica": "https://www.britannica.com/biography/Henry-VII-king-of-England"
+ },
+ "event:hen-wlad-fy-nhadau": {
+  "cy": "Hen Wlad fy Nhadau"
+ },
+ "event:henry-ii-turned-back": {
+  "cy": "Brwydr Crogen"
+ },
+ "event:henry-morgan-at-panama": {
+  "cy": "Harri Morgan",
+  "britannica": "https://www.britannica.com/biography/Henry-Morgan-Welsh-buccaneer"
+ },
+ "event:hywel-dda-dies": {
+  "cy": "Hywel Dda",
+  "britannica": "https://www.britannica.com/biography/Hywel-Dda"
+ },
+ "event:hywel-goes-to-rome": {
+  "cy": "Hywel Dda",
+  "britannica": "https://www.britannica.com/biography/Hywel-Dda"
+ },
+ "event:hywel-rules-most-of-wales": {
+  "cy": "Hywel Dda",
+  "britannica": "https://www.britannica.com/biography/Hywel-Dda"
+ },
+ "event:investiture-at-caernarfon": {
+  "cy": "Castell Caernarfon",
+  "britannica": "https://www.britannica.com/place/Caernarfon-Castle",
+  "coflein": "https://coflein.gov.uk/en/site/95318"
+ },
+ "event:iron-at-merthyr": {
+  "cy": "Gwaith Haearn Dowlais"
+ },
+ "event:its-not-unusual": {
+  "cy": "Tom Jones",
+  "britannica": "https://www.britannica.com/biography/Tom-Jones"
+ },
+ "event:jesus-college-oxford": {
+  "cy": "Coleg yr Iesu, Rhydychen"
+ },
+ "event:john-daviess-dictionary": {
+  "cy": "John Davies, Mallwyd"
+ },
+ "event:john-evans-reaches-the-mandan": {
+  "cy": "John Evans (fforiwr)"
+ },
+ "event:john-jenkins-sentenced": {
+  "cy": "John Barnard Jenkins"
+ },
+ "event:joseph-of-arimathea-comes-to-ynys-wydrin": {
+  "cy": "Joseff o Arimathea",
+  "britannica": "https://www.britannica.com/biography/Saint-Joseph-of-Arimathea"
+ },
+ "event:julius-and-aaron": {
+  "cy": "Julius ac Aaron"
+ },
+ "event:justice-of-south-wales": {
+  "cy": "Rhys ap Gruffudd",
+  "britannica": "https://www.britannica.com/biography/Rhys-ap-Gruffudd"
+ },
+ "event:keep-the-home-fires-burning": {
+  "cy": "Ivor Novello",
+  "britannica": "https://www.britannica.com/biography/Ivor-Novello"
+ },
+ "event:keir-hardie-for-merthyr": {
+  "cy": "Keir Hardie",
+  "britannica": "https://www.britannica.com/biography/J-Keir-Hardie"
+ },
+ "event:law-making-powers": {
+  "cy": "Refferendwm ar bwerau Cynulliad Cenedlaethol Cymru 2011"
+ },
+ "event:lhuyd-shows-welsh-has-sister-tongues": {
+  "cy": "Edward Lhuyd",
+  "britannica": "https://www.britannica.com/biography/Edward-Lhuyd"
+ },
+ "event:liverpool-says-sorry": {
+  "cy": "Boddi Tryweryn"
+ },
+ "event:llanelwy": {
+  "cy": "Eglwys Gadeiriol Llanelwy",
+  "coflein": "https://coflein.gov.uk/en/site/140540"
+ },
+ "event:llangrannog": {
+  "cy": "Urdd Gobaith Cymru"
+ },
+ "event:lloyd-george-elected": {
+  "cy": "David Lloyd George",
+  "britannica": "https://www.britannica.com/biography/David-Lloyd-George"
+ },
+ "event:llywelyn-ap-seisyll-wins-at-abergwili": {
+  "cy": "Llywelyn ap Seisyll"
+ },
+ "event:llywelyn-bren-rises": {
+  "cy": "Llywelyn Bren"
+ },
+ "event:llywelyn-fawr-dies": {
+  "cy": "Llywelyn Fawr",
+  "britannica": "https://www.britannica.com/biography/Llywelyn-ap-Iorwerth"
+ },
+ "event:llywelyn-fawr-supreme": {
+  "cy": "Llywelyn Fawr",
+  "britannica": "https://www.britannica.com/biography/Llywelyn-ap-Iorwerth"
+ },
+ "event:llywelyn-marries-eleanor": {
+  "cy": "Elinor de Montfort"
+ },
+ "event:llywelyn-marries-siwan": {
+  "cy": "Y Dywysoges Siwan"
+ },
+ "event:llywelyn-strikes-back": {
+  "cy": "Llywelyn Fawr",
+  "britannica": "https://www.britannica.com/biography/Llywelyn-ap-Iorwerth"
+ },
+ "event:llywelyn-wins-at-aberconwy": {
+  "cy": "Llywelyn Fawr",
+  "britannica": "https://www.britannica.com/biography/Llywelyn-ap-Iorwerth"
+ },
+ "event:mac-strikes-at-tryweryn": {
+  "cy": "Mudiad Amddiffyn Cymru"
+ },
+ "event:macsen-wledig": {
+  "cy": "Macsen Wledig",
+  "britannica": "https://www.britannica.com/biography/Magnus-Maximus"
+ },
+ "event:madog-ap-llywelyns-revolt": {
+  "cy": "Madog ap Llywelyn"
+ },
+ "event:madog-sails-west": {
+  "cy": "Madog ab Owain Gwynedd",
+  "britannica": "https://www.britannica.com/topic/Madog-ab-Owain-Gwynedd"
+ },
+ "event:madogs-voyage-in-print": {
+  "cy": "Madog ab Owain Gwynedd",
+  "britannica": "https://www.britannica.com/topic/Madog-ab-Owain-Gwynedd"
+ },
+ "event:maelgwn-and-the-yellow-plague": {
+  "cy": "Maelgwn Gwynedd"
+ },
+ "event:mail-order-is-born": {
+  "cy": "Pryce Pryce-Jones"
+ },
+ "event:maredudd-ab-owain": {
+  "cy": "Maredudd ab Owain",
+  "britannica": "https://www.britannica.com/biography/Maredudd-ap-Owain"
+ },
+ "event:maredudd-ransoms-his-people": {
+  "cy": "Maredudd ab Owain",
+  "britannica": "https://www.britannica.com/biography/Maredudd-ap-Owain"
+ },
+ "event:mary-joness-walk": {
+  "cy": "Mari Jones"
+ },
+ "event:merfyn-frych": {
+  "cy": "Merfyn Frych"
+ },
+ "event:mon-is-saved-by-boudica": {
+  "cy": "Buddug (Boudica)",
+  "britannica": "https://www.britannica.com/biography/Boudicca"
+ },
+ "event:myfanwy": {
+  "cy": "Myfanwy"
+ },
+ "event:national-library-and-museum": {
+  "cy": "Llyfrgell Genedlaethol Cymru",
+  "britannica": "https://www.britannica.com/place/National-Library-of-Wales",
+  "coflein": "https://coflein.gov.uk/en/site/23293"
+ },
+ "event:natural-selection": {
+  "cy": "Alfred Russel Wallace",
+  "britannica": "https://www.britannica.com/biography/Alfred-Russel-Wallace"
+ },
+ "event:neanderthals-at-pontnewydd": {
+  "cy": "Ogof Bontnewydd"
+ },
+ "event:nest-and-the-night-at-cenarth-bychan": {
+  "cy": "Nest ferch Rhys ap Tewdwr"
+ },
+ "event:newport-and-rebecca": {
+  "cy": "Terfysg Casnewydd"
+ },
+ "event:normans-at-chepstow": {
+  "cy": "Castell Cas-gwent",
+  "coflein": "https://coflein.gov.uk/en/site/95237"
+ },
+ "event:offas-dyke": {
+  "cy": "Clawdd Offa",
+  "britannica": "https://www.britannica.com/topic/Offas-Dyke"
+ },
+ "event:offerings-at-llyn-cerrig-bach": {
+  "cy": "Llyn Cerrig Bach"
+ },
+ "event:one-king-for-all-wales": {
+  "cy": "Gruffudd ap Llywelyn"
+ },
+ "event:owain-gwynedd": {
+  "cy": "Owain Gwynedd",
+  "britannica": "https://www.britannica.com/biography/Owain-Gwynedd"
+ },
+ "event:owain-gwynedd-dies": {
+  "cy": "Owain Gwynedd",
+  "britannica": "https://www.britannica.com/biography/Owain-Gwynedd"
+ },
+ "event:owain-is-never-taken": {
+  "cy": "Owain Glyn Dŵr",
+  "britannica": "https://www.britannica.com/biography/Owain-Glyn-Dwr"
+ },
+ "event:owain-lawgoch-sails": {
+  "cy": "Owain Lawgoch"
+ },
+ "event:owain-tudur-and-the-queen": {
+  "cy": "Owain Tudur",
+  "britannica": "https://www.britannica.com/biography/Owen-Tudor"
+ },
+ "event:owain-writes-to-scotland-and-ireland": {
+  "cy": "Owain Glyn Dŵr",
+  "britannica": "https://www.britannica.com/biography/Owain-Glyn-Dwr"
+ },
+ "event:padarn-at-llanbadarn-fawr": {
+  "cy": "Padarn"
+ },
+ "event:pantycelyns-first-hymns": {
+  "cy": "William Williams, Pantycelyn"
+ },
+ "event:parliament-at-machynlleth": {
+  "cy": "Machynlleth"
+ },
+ "event:patrick-goes-to-ireland": {
+  "cy": "Sant Padrig",
+  "britannica": "https://www.britannica.com/biography/Saint-Patrick"
+ },
+ "event:patrick-taken-by-irish-raiders": {
+  "cy": "Sant Padrig",
+  "britannica": "https://www.britannica.com/biography/Saint-Patrick"
+ },
+ "event:pelagius": {
+  "cy": "Pelagius"
+ },
+ "event:pembroke-dock": {
+  "cy": "Doc Penfro",
+  "coflein": "https://coflein.gov.uk/en/site/33204"
+ },
+ "event:plaid-cymru-founded": {
+  "cy": "Plaid Cymru",
+  "britannica": "https://www.britannica.com/topic/Plaid-Cymru"
+ },
+ "event:plaid-cymru-leads-wales": {
+  "cy": "Etholiad Senedd Cymru, 2026"
+ },
+ "event:pontcysyllte-opens": {
+  "cy": "Dyfrbont Pontcysyllte",
+  "coflein": "https://coflein.gov.uk/en/site/34410"
+ },
+ "event:pontcysyllte-world-heritage": {
+  "cy": "Dyfrbont Pontcysyllte",
+  "coflein": "https://coflein.gov.uk/en/site/34410"
+ },
+ "event:prince-of-wales": {
+  "cy": "Tywysog Cymru",
+  "britannica": "https://www.britannica.com/topic/prince-of-Wales"
+ },
+ "event:protest-at-trefechan-bridge": {
+  "cy": "Cymdeithas yr Iaith",
+  "britannica": "https://www.britannica.com/topic/Welsh-Language-Society"
+ },
+ "event:radio-across-the-sea": {
+  "cy": "William Henry Preece",
+  "britannica": "https://www.britannica.com/biography/William-Henry-Preece"
+ },
+ "event:radio-comes-to-wales": {
+  "cy": "BBC Cymru"
+ },
+ "event:radio-cymru": {
+  "cy": "BBC Radio Cymru"
+ },
+ "event:rebecca-rides": {
+  "cy": "Helyntion Beca"
+ },
+ "event:revenge-for-rhodri": {
+  "cy": "Anarawd ap Rhodri",
+  "britannica": "https://www.britannica.com/biography/Anarawd"
+ },
+ "event:rhodri-ap-merfyn": {
+  "cy": "Rhodri Mawr"
+ },
+ "event:rhodri-gains-powys": {
+  "cy": "Cyngen ap Cadell"
+ },
+ "event:rhodri-gains-seisyllwg": {
+  "cy": "Seisyllwg"
+ },
+ "event:rhodri-mawr-defeats-the-vikings": {
+  "cy": "Rhodri Mawr"
+ },
+ "event:rhodri-mawr-falls": {
+  "cy": "Rhodri Mawr"
+ },
+ "event:rhys-ap-tewdwr-falls": {
+  "cy": "Rhys ap Tewdwr",
+  "britannica": "https://www.britannica.com/biography/Rhys-ap-Tewdwr"
+ },
+ "event:richard-amerike-and-cabot": {
+  "cy": "Richard ap Meurig"
+ },
+ "event:richard-gwyn-executed": {
+  "cy": "Rhisiart Gwyn"
+ },
+ "event:richard-price-and-liberty": {
+  "cy": "Richard Price",
+  "britannica": "https://www.britannica.com/biography/Richard-Price"
+ },
+ "event:robert-owen-at-new-lanark": {
+  "cy": "Robert Owen",
+  "britannica": "https://www.britannica.com/biography/Robert-Owen"
+ },
+ "event:roman-gold-at-dolaucothi": {
+  "cy": "Mwynfeydd aur Dolaucothi",
+  "coflein": "https://coflein.gov.uk/en/site/95142"
+ },
+ "event:rome-attacks-ynys-mon": {
+  "cy": "Cyfnod y Rhufeiniaid yng Nghymru"
+ },
+ "event:rome-meets-the-deceangli": {
+  "cy": "Deceangli"
+ },
+ "event:s4c-goes-on-air": {
+  "cy": "S4C"
+ },
+ "event:saint-dyfrig": {
+  "cy": "Dyfrig"
+ },
+ "event:samson-sails-to-brittany": {
+  "cy": "Samson (sant)"
+ },
+ "event:sarn-helen": {
+  "cy": "Sarn Helen"
+ },
+ "event:senedd-cymru": {
+  "cy": "Senedd Cymru",
+  "britannica": "https://www.britannica.com/topic/National-Assembly-for-Wales"
+ },
+ "event:senghenydd": {
+  "cy": "Tanchwa Senghennydd"
+ },
+ "event:seren-gomer": {
+  "cy": "Seren Gomer"
+ },
+ "event:silex-scintillans": {
+  "cy": "Henry Vaughan",
+  "britannica": "https://www.britannica.com/biography/Henry-Vaughan"
+ },
+ "event:statute-of-rhuddlan": {
+  "cy": "Statud Rhuddlan"
+ },
+ "event:strata-florida": {
+  "cy": "Abaty Ystrad Fflur",
+  "coflein": "https://coflein.gov.uk/en/site/95764"
+ },
+ "event:sulien-the-wise": {
+  "cy": "Sulien"
+ },
+ "event:sunday-closing-act": {
+  "cy": "Deddf Cau Tafarnau ar y Sul (Cymru) 1881"
+ },
+ "event:swansea-lift-the-league-cup": {
+  "cy": "C.P.D. Dinas Abertawe"
+ },
+ "event:taliesin-sings-for-urien": {
+  "cy": "Taliesin",
+  "britannica": "https://www.britannica.com/biography/Taliesin-Welsh-poet"
+ },
+ "event:teilo-of-llandeilo": {
+  "cy": "Teilo"
+ },
+ "event:tertullian-britons-subject-to-christ": {
+  "cy": "Tertullianus",
+  "britannica": "https://www.britannica.com/biography/Tertullian"
+ },
+ "event:tewdrig-at-tintern": {
+  "cy": "Tewdrig"
+ },
+ "event:the-1868-election": {
+  "cy": "Etholiad cyffredinol y Deyrnas Unedig, 1868"
+ },
+ "event:the-abbey-works": {
+  "cy": "Gwaith Dur Port Talbot"
+ },
+ "event:the-abergele-martyrs": {
+  "cy": "Mudiad Amddiffyn Cymru"
+ },
+ "event:the-ambush-at-coed-eulo": {
+  "cy": "Brwydr Cwnsyllt"
+ },
+ "event:the-annals-of-wales": {
+  "cy": "Annales Cambriae",
+  "britannica": "https://www.britannica.com/topic/Annales-Cambriae"
+ },
+ "event:the-banc-tynddol-sun-disc": {
+  "cy": "Cwmystwyth"
+ },
+ "event:the-battle-of-arfderydd": {
+  "cy": "Brwydr Arfderydd"
+ },
+ "event:the-bible-revised": {
+  "cy": "Cyfieithu'r Beibl i'r Gymraeg"
+ },
+ "event:the-bishops-palace-at-st-davids": {
+  "coflein": "https://coflein.gov.uk/en/site/21633"
+ },
+ "event:the-black-book-of-carmarthen": {
+  "cy": "Llyfr Du Caerfyrddin",
+  "britannica": "https://www.britannica.com/topic/Black-Book-of-Carmarthen"
+ },
+ "event:the-black-chair": {
+  "cy": "Hedd Wyn"
+ },
+ "event:the-black-death": {
+  "cy": "Pla Du",
+  "britannica": "https://www.britannica.com/event/Black-Death"
+ },
+ "event:the-bluestones-of-preseli": {
+  "cy": "Côr y Cewri",
+  "britannica": "https://www.britannica.com/topic/Stonehenge"
+ },
+ "event:the-book-of-aneirin": {
+  "cy": "Llyfr Aneirin",
+  "britannica": "https://www.britannica.com/topic/The-Book-of-Aneirin"
+ },
+ "event:the-book-of-iorwerth": {
+  "cy": "Cyfraith Hywel"
+ },
+ "event:the-book-of-llandaf": {
+  "cy": "Llyfr Llandaf",
+  "britannica": "https://www.britannica.com/topic/Book-of-Llandaff"
+ },
+ "event:the-book-of-taliesin": {
+  "cy": "Llyfr Taliesin",
+  "britannica": "https://www.britannica.com/topic/The-Book-of-Taliesin"
+ },
+ "event:the-book-of-the-three-birds": {
+  "cy": "Morgan Llwyd",
+  "britannica": "https://www.britannica.com/biography/Morgan-Llwyd"
+ },
+ "event:the-britannia-bridge": {
+  "cy": "Pont Britannia",
+  "britannica": "https://www.britannica.com/topic/Britannia-Bridge",
+  "coflein": "https://coflein.gov.uk/en/site/34614"
+ },
+ "event:the-caergwrle-bowl": {
+  "cy": "Cawg Caergwrle"
+ },
+ "event:the-caerwys-eisteddfod": {
+  "cy": "Caerwys"
+ },
+ "event:the-carmarthen-eisteddfod": {
+  "cy": "Dafydd ab Edmwnd",
+  "britannica": "https://www.britannica.com/biography/Dafydd-ap-Edmwnd"
+ },
+ "event:the-castles-become-world-heritage": {
+  "cy": "Cestyll a Muriau Trefi'r Brenin Edward yng Ngwynedd"
+ },
+ "event:the-church-in-wales": {
+  "cy": "Yr Eglwys yng Nghymru",
+  "britannica": "https://www.britannica.com/topic/Church-in-Wales"
+ },
+ "event:the-circulating-schools": {
+  "cy": "Griffith Jones, Llanddowror",
+  "britannica": "https://www.britannica.com/biography/Griffith-Jones"
+ },
+ "event:the-clearing-of-epynt": {
+  "cy": "Mynydd Epynt"
+ },
+ "event:the-coal-exchange-opens": {
+  "cy": "Y Gyfnewidfa Lo",
+  "coflein": "https://coflein.gov.uk/en/site/31766"
+ },
+ "event:the-corwen-eisteddfod": {
+  "cy": "Gwyneddigion"
+ },
+ "event:the-council-at-aberdyfi": {
+  "cy": "Llywelyn Fawr",
+  "britannica": "https://www.britannica.com/biography/Llywelyn-ap-Iorwerth"
+ },
+ "event:the-council-of-the-silures": {
+  "cy": "Caer-went",
+  "coflein": "https://coflein.gov.uk/en/site/33166"
+ },
+ "event:the-court-of-great-sessions": {
+  "cy": "Llys y Sesiwn Fawr",
+  "britannica": "https://www.britannica.com/topic/Court-of-Great-Sessions"
+ },
+ "event:the-cymmrodorion": {
+  "cy": "Anrhydeddus Gymdeithas y Cymmrodorion",
+  "britannica": "https://www.britannica.com/topic/Cymmrodorion-Society"
+ },
+ "event:the-druids-of-mon": {
+  "cy": "Derwydd",
+  "britannica": "https://www.britannica.com/topic/Druid"
+ },
+ "event:the-education-act": {
+  "britannica": "https://www.britannica.com/topic/Elementary-Education-Act"
+ },
+ "event:the-elegy-for-llywelyn": {
+  "cy": "Gruffudd ab yr Ynad Coch"
+ },
+ "event:the-empire-games-in-cardiff": {
+  "cy": "Gemau Ymerodraeth Prydain a'r Gymanwlad 1958"
+ },
+ "event:the-equals-sign": {
+  "cy": "Robert Recorde",
+  "britannica": "https://www.britannica.com/biography/Robert-Recorde"
+ },
+ "event:the-family-at-trefeca": {
+  "cy": "Howel Harris",
+  "britannica": "https://www.britannica.com/biography/Howel-Harris"
+ },
+ "event:the-fed": {
+  "cy": "Ffederasiwn Glowyr De Cymru"
+ },
+ "event:the-ffestiniog-railway-carries-passengers": {
+  "cy": "Rheilffordd Ffestiniog",
+  "coflein": "https://coflein.gov.uk/en/site/34660"
+ },
+ "event:the-first-assembly-election": {
+  "cy": "Etholiad Cynulliad Cenedlaethol Cymru, 1999"
+ },
+ "event:the-first-chapel-at-llanfaches": {
+  "cy": "Llanfaches"
+ },
+ "event:the-first-eisteddfod": {
+  "cy": "Eisteddfod",
+  "britannica": "https://www.britannica.com/art/eisteddfod"
+ },
+ "event:the-first-gorsedd": {
+  "cy": "Gorsedd y Beirdd"
+ },
+ "event:the-first-grand-slam": {
+  "cy": "Tîm rygbi'r undeb cenedlaethol Cymru"
+ },
+ "event:the-first-king-of-all-wales-falls": {
+  "cy": "Gruffudd ap Llywelyn"
+ },
+ "event:the-first-map-of-wales": {
+  "cy": "Humphrey Lhuyd"
+ },
+ "event:the-first-million-pound-cheque": {
+  "cy": "Y Gyfnewidfa Lo",
+  "coflein": "https://coflein.gov.uk/en/site/31766"
+ },
+ "event:the-first-old-age-pensions": {
+  "britannica": "https://www.britannica.com/topic/Old-Age-Pensions-Act-United-Kingdom-1908"
+ },
+ "event:the-first-railway-locomotive": {
+  "cy": "Richard Trevithick",
+  "britannica": "https://www.britannica.com/biography/Richard-Trevithick"
+ },
+ "event:the-first-welsh-book": {
+  "cy": "Yn y lhyvyr hwnn",
+  "britannica": "https://www.britannica.com/topic/Yn-y-lhyvyr-hwnn"
+ },
+ "event:the-first-welsh-dictionary": {
+  "cy": "William Salesbury",
+  "britannica": "https://www.britannica.com/biography/William-Salesbury"
+ },
+ "event:the-first-welsh-earl": {
+  "cy": "William Herbert (gwahaniaethu)"
+ },
+ "event:the-first-welsh-medium-secondary-school": {
+  "cy": "Ysgol Glan Clwyd"
+ },
+ "event:the-first-welsh-medium-state-school": {
+  "cy": "Addysg Gymraeg"
+ },
+ "event:the-fort-of-segontium": {
+  "cy": "Segontium"
+ },
+ "event:the-fortress-at-caerleon": {
+  "cy": "Caerllion",
+  "britannica": "https://www.britannica.com/place/Caerleon"
+ },
+ "event:the-four-branches-are-written": {
+  "cy": "Pedair Cainc y Mabinogi",
+  "britannica": "https://www.britannica.com/topic/The-Four-Branches-of-the-Mabinogi"
+ },
+ "event:the-free-wales-army-at-llyn-celyn": {
+  "cy": "Byddin Rhyddid Cymru"
+ },
+ "event:the-free-wales-army-trial-ends": {
+  "cy": "Byddin Rhyddid Cymru"
+ },
+ "event:the-fuel-cell": {
+  "cy": "William Robert Grove",
+  "britannica": "https://www.britannica.com/biography/William-Robert-Grove"
+ },
+ "event:the-future-generations-act": {
+  "cy": "Deddf Llesiant Cenedlaethau'r Dyfodol (Cymru) 2015"
+ },
+ "event:the-general-strike": {
+  "cy": "Streic Gyffredinol y Deyrnas Unedig 1926",
+  "britannica": "https://www.britannica.com/event/General-Strike-of-1926"
+ },
+ "event:the-glamorganshire-canal-opens": {
+  "cy": "Camlas Morgannwg",
+  "britannica": "https://www.britannica.com/topic/Glamorganshire-Canal",
+  "coflein": "https://coflein.gov.uk/en/site/34425"
+ },
+ "event:the-golden-era-begins": {
+  "cy": "Pencampwriaeth y Pum Gwlad 1971"
+ },
+ "event:the-gorsedd-joins-the-eisteddfod": {
+  "cy": "Gorsedd y Beirdd"
+ },
+ "event:the-government-of-wales-act": {
+  "cy": "Deddf Llywodraeth Cymru 1998"
+ },
+ "event:the-great-revival": {
+  "cy": "Diwygiad 1904–1905"
+ },
+ "event:the-henges-of-llandygai": {
+  "cy": "Llandygái"
+ },
+ "event:the-hillfort-tribes": {
+  "cy": "Cynhanes Cymru"
+ },
+ "event:the-history-of-the-britons": {
+  "cy": "Historia Brittonum",
+  "britannica": "https://www.britannica.com/topic/Historia-Brittonum"
+ },
+ "event:the-history-of-the-kings-of-britain": {
+  "cy": "Historia Regum Britanniae"
+ },
+ "event:the-king-who-became-prince": {
+  "cy": "Owain Gwynedd",
+  "britannica": "https://www.britannica.com/biography/Owain-Gwynedd"
+ },
+ "event:the-language-petition": {
+  "cy": "Deddf Llysoedd Cymreig 1942"
+ },
+ "event:the-last-invasion-of-britain": {
+  "cy": "Brwydr Abergwaun"
+ },
+ "event:the-laws-in-wales-acts": {
+  "cy": "Deddfau'r Cyfreithiau yng Nghymru 1536 a 1542"
+ },
+ "event:the-laws-of-hywel-dda": {
+  "cy": "Cyfraith Cymru"
+ },
+ "event:the-life-of-saint-david": {
+  "cy": "Rhygyfarch ap Sulien"
+ },
+ "event:the-llangollen-international-eisteddfod": {
+  "cy": "Eisteddfod Ryngwladol Llangollen"
+ },
+ "event:the-lord-rhys": {
+  "cy": "Rhys ap Gruffudd",
+  "britannica": "https://www.britannica.com/biography/Rhys-ap-Gruffudd"
+ },
+ "event:the-lord-rhys-dies": {
+  "cy": "Rhys ap Gruffudd",
+  "britannica": "https://www.britannica.com/biography/Rhys-ap-Gruffudd"
+ },
+ "event:the-mabinogion-in-english": {
+  "cy": "Charlotte Guest"
+ },
+ "event:the-march-to-liverpool": {
+  "cy": "Boddi Tryweryn"
+ },
+ "event:the-menai-bridge": {
+  "cy": "Pont y Borth",
+  "britannica": "https://www.britannica.com/topic/Menai-Bridge",
+  "coflein": "https://coflein.gov.uk/en/site/43063"
+ },
+ "event:the-merthyr-rising": {
+  "cy": "Gwrthryfel y gweithwyr ym Merthyr Tudful"
+ },
+ "event:the-message-of-peace-and-goodwill": {
+  "cy": "Urdd Gobaith Cymru"
+ },
+ "event:the-methodist-revival": {
+  "cy": "Howel Harris",
+  "britannica": "https://www.britannica.com/biography/Howel-Harris"
+ },
+ "event:the-methodists-break-away": {
+  "cy": "Eglwys Bresbyteraidd Cymru",
+  "britannica": "https://www.britannica.com/topic/Presbyterian-Church-of-Wales"
+ },
+ "event:the-microphone": {
+  "cy": "David Edward Hughes",
+  "britannica": "https://www.britannica.com/biography/David-Hughes"
+ },
+ "event:the-millennium-stadium": {
+  "cy": "Stadiwm y Mileniwm"
+ },
+ "event:the-miners-buy-tower": {
+  "cy": "Glofa'r Tŵr",
+  "coflein": "https://coflein.gov.uk/en/site/91586"
+ },
+ "event:the-miners-strike": {
+  "cy": "Streic y Glowyr (1984–85)"
+ },
+ "event:the-mirror-of-the-first-ages": {
+  "cy": "Theophilus Evans"
+ },
+ "event:the-mold-gold-cape": {
+  "cy": "Clogyn Aur yr Wyddgrug"
+ },
+ "event:the-mumbles-railway": {
+  "cy": "Rheilffordd Abertawe a'r Mwmbwls",
+  "coflein": "https://coflein.gov.uk/en/site/34832"
+ },
+ "event:the-national-eisteddfod": {
+  "cy": "Eisteddfod Genedlaethol Cymru",
+  "britannica": "https://www.britannica.com/topic/National-Eisteddfod-of-Wales"
+ },
+ "event:the-nato-summit": {
+  "cy": "Uwchgynhadledd NATO, 2014"
+ },
+ "event:the-new-testament-in-welsh": {
+  "cy": "William Salesbury",
+  "britannica": "https://www.britannica.com/biography/William-Salesbury"
+ },
+ "event:the-nhs": {
+  "cy": "Aneurin Bevan",
+  "britannica": "https://www.britannica.com/biography/Aneurin-Bevan"
+ },
+ "event:the-peak-of-coal": {
+  "cy": "Maes glo De Cymru"
+ },
+ "event:the-pennal-letter": {
+  "cy": "Polisi Pennal"
+ },
+ "event:the-penrhyn-lockout": {
+  "cy": "Chwarel y Penrhyn",
+  "coflein": "https://coflein.gov.uk/en/site/40564"
+ },
+ "event:the-peoples-of-wales": {
+  "cy": "Silwriaid"
+ },
+ "event:the-pillar-of-eliseg": {
+  "cy": "Croes Eliseg",
+  "coflein": "https://coflein.gov.uk/en/site/165274"
+ },
+ "event:the-psalms-in-song": {
+  "cy": "Edmwnd Prys",
+  "britannica": "https://www.britannica.com/biography/Edmwnd-Prys"
+ },
+ "event:the-red-book-of-hergest": {
+  "cy": "Llyfr Coch Hergest",
+  "britannica": "https://www.britannica.com/topic/The-Red-Book-of-Hergest"
+ },
+ "event:the-red-dragon-made-official": {
+  "cy": "Baner Cymru",
+  "britannica": "https://www.britannica.com/topic/flag-of-Wales"
+ },
+ "event:the-ricemarch-psalter": {
+  "cy": "Sallwyr Rhygyfarch"
+ },
+ "event:the-rising-of-rhys-ap-maredudd": {
+  "cy": "Rhys ap Maredudd"
+ },
+ "event:the-royal-charter-storm": {
+  "cy": "Royal Charter"
+ },
+ "event:the-school-of-illtud": {
+  "cy": "Illtud"
+ },
+ "event:the-senedd-building-opens": {
+  "cy": "Adeilad y Senedd"
+ },
+ "event:the-siege-of-harlech": {
+  "cy": "Castell Harlech",
+  "coflein": "https://coflein.gov.uk/en/site/93729"
+ },
+ "event:the-silures-defeat-a-legion": {
+  "cy": "Silwriaid"
+ },
+ "event:the-slate-landscape-world-heritage": {
+  "cy": "Diwydiant llechi Cymru"
+ },
+ "event:the-songs-of-heledd": {
+  "cy": "Canu Heledd"
+ },
+ "event:the-swansea-blitz": {
+  "cy": "Bomio Abertawe"
+ },
+ "event:the-synod-at-llanddewi-brefi": {
+  "cy": "Llanddewi Brefi",
+  "coflein": "https://coflein.gov.uk/en/site/33044"
+ },
+ "event:the-taff-vale-railway": {
+  "coflein": "https://coflein.gov.uk/en/site/91550"
+ },
+ "event:the-tournament-at-carew": {
+  "cy": "Castell Caeriw",
+  "coflein": "https://coflein.gov.uk/en/site/92709"
+ },
+ "event:the-treachery-of-the-blue-books": {
+  "cy": "Brad y Llyfrau Gleision"
+ },
+ "event:the-tripartite-indenture": {
+  "cy": "Cytundeb Tridarn"
+ },
+ "event:the-tryweryn-act": {
+  "cy": "Boddi Tryweryn"
+ },
+ "event:the-tywyn-stone": {
+  "cy": "Carreg Cadfan"
+ },
+ "event:the-university-of-wales": {
+  "cy": "Prifysgol Cymru",
+  "britannica": "https://www.britannica.com/place/University-of-Wales"
+ },
+ "event:the-urdd-is-founded": {
+  "cy": "Urdd Gobaith Cymru"
+ },
+ "event:the-victory-at-badon": {
+  "cy": "Brwydr Mynydd Baddon"
+ },
+ "event:the-visions-of-the-sleeping-bard": {
+  "cy": "Ellis Wynne",
+  "britannica": "https://www.britannica.com/biography/Ellis-Wynne"
+ },
+ "event:the-wales-coast-path": {
+  "cy": "Llwybr Arfordir Cymru"
+ },
+ "event:the-wales-millennium-centre": {
+  "cy": "Canolfan Mileniwm Cymru"
+ },
+ "event:the-war-of-1282-begins": {
+  "cy": "Goresgyniad Edward I"
+ },
+ "event:the-welsh-bible": {
+  "cy": "William Morgan (esgob)",
+  "britannica": "https://www.britannica.com/biography/William-Morgan-Welsh-bishop"
+ },
+ "event:the-welsh-not": {
+  "cy": "Welsh Not"
+ },
+ "event:the-welsh-office": {
+  "cy": "Y Swyddfa Gymreig"
+ },
+ "event:the-welsh-rise-against-the-normans": {
+  "cy": "Cadwgan ap Bleddyn"
+ },
+ "event:the-welsh-rugby-union": {
+  "cy": "Undeb Rygbi Cymru"
+ },
+ "event:the-white-book-of-rhydderch": {
+  "cy": "Llyfr Gwyn Rhydderch"
+ },
+ "event:the-wisest-of-kings": {
+  "cy": "Cadfan ap Iago"
+ },
+ "event:thomas-button-in-hudson-bay": {
+  "cy": "Thomas Button",
+  "britannica": "https://www.britannica.com/biography/Thomas-Button"
+ },
+ "event:thomas-charless-schools": {
+  "cy": "Thomas Charles",
+  "britannica": "https://www.britannica.com/biography/Thomas-Charles"
+ },
+ "event:tinopolis": {
+  "cy": "Llanelli",
+  "britannica": "https://www.britannica.com/place/Llanelli-Wales",
+  "coflein": "https://coflein.gov.uk/en/site/33068"
+ },
+ "event:tintern-abbey": {
+  "cy": "Abaty Tyndyrn",
+  "britannica": "https://www.britannica.com/topic/Tintern-Abbey",
+  "coflein": "https://coflein.gov.uk/en/site/359"
+ },
+ "event:tonypandy-riots": {
+  "cy": "Terfysg Tonypandy"
+ },
+ "event:treaty-of-aberconwy": {
+  "cy": "Cytundeb Aberconwy"
+ },
+ "event:treaty-of-montgomery": {
+  "cy": "Cytundeb Trefaldwyn",
+  "britannica": "https://www.britannica.com/topic/Treaty-of-Montgomery"
+ },
+ "event:trer-ceiri": {
+  "cy": "Tre'r Ceiri",
+  "coflein": "https://coflein.gov.uk/en/site/95292"
+ },
+ "event:tryweryn": {
+  "cy": "Capel Celyn"
+ },
+ "event:twm-sion-cati": {
+  "cy": "Twm Siôn Cati"
+ },
+ "event:tynged-yr-iaith": {
+  "cy": "Tynged yr Iaith"
+ },
+ "event:under-milk-wood": {
+  "cy": "Under Milk Wood",
+  "britannica": "https://www.britannica.com/topic/Under-Milk-Wood"
+ },
+ "event:urien-besieges-lindisfarne": {
+  "cy": "Urien Rheged"
+ },
+ "event:victory-at-bosworth": {
+  "cy": "Brwydr Maes Bosworth",
+  "britannica": "https://www.britannica.com/event/Battle-of-Bosworth-Field"
+ },
+ "event:victory-at-bryn-derwin": {
+  "cy": "Brwydr Bryn Derwin"
+ },
+ "event:victory-at-cadfan": {
+  "cy": "Brwydr Coed Llathen"
+ },
+ "event:victory-at-crug-mawr": {
+  "cy": "Brwydr Crug Mawr"
+ },
+ "event:victory-at-glasbury": {
+  "cy": "Gruffudd ap Llywelyn"
+ },
+ "event:victory-at-hyddgen": {
+  "cy": "Brwydr Hyddgen"
+ },
+ "event:victory-at-leominster": {
+  "cy": "Gruffudd ap Llywelyn"
+ },
+ "event:victory-at-llandudoch": {
+  "cy": "Rhys ap Tewdwr",
+  "britannica": "https://www.britannica.com/biography/Rhys-ap-Tewdwr"
+ },
+ "event:victory-at-moel-y-don": {
+  "cy": "Brwydr Moel-y-don"
+ },
+ "event:votes-at-sixteen": {
+  "cy": "Etholiad Senedd Cymru, 2021"
+ },
+ "event:wales-accepts-the-roman-easter": {
+  "cy": "Elfodd"
+ },
+ "event:wales-and-france-make-a-treaty": {
+  "cy": "Owain Glyn Dŵr",
+  "britannica": "https://www.britannica.com/biography/Owain-Glyn-Dwr"
+ },
+ "event:wales-at-the-world-cup": {
+  "cy": "Cwpan y Byd Pêl-droed 1958"
+ },
+ "event:wales-beat-the-all-blacks": {
+  "cy": "Tîm rygbi'r undeb cenedlaethol Cymru"
+ },
+ "event:wales-beat-the-all-blacks-again": {
+  "cy": "Tîm rygbi'r undeb cenedlaethol Cymru"
+ },
+ "event:wales-in-magna-carta": {
+  "cy": "Magna Carta",
+  "britannica": "https://www.britannica.com/topic/Magna-Carta"
+ },
+ "event:wales-women-at-the-euros": {
+  "cy": "Tîm pêl-droed cenedlaethol merched Cymru"
+ },
+ "event:welsh-for-every-child": {
+  "cy": "Cymraeg",
+  "britannica": "https://www.britannica.com/topic/Welsh-language"
+ },
+ "event:welsh-in-the-census": {
+  "cy": "Cymraeg",
+  "britannica": "https://www.britannica.com/topic/Welsh-language"
+ },
+ "event:welsh-in-the-courts": {
+  "cy": "Deddf Llysoedd Cymreig 1942"
+ },
+ "event:welsh-language-act": {
+  "cy": "Deddf yr Iaith Gymraeg 1967",
+  "britannica": "https://www.britannica.com/topic/Welsh-Language-Act-Wales-1967"
+ },
+ "event:welsh-language-act-1993": {
+  "cy": "Deddf yr Iaith Gymraeg 1993",
+  "britannica": "https://www.britannica.com/topic/Welsh-Language-Act-Wales-1993"
+ },
+ "event:welsh-made-official": {
+  "cy": "Mesur y Gymraeg (Cymru) 2011"
+ },
+ "event:william-at-st-davids": {
+  "cy": "Rhys ap Tewdwr",
+  "britannica": "https://www.britannica.com/biography/Rhys-ap-Tewdwr"
+ },
+ "event:y-beibl-bach": {
+  "cy": "Cyfieithu'r Beibl i'r Gymraeg"
+ },
+ "event:y-gododdin": {
+  "cy": "Y Gododdin",
+  "britannica": "https://www.britannica.com/topic/Y-Gododdin"
+ },
+ "event:y-wladfa": {
+  "cy": "Y Wladfa"
+ },
+ "event:yale": {
+  "cy": "Elihu Yale",
+  "britannica": "https://www.britannica.com/biography/Elihu-Yale"
+ },
+ "event:yes-to-devolution": {
+  "cy": "Refferendwm datganoli i Gymru, 1997"
+ },
  "person:alexander-cordell": {
   "cy": "Alexander Cordell"
  },
  "person:alfred-russel-wallace": {
   "cy": "Alfred Russel Wallace",
-  "dwb": "https://biography.wales/article/s6-WALL-RUS-1823"
+  "dwb": "https://biography.wales/article/s6-WALL-RUS-1823",
+  "odnb": "https://www.oxforddnb.com/view/article/36700",
+  "britannica": "https://www.britannica.com/biography/Alfred-Russel-Wallace"
  },
  "person:alun-wyn-jones": {
   "cy": "Alun Wyn Jones"
  },
+ "person:amy-dillwyn": {
+  "cy": "Amy Dillwyn",
+  "dwb": "https://biography.wales/article/s12-DILL-AMY-1845",
+  "odnb": "https://www.oxforddnb.com/view/article/37358"
+ },
  "person:anarawd": {
   "cy": "Anarawd ap Rhodri",
-  "dwb": "https://biography.wales/article/s-ANAR-APR-0857"
+  "dwb": "https://biography.wales/article/s-ANAR-APR-0857",
+  "odnb": "https://www.oxforddnb.com/view/article/458",
+  "britannica": "https://www.britannica.com/biography/Anarawd"
  },
  "person:andrew-vicari": {
   "cy": "Andrew Vicari",
-  "dwb": "https://biography.wales/article/s15-VACC-GIO-1932"
+  "dwb": "https://biography.wales/article/s15-VACC-GIO-1932",
+  "artuk": "https://artuk.org/discover/artists/vicari-andrew-19382016"
  },
  "person:aneirin": {
   "cy": "Aneirin",
-  "dwb": "https://biography.wales/article/s-ANEI-RIN-0550"
+  "dwb": "https://biography.wales/article/s-ANEI-RIN-0550",
+  "odnb": "https://www.oxforddnb.com/view/article/535",
+  "britannica": "https://www.britannica.com/biography/Aneirin"
  },
  "person:aneurin-bevan": {
   "cy": "Aneurin Bevan",
-  "dwb": "https://biography.wales/article/s2-BEVA-ANE-1897"
+  "dwb": "https://biography.wales/article/s2-BEVA-ANE-1897",
+  "odnb": "https://www.oxforddnb.com/view/article/30740",
+  "britannica": "https://www.britannica.com/biography/Aneurin-Bevan"
  },
  "person:ann-griffiths": {
   "cy": "Ann Griffiths",
-  "dwb": "https://biography.wales/article/s-GRIF-ANN-1776"
+  "dwb": "https://biography.wales/article/s-GRIF-ANN-1776",
+  "odnb": "https://www.oxforddnb.com/view/article/11614",
+  "britannica": "https://www.britannica.com/biography/Ann-Griffiths"
  },
  "person:anthony-hopkins": {
-  "cy": "Anthony Hopkins"
+  "cy": "Anthony Hopkins",
+  "britannica": "https://www.britannica.com/biography/Anthony-Hopkins"
  },
  "person:arthur": {
   "cy": "Athrwys ap Meurig"
  },
  "person:asser": {
   "cy": "Asser",
-  "dwb": "https://biography.wales/article/s-ASSE-JOH-0909"
+  "dwb": "https://biography.wales/article/s-ASSE-JOH-0909",
+  "odnb": "https://www.oxforddnb.com/view/article/810",
+  "britannica": "https://www.britannica.com/biography/Asser"
  },
  "person:augustus-john": {
   "cy": "Augustus John",
-  "dwb": "https://biography.wales/article/s2-JOHN-EDW-1878"
+  "dwb": "https://biography.wales/article/s2-JOHN-EDW-1878",
+  "odnb": "https://www.oxforddnb.com/view/article/34196",
+  "britannica": "https://www.britannica.com/biography/Augustus-John",
+  "artuk": "https://artuk.org/discover/artists/john-augustus-edwin-18781961"
+ },
+ "person:bardd-y-brenin": {
+  "cy": "Edward Jones (Bardd y Brenin)",
+  "dwb": "https://biography.wales/article/s-JONE-EDW-1752",
+  "odnb": "https://www.oxforddnb.com/view/article/14997"
  },
  "person:barry-john": {
   "cy": "Barry John"
  },
  "person:barti-ddu": {
   "cy": "Bartholomew Roberts",
-  "dwb": "https://biography.wales/article/s-ROBE-BAR-1682"
+  "dwb": "https://biography.wales/article/s-ROBE-BAR-1682",
+  "odnb": "https://www.oxforddnb.com/view/article/23744",
+  "britannica": "https://www.britannica.com/biography/Bartholomew-Roberts"
+ },
+ "person:bedwyr": {
+  "cy": "Bedwyr"
  },
  "person:bertrand-russell": {
-  "cy": "Bertrand Russell"
+  "cy": "Bertrand Russell",
+  "odnb": "https://www.oxforddnb.com/view/article/35875",
+  "britannica": "https://www.britannica.com/biography/Bertrand-Russell"
  },
  "person:betsi-cadwaladr": {
   "cy": "Betsi Cadwaladr",
-  "dwb": "https://biography.wales/article/s12-DAVI-ELI-1789"
+  "dwb": "https://biography.wales/article/s12-DAVI-ELI-1789",
+  "odnb": "https://www.oxforddnb.com/view/article/48650"
  },
  "person:betty-campbell": {
   "cy": "Betty Campbell",
-  "dwb": "https://biography.wales/article/s14-CAMP-ELI-1934"
+  "dwb": "https://biography.wales/article/s14-CAMP-ELI-1934",
+  "odnb": "https://www.oxforddnb.com/view/article/90000380193"
  },
  "person:beuno": {
   "cy": "Beuno",
-  "dwb": "https://biography.wales/article/s-BEUN-O00-0642"
+  "dwb": "https://biography.wales/article/s-BEUN-O00-0642",
+  "odnb": "https://www.oxforddnb.com/view/article/2317"
  },
  "person:bill-frost": {
   "cy": "William (Bill) Frost"
  },
  "person:billy-hughes": {
-  "cy": "William Morris Hughes"
+  "cy": "William Morris Hughes",
+  "odnb": "https://www.oxforddnb.com/view/article/34046",
+  "britannica": "https://www.britannica.com/biography/William-Morris-Hughes"
  },
  "person:billy-meredith": {
   "cy": "Billy Meredith",
-  "dwb": "https://biography.wales/article/s2-MERE-WIL-1874"
+  "dwb": "https://biography.wales/article/s2-MERE-WIL-1874",
+  "odnb": "https://www.oxforddnb.com/view/article/58286"
+ },
+ "person:blanche-parry": {
+  "cy": "Blanche Parry",
+  "dwb": "https://biography.wales/article/s7-PARR-BLA-1508",
+  "odnb": "https://www.oxforddnb.com/view/article/65989"
  },
  "person:bleddyn-ap-cynfyn": {
   "cy": "Bleddyn ap Cynfyn",
-  "dwb": "https://biography.wales/article/s-BLED-APC-1025"
+  "dwb": "https://biography.wales/article/s-BLED-APC-1025",
+  "odnb": "https://www.oxforddnb.com/view/article/48537"
  },
  "person:bonnie-tyler": {
   "cy": "Bonnie Tyler"
  },
+ "person:bran-fendigaid": {
+  "cy": "Bendigeidfran fab Llŷr"
+ },
  "person:brian-josephson": {
-  "cy": "Brian David Josephson"
+  "cy": "Brian David Josephson",
+  "britannica": "https://www.britannica.com/biography/Brian-Josephson"
+ },
+ "person:briog": {
+  "cy": "Briog",
+  "dwb": "https://biography.wales/article/s-BRIO-G00-0500"
+ },
+ "person:brochwel-ysgithrog": {
+  "cy": "Brochwel Ysgithrog",
+  "dwb": "https://biography.wales/article/s-BROC-YSG-0502",
+  "odnb": "https://www.oxforddnb.com/view/article/3466"
  },
  "person:brychan": {
   "cy": "Brychan",
-  "dwb": "https://biography.wales/article/s-BRYC-APA-0419"
+  "dwb": "https://biography.wales/article/s-BRYC-APA-0419",
+  "odnb": "https://www.oxforddnb.com/view/article/51949"
  },
  "person:bryn-terfel": {
-  "cy": "Bryn Terfel"
+  "cy": "Bryn Terfel",
+  "britannica": "https://www.britannica.com/biography/Bryn-Terfel"
+ },
+ "person:brynach": {
+  "cy": "Brynach Wyddel",
+  "dwb": "https://biography.wales/article/s-BRYN-ACH-0500",
+  "odnb": "https://www.oxforddnb.com/view/article/51950"
  },
  "person:buddug": {
-  "cy": "Buddug (Boudica)"
+  "cy": "Buddug (Boudica)",
+  "odnb": "https://www.oxforddnb.com/view/article/2732",
+  "britannica": "https://www.britannica.com/biography/Boudicca"
+ },
+ "person:cadell-ap-rhodri": {
+  "cy": "Cadell ap Rhodri",
+  "odnb": "https://www.oxforddnb.com/view/article/4296"
+ },
+ "person:cadfan": {
+  "cy": "Cadfan (sant)",
+  "dwb": "https://biography.wales/article/s-CADF-AN0-0550",
+  "odnb": "https://www.oxforddnb.com/view/article/4313"
  },
  "person:cadog": {
   "cy": "Cadog",
-  "dwb": "https://biography.wales/article/s-CADO-G00-0497"
+  "dwb": "https://biography.wales/article/s-CADO-G00-0497",
+  "odnb": "https://www.oxforddnb.com/view/article/4306"
  },
  "person:cadwaladr": {
   "cy": "Cadwaladr (gwahaniaethu)"
  },
  "person:cadwallon": {
   "cy": "Cadwallon ap Cadfan",
-  "dwb": "https://biography.wales/article/s-CADW-APC-0591"
+  "dwb": "https://biography.wales/article/s-CADW-APC-0591",
+  "odnb": "https://www.oxforddnb.com/view/article/4322",
+  "britannica": "https://www.britannica.com/biography/Cadwallon"
+ },
+ "person:cadwallon-lawhir": {
+  "cy": "Cadwallon Lawhir"
+ },
+ "person:cai": {
+  "cy": "Cai"
+ },
+ "person:caradog-freichfras": {
+  "cy": "Caradog Freichfras"
+ },
+ "person:caradog-griffith-rhys-jones": {
+  "cy": "Griffith Rhys Jones",
+  "dwb": "https://biography.wales/article/s-JONE-RHY-1834",
+  "odnb": "https://www.oxforddnb.com/view/article/52650"
+ },
+ "person:carannog": {
+  "cy": "Carranog",
+  "dwb": "https://biography.wales/article/s-CARA-APC-0550",
+  "odnb": "https://www.oxforddnb.com/view/article/4343"
  },
  "person:caratacus": {
-  "cy": "Caradog"
+  "cy": "Caradog",
+  "odnb": "https://www.oxforddnb.com/view/article/4601",
+  "britannica": "https://www.britannica.com/biography/Caratacus"
  },
  "person:carwyn-jones": {
-  "cy": "Carwyn Jones"
+  "cy": "Carwyn Jones",
+  "britannica": "https://www.britannica.com/biography/Carwyn-Jones"
  },
  "person:caswallon": {
-  "cy": "Caswallawn fab Beli"
+  "cy": "Caswallawn fab Beli",
+  "odnb": "https://www.oxforddnb.com/view/article/4863",
+  "britannica": "https://www.britannica.com/biography/Cassivellaunus"
  },
  "person:catherine-zeta-jones": {
-  "cy": "Catherine Zeta-Jones"
+  "cy": "Catherine Zeta-Jones",
+  "britannica": "https://www.britannica.com/biography/Catherine-Zeta-Jones"
  },
  "person:catrin-glyndwr": {
   "cy": "Catrin ferch Owain Glyn Dŵr"
  },
  "person:catrin-o-ferain": {
   "cy": "Catrin o Ferain",
-  "dwb": "https://biography.wales/article/s-CATR-BER-1534"
+  "dwb": "https://biography.wales/article/s-CATR-BER-1534",
+  "odnb": "https://www.oxforddnb.com/view/article/67988"
  },
  "person:cayo-evans": {
   "cy": "Julian Cayo-Evans",
   "dwb": "https://biography.wales/article/s10-CAYO-JUL-1937"
+ },
+ "person:ceiriog": {
+  "cy": "John Ceiriog Hughes",
+  "dwb": "https://biography.wales/article/s-HUGH-CEI-1832",
+  "odnb": "https://www.oxforddnb.com/view/article/14082",
+  "britannica": "https://www.britannica.com/biography/John-Ceiriog-Hughes"
+ },
+ "person:cennydd": {
+  "cy": "Sant Cennydd"
  },
  "person:cerys-matthews": {
   "cy": "Cerys Matthews"
@@ -137,54 +1582,114 @@
  },
  "person:christmas-evans": {
   "cy": "Christmas Evans",
-  "dwb": "https://biography.wales/article/s-EVAN-CHR-1766"
+  "dwb": "https://biography.wales/article/s-EVAN-CHR-1766",
+  "odnb": "https://www.oxforddnb.com/view/article/8946"
  },
  "person:clive-granger": {
-  "cy": "Clive Granger"
+  "cy": "Clive Granger",
+  "odnb": "https://www.oxforddnb.com/view/article/101749",
+  "britannica": "https://www.britannica.com/biography/Clive-Granger"
+ },
+ "person:clive-sullivan": {
+  "cy": "Clive Sullivan",
+  "dwb": "https://biography.wales/article/s12-SULL-CLI-1943",
+  "odnb": "https://www.oxforddnb.com/view/article/75586"
  },
  "person:clough-williams-ellis": {
-  "cy": "Clough Williams-Ellis"
+  "cy": "Clough Williams-Ellis",
+  "odnb": "https://www.oxforddnb.com/view/article/31839"
+ },
+ "person:clydno-eidyn": {
+  "cy": "Clydno Eidyn"
  },
  "person:coel-hen": {
   "cy": "Coel Hen"
  },
  "person:colin-jackson": {
-  "cy": "Colin Jackson"
+  "cy": "Colin Jackson",
+  "olympedia": "https://www.olympedia.org/athletes/69187",
+  "athletics": "https://worldathletics.org/athletes/-/1264"
  },
  "person:cranogwen": {
   "cy": "Sarah Jane Rees (Cranogwen)",
-  "dwb": "https://biography.wales/article/s-REES-JAN-1839"
+  "dwb": "https://biography.wales/article/s-REES-JAN-1839",
+  "odnb": "https://www.oxforddnb.com/view/article/48648"
+ },
+ "person:culhwch": {
+  "cy": "Culhwch ac Olwen",
+  "britannica": "https://www.britannica.com/art/Kulhwch-and-Olwen"
  },
  "person:cunedda": {
   "cy": "Cunedda",
-  "dwb": "https://biography.wales/article/s-CUNE-WLE-0380"
+  "dwb": "https://biography.wales/article/s-CUNE-WLE-0380",
+  "odnb": "https://www.oxforddnb.com/view/article/39297",
+  "britannica": "https://www.britannica.com/biography/Cunedda-Wledig"
  },
  "person:cybi": {
   "cy": "Cybi",
-  "dwb": "https://biography.wales/article/s-CYBI-APS-0490"
+  "dwb": "https://biography.wales/article/s-CYBI-APS-0490",
+  "odnb": "https://www.oxforddnb.com/view/article/6987"
+ },
+ "person:cynan": {
+  "cy": "Cynan (bardd)",
+  "dwb": "https://biography.wales/article/s2-JONE-EVA-1895",
+  "odnb": "https://www.oxforddnb.com/view/article/55461"
+ },
+ "person:cynan-garwyn": {
+  "cy": "Cynan Garwyn",
+  "odnb": "https://www.oxforddnb.com/view/article/51393",
+  "britannica": "https://www.britannica.com/biography/Cynan-Garwyn-of-Powys"
  },
  "person:cynddelw": {
   "cy": "Cynddelw Brydydd Mawr",
-  "dwb": "https://biography.wales/article/s-CYND-BRY-1155"
+  "dwb": "https://biography.wales/article/s-CYND-BRY-1155",
+  "odnb": "https://www.oxforddnb.com/view/article/48540",
+  "britannica": "https://www.britannica.com/biography/Cynddelw-Brydydd-Mawr"
+ },
+ "person:cyndeyrn": {
+  "cy": "Cyndeyrn",
+  "dwb": "https://biography.wales/article/s1-CYND-EYR-0518",
+  "odnb": "https://www.oxforddnb.com/view/article/15426",
+  "britannica": "https://www.britannica.com/biography/Saint-Kentigern"
  },
  "person:cynfelyn": {
-  "cy": "Cynfelyn"
+  "cy": "Cynfelyn",
+  "odnb": "https://www.oxforddnb.com/view/article/6939",
+  "britannica": "https://www.britannica.com/biography/Cunobelinus"
  },
  "person:cyngen": {
   "cy": "Cyngen ap Cadell",
-  "dwb": "https://biography.wales/article/s-CYNG-POW-0778"
+  "dwb": "https://biography.wales/article/s-CYNG-POW-0778",
+  "odnb": "https://www.oxforddnb.com/view/article/51399"
+ },
+ "person:d-j-williams": {
+  "cy": "D. J. Williams",
+  "dwb": "https://biography.wales/article/s2-WILL-JOH-1885",
+  "odnb": "https://www.oxforddnb.com/view/article/61285"
+ },
+ "person:dafydd-ab-edmwnd": {
+  "cy": "Dafydd ab Edmwnd",
+  "dwb": "https://biography.wales/article/s-DAFY-ABE-1450",
+  "odnb": "https://www.oxforddnb.com/view/article/48541",
+  "britannica": "https://www.britannica.com/biography/Dafydd-ap-Edmwnd"
  },
  "person:dafydd-ap-gruffudd": {
   "cy": "Dafydd ap Gruffudd",
-  "dwb": "https://biography.wales/article/s-DAFY-APG-1283"
+  "dwb": "https://biography.wales/article/s-DAFY-APG-1283",
+  "odnb": "https://www.oxforddnb.com/view/article/7324",
+  "britannica": "https://www.britannica.com/biography/David-ap-Gruffudd"
  },
  "person:dafydd-ap-gwilym": {
   "cy": "Dafydd ap Gwilym",
-  "dwb": "https://biography.wales/article/s12-DAFY-APG-1340"
+  "dwb": "https://biography.wales/article/s12-DAFY-APG-1340",
+  "odnb": "https://www.oxforddnb.com/view/article/7210",
+  "britannica": "https://www.britannica.com/biography/Dafydd-ap-Gwilym"
  },
  "person:dafydd-ap-llywelyn": {
   "cy": "Dafydd ap Llywelyn",
-  "dwb": "https://biography.wales/article/s-DAFY-APL-1246"
+  "dwb": "https://biography.wales/article/s-DAFY-APL-1246",
+  "odnb": "https://www.oxforddnb.com/view/article/7323",
+  "britannica": "https://www.britannica.com/biography/David-ap-Llywelyn"
  },
  "person:dafydd-elis-thomas": {
   "cy": "Dafydd Elis-Thomas"
@@ -195,52 +1700,78 @@
  "person:dafydd-wigley": {
   "cy": "Dafydd Wigley"
  },
+ "person:daniel-james-gwyrosydd": {
+  "cy": "Daniel James (Gwyrosydd)",
+  "dwb": "https://biography.wales/article/s-JAME-DAN-1847"
+ },
  "person:daniel-owen": {
   "cy": "Daniel Owen",
-  "dwb": "https://biography.wales/article/s-OWEN-DAN-1836"
+  "dwb": "https://biography.wales/article/s-OWEN-DAN-1836",
+  "odnb": "https://www.oxforddnb.com/view/article/45943",
+  "britannica": "https://www.britannica.com/biography/Daniel-Owen"
  },
  "person:dannie-abse": {
-  "cy": "Dannie Abse"
+  "cy": "Dannie Abse",
+  "odnb": "https://www.oxforddnb.com/view/article/108587",
+  "britannica": "https://www.britannica.com/biography/Dannie-Abse"
  },
  "person:david-brunt": {
   "cy": "David Brunt",
-  "dwb": "https://biography.wales/article/s2-BRUN-DAV-1886"
+  "dwb": "https://biography.wales/article/s2-BRUN-DAV-1886",
+  "odnb": "https://www.oxforddnb.com/view/article/32138"
  },
  "person:david-davies-llandinam": {
   "cy": "David Davies, Llandinam",
-  "dwb": "https://biography.wales/article/s-DAVI-DAV-1818"
+  "dwb": "https://biography.wales/article/s-DAVI-DAV-1818",
+  "odnb": "https://www.oxforddnb.com/view/article/37343"
  },
  "person:david-edward-hughes": {
   "cy": "David Edward Hughes",
-  "dwb": "https://biography.wales/article/s-HUGH-EDW-1831"
+  "dwb": "https://biography.wales/article/s-HUGH-EDW-1831",
+  "odnb": "https://www.oxforddnb.com/view/article/14066",
+  "britannica": "https://www.britannica.com/biography/David-Hughes"
  },
  "person:david-griffiths-missionary": {
   "cy": "David Griffiths (cenhadwr)",
-  "dwb": "https://biography.wales/article/s-GRIF-DAV-1792"
+  "dwb": "https://biography.wales/article/s-GRIF-DAV-1792",
+  "odnb": "https://www.oxforddnb.com/view/article/11615"
  },
  "person:david-thomas-iron": {
   "cy": "David Thomas (metelegwr)",
-  "dwb": "https://biography.wales/article/s-THOM-DAV-1794"
+  "dwb": "https://biography.wales/article/s-THOM-DAV-1794",
+  "odnb": "https://www.oxforddnb.com/view/article/49469"
  },
  "person:deiniol": {
   "cy": "Deiniol",
-  "dwb": "https://biography.wales/article/s-DEIN-IOL-0584"
+  "dwb": "https://biography.wales/article/s-DEIN-IOL-0584",
+  "odnb": "https://www.oxforddnb.com/view/article/7110"
  },
  "person:dewi-sant": {
   "cy": "Dewi Sant",
-  "dwb": "https://biography.wales/article/s-DEWI-SAN-0600"
+  "dwb": "https://biography.wales/article/s-DEWI-SAN-0600",
+  "odnb": "https://www.oxforddnb.com/view/article/7206",
+  "britannica": "https://www.britannica.com/biography/Saint-David"
  },
  "person:dic-aberdaron": {
   "cy": "Richard Robert Jones",
-  "dwb": "https://biography.wales/article/s-JONE-ROB-1780"
+  "dwb": "https://biography.wales/article/s-JONE-ROB-1780",
+  "odnb": "https://www.oxforddnb.com/view/article/15076"
  },
  "person:dic-penderyn": {
   "cy": "Dic Penderyn",
-  "dwb": "https://biography.wales/article/s-LEWI-RIC-1807"
+  "dwb": "https://biography.wales/article/s-LEWI-RIC-1807",
+  "odnb": "https://www.oxforddnb.com/view/article/48760"
+ },
+ "person:dogfael": {
+  "cy": "Dogfael",
+  "dwb": "https://biography.wales/article/s-DOGM-SAN-0500",
+  "odnb": "https://www.oxforddnb.com/view/article/7769"
  },
  "person:donald-davies": {
   "cy": "Donald Watts Davies",
-  "dwb": "https://biography.wales/article/s8-DAVI-WAT-1924"
+  "dwb": "https://biography.wales/article/s8-DAVI-WAT-1924",
+  "odnb": "https://www.oxforddnb.com/view/article/74127",
+  "britannica": "https://www.britannica.com/biography/Donald-Watts-Davies"
  },
  "person:duffy": {
   "cy": "Duffy"
@@ -248,129 +1779,245 @@
  "person:dwynwen": {
   "cy": "Santes Dwynwen"
  },
+ "person:dyfrig": {
+  "cy": "Dyfrig",
+  "dwb": "https://biography.wales/article/s-DYFR-SAN-0475",
+  "odnb": "https://www.oxforddnb.com/view/article/8124"
+ },
  "person:dylan-thomas": {
   "cy": "Dylan Thomas",
-  "dwb": "https://biography.wales/article/s10-THOM-MAR-1914"
+  "dwb": "https://biography.wales/article/s10-THOM-MAR-1914",
+  "odnb": "https://www.oxforddnb.com/view/article/36471"
  },
  "person:edmwnd-prys": {
   "cy": "Edmwnd Prys",
-  "dwb": "https://biography.wales/article/s-PRYS-EDM-1544"
+  "dwb": "https://biography.wales/article/s-PRYS-EDM-1544",
+  "odnb": "https://www.oxforddnb.com/view/article/22856",
+  "britannica": "https://www.britannica.com/biography/Edmwnd-Prys"
  },
  "person:ednyfed-fychan": {
   "cy": "Ednyfed Fychan",
-  "dwb": "https://biography.wales/article/s-EDNY-FYC-1246"
+  "dwb": "https://biography.wales/article/s-EDNY-FYC-1246",
+  "odnb": "https://www.oxforddnb.com/view/article/8509"
  },
  "person:edward-bowen": {
   "cy": "Edward George Bowen",
-  "dwb": "https://biography.wales/article/s8-BOWE-GEO-1911"
+  "dwb": "https://biography.wales/article/s8-BOWE-GEO-1911",
+  "odnb": "https://www.oxforddnb.com/view/article/49587"
  },
  "person:edward-lhuyd": {
   "cy": "Edward Lhuyd",
-  "dwb": "https://biography.wales/article/s-LHUY-EDW-1660"
+  "dwb": "https://biography.wales/article/s-LHUY-EDW-1660",
+  "odnb": "https://www.oxforddnb.com/view/article/16633",
+  "britannica": "https://www.britannica.com/biography/Edward-Lhuyd"
+ },
+ "person:eigr": {
+  "cy": "Eigr"
+ },
+ "person:eileen-beasley": {
+  "cy": "Eileen Beasley",
+  "odnb": "https://www.oxforddnb.com/view/article/105629"
  },
  "person:elaine-morgan": {
   "cy": "Elaine Morgan",
-  "dwb": "https://biography.wales/article/s12-MORG-NEV-1920"
+  "dwb": "https://biography.wales/article/s12-MORG-NEV-1920",
+  "britannica": "https://www.britannica.com/biography/Elaine-Morgan"
+ },
+ "person:eleanor-de-montfort": {
+  "cy": "Elinor de Montfort",
+  "dwb": "https://biography.wales/article/s11-ELEA-WRL-1200",
+  "odnb": "https://www.oxforddnb.com/view/article/19046"
+ },
+ "person:elffin": {
+  "cy": "Elffin ap Gwyddno"
  },
  "person:elihu-yale": {
-  "cy": "Elihu Yale"
+  "cy": "Elihu Yale",
+  "odnb": "https://www.oxforddnb.com/view/article/30183",
+  "britannica": "https://www.britannica.com/biography/Elihu-Yale"
  },
  "person:elisedd": {
   "cy": "Elisedd ap Gwylog"
  },
  "person:elizabeth-andrews": {
-  "cy": "Elizabeth Andrews"
+  "cy": "Elizabeth Andrews",
+  "odnb": "https://www.oxforddnb.com/view/article/55090"
  },
  "person:elizabeth-phillips-hughes": {
   "cy": "Elizabeth Phillips Hughes",
-  "dwb": "https://biography.wales/article/s-HUGH-PHI-1851"
+  "dwb": "https://biography.wales/article/s-HUGH-PHI-1851",
+  "odnb": "https://www.oxforddnb.com/view/article/37579"
  },
  "person:ellis-wynne": {
   "cy": "Ellis Wynne",
-  "dwb": "https://biography.wales/article/s-WYNN-ELL-1670"
+  "dwb": "https://biography.wales/article/s-WYNN-ELL-1670",
+  "odnb": "https://www.oxforddnb.com/view/article/30158",
+  "britannica": "https://www.britannica.com/biography/Ellis-Wynne"
  },
  "person:eluned-morgan": {
   "cy": "Eluned Morgan (gwleidydd)"
  },
+ "person:emrys-ap-iwan": {
+  "cy": "Robert Ambrose Jones (Emrys ap Iwan)",
+  "dwb": "https://biography.wales/article/s-JONE-AMB-1848",
+  "odnb": "https://www.oxforddnb.com/view/article/61279"
+ },
+ "person:emrys-wledig": {
+  "cy": "Emrys Wledig",
+  "dwb": "https://biography.wales/article/s-AMBR-AUR-0475",
+  "odnb": "https://www.oxforddnb.com/view/article/436"
+ },
+ "person:enid": {
+  "cy": "Y Tair Rhamant"
+ },
+ "person:euddogwy": {
+  "cy": "Euddogwy",
+  "dwb": "https://biography.wales/article/s-EUDD-OGW-0600",
+  "odnb": "https://www.oxforddnb.com/view/article/20948"
+ },
  "person:evan-james-williams": {
   "cy": "Evan James Williams",
-  "dwb": "https://biography.wales/article/s14-WILL-JAM-1903"
+  "dwb": "https://biography.wales/article/s14-WILL-JAM-1903",
+  "odnb": "https://www.oxforddnb.com/view/article/38131"
  },
  "person:evan-roberts": {
   "cy": "Evan Roberts, y diwygiwr",
-  "dwb": "https://biography.wales/article/s2-ROBE-JOH-1878"
+  "dwb": "https://biography.wales/article/s2-ROBE-JOH-1878",
+  "odnb": "https://www.oxforddnb.com/view/article/46333"
  },
  "person:frances-hoggan": {
   "cy": "Frances Elizabeth Morgan",
-  "dwb": "https://biography.wales/article/s11-HOGG-ELI-1843"
+  "dwb": "https://biography.wales/article/s11-HOGG-ELI-1843",
+  "odnb": "https://www.oxforddnb.com/view/article/46422"
  },
  "person:freddie-welsh": {
   "cy": "Freddie Welsh",
-  "dwb": "https://biography.wales/article/s-THOM-HAL-1886"
+  "dwb": "https://biography.wales/article/s-THOM-HAL-1886",
+  "odnb": "https://www.oxforddnb.com/view/article/72753"
  },
  "person:gareth-bale": {
   "cy": "Gareth Bale"
  },
  "person:geoffrey-of-monmouth": {
   "cy": "Sieffre o Fynwy",
-  "dwb": "https://biography.wales/article/s-SIEF-OFY-1090"
+  "dwb": "https://biography.wales/article/s-SIEF-OFY-1090",
+  "odnb": "https://www.oxforddnb.com/view/article/10530",
+  "britannica": "https://www.britannica.com/biography/Geoffrey-of-Monmouth"
  },
  "person:george-herbert": {
   "cy": "George Herbert",
-  "dwb": "https://biography.wales/article/s-HERB-GEO-1593"
+  "dwb": "https://biography.wales/article/s-HERB-GEO-1593",
+  "odnb": "https://www.oxforddnb.com/view/article/13025",
+  "britannica": "https://www.britannica.com/biography/George-Herbert",
+  "histparl": "http://www.historyofparliamentonline.org/volume/1604-1629/member/herbert-george-1593-1633"
  },
  "person:geraint-evans": {
   "cy": "Geraint Evans (canwr opera)",
-  "dwb": "https://biography.wales/article/s14-EVAN-LLE-1922"
+  "dwb": "https://biography.wales/article/s14-EVAN-LLE-1922",
+  "odnb": "https://www.oxforddnb.com/view/article/51027",
+  "britannica": "https://www.britannica.com/biography/Geraint-Evans"
+ },
+ "person:geraint-fab-erbin": {
+  "cy": "Geraint"
  },
  "person:geraint-thomas": {
-  "cy": "Geraint Thomas"
+  "cy": "Geraint Thomas",
+  "olympedia": "https://www.olympedia.org/athletes/113194"
  },
  "person:gerallt-gymro": {
   "cy": "Gerallt Gymro",
-  "dwb": "https://biography.wales/article/s-GIRA-CAM-1146"
+  "dwb": "https://biography.wales/article/s-GIRA-CAM-1146",
+  "odnb": "https://www.oxforddnb.com/view/article/10769",
+  "britannica": "https://www.britannica.com/biography/Giraldus-Cambrensis"
  },
  "person:gildas": {
   "cy": "Gildas",
-  "dwb": "https://biography.wales/article/s-GILD-AS0-0495"
+  "dwb": "https://biography.wales/article/s-GILD-AS0-0495",
+  "odnb": "https://www.oxforddnb.com/view/article/10718",
+  "britannica": "https://www.britannica.com/biography/Saint-Gildas"
  },
  "person:gillian-clarke": {
   "cy": "Gillian Clarke"
  },
+ "person:glewlwyd": {
+  "cy": "Glewlwyd Gafaelfawr"
+ },
+ "person:gofan": {
+  "cy": "Eglwys Sant Gofan"
+ },
  "person:grace-williams": {
   "cy": "Grace Williams",
-  "dwb": "https://biography.wales/article/s10-WILL-MAR-1906"
+  "dwb": "https://biography.wales/article/s10-WILL-MAR-1906",
+  "odnb": "https://www.oxforddnb.com/view/article/55453"
  },
  "person:griffith-jones": {
   "cy": "Griffith Jones, Llanddowror",
-  "dwb": "https://biography.wales/article/s-JONE-GRI-1683"
+  "dwb": "https://biography.wales/article/s-JONE-GRI-1683",
+  "odnb": "https://www.oxforddnb.com/view/article/15006",
+  "britannica": "https://www.britannica.com/biography/Griffith-Jones"
  },
  "person:gruff-rhys": {
   "cy": "Gruff Rhys"
  },
+ "person:gruffudd-ab-yr-ynad-coch": {
+  "cy": "Gruffudd ab yr Ynad Coch",
+  "dwb": "https://biography.wales/article/s-GRUF-APY-1280"
+ },
  "person:gruffudd-ap-cynan": {
   "cy": "Gruffudd ap Cynan",
-  "dwb": "https://biography.wales/article/s-GRUF-APC-1055"
+  "dwb": "https://biography.wales/article/s-GRUF-APC-1055",
+  "odnb": "https://www.oxforddnb.com/view/article/11693",
+  "britannica": "https://www.britannica.com/biography/Gruffudd-ap-Cynan"
  },
  "person:gruffudd-ap-llywelyn": {
   "cy": "Gruffudd ap Llywelyn",
-  "dwb": "https://biography.wales/article/s12-GRUF-APL-1063"
+  "dwb": "https://biography.wales/article/s12-GRUF-APL-1063",
+  "odnb": "https://www.oxforddnb.com/view/article/11695"
+ },
+ "person:gruffudd-ap-llywelyn-fawr": {
+  "cy": "Gruffudd ap Llywelyn Fawr",
+  "dwb": "https://biography.wales/article/s-GRUF-APL-1244",
+  "odnb": "https://www.oxforddnb.com/view/article/11696"
  },
  "person:gruffydd-robert": {
   "cy": "Gruffydd Robert",
-  "dwb": "https://biography.wales/article/s12-ROBE-GRU-1522"
+  "dwb": "https://biography.wales/article/s12-ROBE-GRU-1522",
+  "odnb": "https://www.oxforddnb.com/view/article/23752",
+  "britannica": "https://www.britannica.com/biography/Gruffydd-Robert"
  },
  "person:guto-r-glyn": {
   "cy": "Guto'r Glyn",
-  "dwb": "https://biography.wales/article/s-GUTO-GLY-1440"
+  "dwb": "https://biography.wales/article/s-GUTO-GLY-1440",
+  "odnb": "https://www.oxforddnb.com/view/article/11794",
+  "britannica": "https://www.britannica.com/biography/Gutor-Glyn"
+ },
+ "person:gwalchmai": {
+  "cy": "Gwalchmai ap Gwyar",
+  "britannica": "https://www.britannica.com/topic/Gwalchmei"
  },
  "person:gwen-john": {
   "cy": "Gwen John",
-  "dwb": "https://biography.wales/article/s3-JOHN-MAR-1876"
+  "dwb": "https://biography.wales/article/s3-JOHN-MAR-1876",
+  "odnb": "https://www.oxforddnb.com/view/article/37610",
+  "britannica": "https://www.britannica.com/biography/Gwen-John",
+  "artuk": "https://artuk.org/discover/artists/john-gwen-18761939"
+ },
+ "person:gwenallt": {
+  "cy": "David James Jones (Gwenallt)",
+  "dwb": "https://biography.wales/article/s2-JONE-JAM-1899",
+  "odnb": "https://www.oxforddnb.com/view/article/61277"
+ },
+ "person:gwenddolau": {
+  "cy": "Gwenddolau"
  },
  "person:gwenfrewi": {
   "cy": "Gwenffrewi",
-  "dwb": "https://biography.wales/article/s-GWEN-FFR-0600"
+  "dwb": "https://biography.wales/article/s-GWEN-FFR-0600",
+  "odnb": "https://www.oxforddnb.com/view/article/29729"
+ },
+ "person:gwenhwyfar": {
+  "cy": "Gwenhwyfar",
+  "britannica": "https://www.britannica.com/topic/Guinevere"
  },
  "person:gwenllian": {
   "cy": "Gwenllian ferch Gruffudd ap Cynan",
@@ -381,65 +2028,116 @@
  },
  "person:gwerful-mechain": {
   "cy": "Gwerful Mechain",
-  "dwb": "https://biography.wales/article/s-GWER-MEC-1462"
+  "dwb": "https://biography.wales/article/s-GWER-MEC-1462",
+  "odnb": "https://www.oxforddnb.com/view/article/90000369563"
+ },
+ "person:gwladys": {
+  "cy": "Santes Gwladys"
+ },
+ "person:gwrthefyr": {
+  "cy": "Vortiporius"
+ },
+ "person:gwyddno-garanhir": {
+  "cy": "Gwyddno Garanhir"
+ },
+ "person:gwyn-ap-nudd": {
+  "cy": "Gwyn ap Nudd"
  },
  "person:gwyneth-lewis": {
   "cy": "Gwyneth Lewis"
  },
  "person:gwynfor-evans": {
   "cy": "Gwynfor Evans",
-  "dwb": "https://biography.wales/article/s10-EVAN-RIC-1912"
+  "dwb": "https://biography.wales/article/s10-EVAN-RIC-1912",
+  "odnb": "https://www.oxforddnb.com/view/article/95754",
+  "britannica": "https://www.britannica.com/biography/Richard-Gwynfor-Evans"
+ },
+ "person:gwynllyw": {
+  "dwb": "https://biography.wales/article/s-GWYN-FAR-0466",
+  "odnb": "https://www.oxforddnb.com/view/article/11818"
  },
  "person:harri-tudur": {
   "cy": "Harri VII, brenin Lloegr",
-  "dwb": "https://biography.wales/article/s-HENR-KIN-1457"
+  "dwb": "https://biography.wales/article/s-HENR-KIN-1457",
+  "odnb": "https://www.oxforddnb.com/view/article/12954",
+  "britannica": "https://www.britannica.com/biography/Henry-VII-king-of-England"
  },
  "person:harry-secombe": {
-  "cy": "Harry Secombe"
+  "cy": "Harry Secombe",
+  "odnb": "https://www.oxforddnb.com/view/article/75800",
+  "britannica": "https://www.britannica.com/biography/Harry-Donald-Secombe"
  },
  "person:hedd-wyn": {
   "cy": "Hedd Wyn",
-  "dwb": "https://biography.wales/article/s-EVAN-HUM-1887"
+  "dwb": "https://biography.wales/article/s-EVAN-HUM-1887",
+  "odnb": "https://www.oxforddnb.com/view/article/60745"
  },
  "person:henry-morgan": {
   "cy": "Harri Morgan",
-  "dwb": "https://biography.wales/article/s-MORG-HEN-1635"
+  "dwb": "https://biography.wales/article/s-MORG-HEN-1635",
+  "odnb": "https://www.oxforddnb.com/view/article/19224",
+  "britannica": "https://www.britannica.com/biography/Henry-Morgan-Welsh-buccaneer"
  },
  "person:henry-morton-stanley": {
-  "cy": "Henry Morton Stanley"
+  "cy": "Henry Morton Stanley",
+  "odnb": "https://www.oxforddnb.com/view/article/36247",
+  "britannica": "https://www.britannica.com/biography/Henry-Morton-Stanley"
  },
  "person:henry-richard": {
   "cy": "Henry Richard",
-  "dwb": "https://biography.wales/article/s-RICH-HEN-1812"
+  "dwb": "https://biography.wales/article/s-RICH-HEN-1812",
+  "odnb": "https://www.oxforddnb.com/view/article/23527"
  },
  "person:henry-v": {
-  "cy": "Harri V, brenin Lloegr"
+  "cy": "Harri V, brenin Lloegr",
+  "odnb": "https://www.oxforddnb.com/view/article/12952",
+  "britannica": "https://www.britannica.com/biography/Henry-V-king-of-England"
  },
  "person:henry-vaughan": {
   "cy": "Henry Vaughan",
-  "dwb": "https://biography.wales/article/s-VAUG-HEN-1621"
+  "dwb": "https://biography.wales/article/s-VAUG-HEN-1621",
+  "odnb": "https://www.oxforddnb.com/view/article/28130",
+  "britannica": "https://www.britannica.com/biography/Henry-Vaughan"
  },
  "person:howell-harris": {
   "cy": "Howel Harris",
-  "dwb": "https://biography.wales/article/s-HARR-HOW-1714"
+  "dwb": "https://biography.wales/article/s-HARR-HOW-1714",
+  "odnb": "https://www.oxforddnb.com/view/article/12392",
+  "britannica": "https://www.britannica.com/biography/Howel-Harris"
  },
  "person:hugh-griffith": {
-  "cy": "Hugh Griffith"
+  "cy": "Hugh Griffith",
+  "odnb": "https://www.oxforddnb.com/view/article/55467",
+  "britannica": "https://www.britannica.com/biography/Hugh-Emrys-Griffith"
  },
  "person:hugh-myddelton": {
-  "cy": "Hugh Myddelton"
+  "cy": "Hugh Myddelton",
+  "odnb": "https://www.oxforddnb.com/view/article/19683",
+  "britannica": "https://www.britannica.com/biography/Sir-Hugh-Myddelton-1st-Baronet",
+  "histparl": "http://www.historyofparliamentonline.org/volume/1604-1629/member/myddelton-hugh-1560-1631"
  },
  "person:hugh-owen-thomas": {
   "cy": "Hugh Owen Thomas",
-  "dwb": "https://biography.wales/article/s-THOM-OWE-1834"
+  "dwb": "https://biography.wales/article/s-THOM-OWE-1834",
+  "odnb": "https://www.oxforddnb.com/view/article/38058"
+ },
+ "person:humphrey-llwyd": {
+  "cy": "Humphrey Lhuyd",
+  "dwb": "https://biography.wales/article/s12-LLWY-HUM-1527",
+  "odnb": "https://www.oxforddnb.com/view/article/16867",
+  "histparl": "http://www.historyofparliamentonline.org/volume/1558-1603/member/lloyd-%28lhuyd%29-humphrey-%29-1527-68"
  },
  "person:hywel-ab-owain": {
   "cy": "Hywel ab Owain Gwynedd",
-  "dwb": "https://biography.wales/article/s-HYWE-ABO-1170"
+  "dwb": "https://biography.wales/article/s-HYWE-ABO-1170",
+  "odnb": "https://www.oxforddnb.com/view/article/13971",
+  "britannica": "https://www.britannica.com/biography/Hywel-ab-Owain-Gwynedd"
  },
  "person:hywel-dda": {
   "cy": "Hywel Dda",
-  "dwb": "https://biography.wales/article/s-HYWE-DDA-0950"
+  "dwb": "https://biography.wales/article/s-HYWE-DDA-0950",
+  "odnb": "https://www.oxforddnb.com/view/article/13968",
+  "britannica": "https://www.britannica.com/biography/Hywel-Dda"
  },
  "person:ian-rush": {
   "cy": "Ian Rush"
@@ -447,36 +2145,82 @@
  "person:ian-woosnam": {
   "cy": "Ian Woosnam"
  },
+ "person:idris-davies": {
+  "cy": "Idris Davies",
+  "dwb": "https://biography.wales/article/s2-DAVI-IDR-1905",
+  "odnb": "https://www.oxforddnb.com/view/article/58768"
+ },
+ "person:idwal-foel": {
+  "cy": "Idwal Foel",
+  "dwb": "https://biography.wales/article/s-IDWA-FOE-0942",
+  "odnb": "https://www.oxforddnb.com/view/article/14355"
+ },
+ "person:iestyn-ap-gwrgant": {
+  "cy": "Iestyn ap Gwrgant",
+  "dwb": "https://biography.wales/article/s-IEST-APG-1045",
+  "odnb": "https://www.oxforddnb.com/view/article/14357"
+ },
  "person:ieuan-fardd": {
   "cy": "Evan Evans (Ieuan Fardd)",
-  "dwb": "https://biography.wales/article/s-EVAN-EVA-1731"
+  "dwb": "https://biography.wales/article/s-EVAN-EVA-1731",
+  "odnb": "https://www.oxforddnb.com/view/article/8955",
+  "britannica": "https://www.britannica.com/biography/Evan-Evans"
  },
  "person:ifan-ab-owen-edwards": {
   "cy": "Ifan ab Owen Edwards",
-  "dwb": "https://biography.wales/article/s2-EDWA-OWE-1895"
+  "dwb": "https://biography.wales/article/s2-EDWA-OWE-1895",
+  "odnb": "https://www.oxforddnb.com/view/article/55464"
+ },
+ "person:ifor-williams": {
+  "cy": "Ifor Williams",
+  "dwb": "https://biography.wales/article/s2-WILL-IFO-1881",
+  "odnb": "https://www.oxforddnb.com/view/article/55457"
  },
  "person:illtud": {
   "cy": "Illtud",
-  "dwb": "https://biography.wales/article/s-ILLT-UD0-0475"
+  "dwb": "https://biography.wales/article/s-ILLT-UD0-0475",
+  "odnb": "https://www.oxforddnb.com/view/article/14365"
  },
  "person:ioan-gruffudd": {
   "cy": "Ioan Gruffudd"
  },
  "person:iolo-goch": {
   "cy": "Iolo Goch",
-  "dwb": "https://biography.wales/article/s-IOLO-GOC-1320"
+  "odnb": "https://www.oxforddnb.com/view/article/14440",
+  "britannica": "https://www.britannica.com/biography/Iolo-Goch"
  },
  "person:iolo-morganwg": {
   "cy": "Iolo Morganwg",
-  "dwb": "https://biography.wales/article/s-WILL-EDW-1747"
+  "dwb": "https://biography.wales/article/s-WILL-EDW-1747",
+  "odnb": "https://www.oxforddnb.com/view/article/29498"
+ },
+ "person:iorwerth-peate": {
+  "cy": "Iorwerth Cyfeiliog Peate",
+  "dwb": "https://biography.wales/article/s6-PEAT-CYF-1901",
+  "odnb": "https://www.oxforddnb.com/view/article/55462"
  },
  "person:isaac-roberts": {
   "cy": "Isaac Roberts",
-  "dwb": "https://biography.wales/article/s-ROBE-ISA-1829"
+  "dwb": "https://biography.wales/article/s-ROBE-ISA-1829",
+  "odnb": "https://www.oxforddnb.com/view/article/35770",
+  "britannica": "https://www.britannica.com/biography/Isaac-Roberts"
+ },
+ "person:islwyn": {
+  "cy": "William Thomas (Islwyn)",
+  "dwb": "https://biography.wales/article/s-THOM-WIL-1832",
+  "odnb": "https://www.oxforddnb.com/view/article/27247",
+  "britannica": "https://www.britannica.com/biography/William-Thomas"
  },
  "person:ivor-novello": {
   "cy": "Ivor Novello",
-  "dwb": "https://biography.wales/article/s2-NOVE-IVO-1893"
+  "dwb": "https://biography.wales/article/s2-NOVE-IVO-1893",
+  "odnb": "https://www.oxforddnb.com/view/article/35264",
+  "britannica": "https://www.britannica.com/biography/Ivor-Novello"
+ },
+ "person:j-e-lloyd": {
+  "cy": "John Edward Lloyd",
+  "dwb": "https://biography.wales/article/s2-LLOY-EDW-1861",
+  "odnb": "https://www.oxforddnb.com/view/article/34568"
  },
  "person:james-dean-bradfield": {
   "cy": "James Dean Bradfield"
@@ -487,52 +2231,73 @@
  },
  "person:jasper-tudor": {
   "cy": "Siasbar Tudur",
-  "dwb": "https://biography.wales/article/s-TUDO-SIA-1431"
+  "dwb": "https://biography.wales/article/s-TUDO-SIA-1431",
+  "odnb": "https://www.oxforddnb.com/view/article/27796",
+  "britannica": "https://www.britannica.com/biography/Jasper-Tudor-duke-of-Bedford"
  },
  "person:jemima-nicholas": {
   "cy": "Jemima Niclas"
  },
  "person:jim-griffiths": {
   "cy": "Jim Griffiths",
-  "dwb": "https://biography.wales/article/s6-GRIF-JAM-1890"
+  "dwb": "https://biography.wales/article/s6-GRIF-JAM-1890",
+  "odnb": "https://www.oxforddnb.com/view/article/31175"
  },
  "person:jimmy-wilde": {
   "cy": "Jimmy Wilde",
-  "dwb": "https://biography.wales/article/s2-WILD-JAM-1892"
+  "dwb": "https://biography.wales/article/s2-WILD-JAM-1892",
+  "odnb": "https://www.oxforddnb.com/view/article/36896",
+  "britannica": "https://www.britannica.com/biography/Jimmy-Wilde"
  },
  "person:joe-calzaghe": {
-  "cy": "Joe Calzaghe"
+  "cy": "Joe Calzaghe",
+  "britannica": "https://www.britannica.com/biography/Joe-Calzaghe"
+ },
+ "person:john-barnard-jenkins": {
+  "cy": "John Barnard Jenkins"
  },
  "person:john-cale": {
-  "cy": "John Cale"
+  "cy": "John Cale",
+  "britannica": "https://www.britannica.com/biography/John-Cale"
  },
  "person:john-charles": {
   "cy": "John Charles",
-  "dwb": "https://biography.wales/article/s12-CHAR-JOH-1931"
+  "dwb": "https://biography.wales/article/s12-CHAR-JOH-1931",
+  "odnb": "https://www.oxforddnb.com/view/article/94244",
+  "britannica": "https://www.britannica.com/biography/John-Charles"
  },
  "person:john-davies-mallwyd": {
   "cy": "John Davies, Mallwyd",
-  "dwb": "https://biography.wales/article/s-DAVI-JOH-1567"
+  "dwb": "https://biography.wales/article/s-DAVI-JOH-1567",
+  "odnb": "https://www.oxforddnb.com/view/article/7246"
  },
  "person:john-dee": {
   "cy": "John Dee",
-  "dwb": "https://biography.wales/article/s-DEE0-JOH-1527"
+  "dwb": "https://biography.wales/article/s-DEE0-JOH-1527",
+  "odnb": "https://www.oxforddnb.com/view/article/7418",
+  "britannica": "https://www.britannica.com/biography/John-Dee"
  },
  "person:john-evans-waunfawr": {
   "cy": "John Evans (fforiwr)",
-  "dwb": "https://biography.wales/article/s-EVAN-JOH-1770"
+  "dwb": "https://biography.wales/article/s-EVAN-JOH-1770",
+  "odnb": "https://www.oxforddnb.com/view/article/41228"
  },
  "person:john-frost": {
   "cy": "John Frost",
-  "dwb": "https://biography.wales/article/s-FROS-JOH-1784"
+  "dwb": "https://biography.wales/article/s-FROS-JOH-1784",
+  "odnb": "https://www.oxforddnb.com/view/article/10198",
+  "britannica": "https://www.britannica.com/biography/John-Frost"
  },
  "person:john-gibson": {
   "cy": "John Gibson (cerflunydd)",
-  "dwb": "https://biography.wales/article/s-GIBS-JOH-1790"
+  "dwb": "https://biography.wales/article/s-GIBS-JOH-1790",
+  "odnb": "https://www.oxforddnb.com/view/article/10625",
+  "britannica": "https://www.britannica.com/biography/John-Gibson"
  },
  "person:john-hughes-yuzovka": {
   "cy": "John Hughes (diwydiannwr)",
-  "dwb": "https://biography.wales/article/s-HUGH-JOH-1814"
+  "dwb": "https://biography.wales/article/s-HUGH-JOH-1814",
+  "britannica": "https://www.britannica.com/biography/John-Hughes-Welsh-metallurgist"
  },
  "person:john-jones-seryddwr": {
   "cy": "John Jones (seryddwr)",
@@ -541,19 +2306,39 @@
  "person:john-meurig-thomas": {
   "cy": "John Meurig Thomas"
  },
+ "person:john-morris-jones": {
+  "cy": "John Morris-Jones",
+  "dwb": "https://biography.wales/article/s-MORR-JOH-1864",
+  "odnb": "https://www.oxforddnb.com/view/article/35120",
+  "britannica": "https://www.britannica.com/biography/John-Morris-Jones"
+ },
+ "person:john-penry": {
+  "cy": "John Penry",
+  "dwb": "https://biography.wales/article/s-PENR-JOH-1563",
+  "odnb": "https://www.oxforddnb.com/view/article/21894"
+ },
  "person:john-price": {
   "cy": "John Price",
-  "dwb": "https://biography.wales/article/s-PRIC-JOH-1502"
+  "dwb": "https://biography.wales/article/s-PRIC-JOH-1502",
+  "odnb": "https://www.oxforddnb.com/view/article/22752",
+  "histparl": "http://www.historyofparliamentonline.org/volume/1509-1558/member/price-sir-john-15012-55"
+ },
+ "person:john-rhys": {
+  "cy": "John Rhŷs",
+  "dwb": "https://biography.wales/article/s-RHYS-JOH-1840",
+  "odnb": "https://www.oxforddnb.com/view/article/35734"
  },
  "person:joseph-parry": {
   "cy": "Joseph Parry",
-  "dwb": "https://biography.wales/article/s-PARR-JOS-1841"
+  "dwb": "https://biography.wales/article/s-PARR-JOS-1841",
+  "odnb": "https://www.oxforddnb.com/view/article/35394"
  },
  "person:jpr-williams": {
   "cy": "J. P. R. Williams"
  },
  "person:julia-gillard": {
-  "cy": "Julia Gillard"
+  "cy": "Julia Gillard",
+  "britannica": "https://www.britannica.com/biography/Julia-Gillard"
  },
  "person:julien-macdonald": {
   "cy": "Julien Macdonald"
@@ -566,7 +2351,9 @@
  },
  "person:kate-roberts": {
   "cy": "Kate Roberts",
-  "dwb": "https://biography.wales/article/s10-ROBE-KAT-1891"
+  "dwb": "https://biography.wales/article/s10-ROBE-KAT-1891",
+  "odnb": "https://www.oxforddnb.com/view/article/55465",
+  "britannica": "https://www.britannica.com/biography/Kate-Roberts"
  },
  "person:katherine-jenkins": {
   "cy": "Katherine Jenkins"
@@ -579,81 +2366,142 @@
  },
  "person:kyffin-williams": {
   "cy": "Kyffin Williams",
-  "dwb": "https://biography.wales/article/s10-WILL-KYF-1918"
+  "dwb": "https://biography.wales/article/s10-WILL-KYF-1918",
+  "odnb": "https://www.oxforddnb.com/view/article/96842",
+  "artuk": "https://artuk.org/discover/artists/williams-kyffin-19182006"
  },
  "person:lady-charlotte-guest": {
   "cy": "Charlotte Guest",
-  "dwb": "https://biography.wales/article/s-GUES-ELI-1812"
+  "dwb": "https://biography.wales/article/s-GUES-ELI-1812",
+  "odnb": "https://www.oxforddnb.com/view/article/24832"
  },
  "person:lady-llanover": {
   "cy": "Augusta Hall, Arglwyddes Llanofer",
-  "dwb": "https://biography.wales/article/s10-HALL-AUG-1802"
+  "dwb": "https://biography.wales/article/s10-HALL-AUG-1802",
+  "odnb": "https://www.oxforddnb.com/view/article/39088"
  },
  "person:lady-rhondda": {
   "cy": "Margaret Haig Mackworth, 2il Is-iarlles Rhondda",
-  "dwb": "https://biography.wales/article/s12-THOM-HAI-1883"
+  "dwb": "https://biography.wales/article/s12-THOM-HAI-1883",
+  "odnb": "https://www.oxforddnb.com/view/article/36479"
  },
  "person:laura-ashley": {
-  "cy": "Laura Ashley"
+  "cy": "Laura Ashley",
+  "odnb": "https://www.oxforddnb.com/view/article/30770",
+  "britannica": "https://www.britannica.com/biography/Laura-Ashley"
  },
  "person:lauren-price": {
-  "cy": "Lauren Price"
+  "cy": "Lauren Price",
+  "olympedia": "https://www.olympedia.org/athletes/142978"
  },
  "person:lewis-jones-patagonia": {
   "cy": "Lewis Jones, Patagonia",
-  "dwb": "https://biography.wales/article/s-JONE-LEW-1836"
+  "dwb": "https://biography.wales/article/s-JONE-LEW-1836",
+  "odnb": "https://www.oxforddnb.com/view/article/89948"
  },
  "person:lewis-valentine": {
   "cy": "Lewis Valentine",
-  "dwb": "https://biography.wales/article/s11-VALE-EDW-1893"
+  "dwb": "https://biography.wales/article/s11-VALE-EDW-1893",
+  "odnb": "https://www.oxforddnb.com/view/article/95349"
  },
  "person:lewys-glyn-cothi": {
   "cy": "Lewys Glyn Cothi",
-  "dwb": "https://biography.wales/article/s-LEWI-GLY-1447"
+  "dwb": "https://biography.wales/article/s-LEWI-GLY-1447",
+  "odnb": "https://www.oxforddnb.com/view/article/16571",
+  "britannica": "https://www.britannica.com/biography/Lewis-Glyn-Cothi"
+ },
+ "person:lleurwg": {
+  "odnb": "https://www.oxforddnb.com/view/article/17145"
  },
  "person:lloyd-george": {
   "cy": "David Lloyd George",
-  "dwb": "https://biography.wales/article/s2-LLOY-DAV-1863"
+  "dwb": "https://biography.wales/article/s2-LLOY-DAV-1863",
+  "odnb": "https://www.oxforddnb.com/view/article/34570",
+  "britannica": "https://www.britannica.com/biography/David-Lloyd-George"
+ },
+ "person:llywarch-hen": {
+  "cy": "Llywarch Hen",
+  "dwb": "https://biography.wales/article/s-LLYW-HEN-0550",
+  "odnb": "https://www.oxforddnb.com/view/article/16872",
+  "britannica": "https://www.britannica.com/biography/Llywarch-Hen-Welsh-poet"
  },
  "person:llywelyn-ap-gruffudd": {
   "cy": "Llywelyn ap Gruffudd",
-  "dwb": "https://biography.wales/article/s-LLYW-APG-1200"
+  "dwb": "https://biography.wales/article/s-LLYW-APG-1200",
+  "odnb": "https://www.oxforddnb.com/view/article/16875",
+  "britannica": "https://www.britannica.com/biography/Llywelyn-ap-Gruffudd"
+ },
+ "person:llywelyn-ap-gruffudd-fychan": {
+  "cy": "Llywelyn ap Gruffudd Fychan"
  },
  "person:llywelyn-ap-seisyll": {
   "cy": "Llywelyn ap Seisyll",
-  "dwb": "https://biography.wales/article/s-LLYW-APS-1023"
+  "dwb": "https://biography.wales/article/s-LLYW-APS-1023",
+  "odnb": "https://www.oxforddnb.com/view/article/16873"
  },
  "person:llywelyn-bren": {
   "cy": "Llywelyn Bren",
-  "dwb": "https://biography.wales/article/s-LLYW-APG-1317"
+  "dwb": "https://biography.wales/article/s-LLYW-APG-1317",
+  "odnb": "https://www.oxforddnb.com/view/article/16876"
  },
  "person:llywelyn-fawr": {
   "cy": "Llywelyn Fawr",
-  "dwb": "https://biography.wales/article/s-LLYW-API-1173"
+  "dwb": "https://biography.wales/article/s-LLYW-API-1173",
+  "odnb": "https://www.oxforddnb.com/view/article/16874",
+  "britannica": "https://www.britannica.com/biography/Llywelyn-ap-Iorwerth"
  },
  "person:luke-evans": {
   "cy": "Luke Evans"
  },
  "person:lynn-davies": {
-  "cy": "Lynn Davies"
+  "cy": "Lynn Davies",
+  "olympedia": "https://www.olympedia.org/athletes/69002",
+  "athletics": "https://worldathletics.org/athletes/-/5656"
+ },
+ "person:mabon": {
+  "cy": "Mabon fab Modron"
  },
  "person:macsen-wledig": {
-  "cy": "Macsen Wledig"
+  "cy": "Macsen Wledig",
+  "odnb": "https://www.oxforddnb.com/view/article/48295",
+  "britannica": "https://www.britannica.com/biography/Magnus-Maximus"
  },
  "person:madog": {
-  "cy": "Madog ab Owain Gwynedd"
+  "cy": "Madog ab Owain Gwynedd",
+  "odnb": "https://www.oxforddnb.com/view/article/17763",
+  "britannica": "https://www.britannica.com/topic/Madog-ab-Owain-Gwynedd"
  },
  "person:madog-ap-llywelyn": {
   "cy": "Madog ap Llywelyn",
-  "dwb": "https://biography.wales/article/s-MADO-APL-1294"
+  "dwb": "https://biography.wales/article/s-MADO-APL-1294",
+  "odnb": "https://www.oxforddnb.com/view/article/17765"
+ },
+ "person:madog-ap-maredudd": {
+  "cy": "Madog ap Maredudd",
+  "dwb": "https://biography.wales/article/s-MADO-APM-1160",
+  "odnb": "https://www.oxforddnb.com/view/article/17762",
+  "britannica": "https://www.britannica.com/biography/Madog-ap-Maredudd"
  },
  "person:maelgwn-gwynedd": {
   "cy": "Maelgwn Gwynedd",
-  "dwb": "https://biography.wales/article/s-MAEL-GWY-0547"
+  "dwb": "https://biography.wales/article/s-MAEL-GWY-0547",
+  "odnb": "https://www.oxforddnb.com/view/article/17768"
+ },
+ "person:malo": {
+  "cy": "Malo",
+  "dwb": "https://biography.wales/article/s-MALO-SAN-0550",
+  "britannica": "https://www.britannica.com/biography/Maclou"
  },
  "person:maredudd-ab-owain": {
   "cy": "Maredudd ab Owain",
-  "dwb": "https://biography.wales/article/s-MARE-ABO-0999"
+  "dwb": "https://biography.wales/article/s-MARE-ABO-0999",
+  "odnb": "https://www.oxforddnb.com/view/article/18040",
+  "britannica": "https://www.britannica.com/biography/Maredudd-ap-Owain"
+ },
+ "person:marged-ferch-ifan": {
+  "cy": "Marged uch Ifan",
+  "dwb": "https://biography.wales/article/s-MARG-VCH-1696",
+  "odnb": "https://www.oxforddnb.com/view/article/62908"
  },
  "person:mark-drakeford": {
   "cy": "Mark Drakeford"
@@ -664,9 +2512,13 @@
  "person:mark-williams-snooker": {
   "cy": "Mark J. Williams"
  },
+ "person:martin-evans": {
+  "britannica": "https://www.britannica.com/biography/Martin-Evans"
+ },
  "person:martyn-lloyd-jones": {
   "cy": "Martyn Lloyd-Jones",
-  "dwb": "https://biography.wales/article/s12-LLOY-MAR-1899"
+  "dwb": "https://biography.wales/article/s12-LLOY-MAR-1899",
+  "odnb": "https://www.oxforddnb.com/view/article/46322"
  },
  "person:mary-dillwyn": {
   "cy": "Mary Dillwyn"
@@ -675,23 +2527,31 @@
   "cy": "Mary Hopkin"
  },
  "person:mary-jones": {
-  "cy": "Mari Jones"
+  "cy": "Mari Jones",
+  "odnb": "https://www.oxforddnb.com/view/article/70976"
  },
  "person:max-boyce": {
   "cy": "Max Boyce"
  },
  "person:meddygon-myddfai": {
-  "cy": "Meddygon Myddfai"
+  "cy": "Meddygon Myddfai",
+  "britannica": "https://www.britannica.com/topic/Physicians-of-Myddvai"
+ },
+ "person:medrawd": {
+  "cy": "Medrawd",
+  "britannica": "https://www.britannica.com/topic/Mordred"
  },
  "person:megan-lloyd-george": {
-  "cy": "Megan Lloyd George"
+  "cy": "Megan Lloyd George",
+  "odnb": "https://www.oxforddnb.com/view/article/34572"
  },
  "person:meic-stevens": {
   "cy": "Meic Stevens"
  },
  "person:meilyr-brydydd": {
   "cy": "Meilyr Brydydd",
-  "dwb": "https://biography.wales/article/s-MEIL-BRY-1100"
+  "dwb": "https://biography.wales/article/s-MEIL-BRY-1100",
+  "odnb": "https://www.oxforddnb.com/view/article/18520"
  },
  "person:melangell": {
   "cy": "Melangell"
@@ -701,11 +2561,16 @@
  },
  "person:merfyn-frych": {
   "cy": "Merfyn Frych",
-  "dwb": "https://biography.wales/article/s-MERF-FRY-0844"
+  "dwb": "https://biography.wales/article/s-MERF-FRY-0844",
+  "odnb": "https://www.oxforddnb.com/view/article/18587"
+ },
+ "person:meurig-ap-tewdrig": {
+  "cy": "Meurig ap Tewdrig"
  },
  "person:michael-d-jones": {
   "cy": "Michael D. Jones",
-  "dwb": "https://biography.wales/article/s-JONE-DAN-1822"
+  "dwb": "https://biography.wales/article/s-JONE-DAN-1822",
+  "odnb": "https://www.oxforddnb.com/view/article/49170"
  },
  "person:michael-moritz": {
   "cy": "Michael Moritz"
@@ -718,74 +2583,143 @@
  },
  "person:morfydd-owen": {
   "cy": "Morfydd Llwyn Owen",
-  "dwb": "https://biography.wales/article/s-OWEN-LLW-1891"
+  "dwb": "https://biography.wales/article/s-OWEN-LLW-1891",
+  "odnb": "https://www.oxforddnb.com/view/article/52649"
+ },
+ "person:morgan-hen": {
+  "cy": "Morgan Hen ab Owain",
+  "dwb": "https://biography.wales/article/s-MORG-HEN-0975",
+  "odnb": "https://www.oxforddnb.com/view/article/19210"
  },
  "person:morgan-john-rhys": {
   "cy": "Morgan John Rhys",
-  "dwb": "https://biography.wales/article/s-RHYS-JOH-1760"
+  "dwb": "https://biography.wales/article/s-RHYS-JOH-1760",
+  "odnb": "https://www.oxforddnb.com/view/article/23447"
  },
  "person:morgan-llwyd": {
   "cy": "Morgan Llwyd",
-  "dwb": "https://biography.wales/article/s-LLWY-MOR-1619"
+  "dwb": "https://biography.wales/article/s-LLWY-MOR-1619",
+  "odnb": "https://www.oxforddnb.com/view/article/16869",
+  "britannica": "https://www.britannica.com/biography/Morgan-Llwyd"
+ },
+ "person:morgan-mwynfawr": {
+  "cy": "Morgan Mwynfawr",
+  "dwb": "https://biography.wales/article/s-MORG-MWY-0730",
+  "odnb": "https://www.oxforddnb.com/view/article/19209"
+ },
+ "person:mynyddog-mwynfawr": {
+  "cy": "Mynyddog Mwynfawr",
+  "odnb": "https://www.oxforddnb.com/view/article/51402",
+  "britannica": "https://www.britannica.com/biography/Mynyddawg-Mwynfawr"
+ },
+ "person:myrddin": {
+  "britannica": "https://www.britannica.com/biography/Myrddin-Wyllt"
  },
  "person:neil-kinnock": {
-  "cy": "Neil Kinnock"
+  "cy": "Neil Kinnock",
+  "britannica": "https://www.britannica.com/biography/Neil-Kinnock-Baron-Kinnock-of-Bedwellty"
  },
  "person:nennius": {
   "cy": "Nennius",
-  "dwb": "https://biography.wales/article/s-NENN-IUS-0800"
+  "dwb": "https://biography.wales/article/s-NENN-IUS-0800",
+  "odnb": "https://www.oxforddnb.com/view/article/19892",
+  "britannica": "https://www.britannica.com/biography/Nennius"
  },
  "person:nest": {
   "cy": "Nest ferch Rhys ap Tewdwr",
-  "dwb": "https://biography.wales/article/s-DEWI-NES-1120"
+  "dwb": "https://biography.wales/article/s-DEWI-NES-1120",
+  "odnb": "https://www.oxforddnb.com/view/article/19905"
  },
  "person:neville-southall": {
   "cy": "Neville Southall"
  },
  "person:nicole-cooke": {
-  "cy": "Nicole Cooke"
+  "cy": "Nicole Cooke",
+  "olympedia": "https://www.olympedia.org/athletes/103694"
  },
  "person:non": {
   "cy": "Non",
-  "dwb": "https://biography.wales/article/s-NONN-000-0450"
+  "dwb": "https://biography.wales/article/s-NONN-000-0450",
+  "odnb": "https://www.oxforddnb.com/view/article/20244"
+ },
+ "person:olwen": {
+  "cy": "Culhwch ac Olwen",
+  "britannica": "https://www.britannica.com/art/Kulhwch-and-Olwen"
  },
  "person:om-edwards": {
   "cy": "Owen Morgan Edwards",
-  "dwb": "https://biography.wales/article/s-EDWA-MOR-1858"
+  "dwb": "https://biography.wales/article/s-EDWA-MOR-1858",
+  "odnb": "https://www.oxforddnb.com/view/article/32984",
+  "britannica": "https://www.britannica.com/biography/Owen-Morgan-Edwards"
+ },
+ "person:owain-ab-urien": {
+  "cy": "Owain ab Urien"
  },
  "person:owain-cyfeiliog": {
   "cy": "Owain Cyfeiliog",
-  "dwb": "https://biography.wales/article/s-OWAI-CYF-1130"
+  "dwb": "https://biography.wales/article/s-OWAI-CYF-1130",
+  "odnb": "https://www.oxforddnb.com/view/article/20981",
+  "britannica": "https://www.britannica.com/biography/Owain-Cyfeiliog"
  },
  "person:owain-glyndwr": {
   "cy": "Owain Glyn Dŵr",
-  "dwb": "https://biography.wales/article/s-OWAI-GLY-1354"
+  "dwb": "https://biography.wales/article/s-OWAI-GLY-1354",
+  "odnb": "https://www.oxforddnb.com/view/article/10816",
+  "britannica": "https://www.britannica.com/biography/Owain-Glyn-Dwr"
  },
  "person:owain-gwynedd": {
   "cy": "Owain Gwynedd",
-  "dwb": "https://biography.wales/article/s-OWAI-GWY-1100"
+  "dwb": "https://biography.wales/article/s-OWAI-GWY-1100",
+  "odnb": "https://www.oxforddnb.com/view/article/20979",
+  "britannica": "https://www.britannica.com/biography/Owain-Gwynedd"
  },
  "person:owain-lawgoch": {
   "cy": "Owain Lawgoch",
-  "dwb": "https://biography.wales/article/s-OWAI-APT-1378"
+  "dwb": "https://biography.wales/article/s-OWAI-APT-1378",
+  "odnb": "https://www.oxforddnb.com/view/article/20983"
+ },
+ "person:owain-myfyr": {
+  "cy": "Owen Jones (Owain Myfyr)",
+  "dwb": "https://biography.wales/article/s-JONE-OWE-1741",
+  "odnb": "https://www.oxforddnb.com/view/article/15065"
  },
  "person:owain-tudur": {
   "cy": "Owain Tudur",
-  "dwb": "https://biography.wales/article/s-OWAI-TUD-1400"
+  "dwb": "https://biography.wales/article/s-OWAI-TUD-1400",
+  "odnb": "https://www.oxforddnb.com/view/article/27797",
+  "britannica": "https://www.britannica.com/biography/Owen-Tudor"
+ },
+ "person:pabo-post-prydain": {
+  "cy": "Pabo Post Prydain",
+  "odnb": "https://www.oxforddnb.com/view/article/21063"
  },
  "person:padarn": {
   "cy": "Padarn",
-  "dwb": "https://biography.wales/article/s-PADA-SAN-0560"
+  "dwb": "https://biography.wales/article/s-PADA-SAN-0560",
+  "odnb": "https://www.oxforddnb.com/view/article/21078"
  },
  "person:pantycelyn": {
   "cy": "William Williams, Pantycelyn",
-  "dwb": "https://biography.wales/article/s-WILL-WIL-1717"
+  "dwb": "https://biography.wales/article/s-WILL-WIL-1717",
+  "odnb": "https://www.oxforddnb.com/view/article/29556"
+ },
+ "person:parri-ddall": {
+  "cy": "John Parry (Y Telynor Dall)",
+  "dwb": "https://biography.wales/article/s-PARR-JOH-1710",
+  "odnb": "https://www.oxforddnb.com/view/article/21420"
  },
  "person:patrick": {
-  "cy": "Sant Padrig"
+  "cy": "Sant Padrig",
+  "odnb": "https://www.oxforddnb.com/view/article/21562",
+  "britannica": "https://www.britannica.com/biography/Saint-Patrick"
  },
  "person:pelagius": {
-  "cy": "Pelagius"
+  "cy": "Pelagius",
+  "odnb": "https://www.oxforddnb.com/view/article/21784"
+ },
+ "person:peredur": {
+  "cy": "Peredur fab Efrawg",
+  "britannica": "https://www.britannica.com/topic/Peredur-Son-of-Efrawg"
  },
  "person:phil-bennett": {
   "cy": "Phil Bennett"
@@ -795,129 +2729,216 @@
  },
  "person:philip-jones-griffiths": {
   "cy": "Philip Jones Griffiths",
-  "dwb": "https://biography.wales/article/s11-GRIF-JON-1936"
+  "dwb": "https://biography.wales/article/s11-GRIF-JON-1936",
+  "odnb": "https://www.oxforddnb.com/view/article/99901"
+ },
+ "person:pol": {
+  "cy": "Paulinus Aurelianus",
+  "dwb": "https://biography.wales/article/s-PAUL-AUR-0475",
+  "odnb": "https://www.oxforddnb.com/view/article/21592"
  },
  "person:pryce-pryce-jones": {
   "cy": "Pryce Pryce-Jones",
-  "dwb": "https://biography.wales/article/s3-PRYC-PRY-1834"
+  "dwb": "https://biography.wales/article/s3-PRYC-PRY-1834",
+  "odnb": "https://www.oxforddnb.com/view/article/53210"
+ },
+ "person:prydydd-y-moch": {
+  "cy": "Llywarch ap Llywelyn",
+  "dwb": "https://biography.wales/article/s-LLYW-APL-1173",
+  "odnb": "https://www.oxforddnb.com/view/article/16871"
  },
  "person:r-s-thomas": {
   "cy": "R. S. Thomas",
-  "dwb": "https://biography.wales/article/s12-THOM-STU-1913"
+  "dwb": "https://biography.wales/article/s12-THOM-STU-1913",
+  "odnb": "https://www.oxforddnb.com/view/article/74584"
+ },
+ "person:r-williams-parry": {
+  "cy": "Robert Williams Parry",
+  "dwb": "https://biography.wales/article/s2-PARR-WIL-1884",
+  "odnb": "https://www.oxforddnb.com/view/article/55458"
  },
  "person:ray-milland": {
-  "cy": "Ray Milland"
+  "cy": "Ray Milland",
+  "odnb": "https://www.oxforddnb.com/view/article/57315"
  },
  "person:ray-reardon": {
   "cy": "Ray Reardon"
  },
  "person:raymond-williams": {
   "cy": "Raymond Williams",
-  "dwb": "https://biography.wales/article/s12-WILL-HEN-1921"
+  "dwb": "https://biography.wales/article/s12-WILL-HEN-1921",
+  "odnb": "https://www.oxforddnb.com/view/article/39847"
+ },
+ "person:red-lady-of-paviland": {
+  "odnb": "https://www.oxforddnb.com/view/article/106753"
  },
  "person:rhodri-mawr": {
   "cy": "Rhodri Mawr",
-  "dwb": "https://biography.wales/article/s-RHOD-MAW-0877"
+  "dwb": "https://biography.wales/article/s-RHOD-MAW-0877",
+  "odnb": "https://www.oxforddnb.com/view/article/23456"
  },
  "person:rhodri-morgan": {
   "cy": "Rhodri Morgan",
-  "dwb": "https://biography.wales/article/s12-MORG-RHO-1939"
+  "dwb": "https://biography.wales/article/s12-MORG-RHO-1939",
+  "odnb": "https://www.oxforddnb.com/view/article/90000380313"
+ },
+ "person:rhun-ap-maelgwn": {
+  "cy": "Rhun ap Maelgwn Gwynedd",
+  "dwb": "https://biography.wales/article/s-RHUN-APM-0550",
+  "odnb": "https://www.oxforddnb.com/view/article/23458"
+ },
+ "person:rhydderch-hael": {
+  "cy": "Rhydderch Hael",
+  "dwb": "https://biography.wales/article/s-RHYD-HAE-0590",
+  "odnb": "https://www.oxforddnb.com/view/article/23459"
  },
  "person:rhygyfarch": {
   "cy": "Rhygyfarch ap Sulien",
-  "dwb": "https://biography.wales/article/s-RHYG-YFA-1056"
+  "dwb": "https://biography.wales/article/s-RHYG-YFA-1056",
+  "odnb": "https://www.oxforddnb.com/view/article/23461"
  },
  "person:rhys-ap-tewdwr": {
   "cy": "Rhys ap Tewdwr",
-  "dwb": "https://biography.wales/article/s11-RHYS-APT-1093"
+  "dwb": "https://biography.wales/article/s11-RHYS-APT-1093",
+  "odnb": "https://www.oxforddnb.com/view/article/23463",
+  "britannica": "https://www.britannica.com/biography/Rhys-ap-Tewdwr"
  },
  "person:rhys-ap-thomas": {
   "cy": "Rhys ap Thomas",
-  "dwb": "https://biography.wales/article/s-RHYS-APT-1449"
+  "dwb": "https://biography.wales/article/s-RHYS-APT-1449",
+  "odnb": "https://www.oxforddnb.com/view/article/23467"
  },
  "person:rhys-gwilym-ap-tudur": {
-  "cy": "Castell Conwy"
+  "cy": "Castell Conwy",
+  "britannica": "https://www.britannica.com/place/Conwy-Castle"
  },
  "person:rhys-prichard": {
   "cy": "Rhys Prichard",
-  "dwb": "https://biography.wales/article/s-PRIC-RHY-1579"
+  "dwb": "https://biography.wales/article/s-PRIC-RHY-1579",
+  "odnb": "https://www.oxforddnb.com/view/article/22777",
+  "britannica": "https://www.britannica.com/biography/Rhys-Prichard"
  },
  "person:richard-amerike": {
   "cy": "Richard ap Meurig"
  },
  "person:richard-burton": {
   "cy": "Richard Burton",
-  "dwb": "https://biography.wales/article/s8-BURT-RIC-1925"
+  "dwb": "https://biography.wales/article/s8-BURT-RIC-1925",
+  "odnb": "https://www.oxforddnb.com/view/article/30881",
+  "britannica": "https://www.britannica.com/biography/Richard-Burton-Welsh-actor"
  },
  "person:richard-davies": {
   "cy": "Richard Davies",
-  "dwb": "https://biography.wales/article/s-DAVI-RIC-1501"
+  "dwb": "https://biography.wales/article/s-DAVI-RIC-1501",
+  "odnb": "https://www.oxforddnb.com/view/article/7255",
+  "britannica": "https://www.britannica.com/biography/Richard-Davies"
+ },
+ "person:richard-gwyn": {
+  "cy": "Rhisiart Gwyn",
+  "dwb": "https://biography.wales/article/s-GWYN-RIC-1557",
+  "odnb": "https://www.oxforddnb.com/view/article/29264"
  },
  "person:richard-price": {
   "cy": "Richard Price",
-  "dwb": "https://biography.wales/article/s-PRIC-RIC-1723"
+  "dwb": "https://biography.wales/article/s-PRIC-RIC-1723",
+  "odnb": "https://www.oxforddnb.com/view/article/22761",
+  "britannica": "https://www.britannica.com/biography/Richard-Price"
+ },
+ "person:richard-roberts-engineer": {
+  "cy": "Richard Roberts (peiriannydd)",
+  "dwb": "https://biography.wales/article/s-ROBE-RIC-1789",
+  "odnb": "https://www.oxforddnb.com/view/article/23770",
+  "britannica": "https://www.britannica.com/biography/Richard-Roberts-British-inventor"
  },
  "person:richard-wilson": {
   "cy": "Richard Wilson (arlunydd)",
-  "dwb": "https://biography.wales/article/s-WILS-RIC-1713"
+  "dwb": "https://biography.wales/article/s-WILS-RIC-1713",
+  "odnb": "https://www.oxforddnb.com/view/article/29680",
+  "britannica": "https://www.britannica.com/biography/Richard-Wilson"
  },
  "person:richey-edwards": {
   "cy": "Richey Edwards"
  },
  "person:roald-dahl": {
-  "cy": "Roald Dahl"
+  "cy": "Roald Dahl",
+  "odnb": "https://www.oxforddnb.com/view/article/39827",
+  "britannica": "https://www.britannica.com/biography/Roald-Dahl"
  },
  "person:rob-brydon": {
   "cy": "Rob Brydon"
  },
  "person:robert-jones-surgeon": {
   "cy": "Robert Jones (llawfeddyg)",
-  "dwb": "https://biography.wales/article/s-JONE-ROB-1857"
+  "dwb": "https://biography.wales/article/s-JONE-ROB-1857",
+  "odnb": "https://www.oxforddnb.com/view/article/34237"
  },
  "person:robert-owen": {
   "cy": "Robert Owen",
-  "dwb": "https://biography.wales/article/s-OWEN-ROB-1771"
+  "dwb": "https://biography.wales/article/s-OWEN-ROB-1771",
+  "odnb": "https://www.oxforddnb.com/view/article/21027",
+  "britannica": "https://www.britannica.com/biography/Robert-Owen"
  },
  "person:robert-recorde": {
   "cy": "Robert Recorde",
-  "dwb": "https://biography.wales/article/s11-RECO-ROB-1558"
+  "dwb": "https://biography.wales/article/s11-RECO-ROB-1558",
+  "odnb": "https://www.oxforddnb.com/view/article/23241",
+  "britannica": "https://www.britannica.com/biography/Robert-Recorde"
  },
  "person:ron-davies": {
   "cy": "Ron Davies"
  },
  "person:rowan-williams": {
-  "cy": "Rowan Williams"
+  "cy": "Rowan Williams",
+  "britannica": "https://www.britannica.com/biography/Rowan-Williams"
  },
  "person:roy-jenkins": {
   "cy": "Roy Jenkins",
-  "dwb": "https://biography.wales/article/s14-JENK-HAR-1920"
+  "dwb": "https://biography.wales/article/s14-JENK-HAR-1920",
+  "odnb": "https://www.oxforddnb.com/view/article/88739",
+  "britannica": "https://www.britannica.com/biography/Roy-Jenkins-Baron-Jenkins-of-Hillhead"
  },
  "person:ruth-jones": {
   "cy": "Ruth Jones"
  },
  "person:ryan-davies": {
-  "cy": "Ryan Davies"
+  "cy": "Ryan Davies",
+  "odnb": "https://www.oxforddnb.com/view/article/101155"
  },
  "person:sam-warburton": {
   "cy": "Sam Warburton"
  },
  "person:samson": {
   "cy": "Samson (sant)",
-  "dwb": "https://biography.wales/article/s-SAMS-ON0-0485"
+  "dwb": "https://biography.wales/article/s-SAMS-ON0-0485",
+  "odnb": "https://www.oxforddnb.com/view/article/24599"
+ },
+ "person:samuel-griffith": {
+  "cy": "Samuel Griffith",
+  "dwb": "https://biography.wales/article/s-GRIF-WAL-1845",
+  "odnb": "https://www.oxforddnb.com/view/article/52445"
  },
  "person:sarah-siddons": {
   "cy": "Sarah Siddons",
-  "dwb": "https://biography.wales/article/s-SIDD-SAR-1755"
+  "dwb": "https://biography.wales/article/s-SIDD-SAR-1755",
+  "odnb": "https://www.oxforddnb.com/view/article/25516",
+  "britannica": "https://www.britannica.com/biography/Sarah-Siddons"
  },
  "person:saunders-lewis": {
   "cy": "Saunders Lewis",
-  "dwb": "https://biography.wales/article/s10-LEWI-SAU-1893"
+  "dwb": "https://biography.wales/article/s10-LEWI-SAU-1893",
+  "odnb": "https://www.oxforddnb.com/view/article/55454"
+ },
+ "person:seiriol": {
+  "cy": "Seiriol",
+  "dwb": "https://biography.wales/article/s-SEIR-IOL-0500",
+  "odnb": "https://www.oxforddnb.com/view/article/25048"
  },
  "person:shane-williams": {
   "cy": "Shane Williams"
  },
  "person:shirley-bassey": {
-  "cy": "Shirley Bassey"
+  "cy": "Shirley Bassey",
+  "britannica": "https://www.britannica.com/biography/Shirley-Bassey"
  },
  "person:sian-phillips": {
   "cy": "Siân Phillips"
@@ -927,25 +2948,38 @@
  },
  "person:sir-john-williams": {
   "cy": "John Williams (casglwr llawysgrifau)",
-  "dwb": "https://biography.wales/article/s-WILL-JOH-1840"
+  "dwb": "https://biography.wales/article/s-WILL-JOH-1840",
+  "odnb": "https://www.oxforddnb.com/view/article/95028"
  },
  "person:siwan": {
   "cy": "Y Dywysoges Siwan",
-  "dwb": "https://biography.wales/article/s12-JOAN-TYW-1237"
+  "dwb": "https://biography.wales/article/s12-JOAN-TYW-1237",
+  "odnb": "https://www.oxforddnb.com/view/article/14819"
  },
  "person:steve-jones": {
   "cy": "Steve Jones (biolegydd)"
  },
  "person:sulien": {
   "cy": "Sulien",
-  "dwb": "https://biography.wales/article/s-SULI-EN0-1011"
+  "dwb": "https://biography.wales/article/s-SULI-EN0-1011",
+  "odnb": "https://www.oxforddnb.com/view/article/26768"
  },
  "person:t-e-lawrence": {
-  "cy": "T. E. Lawrence"
+  "cy": "T. E. Lawrence",
+  "odnb": "https://www.oxforddnb.com/view/article/34440",
+  "britannica": "https://www.britannica.com/biography/T-E-Lawrence"
+ },
+ "person:t-gwynn-jones": {
+  "cy": "Thomas Gwynn Jones",
+  "dwb": "https://biography.wales/article/s2-JONE-GWY-1871",
+  "odnb": "https://www.oxforddnb.com/view/article/37616",
+  "britannica": "https://www.britannica.com/biography/Thomas-Gwynn-Jones"
  },
  "person:t-h-parry-williams": {
   "cy": "T. H. Parry-Williams",
-  "dwb": "https://biography.wales/article/s10-PARR-HER-1887"
+  "dwb": "https://biography.wales/article/s10-PARR-HER-1887",
+  "odnb": "https://www.oxforddnb.com/view/article/37835",
+  "britannica": "https://www.britannica.com/biography/Thomas-Parry-Williams"
  },
  "person:t-llew-jones": {
   "cy": "T. Llew Jones",
@@ -953,68 +2987,118 @@
  },
  "person:taliesin": {
   "cy": "Taliesin",
-  "dwb": "https://biography.wales/article/s-TALI-ESI-0575"
+  "dwb": "https://biography.wales/article/s-TALI-ESI-0575",
+  "odnb": "https://www.oxforddnb.com/view/article/26952",
+  "britannica": "https://www.britannica.com/biography/Taliesin-Welsh-poet"
  },
  "person:tanni-grey-thompson": {
-  "cy": "Tanni Grey-Thompson"
+  "cy": "Tanni Grey-Thompson",
+  "olympedia": "https://www.olympedia.org/athletes/901551"
  },
  "person:taron-egerton": {
   "cy": "Taron Egerton"
  },
  "person:tasker-watkins": {
   "cy": "Tasker Watkins",
-  "dwb": "https://biography.wales/article/s11-WATK-TAS-1918"
+  "dwb": "https://biography.wales/article/s11-WATK-TAS-1918",
+  "odnb": "https://www.oxforddnb.com/view/article/99120"
+ },
+ "person:tathan": {
+  "dwb": "https://biography.wales/article/s-TATH-AN0-0450"
+ },
+ "person:tegau-eurfron": {
+  "cy": "Tegau Eurfron"
  },
  "person:teilo": {
   "cy": "Teilo",
-  "dwb": "https://biography.wales/article/s-TEIL-SAN-0500"
+  "dwb": "https://biography.wales/article/s-TEIL-SAN-0500",
+  "odnb": "https://www.oxforddnb.com/view/article/27104"
  },
  "person:terry-matthews": {
   "cy": "Terry Matthews"
  },
+ "person:tewdrig": {
+  "cy": "Tewdrig"
+ },
  "person:theophilus-evans": {
   "cy": "Theophilus Evans",
-  "dwb": "https://biography.wales/article/s-EVAN-THE-1693"
+  "dwb": "https://biography.wales/article/s-EVAN-THE-1693",
+  "odnb": "https://www.oxforddnb.com/view/article/8980"
  },
  "person:thomas-button": {
   "cy": "Thomas Button",
-  "dwb": "https://biography.wales/article/s-BUTT-THO-1634"
+  "dwb": "https://biography.wales/article/s-BUTT-THO-1634",
+  "odnb": "https://www.oxforddnb.com/view/article/4235",
+  "britannica": "https://www.britannica.com/biography/Thomas-Button"
  },
  "person:thomas-charles": {
   "cy": "Thomas Charles",
-  "dwb": "https://biography.wales/article/s-CHAR-THO-1755"
+  "dwb": "https://biography.wales/article/s-CHAR-THO-1755",
+  "odnb": "https://www.oxforddnb.com/view/article/5151",
+  "britannica": "https://www.britannica.com/biography/Thomas-Charles"
  },
  "person:thomas-gee": {
   "cy": "Thomas Gee",
-  "dwb": "https://biography.wales/article/s-GEE0-THO-1815"
+  "dwb": "https://biography.wales/article/s-GEE0-THO-1815",
+  "odnb": "https://www.oxforddnb.com/view/article/46663"
  },
  "person:thomas-jones-pencerrig": {
   "cy": "Thomas Jones (arlunydd)",
-  "dwb": "https://biography.wales/article/s-JONE-THO-1742"
+  "dwb": "https://biography.wales/article/s-JONE-THO-1742",
+  "odnb": "https://www.oxforddnb.com/view/article/15091",
+  "artuk": "https://artuk.org/discover/artists/jones-thomas-17421803"
  },
  "person:thomas-lewis": {
   "cy": "Thomas Lewis (cardiolegydd)",
-  "dwb": "https://biography.wales/article/s2-LEWI-THO-1881"
+  "dwb": "https://biography.wales/article/s2-LEWI-THO-1881",
+  "odnb": "https://www.oxforddnb.com/view/article/34520"
  },
  "person:thomas-pennant": {
   "cy": "Thomas Pennant (awdur)",
-  "dwb": "https://biography.wales/article/s-PENN-THO-1726"
+  "dwb": "https://biography.wales/article/s-PENN-THO-1726",
+  "odnb": "https://www.oxforddnb.com/view/article/21860",
+  "britannica": "https://www.britannica.com/biography/Thomas-Pennant"
+ },
+ "person:thomas-williams-llanidan": {
+  "cy": "Thomas Williams, Llanidan",
+  "dwb": "https://biography.wales/article/s-WILL-THO-1737",
+  "odnb": "https://www.oxforddnb.com/view/article/38133",
+  "histparl": "http://www.historyofparliamentonline.org/volume/1790-1820/member/williams-thomas-1737-1802"
+ },
+ "person:tom-ellis": {
+  "cy": "Thomas Edward Ellis",
+  "dwb": "https://biography.wales/article/s-ELLI-EDW-1859",
+  "odnb": "https://www.oxforddnb.com/view/article/37394"
  },
  "person:tom-jones": {
-  "cy": "Tom Jones"
+  "cy": "Tom Jones",
+  "britannica": "https://www.britannica.com/biography/Tom-Jones"
  },
  "person:tom-parry-jones": {
   "cy": "Tom Parry Jones",
   "dwb": "https://biography.wales/article/s12-JONE-PAR-1935"
  },
  "person:tommy-cooper": {
-  "cy": "Tommy Cooper"
+  "cy": "Tommy Cooper",
+  "odnb": "https://www.oxforddnb.com/view/article/30966"
  },
  "person:tommy-farr": {
-  "cy": "Tommy Farr"
+  "cy": "Tommy Farr",
+  "odnb": "https://www.oxforddnb.com/view/article/40685"
  },
  "person:tori-james": {
   "cy": "Tori James"
+ },
+ "person:tudno": {
+  "cy": "Tudno"
+ },
+ "person:tudur-aled": {
+  "cy": "Tudur Aled",
+  "dwb": "https://biography.wales/article/s-TUDU-ALE-1480",
+  "odnb": "https://www.oxforddnb.com/view/article/318"
+ },
+ "person:tudwal": {
+  "cy": "Tudwal"
  },
  "person:twm-carnabwth": {
   "cy": "Thomas Rees (Twm Carnabwth)",
@@ -1022,57 +3106,100 @@
  },
  "person:twm-or-nant": {
   "cy": "Twm o'r Nant",
-  "dwb": "https://biography.wales/article/s-EDWA-THO-1739"
+  "dwb": "https://biography.wales/article/s-EDWA-THO-1739",
+  "odnb": "https://www.oxforddnb.com/view/article/62647"
  },
  "person:twm-sion-cati": {
   "cy": "Twm Siôn Cati",
-  "dwb": "https://biography.wales/article/s-JONE-THO-1530"
+  "dwb": "https://biography.wales/article/s-JONE-THO-1530",
+  "odnb": "https://www.oxforddnb.com/view/article/15087"
+ },
+ "person:tysul": {
+  "cy": "Tysul"
  },
  "person:urien-rheged": {
-  "cy": "Urien Rheged"
+  "cy": "Urien Rheged",
+  "odnb": "https://www.oxforddnb.com/view/article/28016"
+ },
+ "person:uthr-bendragon": {
+  "cy": "Uthyr Pen Ddraig",
+  "odnb": "https://www.oxforddnb.com/view/article/28038",
+  "britannica": "https://www.britannica.com/topic/Uther-Pendragon"
  },
  "person:w-h-davies": {
   "cy": "W. H. Davies",
-  "dwb": "https://biography.wales/article/s-DAVI-HEN-1871"
+  "dwb": "https://biography.wales/article/s-DAVI-HEN-1871",
+  "odnb": "https://www.oxforddnb.com/view/article/32742",
+  "britannica": "https://www.britannica.com/biography/William-Henry-Davies"
  },
  "person:waldo-williams": {
   "cy": "Waldo Williams",
-  "dwb": "https://biography.wales/article/s11-WILL-WAL-1904"
+  "dwb": "https://biography.wales/article/s11-WILL-WAL-1904",
+  "odnb": "https://www.oxforddnb.com/view/article/58905"
  },
  "person:william-edwards": {
   "cy": "William Edwards (peiriannydd)",
-  "dwb": "https://biography.wales/article/s-EDWA-WIL-1719"
+  "dwb": "https://biography.wales/article/s-EDWA-WIL-1719",
+  "odnb": "https://www.oxforddnb.com/view/article/8564"
  },
  "person:william-grove": {
   "cy": "William Robert Grove",
-  "dwb": "https://biography.wales/article/s-GROV-ROB-1811"
+  "dwb": "https://biography.wales/article/s-GROV-ROB-1811",
+  "odnb": "https://www.oxforddnb.com/view/article/11685",
+  "britannica": "https://www.britannica.com/biography/William-Robert-Grove"
+ },
+ "person:william-herbert": {
+  "cy": "William Herbert, Iarll 1af Penfro (1423–1469)",
+  "dwb": "https://biography.wales/article/s-HERB-WIL-1469",
+  "odnb": "https://www.oxforddnb.com/view/article/13053"
  },
  "person:william-jones": {
   "cy": "William Jones (mathemategydd)",
-  "dwb": "https://biography.wales/article/s-JONE-WIL-1675"
+  "dwb": "https://biography.wales/article/s-JONE-WIL-1675",
+  "odnb": "https://www.oxforddnb.com/view/article/15104"
  },
  "person:william-jones-orientalist": {
-  "cy": "William Jones (ieithegwr)"
+  "cy": "William Jones (ieithegwr)",
+  "odnb": "https://www.oxforddnb.com/view/article/15105",
+  "britannica": "https://www.britannica.com/biography/William-Jones-British-orientalist-and-jurist"
  },
  "person:william-morgan": {
   "cy": "William Morgan (esgob)",
-  "dwb": "https://biography.wales/article/s-MORG-WIL-1545"
+  "dwb": "https://biography.wales/article/s-MORG-WIL-1545",
+  "odnb": "https://www.oxforddnb.com/view/article/19242",
+  "britannica": "https://www.britannica.com/biography/William-Morgan-Welsh-bishop"
+ },
+ "person:william-owen-pughe": {
+  "cy": "William Owen Pughe",
+  "dwb": "https://biography.wales/article/s-PUGH-OWE-1759",
+  "odnb": "https://www.oxforddnb.com/view/article/22867"
  },
  "person:william-preece": {
   "cy": "William Henry Preece",
-  "dwb": "https://biography.wales/article/s-PREE-HEN-1834"
+  "dwb": "https://biography.wales/article/s-PREE-HEN-1834",
+  "odnb": "https://www.oxforddnb.com/view/article/35605",
+  "britannica": "https://www.britannica.com/biography/William-Henry-Preece"
  },
  "person:william-price": {
   "cy": "William Price (meddyg)",
-  "dwb": "https://biography.wales/article/s-PRIC-WIL-1800"
+  "dwb": "https://biography.wales/article/s-PRIC-WIL-1800",
+  "odnb": "https://www.oxforddnb.com/view/article/61784"
  },
  "person:william-salesbury": {
   "cy": "William Salesbury",
-  "dwb": "https://biography.wales/article/s-SALE-WIL-1520"
+  "dwb": "https://biography.wales/article/s-SALE-WIL-1520",
+  "odnb": "https://www.oxforddnb.com/view/article/24546",
+  "britannica": "https://www.britannica.com/biography/William-Salesbury"
+ },
+ "person:william-wroth": {
+  "dwb": "https://biography.wales/article/s-WROT-WIL-1576",
+  "odnb": "https://www.oxforddnb.com/view/article/30086"
  },
  "person:yr-arglwydd-rhys": {
   "cy": "Rhys ap Gruffudd",
-  "dwb": "https://biography.wales/article/s-RHYS-APG-1132"
+  "dwb": "https://biography.wales/article/s-RHYS-APG-1132",
+  "odnb": "https://www.oxforddnb.com/view/article/23464",
+  "britannica": "https://www.britannica.com/biography/Rhys-ap-Gruffudd"
  },
  "place:aberfan": {
   "cy": "Trychineb Aberfan"
@@ -1081,9 +3208,24 @@
   "cy": "Aberffraw",
   "coflein": "https://coflein.gov.uk/en/site/32986"
  },
+ "place:bangor": {
+  "cy": "Eglwys Gadeiriol Bangor",
+  "britannica": "https://www.britannica.com/place/Bangor-Cathedral",
+  "coflein": "https://coflein.gov.uk/en/site/43727",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=4027"
+ },
+ "place:basingwerk": {
+  "cy": "Abaty Dinas Basing",
+  "coflein": "https://coflein.gov.uk/en/site/35649",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=505"
+ },
  "place:beaumaris": {
   "cy": "Castell Biwmares",
-  "coflein": "https://coflein.gov.uk/en/site/95769"
+  "coflein": "https://coflein.gov.uk/en/site/95769",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=5574"
+ },
+ "place:bethlehem": {
+  "cy": "Bethlehem, Sir Gaerfyrddin"
  },
  "place:blaenavon": {
   "cy": "Tirlun Diwydiannol Blaenafon"
@@ -1093,21 +3235,42 @@
  },
  "place:caerffili": {
   "cy": "Castell Caerffili",
-  "coflein": "https://coflein.gov.uk/en/site/94497"
+  "britannica": "https://www.britannica.com/place/Caerphilly-Castle",
+  "coflein": "https://coflein.gov.uk/en/site/94497",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=13539"
+ },
+ "place:caergybi": {
+  "cy": "Caer Gybi (caer)",
+  "coflein": "https://coflein.gov.uk/en/site/15607",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=5415"
  },
  "place:caerleon": {
-  "cy": "Caerllion"
+  "cy": "Caerllion",
+  "britannica": "https://www.britannica.com/place/Caerleon"
  },
  "place:caernarfon": {
   "cy": "Castell Caernarfon",
-  "coflein": "https://coflein.gov.uk/en/site/95318"
+  "britannica": "https://www.britannica.com/place/Caernarfon-Castle",
+  "coflein": "https://coflein.gov.uk/en/site/95318",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=3814"
  },
  "place:caerwent": {
   "cy": "Venta Silurum"
  },
  "place:cardigan": {
   "cy": "Castell Aberteifi",
-  "coflein": "https://coflein.gov.uk/en/site/92314"
+  "coflein": "https://coflein.gov.uk/en/site/92314",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=10458"
+ },
+ "place:carewcross": {
+  "cy": "Croes Caeriw",
+  "coflein": "https://coflein.gov.uk/en/site/103458",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=5938"
+ },
+ "place:carregcennen": {
+  "cy": "Castell Carreg Cennen",
+  "coflein": "https://coflein.gov.uk/en/site/103970",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=20923"
  },
  "place:castellhenllys": {
   "cy": "Castell Henllys",
@@ -1121,21 +3284,60 @@
  },
  "place:chepstow": {
   "cy": "Castell Cas-gwent",
-  "coflein": "https://coflein.gov.uk/en/site/95237"
+  "coflein": "https://coflein.gov.uk/en/site/95237",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=2475"
  },
  "place:cilmeri": {
   "cy": "Cilmeri"
  },
+ "place:clynnog": {
+  "coflein": "https://coflein.gov.uk/en/site/43699",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=3758"
+ },
  "place:conwy": {
   "cy": "Castell Conwy",
-  "coflein": "https://coflein.gov.uk/en/site/121"
+  "britannica": "https://www.britannica.com/place/Conwy-Castle",
+  "coflein": "https://coflein.gov.uk/en/site/121",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=3250"
+ },
+ "place:cricieth": {
+  "cy": "Castell Cricieth",
+  "coflein": "https://coflein.gov.uk/en/site/95281",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=4396"
+ },
+ "place:cwmhir": {
+  "cy": "Abaty Cwm-hir",
+  "coflein": "https://coflein.gov.uk/en/site/96529",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=8717"
+ },
+ "place:cymer": {
+  "cy": "Abaty Cymer",
+  "coflein": "https://coflein.gov.uk/en/site/95420",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=4738"
  },
  "place:dale": {
-  "cy": "Harri VII, brenin Lloegr"
+  "cy": "Harri VII, brenin Lloegr",
+  "britannica": "https://www.britannica.com/biography/Henry-VII-king-of-England"
+ },
+ "place:deganwy": {
+  "cy": "Castell Degannwy",
+  "coflein": "https://coflein.gov.uk/en/site/95282",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=3365"
+ },
+ "place:dinasbran": {
+  "cy": "Castell Dinas Brân",
+  "britannica": "https://www.britannica.com/place/Castell-Dinas-Bran",
+  "coflein": "https://coflein.gov.uk/en/site/307064"
+ },
+ "place:dinasemrys": {
+  "cy": "Dinas Emrys",
+  "coflein": "https://coflein.gov.uk/en/site/95284"
  },
  "place:dinefwr": {
   "cy": "Castell Dinefwr",
-  "coflein": "https://coflein.gov.uk/en/site/425"
+  "britannica": "https://www.britannica.com/place/Dynevor-Castle",
+  "coflein": "https://coflein.gov.uk/en/site/425",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=11117"
  },
  "place:dinorwig": {
   "cy": "Diwydiant llechi Cymru"
@@ -1146,44 +3348,118 @@
  },
  "place:dolbadarn": {
   "cy": "Castell Dolbadarn",
-  "coflein": "https://coflein.gov.uk/en/site/93541"
+  "coflein": "https://coflein.gov.uk/en/site/93541",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=21854"
+ },
+ "place:dolforwyn": {
+  "cy": "Castell Dolforwyn",
+  "coflein": "https://coflein.gov.uk/en/site/300392",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=7550"
+ },
+ "place:dolwyddelan": {
+  "cy": "Castell Dolwyddelan",
+  "coflein": "https://coflein.gov.uk/en/site/95299",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=18253"
+ },
+ "place:dryslwyn": {
+  "cy": "Castell y Dryslwyn",
+  "coflein": "https://coflein.gov.uk/en/site/100682",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=10934"
  },
  "place:eliseg": {
   "cy": "Croes Eliseg",
-  "coflein": "https://coflein.gov.uk/en/site/165274"
+  "coflein": "https://coflein.gov.uk/en/site/165274",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=19678"
  },
  "place:enlli": {
-  "cy": "Ynys Enlli"
+  "cy": "Ynys Enlli",
+  "britannica": "https://www.britannica.com/place/Bardsey-Island"
  },
  "place:epynt": {
   "cy": "Mynydd Epynt"
  },
+ "place:ewloe": {
+  "cy": "Castell Ewlo",
+  "coflein": "https://coflein.gov.uk/en/site/94447",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=13"
+ },
  "place:fishguard": {
   "cy": "Brwydr Abergwaun"
  },
+ "place:garthcelyn": {
+  "cy": "Abergwyngregyn"
+ },
  "place:harlech": {
   "cy": "Castell Harlech",
-  "coflein": "https://coflein.gov.uk/en/site/93729"
+  "coflein": "https://coflein.gov.uk/en/site/93729",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=25500"
  },
  "place:hendygwyn": {
   "cy": "Hendy-gwyn",
   "coflein": "https://coflein.gov.uk/en/site/462"
  },
+ "place:kidwelly": {
+  "cy": "Castell Cydweli",
+  "coflein": "https://coflein.gov.uk/en/site/95633",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=11876"
+ },
+ "place:lavernock": {
+  "cy": "Larnog"
+ },
  "place:library": {
   "cy": "Llyfrgell Genedlaethol Cymru",
+  "britannica": "https://www.britannica.com/place/National-Library-of-Wales",
   "coflein": "https://coflein.gov.uk/en/site/23293"
+ },
+ "place:llanbadarn": {
+  "cy": "Eglwys Padarn",
+  "coflein": "https://coflein.gov.uk/en/site/271",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=9832"
+ },
+ "place:llancarfan": {
+  "cy": "Llancarfan"
+ },
+ "place:llandaf": {
+  "cy": "Eglwys Gadeiriol Llandaf",
+  "britannica": "https://www.britannica.com/place/Cathedral-of-Llandaff",
+  "coflein": "https://coflein.gov.uk/en/site/131",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=13710"
+ },
+ "place:llanddewibrefi": {
+  "cy": "Llanddewi Brefi",
+  "coflein": "https://coflein.gov.uk/en/site/33044"
+ },
+ "place:llanelwy": {
+  "cy": "Eglwys Gadeiriol Llanelwy",
+  "coflein": "https://coflein.gov.uk/en/site/140540",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=1460"
  },
  "place:llanfaches": {
   "cy": "Llanfaches"
+ },
+ "place:llanfairpwll": {
+  "cy": "Llanfair Pwllgwyngyll"
  },
  "place:llangollen": {
   "cy": "Eisteddfod Ryngwladol Llangollen"
  },
  "place:llanilltud": {
-  "cy": "Llanilltud Fawr"
+  "cy": "Llanilltud Fawr",
+  "britannica": "https://www.britannica.com/place/Llantwit-Major"
  },
  "place:llanrhaeadr": {
   "cy": "Llanrhaeadr-ym-Mochnant"
+ },
+ "place:llanthony": {
+  "cy": "Priordy Llanddewi Nant Hodni",
+  "coflein": "https://coflein.gov.uk/en/site/95238",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=1939"
+ },
+ "place:llanymddyfri": {
+  "cy": "Llywelyn ap Gruffudd Fychan"
+ },
+ "place:llysrhosyr": {
+  "cy": "Llys Rhosyr"
  },
  "place:machynlleth": {
   "cy": "Machynlleth"
@@ -1198,7 +3474,9 @@
  },
  "place:menai": {
   "cy": "Pont y Borth",
-  "coflein": "https://coflein.gov.uk/en/site/43063"
+  "britannica": "https://www.britannica.com/topic/Menai-Bridge",
+  "coflein": "https://coflein.gov.uk/en/site/43063",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=4049"
  },
  "place:merthyr": {
   "cy": "Merthyr Tudful",
@@ -1207,37 +3485,65 @@
  "place:mold": {
   "cy": "Clogyn Aur yr Wyddgrug"
  },
+ "place:nanhyfer": {
+  "cy": "Nanhyfer"
+ },
+ "place:neathabbey": {
+  "cy": "Abaty Nedd",
+  "coflein": "https://coflein.gov.uk/en/site/133"
+ },
  "place:offasdyke": {
-  "cy": "Clawdd Offa"
+  "cy": "Clawdd Offa",
+  "britannica": "https://www.britannica.com/topic/Offas-Dyke"
  },
  "place:orme": {
-  "cy": "Pen y Gogarth"
+  "cy": "Pen y Gogarth",
+  "britannica": "https://www.britannica.com/place/Great-Orme"
  },
  "place:parys": {
   "cy": "Mynydd Parys"
  },
  "place:penfro": {
   "cy": "Castell Penfro",
-  "coflein": "https://coflein.gov.uk/en/site/94945"
+  "coflein": "https://coflein.gov.uk/en/site/94945",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=6314"
+ },
+ "place:penmon": {
+  "cy": "Penmon"
+ },
+ "place:pennantmelangell": {
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=7634"
  },
  "place:pentreifan": {
   "cy": "Pentre Ifan",
   "coflein": "https://coflein.gov.uk/en/site/101450"
  },
+ "place:penygwryd": {
+  "cy": "Pen-y-gwryd"
+ },
  "place:pontcysyllte": {
   "cy": "Dyfrbont Pontcysyllte",
-  "coflein": "https://coflein.gov.uk/en/site/34410"
+  "coflein": "https://coflein.gov.uk/en/site/34410",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=1601"
  },
  "place:pontnewydd": {
   "cy": "Ogof Bontnewydd"
  },
+ "place:powis": {
+  "cy": "Castell Powys",
+  "britannica": "https://www.britannica.com/place/Powis-Castle",
+  "coflein": "https://coflein.gov.uk/en/site/29858",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=7746"
+ },
  "place:rhaglan": {
   "cy": "Castell Rhaglan",
-  "coflein": "https://coflein.gov.uk/en/site/93387"
+  "coflein": "https://coflein.gov.uk/en/site/93387",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=2101"
  },
  "place:rhuddlan": {
   "cy": "Castell Rhuddlan",
-  "coflein": "https://coflein.gov.uk/en/site/92914"
+  "coflein": "https://coflein.gov.uk/en/site/92914",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=14977"
  },
  "place:segontium": {
   "cy": "Segontium"
@@ -1253,26 +3559,36 @@
  },
  "place:stdavids": {
   "cy": "Eglwys Gadeiriol Tyddewi",
-  "coflein": "https://coflein.gov.uk/en/site/306"
+  "coflein": "https://coflein.gov.uk/en/site/306",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=12537"
  },
  "place:stfagans": {
   "cy": "Amgueddfa Werin Cymru",
+  "britannica": "https://www.britannica.com/place/Welsh-Folk-Museum",
   "coflein": "https://coflein.gov.uk/en/site/31920"
  },
  "place:strataflorida": {
   "cy": "Abaty Ystrad Fflur",
-  "coflein": "https://coflein.gov.uk/en/site/95764"
+  "coflein": "https://coflein.gov.uk/en/site/95764",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=9913"
  },
  "place:sycharth": {
   "cy": "Sycharth",
   "coflein": "https://coflein.gov.uk/en/site/306999"
  },
  "place:talacharn": {
-  "coflein": "https://coflein.gov.uk/en/site/17122"
+  "coflein": "https://coflein.gov.uk/en/site/17122",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=9627"
+ },
+ "place:talley": {
+  "cy": "Abaty Talyllychau",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=15767"
  },
  "place:tintern": {
   "cy": "Abaty Tyndyrn",
-  "coflein": "https://coflein.gov.uk/en/site/359"
+  "britannica": "https://www.britannica.com/topic/Tintern-Abbey",
+  "coflein": "https://coflein.gov.uk/en/site/359",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=24037"
  },
  "place:tonypandy": {
   "cy": "Terfysg Tonypandy"
@@ -1280,9 +3596,18 @@
  "place:trefflemin": {
   "cy": "Trefflemin"
  },
+ "place:treffynnon": {
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=426"
+ },
  "place:trerceiri": {
   "cy": "Tre'r Ceiri",
   "coflein": "https://coflein.gov.uk/en/site/95292"
+ },
+ "place:vallecrucis": {
+  "cy": "Abaty Glyn y Groes",
+  "britannica": "https://www.britannica.com/place/Valle-Crucis-Abbey",
+  "coflein": "https://coflein.gov.uk/en/site/95205",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=19693"
  },
  "place:westgate": {
   "cy": "Terfysg Casnewydd"
