@@ -662,3 +662,7 @@ EVENTS = sorted(EVENTS + _CRE, key=lambda ev: ev[1])
 # ---------- The coming of Christianity to Britain (src/christianity.py) ----------
 from christianity import EVENTS as _CHE
 EVENTS = sorted(EVENTS + _CHE, key=lambda ev: ev[1])
+
+# ---------- Saint Patrick, the Briton from Wales (src/patrick.py) ----------
+from patrick import EVENTS as _PTE
+EVENTS = sorted(EVENTS + _PTE, key=lambda ev: ev[1])
