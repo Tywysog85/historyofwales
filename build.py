@@ -627,7 +627,7 @@ PERSON_EXTRA = {"arthur": arthur_extra}
 
 def date_cy(d):
     """The Welsh side of a person's dates, where it differs (most dates read the same in both languages)."""
-    return {"Age of Arthur": "Oes Arthur", "The Four Branches": "Y Pedair Cainc"}.get(d, d)
+    return {"Age of Arthur": "Oes Arthur", "The Four Branches": "Y Pedair Cainc", "1st century BC": "y ganrif gyntaf CC", "12th century": "y 12fed ganrif", "4th century": "y 4edd ganrif"}.get(d, d)
 
 
 def arthur_circle(slug):
@@ -1192,6 +1192,8 @@ def page_refs(path):
         return "arthur-circle", None
     if kind == "person" and rest in MP.OWN_IDS and "mabinogi-people" in REF2.PAGES:
         return "mabinogi-people", None
+    if kind == "mabinogi" and f"mabinogi-{rest}" in REF2.PAGES:  # a tale with its own reading list (src/refs2.py)
+        return f"mabinogi-{rest}", None
     if kind == "mabinogi" and "mabinogi-tales" in REF2.PAGES:
         return "mabinogi-tales", None
     if kind in ("person", "place"):
@@ -1213,7 +1215,7 @@ SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes
     ("law", "The laws of Hywel Dda", "Cyfreithiau Hywel Dda", ["laws", "hywel", "topic-law"]),
     ("saints", "Saints, learning and faith", "Seintiau, dysg a ffydd", ["christianity", "joseph", "lucius", "patrick", "saints", "saints-*", "learning", "brittany", "topic-faith"]),
     ("princes", "Princes, castles and Owain Glyndŵr", "Tywysogion, cestyll ac Owain Glyndŵr", ["era-medieval", "castles", "glyndwr", "longbow", "battles", "documents", "topic-war", "nest", "rhys"]),
-    ("lit", "Poets, old books and legends", "Beirdd, hen lyfrau a chwedlau", ["literature", "books", "triads", "mabinogion", "mabinogi", "mabinogi-tales", "mabinogi-people", "legends", "legend-*", "bran", "symbols", "iolo", "topic-music", "trail-song"]),
+    ("lit", "Poets, old books and legends", "Beirdd, hen lyfrau a chwedlau", ["literature", "books", "triads", "mabinogion", "mabinogi", "mabinogi-tales", "mabinogi-people", "mabinogi-*", "legends", "legend-*", "bran", "symbols", "iolo", "topic-music", "trail-song"]),
     ("tudor", "From the Tudors to the Methodists", "O’r Tuduriaid i’r Methodistiaid", ["era-tudor"]),
     ("industry", "Iron, coal, slate and the sea", "Haearn, glo, llechi a’r môr", ["era-industrial", "industry", "coal", "aberfan", "protest", "topic-industry", "trail-coal", "trail-sea", "firsts", "topic-science"]),
     ("modern", "Modern Wales and the Welsh abroad", "Cymru fodern a’r Cymry ar wasgar", ["era-modern", "era-today", "revival", "mac", "fwa", "world", "madog", "tryweryn", "topic-abroad", "topic-sport"]),
