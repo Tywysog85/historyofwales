@@ -1,4 +1,1188 @@
 {
+ "event:18-poems": {
+  "cy": "Dylan Thomas"
+ },
+ "event:a-bigger-senedd": {
+  "cy": "Etholiad Senedd Cymru, 2026"
+ },
+ "event:a-fort-at-cardiff": {
+  "cy": "Castell Caerdydd",
+  "coflein": "https://coflein.gov.uk/en/site/33"
+ },
+ "event:a-fortress-at-usk": {
+  "cy": "Caer Rufeinig Brynbuga",
+  "coflein": "https://coflein.gov.uk/en/site/93470"
+ },
+ "event:a-million-welsh-speakers": {
+  "cy": "Cymraeg"
+ },
+ "event:a-prince-called-arthur": {
+  "cy": "Arthur Tudur"
+ },
+ "event:a-society-for-welsh-in-the-schools": {
+  "cy": "Dan Isaac Davies"
+ },
+ "event:a-university-for-wales": {
+  "cy": "Prifysgol Aberystwyth"
+ },
+ "event:a-welsh-grammar-in-milan": {
+  "cy": "Gruffydd Robert"
+ },
+ "event:a-welsh-king": {
+  "cy": "Harri VII, brenin Lloegr"
+ },
+ "event:a-welsh-prime-minister": {
+  "cy": "David Lloyd George"
+ },
+ "event:a-world-record": {
+  "cy": "Colin Jackson"
+ },
+ "event:aberfan": {
+  "cy": "Trychineb Aberfan"
+ },
+ "event:aberfans-money-returned": {
+  "cy": "Trychineb Aberfan"
+ },
+ "event:agricola-completes-the-conquest": {
+  "cy": "Agricola"
+ },
+ "event:an-act-for-the-bible-in-welsh": {
+  "cy": "Cyfieithu'r Beibl i'r Gymraeg"
+ },
+ "event:an-english-prince-of-wales": {
+  "cy": "Edward II, brenin Lloegr"
+ },
+ "event:another-grand-slam": {
+  "cy": "Pencampwriaeth y Chwe Gwlad 2019"
+ },
+ "event:armes-prydein": {
+  "cy": "Armes Prydein"
+ },
+ "event:art-in-kendricks-cave": {
+  "cy": "Ogof Kendrick"
+ },
+ "event:asser-writes-alfreds-life": {
+  "cy": "Asser"
+ },
+ "event:back-at-the-world-cup": {
+  "cy": "Tîm pêl-droed cenedlaethol Cymru"
+ },
+ "event:barclodiad-y-gawres": {
+  "cy": "Barclodiad y Gawres"
+ },
+ "event:barry-docks-open": {
+  "cy": "Doc y Barri"
+ },
+ "event:barti-ddu": {
+  "cy": "Bartholomew Roberts"
+ },
+ "event:battle-of-bryn-glas": {
+  "cy": "Brwydr Bryn Glas"
+ },
+ "event:battle-of-chester": {
+  "cy": "Brwydr Caer"
+ },
+ "event:battle-of-mynydd-carn": {
+  "cy": "Brwydr Mynydd Carn"
+ },
+ "event:battle-of-st-fagans": {
+  "cy": "Brwydr Sain Ffagan"
+ },
+ "event:beuno-at-clynnog-fawr": {
+  "cy": "Clynnog Fawr"
+ },
+ "event:bleddyn-ap-cynfyn": {
+  "cy": "Bleddyn ap Cynfyn"
+ },
+ "event:bomb-at-the-temple-of-peace": {
+  "cy": "Y Deml Heddwch",
+  "coflein": "https://coflein.gov.uk/en/site/11820"
+ },
+ "event:bran-fendigaid-brings-the-faith-from-rome": {
+  "cy": "Bendigeidfran fab Llŷr"
+ },
+ "event:brutus-comes-to-the-island-of-britain": {
+  "cy": "Brutus"
+ },
+ "event:brychans-kingdom": {
+  "cy": "Brychan"
+ },
+ "event:bryn-cader-faner": {
+  "cy": "Bryn Cader Faner",
+  "coflein": "https://coflein.gov.uk/en/site/302869"
+ },
+ "event:bryn-celli-ddu": {
+  "cy": "Bryn Celli Ddu"
+ },
+ "event:bryn-terfel-in-cardiff": {
+  "cy": "Bryn Terfel"
+ },
+ "event:builders-of-the-dolmens": {
+  "cy": "Pentre Ifan",
+  "coflein": "https://coflein.gov.uk/en/site/101450"
+ },
+ "event:cadog-at-llancarfan": {
+  "cy": "Llancarfan"
+ },
+ "event:cadwaladr": {
+  "cy": "Cadwaladr (gwahaniaethu)"
+ },
+ "event:cadwallon-defeats-northumbria": {
+  "cy": "Cadwallon ap Cadfan"
+ },
+ "event:caer-gybi": {
+  "cy": "Caergybi",
+  "coflein": "https://coflein.gov.uk/en/site/32990"
+ },
+ "event:caerwent-town-of-the-silures": {
+  "cy": "Caer-went",
+  "coflein": "https://coflein.gov.uk/en/site/33166"
+ },
+ "event:camlann": {
+  "cy": "Brwydr Camlan"
+ },
+ "event:canwyll-y-cymry": {
+  "cy": "Rhys Prichard"
+ },
+ "event:caratacus-speaks-in-rome": {
+  "cy": "Caradog"
+ },
+ "event:caratacuss-last-stand": {
+  "cy": "Caradog"
+ },
+ "event:cardiff-becomes-a-city": {
+  "cy": "Caerdydd"
+ },
+ "event:cardiff-named-capital": {
+  "cy": "Caerdydd"
+ },
+ "event:cardiffs-first-dock": {
+  "cy": "Bae Caerdydd"
+ },
+ "event:castell-henllys": {
+  "cy": "Castell Henllys",
+  "coflein": "https://coflein.gov.uk/en/site/94989"
+ },
+ "event:cofiwch-dryweryn-across-wales": {
+  "cy": "Cofiwch Dryweryn"
+ },
+ "event:colleges-at-cardiff-and-bangor": {
+  "cy": "Prifysgol Bangor"
+ },
+ "event:conwy-taken-on-good-friday": {
+  "cy": "Castell Conwy",
+  "coflein": "https://coflein.gov.uk/en/site/121"
+ },
+ "event:copper-at-parys-mountain": {
+  "cy": "Mynydd Parys"
+ },
+ "event:copper-at-parys-mountain-1768": {
+  "cy": "Mynydd Parys"
+ },
+ "event:copper-from-the-great-orme": {
+  "cy": "Pen y Gogarth"
+ },
+ "event:counties-with-welsh-names": {
+  "cy": "Deddf Llywodraeth Leol 1972"
+ },
+ "event:cranogwen-edits-y-frythones": {
+  "cy": "Sarah Jane Rees (Cranogwen)"
+ },
+ "event:cunedda-comes-to-gwynedd": {
+  "cy": "Cunedda"
+ },
+ "event:cwmbran": {
+  "cy": "Cwmbrân"
+ },
+ "event:cyfarthfa": {
+  "cy": "Gwaith Haearn Cyfarthfa"
+ },
+ "event:cymru-fydd": {
+  "cy": "Cymru Fydd"
+ },
+ "event:dafydd-ap-gwilym": {
+  "cy": "Dafydd ap Gwilym"
+ },
+ "event:dafydd-fights-on": {
+  "cy": "Dafydd ap Gruffudd"
+ },
+ "event:dafydd-prince-of-wales": {
+  "cy": "Dafydd ap Llywelyn"
+ },
+ "event:death-at-cilmeri": {
+  "cy": "Llywelyn ap Gruffudd"
+ },
+ "event:death-of-saint-david": {
+  "cy": "Dewi Sant"
+ },
+ "event:deiniol-at-bangor": {
+  "cy": "Eglwys Gadeiriol Bangor",
+  "coflein": "https://coflein.gov.uk/en/site/43727"
+ },
+ "event:devolution-rejected": {
+  "cy": "Refferendwm datganoli i Gymru, 1979"
+ },
+ "event:dowlais-biggest-in-the-world": {
+  "cy": "Gwaith Haearn Dowlais"
+ },
+ "event:dr-william-price-and-cremation": {
+  "cy": "William Price (meddyg)"
+ },
+ "event:early-written-welsh": {
+  "cy": "Llyfr Sant Chad"
+ },
+ "event:edwards-ring-of-iron": {
+  "cy": "Cestyll a Muriau Trefi'r Brenin Edward yng Ngwynedd"
+ },
+ "event:escape-from-tenby": {
+  "cy": "Siasbar Tudur"
+ },
+ "event:fire-at-penyberth": {
+  "cy": "Penyberth",
+  "coflein": "https://coflein.gov.uk/en/site/16699"
+ },
+ "event:football-association-of-wales": {
+  "cy": "Cymdeithas Bêl-droed Cymru"
+ },
+ "event:footprints-in-the-severn-mud": {
+  "cy": "Allteuryn"
+ },
+ "event:frances-hoggan-doctor": {
+  "cy": "Frances Elizabeth Morgan"
+ },
+ "event:freddie-welsh-world-champion": {
+  "cy": "Freddie Welsh"
+ },
+ "event:frontinus-and-the-silures": {
+  "cy": "Sextus Julius Frontinus"
+ },
+ "event:geraint-thomas-wins-the-tour": {
+  "cy": "Geraint Thomas"
+ },
+ "event:geralds-journey": {
+  "cy": "Gerallt Gymro"
+ },
+ "event:gildas-writes": {
+  "cy": "De Excidio Britanniae"
+ },
+ "event:glyndwrs-rising": {
+  "cy": "Owain Glyn Dŵr"
+ },
+ "event:grand-slam": {
+  "cy": "Pencampwriaeth y Chwe Gwlad 2005"
+ },
+ "event:grand-slam-2008": {
+  "cy": "Pencampwriaeth y Chwe Gwlad 2008"
+ },
+ "event:green-and-white-at-crecy": {
+  "cy": "Brwydr Crécy"
+ },
+ "event:gruffudd-ap-cynan-rebuilds-gwynedd": {
+  "cy": "Gruffudd ap Cynan"
+ },
+ "event:gwenllian-and-the-great-revolt": {
+  "cy": "Gwenllian ferch Gruffudd ap Cynan"
+ },
+ "event:gwynfor-and-s4c": {
+  "cy": "Gwynfor Evans"
+ },
+ "event:gwynfor-evans-elected": {
+  "cy": "Gwynfor Evans"
+ },
+ "event:half-and-half": {
+  "cy": "Etholiad Cynulliad Cenedlaethol Cymru, 2003"
+ },
+ "event:harlech-and-aberystwyth": {
+  "cy": "Castell Harlech",
+  "coflein": "https://coflein.gov.uk/en/site/93729"
+ },
+ "event:harri-tudur-is-born": {
+  "cy": "Harri VII, brenin Lloegr"
+ },
+ "event:hen-wlad-fy-nhadau": {
+  "cy": "Hen Wlad fy Nhadau"
+ },
+ "event:henry-ii-turned-back": {
+  "cy": "Brwydr Crogen"
+ },
+ "event:henry-morgan-at-panama": {
+  "cy": "Harri Morgan"
+ },
+ "event:hywel-dda-dies": {
+  "cy": "Hywel Dda"
+ },
+ "event:hywel-goes-to-rome": {
+  "cy": "Hywel Dda"
+ },
+ "event:hywel-rules-most-of-wales": {
+  "cy": "Hywel Dda"
+ },
+ "event:investiture-at-caernarfon": {
+  "cy": "Castell Caernarfon",
+  "coflein": "https://coflein.gov.uk/en/site/95318"
+ },
+ "event:iron-at-merthyr": {
+  "cy": "Gwaith Haearn Dowlais"
+ },
+ "event:its-not-unusual": {
+  "cy": "Tom Jones"
+ },
+ "event:jesus-college-oxford": {
+  "cy": "Coleg yr Iesu, Rhydychen"
+ },
+ "event:john-daviess-dictionary": {
+  "cy": "John Davies, Mallwyd"
+ },
+ "event:john-evans-reaches-the-mandan": {
+  "cy": "John Evans (fforiwr)"
+ },
+ "event:john-jenkins-sentenced": {
+  "cy": "John Barnard Jenkins"
+ },
+ "event:joseph-of-arimathea-comes-to-ynys-wydrin": {
+  "cy": "Joseff o Arimathea"
+ },
+ "event:julius-and-aaron": {
+  "cy": "Julius ac Aaron"
+ },
+ "event:justice-of-south-wales": {
+  "cy": "Rhys ap Gruffudd"
+ },
+ "event:keep-the-home-fires-burning": {
+  "cy": "Ivor Novello"
+ },
+ "event:keir-hardie-for-merthyr": {
+  "cy": "Keir Hardie"
+ },
+ "event:law-making-powers": {
+  "cy": "Refferendwm ar bwerau Cynulliad Cenedlaethol Cymru 2011"
+ },
+ "event:lhuyd-shows-welsh-has-sister-tongues": {
+  "cy": "Edward Lhuyd"
+ },
+ "event:liverpool-says-sorry": {
+  "cy": "Boddi Tryweryn"
+ },
+ "event:llanelwy": {
+  "cy": "Eglwys Gadeiriol Llanelwy",
+  "coflein": "https://coflein.gov.uk/en/site/140540"
+ },
+ "event:llangrannog": {
+  "cy": "Urdd Gobaith Cymru"
+ },
+ "event:lloyd-george-elected": {
+  "cy": "David Lloyd George"
+ },
+ "event:llywelyn-ap-seisyll-wins-at-abergwili": {
+  "cy": "Llywelyn ap Seisyll"
+ },
+ "event:llywelyn-bren-rises": {
+  "cy": "Llywelyn Bren"
+ },
+ "event:llywelyn-fawr-dies": {
+  "cy": "Llywelyn Fawr"
+ },
+ "event:llywelyn-fawr-supreme": {
+  "cy": "Llywelyn Fawr"
+ },
+ "event:llywelyn-marries-eleanor": {
+  "cy": "Elinor de Montfort"
+ },
+ "event:llywelyn-marries-siwan": {
+  "cy": "Y Dywysoges Siwan"
+ },
+ "event:llywelyn-strikes-back": {
+  "cy": "Llywelyn Fawr"
+ },
+ "event:llywelyn-wins-at-aberconwy": {
+  "cy": "Llywelyn Fawr"
+ },
+ "event:mac-strikes-at-tryweryn": {
+  "cy": "Mudiad Amddiffyn Cymru"
+ },
+ "event:macsen-wledig": {
+  "cy": "Macsen Wledig"
+ },
+ "event:madog-ap-llywelyns-revolt": {
+  "cy": "Madog ap Llywelyn"
+ },
+ "event:madog-sails-west": {
+  "cy": "Madog ab Owain Gwynedd"
+ },
+ "event:madogs-voyage-in-print": {
+  "cy": "Madog ab Owain Gwynedd"
+ },
+ "event:maelgwn-and-the-yellow-plague": {
+  "cy": "Maelgwn Gwynedd"
+ },
+ "event:mail-order-is-born": {
+  "cy": "Pryce Pryce-Jones"
+ },
+ "event:maredudd-ab-owain": {
+  "cy": "Maredudd ab Owain"
+ },
+ "event:maredudd-ransoms-his-people": {
+  "cy": "Maredudd ab Owain"
+ },
+ "event:mary-joness-walk": {
+  "cy": "Mari Jones"
+ },
+ "event:merfyn-frych": {
+  "cy": "Merfyn Frych"
+ },
+ "event:mon-is-saved-by-boudica": {
+  "cy": "Buddug (Boudica)"
+ },
+ "event:myfanwy": {
+  "cy": "Myfanwy"
+ },
+ "event:national-library-and-museum": {
+  "cy": "Llyfrgell Genedlaethol Cymru",
+  "coflein": "https://coflein.gov.uk/en/site/23293"
+ },
+ "event:natural-selection": {
+  "cy": "Alfred Russel Wallace"
+ },
+ "event:neanderthals-at-pontnewydd": {
+  "cy": "Ogof Bontnewydd"
+ },
+ "event:nest-and-the-night-at-cenarth-bychan": {
+  "cy": "Nest ferch Rhys ap Tewdwr"
+ },
+ "event:newport-and-rebecca": {
+  "cy": "Terfysg Casnewydd"
+ },
+ "event:normans-at-chepstow": {
+  "cy": "Castell Cas-gwent",
+  "coflein": "https://coflein.gov.uk/en/site/95237"
+ },
+ "event:offas-dyke": {
+  "cy": "Clawdd Offa"
+ },
+ "event:offerings-at-llyn-cerrig-bach": {
+  "cy": "Llyn Cerrig Bach"
+ },
+ "event:one-king-for-all-wales": {
+  "cy": "Gruffudd ap Llywelyn"
+ },
+ "event:owain-gwynedd": {
+  "cy": "Owain Gwynedd"
+ },
+ "event:owain-gwynedd-dies": {
+  "cy": "Owain Gwynedd"
+ },
+ "event:owain-is-never-taken": {
+  "cy": "Owain Glyn Dŵr"
+ },
+ "event:owain-lawgoch-sails": {
+  "cy": "Owain Lawgoch"
+ },
+ "event:owain-tudur-and-the-queen": {
+  "cy": "Owain Tudur"
+ },
+ "event:owain-writes-to-scotland-and-ireland": {
+  "cy": "Owain Glyn Dŵr"
+ },
+ "event:padarn-at-llanbadarn-fawr": {
+  "cy": "Padarn"
+ },
+ "event:pantycelyns-first-hymns": {
+  "cy": "William Williams, Pantycelyn"
+ },
+ "event:parliament-at-machynlleth": {
+  "cy": "Machynlleth"
+ },
+ "event:patrick-goes-to-ireland": {
+  "cy": "Sant Padrig"
+ },
+ "event:patrick-taken-by-irish-raiders": {
+  "cy": "Sant Padrig"
+ },
+ "event:pelagius": {
+  "cy": "Pelagius"
+ },
+ "event:pembroke-dock": {
+  "cy": "Doc Penfro",
+  "coflein": "https://coflein.gov.uk/en/site/33204"
+ },
+ "event:plaid-cymru-founded": {
+  "cy": "Plaid Cymru"
+ },
+ "event:plaid-cymru-leads-wales": {
+  "cy": "Etholiad Senedd Cymru, 2026"
+ },
+ "event:pontcysyllte-opens": {
+  "cy": "Dyfrbont Pontcysyllte",
+  "coflein": "https://coflein.gov.uk/en/site/34410"
+ },
+ "event:pontcysyllte-world-heritage": {
+  "cy": "Dyfrbont Pontcysyllte",
+  "coflein": "https://coflein.gov.uk/en/site/34410"
+ },
+ "event:prince-of-wales": {
+  "cy": "Tywysog Cymru"
+ },
+ "event:protest-at-trefechan-bridge": {
+  "cy": "Cymdeithas yr Iaith"
+ },
+ "event:radio-across-the-sea": {
+  "cy": "William Henry Preece"
+ },
+ "event:radio-comes-to-wales": {
+  "cy": "BBC Cymru"
+ },
+ "event:radio-cymru": {
+  "cy": "BBC Radio Cymru"
+ },
+ "event:rebecca-rides": {
+  "cy": "Helyntion Beca"
+ },
+ "event:revenge-for-rhodri": {
+  "cy": "Anarawd ap Rhodri"
+ },
+ "event:rhodri-ap-merfyn": {
+  "cy": "Rhodri Mawr"
+ },
+ "event:rhodri-gains-powys": {
+  "cy": "Cyngen ap Cadell"
+ },
+ "event:rhodri-gains-seisyllwg": {
+  "cy": "Seisyllwg"
+ },
+ "event:rhodri-mawr-defeats-the-vikings": {
+  "cy": "Rhodri Mawr"
+ },
+ "event:rhodri-mawr-falls": {
+  "cy": "Rhodri Mawr"
+ },
+ "event:rhys-ap-tewdwr-falls": {
+  "cy": "Rhys ap Tewdwr"
+ },
+ "event:richard-amerike-and-cabot": {
+  "cy": "Richard ap Meurig"
+ },
+ "event:richard-gwyn-executed": {
+  "cy": "Rhisiart Gwyn"
+ },
+ "event:richard-price-and-liberty": {
+  "cy": "Richard Price"
+ },
+ "event:robert-owen-at-new-lanark": {
+  "cy": "Robert Owen"
+ },
+ "event:roman-gold-at-dolaucothi": {
+  "cy": "Mwynfeydd aur Dolaucothi",
+  "coflein": "https://coflein.gov.uk/en/site/95142"
+ },
+ "event:rome-attacks-ynys-mon": {
+  "cy": "Cyfnod y Rhufeiniaid yng Nghymru"
+ },
+ "event:rome-meets-the-deceangli": {
+  "cy": "Deceangli"
+ },
+ "event:s4c-goes-on-air": {
+  "cy": "S4C"
+ },
+ "event:saint-dyfrig": {
+  "cy": "Dyfrig"
+ },
+ "event:samson-sails-to-brittany": {
+  "cy": "Samson (sant)"
+ },
+ "event:sarn-helen": {
+  "cy": "Sarn Helen"
+ },
+ "event:senedd-cymru": {
+  "cy": "Senedd Cymru"
+ },
+ "event:senghenydd": {
+  "cy": "Tanchwa Senghennydd"
+ },
+ "event:seren-gomer": {
+  "cy": "Seren Gomer"
+ },
+ "event:silex-scintillans": {
+  "cy": "Henry Vaughan"
+ },
+ "event:statute-of-rhuddlan": {
+  "cy": "Statud Rhuddlan"
+ },
+ "event:strata-florida": {
+  "cy": "Abaty Ystrad Fflur",
+  "coflein": "https://coflein.gov.uk/en/site/95764"
+ },
+ "event:sulien-the-wise": {
+  "cy": "Sulien"
+ },
+ "event:sunday-closing-act": {
+  "cy": "Deddf Cau Tafarnau ar y Sul (Cymru) 1881"
+ },
+ "event:swansea-lift-the-league-cup": {
+  "cy": "C.P.D. Dinas Abertawe"
+ },
+ "event:taliesin-sings-for-urien": {
+  "cy": "Taliesin"
+ },
+ "event:teilo-of-llandeilo": {
+  "cy": "Teilo"
+ },
+ "event:tertullian-britons-subject-to-christ": {
+  "cy": "Tertullianus"
+ },
+ "event:tewdrig-at-tintern": {
+  "cy": "Tewdrig"
+ },
+ "event:the-1868-election": {
+  "cy": "Etholiad cyffredinol y Deyrnas Unedig, 1868"
+ },
+ "event:the-abbey-works": {
+  "cy": "Gwaith Dur Port Talbot"
+ },
+ "event:the-abergele-martyrs": {
+  "cy": "Mudiad Amddiffyn Cymru"
+ },
+ "event:the-ambush-at-coed-eulo": {
+  "cy": "Brwydr Cwnsyllt"
+ },
+ "event:the-annals-of-wales": {
+  "cy": "Annales Cambriae"
+ },
+ "event:the-banc-tynddol-sun-disc": {
+  "cy": "Cwmystwyth"
+ },
+ "event:the-battle-of-arfderydd": {
+  "cy": "Brwydr Arfderydd"
+ },
+ "event:the-bible-revised": {
+  "cy": "Cyfieithu'r Beibl i'r Gymraeg"
+ },
+ "event:the-bishops-palace-at-st-davids": {
+  "coflein": "https://coflein.gov.uk/en/site/21633"
+ },
+ "event:the-black-book-of-carmarthen": {
+  "cy": "Llyfr Du Caerfyrddin"
+ },
+ "event:the-black-chair": {
+  "cy": "Hedd Wyn"
+ },
+ "event:the-black-death": {
+  "cy": "Pla Du"
+ },
+ "event:the-bluestones-of-preseli": {
+  "cy": "Côr y Cewri"
+ },
+ "event:the-book-of-aneirin": {
+  "cy": "Llyfr Aneirin"
+ },
+ "event:the-book-of-iorwerth": {
+  "cy": "Cyfraith Hywel"
+ },
+ "event:the-book-of-llandaf": {
+  "cy": "Llyfr Llandaf"
+ },
+ "event:the-book-of-taliesin": {
+  "cy": "Llyfr Taliesin"
+ },
+ "event:the-book-of-the-three-birds": {
+  "cy": "Morgan Llwyd"
+ },
+ "event:the-britannia-bridge": {
+  "cy": "Pont Britannia",
+  "coflein": "https://coflein.gov.uk/en/site/34614"
+ },
+ "event:the-caergwrle-bowl": {
+  "cy": "Cawg Caergwrle"
+ },
+ "event:the-caerwys-eisteddfod": {
+  "cy": "Caerwys"
+ },
+ "event:the-carmarthen-eisteddfod": {
+  "cy": "Dafydd ab Edmwnd"
+ },
+ "event:the-castles-become-world-heritage": {
+  "cy": "Cestyll a Muriau Trefi'r Brenin Edward yng Ngwynedd"
+ },
+ "event:the-church-in-wales": {
+  "cy": "Yr Eglwys yng Nghymru"
+ },
+ "event:the-circulating-schools": {
+  "cy": "Griffith Jones, Llanddowror"
+ },
+ "event:the-clearing-of-epynt": {
+  "cy": "Mynydd Epynt"
+ },
+ "event:the-coal-exchange-opens": {
+  "cy": "Y Gyfnewidfa Lo",
+  "coflein": "https://coflein.gov.uk/en/site/31766"
+ },
+ "event:the-corwen-eisteddfod": {
+  "cy": "Gwyneddigion"
+ },
+ "event:the-council-at-aberdyfi": {
+  "cy": "Llywelyn Fawr"
+ },
+ "event:the-council-of-the-silures": {
+  "cy": "Caer-went",
+  "coflein": "https://coflein.gov.uk/en/site/33166"
+ },
+ "event:the-court-of-great-sessions": {
+  "cy": "Llys y Sesiwn Fawr"
+ },
+ "event:the-cymmrodorion": {
+  "cy": "Anrhydeddus Gymdeithas y Cymmrodorion"
+ },
+ "event:the-druids-of-mon": {
+  "cy": "Derwydd"
+ },
+ "event:the-elegy-for-llywelyn": {
+  "cy": "Gruffudd ab yr Ynad Coch"
+ },
+ "event:the-empire-games-in-cardiff": {
+  "cy": "Gemau Ymerodraeth Prydain a'r Gymanwlad 1958"
+ },
+ "event:the-equals-sign": {
+  "cy": "Robert Recorde"
+ },
+ "event:the-family-at-trefeca": {
+  "cy": "Howel Harris"
+ },
+ "event:the-fed": {
+  "cy": "Ffederasiwn Glowyr De Cymru"
+ },
+ "event:the-ffestiniog-railway-carries-passengers": {
+  "cy": "Rheilffordd Ffestiniog",
+  "coflein": "https://coflein.gov.uk/en/site/34660"
+ },
+ "event:the-first-assembly-election": {
+  "cy": "Etholiad Cynulliad Cenedlaethol Cymru, 1999"
+ },
+ "event:the-first-chapel-at-llanfaches": {
+  "cy": "Llanfaches"
+ },
+ "event:the-first-eisteddfod": {
+  "cy": "Eisteddfod"
+ },
+ "event:the-first-gorsedd": {
+  "cy": "Gorsedd y Beirdd"
+ },
+ "event:the-first-grand-slam": {
+  "cy": "Tîm rygbi'r undeb cenedlaethol Cymru"
+ },
+ "event:the-first-king-of-all-wales-falls": {
+  "cy": "Gruffudd ap Llywelyn"
+ },
+ "event:the-first-map-of-wales": {
+  "cy": "Humphrey Lhuyd"
+ },
+ "event:the-first-million-pound-cheque": {
+  "cy": "Y Gyfnewidfa Lo",
+  "coflein": "https://coflein.gov.uk/en/site/31766"
+ },
+ "event:the-first-railway-locomotive": {
+  "cy": "Richard Trevithick"
+ },
+ "event:the-first-welsh-book": {
+  "cy": "Yn y lhyvyr hwnn"
+ },
+ "event:the-first-welsh-dictionary": {
+  "cy": "William Salesbury"
+ },
+ "event:the-first-welsh-earl": {
+  "cy": "William Herbert (gwahaniaethu)"
+ },
+ "event:the-first-welsh-medium-secondary-school": {
+  "cy": "Ysgol Glan Clwyd"
+ },
+ "event:the-first-welsh-medium-state-school": {
+  "cy": "Addysg Gymraeg"
+ },
+ "event:the-fort-of-segontium": {
+  "cy": "Segontium"
+ },
+ "event:the-fortress-at-caerleon": {
+  "cy": "Caerllion"
+ },
+ "event:the-four-branches-are-written": {
+  "cy": "Pedair Cainc y Mabinogi"
+ },
+ "event:the-free-wales-army-at-llyn-celyn": {
+  "cy": "Byddin Rhyddid Cymru"
+ },
+ "event:the-free-wales-army-trial-ends": {
+  "cy": "Byddin Rhyddid Cymru"
+ },
+ "event:the-fuel-cell": {
+  "cy": "William Robert Grove"
+ },
+ "event:the-future-generations-act": {
+  "cy": "Deddf Llesiant Cenedlaethau'r Dyfodol (Cymru) 2015"
+ },
+ "event:the-general-strike": {
+  "cy": "Streic Gyffredinol y Deyrnas Unedig 1926"
+ },
+ "event:the-glamorganshire-canal-opens": {
+  "cy": "Camlas Morgannwg",
+  "coflein": "https://coflein.gov.uk/en/site/34425"
+ },
+ "event:the-golden-era-begins": {
+  "cy": "Pencampwriaeth y Pum Gwlad 1971"
+ },
+ "event:the-gorsedd-joins-the-eisteddfod": {
+  "cy": "Gorsedd y Beirdd"
+ },
+ "event:the-government-of-wales-act": {
+  "cy": "Deddf Llywodraeth Cymru 1998"
+ },
+ "event:the-great-revival": {
+  "cy": "Diwygiad 1904–1905"
+ },
+ "event:the-henges-of-llandygai": {
+  "cy": "Llandygái"
+ },
+ "event:the-hillfort-tribes": {
+  "cy": "Cynhanes Cymru"
+ },
+ "event:the-history-of-the-britons": {
+  "cy": "Historia Brittonum"
+ },
+ "event:the-history-of-the-kings-of-britain": {
+  "cy": "Historia Regum Britanniae"
+ },
+ "event:the-king-who-became-prince": {
+  "cy": "Owain Gwynedd"
+ },
+ "event:the-language-petition": {
+  "cy": "Deddf Llysoedd Cymreig 1942"
+ },
+ "event:the-last-invasion-of-britain": {
+  "cy": "Brwydr Abergwaun"
+ },
+ "event:the-laws-in-wales-acts": {
+  "cy": "Deddfau'r Cyfreithiau yng Nghymru 1536 a 1542"
+ },
+ "event:the-laws-of-hywel-dda": {
+  "cy": "Cyfraith Cymru"
+ },
+ "event:the-life-of-saint-david": {
+  "cy": "Rhygyfarch ap Sulien"
+ },
+ "event:the-llangollen-international-eisteddfod": {
+  "cy": "Eisteddfod Ryngwladol Llangollen"
+ },
+ "event:the-lord-rhys": {
+  "cy": "Rhys ap Gruffudd"
+ },
+ "event:the-lord-rhys-dies": {
+  "cy": "Rhys ap Gruffudd"
+ },
+ "event:the-mabinogion-in-english": {
+  "cy": "Charlotte Guest"
+ },
+ "event:the-march-to-liverpool": {
+  "cy": "Boddi Tryweryn"
+ },
+ "event:the-menai-bridge": {
+  "cy": "Pont y Borth",
+  "coflein": "https://coflein.gov.uk/en/site/43063"
+ },
+ "event:the-merthyr-rising": {
+  "cy": "Gwrthryfel y gweithwyr ym Merthyr Tudful"
+ },
+ "event:the-message-of-peace-and-goodwill": {
+  "cy": "Urdd Gobaith Cymru"
+ },
+ "event:the-methodist-revival": {
+  "cy": "Howel Harris"
+ },
+ "event:the-methodists-break-away": {
+  "cy": "Eglwys Bresbyteraidd Cymru"
+ },
+ "event:the-microphone": {
+  "cy": "David Edward Hughes"
+ },
+ "event:the-millennium-stadium": {
+  "cy": "Stadiwm y Mileniwm"
+ },
+ "event:the-miners-buy-tower": {
+  "cy": "Glofa'r Tŵr",
+  "coflein": "https://coflein.gov.uk/en/site/91586"
+ },
+ "event:the-miners-strike": {
+  "cy": "Streic y Glowyr (1984–85)"
+ },
+ "event:the-mirror-of-the-first-ages": {
+  "cy": "Theophilus Evans"
+ },
+ "event:the-mold-gold-cape": {
+  "cy": "Clogyn Aur yr Wyddgrug"
+ },
+ "event:the-mumbles-railway": {
+  "cy": "Rheilffordd Abertawe a'r Mwmbwls",
+  "coflein": "https://coflein.gov.uk/en/site/34832"
+ },
+ "event:the-national-eisteddfod": {
+  "cy": "Eisteddfod Genedlaethol Cymru"
+ },
+ "event:the-nato-summit": {
+  "cy": "Uwchgynhadledd NATO, 2014"
+ },
+ "event:the-new-testament-in-welsh": {
+  "cy": "William Salesbury"
+ },
+ "event:the-nhs": {
+  "cy": "Aneurin Bevan"
+ },
+ "event:the-peak-of-coal": {
+  "cy": "Maes glo De Cymru"
+ },
+ "event:the-pennal-letter": {
+  "cy": "Polisi Pennal"
+ },
+ "event:the-penrhyn-lockout": {
+  "cy": "Chwarel y Penrhyn",
+  "coflein": "https://coflein.gov.uk/en/site/40564"
+ },
+ "event:the-peoples-of-wales": {
+  "cy": "Silwriaid"
+ },
+ "event:the-pillar-of-eliseg": {
+  "cy": "Croes Eliseg",
+  "coflein": "https://coflein.gov.uk/en/site/165274"
+ },
+ "event:the-psalms-in-song": {
+  "cy": "Edmwnd Prys"
+ },
+ "event:the-red-book-of-hergest": {
+  "cy": "Llyfr Coch Hergest"
+ },
+ "event:the-red-dragon-made-official": {
+  "cy": "Baner Cymru"
+ },
+ "event:the-ricemarch-psalter": {
+  "cy": "Sallwyr Rhygyfarch"
+ },
+ "event:the-rising-of-rhys-ap-maredudd": {
+  "cy": "Rhys ap Maredudd"
+ },
+ "event:the-royal-charter-storm": {
+  "cy": "Royal Charter"
+ },
+ "event:the-school-of-illtud": {
+  "cy": "Illtud"
+ },
+ "event:the-senedd-building-opens": {
+  "cy": "Adeilad y Senedd"
+ },
+ "event:the-siege-of-harlech": {
+  "cy": "Castell Harlech",
+  "coflein": "https://coflein.gov.uk/en/site/93729"
+ },
+ "event:the-silures-defeat-a-legion": {
+  "cy": "Silwriaid"
+ },
+ "event:the-slate-landscape-world-heritage": {
+  "cy": "Diwydiant llechi Cymru"
+ },
+ "event:the-songs-of-heledd": {
+  "cy": "Canu Heledd"
+ },
+ "event:the-swansea-blitz": {
+  "cy": "Bomio Abertawe"
+ },
+ "event:the-synod-at-llanddewi-brefi": {
+  "cy": "Llanddewi Brefi",
+  "coflein": "https://coflein.gov.uk/en/site/33044"
+ },
+ "event:the-taff-vale-railway": {
+  "coflein": "https://coflein.gov.uk/en/site/91550"
+ },
+ "event:the-tournament-at-carew": {
+  "cy": "Castell Caeriw",
+  "coflein": "https://coflein.gov.uk/en/site/92709"
+ },
+ "event:the-treachery-of-the-blue-books": {
+  "cy": "Brad y Llyfrau Gleision"
+ },
+ "event:the-tripartite-indenture": {
+  "cy": "Cytundeb Tridarn"
+ },
+ "event:the-tryweryn-act": {
+  "cy": "Boddi Tryweryn"
+ },
+ "event:the-tywyn-stone": {
+  "cy": "Carreg Cadfan"
+ },
+ "event:the-university-of-wales": {
+  "cy": "Prifysgol Cymru"
+ },
+ "event:the-urdd-is-founded": {
+  "cy": "Urdd Gobaith Cymru"
+ },
+ "event:the-victory-at-badon": {
+  "cy": "Brwydr Mynydd Baddon"
+ },
+ "event:the-visions-of-the-sleeping-bard": {
+  "cy": "Ellis Wynne"
+ },
+ "event:the-wales-coast-path": {
+  "cy": "Llwybr Arfordir Cymru"
+ },
+ "event:the-wales-millennium-centre": {
+  "cy": "Canolfan Mileniwm Cymru"
+ },
+ "event:the-war-of-1282-begins": {
+  "cy": "Goresgyniad Edward I"
+ },
+ "event:the-welsh-bible": {
+  "cy": "William Morgan (esgob)"
+ },
+ "event:the-welsh-not": {
+  "cy": "Welsh Not"
+ },
+ "event:the-welsh-office": {
+  "cy": "Y Swyddfa Gymreig"
+ },
+ "event:the-welsh-rise-against-the-normans": {
+  "cy": "Cadwgan ap Bleddyn"
+ },
+ "event:the-welsh-rugby-union": {
+  "cy": "Undeb Rygbi Cymru"
+ },
+ "event:the-white-book-of-rhydderch": {
+  "cy": "Llyfr Gwyn Rhydderch"
+ },
+ "event:the-wisest-of-kings": {
+  "cy": "Cadfan ap Iago"
+ },
+ "event:thomas-button-in-hudson-bay": {
+  "cy": "Thomas Button"
+ },
+ "event:thomas-charless-schools": {
+  "cy": "Thomas Charles"
+ },
+ "event:tinopolis": {
+  "cy": "Llanelli",
+  "coflein": "https://coflein.gov.uk/en/site/33068"
+ },
+ "event:tintern-abbey": {
+  "cy": "Abaty Tyndyrn",
+  "coflein": "https://coflein.gov.uk/en/site/359"
+ },
+ "event:tonypandy-riots": {
+  "cy": "Terfysg Tonypandy"
+ },
+ "event:treaty-of-aberconwy": {
+  "cy": "Cytundeb Aberconwy"
+ },
+ "event:treaty-of-montgomery": {
+  "cy": "Cytundeb Trefaldwyn"
+ },
+ "event:trer-ceiri": {
+  "cy": "Tre'r Ceiri",
+  "coflein": "https://coflein.gov.uk/en/site/95292"
+ },
+ "event:tryweryn": {
+  "cy": "Capel Celyn"
+ },
+ "event:twm-sion-cati": {
+  "cy": "Twm Siôn Cati"
+ },
+ "event:tynged-yr-iaith": {
+  "cy": "Tynged yr Iaith"
+ },
+ "event:under-milk-wood": {
+  "cy": "Under Milk Wood"
+ },
+ "event:urien-besieges-lindisfarne": {
+  "cy": "Urien Rheged"
+ },
+ "event:victory-at-bosworth": {
+  "cy": "Brwydr Maes Bosworth"
+ },
+ "event:victory-at-bryn-derwin": {
+  "cy": "Brwydr Bryn Derwin"
+ },
+ "event:victory-at-cadfan": {
+  "cy": "Brwydr Coed Llathen"
+ },
+ "event:victory-at-crug-mawr": {
+  "cy": "Brwydr Crug Mawr"
+ },
+ "event:victory-at-glasbury": {
+  "cy": "Gruffudd ap Llywelyn"
+ },
+ "event:victory-at-hyddgen": {
+  "cy": "Brwydr Hyddgen"
+ },
+ "event:victory-at-leominster": {
+  "cy": "Gruffudd ap Llywelyn"
+ },
+ "event:victory-at-llandudoch": {
+  "cy": "Rhys ap Tewdwr"
+ },
+ "event:victory-at-moel-y-don": {
+  "cy": "Brwydr Moel-y-don"
+ },
+ "event:votes-at-sixteen": {
+  "cy": "Etholiad Senedd Cymru, 2021"
+ },
+ "event:wales-accepts-the-roman-easter": {
+  "cy": "Elfodd"
+ },
+ "event:wales-and-france-make-a-treaty": {
+  "cy": "Owain Glyn Dŵr"
+ },
+ "event:wales-at-the-world-cup": {
+  "cy": "Cwpan y Byd Pêl-droed 1958"
+ },
+ "event:wales-beat-the-all-blacks": {
+  "cy": "Tîm rygbi'r undeb cenedlaethol Cymru"
+ },
+ "event:wales-beat-the-all-blacks-again": {
+  "cy": "Tîm rygbi'r undeb cenedlaethol Cymru"
+ },
+ "event:wales-in-magna-carta": {
+  "cy": "Magna Carta"
+ },
+ "event:wales-women-at-the-euros": {
+  "cy": "Tîm pêl-droed cenedlaethol merched Cymru"
+ },
+ "event:welsh-for-every-child": {
+  "cy": "Cymraeg"
+ },
+ "event:welsh-in-the-census": {
+  "cy": "Cymraeg"
+ },
+ "event:welsh-in-the-courts": {
+  "cy": "Deddf Llysoedd Cymreig 1942"
+ },
+ "event:welsh-language-act": {
+  "cy": "Deddf yr Iaith Gymraeg 1967"
+ },
+ "event:welsh-language-act-1993": {
+  "cy": "Deddf yr Iaith Gymraeg 1993"
+ },
+ "event:welsh-made-official": {
+  "cy": "Mesur y Gymraeg (Cymru) 2011"
+ },
+ "event:william-at-st-davids": {
+  "cy": "Rhys ap Tewdwr"
+ },
+ "event:y-beibl-bach": {
+  "cy": "Cyfieithu'r Beibl i'r Gymraeg"
+ },
+ "event:y-gododdin": {
+  "cy": "Y Gododdin"
+ },
+ "event:y-wladfa": {
+  "cy": "Y Wladfa"
+ },
+ "event:yale": {
+  "cy": "Elihu Yale"
+ },
+ "event:yes-to-devolution": {
+  "cy": "Refferendwm datganoli i Gymru, 1997"
+ },
  "person:alexander-cordell": {
   "cy": "Alexander Cordell"
  },
@@ -8,6 +1192,10 @@
  },
  "person:alun-wyn-jones": {
   "cy": "Alun Wyn Jones"
+ },
+ "person:amy-dillwyn": {
+  "cy": "Amy Dillwyn",
+  "dwb": "https://biography.wales/article/s12-DILL-AMY-1845"
  },
  "person:anarawd": {
   "cy": "Anarawd ap Rhodri",
@@ -43,12 +1231,19 @@
   "cy": "Augustus John",
   "dwb": "https://biography.wales/article/s2-JOHN-EDW-1878"
  },
+ "person:bardd-y-brenin": {
+  "cy": "Edward Jones (Bardd y Brenin)",
+  "dwb": "https://biography.wales/article/s-JONE-EDW-1752"
+ },
  "person:barry-john": {
   "cy": "Barry John"
  },
  "person:barti-ddu": {
   "cy": "Bartholomew Roberts",
   "dwb": "https://biography.wales/article/s-ROBE-BAR-1682"
+ },
+ "person:bedwyr": {
+  "cy": "Bedwyr"
  },
  "person:bertrand-russell": {
   "cy": "Bertrand Russell"
@@ -75,6 +1270,10 @@
   "cy": "Billy Meredith",
   "dwb": "https://biography.wales/article/s2-MERE-WIL-1874"
  },
+ "person:blanche-parry": {
+  "cy": "Blanche Parry",
+  "dwb": "https://biography.wales/article/s7-PARR-BLA-1508"
+ },
  "person:bleddyn-ap-cynfyn": {
   "cy": "Bleddyn ap Cynfyn",
   "dwb": "https://biography.wales/article/s-BLED-APC-1025"
@@ -82,8 +1281,19 @@
  "person:bonnie-tyler": {
   "cy": "Bonnie Tyler"
  },
+ "person:bran-fendigaid": {
+  "cy": "Bendigeidfran fab Llŷr"
+ },
  "person:brian-josephson": {
   "cy": "Brian David Josephson"
+ },
+ "person:briog": {
+  "cy": "Briog",
+  "dwb": "https://biography.wales/article/s-BRIO-G00-0500"
+ },
+ "person:brochwel-ysgithrog": {
+  "cy": "Brochwel Ysgithrog",
+  "dwb": "https://biography.wales/article/s-BROC-YSG-0502"
  },
  "person:brychan": {
   "cy": "Brychan",
@@ -92,8 +1302,19 @@
  "person:bryn-terfel": {
   "cy": "Bryn Terfel"
  },
+ "person:brynach": {
+  "cy": "Brynach Wyddel",
+  "dwb": "https://biography.wales/article/s-BRYN-ACH-0500"
+ },
  "person:buddug": {
   "cy": "Buddug (Boudica)"
+ },
+ "person:cadell-ap-rhodri": {
+  "cy": "Cadell ap Rhodri"
+ },
+ "person:cadfan": {
+  "cy": "Cadfan (sant)",
+  "dwb": "https://biography.wales/article/s-CADF-AN0-0550"
  },
  "person:cadog": {
   "cy": "Cadog",
@@ -105,6 +1326,23 @@
  "person:cadwallon": {
   "cy": "Cadwallon ap Cadfan",
   "dwb": "https://biography.wales/article/s-CADW-APC-0591"
+ },
+ "person:cadwallon-lawhir": {
+  "cy": "Cadwallon Lawhir"
+ },
+ "person:cai": {
+  "cy": "Cai"
+ },
+ "person:caradog-freichfras": {
+  "cy": "Caradog Freichfras"
+ },
+ "person:caradog-griffith-rhys-jones": {
+  "cy": "Griffith Rhys Jones",
+  "dwb": "https://biography.wales/article/s-JONE-RHY-1834"
+ },
+ "person:carannog": {
+  "cy": "Carranog",
+  "dwb": "https://biography.wales/article/s-CARA-APC-0550"
  },
  "person:caratacus": {
   "cy": "Caradog"
@@ -129,6 +1367,13 @@
   "cy": "Julian Cayo-Evans",
   "dwb": "https://biography.wales/article/s10-CAYO-JUL-1937"
  },
+ "person:ceiriog": {
+  "cy": "John Ceiriog Hughes",
+  "dwb": "https://biography.wales/article/s-HUGH-CEI-1832"
+ },
+ "person:cennydd": {
+  "cy": "Sant Cennydd"
+ },
  "person:cerys-matthews": {
   "cy": "Cerys Matthews"
  },
@@ -142,18 +1387,30 @@
  "person:clive-granger": {
   "cy": "Clive Granger"
  },
+ "person:clive-sullivan": {
+  "cy": "Clive Sullivan",
+  "dwb": "https://biography.wales/article/s12-SULL-CLI-1943"
+ },
  "person:clough-williams-ellis": {
   "cy": "Clough Williams-Ellis"
+ },
+ "person:clydno-eidyn": {
+  "cy": "Clydno Eidyn"
  },
  "person:coel-hen": {
   "cy": "Coel Hen"
  },
  "person:colin-jackson": {
-  "cy": "Colin Jackson"
+  "cy": "Colin Jackson",
+  "olympedia": "https://www.olympedia.org/athletes/69187",
+  "athletics": "https://worldathletics.org/athletes/-/1264"
  },
  "person:cranogwen": {
   "cy": "Sarah Jane Rees (Cranogwen)",
   "dwb": "https://biography.wales/article/s-REES-JAN-1839"
+ },
+ "person:culhwch": {
+  "cy": "Culhwch ac Olwen"
  },
  "person:cunedda": {
   "cy": "Cunedda",
@@ -163,9 +1420,20 @@
   "cy": "Cybi",
   "dwb": "https://biography.wales/article/s-CYBI-APS-0490"
  },
+ "person:cynan": {
+  "cy": "Cynan (bardd)",
+  "dwb": "https://biography.wales/article/s2-JONE-EVA-1895"
+ },
+ "person:cynan-garwyn": {
+  "cy": "Cynan Garwyn"
+ },
  "person:cynddelw": {
   "cy": "Cynddelw Brydydd Mawr",
   "dwb": "https://biography.wales/article/s-CYND-BRY-1155"
+ },
+ "person:cyndeyrn": {
+  "cy": "Cyndeyrn",
+  "dwb": "https://biography.wales/article/s1-CYND-EYR-0518"
  },
  "person:cynfelyn": {
   "cy": "Cynfelyn"
@@ -173,6 +1441,14 @@
  "person:cyngen": {
   "cy": "Cyngen ap Cadell",
   "dwb": "https://biography.wales/article/s-CYNG-POW-0778"
+ },
+ "person:d-j-williams": {
+  "cy": "D. J. Williams",
+  "dwb": "https://biography.wales/article/s2-WILL-JOH-1885"
+ },
+ "person:dafydd-ab-edmwnd": {
+  "cy": "Dafydd ab Edmwnd",
+  "dwb": "https://biography.wales/article/s-DAFY-ABE-1450"
  },
  "person:dafydd-ap-gruffudd": {
   "cy": "Dafydd ap Gruffudd",
@@ -194,6 +1470,10 @@
  },
  "person:dafydd-wigley": {
   "cy": "Dafydd Wigley"
+ },
+ "person:daniel-james-gwyrosydd": {
+  "cy": "Daniel James (Gwyrosydd)",
+  "dwb": "https://biography.wales/article/s-JAME-DAN-1847"
  },
  "person:daniel-owen": {
   "cy": "Daniel Owen",
@@ -238,6 +1518,10 @@
   "cy": "Dic Penderyn",
   "dwb": "https://biography.wales/article/s-LEWI-RIC-1807"
  },
+ "person:dogfael": {
+  "cy": "Dogfael",
+  "dwb": "https://biography.wales/article/s-DOGM-SAN-0500"
+ },
  "person:donald-davies": {
   "cy": "Donald Watts Davies",
   "dwb": "https://biography.wales/article/s8-DAVI-WAT-1924"
@@ -247,6 +1531,10 @@
  },
  "person:dwynwen": {
   "cy": "Santes Dwynwen"
+ },
+ "person:dyfrig": {
+  "cy": "Dyfrig",
+  "dwb": "https://biography.wales/article/s-DYFR-SAN-0475"
  },
  "person:dylan-thomas": {
   "cy": "Dylan Thomas",
@@ -268,9 +1556,22 @@
   "cy": "Edward Lhuyd",
   "dwb": "https://biography.wales/article/s-LHUY-EDW-1660"
  },
+ "person:eigr": {
+  "cy": "Eigr"
+ },
+ "person:eileen-beasley": {
+  "cy": "Eileen Beasley"
+ },
  "person:elaine-morgan": {
   "cy": "Elaine Morgan",
   "dwb": "https://biography.wales/article/s12-MORG-NEV-1920"
+ },
+ "person:eleanor-de-montfort": {
+  "cy": "Elinor de Montfort",
+  "dwb": "https://biography.wales/article/s11-ELEA-WRL-1200"
+ },
+ "person:elffin": {
+  "cy": "Elffin ap Gwyddno"
  },
  "person:elihu-yale": {
   "cy": "Elihu Yale"
@@ -291,6 +1592,21 @@
  },
  "person:eluned-morgan": {
   "cy": "Eluned Morgan (gwleidydd)"
+ },
+ "person:emrys-ap-iwan": {
+  "cy": "Robert Ambrose Jones (Emrys ap Iwan)",
+  "dwb": "https://biography.wales/article/s-JONE-AMB-1848"
+ },
+ "person:emrys-wledig": {
+  "cy": "Emrys Wledig",
+  "dwb": "https://biography.wales/article/s-AMBR-AUR-0475"
+ },
+ "person:enid": {
+  "cy": "Y Tair Rhamant"
+ },
+ "person:euddogwy": {
+  "cy": "Euddogwy",
+  "dwb": "https://biography.wales/article/s-EUDD-OGW-0600"
  },
  "person:evan-james-williams": {
   "cy": "Evan James Williams",
@@ -323,8 +1639,12 @@
   "cy": "Geraint Evans (canwr opera)",
   "dwb": "https://biography.wales/article/s14-EVAN-LLE-1922"
  },
+ "person:geraint-fab-erbin": {
+  "cy": "Geraint"
+ },
  "person:geraint-thomas": {
-  "cy": "Geraint Thomas"
+  "cy": "Geraint Thomas",
+  "olympedia": "https://www.olympedia.org/athletes/113194"
  },
  "person:gerallt-gymro": {
   "cy": "Gerallt Gymro",
@@ -337,6 +1657,12 @@
  "person:gillian-clarke": {
   "cy": "Gillian Clarke"
  },
+ "person:glewlwyd": {
+  "cy": "Glewlwyd Gafaelfawr"
+ },
+ "person:gofan": {
+  "cy": "Eglwys Sant Gofan"
+ },
  "person:grace-williams": {
   "cy": "Grace Williams",
   "dwb": "https://biography.wales/article/s10-WILL-MAR-1906"
@@ -348,6 +1674,10 @@
  "person:gruff-rhys": {
   "cy": "Gruff Rhys"
  },
+ "person:gruffudd-ab-yr-ynad-coch": {
+  "cy": "Gruffudd ab yr Ynad Coch",
+  "dwb": "https://biography.wales/article/s-GRUF-APY-1280"
+ },
  "person:gruffudd-ap-cynan": {
   "cy": "Gruffudd ap Cynan",
   "dwb": "https://biography.wales/article/s-GRUF-APC-1055"
@@ -355,6 +1685,10 @@
  "person:gruffudd-ap-llywelyn": {
   "cy": "Gruffudd ap Llywelyn",
   "dwb": "https://biography.wales/article/s12-GRUF-APL-1063"
+ },
+ "person:gruffudd-ap-llywelyn-fawr": {
+  "cy": "Gruffudd ap Llywelyn Fawr",
+  "dwb": "https://biography.wales/article/s-GRUF-APL-1244"
  },
  "person:gruffydd-robert": {
   "cy": "Gruffydd Robert",
@@ -364,13 +1698,26 @@
   "cy": "Guto'r Glyn",
   "dwb": "https://biography.wales/article/s-GUTO-GLY-1440"
  },
+ "person:gwalchmai": {
+  "cy": "Gwalchmai ap Gwyar"
+ },
  "person:gwen-john": {
   "cy": "Gwen John",
   "dwb": "https://biography.wales/article/s3-JOHN-MAR-1876"
  },
+ "person:gwenallt": {
+  "cy": "David James Jones (Gwenallt)",
+  "dwb": "https://biography.wales/article/s2-JONE-JAM-1899"
+ },
+ "person:gwenddolau": {
+  "cy": "Gwenddolau"
+ },
  "person:gwenfrewi": {
   "cy": "Gwenffrewi",
   "dwb": "https://biography.wales/article/s-GWEN-FFR-0600"
+ },
+ "person:gwenhwyfar": {
+  "cy": "Gwenhwyfar"
  },
  "person:gwenllian": {
   "cy": "Gwenllian ferch Gruffudd ap Cynan",
@@ -383,12 +1730,27 @@
   "cy": "Gwerful Mechain",
   "dwb": "https://biography.wales/article/s-GWER-MEC-1462"
  },
+ "person:gwladys": {
+  "cy": "Santes Gwladys"
+ },
+ "person:gwrthefyr": {
+  "cy": "Vortiporius"
+ },
+ "person:gwyddno-garanhir": {
+  "cy": "Gwyddno Garanhir"
+ },
+ "person:gwyn-ap-nudd": {
+  "cy": "Gwyn ap Nudd"
+ },
  "person:gwyneth-lewis": {
   "cy": "Gwyneth Lewis"
  },
  "person:gwynfor-evans": {
   "cy": "Gwynfor Evans",
   "dwb": "https://biography.wales/article/s10-EVAN-RIC-1912"
+ },
+ "person:gwynllyw": {
+  "dwb": "https://biography.wales/article/s-GWYN-FAR-0466"
  },
  "person:harri-tudur": {
   "cy": "Harri VII, brenin Lloegr",
@@ -433,6 +1795,10 @@
   "cy": "Hugh Owen Thomas",
   "dwb": "https://biography.wales/article/s-THOM-OWE-1834"
  },
+ "person:humphrey-llwyd": {
+  "cy": "Humphrey Lhuyd",
+  "dwb": "https://biography.wales/article/s12-LLWY-HUM-1527"
+ },
  "person:hywel-ab-owain": {
   "cy": "Hywel ab Owain Gwynedd",
   "dwb": "https://biography.wales/article/s-HYWE-ABO-1170"
@@ -447,6 +1813,18 @@
  "person:ian-woosnam": {
   "cy": "Ian Woosnam"
  },
+ "person:idris-davies": {
+  "cy": "Idris Davies",
+  "dwb": "https://biography.wales/article/s2-DAVI-IDR-1905"
+ },
+ "person:idwal-foel": {
+  "cy": "Idwal Foel",
+  "dwb": "https://biography.wales/article/s-IDWA-FOE-0942"
+ },
+ "person:iestyn-ap-gwrgant": {
+  "cy": "Iestyn ap Gwrgant",
+  "dwb": "https://biography.wales/article/s-IEST-APG-1045"
+ },
  "person:ieuan-fardd": {
   "cy": "Evan Evans (Ieuan Fardd)",
   "dwb": "https://biography.wales/article/s-EVAN-EVA-1731"
@@ -454,6 +1832,10 @@
  "person:ifan-ab-owen-edwards": {
   "cy": "Ifan ab Owen Edwards",
   "dwb": "https://biography.wales/article/s2-EDWA-OWE-1895"
+ },
+ "person:ifor-williams": {
+  "cy": "Ifor Williams",
+  "dwb": "https://biography.wales/article/s2-WILL-IFO-1881"
  },
  "person:illtud": {
   "cy": "Illtud",
@@ -463,20 +1845,31 @@
   "cy": "Ioan Gruffudd"
  },
  "person:iolo-goch": {
-  "cy": "Iolo Goch",
-  "dwb": "https://biography.wales/article/s-IOLO-GOC-1320"
+  "cy": "Iolo Goch"
  },
  "person:iolo-morganwg": {
   "cy": "Iolo Morganwg",
   "dwb": "https://biography.wales/article/s-WILL-EDW-1747"
  },
+ "person:iorwerth-peate": {
+  "cy": "Iorwerth Cyfeiliog Peate",
+  "dwb": "https://biography.wales/article/s6-PEAT-CYF-1901"
+ },
  "person:isaac-roberts": {
   "cy": "Isaac Roberts",
   "dwb": "https://biography.wales/article/s-ROBE-ISA-1829"
  },
+ "person:islwyn": {
+  "cy": "William Thomas (Islwyn)",
+  "dwb": "https://biography.wales/article/s-THOM-WIL-1832"
+ },
  "person:ivor-novello": {
   "cy": "Ivor Novello",
   "dwb": "https://biography.wales/article/s2-NOVE-IVO-1893"
+ },
+ "person:j-e-lloyd": {
+  "cy": "John Edward Lloyd",
+  "dwb": "https://biography.wales/article/s2-LLOY-EDW-1861"
  },
  "person:james-dean-bradfield": {
   "cy": "James Dean Bradfield"
@@ -502,6 +1895,9 @@
  },
  "person:joe-calzaghe": {
   "cy": "Joe Calzaghe"
+ },
+ "person:john-barnard-jenkins": {
+  "cy": "John Barnard Jenkins"
  },
  "person:john-cale": {
   "cy": "John Cale"
@@ -541,9 +1937,21 @@
  "person:john-meurig-thomas": {
   "cy": "John Meurig Thomas"
  },
+ "person:john-morris-jones": {
+  "cy": "John Morris-Jones",
+  "dwb": "https://biography.wales/article/s-MORR-JOH-1864"
+ },
+ "person:john-penry": {
+  "cy": "John Penry",
+  "dwb": "https://biography.wales/article/s-PENR-JOH-1563"
+ },
  "person:john-price": {
   "cy": "John Price",
   "dwb": "https://biography.wales/article/s-PRIC-JOH-1502"
+ },
+ "person:john-rhys": {
+  "cy": "John Rhŷs",
+  "dwb": "https://biography.wales/article/s-RHYS-JOH-1840"
  },
  "person:joseph-parry": {
   "cy": "Joseph Parry",
@@ -597,7 +2005,8 @@
   "cy": "Laura Ashley"
  },
  "person:lauren-price": {
-  "cy": "Lauren Price"
+  "cy": "Lauren Price",
+  "olympedia": "https://www.olympedia.org/athletes/142978"
  },
  "person:lewis-jones-patagonia": {
   "cy": "Lewis Jones, Patagonia",
@@ -615,9 +2024,16 @@
   "cy": "David Lloyd George",
   "dwb": "https://biography.wales/article/s2-LLOY-DAV-1863"
  },
+ "person:llywarch-hen": {
+  "cy": "Llywarch Hen",
+  "dwb": "https://biography.wales/article/s-LLYW-HEN-0550"
+ },
  "person:llywelyn-ap-gruffudd": {
   "cy": "Llywelyn ap Gruffudd",
   "dwb": "https://biography.wales/article/s-LLYW-APG-1200"
+ },
+ "person:llywelyn-ap-gruffudd-fychan": {
+  "cy": "Llywelyn ap Gruffudd Fychan"
  },
  "person:llywelyn-ap-seisyll": {
   "cy": "Llywelyn ap Seisyll",
@@ -635,7 +2051,12 @@
   "cy": "Luke Evans"
  },
  "person:lynn-davies": {
-  "cy": "Lynn Davies"
+  "cy": "Lynn Davies",
+  "olympedia": "https://www.olympedia.org/athletes/69002",
+  "athletics": "https://worldathletics.org/athletes/-/5656"
+ },
+ "person:mabon": {
+  "cy": "Mabon fab Modron"
  },
  "person:macsen-wledig": {
   "cy": "Macsen Wledig"
@@ -647,13 +2068,25 @@
   "cy": "Madog ap Llywelyn",
   "dwb": "https://biography.wales/article/s-MADO-APL-1294"
  },
+ "person:madog-ap-maredudd": {
+  "cy": "Madog ap Maredudd",
+  "dwb": "https://biography.wales/article/s-MADO-APM-1160"
+ },
  "person:maelgwn-gwynedd": {
   "cy": "Maelgwn Gwynedd",
   "dwb": "https://biography.wales/article/s-MAEL-GWY-0547"
  },
+ "person:malo": {
+  "cy": "Malo",
+  "dwb": "https://biography.wales/article/s-MALO-SAN-0550"
+ },
  "person:maredudd-ab-owain": {
   "cy": "Maredudd ab Owain",
   "dwb": "https://biography.wales/article/s-MARE-ABO-0999"
+ },
+ "person:marged-ferch-ifan": {
+  "cy": "Marged uch Ifan",
+  "dwb": "https://biography.wales/article/s-MARG-VCH-1696"
  },
  "person:mark-drakeford": {
   "cy": "Mark Drakeford"
@@ -683,6 +2116,9 @@
  "person:meddygon-myddfai": {
   "cy": "Meddygon Myddfai"
  },
+ "person:medrawd": {
+  "cy": "Medrawd"
+ },
  "person:megan-lloyd-george": {
   "cy": "Megan Lloyd George"
  },
@@ -703,6 +2139,9 @@
   "cy": "Merfyn Frych",
   "dwb": "https://biography.wales/article/s-MERF-FRY-0844"
  },
+ "person:meurig-ap-tewdrig": {
+  "cy": "Meurig ap Tewdrig"
+ },
  "person:michael-d-jones": {
   "cy": "Michael D. Jones",
   "dwb": "https://biography.wales/article/s-JONE-DAN-1822"
@@ -720,6 +2159,10 @@
   "cy": "Morfydd Llwyn Owen",
   "dwb": "https://biography.wales/article/s-OWEN-LLW-1891"
  },
+ "person:morgan-hen": {
+  "cy": "Morgan Hen ab Owain",
+  "dwb": "https://biography.wales/article/s-MORG-HEN-0975"
+ },
  "person:morgan-john-rhys": {
   "cy": "Morgan John Rhys",
   "dwb": "https://biography.wales/article/s-RHYS-JOH-1760"
@@ -727,6 +2170,13 @@
  "person:morgan-llwyd": {
   "cy": "Morgan Llwyd",
   "dwb": "https://biography.wales/article/s-LLWY-MOR-1619"
+ },
+ "person:morgan-mwynfawr": {
+  "cy": "Morgan Mwynfawr",
+  "dwb": "https://biography.wales/article/s-MORG-MWY-0730"
+ },
+ "person:mynyddog-mwynfawr": {
+  "cy": "Mynyddog Mwynfawr"
  },
  "person:neil-kinnock": {
   "cy": "Neil Kinnock"
@@ -743,15 +2193,22 @@
   "cy": "Neville Southall"
  },
  "person:nicole-cooke": {
-  "cy": "Nicole Cooke"
+  "cy": "Nicole Cooke",
+  "olympedia": "https://www.olympedia.org/athletes/103694"
  },
  "person:non": {
   "cy": "Non",
   "dwb": "https://biography.wales/article/s-NONN-000-0450"
  },
+ "person:olwen": {
+  "cy": "Culhwch ac Olwen"
+ },
  "person:om-edwards": {
   "cy": "Owen Morgan Edwards",
   "dwb": "https://biography.wales/article/s-EDWA-MOR-1858"
+ },
+ "person:owain-ab-urien": {
+  "cy": "Owain ab Urien"
  },
  "person:owain-cyfeiliog": {
   "cy": "Owain Cyfeiliog",
@@ -769,9 +2226,16 @@
   "cy": "Owain Lawgoch",
   "dwb": "https://biography.wales/article/s-OWAI-APT-1378"
  },
+ "person:owain-myfyr": {
+  "cy": "Owen Jones (Owain Myfyr)",
+  "dwb": "https://biography.wales/article/s-JONE-OWE-1741"
+ },
  "person:owain-tudur": {
   "cy": "Owain Tudur",
   "dwb": "https://biography.wales/article/s-OWAI-TUD-1400"
+ },
+ "person:pabo-post-prydain": {
+  "cy": "Pabo Post Prydain"
  },
  "person:padarn": {
   "cy": "Padarn",
@@ -781,11 +2245,18 @@
   "cy": "William Williams, Pantycelyn",
   "dwb": "https://biography.wales/article/s-WILL-WIL-1717"
  },
+ "person:parri-ddall": {
+  "cy": "John Parry (Y Telynor Dall)",
+  "dwb": "https://biography.wales/article/s-PARR-JOH-1710"
+ },
  "person:patrick": {
   "cy": "Sant Padrig"
  },
  "person:pelagius": {
   "cy": "Pelagius"
+ },
+ "person:peredur": {
+  "cy": "Peredur fab Efrawg"
  },
  "person:phil-bennett": {
   "cy": "Phil Bennett"
@@ -797,13 +2268,25 @@
   "cy": "Philip Jones Griffiths",
   "dwb": "https://biography.wales/article/s11-GRIF-JON-1936"
  },
+ "person:pol": {
+  "cy": "Paulinus Aurelianus",
+  "dwb": "https://biography.wales/article/s-PAUL-AUR-0475"
+ },
  "person:pryce-pryce-jones": {
   "cy": "Pryce Pryce-Jones",
   "dwb": "https://biography.wales/article/s3-PRYC-PRY-1834"
  },
+ "person:prydydd-y-moch": {
+  "cy": "Llywarch ap Llywelyn",
+  "dwb": "https://biography.wales/article/s-LLYW-APL-1173"
+ },
  "person:r-s-thomas": {
   "cy": "R. S. Thomas",
   "dwb": "https://biography.wales/article/s12-THOM-STU-1913"
+ },
+ "person:r-williams-parry": {
+  "cy": "Robert Williams Parry",
+  "dwb": "https://biography.wales/article/s2-PARR-WIL-1884"
  },
  "person:ray-milland": {
   "cy": "Ray Milland"
@@ -822,6 +2305,14 @@
  "person:rhodri-morgan": {
   "cy": "Rhodri Morgan",
   "dwb": "https://biography.wales/article/s12-MORG-RHO-1939"
+ },
+ "person:rhun-ap-maelgwn": {
+  "cy": "Rhun ap Maelgwn Gwynedd",
+  "dwb": "https://biography.wales/article/s-RHUN-APM-0550"
+ },
+ "person:rhydderch-hael": {
+  "cy": "Rhydderch Hael",
+  "dwb": "https://biography.wales/article/s-RHYD-HAE-0590"
  },
  "person:rhygyfarch": {
   "cy": "Rhygyfarch ap Sulien",
@@ -853,9 +2344,17 @@
   "cy": "Richard Davies",
   "dwb": "https://biography.wales/article/s-DAVI-RIC-1501"
  },
+ "person:richard-gwyn": {
+  "cy": "Rhisiart Gwyn",
+  "dwb": "https://biography.wales/article/s-GWYN-RIC-1557"
+ },
  "person:richard-price": {
   "cy": "Richard Price",
   "dwb": "https://biography.wales/article/s-PRIC-RIC-1723"
+ },
+ "person:richard-roberts-engineer": {
+  "cy": "Richard Roberts (peiriannydd)",
+  "dwb": "https://biography.wales/article/s-ROBE-RIC-1789"
  },
  "person:richard-wilson": {
   "cy": "Richard Wilson (arlunydd)",
@@ -905,6 +2404,10 @@
   "cy": "Samson (sant)",
   "dwb": "https://biography.wales/article/s-SAMS-ON0-0485"
  },
+ "person:samuel-griffith": {
+  "cy": "Samuel Griffith",
+  "dwb": "https://biography.wales/article/s-GRIF-WAL-1845"
+ },
  "person:sarah-siddons": {
   "cy": "Sarah Siddons",
   "dwb": "https://biography.wales/article/s-SIDD-SAR-1755"
@@ -912,6 +2415,10 @@
  "person:saunders-lewis": {
   "cy": "Saunders Lewis",
   "dwb": "https://biography.wales/article/s10-LEWI-SAU-1893"
+ },
+ "person:seiriol": {
+  "cy": "Seiriol",
+  "dwb": "https://biography.wales/article/s-SEIR-IOL-0500"
  },
  "person:shane-williams": {
   "cy": "Shane Williams"
@@ -943,6 +2450,10 @@
  "person:t-e-lawrence": {
   "cy": "T. E. Lawrence"
  },
+ "person:t-gwynn-jones": {
+  "cy": "Thomas Gwynn Jones",
+  "dwb": "https://biography.wales/article/s2-JONE-GWY-1871"
+ },
  "person:t-h-parry-williams": {
   "cy": "T. H. Parry-Williams",
   "dwb": "https://biography.wales/article/s10-PARR-HER-1887"
@@ -956,7 +2467,8 @@
   "dwb": "https://biography.wales/article/s-TALI-ESI-0575"
  },
  "person:tanni-grey-thompson": {
-  "cy": "Tanni Grey-Thompson"
+  "cy": "Tanni Grey-Thompson",
+  "olympedia": "https://www.olympedia.org/athletes/901551"
  },
  "person:taron-egerton": {
   "cy": "Taron Egerton"
@@ -965,12 +2477,21 @@
   "cy": "Tasker Watkins",
   "dwb": "https://biography.wales/article/s11-WATK-TAS-1918"
  },
+ "person:tathan": {
+  "dwb": "https://biography.wales/article/s-TATH-AN0-0450"
+ },
+ "person:tegau-eurfron": {
+  "cy": "Tegau Eurfron"
+ },
  "person:teilo": {
   "cy": "Teilo",
   "dwb": "https://biography.wales/article/s-TEIL-SAN-0500"
  },
  "person:terry-matthews": {
   "cy": "Terry Matthews"
+ },
+ "person:tewdrig": {
+  "cy": "Tewdrig"
  },
  "person:theophilus-evans": {
   "cy": "Theophilus Evans",
@@ -1000,6 +2521,14 @@
   "cy": "Thomas Pennant (awdur)",
   "dwb": "https://biography.wales/article/s-PENN-THO-1726"
  },
+ "person:thomas-williams-llanidan": {
+  "cy": "Thomas Williams, Llanidan",
+  "dwb": "https://biography.wales/article/s-WILL-THO-1737"
+ },
+ "person:tom-ellis": {
+  "cy": "Thomas Edward Ellis",
+  "dwb": "https://biography.wales/article/s-ELLI-EDW-1859"
+ },
  "person:tom-jones": {
   "cy": "Tom Jones"
  },
@@ -1016,6 +2545,16 @@
  "person:tori-james": {
   "cy": "Tori James"
  },
+ "person:tudno": {
+  "cy": "Tudno"
+ },
+ "person:tudur-aled": {
+  "cy": "Tudur Aled",
+  "dwb": "https://biography.wales/article/s-TUDU-ALE-1480"
+ },
+ "person:tudwal": {
+  "cy": "Tudwal"
+ },
  "person:twm-carnabwth": {
   "cy": "Thomas Rees (Twm Carnabwth)",
   "dwb": "https://biography.wales/article/s-REES-THO-1806"
@@ -1028,8 +2567,14 @@
   "cy": "Twm Siôn Cati",
   "dwb": "https://biography.wales/article/s-JONE-THO-1530"
  },
+ "person:tysul": {
+  "cy": "Tysul"
+ },
  "person:urien-rheged": {
   "cy": "Urien Rheged"
+ },
+ "person:uthr-bendragon": {
+  "cy": "Uthyr Pen Ddraig"
  },
  "person:w-h-davies": {
   "cy": "W. H. Davies",
@@ -1047,6 +2592,10 @@
   "cy": "William Robert Grove",
   "dwb": "https://biography.wales/article/s-GROV-ROB-1811"
  },
+ "person:william-herbert": {
+  "cy": "William Herbert, Iarll 1af Penfro (1423–1469)",
+  "dwb": "https://biography.wales/article/s-HERB-WIL-1469"
+ },
  "person:william-jones": {
   "cy": "William Jones (mathemategydd)",
   "dwb": "https://biography.wales/article/s-JONE-WIL-1675"
@@ -1057,6 +2606,10 @@
  "person:william-morgan": {
   "cy": "William Morgan (esgob)",
   "dwb": "https://biography.wales/article/s-MORG-WIL-1545"
+ },
+ "person:william-owen-pughe": {
+  "cy": "William Owen Pughe",
+  "dwb": "https://biography.wales/article/s-PUGH-OWE-1759"
  },
  "person:william-preece": {
   "cy": "William Henry Preece",
@@ -1070,6 +2623,9 @@
   "cy": "William Salesbury",
   "dwb": "https://biography.wales/article/s-SALE-WIL-1520"
  },
+ "person:william-wroth": {
+  "dwb": "https://biography.wales/article/s-WROT-WIL-1576"
+ },
  "person:yr-arglwydd-rhys": {
   "cy": "Rhys ap Gruffudd",
   "dwb": "https://biography.wales/article/s-RHYS-APG-1132"
@@ -1081,9 +2637,23 @@
   "cy": "Aberffraw",
   "coflein": "https://coflein.gov.uk/en/site/32986"
  },
+ "place:bangor": {
+  "cy": "Eglwys Gadeiriol Bangor",
+  "coflein": "https://coflein.gov.uk/en/site/43727",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=4027"
+ },
+ "place:basingwerk": {
+  "cy": "Abaty Dinas Basing",
+  "coflein": "https://coflein.gov.uk/en/site/35649",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=505"
+ },
  "place:beaumaris": {
   "cy": "Castell Biwmares",
-  "coflein": "https://coflein.gov.uk/en/site/95769"
+  "coflein": "https://coflein.gov.uk/en/site/95769",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=5574"
+ },
+ "place:bethlehem": {
+  "cy": "Bethlehem, Sir Gaerfyrddin"
  },
  "place:blaenavon": {
   "cy": "Tirlun Diwydiannol Blaenafon"
@@ -1093,21 +2663,39 @@
  },
  "place:caerffili": {
   "cy": "Castell Caerffili",
-  "coflein": "https://coflein.gov.uk/en/site/94497"
+  "coflein": "https://coflein.gov.uk/en/site/94497",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=13539"
+ },
+ "place:caergybi": {
+  "cy": "Caer Gybi (caer)",
+  "coflein": "https://coflein.gov.uk/en/site/15607",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=5415"
  },
  "place:caerleon": {
   "cy": "Caerllion"
  },
  "place:caernarfon": {
   "cy": "Castell Caernarfon",
-  "coflein": "https://coflein.gov.uk/en/site/95318"
+  "coflein": "https://coflein.gov.uk/en/site/95318",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=3814"
  },
  "place:caerwent": {
   "cy": "Venta Silurum"
  },
  "place:cardigan": {
   "cy": "Castell Aberteifi",
-  "coflein": "https://coflein.gov.uk/en/site/92314"
+  "coflein": "https://coflein.gov.uk/en/site/92314",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=10458"
+ },
+ "place:carewcross": {
+  "cy": "Croes Caeriw",
+  "coflein": "https://coflein.gov.uk/en/site/103458",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=5938"
+ },
+ "place:carregcennen": {
+  "cy": "Castell Carreg Cennen",
+  "coflein": "https://coflein.gov.uk/en/site/103970",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=20923"
  },
  "place:castellhenllys": {
   "cy": "Castell Henllys",
@@ -1121,21 +2709,56 @@
  },
  "place:chepstow": {
   "cy": "Castell Cas-gwent",
-  "coflein": "https://coflein.gov.uk/en/site/95237"
+  "coflein": "https://coflein.gov.uk/en/site/95237",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=2475"
  },
  "place:cilmeri": {
   "cy": "Cilmeri"
  },
+ "place:clynnog": {
+  "coflein": "https://coflein.gov.uk/en/site/43699",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=3758"
+ },
  "place:conwy": {
   "cy": "Castell Conwy",
-  "coflein": "https://coflein.gov.uk/en/site/121"
+  "coflein": "https://coflein.gov.uk/en/site/121",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=3250"
+ },
+ "place:cricieth": {
+  "cy": "Castell Cricieth",
+  "coflein": "https://coflein.gov.uk/en/site/95281",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=4396"
+ },
+ "place:cwmhir": {
+  "cy": "Abaty Cwm-hir",
+  "coflein": "https://coflein.gov.uk/en/site/96529",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=8717"
+ },
+ "place:cymer": {
+  "cy": "Abaty Cymer",
+  "coflein": "https://coflein.gov.uk/en/site/95420",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=4738"
  },
  "place:dale": {
   "cy": "Harri VII, brenin Lloegr"
  },
+ "place:deganwy": {
+  "cy": "Castell Degannwy",
+  "coflein": "https://coflein.gov.uk/en/site/95282",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=3365"
+ },
+ "place:dinasbran": {
+  "cy": "Castell Dinas Brân",
+  "coflein": "https://coflein.gov.uk/en/site/307064"
+ },
+ "place:dinasemrys": {
+  "cy": "Dinas Emrys",
+  "coflein": "https://coflein.gov.uk/en/site/95284"
+ },
  "place:dinefwr": {
   "cy": "Castell Dinefwr",
-  "coflein": "https://coflein.gov.uk/en/site/425"
+  "coflein": "https://coflein.gov.uk/en/site/425",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=11117"
  },
  "place:dinorwig": {
   "cy": "Diwydiant llechi Cymru"
@@ -1146,11 +2769,28 @@
  },
  "place:dolbadarn": {
   "cy": "Castell Dolbadarn",
-  "coflein": "https://coflein.gov.uk/en/site/93541"
+  "coflein": "https://coflein.gov.uk/en/site/93541",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=21854"
+ },
+ "place:dolforwyn": {
+  "cy": "Castell Dolforwyn",
+  "coflein": "https://coflein.gov.uk/en/site/300392",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=7550"
+ },
+ "place:dolwyddelan": {
+  "cy": "Castell Dolwyddelan",
+  "coflein": "https://coflein.gov.uk/en/site/95299",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=18253"
+ },
+ "place:dryslwyn": {
+  "cy": "Castell y Dryslwyn",
+  "coflein": "https://coflein.gov.uk/en/site/100682",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=10934"
  },
  "place:eliseg": {
   "cy": "Croes Eliseg",
-  "coflein": "https://coflein.gov.uk/en/site/165274"
+  "coflein": "https://coflein.gov.uk/en/site/165274",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=19678"
  },
  "place:enlli": {
   "cy": "Ynys Enlli"
@@ -1158,23 +2798,65 @@
  "place:epynt": {
   "cy": "Mynydd Epynt"
  },
+ "place:ewloe": {
+  "cy": "Castell Ewlo",
+  "coflein": "https://coflein.gov.uk/en/site/94447",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=13"
+ },
  "place:fishguard": {
   "cy": "Brwydr Abergwaun"
  },
+ "place:garthcelyn": {
+  "cy": "Abergwyngregyn"
+ },
  "place:harlech": {
   "cy": "Castell Harlech",
-  "coflein": "https://coflein.gov.uk/en/site/93729"
+  "coflein": "https://coflein.gov.uk/en/site/93729",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=25500"
  },
  "place:hendygwyn": {
   "cy": "Hendy-gwyn",
   "coflein": "https://coflein.gov.uk/en/site/462"
  },
+ "place:kidwelly": {
+  "cy": "Castell Cydweli",
+  "coflein": "https://coflein.gov.uk/en/site/95633",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=11876"
+ },
+ "place:lavernock": {
+  "cy": "Larnog"
+ },
  "place:library": {
   "cy": "Llyfrgell Genedlaethol Cymru",
   "coflein": "https://coflein.gov.uk/en/site/23293"
  },
+ "place:llanbadarn": {
+  "cy": "Eglwys Padarn",
+  "coflein": "https://coflein.gov.uk/en/site/271",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=9832"
+ },
+ "place:llancarfan": {
+  "cy": "Llancarfan"
+ },
+ "place:llandaf": {
+  "cy": "Eglwys Gadeiriol Llandaf",
+  "coflein": "https://coflein.gov.uk/en/site/131",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=13710"
+ },
+ "place:llanddewibrefi": {
+  "cy": "Llanddewi Brefi",
+  "coflein": "https://coflein.gov.uk/en/site/33044"
+ },
+ "place:llanelwy": {
+  "cy": "Eglwys Gadeiriol Llanelwy",
+  "coflein": "https://coflein.gov.uk/en/site/140540",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=1460"
+ },
  "place:llanfaches": {
   "cy": "Llanfaches"
+ },
+ "place:llanfairpwll": {
+  "cy": "Llanfair Pwllgwyngyll"
  },
  "place:llangollen": {
   "cy": "Eisteddfod Ryngwladol Llangollen"
@@ -1184,6 +2866,17 @@
  },
  "place:llanrhaeadr": {
   "cy": "Llanrhaeadr-ym-Mochnant"
+ },
+ "place:llanthony": {
+  "cy": "Priordy Llanddewi Nant Hodni",
+  "coflein": "https://coflein.gov.uk/en/site/95238",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=1939"
+ },
+ "place:llanymddyfri": {
+  "cy": "Llywelyn ap Gruffudd Fychan"
+ },
+ "place:llysrhosyr": {
+  "cy": "Llys Rhosyr"
  },
  "place:machynlleth": {
   "cy": "Machynlleth"
@@ -1198,7 +2891,8 @@
  },
  "place:menai": {
   "cy": "Pont y Borth",
-  "coflein": "https://coflein.gov.uk/en/site/43063"
+  "coflein": "https://coflein.gov.uk/en/site/43063",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=4049"
  },
  "place:merthyr": {
   "cy": "Merthyr Tudful",
@@ -1206,6 +2900,13 @@
  },
  "place:mold": {
   "cy": "Clogyn Aur yr Wyddgrug"
+ },
+ "place:nanhyfer": {
+  "cy": "Nanhyfer"
+ },
+ "place:neathabbey": {
+  "cy": "Abaty Nedd",
+  "coflein": "https://coflein.gov.uk/en/site/133"
  },
  "place:offasdyke": {
   "cy": "Clawdd Offa"
@@ -1218,26 +2919,44 @@
  },
  "place:penfro": {
   "cy": "Castell Penfro",
-  "coflein": "https://coflein.gov.uk/en/site/94945"
+  "coflein": "https://coflein.gov.uk/en/site/94945",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=6314"
+ },
+ "place:penmon": {
+  "cy": "Penmon"
+ },
+ "place:pennantmelangell": {
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=7634"
  },
  "place:pentreifan": {
   "cy": "Pentre Ifan",
   "coflein": "https://coflein.gov.uk/en/site/101450"
  },
+ "place:penygwryd": {
+  "cy": "Pen-y-gwryd"
+ },
  "place:pontcysyllte": {
   "cy": "Dyfrbont Pontcysyllte",
-  "coflein": "https://coflein.gov.uk/en/site/34410"
+  "coflein": "https://coflein.gov.uk/en/site/34410",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=1601"
  },
  "place:pontnewydd": {
   "cy": "Ogof Bontnewydd"
  },
+ "place:powis": {
+  "cy": "Castell Powys",
+  "coflein": "https://coflein.gov.uk/en/site/29858",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=7746"
+ },
  "place:rhaglan": {
   "cy": "Castell Rhaglan",
-  "coflein": "https://coflein.gov.uk/en/site/93387"
+  "coflein": "https://coflein.gov.uk/en/site/93387",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=2101"
  },
  "place:rhuddlan": {
   "cy": "Castell Rhuddlan",
-  "coflein": "https://coflein.gov.uk/en/site/92914"
+  "coflein": "https://coflein.gov.uk/en/site/92914",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=14977"
  },
  "place:segontium": {
   "cy": "Segontium"
@@ -1253,7 +2972,8 @@
  },
  "place:stdavids": {
   "cy": "Eglwys Gadeiriol Tyddewi",
-  "coflein": "https://coflein.gov.uk/en/site/306"
+  "coflein": "https://coflein.gov.uk/en/site/306",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=12537"
  },
  "place:stfagans": {
   "cy": "Amgueddfa Werin Cymru",
@@ -1261,18 +2981,25 @@
  },
  "place:strataflorida": {
   "cy": "Abaty Ystrad Fflur",
-  "coflein": "https://coflein.gov.uk/en/site/95764"
+  "coflein": "https://coflein.gov.uk/en/site/95764",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=9913"
  },
  "place:sycharth": {
   "cy": "Sycharth",
   "coflein": "https://coflein.gov.uk/en/site/306999"
  },
  "place:talacharn": {
-  "coflein": "https://coflein.gov.uk/en/site/17122"
+  "coflein": "https://coflein.gov.uk/en/site/17122",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=9627"
+ },
+ "place:talley": {
+  "cy": "Abaty Talyllychau",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=15767"
  },
  "place:tintern": {
   "cy": "Abaty Tyndyrn",
-  "coflein": "https://coflein.gov.uk/en/site/359"
+  "coflein": "https://coflein.gov.uk/en/site/359",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=24037"
  },
  "place:tonypandy": {
   "cy": "Terfysg Tonypandy"
@@ -1280,9 +3007,17 @@
  "place:trefflemin": {
   "cy": "Trefflemin"
  },
+ "place:treffynnon": {
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=426"
+ },
  "place:trerceiri": {
   "cy": "Tre'r Ceiri",
   "coflein": "https://coflein.gov.uk/en/site/95292"
+ },
+ "place:vallecrucis": {
+  "cy": "Abaty Glyn y Groes",
+  "coflein": "https://coflein.gov.uk/en/site/95205",
+  "cadwb": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?id=19693"
  },
  "place:westgate": {
   "cy": "Terfysg Casnewydd"
