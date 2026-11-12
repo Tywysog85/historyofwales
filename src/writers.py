@@ -360,7 +360,7 @@ ALL_IDS = list(dict.fromkeys(s for _, _, ids in GROUPS for s in ids))
 STORY = dict(id="writers", era="medieval", art="book", mins=20,
   people=["gildas", "elfoddw", "nennius", "asser", "sulien", "rhygyfarch", "ieuan-ap-sulien", "lifris", "caradog-llancarfan",
           "geoffrey-of-monmouth", "walter-map", "gerallt-gymro", "hopcyn-ap-tomos", "hywel-fychan", "adam-of-usk", "gutun-owain", "elis-gruffydd"],
-  places=["stdavids", "strataflorida"],
+  places=["stdavids", "llanbadarn", "llancarfan", "strataflorida"],
   links=[("person-gerallt-gymro.html", "Gerald of Wales", "Gerallt Gymro"),
          ("person-nennius.html", "Nennius and the History of the Britons", "Nennius a Hanes y Brythoniaid"),
          ("person-geoffrey-of-monmouth.html", "Geoffrey of Monmouth", "Sieffre o Fynwy"),

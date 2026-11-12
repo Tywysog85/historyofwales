@@ -8,6 +8,14 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "The old books of Wales", "Hen lyfrau Cymru",
+     "Every great old book of Wales now has a page of its own, from the Llandeilo Gospels and the Black Book of Carmarthen to the Red Book of Hergest, the Book of the Anchorite, the Peniarth manuscripts and William Morgan’s Bible.",
+     "Mae gan bob un o hen lyfrau mawr Cymru dudalen ei hun bellach, o Efengylau Llandeilo a Llyfr Du Caerfyrddin hyd Lyfr Coch Hergest, Llyfr Ancr, llawysgrifau Peniarth a Beibl William Morgan.",
+     "books.html"),
+    ("2026-11-12", "The Bruts: the chronicles of Wales", "Y Brutiau: croniclau Cymru",
+     "A new long read on Brut y Brenhinedd and Brut y Tywysogion, the chronicles in which the Welsh wrote their history from Troy to the last prince, and ten more Welsh Triads.",
+     "Erthygl newydd ar Frut y Brenhinedd a Brut y Tywysogion, y croniclau lle ysgrifennodd y Cymry eu hanes o Gaerdroea hyd y tywysog olaf, a deg triawd arall.",
+     "story-bruts.html"),
     ("2026-11-12", "Hear real Welsh on every play button", "Clywch Gymraeg go iawn ar bob botwm sain",
      "Every Welsh word and phrase on the site now plays proper Welsh: real speakers from Lingua Libre where they have recorded it, and Bangor University’s Welsh voice for the rest, the same on every phone and computer.",
      "Mae pob gair ac ymadrodd Cymraeg ar y wefan bellach yn chwarae Cymraeg iawn: siaradwyr go iawn o Lingua Libre lle maen nhw wedi’i recordio, a llais Cymraeg Prifysgol Bangor ar gyfer y gweddill, yr un fath ar bob ffôn a chyfrifiadur.",

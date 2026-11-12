@@ -337,6 +337,60 @@ PAGE.update({
     "person-gutun-owain.html": "g:holy-basingwerk",
 })
 
+# The Bruts (src/bruts.py) and the old books of Wales, one page each (src/oldbooks.py): the picture at the top of each page.
+_CC0 = "https://creativecommons.org/publicdomain/zero/1.0/"
+EXTRA.update({
+    "Jesus-College-MS-111 00115 58r (cropped) Brut y Tywysogion.jpg": ("Hywel Fychan ap Hywel Goch and others; Jesus College, Oxford", "CC BY 4.0", _BY + "4.0/",
+        "The chronicle of the princes in the Red Book of Hergest, written about 1400", "Cronicl y tywysogion yn Llyfr Coch Hergest, a ysgrifennwyd tua 1400"),
+    "Chronical of the Princes (f.260).jpg": ("Medieval scribe; National Library of Wales, Peniarth MS 20", "CC0", _CC0,
+        "A page of Brut y Tywysogion in Peniarth 20", "Tudalen o Frut y Tywysogion yn Peniarth 20"),
+    "Catgualart fili' catguolaum obiit.png": ("Medieval scribe; British Library, Harley MS 3859", "Public domain", _PD,
+        "The Annals of Wales in Harley 3859, the oldest copy of the History of the Britons", "Anodau Cymru yn Harley 3859, y copi hynaf o Hanes y Brythoniaid"),
+    "Liber Landavensis binding.png": ("Medieval craftsman; National Library of Wales", "CC0", _CC0,
+        "The binding of the Book of Llandaf", "Rhwymiad Llyfr Llandaf"),
+    "Llyfr Gwyn Rhydderch f. 45 r. Beginning of Macsen Wledig.png": ("Medieval scribe; National Library of Wales", "CC0", _CC0,
+        "The opening of the Dream of Macsen Wledig in the White Book of Rhydderch", "Dechrau Breuddwyd Macsen Wledig yn Llyfr Gwyn Rhydderch"),
+    "Hendregadredd Manuscript-small.jpg": ("Medieval scribe; National Library of Wales", "Public domain", _PD,
+        "A page of the Hendregadredd Manuscript", "Tudalen o Lawysgrif Hendregadredd"),
+    "Jesus-College-MS-119 00007 2r.jpg": ("Jesus College, Oxford; photograph by the Bodleian Libraries", "CC BY 4.0", _BY + "4.0/",
+        "A later owner’s note in the Book of the Anchorite: it was written for Gruffudd ap Llywelyn of Cantref Mawr in 1346", "Nodyn gan berchennog diweddarach yn Llyfr Ancr: fe’i hysgrifennwyd i Ruffudd ap Llywelyn o’r Cantref Mawr yn 1346"),
+    "Llyfr du Basing (4401103).jpg": ("Gutun Owain and an earlier scribe; National Library of Wales", "CC0", _CC0,
+        "A page of the Black Book of Basingwerk", "Tudalen o Lyfr Du Basing"),
+    "Peniarth, Merionethshire 06.jpeg": ("Thomas Nicholls", "Public domain", _PD,
+        "Peniarth, near Tywyn, home of the Peniarth manuscripts until 1904", "Peniarth, ger Tywyn, cartref llawysgrifau Peniarth hyd 1904"),
+    "Yny_Lhyvyr_hwnn_title_page.jpg": ("Sir John Price; National Library of Wales", "CC0", _CC0,
+        "The title page of Yny lhyvyr hwnn, 1546, the first book printed in Welsh", "Wyneb-ddalen Yny lhyvyr hwnn, 1546, y llyfr cyntaf a argraffwyd yn Gymraeg"),
+    "WYNNE, Ellis (1671-1734). Gweledigaetheu y bardd cwsc. London; E. Powell, 1703.jpg": ("Ellis Wynne; photograph by Christie’s", "Public domain", _PD,
+        "The title page of the first edition of the Visions of the Sleeping Bard, 1703", "Wyneb-ddalen argraffiad cyntaf Gweledigaetheu y Bardd Cwsc, 1703"),
+    "Drych y Prif Oesoedd Ab Owen (Carreg Arthur, Abertawe).jpg": ("From O. M. Edwards’s edition of Drych y Prif Oesoedd", "Public domain", _PD,
+        "Carreg Arthur on Gower, from O. M. Edwards’s edition of Drych y Prif Oesoedd", "Carreg Arthur ar Benrhyn Gŵyr, o argraffiad O. M. Edwards o Ddrych y Prif Oesoedd"),
+})
+PAGE.update({
+    "story-bruts.html": "c:Jesus-College-MS-111 00115 58r (cropped) Brut y Tywysogion.jpg",
+    "book-llandeilo.html": "g:trea-st-chad",
+    "book-juvencus.html": "c:Ricemarch Psalter, Psalm 1.JPG@50% 20%",
+    "book-historia.html": "c:Catgualart fili' catguolaum obiit.png",
+    "book-llandaf.html": "c:Liber Landavensis binding.png",
+    "book-black.html": "g:trea-black-book",
+    "book-aneirin.html": "g:trea-book-aneirin",
+    "book-taliesin.html": "g:trea-book-taliesin",
+    "book-red.html": "g:trea-red-book",
+    "book-white.html": "c:Llyfr Gwyn Rhydderch f. 45 r. Beginning of Macsen Wledig.png",
+    "book-hendregadredd.html": "c:Hendregadredd Manuscript-small.jpg",
+    "book-laws.html": "g:trea-laws-hywel",
+    "book-brut-tywysogion.html": "c:Chronical of the Princes (f.260).jpg@50% 30%",
+    "book-brut-brenhinedd.html": "p:cadwallon",
+    "book-llyfr-ancr.html": "c:Jesus-College-MS-119 00007 2r.jpg",
+    "book-basingwerk.html": "c:Llyfr du Basing (4401103).jpg",
+    "book-peniarth.html": "c:Peniarth, Merionethshire 06.jpeg",
+    "book-yny.html": "c:Yny_Lhyvyr_hwnn_title_page.jpg",
+    "book-testament.html": "p:william-salesbury",
+    "book-bible.html": "g:trea-bible-1588",
+    "book-bardd-cwsc.html": "c:WYNNE, Ellis (1671-1734). Gweledigaetheu y bardd cwsc. London; E. Powell, 1703.jpg",
+    "book-drych.html": "c:Drych y Prif Oesoedd Ab Owen (Carreg Arthur, Abertawe).jpg",
+    "book-myvyrian.html": "g:person-iolo-morganwg",
+})
+
 # Pages that keep the picture they already have at the top (nothing to replace).
 SKIP = {"index.html"}
 

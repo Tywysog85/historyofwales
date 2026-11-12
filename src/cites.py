@@ -848,6 +848,10 @@ from princes import CITES as _PRINCES  # noqa: E402  (the kings and princes of W
 S.update(_PRINCES)
 from writers import CITES as _WRITERS  # noqa: E402  (the writers who recorded early Wales, src/writers.py)
 S.update(_WRITERS)
+from bruts import CITES as _BRUTS  # noqa: E402  (the Bruts, src/bruts.py)
+S.update(_BRUTS)
+from oldbooks import CITES as _OLDBOOKS  # noqa: E402  (the old books of Wales, src/oldbooks.py)
+S.update(_OLDBOOKS)
 
 MARK = re.compile(r"\[\[cite:([a-z0-9,\- ]+)\]\]")
 

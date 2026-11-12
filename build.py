@@ -63,6 +63,10 @@ import mac as _MACR  # noqa: E402
 REF.REFS.update(_MACR.REFS)  # reading lists for the MAC and Free Wales Army long reads
 import writers as WRT  # noqa: E402  (the writers who recorded early Wales: their block, long read and reading list)
 REF.REFS.update(WRT.REFS)
+import bruts as BRT  # noqa: E402  (the Bruts, the chronicles of Wales: long read and reading list)
+REF.REFS.update(BRT.REFS)
+import oldbooks as OB  # noqa: E402  (the old books of Wales: a page for every book, book-<id>.html)
+REF2.PAGES.update(OB.REFS)
 import authors as AU  # noqa: E402  (the authors on the Books and authors page)
 import ylolfa as YLF  # noqa: E402  (Y Lolfa books: the "Y Lolfa" section of the Books and authors page)
 F.STORIES = AD.newest("story", F.STORIES)  # long reads: the newest first everywhere (index, home page, "Keep reading")
@@ -1192,6 +1196,8 @@ def page_refs(path):
         return "arthur-circle", None
     if kind == "person" and rest in MP.OWN_IDS and "mabinogi-people" in REF2.PAGES:
         return "mabinogi-people", None
+    if kind == "book":  # the old books (src/oldbooks.py): a book's own list, or the list for all the books
+        return ("books" if name not in REF2.PAGES else name), None
     if kind == "mabinogi" and f"mabinogi-{rest}" in REF2.PAGES:  # a tale with its own reading list (src/refs2.py)
         return f"mabinogi-{rest}", None
     if kind == "mabinogi" and "mabinogi-tales" in REF2.PAGES:
@@ -1224,7 +1230,7 @@ SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes
 ]
 
 
-next(g for g in SHELF if g[0] == "lit")[3].append("writers")  # the writers who recorded early Wales (src/writers.py)
+next(g for g in SHELF if g[0] == "lit")[3].extend(["writers", "bruts", "book-*"])  # the writers, the Bruts and the old books (src/writers.py, bruts.py, oldbooks.py)
 SHELF_ORDER = ["start", "britons", "kings", "saints", "law", "princes", "tudor", "industry", "modern", "lit", "lang", "life"]  # the order on the page: by period, then the themes
 
 
@@ -1755,7 +1761,7 @@ def literature_page():
             + f'<style>{LIT_CSS}</style>'
             + section(paras(LT.HUB_EN, LT.HUB_CY) + f'<div class="lit-doors">{"".join(lit_door(d) for d in LT.DOORS)}</div>', top=True)
             + ages
-            + section(f'<div class="pager"><a class="btn" href="triads.html">{bi("The Welsh Triads", "Trioedd Ynys Prydain")} →</a><a class="btn solid" href="books.html">{bi("The great books of Wales", "Llyfrau mawr Cymru")} →</a></div>'))
+            + section(f'<div class="pager"><a class="btn" href="triads.html">{bi("The Welsh Triads", "Trioedd Ynys Prydain")} →</a><a class="btn solid" href="books.html">{bi("The old books of Wales", "Hen lyfrau Cymru")} →</a></div>'))
     ld = {"@context": "https://schema.org", "@type": "Article", "headline": "The literature of Wales", "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
     return page("literature.html", "The literature of Wales · History of Wales",
                 "Fourteen centuries of Welsh literature: Taliesin and Aneirin, the Poets of the Princes, Dafydd ap Gwilym and the cywyddwyr, cynghanedd, the 1588 Bible, the hymns and the Eisteddfod, in English and Cymraeg.",
@@ -1768,29 +1774,68 @@ def book_card(b, era):
     link = (f'<p><a class="go" href="{b["link"][0]}">{bi(b["link"][1], b["link"][2])} →</a></p>' if b.get("link") else "")
     return (f'<article class="bk rv" id="{b["id"]}" data-era="{era}">{lit_fig(b["pic"])}<div class="in">'
             f'<p class="meta"><span>{bi(b["date"], b["dateCy"])}</span>{f"<span>{where}</span>" if where else ""}</p>'
-            f'<h3>{bi(b["en"], b["cy"])}</h3>' + (f'<p class="alt l-en" lang="cy">{e(alt)}</p>' if alt else "")
-            + f'<p>{bi(b["en_t"], b["cy_t"])}</p>{lit_fig(b.get("pic2"), "pic2")}{link}</div></article>')
+            f'<h3><a href="book-{b["id"]}.html">{bi(b["en"], b["cy"])}</a></h3>' + (f'<p class="alt l-en" lang="cy">{e(alt)}</p>' if alt else "")
+            + f'<p>{bi(b["en_t"], b["cy_t"])}</p>{lit_fig(b.get("pic2"), "pic2")}'
+            + f'<p><a class="go" href="book-{b["id"]}.html">{bi("The whole story of the book", "Stori gyfan y llyfr")} →</a></p>{link}</div></article>')
 
 
 def books_page():
-    eras = {"earliest": "saints", "four": "medieval", "great": "medieval", "print": "tudor"}
+    eras = BOOK_ERAS
     jump = '<nav class="chips l-jump" aria-label="Sections / Adrannau">' + "".join(f'<a class="chip" href="#{g["id"]}">{bi(g["en"], g["cy"])}</a>' for g in LT.BOOK_GROUPS) + '</nav>'
     groups = "".join(f'<section class="tight" id="{g["id"]}"><div class="wrap"><h2 class="sub-h">{bi(g["en"], g["cy"])}</h2>'
                      f'<div class="bk-grid">{"".join(book_card(b, eras[g["id"]]) for b in g["books"])}</div></div></section>' for g in LT.BOOK_GROUPS)
     main = (hero("medieval", f'<a href="index.html">{SITE}</a> / <a href="literature.html">{bi("Literature", "Llenyddiaeth")}</a>', "book", "c. 800–1807", "tua 800–1807",
-                 "The great books of Wales", "Llyfrau mawr Cymru",
+                 "The old books of Wales", "Hen lyfrau Cymru",
                  "The Black Book of Carmarthen, the Books of Aneirin and Taliesin, the Red Book of Hergest, the White Book of Rhydderch, and the first printed books: the treasures that kept the memory of Wales alive.",
                  "Llyfr Du Caerfyrddin, Llyfrau Aneirin a Thaliesin, Llyfr Coch Hergest, Llyfr Gwyn Rhydderch, a’r llyfrau printiedig cyntaf: y trysorau a gadwodd gof Cymru’n fyw.", art="arches", extra=jump)
             + f'<style>{LIT_CSS}</style>'
-            + section(paras(LT.BOOKS_INTRO_EN, LT.BOOKS_INTRO_CY), top=True)
+            + section(paras(LT.BOOKS_INTRO_EN, LT.BOOKS_INTRO_CY) + f'<p class="lede">{bi(OB.INTRO_EN, OB.INTRO_CY)}</p>'
+                      + f'<p class="l-links"><a class="btn" href="story-writers.html">{bi("The writers who recorded early Wales", "Yr awduron a gofnododd Gymru gynnar")} →</a> '
+                      + f'<a class="btn" href="story-bruts.html">{bi("The Bruts: the chronicles of Wales", "Y Brutiau: croniclau Cymru")} →</a> '
+                      + f'<a class="btn" href="triads.html">{bi("The Welsh Triads", "Trioedd Ynys Prydain")} →</a></p>', top=True)
             + groups
             + section(prose_bi(LT.WHERE_EN, LT.WHERE_CY) + f'<p class="l-links"><a class="btn" href="place-library.html">{bi("The National Library of Wales", "Llyfrgell Genedlaethol Cymru")} →</a> '
                       f'<a class="btn" href="https://www.library.wales" rel="noopener">{bi("See the manuscripts online", "Gweld y llawysgrifau ar-lein")} ↗</a></p>')
             + section(f'<div class="pager"><a class="btn" href="literature.html">← {bi("The literature of Wales", "Llenyddiaeth Cymru")}</a><a class="btn solid" href="triads.html">{bi("The Welsh Triads", "Trioedd Ynys Prydain")} →</a></div>'))
-    ld = {"@context": "https://schema.org", "@type": "Article", "headline": "The great books of Wales", "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
-    return page("books.html", "The great books of Wales · History of Wales",
-                "The great manuscripts and books of Wales: the Four Ancient Books (the Black Book of Carmarthen, the Book of Aneirin, the Book of Taliesin, the Red Book of Hergest), the White Book of Rhydderch, the Hendregadredd Manuscript, Brut y Tywysogion and the 1588 Bible.",
+    ld = {"@context": "https://schema.org", "@type": "Article", "headline": "The old books of Wales", "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
+    return page("books.html", "The old books of Wales · History of Wales",
+                "The old books of Wales, each with a page of its own: the Four Ancient Books (the Black Book of Carmarthen, the Book of Aneirin, the Book of Taliesin, the Red Book of Hergest), the White Book of Rhydderch, the Hendregadredd Manuscript, Brut y Tywysogion and the 1588 Bible.",
                 main, era="medieval", ld=ld, og_type="website", active="literature.html", track="page:books")
+
+
+LT.BOOK_GROUPS.insert(next(i for i, g in enumerate(LT.BOOK_GROUPS) if g["id"] == "great") + 1, OB.NEW_GROUP)  # three more treasures (src/oldbooks.py)
+BOOK_ERAS = {"earliest": "saints", "four": "medieval", "great": "medieval", "more": "medieval", "print": "tudor"}
+ALL_BOOKS = [(b, g) for g in LT.BOOK_GROUPS for b in g["books"]]
+
+
+def book_page(i):
+    """One old book of Wales (src/oldbooks.py): its facts, its whole story, its pictures, its people and where to read more."""
+    b, g = ALL_BOOKS[i]
+    era = BOOK_ERAS[g["id"]]
+    pg = OB.PAGES[b["id"]]
+    prev_b = ALL_BOOKS[i - 1][0] if i > 0 else None
+    next_b = ALL_BOOKS[i + 1][0] if i + 1 < len(ALL_BOOKS) else None
+    crumbs = (f'<a href="index.html">{SITE}</a> / <a href="literature.html">{bi("Literature", "Llenyddiaeth")}</a> / '
+              f'<a href="books.html">{bi("The old books of Wales", "Hen lyfrau Cymru")}</a>')
+    first = lambda t: t.split(". ")[0].rstrip(".") + "."
+    alt = f'<p class="byline"><span lang="cy">{e(b["cy"])}</span></p>' if b["cy"] != b["en"] else ""
+    where = f'<p class="byline"><span>{bi(g["en"], g["cy"])}</span>' + (f'<span>{bi(b["whereEn"], b["whereCy"])}</span>' if b["whereEn"] else "") + '</p>'
+    links = [(f'{u}', a, c) for u, a, c in pg.get("links", [])]
+    if b.get("link") and b["link"][0] not in {u for u, _, _ in links}:
+        links.insert(0, b["link"])
+    btns = " ".join(f'<a class="btn" href="{u}">{bi(a, c)} →</a>' for u, a, c in links)
+    body = (f'<section class="article"><div class="wrap narrow">{where}{alt}'
+            f'{prose_bi(pg["pEn"], pg["pCy"], "story prose", figs=OB.FIGS)}{lit_fig(b.get("pic2"), "lr-fig")}'
+            f'<p class="l-links">{btns}</p></div></section>')
+    ppl = "".join(lit_person_chip(s) for s in pg.get("people", []))
+    who = section(f'<div class="ar-circle"><div class="ppl">{ppl}</div></div>', "People of the book", "Pobl y llyfr") if ppl else ""
+    pager = ((f'<a class="btn" href="book-{prev_b["id"]}.html">← {bi(prev_b["en"], prev_b["cy"])}</a>' if prev_b else f'<a class="btn" href="books.html">← {bi("The old books of Wales", "Hen lyfrau Cymru")}</a>')
+             + (f'<a class="btn solid" href="book-{next_b["id"]}.html">{bi(next_b["en"], next_b["cy"])} →</a>' if next_b else f'<a class="btn solid" href="books.html">{bi("The old books of Wales", "Hen lyfrau Cymru")} →</a>'))
+    main = (hero(era, crumbs, "book", b["date"], b["dateCy"], b["en"], b["cy"] if b["cy"] != b["en"] else b["en"], first(b["en_t"]), first(b["cy_t"]), art="book")
+            + body + who + section(f'<div class="pager">{pager}</div>'))
+    ld = {"@context": "https://schema.org", "@type": "Article", "headline": b["en"], "description": first(b["en_t"]), "inLanguage": ["en", "cy"],
+          "about": {"@type": "Book", "name": b["en"], "alternateName": b["cy"]}, "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
+    return page(f'book-{b["id"]}.html', f'{b["en"]} · The old books of Wales · History of Wales', first(b["en_t"]), main, era=era, ld=ld, active="literature.html", track=f'book:{b["id"]}')
 
 
 def triad_card(t, k):
@@ -1821,7 +1866,7 @@ def triads_page():
             + f'<style>{LIT_CSS}</style>'
             + section(f'<div class="lit-age"><div>{prose_bi(LT.TRIADS_INTRO_EN, LT.TRIADS_INTRO_CY)}</div><div class="lit-side">{today}{lit_fig("trea-red-book")}</div></div>', top=True)
             + groups
-            + section(f'<div class="lit-age"><div>{prose_bi(LT.TRIADS_MORE_EN, LT.TRIADS_MORE_CY)}<p class="l-links"><a class="btn" href="laws.html#inside">{bi("The Laws of Hywel Dda", "Cyfraith Hywel Dda")} →</a> <a class="btn" href="story-iolo.html">{bi("Iolo Morganwg", "Iolo Morganwg")} →</a></p></div>'
+            + section(f'<div class="lit-age"><div>{prose_bi(LT.TRIADS_MORE_EN, LT.TRIADS_MORE_CY)}<p class="l-links"><a class="btn" href="laws.html#inside">{bi("The Laws of Hywel Dda", "Cyfraith Hywel Dda")} →</a> <a class="btn" href="story-iolo.html">{bi("Iolo Morganwg", "Iolo Morganwg")} →</a> <a class="btn" href="story-bruts.html">{bi("The Bruts: the chronicles of Wales", "Y Brutiau: croniclau Cymru")} →</a> <a class="btn" href="story-writers.html">{bi("The writers who recorded early Wales", "Yr awduron a gofnododd Gymru gynnar")} →</a> <a class="btn" href="books.html">{bi("The old books of Wales", "Hen lyfrau Cymru")} →</a></p></div>'
                       f'<div class="lit-side">{lit_fig(LT.WHITE_BOOK_PAGE)}</div></div>')
             + section(f'<div class="pager"><a class="btn" href="literature.html">← {bi("The literature of Wales", "Llenyddiaeth Cymru")}</a><a class="btn solid" href="mabinogion.html">{bi("The Mabinogion", "Y Mabinogion")} →</a></div>'))
     ld = {"@context": "https://schema.org", "@type": "Article", "headline": "The Welsh Triads (Trioedd Ynys Prydain)", "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
@@ -3817,6 +3862,8 @@ def main():
         pages[f'mabinogi-{t["id"]}.html'] = tale_page(t, i)
     pages["literature.html"] = literature_page()
     pages["books.html"] = books_page()
+    for i, (b, _g) in enumerate(ALL_BOOKS):
+        pages[f'book-{b["id"]}.html'] = book_page(i)
     pages["books-and-authors.html"] = bookshelf_page()
     pages["triads.html"] = triads_page()
     pages["laws.html"] = laws_page()

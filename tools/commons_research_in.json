@@ -1,7 +1,7 @@
 {"branch": "claude/project-thread-eff0ku",
- "out": "_research/writers",
- "max": 300,
- "categories": ["Gerald of Wales", "Topographia Hibernica", "Itinerarium Cambriae", "Walter Map", "Historia Brittonum", "Annales Cambriae", "Harley MS 3859", "Brut y Tywysogion", "Brut y Brenhinedd", "Peniarth MS 23", "Llyfr Ancr Llanddewibrefi", "Red Book of Hergest", "Black Book of Carmarthen", "Book of Taliesin", "Book of Aneirin", "White Book of Rhydderch", "Book of Llandaff", "Asser", "Life of King Alfred", "Llancarfan", "St Cadoc's Church, Llancarfan", "Llanbadarn Fawr Church, Ceredigion", "Strata Florida Abbey", "Adam of Usk", "Gutun Owain", "Rhygyfarch", "Ricemarch Psalter", "Geoffrey of Monmouth", "Historia Regum Britanniae", "Welsh Triads", "Peniarth Manuscripts"],
- "searches": ["Giraldus Cambrensis manuscript", "Gerald of Wales Manorbier", "De nugis curialium", "Historia Brittonum manuscript", "Brut y Tywysogion manuscript", "Llyfr Ancr", "Ricemarch Psalter", "Rhygyfarch psalter", "Caradoc of Llancarfan", "Lifris", "Peniarth 20", "Trioedd Ynys Prydain", "Adam Usk chronicle brass", "Basingwerk Abbey"],
- "files": [],
+ "out": "_research/oldbooks",
+ "max": 260,
+ "categories": ["Llyfr Ancr Llanddewibrefi", "Jesus College MS 119", "Black Book of Basingwerk", "NLW MS 7006D", "Peniarth Manuscripts", "Peniarth MS 20", "Peniarth MS 23", "Peniarth MS 16", "Harley MS 3859", "Juvencus manuscript (Cambridge)", "William Morgan Bible", "Y Beibl Cyssegr-lan (1588)", "Myvyrian Archaiology of Wales", "Hengwrt", "Robert Vaughan (antiquary)", "St Chad Gospels", "Book of Taliesin", "Black Book of Carmarthen", "Book of Aneirin", "Gweledigaetheu y Bardd Cwsc"],
+ "searches": ["Llyfr Ancr", "Jesus College MS 119", "Basingwerk manuscript", "Chronicle of the Princes NLW", "Peniarth 20", "Peniarth 16 triads", "Testament Newydd 1567 Salesbury", "Beibl 1588 William Morgan title page", "Myvyrian Archaiology", "Historia Brittonum Harley 3859", "Annales Cambriae manuscript", "Juvencus englynion", "Brut y Brenhinedd manuscript", "Hengwrt library Robert Vaughan"],
+ "files": ["Chronical of the Princes (f.260).jpg", "Brut y Tywysogion, folio 4v (4781400).jpg", "Jesus-College-MS-111 00115 58r (cropped) Brut y Tywysogion.jpg", "Llyfr Taliesin NLW Peniarth MS 2 page54.jpg", "The Chronicle of the Princes, Page 305 (4754463).png"],
  "download": []}
