@@ -97,10 +97,11 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - `paintSets()` in `src/static/site.js` marks the collected cards from the journey on the reader's device, shows "New card" and "Set complete" messages, and remembers finished sets in `j.s`. Two badges go with them: Collector (one set) and Keeper of treasures (five sets).
 - To test, put keys such as `person:owain-gwynedd` into `localStorage["hc-journey"].v` in Playwright, then open a page in that set.
 
-### Read further links: Dictionary of Welsh Biography, Coflein, Welsh Wikipedia (November 2026)
-- `tools/fetch_sources.py` asks English Wikipedia for each person's and place's Wikidata item (following redirects), then asks Wikidata for the Dictionary of Welsh Biography id, the Coflein id and the Welsh Wikipedia article. It writes `src/source_links.json`.
-- It runs on GitHub (`.github/workflows/fetch-sources.yml`), because Wikimedia is blocked from Claude's cloud computer. It runs when the script changes on a claude/ branch, on the 1st of each month, or from the Actions tab.
-- `further()` in `build.py` draws the "Read further" buttons. In Welsh the Dictionary link goes to bywgraffiadur.cymru and the Wikipedia link to cy.wikipedia.org.
+### Sources and further reading: better sources than Wikipedia (November 2026)
+- `tools/fetch_sources.py` asks English Wikipedia for the Wikidata item of every person, place and event (following redirects), then asks Wikidata for each item's ids in the Dictionary of Welsh Biography, Oxford Dictionary of National Biography, History of Parliament, UK Parliament, Coflein, Cadw (scheduled monuments and listed buildings), Art UK, Olympedia, World Athletics and Britannica, and the Welsh Wikipedia article. `KINDS` says which sources suit people, places and events.
+- It opens every link before keeping it, and leaves out any that does not open (the log lists them). It writes `src/source_links.json` (keys `person:<id>`, `place:<id>`, `event:<slug>`).
+- It runs on GitHub (`.github/workflows/fetch-sources.yml`), because Wikimedia is blocked from Claude's cloud computer. It runs when the script changes on a claude/ branch, on the 1st of each month, or from the Actions tab, and commits the file to that branch.
+- `further()` in `build.py` draws the "Sources and further reading" buttons on person, place and event pages, in the order of `SOURCES`, with Wikipedia always last. In Welsh the Dictionary link goes to bywgraffiadur.cymru and Wikipedia to cy.wikipedia.org. The cards on lists carry no source link (Ifan, November 2026).
 
 ### Today's picture to share (November 2026)
 - `today.html` shows a square 1080 x 1080 picture for today's best On this day entry, in English and in Cymraeg (`_site/cards/today-en.jpg` and `today-cy.jpg`), with ready-to-paste words and hashtags.
@@ -147,10 +148,11 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - Returning visitors see "New" labels on lines added since their last look, and a red dot on the menu button until they open What's new (`hc-news-seen` in local storage, the newest date is on the menu button as `data-news`). First-time visitors see nothing marked new.
 - `feed.xml` is an Atom feed of the news plus today's anniversaries from On this day. `deploy.yml` now also rebuilds the site every morning at 04:15 UTC (`schedule`) so the feed carries each day's anniversaries.
 - **The weekly email** uses Brevo (brevo.com). Its free plan has no time limit and no card: up to 300 emails a day, with a small Brevo logo at the foot of each email. (Kit and MailerLite were ruled out: Kit's sign-up pushes a paid trial, and MailerLite's free plan cannot send our own email design through its API.) Four settings switch it on:
-  1. `EMAIL_FORM`: the link to the Brevo sign-up form (Brevo → Contacts → Forms → the form → Share → copy link). Repository variable in GitHub (Settings → Secrets and variables → Actions → Variables → New repository variable). The site then shows a "Sign up for the weekly email" button on the home page, What's new and the foot of every page. Until then those places show "What's new" and "News feed".
+  1. `EMAIL_FORM`: the link to the Brevo sign-up form (Brevo → Contacts → Forms → the form → Share → copy link). Repository variable in GitHub (Settings → Secrets and variables → Actions → Variables → New repository variable). The site then shows a sign-up box (email address and a Sign up button) on the home page, What's new and the foot of every page. Until then those places show "What's new" and "News feed".
   2. `BREVO_LIST_ID`: the number of the Brevo list the form adds people to (Brevo → Contacts → Lists, the ID column). Repository variable.
   3. `BREVO_SENDER`: the email address the weekly email comes from. It must be added and confirmed in Brevo first (Settings → Senders, domains and dedicated IPs → Senders → Add a sender). Repository variable.
   4. `BREVO_API_KEY`: a Brevo API key (Brevo → your name, top right → SMTP & API → API keys → Generate a new API key). Stored as a GitHub **secret** (same page, Secrets tab, New repository secret). Never paste it anywhere else.
+- **Signing up happens on our own page** (November 2026). The box in `follow_box()` in `build.py` is a real form whose address is the `EMAIL_FORM` link, with Brevo's field names: `EMAIL`, `email_address_check` (Brevo's robot trap, hidden and left empty) and `locale`. The end of `src/static/site.js` sends it to that address with `?isAjax=1` in the background; Brevo answers `{"success": true}` and the box shows a thank-you in English or Welsh in place of the form, so nobody leaves the site. If the browser won't let the page read Brevo's answer, the form has still reached Brevo, so it says thank you then too; a real error answer shows "Sorry, that didn't go through". Without JavaScript the form posts to Brevo the plain way. Each sign-up is counted in GoatCounter as the event `email-signup`. If the Brevo form ever gets a new field (a name, or a tick box), add an input with the same name to `follow_box()`.
 - When more than about 300 people have signed up, the free plan's 300 a day is no longer enough for one send, and the email needs Brevo's cheapest paid plan or a split send.
 - `.github/workflows/weekly-email.yml` runs every Monday at 07:00 UTC: it builds the site, and `tools/weekly_email.py` writes "This week in Welsh history" (the anniversaries of the next seven days and anything added in the last week) and asks Brevo to send it (it makes a campaign for the list and sends it at once). Run `python3 tools/weekly_email.py` after a build to preview the email (it writes `email-preview.html`; give a date such as `2027-03-01` to see another week, and `SITE_URL=file://$PWD/_site/` with a local build that made the share pictures to see the pictures offline). It can also be started by hand from the Actions tab (Run workflow).
 - **How the email looks** (November 2026): like the site, night blue with gold and dragon red, Gloock headings. A banner (`src/static/email/head.jpg`, drawn by `tools/email_header.py`, committed so no Pillow is needed), a Story of the week with its share picture (the anniversary whose picture fits best; `GREAT_DAYS` makes Saint David's Day, Owain Glyndŵr Day, 11 December and Saint Dwynwen's Day always lead), the week day by day with dates in the colour of their age, New on the site with pictures, a Welsh word of the week from `src/cymraeg.py`, and buttons to the daily challenge and quiz. Email programs ignore most modern CSS, so it is built from tables with the style written on every element; pictures load from the live site (`cards/<page>.jpg`), so only pages the deploy made a share picture for get one. Keep it under about 100 KB or Gmail cuts it short (it is about 20 KB).
@@ -302,7 +304,7 @@ Learnt while expanding Arthur's page (`src/arthur.py`).
 
 ### Kings and princes pages (November 2026)
 - All the royal lines live in `src/royal.py`: one entry per kingdom, each with a list of rulers. `R(...)` is a ruler (sort year, dates, name, English note, Welsh note, optional link), `H(...)` a heading inside the list, `N(...)` a short note between rulers.
-- `build.py` makes `kings.html` (all of Wales: Gruffudd ap Llywelyn first, then kings who ruled most of Wales, the Princes of Wales, the kingdoms, and every ruler in one list by century) and one `kings-<id>.html` per kingdom.
+- `build.py` makes `kings.html` (all of Wales: Gruffudd ap Llywelyn first, then kings who ruled most or all of Wales, the Princes of Wales, the kingdoms, and every ruler in one list by century) and one `kings-<id>.html` per kingdom.
 - The combined list merges a ruler who held several kingdoms into one line, with a chip for each kingdom. `HOME_REALM` in `build.py` picks which note is shown.
 - Person and place pages link back to every kingdom list that names them, automatically. The kingdoms map legend links each realm to its page through `KGLINK` in `build.py`.
 - Welsh dates are made from the English ones by `cy_dates()`: "c." becomes "tua", "d." becomes "m.".
@@ -484,6 +486,7 @@ Behind the dragon, the mountains, the moor and the castle are real 3D too, drawn
 - Commons is blocked from Claude's cloud computer, so picture research runs on GitHub too. Write what to look for in `tools/commons_research_in.json` (your own branch name in `branch`, Commons categories, searches, or exact file names, and an `out` folder) and push it to that `claude/` branch. The look-up only runs on the branch named in `branch` (or when started by hand from the Actions tab), so other threads that merge main never run it; put `branch` back to `""` before merging. It never fails the run, so Ifan gets no failure emails. The "Look up pictures on Wikimedia Commons" workflow runs `tools/commons_research.py` and commits `<out>/found.json` (title, size, licence, author, description of every file) and a small preview of each (`<out>/<n>.jpg`). `git pull`, make a contact sheet of the previews with Pillow, and pick by eye.
 - The first run also lists the subcategories it met; run it again on those to go deeper (that is how the Peniarth 28 drawings and the dragons in the margins of NLW MS 20143A were found).
 - The `_research/` folder is only for choosing. Delete it before merging.
+- **Full-size copies too.** List the chosen files under `"download"` in the same JSON and the look-up also saves each one at up to 1400 px (`<out>/full/<k>.jpg`). Turn them into gallery pictures with Pillow (`src/static/gallery/<id>.webp` fitting 1280 x 1000 and `<id>-s.webp` fitting 600 x 800), add the credit line to `GALLERY` in `src/gallery_photos.py` and the group to `EXTRA` in `src/gallery.py`, then give the page its picture in `PAGE` in `src/pictures.py`. That is how the MAC and Free Wales Army pages got Geoff Charles's photographs of the Llyn Celyn protest (1965) and the Cofia 1282 rally (1969).
 - To check a page before its Commons pictures are kept on the site, the Playwright screenshot script can answer the Commons links with the previews (`page.route`), so the page looks as it will live.
 
 ### The Laws of Hywel Dda page (November 2026)
@@ -621,17 +624,25 @@ Learnt while simplifying the home page.
 - Fix the source in `src/*.py` with an exact find-and-replace that checks each phrase occurs the expected number of times, then rebuild.
 - A fluent proofreader is still the final check.
 
+### Adding people in batches, and checking quotations when a source site is blocked (November 2026)
+- New people go in a new part file (`src/people2g.py` and on), in the `P(...)` format of `people2a.py`, and are added to `ALL` in `src/people2.py`. build.py then makes the person page, the Welsh page, the People and age listings, the firsts page (if `first=` is set) and links timeline events whose text names them.
+- To find gaps, list everyone already on the site (`python3 -c "import data; ..."` in `src/`) and compare with the Dictionary of Welsh Biography; grep the other `claude/` branches so two threads don't write the same person.
+- Long reads for one person (`src/caradog.py`, `macsen.py`, `nest.py`, `rhys.py`) follow `src/madog.py`: a `STORY` dict in features.py, `EVENTS` in data.py, a reading list in refs.py, and the story id in a SHELF group in build.py (the build warns if a book is missing from the bookshelf).
+- Many sites are blocked from Claude's cloud computer for curl, but WebFetch can still read them. It will not print long passages, so check a quotation by giving it the exact sentences and asking "does each appear word for word?".
+
 ### A circle of linked people pages: Arthur's circle (November 2026)
 
 - `src/arthur_circle.py` holds the people of Arthur's story (same `P(...)` format as `people2a.py`; `people2.py` adds them to the site) and `GROUPS`, the headed lists of names.
 - `arthur_circle(slug)` in `build.py` shows the whole circle as small name chips on Arthur's page and on every page in it, with the current person highlighted. To add someone, give them a `P(...)` entry and put their slug in a group. People who already have pages elsewhere can go in a group too.
 - People known only from the tales take the date "Age of Arthur": `data.py` sorts them just after Arthur, and `date_cy()` shows "Oes Arthur" on the Welsh side.
 - Their reference list is `PAGES["arthur-circle"]` in `src/refs2.py`. Saints who gain a person page get `link=P("slug")` in `src/saints.py`, so the saints pages link to them.
+- `src/sixth_century.py` does the same for the kings and saints of the sixth century. Its `LONG` dict gives a person a full coded long text (`## heading`, `> quote | source`, `|| left | right` tables) that replaces their short one: `people2.py` applies it with `PEOPLE_LONG.update(...)`. Illtud and Dewi Sant use it. A long read lists its people with `people=[...]` (as `pride2.py` does for the learning story), and the person page links back to it.
 
 ### Books from one publisher, checked when their site is blocked: Y Lolfa (November 2026)
 
 - `src/ylolfa.py` holds each Y Lolfa book as a normal reading-list item whose last field is its ylolfa.com page. Put the name in the reading list of the page it belongs to (`src/refs.py`, `src/refs2.py`) or in `SHELF_EXTRA`; `bookshelf_page()` in `build.py` gathers every item with a ylolfa.com link into the "Y Lolfa" section of the Books and authors page, linking each to its place in its period.
 - ylolfa.com refuses automated fetches. To check a book: a web search limited to ylolfa.com gives the book's own page, whose title shows the exact title and ISBN (`/products/<ISBN>/<slug>`); then a search for that ISBN in quotes shows the author on booksellers' listings. Give a year only when a listing confirms it.
+- The home page's Further reading lists are `READING` and `ONLINE` in `src/data.py`. A book with `u` gets a link; an online site with `uCy` links to its Welsh address on the Welsh page (e.g. biography.wales / bywgraffiadur.cymru). Gwales.com closed on 2 March 2026: the Books Council of Wales now sells through ffolio.wales / ffolio.cymru.
 
 ### Helping a first-time visitor choose where to begin (November 2026)
 - The three "Where to begin" cards sit in the home hero in `src/head.html` (`<nav class="begin">`), styled in `src/v6.css` under "where to begin". The hero's moving scene measures `.begin` (in `src/app.js`, `measure()`) to keep the mountain and stars clear of the words, so keep that class name if the cards change.
@@ -645,7 +656,7 @@ Learnt while simplifying the home page.
 - Pictures are only ones already kept on the site with their Commons credit: `g:<id>` from the gallery, `p:<id>` from the person photos, `l:<key>` from the legend photos. Add `@50% 15%` to a ref to move the crop (e.g. to keep a face in frame).
 - To change a page's picture, change its line in `PAGE`. Pages not listed use their place's own gallery picture, or the picture for their age (`ERA`). `build.py` runs `PX.dress()` on every page, so new pages get a picture automatically.
 - The top picture loads at once (`fetchpriority="high"`, 600px copy for phones through `srcset`); card pictures load lazily from the small copy. The build stops if a named picture's file is missing.
-- Commons can't be reached from the cloud. New pictures have to be downloaded on the Mini-PC (Remote Control) and added to the gallery first.
+- New pictures: Commons can't be reached from the cloud, so look them up on GitHub. Put the searches in `tools/commons_research_in.json` with your own branch name and push it; the Commons research workflow commits `_research/<folder>/found.json` and previews. Add the chosen file to `EXTRA` in `src/pictures.py` (credit and captions) and use it as `c:<Commons file>`. Then run the fetch-photos workflow on your branch, which saves the WebP copies. Delete `_research/` before merging.
 
 ### Sources beside the claims (November 2026)
 
@@ -654,6 +665,76 @@ Learnt while simplifying the home page.
 - The card opens on click (code at the end of `src/static/site.js`): under the chip on a computer, as a sheet along the bottom on a phone. Without JavaScript the chip is a plain link to the first source.
 - The home page's "Did you know?" fact is drawn again by `app.js` when "Another" is pressed, so `FACTS` goes into the page data already turned into HTML (`CITE.html_text`).
 - Check sources with the WebFetch tool when the cloud can't reach a site directly, and quote the source's own words in the note where you can.
+- Every "Did you know?" fact links to a full page (third item of each `FACTS` tuple in `src/features.py`), with a "Read the full story" button that follows "Another". `CITE.linked()` makes the sentence the link and puts its chips after it. Where no page existed one was written: places in `src/factplaces.py` (their own `PLACES` and `LONG`), events in `src/events_more.py`.
+- World first and Welsh first badges on person pages take their sources from `FIRST_CITES` in `src/cites.py` (person id -> keys); the chip sits beside the badge because the badge is a link. Only add a badge source that says what the badge says.
+
+### Place pages people can visit: the Visiting box (November 2026)
+
+- New historic places, and longer text for existing ones, go in `src/places3.py`: `NEW` (same shape as `places2.py`), `LONG` (paragraphs, `## ` sub-headings, `[[cite:key]]` sources), `PEOPLE` (person slugs linked with the place) and `LINKS` (other pages on the site). The sources used there are in `CITES` at the bottom and are added to `cites.S`; keys start with `pl-`.
+- A person slug with no page yet is simply skipped, and shows up by itself once someone adds that person. Person pages list "Places to visit" back from the same `PEOPLE` lists.
+- `src/visit.py` holds, for each place, who looks after it (Cadw, the National Trust, a council, a church, private), the official page, the postcode and how you get in (free, ticketed, open land, private land). Never copy opening times or prices: they change. Link the official page instead.
+- Cadw's site lists every place at `cadw.gov.wales/visit/places-to-visit/find-a-place-to-visit/map`; each place page gives its postcode and whether entry is free. National Trust places are at `nationaltrust.org.uk/visit/wales/<name>`. Both sites are blocked from the cloud machine's own network, but the WebFetch tool can read them.
+- The Directions link is Google Maps with the place's latitude and longitude, so it works even where there is no postcode.
+- The map card shows the same in one line (`vis` in the page data, drawn in `selectPlace()` in `src/app.js` and `ssr_visit_line()` in `build.py`).
+- A new place's picture: one line in `PAGE` in `src/pictures.py`. The map card picks it up too.
+### A photograph inside a long read (November 2026)
+
+Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.html`).
+
+- A paragraph that is just `!! <gallery id>` (for example `!! person-gwynfor-evans`) puts that gallery picture into the text with its full credit: caption, photographer, licence and Commons link. It works anywhere `prose()` is used: long reads, person pages, chapters. Put the same line in the English and the Welsh paragraphs, in the same place.
+- The picture must already be in the gallery (`src/gallery_photos.py`, files in `src/static/gallery/`); an unknown id stops the build. A tall picture is shown as a portrait (narrower, cropped from near the top) so faces are not cut off.
+- The picture at the top of a long read comes from `PAGE` in `src/pictures.py` (`"story-tryweryn.html": "g:place-celyn@50% 55%"`), with its credit under the title, so don't repeat that picture in the text.
+
+### Full-length pages for the kings and princes, with sources beside the claims (November 2026)
+- `src/princes.py` holds the long texts for the kings and princes of Wales (`LONG`, put over the short texts by `src/long.py`), new rulers in the `people2a.py` format (`PEOPLE`, added in `src/people2.py`), and `GROUPS`/`LINKS` for the "Kings and princes of Wales" block that `princes_circle()` in `build.py` shows on each of their pages. A group can list people whose pages are still to come: only people with a page are shown.
+- Their sources go beside the claims as `[[cite:...]]` chips (see "Sources beside the claims"). The keys for these pages live in `CITES` in `src/princes.py`, which `src/cites.py` adds to its list, so other threads editing `cites.py` don't collide with them. Good free texts to link: the Annales Cambriae (Fordham Internet Medieval Sourcebook), the Annals of Ulster (CELT, one page per year: `T100001A/text426.html` is 856), Asser (Fordham) and Gerald's Description of Wales (A Vision of Britain). The Brut has no good free English text online: cite Thomas Jones's translation with no link.
+- Check every quote against a real edition before it goes in. Gerald of Wales (Description of Wales I.2) gives North Wales to Merfyn and Powys to Anarawd, not the other way round; only his I.4 names the three royal seats (Aberffraw, Dinefwr, Pengwern).
+
+### Pictures inside a long read, and a Commons photo for the top of the page (November 2026)
+- For a picture that is not in the gallery, a long read can carry its own list. Give the story `figs={key: (Commons file, maker, licence, licence link, caption EN, caption CY, width, height)}` and put a paragraph `"!! key"` where each picture goes, in both the English and the Welsh list. `prose()` in `build.py` looks in `figs` first, then in the gallery, and draws it with its full credit (`lit_fig`). First used in `src/welshnot.py`.
+- Search Commons from GitHub first (see "Looking up Commons pictures from GitHub"): the Welsh Not category held a real W.N. board, an 1879 magazine drawing and Geoff Charles's photographs of Cymdeithas yr Iaith, all free to use. The "Fetch photos" workflow then keeps copies on the site.
+- When the picture for the top of a page is not yet in the gallery, add it to `LEGEND_PHOTOS` in `src/art.py` and `PICKS` in `tools/fetch_legend_photos.py` under a key no legend uses. Pushing that file runs "Fetch photos", which saves `src/static/legends/<key>.webp`; pull, then add `"story-x.html": "l:<key>"` to `PAGE` in `src/pictures.py` (its check stops the build if the file is not there yet).
+
+### A slider that is easy to drag, with a mouse or a finger (November 2026)
+- Never rebuild a slider's HTML from its own `input` event: the browser loses the drag and the thumb jumps back. Build the panel once (`kgShell` in `src/app.js`) and only update the text, the year marks and the value afterwards.
+- Phones (iOS above all) only drag a range input when the finger lands right on the thumb. So the whole strip (track and year labels, `.kg-slide`) takes the pointer with `setPointerCapture`, works out the value from the x position, and has `touch-action: pan-y` so a sideways drag moves the slider while an up-and-down swipe still scrolls the page. The input itself has `pointer-events: none` and stays for the keyboard and screen readers (`aria-valuetext` names the stage).
+- For a smooth drag, use `step="any"`, change the map at the nearest stage while dragging, and glide the thumb onto that stage when the finger lets go. Arrow keys, Page Up/Down, Home and End are handled in a `keydown` listener.
+- Year labels are placed under the exact thumb positions with `left: calc(thumb/2 + (100% - thumb) * i / n)`; on a phone every other year drops to a second row so all of them fit. Test drags in Playwright with `page.mouse` and, for touch, CDP `Input.dispatchTouchEvent`.
+
+### Themed trails (November 2026)
+- The trails are `TRAILS` in `src/long.py` (the first four) and `src/trails.py` (the newer ones, put in front, newest first). `build.py` makes `trails.html` and one `trail-<id>.html` per trail.
+- A stop can be an event (by its English title), a person, a place, a long read (`("story", id)`), a legend (`("legend", id)`) or any page (`("page", href, era, dates, titles, texts)`). Every stop is one link to its own page (the whole row, see "Whole cards are links"), and person and place stops also link any long read that names them.
+- A long read that does not exist yet can already be named on a trail: it stays hidden until another thread publishes it (for example `story-welsh-not`, `story-mac`).
+- Keep 8 to 10 stops per trail, and keep the number of trails a multiple of 6, so the grid on `trails.html` is full at three columns and at two.
+- Every stop title has the same size and font: there is no bigger serif style for "key" events any more (removed from `.era-events li.key h3` and the timeline's `.ev.key h4`). Key events keep their coloured dot.
+- Full pages for the people and places on the trails are in `src/trail_people.py` and `src/trail_places.py` (headings with `## `, quotes with `> words | who`); `long.py` loads them last, so they replace the short text.
+- A drop cap must only catch a page's first paragraph: use `.story > p:first-child`, not `.story p:first-child`, or the first letter of every pull quote turns into a giant letter.
+- To check fonts across the site, load pages in Playwright and compare the computed font of headings in sibling cards or list items; flag any group with more than one style.
+
+### The Mabinogi tale guides (November 2026)
+- Each tale of the Mabinogion has a guide page, `mabinogi-<id>.html`, made by `tale_page()` in `build.py` from `TALES` in `src/mabinogi_tales.py`: facts table, the tale part by part, "People of the tale" chips, "Pictures of the tale" (`figs`, Commons tuples shown with `lit_fig()`) and a numbered map of its places.
+- `pin_map(places, prefix, label)` draws a numbered map of Wales with a list beside it (the look of Arthur's Wales). A place with `lat=None` is listed but not pinned. Pins that would overlap move aside (`NUDGES`), with a short line and a dot back to the real spot.
+- The people of the tales are in `src/mabinogi_people.py` (the `P()` format of people2a.py); `GROUPS` gives the "People of the Mabinogi" block on each of their pages, `PHOTOS` adds their pictures to `PERSON_PHOTOS`.
+- A long read can show a "Pictures" section: give its STORY dict `figs=[...]` (Commons tuples as `lit_fig()` takes them).
+- Before adding a person, search all of `src/people2*.py`, `princes.py`, `sixth_century.py` and `arthur_circle.py` for the slug and other spellings (Hopcyn ap Tomos/Tomas was nearly added twice).
+- Pictures: ask `tools/commons_research.py` (set `tools/commons_research_in.json` to your branch), pick from the results, add the files as figures or `c:<file>` page tops (with an `EXTRA` credit in `src/pictures.py`), then run the "Fetch photos" workflow on the branch so the site keeps its own copies. Delete `_research/` and restore the research input file before merging.
+
+### Whole cards are links (November 2026)
+- Ifan wants every card and list row on the site to be one big link, with no "Read more", "Read →", "The full story" or "Source ↗" on it.
+- The card gets the class `wl-card`, and its link the class `wl`: `<a class="wl" href="...">Card name</a>`. The CSS at the end of `src/v6.css` stretches that link over the whole card and hides its words, so the card's name is still read out by screen readers.
+- A name that should stay visible (a heading link) gets `wl-go` instead: it stays as it is and only its click area is stretched.
+- Any other link or button inside the card (kingdom chips, "The place →", "See it on the map") stays clickable on its own: the CSS lifts them above the stretched link.
+- Rows in a list get a faint highlight on hover, boxes a thin coloured ring. Keyboard focus draws a gold outline round the whole card.
+- Cards that are already a single `<a>` (long reads, ages, trails, games) just lose their "Read →" line.
+- Family tree cards are left alone, because a tap on them lights up the family line.
+- To check: load the page in Playwright, and for each `.wl-card` use `document.elementFromPoint` at the corners and middle: it must hit the card's link, and every other link or button inside must still hit itself. Turn off smooth scrolling first, or the points are measured mid-scroll.
+
+### A set of linked writers' pages, and checking an old book when its site is blocked (November 2026)
+- `src/writers.py` holds the writers who recorded early Wales, the same way `src/princes.py` holds the rulers: `LONG` (full coded texts put over the short ones, added last in `src/long.py` so nothing overwrites them), `PEOPLE` (new people), `GROUPS`/`LINKS` (the block `writers_circle()` in `build.py` shows on each of their pages), `STORY` (the long read `story-writers.html`), `REFS` (its reading list) and `CITES` (its sources, added to `src/cites.py`).
+- A link in `LINKS` to a long read that is not built yet (`story-bruts.html`) is left out until it exists, so pages can name each other before both are published.
+- To add a list to the Books and authors page without touching the `SHELF` lines other threads edit, append its key after the list (`next(g for g in SHELF if g[0] == "lit")[3].append("writers")`). The same trick works for `PAGE` in `src/pictures.py`: a `PAGE.update({...})` block of your own.
+- Project Gutenberg can be read with WebFetch even when curl is blocked: Gerald's Itinerary is ebook 1148 and his Description of Wales ebook 1092 (Hoare's translation); the Historia Brittonum is ebook 1972 (Giles). A Vision of Britain has the Description chapter by chapter (`/travellers/Cambrensis_Desc/<n>`, book I chapter n is page n+2, book II chapter n is page n+21), but sometimes refuses automated reads.
+- The National Library of Wales's manuscript pages are at `library.wales/discover-learn/digital-exhibitions/manuscripts/the-middle-ages/<name>` (white-book-of-rhydderch, hendregadredd-manuscript, chronicle-of-the-princes, book-of-taliesin, laws-of-hywel-dda): find them with a WebSearch limited to library.wales, then read them with WebFetch.
 
 ## Working together
 

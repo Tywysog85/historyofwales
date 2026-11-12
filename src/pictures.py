@@ -35,16 +35,69 @@ ERA = dict(
 )
 
 PAGE = {
+    # the princes of Powys and Deheubarth (src/princes4.py)
+    "person-gwenwynwyn.html": "g:cast-powis",
+    "person-madog-ap-gruffudd-maelor.html": "g:holy-valle-crucis",
+    "person-maelgwn-ap-rhys.html": "g:place-strataflorida",
+    "person-rhys-gryg.html": "g:place-dinefwr",
+    # historic places of importance (src/places3.py)
+    "place-garthcelyn.html": "g:person-siwan",
+    "place-dolwyddelan.html": "g:cast-dolwyddelan",
+    "place-dinasemrys.html": "g:land-dinas-emrys",
+    "place-llysrhosyr.html": "g:anci-llys-rhosyr",
+    "place-cricieth.html": "g:cast-criccieth",
+    "place-dolforwyn.html": "g:person-llywelyn-ap-gruffudd",
+    "place-dryslwyn.html": "g:cast-dryslwyn",
+    "place-carregcennen.html": "g:cast-carreg-cennen",
+    "place-ewloe.html": "g:cast-ewloe",
+    "place-dinasbran.html": "g:cast-dinas-bran",
+    "place-cwmhir.html": "g:holy-cwmhir",
+    "place-powis.html": "g:cast-powis",
+    "place-kidwelly.html": "g:cast-kidwelly",
+    "place-vallecrucis.html": "g:holy-valle-crucis",
+    "place-penmon.html": "g:holy-penmon",
+    "place-talley.html": "g:holy-talley",
+    "place-basingwerk.html": "g:holy-basingwerk",
+    "place-margam.html": "g:holy-margam",
+    "place-neathabbey.html": "g:holy-neath-abbey",
+    "place-llanthony.html": "g:holy-llanthony",
+    "place-pennantmelangell.html": "g:holy-pennant-melangell",
+    "place-llanbadarn.html": "g:holy-llanbadarn",
+    "place-bangor.html": "g:holy-bangor",
+    "place-llandaf.html": "g:holy-llandaff",
+    "place-llanelwy.html": "g:holy-st-asaph",
+    "place-stnons.html": "g:person-dewi-sant",
+    "place-llanddewibrefi.html": "g:person-dewi-sant",
+    "place-llancarfan.html": "g:person-cadog",
+    "place-carewcross.html": "g:cast-carew",
+    "place-ygaer.html": "g:anci-y-gaer",
+    "place-tomenymur.html": "g:anci-tomen-y-mur",
+    "place-dinlligwy.html": "g:anci-din-lligwy",
+    "place-barclodiad.html": "g:anci-barclodiad",
+    "place-tinkinswood.html": "g:anci-tinkinswood",
+    "place-maenceti.html": "g:anci-maen-ceti",
+    "place-parclebreos.html": "g:anci-parc-le-breos",
+    "place-carregsamson.html": "g:anci-carreg-samson",
+    "place-tymawr.html": "g:land-south-stack",
+    "place-pilleth.html": "g:person-owain-glyndwr",
+    "place-pennal.html": "g:trea-pennal-letter",
+    "place-chirk.html": "g:cast-chirk",
+    "place-plasmawr.html": "g:buil-plas-mawr",
+    "place-erddig.html": "g:buil-erddig",
+    "place-penrhyn.html": "g:cast-penrhyn",
+    "place-bigpit.html": "g:indu-big-pit-winding",
+    "place-llanystumdwy.html": "g:person-lloyd-george",
+    "place-wmc.html": "g:buil-wmc",
     # long reads
     "story-castles.html": "g:place-caernarfon",
     "story-language.html": "g:trea-bible-1588",
     "story-hywel.html": "g:trea-laws-hywel",
     "story-coal.html": "g:place-blaenavon",
     "story-protest.html": "g:place-westgate",
-    "story-world.html": "g:indu-coal-exchange",
+    "story-world.html": "c:Gaiman, Chubut ca.1911.jpg",
     "story-arthur.html": "g:person-arthur",
     "story-glyndwr.html": "g:trea-pennal-letter",
-    "story-longbow.html": "g:place-cardigan",
+    "story-longbow.html": "c:Longbowmen.jpg",
     "story-learning.html": "g:place-llanilltud",
     "story-unconquered.html": "g:cast-dolwyddelan",
     "story-firsts.html": "g:place-merthyr",
@@ -58,10 +111,18 @@ PAGE = {
     "story-caradog.html": "g:person-caratacus",
     "story-macsen.html": "g:place-segontium",
     "story-christianity.html": "g:holy-margam",
+    "story-industry.html": "g:indu-ffestiniog-rly",
+    "story-mac.html": "g:peop-cofia-1282",
+    "story-fwa.html": "g:peop-celyn-protest",
+    "person-john-barnard-jenkins.html": "g:peop-liverpool-steals@50% 40%",
+    "person-dennis-coslett.html": "g:peop-celyn-line",
     "story-lucius.html": "g:holy-llandaff",
     "story-bran.html": "g:place-harlech",
-    "story-joseph.html": "g:person-dewi-sant",
+    "story-joseph.html": "c:Glastonbury Abbey Ruins 2.JPG",
+    "story-aberfan.html": "g:place-aberfan",
     "story-patrick.html": "g:place-stdavids",
+    "story-tryweryn.html": "g:place-celyn@50% 55%",
+    "story-welsh-not.html": "l:iaith-1966",  # Cymdeithas yr Iaith at Llangefni, 1966 (Geoff Charles), src/art.py LEGEND_PHOTOS
     # legends that have no photograph of their own yet
     "legend-dragons.html": "g:land-dinas-emrys",
     "legend-lludd.html": "g:land-dinas-emrys",
@@ -94,7 +155,7 @@ PAGE = {
     "kings-ergyng.html": "g:holy-llanthony",
     "kings-rheged.html": "g:trea-book-taliesin",
     "kings-gododdin.html": "g:trea-book-aneirin",
-    "kings-ystrad-clud.html": "g:person-aneirin",
+    "kings-ystrad-clud.html": "c:Castle from pier, Dumbarton, Scotland-LCCN2001705975.jpg",
     "kings-elfed.html": "g:land-tryfan",
     "kings-efrog.html": "g:anci-tomen-y-mur",
     "saints.html": "g:holy-st-govans",
@@ -110,7 +171,7 @@ PAGE = {
     "saints-llydaw.html": "g:person-illtud",
     # topic guides and trails
     "topics.html": "g:place-library",
-    "topic-abroad.html": "p:lewis-jones-patagonia",
+    "topic-abroad.html": "c:Vista de Gaiman.JPG",
     "topic-countryside.html": "g:place-stfagans",
     "topic-faith.html": "g:holy-soar-y-mynydd",
     "topic-industry.html": "g:place-dinorwig",
@@ -126,6 +187,20 @@ PAGE = {
     "trail-sea.html": "g:land-south-stack",
     "trail-song.html": "g:holy-tabernacl",
     "trail-women.html": "g:place-fishguard",
+    "trail-kings.html": "g:person-llywelyn-fawr",
+    "trail-arthur.html": "g:person-arthur",
+    "trail-saints.html": "g:place-treffynnon",
+    "trail-language.html": "g:trea-bible-1588",
+    "trail-castles.html": "g:cast-carreg-cennen",
+    "trail-roman.html": "g:place-caerleon",
+    "trail-mabinogi.html": "g:anci-tomen-y-mur",
+    "trail-rebels.html": "g:place-machynlleth",
+    "trail-poets.html": "g:place-yrysgwrn",
+    "trail-world.html": "g:place-llangollen",
+    "trail-first-peoples.html": "g:place-brynceliddu",
+    "trail-firsts.html": "g:person-robert-recorde",
+    "trail-tudors.html": "g:place-penfro",
+    "trail-sport.html": "g:place-stadiwm",
     # index pages and the rest
     "stories.html": "g:trea-black-book",
     "legends.html": "g:land-dinas-emrys",
@@ -165,7 +240,102 @@ PAGE = {
     "404.html": "g:land-borth-forest",
     "laws.html": "g:trea-laws-hywel",
     "llys-rhosyr.html": "g:anci-llys-rhosyr",
+    "story-mabinogi.html": "g:trea-red-book",
+    # the Mabinogi tale guides (src/mabinogi_tales.py)
+    "mabinogi-pwyll.html": "c:Narberth castle pembrokeshire.jpg@50% 55%",
+    "mabinogi-branwen.html": "c:Branwen drudwy.JPG@50% 40%",
+    "mabinogi-manawydan.html": "c:DV405 no.86 Narberth Castle.png",
+    "mabinogi-math.html": "c:Dinas Dinlle.jpg",
+    # the people of the Mabinogi (src/mabinogi_people.py): the country of their tale
+    "person-pwyll.html": "g:anci-carn-ingli",
+    "person-rhiannon.html": "g:anci-carn-ingli",
+    "person-pryderi.html": "g:anci-carn-ingli",
+    "person-arawn.html": "g:anci-carn-ingli",
+    "person-cigfa.html": "g:anci-gors-fawr",
+    "person-teyrnon.html": "g:place-caerwent",
+    "person-branwen.html": "g:place-harlech",
+    "person-manawydan.html": "g:place-harlech",
+    "person-matholwch.html": "g:place-harlech",
+    "person-efnysien.html": "g:place-harlech",
+    "person-math.html": "g:anci-tomen-y-mur",
+    "person-gwydion.html": "g:anci-tomen-y-mur",
+    "person-gilfaethwy.html": "g:anci-tomen-y-mur",
+    "person-goewin.html": "g:anci-tomen-y-mur",
+    "person-arianrhod.html": "g:anci-tomen-y-mur",
+    "person-dylan-ail-don.html": "g:anci-tomen-y-mur",
+    "person-lleu.html": "g:anci-tomen-y-mur",
+    "person-blodeuwedd.html": "g:anci-tomen-y-mur",
+    "person-gronw-pebr.html": "g:land-llyn-tegid",
+    "person-rhydderch-ab-ieuan-llwyd.html": "g:place-strataflorida",
+    "person-hywel-fychan.html": "g:trea-red-book",
+    "person-tegid.html": "g:land-llyn-tegid",
+    "person-carnhuanawc.html": "g:place-library",
+    "mabinogi-culhwch.html": "g:anci-carn-ingli",
+    "mabinogi-macsen.html": "g:place-segontium",
+    "mabinogi-lludd.html": "g:land-dinas-emrys",
+    "mabinogi-rhonabwy.html": "g:cast-powis",
+    "mabinogi-owain.html": "g:place-caerleon",
+    "mabinogi-peredur.html": "g:land-brecon-beacons",
+    "mabinogi-geraint.html": "g:place-caerleon",
+    "mabinogi-taliesin.html": "g:land-llyn-tegid",
+    "person-llwyd-fab-cil-coed.html": "g:anci-carn-ingli",
+    "person-ysbaddaden.html": "g:anci-carn-ingli",
+    "person-beli-mawr.html": "g:land-dinas-emrys",
+    "person-lludd.html": "g:land-dinas-emrys",
+    "person-llefelys.html": "g:land-dinas-emrys",
+    "person-cynan-meiriadog.html": "g:place-segontium",
+    "person-rhonabwy.html": "g:cast-powis",
+    "person-luned.html": "g:place-caerleon",
+    "person-cynon-ap-clydno.html": "g:place-caerleon",
+    "person-ceridwen.html": "g:land-llyn-tegid",
+    "person-elis-gruffydd.html": "g:place-library",
 }
+
+# More pictures, found on Commons for this (tools/commons_research.py) and kept on the site by tools/fetch_photos.py.
+# Commons file -> (author, licence, licence link, what it shows EN, CY). Use them as "c:<Commons file>".
+_BY = "https://creativecommons.org/licenses/by/"
+_BYSA = "https://creativecommons.org/licenses/by-sa/"
+_PD = "https://creativecommons.org/publicdomain/mark/1.0/"
+EXTRA = {
+    # the Mabinogi tale guides (src/mabinogi_tales.py)
+    "Narberth castle pembrokeshire.jpg": ("WestWalesP", "CC BY-SA 3.0", _BYSA + "3.0",
+           "The ruins of Narberth Castle, Arberth, where tradition places the court of Pwyll", "Adfeilion Castell Arberth, lle mae traddodiad yn gosod llys Pwyll"),
+    "DV405 no.86 Narberth Castle.png": ("Alphonse Dousseau", "CC0", "https://creativecommons.org/publicdomain/zero/1.0/",
+           "Narberth Castle on its hill, painted by Alphonse Dousseau", "Castell Arberth ar ei fryn, gan Alphonse Dousseau"),
+    "Branwen drudwy.JPG": ("W. Williams", "Public domain", _PD,
+           "Branwen with her starling in the court of Matholwch", "Branwen a’i drudwy yn llys Matholwch"),
+    "Dinas Dinlle.jpg": ("Dwalad", "CC BY-SA 4.0", _BYSA + "4.0",
+           "Sunset seen from the hillfort of Dinas Dinlle, Lleu’s fort, on the coast of Arfon", "Machlud o fryngaer Dinas Dinlle, caer Lleu, ar arfordir Arfon"),
+    "Longbowmen.jpg": ("Luttrell Psalter, British Library", "Public domain", _PD,
+                       "Archers at practice with the longbow, from the Luttrell Psalter of about 1325", "Saethwyr yn ymarfer â’r bwa hir, o Sallwyr Luttrell, tua 1325"),
+    "Gaiman, Chubut ca.1911.jpg": ("Unknown photographer", "Public domain", _PD,
+                                   "Gaiman, in the Welsh settlement of Y Wladfa in Patagonia, about 1911", "Y Gaiman, yn y Wladfa ym Mhatagonia, tua 1911"),
+    "Vista de Gaiman.JPG": ("Gastón Cuello", "CC BY-SA 3.0", _BYSA + "3.0/",
+                            "Gaiman in the Chubut valley, Patagonia, founded by Welsh settlers", "Y Gaiman yn nyffryn Camwy, Patagonia, a sefydlwyd gan wladfawyr o Gymru"),
+    "Glastonbury Abbey Ruins 2.JPG": ("Mimihitam", "CC BY-SA 3.0", _BYSA + "3.0/",
+                                      "The ruins of Glastonbury Abbey, Ynys Wydrin", "Adfeilion Abaty Glastonbury, Ynys Wydrin"),
+    "Castle from pier, Dumbarton, Scotland-LCCN2001705975.jpg": ("Detroit Publishing Co., Library of Congress", "Public domain", _PD,
+                                                                 "Dumbarton Rock, Alt Clut, the old fortress of the kings of Ystrad Clud, about 1895", "Craig Dumbarton, Alclud, hen gaer brenhinoedd Ystrad Clud, tua 1895"),
+}
+
+# The writers who recorded early Wales (src/writers.py): their pictures, and the long read's.
+EXTRA["Ricemarch Psalter, Psalm 1.JPG"] = ("Ithael and Ieuan ap Sulien, Llanbadarn Fawr; Trinity College Dublin", "Public domain", _PD,
+                                         "The opening of Psalm 1 in the Rhygyfarch Psalter, made at Llanbadarn Fawr about 1080",
+                                         "Dechrau Salm 1 yn Sallwyr Rhygyfarch, a wnaed yn Llanbadarn Fawr tua 1080")
+PAGE.update({
+    "story-writers.html": "c:Ricemarch Psalter, Psalm 1.JPG@50% 20%",
+    "person-gerallt-gymro.html": "g:person-gerallt-gymro",
+    "person-asser.html": "g:person-asser",
+    "person-nennius.html": "g:land-dinas-emrys",
+    "person-rhygyfarch.html": "g:holy-llanbadarn",
+    "person-ieuan-ap-sulien.html": "c:Ricemarch Psalter, Psalm 1.JPG@50% 20%",
+    "person-elfoddw.html": "g:holy-bangor",
+    "person-lifris.html": "g:holy-llandaff",
+    "person-caradog-llancarfan.html": "c:Glastonbury Abbey Ruins 2.JPG",
+    "person-walter-map.html": "l:lady",
+    "person-adam-of-usk.html": "g:trea-pennal-letter",
+    "person-gutun-owain.html": "g:holy-basingwerk",
+})
 
 # Pages that keep the picture they already have at the top (nothing to replace).
 SKIP = {"index.html"}
@@ -191,6 +361,14 @@ def _parse1(ref):
         cr = ph[3] if len(ph) > 3 else ""
         loc = _LOCAL[f]
         return dict(src=f"photos/{loc[0]}.webp", small=f"photos/{loc[0]}-s.webp", w=loc[1], h=loc[2], file=f, by=cr, lic="", licu="", en=en, cy=cy, pos="50% 30%")
+    if kind == "c":
+        by, lic, licu, en, cy = EXTRA[key]
+        loc = _LOCAL.get(key)
+        if loc:
+            return dict(src=f"photos/{loc[0]}.webp", small=f"photos/{loc[0]}-s.webp", w=loc[1], h=loc[2], file=key, by=by, lic=lic, licu=licu, en=en, cy=cy,
+                        pos="50% 30%" if loc[2] > loc[1] * .9 else "50% 50%")
+        u = COMMONS + "Special:FilePath/" + _q(key, safe="")  # until tools/fetch_photos.py has kept a copy on the site
+        return dict(src=u + "?width=1280", small=u + "?width=600", w=1280, h=853, file=key, by=by, lic=lic, licu=licu, en=en, cy=cy, pos="50% 50%", remote=True)
     if kind == "l":
         ph = A.LEGEND_PHOTOS[key]
         return dict(src=f"legends/{key}.webp", small=f"legends/{key}-s.webp", w=1280, h=853, file=ph[0], by=ph[1], lic=ph[2], licu=ph[3], en=ph[4], cy=ph[5], pos=ph[6])
@@ -201,6 +379,8 @@ def check():
     """Stop the build if a picture named here is missing (a typo, or a gallery picture taken out)."""
     for ref in list(ERA.values()) + list(PAGE.values()) + W10:
         p = _parse(ref)
+        if p.get("remote"):
+            continue
         for f in (p["src"], p["small"]):
             if not os.path.exists(os.path.join(_HERE, "static", f)):
                 raise SystemExit(f"src/pictures.py: {ref} has no file {f}")

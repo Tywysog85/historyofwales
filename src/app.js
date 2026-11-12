@@ -18,7 +18,6 @@
     if (y < 1000) return c + y + " " + T("AD", "OC");
     return c + y + end;
   }
-  function srcLink(s) { return s ? '<a class="src" href="' + WIKI + s + '" target="_blank" rel="noopener">' + T("Source", "Ffynhonnell") + " ↗</a>" : ""; }
   var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   var MONTHS_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   var MONTHS_CY = ["Ionawr","Chwefror","Mawrth","Ebrill","Mai","Mehefin","Gorffennaf","Awst","Medi","Hydref","Tachwedd","Rhagfyr"];
@@ -396,7 +395,7 @@
   /* ---------- Chapters ---------- */
   function renderChapters() {
     $("#chap-list").innerHTML = ERAS.map(function (e) {
-      return '<button type="button" class="chap" data-era="' + e.id + '" data-open="' + e.id + '"><svg aria-hidden="true"><use href="#i-' + e.ill + '"/></svg><span class="span">' + T(e.spanEn, e.spanCy) + "</span><h3>" + T(e.en, e.cy) + "</h3><p>" + esc(T(e.blurbEn, e.blurbCy)) + '</p><span class="go">' + T("Read the chapter →", "Darllen y bennod →") + "</span></button>";
+      return '<button type="button" class="chap" data-era="' + e.id + '" data-open="' + e.id + '"><svg aria-hidden="true"><use href="#i-' + e.ill + '"/></svg><span class="span">' + T(e.spanEn, e.spanCy) + "</span><h3>" + T(e.en, e.cy) + "</h3><p>" + esc(T(e.blurbEn, e.blurbCy)) + "</p></button>";
     }).join("");
     $("#foot-eras").innerHTML = ERAS.map(function (e) { return '<a href="era-' + e.id + '.html">' + T(e.en, e.cy) + "</a>"; }).join("") + '<a href="trails.html">' + T("Trails", "Llwybrau") + '</a><a href="teachers.html">' + T("For teachers", "I athrawon") + '</a><a href="#sources">' + T("Sources", "Ffynonellau") + "</a>";
     $("#trail-list").innerHTML = D.TRAILS.map(function (t, i) { return '<a class="trail-card" href="trail-' + t.id + '.html" data-era="' + ERAS[i % ERAS.length].id + '"><svg aria-hidden="true"><use href="#i-' + t.ill + '"/></svg><span><b>' + esc(T(t.en, t.cy)) + "</b><span>" + t.n + " " + T("stops", "arhosfan") + "</span></span></a>"; }).join("");
@@ -540,9 +539,9 @@
       if (tlEra !== "all" && e[E_ERA] !== tlEra) return;
       n++;
       if (e[E_ERA] !== last) { var E = ERA[e[E_ERA]]; html += '<li class="era-head" id="era-' + E.id + '" data-era="' + E.id + '"><span class="eyebrow">' + T(E.spanEn, E.spanCy) + "</span><h3>" + T(E.en, E.cy) + '</h3><button type="button" data-open="' + E.id + '">' + T("Read the chapter", "Darllen y bennod") + "</button></li>"; last = e[E_ERA]; }
-      html += '<li class="ev' + (e[E_KEY] ? " key" : "") + '" id="ev-' + i + '" data-i="' + i + '" data-era="' + e[E_ERA] + '"><time>' + yearLabel(e) + "</time><h4>" + esc(T(e[E_TEN], e[E_TCY])) + "</h4><p>" + esc(T(e[E_BEN], e[E_BCY])) + '</p><div class="links">' +
-        (D.EVS ? '<a class="src full" href="event-' + D.EVS[i] + '.html">' + T("The full story", "Yr hanes llawn") + " →</a>" : "") +
-        (e[E_PLACE] ? '<button type="button" class="maplink" data-map="' + e[E_PLACE] + '"><svg aria-hidden="true"><use href="#i-pin"/></svg>' + T("See it on the map", "Gweld ar y map") + "</button>" : "") + (D.SL && D.SL[i] ? '<a class="src" href="story-' + D.SL[i] + '.html">' + T("Read the long read", "Darllen yr erthygl") + " →</a>" : "") + srcLink(e[E_SRC]) + "</div></li>";
+      html += '<li class="ev' + (D.EVS ? " wl-card" : "") + (e[E_KEY] ? " key" : "") + '" id="ev-' + i + '" data-i="' + i + '" data-era="' + e[E_ERA] + '"><time>' + yearLabel(e) + "</time><h4>" + esc(T(e[E_TEN], e[E_TCY])) + "</h4><p>" + esc(T(e[E_BEN], e[E_BCY])) + '</p><div class="links">' +
+        (D.EVS ? '<a class="wl" href="event-' + D.EVS[i] + '.html">' + esc(T(e[E_TEN], e[E_TCY])) + "</a>" : "") +
+        (e[E_PLACE] ? '<button type="button" class="maplink" data-map="' + e[E_PLACE] + '"><svg aria-hidden="true"><use href="#i-pin"/></svg>' + T("See it on the map", "Gweld ar y map") + "</button>" : "") + (D.SL && D.SL[i] ? '<a class="src" href="story-' + D.SL[i] + '.html">' + T("Read the long read", "Darllen yr erthygl") + " →</a>" : "") + "</div></li>";
     });
     $("#events").innerHTML = html;
     $("#tl-count").textContent = n + " " + T("events", "digwyddiad");
@@ -603,6 +602,7 @@
         '<circle class="halo" r="20"/><circle class="dot" r="7"/><text class="lbl" x="' + (right ? -14 : 14) + '" y="4" text-anchor="' + (right ? "end" : "start") + '">' + esc(T(p.en, p.cy)) + "</text></g>";
     }).join("");
   }
+  function cap(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
   function selectPlace(id) {
     if (!PLACE[id]) return;
     sel = id; var p = PLACE[id], E = ERA[p.era];
@@ -616,7 +616,7 @@
     card.innerHTML = art +
       '<div style="display:grid;gap:.3rem"><h3>' + esc(T(p.en, p.cy)) + "</h3>" + (other !== T(p.en, p.cy) ? '<span class="cy-name">' + esc(other) + "</span>" : "") + "</div>" +
       '<div class="meta"><span><b>' + T(E.en, E.cy) + "</b></span><span>" + esc(p.year) + "</span><span>" + p.lat.toFixed(3) + "° N, " + Math.abs(p.lon).toFixed(3) + "° W</span></div>" +
-      '<p class="desc">' + esc(T(p.dEn, p.dCy)) + "</p>" + '<div style="display:flex;gap:1.2rem;flex-wrap:wrap;align-items:center"><a class="src" style="color:var(--ink)" href="place-' + p.id + '.html">' + T("Read the full story", "Darllen y stori lawn") + " →</a>" + srcLink(p.src) + (p.ph ? '<a class="credit" href="' + p.ph[1] + '" target="_blank" rel="noopener">' + T("Photo: Wikimedia Commons", "Llun: Wikimedia Commons") + " ↗</a>" : "") + "</div>" +
+      '<p class="desc">' + esc(T(p.dEn, p.dCy)) + "</p>" + (p.vis ? '<p class="pc-visit"><b>' + T("Visit", "Ymweld") + ':</b> ' + esc(cap(T(p.vis[0], p.vis[1]))) + " · " + esc(T(p.vis[3], p.vis[4])) + (p.vis[5] ? " · " + esc(p.vis[5]) : "") + (p.vis[2] ? ' · <a href="' + esc(p.vis[2]) + '" target="_blank" rel="noopener">' + T("Times and prices", "Amseroedd a phrisiau") + " ↗</a>" : "") + ' · <a href="' + esc(p.vis[6]) + '" target="_blank" rel="noopener">' + T("Directions", "Cyfarwyddiadau") + " ↗</a></p>" : "") + '<div style="display:flex;gap:1.2rem;flex-wrap:wrap;align-items:center"><a class="wl" href="place-' + p.id + '.html">' + esc(T(p.en, p.cy)) + "</a>" + (p.ph ? '<a class="credit" href="' + p.ph[1] + '" target="_blank" rel="noopener">' + T("Photo: Wikimedia Commons", "Llun: Wikimedia Commons") + " ↗</a>" : "") + "</div>" +
       '<div class="row">' + (evIdx >= 0 ? '<button type="button" class="btn" data-tl="' + evIdx + '">' + T("See it on the timeline", "Gweld ar y llinell amser") + "</button>" : "<span></span>") +
       '<div class="nav-btns"><button type="button" class="icon-btn" id="pl-prev" aria-label="' + T("Previous place", "Lle blaenorol") + '"><svg><use href="#i-left"/></svg></button><span class="people-count" style="align-self:center;min-width:3.2rem;text-align:center">' + (i + 1) + " / " + visible.length + '</span><button type="button" class="icon-btn" id="pl-next" aria-label="' + T("Next place", "Lle nesaf") + '"><svg><use href="#i-right"/></svg></button></div></div>';
     $("#pl-prev").onclick = function () { selectPlace(visible[(i - 1 + visible.length) % visible.length].id); };
@@ -626,7 +626,7 @@
   $("#pins").addEventListener("keydown", function (ev) { var g = ev.target.closest(".pin"); if (g && (ev.key === "Enter" || ev.key === " ")) { ev.preventDefault(); selectPlace(g.dataset.pid); var n = $('.pin[data-pid="' + g.dataset.pid + '"]'); if (n) n.focus(); } });
 
   /* ---------- Map: kingdoms ---------- */
-  var kgStage = 5, kgTimer = 0;
+  var kgStage = 5, kgTimer = 0, kgDrag = false;
   function kgStop() { if (kgTimer) { clearInterval(kgTimer); kgTimer = 0; } }
   function renderLAs() { $("#las").innerHTML = Object.keys(D.LA).map(function (n) { return '<path class="la" data-la="' + esc(n) + '" d="' + D.LA[n] + '"><title>' + esc(n) + "</title></path>"; }).join(""); }
   function renderKg() {
@@ -641,22 +641,83 @@
       return sa ? '<text class="kg-label" x="' + (sx / sa).toFixed(0) + '" y="' + (sy / sa).toFixed(0) + '">' + esc(name) + "</text>" : "";
     }).join("");
     $("#kg-labels").innerHTML = labels;
-    var card = $("#kg-card");
-    card.innerHTML = '<p class="eyebrow">' + T("The changing map", "Y map yn newid") + '</p><h3 class="kg-stage">' + esc(T(K.en, K.cy)) + "</h3><p class=\"desc\">" + esc(T(K.nEn, K.nCy)) + '</p><ul class="kg-legend">' +
-      K.groups.map(function (g) { var u = (D.KGLINK || {})[g[0]], n = esc(T(g[0], g[1])); return '<li style="--k:' + g[2] + '"><i></i>' + (u ? '<a href="' + u + '">' + n + "</a>" : n) + "</li>"; }).join("") + "</ul>" +
+    var card = $("#kg-card"), N = D.KINGDOMS.length;
+    /* The card is built once per language and then only updated, so the slider is never
+       replaced while someone is dragging it (replacing it mid-drag is what made it hard to move). */
+    if (card.dataset.lang !== lang || !$("#kg-in")) { card.dataset.lang = lang; kgShell(card, N); }
+    kgText(card, K);
+    [].forEach.call(card.querySelectorAll(".kg-ticks span"), function (t, n) { t.classList.toggle("on", n === kgStage); });
+    var inp = $("#kg-in"); inp.setAttribute("aria-valuetext", T(K.en, K.cy));
+    if (!kgDrag) { inp.value = kgStage; kgFill(kgStage); }
+    $("#kg-play").textContent = kgTimer ? T("Pause", "Oedi") : "▶ " + T("Play through time", "Chwarae drwy amser");
+  }
+  function kgText(card, K) {
+    card.querySelector(".kg-stage").textContent = T(K.en, K.cy);
+    card.querySelector(".kg-desc").textContent = T(K.nEn, K.nCy);
+    card.querySelector(".kg-legend").innerHTML = K.groups.map(function (g) { var u = (D.KGLINK || {})[g[0]], n = esc(T(g[0], g[1])); return '<li style="--k:' + g[2] + '"><i></i>' + (u ? '<a href="' + u + '">' + n + "</a>" : n) + "</li>"; }).join("");
+  }
+  function kgYear(k) { return k.id === "today" ? T("Now", "Nawr") : k.id.replace("c", ""); }
+  function kgFill(v) { var w = document.querySelector(".kg-slide"); if (w) w.style.setProperty("--f", (v / (D.KINGDOMS.length - 1)).toFixed(4)); }
+  function kgGo(n) {
+    n = Math.max(0, Math.min(D.KINGDOMS.length - 1, n));
+    var changed = n !== kgStage || !!kgTimer;
+    kgStop();
+    if (changed) { kgStage = n; renderKg(); }
+  }
+  /* glide the thumb onto the nearest year once the finger or mouse lets go */
+  function kgSnap() {
+    var inp = $("#kg-in"); if (!inp) return;
+    var from = +inp.value, to = kgStage, t0 = performance.now();
+    if (Math.abs(from - to) < .01 || matchMedia("(prefers-reduced-motion: reduce)").matches) { inp.value = to; kgFill(to); return; }
+    (function step(now) {
+      if (kgDrag) return;
+      var k = Math.min(1, (now - t0) / 160), v = from + (to - from) * (1 - Math.pow(1 - k, 3));
+      inp.value = v; kgFill(v); if (k < 1) requestAnimationFrame(step);
+    })(t0);
+  }
+  function kgShell(card, N) {
+    /* the slider comes first: nothing above it changes, so it never moves while it is dragged */
+    card.innerHTML = '<p class="eyebrow">' + T("The changing map", "Y map yn newid") + "</p>" +
+      '<div class="kg-range"><label for="kg-in" class="eyebrow">' + T("Move through time", "Symud drwy amser") + "</label>" +
+      '<div class="kg-slide" style="--n:' + (N - 1) + '"><input type="range" id="kg-in" min="0" max="' + (N - 1) + '" step="any" value="' + kgStage + '">' +
+      '<div class="kg-ticks" aria-hidden="true">' + D.KINGDOMS.map(function (k, n) { return '<span style="--i:' + n + '">' + kgYear(k) + "</span>"; }).join("") + "</div></div>" +
+      '<p class="kg-hint">' + T("Drag the slider, or tap a year to jump to it.", "Llusgwch y llithrydd, neu tapiwch flwyddyn i neidio ati.") + "</p>" +
+      '<div class="kg-btns"><button type="button" class="btn" id="kg-prev" aria-label="' + T("Earlier", "Cynharach") + '">←</button><button type="button" class="btn solid" id="kg-play"></button><button type="button" class="btn" id="kg-next" aria-label="' + T("Later", "Diweddarach") + '">→</button></div></div>' +
+      '<div class="kg-body"><h3 class="kg-stage"></h3><p class="desc kg-desc"></p><ul class="kg-legend"></ul></div>' +
       '<p class="kg-kings"><a href="kings.html">' + T("Every king and prince of Wales", "Pob brenin a thywysog yng Nghymru") + " →</a></p>" +
-      '<div class="kg-range"><label for="kg-in" class="eyebrow">' + T("Move through time", "Symud drwy amser") + '</label><input type="range" id="kg-in" min="0" max="' + (D.KINGDOMS.length - 1) + '" step="1" value="' + kgStage + '"><div class="kg-ticks">' +
-      D.KINGDOMS.map(function (k, n) { return "<span" + (n === kgStage ? ' class="on"' : "") + ">" + (k.id === "today" ? T("Now", "Nawr") : k.id.replace("c", "")) + "</span>"; }).join("") + '</div><div class="kg-btns"><button type="button" class="btn" id="kg-prev" aria-label="' + T("Earlier", "Cynharach") + '">←</button><button type="button" class="btn solid" id="kg-play">' + (kgTimer ? T("Pause", "Oedi") : "▶ " + T("Play through time", "Chwarae drwy amser")) + '</button><button type="button" class="btn" id="kg-next" aria-label="' + T("Later", "Diweddarach") + '">→</button></div></div><p class="kg-note">' + T("Approximate: borders are drawn using modern council areas as building blocks.", "Bras: lluniwyd y ffiniau gan ddefnyddio ardaloedd cynghorau modern.") + "</p>";
-    $("#kg-in").oninput = function () { kgStop(); kgStage = +this.value; renderKg(); var i = $("#kg-in"); if (i) i.focus(); };
-    $("#kg-prev").onclick = function () { kgStop(); kgStage = Math.max(0, kgStage - 1); renderKg(); $("#kg-prev").focus(); };
-    $("#kg-next").onclick = function () { kgStop(); kgStage = Math.min(D.KINGDOMS.length - 1, kgStage + 1); renderKg(); $("#kg-next").focus(); };
+      '<p class="kg-note">' + T("Approximate: borders are drawn using modern council areas as building blocks.", "Bras: lluniwyd y ffiniau gan ddefnyddio ardaloedd cynghorau modern.") + "</p>";
+    var inp = $("#kg-in"), slide = card.querySelector(".kg-slide");
+    /* The whole strip (track and years) takes the pointer, so a tap or drag anywhere on it works,
+       with a mouse or a finger. The input itself keeps the keyboard and screen readers. */
+    function valAt(x) {
+      var r = inp.getBoundingClientRect(), th = parseFloat(getComputedStyle(slide).getPropertyValue("--th")) || 32;
+      var f = (x - r.left - th / 2) / Math.max(1, r.width - th);
+      return Math.max(0, Math.min(1, f)) * (N - 1);
+    }
+    function move(ev) { var v = valAt(ev.clientX); inp.value = v; kgFill(v); kgGo(Math.round(v)); }
+    slide.addEventListener("pointerdown", function (ev) {
+      if (ev.button > 0) return;
+      ev.preventDefault(); kgDrag = true; slide.classList.add("drag");
+      try { slide.setPointerCapture(ev.pointerId); } catch (e) {}
+      inp.focus({ preventScroll: true }); move(ev);
+    });
+    slide.addEventListener("pointermove", function (ev) { if (kgDrag) move(ev); });
+    function end() { if (!kgDrag) return; kgDrag = false; slide.classList.remove("drag"); kgSnap(); }
+    slide.addEventListener("pointerup", end); slide.addEventListener("pointercancel", end); slide.addEventListener("lostpointercapture", end);
+    /* screen readers, and anything else that sets the value directly */
+    inp.addEventListener("input", function () { if (!kgDrag) kgGo(Math.round(+inp.value)); });
+    inp.addEventListener("change", function () { if (!kgDrag) kgSnap(); });
+    inp.addEventListener("keydown", function (ev) {
+      var d = { ArrowLeft: -1, ArrowDown: -1, ArrowRight: 1, ArrowUp: 1, PageDown: -3, PageUp: 3, Home: -N, End: N }[ev.key];
+      if (d) { ev.preventDefault(); kgGo(kgStage + d); }
+    });
+    $("#kg-prev").onclick = function () { kgGo(kgStage - 1); };
+    $("#kg-next").onclick = function () { kgGo(kgStage + 1); };
     $("#kg-play").onclick = function () {
-      if (kgTimer) { kgStop(); renderKg(); } else {
-        if (kgStage >= D.KINGDOMS.length - 1) kgStage = 0; else kgStage++;
-        kgTimer = setInterval(function () { if (kgStage >= D.KINGDOMS.length - 1) { kgStop(); } else kgStage++; renderKg(); }, 2600);
-        renderKg();
-      }
-      $("#kg-play").focus();
+      if (kgTimer) { kgStop(); renderKg(); return; }
+      kgStage = kgStage >= N - 1 ? 0 : kgStage + 1;
+      kgTimer = setInterval(function () { if (kgStage >= N - 1) kgStop(); else kgStage++; renderKg(); }, 2600);
+      renderKg();
     };
   }
   function setMode(m) {
@@ -695,14 +756,14 @@
     var more = $("#people-more"); more.hidden = P_PAGE || pEra !== "all" || pField !== "all"; more.textContent = pAll ? T("Show fewer", "Dangos llai") : T("Show all " + PEOPLE.length + " people", "Dangos pob un o’r " + PEOPLE.length);
     $("#people-grid").innerHTML = list.map(function (p) {
       var name = T(p[3], p[4]), other = lang === "en" ? p[4] : p[3], link = "person-" + p[0] + ".html", ph = D.PPH[p[0]];
-      return '<article class="plaque" data-era="' + p[1] + '"><div class="top-row"><span class="ava" aria-hidden="true">' + initials(p[3]) + (ph ? '<img src="' + ph + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : "") + '</span><div><span class="dates">' + esc(p[2]) + "</span><h3>" + esc(name) + '</h3></div></div><span class="epi">' + esc(T(p[5], p[6])) + (other !== name ? " · " + esc(other) : "") + "</span>" + ((D.PFIRST || {})[p[0]] ? '<span class="first-tag">★ ' + esc(T(D.PFIRST[p[0]][1], D.PFIRST[p[0]][2])) + "</span>" : "") + "<p>" + esc(T(p[7], p[8])) + '</p><div class="links"><a class="go" href="' + link + '">' + T("Read more", "Darllen mwy") + ' →</a><button type="button" class="copy" data-copy="' + link + '">' + T("Copy link", "Copïo’r ddolen") + "</button>" + srcLink(p[9]) + "</div></article>";
+      return '<article class="plaque wl-card" data-era="' + p[1] + '"><div class="top-row"><span class="ava" aria-hidden="true">' + initials(p[3]) + (ph ? '<img src="' + ph + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : "") + '</span><div><span class="dates">' + esc(p[2]) + "</span><h3>" + esc(name) + '</h3></div></div><span class="epi">' + esc(T(p[5], p[6])) + (other !== name ? " · " + esc(other) : "") + "</span>" + ((D.PFIRST || {})[p[0]] ? '<span class="first-tag">★ ' + esc(T(D.PFIRST[p[0]][1], D.PFIRST[p[0]][2])) + "</span>" : "") + "<p>" + esc(T(p[7], p[8])) + '</p><a class="wl" href="' + link + '">' + esc(name) + "</a></article>";
     }).join("");
   }
   $("#people-more").onclick = function () { pAll = !pAll; renderPeople(); if (!pAll) goTo($("#people")); };
 
   /* ---------- Did you know? + daily streak ---------- */
   var factI = Math.floor(Date.now() / 864e5) % D.FACTS.length;
-  function renderFact() { var f = D.FACTS[factI % D.FACTS.length]; $("#fact").innerHTML = T(f[0], f[1]); }  /* our own text, escaped at build, with its source chip (src/cites.py) */
+  function renderFact() { var f = D.FACTS[factI % D.FACTS.length]; $("#fact").innerHTML = T(f[0], f[1]); var m = $("#fact-more"); if (m) m.setAttribute("href", f[2]); }  /* our own text, escaped at build, with its source chip (src/cites.py) */
   $("#fact-next").onclick = function () { factI++; renderFact(); };
   function renderStreak() {
     var el = document.getElementById("daily-streak"); if (!el) return;
@@ -917,8 +978,8 @@
 
   /* ---------- Sources ---------- */
   function renderSources() {
-    $("#read-books").innerHTML = D.READING.map(function (r) { return "<li><b>" + esc(r.t) + "</b><span>" + esc(T(r.n, r.nCy)) + "</span></li>"; }).join("");
-    $("#read-online").innerHTML = D.ONLINE.map(function (r) { return '<li><a href="' + r.u + '" target="_blank" rel="noopener"><b>' + esc(T(r.t, r.tCy)) + "</b></a><span>" + esc(r.u.replace(/^https:\/\/(www\.)?/, "").replace(/\/$/, "")) + "</span></li>"; }).join("");
+    $("#read-books").innerHTML = D.READING.map(function (r) { var b = "<b>" + esc(r.t) + "</b>"; return "<li>" + (r.u ? '<a href="' + r.u + '" target="_blank" rel="noopener">' + b + "</a>" : b) + "<span>" + esc(T(r.n, r.nCy)) + "</span></li>"; }).join("");
+    $("#read-online").innerHTML = D.ONLINE.map(function (r) { var u = T(r.u, r.uCy || r.u); return '<li><a href="' + u + '" target="_blank" rel="noopener"><b>' + esc(T(r.t, r.tCy)) + "</b></a><span>" + esc(u.replace(/^https:\/\/(www\.)?/, "").replace(/\/$/, "")) + "</span></li>"; }).join("");
   }
 
   /* ---------- Language toggle ---------- */

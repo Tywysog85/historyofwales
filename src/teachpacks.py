@@ -207,7 +207,7 @@ def pack_page(i, era):
         f'<li><time>{bi(g["year_label"](ev), g["year_label"](ev, True))}</time><div><a href="{href(ev)}"><b>{bi(ev[5], ev[6])}</b></a><p>{bi(ev[7], ev[8])}</p></div></li>' for ev in tl) + "</ol>")
     cards = ('<div class="pk-cards">' + "".join(f'<div class="pk-card">{bi(ev[5], ev[6])}</div>' for ev in sorted(tl[:8], key=lambda ev: ev[5])) + "</div>")
     ppl = ('<div class="pk-people">' + "".join(
-        f'<div class="pk-person"><p class="pk-d">{e(p[2])}</p><h3><a href="person-{p[0]}.html">{bi(p[3], p[4])}</a></h3><p class="pk-epi">{bi(p[5], p[6])}</p><p>{bi(p[7], p[8])}</p></div>' for p in people) + "</div>")
+        f'<div class="pk-person wl-card"><p class="pk-d">{e(p[2])}</p><h3><a class="wl-go" href="person-{p[0]}.html">{bi(p[3], p[4])}</a></h3><p class="pk-epi">{bi(p[5], p[6])}</p><p>{bi(p[7], p[8])}</p></div>' for p in people) + "</div>")
     words = ('<dl class="pk-words">' + "".join(
         f'<div><dt>{bi(terms[w]["en"], terms[w]["cy"])}</dt><dd>{bi(terms[w]["dEn"], terms[w]["dCy"])}</dd></div>' for w in P["words"] if w in terms) + "</dl>")
     plc = ('<ul class="pk-places">' + "".join(f'<li><a href="place-{p["id"]}.html"><b>{bi(p["en"], p["cy"])}</b></a> · {bi(p["dEn"], p["dCy"])}</li>' for p in places) + "</ul>"

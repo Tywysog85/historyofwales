@@ -578,3 +578,41 @@ SHELF_EXTRA = {
          "The Welsh women writers of the 1800s.", "Llenorion benywaidd Cymru’r 1800au."),
     ],
 }
+
+# The Mabinogi section (src/mabinogi_tales.py, src/mabinogi_people.py): the tale guides and the people of the tales.
+import refs as _R  # noqa: E402
+PAGES["mabinogi-tales"] = L(_R.MABINOGION, _R.PEDEIR_KEINC, _R.GUEST_MABINOGION, _R.IFANS_MABINOGION, _R.TRIADS, _R.DAVIES_FOUR_BRANCHES,
+    (B, "Hywel Wyn Owen and Richard Morgan", "Dictionary of the Place-Names of Wales", "Gomer, 2007",
+     "The meaning of the place names the tales explain, from Nantlle to Mochdre.", "Ystyr yr enwau lleoedd a eglurir yn y chwedlau, o Nantlle i Fochdre."))
+PAGES["mabinogi-people"] = PAGES["mabinogi-tales"]
+_MBT = PAGES["mabinogi-tales"]["items"][:4]  # the editions and translations of the whole Mabinogion
+PAGES["mabinogi-culhwch"] = L(*_MBT,
+    (B, "Rachel Bromwich and D. Simon Evans", "Culhwch and Olwen: An Edition and Study of the Oldest Arthurian Tale", "University of Wales Press, 1992",
+     "The standard edition, with the tasks, the list of Arthur’s men and the route of the boar.", "Yr argraffiad safonol, gyda’r anoethau, rhestr gwŷr Arthur a llwybr y twrch."),
+    (B, "Rachel Bromwich and D. Simon Evans", "Culhwch ac Olwen: Testun Syr Idris Foster", "Gwasg Prifysgol Cymru, 1988",
+     "The Welsh text begun by Idris Foster and finished by Rachel Bromwich and D. Simon Evans, with notes.", "Y testun Cymraeg a ddechreuwyd gan Idris Foster ac a orffennwyd gan Rachel Bromwich a D. Simon Evans, gyda nodiadau."),
+    _R.TRIADS)
+PAGES["mabinogi-macsen"] = L(*_MBT,
+    (B, "Ifor Williams", "Breuddwyd Maxen", "Jarvis a Foster, Bangor, 1908",
+     "The Welsh text of the Dream, edited by Ifor Williams.", "Testun Cymraeg y Breuddwyd, wedi’i olygu gan Ifor Williams."),
+    (B, "Brynley F. Roberts", "Breuddwyd Maxen Wledig", "Dublin Institute for Advanced Studies, 2005",
+     "A modern edition with a study of the tale and its history.", "Argraffiad diweddar gydag astudiaeth o’r chwedl a’i hanes."))
+PAGES["mabinogi-lludd"] = L(*_MBT,
+    (B, "Brynley F. Roberts", "Cyfranc Lludd a Llefelys", "Dublin Institute for Advanced Studies, 1975",
+     "The standard edition of the tale, with its place in the Welsh Brut.", "Argraffiad safonol y chwedl, a’i lle yn y Brut Cymraeg."))
+PAGES["mabinogi-rhonabwy"] = L(*_MBT,
+    (B, "Melville Richards", "Breudwyt Ronabwy", "Gwasg Prifysgol Cymru, 1948",
+     "The Welsh text of the Dream from the Red Book of Hergest, with notes on its places in Powys.", "Testun Cymraeg y Breuddwyd o Lyfr Coch Hergest, gyda nodiadau ar ei leoedd ym Mhowys."))
+PAGES["mabinogi-owain"] = L(*_MBT,
+    (B, "R. L. Thomson", "Owein, or Chwedyl Iarlles y Ffynnawn", "Dublin Institute for Advanced Studies, 1968",
+     "The standard edition of the romance.", "Argraffiad safonol y rhamant."))
+PAGES["mabinogi-peredur"] = L(*_MBT,
+    (B, "Glenys Witchard Goetinck", "Historia Peredur vab Efrawc", "Gwasg Prifysgol Cymru, 1976",
+     "The Welsh text of Peredur.", "Testun Cymraeg Peredur."))
+PAGES["mabinogi-geraint"] = L(*_MBT,
+    (B, "R. L. Thomson", "Ystorya Gereint uab Erbin", "Dublin Institute for Advanced Studies, 1997",
+     "The standard edition of the romance.", "Argraffiad safonol y rhamant."))
+PAGES["mabinogi-taliesin"] = L(*_MBT,
+    (B, "Patrick K. Ford", "Ystoria Taliesin", "University of Wales Press, 1992",
+     "The tale as Elis Gruffydd wrote it, edited with a study of its poems.", "Y chwedl fel yr ysgrifennodd Elis Gruffydd hi, wedi’i golygu gydag astudiaeth o’i cherddi."),
+    _R.BOOK_TALIESIN if hasattr(_R, "BOOK_TALIESIN") else _R.TRIADS)
