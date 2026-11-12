@@ -299,3 +299,8 @@ PLACE_LONG.update(_FPL.LONG)
 # ---------- the trails added in November 2026 (src/trails.py), newest first ----------
 import trails as _TR
 TRAILS[:0] = _TR.TRAILS
+
+# ---------- full pages for the people and places on the trails (src/trail_people.py, src/trail_places.py) ----------
+import trail_people as _TPP, trail_places as _TPL
+PEOPLE_LONG.update(_TPP.LONG)
+PLACE_LONG.update(_TPL.LONG)
