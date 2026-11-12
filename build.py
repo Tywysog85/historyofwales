@@ -59,6 +59,8 @@ import patrick as _PTR  # noqa: E402
 REF.REFS.update(_PTR.REFS)  # reading list for the Saint Patrick long read
 import mac as _MACR  # noqa: E402
 REF.REFS.update(_MACR.REFS)  # reading lists for the MAC and Free Wales Army long reads
+import writers as WRT  # noqa: E402  (the writers who recorded early Wales: their block, long read and reading list)
+REF.REFS.update(WRT.REFS)
 import authors as AU  # noqa: E402  (the authors on the Books and authors page)
 import ylolfa as YLF  # noqa: E402  (Y Lolfa books: the "Y Lolfa" section of the Books and authors page)
 F.STORIES = AD.newest("story", F.STORIES)  # long reads: the newest first everywhere (index, home page, "Keep reading")
@@ -648,6 +650,28 @@ def princes_circle(slug):
     return section(f'<div class="ar-circle"><p class="lede">{lead}</p>{out}<p class="ar-more">{more}</p></div>', "Kings and princes of Wales", "Brenhinoedd a thywysogion Cymru")
 
 
+
+def writers_circle(slug):
+    """The writers who recorded early Wales (src/writers.py): the whole set, on each of their pages. Only people with a page are shown."""
+    if slug not in WRT.ALL_IDS:
+        return ""
+    out = ""
+    for en, cy, ids in WRT.GROUPS:
+        ids = [s for s in ids if s in PERSON]
+        if not ids:
+            continue
+        chips = ""
+        for s in ids:
+            c = lit_person_chip(s)
+            chips += c.replace("<a ", '<a aria-current="page" ', 1) if s == slug else c
+        out += f'<h3 class="sub-h">{bi(en, cy)}</h3><div class="ppl">{chips}</div>'
+    built = {f'story-{x["id"]}.html' for x in F.STORIES}
+    more = " ".join(f'<a class="btn" href="{u}">{bi(a, b)} →</a>' for u, a, b in WRT.LINKS if not u.startswith("story-") or u in built)
+    lead = bi("The monks, scholars, storytellers and scribes who wrote down the history of early Wales, from Gildas to the soldier of Calais, each with a page of their own.",
+              "Y mynachod, yr ysgolheigion, y storïwyr a’r copïwyr a ysgrifennodd hanes Cymru gynnar, o Gildas hyd filwr Calais, pob un â’i dudalen ei hun.")
+    return section(f'<div class="ar-circle"><p class="lede">{lead}</p>{out}<p class="ar-more">{more}</p></div>', "Writers who recorded early Wales", "Awduron a gofnododd Gymru gynnar")
+
+
 def person_page(p):
     slug, eid = p[0], p[1]
     era = ERA[eid]
@@ -670,6 +694,7 @@ def person_page(p):
             + PERSON_EXTRA.get(slug, lambda: "")()
             + arthur_circle(slug)
             + princes_circle(slug)
+            + writers_circle(slug)
             + story_feature("people", slug)
             + person_places(slug)
             + (section(f'<ol class="era-events">{"".join(event_li(ev) for ev in related)}</ol>', "On the timeline", "Ar y llinell amser") if related else "")
@@ -1095,6 +1120,7 @@ SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes
 ]
 
 
+next(g for g in SHELF if g[0] == "lit")[3].append("writers")  # the writers who recorded early Wales (src/writers.py)
 SHELF_ORDER = ["start", "britons", "kings", "saints", "law", "princes", "tudor", "industry", "modern", "lit", "lang", "life"]  # the order on the page: by period, then the themes
 
 
@@ -1116,6 +1142,19 @@ def _shelf_pages():
     out += [(g, "kings.html", "Kings and princes of Wales", "Brenhinoedd a thywysogion Cymru") for g in sorted(set(REF2.KINGS_GROUP.values()))]
     out.append(("saints-llydaw", "saints-llydaw.html", "Saints of Brittany", "Seintiau Llydaw"))
     return out
+
+
+def bookshelf_old_writers():
+    """A box near the top of the Books and authors page: the writers of early Wales themselves (src/writers.py)."""
+    built = {f'story-{x["id"]}.html' for x in F.STORIES}
+    links = [("story-writers.html", "The writers who recorded early Wales", "Yr awduron a gofnododd Gymru gynnar"),
+             ("person-gerallt-gymro.html", "Gerald of Wales", "Gerallt Gymro"), ("person-nennius.html", "Nennius", "Nennius"),
+             ("person-geoffrey-of-monmouth.html", "Geoffrey of Monmouth", "Sieffre o Fynwy"), ("story-bruts.html", "The Bruts", "Y Brutiau"),
+             ("books.html", "The old books of Wales", "Hen lyfrau Cymru")]
+    btns = " ".join(f'<a class="btn" href="{u}">{bi(a, b)} →</a>' for u, a, b in links if not u.startswith("story-") or u in built)
+    return (f'<div class="old-writers" style="margin:2.4rem 0 2.6rem"><h2 class="sub-h" style="font-size:clamp(1.5rem,3.2vw,2.1rem)">{bi("The first writers of Wales", "Awduron cyntaf Cymru")}</h2>'
+            f'<p>{bi("Before the historians came the writers they all rely on: Gildas, Nennius, Asser, Rhygyfarch, Geoffrey of Monmouth, Walter Map, Gerald of Wales and the monks who kept the chronicle of the princes. Each has a page of their own.", "Cyn yr haneswyr daeth yr awduron y mae pob un ohonynt yn dibynnu arnynt: Gildas, Nennius, Asser, Rhygyfarch, Sieffre o Fynwy, Gwallter Map, Gerallt Gymro a’r mynachod a gadwodd gronicl y tywysogion. Mae gan bob un ei dudalen ei hun.")}</p>'
+            f'<p class="l-links">{btns}</p></div>')
 
 
 def bookshelf_page():
@@ -1221,7 +1260,7 @@ def bookshelf_page():
                f"{n_auth} o awduron a adroddodd stori Cymru a {total} o lyfrau a hen destunau, o’r Brythoniaid hyd heddiw, wedi’u trefnu fesul cyfnod. Ym mhob cyfnod fe gwrddwch â’r awduron yn gyntaf, ac yna eu llyfrau. O dan lyfr fe welwch dudalennau’r wefan hon sy’n ei ddefnyddio. Gall unrhyw lyfrgell yng Nghymru eu cael i chi.")
     main = (hero("tudor", f'<a href="index.html">{SITE}</a>', "book", "Books and authors", "Llyfrau ac awduron", "Books and authors of Welsh history", "Llyfrau ac awduron hanes Cymru",
                  "The old sources and the historians’ books behind this site, chosen to read next.", "Yr hen ffynonellau a llyfrau’r haneswyr y tu ôl i’r wefan hon, i’w darllen nesaf.", art="book")
-            + section(f'<div class="narrow"><p class="lede">{intro}</p><nav class="chips shelf-chips" aria-label="{bi("Sections", "Adrannau", "span")}">{chips}</nav>{body}</div>', top=True))
+            + section(f'<div class="narrow"><p class="lede">{intro}</p>{bookshelf_old_writers()}<nav class="chips shelf-chips" aria-label="{bi("Sections", "Adrannau", "span")}">{chips}</nav>{body}</div>', top=True))
     ld = {"@context": "https://schema.org", "@type": "CollectionPage", "name": "Books and authors of Welsh history", "inLanguage": ["en", "cy"],
           "hasPart": [{"@type": "Book" if it[0] == "b" else "CreativeWork", "name": it[2], "author": it[1]} for v in works.values() for it in v]}
     return page("books-and-authors.html", "Books and authors of Welsh history · History of Wales",

@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "The writers who recorded early Wales", "Yr awduron a gofnododd Gymru gynnar",
+     "A new long read and full pages on the writers who gave Wales its memory: Gerald of Wales and his journey of 1188, Nennius and the History of the Britons, Asser at Alfred’s court, Rhygyfarch and the Life of Saint David, Geoffrey of Monmouth, and new pages on Walter Map, Caradog of Llancarfan, Lifris, Elfoddw, Adam of Usk, Gutun Owain, Hywel Fychan of the Red Book and Elis Gruffydd, the soldier of Calais.",
+     "Erthygl newydd a thudalennau llawn ar yr awduron a roddodd ei chof i Gymru: Gerallt Gymro a’i daith yn 1188, Nennius a Hanes y Brythoniaid, Asser yn llys Alffred, Rhygyfarch a Buchedd Dewi, Sieffre o Fynwy, a thudalennau newydd ar Wallter Map, Caradog o Lancarfan, Lifris, Elfoddw, Adda o Frynbuga, Gutun Owain, Hywel Fychan y Llyfr Coch ac Elis Gruffydd, milwr Calais.",
+     "story-writers.html"),
     ("2026-11-12", "Fourteen new trails through Welsh history", "Pedwar llwybr newydd ar ddeg drwy hanes Cymru",
      "Eighteen trails now: kings and princes, Arthur’s Wales, saints and holy wells, the fight for the language, castles, Roman Wales, the Mabinogi landscape, rebels and risings, poets and bards, Wales and the world, the first people, Welsh firsts, the Welsh Tudors and sporting Wales, each with ten stops and the full story at every one.",
      "Deunaw llwybr bellach: brenhinoedd a thywysogion, Cymru Arthur, seintiau a ffynhonnau sanctaidd, y frwydr dros yr iaith, cestyll, Cymru a Rhufain, tirwedd y Mabinogi, gwrthryfelwyr, beirdd, Cymru a’r byd, y bobl gyntaf, Cymru’n gyntaf, y Tuduriaid a Chymru’r campau, pob un â deg arhosfan a’r hanes llawn ym mhob un.",

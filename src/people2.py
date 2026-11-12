@@ -7,9 +7,11 @@ import arthur_circle as _AC, sixth_century as _SC
 import christianity as _CH  # Brân Fendigaid and King Lleurwg (src/christianity.py)
 import mac as _MAC  # John Jenkins and Dennis Coslett (src/mac.py)
 import princes as _PRN  # the kings and princes of Wales (src/princes.py)
+import writers as _WRT  # the writers who recorded early Wales (src/writers.py)
 
 ALL = _A.PEOPLE + _B.PEOPLE + _C.PEOPLE + _D.PEOPLE + _E.PEOPLE + _F.PEOPLE + _AC.PEOPLE + _CH.PEOPLE + _SC.PEOPLE + _G.PEOPLE + _MAC.PEOPLE + _H.PEOPLE
 ALL = ALL + _PRN.PEOPLE  # the kings and princes of Wales (src/princes.py)
+ALL = ALL + _WRT.PEOPLE  # the writers who recorded early Wales (src/writers.py)
 
 # tuples in the site's people format: (slug, era, dates, nameEn, nameCy, epithetEn, epithetCy, bioEn, bioCy, wikipediaTitle)
 PEOPLE_NEW = [(p["id"], p["era"], p["d"], p["en"], p["cy"], p["eEn"], p["eCy"], p["bEn"], p["bCy"], p["w"]) for p in ALL]

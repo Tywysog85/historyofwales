@@ -299,3 +299,7 @@ PLACE_LONG.update(_FPL.LONG)
 # ---------- the trails added in November 2026 (src/trails.py), newest first ----------
 import trails as _TR
 TRAILS[:0] = _TR.TRAILS
+
+# ---------- the writers who recorded early Wales, full-length pages (src/writers.py); kept last so nothing overwrites them ----------
+import writers as _WRT  # noqa: E402
+PEOPLE_LONG.update(_WRT.LONG)

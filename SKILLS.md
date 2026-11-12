@@ -702,6 +702,13 @@ Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.
 - Every stop title has the same size and font: there is no bigger serif style for "key" events any more (removed from `.era-events li.key h3` and the timeline's `.ev.key h4`). Key events keep their coloured dot.
 - To check fonts across the site, load pages in Playwright and compare the computed font of headings in sibling cards or list items; flag any group with more than one style.
 
+### A set of linked writers' pages, and checking an old book when its site is blocked (November 2026)
+- `src/writers.py` holds the writers who recorded early Wales, the same way `src/princes.py` holds the rulers: `LONG` (full coded texts put over the short ones, added last in `src/long.py` so nothing overwrites them), `PEOPLE` (new people), `GROUPS`/`LINKS` (the block `writers_circle()` in `build.py` shows on each of their pages), `STORY` (the long read `story-writers.html`), `REFS` (its reading list) and `CITES` (its sources, added to `src/cites.py`).
+- A link in `LINKS` to a long read that is not built yet (`story-bruts.html`) is left out until it exists, so pages can name each other before both are published.
+- To add a list to the Books and authors page without touching the `SHELF` lines other threads edit, append its key after the list (`next(g for g in SHELF if g[0] == "lit")[3].append("writers")`). The same trick works for `PAGE` in `src/pictures.py`: a `PAGE.update({...})` block of your own.
+- Project Gutenberg can be read with WebFetch even when curl is blocked: Gerald's Itinerary is ebook 1148 and his Description of Wales ebook 1092 (Hoare's translation); the Historia Brittonum is ebook 1972 (Giles). A Vision of Britain has the Description chapter by chapter (`/travellers/Cambrensis_Desc/<n>`, book I chapter n is page n+2, book II chapter n is page n+21), but sometimes refuses automated reads.
+- The National Library of Wales's manuscript pages are at `library.wales/discover-learn/digital-exhibitions/manuscripts/the-middle-ages/<name>` (white-book-of-rhydderch, hendregadredd-manuscript, chronicle-of-the-princes, book-of-taliesin, laws-of-hywel-dda): find them with a WebSearch limited to library.wales, then read them with WebFetch.
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
