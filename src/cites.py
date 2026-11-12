@@ -502,6 +502,9 @@ S = {
         url="https://www.legislation.gov.uk/mwa/2011/1/section/1", lang="en"),
 }
 
+from princes import CITES as _PRINCES  # noqa: E402  (the kings and princes of Wales, src/princes.py)
+S.update(_PRINCES)
+
 MARK = re.compile(r"\[\[cite:([a-z0-9,\- ]+)\]\]")
 
 # where a chip can never go: raw text elements, and inside anything that is itself a link or a control

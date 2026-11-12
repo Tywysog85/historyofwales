@@ -44,6 +44,7 @@ import mabinogion as MB  # noqa: E402
 import literature as LT  # noqa: E402  (literature.html, books.html, triads.html)
 import laws as LW  # noqa: E402  (the Laws of Hywel Dda page, laws.html)
 import people2 as P2  # noqa: E402
+import princes as PRN  # noqa: E402  (the kings and princes of Wales: the block on each of their pages)
 import arthur_circle as AC  # noqa: E402  (Arthur's circle: the block on every page of the people of Arthur's story)
 import sets as SETS  # noqa: E402
 import seo as SEO  # noqa: E402  (search engine extras for every page)
@@ -617,6 +618,26 @@ def arthur_circle(slug):
     return section(f'<div class="ar-circle"><p class="lede">{lead}</p>{out}<p class="ar-more">{more}</p></div>', "Arthur’s circle", "Cylch Arthur")
 
 
+def princes_circle(slug):
+    """The kings and princes of Wales (src/princes.py): the whole set, on each of their pages. Only people with a page are shown."""
+    if slug not in PRN.ALL_IDS:
+        return ""
+    out = ""
+    for en, cy, ids in PRN.GROUPS:
+        ids = [s for s in ids if s in PERSON]
+        if not ids:
+            continue
+        chips = ""
+        for s in ids:
+            c = lit_person_chip(s)
+            chips += c.replace("<a ", '<a aria-current="page" ', 1) if s == slug else c
+        out += f'<h3 class="sub-h">{bi(en, cy)}</h3><div class="ppl">{chips}</div>'
+    more = " ".join(f'<a class="btn" href="{u}">{bi(a, b)} →</a>' for u, a, b in PRN.LINKS)
+    lead = bi("The kings and princes of Wales, from Merfyn Frych and Rhodri Mawr to Llywelyn ein Llyw Olaf, each with a page of their own.",
+              "Brenhinoedd a thywysogion Cymru, o Ferfyn Frych a Rhodri Mawr hyd Lywelyn ein Llyw Olaf, pob un â’i dudalen ei hun.")
+    return section(f'<div class="ar-circle"><p class="lede">{lead}</p>{out}<p class="ar-more">{more}</p></div>', "Kings and princes of Wales", "Brenhinoedd a thywysogion Cymru")
+
+
 def person_page(p):
     slug, eid = p[0], p[1]
     era = ERA[eid]
@@ -638,6 +659,7 @@ def person_page(p):
             + section(meta + photo_fig(PH.PERSON_PHOTOS.get(slug), "portrait", "person-" + slug) + body + f'<p class="share no-print"><button type="button" class="btn" data-copy="person-{slug}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button></p>' + further(f"person:{slug}", p[9]), top=True)
             + PERSON_EXTRA.get(slug, lambda: "")()
             + arthur_circle(slug)
+            + princes_circle(slug)
             + story_feature("people", slug)
             + (section(f'<ol class="era-events">{"".join(event_li(ev) for ev in related)}</ol>', "On the timeline", "Ar y llinell amser") if related else "")
             + set_block(f"person:{slug}")
