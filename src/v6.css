@@ -607,3 +607,18 @@ html.cy .news-item.is-new .n-t::after { content: "Newydd" }
 .just-added a:hover, .just-added a:focus-visible { border-color: var(--gold, #e8c65a) }
 .just-added b { font-weight: 600; line-height: 1.3 }
 .just-added .ja-d { font: 500 .72rem var(--f-mono); color: var(--muted); letter-spacing: .04em; text-transform: uppercase }
+/* Further reading and references at the end of every long read (src/refs.py, refs_block in build.py) */
+.refs { margin-top: 3rem; padding: 1.6rem clamp(1.1rem, 3vw, 1.8rem); border: 1px solid var(--line); border-radius: var(--r); background: var(--card) }
+.refs h2 { margin: 0 0 .5rem; font-size: clamp(1.35rem, 2.6vw, 1.7rem); color: var(--ink) }
+.refs .refs-i { margin: 0 0 .4rem; color: #b4b9c4; font-size: .98rem; line-height: 1.6 }
+.refs h3 { margin: 1.3rem 0 .55rem; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold) }
+.refs ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .8rem }
+.refs li { padding-left: .95rem; border-left: 2px solid rgba(255,255,255,.12); font-size: .98rem; line-height: 1.55; color: #dcdee4 }
+.refs cite { font-style: italic; color: var(--ink) }
+.refs .ref-w { font-weight: 600 }
+.refs .ref-d { color: #9aa0ad }
+.refs .ref-n { display: block; margin-top: .15rem; font-size: .9rem; color: #b4b9c4 }
+.refs a { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--gold) 55%, transparent); text-underline-offset: 3px }
+.refs a:hover cite { color: var(--gold) }
+.w10-refs .refs { margin-top: 0 }
+@media print { .refs { border-color: #999; background: none; break-inside: avoid-page } .refs li, .refs .refs-i, .refs .ref-n, .refs .ref-d, .refs cite, .refs h2 { color: #000 } }

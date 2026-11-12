@@ -7,6 +7,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Every long read now has a reading list", "Rhestr ddarllen ar bob erthygl bellach",
+     "Each long read now ends with further reading and references: the old texts behind it, the historians’ books that tell it in full, such as R. R. Davies and John Davies, and the Dictionary of Welsh Biography. Ideal for teachers and students.",
+     "Mae pob erthygl bellach yn gorffen â darllen pellach a chyfeiriadau: yr hen destunau y tu ôl iddi, llyfrau’r haneswyr sy’n adrodd yr hanes yn llawn, megis R. R. Davies a John Davies, a’r Bywgraffiadur Cymreig. Delfrydol i athrawon a myfyrwyr.",
+     "story-glyndwr.html#references"),
     ("2026-11-12", "The newest things now come first", "Y pethau mwyaf newydd sy’n dod gyntaf bellach",
      "New long reads now go at the top of the long reads page and the home page, and the legends, key documents, battles and quick answers each open with a “Just added” strip, so you see what is new first. The newest wear a red New badge.",
      "Mae erthyglau newydd bellach yn mynd ar frig tudalen yr erthyglau a’r hafan, ac mae’r chwedlau, y dogfennau allweddol, y brwydrau a’r atebion cyflym i gyd yn agor â stribed “Newydd ei ychwanegu”, er mwyn i chi weld beth sy’n newydd yn gyntaf. Mae bathodyn coch Newydd ar y rhai diweddaraf.",

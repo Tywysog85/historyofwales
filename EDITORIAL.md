@@ -39,6 +39,13 @@ Ifan asked on 12 November 2026 that new material goes at the top of a page, not 
 - The newest few things added in the last two weeks wear a small red **New** badge.
 - A big addition still gets a line at the top of What's new (`src/whatsnew.py`).
 
+## References
+
+Every long read ends with a short list of further reading and references (`src/refs.py`): the old texts it rests on and the historians' books that tell the story in full, plus the Dictionary of Welsh Biography. Wikipedia alone is not enough for a teaching resource.
+
+- Cite only works that really exist, with the right author, title, publisher and year. Never invent one; if a detail can't be checked, leave it out.
+- Give the title as published, even when it uses a word the site avoids (for example "The Atlantic Celts"). The note in our own words follows the site's rules.
+
 ## Before publishing
 
 - New Welsh text should be read by a fluent speaker when one is available.

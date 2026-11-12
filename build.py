@@ -39,6 +39,7 @@ import people2 as P2  # noqa: E402
 import sets as SETS  # noqa: E402
 import seo as SEO  # noqa: E402  (search engine extras for every page)
 import added as AD  # noqa: E402  (when each item was added: newest first, "Just added" strips, "New" badges)
+import refs as REF  # noqa: E402  (further reading and references for every long read)
 F.STORIES = AD.newest("story", F.STORIES)  # long reads: the newest first everywhere (index, home page, "Keep reading")
 L.TEACH.update(AG9.TEACH)
 from urllib.parse import quote as _q
@@ -759,6 +760,49 @@ def story_more_links(x):
     return (f'<p class="l-links">' + " ".join(f'<a class="btn" href="{h}">{bi(en, cy)} →</a>' for h, en, cy in ls) + '</p>') if ls else ""
 
 
+REF_KINDS = [("p", "Old sources and records", "Hen ffynonellau a chofnodion"), ("b", "Books by historians", "Llyfrau gan haneswyr"), ("w", "Online", "Ar-lein")]
+
+
+def refs_block(key):
+    """The "Further reading and references" list at the end of a long read (src/refs.py), with the
+    Dictionary of Welsh Biography articles for the people in it. Prints for teachers too."""
+    r = REF.REFS.get(key)
+    if not r:
+        return ""
+    out = []
+    for kind, en, cy in REF_KINDS:
+        lis = []
+        for it in r["items"]:
+            if it[0] != kind:
+                continue
+            _, who, title, det, nen, ncy = it[:6]
+            url = it[6] if len(it) > 6 else ""
+            t = f'<a href="{e(url)}" target="_blank" rel="noopener"><cite>{e(title)}</cite> ↗</a>' if url else f"<cite>{e(title)}</cite>"
+            lis.append(f'<li><span class="ref-w">{e(who)}</span>, {t} <span class="ref-d">({e(det)})</span><span class="ref-n">{bi(nen, ncy)}</span></li>')
+        if kind == "w":
+            for pid in r.get("dwb", []):
+                rec = SOURCE_LINKS.get("person:" + pid, {})
+                if rec.get("dwb"):
+                    name = PERSON[pid][3] if pid in PERSON else rec.get("cy", pid)
+                    u = rec["dwb"]
+                    lis.append(f'<li><span class="ref-w">{bi("Dictionary of Welsh Biography", "Y Bywgraffiadur Cymreig")}</span>, '
+                               f'<a class="l-en" lang="en" href="{e(u)}" target="_blank" rel="noopener"><cite>{e(name)}</cite> ↗</a>'
+                               f'<a class="l-cy" lang="cy" href="{e(u.replace("://biography.wales/", "://bywgraffiadur.cymru/"))}" target="_blank" rel="noopener"><cite>{e(rec.get("cy") or name)}</cite> ↗</a></li>')
+        if lis:
+            out.append(f'<h3>{bi(en, cy)}</h3><ul>{"".join(lis)}</ul>')
+    if not out:
+        return ""
+    return (f'<aside class="refs" id="references" aria-labelledby="refs-h"><h2 id="refs-h">{bi("Further reading and references", "Darllen pellach a chyfeiriadau")}</h2>'
+            f'<p class="refs-i">{bi("The old texts and the historians’ books behind this page, for anyone who wants to go further. Any library in Wales can find them for you.", "Yr hen destunau a llyfrau’r haneswyr y tu ôl i’r dudalen hon, i unrhyw un sydd am fynd ymhellach. Gall unrhyw lyfrgell yng Nghymru eu cael i chi.")}</p>'
+            + "".join(out) + "</aside>")
+
+
+def refs_ld(key):
+    """The same list for search engines: schema.org citation entries."""
+    r = REF.REFS.get(key) or {}
+    return [{"@type": "CreativeWork", "name": it[2], "author": it[1]} for it in r.get("items", []) if it[0] in "pb"]
+
+
 def story_page(x, i):
     nxt = F.STORIES[(i + 1) % len(F.STORIES)]
     others = [y for y in F.STORIES if y["id"] != x["id"]][:3]
@@ -767,10 +811,12 @@ def story_page(x, i):
     main = (hero(x["era"], f'<a href="index.html">{SITE}</a> / <a href="stories.html">{bi("Long reads", "Erthyglau")}</a>', "book", "Long read", "Erthygl", x["en"], x["cy"], x["sumEn"], x["sumCy"], art=x["art"])
             + f'<section class="article"><div class="wrap narrow">{meta}{prose_bi(x["pEn"], x["pCy"])}' + (f'<p><a class="btn solid" href="firsts.html">★ {bi("Every Welsh world first, with the people behind them", "Pob un o’r pethau a wnaeth Cymru gyntaf, a’r bobl y tu ôl iddynt")} →</a></p>' if x["id"] == "firsts" else "")
               + story_more_links(x)
-              + (f'<p><a class="btn solid" href="laws.html">{bi("Much more on the law: the big page on the Laws of Hywel Dda, with the manuscripts and a quiz", "Llawer mwy am y gyfraith: y dudalen fawr ar Gyfreithiau Hywel Dda, gyda’r llawysgrifau a chwis")} →</a></p>' if x["id"] == "hywel" else "") + '</div></section>'
+              + (f'<p><a class="btn solid" href="laws.html">{bi("Much more on the law: the big page on the Laws of Hywel Dda, with the manuscripts and a quiz", "Llawer mwy am y gyfraith: y dudalen fawr ar Gyfreithiau Hywel Dda, gyda’r llawysgrifau a chwis")} →</a></p>' if x["id"] == "hywel" else "") + refs_block(x["id"]) + '</div></section>'
             + section(f'<div class="s-grid three">{"".join(story_card(y) for y in others)}</div>', "Keep reading", "Daliwch ati i ddarllen")
             + section(f'<div class="pager"><a class="btn" href="stories.html">← {bi("All long reads", "Pob erthygl")}</a><a class="btn solid" href="story-{nxt["id"]}.html">{bi(nxt["en"], nxt["cy"])} →</a></div>'))
     ld = {"@context": "https://schema.org", "@type": "Article", "headline": x["en"], "description": x["sumEn"], "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
+    if refs_ld(x["id"]):
+        ld["citation"] = refs_ld(x["id"])
     return page(f"story-{x['id']}.html", f'{x["en"]} · History of Wales', x["sumEn"], main, era=x["era"], ld=ld, active="stories.html", track=f"story:{x['id']}")
 
 
@@ -1653,7 +1699,8 @@ def wales_in_10_page():
     main = (f'<div class="w10"><p class="crumbs wrap"><a href="index.html">{SITE}</a> / {bi("Wales in 10 minutes", "Cymru mewn 10 munud")}</p>'
             f'<div class="w10-grid"><div class="w10-map" aria-hidden="false"><div class="w10-bar"><i id="w10-bar"></i></div>{svg}'
             f'<p class="w10-stage" id="w10-stage" aria-live="polite"></p><p class="w10-places" id="w10-places"></p></div>'
-            f'<div class="w10-steps">{steps}{end}</div></div></div>')
+            f'<div class="w10-steps">{steps}{end}</div></div></div>'
+            f'<section class="tight w10-refs"><div class="wrap narrow">{refs_block("wales-in-10")}</div></section>')
     data = json.dumps(dict(stages=stages, pins=pins), ensure_ascii=False, separators=(",", ":"))
     extra = "<script>window.W10=" + data.replace("</", "<\\/") + ";</script><script>" + read("wales10.js") + "</script>\n"
     return page("wales-in-10.html", "Wales in 10 minutes · History of Wales",
@@ -2931,6 +2978,8 @@ def main():
     pages["stories.html"] = stories_index()
     for i, x in enumerate(F.STORIES):
         pages[f"story-{x['id']}.html"] = story_page(x, i)
+        if x["id"] not in REF.REFS:
+            print(f"WARNING: long read '{x['id']}' has no reference list. Add one to src/refs.py (real books only).")
     pages["legends.html"] = legends_index()
     pages["mabinogion.html"] = mabinogion_page()
     pages["literature.html"] = literature_page()
