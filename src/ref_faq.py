@@ -354,8 +354,8 @@ _MORE = {
     "Oes. Cloddiodd y Rhufeiniaid aur yn Nolaucothi, ac mae’r llain aur ger Dolgellau wedi rhoi modrwyau priodas brenhinol ers 1923. Mae aur Cymru ymhlith y prinnaf yn y byd.",
     ["place-dolaucothi.html"]),
   Q("orme", "Where is the oldest mine in Wales?", "Ble mae’r mwynglawdd hynaf yng Nghymru?",
-    "The Great Orme copper mines at Llandudno, worked about 4,000 years ago in the Bronze Age. Their tunnels run for miles and make them among the largest prehistoric mines in the world.",
-    "Mwyngloddiau copr y Gogarth yn Llandudno, a weithiwyd tua 4,000 o flynyddoedd yn ôl yn Oes yr Efydd. Mae eu twneli’n rhedeg am filltiroedd ac yn eu gwneud ymhlith mwyngloddiau cynhanesyddol mwyaf y byd.",
+    "The Great Orme copper mines at Llandudno, worked about 4,000 years ago in the Bronze Age. Their tunnels run for miles and make them among the largest prehistoric mines in the world.[[cite:orme-antiquity,orme-gsl,orme-guinness]]",
+    "Mwyngloddiau copr y Gogarth yn Llandudno, a weithiwyd tua 4,000 o flynyddoedd yn ôl yn Oes yr Efydd. Mae eu twneli’n rhedeg am filltiroedd ac yn eu gwneud ymhlith mwyngloddiau cynhanesyddol mwyaf y byd.[[cite:orme-antiquity,orme-gsl,orme-guinness]]",
     ["place-orme.html"]),
  ],
  "faith": [

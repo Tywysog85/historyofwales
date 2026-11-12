@@ -628,6 +628,11 @@ Learnt while simplifying the home page.
 - People known only from the tales take the date "Age of Arthur": `data.py` sorts them just after Arthur, and `date_cy()` shows "Oes Arthur" on the Welsh side.
 - Their reference list is `PAGES["arthur-circle"]` in `src/refs2.py`. Saints who gain a person page get `link=P("slug")` in `src/saints.py`, so the saints pages link to them.
 
+### Books from one publisher, checked when their site is blocked: Y Lolfa (November 2026)
+
+- `src/ylolfa.py` holds each Y Lolfa book as a normal reading-list item whose last field is its ylolfa.com page. Put the name in the reading list of the page it belongs to (`src/refs.py`, `src/refs2.py`) or in `SHELF_EXTRA`; `bookshelf_page()` in `build.py` gathers every item with a ylolfa.com link into the "Y Lolfa" section of the Books and authors page, linking each to its place in its period.
+- ylolfa.com refuses automated fetches. To check a book: a web search limited to ylolfa.com gives the book's own page, whose title shows the exact title and ISBN (`/products/<ISBN>/<slug>`); then a search for that ISBN in quotes shows the author on booksellers' listings. Give a year only when a listing confirms it.
+
 ### Helping a first-time visitor choose where to begin (November 2026)
 - The three "Where to begin" cards sit in the home hero in `src/head.html` (`<nav class="begin">`), styled in `src/v6.css` under "where to begin". The hero's moving scene measures `.begin` (in `src/app.js`, `measure()`) to keep the mountain and stars clear of the words, so keep that class name if the cards change.
 - Section order on the home page is simply the order in `src/body.html`: the nine ages (`#chapters`) first, then `#today`.
@@ -641,6 +646,14 @@ Learnt while simplifying the home page.
 - To change a page's picture, change its line in `PAGE`. Pages not listed use their place's own gallery picture, or the picture for their age (`ERA`). `build.py` runs `PX.dress()` on every page, so new pages get a picture automatically.
 - The top picture loads at once (`fetchpriority="high"`, 600px copy for phones through `srcset`); card pictures load lazily from the small copy. The build stops if a named picture's file is missing.
 - Commons can't be reached from the cloud. New pictures have to be downloaded on the Mini-PC (Remote Control) and added to the gallery first.
+
+### Sources beside the claims (November 2026)
+
+- Write `[[cite:key1,key2]]` straight after the full stop of any sentence in `src/` (English and Welsh copy), and add each key to `S` in `src/cites.py` with a short chip label, title, author, a note on what it shows, and the link (plus `url_cy` if the source has a Welsh page).
+- `build.py` turns markers into chips after the Welsh pages are split off, so each language gets its own labels. Markers inside page titles, descriptions, JSON-LD, scripts, links and buttons are removed, and `write()` removes any left in JSON, feeds and the search index, so a marker never shows as text. An unknown key stops the build.
+- The card opens on click (code at the end of `src/static/site.js`): under the chip on a computer, as a sheet along the bottom on a phone. Without JavaScript the chip is a plain link to the first source.
+- The home page's "Did you know?" fact is drawn again by `app.js` when "Another" is pressed, so `FACTS` goes into the page data already turned into HTML (`CITE.html_text`).
+- Check sources with the WebFetch tool when the cloud can't reach a site directly, and quote the source's own words in the note where you can.
 
 ## Working together
 
