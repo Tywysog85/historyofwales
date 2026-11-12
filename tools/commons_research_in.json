@@ -1,6 +1,6 @@
-{"branch": "claude/project-thread-c1ha7o",
- "out": "_research/pictures2",
- "max": 300,
- "categories": ["Category:Dumbarton Rock", "Category:Multangular Tower", "Category:Archaeologia Britannica", "Category:Madoc", "Category:Gaiman, Chubut", "Category:Longbows"],
- "searches": ["Mary Rose longbow", "longbow medieval archers manuscript", "Welsh archers longbow", "Crecy archers Froissart", "Madoc plaque Fort Morgan", "Prince Madog memorial Rhos-on-Sea", "Glastonbury Abbey ruins", "Glastonbury holy thorn", "Dumbarton Rock castle", "York Multangular Tower Roman", "Elmet Barwick earthworks", "Archaeologia Britannica Lhuyd 1707", "Welsh chapel Gaiman Patagonia", "Trelew Welsh Patagonia", "Capilla Bethel Gaiman", "Mimosa ship Welsh Patagonia 1865"],
+{"branch": "",
+ "out": "_research/example",
+ "max": 200,
+ "categories": [],
+ "searches": [],
  "files": []}
