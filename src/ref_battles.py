@@ -1000,13 +1000,277 @@ BATTLES += [
    ["a-z.html#az-welsh-guards"], "o"),
 ]
 
+# Every other battle and raid the Welsh Annals (to 954) and Brut y Tywysogion (954–1122, Red Book text, read in
+# ab Ithel's translation) record for Wales and the Britons, plus the best-known raids after 1122. The Brut's own years
+# run a year or two early before 1122, so these use the corrected year with "c.". Where the chronicle names only a
+# region, the date line says "region only" and geo is None. R() also records who each was against.
+_RAID_VS = {}
+
+
+def R(id, en, cy, year, dEn, dCy, geo, era, sEn, sCy, tEn, tCy, vs, win="o", see=()):
+    _RAID_VS[id] = vs
+    BATTLES.append(B(id, en, cy, year, dEn, dCy, geo, era, sEn, sCy, tEn, tCy, see, win))
+
+
+AN, ANC = "(Welsh Annals)", "(Annales Cambriae)"
+R("severn632", "The slaughter of the Severn", "Lladdfa Hafren", 632, f"632 {AN} · place not certain", f"632 {ANC} · lle ansicr", None, "saints",
+  "Britons, against an enemy the annal does not name", "Brythoniaid, yn erbyn gelyn nad yw’r cofnod yn ei enwi",
+  "The Welsh Annals record ‘the slaughter of the Severn, and the death of Idris’. Idris is thought to have been a king of Meirionnydd.",
+  "Mae Annales Cambriae yn cofnodi ‘lladdfa Hafren, a marw Idris’. Credir mai brenin Meirionnydd oedd Idris.", "unknown", "l", ["kings-meirionnydd.html"])
+R("dyfed645", "Dyfed struck and St Davids burned", "Taro Dyfed a llosgi Tyddewi", 645, f"645 {AN} · region only", f"645 {ANC} · ardal yn unig", None, "saints",
+  "The people of Dyfed, against an enemy the annal does not name", "Pobl Dyfed, yn erbyn gelyn nad yw’r cofnod yn ei enwi",
+  "The Welsh Annals record ‘the hammering of the region of Dyfed, when the monastery of David was burnt’.",
+  "Mae Annales Cambriae yn cofnodi ‘taro gwlad Dyfed, pan losgwyd mynachlog Dewi’.", "unknown", "l", ["place-stdavids.html"])
+R("gwent649", "Slaughter in Gwent", "Lladdfa yng Ngwent", 649, f"649 {AN} · region only", f"649 {ANC} · ardal yn unig", None, "saints",
+  "The men of Gwent, against an enemy the annal does not name", "Gwŷr Gwent, yn erbyn gelyn nad yw’r cofnod yn ei enwi",
+  "The Welsh Annals say only: ‘Slaughter in Gwent.’", "Dywed Annales Cambriae yn unig: ‘Lladdfa yng Ngwent.’", "unknown", "l", ["kings-gwent.html"])
+R("badon665", "The second battle of Badon", "Ail frwydr Baddon", 665, f"665 {AN}", f"665 {ANC}", None, "saints",
+  "Britons, against an enemy the annal does not name", "Brythoniaid, yn erbyn gelyn nad yw’r cofnod yn ei enwi",
+  "The Welsh Annals record a second battle of Badon, in the same year as the first celebration of Easter among the Saxons. Nothing more is known of it.",
+  "Mae Annales Cambriae yn cofnodi ail frwydr Baddon, yn yr un flwyddyn â dathlu’r Pasg cyntaf ymhlith y Saeson. Ni wyddys dim mwy amdani.", "unknown", "o", ["battles.html#b-badon"])
+R("carno728", "Mount Carno", "Mynydd Carno", 728, f"728 {AN}", f"728 {ANC}", None, "kings",
+  "Britons, against an enemy the annal does not name", "Brythoniaid, yn erbyn gelyn nad yw’r cofnod yn ei enwi",
+  "The Welsh Annals record ‘the battle of Mount Carno’, with no word on who fought there. It is a different battle from Carno in 951.",
+  "Mae Annales Cambriae yn cofnodi ‘brwydr Mynydd Carno’, heb air am bwy a ymladdodd yno. Mae’n frwydr wahanol i Garno yn 951.", "unknown", "o")
+R("mocetauc", "Mocetauc", "Mocetauc", 750, f"750 {AN} · in the North", f"750 {ANC} · yn y Gogledd", None, "kings",
+  "The Britons of Strathclyde against the Picts", "Brythoniaid Ystrad Clud yn erbyn y Pictiaid",
+  "The Welsh Annals record a battle between the Picts and the Britons at Mocetauc, in which the Pictish king’s brother Talorgan was killed by the Britons.",
+  "Mae Annales Cambriae yn cofnodi brwydr rhwng y Pictiaid a’r Brythoniaid ym Mocetauc, lle lladdwyd Talorgan, brawd brenin y Pictiaid, gan y Brythoniaid.", "picts", "w", ["kings-ystrad-clud.html"])
+R("mynyw810", "St Davids burned", "Llosgi Mynyw", 810, f"810 {AN}", f"810 {ANC}", (51.882, -5.268), "kings",
+  "St Davids, against an enemy the annal does not name", "Tyddewi, yn erbyn gelyn nad yw’r cofnod yn ei enwi",
+  "The Welsh Annals say only: ‘Mynyw burnt.’", "Dywed Annales Cambriae yn unig: ‘Llosgi Mynyw.’", "unknown", "l", ["place-stdavids.html"])
+R("hywelcynan813", "Hywel and Cynan", "Hywel a Chynan", 813, f"813 and 817 {AN}", f"813 a 817 {ANC}", None, "kings",
+  "Hywel against Cynan, in the struggle for Gwynedd", "Hywel yn erbyn Cynan, yn y frwydr am Wynedd",
+  "The Welsh Annals record a battle between Hywel and Cynan in 813, and the battle of Llan-faes in 817, most likely part of the same struggle for Gwynedd. Within a few years Merfyn Frych had taken the kingdom.",
+  "Mae Annales Cambriae yn cofnodi brwydr rhwng Hywel a Chynan yn 813, a brwydr Llan-faes yn 817, yn ôl pob tebyg yn rhan o’r un frwydr am Wynedd. O fewn ychydig flynyddoedd roedd Merfyn Frych wedi cymryd y deyrnas.", "welsh", "o", ["kings-gwynedd.html", "person-merfyn-frych.html"])
+R("cetill844", "Cetill", "Gwaith Cetill", 844, f"844 {AN}", f"844 {ANC}", None, "kings",
+  "Britons, against an enemy the annal does not name", "Brythoniaid, yn erbyn gelyn nad yw’r cofnod yn ei enwi",
+  "In the year that Merfyn Frych died, the Welsh Annals record ‘the battle of Cetill’. Its place and its enemy are unknown.",
+  "Yn y flwyddyn y bu farw Merfyn Frych, mae Annales Cambriae yn cofnodi ‘brwydr Cetill’. Nid yw ei lle na’i gelyn yn hysbys.", "unknown", "o", ["person-merfyn-frych.html"])
+R("meurig849", "The fall of Meurig of Gwent", "Cwymp Meurig o Went", 849, f"849 {AN}", f"849 {ANC}", None, "kings",
+  "Meurig against the Saxons", "Meurig yn erbyn y Saeson",
+  "The Welsh Annals record that Meurig was killed by the Saxons.", "Mae Annales Cambriae yn cofnodi i Feurig gael ei ladd gan y Saeson.", "saxons", "l")
+R("cyngen850", "The fall of Cyngen", "Cwymp Cyngen", 850, f"850 {AN}", f"850 {ANC}", None, "kings",
+  "Cyngen against Viking raiders", "Cyngen yn erbyn ysbeilwyr Llychlynnaidd",
+  "The Welsh Annals record that Cyngen was killed by the heathens, the first Welsh ruler the annals say fell to the Vikings.",
+  "Mae Annales Cambriae yn cofnodi i Gyngen gael ei ladd gan y paganiaid, y rheolwr Cymreig cyntaf y dywed yr annalau iddo syrthio i’r Llychlynwyr.", "vikings", "l")
+R("glywysing864", "Glywysing laid waste", "Anrheithio Glywysing", 864, f"864 {AN} · region only", f"864 {ANC} · ardal yn unig", None, "kings",
+  "Glywysing against Duda", "Glywysing yn erbyn Duda",
+  "The Welsh Annals say ‘Duda laid Glywysing waste’. Who Duda was is not known.", "Dywed Annales Cambriae ‘anrheithiodd Duda Glywysing’. Ni wyddys pwy oedd Duda.", "unknown", "l", ["kings-glywysing.html"])
+R("brynonnen869", "Bryn Onnen", "Gwaith Bryn Onnen", 869, f"869 {AN}", f"869 {ANC}", None, "kings",
+  "Britons, against an enemy the annal does not name", "Brythoniaid, yn erbyn gelyn nad yw’r cofnod yn ei enwi",
+  "The Welsh Annals record ‘the battle of Bryn Onnen’, the hill of the ash trees. Nothing more is known of it.",
+  "Mae Annales Cambriae yn cofnodi ‘brwydr Bryn Onnen’. Ni wyddys dim mwy amdani.", "unknown", "o")
+R("bannguolou873", "Bannguolou", "Gwaith Bannguolou", 873, f"873 {AN}", f"873 {ANC}", None, "kings",
+  "Britons, against an enemy the annal does not name", "Brythoniaid, yn erbyn gelyn nad yw’r cofnod yn ei enwi",
+  "The Welsh Annals record ‘the battle of Bannguolou’. Its place and its enemy are unknown.",
+  "Mae Annales Cambriae yn cofnodi ‘brwydr Bannguolou’. Nid yw ei lle na’i gelyn yn hysbys.", "unknown", "o")
+R("anarawd894", "Anarawd in Ceredigion and Ystrad Tywi", "Anarawd yng Ngheredigion ac Ystrad Tywi", 894, f"894 {AN} · region only", f"894 {ANC} · ardal yn unig", None, "kings",
+  "Anarawd ap Rhodri, with English allies, against the rulers of the south", "Anarawd ap Rhodri, gyda chynghreiriaid Seisnig, yn erbyn rheolwyr y de",
+  "The Welsh Annals record that Anarawd came with the English and laid waste Ceredigion and Ystrad Tywi.",
+  "Mae Annales Cambriae yn cofnodi i Anarawd ddod gyda’r Saeson ac anrheithio Ceredigion ac Ystrad Tywi.", "welsh", "o", ["person-anarawd.html"])
+R("brycheiniog895", "The Northmen in Brycheiniog", "Y Gwŷr o’r Gogledd ym Mrycheiniog", 895, f"895 {AN} · region only", f"895 {ANC} · ardal yn unig", None, "kings",
+  "Brycheiniog, Gwent and Gwynllŵg against a Danish army", "Brycheiniog, Gwent a Gwynllŵg yn erbyn byddin Ddanaidd",
+  "The Welsh Annals record that the Northmen came and laid waste Lloegr and Brycheiniog, Gwent and Gwynllŵg, the same Danish army that had been beaten at Buttington.",
+  "Mae Annales Cambriae yn cofnodi i’r Gwŷr o’r Gogledd ddod ac anrheithio Lloegr a Brycheiniog, Gwent a Gwynllŵg, yr un fyddin Ddanaidd a drechwyd yn Nhal-y-bont.", "vikings", "l", ["kings-brycheiniog.html"])
+R("dinmeir906", "Dinmeir, and St Davids broken", "Dinmeir, a thorri Mynyw", 906, f"906 {AN}", f"906 {ANC}", None, "kings",
+  "Britons, against an enemy the annal does not name", "Brythoniaid, yn erbyn gelyn nad yw’r cofnod yn ei enwi",
+  "The Welsh Annals record ‘the battle of Dinmeir, and Mynyw was broken’.", "Mae Annales Cambriae yn cofnodi ‘brwydr Dinmeir, a thorri Mynyw’.", "unknown", "l", ["place-stdavids.html"])
+R("dinasnewydd921", "Dinas Newydd", "Gwaith Dinas Newydd", 921, f"921 {AN}", f"921 {ANC}", None, "kings",
+  "Britons, against an enemy the annal does not name", "Brythoniaid, yn erbyn gelyn nad yw’r cofnod yn ei enwi",
+  "The Welsh Annals record ‘the battle of Dinas Newydd’. Its place and its enemy are unknown.",
+  "Mae Annales Cambriae yn cofnodi ‘brwydr Dinas Newydd’. Nid yw ei lle na’i gelyn yn hysbys.", "unknown", "o")
+R("brunanburh", "Brunanburh", "Brune", 937, "937 · in northern England", "937 · yng ngogledd Lloegr", None, "kings",
+  "Owain of Strathclyde, with the Scots and the Norse of Dublin, against Athelstan", "Owain o Ystrad Clud, gyda’r Albanwyr a Llychlynwyr Dulyn, yn erbyn Athelstan",
+  "The Welsh Annals note ‘the battle of Brune’. The Britons of Strathclyde fought there with the Scots and the Norse of Dublin against the English king Athelstan, and were beaten. Hywel Dda kept the kingdoms of Wales out of it.",
+  "Mae Annales Cambriae yn nodi ‘brwydr Brune’. Ymladdodd Brythoniaid Ystrad Clud yno gyda’r Albanwyr a Llychlynwyr Dulyn yn erbyn y brenin Seisnig Athelstan, a’u trechu. Cadwodd Hywel Dda deyrnasoedd Cymru allan ohoni.", "saxons", "l", ["kings-ystrad-clud.html", "person-hywel-dda.html"])
+R("strathclyde946", "Strathclyde laid waste", "Anrheithio Ystrad Clud", 946, f"946 {AN} · region only", f"946 {ANC} · ardal yn unig", None, "kings",
+  "The Britons of Strathclyde against King Edmund", "Brythoniaid Ystrad Clud yn erbyn y Brenin Edmund",
+  "The Welsh Annals record that Strathclyde was laid waste by the Saxons.", "Mae Annales Cambriae yn cofnodi i Ystrad Clud gael ei hanrheithio gan y Saeson.", "saxons", "l", ["kings-ystrad-clud.html"])
+R("cadwgan951", "The fall of Cadwgan ab Owain", "Cwymp Cadwgan ab Owain", 951, f"951 {AN}", f"951 {ANC}", None, "kings",
+  "Cadwgan ab Owain against the English", "Cadwgan ab Owain yn erbyn y Saeson",
+  "The Welsh Annals record that Cadwgan son of Owain was killed by the Saxons, in the same year as the battle of Carno.",
+  "Mae Annales Cambriae yn cofnodi i Gadwgan fab Owain gael ei ladd gan y Saeson, yn yr un flwyddyn â brwydr Carno.", "saxons", "l")
+R("dyfed952", "The sons of Idwal in Dyfed", "Meibion Idwal yn Nyfed", 952, f"952 {AN} · region only", f"952 {ANC} · ardal yn unig", None, "kings",
+  "Iago and Ieuaf, sons of Idwal, against the sons of Hywel Dda", "Iago ac Ieuaf, meibion Idwal, yn erbyn meibion Hywel Dda",
+  "After their win at Carno the sons of Idwal carried the war south and, the Welsh Annals say, laid Dyfed waste.",
+  "Wedi eu buddugoliaeth yng Ngharno aeth meibion Idwal â’r rhyfel tua’r de ac, medd Annales Cambriae, anrheithio Dyfed.", "welsh", "o", ["kings-dyfed.html"])
+
+BR, BRC = "(the Brut)", "(y Brut)"
+R("gorwennydd960", "Owain in Gorwennydd", "Owain yng Ngorwennydd", 960, "c. 960 · region only", "tua 960 · ardal yn unig", None, "kings",
+  "Owain ap Hywel of Deheubarth against the lords of Gorwennydd", "Owain ap Hywel o Ddeheubarth yn erbyn arglwyddi Gorwennydd",
+  "The Brut records that Owain ap Hywel Dda laid waste Gorwennydd, the land between the Tawe and the Nedd.",
+  "Mae’r Brut yn cofnodi i Owain ap Hywel Dda anrheithio Gorwennydd, y tir rhwng afon Tawe ac afon Nedd.", "welsh", "o", ["person-owain-ap-hywel.html"])
+R("caergybi961", "Caergybi and Llŷn raided", "Ysbeilio Caergybi a Llŷn", 961, "c. 961", "tua 961", (53.31, -4.63), "kings",
+  "Holyhead and Llŷn against the sons of Olaf", "Caergybi a Llŷn yn erbyn meibion Olaf",
+  "The Brut records that the sons of Abloec, Olaf Cuarán of Dublin, laid waste Caergybi and Llŷn.",
+  "Mae’r Brut yn cofnodi i feibion Abloec, Olaf Cuarán o Ddulyn, anrheithio Caergybi a Llŷn.", "vikings", "l")
+R("tywyn963", "Tywyn raided", "Ysbeilio Tywyn", 963, "c. 963", "tua 963", (52.59, -4.09), "kings",
+  "The clas of Tywyn against Viking raiders", "Clas Tywyn yn erbyn ysbeilwyr Llychlynnaidd",
+  "The Brut records that the heathens laid waste Tywyn, the church of St Cadfan in Meirionnydd.",
+  "Mae’r Brut yn cofnodi i’r paganiaid anrheithio Tywyn, eglwys Sant Cadfan ym Meirionnydd.", "vikings", "l")
+R("aelfhere967", "Ælfhere in Gwynedd", "Ælfhere yng Ngwynedd", 967, "c. 967 · region only", "tua 967 · ardal yn unig", None, "kings",
+  "The sons of Idwal against Ælfhere of Mercia", "Meibion Idwal yn erbyn Ælfhere o Fersia",
+  "The Brut records that the English, led by Ælfhere, ealdorman of Mercia, laid waste the lands of the sons of Idwal.",
+  "Mae’r Brut yn cofnodi i’r Saeson, dan arweiniad Ælfhere, ealdorman Mersia, anrheithio tiroedd meibion Idwal.", "saxons", "l", ["kings-gwynedd.html"])
+R("aberffraw968", "Aberffraw laid waste", "Anrheithio Aberffraw", 968, "c. 968", "tua 968", (53.19, -4.46), "kings",
+  "The royal seat of Gwynedd, against raiders the chronicle does not name", "Llys brenhinol Gwynedd, yn erbyn ysbeilwyr nad yw’r cronicl yn eu henwi",
+  "The Brut records that Aberffraw, the chief court of the kings of Gwynedd, was laid waste. It does not say by whom.",
+  "Mae’r Brut yn cofnodi i Aberffraw, prif lys brenhinoedd Gwynedd, gael ei anrheithio. Nid yw’n dweud gan bwy.", "unknown", "l", ["place-aberffraw.html"])
+R("gower970", "Einion ab Owain in Gower", "Einion ab Owain yng Ngŵyr", 970, "c. 970 and 977 · region only", "tua 970 a 977 · ardal yn unig", None, "kings",
+  "Einion ab Owain of Deheubarth against the lords of Gower", "Einion ab Owain o Ddeheubarth yn erbyn arglwyddi Gŵyr",
+  "Twice, the Brut records, Einion ab Owain, grandson of Hywel Dda, laid waste Gower, pushing the power of Deheubarth east.",
+  "Ddwywaith, medd y Brut, anrheithiodd Einion ab Owain, ŵyr Hywel Dda, Ŵyr, gan wthio grym Deheubarth tua’r dwyrain.", "welsh", "o", ["kings-deheubarth.html"])
+R("penmon971", "Penmon raided", "Ysbeilio Penmon", 971, "c. 971", "tua 971", (53.30, -4.06), "kings",
+  "The clas of Penmon against Maccus son of Harald", "Clas Penmon yn erbyn Maccus fab Harald",
+  "The Brut records that Maccus son of Harald, a Norse king of the Isles, laid waste Penmon, the church of St Seiriol in Môn. The next year his brother Gothfrith laid waste Môn itself.",
+  "Mae’r Brut yn cofnodi i Maccus fab Harald, brenin Llychlynnaidd yr Ynysoedd, anrheithio Penmon, eglwys Sant Seiriol ym Môn. Y flwyddyn wedyn anrheithiodd ei frawd Gothfrith Fôn ei hun.", "vikings", "l")
+R("clynnog978", "Clynnog Fawr raided", "Ysbeilio Clynnog Fawr", 978, "c. 978", "tua 978", (53.02, -4.37), "kings",
+  "Hywel ab Ieuaf with English allies against his uncle Iago", "Hywel ab Ieuaf gyda chynghreiriaid Seisnig yn erbyn ei ewythr Iago",
+  "In his struggle with his uncle Iago for Gwynedd, Hywel ab Ieuaf brought English soldiers into Llŷn, and the Brut records that Clynnog Fawr, the church of St Beuno, was laid waste a second time.",
+  "Yn ei frwydr â’i ewythr Iago am Wynedd, daeth Hywel ab Ieuaf â milwyr Seisnig i Lŷn, ac mae’r Brut yn cofnodi i Glynnog Fawr, eglwys Sant Beuno, gael ei hanrheithio am yr eildro.", "welsh saxons", "o", ["person-beuno.html"])
+R("llanwenog982", "Llanwenog", "Gwaith Llanwenog", 982, "c. 982", "tua 982", (52.07, -4.18), "kings",
+  "The men of Ceredigion, against an enemy the chronicle does not name", "Gwŷr Ceredigion, yn erbyn gelyn nad yw’r cronicl yn ei enwi",
+  "The Brut records ‘the action of Llanwenog’, in Ceredigion, without saying who fought there.",
+  "Mae’r Brut yn cofnodi ‘gwaith Llanwenog’, yng Ngheredigion, heb ddweud pwy a ymladdodd yno.", "unknown", "o")
+R("brycheiniog983", "Ælfhere in Brycheiniog", "Ælfhere ym Mrycheiniog", 983, "c. 983 · region only", "tua 983 · ardal yn unig", None, "kings",
+  "Einion ab Owain and Hywel ab Ieuaf against Ælfhere of Mercia", "Einion ab Owain a Hywel ab Ieuaf yn erbyn Ælfhere o Fersia",
+  "The Brut records that Ælfhere and the English laid waste Brycheiniog and all the lands of Einion ab Owain, and that Hywel and Einion killed many of the English host.",
+  "Mae’r Brut yn cofnodi i Ælfhere a’r Saeson anrheithio Brycheiniog a holl diroedd Einion ab Owain, ac i Hywel ac Einion ladd llawer o’r llu Seisnig.", "saxons", "w", ["kings-brycheiniog.html"])
+R("maredudd986", "Maredudd ab Owain wins Gwynedd", "Maredudd ab Owain yn ennill Gwynedd", 986, "c. 986", "tua 986", None, "kings",
+  "Maredudd ab Owain against Cadwallon ab Ieuaf", "Maredudd ab Owain yn erbyn Cadwallon ab Ieuaf",
+  "The Brut records that Maredudd ab Owain of Deheubarth killed Cadwallon ab Ieuaf and won Môn and Meirionnydd, ruling most of Wales like his grandfather Hywel Dda.",
+  "Mae’r Brut yn cofnodi i Faredudd ab Owain o Ddeheubarth ladd Cadwallon ab Ieuaf ac ennill Môn a Meirionnydd, gan reoli’r rhan fwyaf o Gymru fel ei daid Hywel Dda.", "welsh", "o", ["person-maredudd-ab-owain.html"])
+R("maeshyfaidd991", "Maes Hyfaidd", "Maes Hyfaidd", 991, "c. 991 · region only", "tua 991 · ardal yn unig", None, "kings",
+  "Maredudd ab Owain against the lords of Maes Hyfaidd", "Maredudd ab Owain yn erbyn arglwyddi Maes Hyfaidd",
+  "The Brut records that Maredudd ab Owain laid waste Maes Hyfaidd, the land around Radnor.",
+  "Mae’r Brut yn cofnodi i Faredudd ab Owain anrheithio Maes Hyfaidd, y tir o gwmpas Maesyfed.", "welsh", "o", ["person-maredudd-ab-owain.html"])
+R("edwin992", "Edwin ab Einion’s raid", "Cyrch Edwin ab Einion", 992, "c. 992 · region only", "tua 992 · ardal yn unig", None, "kings",
+  "Edwin ab Einion, with English help, against his uncle Maredudd ab Owain", "Edwin ab Einion, gyda help Seisnig, yn erbyn ei ewythr Maredudd ab Owain",
+  "The Brut records that Edwin ab Einion, with an English leader named Eclis, laid waste Dyfed, Ceredigion, Gower, Cydweli and St Davids. In reply Maredudd hired Norse warriors and laid waste Morgannwg.",
+  "Mae’r Brut yn cofnodi i Edwin ab Einion, gydag arweinydd Seisnig o’r enw Eclis, anrheithio Dyfed, Ceredigion, Gŵyr, Cydweli a Thyddewi. Mewn ateb llogodd Maredudd ryfelwyr Llychlynnaidd ac anrheithio Morgannwg.", "welsh", "o", ["person-maredudd-ab-owain.html"])
+R("llangwm994", "Llangwm", "Gwaith Llangwm", 994, "c. 994", "tua 994", None, "kings",
+  "The sons of Meurig against Maredudd ab Owain", "Meibion Meurig yn erbyn Maredudd ab Owain",
+  "The sons of Meurig raided Gwynedd, and in the battle at Llangwm that followed they beat Maredudd ab Owain, and his nephew Tewdwr ab Einion fell.",
+  "Ysbeiliodd meibion Meurig Wynedd, ac yn y frwydr yn Llangwm a ddilynodd trechasant Faredudd ab Owain, a syrthiodd ei nai Tewdwr ab Einion.", "welsh", "o", ["person-maredudd-ab-owain.html"])
+R("mon993", "Môn raided again", "Ysbeilio Môn eto", 993, "c. 993 · region only", "tua 993 · ardal yn unig", None, "kings",
+  "The people of Môn against Viking raiders", "Pobl Môn yn erbyn ysbeilwyr Llychlynnaidd",
+  "The Brut records yet another raid on Môn by the heathens, one of many in these years.",
+  "Mae’r Brut yn cofnodi cyrch arall eto ar Fôn gan y paganiaid, y pedwerydd ar yr ynys mewn cenhedlaeth.", "vikings", "l")
+R("dyfed1001", "Dyfed raided", "Ysbeilio Dyfed", 1001, "c. 1001 · region only", "tua 1001 · ardal yn unig", None, "kings",
+  "The people of Dyfed against Viking raiders", "Pobl Dyfed yn erbyn ysbeilwyr Llychlynnaidd",
+  "The Brut records that the heathens laid waste Dyfed.", "Mae’r Brut yn cofnodi i’r paganiaid anrheithio Dyfed.", "vikings", "l", ["kings-dyfed.html"])
+R("mynyw1012", "St Davids raided by the English", "Saeson yn ysbeilio Mynyw", 1012, "c. 1012", "tua 1012", (51.884, -5.272), "kings",
+  "St Davids against Eadric and Ubis", "Tyddewi yn erbyn Eadric ac Ubis",
+  "The Brut records that the English, led by Eadric and Ubis, laid waste St Davids.",
+  "Mae’r Brut yn cofnodi i’r Saeson, dan arweiniad Eadric ac Ubis, anrheithio Tyddewi.", "saxons", "l", ["place-stdavids.html"])
+R("eilaf1022", "Eilaf in Dyfed", "Eilaf yn Nyfed", 1022, "c. 1022 · region only", "tua 1022 · ardal yn unig", None, "kings",
+  "Dyfed and St Davids against Earl Eilaf", "Dyfed a Thyddewi yn erbyn yr Iarll Eilaf",
+  "The Brut records that Eilaf, a Danish earl of King Cnut, came to Britain, laid waste Dyfed and destroyed St Davids.",
+  "Mae’r Brut yn cofnodi i Eilaf, iarll Danaidd i’r Brenin Cnut, ddod i Brydain, anrheithio Dyfed a dinistrio Tyddewi.", "vikings", "l", ["place-stdavids.html"])
+R("hiraethwy1034", "Hiraethwy", "Gwaith Hiraethwy", 1034, "c. 1034", "tua 1034", None, "kings",
+  "The sons of Edwin against the sons of Rhydderch", "Meibion Edwin yn erbyn meibion Rhydderch",
+  "The Brut records the battle of Hiraethwy between the sons of Edwin and the sons of Rhydderch, rival families of the south.",
+  "Mae’r Brut yn cofnodi brwydr Hiraethwy rhwng meibion Edwin a meibion Rhydderch, teuluoedd cystadleuol y de.", "welsh", "o", ["kings-deheubarth.html"])
+R("llanbadarn1039", "Llanbadarn laid waste", "Anrheithio Llanbadarn", 1039, "c. 1039", "tua 1039", (52.40, -4.07), "kings",
+  "Gruffudd ap Llywelyn against Hywel ab Edwin", "Gruffudd ap Llywelyn yn erbyn Hywel ab Edwin",
+  "After Rhyd-y-groes, the Brut says, Gruffudd ap Llywelyn laid waste Llanbadarn and drove Hywel ab Edwin from his lands.",
+  "Wedi Rhyd-y-groes, medd y Brut, anrheithiodd Gruffudd ap Llywelyn Lanbadarn a gyrru Hywel ab Edwin o’i diroedd.", "welsh", "o", ["person-gruffudd-ap-llywelyn.html"])
+R("ystradtywi1047", "Gruffudd’s revenge in Ystrad Tywi", "Dial Gruffudd yn Ystrad Tywi", 1047, "c. 1047 · region only", "tua 1047 · ardal yn unig", None, "kings",
+  "Gruffudd ap Llywelyn against the men of Ystrad Tywi", "Gruffudd ap Llywelyn yn erbyn gwŷr Ystrad Tywi",
+  "The Brut tells how the leading men of Ystrad Tywi killed about 140 of Gruffudd ap Llywelyn’s war band by treachery, and how Gruffudd laid waste Ystrad Tywi and Dyfed in revenge. Two years later, it says, all the south was laid waste.",
+  "Mae’r Brut yn adrodd sut y lladdodd prif wŷr Ystrad Tywi tua 140 o osgordd Gruffudd ap Llywelyn drwy frad, a sut yr anrheithiodd Gruffudd Ystrad Tywi a Dyfed i ddial. Ddwy flynedd wedyn, medd, anrheithiwyd y de i gyd.", "welsh", "o", ["person-gruffudd-ap-llywelyn.html"])
+R("magnus1058", "Gruffudd and Magnus raid England", "Gruffudd a Magnus yn ysbeilio Lloegr", 1058, "c. 1058 · in England", "tua 1058 · yn Lloegr", None, "kings",
+  "Gruffudd ap Llywelyn and Magnus, son of the king of Norway, against the English", "Gruffudd ap Llywelyn a Magnus, mab brenin Norwy, yn erbyn y Saeson",
+  "The Brut records that Magnus, son of King Harald of Norway, came with a fleet and raided English lands with Gruffudd ap Llywelyn as his ally, helping to restore Earl Ælfgar.",
+  "Mae’r Brut yn cofnodi i Magnus, mab y Brenin Harald o Norwy, ddod gyda llynges ac ysbeilio tiroedd Seisnig gyda Gruffudd ap Llywelyn yn gynghreiriad iddo, gan helpu i adfer yr Iarll Ælfgar.", "saxons", "w", ["person-gruffudd-ap-llywelyn.html"])
+R("normans1073", "The first Norman raids", "Cyrchoedd cyntaf y Normaniaid", 1073, "c. 1073 and 1074 · region only", "tua 1073 a 1074 · ardal yn unig", None, "kings",
+  "Ceredigion and Dyfed against the Normans", "Ceredigion a Dyfed yn erbyn y Normaniaid",
+  "Seven years after Hastings, the Brut records, the French laid waste Ceredigion and Dyfed, and came back to Ceredigion the next year. The same year heathen raiders laid waste St Davids and Bangor.",
+  "Saith mlynedd wedi Hastings, medd y Brut, anrheithiodd y Ffrancod Geredigion a Dyfed, a dychwelyd i Geredigion y flwyddyn wedyn. Yr un flwyddyn anrheithiodd ysbeilwyr paganaidd Dyddewi a Bangor.", "normans vikings", "l", ["story-unconquered.html"])
+R("cynwrig1075", "The fall of Cynwrig ap Rhiwallon", "Cwymp Cynwrig ap Rhiwallon", 1075, "c. 1075", "tua 1075", None, "kings",
+  "Gruffudd ap Cynan against the men of Môn and Cynwrig ap Rhiwallon", "Gruffudd ap Cynan yn erbyn gwŷr Môn a Chynwrig ap Rhiwallon",
+  "On first landing in Gwynedd, the Brut records, Gruffudd ap Cynan fought the men of Môn, and Cynwrig ap Rhiwallon, who ruled part of the north, was killed by the men of Gwynedd.",
+  "Wedi glanio gyntaf yng Ngwynedd, medd y Brut, ymladdodd Gruffudd ap Cynan â gwŷr Môn, a lladdwyd Cynwrig ap Rhiwallon, a reolai ran o’r gogledd, gan wŷr Gwynedd.", "welsh", "o", ["person-gruffudd-ap-cynan.html"])
+R("gweunytwl1077", "Gweunytwl", "Gwaith Gweunytwl", 1077, "c. 1077", "tua 1077", None, "kings",
+  "Rhys ab Owain and Rhydderch ap Caradog against the sons of Cadwgan", "Rhys ab Owain a Rhydderch ap Caradog yn erbyn meibion Cadwgan",
+  "Two years after Camddwr the sons of Cadwgan tried again, and the Brut records that Rhys and Rhydderch beat them a second time at Gweunytwl.",
+  "Ddwy flynedd wedi Camddwr ceisiodd meibion Cadwgan eto, ac mae’r Brut yn cofnodi i Rys a Rhydderch eu trechu am yr eildro yng Ngweunytwl.", "welsh", "o", ["kings-deheubarth.html"])
+R("dyfed1093", "Cadwgan in Dyfed", "Cadwgan yn Nyfed", 1093, "2 May 1093 · region only", "2 Mai 1093 · ardal yn unig", None, "kings",
+  "Cadwgan ap Bleddyn against the men of Dyfed", "Cadwgan ap Bleddyn yn erbyn gwŷr Dyfed",
+  "Soon after Rhys ap Tewdwr fell, the Brut records, Cadwgan ap Bleddyn plundered Dyfed. Within weeks the Normans had entered Dyfed and Ceredigion and begun building castles there.",
+  "Yn fuan wedi i Rys ap Tewdwr syrthio, medd y Brut, ysbeiliodd Cadwgan ap Bleddyn Ddyfed. O fewn wythnosau roedd y Normaniaid wedi dod i mewn i Ddyfed a Cheredigion a dechrau codi cestyll yno.", "welsh", "o")
+R("castles1094", "The Norman castles thrown down", "Bwrw cestyll y Normaniaid", 1094, "c. 1094 · region", "tua 1094 · ardal", None, "kings",
+  "The Welsh of Gwynedd, Ceredigion and Dyfed against the Norman castles", "Cymry Gwynedd, Ceredigion a Dyfed yn erbyn cestyll y Normaniaid",
+  "The Brut records that the Britons threw down the French castles in Gwynedd, then all the castles of Ceredigion and Dyfed except Pembroke and Rhyd-y-gors, and drove off the people and cattle of Dyfed. In reply the French laid waste Gower, Cydweli and Ystrad Tywi.",
+  "Mae’r Brut yn cofnodi i’r Brythoniaid fwrw i lawr gestyll y Ffrancod yng Ngwynedd, yna holl gestyll Ceredigion a Dyfed ond Penfro a Rhyd-y-gors, a gyrru pobl a gwartheg Dyfed ymaith. Mewn ateb anrheithiodd y Ffrancod Ŵyr, Cydweli ac Ystrad Tywi.", "normans", "w", ["story-unconquered.html"])
+R("gerald1097", "Gerald of Windsor’s raid", "Cyrch Gerallt o Windsor", 1097, "c. 1097 · region only", "tua 1097 · ardal yn unig", None, "kings",
+  "The lands of St Davids against Gerald of Windsor", "Tiroedd Tyddewi yn erbyn Gerallt o Windsor",
+  "The Brut records that Gerald, the steward of Pembroke, laid waste the lands around St Davids.",
+  "Mae’r Brut yn cofnodi i Gerallt, stiward Penfro, anrheithio’r tiroedd o gwmpas Tyddewi.", "normans", "l", ["place-stdavids.html"])
+R("rhydygors1105", "Hywel ap Goronwy’s war", "Rhyfel Hywel ap Goronwy", 1105, "c. 1105 · region", "tua 1105 · ardal", None, "medieval",
+  "Hywel ap Goronwy against the Normans of Rhyd-y-gors", "Hywel ap Goronwy yn erbyn Normaniaid Rhyd-y-gors",
+  "Driven from his lordship, Hywel ap Goronwy burned houses and laid waste the country around the castle of Rhyd-y-gors, killing French soldiers on their way home. He fell soon after through a plot.",
+  "Wedi’i yrru o’i arglwyddiaeth, llosgodd Hywel ap Goronwy dai ac anrheithio’r wlad o gwmpas castell Rhyd-y-gors, gan ladd milwyr Ffrengig ar eu ffordd adref. Syrthiodd yn fuan wedyn drwy gynllwyn.", "normans", "o")
+R("flemings1108", "The Flemings take Rhos", "Y Fflemiaid yn cymryd Rhos", 1108, "c. 1108 · region only", "tua 1108 · ardal yn unig", None, "medieval",
+  "The Welsh of Rhos against Flemish settlers", "Cymry Rhos yn erbyn gwladychwyr Fflemaidd",
+  "The Brut records that Flemings sent by Henry I took the whole cantref of Rhos in Dyfed and drove out its people. It is the start of ‘Little England beyond Wales’ in south Pembrokeshire.",
+  "Mae’r Brut yn cofnodi i Fflemiaid a anfonwyd gan Harri I gymryd cantref Rhos cyfan yn Nyfed a gyrru ei bobl allan. Dyma ddechrau ‘Lloegr fach tu hwnt i Gymru’ yn ne Sir Benfro.", "normans", "l", ["place-penfro.html"])
+R("ceredigion1109", "The raids on Ceredigion", "Y cyrchoedd ar Geredigion", 1109, "c. 1109–1110 · region", "tua 1109–1110 · ardal", None, "medieval",
+  "The princes of Powys against each other and the Normans", "Tywysogion Powys yn erbyn ei gilydd a’r Normaniaid",
+  "The Brut tells of years of raiding among the house of Bleddyn ap Cynfyn: Madog and Ithel ap Rhiryd burned houses and corn across Ceredigion, men fleeing were killed at Llanbadarn, Llanddewi Brefi was plundered, and Owain ap Cadwgan’s men raided Dyfed and the Flemings.",
+  "Mae’r Brut yn adrodd am flynyddoedd o ysbeilio ymhlith teulu Bleddyn ap Cynfyn: llosgodd Madog ac Ithel ap Rhiryd dai ac ŷd ar draws Ceredigion, lladdwyd rhai yn ffoi yn Llanbadarn, ysbeiliwyd Llanddewi Brefi, ac ysbeiliodd gwŷr Owain ap Cadwgan Ddyfed a’r Fflemiaid.", "welsh normans", "o", ["kings-powys.html"])
+R("henry1114", "Henry I invades Gwynedd and Powys", "Harri I yn goresgyn Gwynedd a Phowys", 1114, "c. 1114 · region", "tua 1114 · ardal", None, "medieval",
+  "Gruffudd ap Cynan and Owain ap Cadwgan against Henry I", "Gruffudd ap Cynan ac Owain ap Cadwgan yn erbyn Harri I",
+  "Henry I sent three armies into Gwynedd and Powys, one by way of Mur Castell. Owain ap Cadwgan drew back into Eryri, and the war ended without a battle when the princes made terms.",
+  "Anfonodd Harri I dair byddin i Wynedd a Phowys, un drwy Fur Castell. Tynnodd Owain ap Cadwgan yn ôl i Eryri, a daeth y rhyfel i ben heb frwydr pan wnaeth y tywysogion delerau.", "english", "o", ["person-gruffudd-ap-cynan.html"])
+R("cymer1116", "Cymer castle burned", "Llosgi castell Cymer", 1116, "c. 1116", "tua 1116", (52.76, -3.88), "medieval",
+  "Welsh lords of Meirionnydd against each other", "Arglwyddi Cymreig Meirionnydd yn erbyn ei gilydd",
+  "The Brut records that the castle at Cymer in Meirionnydd was attacked and burned after part of its garrison had fled.",
+  "Mae’r Brut yn cofnodi i’r castell yng Nghymer ym Meirionnydd gael ei ymosod arno a’i losgi wedi i ran o’i warchodlu ffoi.", "welsh", "o", ["kings-meirionnydd.html"])
+R("clwyd1118", "The Vale of Clwyd (Maes Maen Cymro)", "Dyffryn Clwyd (Maes Maen Cymro)", 1118, "c. 1118 · Vale of Clwyd", "tua 1118 · Dyffryn Clwyd", None, "medieval",
+  "Hywel ab Ithel and his allies against the sons of Owain ab Edwin", "Hywel ab Ithel a’i gynghreiriaid yn erbyn meibion Owain ab Edwin",
+  "The Brut records a battle in the Vale of Clwyd, where Hywel ab Ithel’s allies, Maredudd ap Bleddyn and the sons of Cadwgan with some Normans, beat the sons of Owain ab Edwin.",
+  "Mae’r Brut yn cofnodi brwydr yn Nyffryn Clwyd, lle trechodd cynghreiriaid Hywel ab Ithel, Maredudd ap Bleddyn a meibion Cadwgan gyda rhai Normaniaid, feibion Owain ab Edwin.", "welsh", "o", ["kings-powys.html"])
+R("henry1121", "The arrow at Henry I", "Y saeth at Harri I", 1121, "c. 1121 · in Powys", "tua 1121 · ym Mhowys", None, "medieval",
+  "The young archers of Maredudd ap Bleddyn against Henry I", "Saethwyr ifanc Maredudd ap Bleddyn yn erbyn Harri I",
+  "When Henry I marched into Powys, Maredudd ap Bleddyn’s young archers ambushed his army in a steep wooded pass. One arrow struck the king’s breastplate, and Henry made peace soon after.",
+  "Pan orymdeithiodd Harri I i Bowys, ymosododd saethwyr ifanc Maredudd ap Bleddyn ar ei fyddin mewn bwlch coediog serth. Trawodd un saeth ddwyfronneg y brenin, a gwnaeth Harri heddwch yn fuan wedyn.", "english", "w", ["kings-powys.html", "story-longbow.html"])
+R("meirionnydd1121", "Gwynedd takes Meirionnydd", "Gwynedd yn cymryd Meirionnydd", 1121, "c. 1121 · region only", "tua 1121 · ardal yn unig", None, "medieval",
+  "The sons of Gruffudd ap Cynan against the men of Meirionnydd and Powys", "Meibion Gruffudd ap Cynan yn erbyn gwŷr Meirionnydd a Phowys",
+  "The Brut records that the sons of Gruffudd ap Cynan raided Meirionnydd and moved its people and goods into Llŷn, the first step in Gwynedd’s growth under Owain Gwynedd.",
+  "Mae’r Brut yn cofnodi i feibion Gruffudd ap Cynan ysbeilio Meirionnydd a symud ei phobl a’i heiddo i Lŷn, y cam cyntaf yn nhwf Gwynedd dan Owain Gwynedd.", "welsh", "o", ["person-owain-gwynedd.html"])
+
+# After 1122: the best-known raids, from the standard histories rather than a text read for this page.
+R("carmarthen1137", "Carmarthen burned", "Llosgi Caerfyrddin", 1137, "1137", "1137", (51.857, -4.305), "medieval",
+  "Owain Gwynedd and Cadwaladr against the Norman castles of the south", "Owain Gwynedd a Chadwaladr yn erbyn cestyll Normanaidd y de",
+  "On their third march into the south after Crug Mawr, Owain and Cadwaladr burned castles across Ceredigion and the castle of Carmarthen.",
+  "Ar eu trydedd ymgyrch i’r de wedi Crug Mawr, llosgodd Owain a Chadwaladr gestyll ar draws Ceredigion a chastell Caerfyrddin.", "normans", "w", ["person-owain-gwynedd.html"])
+R("cardigan1165", "Cardigan and Cilgerran taken", "Cipio Aberteifi a Chilgerran", 1165, "1165", "1165", (52.08, -4.66), "medieval",
+  "The Lord Rhys against the Normans of Cardigan", "Yr Arglwydd Rhys yn erbyn Normaniaid Aberteifi",
+  "The Lord Rhys took Cardigan castle and Cilgerran, winning back the whole of Ceredigion. Cardigan became his own castle, where he held the first recorded eisteddfod in 1176.",
+  "Cipiodd yr Arglwydd Rhys gastell Aberteifi a Chilgerran, gan adennill Ceredigion gyfan. Daeth Aberteifi’n gastell iddo ef ei hun, lle cynhaliodd yr eisteddfod gyntaf a gofnodwyd yn 1176.", "normans", "w", ["person-yr-arglwydd-rhys.html", "place-cardigan.html"])
+R("abergavenny1175", "Abergavenny", "Y Fenni", 1175, "Christmas 1175", "Nadolig 1175", (51.82, -3.02), "medieval",
+  "Seisyll ap Dyfnwal and the Welsh lords of Gwent against William de Braose", "Seisyll ap Dyfnwal ac arglwyddi Cymreig Gwent yn erbyn William de Braose",
+  "William de Braose invited Seisyll ap Dyfnwal and the leading men of Gwent to his castle at Abergavenny for Christmas, and had them killed at the feast. The chronicle says that after it no Welshman dared trust the French. In 1182 the men of Gwent took the castle and burned it.",
+  "Gwahoddodd William de Braose Seisyll ap Dyfnwal a phrif wŷr Gwent i’w gastell yn y Fenni dros y Nadolig, a pharodd eu lladd yn y wledd. Dywed y cronicl na feiddiai’r un Cymro ymddiried yn y Ffrancod wedi hynny. Yn 1182 cipiodd gwŷr Gwent y castell a’i losgi.", "normans", "l", ["kings-gwent.html"])
+R("narberth1220", "Narberth and Wiston", "Arberth a Chas-wis", 1220, "1220", "1220", (51.80, -4.74), "medieval",
+  "Llywelyn ab Iorwerth against the Flemings and Normans of Dyfed", "Llywelyn ab Iorwerth yn erbyn Fflemiaid a Normaniaid Dyfed",
+  "Llywelyn led his army into Dyfed and threw down the castles of Narberth and Wiston, and the Flemings of Rhos had to make peace with him.",
+  "Arweiniodd Llywelyn ei fyddin i Ddyfed a bwrw i lawr gestyll Arberth a Chas-wis, a bu’n rhaid i Fflemiaid Rhos wneud heddwch ag ef.", "normans", "w", ["person-llywelyn-fawr.html"])
+R("marshal1223", "William Marshal retakes Cardigan and Carmarthen", "William Marshal yn adennill Aberteifi a Chaerfyrddin", 1223, "1223", "1223", (52.083, -4.665), "medieval",
+  "Llywelyn ab Iorwerth’s garrisons against William Marshal, Earl of Pembroke", "Gwarchodluoedd Llywelyn ab Iorwerth yn erbyn William Marshal, Iarll Penfro",
+  "The younger William Marshal landed from Ireland with an army and took back Cardigan and Carmarthen, which Llywelyn had held since 1215.",
+  "Glaniodd William Marshal yr ieuengaf o Iwerddon gyda byddin ac adennill Aberteifi a Chaerfyrddin, a ddaliodd Llywelyn ers 1215.", "normans", "l", ["person-llywelyn-fawr.html"])
+
 # Who each battle was against, for the filter on battles.html. A battle can be against more than one.
 AGAINST = {
     "rome": ("Rome", "Rhufain"), "saxons": ("Saxons and Angles", "Saeson ac Eingl"), "vikings": ("Vikings", "Llychlynwyr"),
     "irish": ("The Irish", "Y Gwyddelod"), "welsh": ("Welsh against Welsh", "Cymry yn erbyn Cymry"),
     "normans": ("Normans and Marcher lords", "Normaniaid ac arglwyddi’r Mers"), "english": ("Kings of England", "Brenhinoedd Lloegr"),
     "roses": ("Wars of the Roses", "Rhyfeloedd y Rhos"), "civil": ("The Civil War", "Y Rhyfel Cartref"), "france": ("France", "Ffrainc"),
-    "risings": ("Risings and protests", "Gwrthryfeloedd a phrotestiadau"), "germany": ("Germany", "Yr Almaen"),
+    "risings": ("Risings and protests", "Gwrthryfeloedd a phrotestiadau"), "germany": ("Germany", "Yr Almaen"), "picts": ("The Picts", "Y Pictiaid"),
+    "unknown": ("Enemy not named", "Gelyn heb ei enwi"),
     "abroad": ("Other wars abroad", "Rhyfeloedd tramor eraill"),
 }
 VS = {
@@ -1050,6 +1314,7 @@ VS = {
     "tsingtao1914": "germany", "gheluvelt1914": "germany", "loos1915": "germany", "gaza1917": "abroad", "doiran1918": "abroad",
     "boulogne1940": "germany", "cassino1944": "germany", "korea1951": "abroad", "helmand2009": "abroad",
 }
+VS.update(_RAID_VS)
 for _b in BATTLES:
     _b["vs"] = VS[_b["id"]].split()
     assert all(v in AGAINST for v in _b["vs"]), _b["id"]
