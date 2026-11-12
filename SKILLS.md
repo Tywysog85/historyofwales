@@ -194,6 +194,9 @@ This file collects the techniques and lessons from building History of Wales. Ad
 ### Checking quality
 - Take screenshots at computer width (1280px) and phone width (390px) with Playwright before publishing.
 - Run axe-core for accessibility. Headings must go in order (h1 → h2 → h3). A visually hidden heading (`.vh`) can fill a gap.
+- Sweep many pages at once: serve `_site` (`python3 -m http.server`), then load each page on a phone-sized Playwright window, add `axe.min.js` with `addScriptTag` and print `axe.run()` violations. Pale text usually comes from `opacity` on a whole card or label, not from the colour itself: raise the opacity rather than changing the colour. White on the site red needs the darker red `#b8302a` for small text.
+- Don't use `<aside>` inside the page's main content (axe flags it): use a `<div>` or `<section>` with the same class.
+- A box that scrolls on its own (`overflow:auto`) needs `tabindex="0"` so keyboard users can scroll it. A `<textarea>` needs an `aria-label`.
 - Run Lighthouse for performance, accessibility, best practice and SEO. The home page scored 92/100/100/100.
 
 ## The redesign (November 2026)

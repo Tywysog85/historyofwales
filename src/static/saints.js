@@ -24,7 +24,7 @@
     g.classList.add("sel");
     var ids = g.dataset.s.split(" ");
     card.style.setProperty("--c", g.style.getPropertyValue("--c"));
-    card.innerHTML = '<p class="eyebrow">' + bi("Llan", "Llan") + "</p><h3>" + esc(g.dataset.n) + "</h3>" + (g.dataset.en ? '<p class="en l-en" lang="en">' + esc(g.dataset.en) + "</p>" : "") +
+    card.innerHTML = '<p class="eyebrow">' + bi("Llan", "Llan") + "</p><h2>" + esc(g.dataset.n) + "</h2>" + (g.dataset.en ? '<p class="en l-en" lang="en">' + esc(g.dataset.en) + "</p>" : "") +
       "<p>" + bi("Named after, or linked with:", "Wedi’i henwi ar ôl, neu’n gysylltiedig â:") + "</p><ul>" +
       ids.map(function (id) { return "<li>" + saintLink(id) + " →</li>"; }).join("") + "</ul>";
   }
@@ -43,7 +43,7 @@
     }
     var mine = dots.filter(function (x) { return x.dataset.s.split(" ").indexOf(id) >= 0; });
     if (mine[0]) card.style.setProperty("--c", mine[0].style.getPropertyValue("--c"));
-    card.innerHTML = '<p class="eyebrow">' + bi(mine.length + (mine.length === 1 ? " place" : " places"), mine.length + " o leoedd") + "</p><h3>" + saintLink(id) + "</h3><ul>" +
+    card.innerHTML = '<p class="eyebrow">' + bi(mine.length + (mine.length === 1 ? " place" : " places"), mine.length + " o leoedd") + "</p><h2>" + saintLink(id) + "</h2><ul>" +
       mine.map(function (x) { return "<li>" + esc(x.dataset.n) + (x.dataset.en ? ' <span class="en l-en" lang="en">· ' + esc(x.dataset.en) + "</span>" : "") + "</li>"; }).join("") + "</ul>";
   }
 
@@ -115,7 +115,7 @@
     var f = today[0] || next;
     var when = f[1] + " " + MON[f[0] - 1][0], whenCy = f[1] + " " + MON[f[0] - 1][1];
     box.innerHTML = '<p class="eyebrow">' + (today.length ? bi("Today, " + when + ", is the feast of", "Heddiw, " + whenCy + ", yw gŵyl") : bi("The next saint’s day: " + when, "Dydd gŵyl nesaf y saint: " + whenCy)) + "</p>" +
-      today.concat(today.length ? [] : [f]).map(function (x) { return '<h3><a href="' + x[4] + '">' + bi(x[2], x[3]) + "</a></h3><p>" + bi(x[5], x[6]) + "</p>"; }).join("") +
+      today.concat(today.length ? [] : [f]).map(function (x) { return '<h2><a href="' + x[4] + '">' + bi(x[2], x[3]) + "</a></h2><p>" + bi(x[5], x[6]) + "</p>"; }).join("") +
       '<p><a class="go" href="#cal">' + bi("See the whole calendar", "Gweld y calendr cyfan") + " →</a></p>";
     [].forEach.call(document.querySelectorAll('.cal li[data-m="' + m + '"][data-d="' + day + '"]'), function (li) { li.classList.add("today"); });
   }

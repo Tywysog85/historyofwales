@@ -744,7 +744,7 @@ def just_added(kind, items, href, title, key=lambda x: x["id"], n=4, h_en="Just 
     if not xs:
         return ""
     lis = "".join(f'<li><a href="{href(x)}"><b>{bi(*title(x))}</b><small class="ja-d">{bi(added_date(kind, key(x)), added_date(kind, key(x), True))}</small></a></li>' for x in xs)
-    return f'<aside class="just-added" aria-label="{h_en} / {h_cy}"><h2>{bi(h_en, h_cy)}</h2><ul>{lis}</ul></aside>'
+    return f'<section class="just-added" aria-label="{h_en} / {h_cy}"><h2>{bi(h_en, h_cy)}</h2><ul>{lis}</ul></section>'
 
 
 def legend_card(x):
@@ -839,7 +839,7 @@ def legend_page(x, i):
     nxt = F.LEGENDS[(i + 1) % len(F.LEGENDS)]
     main = (hero(x["era"], f'<a href="index.html">{SITE}</a> / <a href="legends.html">{bi("Legends", "Chwedlau")}</a>', "book", x["place"], x["place"], x["en"], x["cy"], x["sumEn"], x["sumCy"], art=x["art"], photo=True)
             + f'<section class="article"><div class="wrap narrow">{prose_bi(x["pEn"], x["pCy"], "prose tale")}'
-              f'<aside class="behind"><p class="eyebrow">{bi(x.get("hLabelEn", "The history behind the legend"), x.get("hLabelCy", "Yr hanes y tu ôl i’r chwedl"))}</p><p>{bi(x["hEn"], x["hCy"])}</p></aside>'
+              f'<div class="behind"><p class="eyebrow">{bi(x.get("hLabelEn", "The history behind the legend"), x.get("hLabelCy", "Yr hanes y tu ôl i’r chwedl"))}</p><p>{bi(x["hEn"], x["hCy"])}</p></div>'
               + (f'<p class="l-links">' + "".join(f'<a class="btn" href="{h}">{bi(en, cy)} →</a>' for h, en, cy in x["links"]) + '</p>' if x.get("links") else "") +
               f'<p class="byline"><button type="button" class="copy" data-copy="legend-{x["id"]}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button></p>{legend_credit(x["art"])}</div></section>'
             + set_block(f"legend:{x['id']}")
@@ -1565,7 +1565,7 @@ def today_page():
     def fig(lang, label):
         txt = _today_text(day, r, lang)
         return (f'<figure class="today-fig"><img src="cards/today-{lang}.jpg?d={stamp}" width="1080" height="1080" alt="{e(txt.split(chr(10))[0])}" loading="lazy">'
-                f'<figcaption><p class="eyebrow">{label}</p><textarea readonly rows="7" id="cap-{lang}" lang="{"en" if lang == "en" else "cy"}">{e(txt)}</textarea>'
+                f'<figcaption><p class="eyebrow">{label}</p><textarea readonly rows="7" id="cap-{lang}" aria-label="{e(label)}" lang="{"en" if lang == "en" else "cy"}">{e(txt)}</textarea>'
                 f'<p class="more-row"><a class="btn solid" href="cards/today-{lang}.jpg?d={stamp}" download="hanes-cymru-{day}-{lang}.jpg">{bi("Download the picture", "Lawrlwytho’r llun")}</a>'
                 f'<button type="button" class="btn" data-copytext="cap-{lang}">{bi("Copy the words", "Copïo’r geiriau")}</button></p></figcaption></figure>')
     more = "".join(otd_item(x) for x in todays[1:])
@@ -1864,22 +1864,22 @@ def kings_page():
         cur.append(ruler_li(x, chips))
     every += f'<ol class="era-events royal">{"".join(cur)}</ol>' if cur else ""
     n_all = len(all_rulers())
-    one = (f'<aside class="behind one-king"><p class="eyebrow">{bi("1055–1063 · One king of all Wales", "1055–1063 · Un brenin ar Gymru gyfan")}</p>'
+    one = (f'<div class="behind one-king"><p class="eyebrow">{bi("1055–1063 · One king of all Wales", "1055–1063 · Un brenin ar Gymru gyfan")}</p>'
            f'<h2>{bi("Gruffudd ap Llywelyn, King of Wales", "Gruffudd ap Llywelyn, Brenin Cymru")}</h2>'
            + paras(RY.GRUFFUDD["en"], RY.GRUFFUDD["cy"]) +
-           f'<p><a class="go" href="person-gruffudd-ap-llywelyn.html">{bi("Read his story", "Darllen ei hanes")} →</a> &nbsp; <a class="go" href="index.html#map">{bi("See his Wales on the kingdoms map", "Gweld ei Gymru ar fap y teyrnasoedd")} →</a></p></aside>')
+           f'<p><a class="go" href="person-gruffudd-ap-llywelyn.html">{bi("Read his story", "Darllen ei hanes")} →</a> &nbsp; <a class="go" href="index.html#map">{bi("See his Wales on the kingdoms map", "Gweld ei Gymru ar fap y teyrnasoedd")} →</a></p></div>')
     main = (hero("kings", f'<a href="index.html">{SITE}</a>', "crown", "c. 450–1415", "tua 450–1415", "Kings and princes of Wales", "Brenhinoedd a thywysogion Cymru",
                  "For a thousand years Wales was a land of kingdoms. Great kings brought most of it together, one king ruled it all, and its princes carried the title Prince of Wales.",
                  "Am fil o flynyddoedd gwlad o deyrnasoedd oedd Cymru. Daeth brenhinoedd mawr â’r rhan fwyaf ohoni ynghyd, rheolodd un brenin y cyfan, a dygodd ei thywysogion y teitl Tywysog Cymru.", art="castle")
             + section(one, top=True)
             + section(lst(RY.MOST), "Kings who ruled most of Wales", "Brenhinoedd a reolodd y rhan fwyaf o Gymru")
             + section('<span id="princes"></span>' + lst(RY.PRINCES) + f'<p class="lede" style="margin-top:1.5rem">{bi(RY.CODA["en"], RY.CODA["cy"])} <a href="person-harri-tudur.html">{bi("Harri Tudur", "Harri Tudur")} →</a></p>', "Princes of Wales", "Tywysogion Cymru")
-            + section(f'<aside class="behind one-king"><p class="eyebrow">{bi("Rhodri Mawr to Harri Tudur", "Rhodri Mawr i Harri Tudur")}</p><h2>{bi("Royal family trees", "Coed teulu brenhinol")}</h2>'
+            + section(f'<div class="behind one-king"><p class="eyebrow">{bi("Rhodri Mawr to Harri Tudur", "Rhodri Mawr i Harri Tudur")}</p><h2>{bi("Royal family trees", "Coed teulu brenhinol")}</h2>'
                       f'<p>{bi("The royal houses of Wales were one great family. See how Gwynedd, Deheubarth, Powys and Gwent married into one another, and how their blood came to the throne at Bosworth with Harri Tudur. Tap anyone to light up their line.", "Un teulu mawr oedd tai brenhinol Cymru. Gwelwch sut y priododd Gwynedd, Deheubarth, Powys a Gwent â’i gilydd, a sut y daeth eu gwaed i’r orsedd yn Bosworth gyda Harri Tudur. Tapiwch unrhyw un i oleuo’i linach.")}</p>'
-                      f'<p><a class="go" href="family-trees.html">{bi("See the family trees", "Gweld y coed teulu")} →</a></p></aside>')
-            + section(f'<aside class="behind one-king"><p class="eyebrow">{bi("Cyfraith Hywel · about 945 to 1543", "Cyfraith Hywel · tua 945 i 1543")}</p><h2>{bi("The Laws of Hywel Dda", "Cyfreithiau Hywel Dda")}</h2>'
+                      f'<p><a class="go" href="family-trees.html">{bi("See the family trees", "Gweld y coed teulu")} →</a></p></div>')
+            + section(f'<div class="behind one-king"><p class="eyebrow">{bi("Cyfraith Hywel · about 945 to 1543", "Cyfraith Hywel · tua 945 i 1543")}</p><h2>{bi("The Laws of Hywel Dda", "Cyfreithiau Hywel Dda")}</h2>'
                       f'<p>{bi("The kings of Wales ruled by a law of their own for six hundred years. Read how it was made at Whitland, what it said about crime, honour, marriage and land, and see the manuscripts that carried it.", "Rheolai brenhinoedd Cymru dan eu cyfraith eu hunain am chwe chan mlynedd. Darllenwch sut y’i lluniwyd yn Hendy-gwyn, beth a ddywedai am drosedd, anrhydedd, priodas a thir, a gwelwch y llawysgrifau a’i cariodd.")}</p>'
-                      f'<p><a class="go" href="laws.html">{bi("Read about the laws", "Darllen am y cyfreithiau")} →</a></p></aside>')
+                      f'<p><a class="go" href="laws.html">{bi("Read about the laws", "Darllen am y cyfreithiau")} →</a></p></div>')
             + section(f'<div class="era-places">{"".join(realm_tile(r) for r in RY.REALMS if r.get("group") != "north")}</div>', "The kingdoms, one by one", "Y teyrnasoedd, fesul un")
             + section(f'<span id="old-north"></span><p class="lede" style="margin-bottom:1.5rem">{bi(RY.NORTH_INTRO["en"], RY.NORTH_INTRO["cy"])}</p><div class="era-places">{"".join(realm_tile(r) for r in RY.REALMS if r.get("group") == "north")}</div>', "The Old North: Yr Hen Ogledd", "Yr Hen Ogledd")
             + section(f'<p class="lede">{bi(f"All {n_all} kings, princes and lords on this site, from every kingdom, oldest first. Tap a kingdom to see its own line.", f"Pob un o’r {n_all} o frenhinoedd, tywysogion ac arglwyddi ar y wefan hon, o bob teyrnas, yr hynaf yn gyntaf. Tapiwch deyrnas i weld ei llinach ei hun.")}</p>'
@@ -2351,7 +2351,7 @@ a.chip.ll { cursor: pointer } a.chip.ll:hover { border-color: var(--c) }
 .ll-out .eq { font: 400 clamp(1.5rem, 4vw, 2.2rem)/1.15 var(--f-display) } .ll-out .eq em { color: var(--c); font-style: normal }
 .today-card { margin-top: 2rem; display: grid; gap: .4rem; background: radial-gradient(120% 140% at 100% 0%, color-mix(in srgb, var(--e-saints) 22%, transparent), transparent 60%), var(--slate); border: 1px solid color-mix(in srgb, var(--e-saints) 40%, var(--line)); border-radius: 18px; padding: 1.3rem 1.5rem }
 .today-card .eyebrow { color: var(--e-saints) }
-.today-card h3 { font: 400 clamp(1.8rem, 4.5vw, 2.6rem)/1.05 var(--f-display) }
+.today-card h3, .today-card h2 { margin: 0; font: 400 clamp(1.8rem, 4.5vw, 2.6rem)/1.05 var(--f-display) }
 .today-card p { color: var(--muted) }
 .cal { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); gap: 1rem }
 .cal-m { background: var(--slate); border: 1px solid var(--line); border-radius: 14px; padding: 1rem 1.1rem }
@@ -2399,11 +2399,11 @@ def saints_page():
         every += (f'<h3 class="sub-h saints-h" style="--c:{r["col"]}">{bi(r["en"], r["cy"])}<a href="saints-{r["id"]}.html">{bi("The region’s page", "Tudalen y rhanbarth")} →</a></h3>'
                   f'<ol class="era-events royal" data-era="{r["era"]}">{"".join(saint_li(x) for x in r["saints"])}</ol>')
     dewi = SAINT["dewi"][0]
-    lead = (f'<aside class="behind one-king"><p class="eyebrow">{bi("Feast day 1 March · Patron saint of Wales", "Dydd gŵyl 1 Mawrth · Nawddsant Cymru")}</p>'
+    lead = (f'<div class="behind one-king"><p class="eyebrow">{bi("Feast day 1 March · Patron saint of Wales", "Dydd gŵyl 1 Mawrth · Nawddsant Cymru")}</p>'
             f'<h2>{bi("Dewi Sant, Saint David", "Dewi Sant")}</h2>' + paras(SA.DEWI["en"], SA.DEWI["cy"]) +
-            f'<p><a class="go" href="person-dewi-sant.html">{bi("Read his story", "Darllen ei hanes")} →</a> &nbsp; <a class="go" href="saints-dyfed.html">{bi("The saints of Dyfed", "Seintiau Dyfed")} →</a> &nbsp; <a class="go" href="place-stdavids.html">{bi("Visit St Davids", "Ymweld â Thyddewi")} →</a></p></aside>')
+            f'<p><a class="go" href="person-dewi-sant.html">{bi("Read his story", "Darllen ei hanes")} →</a> &nbsp; <a class="go" href="saints-dyfed.html">{bi("The saints of Dyfed", "Seintiau Dyfed")} →</a> &nbsp; <a class="go" href="place-stdavids.html">{bi("Visit St Davids", "Ymweld â Thyddewi")} →</a></p></div>')
     today = (f'<div class="today-card" id="today-saint"><p class="eyebrow">{bi("The saints’ calendar", "Calendr y saint")}</p>'
-             f'<h3>{bi(dewi["en"], dewi["cy"])}</h3><p>{bi("Every saint on this page has a feast day. Their days are listed in the calendar at the foot of the page.", "Mae gan bob sant ar y dudalen hon ddydd gŵyl. Rhestrir eu dyddiau yn y calendr ar waelod y dudalen.")}</p></div>')
+             f'<h2 class="h3">{bi(dewi["en"], dewi["cy"])}</h2><p>{bi("Every saint on this page has a feast day. Their days are listed in the calendar at the foot of the page.", "Mae gan bob sant ar y dudalen hon ddydd gŵyl. Rhestrir eu dyddiau yn y calendr ar waelod y dudalen.")}</p></div>')
     n_all = len(SAINT)
     n_ll = len({n for r in SA.REGIONS for x in r["saints"] for n in x["places"] if not SA.LL[n][3]})
     main = (hero("saints", f'<a href="index.html">{SITE}</a>', "cross", "c. 400–700 · The Age of the Saints", "tua 400–700 · Oes y Saint", "Saints of Wales", "Seintiau Cymru",
@@ -2808,10 +2808,10 @@ def castles_page():
               f'<div class="cm-zoom"><button type="button" id="cm-in" aria-label="Zoom in / Chwyddo i mewn">+</button><button type="button" id="cm-out" aria-label="Zoom out / Chwyddo allan">−</button>'
               f'<button type="button" id="cm-home" aria-label="Whole of Wales / Cymru gyfan"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2"/></svg></button></div>'
               f'<p class="cm-hint" id="cm-hint">{bi("Drag to move, pinch or scroll to zoom, tap a castle", "Llusgwch i symud, pinsiwch neu sgroliwch i chwyddo, tapiwch gastell")}</p></div>'
-              f'<aside class="cm-side"><div id="cm-card" class="cm-card" aria-live="polite">'
+              f'<div class="cm-side"><div id="cm-card" class="cm-card" aria-live="polite" tabindex="0">'
               f'<p class="eyebrow">{bi(f"{n_all} castle sites", f"{n_all} o safleoedd cestyll")}</p>'
               f'<h2>{bi("Choose a castle", "Dewiswch gastell")}</h2><p class="muted">{bi("Tap any dot on the map, search by name, or find the castles nearest to you. The red dots are castles built by the Welsh.", "Tapiwch unrhyw ddot ar y map, chwiliwch yn ôl enw, neu dewch o hyd i’r cestyll agosaf atoch. Cestyll a godwyd gan y Cymry yw’r dotiau coch.")}</p>'
-              f'<ul class="cm-legend">{legend}</ul></div></aside></div>')
+              f'<ul class="cm-legend">{legend}</ul></div></div></div>')
 
     def fcard(q):
         r = by_q[q]
