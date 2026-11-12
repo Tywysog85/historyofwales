@@ -649,7 +649,7 @@ Learnt while simplifying the home page.
 - Pictures are only ones already kept on the site with their Commons credit: `g:<id>` from the gallery, `p:<id>` from the person photos, `l:<key>` from the legend photos. Add `@50% 15%` to a ref to move the crop (e.g. to keep a face in frame).
 - To change a page's picture, change its line in `PAGE`. Pages not listed use their place's own gallery picture, or the picture for their age (`ERA`). `build.py` runs `PX.dress()` on every page, so new pages get a picture automatically.
 - The top picture loads at once (`fetchpriority="high"`, 600px copy for phones through `srcset`); card pictures load lazily from the small copy. The build stops if a named picture's file is missing.
-- Commons can't be reached from the cloud. New pictures have to be downloaded on the Mini-PC (Remote Control) and added to the gallery first.
+- New pictures: Commons can't be reached from the cloud, so look them up on GitHub. Put the searches in `tools/commons_research_in.json` with your own branch name and push it; the Commons research workflow commits `_research/<folder>/found.json` and previews. Add the chosen file to `EXTRA` in `src/pictures.py` (credit and captions) and use it as `c:<Commons file>`. Then run the fetch-photos workflow on your branch, which saves the WebP copies. Delete `_research/` before merging.
 
 ### Sources beside the claims (November 2026)
 
