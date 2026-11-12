@@ -325,7 +325,7 @@ EXTRA.update({
     "Hendregadredd Manuscript-small.jpg": ("Medieval scribe; National Library of Wales", "Public domain", _PD,
         "A page of the Hendregadredd Manuscript", "Tudalen o Lawysgrif Hendregadredd"),
     "Jesus-College-MS-119 00007 2r.jpg": ("Jesus College, Oxford; photograph by the Bodleian Libraries", "CC BY 4.0", _BY + "4.0/",
-        "Notes at the front of the Book of the Anchorite of Llanddewibrefi, written in 1346", "Nodiadau ar ddechrau Llyfr Ancr Llanddewibrefi, a ysgrifennwyd yn 1346"),
+        "A later owner’s note in the Book of the Anchorite: it was written for Gruffudd ap Llywelyn of Cantref Mawr in 1346", "Nodyn gan berchennog diweddarach yn Llyfr Ancr: fe’i hysgrifennwyd i Ruffudd ap Llywelyn o’r Cantref Mawr yn 1346"),
     "Llyfr du Basing (4401103).jpg": ("Gutun Owain and an earlier scribe; National Library of Wales", "CC0", _CC0,
         "A page of the Black Book of Basingwerk", "Tudalen o Lyfr Du Basing"),
     "Peniarth, Merionethshire 06.jpeg": ("Thomas Nicholls", "Public domain", _PD,
