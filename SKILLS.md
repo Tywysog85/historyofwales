@@ -97,10 +97,11 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - `paintSets()` in `src/static/site.js` marks the collected cards from the journey on the reader's device, shows "New card" and "Set complete" messages, and remembers finished sets in `j.s`. Two badges go with them: Collector (one set) and Keeper of treasures (five sets).
 - To test, put keys such as `person:owain-gwynedd` into `localStorage["hc-journey"].v` in Playwright, then open a page in that set.
 
-### Read further links: Dictionary of Welsh Biography, Coflein, Welsh Wikipedia (November 2026)
-- `tools/fetch_sources.py` asks English Wikipedia for each person's and place's Wikidata item (following redirects), then asks Wikidata for the Dictionary of Welsh Biography id, the Coflein id and the Welsh Wikipedia article. It writes `src/source_links.json`.
-- It runs on GitHub (`.github/workflows/fetch-sources.yml`), because Wikimedia is blocked from Claude's cloud computer. It runs when the script changes on a claude/ branch, on the 1st of each month, or from the Actions tab.
-- `further()` in `build.py` draws the "Read further" buttons. In Welsh the Dictionary link goes to bywgraffiadur.cymru and the Wikipedia link to cy.wikipedia.org.
+### Sources and further reading: better sources than Wikipedia (November 2026)
+- `tools/fetch_sources.py` asks English Wikipedia for the Wikidata item of every person, place and event (following redirects), then asks Wikidata for each item's ids in the Dictionary of Welsh Biography, Oxford Dictionary of National Biography, History of Parliament, UK Parliament, Coflein, Cadw (scheduled monuments and listed buildings), Art UK, Olympedia, World Athletics and Britannica, and the Welsh Wikipedia article. `KINDS` says which sources suit people, places and events.
+- It opens every link before keeping it, and leaves out any that does not open (the log lists them). It writes `src/source_links.json` (keys `person:<id>`, `place:<id>`, `event:<slug>`).
+- It runs on GitHub (`.github/workflows/fetch-sources.yml`), because Wikimedia is blocked from Claude's cloud computer. It runs when the script changes on a claude/ branch, on the 1st of each month, or from the Actions tab, and commits the file to that branch.
+- `further()` in `build.py` draws the "Sources and further reading" buttons on person, place and event pages, in the order of `SOURCES`, with Wikipedia always last. In Welsh the Dictionary link goes to bywgraffiadur.cymru and Wikipedia to cy.wikipedia.org. The cards on lists carry no source link (Ifan, November 2026).
 
 ### Today's picture to share (November 2026)
 - `today.html` shows a square 1080 x 1080 picture for today's best On this day entry, in English and in Cymraeg (`_site/cards/today-en.jpg` and `today-cy.jpg`), with ready-to-paste words and hashtags.

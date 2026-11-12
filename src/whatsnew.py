@@ -8,10 +8,17 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+<<<<<<< HEAD
     ("2026-11-12", "Every tale of the Mabinogion, with a guide and a map", "Pob chwedl yn y Mabinogion, gyda thywysydd a map",
      "Guides to Culhwch and Olwen, the Dream of Macsen Wledig, Lludd and Llefelys, the Dream of Rhonabwy, the three romances of Owain, Peredur and Geraint, and the Tale of Taliesin, each with its places in Wales on a map; and 11 more people, from Ceridwen and Ysbaddaden Bencawr to Lludd, Llefelys and Luned.",
      "Tywysyddion i Culhwch ac Olwen, Breuddwyd Macsen Wledig, Lludd a Llefelys, Breuddwyd Rhonabwy, tair rhamant Owain, Peredur a Geraint, a Hanes Taliesin, pob un â’i lleoedd yng Nghymru ar fap; ac 11 yn rhagor o bobl, o Geridwen ac Ysbaddaden Bencawr i Ludd, Llefelys a Luned.",
      "mabinogion.html"),
+=======
+    ("2026-11-12", "Castles, great houses and places of modern Wales to visit", "Cestyll, plastai a lleoedd Cymru fodern i ymweld â nhw",
+     "Thirteen new places, from Pilleth and Pennal in Owain Glyndŵr’s war to Plas Mawr, Tŷ Mawr Wybrnant, Chirk, Erddig, Penrhyn, Big Pit, Llanystumdwy, the Wales Millennium Centre and the National Botanic Garden; full pages for Sycharth, Conwy, Beaumaris, Rhuddlan, Caerphilly, Raglan, Chepstow and Pembroke; and Visiting boxes for the great castles.",
+     "Tri lle ar ddeg newydd, o Billeth a Phennal yn rhyfel Owain Glyndŵr i Blas Mawr, Tŷ Mawr Wybrnant, y Waun, Erddig, y Penrhyn, y Pwll Mawr, Llanystumdwy, Canolfan Mileniwm Cymru a’r Ardd Fotaneg Genedlaethol; tudalennau llawn ar Sycharth, Conwy, Biwmares, Rhuddlan, Caerffili, Rhaglan, Cas-gwent a Phenfro; a blychau Ymweld ar gyfer y cestyll mawr.",
+     "place-sycharth.html"),
+>>>>>>> origin/main
     ("2026-11-12", "The writers who recorded early Wales", "Yr awduron a gofnododd Gymru gynnar",
      "A new long read and full pages on the writers who gave Wales its memory: Gerald of Wales and his journey of 1188, Nennius and the History of the Britons, Asser at Alfred’s court, Rhygyfarch and the Life of Saint David, Geoffrey of Monmouth, and new pages on Walter Map, Caradog of Llancarfan, Lifris, Elfoddw, Adam of Usk, Gutun Owain, Hywel Fychan of the Red Book and Elis Gruffydd, the soldier of Calais.",
      "Erthygl newydd a thudalennau llawn ar yr awduron a roddodd ei chof i Gymru: Gerallt Gymro a’i daith yn 1188, Nennius a Hanes y Brythoniaid, Asser yn llys Alffred, Rhygyfarch a Buchedd Dewi, Sieffre o Fynwy, a thudalennau newydd ar Wallter Map, Caradog o Lancarfan, Lifris, Elfoddw, Adda o Frynbuga, Gutun Owain, Hywel Fychan y Llyfr Coch ac Elis Gruffydd, milwr Calais.",
