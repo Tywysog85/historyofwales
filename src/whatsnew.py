@@ -7,6 +7,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Alan Wilson and Baram Blackett, the men who went looking for Arthur", "Alan Wilson a Baram Blackett, y dynion a aeth i chwilio am Arthur",
+     "A new long read on the two researchers who gave forty years to the early history of the Britons: their books, their two Arthurs, Athrwys ap Meurig, St Peter’s on Mynydd-y-Gaer, the Brut and the Coelbren.",
+     "Erthygl newydd am y ddau ymchwilydd a roddodd ddeugain mlynedd i hanes cynnar y Brythoniaid: eu llyfrau, eu dau Arthur, Athrwys ap Meurig, Sant Pedr ar Fynydd-y-Gaer, y Brut a’r Coelbren.",
+     "story-wilson-blackett.html"),
     ("2026-11-12", "Owain Gwynedd: the king who became prince", "Owain Gwynedd: y brenin a ddaeth yn dywysog",
      "King Owain Gwynedd’s page now tells his whole reign and how he became the first to call himself Prince of Wales: why he chose princeps, the title of Augustus, why it was a step up from king, why it fitted the Welsh idea of a tywysog, and why Henry II was so angry.",
      "Mae tudalen y Brenin Owain Gwynedd bellach yn adrodd ei holl deyrnasiad a sut y daeth y cyntaf i’w alw ei hun yn Dywysog Cymru: pam y dewisodd princeps, teitl Awgwstws, pam yr oedd yn gam i fyny o frenin, pam yr oedd yn cyd-fynd â syniad y Cymry am dywysog, a pham yr oedd Harri’r Ail mor ddig.",

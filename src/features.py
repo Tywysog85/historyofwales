@@ -379,4 +379,5 @@ for _s in STORIES:
         _s["mins"] = 8
 import pride3 as _P3
 import iolo as _IO  # Iolo Morganwg long read (src/iolo.py)
-STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY]
+import wilson_blackett as _WB  # Alan Wilson and Baram Blackett long read (src/wilson_blackett.py)
+STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY]
