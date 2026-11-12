@@ -435,7 +435,7 @@ BATTLE_CSS = """
 .bt-card p{margin:.35rem 0 0;line-height:1.6}
 .bt-date{font:500 .78rem var(--f-mono);color:var(--muted);letter-spacing:.03em;text-transform:uppercase;margin:0!important}
 .bt-k{color:var(--gold,#e8c65a)}.bt-l .bt-k{color:#e9d9c6}.bt-o .bt-k{color:#93a0e0}
-.bt-nomap{opacity:.7}
+.bt-nomap{opacity:1}
 .tw-top .ref-filter{width:100%;box-sizing:border-box;margin-top:.6rem}
 .bt-side{font-weight:600;color:var(--ink)}
 .bt-h{font:600 1.5rem var(--f-display);margin:2rem 0 .6rem}
@@ -777,10 +777,10 @@ def sites_page(have):
               f'<div class="cm-zoom"><button type="button" id="cm-in" aria-label="Zoom in / Chwyddo i mewn">+</button><button type="button" id="cm-out" aria-label="Zoom out / Chwyddo allan">−</button>'
               f'<button type="button" id="cm-home" aria-label="Whole of Wales / Cymru gyfan"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2"/></svg></button></div>'
               f'<p class="cm-hint" id="cm-hint">{bi("Drag to move, pinch or scroll to zoom, tap a dot", "Llusgwch i symud, pinsiwch neu sgroliwch i chwyddo, tapiwch ddot")}</p></div>'
-              f'<aside class="cm-side"><div id="cm-card" class="cm-card" aria-live="polite">'
+              f'<div class="cm-side"><div id="cm-card" class="cm-card" aria-live="polite" tabindex="0">'
               f'<p class="eyebrow">{bi(f"{n_all:,} historic sites", f"{n_all:,} o safleoedd hanesyddol")}</p>'
               f'<h2>{bi("Choose a site", "Dewiswch safle")}</h2><p class="muted">{bi(f"Every scheduled monument in Wales: tap a dot, search by name, or find the sites nearest to you. The {n_visit} big dots are the sites Cadw looks after and opens to visitors.", f"Pob heneb gofrestredig yng Nghymru: tapiwch ddot, chwiliwch yn ôl enw, neu dewch o hyd i’r safleoedd agosaf atoch. Y {n_visit} dot mawr yw’r safleoedd y mae Cadw’n gofalu amdanynt ac yn eu hagor i ymwelwyr.")}</p>'
-              f'<ul class="cm-legend">{legend}</ul></div></aside></div>')
+              f'<ul class="cm-legend">{legend}</ul></div></div></div>')
     visit = [r for r in rows if r["visit"]]
     lists = ""
     for la, la_cy in las:
