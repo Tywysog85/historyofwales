@@ -28,6 +28,8 @@ import gallery_photos as GP  # noqa: E402
 import ages as AG  # noqa: E402
 import features as F  # noqa: E402
 import art as A  # noqa: E402
+import pictures as PX  # noqa: E402  (a real picture at the top of every page and on its card: src/pictures.py)
+PX.check()
 L.TEACH.update(AG.TEACH)
 import ages9 as AG9
 import whatsnew as WN  # noqa: E402
@@ -387,6 +389,7 @@ def footer():
 
 
 def page(path, title, desc, main_html, era=None, og_type="article", ld=None, active="", track="", extra=""):
+    main_html = PX.dress(path, era, main_html)
     card = None
     if CARDS_ON and path != "404.html":
         CARD_JOBS[path] = (title, desc, era)
@@ -792,7 +795,7 @@ LAW_LINKED = {"people": {"hywel-dda", "llywelyn-ap-gruffudd"}, "places": {"hendy
 
 
 def laws_card():
-    return (f'<a class="s-card rv lead" href="laws.html" data-era="kings"><span class="art">{A.scene("book", COL["kings"])}</span>'
+    return (f'<a class="s-card rv lead" href="laws.html" data-era="kings"><span class="art">{PX.card_img("laws.html") or A.scene("book", COL["kings"])}</span>'
             f'<span class="txt"><span class="span">{bi("The big page", "Y dudalen fawr")} · {bi("15 chapters, pictures and a quiz", "15 pennod, lluniau a chwis")}</span><h3>{bi("The Laws of Hywel Dda", "Cyfreithiau Hywel Dda")}</h3>'
             f'<p>{bi("Everything about Cyfraith Hywel: the gathering at Whitland, the three lawbooks, galanas and sarhaed, women and marriage, the worth of everything, and the manuscripts with their pictures.", "Popeth am Gyfraith Hywel: y cynulliad yn Hendy-gwyn, y tri llyfr cyfraith, galanas a sarhaed, menywod a phriodas, gwerth pob peth, a’r llawysgrifau a’u lluniau.")}</p>'
             f'<span class="go">{bi("Read", "Darllen")} →</span></span></a>')
@@ -809,7 +812,7 @@ def prose_bi(en, cy, cls="prose"):
 
 
 def story_card(x, lead=False):
-    return (f'<a class="s-card rv{" lead" if lead else ""}" href="story-{x["id"]}.html" data-era="{x["era"]}"><span class="art">{A.scene(x["art"], COL[x["era"]])}</span>'
+    return (f'<a class="s-card rv{" lead" if lead else ""}" href="story-{x["id"]}.html" data-era="{x["era"]}"><span class="art">{PX.card_img(f"story-{x['id']}.html") or A.scene(x["art"], COL[x["era"]])}</span>'
             f'<span class="txt"><span class="span">{bi("Long read", "Erthygl")} · {x["mins"]} {bi("min", "mun")}{new_tag("story", x["id"])}</span><h3>{bi(x["en"], x["cy"])}</h3><p>{bi(x["sumEn"], x["sumCy"])}</p>'
             f'<span class="go">{bi("Read", "Darllen")} →</span></span></a>')
 
@@ -834,7 +837,7 @@ def just_added(kind, items, href, title, key=lambda x: x["id"], n=4, h_en="Just 
 
 
 def legend_card(x):
-    return (f'<a class="l-card rv" href="legend-{x["id"]}.html" data-era="{x["era"]}"><span class="art">{A.photo_scene(x["art"], small=True) or A.scene(x["art"], COL[x["era"]])}</span>'
+    return (f'<a class="l-card rv" href="legend-{x["id"]}.html" data-era="{x["era"]}"><span class="art">{A.photo_scene(x["art"], small=True) or PX.card_img(f"legend-{x['id']}.html") or A.scene(x["art"], COL[x["era"]])}</span>'
             f'<span class="txt"><span class="span">{e(x["place"])}{new_tag("legend", x["id"])}</span><h3>{bi(x["en"], x["cy"])}</h3><p>{bi(x["sumEn"], x["sumCy"])}</p></span></a>')
 
 
@@ -1672,7 +1675,7 @@ def card_html(key, n, total, here=False):
     en, cy, sub, era, link, img = CARD_INFO[key]
     pic = f'<img src="{img}" alt="" loading="lazy" decoding="async">' if img else ""
     if not img and key.startswith("legend:"):
-        pic = A.scene(LEGEND[key[7:]]["art"], COL[era])
+        pic = PX.card_img(f"legend-{key[7:]}.html") or A.scene(LEGEND[key[7:]]["art"], COL[era])
     return (f'<a class="cc{" here" if here else ""}" href="{link}" data-k="{key}" data-era="{era}">'
             f'<span class="cc-img"><i aria-hidden="true">{e(_initials(en))}</i>{pic}</span><span class="cc-no">{n}/{total}</span>'
             f'<span class="cc-t"><b>{bi(en, cy)}</b><small>{e(sub)}</small></span></a>')
@@ -1916,7 +1919,7 @@ def wales_in_10_page():
         eyebrow = (f'<p class="eyebrow">{bi(when, when.replace("BC", "CC").replace("AD ", "").replace("today", "heddiw").replace("c. ", "tua "))}</p>' if when
                    else f'<p class="eyebrow">{bi("Wales in 10 minutes", "Cymru mewn 10 munud")}</p>')
         steps += (f'<article class="w10-step{" on" if i == 0 else ""}" data-i="{i}" data-stage="{stage}"><div class="w10-card">'
-                  f'<span class="w10-n">{i + 1} / {n}</span>{eyebrow}<{h}>{bi(ten, tcy)}</{h}>{body}'
+                  f'<span class="w10-n">{i + 1} / {n}</span>{eyebrow}<{h}>{bi(ten, tcy)}</{h}>{PX.small_fig(PX.W10[i]) if i < len(PX.W10) else ""}{body}'
                   + (f'<p class="w10-more">{more}</p>' if more else "")
                   + ('<p class="w10-hint" aria-hidden="true">↓ ' + bi("Scroll", "Sgroliwch") + "</p>" if i == 0 else "")
                   + "</div></article>")
@@ -2941,7 +2944,7 @@ ERA_Q = {
 }
 assert set(ERA_Q) == {x["id"] for x in D.ERAS}, "every age needs a question in ERA_Q"
 AGES_HTML = "".join(
-    f'<a class="poster" href="era-{x["id"]}.html" data-era="{x["id"]}">{A.scene(ERA_ART[x["id"]], COL[x["id"]])}<span class="shade"></span><span class="rn"><span class="vh">{bi("Age", "Oes")} </span>{ROMAN[i]}<span class="vh">: </span></span>'
+    f'<a class="poster" href="era-{x["id"]}.html" data-era="{x["id"]}">{PX.card_img(f"era-{x['id']}.html") or A.scene(ERA_ART[x["id"]], COL[x["id"]])}<span class="shade"></span><span class="rn"><span class="vh">{bi("Age", "Oes")} </span>{ROMAN[i]}<span class="vh">: </span></span>'
     f'<span class="txt"><span class="span">{bi(x["spanEn"], x["spanCy"])}</span><h3>{bi(x["en"], x["cy"])}</h3><span class="q">{bi(*ERA_Q[x["id"]])}</span><p>{bi(x["blurbEn"], x["blurbCy"])}</p><span class="go">{bi("Read the chapter", "Darllen y bennod")} →</span></span></a>'
     for i, x in enumerate(D.ERAS))
 MARQ = [("Castles", "Cestyll", "story-castles.html"), ("Poets", "Beirdd", "person-dafydd-ap-gwilym.html"), ("Saints", "Seintiau", "saints.html"),
@@ -2995,6 +2998,7 @@ index_fragment = fill(index_head + _body_filled, home=True)  # no document skele
 
 def app_page(path, title, desc, hero_html, section_file, active, skip):
     """A page that reuses the home page's script with only one of its sections (timeline, quiz)."""
+    hero_html = PX.dress(path, None, hero_html)
     h = re.sub(r'<header class="hero" id="top">.*?</header>', lambda m: hero_html, _bare_head, count=1, flags=re.S)
     h = head_tags(title, desc, path) + SEO.ld_script(SEO.page_ld(BASE_URL, path, title, desc, "website", None, hero_html)) + "\n" + h
     b = "<main>\n" + read(section_file) + "</main>\n" + _body_filled[_body_filled.index("__FOOTER__"):]

@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Real pictures on every page", "Lluniau go iawn ar bob tudalen",
+     "Every long read, legend, age, kingdom, saint, topic and game now opens with a real photograph or old artwork: Segontium for Macsen, the Pennal Letter for Glyndŵr, the Laws of Hywel Dda, the Pillar of Eliseg and many more, each with its credit.",
+     "Mae pob erthygl, chwedl, oes, teyrnas, sant, pwnc a gêm bellach yn agor gyda ffotograff go iawn neu hen waith celf: Segontium i Facsen, Llythyr Pennal i Lyndŵr, Cyfreithiau Hywel Dda, Colofn Eliseg a llawer mwy, pob un gyda’i gydnabyddiaeth.",
+     "stories.html"),
     ("2026-11-12", "The first Christians of Britain", "Cristnogion cyntaf Prydain",
      "Four new long reads: how Gildas dated the coming of the faith to the last years of Tiberius, before AD 37, and the British church that was old before Augustine came; Joseph of Arimathea at Ynys Wydrin; King Lleurwg’s letter to Rome; and Brân Fendigaid, the Blessed.",
      "Pedair erthygl newydd: sut y dyddiodd Gildas ddyfodiad y ffydd i flynyddoedd olaf Tiberius, cyn OC 37, a’r eglwys Frythonig a oedd yn hen cyn i Awstin ddod; Joseff o Arimathea yn Ynys Wydrin; llythyr y Brenin Lleurwg at Rufain; a Brân Fendigaid.",
