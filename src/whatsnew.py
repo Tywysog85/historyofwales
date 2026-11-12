@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Roman forts, hillforts and ancient tombs", "Caerau Rhufeinig, bryngaerau a hen siambrau claddu",
+     "Thirteen new places on the map, including Y Gaer at Brecon, Tomen y Mur, Moridunum, Din Lligwy, Caer y Twr, Caer Drewyn, Barclodiad y Gawres, Tinkinswood, Maen Ceti and Carreg Samson, and full pages for Caerleon, Caerwent, Segontium, Dolaucothi, Tre’r Ceiri, Castell Henllys, Bryn Celli Ddu, the Mold cape and Llyn Cerrig Bach.",
+     "Tri lle ar ddeg newydd ar y map, gan gynnwys Y Gaer yn Aberhonddu, Tomen y Mur, Moridunum, Din Lligwy, Caer y Twr, Caer Drewyn, Barclodiad y Gawres, Tinkinswood, Maen Ceti a Charreg Samson, a thudalennau llawn ar Gaerllion, Caer-went, Segontium, Dolaucothi, Tre’r Ceiri, Castell Henllys, Bryn Celli Ddu, mantell aur yr Wyddgrug a Llyn Cerrig Bach.",
+     "place-caerleon.html"),
     ("2026-11-12", "Full stories for nineteen people and places on the trails", "Hanesion llawn i bedwar ar bymtheg o bobl a lleoedd y llwybrau",
      "New full pages on Gwenllian, Jemima Nicholas, Betsi Cadwaladr, Lady Llanover, Gwen John, Megan Lloyd George, Taliesin, Dafydd ap Gwilym, William Morgan, Pantycelyn, Dic Penderyn and Aneurin Bevan, and on Paviland, St Davids, Mill Bay, Carregwastad, the slate landscape, the Senedd and Blaenavon.",
      "Tudalennau llawn newydd ar Wenllian, Jemima Nicholas, Betsi Cadwaladr, Arglwyddes Llanofer, Gwen John, Megan Lloyd George, Taliesin, Dafydd ap Gwilym, William Morgan, Pantycelyn, Dic Penderyn ac Aneurin Bevan, ac ar Paviland, Tyddewi, Mill Bay, Carregwastad, tirwedd y llechi, y Senedd a Blaenafon.",
