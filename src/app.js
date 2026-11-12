@@ -43,9 +43,9 @@
   function measure() {
     if (!HERO) return false;
     var r = cv.getBoundingClientRect(), q = function (sel) { var el = hEl.querySelector(sel); return el ? el.getBoundingClientRect() : null; };
-    var a = q("h1"), b = q(".sub"), c = q(".ticker"), e = q(".cta"), old = M.h1t + "," + M.h1h + "," + M.sub + "," + M.tick + "," + M.cta;
+    var a = q("h1"), b = q(".sub"), c = q(".ticker"), e = q(".begin"), old = M.h1t + "," + M.h1h + "," + M.sub + "," + M.tick + "," + M.cta;
     if (a) { M.h1t = a.top - r.top; M.h1h = a.height; } var nv = document.querySelector(".nav"); M.nav = nv && window.scrollY < 4 ? Math.max(0, nv.getBoundingClientRect().bottom - r.top) : M.nav;
-    if (b) M.sub = b.bottom - r.top; if (e) { /* the buttons slide up as they arrive, so their resting place is read from the layout, not from where they are mid-slide */ var ce = hEl.querySelector(".cta"), cy = ce.offsetHeight, cn = ce; while (cn && cn !== hEl) { cy += cn.offsetTop; cn = cn.offsetParent; } M.cta = cn === hEl ? cy + hEl.getBoundingClientRect().top - r.top : e.bottom - r.top; } M.tick = c ? c.top - r.top : r.height;
+    if (b) M.sub = b.bottom - r.top; if (e) { /* the buttons slide up as they arrive, so their resting place is read from the layout, not from where they are mid-slide */ var ce = hEl.querySelector(".begin"), cy = ce.offsetHeight, cn = ce; while (cn && cn !== hEl) { cy += cn.offsetTop; cn = cn.offsetParent; } M.cta = cn === hEl ? cy + hEl.getBoundingClientRect().top - r.top : e.bottom - r.top; } M.tick = c ? c.top - r.top : r.height;
     return old !== M.h1t + "," + M.h1h + "," + M.sub + "," + M.tick + "," + M.cta;
   }
   /* the land waits for the lettering: when the fonts arrive the words reflow, and land drawn before that would shift */
@@ -467,7 +467,7 @@
   /* ---------- Chips ---------- */
   function chips(el, cur, onPick, counts) {
     el.innerHTML = '<button type="button" class="chip" data-v="all" aria-pressed="' + (cur === "all") + '">' + T("All", "Y cyfan") + "</button>" +
-      ERAS.filter(function (e) { return !counts || counts[e.id]; }).map(function (e) { return '<button type="button" class="chip" data-era="' + e.id + '" data-v="' + e.id + '" aria-pressed="' + (cur === e.id) + '"><i></i>' + T(e.en, e.cy) + (counts ? ' <span style="opacity:.7">' + counts[e.id] + "</span>" : "") + "</button>"; }).join("");
+      ERAS.filter(function (e) { return !counts || counts[e.id]; }).map(function (e) { return '<button type="button" class="chip" data-era="' + e.id + '" data-v="' + e.id + '" aria-pressed="' + (cur === e.id) + '"><i></i>' + T(e.en, e.cy) + ' <span class="c-dates">' + T(e.spanEn, e.spanCy) + "</span>" + (counts ? ' <span style="opacity:.7">' + counts[e.id] + "</span>" : "") + "</button>"; }).join("");
     el.onclick = function (ev) { var b = ev.target.closest(".chip"); if (b) onPick(b.dataset.v); };
   }
 
@@ -532,7 +532,7 @@
     var counts = {}; EVENTS.forEach(function (e) { counts[e[E_ERA]] = (counts[e[E_ERA]] || 0) + 1; });
     if (!HAS_TL) {
       $("#tl-teaser").innerHTML = '<a class="chip" href="timeline.html">' + T("All", "Y cyfan") + ' <span style="opacity:.7">' + EVENTS.length + "</span></a>" +
-        ERAS.map(function (e) { return '<a class="chip" data-era="' + e.id + '" href="timeline.html#era-' + e.id + '"><i></i>' + T(e.en, e.cy) + ' <span style="opacity:.7">' + counts[e.id] + "</span></a>"; }).join("");
+        ERAS.map(function (e) { return '<a class="chip" data-era="' + e.id + '" href="timeline.html#era-' + e.id + '"><i></i>' + T(e.en, e.cy) + ' <span class="c-dates">' + T(e.spanEn, e.spanCy) + "</span></a>"; }).join("");
       return;
     }
     chips($("#tl-filter"), tlEra, setTlEra, counts);

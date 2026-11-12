@@ -81,7 +81,6 @@ button { font: inherit; color: inherit }
 .hero .sub .tag span { display: block } .hero .sub .tag span + span { margin-top: .35rem }
 .hero .sub p:first-child { font-family: var(--f-display); font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.2 }
 .hero .sub p + p { color: var(--muted); max-width: 34rem }
-.hero .cta { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem }
 .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .7rem 1.25rem; border-radius: 999px; border: 1px solid var(--ink); text-decoration: none; font-weight: 700; font-size: .95rem; cursor: pointer; background: transparent; transition: background .2s, color .2s }
 .btn.solid { background: var(--ink); color: var(--night) }
 .btn:hover { background: var(--dragon-deep); border-color: var(--dragon-deep); color: #fff }
@@ -296,12 +295,16 @@ __NAV__
       <p class="tag"><span data-cy="Gwlad y brenhinoedd, y tywysogion, y cestyll, y beirdd a’r seintiau.">A land of kings, princes, castles, poets, and saints.</span> <span data-cy="Wedi’i chodi ar lo, llechi, haearn, copr a gwlân.">Built on coal, slate, iron, copper, and wool.</span></p>
       <p data-cy="Iaith fyw hynaf Prydain, mil o flynyddoedd o dywysogion a beirdd, a chenedl sydd yma o hyd.">The oldest living language in Britain, a thousand years of princes and poets, and a nation that is still here.</p>
     </div>
-    <div class="cta">
-      <a class="btn solid" href="timeline.html" data-cy="Dechrau'r daith">Start the journey</a>
-      <a class="btn" href="map.html" data-cy="Archwilio'r map">Explore the map</a>
-      <a class="btn ghost" href="daily.html" data-cy="Her y dydd →">Today’s challenge →</a>
-    </div>
-    <a class="scroll-cue" href="#today" aria-label="Scroll down"></a>
+    <!-- three clear ways in for a first-time visitor (Ifan, 2026-11-12); the daily features are further down the page -->
+    <nav class="begin" aria-labelledby="begin-h">
+      <p class="eyebrow" id="begin-h" data-cy="Ble i ddechrau">Where to begin</p>
+      <div class="begin-row">
+        <a class="begin-card is-main" href="#chapters"><svg aria-hidden="true"><use href="#i-dolmen"/></svg><span class="b-t" data-cy="Archwilio’r naw oes">Explore the nine ages</span><span class="b-s" data-cy="O helwyr oes yr iâ i’r Senedd, un oes ar y tro">From ice-age hunters to the Senedd, one age at a time</span><i aria-hidden="true">→</i></a>
+        <a class="begin-card" href="map.html"><svg aria-hidden="true"><use href="#i-pin"/></svg><span class="b-t" data-cy="Dod o hyd i le ar y map">Find a place on the map</span><span class="b-s" data-cy="Bryngaerau, cestyll, capeli a phyllau, a’r hanes sy’n agos atoch">Hillforts, castles, chapels and mines, and the history near you</span><i aria-hidden="true">→</i></a>
+        <a class="begin-card" href="trails.html"><svg aria-hidden="true"><use href="#i-mtn"/></svg><span class="b-t" data-cy="Dilyn llwybr thema">Follow a themed trail</span><span class="b-s" data-cy="Menywod Cymru, y môr, capel a chân, haearn a glo">Women of Wales, the sea, chapel and song, iron and coal</span><i aria-hidden="true">→</i></a>
+      </div>
+    </nav>
+    <a class="scroll-cue" href="#chapters" aria-label="Scroll down"></a>
   </div>
   <div class="ticker">
     <div class="wrap">

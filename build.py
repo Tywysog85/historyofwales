@@ -248,6 +248,8 @@ NAV_MAIN = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#chapter
 NAV_TOP = NAV_MAIN  # Ifan wants the same links along the top bar as in the big Menu list
 # the Menu's side panel: (heading EN, heading CY, links)
 NAV_GROUPS = [
+    # the nine ages, each with its dates, so a newcomer can tell the Age of Kings from the Age of Princes (Ifan, 2026-11-12)
+    ("The nine ages", "Y naw oes", [(f'era-{x["id"]}.html', x["en"], x["cy"], x["spanEn"], x["spanCy"]) for x in D.ERAS]),
     ("Explore", "Archwilio", [("reference.html", "Look it up", "Chwilio’r hanes"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"),
                               ("castles.html", "Castles map", "Map y cestyll"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"),
                               ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn")]),
@@ -257,7 +259,7 @@ NAV_GROUPS = [
     ("Cymraeg", "Cymraeg", [("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg")]),
     ("You", "Chi", [("journey.html", "Your journey", "Eich taith"), ("teachers.html", "For teachers", "I athrawon"), ("index.html#sources", "Sources", "Ffynonellau"), ("about.html", "About this site", "Am y wefan hon")]),
 ]
-NAV_MORE = [x for g in NAV_GROUPS for x in g[2]]  # the same links as one flat list
+NAV_MORE = [x[:3] for g in NAV_GROUPS for x in g[2]]  # the same links as one flat list
 SEARCH_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
 
 
@@ -330,9 +332,14 @@ def nav(active="", skip="#main", home=False):
     def li(h, a, b, n=None):
         num = f'<span class="n">{n:02d}</span>' if n else ""
         return f'<li><a href="{h}"{" class=on aria-current=page" if active == h else ""}>{num}{bi(a, b)}</a></li>'
+
+    def li_more(h, a, b, de=None, dc=None):
+        if de is None:
+            return li(h, a, b)
+        return f'<li><a href="{h}"{" class=on aria-current=page" if active == h else ""}>{bi(a, b)} <span class="m-dates">{bi(de, dc)}</span></a></li>'
     main = "".join(li(*x) for x in NAV_TOP)
     big = li("index.html", "Home", "Hafan", 1) + "".join(li(h, a, b, i + 2) for i, (h, a, b) in enumerate(NAV_MAIN))
-    more = "".join(f'<div class="menu-group"><p class="eyebrow">{bi(ge, gc)}</p><ul class="menu-more">' + "".join(li(*x) for x in links) + "</ul></div>" for ge, gc, links in NAV_GROUPS)
+    more = "".join(f'<div class="menu-group{" mg-ages" if links and len(links[0]) == 5 else ""}"><p class="eyebrow">{bi(ge, gc)}</p><ul class="menu-more">' + "".join(li_more(*x) for x in links) + "</ul></div>" for ge, gc, links in NAV_GROUPS)
     return (f'<a class="skip" href="{skip}">{bi("Skip to content", "Neidio i’r cynnwys")}</a><div class="progress" aria-hidden="true"><i id="progress"></i></div>'
             f'<nav class="nav" aria-label="Main"><div class="wrap">' + f'<a class="brand" href="index.html">{bi("History of Wales", "Hanes Cymru")}</a>' +
             f'<ul class="nav-inline">{main}</ul>' +
@@ -352,7 +359,8 @@ COPYRIGHT_OWNER_CY = "Hanes Cymru"
 def footer():
     def col(title_en, title_cy, links):
         return f'<div><p class="eyebrow">{bi(title_en, title_cy)}</p><ul>' + "".join(f'<li><a href="{h}">{bi(a, b)}</a></li>' for h, a, b in links) + "</ul></div>"
-    eras = [(f'era-{x["id"]}.html', x["en"], x["cy"]) for x in D.ERAS]
+    eras_col = (f'<div><p class="eyebrow">{bi("The nine ages", "Y naw oes")}</p><ul>' + "".join(
+        f'<li><a href="era-{x["id"]}.html">{bi(x["en"], x["cy"])} <span class="m-dates">{bi(x["spanEn"], x["spanCy"])}</span></a></li>' for x in D.ERAS) + "</ul></div>")
     explore = [("timeline.html", "Timeline", "Llinell amser"), ("map.html", "Map of Wales", "Map Cymru"), ("people.html", "People", "Pobl"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("castles.html", "Castles of Wales", "Cestyll Cymru"), ("trails.html", "Themed trails", "Llwybrau thema"),
                ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"), ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg")]
     read = [("whatsnew.html", "What’s new", "Beth sy’n newydd"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"), ("laws.html", "The Laws of Hywel Dda", "Cyfreithiau Hywel Dda"), ("literature.html", "Welsh literature", "Llenyddiaeth Gymraeg"), ("books.html", "The great books of Wales", "Llyfrau mawr Cymru"), ("triads.html", "The Welsh Triads", "Trioedd Ynys Prydain"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
@@ -372,7 +380,7 @@ def footer():
                "Mae’r ffotograffau a’r ddraig 3D yn eiddo i’w crewyr eu hunain ac fe’u defnyddir dan eu trwyddedau eu hunain, a ddangosir gyda phob un.")
     return ('<footer class="site-foot"><div class="wrap"><div class="foot-top"><p class="big">Diolch<span>.</span></p>'
             f'<p class="foot-tag">{bi("Thank you for reading. Wales is a small country with a long memory; this site is a way in.", "Diolch am ddarllen. Gwlad fach â chof hir yw Cymru; ffordd i mewn yw’r wefan hon.")}</p>{follow_box("foot")}</div>'
-            f'<div class="foot-cols">{col("The nine ages", "Y naw oes", eras)}{col("Explore", "Archwilio", explore)}{col("Read", "Darllen", read)}{col("Play", "Chwarae", play)}</div>'
+            f'<div class="foot-cols">{eras_col}{col("Explore", "Archwilio", explore)}{col("Read", "Darllen", read)}{col("Play", "Chwarae", play)}</div>'
             f'<div class="foot-base"><span>{bi("History of Wales · Hanes Cymru", "Hanes Cymru · History of Wales")}</span>'
             f'<span>{bi("Event links go to Wikipedia, which lists academic sources. Dates marked c. are approximate. Original illustrations; photographs from Wikimedia Commons, credited on each page.", "Mae dolenni’r digwyddiadau’n mynd i Wicipedia, sy’n rhestru ffynonellau academaidd. Dyddiadau bras yw’r rhai a nodir c. Darluniau gwreiddiol; ffotograffau o Wikimedia Commons, gyda chydnabyddiaeth ar bob tudalen.")}</span></div><p class="foot-copy"><span class="l-en" lang="en">{copy_en}</span><span class="l-cy" lang="cy">{copy_cy}</span></p></div></footer>'
             f'<button type="button" class="to-top" id="to-top" aria-label="Back to top / Yn ôl i’r brig" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>')
@@ -519,8 +527,8 @@ def era_page(i, era):
     evs = [ev for ev in D.EVENTS if ev[0] == eid]
     ppl = [p for p in D.PEOPLE if p[1] == eid]
     plc = [p for p in D.PLACES if p["era"] == eid]
-    pager = (f'<a class="btn" href="era-{prev_e["id"]}.html">← {bi(prev_e["en"], prev_e["cy"])}</a>' if prev_e else f'<a class="btn" href="index.html">← {bi("History of Wales", "Hanes Cymru")}</a>') + \
-            (f'<a class="btn solid" href="era-{next_e["id"]}.html">{bi(next_e["en"], next_e["cy"])} →</a>' if next_e else f'<a class="btn solid" href="trails.html">{bi("Follow a trail", "Dilyn llwybr")} →</a>')
+    pager = (f'<a class="btn" href="era-{prev_e["id"]}.html">← {bi(prev_e["en"], prev_e["cy"])} <span class="m-dates">{bi(prev_e["spanEn"], prev_e["spanCy"])}</span></a>' if prev_e else f'<a class="btn" href="index.html">← {bi("History of Wales", "Hanes Cymru")}</a>') + \
+            (f'<a class="btn solid" href="era-{next_e["id"]}.html">{bi(next_e["en"], next_e["cy"])} <span class="m-dates">{bi(next_e["spanEn"], next_e["spanCy"])}</span> →</a>' if next_e else f'<a class="btn solid" href="trails.html">{bi("Follow a trail", "Dilyn llwybr")} →</a>')
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / {bi("Chapter", "Pennod")} {i + 1}', era["ill"], era["spanEn"], era["spanCy"], era["en"], era["cy"], era["blurbEn"], era["blurbCy"], art=ERA_ART[eid])
             + section(paras(era["storyEn"], era["storyCy"]), top=True)
             + section(f'<ol class="era-events">{"".join(event_li(ev) for ev in evs)}</ol>', "Timeline", "Llinell amser")
@@ -2832,7 +2840,7 @@ def ssr_tl_teaser():
     for ev in D.EVENTS:
         counts[ev[0]] = counts.get(ev[0], 0) + 1
     return (f'<a class="chip" href="timeline.html">{bi("All", "Y cyfan")} <span style="opacity:.7">{len(D.EVENTS)}</span></a>'
-            + "".join(f'<a class="chip" data-era="{x["id"]}" href="timeline.html#era-{x["id"]}"><i></i>{bi(x["en"], x["cy"])} <span style="opacity:.7">{counts.get(x["id"], 0)}</span></a>' for x in D.ERAS))
+            + "".join(f'<a class="chip" data-era="{x["id"]}" href="timeline.html#era-{x["id"]}"><i></i>{bi(x["en"], x["cy"])} <span class="c-dates">{bi(x["spanEn"], x["spanCy"])}</span></a>' for x in D.ERAS))
 
 
 def ssr_chart():
@@ -2918,9 +2926,23 @@ def ssr_map_teaser():
 
 
 ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"]
+# One short question for each age on the home page, so a newcomer knows what each chapter answers (Ifan, 2026-11-12).
+# Keep them proud and within EDITORIAL.md: kings are kings, the people are Britons or the Cymry.
+ERA_Q = {
+    "ancient": ("Who raised the great stone tombs and hillforts of Wales?", "Pwy a gododd feddrodau cerrig a bryngaerau mawr Cymru?"),
+    "roman": ("How did the Britons of Wales hold out against Rome for thirty years?", "Sut y daliodd Brythoniaid Cymru eu tir yn erbyn Rhufain am ddeng mlynedd ar hugain?"),
+    "saints": ("Who were the saints who gave their names to hundreds of Welsh places?", "Pwy oedd y seintiau a roddodd eu henwau i gannoedd o leoedd yng Nghymru?"),
+    "kings": ("How did Rhodri Mawr and Hywel Dda draw the kingdoms of Wales together?", "Sut y tynnodd Rhodri Mawr a Hywel Dda deyrnasoedd Cymru ynghyd?"),
+    "medieval": ("How did Gwynedd’s rulers come to claim authority across Wales?", "Sut y daeth rheolwyr Gwynedd i hawlio awdurdod ledled Cymru?"),
+    "tudor": ("How did the Welsh Bible of 1588 help the language survive?", "Sut y helpodd Beibl Cymraeg 1588 yr iaith i oroesi?"),
+    "industrial": ("How did Welsh coal, iron and slate come to power the world?", "Sut y daeth glo, haearn a llechi Cymru i bweru’r byd?"),
+    "modern": ("How did the people of Wales fight to save their language?", "Sut y brwydrodd pobl Cymru i achub eu hiaith?"),
+    "today": ("What has Wales done with a parliament of its own?", "Beth y mae Cymru wedi’i wneud â’i senedd ei hun?"),
+}
+assert set(ERA_Q) == {x["id"] for x in D.ERAS}, "every age needs a question in ERA_Q"
 AGES_HTML = "".join(
     f'<a class="poster" href="era-{x["id"]}.html" data-era="{x["id"]}">{A.scene(ERA_ART[x["id"]], COL[x["id"]])}<span class="shade"></span><span class="rn"><span class="vh">{bi("Age", "Oes")} </span>{ROMAN[i]}<span class="vh">: </span></span>'
-    f'<span class="txt"><span class="span">{bi(x["spanEn"], x["spanCy"])}</span><h3>{bi(x["en"], x["cy"])}</h3><p>{bi(x["blurbEn"], x["blurbCy"])}</p><span class="go">{bi("Read the chapter", "Darllen y bennod")} →</span></span></a>'
+    f'<span class="txt"><span class="span">{bi(x["spanEn"], x["spanCy"])}</span><h3>{bi(x["en"], x["cy"])}</h3><span class="q">{bi(*ERA_Q[x["id"]])}</span><p>{bi(x["blurbEn"], x["blurbCy"])}</p><span class="go">{bi("Read the chapter", "Darllen y bennod")} →</span></span></a>'
     for i, x in enumerate(D.ERAS))
 MARQ = [("Castles", "Cestyll", "story-castles.html"), ("Poets", "Beirdd", "person-dafydd-ap-gwilym.html"), ("Saints", "Seintiau", "saints.html"),
         ("Princes", "Tywysogion", "era-medieval.html"), ("Dragons", "Dreigiau", "legend-dragons.html"), ("Coal", "Glo", "story-coal.html"),
