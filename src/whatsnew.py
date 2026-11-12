@@ -7,6 +7,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "What does that place name mean?", "Beth yw ystyr yr enw lle?",
+     "Towns and villages of Wales: what 136 place names mean and what happened there, on a map, with a decoder that explains any Welsh place name you type in.",
+     "Trefi a phentrefi Cymru: ystyr 136 o enwau lleoedd a beth ddigwyddodd yno, ar fap, gyda datgodiwr sy’n egluro unrhyw enw lle Cymraeg a deipiwch.",
+     "towns.html"),
     ("2026-11-12", "Look it up: an A–Z and 100 quick answers", "Chwilio’r hanes: A–Y a 100 o atebion cyflym",
      "A new reference desk: an A–Z of 118 words and ideas from cantref to cynghanedd, 100 questions answered in a few lines, and a search that now finds every king, prince and castle, even with old spellings like Llewellyn or Caernarvon.",
      "Desg gyfeirio newydd: A–Y o 118 o eiriau a syniadau o gantref i gynghanedd, 100 o gwestiynau wedi’u hateb mewn ychydig linellau, a chwilio sydd bellach yn canfod pob brenin, tywysog a chastell, hyd yn oed gyda hen sillafiadau fel Llewellyn neu Caernarvon.",

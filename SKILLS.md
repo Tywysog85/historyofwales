@@ -162,6 +162,8 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - The words are in `src/ref_az.py` (`A(id, English, Welsh, text, text, see)`) and the questions in `src/ref_faq.py` (`Q(...)` in sections). `see` lists pages to read more; a link to a page the site does not have is left out and named at the end of the build, so entries can point at pages that are still to come.
 - `questions.html` carries FAQPage data and `a-z.html` DefinedTermSet data, so search engines can show the answers directly.
 - Each entry is in search as its own result (kinds `term` and `question`), and the filter box on each page hides what does not match as you type.
+- `towns.html` comes from `src/ref_towns.py`: towns by council area, `T(English, Welsh, meaning, meaning, history, history, see, geo)`, and `ELEMENTS`, the words of place names (list a mutated form such as `fach` or `bont` as its own word). The decoder on the page splits any typed name into the longest known words from the left, so add a word to `ELEMENTS` when a common name comes out in unknown pieces.
+- Town positions come from the free GeoNames list inside the Python package `geonamescache` (from PyPI): run `python3 tools/towns_geo.py` after adding towns; it writes `src/towns_geo.json` and names any it cannot find, which then need a `geo=(lat, lon)` by hand.
 
 ### Offline support
 - `src/static/sw.js` caches pages. **Change the cache name** (`history-of-wales-vN`, now v6) whenever the site's look changes a lot, so returning visitors get the new version.
