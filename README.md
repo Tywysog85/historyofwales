@@ -44,6 +44,7 @@ Everything is plain HTML, CSS and JavaScript. There is no framework and nothing 
 | Games, menu, badges, search | `src/static/play.js`, `src/static/site.js`, `src/static/search.js` |
 | Menu and footer shared by every page | `nav()` and `footer()` in `build.py` |
 | Icons and the share picture | `src/static/`, made by `tools/make_images.js` |
+| When each item was added (newest first, the Just added strips, the New badges) | `src/added.py`, `src/added.json` (filled in by the build: commit it) |
 
 To build and look at it on your own computer:
 

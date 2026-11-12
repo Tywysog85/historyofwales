@@ -597,3 +597,13 @@ html.cy .news-item.is-new .n-t::after { content: "Newydd" }
 .further p:last-child { margin: 0; display: flex; flex-wrap: wrap; gap: .5rem }
 .further a { display: inline-flex; align-items: center; gap: .35rem; padding: .5rem .85rem; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); text-decoration: none; font-size: .9rem; font-weight: 600; background: var(--card) }
 .further a:hover { border-color: var(--gold); color: var(--gold) }
+
+/* Newest first (src/added.py): the "New" badge and the "Just added" strip at the top of ordered lists */
+.new-tag { display: inline-block; margin-left: .5rem; padding: .12rem .5rem; border-radius: 999px; background: var(--red, #e2453d); color: #fff; font: 700 .66rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; vertical-align: .15em; line-height: 1.4 }
+.just-added { margin: 0 0 1.8rem; padding: 1rem 1.1rem 1.1rem; border: 1px solid color-mix(in srgb, var(--gold, #e8c65a) 45%, var(--line)); border-radius: 14px; background: color-mix(in srgb, var(--gold, #e8c65a) 6%, var(--slate, transparent)) }
+.just-added h2 { font: 600 .78rem var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--gold, #e8c65a); margin: 0 0 .7rem }
+.just-added ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr)); gap: .6rem }
+.just-added a { display: grid; grid-template-rows: 1fr auto; gap: .35rem; height: 100%; box-sizing: border-box; padding: .7rem .85rem; border-radius: 10px; border: 1px solid var(--line); background: var(--card, var(--slate)); text-decoration: none; color: var(--ink) }
+.just-added a:hover, .just-added a:focus-visible { border-color: var(--gold, #e8c65a) }
+.just-added b { font-weight: 600; line-height: 1.3 }
+.just-added .ja-d { font: 500 .72rem var(--f-mono); color: var(--muted); letter-spacing: .04em; text-transform: uppercase }

@@ -7,6 +7,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "The newest things now come first", "Y pethau mwyaf newydd sy’n dod gyntaf bellach",
+     "New long reads now go at the top of the long reads page and the home page, and the legends, key documents, battles and quick answers each open with a “Just added” strip, so you see what is new first. The newest wear a red New badge.",
+     "Mae erthyglau newydd bellach yn mynd ar frig tudalen yr erthyglau a’r hafan, ac mae’r chwedlau, y dogfennau allweddol, y brwydrau a’r atebion cyflym i gyd yn agor â stribed “Newydd ei ychwanegu”, er mwyn i chi weld beth sy’n newydd yn gyntaf. Mae bathodyn coch Newydd ar y rhai diweddaraf.",
+     "stories.html"),
     ("2026-11-12", "Britons, not Celts: how Edward Lhuyd gave us a new name", "Brythoniaid, nid Celtiaid: sut y cawsom enw newydd gan Edward Lhuyd",
      "A new long read: Caesar called us Britons and we called ourselves Brythoniaid and Cymry. ‘Celtic’ was Edward Lhuyd’s name for a family of languages in 1707, and only later was it put on the peoples who spoke them.",
      "Erthygl newydd: Brythoniaid oeddem i Gesar, a Brythoniaid a Chymry oeddem i ni ein hunain. ‘Celtaidd’ oedd enw Edward Lhuyd ar deulu o ieithoedd yn 1707, ac yn ddiweddarach yn unig y rhoddwyd ef ar y bobloedd a’u siaradai.",

@@ -20,6 +20,16 @@ import os
 g = {}  # build.py's helpers (bi, e, page, hero, section ...), filled by setup()
 
 
+def track_added():
+    """Note every reference item in src/added.json (src/added.py), so new ones are known as new."""
+    AD = g["AD"]
+    AD.track("az", [t["id"] for t in AZ.TERMS])
+    AD.track("faq", [q["id"] for gr in FAQ.GROUPS for q in gr["qs"]])
+    AD.track("battle", [b["id"] for b in BT.BATTLES])
+    AD.track("doc", [d["id"] for d in DC.DOCS])
+    AD.track("topic", [t["id"] for t in TP.TOPICS])
+
+
 def setup(build_globals):
     g.update(build_globals)
 
@@ -116,7 +126,7 @@ none=document.querySelector("[data-ref-none]"),norm=function(s){return s.toLower
 items.forEach(function(x){x._t=norm(x.textContent)});
 box.addEventListener("input",function(){var q=norm(box.value.trim()),n=0;items.forEach(function(x){var on=!q||x._t.indexOf(q)>=0;x.hidden=!on;if(on)n++});
 groups.forEach(function(gr){gr.hidden=!gr.querySelector("[data-ref-item]:not([hidden])")});if(none)none.hidden=n>0});
-if(location.hash){var t=document.getElementById(location.hash.slice(1));if(t&&t.tagName==="DETAILS")t.open=true}})();</script>
+function op(){if(!location.hash)return;var t=document.getElementById(location.hash.slice(1));if(t&&t.tagName==="DETAILS")t.open=true}op();addEventListener("hashchange",op)})();</script>
 """
 
 REF_CSS = """
@@ -185,11 +195,12 @@ def az_page(have):
         items = ""
         for t in groups[c]:
             sub = f'<small class="l-en" lang="en">{e(t["cy"])}</small>' if t["cy"] != t["en"] else ""
-            items += (f'<div class="ref-item" id="az-{t["id"]}" data-ref-item><dt>{bi(t["en"], t["cy"])}{sub}</dt>'
+            items += (f'<div class="ref-item" id="az-{t["id"]}" data-ref-item><dt>{bi(t["en"], t["cy"])}{g["new_tag"]("az", t["id"])}{sub}</dt>'
                       f'<dd>{bi(t["dEn"], t["dCy"])}{link_chips(t["see"], have)}</dd></div>')
         body += f'<div class="ref-group" id="az-{c}" data-ref-group><h2>{c}</h2><dl class="ref-list">{items}</dl></div>'
     tools = (f'<div class="ref-tools"><input class="ref-filter" type="search" data-ref-filter placeholder="Find a word… / Chwilio am air…" aria-label="Filter the A–Z / Hidlo’r A–Y" autocomplete="off"></div>'
              + bar)
+    tools = g["just_added"]("az", terms, lambda t: f'#az-{t["id"]}', lambda t: (t["en"], t["cy"])) + tools
     n = len(terms)
     main = (g["hero"]("kings", crumbs(), "book", "Reference", "Cyfeirlyfr", "The A–Z of Welsh history", "A–Y hanes Cymru",
                       f"{n} words, laws, places and ideas from Welsh history, each explained in a few lines, with links to read more.",
@@ -210,11 +221,13 @@ def questions_page(have):
     jump = '<ul class="ref-jump">' + "".join(f'<li><a href="#qs-{gr["id"]}">{bi(gr["en"], gr["cy"])}</a></li>' for gr in FAQ.GROUPS) + "</ul>"
     body = ""
     for gr in FAQ.GROUPS:
-        qs = "".join(f'<details class="ref-q" id="q-{q["id"]}" data-ref-item><summary>{bi(q["qEn"], q["qCy"])}</summary>'
+        qs = "".join(f'<details class="ref-q" id="q-{q["id"]}" data-ref-item><summary>{bi(q["qEn"], q["qCy"])}{g["new_tag"]("faq", q["id"])}</summary>'
                      f'<div class="ref-a"><p>{bi(q["aEn"], q["aCy"])}</p>{link_chips(q["see"], have)}</div></details>' for q in gr["qs"])
         body += f'<div class="ref-group" id="qs-{gr["id"]}" data-ref-group><h2 class="ref-gh">{bi(gr["en"], gr["cy"])}</h2>{qs}</div>'
     tools = (f'<div class="ref-tools"><input class="ref-filter" type="search" data-ref-filter placeholder="Find a question… / Chwilio am gwestiwn…" aria-label="Filter the questions / Hidlo’r cwestiynau" autocomplete="off">'
              f'<button type="button" class="btn" data-ref-open>{bi("Open all", "Agor y cyfan")}</button></div>' + jump)
+    allq = [q for gr in FAQ.GROUPS for q in gr["qs"]]
+    tools = g["just_added"]("faq", allq, lambda q: f'#q-{q["id"]}', lambda q: (q["qEn"], q["qCy"])) + tools
     main = (g["hero"]("today", crumbs(), "book", "Reference", "Cyfeirlyfr", "Quick answers", "Atebion cyflym",
                       f"{n} questions people ask about the history of Wales, each answered in a few lines. Tap a question to open it.",
                       f"{n} o gwestiynau y mae pobl yn eu gofyn am hanes Cymru, pob un wedi’i ateb mewn ychydig linellau. Tapiwch gwestiwn i’w agor.", art="book")
@@ -387,7 +400,7 @@ def battles_page(have):
         where = "" if b["geo"] else f'<span class="bt-nomap"> · {bi("not on the map", "nid ar y map")}</span>'
         vs = "".join(f'<span>{bi(*BT.AGAINST[v])}</span>' for v in b["vs"])
         cards += (f'<article class="bt-card bt-{b["win"]}" id="b-{b["id"]}" data-ref-item data-vs="{" ".join(b["vs"])}" style="--c:{g["COL"][b["era"]]}">'
-                  f'<p class="bt-date">{bi(b["dEn"], b["dCy"])} · <span class="bt-k">{bi(*WIN[b["win"]])}</span>{where}</p>'
+                  f'<p class="bt-date">{bi(b["dEn"], b["dCy"])} · <span class="bt-k">{bi(*WIN[b["win"]])}</span>{where}{g["new_tag"]("battle", b["id"])}</p>'
                   f'<h3>{bi(b["en"], b["cy"])}</h3><p class="bt-vs"><b>{bi("Against", "Yn erbyn")}:</b> {vs}</p><p class="bt-side">{bi(b["sEn"], b["sCy"])}</p><p>{bi(b["tEn"], b["tCy"])}</p>{link_chips(b["see"], have)}</article>')
     legend = (f'<ul class="bt-legend"><li class="bt-w">{bi(*WIN["w"])}</li><li class="bt-l">{bi(*WIN["l"])}</li><li class="bt-o">{bi(*WIN["o"])}</li></ul>')
     n = len(rows)
@@ -398,7 +411,8 @@ def battles_page(have):
     main = (g["hero"]("medieval", crumbs(), "book", "Reference", "Cyfeirlyfr", "Battles of Wales", "Brwydrau Cymru",
                       f"{n} battles, raids, sieges and risings, from the Druids on the Menai to Helmand: who fought, who they fought against, what happened, and where. Where a chronicle names only a region, the date says so.",
                       f"{n} o frwydrau, cyrchoedd, gwarchaeau a gwrthryfeloedd, o’r Derwyddon ar y Fenai i Helmand: pwy a ymladdodd, yn erbyn pwy, beth ddigwyddodd, a ble. Lle mae cronicl yn enwi ardal yn unig, mae’r dyddiad yn dweud hynny.", art="sword")
-            + g["section"](f'<div class="tw-top"><div class="tw-mapbox">{battles_map(rows)}{legend}</div><div>'
+            + g["section"](g["just_added"]("battle", rows, lambda b: f'#b-{b["id"]}', lambda b: ((b["en"], b["cy"]) if b["dEn"] in b["en"] else (f'{b["en"]} ({b["dEn"]})', f'{b["cy"]} ({b["dCy"]})')))
+                           + f'<div class="tw-top"><div class="tw-mapbox">{battles_map(rows)}{legend}</div><div>'
                            f'<p>{bi(f"The Normans took England in five years; Wales held out for 216. Here is every battle the chronicles let us name, against Rome, the Saxons, the Vikings, the Normans, the kings of England and more, {nw} of them Welsh victories. Pick who a battle was against below, or tap a cross on the map.", f"Cymerodd y Normaniaid Loegr mewn pum mlynedd; daliodd Cymru allan am 216. Dyma bob brwydr y mae’r croniclau’n gadael i ni ei henwi, yn erbyn Rhufain, y Saeson, y Llychlynwyr, y Normaniaid, brenhinoedd Lloegr a mwy, {nw} ohonynt yn fuddugoliaethau Cymreig. Dewiswch yn erbyn pwy y bu brwydr isod, neu tapiwch groes ar y map.")}</p>'
                            f'<input class="ref-filter" type="search" data-ref-filter placeholder="Find a battle, a leader or a year… / Chwilio am frwydr, arweinydd neu flwyddyn…" aria-label="Filter the battles / Hidlo’r brwydrau" autocomplete="off">'
                            f'<p style="margin-top:1rem"><a class="btn" href="castles.html">{bi("The castles map", "Map y cestyll")} →</a> <a class="btn" href="story-longbow.html">{bi("The Welsh longbow", "Y bwa hir Cymreig")} →</a></p></div></div>'
@@ -465,14 +479,15 @@ def documents_page(have):
     cards = ""
     for d in rows:
         cards += (f'<article class="dc-card" id="doc-{d["id"]}" data-ref-item style="--c:{g["COL"][d["era"]]}">'
-                  f'<p class="bt-date">{bi(d["dEn"], d["dCy"])}</p><h3>{bi(d["en"], d["cy"])}</h3><p>{bi(d["aEn"], d["aCy"])}</p>'
+                  f'<p class="bt-date">{bi(d["dEn"], d["dCy"])}{g["new_tag"]("doc", d["id"])}</p><h3>{bi(d["en"], d["cy"])}</h3><p>{bi(d["aEn"], d["aCy"])}</p>'
                   f'{doc_words(d)}<p><b>{bi("Why it matters", "Pam mae’n bwysig")}:</b> {bi(d["wEn"], d["wCy"])}</p>'
                   f'<p class="dc-kept">{bi("Where to find it", "Ble i’w chael")}: {bi(d["kEn"], d["kCy"])}</p>{link_chips(d["see"], have)}</article>')
     n = len(rows)
     main = (g["hero"]("tudor", crumbs(), "book", "Reference", "Cyfeirlyfr", "Key documents", "Dogfennau allweddol",
                       f"{n} documents that shaped Wales, from Caesar on the Druids to the Senedd, each with its own words, what it did and where to find it.",
                       f"{n} o ddogfennau a luniodd Gymru, o Gesar ar y Derwyddon i’r Senedd, pob un gyda’i geiriau ei hun, beth a wnaeth a ble i’w chael.", art="book")
-            + g["section"](f'<p class="ref-intro">{bi("Where a document’s exact words are known, they are quoted from a published translation. Where they are not, we say what it says in our own words and mark it “in short”. The Laws of Hywel Dda have their own page.", "Lle mae union eiriau dogfen yn hysbys, fe’u dyfynnir o gyfieithiad cyhoeddedig. Lle nad ydynt, rydym yn dweud beth mae’n ei ddweud yn ein geiriau ein hunain ac yn ei nodi’n “yn fyr”. Mae gan Gyfreithiau Hywel Dda eu tudalen eu hunain.")} <a href="laws.html">{bi("The Laws of Hywel Dda", "Cyfreithiau Hywel Dda")} →</a></p>'
+            + g["section"](g["just_added"]("doc", rows, lambda d: f'#doc-{d["id"]}', lambda d: ((d["en"], d["cy"]) if d["dEn"] in d["en"] else (f'{d["en"]} ({d["dEn"]})', f'{d["cy"]} ({d["dCy"]})')))
+                           + f'<p class="ref-intro">{bi("Where a document’s exact words are known, they are quoted from a published translation. Where they are not, we say what it says in our own words and mark it “in short”. The Laws of Hywel Dda have their own page.", "Lle mae union eiriau dogfen yn hysbys, fe’u dyfynnir o gyfieithiad cyhoeddedig. Lle nad ydynt, rydym yn dweud beth mae’n ei ddweud yn ein geiriau ein hunain ac yn ei nodi’n “yn fyr”. Mae gan Gyfreithiau Hywel Dda eu tudalen eu hunain.")} <a href="laws.html">{bi("The Laws of Hywel Dda", "Cyfreithiau Hywel Dda")} →</a></p>'
                            f'<input class="ref-filter dc-filter" type="search" data-ref-filter placeholder="Find a document, a person or a year… / Chwilio am ddogfen, person neu flwyddyn…" aria-label="Filter the documents / Hidlo’r dogfennau" autocomplete="off">'
                            f'<nav class="dc-jump" aria-label="Documents / Dogfennau">{jump}</nav>'
                            f'<div class="bt-list" data-ref-group>{cards}</div><p class="ref-none" data-ref-none hidden>{bi("No document matches that.", "Does dim dogfen yn cyfateb.")}</p>', top=True))
@@ -568,7 +583,7 @@ def topic_page(t, have):
 
 
 def topics_page(have):
-    cards = "".join(f'<a href="topic-{t["id"]}.html" style="--c:{g["COL"][t["era"]]}"><span class="n">{bi("Topic guide", "Canllaw pwnc")}</span><b>{bi(t["en"], t["cy"])}</b><span class="d">{bi(t["sEn"], t["sCy"])}</span></a>' for t in TP.TOPICS)
+    cards = "".join(f'<a href="topic-{t["id"]}.html" style="--c:{g["COL"][t["era"]]}"><span class="n">{bi("Topic guide", "Canllaw pwnc")}{g["new_tag"]("topic", t["id"])}</span><b>{bi(t["en"], t["cy"])}</b><span class="d">{bi(t["sEn"], t["sCy"])}</span></a>' for t in g["AD"].newest("topic", TP.TOPICS, ties="keep"))
     main = (g["hero"]("industrial", crumbs(), "book", "Reference", "Cyfeirlyfr", "Topic guides", "Canllawiau pwnc",
                       "Follow one thread through the whole of Welsh history: the language, faith, law, war, industry, the countryside, women, music and poetry, the Welsh abroad, science and sport.",
                       "Dilynwch un edefyn drwy hanes Cymru i gyd: yr iaith, ffydd, cyfraith, rhyfel, diwydiant, cefn gwlad, menywod, cerdd a barddoniaeth, y Cymry ar wasgar, gwyddoniaeth a chwaraeon.", art="book")
