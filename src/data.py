@@ -698,6 +698,9 @@ EVENTS = sorted(EVENTS + _PTE, key=lambda ev: ev[1])
 from aberfan import EVENTS as _AFE
 EVENTS = sorted(EVENTS + _AFE, key=lambda ev: ev[1])
 
+# ---------- MAC and the Free Wales Army (src/mac.py) ----------
+from mac import EVENTS as _MACE
+EVENTS = sorted(EVENTS + _MACE, key=lambda ev: ev[1])
 # ---------- The drowning of Capel Celyn and Cwm Tryweryn (src/tryweryn.py) ----------
 from tryweryn import EVENTS as _TWE
 EVENTS = sorted(EVENTS + _TWE, key=lambda ev: ev[1])
