@@ -688,6 +688,20 @@ Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.
 - Search Commons from GitHub first (see "Looking up Commons pictures from GitHub"): the Welsh Not category held a real W.N. board, an 1879 magazine drawing and Geoff Charles's photographs of Cymdeithas yr Iaith, all free to use. The "Fetch photos" workflow then keeps copies on the site.
 - When the picture for the top of a page is not yet in the gallery, add it to `LEGEND_PHOTOS` in `src/art.py` and `PICKS` in `tools/fetch_legend_photos.py` under a key no legend uses. Pushing that file runs "Fetch photos", which saves `src/static/legends/<key>.webp`; pull, then add `"story-x.html": "l:<key>"` to `PAGE` in `src/pictures.py` (its check stops the build if the file is not there yet).
 
+### A slider that is easy to drag, with a mouse or a finger (November 2026)
+- Never rebuild a slider's HTML from its own `input` event: the browser loses the drag and the thumb jumps back. Build the panel once (`kgShell` in `src/app.js`) and only update the text, the year marks and the value afterwards.
+- Phones (iOS above all) only drag a range input when the finger lands right on the thumb. So the whole strip (track and year labels, `.kg-slide`) takes the pointer with `setPointerCapture`, works out the value from the x position, and has `touch-action: pan-y` so a sideways drag moves the slider while an up-and-down swipe still scrolls the page. The input itself has `pointer-events: none` and stays for the keyboard and screen readers (`aria-valuetext` names the stage).
+- For a smooth drag, use `step="any"`, change the map at the nearest stage while dragging, and glide the thumb onto that stage when the finger lets go. Arrow keys, Page Up/Down, Home and End are handled in a `keydown` listener.
+- Year labels are placed under the exact thumb positions with `left: calc(thumb/2 + (100% - thumb) * i / n)`; on a phone every other year drops to a second row so all of them fit. Test drags in Playwright with `page.mouse` and, for touch, CDP `Input.dispatchTouchEvent`.
+
+### Themed trails (November 2026)
+- The trails are `TRAILS` in `src/long.py` (the first four) and `src/trails.py` (the newer ones, put in front, newest first). `build.py` makes `trails.html` and one `trail-<id>.html` per trail.
+- A stop can be an event (by its English title), a person, a place, a long read (`("story", id)`), a legend (`("legend", id)`) or any page (`("page", href, era, dates, titles, texts)`). Every stop gets a "The full story" link to its own page, and person and place stops also link any long read that names them.
+- A long read that does not exist yet can already be named on a trail: it stays hidden until another thread publishes it (for example `story-welsh-not`, `story-mac`).
+- Keep 8 to 10 stops per trail, and keep the number of trails a multiple of 6, so the grid on `trails.html` is full at three columns and at two.
+- Every stop title has the same size and font: there is no bigger serif style for "key" events any more (removed from `.era-events li.key h3` and the timeline's `.ev.key h4`). Key events keep their coloured dot.
+- To check fonts across the site, load pages in Playwright and compare the computed font of headings in sibling cards or list items; flag any group with more than one style.
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
