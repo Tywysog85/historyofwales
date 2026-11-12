@@ -9,6 +9,8 @@ import re
 
 import ref_az as AZ
 import ref_faq as FAQ
+import ref_towns as TWN
+import os
 
 g = {}  # build.py's helpers (bi, e, page, hero, section ...), filled by setup()
 
@@ -213,6 +215,138 @@ OPEN_JS = r"""<script>(function(){var b=document.querySelector("[data-ref-open]"
 """
 
 
+# ---------- towns and villages ----------
+def slug(s):
+    s = s.lower()
+    for a, b in (("ŵ", "w"), ("ŷ", "y"), ("â", "a"), ("ô", "o"), ("ê", "e"), ("î", "i"), ("û", "u"), ("ï", "i"), ("’", ""), ("'", "")):
+        s = s.replace(a, b)
+    return re.sub(r"[^a-z0-9]+", "-", s).strip("-")
+
+
+def town_rows():
+    geo_file = os.path.join(g["SRC"], "towns_geo.json")
+    found = json.load(open(geo_file)) if os.path.exists(geo_file) else {}
+    rows = []
+    for la, towns in TWN.TOWNS.items():
+        for t in towns:
+            ll = t["geo"] or found.get(t["en"])
+            assert ll, f"No map position for {t['en']}: run python3 tools/towns_geo.py"
+            rows.append(dict(t, la=la, laCy=g["CS"].LA_CY[la], id="town-" + slug(t["en"]), lat=ll[0], lon=ll[1]))
+    ids = [r["id"] for r in rows]
+    assert len(ids) == len(set(ids)), "two towns share a name"
+    return rows
+
+
+def wales_xy(lat, lon):
+    G = g["geo"]
+    return (lon - G["minx"]) * G["k"] * G["sc"], (G["maxy"] - lat) * G["sc"]
+
+
+def towns_map(rows):
+    dots = ""
+    for r in rows:
+        x, y = wales_xy(r["lat"], r["lon"])
+        dots += (f'<a href="#{r["id"]}" class="tw-dot" aria-label="{e(r["cy"])} / {e(r["en"])}"><g transform="translate({x:.1f} {y:.1f})"><circle class="h" r="12"/><circle class="d" r="4.5"/></g>'
+                 f'<title>{e(r["cy"])}{" / " + e(r["en"]) if r["cy"] != r["en"] else ""}: {e(r["mEn"])}</title></a>')
+    return (f'<svg class="tw-map" viewBox="-20 -20 640 711" role="group" aria-label="Map of Wales: tap a town to read about it">'
+            f'<path class="land" d="{g["geo"]["outline"]}"/>{dots}</svg>')
+
+
+def town_card(r, have):
+    sub = f'<span class="tw-en">{e(r["en"])}</span>' if r["en"] != r["cy"] else ""
+    return (f'<article class="tw-card" id="{r["id"]}" data-ref-item><h3><span class="tw-cy" lang="cy">{e(r["cy"])}</span>{sub}</h3>'
+            f'<p class="tw-m"><b>{bi("Means", "Ystyr")}:</b> {bi(r["mEn"], r["mCy"])}</p><p>{bi(r["hEn"], r["hCy"])}</p>{link_chips(r["see"], have)}</article>')
+
+
+DECODER_JS = r"""<script>(function(){var box=document.getElementById("tw-in"),out=document.getElementById("tw-out");if(!box)return;
+var EL=JSON.parse(document.getElementById("tw-el").textContent),TW=JSON.parse(document.getElementById("tw-towns").textContent);
+var cy=function(){return document.documentElement.classList.contains("cy")};
+var norm=function(s){return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[’'.]/g,"")};
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
+var keys=Object.keys(EL).sort(function(a,b){return b.length-a.length});
+function split(word){var parts=[],i=0,rest="";while(i<word.length){var hit=null;for(var k=0;k<keys.length;k++){if(keys[k].length>1&&word.substr(i,keys[k].length)===keys[k]){hit=keys[k];break}}
+if(hit){if(rest){parts.push([rest,null]);rest=""}parts.push([hit,EL[hit]]);i+=hit.length}else{rest+=word[i];i++}}if(rest)parts.push([rest,null]);return parts}
+function run(){var q=norm(box.value.trim());if(!q){out.innerHTML="";return}
+var t=TW.filter(function(x){return norm(x[0])===q||norm(x[1])===q})[0],html="";
+if(t)html+='<p class="tw-hit"><a href="#'+t[4]+'"><b>'+esc(t[1])+(t[0]!==t[1]?" / "+esc(t[0]):"")+"</b></a>: "+esc(cy()?t[3]:t[2])+"</p>";
+var words=q.split(/[\s-]+/).filter(Boolean),chips="";
+words.forEach(function(w){if(EL[w]){chips+='<li><b>'+esc(w)+"</b><span>"+esc(cy()?EL[w][1]:EL[w][0])+"</span></li>";return}
+split(w).forEach(function(p){chips+=p[1]?'<li><b>'+esc(p[0])+"</b><span>"+esc(cy()?p[1][1]:p[1][0])+"</span></li>":'<li class="un"><b>'+esc(p[0])+"</b><span>"+(cy()?"enw sant, person, afon neu air arall":"a saint, person, river or other word")+"</span></li>"})});
+out.innerHTML=html+'<ul class="tw-parts">'+chips+"</ul>"}
+box.addEventListener("input",run);document.addEventListener("click",function(ev){if(ev.target.closest("#lang-en,#lang-cy"))setTimeout(run,0)});
+[].slice.call(document.querySelectorAll("[data-tw-try]")).forEach(function(b){b.addEventListener("click",function(){box.value=b.textContent;run();box.focus()})})})();</script>
+"""
+
+
+def towns_page(have):
+    rows = town_rows()
+    els = {}
+    for w, en, cy in TWN.ELEMENTS:
+        els.setdefault(w, [en, cy])
+    data = (f'<script type="application/json" id="tw-el">{json.dumps(els, ensure_ascii=False)}</script>'
+            f'<script type="application/json" id="tw-towns">{json.dumps([[r["en"], r["cy"], r["mEn"], r["mCy"], r["id"]] for r in rows], ensure_ascii=False)}</script>')
+    tries = "".join(f'<button type="button" class="chip" data-tw-try>{w}</button>' for w in ("Aberystwyth", "Llanfair Pwllgwyngyll", "Pen-y-bont", "Bryn-coch", "Abertawe", "Pontypridd", "Maesteg", "Dolgellau"))
+    decoder = (f'<div class="tw-dec"><label for="tw-in" class="tw-lab">{bi("What does the name mean? Type any Welsh place name.", "Beth yw ystyr yr enw? Teipiwch unrhyw enw lle Cymraeg.")}</label>'
+               f'<input id="tw-in" class="ref-filter" type="search" autocomplete="off" spellcheck="false" placeholder="e.g. Aberdaugleddau, Pen-y-groes, Llanelli">'
+               f'<p class="tw-try">{bi("Try:", "Rhowch gynnig ar:")} {tries}</p><div id="tw-out" aria-live="polite"></div>{data}</div>')
+    groups = ""
+    for la in g["CS"].LA_ORDER:
+        rs = [r for r in rows if r["la"] == la]
+        if not rs:
+            continue
+        rs.sort(key=lambda r: slug(r["cy"]))
+        groups += (f'<div class="ref-group" id="tw-{slug(la)}" data-ref-group><h2 class="ref-gh">{bi(la, g["CS"].LA_CY[la])}</h2>'
+                   f'<div class="tw-grid">{"".join(town_card(r, have) for r in rs)}</div></div>')
+    jump = '<ul class="ref-jump">' + "".join(f'<li><a href="#tw-{slug(la)}">{bi(la, g["CS"].LA_CY[la])}</a></li>' for la in g["CS"].LA_ORDER if any(r["la"] == la for r in rows)) + "</ul>"
+    seen, words = set(), []
+    for w, en, cy in TWN.ELEMENTS:
+        if w in seen:
+            continue
+        seen.add(w)
+        words.append(f'<div><dt lang="cy">{e(w)}</dt><dd>{bi(en, cy)}</dd></div>')
+    gloss = f'<dl class="tw-words">{"".join(words)}</dl>'
+    n = len(rows)
+    main = (g["hero"]("saints", crumbs(), "book", "Reference", "Cyfeirlyfr", "Towns and villages of Wales", "Trefi a phentrefi Cymru",
+                      f"What {n} Welsh place names mean, and what happened there. Or type any name into the decoder to see what its parts mean.",
+                      f"Beth yw ystyr {n} o enwau lleoedd Cymru, a beth ddigwyddodd yno. Neu teipiwch unrhyw enw i’r datgodiwr i weld ystyr ei rannau.", art="cross")
+            + g["section"](decoder, top=True)
+            + g["section"](f'<div class="tw-top"><div class="tw-mapbox">{towns_map(rows)}</div><div><p>{bi("Tap a dot on the map to jump to that place, or pick a county.", "Tapiwch ddot ar y map i neidio i’r lle hwnnw, neu dewiswch sir.")}</p>{jump}'
+                           f'<input class="ref-filter" type="search" data-ref-filter placeholder="Find a town… / Chwilio am dref…" aria-label="Filter the towns / Hidlo’r trefi" autocomplete="off"></div></div>'
+                           + groups + f'<p class="ref-none" data-ref-none hidden>{bi("No town in the list matches. Try the decoder above, which works for any name.", "Does dim tref yn y rhestr yn cyfateb. Rhowch gynnig ar y datgodiwr uchod, sy’n gweithio i unrhyw enw.")}</p>',
+                           "The places", "Y lleoedd")
+            + g["section"](gloss, "The words in Welsh place names", "Y geiriau mewn enwau lleoedd"))
+    return g["page"]("towns.html", "Welsh place names: what they mean · History of Wales",
+                     f"What Welsh place names mean: {n} towns and villages with their history, a name decoder for any place in Wales, and the words that make up the names.",
+                     main, era="saints", ld=ld_article("Towns and villages of Wales", "What Welsh place names mean"), active="reference.html", track="page:towns", extra=FILTER_JS + DECODER_JS)
+
+
+TOWN_CSS = """
+.tw-dec{background:var(--slate);border:1px solid var(--line);border-radius:16px;padding:1.3rem 1.3rem 1.1rem;max-width:50rem}
+.tw-lab{display:block;font:600 1.2rem var(--f-display);margin:0 0 .7rem}
+.tw-dec .ref-filter{width:100%;box-sizing:border-box;background:var(--night)}
+.tw-try{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;margin:.8rem 0 0;color:var(--muted);font-size:.9rem}
+.tw-parts{list-style:none;padding:0;margin:1rem 0 0;display:flex;flex-wrap:wrap;gap:.5rem}
+.tw-parts li{display:grid;gap:.1rem;background:var(--night);border:1px solid var(--line);border-top:3px solid var(--gold,#e8c65a);border-radius:10px;padding:.5rem .8rem}
+.tw-parts li b{font:600 1.1rem var(--f-display)}.tw-parts li span{font-size:.85rem;color:var(--muted)}
+.tw-parts li.un{border-top-color:var(--line)}
+.tw-hit{margin:1rem 0 0}.tw-hit a{color:var(--gold,#e8c65a)}
+.tw-top{display:grid;grid-template-columns:minmax(0,1fr);gap:1.4rem;margin:0 0 2rem}
+@media(min-width:800px){.tw-top{grid-template-columns:minmax(0,22rem) minmax(0,1fr);align-items:start}}
+.tw-mapbox{max-width:24rem}
+.tw-map{width:100%;height:auto;display:block}.tw-map .land{fill:var(--slate);stroke:var(--line);stroke-width:1.2}
+.tw-dot .d{fill:var(--gold,#e8c65a)}.tw-dot .h{fill:transparent}.tw-dot:hover .d,.tw-dot:focus .d{fill:var(--red,#e2453d)}
+.tw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,19rem),1fr));gap:1rem;margin-bottom:1rem}
+.tw-card{background:var(--slate);border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem 1.1rem;scroll-margin-top:5.5rem}
+.tw-card:target{border-color:var(--gold,#e8c65a);box-shadow:0 0 0 2px color-mix(in srgb,var(--gold,#e8c65a) 35%,transparent)}
+.tw-card h3{margin:0 0 .4rem;display:flex;flex-wrap:wrap;gap:.2rem .6rem;align-items:baseline}
+.tw-cy{font:600 1.35rem/1.2 var(--f-display)}.tw-en{font:500 .8rem var(--f-mono);color:var(--muted)}
+.tw-card p{margin:.35rem 0 0;line-height:1.55;font-size:.95rem}.tw-m{color:var(--gold,#e8c65a)}.tw-m b{color:var(--muted);font-weight:500}
+.tw-words{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,13rem),1fr));gap:.3rem 1rem;margin:0}
+.tw-words div{display:flex;gap:.6rem;align-items:baseline;padding:.35rem 0;border-bottom:1px solid var(--line)}
+.tw-words dt{font:600 1.05rem var(--f-display);min-width:5rem}.tw-words dd{margin:0;color:var(--muted);font-size:.9rem}
+"""
+
+
 # ---------- the look-it-up desk ----------
 DESK = [  # href, English, Welsh, English line, Welsh line, era colour
     ("a-z.html", "The A–Z", "Yr A–Y", "Words, laws and ideas, each explained in a few lines.", "Geiriau, cyfreithiau a syniadau, pob un wedi’i egluro mewn ychydig linellau.", "kings"),
@@ -259,16 +393,19 @@ def pages(have):
     """have: the set of page names build.py is making (so links to pages that do not exist yet are left out)."""
     _titles()
     have = set(have) | set(PAGE_NAMES)
-    out = {"a-z.html": az_page(have), "questions.html": questions_page(have), "reference.html": desk_page(have)}
+    out = {"a-z.html": az_page(have), "questions.html": questions_page(have), "towns.html": towns_page(have), "reference.html": desk_page(have)}
     return out
 
 
-PAGE_NAMES = ["a-z.html", "questions.html", "reference.html"]
+PAGE_NAMES = ["a-z.html", "questions.html", "towns.html", "reference.html"]
 
 
 def search_items():
     items = [dict(k="term", t=t["en"], c=t["cy"], u=f"a-z.html#az-{t['id']}", y=["A–Z", "A–Y"], b=[t["dEn"], t["dCy"]], e="kings") for t in AZ.TERMS]
     items += [dict(k="question", t=q["qEn"], c=q["qCy"], u=f"questions.html#q-{q['id']}", y=["Quick answer", "Ateb cyflym"], b=[q["aEn"], q["aCy"]], e="today") for gr in FAQ.GROUPS for q in gr["qs"]]
+    items += [dict(k="town", t=r["cy"], c=r["cy"], u=f"towns.html#{r['id']}", y=[r["en"] if r["en"] != r["cy"] else r["la"], r["laCy"]], b=[r["mEn"].capitalize() + ". " + r["hEn"], r["mCy"].capitalize() + ". " + r["hCy"]], e="saints", a=r["en"]) for r in town_rows()]
+    items.append(dict(k="page", t="Towns and villages: what Welsh place names mean", c="Trefi a phentrefi: ystyr enwau lleoedd", u="towns.html", y=["Place names", "Enwau lleoedd"],
+                      b=["What Welsh place names mean, with a decoder for any name: aber, llan, caer, pen, tre and more.", "Ystyr enwau lleoedd Cymru, gyda datgodiwr i unrhyw enw: aber, llan, caer, pen, tre a rhagor."], e="saints"))
     items.append(dict(k="page", t="The A–Z of Welsh history", c="A–Y hanes Cymru", u="a-z.html", y=["Reference", "Cyfeirlyfr"],
                       b=["Words, laws, places and ideas from Welsh history, each explained in a few lines.", "Geiriau, cyfreithiau, lleoedd a syniadau o hanes Cymru, pob un wedi’i egluro mewn ychydig linellau."], e="kings"))
     items.append(dict(k="page", t="Look it up: the reference desk", c="Chwilio’r hanes: y ddesg gyfeirio", u="reference.html", y=["Reference", "Cyfeirlyfr"],

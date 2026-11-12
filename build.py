@@ -2877,7 +2877,7 @@ def not_found_page():
 
 import refpages as RP  # noqa: E402  (the reference pages: reference.html, a-z.html ...)
 RP.setup(globals())
-style += RP.REF_CSS
+style += RP.REF_CSS + RP.TOWN_CSS
 
 
 def main():
