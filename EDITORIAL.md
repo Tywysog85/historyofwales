@@ -29,6 +29,8 @@ A Welsh person anywhere in the world, or anyone with a link to Wales, should fin
 | Llanilltud Fawr | The oldest centre of learning in Britain. |
 | Vikings and Normans | No Viking kingdom took root in Wales. The Normans took England in five years and needed 216 for Wales (1067 to 1283). |
 | The front page tagline | "A land of kings, princes, castles, poets, and saints. Built on coal, slate, iron, copper, and wool." Lower case, as written. |
+| The nine ages | Wherever visitors choose between the ages (home page, Menu, footer, filters, next/previous buttons), each name goes with its dates, e.g. "The Age of Kings 800 – 1100", "The Age of Princes 1100 – 1485" (Ifan, 12 November 2026). Each age has one short question on the home page, in both languages (`ERA_Q` in `build.py`). |
+| Where to begin | The home page opens with three ways in beside the introduction: "Explore the nine ages", "Find a place on the map" and "Follow a themed trail". The Today section (On this day, daily challenge, Did you know, New on the site) comes after the nine ages (Ifan, 12 November 2026). |
 
 ## Newest first
 
@@ -45,6 +47,16 @@ Every long read ends with a short list of further reading and references (`src/r
 
 - Cite only works that really exist, with the right author, title, publisher and year. Never invent one; if a detail can't be checked, leave it out.
 - Give the title as published, even when it uses a word the site avoids (for example "The Atlantic Celts"). The note in our own words follows the site's rules.
+
+## Sources beside the claims
+
+Ifan asked on 12 November 2026 for the source to sit right beside the claim it supports, not only in the list at the bottom. A small chip with a § (for example "§ Antiquity, 2019 +2") follows the sentence; tap it and a card shows each source, who wrote it, what it shows, and a link. How to add one is at the top of `src/cites.py`.
+
+- Start with what the site features and what readers will question: the facts on the home page, superlatives ("largest", "first", "oldest") and traditional stories.
+- Give the claim's own evidence where there is any: the archaeological paper, the museum or archive that holds the find, the old text itself. Open and read each source before it goes in.
+- The source must say what the sentence says. If it says less, change the sentence to match the source (Marconi's 1897 message is now "between" Lavernock and Flat Holm, as the sources have it).
+- Traditions (Arthur as Athrwys, Madog, Brutus) are cited to their own sources: the Book of Llandaff, The Historie of Cambria (1584), the Historia Brittonum, Geoffrey, Adam of Usk, and the books that make the tradition's case. No debunking sources and no debunking words.
+- Put the marker in the English and the Welsh sentence alike.
 
 ## Author, dates and corrections
 

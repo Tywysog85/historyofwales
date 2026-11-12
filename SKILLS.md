@@ -579,8 +579,12 @@ Learnt while simplifying the home page.
 - Every page is written twice: `<page>.html` in English and `cy/<page>.html` in Welsh. `src/welshpages.py` does it at the end of the build (`WP.split`, called in `main()` after `shared_assets`). Write pages as before with `bi()`: nothing else is needed.
 - The English page has the Welsh copies (class `l-cy`) taken out, and the Welsh page the English ones (`l-en`), so each address is in one language only. That also halves the size of most pages.
 - The Welsh page gets `lang="cy"`, a Welsh `<title>` from its own `<h1>` (plus "· Hanes Cymru"), a Welsh description from its first `class="lede"` line, `og:locale` cy_GB and its own canonical. Both pages carry `hreflang` links (en, cy, x-default = English). For a page whose heading isn't a good title, special-case it in `split()`.
-- Welsh pages sit in `cy/` with `<base href="../">`, so pictures, scripts and styles still load from the one shared copy. Links between pages are rewritten to `cy/...` when the page is built; a small script in the head does the same for links that scripts make, fixes `#` links and `history.replaceState("#...")`, and remembers the reader chose Cymraeg.
-- The EN and CY buttons go to the other address. An English page opened by someone who chose Cymraeg sends them to the Welsh page.
+- Welsh pages sit in `cy/` with `<base href="../">`, so pictures, scripts and styles still load from the one shared copy. Links between pages are rewritten to `cy/...` when the page is built; a small script in the head does the same for links that scripts make, and fixes `#` links and `history.replaceState("#...")`.
+- EN and CY are real links (`<a hreflang>`) to the other address, made in `split()` (`_switch`), so they can be copied, shared and followed by search engines. They keep the reader's place (`#...`). A page's language comes only from its address: never read `hc-lang` to decide what language to show (`app.js` reads the `cy` class on `<html>`).
+- The reader's choice (`hc-lang` in localStorage) is saved only when they press EN, CY or the "read this in…" bar, never by just opening a page. It never overrides a link: a shared English link opens in English and a `cy/` link in Welsh, for everyone. Only the bare home address sends someone who chose Cymraeg to `cy/` (and not when they came from another page of the site). Anywhere else, a small bar above the page offers it in their language; × hides it for the visit.
+- Pages built without `LANG_JS` (home, timeline, people, map) get the switch script added before `</body>` (`_with_switch_js`). Only the 404 page still swaps words in place (`LANG_TOGGLE`).
+- To check every pair: canonical is the page itself, hreflang en / cy / x-default point at the two addresses, `og:url` matches. Build with `SITE_URL=https://historyofwales.cymru/` first, or the addresses are the github.io ones.
+- The home page search description is set in `build.py` (English) and in `split()` (Welsh). Keep both under about 155 characters, or Google cuts them off mid-sentence.
 - Scripts that read text from a page must not expect both `.l-en` and `.l-cy` to be there (see `site.js`, the card sets).
 - Elements whose words a script swaps (`data-cy="..."`) start out in Welsh on the Welsh page.
 
@@ -617,6 +621,33 @@ Learnt while simplifying the home page.
 - `arthur_circle(slug)` in `build.py` shows the whole circle as small name chips on Arthur's page and on every page in it, with the current person highlighted. To add someone, give them a `P(...)` entry and put their slug in a group. People who already have pages elsewhere can go in a group too.
 - People known only from the tales take the date "Age of Arthur": `data.py` sorts them just after Arthur, and `date_cy()` shows "Oes Arthur" on the Welsh side.
 - Their reference list is `PAGES["arthur-circle"]` in `src/refs2.py`. Saints who gain a person page get `link=P("slug")` in `src/saints.py`, so the saints pages link to them.
+
+### Books from one publisher, checked when their site is blocked: Y Lolfa (November 2026)
+
+- `src/ylolfa.py` holds each Y Lolfa book as a normal reading-list item whose last field is its ylolfa.com page. Put the name in the reading list of the page it belongs to (`src/refs.py`, `src/refs2.py`) or in `SHELF_EXTRA`; `bookshelf_page()` in `build.py` gathers every item with a ylolfa.com link into the "Y Lolfa" section of the Books and authors page, linking each to its place in its period.
+- ylolfa.com refuses automated fetches. To check a book: a web search limited to ylolfa.com gives the book's own page, whose title shows the exact title and ISBN (`/products/<ISBN>/<slug>`); then a search for that ISBN in quotes shows the author on booksellers' listings. Give a year only when a listing confirms it.
+
+### Helping a first-time visitor choose where to begin (November 2026)
+- The three "Where to begin" cards sit in the home hero in `src/head.html` (`<nav class="begin">`), styled in `src/v6.css` under "where to begin". The hero's moving scene measures `.begin` (in `src/app.js`, `measure()`) to keep the mountain and stars clear of the words, so keep that class name if the cards change.
+- Section order on the home page is simply the order in `src/body.html`: the nine ages (`#chapters`) first, then `#today`.
+- Age names always travel with their dates: `spanEn`/`spanCy` from `src/ages9.py`/`data.py`. In Python use a `<span class="m-dates">` (Menu, footer, pager) or `c-dates` (chips); in `app.js` the shared `chips()` filter adds them on the timeline, map and people pages.
+- The home page question for each age is `ERA_Q` in `build.py`; the build stops if an age has no question.
+- On phones (640px and under) the nine posters become one list to choose from, with the question shown and the longer blurb hidden.
+
+### A real picture on every page (November 2026)
+- `src/pictures.py` gives every page a photograph or old artwork at the top, in place of the drawn scenes, with a credit line under the title. It also gives the long read, legend and age cards their pictures, and one picture to each step of Wales in 10 minutes.
+- Pictures are only ones already kept on the site with their Commons credit: `g:<id>` from the gallery, `p:<id>` from the person photos, `l:<key>` from the legend photos. Add `@50% 15%` to a ref to move the crop (e.g. to keep a face in frame).
+- To change a page's picture, change its line in `PAGE`. Pages not listed use their place's own gallery picture, or the picture for their age (`ERA`). `build.py` runs `PX.dress()` on every page, so new pages get a picture automatically.
+- The top picture loads at once (`fetchpriority="high"`, 600px copy for phones through `srcset`); card pictures load lazily from the small copy. The build stops if a named picture's file is missing.
+- Commons can't be reached from the cloud. New pictures have to be downloaded on the Mini-PC (Remote Control) and added to the gallery first.
+
+### Sources beside the claims (November 2026)
+
+- Write `[[cite:key1,key2]]` straight after the full stop of any sentence in `src/` (English and Welsh copy), and add each key to `S` in `src/cites.py` with a short chip label, title, author, a note on what it shows, and the link (plus `url_cy` if the source has a Welsh page).
+- `build.py` turns markers into chips after the Welsh pages are split off, so each language gets its own labels. Markers inside page titles, descriptions, JSON-LD, scripts, links and buttons are removed, and `write()` removes any left in JSON, feeds and the search index, so a marker never shows as text. An unknown key stops the build.
+- The card opens on click (code at the end of `src/static/site.js`): under the chip on a computer, as a sheet along the bottom on a phone. Without JavaScript the chip is a plain link to the first source.
+- The home page's "Did you know?" fact is drawn again by `app.js` when "Another" is pressed, so `FACTS` goes into the page data already turned into HTML (`CITE.html_text`).
+- Check sources with the WebFetch tool when the cloud can't reach a site directly, and quote the source's own words in the note where you can.
 
 ## Working together
 
