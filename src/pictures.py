@@ -35,6 +35,11 @@ ERA = dict(
 )
 
 PAGE = {
+    # the princes of Powys and Deheubarth (src/princes4.py)
+    "person-gwenwynwyn.html": "g:cast-powis",
+    "person-madog-ap-gruffudd-maelor.html": "g:holy-valle-crucis",
+    "person-maelgwn-ap-rhys.html": "g:place-strataflorida",
+    "person-rhys-gryg.html": "g:place-dinefwr",
     # historic places of importance (src/places3.py)
     "place-garthcelyn.html": "g:person-siwan",
     "place-dolwyddelan.html": "g:cast-dolwyddelan",
@@ -65,6 +70,15 @@ PAGE = {
     "place-llanddewibrefi.html": "g:person-dewi-sant",
     "place-llancarfan.html": "g:person-cadog",
     "place-carewcross.html": "g:cast-carew",
+    "place-ygaer.html": "g:anci-y-gaer",
+    "place-tomenymur.html": "g:anci-tomen-y-mur",
+    "place-dinlligwy.html": "g:anci-din-lligwy",
+    "place-barclodiad.html": "g:anci-barclodiad",
+    "place-tinkinswood.html": "g:anci-tinkinswood",
+    "place-maenceti.html": "g:anci-maen-ceti",
+    "place-parclebreos.html": "g:anci-parc-le-breos",
+    "place-carregsamson.html": "g:anci-carreg-samson",
+    "place-tymawr.html": "g:land-south-stack",
     # long reads
     "story-castles.html": "g:place-caernarfon",
     "story-language.html": "g:trea-bible-1588",
@@ -294,6 +308,25 @@ EXTRA = {
     "Castle from pier, Dumbarton, Scotland-LCCN2001705975.jpg": ("Detroit Publishing Co., Library of Congress", "Public domain", _PD,
                                                                  "Dumbarton Rock, Alt Clut, the old fortress of the kings of Ystrad Clud, about 1895", "Craig Dumbarton, Alclud, hen gaer brenhinoedd Ystrad Clud, tua 1895"),
 }
+
+# The writers who recorded early Wales (src/writers.py): their pictures, and the long read's.
+EXTRA["Ricemarch Psalter, Psalm 1.JPG"] = ("Ithael and Ieuan ap Sulien, Llanbadarn Fawr; Trinity College Dublin", "Public domain", _PD,
+                                         "The opening of Psalm 1 in the Rhygyfarch Psalter, made at Llanbadarn Fawr about 1080",
+                                         "Dechrau Salm 1 yn Sallwyr Rhygyfarch, a wnaed yn Llanbadarn Fawr tua 1080")
+PAGE.update({
+    "story-writers.html": "c:Ricemarch Psalter, Psalm 1.JPG@50% 20%",
+    "person-gerallt-gymro.html": "g:person-gerallt-gymro",
+    "person-asser.html": "g:person-asser",
+    "person-nennius.html": "g:land-dinas-emrys",
+    "person-rhygyfarch.html": "g:holy-llanbadarn",
+    "person-ieuan-ap-sulien.html": "c:Ricemarch Psalter, Psalm 1.JPG@50% 20%",
+    "person-elfoddw.html": "g:holy-bangor",
+    "person-lifris.html": "g:holy-llandaff",
+    "person-caradog-llancarfan.html": "c:Glastonbury Abbey Ruins 2.JPG",
+    "person-walter-map.html": "l:lady",
+    "person-adam-of-usk.html": "g:trea-pennal-letter",
+    "person-gutun-owain.html": "g:holy-basingwerk",
+})
 
 # Pages that keep the picture they already have at the top (nothing to replace).
 SKIP = {"index.html"}

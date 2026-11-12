@@ -395,6 +395,15 @@ CITES = {
 import princes2 as _P2X  # noqa: E402
 LONG.update(_P2X.LONG)
 CITES.update(_P2X.CITES)
+# Batch 3 (Siwan, the two Gwenllians, Owain Lawgoch) lives in princes3.py.
+import princes3 as _P3X  # noqa: E402
+LONG.update(_P3X.LONG)
+CITES.update(_P3X.CITES)
+# Batch 4 (Powys and Deheubarth: Owain Cyfeiliog, Gwenwynwyn, Madog ap Gruffudd Maelor, Maelgwn ap Rhys, Rhys Gryg) lives in princes4.py.
+import princes4 as _P4X  # noqa: E402
+LONG.update(_P4X.LONG)
+PEOPLE = PEOPLE + _P4X.PEOPLE
+CITES.update(_P4X.CITES)
 
 # ---------------------------------------------------------------- the block on every page of the set
 # Only people with a page on the site are shown, so ids for pages still to come can be listed already.
@@ -406,7 +415,7 @@ GROUPS = [
   ["gruffudd-ap-cynan", "owain-gwynedd", "llywelyn-fawr", "siwan", "gruffudd-ap-llywelyn-fawr", "dafydd-ap-llywelyn", "llywelyn-ap-gruffudd", "eleanor-de-montfort",
    "dafydd-ap-gruffudd", "gwenllian-ferch-llywelyn", "madog-ap-llywelyn", "owain-lawgoch"]),
  ("The princes of Deheubarth", "Tywysogion Deheubarth",
-  ["rhys-ap-tewdwr", "nest", "gruffudd-ap-rhys", "gwenllian", "yr-arglwydd-rhys", "rhys-gryg"]),
+  ["rhys-ap-tewdwr", "nest", "gruffudd-ap-rhys", "gwenllian", "yr-arglwydd-rhys", "maelgwn-ap-rhys", "rhys-gryg"]),
  ("The kings of Morgannwg and Gwent", "Brenhinoedd Morgannwg a Gwent",
   ["morgan-hen", "iestyn-ap-gwrgant"]),
  ("The kings and princes of Powys", "Brenhinoedd a thywysogion Powys",
