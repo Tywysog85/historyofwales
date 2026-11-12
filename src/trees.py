@@ -205,8 +205,8 @@ GWENT = T("Tewdrig ap Llywarch", "fl. c. 600", ("King of Gwent and Glywysing, an
  T("Meurig ap Tewdrig", "fl. c. 625", ("King of Gwent and Glywysing", "Brenin Gwent a Glywysing"),
    ("Married Onbrawst, daughter of Gwrgan Fawr of Ergyng.", "Priododd Onbrawst, merch Gwrgan Fawr o Ergyng."), crown=True, kids=[
   T(("Athrwys ap Meurig (Arthur)", "Athrwys ap Meurig (Arthur)"), "c. 605–655", ("King of Gwent and Glywysing", "Brenin Gwent a Glywysing"),
-    ("Welsh tradition holds that this king was Arthur, whose court was at Caerleon. Historians debate the identification and the dates.",
-     "Yn ôl traddodiad Cymru, y brenin hwn oedd Arthur, a’i lys yng Nghaerllion. Mae haneswyr yn trafod yr uniaethiad a’r dyddiadau."),
+    ("Welsh tradition holds that this king was Arthur, whose court was at Caerleon. Other historians may see it differently.",
+     "Yn ôl traddodiad Cymru, y brenin hwn oedd Arthur, a’i lys yng Nghaerllion. Gall haneswyr eraill weld pethau’n wahanol."),
     P("arthur"), crown=True, id="athrwys", kids=[
    T("Morgan Mwynfawr ab Athrwys", "fl. c. 665–710", ("King of Glywysing", "Brenin Glywysing"),
      ("‘The Generous’. Welsh tradition holds that Morgannwg, Glamorgan, takes its name from him.", "‘Mwynfawr’. Yn ôl traddodiad Cymru, ar ei ôl ef yr enwyd Morgannwg."), crown=True, kids=[

@@ -24,8 +24,8 @@ def N(en, cy):
 
 P = lambda s: f"person-{s}.html"  # noqa: E731
 
-ATHRWYS_EN = "Welsh tradition holds that this king of Gwent and Glywysing was Arthur, whose court was at Caerleon. Historians debate the identification and the dates."
-ATHRWYS_CY = "Yn ôl traddodiad Cymru, y brenin hwn ar Went a Glywysing oedd Arthur, a’i lys yng Nghaerllion. Mae haneswyr yn trafod yr uniaethiad a’r dyddiadau."
+ATHRWYS_EN = "Welsh tradition holds that this king of Gwent and Glywysing was Arthur, whose court was at Caerleon. Other historians may see it differently."
+ATHRWYS_CY = "Yn ôl traddodiad Cymru, y brenin hwn ar Went a Glywysing oedd Arthur, a’i lys yng Nghaerllion. Gall haneswyr eraill weld pethau’n wahanol."
 MORGAN_EN, MORGAN_CY = "‘The Generous’. Welsh tradition holds that Morgannwg, Glamorgan, takes its name from him.", "‘Mwynfawr’. Yn ôl traddodiad Cymru, ar ei ôl ef yr enwyd Morgannwg."
 MEURIG_EN = "Son of Tewdrig. He married Onbrawst, daughter of Gwrgan Fawr of Ergyng, and ruled Gwent and Glywysing together."
 MEURIG_CY = "Mab Tewdrig. Priododd Onbrawst, merch Gwrgan Fawr o Ergyng, a rheolodd Went a Glywysing ynghyd."

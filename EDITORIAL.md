@@ -18,7 +18,7 @@ A Welsh person anywhere in the world, or anyone with a link to Wales, should fin
 
 | Subject | Rule |
 | --- | --- |
-| King Arthur | A king, never a "myth" or a "legend". Welsh tradition holds that he was Athrwys ap Meurig, king of Gwent and Glywysing. One line may say that historians debate the identification and the dates. |
+| King Arthur | A king, never a "myth" or a "legend". Welsh tradition holds that he was Athrwys ap Meurig, king of Gwent and Glywysing. This is the site's position. Each Arthur page may add one line, and only one: "Other historians may see it differently." (Welsh: "Gall haneswyr eraill weld pethau’n wahanol.") |
 | Iolo Morganwg | Never called a forger or a drug addict. Write what he gave Wales: the Gorsedd, the manuscripts he saved, the hymns, his stand against slavery. |
 | The Coelbren | Iolo had it from the old bards of Glamorgan, in his own account. Never "forged". Do not print the word "proof" without a source to show. |
 | Brutus | Owain Glyndŵr wrote to the King of Scotland that both were descended from Brutus. State it as Owain's words. Do not label it a myth. |

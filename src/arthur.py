@@ -1,7 +1,7 @@
 # Arthur's person page (person-arthur.html): the long text, his line, and the map of Arthur's Wales.
 # House rules (see EDITORIAL.md): Arthur is a king, never "myth" or "legend". Welsh tradition holds
-# that he was Athrwys ap Meurig, king of Gwent and Glywysing. One line only says that historians
-# debate the identification and the dates. Nothing negative about him or his family.
+# that he was Athrwys ap Meurig, king of Gwent and Glywysing. One line only says that other historians
+# may see it differently. Nothing negative about him or his family.
 # long.py and build.py pull these in.
 # Paragraph codes (see prose() in build.py):
 #   "## Heading"            a sub-heading
@@ -34,7 +34,7 @@ PERSON_LONG = (
 
   "## Why Wales holds that Athrwys was Arthur",
   "The name is the first reason: Athrwys, Arthwys and Arthur sit close together. The place is the second. The oldest accounts put Arthur’s court at Caerleon on the Usk, and Caerleon lay at the heart of Meurig’s kingdom. The saints are the third. The Lives of the saints of the south-east, written at Llancarfan and in the churches of Glamorgan, bring Arthur to their doors again and again, and the Life of Illtud calls him the saint’s cousin. The land itself is the fourth. Across Gwent, Glamorgan, Brycheiniog and Dyfed, hills, stones and lakes have carried Arthur’s name for as long as anyone has written them down.",
-  "Writers of Gwent and Glamorgan set out the case in print in the eighteenth century, and it has been held in Wales ever since. In our own time Alan Wilson of Cardiff and his partner Baram Blackett made it the work of their lives. Historians debate the identification and the dates.",
+  "Writers of Gwent and Glamorgan set out the case in print in the eighteenth century, and it has been held in Wales ever since. In our own time Alan Wilson of Cardiff and his partner Baram Blackett made it the work of their lives. Other historians may see it differently.",
 
   "## The twelve battles",
   "The Historia Brittonum, the History of the Britons, was written in Gwynedd in about 829, in the reign of King Merfyn Frych. It is the oldest book to tell of Arthur’s wars, and it gives him a title that is his alone:",
@@ -116,7 +116,7 @@ PERSON_LONG = (
 
   "## Pam y cred Cymru mai Arthur oedd Athrwys",
   "Yr enw yw’r rheswm cyntaf: mae Athrwys, Arthwys ac Arthur yn agos iawn at ei gilydd. Y lle yw’r ail. Mae’r adroddiadau hynaf yn gosod llys Arthur yng Nghaerllion ar Wysg, ac roedd Caerllion yng nghanol teyrnas Meurig. Y saint yw’r trydydd. Mae Bucheddau saint y de-ddwyrain, a ysgrifennwyd yn Llancarfan ac yn eglwysi Morgannwg, yn dod ag Arthur at eu drysau dro ar ôl tro, ac mae Buchedd Illtud yn ei alw’n gefnder i’r sant. Y tir ei hun yw’r pedwerydd. Ar draws Gwent, Morgannwg, Brycheiniog a Dyfed, mae bryniau, meini a llynnoedd wedi dwyn enw Arthur cyhyd ag y mae neb wedi’u cofnodi.",
-  "Rhoddodd awduron Gwent a Morgannwg yr achos mewn print yn y ddeunawfed ganrif, ac mae wedi’i arddel yng Nghymru byth er hynny. Yn ein hoes ni gwnaeth Alan Wilson o Gaerdydd a’i bartner Baram Blackett ef yn waith eu bywydau. Mae haneswyr yn trafod yr uniaethiad a’r dyddiadau.",
+  "Rhoddodd awduron Gwent a Morgannwg yr achos mewn print yn y ddeunawfed ganrif, ac mae wedi’i arddel yng Nghymru byth er hynny. Yn ein hoes ni gwnaeth Alan Wilson o Gaerdydd a’i bartner Baram Blackett ef yn waith eu bywydau. Gall haneswyr eraill weld pethau’n wahanol.",
 
   "## Y deuddeg brwydr",
   "Ysgrifennwyd yr Historia Brittonum, Hanes y Brythoniaid, yng Ngwynedd tua 829, yn nheyrnasiad y Brenin Merfyn Frych. Dyma’r llyfr hynaf i adrodd am ryfeloedd Arthur, ac mae’n rhoi iddo deitl nad oes neb arall yn ei rannu:",
