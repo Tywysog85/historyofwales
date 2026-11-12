@@ -217,6 +217,36 @@ PAGE = {
     "404.html": "g:land-borth-forest",
     "laws.html": "g:trea-laws-hywel",
     "llys-rhosyr.html": "g:anci-llys-rhosyr",
+    "story-mabinogi.html": "g:trea-red-book",
+    # the Mabinogi tale guides (src/mabinogi_tales.py)
+    "mabinogi-pwyll.html": "c:Narberth castle pembrokeshire.jpg@50% 55%",
+    "mabinogi-branwen.html": "c:Branwen drudwy.JPG@50% 40%",
+    "mabinogi-manawydan.html": "c:DV405 no.86 Narberth Castle.png",
+    "mabinogi-math.html": "c:Dinas Dinlle.jpg",
+    # the people of the Mabinogi (src/mabinogi_people.py): the country of their tale
+    "person-pwyll.html": "g:anci-carn-ingli",
+    "person-rhiannon.html": "g:anci-carn-ingli",
+    "person-pryderi.html": "g:anci-carn-ingli",
+    "person-arawn.html": "g:anci-carn-ingli",
+    "person-cigfa.html": "g:anci-gors-fawr",
+    "person-teyrnon.html": "g:place-caerwent",
+    "person-branwen.html": "g:place-harlech",
+    "person-manawydan.html": "g:place-harlech",
+    "person-matholwch.html": "g:place-harlech",
+    "person-efnysien.html": "g:place-harlech",
+    "person-math.html": "g:anci-tomen-y-mur",
+    "person-gwydion.html": "g:anci-tomen-y-mur",
+    "person-gilfaethwy.html": "g:anci-tomen-y-mur",
+    "person-goewin.html": "g:anci-tomen-y-mur",
+    "person-arianrhod.html": "g:anci-tomen-y-mur",
+    "person-dylan-ail-don.html": "g:anci-tomen-y-mur",
+    "person-lleu.html": "g:anci-tomen-y-mur",
+    "person-blodeuwedd.html": "g:anci-tomen-y-mur",
+    "person-gronw-pebr.html": "g:land-llyn-tegid",
+    "person-rhydderch-ab-ieuan-llwyd.html": "g:place-strataflorida",
+    "person-hywel-fychan.html": "g:trea-red-book",
+    "person-tegid.html": "g:land-llyn-tegid",
+    "person-carnhuanawc.html": "g:place-library",
 }
 
 # More pictures, found on Commons for this (tools/commons_research.py) and kept on the site by tools/fetch_photos.py.
@@ -225,6 +255,15 @@ _BY = "https://creativecommons.org/licenses/by/"
 _BYSA = "https://creativecommons.org/licenses/by-sa/"
 _PD = "https://creativecommons.org/publicdomain/mark/1.0/"
 EXTRA = {
+    # the Mabinogi tale guides (src/mabinogi_tales.py)
+    "Narberth castle pembrokeshire.jpg": ("WestWalesP", "CC BY-SA 3.0", _BYSA + "3.0",
+           "The ruins of Narberth Castle, Arberth, where tradition places the court of Pwyll", "Adfeilion Castell Arberth, lle mae traddodiad yn gosod llys Pwyll"),
+    "DV405 no.86 Narberth Castle.png": ("Alphonse Dousseau", "CC0", "https://creativecommons.org/publicdomain/zero/1.0/",
+           "Narberth Castle on its hill, painted by Alphonse Dousseau", "Castell Arberth ar ei fryn, gan Alphonse Dousseau"),
+    "Branwen drudwy.JPG": ("W. Williams", "Public domain", _PD,
+           "Branwen with her starling in the court of Matholwch", "Branwen a’i drudwy yn llys Matholwch"),
+    "Dinas Dinlle.jpg": ("Dwalad", "CC BY-SA 4.0", _BYSA + "4.0",
+           "Sunset seen from the hillfort of Dinas Dinlle, Lleu’s fort, on the coast of Arfon", "Machlud o fryngaer Dinas Dinlle, caer Lleu, ar arfordir Arfon"),
     "Longbowmen.jpg": ("Luttrell Psalter, British Library", "Public domain", _PD,
                        "Archers at practice with the longbow, from the Luttrell Psalter of about 1325", "Saethwyr yn ymarfer â’r bwa hir, o Sallwyr Luttrell, tua 1325"),
     "Gaiman, Chubut ca.1911.jpg": ("Unknown photographer", "Public domain", _PD,

@@ -48,6 +48,8 @@ import laws as LW  # noqa: E402  (the Laws of Hywel Dda page, laws.html)
 import people2 as P2  # noqa: E402
 import princes as PRN  # noqa: E402  (the kings and princes of Wales: the block on each of their pages)
 import arthur_circle as AC  # noqa: E402  (Arthur's circle: the block on every page of the people of Arthur's story)
+import mabinogi_tales as MT  # noqa: E402  (a guide page for each tale of the Mabinogion, mabinogi-<id>.html)
+import mabinogi_people as MP  # noqa: E402  (the people of the Mabinogi: the block on each of their pages)
 import sets as SETS  # noqa: E402
 import seo as SEO  # noqa: E402  (search engine extras for every page)
 import added as AD  # noqa: E402  (when each item was added: newest first, "Just added" strips, "New" badges)
@@ -608,7 +610,7 @@ PERSON_EXTRA = {"arthur": arthur_extra}
 
 def date_cy(d):
     """The Welsh side of a person's dates, where it differs (most dates read the same in both languages)."""
-    return "Oes Arthur" if d == "Age of Arthur" else d
+    return {"Age of Arthur": "Oes Arthur", "The Four Branches": "Y Pedair Cainc"}.get(d, d)
 
 
 def arthur_circle(slug):
@@ -648,6 +650,87 @@ def princes_circle(slug):
     return section(f'<div class="ar-circle"><p class="lede">{lead}</p>{out}<p class="ar-more">{more}</p></div>', "Kings and princes of Wales", "Brenhinoedd a thywysogion Cymru")
 
 
+def mabinogi_circle(slug):
+    """The people of the Mabinogi (src/mabinogi_people.py): the block on each of their pages."""
+    if slug not in MP.ALL_IDS or slug == "arthur":
+        return ""
+    out = ""
+    for en, cy, ids in MP.GROUPS:
+        chips = ""
+        for s in ids:
+            c = lit_person_chip(s)
+            chips += c.replace("<a ", '<a aria-current="page" ', 1) if s == slug else c
+        out += f'<h3 class="sub-h">{bi(en, cy)}</h3><div class="ppl">{chips}</div>'
+    tales = [t for t in MT.TALES if slug in t["people"]]
+    more = " ".join(f'<a class="btn" href="mabinogi-{t["id"]}.html">{bi("The tale: " + t["en"], "Y chwedl: " + t["cy"])} →</a>' for t in tales)
+    more += f' <a class="btn" href="mabinogion.html">{bi("All the tales of the Mabinogion", "Holl chwedlau’r Mabinogion")} →</a> <a class="btn" href="story-mabinogi.html">{bi("Long read: the books that kept the tales", "Erthygl: y llyfrau a gadwodd y chwedlau")} →</a>'
+    n = sum(1 for s in MP.ALL_IDS if s in PERSON)
+    lead = bi(f"{n} people of the Mabinogi, each with a page of their own: the lords and ladies of Dyfed, the children of Llŷr and of Dôn, the heroes of the other tales, and the people who kept the tales alive.",
+              f"{n} o bobl y Mabinogi, pob un â’i dudalen ei hun: arglwyddi ac arglwyddesau Dyfed, plant Llŷr a phlant Dôn, arwyr y chwedlau eraill, a’r bobl a gadwodd y chwedlau’n fyw.")
+    return section(f'<div class="ar-circle"><p class="lede">{lead}</p>{out}<p class="ar-more">{more}</p></div>', "People of the Mabinogi", "Pobl y Mabinogi")
+
+
+NUDGES = [(0, 0)] + [(round(r * c), round(r * s_)) for r in (30, 56, 84) for c, s_ in ((1, 0), (-1, 0), (0, -1), (0, 1), (.7, -.7), (-.7, -.7), (.7, .7), (-.7, .7))]
+
+
+def pin_map(places, pre, label):
+    """A numbered map of Wales with a list beside it (the look of Arthur's Wales). places: (en, cy, lat, lon, note en, note cy, link);
+    a place with lat None is listed but has no pin (it lies outside Wales or is not known)."""
+    sc, k, minx, maxy = geo["sc"], geo["k"], geo["minx"], geo["maxy"]
+    pins, items, seen = "", "", []
+    for i, (en, cy, lat, lon, ten, tcy, link) in enumerate(places, 1):
+        if lat is not None:
+            x0, y0 = (lon - minx) * k * sc, (maxy - lat) * sc
+            x, y = x0, y0
+            for dx, dy in NUDGES:  # a pin that would sit on another moves aside, with a short line back to the real spot
+                if all((px - x0 - dx) ** 2 + (py - y0 - dy) ** 2 >= 27 ** 2 for px, py in seen):
+                    x, y = x0 + dx, y0 + dy
+                    break
+            if (x, y) != (x0, y0):
+                pins += f'<circle class="ar-dot" cx="{x0:.0f}" cy="{y0:.0f}" r="3" fill="#d43c34"/><line class="ar-lead" x1="{x0:.0f}" y1="{y0:.0f}" x2="{x:.0f}" y2="{y:.0f}"/>'
+            seen.append((x, y))
+            pins += (f'<a href="#{pre}-{i}" class="ar-pin"><circle cx="{x:.0f}" cy="{y:.0f}" r="13"/>'
+                     f'<text x="{x:.0f}" y="{y + 5:.0f}">{i}</text><title>{e(en)}</title></a>')
+        more = f' <a class="src" href="{link}">{bi("More", "Mwy")} →</a>' if link else ""
+        items += f'<li id="{pre}-{i}"><b>{bi(en, cy)}</b><p>{bi(ten, tcy)}{more}</p></li>'
+    svg = (f'<svg class="ar-map" viewBox="-10 -10 630 691" role="img" aria-label="{e(label)}">'
+           f'<path class="land" d="{geo["outline"]}"/>{pins}</svg>')
+    return f'<div class="ar-grid"><div class="ar-mapbox">{svg}</div><ol class="ar-list">{items}</ol></div>'
+
+
+def tale_page(t, i):
+    """A guide to one tale of the Mabinogion (src/mabinogi_tales.py): the facts, the whole tale, its people and its places."""
+    tl = MT.TALES
+    prev_t, next_t = (tl[i - 1] if i > 0 else None), (tl[i + 1] if i + 1 < len(tl) else None)
+    grp = next(g for g in MT.GROUPS if g[0] == t["group"])
+    crumbs = f'<a href="index.html">{SITE}</a> / <a href="legends.html">{bi("Legends", "Chwedlau")}</a> / <a href="mabinogion.html">{bi("The Mabinogion", "Y Mabinogion")}</a>'
+    ppl = "".join(lit_person_chip(s) for s in t["people"])
+    links = ""
+    if t["legend"]:
+        lg = LEGEND.get(t["legend"][7:-5])
+        if lg:
+            links += f'<a class="btn solid" href="{t["legend"]}">{bi("Read the tale retold: " + lg["en"], "Darllen y chwedl: " + lg["cy"])} →</a> '
+    links += (f'<a class="btn" href="story-mabinogi.html">{bi("The books that kept the tales", "Y llyfrau a gadwodd y chwedlau")} →</a> '
+              f'<a class="btn" href="mabinogion.html">{bi("All the tales", "Pob chwedl")} →</a>')
+    body = (f'<section class="article"><div class="wrap narrow"><p class="byline">{AB.byline_top()}<span>{bi(grp[1], grp[2])}</span></p>'
+            f'{prose_bi(t["pEn"], t["pCy"], "story prose")}<p class="l-links">{links}</p></div></section>')
+    who = section(f'<div class="ar-circle"><div class="ppl">{ppl}</div></div>', "People of the tale", "Pobl y chwedl") if ppl else ""
+    hero_ref = PX.PAGE.get(f'mabinogi-{t["id"]}.html', "")
+    hero_file = hero_ref[2:].split("@")[0] if hero_ref.startswith("c:") else None
+    figs = "".join(lit_fig(f) for f in t.get("figs", []) if f[0] != hero_file)  # the picture at the top is not shown twice
+    figs = section(f'<div class="mb-figs">{figs}</div>', "Pictures of the tale", "Lluniau’r chwedl") if figs else ""
+    pins = sum(1 for x in t["places"] if x[2] is not None)
+    where = section(f'<p class="lede">{bi(f"{pins} places in Wales where the tale happens. Tap a number to read about it.", f"{pins} o leoedd yng Nghymru lle mae’r chwedl yn digwydd. Tapiwch rif i ddarllen amdano.")}</p>'
+                    + pin_map(t["places"], "lle", f'Map of the places of {t["en"]} / Map o leoedd {t["cy"]}'), "The places of the tale", "Lleoedd y chwedl") if t["places"] else ""
+    pager = ((f'<a class="btn" href="mabinogi-{prev_t["id"]}.html">← {bi(prev_t["en"], prev_t["cy"])}</a>' if prev_t else f'<a class="btn" href="mabinogion.html">← {bi("The Mabinogion", "Y Mabinogion")}</a>')
+             + (f'<a class="btn solid" href="mabinogi-{next_t["id"]}.html">{bi(next_t["en"], next_t["cy"])} →</a>' if next_t else f'<a class="btn solid" href="mabinogion.html">{bi("The Mabinogion", "Y Mabinogion")} →</a>'))
+    main = (hero(t["era"], crumbs, "book", t["n"][0], t["n"][1], t["en"], t["cy"], t["sumEn"], t["sumCy"], art="book")
+            + body + figs + who + where + section(f'<div class="pager">{pager}</div>'))
+    ld = {"@context": "https://schema.org", "@type": "Article", "headline": f'{t["cy"]} ({t["en"]})', "description": t["sumEn"], "inLanguage": ["en", "cy"],
+          "about": {"@type": "Book", "name": t["cy"], "alternateName": t["en"], "inLanguage": "cy"}, "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
+    return page(f'mabinogi-{t["id"]}.html', f'{t["cy"]}: {t["en"]} · History of Wales', t["sumEn"], main, era=t["era"], ld=ld, active="legends.html", track=f'mabinogi:{t["id"]}')
+
+
 def person_page(p):
     slug, eid = p[0], p[1]
     era = ERA[eid]
@@ -669,6 +752,7 @@ def person_page(p):
             + section(meta + photo_fig(PH.PERSON_PHOTOS.get(slug), "portrait", "person-" + slug) + body + f'<p class="share no-print"><button type="button" class="btn" data-copy="person-{slug}.html">{bi("Copy link to share", "Copïo dolen i’w rhannu")}</button></p>' + further(f"person:{slug}", p[9]), top=True)
             + PERSON_EXTRA.get(slug, lambda: "")()
             + arthur_circle(slug)
+            + mabinogi_circle(slug)
             + princes_circle(slug)
             + story_feature("people", slug)
             + person_places(slug)
@@ -1067,6 +1151,10 @@ def page_refs(path):
         return "general", None
     if kind == "person" and rest in AC.ALL_IDS and rest != "arthur" and "arthur-circle" in REF2.PAGES:
         return "arthur-circle", None
+    if kind == "person" and rest in MP.OWN_IDS and "mabinogi-people" in REF2.PAGES:
+        return "mabinogi-people", None
+    if kind == "mabinogi" and "mabinogi-tales" in REF2.PAGES:
+        return "mabinogi-tales", None
     if kind in ("person", "place"):
         rec = PERSON.get(rest) if kind == "person" else PLACE.get(rest)
         era = (rec[1] if kind == "person" else rec["era"]) if rec else None
@@ -1086,7 +1174,7 @@ SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes
     ("law", "The laws of Hywel Dda", "Cyfreithiau Hywel Dda", ["laws", "hywel", "topic-law"]),
     ("saints", "Saints, learning and faith", "Seintiau, dysg a ffydd", ["christianity", "joseph", "lucius", "patrick", "saints", "saints-*", "learning", "brittany", "topic-faith"]),
     ("princes", "Princes, castles and Owain Glyndŵr", "Tywysogion, cestyll ac Owain Glyndŵr", ["era-medieval", "castles", "glyndwr", "longbow", "battles", "documents", "topic-war", "nest", "rhys"]),
-    ("lit", "Poets, old books and legends", "Beirdd, hen lyfrau a chwedlau", ["literature", "books", "triads", "mabinogion", "legends", "legend-*", "bran", "symbols", "iolo", "topic-music", "trail-song"]),
+    ("lit", "Poets, old books and legends", "Beirdd, hen lyfrau a chwedlau", ["literature", "books", "triads", "mabinogion", "mabinogi", "mabinogi-tales", "mabinogi-people", "legends", "legend-*", "bran", "symbols", "iolo", "topic-music", "trail-song"]),
     ("tudor", "From the Tudors to the Methodists", "O’r Tuduriaid i’r Methodistiaid", ["era-tudor"]),
     ("industry", "Iron, coal, slate and the sea", "Haearn, glo, llechi a’r môr", ["era-industrial", "industry", "coal", "aberfan", "protest", "topic-industry", "trail-coal", "trail-sea", "firsts", "topic-science"]),
     ("modern", "Modern Wales and the Welsh abroad", "Cymru fodern a’r Cymry ar wasgar", ["era-modern", "era-today", "revival", "mac", "fwa", "world", "madog", "tryweryn", "topic-abroad", "topic-sport"]),
@@ -1243,6 +1331,7 @@ def story_page(x, i):
             + f'<section class="article"><div class="wrap narrow">{meta}{prose_bi(x["pEn"], x["pCy"], figs=x.get("figs"))}' + (f'<p><a class="btn solid" href="firsts.html">★ {bi("Every Welsh world first, with the people behind them", "Pob un o’r pethau a wnaeth Cymru gyntaf, a’r bobl y tu ôl iddynt")} →</a></p>' if x["id"] == "firsts" else "")
               + story_more_links(x)
               + (f'<p><a class="btn solid" href="laws.html">{bi("Much more on the law: the big page on the Laws of Hywel Dda, with the manuscripts and a quiz", "Llawer mwy am y gyfraith: y dudalen fawr ar Gyfreithiau Hywel Dda, gyda’r llawysgrifau a chwis")} →</a></p>' if x["id"] == "hywel" else "") + refs_block(x["id"]) + '</div></section>'
+            + (section(f'<div class="mb-figs">{"".join(lit_fig(f) for f in x["figs"])}</div>', "Pictures", "Lluniau") if x.get("figs") else "")
             + section(f'<div class="s-grid three">{"".join(story_card(y) for y in others)}</div>', "Keep reading", "Daliwch ati i ddarllen")
             + section(f'<div class="pager"><a class="btn" href="stories.html">← {bi("All long reads", "Pob erthygl")}</a><a class="btn solid" href="story-{nxt["id"]}.html">{bi(nxt["en"], nxt["cy"])} →</a></div>'))
     ld = {"@context": "https://schema.org", "@type": "Article", "headline": x["en"], "description": x["sumEn"], "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
@@ -1292,10 +1381,15 @@ def legends_index():
     return page("legends.html", "Legends · History of Wales", "The legends of Wales retold: the tales of King Arthur, the red dragon, Gelert, the Four Branches of the Mabinogi, Macsen Wledig, Culhwch and Olwen, Dwynwen, Melangell, the Tylwyth Teg and more, with the history behind them.", main, era="medieval", og_type="website", active="legends.html")
 
 
+MT_BY_CY = {t["cy"]: t for t in MT.TALES}
+
+
 def mabinogion_page():
     # src/mabinogion.py: the eleven tales, the White Book and the Red Book, Lady Charlotte Guest
     def tale(t, era):
-        go = (f'<a class="btn" href="{t["link"]}">{bi("Read the tale", "Darllen y chwedl")} →</a>' if t["link"] else "")
+        g = MT_BY_CY.get(t["cy"])
+        go = (f'<a class="btn solid" href="mabinogi-{g["id"]}.html">{bi("The guide: the whole tale, its people and places", "Y tywysydd: y chwedl gyfan, ei phobl a’i lleoedd")} →</a> ' if g else "")
+        go += (f'<a class="btn" href="{t["link"]}">{bi("Read it retold", "Darllen y chwedl")} →</a>' if t["link"] else "")
         return (f'<article class="mab-tale rv" data-era="{era}"><h3 lang="cy">{e(t["cy"])}</h3><p class="mab-en l-en" lang="en">{e(t["en"])}</p>'
                 f'<p>{bi(t["sumEn"], t["sumCy"])}</p>{go}</article>')
     groups = "".join(f'<section class="tight" id="mab-{k + 1}"><div class="wrap"><h2 class="sub-h">{bi(g["en"], g["cy"])}</h2><p class="l-sum">{bi(g["sumEn"], g["sumCy"])}</p>'
@@ -1305,11 +1399,13 @@ def mabinogion_page():
                  "The great tales of medieval Wales: the Four Branches of the Mabinogi, the native tales and the three romances, kept for six hundred years in the White Book and the Red Book.",
                  "Chwedlau mawr Cymru’r Oesoedd Canol: Pedair Cainc y Mabinogi, y chwedlau brodorol a’r tair rhamant, a gadwyd am chwe chan mlynedd yn y Llyfr Gwyn a’r Llyfr Coch.", art="book", extra=jump)
             + f'<section class="article"><div class="wrap narrow">{prose_bi(MB.INTRO_EN, MB.INTRO_CY)}'
-              f'<p class="l-links"><a class="btn" href="person-arthur.html">{bi("Arthur, King of the Britons", "Arthur, Brenin y Brythoniaid")} →</a> '
+              f'<p class="l-links"><a class="btn solid" href="story-mabinogi.html">{bi("Long read: the books that kept the tales, and the woman who translated them", "Erthygl: y llyfrau a gadwodd y chwedlau, a’r wraig a’u cyfieithodd")} →</a> '
+              f'<a class="btn" href="person-arthur.html">{bi("Arthur, King of the Britons", "Arthur, Brenin y Brythoniaid")} →</a> '
               f'<a class="btn" href="books.html#white">{bi("The White Book and the Red Book", "Y Llyfr Gwyn a’r Llyfr Coch")} →</a> '
               f'<a class="btn" href="triads.html">{bi("The Welsh Triads", "Trioedd Ynys Prydain")} →</a></p></div></section>'
             + groups
-            + section(f'<div class="pager"><a class="btn" href="legends.html">← {bi("All legends", "Pob chwedl")}</a><a class="btn solid" href="legend-pwyll.html">{bi("Begin with the First Branch", "Dechrau â’r Gainc Gyntaf")} →</a></div>'))
+            + section("".join(f'<h3 class="sub-h">{bi(en, cy)}</h3><div class="ppl">{"".join(lit_person_chip(s) for s in ids)}</div>' for en, cy, ids in MP.GROUPS).join(['<div class="ar-circle">', '</div>']), "People of the Mabinogi", "Pobl y Mabinogi")
+            + section(f'<div class="pager"><a class="btn" href="legends.html">← {bi("All legends", "Pob chwedl")}</a><a class="btn solid" href="mabinogi-pwyll.html">{bi("Begin with the First Branch", "Dechrau â’r Gainc Gyntaf")} →</a></div>'))
     ld = {"@context": "https://schema.org", "@type": "Article", "headline": "The Mabinogion", "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
     return page("mabinogion.html", "The Mabinogion · History of Wales", "The Mabinogion: the eleven great tales of medieval Wales, the White Book of Rhydderch and the Red Book of Hergest, and Lady Charlotte Guest’s translation, in English and Cymraeg.",
                 main, era="medieval", ld=ld, active="legends.html", track="page:mabinogion")
@@ -3254,7 +3350,8 @@ def search_index():
                       b=["Who writes History of Wales, how it is written, and how to report a mistake or a correction.", "Pwy sy’n ysgrifennu Hanes Cymru, sut y caiff ei hysgrifennu, a sut i roi gwybod am gamgymeriad neu gywiriad."], e="today"))
     items.append(dict(k="page", t="The Mabinogion", c="Y Mabinogion", u="mabinogion.html", y=["Eleven tales", "Un chwedl ar ddeg"],
                       b=["The eleven great tales of medieval Wales, the White Book and the Red Book, and Lady Charlotte Guest.", "Un chwedl fawr ar ddeg Cymru’r Oesoedd Canol, y Llyfr Gwyn a’r Llyfr Coch, a’r Arglwyddes Charlotte Guest."], e="medieval"))
-    items += [dict(k="page", t=t["cy"], c=t["cy"], u="mabinogion.html#mab-" + str(k + 1), y=[t["en"], g["cy"]], b=[t["sumEn"], t["sumCy"]], e=g["era"]) for k, g in enumerate(MB.GROUPS) for t in g["tales"] if not t["link"]]
+    items += [dict(k="page", t=t["cy"], c=t["cy"], u="mabinogion.html#mab-" + str(k + 1), y=[t["en"], g["cy"]], b=[t["sumEn"], t["sumCy"]], e=g["era"]) for k, g in enumerate(MB.GROUPS) for t in g["tales"] if not t["link"] and t["cy"] not in MT_BY_CY]
+    items += [dict(k="page", t=t["cy"], c=t["cy"], u=f'mabinogi-{t["id"]}.html', y=[t["en"], t["n"][1]], b=[t["sumEn"], t["sumCy"]], e=t["era"]) for t in MT.TALES]
     items.append(dict(k="page", t="The Laws of Hywel Dda", c="Cyfreithiau Hywel Dda", u="laws.html", y=["Cyfraith Hywel", "Cyfraith Hywel"],
                       b=["The law of Wales for six hundred years: Whitland, the three lawbooks, galanas and sarhaed, women and marriage, land, the worth of everything, the manuscripts, and a quiz.",
                          "Cyfraith Cymru am chwe chan mlynedd: Hendy-gwyn, y tri llyfr cyfraith, galanas a sarhaed, menywod a phriodas, tir, gwerth pob peth, y llawysgrifau, a chwis."], e="kings"))
@@ -3647,6 +3744,8 @@ def main():
             print(f"WARNING: long read '{x['id']}' has no reference list. Add one to src/refs.py (real books only).")
     pages["legends.html"] = legends_index()
     pages["mabinogion.html"] = mabinogion_page()
+    for i, t in enumerate(MT.TALES):
+        pages[f'mabinogi-{t["id"]}.html'] = tale_page(t, i)
     pages["literature.html"] = literature_page()
     pages["books.html"] = books_page()
     pages["books-and-authors.html"] = bookshelf_page()
