@@ -511,6 +511,14 @@ Learnt while adding "Britons, not Celts" (`src/celts.py`).
 - An era page links a long read only through its timeline: list the exact English title of a timeline event in that era in `events=[...]` (here "The peoples of Wales" for Ancient Wales).
 - Other pages (the A to Z, legends) need the link added by hand, for example in the `see` list of an A to Z entry in `src/ref_az.py`.
 
+### A family of long reads in one file (November 2026)
+Learnt while adding the coming of Christianity to Britain (`src/christianity.py`: `story-christianity.html`, `story-joseph.html`, `story-lucius.html`, `story-bran.html`).
+
+- One file can hold several long reads that belong together: a `STORIES` list (added to `STORIES` in `src/features.py`), their timeline `EVENTS` (added at the bottom of `src/data.py`), new people in the `people2a.py` format (`PEOPLE`, added to `ALL` in `src/people2.py`) and their reading lists (`REFS`, merged into `refs.REFS` by one line near the top of `build.py`).
+- Keeping the reading lists in the same file lets them reuse the shared items in `src/refs.py` and `src/refs2.py` (GILDAS, NENNIUS, MABINOGION …) without a circular import.
+- Add the new reading-list keys to a section of `SHELF` in `build.py` so the books appear on the Books and authors page. The first section to list a book keeps it, so put a list whose books belong elsewhere (the Brân list shares the Mabinogion) in the later section.
+- A legend can carry `links=[(href, en, cy)]` too: Branwen now links to the Brân long read and person page.
+
 ### Buttons at the end of a long read
 
 - A long read (a `STORY` dict, e.g. `src/wilson_blackett.py`) can carry `links=[(href, en, cy), ...]`. `story_more_links()` in `build.py` shows them as buttons after the text, the same way legends use `links`.

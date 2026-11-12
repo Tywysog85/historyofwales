@@ -191,9 +191,9 @@ GROUPS = [
  ]),
  dict(id="faith", en="Faith and learning", cy="Ffydd a dysg", qs=[
   Q("christianity", "When did Wales become Christian?", "Pryd y daeth Cymru’n Gristnogol?",
-    "Christianity reached Wales in Roman times; Julius and Aaron were martyred at Caerleon. In the Age of Saints, the 400s to 600s, Wales became a land of churches and schools, and Welsh saints carried the faith to Cornwall, Brittany and Ireland.",
-    "Cyrhaeddodd Cristnogaeth Gymru yn oes y Rhufeiniaid; merthyrwyd Julius ac Aaron yng Nghaerllion. Yn Oes y Seintiau, yr 400au i’r 600au, daeth Cymru’n wlad o eglwysi ac ysgolion, a chariodd seintiau Cymru’r ffydd i Gernyw, Llydaw ac Iwerddon.",
-    ["person-julius-and-aaron.html", "saints.html"]),
+    "Very early. Gildas wrote that the faith of Christ reached Britain in the last years of the Emperor Tiberius, before AD 37, and Welsh tradition remembers Brân Fendigaid and King Lleurwg bringing it to the Britons. Julius and Aaron were martyred at Caerleon, and British bishops sat at the Council of Arles in 314. In the Age of Saints, the 400s to 600s, Wales became a land of churches and schools, and Welsh saints carried the faith to Cornwall, Brittany and Ireland.",
+    "Yn gynnar iawn. Ysgrifennodd Gildas i ffydd Crist gyrraedd Prydain ym mlynyddoedd olaf yr Ymerawdwr Tiberius, cyn OC 37, ac mae traddodiad Cymru’n cofio Brân Fendigaid a’r Brenin Lleurwg yn dod â hi at y Brythoniaid. Merthyrwyd Julius ac Aaron yng Nghaerllion, ac eisteddai esgobion o Brydain yng Nghyngor Arles yn 314. Yn Oes y Seintiau, yr 400au i’r 600au, daeth Cymru’n wlad o eglwysi ac ysgolion, a chariodd seintiau Cymru’r ffydd i Gernyw, Llydaw ac Iwerddon.",
+    ["story-christianity.html", "person-julius-and-aaron.html", "saints.html"]),
   Q("oldest-college", "What is the oldest centre of learning in Britain?", "Beth yw’r ganolfan ddysg hynaf ym Mhrydain?",
     "Llanilltud Fawr, founded by Illtud about 500. Its school taught saints including Samson, Gildas and, by tradition, Dewi and Padarn.",
     "Llanilltud Fawr, a sefydlwyd gan Illtud tua 500. Dysgodd ei hysgol seintiau gan gynnwys Samson, Gildas ac, yn ôl traddodiad, Dewi a Phadarn.",

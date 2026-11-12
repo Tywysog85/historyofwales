@@ -658,3 +658,7 @@ EVENTS = sorted(EVENTS + _MDE, key=lambda ev: ev[1])
 # ---------- King Caradog against Rome (src/caradog.py) ----------
 from caradog import EVENTS as _CRE
 EVENTS = sorted(EVENTS + _CRE, key=lambda ev: ev[1])
+
+# ---------- The coming of Christianity to Britain (src/christianity.py) ----------
+from christianity import EVENTS as _CHE
+EVENTS = sorted(EVENTS + _CHE, key=lambda ev: ev[1])
