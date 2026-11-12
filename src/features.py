@@ -382,4 +382,5 @@ import iolo as _IO  # Iolo Morganwg long read (src/iolo.py)
 import wilson_blackett as _WB  # Alan Wilson and Baram Blackett long read (src/wilson_blackett.py)
 import brutus as _BR  # Brutus of Troy and the Britons long read (src/brutus.py)
 import celts as _CE  # Britons, not Celts: Edward Lhuyd and the name 'Celtic' (src/celts.py)
-STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY]
+import madog as _MD  # Prince Madog's voyage to America and the Welsh Indians (src/madog.py)
+STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY]
