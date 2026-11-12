@@ -34,6 +34,9 @@ SERIF = "Gloock,'Iowan Old Style','Palatino Linotype',Georgia,serif"
 SANS = "Figtree,'Segoe UI',Helvetica,Arial,sans-serif"
 MONO = "'JetBrains Mono',Menlo,Consolas,monospace"
 e = lambda s: html.escape(str(s), quote=True)
+# Outlook's dark mode repaints plain background colours (night blue turned grey); it leaves background pictures alone, so
+# every dark panel also carries its colour as a one-colour gradient
+bg = lambda c: f"background-color:{c};background-image:linear-gradient({c},{c})"
 # the great days of the Welsh year always lead the email when they fall in its week: (title in onthisday.json, page to show)
 GREAT_DAYS = {"03-01": ("Saint David’s Day", "person-dewi-sant.html"), "09-16": ("Owain Glyndŵr Day", "person-owain-glyndwr.html"),
               "12-11": ("Death at Cilmeri", "person-llywelyn-ap-gruffudd.html", "Llywelyn, Our Last Prince"), "01-25": ("Saint Dwynwen’s Day", "legend-dwynwen.html")}
@@ -141,7 +144,7 @@ def build(today):
     out = []
     # the banner and the dates
     out.append(f'<tr><td style="padding:0"><a href="{SITE}"><img src="{SITE}email/head.jpg" width="600" alt="This week in Welsh history · Yr wythnos hon yn hanes Cymru" '
-               f'style="display:block;width:100%;max-width:600px;height:auto;border:0;background:{NIGHT};color:{INK};font:400 28px {SERIF}"></a></td></tr>')
+               f'style="display:block;width:100%;max-width:600px;height:auto;border:0;{bg(NIGHT)};color:{INK};font:400 28px {SERIF}"></a></td></tr>')
     out.append(f'<tr><td style="padding:22px 32px 0"><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>'
                f'<td style="border:1px solid {LINE};border-radius:99px;padding:7px 14px;font:700 13px/1 {MONO};color:{GOLD};letter-spacing:.04em">{e(span.upper())} {end.year}</td></tr></table>'
                f'<p style="margin:18px 0 0;font:400 17px/1.6 {SANS};color:{INK}"><b style="font-family:{SERIF};font-weight:400;font-size:20px">Bore da!</b> '
@@ -151,7 +154,7 @@ def build(today):
     if story:
         url = SITE + story["page"]
         out.append(section("Story of the week", "Stori’r wythnos"))
-        out.append(f'<tr><td style="padding:14px 32px 0"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="{SLATE}" style="background:{SLATE};border:1px solid {LINE};border-radius:16px;overflow:hidden">'
+        out.append(f'<tr><td style="padding:14px 32px 0"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="{SLATE}" style="{bg(SLATE)};border:1px solid {LINE};border-radius:16px;overflow:hidden">'
                    f'<tr><td style="padding:0"><a href="{e(url)}"><img src="{e(card(story["page"]))}" width="536" alt="{e(story["title"])}" style="display:block;width:100%;height:auto;border:0;border-radius:16px 16px 0 0"></a></td></tr>'
                    f'<tr><td style="padding:22px 24px 26px">{kicker(e(story["kicker"]), story["colour"])}'
                    f'<p style="margin:0 0 10px;font:400 28px/1.15 {SERIF};color:{INK}"><a href="{e(url)}" style="color:{INK};text-decoration:none">{e(story["title"])}</a></p>'
@@ -211,7 +214,7 @@ def build(today):
     # Welsh word of the week
     w = word_of_week(week)
     if w:
-        out.append(f'<tr><td style="padding:36px 32px 0"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="{SLATE2}" style="background:{SLATE2};border-radius:16px;border-left:4px solid {RED}">'
+        out.append(f'<tr><td style="padding:36px 32px 0"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="{SLATE2}" style="{bg(SLATE2)};border-radius:16px;border-left:4px solid {RED}">'
                    f'<tr><td style="padding:22px 24px">{kicker("Welsh word of the week · Gair yr wythnos", RED)}'
                    f'<p style="margin:0;font:400 40px/1.1 {SERIF};color:{INK}">{e(w["word"])}</p>'
                    f'<p style="margin:6px 0 14px;font:400 15px/1.4 {SANS};color:{MUTED}">say <b style="color:{INK};font-family:{MONO};font-size:14px">{e(w["say"])}</b> &nbsp;·&nbsp; {e(w["means"])}</p>'
@@ -248,7 +251,7 @@ def build(today):
 <title>{e(subject)}</title>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&family=Gloock&display=swap" rel="stylesheet">
 <style>
-  body {{ margin:0; padding:0; background:{NIGHT}; }}
+  body {{ margin:0; padding:0; {bg(NIGHT)}; }}
   a {{ color:{GOLD}; }}
   @media (max-width:620px) {{
     .shell td[style*="padding:14px 32px"], .shell td[style*="padding:36px 32px"], .shell td[style*="padding:22px 32px"],
@@ -257,10 +260,10 @@ def build(today):
   }}
 </style>
 </head>
-<body style="margin:0;padding:0;background:{NIGHT}">
+<body style="margin:0;padding:0;{bg(NIGHT)}">
 <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:{NIGHT}">{e(preview)}&#8199;&#65279;&#847;&#8199;&#65279;&#847;&#8199;&#65279;&#847;&#8199;&#65279;&#847;</div>
-<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="{NIGHT}" style="background:{NIGHT}"><tr><td align="center" style="padding:16px 8px 24px">
-<table role="presentation" class="shell" cellpadding="0" cellspacing="0" border="0" width="600" bgcolor="{NIGHT}" style="width:100%;max-width:600px;background:{NIGHT};border:1px solid {LINE};border-radius:18px;overflow:hidden">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="{NIGHT}" style="{bg(NIGHT)}"><tr><td align="center" style="padding:16px 8px 24px">
+<table role="presentation" class="shell" cellpadding="0" cellspacing="0" border="0" width="600" bgcolor="{NIGHT}" style="width:100%;max-width:600px;{bg(NIGHT)};border:1px solid {LINE};border-radius:18px;overflow:hidden">
 {body}
 </table></td></tr></table>
 </body>
