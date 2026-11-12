@@ -233,10 +233,10 @@ PRINT_CSS = """
 
 
 NAV_MAIN = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#chapters", "Ages", "Oesoedd"), ("map.html", "Map", "Map"),
-            ("people.html", "People", "Pobl"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("play.html", "Play", "Chwarae")]
-# the short row of links in the top bar on wide screens; everything else is in the Menu, in groups
-NAV_TOP = [("timeline.html", "Timeline", "Llinell amser"), ("map.html", "Map", "Map"), ("people.html", "People", "Pobl"),
-           ("stories.html", "Read", "Darllen"), ("play.html", "Play", "Chwarae"), ("welsh.html", "Cymraeg", "Cymraeg")]
+            ("people.html", "People", "Pobl"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("play.html", "Play", "Chwarae"),
+            ("welsh.html", "Cymraeg", "Cymraeg")]
+# the row of links in the top bar on wide screens; the rest of the site is in the Menu, in groups
+NAV_TOP = NAV_MAIN  # Ifan wants the same links along the top bar as in the big Menu list
 # the Menu's side panel: (heading EN, heading CY, links)
 NAV_GROUPS = [
     ("Explore", "Archwilio", [("reference.html", "Look it up", "Chwilio’r hanes"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"),
