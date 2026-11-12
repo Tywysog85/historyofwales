@@ -461,7 +461,7 @@ REGIONS = [
    S("ffagan-dyfan", "Saints Fagan and Dyfan", "Ffagan a Dyfan", "c. 180", None,
      "Welsh tradition holds that King Lles ap Coel asked Pope Eleutherius for teachers of the faith, and that Ffagan and Dyfan were sent. If so, they were among the first Christian teachers in Britain. Dyfan, it is said, died a martyr at Merthyr Dyfan.",
      "Mae traddodiad Cymru yn dal i’r Brenin Lles ap Coel ofyn i’r Pab Eleutherius am athrawon y ffydd, ac i Ffagan a Dyfan gael eu hanfon. Os felly, roeddent ymhlith yr athrawon Cristnogol cyntaf ym Mhrydain. Bu Dyfan, meddir, farw’n ferthyr ym Merthyr Dyfan.",
-     ["Sain Ffagan", "Merthyr Dyfan"], y=180),
+     ["Sain Ffagan", "Merthyr Dyfan"], link="story-lucius.html", y=180),
    S("illtud", "Saint Illtud", "Illtud Sant", "fl. c. 500", (6, 11),
      "Founder of Llanilltud Fawr, the oldest centre of learning in Britain. His Life tells that he was a soldier and cousin to King Arthur before he gave up the sword. His school taught the saints who carried the faith to Brittany, and Gildas called the teacher of Maelgwn Gwynedd ‘the refined master of almost all Britain’. He is remembered from Gower to Meirionnydd.",
      "Sylfaenydd Llanilltud Fawr, canolfan ddysg hynaf Prydain. Medd ei Fuchedd iddo fod yn filwr ac yn gefnder i’r Brenin Arthur cyn rhoi’r cleddyf heibio. Dysgodd ei ysgol y saint a gariodd y ffydd i Lydaw, a galwodd Gildas athro Maelgwn Gwynedd yn ‘athro coeth bron holl Brydain’. Cofir amdano o Ŵyr i Feirionnydd.",

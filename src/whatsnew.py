@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "The first Christians of Britain", "Cristnogion cyntaf Prydain",
+     "Four new long reads: how Gildas dated the coming of the faith to the last years of Tiberius, before AD 37, and the British church that was old before Augustine came; Joseph of Arimathea at Ynys Wydrin; King Lleurwg’s letter to Rome; and Brân Fendigaid, the Blessed.",
+     "Pedair erthygl newydd: sut y dyddiodd Gildas ddyfodiad y ffydd i flynyddoedd olaf Tiberius, cyn OC 37, a’r eglwys Frythonig a oedd yn hen cyn i Awstin ddod; Joseff o Arimathea yn Ynys Wydrin; llythyr y Brenin Lleurwg at Rufain; a Brân Fendigaid.",
+     "story-christianity.html"),
     ("2026-11-12", "Prince Madog’s voyage to America, and the Welsh Indians", "Mordaith y Tywysog Madog i America, a’r Indiaid Cymreig",
      "A new long read: the Welsh tradition that Madog ab Owain Gwynedd sailed west in 1170, how it became Elizabeth I’s claim to America, the Welsh Indians said to live on the Missouri, and John Evans of Waunfawr, who went 1,800 miles upriver to find them.",
      "Erthygl newydd: y traddodiad Cymreig i Fadog ab Owain Gwynedd hwylio tua’r gorllewin yn 1170, sut y daeth yn hawl Elisabeth I ar America, yr Indiaid Cymreig y dywedid eu bod yn byw ar y Missouri, a John Evans o’r Waunfawr, a aeth 1,800 o filltiroedd i fyny’r afon i chwilio amdanynt.",
