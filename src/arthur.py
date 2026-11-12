@@ -174,13 +174,13 @@ PERSON_LONG = (
   "Bymtheg canrif yn ddiweddarach, ein brenin ni yw ef o hyd: brenin y Brythoniaid, brenin Gwent a Glywysing, y mae ei enw ar fryniau pob rhan o Gymru, ac y mae ei bobl yn dal i siarad ei iaith.",
  ])
 
-# His line, shown as a row of names under the text. (name, note EN, note CY, is_him)
+# His line, shown as a row of names under the text. (name, note EN, note CY, is_him, person page slug or None)
 LINE = [
- ("Tewdrig ap Llywarch", "King, saint and martyr", "Brenin, sant a merthyr", False),
- ("Meurig ap Tewdrig", "King of Gwent and Glywysing", "Brenin Gwent a Glywysing", False),
- ("Athrwys ap Meurig", "Arthur", "Arthur", True),
- ("Morgan Mwynfawr", "Morgannwg bears his name, tradition holds", "Yn ôl traddodiad, ar ei ôl ef yr enwyd Morgannwg", False),
- ("Ithel ap Morgan", "King of Glywysing and Gwent", "Brenin Glywysing a Gwent", False),
+ ("Tewdrig ap Llywarch", "King, saint and martyr", "Brenin, sant a merthyr", False, "tewdrig"),
+ ("Meurig ap Tewdrig", "King of Gwent and Glywysing", "Brenin Gwent a Glywysing", False, "meurig-ap-tewdrig"),
+ ("Athrwys ap Meurig", "Arthur", "Arthur", True, None),
+ ("Morgan Mwynfawr", "Morgannwg bears his name, tradition holds", "Yn ôl traddodiad, ar ei ôl ef yr enwyd Morgannwg", False, "morgan-mwynfawr"),
+ ("Ithel ap Morgan", "King of Glywysing and Gwent", "Brenin Glywysing a Gwent", False, None),
 ]
 
 # Arthur's Wales: places that carry his name or his story. (name EN, name CY, lat, lon, text EN, text CY, link)

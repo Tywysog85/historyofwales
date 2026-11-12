@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Arthur’s circle: 35 new people of Arthur’s story", "Cylch Arthur: 35 o bobl newydd hanes Arthur",
+     "A page each for the people of Arthur’s story in Welsh tradition: his line in Gwent, Tewdrig, Meurig, Onbrawst and Morgan Mwynfawr; Uthr Bendragon, Eigr, his brother Madog ap Uthr, Gwenhwyfar, his sons Llacheu, Amr and Gwydre, Gwalchmai and Medrawd; Cai, Bedwyr, Glewlwyd, Mabon, Caradog Freichfras, Owain ab Urien, Peredur, Geraint and Enid; Culhwch and Olwen; Myrddin, Emrys Wledig and Saint Dyfrig. Brychan Brycheiniog’s page is longer too.",
+     "Tudalen yr un i bobl hanes Arthur yn nhraddodiad Cymru: ei linach yng Ngwent, Tewdrig, Meurig, Onbrawst a Morgan Mwynfawr; Uthr Bendragon, Eigr, ei frawd Madog ab Uthr, Gwenhwyfar, ei feibion Llacheu, Amr a Gwydre, Gwalchmai a Medrawd; Cai, Bedwyr, Glewlwyd, Mabon, Caradog Freichfras, Owain ab Urien, Peredur, Geraint ac Enid; Culhwch ac Olwen; Myrddin, Emrys Wledig a Dyfrig Sant. Mae tudalen Brychan Brycheiniog yn hwy hefyd.",
+     "person-arthur.html"),
     ("2026-11-12", "Macsen Wledig: the emperor from Britain and the birth of Wales", "Macsen Wledig: yr ymerawdwr o Brydain a geni Cymru",
      "A new long read: the general proclaimed emperor by the soldiers of Britain in 383, the Dream of Macsen and Elen of Caernarfon, the Britons who founded Brittany, the kings who traced their line to him, and the year that begins Yma o Hyd.",
      "Erthygl newydd: y cadfridog a gyhoeddwyd yn ymerawdwr gan filwyr Prydain yn 383, Breuddwyd Macsen ac Elen o Gaernarfon, y Brythoniaid a sefydlodd Lydaw, y brenhinoedd a olrheiniodd eu llinach ato, a’r flwyddyn sy’n dechrau Yma o Hyd.",
