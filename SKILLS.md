@@ -636,6 +636,11 @@ Learnt while simplifying the home page.
 - The top picture loads at once (`fetchpriority="high"`, 600px copy for phones through `srcset`); card pictures load lazily from the small copy. The build stops if a named picture's file is missing.
 - Commons can't be reached from the cloud. New pictures have to be downloaded on the Mini-PC (Remote Control) and added to the gallery first.
 
+### Pictures inside a long read, and a Commons photo for the top of the page (November 2026)
+- A long read can show pictures between its paragraphs. Give the story `figs={key: (Commons file, maker, licence, licence link, caption EN, caption CY, width, height)}` and put a paragraph `"!! key"` where each picture goes, in both the English and the Welsh list. `prose()` in `build.py` draws it with its full credit (`lit_fig`). First used in `src/welshnot.py`.
+- Search Commons from GitHub first (see "Looking up Commons pictures from GitHub"): the Welsh Not category held a real W.N. board, an 1879 magazine drawing and Geoff Charles's photographs of Cymdeithas yr Iaith, all free to use. The "Fetch photos" workflow then keeps copies on the site.
+- When the picture for the top of a page is not yet in the gallery, add it to `LEGEND_PHOTOS` in `src/art.py` and `PICKS` in `tools/fetch_legend_photos.py` under a key no legend uses. Pushing that file runs "Fetch photos", which saves `src/static/legends/<key>.webp`; pull, then add `"story-x.html": "l:<key>"` to `PAGE` in `src/pictures.py` (its check stops the build if the file is not there yet).
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.

@@ -61,6 +61,7 @@ PAGE = {
     "story-lucius.html": "g:holy-llandaff",
     "story-bran.html": "g:place-harlech",
     "story-joseph.html": "g:person-dewi-sant",
+    "story-welsh-not.html": "l:iaith-1966",  # Cymdeithas yr Iaith at Llangefni, 1966 (Geoff Charles), src/art.py LEGEND_PHOTOS
     # legends that have no photograph of their own yet
     "legend-dragons.html": "g:land-dinas-emrys",
     "legend-lludd.html": "g:land-dinas-emrys",
