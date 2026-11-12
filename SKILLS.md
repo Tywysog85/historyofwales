@@ -511,6 +511,14 @@ Learnt while adding "Britons, not Celts" (`src/celts.py`).
 - An era page links a long read only through its timeline: list the exact English title of a timeline event in that era in `events=[...]` (here "The peoples of Wales" for Ancient Wales).
 - Other pages (the A to Z, legends) need the link added by hand, for example in the `see` list of an A to Z entry in `src/ref_az.py`.
 
+### A family of long reads in one file (November 2026)
+Learnt while adding the coming of Christianity to Britain (`src/christianity.py`: `story-christianity.html`, `story-joseph.html`, `story-lucius.html`, `story-bran.html`).
+
+- One file can hold several long reads that belong together: a `STORIES` list (added to `STORIES` in `src/features.py`), their timeline `EVENTS` (added at the bottom of `src/data.py`), new people in the `people2a.py` format (`PEOPLE`, added to `ALL` in `src/people2.py`) and their reading lists (`REFS`, merged into `refs.REFS` by one line near the top of `build.py`).
+- Keeping the reading lists in the same file lets them reuse the shared items in `src/refs.py` and `src/refs2.py` (GILDAS, NENNIUS, MABINOGION …) without a circular import.
+- Add the new reading-list keys to a section of `SHELF` in `build.py` so the books appear on the Books and authors page. The first section to list a book keeps it, so put a list whose books belong elsewhere (the Brân list shares the Mabinogion) in the later section.
+- A legend can carry `links=[(href, en, cy)]` too: Branwen now links to the Brân long read and person page.
+
 ### Buttons at the end of a long read
 
 - A long read (a `STORY` dict, e.g. `src/wilson_blackett.py`) can carry `links=[(href, en, cy), ...]`. `story_more_links()` in `build.py` shows them as buttons after the text, the same way legends use `links`.
@@ -571,8 +579,12 @@ Learnt while simplifying the home page.
 - Every page is written twice: `<page>.html` in English and `cy/<page>.html` in Welsh. `src/welshpages.py` does it at the end of the build (`WP.split`, called in `main()` after `shared_assets`). Write pages as before with `bi()`: nothing else is needed.
 - The English page has the Welsh copies (class `l-cy`) taken out, and the Welsh page the English ones (`l-en`), so each address is in one language only. That also halves the size of most pages.
 - The Welsh page gets `lang="cy"`, a Welsh `<title>` from its own `<h1>` (plus "· Hanes Cymru"), a Welsh description from its first `class="lede"` line, `og:locale` cy_GB and its own canonical. Both pages carry `hreflang` links (en, cy, x-default = English). For a page whose heading isn't a good title, special-case it in `split()`.
-- Welsh pages sit in `cy/` with `<base href="../">`, so pictures, scripts and styles still load from the one shared copy. Links between pages are rewritten to `cy/...` when the page is built; a small script in the head does the same for links that scripts make, fixes `#` links and `history.replaceState("#...")`, and remembers the reader chose Cymraeg.
-- The EN and CY buttons go to the other address. An English page opened by someone who chose Cymraeg sends them to the Welsh page.
+- Welsh pages sit in `cy/` with `<base href="../">`, so pictures, scripts and styles still load from the one shared copy. Links between pages are rewritten to `cy/...` when the page is built; a small script in the head does the same for links that scripts make, and fixes `#` links and `history.replaceState("#...")`.
+- EN and CY are real links (`<a hreflang>`) to the other address, made in `split()` (`_switch`), so they can be copied, shared and followed by search engines. They keep the reader's place (`#...`). A page's language comes only from its address: never read `hc-lang` to decide what language to show (`app.js` reads the `cy` class on `<html>`).
+- The reader's choice (`hc-lang` in localStorage) is saved only when they press EN, CY or the "read this in…" bar, never by just opening a page. It never overrides a link: a shared English link opens in English and a `cy/` link in Welsh, for everyone. Only the bare home address sends someone who chose Cymraeg to `cy/` (and not when they came from another page of the site). Anywhere else, a small bar above the page offers it in their language; × hides it for the visit.
+- Pages built without `LANG_JS` (home, timeline, people, map) get the switch script added before `</body>` (`_with_switch_js`). Only the 404 page still swaps words in place (`LANG_TOGGLE`).
+- To check every pair: canonical is the page itself, hreflang en / cy / x-default point at the two addresses, `og:url` matches. Build with `SITE_URL=https://historyofwales.cymru/` first, or the addresses are the github.io ones.
+- The home page search description is set in `build.py` (English) and in `split()` (Welsh). Keep both under about 155 characters, or Google cuts them off mid-sentence.
 - Scripts that read text from a page must not expect both `.l-en` and `.l-cy` to be there (see `site.js`, the card sets).
 - Elements whose words a script swaps (`data-cy="..."`) start out in Welsh on the Welsh page.
 
@@ -609,6 +621,20 @@ Learnt while simplifying the home page.
 - `arthur_circle(slug)` in `build.py` shows the whole circle as small name chips on Arthur's page and on every page in it, with the current person highlighted. To add someone, give them a `P(...)` entry and put their slug in a group. People who already have pages elsewhere can go in a group too.
 - People known only from the tales take the date "Age of Arthur": `data.py` sorts them just after Arthur, and `date_cy()` shows "Oes Arthur" on the Welsh side.
 - Their reference list is `PAGES["arthur-circle"]` in `src/refs2.py`. Saints who gain a person page get `link=P("slug")` in `src/saints.py`, so the saints pages link to them.
+
+### Helping a first-time visitor choose where to begin (November 2026)
+- The three "Where to begin" cards sit in the home hero in `src/head.html` (`<nav class="begin">`), styled in `src/v6.css` under "where to begin". The hero's moving scene measures `.begin` (in `src/app.js`, `measure()`) to keep the mountain and stars clear of the words, so keep that class name if the cards change.
+- Section order on the home page is simply the order in `src/body.html`: the nine ages (`#chapters`) first, then `#today`.
+- Age names always travel with their dates: `spanEn`/`spanCy` from `src/ages9.py`/`data.py`. In Python use a `<span class="m-dates">` (Menu, footer, pager) or `c-dates` (chips); in `app.js` the shared `chips()` filter adds them on the timeline, map and people pages.
+- The home page question for each age is `ERA_Q` in `build.py`; the build stops if an age has no question.
+- On phones (640px and under) the nine posters become one list to choose from, with the question shown and the longer blurb hidden.
+
+### A real picture on every page (November 2026)
+- `src/pictures.py` gives every page a photograph or old artwork at the top, in place of the drawn scenes, with a credit line under the title. It also gives the long read, legend and age cards their pictures, and one picture to each step of Wales in 10 minutes.
+- Pictures are only ones already kept on the site with their Commons credit: `g:<id>` from the gallery, `p:<id>` from the person photos, `l:<key>` from the legend photos. Add `@50% 15%` to a ref to move the crop (e.g. to keep a face in frame).
+- To change a page's picture, change its line in `PAGE`. Pages not listed use their place's own gallery picture, or the picture for their age (`ERA`). `build.py` runs `PX.dress()` on every page, so new pages get a picture automatically.
+- The top picture loads at once (`fetchpriority="high"`, 600px copy for phones through `srcset`); card pictures load lazily from the small copy. The build stops if a named picture's file is missing.
+- Commons can't be reached from the cloud. New pictures have to be downloaded on the Mini-PC (Remote Control) and added to the gallery first.
 
 ## Working together
 

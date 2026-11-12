@@ -4,7 +4,9 @@
 import people2a as _A, people2b as _B, people2c as _C, people2d as _D, people2e as _E, people2f as _F
 import arthur_circle as _AC
 
-ALL = _A.PEOPLE + _B.PEOPLE + _C.PEOPLE + _D.PEOPLE + _E.PEOPLE + _F.PEOPLE + _AC.PEOPLE
+import christianity as _CH  # Brân Fendigaid and King Lleurwg (src/christianity.py)
+
+ALL = _A.PEOPLE + _B.PEOPLE + _C.PEOPLE + _D.PEOPLE + _E.PEOPLE + _F.PEOPLE + _AC.PEOPLE + _CH.PEOPLE
 
 # tuples in the site's people format: (slug, era, dates, nameEn, nameCy, epithetEn, epithetCy, bioEn, bioCy, wikipediaTitle)
 PEOPLE_NEW = [(p["id"], p["era"], p["d"], p["en"], p["cy"], p["eEn"], p["eCy"], p["bEn"], p["bCy"], p["w"]) for p in ALL]

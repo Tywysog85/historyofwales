@@ -1,8 +1,7 @@
 (function () {
   var D = DATA, ERAS = D.ERAS, EVENTS = D.EVENTS, PLACES = D.PLACES, PEOPLE = D.PEOPLE, MAPC = D.MAPC;
   var WIKI = "https://en.wikipedia.org/wiki/";
-  var lang = "en";
-  try { if (localStorage.getItem("hc-lang") === "cy") lang = "cy"; } catch (e) {}
+  var lang = document.documentElement.classList.contains("cy") ? "cy" : "en";  /* each page is one language: /cy/ pages are Welsh */
   var $ = function (s, r) { return (r || document).querySelector(s) || document.createElement("input"); };
   var HAS_TL = !!document.getElementById("events"), HERO = !!document.getElementById("sky"), HAS_MAP = !!document.getElementById("pins");
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
@@ -43,9 +42,9 @@
   function measure() {
     if (!HERO) return false;
     var r = cv.getBoundingClientRect(), q = function (sel) { var el = hEl.querySelector(sel); return el ? el.getBoundingClientRect() : null; };
-    var a = q("h1"), b = q(".sub"), c = q(".ticker"), e = q(".cta"), old = M.h1t + "," + M.h1h + "," + M.sub + "," + M.tick + "," + M.cta;
+    var a = q("h1"), b = q(".sub"), c = q(".ticker"), e = q(".begin"), old = M.h1t + "," + M.h1h + "," + M.sub + "," + M.tick + "," + M.cta;
     if (a) { M.h1t = a.top - r.top; M.h1h = a.height; } var nv = document.querySelector(".nav"); M.nav = nv && window.scrollY < 4 ? Math.max(0, nv.getBoundingClientRect().bottom - r.top) : M.nav;
-    if (b) M.sub = b.bottom - r.top; if (e) { /* the buttons slide up as they arrive, so their resting place is read from the layout, not from where they are mid-slide */ var ce = hEl.querySelector(".cta"), cy = ce.offsetHeight, cn = ce; while (cn && cn !== hEl) { cy += cn.offsetTop; cn = cn.offsetParent; } M.cta = cn === hEl ? cy + hEl.getBoundingClientRect().top - r.top : e.bottom - r.top; } M.tick = c ? c.top - r.top : r.height;
+    if (b) M.sub = b.bottom - r.top; if (e) { /* the buttons slide up as they arrive, so their resting place is read from the layout, not from where they are mid-slide */ var ce = hEl.querySelector(".begin"), cy = ce.offsetHeight, cn = ce; while (cn && cn !== hEl) { cy += cn.offsetTop; cn = cn.offsetParent; } M.cta = cn === hEl ? cy + hEl.getBoundingClientRect().top - r.top : e.bottom - r.top; } M.tick = c ? c.top - r.top : r.height;
     return old !== M.h1t + "," + M.h1h + "," + M.sub + "," + M.tick + "," + M.cta;
   }
   /* the land waits for the lettering: when the fonts arrive the words reflow, and land drawn before that would shift */
@@ -467,7 +466,7 @@
   /* ---------- Chips ---------- */
   function chips(el, cur, onPick, counts) {
     el.innerHTML = '<button type="button" class="chip" data-v="all" aria-pressed="' + (cur === "all") + '">' + T("All", "Y cyfan") + "</button>" +
-      ERAS.filter(function (e) { return !counts || counts[e.id]; }).map(function (e) { return '<button type="button" class="chip" data-era="' + e.id + '" data-v="' + e.id + '" aria-pressed="' + (cur === e.id) + '"><i></i>' + T(e.en, e.cy) + (counts ? ' <span style="opacity:.7">' + counts[e.id] + "</span>" : "") + "</button>"; }).join("");
+      ERAS.filter(function (e) { return !counts || counts[e.id]; }).map(function (e) { return '<button type="button" class="chip" data-era="' + e.id + '" data-v="' + e.id + '" aria-pressed="' + (cur === e.id) + '"><i></i>' + T(e.en, e.cy) + ' <span class="c-dates">' + T(e.spanEn, e.spanCy) + "</span>" + (counts ? ' <span style="opacity:.7">' + counts[e.id] + "</span>" : "") + "</button>"; }).join("");
     el.onclick = function (ev) { var b = ev.target.closest(".chip"); if (b) onPick(b.dataset.v); };
   }
 
@@ -532,7 +531,7 @@
     var counts = {}; EVENTS.forEach(function (e) { counts[e[E_ERA]] = (counts[e[E_ERA]] || 0) + 1; });
     if (!HAS_TL) {
       $("#tl-teaser").innerHTML = '<a class="chip" href="timeline.html">' + T("All", "Y cyfan") + ' <span style="opacity:.7">' + EVENTS.length + "</span></a>" +
-        ERAS.map(function (e) { return '<a class="chip" data-era="' + e.id + '" href="timeline.html#era-' + e.id + '"><i></i>' + T(e.en, e.cy) + ' <span style="opacity:.7">' + counts[e.id] + "</span></a>"; }).join("");
+        ERAS.map(function (e) { return '<a class="chip" data-era="' + e.id + '" href="timeline.html#era-' + e.id + '"><i></i>' + T(e.en, e.cy) + ' <span class="c-dates">' + T(e.spanEn, e.spanCy) + "</span></a>"; }).join("");
       return;
     }
     chips($("#tl-filter"), tlEra, setTlEra, counts);
@@ -924,15 +923,12 @@
   $$("[data-cy-svg]").forEach(function (el) { el.dataset.enSvg = el.textContent; });
   function applyLang() {
     document.documentElement.lang = lang; document.documentElement.classList.toggle("cy", lang === "cy");
-    $("#lang-en").setAttribute("aria-pressed", lang === "en"); $("#lang-cy").setAttribute("aria-pressed", lang === "cy");
     $$("[data-cy]").forEach(function (el) { el.textContent = lang === "cy" ? el.dataset.cy : el.dataset.en; });
     $$("[data-cy-svg]").forEach(function (el) { el.textContent = lang === "cy" ? el.dataset.cySvg : el.dataset.enSvg; });
     renderChapters(); renderToday(); renderTimeline(); renderPeople(); renderFact(); renderStreak(); renderChart(); renderDecoder(); renderWords(); renderSources(); renderNear(); renderGame(); selectPlace(sel); if (mode === "kg") renderKg(); renderQuiz();
     if (!ov.hidden) { var m = /^#pennod-(\w+)/.exec(location.hash); if (m) openChapter(m[1], false); }
   }
-  function setLang(l) { lang = l; try { localStorage.setItem("hc-lang", l); } catch (e) {} applyLang(); }
-  $("#lang-en").onclick = function () { setLang("en"); };
-  $("#lang-cy").onclick = function () { setLang("cy"); };
+  /* the EN / CY switch is a pair of links to the other language's page (see welshpages.py) */
 
   renderGrat(); renderLAs();
   applyLang();
