@@ -646,13 +646,16 @@
     /* The card is built once per language and then only updated, so the slider is never
        replaced while someone is dragging it (replacing it mid-drag is what made it hard to move). */
     if (card.dataset.lang !== lang || !$("#kg-in")) { card.dataset.lang = lang; kgShell(card, N); }
-    card.querySelector(".kg-stage").textContent = T(K.en, K.cy);
-    card.querySelector(".kg-desc").textContent = T(K.nEn, K.nCy);
-    card.querySelector(".kg-legend").innerHTML = K.groups.map(function (g) { var u = (D.KGLINK || {})[g[0]], n = esc(T(g[0], g[1])); return '<li style="--k:' + g[2] + '"><i></i>' + (u ? '<a href="' + u + '">' + n + "</a>" : n) + "</li>"; }).join("");
+    kgText(card, K);
     [].forEach.call(card.querySelectorAll(".kg-ticks span"), function (t, n) { t.classList.toggle("on", n === kgStage); });
     var inp = $("#kg-in"); inp.setAttribute("aria-valuetext", T(K.en, K.cy));
     if (!kgDrag) { inp.value = kgStage; kgFill(kgStage); }
     $("#kg-play").textContent = kgTimer ? T("Pause", "Oedi") : "▶ " + T("Play through time", "Chwarae drwy amser");
+  }
+  function kgText(card, K) {
+    card.querySelector(".kg-stage").textContent = T(K.en, K.cy);
+    card.querySelector(".kg-desc").textContent = T(K.nEn, K.nCy);
+    card.querySelector(".kg-legend").innerHTML = K.groups.map(function (g) { var u = (D.KGLINK || {})[g[0]], n = esc(T(g[0], g[1])); return '<li style="--k:' + g[2] + '"><i></i>' + (u ? '<a href="' + u + '">' + n + "</a>" : n) + "</li>"; }).join("");
   }
   function kgYear(k) { return k.id === "today" ? T("Now", "Nawr") : k.id.replace("c", ""); }
   function kgFill(v) { var w = document.querySelector(".kg-slide"); if (w) w.style.setProperty("--f", (v / (D.KINGDOMS.length - 1)).toFixed(4)); }
@@ -674,13 +677,15 @@
     })(t0);
   }
   function kgShell(card, N) {
-    card.innerHTML = '<p class="eyebrow">' + T("The changing map", "Y map yn newid") + '</p><h3 class="kg-stage"></h3><p class="desc kg-desc"></p><ul class="kg-legend"></ul>' +
-      '<p class="kg-kings"><a href="kings.html">' + T("Every king and prince of Wales", "Pob brenin a thywysog yng Nghymru") + " →</a></p>" +
+    /* the slider comes first: nothing above it changes, so it never moves while it is dragged */
+    card.innerHTML = '<p class="eyebrow">' + T("The changing map", "Y map yn newid") + "</p>" +
       '<div class="kg-range"><label for="kg-in" class="eyebrow">' + T("Move through time", "Symud drwy amser") + "</label>" +
       '<div class="kg-slide" style="--n:' + (N - 1) + '"><input type="range" id="kg-in" min="0" max="' + (N - 1) + '" step="any" value="' + kgStage + '">' +
       '<div class="kg-ticks" aria-hidden="true">' + D.KINGDOMS.map(function (k, n) { return '<span style="--i:' + n + '">' + kgYear(k) + "</span>"; }).join("") + "</div></div>" +
       '<p class="kg-hint">' + T("Drag the slider, or tap a year to jump to it.", "Llusgwch y llithrydd, neu tapiwch flwyddyn i neidio ati.") + "</p>" +
       '<div class="kg-btns"><button type="button" class="btn" id="kg-prev" aria-label="' + T("Earlier", "Cynharach") + '">←</button><button type="button" class="btn solid" id="kg-play"></button><button type="button" class="btn" id="kg-next" aria-label="' + T("Later", "Diweddarach") + '">→</button></div></div>' +
+      '<div class="kg-body"><h3 class="kg-stage"></h3><p class="desc kg-desc"></p><ul class="kg-legend"></ul></div>' +
+      '<p class="kg-kings"><a href="kings.html">' + T("Every king and prince of Wales", "Pob brenin a thywysog yng Nghymru") + " →</a></p>" +
       '<p class="kg-note">' + T("Approximate: borders are drawn using modern council areas as building blocks.", "Bras: lluniwyd y ffiniau gan ddefnyddio ardaloedd cynghorau modern.") + "</p>";
     var inp = $("#kg-in"), slide = card.querySelector(".kg-slide");
     /* The whole strip (track and years) takes the pointer, so a tap or drag anywhere on it works,
