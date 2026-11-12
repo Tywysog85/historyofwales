@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Books from Y Lolfa, the Talybont press", "Llyfrau’r Lolfa, gwasg Tal-y-bont",
+     "24 Welsh history books from Y Lolfa on the Books and authors page, each linked to the publisher: Tryweryn, MAC and the Free Wales Army, Gwynfor Evans’s Land of My Fathers and The Fight for Welsh Freedom, Llywelyn the Great, the Lord Rhys, R. R. Davies on Owain Glyndŵr, Dic Penderyn, Twm Carnabwth and Dewi Sant.",
+     "24 o lyfrau hanes Cymru o’r Lolfa ar y dudalen Llyfrau ac awduron, pob un â dolen at y cyhoeddwr: Tryweryn, MAC a Byddin Rhyddid Cymru, Land of My Fathers a The Fight for Welsh Freedom gan Gwynfor Evans, Llywelyn Fawr, yr Arglwydd Rhys, R. R. Davies ar Owain Glyndŵr, Dic Penderyn, Twm Carnabwth a Dewi Sant.",
+     "books-and-authors.html#ylolfa"),
     ("2026-11-12", "Real pictures on every page", "Lluniau go iawn ar bob tudalen",
      "Every long read, legend, age, kingdom, saint, topic and game now opens with a real photograph or old artwork: Segontium for Macsen, the Pennal Letter for Glyndŵr, the Laws of Hywel Dda, the Pillar of Eliseg and many more, each with its credit.",
      "Mae pob erthygl, chwedl, oes, teyrnas, sant, pwnc a gêm bellach yn agor gyda ffotograff go iawn neu hen waith celf: Segontium i Facsen, Llythyr Pennal i Lyndŵr, Cyfreithiau Hywel Dda, Colofn Eliseg a llawer mwy, pob un gyda’i gydnabyddiaeth.",

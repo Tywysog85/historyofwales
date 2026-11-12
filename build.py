@@ -52,6 +52,7 @@ import refs2 as REF2  # noqa: E402  (the same for every other content page)
 import christianity as _CHR  # noqa: E402
 REF.REFS.update(_CHR.REFS)  # reading lists for the four long reads on the coming of Christianity
 import authors as AU  # noqa: E402  (the authors on the Books and authors page)
+import ylolfa as YLF  # noqa: E402  (Y Lolfa books: the "Y Lolfa" section of the Books and authors page)
 F.STORIES = AD.newest("story", F.STORIES)  # long reads: the newest first everywhere (index, home page, "Keep reading")
 L.TEACH.update(AG9.TEACH)
 from urllib.parse import quote as _q
@@ -1042,8 +1043,17 @@ def bookshelf_page():
         au = (f'<h3 class="shelf-sub">{bi("The authors", "Yr awduron")}</h3><div class="author-grid">{"".join(cards[sid])}</div>' if cards[sid] else "")
         return (f'<section class="refs shelf" id="{sid}" aria-labelledby="h-{sid}"><h2 id="h-{sid}">{bi(en, cy)}</h2>{au}'
                 + f'{group(works[sid])}</section>')
-    chips = "".join(f'<a class="chip" href="#{sid}">{bi(*heads[sid])}</a>' for sid in order if works[sid]) + f'<a class="chip" href="#online">{bi("Online", "Ar-lein")}</a>'
-    body = "".join(shelf_sec(sid) for sid in order if works[sid])
+    # Y Lolfa, the Talybont press (src/ylolfa.py): every book on the shelf with a ylolfa.com link, each pointing to its place below
+    yl = [(sid, it) for sid in order for it in works[sid] if len(it) > 6 and "ylolfa.com/" in it[6]]
+    yl_lis = "".join(f'<li><span class="ref-w">{e(it[1])}</span>, <a href="{e(it[6])}" target="_blank" rel="noopener"><cite>{e(it[2])}</cite> ↗</a> '
+                     f'<span class="ref-d">({e(it[3])})</span><span class="ref-n">{bi(it[4], it[5])}</span>'
+                     f'<span class="ref-on">{bi("On this page:", "Ar y dudalen hon:")} <a href="#{bid(it)}">{bi(*heads[sid])}</a></span></li>' for sid, it in yl)
+    yl_sec = (f'<section class="refs shelf" id="ylolfa" aria-labelledby="h-ylolfa"><h2 id="h-ylolfa">{bi(*YLF.SECTION)}</h2>'
+              f'<p class="refs-i">{bi(*YLF.INTRO)}</p><p><a class="btn" href="https://www.ylolfa.com/" target="_blank" rel="noopener">ylolfa.com ↗</a></p>'
+              f'<h3>{bi(f"{len(yl)} books from Y Lolfa on this page", f"{len(yl)} o lyfrau’r Lolfa ar y dudalen hon")}</h3><ul>{yl_lis}</ul></section>') if yl else ""
+    yl_chip = f'<a class="chip" href="#ylolfa">{bi("Y Lolfa", "Y Lolfa")}</a>' if yl else ""
+    chips = "".join(f'<a class="chip" href="#{sid}">{bi(*heads[sid])}</a>' + (yl_chip if sid == "start" else "") for sid in order if works[sid]) + f'<a class="chip" href="#online">{bi("Online", "Ar-lein")}</a>'
+    body = "".join(shelf_sec(sid) + (yl_sec if sid == "start" else "") for sid in order if works[sid])
     body += f'<section class="refs shelf" id="online" aria-labelledby="h-online"><h2 id="h-online">{bi("Online", "Ar-lein")}</h2>{group(online)}</section>'
     intro = bi(f"{n_auth} writers who told the story of Wales and {total} books and old texts, from the Britons to today, grouped by period. In each period you meet the authors first, then their books. Under a book you will find the pages of this site that use it. Any library in Wales can find them for you.",
                f"{n_auth} o awduron a adroddodd stori Cymru a {total} o lyfrau a hen destunau, o’r Brythoniaid hyd heddiw, wedi’u trefnu fesul cyfnod. Ym mhob cyfnod fe gwrddwch â’r awduron yn gyntaf, ac yna eu llyfrau. O dan lyfr fe welwch dudalennau’r wefan hon sy’n ei ddefnyddio. Gall unrhyw lyfrgell yng Nghymru eu cael i chi.")
