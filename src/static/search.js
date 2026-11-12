@@ -77,7 +77,7 @@
       return [s - rank[x.k] * 0.1, x];
     }).filter(Boolean).sort(function (a, b) { return b[0] - a[0]; }).slice(0, 40).map(function (r) { return r[1]; });
   }
-  function hits(alts) { for (var i = 0; i < data.length; i++) if (score(data[i], alts) >= 0) return true; return false; }
+  function hits(alts) { if (!data) return true; for (var i = 0; i < data.length; i++) if (score(data[i], alts) >= 0) return true; return false; }
   var fixed = null;  // the spelling search used instead of what was typed, shown above the results
   function search(q) {
     fixed = null;

@@ -18,7 +18,8 @@ import data as D  # noqa: E402
 import long as L  # noqa: E402
 import towns as TW  # noqa: E402
 import photos as PH  # noqa: E402
-import eventpages as EP  # noqa: E402  (a page for every timeline event: src/eventpages.py)
+import eventpages as EP  # noqa: E402
+import welshpages as WP  # noqa: E402  (every page also in Welsh at cy/<page>.html: src/welshpages.py)  (a page for every timeline event: src/eventpages.py)
 import gallery as G  # noqa: E402
 import gallery_photos as GP  # noqa: E402
 import ages as AG  # noqa: E402
@@ -210,7 +211,7 @@ def head_tags(title, desc, path, og_type="website", image=None):
     return t
 
 
-TAIL_JS = ('<script src="site.js" defer></script>\n<script src="search.js" defer></script>\n<script>if("serviceWorker" in navigator&&location.protocol==="https:"){addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>\n'
+TAIL_JS = ('<script src="site.js?v=2" defer></script>\n<script src="search.js?v=2" defer></script>\n<script>if("serviceWorker" in navigator&&location.protocol==="https:"){addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>\n'
            + (f'<script data-goatcounter="https://{GOATCOUNTER}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>\n' if GOATCOUNTER else ""))
 
 LANG_BOOT = '<script>(function(){var h=document.documentElement;h.classList.add("js");setTimeout(function(){if(!window.__site)h.classList.add("rv-all")},2500);try{if(localStorage.getItem("hc-lang")==="cy"){h.classList.add("cy");h.lang="cy"}}catch(e){}})()</script>'
@@ -3263,6 +3264,7 @@ def main():
     if RP.MISSING:
         print("Reference pages: links left out because the page does not exist:", ", ".join(sorted(RP.MISSING)))
     shared_files = shared_assets(pages)
+    pages = WP.split(pages, BASE_URL, LANG_BOOT, LANG_JS, SEO.tidy_title, SEO.tidy_desc)  # English pages and their Welsh twins in cy/
     sm, marks = SEO.sitemap(BASE_URL, pages)   # every page, with the date it last changed and its pictures
     today = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
     for name in pages:   # "Last updated" on each page, and dateModified for search engines (src/about.py)
@@ -3292,7 +3294,7 @@ def main():
         shutil.rmtree(a, ignore_errors=True)
         write(os.path.join(a, "index.html"), index_fragment)
         for p in pages:
-            if p != "index.html":
+            if p != "index.html" and "/" not in p:
                 shutil.copy(os.path.join(out, p), os.path.join(a, p))
         for f in os.listdir(os.path.join(SRC, "static")):
             if f.endswith((".png", ".svg", ".js")) and f != "sw.js":

@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "The whole site in Welsh, at its own address", "Y wefan gyfan yn Gymraeg, yn ei chyfeiriad ei hun",
+     "Every page now has a Welsh twin under historyofwales.cymru/cy/, with a Welsh title and summary, so people searching in Cymraeg can find the Welsh page. Press CY on any page to go to it; the site remembers your choice.",
+     "Mae gan bob tudalen efaill Cymraeg bellach dan historyofwales.cymru/cy/, gyda theitl a chrynodeb Cymraeg, fel y gall pobl sy’n chwilio yn Gymraeg ddod o hyd i’r dudalen Gymraeg. Pwyswch CY ar unrhyw dudalen i fynd ati; mae’r wefan yn cofio eich dewis.",
+     "cy/index.html"),
     ("2026-11-12", "Every moment on the timeline now has its own page", "Mae gan bob eiliad ar y llinell amser ei thudalen ei hun bellach",
      "All 405 events on the timeline now open their own page, with the date, the place, the people, the battles and documents of the time, and what came just before and after. The 41 biggest moments, from the bluestones of Preseli to the slate landscape, are told in full.",
      "Mae pob un o’r 405 digwyddiad ar y llinell amser bellach yn agor ei dudalen ei hun, gyda’r dyddiad, y lle, y bobl, brwydrau a dogfennau’r cyfnod, a’r hyn a ddaeth yn union cyn ac wedyn. Adroddir y 41 eiliad fwyaf, o gerrig gleision y Preseli i dirwedd y llechi, yn llawn.",
