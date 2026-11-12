@@ -557,6 +557,8 @@ def _born(p):
         return 640
     if d == "The Four Branches":  # people of the Four Branches of the Mabinogi (src/mabinogi_people.py): the age of Brân, before Caradog
         return 1
+    if d == "1st century BC":  # Beli Mawr and his sons (src/mabinogi_people2.py): the time of Caswallon and Caesar
+        return -50
     m = _re.search(r"([\d,]+) BC", d)
     if m:
         return -int(m.group(1).replace(",", ""))

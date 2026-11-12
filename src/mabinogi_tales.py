@@ -350,4 +350,7 @@ GROUPS = [
  ("romances", "The three romances", "Y tair rhamant"),
 ]
 
+import mabinogi_tales2 as _T2, mabinogi_tales3 as _T3  # the native tales; the romances and Taliesin
+TALES = TALES + _T2.TALES + _T3.TALES
+
 BY_ID = {t["id"]: t for t in TALES}

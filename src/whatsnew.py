@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Every tale of the Mabinogion, with a guide and a map", "Pob chwedl yn y Mabinogion, gyda thywysydd a map",
+     "Guides to Culhwch and Olwen, the Dream of Macsen Wledig, Lludd and Llefelys, the Dream of Rhonabwy, the three romances of Owain, Peredur and Geraint, and the Tale of Taliesin, each with its places in Wales on a map; and 11 more people, from Ceridwen and Ysbaddaden Bencawr to Lludd, Llefelys and Luned.",
+     "Tywysyddion i Culhwch ac Olwen, Breuddwyd Macsen Wledig, Lludd a Llefelys, Breuddwyd Rhonabwy, tair rhamant Owain, Peredur a Geraint, a Hanes Taliesin, pob un â’i lleoedd yng Nghymru ar fap; ac 11 yn rhagor o bobl, o Geridwen ac Ysbaddaden Bencawr i Ludd, Llefelys a Luned.",
+     "mabinogion.html"),
     ("2026-11-12", "The Mabinogi: the tales, the books and the people", "Y Mabinogi: y chwedlau, y llyfrau a’r bobl",
      "A new long read on the White Book of Rhydderch, the Red Book of Hergest and Lady Charlotte Guest’s translation; a guide to each of the Four Branches with a map of its places in Wales; and 23 new people, from Pwyll, Rhiannon and Pryderi to Gwydion, Lleu, Arianrhod and Blodeuwedd.",
      "Erthygl newydd ar Lyfr Gwyn Rhydderch, Llyfr Coch Hergest a chyfieithiad yr Arglwyddes Charlotte Guest; tywysydd i bob un o’r Pedair Cainc gyda map o’u lleoedd yng Nghymru; a 23 o bobl newydd, o Bwyll, Rhiannon a Phryderi i Wydion, Lleu, Arianrhod a Blodeuwedd.",
