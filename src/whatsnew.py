@@ -7,6 +7,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "Battles of Wales and the key documents", "Brwydrau Cymru a’r dogfennau allweddol",
+     "Two new reference pages: 38 battles and risings on a map, from the Druids on the Menai to Mametz Wood, and 21 documents that shaped Wales in their own words, from the Treaty of Montgomery and Glyndŵr’s Pennal letter to Tynged yr Iaith.",
+     "Dwy dudalen gyfeirio newydd: 38 o frwydrau a gwrthryfeloedd ar fap, o’r Derwyddon ar y Fenai i Goed Mametz, a 21 o ddogfennau a luniodd Gymru yn eu geiriau eu hunain, o Gytundeb Trefaldwyn a Llythyr Pennal Glyndŵr i Dynged yr Iaith.",
+     "battles.html"),
     ("2026-11-12", "What does that place name mean?", "Beth yw ystyr yr enw lle?",
      "Towns and villages of Wales: what 136 place names mean and what happened there, on a map, with a decoder that explains any Welsh place name you type in.",
      "Trefi a phentrefi Cymru: ystyr 136 o enwau lleoedd a beth ddigwyddodd yno, ar fap, gyda datgodiwr sy’n egluro unrhyw enw lle Cymraeg a deipiwch.",

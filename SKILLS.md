@@ -164,6 +164,8 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - Each entry is in search as its own result (kinds `term` and `question`), and the filter box on each page hides what does not match as you type.
 - `towns.html` comes from `src/ref_towns.py`: towns by council area, `T(English, Welsh, meaning, meaning, history, history, see, geo)`, and `ELEMENTS`, the words of place names (list a mutated form such as `fach` or `bont` as its own word). The decoder on the page splits any typed name into the longest known words from the left, so add a word to `ELEMENTS` when a common name comes out in unknown pieces.
 - Town positions come from the free GeoNames list inside the Python package `geonamescache` (from PyPI): run `python3 tools/towns_geo.py` after adding towns; it writes `src/towns_geo.json` and names any it cannot find, which then need a `geo=(lat, lon)` by hand.
+- `battles.html` comes from `src/ref_battles.py` (`B(...)`, with `win` set to `w` for a Welsh victory, `l` for a Welsh stand, `o` for a battle or rising); a battle with `geo=None` is listed but left off the map and marked so.
+- `documents.html` comes from `src/ref_docs.py`. Each document's `words` is a kind and two texts: `quote` (exact words from a named published translation), `welsh` (the Welsh original, with an English version) or `short` (what it says, in our own words). Use `short` whenever the exact wording is not certain: never put words in quotation marks that a document does not contain.
 
 ### Offline support
 - `src/static/sw.js` caches pages. **Change the cache name** (`history-of-wales-vN`, now v6) whenever the site's look changes a lot, so returning visitors get the new version.
