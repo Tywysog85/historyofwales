@@ -422,6 +422,182 @@ S = {
         note=("Meic Stephens painted the first Cofiwch Dryweryn at Llanrhystud; after the wall was attacked in 2019, more than a hundred new murals were painted across Wales.",
               "Meic Stephens a baentiodd y Cofiwch Dryweryn cyntaf yn Llanrhystud; wedi i’r wal gael ei difrodi yn 2019, paentiwyd mwy na chant o furluniau newydd ledled Cymru."),
         url="https://www.peoplescollection.wales/blogs/cofiwch-dryweryn-%E2%80%93-one-hundred-and-counting", lang="en"),
+
+    # ---------- How Wales moved the world: the industrial revolution (src/industry.py) ----------
+    "unesco-blaenavon": dict(
+        short=('UNESCO', 'UNESCO'),
+        t='Blaenavon Industrial Landscape', by=('UNESCO World Heritage List, inscribed 2000', 'Rhestr Treftadaeth y Byd UNESCO, 2000'),
+        note=('It shows “the pre-eminence of South Wales as the world’s major producer of iron and coal in the 19th century”.',
+              'Mae’n dangos mai de Cymru oedd prif gynhyrchydd haearn a glo y byd yn y 19eg ganrif.'),
+        url='https://whc.unesco.org/en/list/984', lang='en'),
+    "guinness-loco": dict(
+        short=('Guinness World Records', 'Guinness World Records'),
+        t='First steam locomotive to run on rails', by=('Guinness World Records', 'Guinness World Records'),
+        note=('The first steam locomotive to run on rails was Richard Trevithick’s, built at the Penydarren ironworks, Merthyr Tydfil; it first ran on 21 February 1804.',
+              'Injan Richard Trevithick, a adeiladwyd yng ngwaith haearn Penydarren, Merthyr Tudful, oedd yr injan stêm gyntaf i redeg ar gledrau; rhedodd gyntaf ar 21 Chwefror 1804.'),
+        url='https://www.guinnessworldrecords.com/world-records/454107-first-steam-locomotive-to-run-on-rails', lang='en'),
+    "graces-penydarren": dict(
+        short=('Grace’s Guide', 'Grace’s Guide'),
+        t='Richard Trevithick: Merthyr Tramroad Trial', by=('Grace’s Guide to British Industrial History', 'Grace’s Guide, hanes diwydiannol Prydain'),
+        note=('Homfray bet Crawshay 500 guineas; on 21 February 1804 the engine took 10 tons of iron in five wagons and 70 men the 9¾ miles from Penydarren to Abercynon in 4 hours 5 minutes.',
+              'Rhoddodd Homfray fet o 500 gini â Crawshay; ar 21 Chwefror 1804 cariodd yr injan 10 tunnell o haearn mewn pum wagen a 70 o ddynion y 9¾ milltir o Benydarren i Abercynon mewn 4 awr a 5 munud.'),
+        url='https://gracesguide.co.uk/Richard_Trevithick:_Merthyr_Tramroad_Trial', lang='en'),
+    "tfw-trevithick": dict(
+        short=('Transport for Wales', 'Trafnidiaeth Cymru'),
+        t='Richard Trevithick', by=('Transport for Wales, Railway 200', 'Trafnidiaeth Cymru, Rheilffordd 200'),
+        note=('Trevithick’s locomotive, built for Samuel Homfray, hauled 10 tonnes of iron the nine miles from Penydarren to Abercynon on 21 February 1804.',
+              'Tynnodd injan Trevithick, a adeiladwyd i Samuel Homfray, 10 tunnell o haearn y naw milltir o Benydarren i Abercynon ar 21 Chwefror 1804.'),
+        url='https://tfw.wales/railway-200/richard-trevithick', lang='en'),
+    "guinness-mumbles": dict(
+        short=('Guinness World Records', 'Guinness World Records'),
+        t='First regular passenger railway service', by=('Guinness World Records', 'Guinness World Records'),
+        note=('The first regular passenger railway service began on the Oystermouth Railway, Swansea, on 25 March 1807, run by Benjamin French for £20 a year.',
+              'Dechreuodd y gwasanaeth teithwyr rheolaidd cyntaf ar reilffordd ar Reilffordd Ystumllwynarth, Abertawe, ar 25 Mawrth 1807, dan ofal Benjamin French am £20 y flwyddyn.'),
+        url='https://www.guinnessworldrecords.com/world-records/114288-first-regular-passenger-railway-service', lang='en'),
+    "cadw-dowlais": dict(
+        short=('Cadw landscape survey', 'Arolwg tirwedd Cadw'),
+        t='Merthyr Tydfil historic landscape: Dowlais', by=('Historic landscape characterisation for Cadw (Glamorgan-Gwent Archaeological Trust, now Heneb)', 'Nodweddu tirwedd hanesyddol i Cadw (Ymddiriedolaeth Archaeolegol Morgannwg-Gwent, Heneb bellach)'),
+        note=('Dowlais became “the largest ironworks in the world” in the 19th century; the rails for the Stockton and Darlington Railway were made there in 1821.',
+              'Daeth Dowlais yn waith haearn mwyaf y byd yn y bedwaredd ganrif ar bymtheg; yno y gwnaed cledrau Rheilffordd Stockton a Darlington yn 1821.'),
+        url='https://heneb.org.uk/archive/ggat/cadw/historic_landscape/Merthyr_Tydfil/English/Merthyr_008.htm', lang='en'),
+    "graces-dowlais": dict(
+        short=('Grace’s Guide', 'Grace’s Guide'),
+        t='Dowlais Ironworks', by=('Grace’s Guide to British Industrial History', 'Grace’s Guide, hanes diwydiannol Prydain'),
+        note=('In 1845 the works had 18 furnaces and 7,300 workers and made about 89,000 tons of iron a year; Lady Charlotte Guest helped run it.',
+              'Yn 1845 roedd gan y gwaith 18 ffwrnais a 7,300 o weithwyr a gwnâi tua 89,000 tunnell o haearn y flwyddyn; helpodd yr Arglwyddes Charlotte Guest i’w redeg.'),
+        url='https://www.gracesguide.co.uk/Dowlais_Ironworks', lang='en'),
+    "wiki-dowlais": dict(
+        short=('Wikipedia', 'Wikipedia'),
+        t='Dowlais Ironworks', by=('Wikipedia, with its sources', 'Wikipedia, gyda’i ffynonellau'),
+        note=('Foreign orders in 1835–36 included rails for the Berlin and Leipzig Railway and the St Petersburg line; Dowlais was the first to license the Bessemer process and made steel from 1865.',
+              'Roedd archebion tramor 1835–36 yn cynnwys cledrau i Reilffordd Berlin a Leipzig a lein St Petersburg; Dowlais oedd y cyntaf i gymryd trwydded proses Bessemer a gwnâi ddur o 1865.'),
+        url='https://en.wikipedia.org/wiki/Dowlais_Ironworks', lang='en'),
+    "wiki-cyfarthfa": dict(
+        short=('Wikipedia', 'Wikipedia'),
+        t='Cyfarthfa Ironworks', by=('Wikipedia, with its sources', 'Wikipedia, gyda’i ffynonellau'),
+        note=('Cyfarthfa made cannon for the Board of Ordnance; Nelson visited in 1802, and its iron rails drew a representative from the Tsar of Russia.',
+              'Gwnâi Cyfarthfa ynnau mawr i’r Bwrdd Ordnans; ymwelodd Nelson yn 1802, a denodd ei gledrau haearn gynrychiolydd Tsar Rwsia.'),
+        url='https://en.wikipedia.org/wiki/Cyfarthfa_Ironworks', lang='en'),
+    "wiki-gilchrist": dict(
+        short=('Wikipedia', 'Wikipedia'),
+        t='Sidney Gilchrist Thomas', by=('Wikipedia, with its sources', 'Wikipedia, gyda’i ffynonellau'),
+        note=('His cousin Percy Gilchrist, chemist at Blaenavon, proved the method; it was announced in 1878 and was “especially valuable on the continent of Europe”.',
+              'Profodd ei gefnder Percy Gilchrist, cemegydd ym Mlaenafon, y dull; fe’i cyhoeddwyd yn 1878 ac roedd yn arbennig o werthfawr ar gyfandir Ewrop.'),
+        url='https://en.wikipedia.org/wiki/Sidney_Gilchrist_Thomas', lang='en'),
+    "wiki-glamcanal": dict(
+        short=('Wikipedia', 'Wikipedia'),
+        t='Glamorganshire Canal', by=('Wikipedia, with its sources', 'Wikipedia, gyda’i ffynonellau'),
+        note=('Opened to Cardiff on 10 February 1794, about 25 miles with some 50 locks; the sea lock opened in June 1798 with a naval procession and ships’ guns.',
+              'Agorodd i Gaerdydd ar 10 Chwefror 1794, tua 25 milltir gyda rhyw 50 o lociau; agorodd y loc môr ym mis Mehefin 1798 gyda gorymdaith lyngesol a gynnau llongau.'),
+        url='https://en.wikipedia.org/wiki/Glamorganshire_Canal', lang='en'),
+    "unesco-pontcysyllte": dict(
+        short=('UNESCO', 'UNESCO'),
+        t='Pontcysyllte Aqueduct and Canal', by=('UNESCO World Heritage List, inscribed 2009', 'Rhestr Treftadaeth y Byd UNESCO, 2009'),
+        note=('Telford’s aqueduct is “a pioneering masterpiece of engineering”.',
+              'Mae traphont ddŵr Telford yn gampwaith peirianneg arloesol.'),
+        url='https://whc.unesco.org/en/list/1303', lang='en'),
+    "museum-cardiff": dict(
+        short=('Amgueddfa Cymru', 'Amgueddfa Cymru'),
+        t='Cardiff: Coal and Shipping Metropolis of the World', by=('Amgueddfa Cymru, National Museum Wales', 'Amgueddfa Cymru'),
+        note=('Cardiff exported about 2 million tons of coal in 1862 and 10.7 million in 1913; before 1914 its cargo tonnage “outstripped that of either London or Liverpool”; about 250 tramp steamers were owned there in 1910.',
+              'Allforiodd Caerdydd tua 2 filiwn tunnell o lo yn 1862 a 10.7 miliwn yn 1913; cyn 1914 roedd ei thunelledd cargo yn fwy na Llundain neu Lerpwl; roedd tua 250 o longau tramp yn eiddo iddi yn 1910.'),
+        url='https://museum.wales/articles/1034/Cardiff--Coal-and-Shipping-Metropolis-of-the-World', lang='en'),
+    "agor-coal": dict(
+        short=('AGOR timeline', 'Llinell amser AGOR'),
+        t='South Wales Coalfield timeline', by=('AGOR, the South Wales Coalfield collection', 'AGOR, casgliad Maes Glo De Cymru'),
+        note=('1840: the first cargo of coal shipped abroad, Cardiff to Nantes. 1851: an Admiralty report finds south Wales steam coal most suitable for the Royal Navy. 1855: the first train of Rhondda steam coal reaches Cardiff.',
+              '1840: y llwyth glo cyntaf i fynd dramor, Caerdydd i Nantes. 1851: adroddiad i’r Morlys yn barnu mai glo ager de Cymru yw’r mwyaf addas i’r Llynges Frenhinol. 1855: y trên cyntaf o lo ager y Rhondda yn cyrraedd Caerdydd.'),
+        url='https://www.agor.org.uk/cwm/timeline.asp', lang='en'),
+    "vicsoc-exchange": dict(
+        short=('Victorian Society', 'Y Gymdeithas Fictoraidd'),
+        t='Cardiff Coal Exchange', by=('The Victorian Society, Top Ten Endangered Buildings', 'Y Gymdeithas Fictoraidd, y deg adeilad mwyaf mewn perygl'),
+        note=('Built in 1884–86 by Seward and Thomas, Grade II* listed; the world’s coal prices were set there, and the first £1 million cheque was signed there in 1904.',
+              'Codwyd yn 1884–86 gan Seward a Thomas, rhestredig Gradd II*; yno y pennid prisiau glo’r byd, ac yno y llofnodwyd y siec £1 miliwn gyntaf yn 1904.'),
+        url='https://www.victoriansociety.org.uk/endangered-buildings/cardiff-coal-exchange-on-victorian-societys-top-ten-endangered-buildings-list-for-the-second-time/', lang='en'),
+    "pcw-cheque": dict(
+        short=('People’s Collection Wales', 'Casgliad y Werin'),
+        t='The Coal Exchange, Cardiff', by=('People’s Collection Wales', 'Casgliad y Werin Cymru'),
+        note=('Records the world’s first recorded £1m cheque, written at the Coal Exchange in 1904 to sign a deal.',
+              'Yn cofnodi siec £1m gyntaf y byd i’w chofnodi, a ysgrifennwyd yn y Gyfnewidfa Lo yn 1904 i selio bargen.'),
+        url='https://www.peoplescollection.wales/items/546926', lang='en'),
+    "cbh-cheque": dict(
+        short=('Cardiff Bay Heritage', 'Treftadaeth Bae Caerdydd'),
+        t='Commerce', by=('Cardiff Bay Heritage', 'Treftadaeth Bae Caerdydd'),
+        note=('The Coal Exchange, “the hub for trade in coal”, opened in 1888; the first £1m cheque “was written here in 1904”.',
+              'Agorodd y Gyfnewidfa Lo, canolbwynt y fasnach lo, yn 1888; ysgrifennwyd y siec £1m gyntaf yma yn 1904.'),
+        url='https://cardiffbayheritage.org.uk/en/commerce', lang='en'),
+    "wiki-exchange": dict(
+        short=('Wikipedia', 'Wikipedia'),
+        t='Coal Exchange', by=('Wikipedia, with its sources', 'Wikipedia, gyda’i ffynonellau'),
+        note=('“At one time the price of the world’s coal was determined here”; up to 200 men on the floor at the midday peak and some 10,000 people a day; the first £1,000,000 deal was agreed here in 1904.',
+              'Ar un adeg pennid pris glo’r byd yma; hyd at 200 o ddynion ar y llawr yn yr awr brysuraf a rhyw 10,000 o bobl y dydd; cytunwyd y fargen £1,000,000 gyntaf yma yn 1904.'),
+        url='https://en.wikipedia.org/wiki/Coal_Exchange', lang='en'),
+    "bbc-exchange": dict(
+        short=('BBC Wales History', 'Hanes Cymru y BBC'),
+        t='Cardiff Coal Exchange: economic centre to entertainment venue', by=('Phil Carradice, BBC Wales History blog, 2012', 'Phil Carradice, blog Hanes Cymru y BBC, 2012'),
+        note=('Opened on 1 February 1886; this telling dates the first £1 million deal to 1901.',
+              'Agorwyd ar 1 Chwefror 1886; mae’r fersiwn hwn yn dyddio’r fargen £1 miliwn gyntaf i 1901.'),
+        url='https://www.bbc.co.uk/blogs/waleshistory/2012/01/cardiff_coal_exchange_economic_centre_entertainment_venue.html', lang='en'),
+    "wiki-barry": dict(
+        short=('Wikipedia', 'Wikipedia'),
+        t='Barry Docks', by=('Wikipedia, citing W. Minchinton (2013) and others', 'Wikipedia, yn dyfynnu W. Minchinton (2013) ac eraill'),
+        note=('Water first admitted 29 June 1889, opened 18 July 1889, promoted by David Davies and John Cory; in 1913 Barry exported 11.05 million tons and was the busiest coal port in the world, ahead of Cardiff’s 10.6 million.',
+              'Daeth y dŵr i mewn gyntaf 29 Mehefin 1889, agorwyd 18 Gorffennaf 1889, dan arweiniad David Davies a John Cory; yn 1913 allforiodd y Barri 11.05 miliwn tunnell a hi oedd porthladd glo prysuraf y byd, o flaen 10.6 miliwn Caerdydd.'),
+        url='https://en.wikipedia.org/wiki/Barry_Docks', lang='en'),
+    "port-fuelling": dict(
+        short=('University of Portsmouth', 'Prifysgol Portsmouth'),
+        t='Fuelling mobility: coal and Britain’s naval power, c. 1870–1914', by=('Research paper, University of Portsmouth', 'Papur ymchwil, Prifysgol Portsmouth'),
+        note=('Welsh steam coal was “universally agreed to be of the highest quality for steam engines”; the Admiralty kept a list of approved collieries from the 1840s, with a naval captain at Cardiff; in 1889 the First Lord called Welsh coal the only home fuel fit for the navy; Welsh merchants traded with foreign navies in peacetime.',
+              'Cytunid yn gyffredinol mai glo ager Cymru oedd o’r ansawdd gorau i injans stêm; cadwai’r Morlys restr o lofeydd o’r 1840au, gyda chapten llynges yng Nghaerdydd; yn 1889 galwodd yr Arglwydd Cyntaf lo Cymru yr unig danwydd cartref addas i’r llynges; masnachai masnachwyr Cymru â llyngesau tramor adeg heddwch.'),
+        url='https://pure.port.ac.uk/ws/portalfiles/portal/7282023/Fuelling_mobility.pdf', lang='en'),
+    "museum-maritime": dict(
+        short=('Amgueddfa Cymru', 'Amgueddfa Cymru'),
+        t='Wales, a modern maritime nation', by=('Amgueddfa Cymru, National Museum Wales', 'Amgueddfa Cymru'),
+        note=('South Wales steam coal had the place oil has today; ships that burned it no longer depended on the wind and arrived sooner and more reliably.',
+              'Roedd gan lo ager y de y lle sydd gan olew heddiw; nid oedd llongau a’i llosgai yn dibynnu ar y gwynt mwyach, a chyrhaeddent yn gynt ac yn fwy dibynadwy.'),
+        url='https://museum.wales/blog/1063/Wales--a-modern-maritime-nation/', lang='en'),
+    "museum-antarctic": dict(
+        short=('Amgueddfa Cymru', 'Amgueddfa Cymru'),
+        t='Fuelling Antarctic exploration: The Crown Patent Fuel Company in Cardiff', by=('Amgueddfa Cymru, National Museum Wales', 'Amgueddfa Cymru'),
+        note=('Scott made Cardiff the Terra Nova’s home port; the Crown Patent Fuel Company gave 300 tons of fuel blocks and south Wales coal companies 100 tons of steam coal.',
+              'Gwnaeth Scott Gaerdydd yn borthladd cartref y Terra Nova; rhoddodd Cwmni Crown Patent Fuel 300 tunnell o flociau tanwydd a chwmnïau glo’r de 100 tunnell o lo ager.'),
+        url='https://museum.wales/articles/1133/Fuelling-Antarctic-exploration-The-Crown-Patent-Fuel-Company-in-Cardiff', lang='en'),
+    "swansea-copper": dict(
+        short=('Swansea Council', 'Cyngor Abertawe'),
+        t='Lower Swansea Valley', by=('City and County of Swansea', 'Dinas a Sir Abertawe'),
+        note=('In the 19th century Swansea was the world’s leading centre for smelting copper ore, and smelted about 90% of the UK’s copper.',
+              'Yn y bedwaredd ganrif ar bymtheg Abertawe oedd prif ganolfan toddi mwyn copr y byd, a thoddai tua 90% o gopr y Deyrnas Unedig.'),
+        url='https://www.swansea.gov.uk/lowerswanseavalley', lang='en'),
+    "ref-copperopolis": dict(
+        short=('Swansea University', 'Prifysgol Abertawe'),
+        t='Copperopolis: Regenerating and Transforming an Industrial Landscape in the Lower Swansea Valley', by=('Swansea University, REF impact case study', 'Prifysgol Abertawe, astudiaeth achos REF'),
+        note=('The Lower Swansea Valley was a world centre for copper smelting by the end of the 1700s, and Swansea led the world until the 1870s; the Hafod works was built in 1810.',
+              'Roedd Cwm Tawe Isaf yn ganolfan toddi copr byd-eang erbyn diwedd y 1700au, ac Abertawe ar flaen y byd hyd y 1870au; codwyd gwaith yr Hafod yn 1810.'),
+        url='https://impact.ref.ac.uk/casestudies/CaseStudy.aspx?Id=5913', lang='en'),
+    "vsb-hafod": dict(
+        short=('Visit Swansea Bay', 'Croeso Bae Abertawe'),
+        t='Hafod Copperworks', by=('Visit Swansea Bay', 'Croeso Bae Abertawe'),
+        note=('The Hafod works, run by the Vivians from 1810 to 1924, was perhaps the largest and most up-to-date copperworks in the world; ore came from Cornwall, then Chile and Australia, and Captain David Morgan brought ore from Chile.',
+              'Gwaith yr Hafod, dan y Vivianiaid o 1810 hyd 1924, oedd efallai’r gwaith copr mwyaf a mwyaf modern yn y byd; deuai mwyn o Gernyw, yna Chile ac Awstralia.'),
+        url='https://www.visitswanseabay.com/blog/post/discover-with-jo-hafod-copperworks/', lang='en'),
+    "wiki-slate": dict(
+        short=('Wikipedia', 'Wikipedia'),
+        t='Slate industry in Wales', by=('Wikipedia, with its sources', 'Wikipedia, gyda’i ffynonellau'),
+        note=('Output peaked at over half a million tons in 1898 with about 17,000 men; Penrhyn and Dinorwig were the two largest slate quarries in the world and the Oakeley the largest slate mine; Germany became a market after the Hamburg fire of 1842; Porthmadog built 201 ships between 1836 and 1880.',
+              'Cyrhaeddodd y cynnyrch dros hanner miliwn tunnell yn 1898 gyda thua 17,000 o ddynion; Penrhyn a Dinorwig oedd dwy chwarel lechi fwyaf y byd a’r Oakeley y gloddfa lechi fwyaf; daeth yr Almaen yn farchnad wedi tân Hamburg yn 1842; adeiladodd Porthmadog 201 o longau rhwng 1836 a 1880.'),
+        url='https://en.wikipedia.org/wiki/Slate_industry_in_Wales', lang='en'),
+    "festrail-history": dict(
+        short=('Ffestiniog Railway', 'Rheilffordd Ffestiniog'),
+        t='History of the Ffestiniog Railway', by=('Ffestiniog and Welsh Highland Railways', 'Rheilffyrdd Ffestiniog ac Eryri'),
+        note=('Incorporated 1832 and worked by gravity and horses; Princess and Mountaineer entered service in October 1863; passenger trains from 1864, the first on a narrow gauge in Britain; Little Wonder was shown in 1870 before engineers including the Imperial Russian Commission.',
+              'Corfforwyd yn 1832 a gweithiai gyda disgyrchiant a cheffylau; daeth Princess a Mountaineer i wasanaeth ym mis Hydref 1863; trenau teithwyr o 1864, y cyntaf ar gledrau cul ym Mhrydain; dangoswyd Little Wonder yn 1870 o flaen peirianwyr gan gynnwys Comisiwn Ymerodrol Rwsia.'),
+        url='https://www.festrail.co.uk/?p=14945', lang='en'),
+    "wiki-littlewonder": dict(
+        short=('Wikipedia', 'Wikipedia'),
+        t='Festiniog Railway Little Wonder', by=('Wikipedia, with its sources', 'Wikipedia, gyda’i ffynonellau'),
+        note=('In the 1870 trials, watched by the Imperial Russian Commissioners and the Commissioners of the Indian Government, Little Wonder hauled 112 wagons (206 tons) at an average of 12.5 mph.',
+              'Yn nhreialon 1870, o flaen Comisiynwyr Ymerodrol Rwsia a Chomisiynwyr Llywodraeth India, tynnodd Little Wonder 112 o wagenni (206 tunnell) ar gyfartaledd o 12.5 milltir yr awr.'),
+        url='https://en.wikipedia.org/wiki/Festiniog_Railway_Little_Wonder', lang='en'),
     # ---------- the Welsh Not long read (src/welshnot.py), each source opened and read November 2026 ----------
     "wn-hop": dict(
         short=("History of Parliament", "Hanes y Senedd"),
@@ -500,6 +676,172 @@ S = {
         t="Welsh Language (Wales) Measure 2011, section 1", by=("The National Archives, legislation.gov.uk", "Yr Archifau Cenedlaethol, legislation.gov.uk"),
         note=("“(1) The Welsh language has official status in Wales.”", "“(1) Mae statws swyddogol i’r Gymraeg yng Nghymru.”"),
         url="https://www.legislation.gov.uk/mwa/2011/1/section/1", lang="en"),
+    # ---------- the full pages behind the home page facts (src/factplaces.py) ----------
+    "orme-visitwales": dict(
+        short=("Visit Wales", "Croeso Cymru"),
+        t="Great Orme Mines", by=("Visit Wales, Welsh Government", "Croeso Cymru, Llywodraeth Cymru"),
+        note=("The Great Cavern, “the largest prehistoric underground excavation in the world”, in “the oldest metal mine open to the public anywhere in the world”; open mid-March to the end of October.",
+              "Yr Ogof Fawr, y cloddiad tanddaearol cynhanesyddol mwyaf yn y byd, yn y mwynglawdd metel hynaf ar agor i’r cyhoedd yn unman yn y byd; ar agor o ganol Mawrth hyd ddiwedd Hydref."),
+        url="https://www.visitwales.com/attraction/historic-site/great-orme-mines-527987", lang="en"),
+    "orme-liverpool": dict(
+        short=("University of Liverpool", "Prifysgol Lerpwl"),
+        t="Britain’s earliest mining boom revealed", by=("University of Liverpool news, 15 October 2019", "Newyddion Prifysgol Lerpwl, 15 Hydref 2019"),
+        note=("The Orme gave “enough copper to dominate Britain’s metal supply for about two centuries”, with a golden age about 1600–1400 BC.",
+              "Rhoddodd y Gogarth ddigon o gopr i reoli cyflenwad metel Prydain am tua dwy ganrif, gydag oes aur tua 1600–1400 CC."),
+        url="https://news.liverpool.ac.uk/2019/10/15/britains-earliest-mining-boom-revealed/", lang="en"),
+    "orme-subbrit": dict(
+        short=("Subterranea Britannica", "Subterranea Britannica"),
+        t="Great Orme Mines", by=("Subterranea Britannica, the society for underground sites", "Subterranea Britannica, y gymdeithas safleoedd tanddaearol"),
+        note=("“Discovered in 1987 during a landscaping project”; a self-guided tour of a 200 m underground section.",
+              "Fe’i darganfuwyd yn 1987 yn ystod cynllun tirlunio; taith hunandywys drwy ran danddaearol 200 m."),
+        url="https://www.subbrit.org.uk/sites/great-orme-mines/", lang="en"),
+    "llanfair-bangor": dict(
+        short=("Bangor University", "Prifysgol Bangor"),
+        t="Archive of the month: the Women’s Institute", by=("Bangor University Archives", "Archifau Prifysgol Bangor"),
+        note=("“The First British WI was started in Llanfair PG, Anglesey on September 16th, 1915.”",
+              "Dechreuwyd Sefydliad y Merched cyntaf Prydain yn Llanfair PG, Ynys Môn, ar 16 Medi 1915."),
+        url="https://bangor.ac.uk/news/archive/archive-of-the-month-17963", lang="en"),
+    "llanfair-coflein": dict(
+        short=("Coflein", "Coflein"),
+        t="Llanfair PG Women’s Institute Hall", by=("Coflein, Royal Commission on the Ancient and Historical Monuments of Wales", "Coflein, Comisiwn Brenhinol Henebion Cymru"),
+        note=("“Established in September 1915, the branch of the Women’s Institute in Llanfairpwllgwyngyll is the oldest in Britain.” It met first in a cottage, then in the iron hall by the tollhouse.",
+              "Sefydlwyd y gangen ym mis Medi 1915, a hi yw’r hynaf ym Mhrydain. Cyfarfu gyntaf mewn bwthyn, yna yn y neuadd haearn wrth y tollty."),
+        url="https://coflein.gov.uk/en/site/420753"),
+    "bethlehem-wikishire": dict(
+        short=("Wikishire", "Wikishire"),
+        t="Bethlehem, Carmarthenshire", by=("Wikishire", "Wikishire"),
+        note=("Once Dyffryn Ceidrich; named after its chapel in the Methodist revival; the Christmas postmark gained national attention around 1965; Carn Goch hillfort above.",
+              "Dyffryn Ceidrych gynt; cafodd ei enw gan ei gapel yn y diwygiad Methodistaidd; daeth y stamp Nadolig i sylw’r genedl tua 1965; bryngaer Carn Goch uwchben."),
+        url="https://wikishire.co.uk/wiki/Bethlehem,_Carmarthenshire", lang="en"),
+    "pyg-wiki": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Pen-y-Gwryd", by=("Wikipedia", "Wikipedia"),
+        note=("The farmhouse of 1811 and the inn; Henry and Ann Owen; the Climbers’ Club founded here in May 1898; the 1953 Everest and 1955 Kangchenjunga signatures on the ceiling; the Roman marching camp.",
+              "Ffermdy 1811 a’r dafarn; Henry ac Ann Owen; sefydlu’r Climbers’ Club yma ym mis Mai 1898; llofnodion Everest 1953 a Kangchenjunga 1955 ar y nenfwd; y gwersyll ymdaith Rhufeinig."),
+        url="https://en.wikipedia.org/wiki/Pen-y-Gwryd", lang="en"),
+    "lavernock-wiki": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Lavernock", by=("Wikipedia, drawing on George Kemp’s diary", "Wikipedia, ar sail dyddiadur George Kemp"),
+        note=("Day by day, 10 to 13 May 1897: Preece’s apparatus on Flat Holm, Marconi’s at Lavernock, the longer aerial, and the messages ‘Are you ready?’, ‘Can you hear me?’, ‘Yes, loud and clear.’",
+              "Ddydd wrth ddydd, 10 i 13 Mai 1897: offer Preece ar Ynys Echni, offer Marconi yn Larnog, yr erial hirach, a’r negeseuon ‘Are you ready?’, ‘Can you hear me?’, ‘Yes, loud and clear.’"),
+        url="https://en.wikipedia.org/wiki/Lavernock", lang="en"),
+    "marconi-urban75": dict(
+        short=("urban75", "urban75"),
+        t="St Lawrence Church, Lavernock: Marconi and the birth of radio", by=("urban75", "urban75"),
+        note=("The church and the bronze plaque put up by the Cardiff Rotary Club in 1948, with photographs.",
+              "Yr eglwys a’r plac efydd a godwyd gan Glwb Rotari Caerdydd yn 1948, gyda lluniau."),
+        url="https://www.urban75.org/blog/st-lawrence-church-lavernock-south-wales-marconi-and-the-birth-of-radio/", lang="en"),
+    "dwb-preece": dict(
+        short=("Dictionary of Welsh Biography", "Y Bywgraffiadur"),
+        t="Preece, Sir William Henry (1834–1913), electrical engineer", by=("Dictionary of Welsh Biography, National Library of Wales", "Y Bywgraffiadur Cymreig, Llyfrgell Genedlaethol Cymru"),
+        note=("Born at Caernarfon; engineer-in-chief of the Post Office from 1892; in 1892 he sent messages through the air across the Bristol Channel between Penarth and Flat Holm.",
+              "Ganed yng Nghaernarfon; prif beiriannydd y Swyddfa Bost o 1892; yn 1892 anfonodd negeseuon drwy’r awyr ar draws Môr Hafren rhwng Penarth ac Ynys Echni."),
+        url="https://biography.wales/article/s-PREE-HEN-1834", url_cy="https://bywgraffiadur.cymru/article/s-PREE-HEN-1834"),
+    "preece-wiki": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="William Henry Preece", by=("Wikipedia", "Wikipedia"),
+        note=("“Preece became one of Marconi’s most ardent supporters” and gained help from the Post Office for his work.",
+              "Daeth Preece yn un o gefnogwyr mwyaf brwd Marconi ac ennill cymorth y Swyddfa Bost i’w waith."),
+        url="https://en.wikipedia.org/wiki/William_Henry_Preece", lang="en"),
+
+    # ---------- World firsts badges on person pages ----------
+    "dwb-parryjones": dict(
+        short=("Dictionary of Welsh Biography", "Y Bywgraffiadur"),
+        t="Jones, Thomas Parry (1935–2013), inventor", by=("Dictionary of Welsh Biography, National Library of Wales", "Y Bywgraffiadur Cymreig, Llyfrgell Genedlaethol Cymru"),
+        note=("In 1974 his company produced the first breathalyser with an electrochemical sensor.",
+              "Yn 1974 cynhyrchodd ei gwmni’r anadliedydd cyntaf â synhwyrydd electrocemegol."),
+        url="https://biography.wales/article/s12-JONE-PAR-1935", url_cy="https://bywgraffiadur.cymru/article/s12-JONE-PAR-1935"),
+    "dwb-wallace": dict(
+        short=("Dictionary of Welsh Biography", "Y Bywgraffiadur"),
+        t="Wallace, Alfred Russel (1823–1913), naturalist", by=("Dictionary of Welsh Biography, National Library of Wales", "Y Bywgraffiadur Cymreig, Llyfrgell Genedlaethol Cymru"),
+        note=("His theory of natural selection was “identical with that being developed by Darwin but independent of him”; their papers were read together at the Linnean Society on 1 July 1858.",
+              "Roedd ei ddamcaniaeth am ddethol naturiol yr un fath ag un Darwin ond yn annibynnol arni; darllenwyd eu papurau gyda’i gilydd yng Nghymdeithas Linnaeus ar 1 Gorffennaf 1858."),
+        url="https://biography.wales/article/s6-WALL-RUS-1823", url_cy="https://bywgraffiadur.cymru/article/s6-WALL-RUS-1823"),
+    "wiki-dillwyn": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Mary Dillwyn", by=("Wikipedia", "Wikipedia"),
+        note=("“She is also credited with taking the first known photograph of a snowman, circa 1853.”",
+              "Hi sy’n cael y clod am dynnu’r ffotograff cyntaf y gwyddys amdano o ddyn eira, tua 1853."),
+        url="https://en.wikipedia.org/wiki/Mary_Dillwyn", lang="en"),
+    "wiki-iroberts": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Isaac Roberts", by=("Wikipedia", "Wikipedia"),
+        note=("His photograph of the Great Nebula in Andromeda, taken on 29 December 1888, “revealed that the nebula had a spiral structure, which was quite unexpected at the time.”",
+              "Dangosodd ei ffotograff o Nifwl Mawr Andromeda, a dynnwyd ar 29 Rhagfyr 1888, fod gan y nifwl siâp troellog, peth annisgwyl iawn ar y pryd."),
+        url="https://en.wikipedia.org/wiki/Isaac_Roberts", lang="en"),
+    "wiki-josephson": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Brian Josephson", by=("Wikipedia", "Wikipedia"),
+        note=("As a PhD student in 1962 he did the research that led to the Josephson effect; Nobel Prize in Physics 1973.",
+              "Fel myfyriwr PhD yn 1962 gwnaeth yr ymchwil a arweiniodd at effaith Josephson; Gwobr Nobel mewn Ffiseg 1973."),
+        url="https://en.wikipedia.org/wiki/Brian_Josephson", lang="en"),
+    "wiki-cooke": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Nicole Cooke", by=("Wikipedia", "Wikipedia"),
+        note=("In 2008 she became the first cyclist, man or woman, to be road race World Champion and Olympic gold medallist in the same year.",
+              "Yn 2008 hi oedd y beiciwr cyntaf, yn ddyn neu’n fenyw, i fod yn Bencampwr y Byd yn y ras ffordd ac yn enillydd medal aur Olympaidd yn yr un flwyddyn."),
+        url="https://en.wikipedia.org/wiki/Nicole_Cooke", lang="en"),
+    "wiki-awjones": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Alun Wyn Jones", by=("Wikipedia", "Wikipedia"),
+        note=("“He is the world’s most-capped rugby union player, with 158 caps for Wales and 12 for the British & Irish Lions.”",
+              "Ef yw’r chwaraewr rygbi’r undeb â’r mwyaf o gapiau yn y byd: 158 i Gymru a 12 i’r Llewod."),
+        url="https://en.wikipedia.org/wiki/Alun_Wyn_Jones", lang="en"),
+    "wiki-wilde": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Jimmy Wilde", by=("Wikipedia", "Wikipedia"),
+        note=("“He was the first official world flyweight champion”, holding the title from 1916 to 1923.",
+              "Ef oedd pencampwr pwysau pry swyddogol cyntaf y byd, a daliodd y teitl o 1916 hyd 1923."),
+        url="https://en.wikipedia.org/wiki/Jimmy_Wilde", lang="en"),
+    "wiki-cjackson": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Colin Jackson", by=("Wikipedia", "Wikipedia"),
+        note=("He set the 110 metres hurdles world record, 12.91 s, on 20 August 1993; it stood for nearly thirteen years, until 11 July 2006.",
+              "Gosododd record y byd yn y 110 metr dros y clwydi, 12.91 eiliad, ar 20 Awst 1993; safodd am bron i dair blynedd ar ddeg, tan 11 Gorffennaf 2006."),
+        url="https://en.wikipedia.org/wiki/Colin_Jackson", lang="en"),
+    "wiki-rprice": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Richard Price", by=("Wikipedia", "Wikipedia"),
+        note=("“He edited Bayes’s major work An Essay Towards Solving a Problem in the Doctrine of Chances (1763).”",
+              "Ef a olygodd brif waith Bayes, An Essay Towards Solving a Problem in the Doctrine of Chances (1763)."),
+        url="https://en.wikipedia.org/wiki/Richard_Price", lang="en"),
+    "wiki-ejwilliams": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Evan James Williams", by=("Wikipedia", "Wikipedia"),
+        note=("“Williams was the first person who experimentally detected muon decay and managed to photograph it”, working with a cloud chamber at Aberystwyth.",
+              "Williams oedd y cyntaf i ganfod dadfeiliad mwon mewn arbrawf a llwyddo i’w ffotograffu, gyda siambr gwmwl yn Aberystwyth."),
+        url="https://en.wikipedia.org/wiki/Evan_James_Williams", lang="en"),
+    "wiki-thomas-splint": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Thomas splint", by=("Wikipedia", "Wikipedia"),
+        note=("Introduced by Hugh Owen Thomas; with it “the mortality rate dropped from 80% to 15.6%” for broken thigh bones.",
+              "Hugh Owen Thomas a’i cyflwynodd; gydag ef gostyngodd y gyfradd marwolaethau o 80% i 15.6% am glun wedi torri."),
+        url="https://en.wikipedia.org/wiki/Thomas_splint", lang="en"),
+    "wiki-rjones-surgeon": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Robert Jones (surgeon)", by=("Wikipedia", "Wikipedia"),
+        note=("In 1896 he took an X-ray of a boy’s wrist to find a bullet; published in The Lancet in February 1896, “the first published clinical radiograph”.",
+              "Yn 1896 tynnodd belydr-X o arddwrn bachgen i ddod o hyd i fwled; cyhoeddwyd yn The Lancet ym mis Chwefror 1896, y radiograff clinigol cyntaf i’w gyhoeddi."),
+        url="https://en.wikipedia.org/wiki/Robert_Jones_(surgeon)", lang="en"),
+    "wiki-ernestjones": dict(
+        short=("Wikipedia", "Wikipedia"),
+        t="Ernest Jones", by=("Wikipedia", "Wikipedia"),
+        note=("“Jones was the first English-speaking practitioner of psychoanalysis”; he first met Freud in 1908.",
+              "Jones oedd y seicdreiddiwr cyntaf yn y byd Saesneg ei iaith; cyfarfu â Freud gyntaf yn 1908."),
+        url="https://en.wikipedia.org/wiki/Ernest_Jones_(psychoanalyst)", lang="en"),
+}
+
+# person id -> sources for the World first / Welsh first badge on that person's page
+FIRST_CITES = {
+    "robert-recorde": "dwb-recorde", "william-jones": "dwb-wjones",
+    "pryce-pryce-jones": "pryce-storipowys,dwb-pryce", "william-grove": "grove-aps,dwb-grove",
+    "william-preece": "lavernock-wiki,preece-wiki", "red-lady-of-paviland": "paviland-museum,paviland-oumnh",
+    "madog": "powel-1584", "tom-parry-jones": "dwb-parryjones", "alfred-russel-wallace": "dwb-wallace",
+    "mary-dillwyn": "wiki-dillwyn", "isaac-roberts": "wiki-iroberts", "brian-josephson": "wiki-josephson",
+    "nicole-cooke": "wiki-cooke", "alun-wyn-jones": "wiki-awjones", "jimmy-wilde": "wiki-wilde",
+    "colin-jackson": "wiki-cjackson", "richard-price": "wiki-rprice", "evan-james-williams": "wiki-ejwilliams",
+    "hugh-owen-thomas": "wiki-thomas-splint", "robert-jones-surgeon": "wiki-rjones-surgeon",
+    "ernest-jones": "wiki-ernestjones",
 }
 
 from princes import CITES as _PRINCES  # noqa: E402  (the kings and princes of Wales, src/princes.py)
@@ -562,6 +904,16 @@ def html_text(text, cy=False):
         pos = m.end()
     out.append(_html.escape(text[pos:], quote=False))
     return "".join(out)
+
+
+def linked(text, href, cy=False, js=False):
+    """A sentence as a link to its full page, with its source chips after the link (a chip can't sit inside a link).
+    js=True: chips already turned into HTML, for text a script puts on the page; otherwise the markers are kept for render()."""
+    words = _html.escape(strip(text), quote=False)
+    marks = "".join(m.group(0) for m in MARK.finditer(text))
+    if js:
+        marks = "".join(chip(keys(m.group(1)), cy, "citej") for m in MARK.finditer(text))
+    return f'<a class="fact-a" href="{_html.escape(href)}">{words}</a>{marks}'
 
 
 def render(doc, cy=False):

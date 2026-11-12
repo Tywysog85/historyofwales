@@ -1,14 +1,14 @@
 # More famous Welsh people (Nov 2026): gathers parts A–D, adds a field for every person on the site,
 # and the Welsh firsts. data.py adds PEOPLE_NEW to the people list, long.py adds PEOPLE_LONG,
 # build.py uses FIELDS, FIELD, FIRSTS and OTHER_FIRSTS for the people filter, person badges and firsts.html.
-import people2a as _A, people2b as _B, people2c as _C, people2d as _D, people2e as _E, people2f as _F, people2g as _G
+import people2a as _A, people2b as _B, people2c as _C, people2d as _D, people2e as _E, people2f as _F, people2g as _G, people2h as _H
 import arthur_circle as _AC, sixth_century as _SC
 
 import christianity as _CH  # Brân Fendigaid and King Lleurwg (src/christianity.py)
 import mac as _MAC  # John Jenkins and Dennis Coslett (src/mac.py)
 import princes as _PRN  # the kings and princes of Wales (src/princes.py)
 
-ALL = _A.PEOPLE + _B.PEOPLE + _C.PEOPLE + _D.PEOPLE + _E.PEOPLE + _F.PEOPLE + _AC.PEOPLE + _CH.PEOPLE + _SC.PEOPLE + _G.PEOPLE + _MAC.PEOPLE
+ALL = _A.PEOPLE + _B.PEOPLE + _C.PEOPLE + _D.PEOPLE + _E.PEOPLE + _F.PEOPLE + _AC.PEOPLE + _CH.PEOPLE + _SC.PEOPLE + _G.PEOPLE + _MAC.PEOPLE + _H.PEOPLE
 ALL = ALL + _PRN.PEOPLE  # the kings and princes of Wales (src/princes.py)
 
 # tuples in the site's people format: (slug, era, dates, nameEn, nameCy, epithetEn, epithetCy, bioEn, bioCy, wikipediaTitle)

@@ -297,7 +297,7 @@ Learnt while expanding Arthur's page (`src/arthur.py`).
 
 ### Kings and princes pages (November 2026)
 - All the royal lines live in `src/royal.py`: one entry per kingdom, each with a list of rulers. `R(...)` is a ruler (sort year, dates, name, English note, Welsh note, optional link), `H(...)` a heading inside the list, `N(...)` a short note between rulers.
-- `build.py` makes `kings.html` (all of Wales: Gruffudd ap Llywelyn first, then kings who ruled most of Wales, the Princes of Wales, the kingdoms, and every ruler in one list by century) and one `kings-<id>.html` per kingdom.
+- `build.py` makes `kings.html` (all of Wales: Gruffudd ap Llywelyn first, then kings who ruled most or all of Wales, the Princes of Wales, the kingdoms, and every ruler in one list by century) and one `kings-<id>.html` per kingdom.
 - The combined list merges a ruler who held several kingdoms into one line, with a chip for each kingdom. `HOME_REALM` in `build.py` picks which note is shown.
 - Person and place pages link back to every kingdom list that names them, automatically. The kingdoms map legend links each realm to its page through `KGLINK` in `build.py`.
 - Welsh dates are made from the English ones by `cy_dates()`: "c." becomes "tua", "d." becomes "m.".
@@ -658,6 +658,8 @@ Learnt while simplifying the home page.
 - The card opens on click (code at the end of `src/static/site.js`): under the chip on a computer, as a sheet along the bottom on a phone. Without JavaScript the chip is a plain link to the first source.
 - The home page's "Did you know?" fact is drawn again by `app.js` when "Another" is pressed, so `FACTS` goes into the page data already turned into HTML (`CITE.html_text`).
 - Check sources with the WebFetch tool when the cloud can't reach a site directly, and quote the source's own words in the note where you can.
+- Every "Did you know?" fact links to a full page (third item of each `FACTS` tuple in `src/features.py`), with a "Read the full story" button that follows "Another". `CITE.linked()` makes the sentence the link and puts its chips after it. Where no page existed one was written: places in `src/factplaces.py` (their own `PLACES` and `LONG`), events in `src/events_more.py`.
+- World first and Welsh first badges on person pages take their sources from `FIRST_CITES` in `src/cites.py` (person id -> keys); the chip sits beside the badge because the badge is a link. Only add a badge source that says what the badge says.
 
 ### Place pages people can visit: the Visiting box (November 2026)
 
@@ -685,6 +687,20 @@ Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.
 - For a picture that is not in the gallery, a long read can carry its own list. Give the story `figs={key: (Commons file, maker, licence, licence link, caption EN, caption CY, width, height)}` and put a paragraph `"!! key"` where each picture goes, in both the English and the Welsh list. `prose()` in `build.py` looks in `figs` first, then in the gallery, and draws it with its full credit (`lit_fig`). First used in `src/welshnot.py`.
 - Search Commons from GitHub first (see "Looking up Commons pictures from GitHub"): the Welsh Not category held a real W.N. board, an 1879 magazine drawing and Geoff Charles's photographs of Cymdeithas yr Iaith, all free to use. The "Fetch photos" workflow then keeps copies on the site.
 - When the picture for the top of a page is not yet in the gallery, add it to `LEGEND_PHOTOS` in `src/art.py` and `PICKS` in `tools/fetch_legend_photos.py` under a key no legend uses. Pushing that file runs "Fetch photos", which saves `src/static/legends/<key>.webp`; pull, then add `"story-x.html": "l:<key>"` to `PAGE` in `src/pictures.py` (its check stops the build if the file is not there yet).
+
+### A slider that is easy to drag, with a mouse or a finger (November 2026)
+- Never rebuild a slider's HTML from its own `input` event: the browser loses the drag and the thumb jumps back. Build the panel once (`kgShell` in `src/app.js`) and only update the text, the year marks and the value afterwards.
+- Phones (iOS above all) only drag a range input when the finger lands right on the thumb. So the whole strip (track and year labels, `.kg-slide`) takes the pointer with `setPointerCapture`, works out the value from the x position, and has `touch-action: pan-y` so a sideways drag moves the slider while an up-and-down swipe still scrolls the page. The input itself has `pointer-events: none` and stays for the keyboard and screen readers (`aria-valuetext` names the stage).
+- For a smooth drag, use `step="any"`, change the map at the nearest stage while dragging, and glide the thumb onto that stage when the finger lets go. Arrow keys, Page Up/Down, Home and End are handled in a `keydown` listener.
+- Year labels are placed under the exact thumb positions with `left: calc(thumb/2 + (100% - thumb) * i / n)`; on a phone every other year drops to a second row so all of them fit. Test drags in Playwright with `page.mouse` and, for touch, CDP `Input.dispatchTouchEvent`.
+
+### Themed trails (November 2026)
+- The trails are `TRAILS` in `src/long.py` (the first four) and `src/trails.py` (the newer ones, put in front, newest first). `build.py` makes `trails.html` and one `trail-<id>.html` per trail.
+- A stop can be an event (by its English title), a person, a place, a long read (`("story", id)`), a legend (`("legend", id)`) or any page (`("page", href, era, dates, titles, texts)`). Every stop gets a "The full story" link to its own page, and person and place stops also link any long read that names them.
+- A long read that does not exist yet can already be named on a trail: it stays hidden until another thread publishes it (for example `story-welsh-not`, `story-mac`).
+- Keep 8 to 10 stops per trail, and keep the number of trails a multiple of 6, so the grid on `trails.html` is full at three columns and at two.
+- Every stop title has the same size and font: there is no bigger serif style for "key" events any more (removed from `.era-events li.key h3` and the timeline's `.ev.key h4`). Key events keep their coloured dot.
+- To check fonts across the site, load pages in Playwright and compare the computed font of headings in sibling cards or list items; flag any group with more than one style.
 
 ## Working together
 

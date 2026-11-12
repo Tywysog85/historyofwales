@@ -531,13 +531,14 @@ def photo_fig(ph, cls="", gid=None):
             f'<figcaption>{bi(cen, ccy)} · <a href="{COMMONS}File:{_q(f, safe="")}" target="_blank" rel="noopener">{bi("Photo: Wikimedia Commons", "Llun: Wikimedia Commons")}</a>{" · " + cr if cr else ""}</figcaption></figure>')
 
 
-def event_li(ev, k=0):
+def event_li(ev, k=0, title_link=False):
     links = ((f'<a class="src" href="laws.html">{bi("The Laws of Hywel Dda: the big page", "Cyfreithiau Hywel Dda: y dudalen fawr")} →</a>' if ev[5] == "The laws of Hywel Dda" else "")
              + "".join(f'<a class="src" href="story-{x["id"]}.html">{bi("Read the long read", "Darllen yr erthygl")} →</a>' for x in story_links("events", ev[5]))
              + (f'<a class="src" href="place-{ev[10]}.html">{bi("The place", "Y lle")} →</a>' if ev[10] else "") + src(ev[11]))
     links = f'<a class="src full" href="{EP.href(ev)}">{bi("The full story", "Yr hanes llawn")} →</a>' + links
+    title = f'<a href="{EP.href(ev)}">{bi(ev[5], ev[6])}</a>' if title_link else bi(ev[5], ev[6])
     return (f'<li id="e{EVI[ev]}" class="{"key" if ev[9] else ""}" data-era="{ev[0]}"><time>{bi(year_label(ev), year_label(ev, True))}</time>'
-            f'<div><h3>{bi(ev[5], ev[6])}</h3><p>{bi(ev[7], ev[8])}</p><div class="links">{links}</div></div></li>')
+            f'<div><h3>{title}</h3><p>{bi(ev[7], ev[8])}</p><div class="links">{links}</div></div></li>')
 
 
 def plaque(p, link=True):
@@ -778,34 +779,68 @@ def place_page(pl):
 
 
 # ---------- trails ----------
-def trail_item(kind, ref):
+# A stop is ("event", title) | ("person", slug) | ("place", id) | ("story", id) | ("legend", id)
+# | ("page", href, era, dateEn, dateCy, titleEn, titleCy, textEn, textCy). A story, legend or page may add
+# its own date label: ("story", id, dateEn, dateCy). A story that is not on the site yet is left out until it is,
+# so a trail can name a long read another thread is still writing. Every stop links to its full page.
+STORY_BY_ID = {x["id"]: x for x in F.STORIES}
+LEGEND_BY_ID = {x["id"]: x for x in F.LEGENDS}
+
+
+def trail_stops(t):
+    return [it for it in t["items"] if (it[0] != "story" or it[1] in STORY_BY_ID) and (it[0] != "legend" or it[1] in LEGEND_BY_ID)]
+
+
+def _stop(era, date_en, date_cy, href, en, cy, text_en, text_cy, extra=""):
+    full = f'<a class="src full" href="{href}">{bi("The full story", "Yr hanes llawn")} →</a>'
+    return (f'<li data-era="{era}"><time>{bi(date_en, date_cy)}</time><div><h3><a href="{href}">{bi(en, cy)}</a></h3>'
+            f'<p>{bi(text_en, text_cy)}</p><div class="links">{full}{extra}</div></div></li>')
+
+
+def _reads(kind, key):
+    return "".join(f'<a class="src" href="story-{x["id"]}.html">{bi("Long read: " + x["en"], "Erthygl: " + x["cy"])} →</a>' for x in sorted(story_links(kind, key), key=lambda x: len(x.get(kind, [])))[:1])
+
+
+def trail_item(item):
+    kind, ref = item[0], item[1]
     if kind == "person":
         p = PERSON[ref]
-        return (f'<li data-era="{p[1]}"><time>{e(p[2])}</time><div><h3><a href="person-{ref}.html">{bi(p[3], p[4])}</a></h3><p>{bi(p[7], p[8])}</p></div></li>')
+        return _stop(p[1], p[2], date_cy(p[2]), f"person-{ref}.html", p[3], p[4], p[7], p[8], _reads("people", ref) + src(p[9]))
     if kind == "place":
         p = PLACE[ref]
-        return (f'<li data-era="{p["era"]}"><time>{e(p["year"])}</time><div><h3><a href="place-{ref}.html">{bi(p["en"], p["cy"])}</a></h3><p>{bi(p["dEn"], p["dCy"])}</p></div></li>')
+        return _stop(p["era"], p["year"], p["year"], f"place-{ref}.html", p["en"], p["cy"], p["dEn"], p["dCy"], _reads("places", ref))
+    if kind == "story":
+        x = STORY_BY_ID[ref]
+        d = item[2:4] if len(item) > 2 else (f'{x["mins"]} min read', f'{x["mins"]} munud')
+        return _stop(x["era"], d[0], d[1], f"story-{ref}.html", x["en"], x["cy"], x["sumEn"], x["sumCy"])
+    if kind == "legend":
+        x = LEGEND_BY_ID[ref]
+        d = item[2:4] if len(item) > 2 else ("Welsh tradition", "Traddodiad Cymru")
+        return _stop(x["era"], d[0], d[1], f"legend-{ref}.html", x["en"], x["cy"], x["sumEn"], x["sumCy"])
+    if kind == "page":
+        href, era, den, dcy, en, cy, ten, tcy = item[1:]
+        return _stop(era, den, dcy, href, en, cy, ten, tcy)
     ev = EVENT_BY_TITLE[ref]
-    return event_li(ev)
+    return event_li(ev, title_link=True)
 
 
 def trail_page(t, i):
     nxt = L.TRAILS[(i + 1) % len(L.TRAILS)]
     main = (hero("medieval", f'<a href="index.html">{SITE}</a> / <a href="trails.html">{bi("Trails", "Llwybrau")}</a>', t["ill"], "Trail", "Llwybr", t["en"], t["cy"], art=TRAIL_ART.get(t["id"], "castle"))
             + section(paras(t["introEn"], t["introCy"]), top=True)
-            + section(f'<ol class="era-events trail">{"".join(trail_item(k, r) for k, r in t["items"])}</ol>', "Stops on the trail", "Arosfannau ar y llwybr")
+            + section(f'<ol class="era-events trail">{"".join(trail_item(it) for it in trail_stops(t))}</ol>', "Stops on the trail", "Arosfannau ar y llwybr")
             + section(f'<div class="pager"><a class="btn" href="trails.html">← {bi("All trails", "Pob llwybr")}</a><a class="btn solid" href="trail-{nxt["id"]}.html">{bi(nxt["en"], nxt["cy"])} →</a></div>'))
     return page(f"trail-{t['id']}.html", f'{t["en"]} · History of Wales', t["introEn"][0], main, era="medieval", active="trails.html")
 
 
 def trails_index():
     cards = "".join(f'<a class="chap" href="trail-{t["id"]}.html" data-era="{D.ERAS[i % len(D.ERAS)]["id"]}"><svg aria-hidden="true"><use href="#i-{t["ill"]}"/></svg>'
-                    f'<span class="span">{len(t["items"])} {bi("stops", "arhosfan")}</span><h3>{bi(t["en"], t["cy"])}</h3><p>{bi(t["introEn"][0], t["introCy"][0])}</p>'
+                    f'<span class="span">{len(trail_stops(t))} {bi("stops", "arhosfan")}</span><h3>{bi(t["en"], t["cy"])}</h3><p>{bi(t["introEn"][0], t["introCy"][0])}</p>'
                     f'<span class="go">{bi("Follow the trail →", "Dilyn y llwybr →")}</span></a>' for i, t in enumerate(L.TRAILS))
     main = (hero("modern", f'<a href="index.html">{SITE}</a>', "mtn", "Themed trails", "Llwybrau thema", "Trails through Welsh history", "Llwybrau drwy hanes Cymru",
                  "Follow one thread through the centuries.", "Dilynwch un edefyn drwy’r canrifoedd.", art="arches")
             + section(f'<h2 class="sr-only">{bi("All trails", "Pob llwybr")}</h2><div class="chapters">{cards}</div>', top=True))
-    return page("trails.html", "Trails · History of Wales", "Themed trails through Welsh history: women, the sea, chapel and song, iron and coal.", main, era="modern", og_type="website", active="trails.html")
+    return page("trails.html", "Trails · History of Wales", f"{len(L.TRAILS)} themed trails through Welsh history: kings and princes, Arthur, saints, the language, castles, rebels, poets, women, the sea, chapel and song, iron and coal, and more.", main, era="modern", og_type="website", active="trails.html")
 
 
 # ---------- teachers ----------
@@ -1053,7 +1088,7 @@ SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes
     ("princes", "Princes, castles and Owain Glyndŵr", "Tywysogion, cestyll ac Owain Glyndŵr", ["era-medieval", "castles", "glyndwr", "longbow", "battles", "documents", "topic-war", "nest", "rhys"]),
     ("lit", "Poets, old books and legends", "Beirdd, hen lyfrau a chwedlau", ["literature", "books", "triads", "mabinogion", "legends", "legend-*", "bran", "symbols", "iolo", "topic-music", "trail-song"]),
     ("tudor", "From the Tudors to the Methodists", "O’r Tuduriaid i’r Methodistiaid", ["era-tudor"]),
-    ("industry", "Iron, coal, slate and the sea", "Haearn, glo, llechi a’r môr", ["era-industrial", "coal", "aberfan", "protest", "topic-industry", "trail-coal", "trail-sea", "firsts", "topic-science"]),
+    ("industry", "Iron, coal, slate and the sea", "Haearn, glo, llechi a’r môr", ["era-industrial", "industry", "coal", "aberfan", "protest", "topic-industry", "trail-coal", "trail-sea", "firsts", "topic-science"]),
     ("modern", "Modern Wales and the Welsh abroad", "Cymru fodern a’r Cymry ar wasgar", ["era-modern", "era-today", "revival", "mac", "fwa", "world", "madog", "tryweryn", "topic-abroad", "topic-sport"]),
     ("lang", "The Welsh language, names and places", "Yr iaith Gymraeg, enwau a lleoedd", ["language", "welsh-not", "topic-language", "welsh", "names", "towns", "maps", "sites"]),
     ("life", "Women and everyday life", "Menywod a bywyd bob dydd", ["topic-women", "trail-women", "topic-countryside"]),
@@ -2142,8 +2177,7 @@ def ruler_li(x, chips="", rid=""):
     link = x["link"]
     more = ""
     if link:
-        lab = ("Read more", "Darllen mwy") if link.startswith(("person-", "legend-")) else ("See more", "Gweld mwy")
-        more = f'<a class="src" href="{link}">{bi(*lab)} →</a>'
+        more = f'<a class="src" href="{link}">{bi("Read more", "Darllen mwy")} →</a>'
     note = f'<p>{bi(x["en"], x["cy"])}</p>' if x["en"] else ""
     links = f'<div class="links">{more}{chips}</div>' if (more or chips) else ""
     return (f'<li{f' id="{rid}"' if rid else ""} class="{"key" if x["key"] else ""}"><time>{bi(x["dates"], cy_dates(x["dates"]))}</time>'
@@ -2270,7 +2304,7 @@ def kings_page():
                  "For a thousand years Wales was a land of kingdoms. Great kings brought most of it together, one king ruled it all, and its princes carried the title Prince of Wales.",
                  "Am fil o flynyddoedd gwlad o deyrnasoedd oedd Cymru. Daeth brenhinoedd mawr â’r rhan fwyaf ohoni ynghyd, rheolodd un brenin y cyfan, a dygodd ei thywysogion y teitl Tywysog Cymru.", art="castle")
             + section(one, top=True)
-            + section(lst(RY.MOST), "Kings who ruled most of Wales", "Brenhinoedd a reolodd y rhan fwyaf o Gymru")
+            + section(lst(RY.MOST), "Kings who ruled most or all of Wales", "Brenhinoedd a reolodd y rhan fwyaf o Gymru neu’r cyfan ohoni")
             + section('<span id="princes"></span>' + lst(RY.PRINCES) + f'<p class="lede" style="margin-top:1.5rem">{bi(RY.CODA["en"], RY.CODA["cy"])} <a href="person-harri-tudur.html">{bi("Harri Tudur", "Harri Tudur")} →</a></p>', "Princes of Wales", "Tywysogion Cymru")
             + section(f'<div class="behind one-king"><p class="eyebrow">{bi("Rhodri Mawr to Harri Tudur", "Rhodri Mawr i Harri Tudur")}</p><h2>{bi("Royal family trees", "Coed teulu brenhinol")}</h2>'
                       f'<p>{bi("The royal houses of Wales were one great family. See how Gwynedd, Deheubarth, Powys and Gwent married into one another, and how their blood came to the throne at Bosworth with Harri Tudur. Tap anyone to light up their line.", "Un teulu mawr oedd tai brenhinol Cymru. Gwelwch sut y priododd Gwynedd, Deheubarth, Powys a Gwent â’i gilydd, a sut y daeth eu gwaed i’r orsedd yn Bosworth gyda Harri Tudur. Tapiwch unrhyw un i oleuo’i linach.")}</p>'
@@ -2854,7 +2888,12 @@ def first_badge(slug):
     if not f:
         return ""
     lab = ("World first", "Y cyntaf yn y byd") if f[0] == "world" else ("Welsh first", "Y Cymro cyntaf")
-    return (f'<a class="first-badge" href="firsts.html#f-{slug}" data-kind="{f[0]}"><b>★ {bi(*lab)}</b> {bi(f[1], f[2])}</a>')
+    badge = f'<a class="first-badge" href="firsts.html#f-{slug}" data-kind="{f[0]}"><b>★ {bi(*lab)}</b> {bi(f[1], f[2])}</a>'
+    src = CITE.FIRST_CITES.get(slug)
+    if not src:
+        return badge
+    # a chip can't sit inside the badge link, so it goes beside it
+    return f'<div class="first-row">{badge}<span class="first-src">[[cite:{src}]]</span></div>'
 
 
 def first_card(slug=None, other=None):
@@ -2911,7 +2950,7 @@ FEATURED = ["dewi-sant", "hywel-dda", "gwenllian", "llywelyn-fawr", "llywelyn-ap
 DATA = dict(
     ERAS=D.ERAS, EVENTS=D.EVENTS, PLACES=[dict(p, ph=place_ph(p['id']), vis=map_visit(p)) for p in D.PLACES], PEOPLE=D.PEOPLE, READING=D.READING, ONLINE=D.ONLINE,
     CENSUS=D.CENSUS, KINGDOMS=D.KINGDOMS, LA=la, DICT=D.DICT, SAMPLES=D.SAMPLES, WORDS=D.WORDS,
-    TRAILS=[dict(id=t["id"], en=t["en"], cy=t["cy"], ill=t["ill"], n=len(t["items"]), introEn=t["introEn"][0], introCy=t["introCy"][0]) for t in L.TRAILS],
+    TRAILS=[dict(id=t["id"], en=t["en"], cy=t["cy"], ill=t["ill"], n=len(trail_stops(t)), introEn=t["introEn"][0], introCy=t["introCy"][0]) for t in L.TRAILS],
     AUDIO=sorted(f[:-4] for f in os.listdir(os.path.join(SRC, 'static', 'audio')) if f.endswith('.mp3')) if os.path.isdir(os.path.join(SRC, 'static', 'audio')) else [],
     MAPC=dict(minx=geo["minx"], maxy=geo["maxy"], k=geo["k"], sc=geo["sc"]),
     SL={i: x["id"] for i, ev in enumerate(D.EVENTS) for x in story_links("events", ev[5])},
@@ -2920,7 +2959,7 @@ DATA = dict(
             "Rhwng Gwy a Hafren": "kings-gwy-a-hafren.html", "Glywysing": "kings-glywysing.html", "Morgannwg": "kings-glywysing.html", "Gwent": "kings-gwent.html", "Deheubarth": "kings-deheubarth.html",
             "Rhodri Mawr": "person-rhodri-mawr.html", "Hywel Dda": "person-hywel-dda.html", "Gruffudd ap Llywelyn": "kings.html", "Principality of Wales": "kings.html#princes",
             "Owain Glyndŵr, Prince of Wales": "person-owain-glyndwr.html"},
-    FACTS=[[CITE.html_text(en), CITE.html_text(cy, cy=True)] for en, cy in F.FACTS], FEATURED=FEATURED, PPH=dict({k: photo_url(v[0], 240) for k, v in PH.PERSON_PHOTOS.items()}, **{k[7:]: f'gallery/{k}-s.webp' for k in GP.GALLERY if k.startswith('person-')}),
+    FACTS=[[CITE.linked(en, h, js=True), CITE.linked(cy, h, cy=True, js=True), h] for en, cy, h in F.FACTS], FEATURED=FEATURED, PPH=dict({k: photo_url(v[0], 240) for k, v in PH.PERSON_PHOTOS.items()}, **{k[7:]: f'gallery/{k}-s.webp' for k in GP.GALLERY if k.startswith('person-')}),
     PFIELDS=P2.FIELDS, PFIELD=P2.FIELD, PFIRST={k: [v[0], v[1], v[2]] for k, v in P2.FIRSTS.items()},
 )
 # ---------- home page, map and people: content built into the HTML, so it shows without JavaScript ----------
@@ -2952,7 +2991,12 @@ def ssr_people(slugs=None):
 def ssr_fact():
     days = (datetime.datetime.now(datetime.timezone.utc) - datetime.datetime(1970, 1, 1, tzinfo=datetime.timezone.utc)).days
     f = F.FACTS[days % len(F.FACTS)]  # the same fact app.js picks for today
-    return bi(f[0], f[1])
+    return (f'<span class="l-en" lang="en">{CITE.linked(f[0], f[2])}</span><span class="l-cy" lang="cy">{CITE.linked(f[1], f[2], cy=True)}</span>')
+
+
+def ssr_fact_href():
+    days = (datetime.datetime.now(datetime.timezone.utc) - datetime.datetime(1970, 1, 1, tzinfo=datetime.timezone.utc)).days
+    return F.FACTS[days % len(F.FACTS)][2]
 
 
 def ssr_today():
@@ -3133,7 +3177,7 @@ def fill(fragment, active="", skip="#chapters", home=False):
             .replace("__STORIES__", "".join(story_card(x, k == 0) for k, x in enumerate(F.STORIES[:HOME_STORIES])))
             .replace("__NSTORIES__", str(len(F.STORIES))).replace("__NPEOPLE__", str(len(D.PEOPLE))).replace("__NPLACES__", str(len(D.PLACES)))
             .replace("__NCASTLES_FMT__", f"{N_CASTLES:,}").replace("__NCASTLES__", str(N_CASTLES))
-            .replace("__TODAY__", ssr_today()).replace("__FACT__", ssr_fact()).replace("__TLTEASER__", ssr_tl_teaser()).replace("__CHART__", ssr_chart())
+            .replace("__TODAY__", ssr_today()).replace("__FACT__", ssr_fact()).replace("__FACTHREF__", ssr_fact_href()).replace("__TLTEASER__", ssr_tl_teaser()).replace("__CHART__", ssr_chart())
             .replace("__BOOKS__", ssr_books()).replace("__ONLINE__", ssr_online()).replace("__WORDS__", ssr_words())
             .replace("__PEOPLEHOME__", ssr_people(FEATURED[:6])).replace("__PEOPLEALL__", ssr_people()).replace("__MAPTEASER__", ssr_map_teaser())
             .replace("__WALES__", geo["outline"]).replace("__GRAT__", ssr_grat()).replace("__PINS__", ssr_pins()).replace("__PLACECARD__", ssr_place_card())

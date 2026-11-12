@@ -94,7 +94,7 @@ TOPICS = [
     "Daeth Abertawe’n Gopropolis, Merthyr Tudful yn dref fwyaf Cymru a phrifddinas haearn y byd, a Chaerdydd yn borthladd glo mwyaf y ddaear. Cododd peirianwyr o Gymru weithfeydd haearn mor bell ag Wcráin, lle sefydlodd John Hughes dref Yuzovka.",
     "Safodd y gweithwyr dros chwarae teg: Gwrthryfel Merthyr yn 1831 a Dic Penderyn, y Siartwyr yng Nghasnewydd yn 1839, Helyntion Beca, a Ffed y glowyr gyda’i neuaddau a’i llyfrgelloedd. O’r cymoedd daeth Aneurin Bevan a’r Gwasanaeth Iechyd Gwladol, ar batrwm cymdeithas cymorth meddygol Tredegar."],
    people=["william-edwards", "lucy-thomas", "david-thomas-iron", "john-hughes-yuzovka", "david-davies-llandinam", "pryce-pryce-jones", "robert-owen", "dic-penderyn", "john-frost", "twm-carnabwth", "elizabeth-andrews", "jim-griffiths", "aneurin-bevan"],
-   reads=["story-coal.html", "story-aberfan.html", "trail-coal.html", "story-protest.html", "castles.html"],
+   reads=["story-industry.html", "story-coal.html", "story-aberfan.html", "trail-coal.html", "story-protest.html", "castles.html"],
    az=["copperopolis", "ironworks", "slate", "coal", "the-fed", "miners-institute", "tredegar", "merthyr-rising", "chartists", "rebecca-riots", "tonypandy", "miners-strike", "aberfan"],
    faq=["first-industrial", "coal", "dic", "chartists", "red-flag", "nhs", "aberfan"],
    battles=["merthyr", "newport"],

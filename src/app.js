@@ -627,7 +627,7 @@
   $("#pins").addEventListener("keydown", function (ev) { var g = ev.target.closest(".pin"); if (g && (ev.key === "Enter" || ev.key === " ")) { ev.preventDefault(); selectPlace(g.dataset.pid); var n = $('.pin[data-pid="' + g.dataset.pid + '"]'); if (n) n.focus(); } });
 
   /* ---------- Map: kingdoms ---------- */
-  var kgStage = 5, kgTimer = 0;
+  var kgStage = 5, kgTimer = 0, kgDrag = false;
   function kgStop() { if (kgTimer) { clearInterval(kgTimer); kgTimer = 0; } }
   function renderLAs() { $("#las").innerHTML = Object.keys(D.LA).map(function (n) { return '<path class="la" data-la="' + esc(n) + '" d="' + D.LA[n] + '"><title>' + esc(n) + "</title></path>"; }).join(""); }
   function renderKg() {
@@ -642,22 +642,78 @@
       return sa ? '<text class="kg-label" x="' + (sx / sa).toFixed(0) + '" y="' + (sy / sa).toFixed(0) + '">' + esc(name) + "</text>" : "";
     }).join("");
     $("#kg-labels").innerHTML = labels;
-    var card = $("#kg-card");
-    card.innerHTML = '<p class="eyebrow">' + T("The changing map", "Y map yn newid") + '</p><h3 class="kg-stage">' + esc(T(K.en, K.cy)) + "</h3><p class=\"desc\">" + esc(T(K.nEn, K.nCy)) + '</p><ul class="kg-legend">' +
-      K.groups.map(function (g) { var u = (D.KGLINK || {})[g[0]], n = esc(T(g[0], g[1])); return '<li style="--k:' + g[2] + '"><i></i>' + (u ? '<a href="' + u + '">' + n + "</a>" : n) + "</li>"; }).join("") + "</ul>" +
+    var card = $("#kg-card"), N = D.KINGDOMS.length;
+    /* The card is built once per language and then only updated, so the slider is never
+       replaced while someone is dragging it (replacing it mid-drag is what made it hard to move). */
+    if (card.dataset.lang !== lang || !$("#kg-in")) { card.dataset.lang = lang; kgShell(card, N); }
+    card.querySelector(".kg-stage").textContent = T(K.en, K.cy);
+    card.querySelector(".kg-desc").textContent = T(K.nEn, K.nCy);
+    card.querySelector(".kg-legend").innerHTML = K.groups.map(function (g) { var u = (D.KGLINK || {})[g[0]], n = esc(T(g[0], g[1])); return '<li style="--k:' + g[2] + '"><i></i>' + (u ? '<a href="' + u + '">' + n + "</a>" : n) + "</li>"; }).join("");
+    [].forEach.call(card.querySelectorAll(".kg-ticks span"), function (t, n) { t.classList.toggle("on", n === kgStage); });
+    var inp = $("#kg-in"); inp.setAttribute("aria-valuetext", T(K.en, K.cy));
+    if (!kgDrag) { inp.value = kgStage; kgFill(kgStage); }
+    $("#kg-play").textContent = kgTimer ? T("Pause", "Oedi") : "▶ " + T("Play through time", "Chwarae drwy amser");
+  }
+  function kgYear(k) { return k.id === "today" ? T("Now", "Nawr") : k.id.replace("c", ""); }
+  function kgFill(v) { var w = document.querySelector(".kg-slide"); if (w) w.style.setProperty("--f", (v / (D.KINGDOMS.length - 1)).toFixed(4)); }
+  function kgGo(n) {
+    n = Math.max(0, Math.min(D.KINGDOMS.length - 1, n));
+    var changed = n !== kgStage || !!kgTimer;
+    kgStop();
+    if (changed) { kgStage = n; renderKg(); }
+  }
+  /* glide the thumb onto the nearest year once the finger or mouse lets go */
+  function kgSnap() {
+    var inp = $("#kg-in"); if (!inp) return;
+    var from = +inp.value, to = kgStage, t0 = performance.now();
+    if (Math.abs(from - to) < .01 || matchMedia("(prefers-reduced-motion: reduce)").matches) { inp.value = to; kgFill(to); return; }
+    (function step(now) {
+      if (kgDrag) return;
+      var k = Math.min(1, (now - t0) / 160), v = from + (to - from) * (1 - Math.pow(1 - k, 3));
+      inp.value = v; kgFill(v); if (k < 1) requestAnimationFrame(step);
+    })(t0);
+  }
+  function kgShell(card, N) {
+    card.innerHTML = '<p class="eyebrow">' + T("The changing map", "Y map yn newid") + '</p><h3 class="kg-stage"></h3><p class="desc kg-desc"></p><ul class="kg-legend"></ul>' +
       '<p class="kg-kings"><a href="kings.html">' + T("Every king and prince of Wales", "Pob brenin a thywysog yng Nghymru") + " →</a></p>" +
-      '<div class="kg-range"><label for="kg-in" class="eyebrow">' + T("Move through time", "Symud drwy amser") + '</label><input type="range" id="kg-in" min="0" max="' + (D.KINGDOMS.length - 1) + '" step="1" value="' + kgStage + '"><div class="kg-ticks">' +
-      D.KINGDOMS.map(function (k, n) { return "<span" + (n === kgStage ? ' class="on"' : "") + ">" + (k.id === "today" ? T("Now", "Nawr") : k.id.replace("c", "")) + "</span>"; }).join("") + '</div><div class="kg-btns"><button type="button" class="btn" id="kg-prev" aria-label="' + T("Earlier", "Cynharach") + '">←</button><button type="button" class="btn solid" id="kg-play">' + (kgTimer ? T("Pause", "Oedi") : "▶ " + T("Play through time", "Chwarae drwy amser")) + '</button><button type="button" class="btn" id="kg-next" aria-label="' + T("Later", "Diweddarach") + '">→</button></div></div><p class="kg-note">' + T("Approximate: borders are drawn using modern council areas as building blocks.", "Bras: lluniwyd y ffiniau gan ddefnyddio ardaloedd cynghorau modern.") + "</p>";
-    $("#kg-in").oninput = function () { kgStop(); kgStage = +this.value; renderKg(); var i = $("#kg-in"); if (i) i.focus(); };
-    $("#kg-prev").onclick = function () { kgStop(); kgStage = Math.max(0, kgStage - 1); renderKg(); $("#kg-prev").focus(); };
-    $("#kg-next").onclick = function () { kgStop(); kgStage = Math.min(D.KINGDOMS.length - 1, kgStage + 1); renderKg(); $("#kg-next").focus(); };
+      '<div class="kg-range"><label for="kg-in" class="eyebrow">' + T("Move through time", "Symud drwy amser") + "</label>" +
+      '<div class="kg-slide" style="--n:' + (N - 1) + '"><input type="range" id="kg-in" min="0" max="' + (N - 1) + '" step="any" value="' + kgStage + '">' +
+      '<div class="kg-ticks" aria-hidden="true">' + D.KINGDOMS.map(function (k, n) { return '<span style="--i:' + n + '">' + kgYear(k) + "</span>"; }).join("") + "</div></div>" +
+      '<p class="kg-hint">' + T("Drag the slider, or tap a year to jump to it.", "Llusgwch y llithrydd, neu tapiwch flwyddyn i neidio ati.") + "</p>" +
+      '<div class="kg-btns"><button type="button" class="btn" id="kg-prev" aria-label="' + T("Earlier", "Cynharach") + '">←</button><button type="button" class="btn solid" id="kg-play"></button><button type="button" class="btn" id="kg-next" aria-label="' + T("Later", "Diweddarach") + '">→</button></div></div>' +
+      '<p class="kg-note">' + T("Approximate: borders are drawn using modern council areas as building blocks.", "Bras: lluniwyd y ffiniau gan ddefnyddio ardaloedd cynghorau modern.") + "</p>";
+    var inp = $("#kg-in"), slide = card.querySelector(".kg-slide");
+    /* The whole strip (track and years) takes the pointer, so a tap or drag anywhere on it works,
+       with a mouse or a finger. The input itself keeps the keyboard and screen readers. */
+    function valAt(x) {
+      var r = inp.getBoundingClientRect(), th = parseFloat(getComputedStyle(slide).getPropertyValue("--th")) || 32;
+      var f = (x - r.left - th / 2) / Math.max(1, r.width - th);
+      return Math.max(0, Math.min(1, f)) * (N - 1);
+    }
+    function move(ev) { var v = valAt(ev.clientX); inp.value = v; kgFill(v); kgGo(Math.round(v)); }
+    slide.addEventListener("pointerdown", function (ev) {
+      if (ev.button > 0) return;
+      ev.preventDefault(); kgDrag = true; slide.classList.add("drag");
+      try { slide.setPointerCapture(ev.pointerId); } catch (e) {}
+      inp.focus({ preventScroll: true }); move(ev);
+    });
+    slide.addEventListener("pointermove", function (ev) { if (kgDrag) move(ev); });
+    function end() { if (!kgDrag) return; kgDrag = false; slide.classList.remove("drag"); kgSnap(); }
+    slide.addEventListener("pointerup", end); slide.addEventListener("pointercancel", end); slide.addEventListener("lostpointercapture", end);
+    /* screen readers, and anything else that sets the value directly */
+    inp.addEventListener("input", function () { if (!kgDrag) kgGo(Math.round(+inp.value)); });
+    inp.addEventListener("change", function () { if (!kgDrag) kgSnap(); });
+    inp.addEventListener("keydown", function (ev) {
+      var d = { ArrowLeft: -1, ArrowDown: -1, ArrowRight: 1, ArrowUp: 1, PageDown: -3, PageUp: 3, Home: -N, End: N }[ev.key];
+      if (d) { ev.preventDefault(); kgGo(kgStage + d); }
+    });
+    $("#kg-prev").onclick = function () { kgGo(kgStage - 1); };
+    $("#kg-next").onclick = function () { kgGo(kgStage + 1); };
     $("#kg-play").onclick = function () {
-      if (kgTimer) { kgStop(); renderKg(); } else {
-        if (kgStage >= D.KINGDOMS.length - 1) kgStage = 0; else kgStage++;
-        kgTimer = setInterval(function () { if (kgStage >= D.KINGDOMS.length - 1) { kgStop(); } else kgStage++; renderKg(); }, 2600);
-        renderKg();
-      }
-      $("#kg-play").focus();
+      if (kgTimer) { kgStop(); renderKg(); return; }
+      kgStage = kgStage >= N - 1 ? 0 : kgStage + 1;
+      kgTimer = setInterval(function () { if (kgStage >= N - 1) kgStop(); else kgStage++; renderKg(); }, 2600);
+      renderKg();
     };
   }
   function setMode(m) {
@@ -703,7 +759,7 @@
 
   /* ---------- Did you know? + daily streak ---------- */
   var factI = Math.floor(Date.now() / 864e5) % D.FACTS.length;
-  function renderFact() { var f = D.FACTS[factI % D.FACTS.length]; $("#fact").innerHTML = T(f[0], f[1]); }  /* our own text, escaped at build, with its source chip (src/cites.py) */
+  function renderFact() { var f = D.FACTS[factI % D.FACTS.length]; $("#fact").innerHTML = T(f[0], f[1]); var m = $("#fact-more"); if (m) m.setAttribute("href", f[2]); }  /* our own text, escaped at build, with its source chip (src/cites.py) */
   $("#fact-next").onclick = function () { factI++; renderFact(); };
   function renderStreak() {
     var el = document.getElementById("daily-streak"); if (!el) return;

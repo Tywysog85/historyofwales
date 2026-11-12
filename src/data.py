@@ -643,6 +643,9 @@ PLACES = PLACES + MORE_PLACES
 # ---------- historic places of importance: royal seats, abbeys, forts, and places to visit (src/places3.py) ----------
 import places3 as _PL3
 PLACES = PLACES + _PL3.NEW
+# ---------- full pages behind the home page facts (src/factplaces.py) ----------
+from factplaces import PLACES as _FACT_PLACES
+PLACES = PLACES + _FACT_PLACES
 
 
 # ---------- proud history (src/pride.py): rewordings, new people and events ----------
@@ -681,6 +684,10 @@ EVENTS = sorted(EVENTS + _BRE, key=lambda ev: ev[1])
 # ---------- Prince Madog's voyage and the Welsh Indians (src/madog.py) ----------
 from madog import EVENTS as _MDE
 EVENTS = sorted(EVENTS + _MDE, key=lambda ev: ev[1])
+
+# ---------- How Wales moved the world: the industrial revolution (src/industry.py) ----------
+from industry import EVENTS as _INE
+EVENTS = sorted(EVENTS + _INE, key=lambda ev: ev[1])
 
 # ---------- King Caradog against Rome (src/caradog.py) ----------
 from caradog import EVENTS as _CRE

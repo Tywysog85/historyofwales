@@ -33,8 +33,6 @@ html.cy .l-en, html:not(.cy) .l-cy { display: none !important }
 .kg-legend li { display: flex; gap: .7rem; align-items: center; font-size: .98rem }
 .kg-legend i { width: 1rem; height: 1rem; border-radius: 4px; background: var(--k); flex: none }
 .kg-range { display: grid; gap: .5rem; border-top: 1px solid var(--line); padding-top: 1rem }
-.kg-range input { width: 100%; accent-color: var(--dragon) }
-.kg-ticks { display: flex; justify-content: space-between; font-family: var(--f-mono); font-size: .7rem; color: var(--muted) }
 .kg-note { font-size: .82rem; color: var(--muted) }
 
 /* Quiz */
@@ -83,7 +81,6 @@ footer nav a:hover { color: var(--ink) }
 .era-events li { display: grid; grid-template-columns: 9rem minmax(0,1fr); gap: 1.25rem; padding: 1.1rem 0; border-bottom: 1px solid var(--line) }
 .era-events time { font-family: var(--f-mono); font-size: .82rem; color: var(--c); padding-top: .2rem }
 .era-events h3 { font-family: var(--f-body); font-weight: 700; font-size: 1.15rem; line-height: 1.3 }
-.era-events li.key h3 { font-family: var(--f-display); font-weight: 400; font-size: 1.6rem }
 .era-events p { color: var(--muted); margin-top: .2rem }
 @media (max-width: 560px) { .era-events li { grid-template-columns: 1fr; gap: .2rem } }
 .plaque { scroll-margin-top: 6rem }
@@ -152,10 +149,9 @@ a.chip { text-decoration: none; color: inherit }
 
 /* kingdoms map: names on the land, play controls */
 .kg-label { font: 600 17px var(--f-body, sans-serif); fill: #fff; text-anchor: middle; dominant-baseline: middle; paint-order: stroke; stroke: rgba(11,14,22,.75); stroke-width: 4px; stroke-linejoin: round; pointer-events: none; letter-spacing: .01em }
-.kg-ticks span.on { color: var(--ink); font-weight: 700 }
 .kg-btns { display: flex; gap: .5rem; align-items: center; margin-top: .4rem }
 .kg-btns #kg-play { flex: 1; justify-content: center }
-@media (max-width: 900px) { .kg-ticks span:not(.on):not(:first-child):not(:last-child) { visibility: hidden } .kg-label { font-size: 24px } }
+@media (max-width: 900px) { .kg-label { font-size: 24px } }
 .kg-legend a { color: inherit; text-decoration-color: var(--line); text-underline-offset: 3px }
 .kg-legend a:hover { text-decoration-color: currentColor }
 .kg-kings { margin-top: .9rem; font-weight: 700 }
@@ -164,3 +160,42 @@ a.chip { text-decoration: none; color: inherit }
 .prose figure.lr-fig { margin: 1.8rem 0 }
 .prose figure.lr-fig img { display: block; width: 100%; height: auto; max-height: 30rem; aspect-ratio: auto; object-fit: contain; background: #0d1018; border-radius: 10px }
 .prose figure.lr-fig figcaption { margin-top: .55rem; line-height: 1.45 }
+
+/* kingdoms map: the "Move through time" slider. --th is the thumb size; --f (0 to 1) is set by app.js.
+   The whole strip takes the pointer (see kgShell in app.js), so the native input only draws and keeps the keyboard. */
+.kg-slide { --th: 32px; --tr: 10px; --f: 0; position: relative; padding: 4px 0 0; touch-action: pan-y; cursor: pointer; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent }
+.kg-slide.drag { cursor: grabbing }
+.kg-slide input { -webkit-appearance: none; appearance: none; display: block; width: 100%; height: calc(var(--th) + 12px); margin: 0; background: transparent; pointer-events: none; cursor: inherit }
+.kg-slide input:focus { outline: none }
+.kg-slide input::-webkit-slider-runnable-track { height: var(--tr); border-radius: 99px; border: 0;
+  background: linear-gradient(to right, var(--dragon) 0 calc(var(--th) / 2 + (100% - var(--th)) * var(--f)), color-mix(in srgb, var(--ink) 22%, transparent) 0) }
+.kg-slide input::-moz-range-track { height: var(--tr); border-radius: 99px; border: 0; background: color-mix(in srgb, var(--ink) 22%, transparent) }
+.kg-slide input::-moz-range-progress { height: var(--tr); border-radius: 99px; background: var(--dragon) }
+.kg-slide input::-webkit-slider-thumb { -webkit-appearance: none; width: var(--th); height: var(--th); margin-top: calc((var(--tr) - var(--th)) / 2); border-radius: 50%;
+  background: var(--dragon); border: 4px solid #fff; box-shadow: 0 2px 10px rgba(0,0,0,.45); transition: transform .15s }
+.kg-slide input::-moz-range-thumb { box-sizing: border-box; width: var(--th); height: var(--th); border-radius: 50%; background: var(--dragon); border: 4px solid #fff; box-shadow: 0 2px 10px rgba(0,0,0,.45); transition: transform .15s }
+.kg-slide:hover input::-webkit-slider-thumb, .kg-slide.drag input::-webkit-slider-thumb { transform: scale(1.12) }
+.kg-slide:hover input::-moz-range-thumb, .kg-slide.drag input::-moz-range-thumb { transform: scale(1.12) }
+.kg-slide input:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px var(--night, #11141c), 0 0 0 7px var(--ink) }
+.kg-slide input:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 4px var(--night, #11141c), 0 0 0 7px var(--ink) }
+.kg-ticks { position: relative; height: 2.2rem; font: 500 .78rem var(--f-mono); color: var(--muted) }
+.kg-ticks span { position: absolute; top: 0; left: calc(var(--th) / 2 + (100% - var(--th)) * var(--i) / var(--n)); transform: translateX(-50%); padding: .55rem .15rem .2rem; white-space: nowrap; transition: color .15s }
+.kg-ticks span::before { content: ""; position: absolute; top: 0; left: 50%; width: 2px; height: .35rem; margin-left: -1px; border-radius: 2px; background: currentColor; opacity: .6 }
+.kg-slide:hover .kg-ticks span:hover { color: var(--ink) }
+.kg-ticks span.on { color: var(--ink); font-weight: 700 }
+.kg-ticks span.on::before { background: var(--dragon); opacity: 1; height: .45rem }
+.kg-hint { margin: 0; font-size: .8rem; color: var(--muted) }
+@media (pointer: coarse) { .kg-slide { --th: 36px; --tr: 12px } }
+/* not room for every year in one row on a phone: every other year drops to a second row */
+@media (max-width: 560px) {
+  .kg-ticks { height: 3.4rem; font-size: .74rem }
+  .kg-ticks span:nth-child(even) { padding-top: 1.75rem }
+  .kg-ticks span:nth-child(even)::before { height: 1.55rem; opacity: .35 }
+  .kg-ticks span.on:nth-child(even)::before { height: 1.6rem }
+}
+/* "Did you know?": the fact links to its full page (Ifan, November 2026) */
+.fact-a { color: inherit; text-decoration: none; background-image: linear-gradient(var(--dragon), var(--dragon)); background-size: 0 2px; background-position: 0 100%; background-repeat: no-repeat; transition: background-size .25s }
+.fact-a:hover, .fact-a:focus-visible { background-size: 100% 2px }
+.fact-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0 }
+.fact-actions .chip.solid { background: var(--dragon); border-color: var(--dragon); color: #1a0d0c; font-weight: 600; text-decoration: none }
+.fact-actions .chip.solid:hover { background: #ff8178 }
