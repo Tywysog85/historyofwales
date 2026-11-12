@@ -19,8 +19,12 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # to save src/added.json back (below)
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -32,6 +36,19 @@ jobs:
           GOATCOUNTER: historyofwales
           SITE_URL: https://historyofwales.cymru/
           EMAIL_FORM: ${{ vars.EMAIL_FORM }}
+      # The build stamps anything new with the time it was added (src/added.json), so pages can show the newest first.
+      # If a change forgot to commit that file, save it back here so the date stays put. Never stops the deploy.
+      - name: Save when new items were added
+        if: github.ref == 'refs/heads/main'
+        continue-on-error: true
+        run: |
+          if [ -n "$(git status --porcelain -- src/added.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+            git add src/added.json
+            git commit -m "Record when new items were added to the site"
+            git pull --rebase origin main && git push origin HEAD:main
+          fi
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

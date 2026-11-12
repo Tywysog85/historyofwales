@@ -38,6 +38,8 @@ import laws as LW  # noqa: E402  (the Laws of Hywel Dda page, laws.html)
 import people2 as P2  # noqa: E402
 import sets as SETS  # noqa: E402
 import seo as SEO  # noqa: E402  (search engine extras for every page)
+import added as AD  # noqa: E402  (when each item was added: newest first, "Just added" strips, "New" badges)
+F.STORIES = AD.newest("story", F.STORIES)  # long reads: the newest first everywhere (index, home page, "Keep reading")
 L.TEACH.update(AG9.TEACH)
 from urllib.parse import quote as _q
 
@@ -721,13 +723,32 @@ def prose_bi(en, cy, cls="prose"):
 
 def story_card(x, lead=False):
     return (f'<a class="s-card rv{" lead" if lead else ""}" href="story-{x["id"]}.html" data-era="{x["era"]}"><span class="art">{A.scene(x["art"], COL[x["era"]])}</span>'
-            f'<span class="txt"><span class="span">{bi("Long read", "Erthygl")} · {x["mins"]} {bi("min", "mun")}</span><h3>{bi(x["en"], x["cy"])}</h3><p>{bi(x["sumEn"], x["sumCy"])}</p>'
+            f'<span class="txt"><span class="span">{bi("Long read", "Erthygl")} · {x["mins"]} {bi("min", "mun")}{new_tag("story", x["id"])}</span><h3>{bi(x["en"], x["cy"])}</h3><p>{bi(x["sumEn"], x["sumCy"])}</p>'
             f'<span class="go">{bi("Read", "Darllen")} →</span></span></a>')
+
+
+def new_tag(kind, i, ids=None):
+    """A small "New" badge for one of the newest things added in the last two weeks (src/added.py)."""
+    return f' <span class="new-tag">{bi("New", "Newydd")}</span>' if AD.is_new(kind, i, ids) else ""
+
+
+def added_date(kind, i, cy=False):
+    return _news_date(AD.when(kind, i)[:10], cy)
+
+
+def just_added(kind, items, href, title, key=lambda x: x["id"], n=4, h_en="Just added", h_cy="Newydd ei ychwanegu"):
+    """A "Just added" strip for the top of a list whose own order means something (by date, A to Z, by section):
+    the newest few items, with the day each went up. Nothing at all until something is added after the list began."""
+    xs = AD.recent(kind, items, key, n)
+    if not xs:
+        return ""
+    lis = "".join(f'<li><a href="{href(x)}"><b>{bi(*title(x))}</b><small class="ja-d">{bi(added_date(kind, key(x)), added_date(kind, key(x), True))}</small></a></li>' for x in xs)
+    return f'<aside class="just-added" aria-label="{h_en} / {h_cy}"><h2>{bi(h_en, h_cy)}</h2><ul>{lis}</ul></aside>'
 
 
 def legend_card(x):
     return (f'<a class="l-card rv" href="legend-{x["id"]}.html" data-era="{x["era"]}"><span class="art">{A.photo_scene(x["art"], small=True) or A.scene(x["art"], COL[x["era"]])}</span>'
-            f'<span class="txt"><span class="span">{e(x["place"])}</span><h3>{bi(x["en"], x["cy"])}</h3><p>{bi(x["sumEn"], x["sumCy"])}</p></span></a>')
+            f'<span class="txt"><span class="span">{e(x["place"])}{new_tag("legend", x["id"])}</span><h3>{bi(x["en"], x["cy"])}</h3><p>{bi(x["sumEn"], x["sumCy"])}</p></span></a>')
 
 
 def story_more_links(x):
@@ -784,6 +805,7 @@ def legends_index():
     main = (hero("medieval", f'<a href="index.html">{SITE}</a>', "book", "Legends", "Chwedlau", "Legends of Wales", "Chwedlau Cymru",
                  f"{len(F.LEGENDS)} old tales, retold for reading aloud, each with the real history behind it.", f"{len(F.LEGENDS)} o hen chwedlau, wedi’u hadrodd o’r newydd i’w darllen ar goedd, pob un â’r hanes go iawn y tu ôl iddi.", art="dragons",
                  extra='<nav class="chips l-jump" aria-label="Sections / Adrannau">' + "".join(f'<a class="chip" href="#{g["ids"][0]}-set">{bi(g["en"], g["cy"])}</a>' for g in F.LEGEND_GROUPS) + '</nav>')
+            + (section(just_added("legend", F.LEGENDS, lambda x: f'legend-{x["id"]}.html', lambda x: (x["en"], x["cy"]), h_en="Newest legends", h_cy="Y chwedlau diweddaraf"), top=True) if AD.recent("legend", F.LEGENDS) else "")
             + "".join(f'<section{"" if k == 0 else " class=\"tight\""} id="{g["ids"][0]}-set"><div class="wrap"><h2 class="sub-h">{bi(g["en"], g["cy"])}</h2><p class="l-sum">{bi(g["sumEn"], g["sumCy"])}</p>'
                       f'<div class="l-grid">{"".join(legend_card(x) for x in g["items"])}</div>'
                       + (f'<p class="l-links"><a class="btn" href="mabinogion.html">{bi("About the Mabinogion: the books, the translation and all eleven tales", "Am y Mabinogion: y llyfrau, y cyfieithiad a’r un chwedl ar ddeg")} →</a></p>' if g["ids"][0] == "pwyll" else "")
@@ -1202,7 +1224,7 @@ def gallery_items():
         add(gid, cat, en, cy, "", link)
     for p in D.PEOPLE:
         add("person-" + p[0], "people", p[3], p[4], p[2], f"person-{p[0]}.html")
-    return items
+    return {c: AD.newest("gallery", v, ties="keep") for c, v in items.items()}  # newly added pictures first in each group
 
 
 def gallery_page():
@@ -1251,6 +1273,8 @@ GAMES = [
  ("hero.html", "hero", "Which figure from history are you?", "Pa ffigwr o hanes ydych chi?", "Six questions to find your match among the people who shaped Wales.", "Chwe chwestiwn i ganfod eich tebyg ymhlith y bobl a luniodd Gymru.", "6 questions", "6 chwestiwn", "ancient"),
  ("pairs.html", "pairs", "Word pairs", "Parau geiriau", "A memory game for younger visitors: match the Welsh word to its meaning.", "Gêm gof i ymwelwyr iau: parwch y gair Cymraeg â’i ystyr.", "For children", "I blant", "modern"),
 ]
+
+GAMES = AD.newest("game", GAMES, key=lambda g: g[0], ties="keep")  # a new game goes at the top
 
 
 def play_cards():
@@ -2977,6 +3001,16 @@ def main():
         shutil.copy(os.path.join(out, "search.json"), os.path.join(a, "search.json"))
         shutil.copy(os.path.join(out, "welsh.js"), os.path.join(a, "welsh.js"))
         shutil.copy(os.path.join(out, "onthisday.json"), os.path.join(a, "onthisday.json"))
+    # note when anything new first appeared (src/added.json), so the lists can show it first next time too
+    AD.track("person", [p[0] for p in D.PEOPLE])
+    AD.track("place", [p["id"] for p in D.PLACES])
+    AD.track("set", [s[0] for s in SETS.SETS])
+    for kind, xs in (("story", F.STORIES), ("legend", F.LEGENDS), ("gallery", GP.GALLERY), ("game", [g[0] for g in GAMES])):
+        AD.track(kind, [x if isinstance(x, str) else x["id"] for x in xs])
+    RP.track_added()
+    fresh = AD.save()
+    if fresh:
+        print(f"New on the site, stamped in src/added.json (commit it): {', '.join(fresh[:12])}{' …' if len(fresh) > 12 else ''}")
     print(f"Built {len(pages)} pages -> {out}")
 
 

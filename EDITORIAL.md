@@ -30,6 +30,15 @@ A Welsh person anywhere in the world, or anyone with a link to Wales, should fin
 | Vikings and Normans | No Viking kingdom took root in Wales. The Normans took England in five years and needed 216 for Wales (1067 to 1283). |
 | The front page tagline | "A land of kings, princes, castles, poets, and saints. Built on coal, slate, iron, copper, and wool." Lower case, as written. |
 
+## Newest first
+
+Ifan asked on 12 November 2026 that new material goes at the top of a page, not the bottom, so visitors see it first. This happens by itself (see `SKILLS.md`, "Newest first on listing pages"): you only add the new item to its list as usual.
+
+- **Lists that simply grow** show the newest first: long reads (and the long reads on the home page), topic guides, games, and new pictures within each gallery group.
+- **Lists whose order carries meaning keep it**: the timeline, battles and key documents by date, people and places by age, the A–Z, the questions by subject, the legends in their sections (the Four Branches stay in their order), family trees, and the chapters inside a long read. These get a **Just added** strip at the top with the newest few instead, linking down to each one.
+- The newest few things added in the last two weeks wear a small red **New** badge.
+- A big addition still gets a line at the top of What's new (`src/whatsnew.py`).
+
 ## Before publishing
 
 - New Welsh text should be read by a fluent speaker when one is available.
