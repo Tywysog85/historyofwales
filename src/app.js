@@ -813,7 +813,10 @@
   function slugW(w) { return w.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
   function sayWord(w) {
     var slug = slugW(w[0]);
-    if (AUDIO[slug]) { try { new Audio("audio/" + slug + ".mp3").play(); } catch (e) {} return; }
+    if (AUDIO[slug]) {
+      try { if (canSpeak) speechSynthesis.cancel(); if (sayWord.a) sayWord.a.pause(); sayWord.a = new Audio("audio/" + slug + ".mp3"); sayWord.a.play(); } catch (e) {}
+      return;
+    }
     if (!canSpeak) return;
     var vs = speechSynthesis.getVoices(), cy = vs.filter(function (v) { return /^cy/i.test(v.lang); })[0];
     var en = vs.filter(function (v) { return /^en-GB/i.test(v.lang); })[0] || vs.filter(function (v) { return /^en/i.test(v.lang); })[0];
@@ -824,7 +827,7 @@
   function renderWords() {
     var play = canSpeak || D.AUDIO && D.AUDIO.length;
     $("#words").innerHTML = D.WORDS.map(function (w, i) {
-      return "<li><b>" + esc(w[0]) + '</b><span class="say">' + esc(w[1]) + (play ? ' <button type="button" class="play" data-w="' + i + '" aria-label="' + T("Hear ", "Clywed ") + esc(w[0]) + '">▶</button>' : "") + "</span><span>" + esc(T(w[2], w[3])) + "</span></li>";
+      return "<li><b>" + esc(w[0]) + '</b><span class="say"><span class="g">' + w[1].split(" ").map(function (x) { return "<i>" + esc(x) + "</i>"; }).join(" ") + "</span>" + (play ? '<button type="button" class="play" data-w="' + i + '" aria-label="' + T("Hear ", "Clywed ") + esc(w[0]) + '">▶</button>' : "") + "</span><span>" + esc(T(w[2], w[3])) + "</span></li>";
     }).join("");
   }
   $("#words").addEventListener("click", function (ev) { var b = ev.target.closest(".play"); if (b) sayWord(D.WORDS[+b.dataset.w]); });

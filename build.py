@@ -204,21 +204,36 @@ def _two(href_en, href_cy, en, cy):
             f'<a class="l-cy" lang="cy" href="{e(href_cy)}" target="_blank" rel="noopener">{e(cy)} ↗</a>')
 
 
+# The sources tools/fetch_sources.py finds for a person, place or event, in the order they are shown (Wikipedia comes last).
+# key: (English name, Welsh name, how to make the Welsh-language address, or None to use the same one)
+SOURCES = {
+    "dwb": ("Dictionary of Welsh Biography", "Y Bywgraffiadur Cymreig", lambda u: u.replace("://biography.wales/", "://bywgraffiadur.cymru/")),
+    "odnb": ("Oxford Dictionary of National Biography", "Oxford Dictionary of National Biography (Saesneg)", None),
+    "histparl": ("The History of Parliament", "The History of Parliament (Saesneg)", None),
+    "ukparl": ("UK Parliament", "Senedd y DU (Saesneg)", None),
+    "coflein": ("Coflein: the national record of this site", "Coflein: cofnod cenedlaethol y safle hwn", None),
+    "cadwm": ("Cadw: scheduled monument record", "Cadw: cofnod yr heneb gofrestredig", None),
+    "cadwb": ("Cadw: listed building record", "Cadw: cofnod yr adeilad rhestredig", None),
+    "artuk": ("Art UK: their paintings", "Art UK: eu paentiadau (Saesneg)", None),
+    "olympedia": ("Olympedia", "Olympedia (Saesneg)", None),
+    "athletics": ("World Athletics", "World Athletics (Saesneg)", None),
+    "britannica": ("Encyclopaedia Britannica", "Encyclopaedia Britannica (Saesneg)", None),
+}
+
+
 def further(key, wiki):
     rec = SOURCE_LINKS.get(key, {})
     links = []
-    if rec.get("dwb"):
-        u = rec["dwb"]
-        links.append(_two(u, u.replace("://biography.wales/", "://bywgraffiadur.cymru/"), "Dictionary of Welsh Biography", "Y Bywgraffiadur Cymreig"))
-    if rec.get("coflein"):
-        u = rec["coflein"]
-        links.append(_two(u, u, "Coflein: the national record of this site", "Coflein: cofnod cenedlaethol y safle hwn"))
+    for k, (en, cy, to_cy) in SOURCES.items():
+        if rec.get(k):
+            u = rec[k]
+            links.append(_two(u, to_cy(u) if to_cy else u, en, cy))
     if wiki:
         cyw = f'https://cy.wikipedia.org/wiki/{_q(rec["cy"].replace(" ", "_"), safe="")}' if rec.get("cy") else WIKI + wiki
         links.append(_two(WIKI + wiki, cyw, "Wikipedia", "Wicipedia" if rec.get("cy") else "Wikipedia (Saesneg)"))
     if not links:
         return ""
-    return f'<div class="further no-print"><p class="eyebrow">{bi("Read further", "Darllen ymhellach")}</p><p>{"".join(links)}</p></div>'
+    return f'<div class="further no-print"><p class="eyebrow">{bi("Sources and further reading", "Ffynonellau a darllen pellach")}</p><p>{"".join(links)}</p></div>'
 
 
 # ---------- shared head tags ----------
@@ -616,7 +631,7 @@ PERSON_EXTRA = {"arthur": arthur_extra}
 
 def date_cy(d):
     """The Welsh side of a person's dates, where it differs (most dates read the same in both languages)."""
-    return {"Age of Arthur": "Oes Arthur", "The Four Branches": "Y Pedair Cainc"}.get(d, d)
+    return {"Age of Arthur": "Oes Arthur", "The Four Branches": "Y Pedair Cainc", "1st century BC": "y ganrif gyntaf CC", "12th century": "y 12fed ganrif", "4th century": "y 4edd ganrif"}.get(d, d)
 
 
 def arthur_circle(slug):
@@ -1181,8 +1196,13 @@ def page_refs(path):
         return "arthur-circle", None
     if kind == "person" and rest in MP.OWN_IDS and "mabinogi-people" in REF2.PAGES:
         return "mabinogi-people", None
+<<<<<<< HEAD
     if kind == "book":  # the old books (src/oldbooks.py): a book's own list, or the list for all the books
         return ("books" if name not in REF2.PAGES else name), None
+=======
+    if kind == "mabinogi" and f"mabinogi-{rest}" in REF2.PAGES:  # a tale with its own reading list (src/refs2.py)
+        return f"mabinogi-{rest}", None
+>>>>>>> origin/main
     if kind == "mabinogi" and "mabinogi-tales" in REF2.PAGES:
         return "mabinogi-tales", None
     if kind in ("person", "place"):
@@ -1204,7 +1224,7 @@ SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes
     ("law", "The laws of Hywel Dda", "Cyfreithiau Hywel Dda", ["laws", "hywel", "topic-law"]),
     ("saints", "Saints, learning and faith", "Seintiau, dysg a ffydd", ["christianity", "joseph", "lucius", "patrick", "saints", "saints-*", "learning", "brittany", "topic-faith"]),
     ("princes", "Princes, castles and Owain Glyndŵr", "Tywysogion, cestyll ac Owain Glyndŵr", ["era-medieval", "castles", "glyndwr", "longbow", "battles", "documents", "topic-war", "nest", "rhys"]),
-    ("lit", "Poets, old books and legends", "Beirdd, hen lyfrau a chwedlau", ["literature", "books", "triads", "mabinogion", "mabinogi", "mabinogi-tales", "mabinogi-people", "legends", "legend-*", "bran", "symbols", "iolo", "topic-music", "trail-song"]),
+    ("lit", "Poets, old books and legends", "Beirdd, hen lyfrau a chwedlau", ["literature", "books", "triads", "mabinogion", "mabinogi", "mabinogi-tales", "mabinogi-people", "mabinogi-*", "legends", "legend-*", "bran", "symbols", "iolo", "topic-music", "trail-song"]),
     ("tudor", "From the Tudors to the Methodists", "O’r Tuduriaid i’r Methodistiaid", ["era-tudor"]),
     ("industry", "Iron, coal, slate and the sea", "Haearn, glo, llechi a’r môr", ["era-industrial", "industry", "coal", "aberfan", "protest", "topic-industry", "trail-coal", "trail-sea", "firsts", "topic-science"]),
     ("modern", "Modern Wales and the Welsh abroad", "Cymru fodern a’r Cymry ar wasgar", ["era-modern", "era-today", "revival", "mac", "fwa", "world", "madog", "tryweryn", "topic-abroad", "topic-sport"]),
@@ -2781,17 +2801,29 @@ def welsh_page():
     credits = ""
     if CYM.AUDIO_CREDITS:
         credits = "<p>" + bi("Recordings:", "Recordiadau:") + " " + "; ".join(f'{e(f)}: <a href="{e(u)}">{e(who)}</a>, {e(lic)}' for f, (who, lic, u) in CYM.AUDIO_CREDITS.items()) + "</p>"
-    if LL_CREDITS:  # Lingua Libre recordings (tools/fetch_audio.py), grouped by speaker
-        by = {}
+    if LL_CREDITS:  # real speakers (tools/fetch_audio.py), grouped by speaker; then the Welsh voice (tools/make_voice.py)
+        by, made = {}, []
         for k, c in LL_CREDITS.items():
-            if k in AUDIO_FILES:
+            if k not in AUDIO_FILES:
+                continue
+            if c.get("kind") == "voice":
+                made.append(c)
+            else:
                 by.setdefault((c["speaker"], c["licence"]), []).append(c)
+        n = sum(len(v) for v in by.values())
         if by:
-            credits += ("<details class=\"cyw-credits\"><summary>" + bi(f"Real Welsh voices: {sum(len(v) for v in by.values())} recordings from Lingua Libre, with thanks to the speakers",
-                                                                         f"Lleisiau Cymraeg go iawn: {sum(len(v) for v in by.values())} o recordiadau o Lingua Libre, gyda diolch i’r siaradwyr") + "</summary><p>"
+            credits += ("<details class=\"cyw-credits\" id=\"voices\" open><summary>" + bi(f"Real Welsh voices: {n} recordings from Lingua Libre, with thanks to the speakers",
+                                                                         f"Lleisiau Cymraeg go iawn: {n} o recordiadau o Lingua Libre, gyda diolch i’r siaradwyr") + "</summary><p>"
                         + "</p><p>".join(f'<b>{e(who)}</b> ({e(lic)}): ' + ", ".join(f'<a href="{e(c["page"])}" lang="cy">{e(c["text"])}</a>' for c in sorted(cs, key=lambda c: c["text"].lower()))
-                                         for (who, lic), cs in sorted(by.items(), key=lambda x: -len(x[1]))) + "</p></details>")
-    note = (f'<div class="cyw-note"><p>{bi("Where a real recording of a word is available, the speaker button plays it. Otherwise your device reads the word aloud: devices with a Welsh voice installed, such as Microsoft Edge on Windows, speak real Welsh, and others read the sound guide in English.", "Lle mae recordiad go iawn o air ar gael, mae’r botwm sain yn ei chwarae. Fel arall mae eich dyfais yn darllen y gair yn uchel: mae dyfeisiau sydd â llais Cymraeg, fel Microsoft Edge ar Windows, yn siarad Cymraeg go iawn, ac mae eraill yn darllen y canllaw sain yn Saesneg.")}</p>'
+                                         for (who, lic), cs in sorted(by.items(), key=lambda x: -len(x[1]))) + "</p>")
+            if made:
+                c0 = made[0]
+                credits += ("<p>" + bi(f"The other {len(made)} words and phrases are spoken by a Welsh computer voice trained by Bangor University’s language technology unit (techiaith), run with the open Piper speech engine",
+                                       f"Mae’r {len(made)} o eiriau ac ymadroddion eraill yn cael eu dweud gan lais cyfrifiadur Cymraeg a hyfforddwyd gan Uned Technolegau Iaith Prifysgol Bangor (techiaith), drwy’r peiriant lleferydd agored Piper")
+                            + f' (<a href="https://huggingface.co/datasets/techiaith/bu-tts-cy-en">BU-TTS</a>, {e(c0.get("licence", "").replace("CC-BY", "CC BY"))}; <a href="{e(c0["page"])}">Piper</a>). '
+                            + bi("A real speaker’s recording replaces it whenever one is shared on Lingua Libre.", "Daw recordiad siaradwr go iawn yn ei le pan rennir un ar Lingua Libre.") + "</p>")
+            credits += "</details>"
+    note = (f'<div class="cyw-note"><p>{bi("Every speaker button plays real Welsh: a Welsh speaker’s own recording where one has been shared on Lingua Libre, and otherwise Bangor University’s Welsh voice. You hear the same sound on every phone and computer.", "Mae pob botwm sain yn chwarae Cymraeg go iawn: recordiad siaradwr Cymraeg lle mae un wedi’i rannu ar Lingua Libre, a llais Cymraeg Prifysgol Bangor fel arall. Rydych chi’n clywed yr un sain ar bob ffôn a chyfrifiadur.")}</p>'
             f'<p>{bi("In the sound guides, capital letters show the stressed syllable, kh is the ch of loch, and hl is the Welsh ll.", "Yn y canllawiau sain, mae priflythrennau’n dangos y sillaf acennog, kh yw ch yn loch, a hl yw’r ll Gymraeg.")}</p>{credits}</div>')
     main = (hero("modern", f'<a href="index.html">{SITE}</a> / <a href="index.html#language">{bi("Language", "Iaith")}</a>', "book", "Learn Welsh", "Dysgu Cymraeg",
                  "Speak a little Cymraeg", "Siaradwch ychydig o Gymraeg",

@@ -214,10 +214,14 @@ PEOPLE = [
 GROUPS = [
  ("The First Branch: Dyfed", "Y Gainc Gyntaf: Dyfed", ["pwyll", "rhiannon", "pryderi", "arawn", "teyrnon", "cigfa"]),
  ("The Second Branch: the children of Llŷr", "Yr Ail Gainc: plant Llŷr", ["bran-fendigaid", "branwen", "manawydan", "efnysien", "matholwch", "caratacus", "caswallon"]),
+ ("The Third Branch: the enchantment of Dyfed", "Y Drydedd Gainc: hud ar Ddyfed", ["manawydan", "rhiannon", "pryderi", "cigfa", "llwyd-fab-cil-coed"]),
  ("The Fourth Branch: Gwynedd and the children of Dôn", "Y Bedwaredd Gainc: Gwynedd a phlant Dôn", ["math", "gwydion", "gilfaethwy", "goewin", "arianrhod", "dylan-ail-don", "lleu", "blodeuwedd", "gronw-pebr"]),
- ("People of the other tales", "Pobl y chwedlau eraill", ["culhwch", "olwen", "macsen-wledig", "elen-luyddog", "taliesin", "owain-ab-urien", "peredur", "geraint-fab-erbin", "enid", "arthur"]),
- ("The people who kept the tales", "Y bobl a gadwodd y chwedlau", ["rhydderch-ab-ieuan-llwyd", "hopcyn-ap-tomos", "hywel-fychan", "lady-charlotte-guest", "tegid", "carnhuanawc"]),
+ ("The people who kept the tales", "Y bobl a gadwodd y chwedlau", ["rhydderch-ab-ieuan-llwyd", "hopcyn-ap-tomos", "hywel-fychan", "lady-charlotte-guest", "tegid", "carnhuanawc", "elis-gruffydd"]),
 ]
+
+import mabinogi_people2 as _MP2  # the people of the other tales
+PEOPLE = PEOPLE + _MP2.PEOPLE
+GROUPS = GROUPS[:4] + _MP2.GROUPS + GROUPS[4:]
 
 ALL_IDS = list(dict.fromkeys(s for _, _, ids in GROUPS for s in ids))
 OWN_IDS = [p["id"] for p in PEOPLE]
@@ -229,6 +233,7 @@ PHOTOS = {
                  "Rhiannon ar ei march gwyn, gan John D. Batten, 1894", "John D. Batten, Public domain"),
     "pryderi": ("Pryderi and Rhiannon from Tales of the Enchanted Islands of the Atlantic 1899.jpg", "Pryderi and Rhiannon held by the golden bowl, by Albert Herter, 1899",
                 "Pryderi a Rhiannon yn sownd wrth y ffiol aur, gan Albert Herter, 1899", "Albert Herter, Public domain"),
+    "ceridwen": ("Ceridwen.jpg", "Ceridwen, painted by Christopher Williams", "Ceridwen, gan Christopher Williams", "Christopher Williams, Public domain"),
     "branwen": ("Branwen.jpg", "Branwen, painted by Christopher Williams. Glynn Vivian Art Gallery, Swansea",
                 "Branwen, gan Christopher Williams. Oriel Gelf Glynn Vivian, Abertawe", "Christopher Williams, Public domain"),
 }
