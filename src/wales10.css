@@ -60,3 +60,8 @@
   .w10-svg .la, .w10-card, .w10-bar i { transition: none }
   .w10-pin, .w10-hint { animation: none }
 }
+
+.w10-pic { margin: .4rem 0 1rem }
+.w10-pic img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; display: block }
+.w10-pic figcaption { font-size: .72rem; line-height: 1.4; color: var(--mute, #9aa0ad); margin-top: .4rem }
+.w10-pic figcaption a { color: inherit }
