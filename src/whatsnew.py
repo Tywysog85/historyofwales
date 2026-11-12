@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-12", "The Great Orme copper mines, in full", "Mwyngloddiau copr y Gogarth, yn llawn",
+     "Every “Did you know?” fact now opens its full story. New pages tell the Great Orme’s Bronze Age copper mines from the 1987 rediscovery to the great cavern, plus Llanfairpwll and the first Women’s Institute, Bethlehem’s Christmas post, Pen-y-Gwryd and the Everest team, Lavernock and Marconi, and the Mumbles Railway.",
+     "Mae pob ffaith “Wyddech chi?” bellach yn agor ei stori lawn. Mae tudalennau newydd yn adrodd hanes mwyngloddiau copr Oes yr Efydd y Gogarth o’u hailddarganfod yn 1987 i’r ogof fawr, a hefyd Llanfairpwll a Sefydliad y Merched cyntaf, post Nadolig Bethlehem, Pen-y-Gwryd a thîm Everest, Larnog a Marconi, a Rheilffordd y Mwmbwls.",
+     "place-orme.html"),
     ("2026-11-12", "Dinefwr and the courts and castles of the princes", "Dinefwr a llysoedd a chestyll y tywysogion",
      "Full pages on Dinefwr, Aberffraw and Mathrafal, the three royal seats of Wales, and on Garth Celyn, Llys Rhosyr, Dolwyddelan, Dolbadarn, Castell y Bere, Criccieth, Dolforwyn, Dryslwyn, Dinas Brân, Abbey Cwmhir, Cilmeri and more, each with the people linked to it and a Visiting box: who looks after it, the official page, postcode and directions.",
      "Tudalennau llawn ar Ddinefwr, Aberffraw a Mathrafal, tri llys brenhinol Cymru, ac ar Lys Rhosyr, Garth Celyn, Dolwyddelan, Dolbadarn, Castell y Bere, Cricieth, Dolforwyn, Dryslwyn, Dinas Brân, Abaty Cwm-hir, Cilmeri a mwy, pob un gyda’r bobl sy’n gysylltiedig ag ef a blwch Ymweld: pwy sy’n gofalu amdano, y dudalen swyddogol, y cod post a chyfarwyddiadau.",
