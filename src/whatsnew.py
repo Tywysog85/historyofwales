@@ -9,8 +9,8 @@ The newest line must come first. The home page shows the first three.
 
 NEWS = [
     ("2026-11-13", "Every day of the year in On this day", "Pob diwrnod o’r flwyddyn yn Ar y dydd hwn",
-     "On this day now has an entry of its own for every day of the year, even 29 February: about 120 new births, deaths, saints’ days and events, each with its source beside it.",
-     "Mae gan Ar y dydd hwn gofnod ei hun ar gyfer pob diwrnod o’r flwyddyn bellach, hyd yn oed 29 Chwefror: tua 120 o enedigaethau, marwolaethau, gwyliau seintiau a digwyddiadau newydd, pob un â’i ffynhonnell wrth ei ochr.",
+     "On this day now has an entry of its own for every day of the year, even 29 February: 126 new births, deaths, saints’ days and events, each with its source beside it.",
+     "Mae gan Ar y dydd hwn gofnod ei hun ar gyfer pob diwrnod o’r flwyddyn bellach, hyd yn oed 29 Chwefror: 126 o enedigaethau, marwolaethau, gwyliau seintiau a digwyddiadau newydd, pob un â’i ffynhonnell wrth ei ochr.",
      "onthisday.html"),
     ("2026-11-13", "A brighter On this day and games", "Ar y dydd hwn a’r gemau, yn fwy lliwgar",
      "On the home page, On this day now has a picture for every entry and a week of days to tap through, the Daily challenge card shows today’s event and your guesses, and every game has a real picture.",

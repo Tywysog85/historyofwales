@@ -1726,3 +1726,66 @@ OTD += [
   "Claddwyd yr emynyddes Ann Griffiths o Ddolwar Fach yn Llanfihangel-yng-Ngwynfa, yn 29 oed. Mae ei hemynau’n llawn o’r Beibl, o deimlad dwfn, cyfriniol ac o ddelweddau beiddgar.",
   "person-ann-griffiths.html", "otd-ann-griffiths"),
 ]
+
+CITES.update({
+    "otd-cewydd": _w("Cewydd", "Cewydd",
+        "His feast day is 1 July; South Wales tradition keeps 15 July as Dygwyl Cewydd, the Feast of St Cewydd. He is the Welsh ‘Rain Saint’: rain on his day was said to last forty days. Churches and places remember him from Anglesey to Aberedw, Disserth and Llangewydd.",
+        "Ei ŵyl yw 1 Gorffennaf; mae traddodiad y De yn cadw 15 Gorffennaf yn Ddygwyl Cewydd. Ef yw ‘Sant y Glaw’ Cymru: dywedid y byddai glaw ar ei ddydd yn para deugain diwrnod. Mae eglwysi a lleoedd yn ei gofio o Fôn i Aberedw, Diserth a Llangewydd."),
+})
+
+OTD += [
+ ("07-15", None, "custom", "Dygwyl Cewydd", "Dygwyl Cewydd",
+  "In South Wales tradition this is Dygwyl Cewydd, the feast of Saint Cewydd, the Welsh Rain Saint. If it rained today, people said, it would rain for forty days.",
+  "Yn nhraddodiad y De dyma Ddygwyl Cewydd, gŵyl Sant Cewydd, Sant y Glaw. Os oedd hi’n bwrw heddiw, meddai pobl, byddai’n bwrw am ddeugain diwrnod.",
+  "", "otd-cewydd"),
+]
+
+CITES.update({
+    "otd-welsh-saints": _w("List_of_Welsh_saints", "List of Welsh saints",
+        "Gives the traditional feast days of the saints of Wales, among them Mwrog, “24 or 26 September (trad.)”.",
+        "Yn rhoi gwyliau traddodiadol seintiau Cymru, yn eu plith Mwrog, “24 neu 26 Medi (trad.)”."),
+    "otd-llanfwrog": dict(short=("Dyffryn Clwyd churches", "Eglwysi Dyffryn Clwyd"), t="St Mwrog, Llanfwrog",
+        by=("Church in Wales, Dyffryn Clwyd", "Yr Eglwys yng Nghymru, Dyffryn Clwyd"),
+        note=("Mwrog “first proclaimed the Gospel in this part of the world”; worship has gone on at Llanfwrog, by Ruthin, since the 6th century, and parts of the church are 13th-century.",
+              "Mwrog a gyhoeddodd yr Efengyl gyntaf yn yr ardal hon; mae addoli wedi bod yn Llanfwrog, ger Rhuthun, ers y 6ed ganrif, ac mae rhannau o’r eglwys o’r 13eg ganrif."),
+        url="https://dyffrynclwyd.co.uk/our-church-buildings/st-mwrog-llanfwrog", lang="en"),
+})
+
+OTD += [
+ ("09-24", None, "feast", "Saint Mwrog", "Sant Mwrog",
+  "A traditional feast day of Mwrog, who first preached the Gospel in the Vale of Clwyd. People have worshipped at his church, Llanfwrog by Ruthin, since the 6th century.",
+  "Un o wyliau traddodiadol Mwrog, a bregethodd yr Efengyl gyntaf yn Nyffryn Clwyd. Mae pobl wedi addoli yn ei eglwys, Llanfwrog ger Rhuthun, ers y 6ed ganrif.",
+  "", "otd-welsh-saints,otd-llanfwrog"),
+]
+
+CITES.update({
+    "otd-bidofydd": _w("Bidofydd", "Bidofydd",
+        "A 6th-century saint of Wales, often associated with Saint Fidalis. The List of Welsh saints gives the feast of both as “26 April (trad.)”.",
+        "Sant o Gymru yn y 6ed ganrif, a gysylltir yn aml â Sant Fidalis. Mae Rhestr Seintiau Cymru yn rhoi gŵyl y ddau fel “26 Ebrill (trad.)”."),
+})
+
+OTD += [
+ ("04-26", None, "feast", "Saints Bidofydd and Fidalis", "Seintiau Bidofydd a Fidalis",
+  "The traditional feast day of Bidofydd, a saint of 6th-century Wales, and of Fidalis, with whom he is often remembered.",
+  "Gŵyl draddodiadol Bidofydd, sant yng Nghymru’r 6ed ganrif, a Fidalis, y cofir amdano’n aml gydag ef.",
+  "", "otd-bidofydd,otd-welsh-saints"),
+]
+
+CITES.update({
+    "otd-gwilym-gwent": dict(short=("Dictionary of Welsh Biography", "Y Bywgraffiadur"),
+        t="WILLIAMS, WILLIAM AUBREY (Gwilym Gwent; 1834 - 1891), musician",
+        by=("Dictionary of Welsh Biography, National Library of Wales", "Y Bywgraffiadur Cymreig, Llyfrgell Genedlaethol Cymru"),
+        note=("Born at Tredegar, 28 November 1834 (after Blackwell); “probably the most popular and possibly one of the most prolific composers in Wales in his time”; his part-songs such as ‘Yr Haf’ were widely sung. He emigrated to Plymouth, Pennsylvania.",
+              "Ganed yn Nhredegar, 28 Tachwedd 1834 (yn ôl Blackwell); y cyfansoddwr mwyaf poblogaidd yng Nghymru yn ei ddydd, mae’n debyg, ac un o’r mwyaf toreithiog; canwyd ei ranganau fel ‘Yr Haf’ yn eang. Ymfudodd i Plymouth, Pennsylvania."),
+        url="https://biography.wales/article/s-WILL-AUB-1834", url_cy="https://bywgraffiadur.cymru/article/s-WILL-AUB-1834"),
+    "otd-gwilym-gwent-w": _w("Gwilym_Gwent", "Gwilym Gwent",
+        "Born in Tredegar, 28 November 1834; composer of part-songs, anthems and hymn tunes, among them ‘Yr Haf’, ‘Y Gwanwyn’ and ‘Y Clychau’; called the “Mozart of the Mines”.",
+        "Ganed yn Nhredegar, 28 Tachwedd 1834; cyfansoddwr rhanganau, anthemau ac emyn-donau, yn eu plith ‘Yr Haf’, ‘Y Gwanwyn’ ac ‘Y Clychau’; fe’i galwyd yn “Mozart y Pyllau”."),
+})
+
+OTD += [
+ ("11-28", 1834, "born", "Gwilym Gwent", "Gwilym Gwent",
+  "The composer William Aubrey Williams, Gwilym Gwent, is born at Tredegar. Perhaps the most popular composer in Wales in his day, his part-songs such as ‘Yr Haf’ were sung everywhere, and he was called the Mozart of the Mines.",
+  "Ganed y cyfansoddwr William Aubrey Williams, Gwilym Gwent, yn Nhredegar. Y cyfansoddwr mwyaf poblogaidd yng Nghymru yn ei ddydd, mae’n debyg; canwyd ei ranganau fel ‘Yr Haf’ ym mhobman, a’i alw’n Mozart y Pyllau.",
+  "", "otd-gwilym-gwent,otd-gwilym-gwent-w"),
+]
