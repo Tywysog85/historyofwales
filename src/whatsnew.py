@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-13", "Cofiwch Epynt: the clearing of the mountain, 1940", "Cofiwch Epynt: clirio’r mynydd, 1940",
+     "A new long read: how 219 people from 54 homes on Mynydd Epynt, a whole Welsh-speaking community with its chapel, school and inn, were made to leave in 1940 for an army range; Iorwerth Peate and ‘Mae’n ddiwedd byd yma’; the fire on the hearth at Glandŵr; and how Wales remembers them, with the farm names set back on the land in 2025.",
+     "Erthygl newydd: sut y gorfodwyd 219 o bobl o 54 o gartrefi ar Fynydd Epynt, cymuned Gymraeg gyfan gyda’i chapel, ei hysgol a’i thafarn, i adael yn 1940 er mwyn maes tanio’r fyddin; Iorwerth Peate a ‘Mae’n ddiwedd byd yma’; y tân ar aelwyd Glandŵr; a sut y mae Cymru’n eu cofio, gydag enwau’r ffermydd yn ôl ar y tir yn 2025.",
+     "story-epynt.html"),
     ("2026-11-13", "A faster, calmer and more private site", "Gwefan gyflymach, dawelach a mwy preifat",
      "The front page has a Pause animation button that stops the dragon, the moving words and the glint on the title, and remembers your choice. The fonts now come from this site itself, so reading it no longer contacts Google, and pages you have visited before open faster. The privacy note on the About page now covers the weekly email too, and a browser set to Welsh is offered the Welsh pages once.",
      "Mae botwm Oedi’r animeiddiad ar y dudalen flaen sy’n atal y ddraig, y geiriau sy’n symud a’r llewyrch ar y teitl, ac mae’n cofio eich dewis. Daw’r ffontiau o’r wefan hon ei hun bellach, felly nid yw ei darllen yn cysylltu â Google mwyach, ac mae tudalennau rydych wedi ymweld â nhw o’r blaen yn agor yn gyflymach. Mae’r nodyn preifatrwydd ar y dudalen Amdanom yn sôn am yr e-bost wythnosol hefyd, a chaiff porwr sydd wedi’i osod i’r Gymraeg gynnig y tudalennau Cymraeg unwaith.",
