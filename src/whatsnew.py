@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-13", "Pictures for 196 more people", "Lluniau i 196 yn rhagor o bobl",
+     "196 people who had no picture now have one, with credits: portraits, seals, statues, graves and the manuscripts their stories survive in, such as the Red Book of Hergest. 461 of the 516 people pages now have a picture of their own.",
+     "Mae gan 196 o bobl nad oedd llun ganddynt un nawr, gyda chydnabyddiaeth: portreadau, seliau, cerfluniau, beddau a’r llawysgrifau lle mae eu hanes wedi goroesi, fel Llyfr Coch Hergest. Mae gan 461 o’r 516 tudalen pobl lun eu hunain nawr.",
+     "people.html"),
     ("2026-11-13", "A brighter On this day and games", "Ar y dydd hwn a’r gemau, yn fwy lliwgar",
      "On the home page, On this day now has a picture for every entry and a week of days to tap through, the Daily challenge card shows today’s event and your guesses, and every game has a real picture.",
      "Ar yr hafan, mae llun ar bob cofnod yn Ar y dydd hwn ac wythnos o ddyddiau i’w tapio, mae cerdyn Her y dydd yn dangos digwyddiad heddiw a’ch cynigion, ac mae llun go iawn gan bob gêm.",
