@@ -67,7 +67,7 @@ This file collects the techniques and lessons from building History of Wales. Ad
 ## Building the site
 
 ### Static site, no framework
-- Content lives in Python data files in `src/` (the table in `README.md` says which file holds what). `build.py` turns them into about 1,900 pages (every page in English and again in Welsh under `cy/`).
+- Content lives in Python data files in `src/` (the table in `README.md` says which file holds what). `build.py` turns them into about 2,600 pages (every page in English and again in Welsh under `cy/`).
 - The home page and the timeline page share one script (`src/app.js`). The script checks which parts exist on the page (the timeline, the hero sky, the map) and skips the rest.
 
 ### Bilingual pages (English / Cymraeg)
@@ -364,9 +364,9 @@ Learnt while expanding Arthur's page (`src/arthur.py`).
 - Quick check after adding people: `python3 -c "import sys; sys.path.insert(0,'src'); import data, people2; print([p[0] for p in data.PEOPLE if p[0] not in people2.FIELD])"` must print `[]`.
 - Person photos: Wikipedia, Wikimedia and Wikidata are blocked from the cloud, so look them up on the owner's Mini-PC through Remote Control (Node `fetch` or PowerShell). Ask the Wikipedia API for each article's free lead image (`action=query&prop=pageimages&piprop=name&pilicense=free&redirects=1`, up to 40 titles a call), then ask the Commons API for each file's credit (`prop=imageinfo&iiprop=extmetadata&iiextmetadatafilter=Artist|LicenseShortName`). Commons answers 429 to a bare User-Agent: send one with the site address, such as `HistoryOfWalesSite/1.0 (https://historyofwales.cymru)`, and pause a second between calls. Put the results in `src/photos2.py` as slug → (file, caption EN, caption CY, credit); `photos.py` merges them, and the credit prints after "Photo: Wikimedia Commons". A lead image is not always the person (a map, a coat of arms, a grave, an album cover): skip it, or write a caption that says what it shows.
 
-### The four notes in the top folder (November 2026)
+### The notes in the top folder (November 2026)
 
-`README.md` says what the site is and where things live. `EDITORIAL.md` holds the owner's rules for how it is written. `TODO.md` lists the open jobs. `SKILLS.md` is this file. The owner wants them kept clean and tidy: when something changes, edit the line that is there instead of adding a new one at the bottom, delete finished jobs from `TODO.md`, and keep the counts in `README.md` true.
+`README.md` says what the site is and where things live. `EDITORIAL.md` holds the owner's rules for how it is written. `STYLE.md` says how it looks, and `SOURCES.md` how facts are checked and cited. `TODO.md` lists the open jobs. `SKILLS.md` is this file. The owner wants them kept clean and tidy: when something changes, edit the line that is there instead of adding a new one at the bottom, delete finished jobs from `TODO.md`, and keep the counts in `README.md` true. A nightly task (7pm) tidies all six and removes unused files.
 
 ### Adding or splitting an age (November 2026)
 
@@ -766,11 +766,6 @@ Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.
 - Reading lists: `page_refs()` gives a book page its own list if `src/oldbooks.py` `REFS` has `book-<id>`, otherwise the `books` list. `"book-*"` is added to the "lit" shelf so they count on Books and authors.
 - Picture research: Commons categories for manuscripts are often missing, so searches by shelf mark work better (`Jesus College MS 119` found the Bodleian's CC BY photos of every page of Llyfr Ancr; `Basingwerk manuscript` found the National Library's CC0 photos). Look at the previews before choosing: flyleaves with owners' notes (dates, names) make good, honest captions.
 
-## Working together
-
-- Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
-- Small visual tweaks are published one at a time so each can be seen live.
-
 ### The home page On this day panel, Daily challenge card and game cards (November 2026)
 - On this day on the home page is drawn twice with the same markup: `ssr_today()` / `otd_home_row()` in `build.py` (so it shows before any script runs) and `renderToday()` / `otdLi()` in `src/app.js` (the visitor's own date, the week strip, ‹ ›). Change both together. Its CSS is at the top of `src/onthisday.css`.
 - Every row of `onthisday.json` now has a 10th field, a small picture, chosen by `otd_pic()` in `build.py`: the person's or place's own photo, else the linked page's picture from `src/pictures.py` (saints take their region's saints page), else the event's place, else the picture of its age. Tools that read the JSON by position are unaffected.
@@ -857,3 +852,8 @@ Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.
 - **The Men of the North** (`src/hen_ogledd.py`) follow the writers' pattern: `LONG`, `PEOPLE`, `GROUPS`/`LINKS` for `north_circle()` on each of their pages, `STORY`, `REFS`, `CITES`. Pictures inside the text are inserted by paragraph number at the end of the file, the same number in English and Welsh, so the two texts must stay paragraph for paragraph.
 - **New family trees** go in `src/trees.py` (`COELING` and `DYFNWAL`, from Bonedd Gwŷr y Gogledd). Give early people an `id` of their own (`hn-…`) when the name could clash with someone in another tree: the build stops on a repeated id. `FT_REALM_TREE` in `build.py` links a kings page to its tree.
 - **Linking the kings lists to person pages** without rewriting each `R(...)` line: `NORTH_PAGES` in `src/royal.py` maps a ruler's name to a person page and sets `link` (and `key`) on the matching rows.
+
+## Working together
+
+- Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
+- Small visual tweaks are published one at a time so each can be seen live.
