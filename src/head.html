@@ -33,6 +33,9 @@
   --e-kings: #e8c65a;     /* the gold of a crown */
   --e-medieval: #f26a62;  /* the dragon */
   --e-roman: #e58fb4; --e-tudor: #62c6c4; --e-today: #f59a4a;
+  --e-britons: #b5c46a;   /* bronze and verdigris */
+  --e-glyndwr: #d98be0;   /* the poets’ purple */
+  --e-revival: #6cb6e8;   /* chapel-window blue */
   --e-industrial: #93a0e0;/* Penrhyn slate blue */
   --e-modern: #7cc495;    /* hill green */
   --f-display: "Gloock", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
@@ -61,6 +64,7 @@ button { font: inherit; color: inherit }
 .chips { display: flex; flex-wrap: wrap; gap: .5rem }
 [data-era="ancient"] { --c: var(--e-ancient) } [data-era="saints"] { --c: var(--e-saints) } [data-era="kings"] { --c: var(--e-kings) } [data-era="medieval"] { --c: var(--e-medieval) }
 [data-era="roman"] { --c: var(--e-roman) } [data-era="tudor"] { --c: var(--e-tudor) } [data-era="today"] { --c: var(--e-today) }
+[data-era="britons"] { --c: var(--e-britons) } [data-era="glyndwr"] { --c: var(--e-glyndwr) } [data-era="revival"] { --c: var(--e-revival) }
 [data-era="industrial"] { --c: var(--e-industrial) } [data-era="modern"] { --c: var(--e-modern) }
 
 /* ---------- Nav ---------- */
@@ -318,7 +322,7 @@ __NAV__
     <nav class="begin" aria-labelledby="begin-h">
       <p class="eyebrow" id="begin-h" data-cy="Ble i ddechrau">Where to begin</p>
       <div class="begin-row">
-        <a class="begin-card is-main" href="#chapters"><svg aria-hidden="true"><use href="#i-dolmen"/></svg><span class="b-t" data-cy="Archwilio’r naw oes">Explore the nine ages</span><span class="b-s" data-cy="O helwyr oes yr iâ i’r Senedd, un oes ar y tro">From ice-age hunters to the Senedd, one age at a time</span><i aria-hidden="true">→</i></a>
+        <a class="begin-card is-main" href="#chapters"><svg aria-hidden="true"><use href="#i-dolmen"/></svg><span class="b-t" data-cy="Archwilio’r deuddeg oes">Explore the twelve ages</span><span class="b-s" data-cy="O helwyr oes yr iâ i’r Senedd, un oes ar y tro">From ice-age hunters to the Senedd, one age at a time</span><i aria-hidden="true">→</i></a>
         <a class="begin-card" href="map.html"><svg aria-hidden="true"><use href="#i-pin"/></svg><span class="b-t" data-cy="Dod o hyd i le ar y map">Find a place on the map</span><span class="b-s" data-cy="Bryngaerau, cestyll, capeli a phyllau, a’r hanes sy’n agos atoch">Hillforts, castles, chapels and mines, and the history near you</span><i aria-hidden="true">→</i></a>
         <a class="begin-card" href="trails.html"><svg aria-hidden="true"><use href="#i-mtn"/></svg><span class="b-t" data-cy="Dilyn llwybr thema">Follow a themed trail</span><span class="b-s" data-cy="Menywod Cymru, y môr, capel a chân, haearn a glo">Women of Wales, the sea, chapel and song, iron and coal</span><i aria-hidden="true">→</i></a>
       </div>

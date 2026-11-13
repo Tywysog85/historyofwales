@@ -37,6 +37,7 @@ import thumbs as TH  # noqa: E402  (small copies of pictures for the cards: src/
 PX.check()
 L.TEACH.update(AG.TEACH)
 import ages9 as AG9
+import ages12 as AG12  # noqa: E402  (twelve ages: src/ages12.py; data.py has already moved everything)
 import whatsnew as WN  # noqa: E402
 import royal as RY  # noqa: E402
 import trees as TR  # noqa: E402
@@ -71,10 +72,19 @@ import hen_ogledd as HO  # noqa: E402  (Yr Hen Ogledd, the Old North: long read,
 REF.REFS.update(HO.REFS)
 import oldbooks as OB  # noqa: E402  (the old books of Wales: a page for every book, book-<id>.html)
 REF2.PAGES.update(OB.REFS)
+REF2.PAGES.update(AG12.refs(REF2))  # reading lists for the twelve ages (src/ages12.py)
 import authors as AU  # noqa: E402  (the authors on the Books and authors page)
 import ylolfa as YLF  # noqa: E402  (Y Lolfa books: the "Y Lolfa" section of the Books and authors page)
 F.STORIES = AD.newest("story", F.STORIES)  # long reads: the newest first everywhere (index, home page, "Keep reading")
 L.TEACH.update(AG9.TEACH)
+L.TEACH.update(AG12.TEACH)
+for _x in F.STORIES:  # long reads, legends and tales carry an age but no year: move them into the twelve ages
+    _x["era"] = AG12.remap("story", _x)
+for _x in F.LEGENDS:
+    _x["era"] = AG12.remap("legend", _x)
+for _x in list(MB.GROUPS) + list(MT.TALES):
+    _x["era"] = AG12.remap("tale", _x)
+PL3.PEOPLE.update(AG12.PEOPLE)
 from urllib.parse import quote as _q
 
 BASE_URL = os.environ.get("SITE_URL", "https://tywysog85.github.io/historyofwales/")
@@ -160,8 +170,8 @@ fonts = "".join(re.findall(r'<link [^>]+>', head))
 ERA = {x["id"]: x for x in D.ERAS}
 PERSON = {p[0]: p for p in D.PEOPLE}
 PLACE = {p["id"]: p for p in D.PLACES}
-COL = dict(ancient="#d39a62", roman="#e58fb4", saints="#b9a0ea", kings="#e8c65a", medieval="#f26a62", tudor="#62c6c4", industrial="#93a0e0", modern="#7cc495", today="#f59a4a")
-ERA_ART = dict(ancient="dolmen", roman="fort", saints="cross", kings="ship", medieval="castle", tudor="book", industrial="pit", modern="terrace", today="senedd")
+COL = dict(ancient="#d39a62", britons="#b5c46a", roman="#e58fb4", saints="#b9a0ea", kings="#e8c65a", medieval="#f26a62", glyndwr="#d98be0", tudor="#62c6c4", revival="#6cb6e8", industrial="#93a0e0", modern="#7cc495", today="#f59a4a")
+ERA_ART = dict(ancient="dolmen", britons="fort", roman="arches", saints="cross", kings="ship", medieval="castle", glyndwr="sword", tudor="book", revival="gorsedd", industrial="pit", modern="terrace", today="senedd")
 TRAIL_ART = dict(women="torch", sea="ship", chapel="book", iron="pit")
 EVENT_BY_TITLE = {ev[5]: ev for ev in D.EVENTS}
 
@@ -299,8 +309,8 @@ NAV_MAIN = [("timeline.html", "Timeline", "Llinell amser"), ("index.html#chapter
 NAV_TOP = NAV_MAIN  # Ifan wants the same links along the top bar as in the big Menu list
 # the Menu's side panel: (heading EN, heading CY, links)
 NAV_GROUPS = [
-    # the nine ages, each with its dates, so a newcomer can tell the Age of Kings from the Age of Princes (Ifan, 2026-11-12)
-    ("The nine ages", "Y naw oes", [(f'era-{x["id"]}.html', x["en"], x["cy"], x["spanEn"], x["spanCy"]) for x in D.ERAS]),
+    # the twelve ages, each with its dates, so a newcomer can tell the Age of Kings from the Age of Princes (Ifan, 2026-11-12)
+    ("The twelve ages", "Y deuddeg oes", [(f'era-{x["id"]}.html', x["en"], x["cy"], x["spanEn"], x["spanCy"]) for x in D.ERAS]),
     ("Explore", "Archwilio", [("reference.html", "Look it up", "Chwilio’r hanes"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"),
                               ("castles.html", "Castles map", "Map y cestyll"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"),
                               ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn")]),
@@ -425,7 +435,7 @@ def footer():
         return f'<details class="fcol" open><summary class="eyebrow">{bi(title_en, title_cy)}</summary><ul>' + "".join(f'<li><a href="{h}">{bi(a, b)}</a></li>' for h, a, b in links) + "</ul></details>"
     # Each list is a <details>, open in the HTML so every link shows on wide screens and without JavaScript.
     # On phones site.js closes them, so the footer is four tappable headings instead of 1,600 px of links.
-    eras_col = (f'<details class="fcol" open><summary class="eyebrow">{bi("The nine ages", "Y naw oes")}</summary><ul>' + "".join(
+    eras_col = (f'<details class="fcol" open><summary class="eyebrow">{bi("The twelve ages", "Y deuddeg oes")}</summary><ul>' + "".join(
         f'<li><a href="era-{x["id"]}.html">{bi(x["en"], x["cy"])} <span class="m-dates">{bi(x["spanEn"], x["spanCy"])}</span></a></li>' for x in D.ERAS) + "</ul></details>")
     explore = [("timeline.html", "Timeline", "Llinell amser"), ("map.html", "Map of Wales", "Map Cymru"), ("people.html", "People", "Pobl"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("castles.html", "Castles of Wales", "Cestyll Cymru"), ("trails.html", "Themed trails", "Llwybrau thema"),
                ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"), ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg")]
@@ -1218,7 +1228,7 @@ def teachers_page():
                 "Rhennir y testun dan drwydded Creative Commons BY-NC 4.0, felly gallwch ei gopïo, ei argraffu a’i addasu ar gyfer gwersi a thaflenni gwaith, cyn belled â’ch bod yn cydnabod Hanes Cymru ac yn rhoi dolen i’r dudalen. Mae gan y ffotograffau eu trwyddedau eu hunain, a ddangosir gyda phob un.",
                 "Mae’r syniadau isod yn addas ar gyfer Maes Dysgu a Phrofiad y Dyniaethau yng Nghwricwlwm i Gymru, gyda’i bwyslais ar gynefin, ymholi a straeon amrywiol Cymru. Addaswch nhw fel y mynnwch."]
     main = (hero("industrial", f'<a href="index.html">{SITE}</a>', "book", "For teachers", "I athrawon", "History of Wales in the classroom", "Hanes Cymru yn y dosbarth",
-                 "Nine free teacher packs for the Curriculum for Wales, lesson ideas, enquiry questions and printable quiz sheets for each age.", "Naw pecyn athrawon am ddim ar gyfer y Cwricwlwm i Gymru, syniadau gwersi, cwestiynau ymholi a thaflenni cwis i’w hargraffu ar gyfer pob oes.", art="book")
+                 "Twelve free teacher packs for the Curriculum for Wales, lesson ideas, enquiry questions and printable quiz sheets for each age.", "Deuddeg pecyn athrawon am ddim ar gyfer y Cwricwlwm i Gymru, syniadau gwersi, cwestiynau ymholi a thaflenni cwis i’w hargraffu ar gyfer pob oes.", art="book")
             + section(paras(intro_en, intro_cy), top=True)
             + section(TPK.packs_grid(), "Teacher packs, one for each age", "Pecynnau athrawon, un ar gyfer pob oes")
             + section(f'<div class="lessons">{blocks}</div>', "Lesson ideas", "Syniadau gwersi")
@@ -1432,13 +1442,13 @@ def page_refs(path):
 # ---------- the Bookshelf (bookshelf.html): every work from every reading list, gathered and grouped ----------
 SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes; the first section to claim a work keeps it)
     ("start", "Start here: the whole story", "Dechrau yma: yr hanes cyfan", ["general", "wales-in-10"]),
-    ("britons", "The Britons and Rome", "Y Brythoniaid a Rhufain", ["era-ancient", "era-roman", "celts", "brutus", "caradog", "macsen"]),
+    ("britons", "The Britons and Rome", "Y Brythoniaid a Rhufain", ["era-ancient", "era-britons", "era-roman", "celts", "brutus", "caradog", "macsen"]),
     ("kings", "Kings, kingdoms and the Old North", "Brenhinoedd, teyrnasoedd a’r Hen Ogledd", ["era-saints", "era-kings", "kings", "kings-*", "family-trees", "arthur", "arthur-circle", "hen-ogledd", "wilson-blackett", "unconquered"]),
     ("law", "The laws of Hywel Dda", "Cyfreithiau Hywel Dda", ["laws", "hywel", "topic-law"]),
     ("saints", "Saints, learning and faith", "Seintiau, dysg a ffydd", ["christianity", "joseph", "lucius", "patrick", "saints", "saints-*", "learning", "brittany", "topic-faith"]),
-    ("princes", "Princes, castles and Owain Glyndŵr", "Tywysogion, cestyll ac Owain Glyndŵr", ["era-medieval", "castles", "glyndwr", "longbow", "battles", "documents", "topic-war", "nest", "rhys"]),
+    ("princes", "Princes, castles and Owain Glyndŵr", "Tywysogion, cestyll ac Owain Glyndŵr", ["era-medieval", "era-glyndwr", "castles", "glyndwr", "longbow", "battles", "documents", "topic-war", "nest", "rhys"]),
     ("lit", "Poets, old books and legends", "Beirdd, hen lyfrau a chwedlau", ["literature", "books", "triads", "mabinogion", "mabinogi", "mabinogi-tales", "mabinogi-people", "mabinogi-*", "legends", "legend-*", "bran", "symbols", "iolo", "topic-music", "trail-song"]),
-    ("tudor", "From the Tudors to the Methodists", "O’r Tuduriaid i’r Methodistiaid", ["era-tudor"]),
+    ("tudor", "From the Tudors to the Methodists", "O’r Tuduriaid i’r Methodistiaid", ["era-tudor", "era-revival"]),
     ("industry", "Iron, coal, slate and the sea", "Haearn, glo, llechi a’r môr", ["era-industrial", "industry", "coal", "aberfan", "protest", "topic-industry", "trail-coal", "trail-sea", "firsts", "topic-science"]),
     ("modern", "Modern Wales and the Welsh abroad", "Cymru fodern a’r Cymry ar wasgar", ["era-modern", "era-today", "revival", "mac", "fwa", "world", "madog", "tryweryn", "epynt", "topic-abroad", "topic-sport"]),
     ("lang", "The Welsh language, names and places", "Yr iaith Gymraeg, enwau a lleoedd", ["language", "welsh-not", "topic-language", "welsh", "names", "towns", "maps", "sites"]),
@@ -2340,6 +2350,7 @@ PLAY_DATA = dict(
     MAPC=dict(minx=geo["minx"], maxy=geo["maxy"], k=geo["k"], sc=geo["sc"]),
     HEROES={k: [v[0], v[1], v[2], v[3], PERSON[k][3], PERSON[k][4], PERSON[k][2]] for k, v in F.HEROES.items()},
     HQ=[[q[0], q[1], [list(a) for a in q[2]]] for q in F.HERO_QS],
+    ERAN={x["id"]: [f'{x["en"]} ({x["spanEn"]})', f'{x["cy"]} ({x["spanCy"]})'] for x in D.ERAS},  # the age names for clues
 )
 
 
@@ -2350,7 +2361,7 @@ def game_page(path, kind, era, title_en, title_cy, sub_en, sub_cy, art, desc, wi
     main = (hero(era, f'<a href="index.html">{SITE}</a> / <a href="play.html">{bi("Play", "Chwarae")}</a>', "book", "Play", "Chwarae", title_en, title_cy, sub_en, sub_cy, art=art)
             + f'<section class="game-sec"><div class="wrap narrow"><div class="g-root" id="g-root" data-game="{kind}"><noscript>This game needs JavaScript.</noscript></div>'
               f'<p class="more-row"><a class="btn" href="play.html">← {bi("All games", "Pob gêm")}</a></p></div></section>')
-    extra = f'<script>var PLAY={json.dumps(data, ensure_ascii=False, separators=(",", ":"))};</script>\n<script src="play.js" defer></script>\n'
+    extra = f'<script>var PLAY={json.dumps(data, ensure_ascii=False, separators=(",", ":"))};</script>\n<script src="play.js?v={_static_fp("play.js")}" defer></script>\n'
     return page(path, f"{title_en} · History of Wales", desc, main, era=era, og_type="website", active="play.html", extra=extra)
 
 
@@ -2462,11 +2473,7 @@ MONTHS = [("January", "Ionawr"), ("February", "Chwefror"), ("March", "Mawrth"), 
 _DAYS_IN = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
 
-def era_of_year(y):
-    for lim, eid in ((48, "ancient"), (410, "roman"), (800, "saints"), (1100, "kings"), (1485, "medieval"), (1750, "tudor"), (1914, "industrial"), (1997, "modern")):
-        if y < lim:
-            return eid
-    return "today"
+era_of_year = AG12.era_of_year  # the twelve ages by year (src/ages12.py)
 
 
 OTD_ICON = {"born": "born", "died": "died", "feast": "cross", "custom": "harp"}
@@ -2748,7 +2755,7 @@ def wales_in_10_page():
            f'<g class="w10-compass" transform="translate({x1 - 42:.0f} {y0 + 48:.0f})"><path d="M0 -26 L7 0 L0 26 L-7 0Z"/><path class="n" d="M0 -26 L7 0 L-7 0Z"/><text y="-32">N</text></g></svg>')
     end = (f'<article class="w10-step w10-end" data-i="{n - 1}" data-stage="{S10.STEPS[-1][0]}"><div class="w10-card"><p class="eyebrow">{bi("You made it", "Da iawn")}</p>'
            f'<h2>{bi("Now go deeper", "Nawr ewch yn ddyfnach")}</h2><p>{bi("Every age has its own page, with the people, the places and the stories in full.", "Mae gan bob oes ei thudalen ei hun, gyda’r bobl, y lleoedd a’r straeon yn llawn.")}</p>'
-           f'<p class="w10-more"><a href="timeline.html">{bi("The timeline", "Y llinell amser")} →</a><a href="index.html#chapters">{bi("The nine ages", "Y naw oes")} →</a>'
+           f'<p class="w10-more"><a href="timeline.html">{bi("The timeline", "Y llinell amser")} →</a><a href="index.html#chapters">{bi("The twelve ages", "Y deuddeg oes")} →</a>'
            f'<a href="quiz.html">{bi("Test yourself", "Profwch eich hun")} →</a></p>{SHARE_BTN}</div></article>')
     main = (f'<div class="w10"><p class="crumbs wrap"><a href="index.html">{SITE}</a> / {bi("Wales in 10 minutes", "Cymru mewn 10 munud")}</p>'
             f'<div class="w10-grid"><div class="w10-map" aria-hidden="false"><div class="w10-bar"><i id="w10-bar"></i></div>{svg}'
@@ -3919,10 +3926,11 @@ ERA_Q = {
     "modern": ("How did the people of Wales fight to save their language?", "Sut y brwydrodd pobl Cymru i achub eu hiaith?"),
     "today": ("What has Wales done with a parliament of its own?", "Beth y mae Cymru wedi’i wneud â’i senedd ei hun?"),
 }
+ERA_Q.update(AG12.ERA_Q)
 assert set(ERA_Q) == {x["id"] for x in D.ERAS}, "every age needs a question in ERA_Q"
-# On phones the nine age cards are thin strips with the picture behind a dark veil, so the 600 px picture is plenty.
+# On phones the twelve age cards are thin strips with the picture behind a dark veil, so the 600 px picture is plenty.
 # "200px" makes even a 3x phone screen (200 x 3 = 600) fetch it;
-# without it phones fetched the 1400 px pictures, about 1.5 MB for the nine. Wide screens still use 40vw.
+# without it phones fetched the 1400 px pictures, about 2 MB for the twelve. Wide screens still use 40vw.
 POSTER_SIZES = "(max-width: 700px) 200px, 40vw"
 AGES_HTML = "".join(
     f'<a class="poster" href="era-{x["id"]}.html" data-era="{x["id"]}">{PX.card_img(f"era-{x['id']}.html", sizes=POSTER_SIZES) or A.scene(ERA_ART[x["id"]], COL[x["id"]])}<span class="shade"></span><span class="rn"><span class="vh">{bi("Age", "Oes")} </span>{ROMAN[i]}<span class="vh">: </span></span>'

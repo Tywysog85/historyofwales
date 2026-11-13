@@ -288,6 +288,8 @@ PEOPLE_LONG["owain-gwynedd"] = _OG.PERSON_LONG
 # ---------- historic places of importance (src/places3.py) ----------
 import places3 as _PL3
 PLACE_LONG.update(_PL3.LONG)
+import ages12 as _A12  # the places of the Age of Revival (src/ages12.py)
+PLACE_LONG.update(_A12.LONG)
 # the clearing of Mynydd Epynt, 1940 (src/epynt.py)
 import epynt as _EPY  # noqa: E402
 PLACE_LONG["epynt"] = _EPY.PLACE_LONG

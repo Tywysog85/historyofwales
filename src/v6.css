@@ -128,7 +128,7 @@ html.menu-open { overflow: hidden }
   .begin-card i { top: 50%; translate: 0 -50% }
 }
 @media (prefers-reduced-motion: reduce) { .begin { animation: none } .begin-card, .begin-card i { transition: none } }
-/* the nine ages always carry their dates, so a newcomer can tell the Age of Kings (800 – 1100) from the Age of Princes (1100 – 1485) */
+/* the twelve ages always carry their dates, so a newcomer can tell the Age of Kings (800 – 1100) from the Age of Princes (1100 – 1485) */
 .m-dates, .c-dates { font: 500 .78em var(--f-mono); letter-spacing: .02em; opacity: .72; white-space: nowrap }
 .menu-group .m-dates { display: block; margin-top: .1rem; font-size: .75rem }
 .pager .m-dates { opacity: .75; margin-inline: .15rem }
@@ -194,13 +194,22 @@ html.menu-open { overflow: hidden }
   .posters:not(:hover):not(:focus-within) .poster:first-child, .poster:hover, .poster:focus-visible { flex-grow: 3.4 }
   .posters:not(:hover):not(:focus-within) .poster:first-child :is(p, .go, .q), .poster:hover :is(p, .go, .q), .poster:focus-visible :is(p, .go, .q) { max-height: 8rem; opacity: 1; transition-delay: .15s }
   .poster:hover .scene { transform: scale(1.06) }
-  /* nine posters are narrow when closed, so a closed poster carries its title up the side */
+  /* twelve posters are narrow when closed, so a closed poster carries its title up the side */
   .poster h3 { writing-mode: vertical-rl; text-orientation: sideways; rotate: 180deg; white-space: nowrap; align-self: flex-start; font-size: clamp(1.2rem, 1.7vw, 1.5rem) }
   /* a closed poster keeps its dates too, running up the side beside its name */
   .poster .span { position: absolute; right: .55rem; bottom: 1.3rem; writing-mode: vertical-rl; text-orientation: sideways; rotate: 180deg; font-size: .75rem }
   .posters:not(:hover):not(:focus-within) .poster:first-child h3, .poster:hover h3, .poster:focus-visible h3 { writing-mode: horizontal-tb; rotate: none; white-space: normal; font-size: clamp(1.25rem, 1.9vw, 1.7rem) }
   .posters:not(:hover):not(:focus-within) .poster:first-child .span, .poster:hover .span, .poster:focus-visible .span { position: static; writing-mode: horizontal-tb; rotate: none; font-size: .75rem }
   .posters:not(:hover):not(:focus-within) .poster:first-child, .poster:hover, .poster:focus-visible { flex-grow: 4.2 }
+  /* twelve ages: a closed poster's number is smaller so VIII and XII fit across it */
+  .posters { gap: .5rem }
+  .poster .rn { left: .6rem; font-size: clamp(1.25rem, 1.75vw, 1.9rem) }
+  .posters:not(:hover):not(:focus-within) .poster:first-child .rn, .poster:hover .rn, .poster:focus-visible .rn { left: 1.1rem; font-size: 2.4rem }
+  /* and its name and dates sit closer to its edges, so they never overlap on a narrow laptop screen */
+  .poster .txt { padding-left: .55rem } .poster h3 { font-size: clamp(1rem, 1.45vw, 1.5rem) } .poster .span { right: .3rem }
+  .posters:not(:hover):not(:focus-within) .poster:first-child .txt, .poster:hover .txt, .poster:focus-visible .txt { padding-left: 1.1rem }
+  .posters:not(:hover):not(:focus-within) .poster:first-child, .poster:hover, .poster:focus-visible { flex-grow: 5 }
+  .poster :is(p, .go, .q) { min-width: 14rem }
 }
 @media (hover: none), (max-width: 900px) {
   .posters { height: auto; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: calc(var(--gut-l) * -1) calc(var(--gut-r) * -1); padding-inline: var(--gut-l) var(--gut-r); scrollbar-width: none; gap: .8rem }
@@ -209,14 +218,14 @@ html.menu-open { overflow: hidden }
   .poster p, .poster .go, .poster .q { max-height: none; opacity: 1; min-width: 0 }
   .poster h3 { font-size: 1.7rem }
 }
-/* phones: all nine ages in one list to choose from, each with its dates and its question */
+/* phones: all twelve ages in one list to choose from, each with its dates and its question */
 @media (max-width: 640px) {
   .posters { display: grid; overflow: visible; margin-inline: 0; padding-inline: 0; gap: .55rem; scroll-snap-type: none }
   .poster { height: auto; min-height: 7.4rem }
   .poster .scene { opacity: .55 }
   .poster .shade { background: linear-gradient(90deg, rgba(9,12,19,.94) 25%, rgba(9,12,19,.7)) }
-  .poster .rn { top: .95rem; left: .95rem; font-size: 1.7rem; width: 2.4rem; text-align: center }
-  .poster .txt { position: relative; inset: auto; padding: .9rem 1rem .95rem 3.9rem; gap: .25rem }
+  .poster .rn { top: .95rem; left: .7rem; font-size: 1.45rem; width: 2.8rem; text-align: center }
+  .poster .txt { position: relative; inset: auto; padding: .9rem 1rem .95rem 4rem; gap: .25rem }
   .poster h3 { font-size: 1.35rem }
   .poster .q { font-size: .98rem }
   .poster p { display: none }
@@ -877,7 +886,7 @@ a.wl-go:focus-visible { outline: none }
 
 /* ---------- A shorter home page on phones (November 2026) ---------- */
 @media (max-width: 700px) {
-  /* the timeline's nine age chips: one row to swipe, like the people filters, instead of ten stacked rows */
+  /* the timeline's twelve age chips: one row to swipe, like the people filters, instead of ten stacked rows */
   #tl-teaser { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; max-width: 100%; -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent) }
   #tl-teaser::-webkit-scrollbar { display: none }
   #tl-teaser .chip { flex: none }
