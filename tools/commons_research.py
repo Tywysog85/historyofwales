@@ -188,8 +188,10 @@ def people(ppl, out):
             if s and pg.get("pageimage"):
                 add(s, pg["pageimage"], "cywiki lead image")
         time.sleep(1)
-    for x in ppl:  # Commons category, then a search for the name
+    for x in ppl:  # files named by hand, the Commons category, then a search for the name
         s = x["slug"]
+        for f in x.get("files", []):
+            add(s, f, "named")
         if s in cat:
             try:
                 r = api(action="query", list="categorymembers", cmtitle="Category:" + cat[s], cmtype="file", cmlimit=str(x.get("cat", 4)))
@@ -197,7 +199,7 @@ def people(ppl, out):
                     add(s, m["title"], "category " + cat[s])
             except Exception as err:  # noqa: BLE001
                 print("category failed", s, err)
-        for q in x.get("search") or ['"' + x["name"] + '"']:
+        for q in x.get("search") or ([] if x.get("files") else ['"' + x["name"] + '"']):
             try:
                 r = api(action="query", list="search", srsearch=q + " filetype:bitmap", srnamespace="6", srlimit=str(x.get("n", 4)))
                 for m in r.get("query", {}).get("search", []):

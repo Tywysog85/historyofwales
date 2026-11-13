@@ -1,1667 +1,484 @@
 {
 "branch": "claude/project-thread-mtdupc",
-"out": "_research/people",
+"out": "_research/people2",
 "people": [
 {
-"slug": "beli-mawr",
-"name": "Beli Mawr",
-"wiki": "Beli_Mawr"
-},
-{
-"slug": "lludd",
-"name": "Lludd son of Beli",
-"wiki": "Lludd_Llaw_Eraint",
+"slug": "_hoc",
+"name": "Historie of Cambria",
+"wiki": "",
 "search": [
-"\"Lludd son of Beli\"",
-"\"Lludd Llaw Eraint\""
-]
+"historieofcambria"
+],
+"n": 50
 },
 {
-"slug": "llefelys",
-"name": "Llefelys son of Beli",
-"wiki": "Lludd_and_Llefelys"
-},
-{
-"slug": "pwyll",
-"name": "Pwyll",
-"wiki": "Pwyll"
-},
-{
-"slug": "arawn",
-"name": "Arawn",
-"wiki": "Arawn"
-},
-{
-"slug": "teyrnon",
-"name": "Teyrnon Twrf Liant",
-"wiki": ""
-},
-{
-"slug": "cigfa",
-"name": "Cigfa",
-"wiki": ""
-},
-{
-"slug": "manawydan",
-"name": "Manawydan fab Llŷr",
-"wiki": "Manawydan",
+"slug": "_jc111",
+"name": "Red Book tale openings",
+"wiki": "",
 "search": [
-"\"Manawydan fab Llŷr\"",
-"\"Manawydan\""
-]
+"Jesus-College-MS-111 cropped"
+],
+"n": 50
 },
 {
-"slug": "matholwch",
-"name": "Matholwch",
-"wiki": "Matholwch"
-},
-{
-"slug": "efnysien",
-"name": "Efnysien",
-"wiki": "Efnysien"
-},
-{
-"slug": "math",
-"name": "Math fab Mathonwy",
-"wiki": "Math_fab_Mathonwy"
-},
-{
-"slug": "gwydion",
-"name": "Gwydion fab Dôn",
-"wiki": "Gwydion",
+"slug": "_hendre",
+"name": "Hendregadredd rubrics",
+"wiki": "",
 "search": [
-"\"Gwydion fab Dôn\"",
-"\"Gwydion\""
-]
-},
-{
-"slug": "gilfaethwy",
-"name": "Gilfaethwy fab Dôn",
-"wiki": "Gilfaethwy",
-"search": [
-"\"Gilfaethwy fab Dôn\"",
-"\"Gilfaethwy\""
-]
-},
-{
-"slug": "goewin",
-"name": "Goewin ferch Pebin",
-"wiki": "Goewin",
-"search": [
-"\"Goewin ferch Pebin\"",
-"\"Goewin\""
-]
-},
-{
-"slug": "arianrhod",
-"name": "Arianrhod ferch Dôn",
-"wiki": "Arianrhod",
-"search": [
-"\"Arianrhod ferch Dôn\"",
-"\"Arianrhod\""
-]
-},
-{
-"slug": "dylan-ail-don",
-"name": "Dylan Eil Ton",
-"wiki": "Dylan_ail_Don",
-"search": [
-"\"Dylan Eil Ton\"",
-"\"Dylan ail Don\""
-]
-},
-{
-"slug": "lleu",
-"name": "Lleu Llaw Gyffes",
-"wiki": "Lleu_Llaw_Gyffes"
-},
-{
-"slug": "blodeuwedd",
-"name": "Blodeuwedd",
-"wiki": "Blodeuwedd"
-},
-{
-"slug": "gronw-pebr",
-"name": "Gronw Pebr",
-"wiki": "Gronw_Pebr"
-},
-{
-"slug": "llwyd-fab-cil-coed",
-"name": "Llwyd son of Cil Coed",
-"wiki": "Llwyd_ap_Cil_Coed",
-"search": [
-"\"Llwyd son of Cil Coed\"",
-"\"Llwyd ap Cil Coed\""
-]
-},
-{
-"slug": "bran-fendigaid",
-"name": "Brân the Blessed",
-"wiki": "Brân_the_Blessed"
-},
-{
-"slug": "lleurwg",
-"name": "King Lucius (Lleurwg)",
-"wiki": "Lucius_of_Britain",
-"search": [
-"\"King Lucius (Lleurwg)\"",
-"\"Lucius of Britain\""
-]
-},
-{
-"slug": "julius-and-aaron",
-"name": "Julius and Aaron",
-"wiki": "Julius_and_Aaron"
-},
-{
-"slug": "cynan-meiriadog",
-"name": "Cynan Meiriadog",
-"wiki": "Conan_Meriadoc",
-"search": [
-"\"Cynan Meiriadog\"",
-"\"Conan Meriadoc\""
-]
-},
-{
-"slug": "elen-luyddog",
-"name": "Elen of the Hosts",
-"wiki": "Elen_of_the_Hosts"
-},
-{
-"slug": "emrys-wledig",
-"name": "Emrys Wledig",
-"wiki": "Ambrosius_Aurelianus",
-"search": [
-"\"Emrys Wledig\"",
-"\"Ambrosius Aurelianus\""
-]
-},
-{
-"slug": "gwynllyw",
-"name": "Gwynllyw",
-"wiki": "Gwynllyw"
-},
-{
-"slug": "gwladys",
-"name": "Saint Gwladys",
-"wiki": "Gwladys",
-"search": [
-"\"Saint Gwladys\"",
-"\"St Gwladys\"",
-"\"Gwladys\""
-]
-},
-{
-"slug": "tathan",
-"name": "Saint Tathan",
-"wiki": "Tathan",
-"search": [
-"\"Saint Tathan\"",
-"\"St Tathan\"",
-"\"Tathan\""
-]
-},
-{
-"slug": "briog",
-"name": "Saint Briog",
-"wiki": "Brioc",
-"search": [
-"\"Saint Briog\"",
-"\"St Briog\"",
-"\"Brioc\""
-]
-},
-{
-"slug": "cadfan",
-"name": "Saint Cadfan",
-"wiki": "Saint_Cadfan",
-"search": [
-"\"Saint Cadfan\"",
-"\"St Cadfan\""
-]
-},
-{
-"slug": "caw-o-brydyn",
-"name": "Caw o Brydyn",
-"wiki": "Caw_of_Pictland",
-"search": [
-"\"Caw o Brydyn\"",
-"\"Caw of Pictland\""
-]
-},
-{
-"slug": "carannog",
-"name": "Saint Carannog",
-"wiki": "Carantoc",
-"search": [
-"\"Saint Carannog\"",
-"\"St Carannog\"",
-"\"Carantoc\""
-]
-},
-{
-"slug": "pol",
-"name": "Saint Paul Aurelian",
-"wiki": "Paul_Aurelian",
-"search": [
-"\"Saint Paul Aurelian\"",
-"\"St Paul Aurelian\"",
-"\"Paul Aurelian\""
-]
-},
-{
-"slug": "brynach",
-"name": "Saint Brynach",
-"wiki": "Saint_Brynach",
-"search": [
-"\"Saint Brynach\"",
-"\"St Brynach\""
-]
-},
-{
-"slug": "dyfrig",
-"name": "Saint Dyfrig",
-"wiki": "Dubricius",
-"search": [
-"\"Saint Dyfrig\"",
-"\"St Dyfrig\"",
-"\"Dubricius\""
-]
-},
-{
-"slug": "rhun-ap-maelgwn",
-"name": "Rhun ap Maelgwn",
-"wiki": "Rhun_ap_Maelgwn_Gwynedd",
-"search": [
-"\"Rhun ap Maelgwn\"",
-"\"Rhun ap Maelgwn Gwynedd\""
-]
-},
-{
-"slug": "dogfael",
-"name": "Saint Dogfael",
-"wiki": "Saint_Dogmael",
-"search": [
-"\"Saint Dogfael\"",
-"\"St Dogfael\"",
-"\"Saint Dogmael\""
-]
-},
-{
-"slug": "gofan",
-"name": "Saint Gofan",
-"wiki": "St_Govan's_Chapel",
-"search": [
-"\"Saint Gofan\"",
-"\"St Gofan\""
-]
-},
-{
-"slug": "cennydd",
-"name": "Saint Cennydd",
-"wiki": "Saint_Cenydd",
-"search": [
-"\"Saint Cennydd\"",
-"\"St Cennydd\"",
-"\"Saint Cenydd\""
-]
-},
-{
-"slug": "elli",
-"name": "Saint Elli",
-"wiki": "Elli_(saint)",
-"search": [
-"\"Saint Elli\"",
-"\"St Elli\"",
-"\"Elli\""
-]
-},
-{
-"slug": "tysul",
-"name": "Saint Tysul",
-"wiki": "Saint_Tysul",
-"search": [
-"\"Saint Tysul\"",
-"\"St Tysul\""
-]
-},
-{
-"slug": "seiriol",
-"name": "Saint Seiriol",
-"wiki": "Saint_Seiriol",
-"search": [
-"\"Saint Seiriol\"",
-"\"St Seiriol\""
-]
-},
-{
-"slug": "eilian",
-"name": "Saint Eilian",
-"wiki": "Saint_Eilian",
-"search": [
-"\"Saint Eilian\"",
-"\"St Eilian\""
-]
-},
-{
-"slug": "tudno",
-"name": "Saint Tudno",
-"wiki": "Saint_Tudno",
-"search": [
-"\"Saint Tudno\"",
-"\"St Tudno\""
-]
-},
-{
-"slug": "tudwal",
-"name": "Saint Tudwal",
-"wiki": "Tudwal",
-"search": [
-"\"Saint Tudwal\"",
-"\"St Tudwal\"",
-"\"Tudwal\""
-]
-},
-{
-"slug": "malo",
-"name": "Saint Malo",
-"wiki": "Saint_Malo_(saint)",
-"search": [
-"\"Saint Malo\"",
-"\"St Malo\""
-]
-},
-{
-"slug": "pedrog",
-"name": "Saint Pedrog",
-"wiki": "Petroc",
-"search": [
-"\"Saint Pedrog\"",
-"\"St Pedrog\"",
-"\"Petroc\""
-]
-},
-{
-"slug": "cadwallon-lawhir",
-"name": "Cadwallon Lawhir",
-"wiki": "Cadwallon_Lawhir_ap_Einion",
-"search": [
-"\"Cadwallon Lawhir\"",
-"\"Cadwallon Lawhir ap Einion\""
-]
-},
-{
-"slug": "pabo-post-prydain",
-"name": "Pabo Post Prydain",
-"wiki": "Pabo_Post_Prydain"
-},
-{
-"slug": "gwenddolau",
-"name": "Gwenddolau ap Ceidio",
-"wiki": "Gwenddoleu_ap_Ceidio",
-"search": [
-"\"Gwenddolau ap Ceidio\"",
-"\"Gwenddoleu ap Ceidio\""
-]
-},
-{
-"slug": "geraint-fab-erbin",
-"name": "Geraint fab Erbin",
-"wiki": "Geraint"
-},
-{
-"slug": "brochwel-ysgithrog",
-"name": "Brochwel Ysgithrog",
-"wiki": "Brochwel_Ysgithrog"
-},
-{
-"slug": "gwrthefyr",
-"name": "Gwrthefyr",
-"wiki": "Vortiporius",
-"search": [
-"\"Gwrthefyr\"",
-"\"Vortiporius\""
-]
-},
-{
-"slug": "clydno-eidyn",
-"name": "Clydno Eidyn",
-"wiki": "Clydno_Eidyn"
-},
-{
-"slug": "gwyddno-garanhir",
-"name": "Gwyddno Garanhir",
-"wiki": "Gwyddno_Garanhir"
-},
-{
-"slug": "elffin",
-"name": "Elffin ap Gwyddno",
-"wiki": "Elffin_ap_Gwyddno"
-},
-{
-"slug": "cynon-ap-clydno",
-"name": "Cynon son of Clydno",
-"wiki": "Cynon_ap_Clydno",
-"search": [
-"\"Cynon son of Clydno\"",
-"\"Cynon ap Clydno\""
-]
-},
-{
-"slug": "tewdrig",
-"name": "Tewdrig ap Llywarch",
-"wiki": "Tewdrig",
-"search": [
-"\"Tewdrig ap Llywarch\"",
-"\"Tewdrig\""
-]
-},
-{
-"slug": "mynyddog-mwynfawr",
-"name": "Mynyddog Mwynfawr",
-"wiki": "Mynyddog_Mwynfawr"
-},
-{
-"slug": "asa",
-"name": "Saint Asaph",
-"wiki": "Saint_Asaph_(bishop)",
-"search": [
-"\"Saint Asaph\"",
-"\"St Asaph\""
-]
-},
-{
-"slug": "euddogwy",
-"name": "Saint Euddogwy",
-"wiki": "Oudoceus",
-"search": [
-"\"Saint Euddogwy\"",
-"\"St Euddogwy\"",
-"\"Oudoceus\""
-]
-},
-{
-"slug": "cyndeyrn",
-"name": "Saint Kentigern",
-"wiki": "Saint_Mungo",
-"search": [
-"\"Saint Kentigern\"",
-"\"St Kentigern\"",
-"\"Saint Mungo\""
-]
-},
-{
-"slug": "rhydderch-hael",
-"name": "Rhydderch Hael",
-"wiki": "Rhydderch_Hael"
-},
-{
-"slug": "owain-ab-urien",
-"name": "Owain ab Urien",
-"wiki": "Owain_mab_Urien",
-"search": [
-"\"Owain ab Urien\"",
-"\"Owain mab Urien\""
-]
-},
-{
-"slug": "myrddin",
-"name": "Myrddin",
-"wiki": "Myrddin_Wyllt",
-"search": [
-"\"Myrddin\"",
-"\"Myrddin Wyllt\""
-]
-},
-{
-"slug": "cynan-garwyn",
-"name": "Cynan Garwyn",
-"wiki": "Cynan_Garwyn"
-},
-{
-"slug": "gwallog",
-"name": "Gwallog ap Lleënog",
-"wiki": "Gwallog_ap_Lleënog"
-},
-{
-"slug": "llywarch-hen",
-"name": "Llywarch Hen",
-"wiki": "Llywarch_Hen"
-},
-{
-"slug": "meurig-ap-tewdrig",
-"name": "Meurig ap Tewdrig",
-"wiki": "Meurig_ap_Tewdrig"
-},
-{
-"slug": "onbrawst",
-"name": "Onbrawst",
-"wiki": ""
-},
-{
-"slug": "uthr-bendragon",
-"name": "Uthr Bendragon",
-"wiki": "Uther_Pendragon",
-"search": [
-"\"Uthr Bendragon\"",
-"\"Uther Pendragon\""
-]
-},
-{
-"slug": "eigr",
-"name": "Eigr",
-"wiki": "Igraine",
-"search": [
-"\"Eigr\"",
-"\"Igraine\""
-]
-},
-{
-"slug": "madog-ap-uthr",
-"name": "Madog ap Uthr",
-"wiki": "Madoc_ap_Uthyr",
-"search": [
-"\"Madog ap Uthr\"",
-"\"Madoc ap Uthyr\""
-]
-},
-{
-"slug": "eliwlod",
-"name": "Eliwlod ap Madog",
-"wiki": ""
-},
-{
-"slug": "gwenhwyfar",
-"name": "Gwenhwyfar",
-"wiki": "Guinevere",
-"search": [
-"\"Gwenhwyfar\"",
-"\"Guinevere\""
-]
-},
-{
-"slug": "llacheu",
-"name": "Llacheu fab Arthur",
-"wiki": "Llacheu",
-"search": [
-"\"Llacheu fab Arthur\"",
-"\"Llacheu\""
-]
-},
-{
-"slug": "amr",
-"name": "Amr fab Arthur",
-"wiki": ""
-},
-{
-"slug": "gwydre",
-"name": "Gwydre fab Arthur",
-"wiki": ""
-},
-{
-"slug": "medrawd",
-"name": "Medrawd",
-"wiki": "Mordred",
-"search": [
-"\"Medrawd\"",
-"\"Mordred\""
-]
-},
-{
-"slug": "gwalchmai",
-"name": "Gwalchmai fab Gwyar",
-"wiki": "Gawain",
-"search": [
-"\"Gwalchmai fab Gwyar\"",
-"\"Gawain\""
-]
-},
-{
-"slug": "culhwch",
-"name": "Culhwch",
-"wiki": "Culhwch_and_Olwen"
-},
-{
-"slug": "olwen",
-"name": "Olwen",
-"wiki": "Culhwch_and_Olwen"
-},
-{
-"slug": "cai",
-"name": "Cai fab Cynyr",
-"wiki": "Sir_Kay",
-"search": [
-"\"Cai fab Cynyr\"",
-"\"Sir Kay\""
-]
-},
-{
-"slug": "bedwyr",
-"name": "Bedwyr fab Pedrog",
-"wiki": "Bedivere",
-"search": [
-"\"Bedwyr fab Pedrog\"",
-"\"Bedivere\""
-]
-},
-{
-"slug": "glewlwyd",
-"name": "Glewlwyd Gafaelfawr",
-"wiki": "Glewlwyd_Gafaelfawr"
-},
-{
-"slug": "mabon",
-"name": "Mabon fab Modron",
-"wiki": "Mabon_ap_Modron",
-"search": [
-"\"Mabon fab Modron\"",
-"\"Mabon ap Modron\""
-]
-},
-{
-"slug": "caradog-freichfras",
-"name": "Caradog Freichfras",
-"wiki": "Caradoc_Vreichvras",
-"search": [
-"\"Caradog Freichfras\"",
-"\"Caradoc Vreichvras\""
-]
-},
-{
-"slug": "tegau-eurfron",
-"name": "Tegau Eurfron",
-"wiki": "Tegau_Eurfron"
-},
-{
-"slug": "gwrhyr",
-"name": "Gwrhyr Gwalstawd Ieithoedd",
-"wiki": ""
-},
-{
-"slug": "menw",
-"name": "Menw fab Teirgwaedd",
-"wiki": ""
-},
-{
-"slug": "peredur",
-"name": "Peredur fab Efrog",
-"wiki": "Peredur_son_of_Efrawg",
-"search": [
-"\"Peredur fab Efrog\"",
-"\"Peredur son of Efrawg\""
-]
+"NLW MS 6680B"
+],
+"n": 50
 },
 {
 "slug": "enid",
-"name": "Enid ferch Ynywl",
-"wiki": "Geraint_and_Enid"
-},
-{
-"slug": "gwyn-ap-nudd",
-"name": "Gwyn ap Nudd",
-"wiki": "Gwyn_ap_Nudd"
-},
-{
-"slug": "ysbaddaden",
-"name": "Ysbaddaden Bencawr",
-"wiki": "Ysbaddaden",
+"name": "Enid",
+"wiki": "",
 "search": [
-"\"Ysbaddaden Bencawr\"",
-"\"Ysbaddaden\""
-]
-},
-{
-"slug": "luned",
-"name": "Luned",
-"wiki": "Lunete",
-"search": [
-"\"Luned\"",
-"\"Lunete\""
-]
-},
-{
-"slug": "cadwaladr",
-"name": "Cadwaladr Fendigaid",
-"wiki": "Cadwaladr",
-"search": [
-"\"Cadwaladr Fendigaid\"",
-"\"Cadwaladr\""
-]
-},
-{
-"slug": "gwenfrewi",
-"name": "Saint Winefride",
-"wiki": "Saint_Winefride",
-"search": [
-"\"Saint Winefride\"",
-"\"St Winefride\""
-]
-},
-{
-"slug": "morgan-mwynfawr",
-"name": "Morgan Mwynfawr",
-"wiki": "Morgan_ab_Athrwys",
-"search": [
-"\"Morgan Mwynfawr\"",
-"\"Morgan ab Athrwys\""
-]
-},
-{
-"slug": "elfoddw",
-"name": "Elfoddw",
-"wiki": "Elfodd",
-"search": [
-"\"Elfoddw\"",
-"\"Elfodd\""
-]
-},
-{
-"slug": "nennius",
-"name": "Nennius",
-"wiki": "Nennius"
-},
-{
-"slug": "cyngen",
-"name": "Cyngen ap Cadell",
-"wiki": "Cyngen_ap_Cadell"
-},
-{
-"slug": "cadell-ap-rhodri",
-"name": "Cadell ap Rhodri",
-"wiki": "Cadell_ap_Rhodri"
-},
-{
-"slug": "idwal-foel",
-"name": "Idwal Foel",
-"wiki": "Idwal_Foel"
-},
-{
-"slug": "morgan-hen",
-"name": "Morgan Hen",
-"wiki": "Morgan_Hen_ab_Owain",
-"search": [
-"\"Morgan Hen\"",
-"\"Morgan Hen ab Owain\""
-]
-},
-{
-"slug": "owain-ap-hywel",
-"name": "Owain ap Hywel Dda",
-"wiki": "Owain_ap_Hywel",
-"search": [
-"\"Owain ap Hywel Dda\"",
-"\"Owain ap Hywel\""
-]
-},
-{
-"slug": "rhys-ap-tewdwr",
-"name": "Rhys ap Tewdwr",
-"wiki": "Rhys_ap_Tewdwr"
-},
-{
-"slug": "iestyn-ap-gwrgant",
-"name": "Iestyn ap Gwrgant",
-"wiki": "Iestyn_ap_Gwrgant"
-},
-{
-"slug": "rhygyfarch",
-"name": "Rhygyfarch",
-"wiki": "Rhygyfarch"
-},
-{
-"slug": "lifris",
-"name": "Lifris of Llancarfan",
-"wiki": ""
-},
-{
-"slug": "ieuan-ap-sulien",
-"name": "Ieuan ap Sulien",
-"wiki": "Ieuan_ap_Sulien"
-},
-{
-"slug": "meilyr-brydydd",
-"name": "Meilyr Brydydd",
-"wiki": "Meilyr_Brydydd"
-},
-{
-"slug": "nest",
-"name": "Nest ferch Rhys",
-"wiki": "Nest_ferch_Rhys"
-},
-{
-"slug": "gruffudd-ap-rhys",
-"name": "Gruffudd ap Rhys",
-"wiki": "Gruffydd_ap_Rhys",
-"search": [
-"\"Gruffudd ap Rhys\"",
-"\"Gruffydd ap Rhys\""
-]
-},
-{
-"slug": "caradog-llancarfan",
-"name": "Caradog of Llancarfan",
-"wiki": "Caradoc_of_Llancarfan",
-"search": [
-"\"Caradog of Llancarfan\"",
-"\"Caradoc of Llancarfan\""
-]
-},
-{
-"slug": "cynddelw",
-"name": "Cynddelw Brydydd Mawr",
-"wiki": "Cynddelw_Brydydd_Mawr"
-},
-{
-"slug": "madog-ap-maredudd",
-"name": "Madog ap Maredudd",
-"wiki": "Madog_ap_Maredudd"
-},
-{
-"slug": "owain-cyfeiliog",
-"name": "Owain Cyfeiliog",
-"wiki": "Owain_Cyfeiliog"
-},
-{
-"slug": "hywel-ab-owain",
-"name": "Hywel ab Owain Gwynedd",
-"wiki": "Hywel_ab_Owain_Gwynedd"
-},
-{
-"slug": "walter-map",
-"name": "Walter Map",
-"wiki": "Walter_Map"
-},
-{
-"slug": "prydydd-y-moch",
-"name": "Prydydd y Moch",
-"wiki": "Llywarch_ap_Llywelyn",
-"search": [
-"\"Prydydd y Moch\"",
-"\"Llywarch ap Llywelyn\""
-]
-},
-{
-"slug": "rhonabwy",
-"name": "Rhonabwy",
-"wiki": "The_Dream_of_Rhonabwy"
-},
-{
-"slug": "maelgwn-ap-rhys",
-"name": "Maelgwn ap Rhys",
-"wiki": "Maelgwn_ap_Rhys"
-},
-{
-"slug": "gwenwynwyn",
-"name": "Gwenwynwyn ab Owain",
-"wiki": "Gwenwynwyn_ab_Owain"
-},
-{
-"slug": "rhys-gryg",
-"name": "Rhys Gryg",
-"wiki": "Rhys_Gryg"
-},
-{
-"slug": "madog-ap-gruffudd-maelor",
-"name": "Madog ap Gruffudd Maelor",
-"wiki": "Madog_ap_Gruffydd_Maelor",
-"search": [
-"\"Madog ap Gruffudd Maelor\"",
-"\"Madog ap Gruffydd Maelor\""
-]
-},
-{
-"slug": "gruffudd-ap-llywelyn-fawr",
-"name": "Gruffudd ap Llywelyn",
-"wiki": "Gruffydd_ap_Llywelyn_Fawr",
-"search": [
-"\"Gruffudd ap Llywelyn\"",
-"\"Gruffydd ap Llywelyn Fawr\""
-]
-},
-{
-"slug": "gruffudd-ab-yr-ynad-coch",
-"name": "Gruffudd ab yr Ynad Coch",
-"wiki": "Gruffudd_ab_yr_Ynad_Coch"
-},
-{
-"slug": "dafydd-ap-gruffudd",
-"name": "Dafydd ap Gruffudd",
-"wiki": "Dafydd_ap_Gruffydd",
-"search": [
-"\"Dafydd ap Gruffudd\"",
-"\"Dafydd ap Gruffydd\""
-]
-},
-{
-"slug": "meddygon-myddfai",
-"name": "Rhiwallon and the Physicians of Myddfai",
-"wiki": "Physicians_of_Myddfai",
-"search": [
-"\"Rhiwallon and the Physicians of Myddfai\"",
-"\"Physicians of Myddfai\""
-]
-},
-{
-"slug": "eleanor-de-montfort",
-"name": "Eleanor de Montfort",
-"wiki": "Eleanor_de_Montfort"
-},
-{
-"slug": "madog-ap-llywelyn",
-"name": "Madog ap Llywelyn",
-"wiki": "Madog_ap_Llywelyn"
-},
-{
-"slug": "llywelyn-bren",
-"name": "Llywelyn Bren",
-"wiki": "Llywelyn_Bren"
-},
-{
-"slug": "iolo-goch",
-"name": "Iolo Goch",
-"wiki": "Iolo_Goch"
-},
-{
-"slug": "rhydderch-ab-ieuan-llwyd",
-"name": "Rhydderch ab Ieuan Llwyd",
-"wiki": "Rhydderch_ab_Ieuan_Llwyd"
-},
-{
-"slug": "hopcyn-ap-tomos",
-"name": "Hopcyn ap Tomos",
-"wiki": ""
-},
-{
-"slug": "hywel-fychan",
-"name": "Hywel Fychan ap Hywel Goch",
-"wiki": ""
-},
-{
-"slug": "hywel-y-fwyall",
-"name": "Sir Hywel ap Gruffudd",
-"wiki": "Hywel_ap_Gruffudd_(Hywel_y_Fwyall)",
-"search": [
-"\"Sir Hywel ap Gruffudd\"",
-"\"Hywel ap Gruffudd\""
-]
-},
-{
-"slug": "adam-of-usk",
-"name": "Adam of Usk",
-"wiki": "Adam_of_Usk"
-},
-{
-"slug": "llywelyn-ap-gruffudd-fychan",
-"name": "Llywelyn ap Gruffudd Fychan",
-"wiki": "Llywelyn_ap_Gruffudd_Fychan"
-},
-{
-"slug": "dafydd-ab-edmwnd",
-"name": "Dafydd ab Edmwnd",
-"wiki": "Dafydd_ab_Edmwnd"
-},
-{
-"slug": "gutun-owain",
-"name": "Gutun Owain",
-"wiki": "Gutun_Owain"
-},
-{
-"slug": "lewys-glyn-cothi",
-"name": "Lewys Glyn Cothi",
-"wiki": "Lewys_Glyn_Cothi"
-},
-{
-"slug": "gwerful-mechain",
-"name": "Gwerful Mechain",
-"wiki": "Gwerful_Mechain"
+"\"Geraint and Enid\"",
+"\"Enid\" Tennyson"
+],
+"n": 6
 },
 {
 "slug": "william-herbert",
-"name": "William Herbert, Earl of Pembroke",
-"wiki": "William_Herbert,_1st_Earl_of_Pembroke_(died_1469)",
+"name": "William Herbert",
+"wiki": "",
 "search": [
-"\"William Herbert, Earl of Pembroke\"",
-"\"William Herbert, 1st Earl of Pembroke\""
-]
-},
-{
-"slug": "jasper-tudor",
-"name": "Jasper Tudor",
-"wiki": "Jasper_Tudor"
-},
-{
-"slug": "guto-r-glyn",
-"name": "Guto’r Glyn",
-"wiki": "Guto'r_Glyn",
-"search": [
-"\"Guto’r Glyn\"",
-"\"Guto'r Glyn\""
-]
-},
-{
-"slug": "tudur-aled",
-"name": "Tudur Aled",
-"wiki": "Tudur_Aled"
-},
-{
-"slug": "elis-gruffydd",
-"name": "Elis Gruffydd",
-"wiki": "Elis_Gruffydd"
-},
-{
-"slug": "blanche-parry",
-"name": "Blanche Parry",
-"wiki": "Blanche_Parry"
+"\"Royal MS 18 D II\"",
+"\"William Herbert\" Edward IV kneeling",
+"\"Herbert\" Raglan effigy"
+],
+"n": 6
 },
 {
 "slug": "gruffydd-robert",
 "name": "Gruffydd Robert",
-"wiki": "Gruffydd_Robert"
-},
-{
-"slug": "humphrey-llwyd",
-"name": "Humphrey Llwyd",
-"wiki": "Humphrey_Llwyd"
-},
-{
-"slug": "sion-dafydd-rhys",
-"name": "Siôn Dafydd Rhys",
-"wiki": "John_Davies_Rhys",
+"wiki": "",
 "search": [
-"\"Siôn Dafydd Rhys\"",
-"\"John Davies Rhys\""
-]
+"\"Dosparth byrr\"",
+"Gramadeg Gruffydd Robert 1567"
+],
+"n": 6
 },
 {
-"slug": "richard-gwyn",
-"name": "Saint Richard Gwyn",
-"wiki": "Richard_Gwyn",
+"slug": "rhydderch-ab-ieuan-llwyd",
+"name": "Rhydderch",
+"wiki": "",
 "search": [
-"\"Saint Richard Gwyn\"",
-"\"St Richard Gwyn\"",
-"\"Richard Gwyn\""
-]
+"\"White Book of Rhydderch\"",
+"\"Llyfr Gwyn Rhydderch\"",
+"\"Peniarth MS 4\""
+],
+"n": 6
 },
 {
-"slug": "john-penry",
-"name": "John Penry",
-"wiki": "John_Penry"
-},
-{
-"slug": "william-wroth",
-"name": "William Wroth",
-"wiki": "William_Wroth"
-},
-{
-"slug": "henry-vaughan",
-"name": "Henry Vaughan",
-"wiki": "Henry_Vaughan"
-},
-{
-"slug": "john-ap-john",
-"name": "John ap John",
-"wiki": ""
-},
-{
-"slug": "theophilus-evans",
-"name": "Theophilus Evans",
-"wiki": "Theophilus_Evans"
-},
-{
-"slug": "isaac-carter",
-"name": "Isaac Carter",
-"wiki": "Isaac_Carter"
-},
-{
-"slug": "daniel-rowland",
-"name": "Daniel Rowland",
-"wiki": "Daniel_Rowland"
-},
-{
-"slug": "marged-ferch-ifan",
-"name": "Marged ferch Ifan",
-"wiki": "Marged_ferch_Ifan"
-},
-{
-"slug": "parri-ddall",
-"name": "John Parry",
-"wiki": "John_Parry_(harpist,_born_1710)"
-},
-{
-"slug": "goronwy-owen",
-"name": "Goronwy Owen",
-"wiki": "Goronwy_Owen"
-},
-{
-"slug": "ieuan-fardd",
-"name": "Evan Evans",
-"wiki": "Evan_Evans_(poet)"
-},
-{
-"slug": "thomas-williams-llanidan",
-"name": "Thomas Williams",
-"wiki": "Thomas_Williams_of_Llanidan",
+"slug": "nennius",
+"name": "Nennius",
+"wiki": "",
 "search": [
-"\"Thomas Williams\"",
-"\"Thomas Williams of Llanidan\""
-]
+"\"Historia Brittonum\""
+],
+"n": 8
 },
 {
-"slug": "owain-myfyr",
-"name": "Owen Jones",
-"wiki": "Owen_Jones_(antiquary)"
-},
-{
-"slug": "bardd-y-brenin",
-"name": "Edward Jones",
-"wiki": "Edward_Jones_(harpist)"
-},
-{
-"slug": "william-owen-pughe",
-"name": "William Owen Pughe",
-"wiki": "William_Owen_Pughe"
-},
-{
-"slug": "morgan-john-rhys",
-"name": "Morgan John Rhys",
-"wiki": "Morgan_John_Rhys"
-},
-{
-"slug": "lucy-thomas",
-"name": "Lucy Thomas",
-"wiki": "Lucy_Thomas"
-},
-{
-"slug": "carnhuanawc",
-"name": "Thomas Price (Carnhuanawc)",
-"wiki": "Thomas_Price_(Carnhuanawc)",
+"slug": "elis-gruffydd",
+"name": "Elis Gruffydd",
+"wiki": "",
 "search": [
-"\"Thomas Price (Carnhuanawc)\"",
-"\"Thomas Price\""
-]
+"\"Elis Gruffudd\"",
+"\"Elis Gruffydd\""
+],
+"n": 6
 },
 {
-"slug": "richard-roberts-engineer",
-"name": "Richard Roberts",
-"wiki": "Richard_Roberts_(engineer)"
-},
-{
-"slug": "tegid",
-"name": "John Jones (Tegid)",
-"wiki": "John_Jones_(Tegid)",
+"slug": "llywelyn-bren",
+"name": "Llywelyn Bren",
+"wiki": "",
 "search": [
-"\"John Jones (Tegid)\"",
-"\"John Jones\""
-]
+"\"Llywelyn Bren\""
+],
+"n": 6
 },
 {
-"slug": "lewsyn-yr-heliwr",
-"name": "Lewis Lewis",
-"wiki": ""
-},
-{
-"slug": "hugh-owen",
-"name": "Sir Hugh Owen",
-"wiki": "Hugh_Owen_(educationist)",
+"slug": "hywel-y-fwyall",
+"name": "Hywel y Fwyall",
+"wiki": "",
 "search": [
-"\"Sir Hugh Owen\"",
-"\"Hugh Owen\""
-]
-},
-{
-"slug": "evan-james",
-"name": "Evan James and James James",
-"wiki": "Evan_James",
-"search": [
-"\"Evan James and James James\"",
-"\"Evan James\""
-]
-},
-{
-"slug": "ceiriog",
-"name": "Ceiriog",
-"wiki": "John_Ceiriog_Hughes",
-"search": [
-"\"Ceiriog\"",
-"\"John Ceiriog Hughes\""
-]
-},
-{
-"slug": "islwyn",
-"name": "Islwyn",
-"wiki": "William_Thomas_(Islwyn)",
-"search": [
-"\"Islwyn\"",
-"\"William Thomas\""
-]
-},
-{
-"slug": "caradog-griffith-rhys-jones",
-"name": "Griffith Rhys Jones",
-"wiki": "Griffith_Rhys_Jones"
-},
-{
-"slug": "john-rhys",
-"name": "Sir John Rhŷs",
-"wiki": "John_Rhys",
-"search": [
-"\"Sir John Rhŷs\"",
-"\"John Rhys\""
-]
-},
-{
-"slug": "frances-hoggan",
-"name": "Frances Hoggan",
-"wiki": "Frances_Hoggan"
-},
-{
-"slug": "samuel-griffith",
-"name": "Sir Samuel Griffith",
-"wiki": "Samuel_Griffith",
-"search": [
-"\"Sir Samuel Griffith\"",
-"\"Samuel Griffith\""
-]
-},
-{
-"slug": "amy-dillwyn",
-"name": "Amy Dillwyn",
-"wiki": "Amy_Dillwyn"
-},
-{
-"slug": "emrys-ap-iwan",
-"name": "Robert Ambrose Jones",
-"wiki": "Emrys_ap_Iwan",
-"search": [
-"\"Robert Ambrose Jones\"",
-"\"Emrys ap Iwan\""
-]
-},
-{
-"slug": "daniel-james-gwyrosydd",
-"name": "Daniel James",
-"wiki": "Daniel_James_(Gwyrosydd)"
-},
-{
-"slug": "tom-ellis",
-"name": "Tom Ellis",
-"wiki": "Thomas_Edward_Ellis",
-"search": [
-"\"Tom Ellis\"",
-"\"Thomas Edward Ellis\""
-]
-},
-{
-"slug": "clara-novello-davies",
-"name": "Clara Novello Davies",
-"wiki": "Clara_Novello_Davies"
-},
-{
-"slug": "llwyd-ap-iwan",
-"name": "Llwyd ap Iwan",
-"wiki": ""
-},
-{
-"slug": "stepney-davies",
-"name": "Thomas and Walter Davies",
-"wiki": "Stepney_Spare_Wheel",
-"search": [
-"\"Thomas and Walter Davies\"",
-"\"Stepney Spare Wheel\""
-]
-},
-{
-"slug": "edgar-evans",
-"name": "Edgar Evans",
-"wiki": "Edgar_Evans_(sailor)"
-},
-{
-"slug": "j-e-lloyd",
-"name": "Sir John Edward Lloyd",
-"wiki": "John_Edward_Lloyd",
-"search": [
-"\"Sir John Edward Lloyd\"",
-"\"John Edward Lloyd\""
-]
-},
-{
-"slug": "john-morris-jones",
-"name": "Sir John Morris-Jones",
-"wiki": "John_Morris-Jones",
-"search": [
-"\"Sir John Morris-Jones\"",
-"\"John Morris-Jones\""
-]
-},
-{
-"slug": "t-gwynn-jones",
-"name": "T. Gwynn Jones",
-"wiki": "T._Gwynn_Jones"
-},
-{
-"slug": "annie-hughes-griffiths",
-"name": "Annie Hughes Griffiths",
-"wiki": "Annie_Hughes_Griffiths"
-},
-{
-"slug": "rachel-barrett",
-"name": "Rachel Barrett",
-"wiki": "Rachel_Barrett"
-},
-{
-"slug": "ernest-jones",
-"name": "Ernest Jones",
-"wiki": "Ernest_Jones"
-},
-{
-"slug": "ifor-williams",
-"name": "Sir Ifor Williams",
-"wiki": "Ifor_Williams",
-"search": [
-"\"Sir Ifor Williams\"",
-"\"Ifor Williams\""
-]
-},
-{
-"slug": "elizabeth-andrews",
-"name": "Elizabeth Andrews",
-"wiki": "Elizabeth_Andrews"
-},
-{
-"slug": "clough-williams-ellis",
-"name": "Sir Clough Williams-Ellis",
-"wiki": "Clough_Williams-Ellis",
-"search": [
-"\"Sir Clough Williams-Ellis\"",
-"\"Clough Williams-Ellis\""
-]
-},
-{
-"slug": "r-williams-parry",
-"name": "R. Williams Parry",
-"wiki": "R._Williams_Parry"
-},
-{
-"slug": "d-j-williams",
-"name": "D. J. Williams",
-"wiki": "D._J._Williams_(Welsh_nationalist)"
-},
-{
-"slug": "morfydd-owen",
-"name": "Morfydd Llwyn Owen",
-"wiki": "Morfydd_Llwyn_Owen"
-},
-{
-"slug": "cynan",
-"name": "Albert Evans-Jones",
-"wiki": "Albert_Evans-Jones"
-},
-{
-"slug": "david-jones-artist",
-"name": "David Jones",
-"wiki": "David_Jones_(artist-poet)"
-},
-{
-"slug": "martyn-lloyd-jones",
-"name": "Martyn Lloyd-Jones",
-"wiki": "Martyn_Lloyd-Jones"
-},
-{
-"slug": "gwenallt",
-"name": "Gwenallt",
-"wiki": "D._Gwenallt_Jones",
-"search": [
-"\"Gwenallt\"",
-"\"D. Gwenallt Jones\""
-]
-},
-{
-"slug": "iorwerth-peate",
-"name": "Iorwerth Peate",
-"wiki": "Iorwerth_Peate"
-},
-{
-"slug": "rhys-davies",
-"name": "Rhys Davies",
-"wiki": "Rhys_Davies"
-},
-{
-"slug": "evan-james-williams",
-"name": "E. J. Williams",
-"wiki": "Evan_James_Williams",
-"search": [
-"\"E. J. Williams\"",
-"\"Evan James Williams\""
-]
-},
-{
-"slug": "t-rowland-hughes",
-"name": "T. Rowland Hughes",
-"wiki": "T._Rowland_Hughes"
-},
-{
-"slug": "ceri-richards",
-"name": "Ceri Richards",
-"wiki": "Ceri_Richards"
-},
-{
-"slug": "caradog-prichard",
-"name": "Caradog Prichard",
-"wiki": "Caradog_Prichard"
-},
-{
-"slug": "idris-davies",
-"name": "Idris Davies",
-"wiki": "Idris_Davies"
-},
-{
-"slug": "glyn-jones",
-"name": "Glyn Jones",
-"wiki": "Glyn_Jones_(writer)"
-},
-{
-"slug": "emlyn-williams",
-"name": "Emlyn Williams",
-"wiki": "Emlyn_Williams"
+"\"Hywel y Fwyall\"",
+"\"Hywel ap Gruffudd\" Criccieth"
+],
+"n": 6
 },
 {
 "slug": "grace-williams",
 "name": "Grace Williams",
-"wiki": "Grace_Williams"
-},
-{
-"slug": "vernon-watkins",
-"name": "Vernon Watkins",
-"wiki": "Vernon_Watkins"
+"wiki": "",
+"search": [
+"\"Grace Williams\" composer"
+],
+"n": 6
 },
 {
 "slug": "gwyn-thomas",
 "name": "Gwyn Thomas",
-"wiki": "Gwyn_Thomas_(novelist)"
-},
-{
-"slug": "dai-rees",
-"name": "Dai Rees",
-"wiki": "Dai_Rees"
-},
-{
-"slug": "alexander-cordell",
-"name": "Alexander Cordell",
-"wiki": "Alexander_Cordell"
-},
-{
-"slug": "desmond-llewelyn",
-"name": "Desmond Llewelyn",
-"wiki": "Desmond_Llewelyn"
-},
-{
-"slug": "alun-lewis",
-"name": "Alun Lewis",
-"wiki": "Alun_Lewis"
-},
-{
-"slug": "kyffin-williams",
-"name": "Sir Kyffin Williams",
-"wiki": "Kyffin_Williams",
+"wiki": "",
 "search": [
-"\"Sir Kyffin Williams\"",
-"\"Kyffin Williams\""
-]
+"\"Gwyn Thomas\" novelist",
+"\"Gwyn Thomas\" Porth"
+],
+"n": 6
 },
 {
-"slug": "mered",
-"name": "Meredydd Evans",
-"wiki": "Meredydd_Evans"
-},
-{
-"slug": "harry-secombe",
-"name": "Sir Harry Secombe",
-"wiki": "Harry_Secombe",
+"slug": "glyn-jones",
+"name": "Glyn Jones",
+"wiki": "",
 "search": [
-"\"Sir Harry Secombe\"",
-"\"Harry Secombe\""
-]
-},
-{
-"slug": "tommy-cooper",
-"name": "Tommy Cooper",
-"wiki": "Tommy_Cooper"
+"\"Glyn Jones\" writer Merthyr",
+"\"Glyn Jones\" poet"
+],
+"n": 6
 },
 {
 "slug": "eileen-beasley",
 "name": "Eileen Beasley",
-"wiki": "Eileen_Beasley"
-},
-{
-"slug": "donald-davies",
-"name": "Donald Davies",
-"wiki": "Donald_Davies"
-},
-{
-"slug": "laura-ashley",
-"name": "Laura Ashley",
-"wiki": "Laura_Ashley"
-},
-{
-"slug": "gwyn-alf-williams",
-"name": "Gwyn Alf Williams",
-"wiki": "Gwyn_Alf_Williams"
-},
-{
-"slug": "stanley-baker",
-"name": "Sir Stanley Baker",
-"wiki": "Stanley_Baker",
+"wiki": "",
 "search": [
-"\"Sir Stanley Baker\"",
-"\"Stanley Baker\""
-]
-},
-{
-"slug": "alun-hoddinott",
-"name": "Alun Hoddinott",
-"wiki": "Alun_Hoddinott"
-},
-{
-"slug": "ivor-allchurch",
-"name": "Ivor Allchurch",
-"wiki": "Ivor_Allchurch"
+"\"Eileen Beasley\"",
+"Beasley Llangennech"
+],
+"n": 6
 },
 {
 "slug": "cliff-morgan",
 "name": "Cliff Morgan",
-"wiki": "Cliff_Morgan"
-},
-{
-"slug": "john-barnard-jenkins",
-"name": "John Jenkins",
-"wiki": "John_Barnard_Jenkins",
+"wiki": "",
 "search": [
-"\"John Jenkins\"",
-"\"John Barnard Jenkins\""
-]
+"\"Cliff Morgan\""
+],
+"n": 6
 },
 {
-"slug": "william-mathias",
-"name": "William Mathias",
-"wiki": "William_Mathias"
+"slug": "margaret-price",
+"name": "Margaret Price",
+"wiki": "",
+"search": [
+"\"Margaret Price\" soprano",
+"\"Margaret Price\" Blackwood"
+],
+"n": 6
 },
 {
 "slug": "gillian-clarke",
 "name": "Gillian Clarke",
-"wiki": "Gillian_Clarke"
-},
-{
-"slug": "dennis-coslett",
-"name": "Dennis Coslett",
-"wiki": "Dennis_Coslett"
-},
-{
-"slug": "howard-winstone",
-"name": "Howard Winstone",
-"wiki": "Howard_Winstone"
-},
-{
-"slug": "margaret-price",
-"name": "Dame Margaret Price",
-"wiki": "Margaret_Price",
+"wiki": "",
 "search": [
-"\"Dame Margaret Price\"",
-"\"Margaret Price\""
-]
+"\"Gillian Clarke\""
+],
+"n": 6
 },
 {
-"slug": "clive-sullivan",
-"name": "Clive Sullivan",
-"wiki": "Clive_Sullivan"
-},
-{
-"slug": "phil-bennett",
-"name": "Phil Bennett",
-"wiki": "Phil_Bennett"
-},
-{
-"slug": "ray-gravell",
-"name": "Ray Gravell",
-"wiki": "Ray_Gravell"
+"slug": "terry-matthews",
+"name": "Terry Matthews",
+"wiki": "",
+"search": [
+"\"Terry Matthews\" Mitel",
+"\"Terry Matthews\" Celtic Manor"
+],
+"n": 6
 },
 {
 "slug": "david-emanuel",
 "name": "David Emanuel",
-"wiki": "David_Emanuel"
-},
-{
-"slug": "phil-campbell",
-"name": "Phil Campbell",
-"wiki": "Phil_Campbell_(musician)"
-},
-{
-"slug": "ralph-steadman",
-"name": "Ralph Steadman",
-"wiki": "Ralph_Steadman"
-},
-{
-"slug": "terry-matthews",
-"name": "Sir Terry Matthews",
-"wiki": "Terry_Matthews",
+"wiki": "",
 "search": [
-"\"Sir Terry Matthews\"",
-"\"Terry Matthews\""
-]
+"\"David Emanuel\" designer",
+"\"David Emanuel\" fashion"
+],
+"n": 6
 },
 {
-"slug": "patrick-jones",
-"name": "Patrick Jones",
-"wiki": "Patrick_Jones_(poet)"
+"slug": "alexander-cordell",
+"name": "Alexander Cordell",
+"wiki": "",
+"search": [
+"\"Alexander Cordell\"",
+"\"Cordell\" Blorenge"
+],
+"n": 6
 },
 {
-"slug": "julien-macdonald",
-"name": "Julien Macdonald",
-"wiki": "Julien_Macdonald"
+"slug": "gwyn-alf-williams",
+"name": "Gwyn Alf Williams",
+"wiki": "",
+"search": [
+"\"Gwyn A. Williams\"",
+"\"Gwyn Alf\""
+],
+"n": 6
 },
 {
-"slug": "jade-jones",
-"name": "Jade Jones",
-"wiki": "Jade_Jones"
+"slug": "elizabeth-andrews",
+"name": "Elizabeth Andrews",
+"wiki": "",
+"search": [
+"\"Elizabeth Andrews\" Labour",
+"\"Elizabeth Andrews\" plaque"
+],
+"n": 6
+},
+{
+"slug": "lucy-thomas",
+"name": "Lucy Thomas",
+"wiki": "",
+"search": [
+"\"Lucy Thomas\" Abercanaid",
+"\"Lucy Thomas\" coal"
+],
+"n": 6
+},
+{
+"slug": "ieuan-fardd",
+"name": "Ieuan Fardd",
+"wiki": "",
+"search": [
+"\"Ieuan Fardd\"",
+"\"Ieuan Brydydd Hir\"",
+"\"Evan Evans\" 1731"
+],
+"n": 6
+},
+{
+"slug": "daniel-james-gwyrosydd",
+"name": "Gwyrosydd",
+"wiki": "",
+"search": [
+"Gwyrosydd",
+"\"Calon Lân\""
+],
+"n": 6
+},
+{
+"slug": "evan-james-williams",
+"name": "E. J. Williams",
+"wiki": "",
+"search": [
+"\"Evan James Williams\" physicist",
+"\"E. J. Williams\" Cwmsychbant"
+],
+"n": 6
+},
+{
+"slug": "rhys-davies",
+"name": "Rhys Davies",
+"wiki": "",
+"search": [
+"\"Rhys Davies\" novelist",
+"\"Rhys Davies\" Blaenclydach"
+],
+"n": 6
+},
+{
+"slug": "donald-davies",
+"name": "Donald Davies",
+"wiki": "",
+"search": [
+"\"Donald Davies\" computer",
+"\"Donald Watts Davies\""
+],
+"n": 6
+},
+{
+"slug": "william-wroth",
+"name": "William Wroth",
+"wiki": "",
+"search": [
+"\"William Wroth\"",
+"Llanfaches chapel"
+],
+"n": 6
+},
+{
+"slug": "isaac-carter",
+"name": "Isaac Carter",
+"wiki": "",
+"search": [
+"\"Isaac Carter\" printer",
+"Trefhedyn press",
+"Atpar press"
+],
+"n": 6
+},
+{
+"slug": "marged-ferch-ifan",
+"name": "Marged ferch Ifan",
+"wiki": "",
+"search": [
+"\"Marged ferch Ifan\"",
+"\"Margaret Evans\" Penllyn"
+],
+"n": 6
+},
+{
+"slug": "gruffudd-ap-rhys",
+"name": "Gruffudd ap Rhys",
+"wiki": "",
+"search": [
+"\"Gruffudd ap Rhys\"",
+"\"Gruffydd ap Rhys\" Deheubarth"
+],
+"n": 6
+},
+{
+"slug": "madog-ap-llywelyn",
+"name": "Madog ap Llywelyn",
+"wiki": "",
+"search": [
+"\"Madog ap Llywelyn\" 1294",
+"\"Madog ap Llywelyn\" Maes Moydog"
+],
+"n": 6
+},
+{
+"slug": "nest",
+"name": "Nest",
+"wiki": "",
+"search": [
+"\"Nest ferch Rhys\"",
+"\"Princess Nest\" Cilgerran"
+],
+"n": 6
+},
+{
+"slug": "john-ap-john",
+"name": "John ap John",
+"wiki": "",
+"search": [
+"\"John ap John\" Quaker",
+"\"John ap John\" Ruabon"
+],
+"n": 6
+},
+{
+"slug": "matholwch",
+"name": "Branwen branch",
+"wiki": "",
+"search": [
+"\"Branwen ferch Llŷr\" manuscript",
+"\"Branwen\" Jesus College"
+],
+"n": 6
+},
+{
+"slug": "rhun-ap-maelgwn",
+"name": "Rhun",
+"wiki": "",
+"search": [
+"\"Rhun ap Maelgwn\"",
+"\"Rhun\" Caer Rhun"
+],
+"n": 6
+},
+{
+"slug": "gwerful-mechain",
+"name": "Gwerful Mechain",
+"wiki": "",
+"search": [
+"\"Gwerful Mechain\""
+],
+"n": 6
+},
+{
+"slug": "dafydd-ab-edmwnd",
+"name": "Dafydd ab Edmwnd",
+"wiki": "",
+"search": [
+"\"Dafydd ab Edmwnd\"",
+"Hanmer church Dafydd"
+],
+"n": 6
+},
+{
+"slug": "cadwallon-lawhir",
+"name": "Cadwallon Lawhir",
+"wiki": "",
+"search": [
+"\"Cadwallon Lawhir\""
+],
+"n": 4
+},
+{
+"slug": "brochwel-ysgithrog",
+"name": "Brochwel",
+"wiki": "",
+"search": [
+"\"Brochwel\" Pennant Melangell",
+"\"Brochfael\""
+],
+"n": 6
+},
+{
+"slug": "caradog-llancarfan",
+"name": "Caradog of Llancarfan",
+"wiki": "",
+"search": [
+"\"Caradog of Llancarfan\"",
+"\"Vita Gildae\""
+],
+"n": 6
+},
+{
+"slug": "cadell-ap-rhodri",
+"name": "Cadell ap Rhodri",
+"wiki": "",
+"search": [
+"\"Cadell ap Rhodri\""
+],
+"n": 4
+},
+{
+"slug": "owain-ap-hywel",
+"name": "Owain ap Hywel",
+"wiki": "",
+"search": [
+"\"Owain ap Hywel\""
+],
+"n": 4
+},
+{
+"slug": "rhys-ap-tewdwr",
+"name": "Rhys ap Tewdwr",
+"wiki": "",
+"search": [
+"\"Rhys ap Tewdwr\""
+],
+"n": 6
+},
+{
+"slug": "iestyn-ap-gwrgant",
+"name": "Iestyn ap Gwrgant",
+"wiki": "",
+"search": [
+"\"Iestyn ap Gwrgant\""
+],
+"n": 6
+},
+{
+"slug": "maelgwn-ap-rhys",
+"name": "Maelgwn ap Rhys",
+"wiki": "",
+"search": [
+"\"Maelgwn ap Rhys\""
+],
+"n": 6
+},
+{
+"slug": "llywelyn-bren2",
+"name": "Llywelyn Bren",
+"wiki": "",
+"search": [
+"Llywelyn Bren Caerphilly 1316"
+],
+"n": 4
 }
 ]
 }
