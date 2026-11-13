@@ -520,6 +520,10 @@ SHELF_EXTRA = {
          "The Chartist rising at Newport and the valleys behind it.", "Gwrthryfel y Siartwyr yng Nghasnewydd a’r cymoedd y tu ôl iddo."),
     ],
     "modern": [
+        (B, "Gwynfor Evans", "For the Sake of Wales: The Memoirs of Gwynfor Evans", "Welsh Academic Press, 1996; first published in Welsh by Gwasg Gwynedd, 1982",
+         "Gwynfor’s own story, from Barry to the first Plaid Cymru seat at Westminster and the fight for S4C.",
+         "Stori Gwynfor ei hun, o’r Barri i sedd gyntaf Plaid Cymru yn San Steffan a’r frwydr dros S4C.",
+         "https://openlibrary.org/books/OL596418M/For_the_sake_of_Wales"),
         (B, "Kenneth O. Morgan", "Wales in British Politics, 1868–1922", "University of Wales Press, 1963",
          "How Wales found its voice at Westminster.", "Sut y cafodd Cymru ei llais yn San Steffan."),
         (B, "Dai Smith", "Wales! Wales?", "George Allen and Unwin, 1984",
