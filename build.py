@@ -2144,6 +2144,9 @@ def otd_pic(link, era, place=None):
     return PX._parse(ref)["small"]
 
 
+OTD_SRC = {}  # (MM-DD, year, English title) -> "[[cite:...]]" keys, filled by otd_rows()
+
+
 def otd_rows():
     """Every dated entry: [MM-DD, year or None, kind, titleEn, titleCy, lineEn, lineCy, link, era, picture]."""
     rows, seen = [], set()
@@ -2154,9 +2157,11 @@ def otd_rows():
             rows.append([ev[4], ev[1], "ev", ev[5], ev[6], ev[7], ev[8], link, ev[0], otd_pic(link, ev[0], ev[10])])
             seen.add((ev[4], ev[1], ev[5]))
     covered = {r[7][6:] for r in OTD.OTD if r[7].startswith("saint:")}
-    for md, y, k, te, tc, le, lc, link in OTD.OTD:
+    for md, y, k, te, tc, le, lc, link, *src in OTD.OTD:
         if (md, y, te) in seen:  # the same day already comes from the timeline (11 November 1918 was in twice)
             continue
+        if src:  # the row's sources (an optional 9th field): a § chip after its line on onthisday.html
+            OTD_SRC[(md, y, te)] = src[0]
         if link.startswith("saint:"):
             link = saint_href(link[6:])
         era = era_of_year(y) if y is not None else "saints" if k == "feast" else "modern"
@@ -2177,7 +2182,9 @@ def otd_item(r):
     title = bi(te, tc)
     if link:
         title = f'<a href="{e(link)}">{title}</a>'
-    return f'<li data-era="{era}" class="k-{k}"><p class="when">{when}</p><div><h4>{title}</h4><p>{bi(le, lc)}</p></div></li>'
+    src = OTD_SRC.get((md, y, te))
+    cite = f"[[cite:{src}]]" if src else ""  # the build turns it into a § source chip (src/cites.py)
+    return f'<li data-era="{era}" class="k-{k}"><p class="when">{when}</p><div><h4>{title}</h4><p>{bi(le, lc)}{cite}</p></div></li>'
 
 
 def onthisday_page():

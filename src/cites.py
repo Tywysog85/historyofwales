@@ -852,6 +852,8 @@ from bruts import CITES as _BRUTS  # noqa: E402  (the Bruts, src/bruts.py)
 S.update(_BRUTS)
 from oldbooks import CITES as _OLDBOOKS  # noqa: E402  (the old books of Wales, src/oldbooks.py)
 S.update(_OLDBOOKS)
+from onthisday import CITES as _OTD  # noqa: E402  (the sources of On this day, src/onthisday.py)
+S.update(_OTD)
 
 MARK = re.compile(r"\[\[cite:([a-z0-9,\- ]+)\]\]")
 
