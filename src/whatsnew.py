@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-13", "Cofiwch Epynt: the clearing of the mountain, 1940", "Cofiwch Epynt: clirio’r mynydd, 1940",
+     "A new long read: how 219 people from 54 homes on Mynydd Epynt, a whole Welsh-speaking community with its chapel, school and inn, were made to leave in 1940 for an army range; Iorwerth Peate and ‘Mae’n ddiwedd byd yma’; the fire on the hearth at Glandŵr; and how Wales remembers them, with the farm names set back on the land in 2025.",
+     "Erthygl newydd: sut y gorfodwyd 219 o bobl o 54 o gartrefi ar Fynydd Epynt, cymuned Gymraeg gyfan gyda’i chapel, ei hysgol a’i thafarn, i adael yn 1940 er mwyn maes tanio’r fyddin; Iorwerth Peate a ‘Mae’n ddiwedd byd yma’; y tân ar aelwyd Glandŵr; a sut y mae Cymru’n eu cofio, gydag enwau’r ffermydd yn ôl ar y tir yn 2025.",
+     "story-epynt.html"),
     ("2026-11-13", "Seventy new books, and where to buy them", "Saith deg o lyfrau newydd, a ble i’w prynu",
      "The Books and authors page has grown by seventy books, from Gwyn A. Williams’s Excalibur and every book by Alan Wilson and Baram Blackett to the old classics of Skene, Wade-Evans and Borrow, many with a free scan to read online. Every book on that page and in Further reading now has Buy links to Amazon and AbeBooks, so you can find a new or second-hand copy.",
      "Mae’r dudalen Llyfrau ac awduron wedi tyfu o saith deg o lyfrau, o Excalibur Gwyn A. Williams a phob llyfr gan Alan Wilson a Baram Blackett i hen glasuron Skene, Wade-Evans a Borrow, llawer ohonynt gyda chopi i’w ddarllen am ddim ar-lein. Mae gan bob llyfr ar y dudalen honno ac yn Darllen pellach ddolenni Prynu i Amazon ac AbeBooks bellach, er mwyn i chi gael copi newydd neu ail-law.",
