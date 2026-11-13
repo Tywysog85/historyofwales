@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-13", "Every book in Further reading now has a link", "Mae dolen i bob llyfr yn Darllen pellach bellach",
+     "Every book in the Further reading list, and in the reading lists on every page, now links to its publisher’s page, or to its free library record when it is out of print. Eight more good Welsh history websites have joined the Online list, from Heneb and the Cambrian Archaeological Association to the poems of Dafydd ap Gwilym and Guto’r Glyn.",
+     "Mae pob llyfr yn y rhestr Darllen pellach, ac yn y rhestrau darllen ar bob tudalen, yn arwain at dudalen ei gyhoeddwr bellach, neu at ei gofnod llyfrgell rhad ac am ddim pan fo allan o brint. Mae wyth gwefan dda arall ar hanes Cymru wedi ymuno â’r rhestr Ar-lein, o Heneb a Chymdeithas Hynafiaethau Cymru i gerddi Dafydd ap Gwilym a Guto’r Glyn.",
+     "index.html#sources"),
     ("2026-11-13", "Every day of the year in On this day", "Pob diwrnod o’r flwyddyn yn Ar y dydd hwn",
      "On this day now has an entry of its own for every day of the year, even 29 February: 126 new births, deaths, saints’ days and events, each with its source beside it.",
      "Mae gan Ar y dydd hwn gofnod ei hun ar gyfer pob diwrnod o’r flwyddyn bellach, hyd yn oed 29 Chwefror: 126 o enedigaethau, marwolaethau, gwyliau seintiau a digwyddiadau newydd, pob un â’i ffynhonnell wrth ei ochr.",

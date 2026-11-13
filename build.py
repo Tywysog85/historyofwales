@@ -21,6 +21,7 @@ import photos as PH  # noqa: E402
 import eventpages as EP  # noqa: E402
 import welshpages as WP  # noqa: E402
 import cites as CITE  # noqa: E402  (sources beside the claims: [[cite:...]] markers, src/cites.py)
+import booklinks as BL  # noqa: E402  (a checked web page for books in the reading lists, src/booklinks.py)
 import llys as LLYS  # noqa: E402  (Llys Rhosyr in 3D: llys-rhosyr.html, src/llys.py, tools/llys3d.src.js -> src/static/llys3d.js)
 import ride as RIDE  # noqa: E402  (Ride with Glyndŵr, 1400: ride-glyndwr.html, src/ride.py, src/static/ride.js)
 import teachpacks as TPK  # noqa: E402  (teacher packs: pack-<age>.html, src/teachpacks.py)  (every page also in Welsh at cy/<page>.html: src/welshpages.py)  (a page for every timeline event: src/eventpages.py)
@@ -1173,7 +1174,7 @@ def refs_block(key, intro=None):
             if it[0] != kind:
                 continue
             _, who, title, det, nen, ncy = it[:6]
-            url = it[6] if len(it) > 6 else ""
+            url = (it[6] if len(it) > 6 else "") or BL.link(who, title)
             t = f'<a href="{e(url)}" target="_blank" rel="noopener"><cite>{e(title)}</cite> ↗</a>' if url else f"<cite>{e(title)}</cite>"
             lis.append(f'<li><span class="ref-w">{e(who)}</span>, {t} <span class="ref-d">({e(det)})</span><span class="ref-n">{bi(nen, ncy)}</span></li>')
         if kind == "w":
@@ -1318,7 +1319,7 @@ def bookshelf_page():
 
     def li(it):
         _, who, title, det, nen, ncy = it[:6]
-        url = it[6] if len(it) > 6 else ""
+        url = (it[6] if len(it) > 6 else "") or BL.link(who, title)
         t = f'<a href="{e(url)}" target="_blank" rel="noopener"><cite>{e(title)}</cite> ↗</a>' if url else f"<cite>{e(title)}</cite>"
         on = where.get((who, title), [])
         more = (f'<span class="ref-on">{bi("On this site:", "Ar y wefan hon:")} ' + ", ".join(f'<a href="{h}">{bi(en, cy)}</a>' for h, en, cy in on[:4])

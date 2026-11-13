@@ -456,9 +456,12 @@ READING = [
  dict(t="Martin Johnes, Wales since 1939", n="Manchester University Press, 2012.", nCy="Gwasg Prifysgol Manceinion, 2012."),
  dict(t="Jan Morris, Wales: Epic Views of a Small Country", n="Penguin, 1998. History as travel writing.", nCy="Penguin, 1998. Hanes drwy lenyddiaeth teithio."),
 ]
+import booklinks as _BL  # every other book gets its publisher's (or Open Library's) page
 for _r in READING:
     if _r.get("u", "").startswith("YL"):
         _r["u"] = "https://www.ylolfa.com/products/" + _r["u"][2:]
+    elif not _r.get("u"):
+        _r["u"] = _BL.link(*_r["t"].split(", ", 1))
 ONLINE = [  # u: the English site, uCy: its Welsh address (each checked 2026-11-12)
  dict(t="Dictionary of Welsh Biography", tCy="Y Bywgraffiadur Cymreig", u="https://biography.wales/", uCy="https://bywgraffiadur.cymru/"),
  dict(t="National Library of Wales", tCy="Llyfrgell Genedlaethol Cymru", u="https://www.library.wales/", uCy="https://www.llyfrgell.cymru/"),
@@ -470,6 +473,14 @@ ONLINE = [  # u: the English site, uCy: its Welsh address (each checked 2026-11-
  dict(t="People’s Collection Wales", tCy="Casgliad y Werin Cymru", u="https://www.peoplescollection.wales/", uCy="https://www.casgliadywerin.cymru/"),
  dict(t="Royal Commission on the Ancient and Historical Monuments of Wales", tCy="Comisiwn Brenhinol Henebion Cymru", u="https://rcahmw.gov.uk/", uCy="https://cbhc.gov.uk/"),
  dict(t="Coflein, the national monuments record", tCy="Coflein, cofnod henebion cenedlaethol", u="https://coflein.gov.uk/", uCy="https://coflein.gov.uk/cy/"),
+ dict(t="Heneb: the Trust for Welsh Archaeology", tCy="Heneb: Ymddiriedolaeth Archaeoleg Cymru", u="https://heneb.org.uk/", uCy="https://heneb.org.uk/cy/"),  # added 2026-11-13
+ dict(t="Cambrian Archaeological Association", tCy="Cymdeithas Hynafiaethau Cymru", u="https://cambrians.org.uk/", uCy="https://cambrians.org.uk/cy/"),
+ dict(t="Historic Place Names of Wales", tCy="Enwau Lleoedd Hanesyddol Cymru", u="https://historicplacenames.rcahmw.gov.uk/", uCy="https://enwaulleoeddhanesyddol.cbhc.gov.uk/"),
+ dict(t="Seintiau: the saints of Wales", tCy="Seintiau: seintiau Cymru", u="https://saints.wales/"),
+ dict(t="Dafydd ap Gwilym: all his poems", tCy="Dafydd ap Gwilym: ei gerddi i gyd", u="https://dafyddapgwilym.net/index_eng.php", uCy="https://dafyddapgwilym.net/index_cym.php"),
+ dict(t="Guto’r Glyn and his Wales", tCy="Guto’r Glyn a’i Gymru", u="https://gutorglyn.net/gutoswales/index.php", uCy="https://gutorglyn.net/gutoswales/cy/index.php"),
+ dict(t="Welsh Prose 1300–1425: the old tales and laws in their manuscripts", tCy="Rhyddiaith 1300–1425: yr hen chwedlau a’r cyfreithiau yn eu llawysgrifau", u="https://rhyddiaithganoloesol.cardiff.ac.uk/en"),
+ dict(t="The Honourable Society of Cymmrodorion, since 1751", tCy="Anrhydeddus Gymdeithas y Cymmrodorion, ers 1751", u="https://www.cymmrodorion.org/", uCy="https://www.cymmrodorion.org/cy/"),
  dict(t="Cymdeithas yr Iaith: its story since 1962", tCy="Cymdeithas yr Iaith: ei hanes ers 1962", u="https://archif.cymdeithas.cymru/what-is-cymdeithas-yr-iaith"),
  dict(t="Y Lolfa, the Talybont press", tCy="Y Lolfa, gwasg Tal-y-bont", u="https://www.ylolfa.com/"),
  dict(t="ffolio: Welsh books from the Books Council of Wales", tCy="ffolio: llyfrau Cymru gan Gyngor Llyfrau Cymru", u="https://www.ffolio.wales/", uCy="https://www.ffolio.cymru/"),
