@@ -465,7 +465,6 @@ def page(path, title, desc, main_html, era=None, og_type="article", ld=None, act
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="claude:viewport-fit-sides" content="cover">
 {head_tags(title, desc, path, og_type, card)}{LANG_BOOT}
 {fonts}
 <style>{style}{PRINT_CSS}</style>
@@ -2127,9 +2126,14 @@ def era_of_year(y):
     return "today"
 
 
-def otd_pic(link, era, place=None):
-    """A small picture for an On this day row (home page panel): the person's or place's own photo,
-    else the linked page's picture (src/pictures.py), else the event's place, else the picture of its age."""
+OTD_ICON = {"born": "born", "died": "died", "feast": "cross", "custom": "harp"}
+
+
+def otd_pic(link, era, place=None, kind="ev"):
+    """A small picture for an On this day row (home page panel): the person's or place's own photo, else the linked page's
+    own picture (src/pictures.py), else the event's place. An entry with no picture of its own gets a small line drawing
+    instead ("i:<icon>": born, died, feast day, tradition, or the drawing of its age for an event), never the stock picture
+    of its age, which showed Capel Celyn beside Ivor Novello and the Cardiff Blitz (audit, November 2026)."""
     path = (link or "").split("#")[0]
     stem = path[:-5] if path.endswith(".html") else ""
     if stem.startswith("saints-") and "#s-" in (link or ""):
@@ -2143,8 +2147,16 @@ def otd_pic(link, era, place=None):
     if place and "place-" + place in GP.GALLERY:
         return f"gallery/place-{place}-s.webp"
     ref = PX.for_page(path) if path else None  # a saint without a portrait takes the picture of their region's saints page
-    ref = ref or PX.ERA.get(era) or PX.ERA["medieval"]
-    return PX._parse(ref)["small"]
+    if ref and ref not in PX.ERA.values():
+        return PX._parse(ref)["small"]
+    return "i:" + OTD_ICON.get(kind, ERA.get(era, ERA["medieval"])["ill"])
+
+
+def otd_pic_html(pic, cls="otd-pic"):
+    """The picture box of an On this day row: a photo, or the small drawing otd_pic() chose (app.js draws the same)."""
+    if pic.startswith("i:"):
+        return f'<span class="{cls} otd-ic" aria-hidden="true"><svg><use href="#i-{pic[2:]}"/></svg></span>'
+    return f'<span class="{cls}"><img src="{e(pic)}" alt="" width="96" height="96" loading="lazy" decoding="async"></span>'
 
 
 OTD_SRC = {}  # (MM-DD, year, English title) -> "[[cite:...]]" keys, filled by otd_rows()
@@ -2168,12 +2180,12 @@ def otd_rows():
         if link.startswith("saint:"):
             link = saint_href(link[6:])
         era = era_of_year(y) if y is not None else "saints" if k == "feast" else "modern"
-        rows.append([md, y, k, te, tc, le, lc, link, era, otd_pic(link, era)])
+        rows.append([md, y, k, te, tc, le, lc, link, era, otd_pic(link, era, kind=k)])
     for sid, (x, r) in SAINT.items():  # every other saint with a feast day on the Saints of Wales page
         if x["feast"] and sid not in covered:
             first = lambda t: t.split(". ")[0].rstrip(".") + "."
             link = saint_href(sid)
-            rows.append([f'{x["feast"][1]:02d}-{x["feast"][0]:02d}', None, "feast", x["en"], x["cy"], first(x["nEn"]), first(x["nCy"]), link, "saints", otd_pic(link, "saints")])
+            rows.append([f'{x["feast"][1]:02d}-{x["feast"][0]:02d}', None, "feast", x["en"], x["cy"], first(x["nEn"]), first(x["nCy"]), link, "saints", otd_pic(link, "saints", kind="feast")])
     rows.sort(key=lambda r: (r[0], OTD_ORDER[r[2]], r[1] if r[1] is not None else -10 ** 6))
     return rows
 
@@ -3290,7 +3302,7 @@ def otd_home_row(r, show_date):
     if tag:
         bits.append(f'<span class="k">{bi(*tag)}</span>')
     href = link or f"onthisday.html#d-{md}"
-    return (f'<li class="otd-row wl-card" data-era="{era}"><span class="otd-pic"><img src="{e(pic)}" alt="" width="96" height="96" loading="lazy" decoding="async"></span>'
+    return (f'<li class="otd-row wl-card" data-era="{era}">{otd_pic_html(pic)}'
             f'<div class="otd-txt"><p class="otd-meta">{"".join(bits)}</p><h3>{bi(te, tc)}</h3><p>{bi(le, lc)}</p></div>'
             f'<a class="wl" href="{e(href)}">{bi(te, tc)}</a></li>')
 
@@ -3323,10 +3335,11 @@ def ssr_today():
         wd = WEEKDAYS[d.weekday()]
         week += (f'<button type="button" class="otd-wd{" on" if k == 0 else ""}{" has" if n else ""}" data-otd-day="{dm}" aria-pressed="{"true" if k == 0 else "false"}">'
                  f'<span class="w">{bi(*wd)}</span> <span class="n">{d.day}</span><i aria-hidden="true">{"".join("<b></b>" for _ in range(min(n, 3)))}</i></button>')
-    pic = shown[0][9] if shown else PX._parse(PX.ERA["medieval"])["small"]
+    pic = next((r[9] for r in shown if not r[9].startswith("i:")), "")  # the first real picture of the day, or none
     note = (f'<p class="otd-near">{bi("Nothing we know of happened on exactly this day. Here are the nearest dates.", "Ni wyddom am ddim a ddigwyddodd ar union y diwrnod hwn. Dyma’r dyddiadau agosaf.")}</p>' if near else "")
     more = (f'<button type="button" class="otd-more" data-otd="more">+{len(hit) - len(shown)} {bi("more on this day", "arall ar y dydd hwn")}</button>' if len(hit) > len(shown) else "")
-    return (f'<div class="otd-head"><img class="otd-bg" src="{e(pic)}" alt="" loading="lazy" decoding="async">'
+    bg = f'<img class="otd-bg" src="{e(pic)}" alt="" loading="lazy" decoding="async">' if pic else ""
+    return (f'<div class="otd-head">{bg}'
             f'<p class="otd-date"><span class="d">{day.day}</span><span class="m">{bi(*MONTHS[m])}</span><span class="lab">{bi("Today", "Heddiw")}</span></p>'
             f'<span class="otd-nav"><button type="button" data-otd="-1" aria-label="{bi("Day before", "Y diwrnod cynt")}">‹</button><button type="button" data-otd="1" aria-label="{bi("Next day", "Y diwrnod nesaf")}">›</button></span></div>'
             f'<div class="otd-week" role="group" aria-label="{bi("Choose a day", "Dewiswch ddiwrnod")}">{week}</div>'
@@ -3920,8 +3933,17 @@ def _fp(text):
     return hashlib.md5(text.encode("utf-8")).hexdigest()[:10]
 
 
+SPRITE = ('<svg xmlns="http://www.w3.org/2000/svg">' + symbols[symbols.index("<defs>"): symbols.rindex("</defs>") + 7] + "</svg>\n")
+SPRITE_URL = f"sprite.svg?v={_fp(SPRITE)}"
+
+
 def shared_assets(pages):
-    files = {}
+    files = {"sprite.svg": SPRITE}
+    # The line drawings (#i-castle and the rest) live in sprite.svg, not in every page. A page used to carry them inline and
+    # point at "#i-castle", but the Welsh pages have <base href="../">, so "#i-castle" meant the English home page and the
+    # drawings came out blank on /cy/ (audit, November 2026). "sprite.svg#i-castle" works the same in both languages.
+    for name, text in list(pages.items()):
+        pages[name] = text.replace(symbols + "\n", "").replace(symbols, "").replace('href="#i-', f'href="{SPRITE_URL}#i-')
     css = style + PRINT_CSS
     css_tag = f'<link rel="stylesheet" href="site.css?v={_fp(css)}">\n'
     files["site.css"] = css
@@ -3945,6 +3967,35 @@ def shared_assets(pages):
         files["data.js"] = data_js
         files["app.js"] = app_js
     return files
+
+
+# ---------- every link between pages must lead somewhere ----------
+# The audit of November 2026 found one dead link on the whole site (learn-welsh.html on the Welsh Not long read). This
+# check keeps it that way: the build stops and names the page and the link if any link points at a page that is not built.
+_HREF = re.compile(r'<a\b[^>]*?\shref="([^"]*)"', re.I)
+_SCRIPTS = re.compile(r"<(script|style|template)\b.*?</\1\s*>", re.S | re.I)
+
+
+def check_links(pages):
+    static = set()
+    for root, _dirs, files in os.walk(os.path.join(SRC, "static")):
+        for f in files:
+            static.add(os.path.relpath(os.path.join(root, f), os.path.join(SRC, "static")).replace(os.sep, "/"))
+    broken = []
+    for name, text in pages.items():
+        if not name.endswith(".html"):
+            continue
+        folder = "" if name.startswith("cy/") else os.path.dirname(name)  # the Welsh pages have <base href="../">
+        for h in _HREF.findall(_SCRIPTS.sub("", text)):
+            h = html.unescape(h).split("#")[0].split("?")[0]
+            if not h or re.match(r"^[a-z][a-z0-9+.-]*:|^//", h, re.I):
+                continue   # a #part of the same page, or another website
+            t = os.path.normpath(h.lstrip("/") if h.startswith("/") else os.path.join(folder, h)).replace(os.sep, "/")
+            if h.endswith("/") or h in (".", ".."):
+                t = "index.html" if t == "." else t + "/index.html"   # a folder: its index.html
+            if t.endswith(".html") and t not in pages and t not in static:
+                broken.append(f"{name} -> {h}")
+    return broken
 
 
 # ---------- the page for addresses that do not exist ----------
@@ -4053,6 +4104,12 @@ def main():
     today = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
     for name in pages:   # "Last updated" on each page, and dateModified for search engines (src/about.py)
         pages[name] = AB.fill_dates(pages[name], marks.get(name, [None, today])[1])
+    broken = check_links(pages)
+    if broken:
+        print(f"BROKEN LINKS: {len(broken)} link(s) point at pages that do not exist. Fix them (or add the page) and build again:")
+        print("\n".join("  " + b for b in sorted(set(broken))[:200]))
+        if os.environ.get("ALLOW_BROKEN_LINKS") != "1":
+            sys.exit(1)
     for name, text in pages.items():
         write(os.path.join(out, name), text)
     for name, text in shared_files.items():

@@ -250,7 +250,7 @@ def pack_page(i, era):
     ld = {"@context": "https://schema.org", "@type": "LearningResource", "name": f'{era["en"]}: teacher pack', "learningResourceType": "Lesson plan",
           "educationalLevel": "Primary and secondary", "inLanguage": ["en", "cy"], "teaches": era["en"],
           "isAccessibleForFree": True, "license": "https://creativecommons.org/licenses/by-nc/4.0/"}
-    return page(f"pack-{eid}.html", f'{era["en"]}: teacher pack for the Curriculum for Wales · History of Wales',
+    return page(f"pack-{eid}.html", f'{era["en"]}: teacher pack, Curriculum for Wales · History of Wales',
                 f'A free printable pack on {era["en"]} ({era["spanEn"]}) for the Curriculum for Wales: enquiry questions, key words, a timeline, people, places, a source and activities for each progression step.',
                 main, era=eid, ld=ld, active="teachers.html", track=f"pack:{eid}")
 
