@@ -415,13 +415,14 @@ import rhys as _RH  # Prince Rhys ap Gruffudd, the Lord Rhys (src/rhys.py)
 import aberfan as _AF  # The Aberfan disaster, 21 October 1966 (src/aberfan.py)
 import mac as _MAC  # MAC and the Free Wales Army (src/mac.py)
 import tryweryn as _TW  # Cofiwch Dryweryn: the drowning of Capel Celyn (src/tryweryn.py)
+import epynt as _EP  # Cofiwch Epynt: the clearing of the mountain, 1940 (src/epynt.py)
 import industry as _IN  # How Wales moved the world: the industrial revolution (src/industry.py)
 import writers as _WRT  # The writers who recorded early Wales (src/writers.py)
 import bruts as _BRT  # The Bruts, the chronicles of Wales (src/bruts.py)
 import welshnot as _WN  # The Welsh Not and how they tried to wipe out the language (src/welshnot.py)
 import mabinogi as _MBG  # The Mabinogi: the books that kept the tales (src/mabinogi.py)
 import brittany as _BZH  # Llydaw: how the Britons made a second Britain (src/brittany.py)
-STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY, _NS.STORY, _RH.STORY] + _CH.STORIES + [_PT.STORY, _AF.STORY, _TW.STORY] + _MAC.STORIES + [_WN.STORY] + [_IN.STORY] + [_MBG.STORY] + [_WRT.STORY, _BRT.STORY] + [_BZH.STORY]
+STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY, _NS.STORY, _RH.STORY] + _CH.STORIES + [_PT.STORY, _AF.STORY, _TW.STORY, _EP.STORY] + _MAC.STORIES + [_WN.STORY] + [_IN.STORY] + [_MBG.STORY] + [_WRT.STORY, _BRT.STORY] + [_BZH.STORY]
 # the long reads on the language and on protest point on to the Welsh Not long read (src/welshnot.py)
 for _s in STORIES:
     if _s["id"] in ("language", "revival", "protest"):
