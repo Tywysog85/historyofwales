@@ -424,7 +424,7 @@ def footer():
         f'<li><a href="era-{x["id"]}.html">{bi(x["en"], x["cy"])} <span class="m-dates">{bi(x["spanEn"], x["spanCy"])}</span></a></li>' for x in D.ERAS) + "</ul></details>")
     explore = [("timeline.html", "Timeline", "Llinell amser"), ("map.html", "Map of Wales", "Map Cymru"), ("people.html", "People", "Pobl"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("castles.html", "Castles of Wales", "Cestyll Cymru"), ("trails.html", "Themed trails", "Llwybrau thema"),
                ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"), ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg")]
-    read = [("whatsnew.html", "What’s new", "Beth sy’n newydd"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"), ("laws.html", "The Laws of Hywel Dda", "Cyfreithiau Hywel Dda"), ("literature.html", "Welsh literature", "Llenyddiaeth Gymraeg"), ("books.html", "The great books of Wales", "Llyfrau mawr Cymru"), ("triads.html", "The Welsh Triads", "Trioedd Ynys Prydain"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
+    read = [("whatsnew.html", "What’s new", "Beth sy’n newydd"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"), ("laws.html", "The Laws of Hywel Dda", "Cyfreithiau Hywel Dda"), ("literature.html", "Welsh literature", "Llenyddiaeth Gymraeg"), ("books.html", "The great books of Wales", "Llyfrau mawr Cymru"), ("manuscripts.html", "Medieval manuscripts", "Llawysgrifau canoloesol"), ("triads.html", "The Welsh Triads", "Trioedd Ynys Prydain"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
             ("teachers.html", "For teachers", "I athrawon"), ("index.html#sources", "Sources", "Ffynonellau"),
             ("about.html", "About this site", "Am y wefan hon"), ("about.html#corrections", "Report a mistake", "Rhoi gwybod am gamgymeriad")]
     play = [("daily.html", "Daily challenge", "Her y dydd"), ("quiz.html", "Quiz", "Cwis"), ("map-game.html", "Where in Wales?", "Ble yng Nghymru?"), ("names.html", "Welsh names", "Enwau Cymraeg"),
@@ -1782,11 +1782,11 @@ def book_card(b, era):
     alt = b["cy"] if b["cy"] != b["en"] else ""
     where = bi(b["whereEn"], b["whereCy"]) if b["whereEn"] else ""
     link = (f'<p><a class="go" href="{b["link"][0]}">{bi(b["link"][1], b["link"][2])} →</a></p>' if b.get("link") else "")
-    return (f'<article class="bk rv" id="{b["id"]}" data-era="{era}">{lit_fig(b["pic"])}<div class="in">'
+    return (f'<article class="bk rv wl-card" id="{b["id"]}" data-era="{era}">{lit_fig(b["pic"])}<div class="in">'
             f'<p class="meta"><span>{bi(b["date"], b["dateCy"])}</span>{f"<span>{where}</span>" if where else ""}</p>'
-            f'<h3><a href="book-{b["id"]}.html">{bi(b["en"], b["cy"])}</a></h3>' + (f'<p class="alt l-en" lang="cy">{e(alt)}</p>' if alt else "")
+            f'<h3><a class="wl-go" href="book-{b["id"]}.html">{bi(b["en"], b["cy"])}</a></h3>' + (f'<p class="alt l-en" lang="cy">{e(alt)}</p>' if alt else "")
             + f'<p>{bi(b["en_t"], b["cy_t"])}</p>{lit_fig(b.get("pic2"), "pic2")}'
-            + f'<p><a class="go" href="book-{b["id"]}.html">{bi("The whole story of the book", "Stori gyfan y llyfr")} →</a></p>{link}</div></article>')
+            + f'{link}</div></article>')
 
 
 def books_page():
@@ -1800,7 +1800,8 @@ def books_page():
                  "Llyfr Du Caerfyrddin, Llyfrau Aneirin a Thaliesin, Llyfr Coch Hergest, Llyfr Gwyn Rhydderch, a’r llyfrau printiedig cyntaf: y trysorau a gadwodd gof Cymru’n fyw.", art="arches", extra=jump)
             + f'<style>{LIT_CSS}</style>'
             + section(paras(LT.BOOKS_INTRO_EN, LT.BOOKS_INTRO_CY) + f'<p class="lede">{bi(OB.INTRO_EN, OB.INTRO_CY)}</p>'
-                      + f'<p class="l-links"><a class="btn" href="story-writers.html">{bi("The writers who recorded early Wales", "Yr awduron a gofnododd Gymru gynnar")} →</a> '
+                      + f'<p class="l-links"><a class="btn solid" href="manuscripts.html">{bi("Every medieval Welsh manuscript, oldest first", "Pob llawysgrif Gymraeg ganoloesol, yr hynaf yn gyntaf")} →</a> '
+                      + f'<a class="btn" href="story-writers.html">{bi("The writers who recorded early Wales", "Yr awduron a gofnododd Gymru gynnar")} →</a> '
                       + f'<a class="btn" href="story-bruts.html">{bi("The Bruts: the chronicles of Wales", "Y Brutiau: croniclau Cymru")} →</a> '
                       + f'<a class="btn" href="triads.html">{bi("The Welsh Triads", "Trioedd Ynys Prydain")} →</a></p>', top=True)
             + groups
@@ -1814,7 +1815,15 @@ def books_page():
 
 
 LT.BOOK_GROUPS.insert(next(i for i, g in enumerate(LT.BOOK_GROUPS) if g["id"] == "great") + 1, OB.NEW_GROUP)  # three more treasures (src/oldbooks.py)
-BOOK_ERAS = {"earliest": "saints", "four": "medieval", "great": "medieval", "more": "medieval", "print": "tudor"}
+for _after, _b in OB.MSS._EARLY:  # more of the oldest manuscripts, each after the book named (src/manuscripts.py)
+    _g = next(g for g in LT.BOOK_GROUPS if g["id"] == "earliest")
+    _g["books"].insert(next(i for i, x in enumerate(_g["books"]) if x["id"] == _after) + 1, _b)
+for _after, _grp in OB.MSS.GROUPS:  # the Latin books, lawbooks, tales and later books of medieval Wales
+    LT.BOOK_GROUPS.insert(next(i for i, g in enumerate(LT.BOOK_GROUPS) if g["id"] == _after) + 1, _grp)
+LT.DOORS.insert(next(i for i, d in enumerate(LT.DOORS) if d[0] == "books.html") + 1,
+                ("manuscripts.html", "The medieval manuscripts of Wales", "Llawysgrifau canoloesol Cymru",
+                 "Every great book written by hand in medieval Wales, and where to read it online.", "Pob llyfr mawr a ysgrifennwyd â llaw yng Nghymru’r Oesoedd Canol, a ble i’w ddarllen ar-lein.", "trea-st-chad"))
+BOOK_ERAS = {"earliest": "saints", "four": "medieval", "great": "medieval", "more": "medieval", "print": "tudor", **OB.MSS.ERAS}
 ALL_BOOKS = [(b, g) for g in LT.BOOK_GROUPS for b in g["books"]]
 
 
@@ -1834,6 +1843,12 @@ def book_page(i):
     if b.get("link") and b["link"][0] not in {u for u, _, _ in links}:
         links.insert(0, b["link"])
     btns = " ".join(f'<a class="btn" href="{u}">{bi(a, c)} →</a>' for u, a, c in links)
+    hub = OB.MSS.HUB.get(b["id"])
+    if hub and hub[3]:  # see the manuscript itself, on its library's website (src/manuscripts.py HUB)
+        btns = (f'<a class="btn solid" href="{e(hub[3])}" target="_blank" rel="noopener">'
+                + (bi("See every page online", "Gweld pob tudalen ar-lein") if hub[4] == "pages" else bi("The library’s record of it", "Cofnod y llyfrgell ohono"))
+                + ' ↗</a> ' + btns)
+    btns += f' <a class="btn" href="manuscripts.html">{bi("Every medieval Welsh manuscript", "Pob llawysgrif Gymraeg ganoloesol")} →</a>' if b["id"] in OB.MSS.HUB else ""
     body = (f'<section class="article"><div class="wrap narrow">{where}{alt}'
             f'{prose_bi(pg["pEn"], pg["pCy"], "story prose", figs=OB.FIGS)}{lit_fig(b.get("pic2"), "lr-fig")}'
             f'<p class="l-links">{btns}</p></div></section>')
@@ -1846,6 +1861,99 @@ def book_page(i):
     ld = {"@context": "https://schema.org", "@type": "Article", "headline": b["en"], "description": first(b["en_t"]), "inLanguage": ["en", "cy"],
           "about": {"@type": "Book", "name": b["en"], "alternateName": b["cy"]}, "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
     return page(f'book-{b["id"]}.html', f'{b["en"]} · The old books of Wales · History of Wales', first(b["en_t"]), main, era=era, ld=ld, active="literature.html", track=f'book:{b["id"]}')
+
+
+MS_CSS = """
+.ms-stats{display:flex;flex-wrap:wrap;gap:.6rem 2rem;margin:1.4rem 0 0;padding:0;list-style:none}
+.ms-stats li{font-family:var(--f-mono);font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ms-stats b{display:block;font-family:var(--f-display);font-size:2.2rem;line-height:1.1;color:var(--gold);letter-spacing:0;text-transform:none}
+.ms-list{list-style:none;margin:0;padding:0;display:grid;gap:.7rem}
+.ms-row{position:relative;display:grid;grid-template-columns:5.5rem 1fr auto;gap:1rem;align-items:center;padding:.8rem;border:1px solid var(--line);border-radius:var(--r);background:var(--card)}
+.ms-row .th{width:5.5rem;height:5.5rem;border-radius:calc(var(--r) * .6);overflow:hidden;background:var(--line)}
+.ms-row .th img{width:100%;height:100%;object-fit:cover;display:block}
+.ms-row h3{font-family:var(--f-display);font-size:1.2rem;line-height:1.25;margin:.15rem 0 .1rem}
+.ms-row .meta{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:0}
+.ms-row .alt{font-style:italic;color:var(--muted);margin:0;font-size:.95rem}
+.ms-row .shelf{margin:.25rem 0 0;font-size:.92rem}
+.ms-row .on{white-space:nowrap;font-size:.85rem}
+.ms-row .on.none{color:var(--muted);font-family:var(--f-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em}
+@media (max-width:640px){.ms-row{grid-template-columns:4.2rem 1fr}.ms-row .th{width:4.2rem;height:4.2rem}.ms-row .on{grid-column:2;justify-self:start}}
+.ms-libs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:1rem}
+.ms-lib{border:1px solid var(--line);border-radius:var(--r);padding:1rem 1.1rem;background:var(--card)}
+.ms-lib h3{font-family:var(--f-display);font-size:1.15rem;margin:0 0 .1rem}
+.ms-lib .n{font-family:var(--f-mono);font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:0 0 .5rem}
+.ms-lib ul{margin:0;padding-left:1.1rem}.ms-lib li{margin:.15rem 0}
+"""
+
+
+def ms_thumb(pic):
+    if not pic:
+        return ""
+    src_ = f"gallery/{pic}-s.webp" if isinstance(pic, str) else photo_url(pic[0].replace(" ", "_") if pic[0] not in LOCAL_PHOTOS and pic[0].replace(" ", "_") in LOCAL_PHOTOS else pic[0], 240)
+    return f'<span class="th"><img src="{src_}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()"></span>'
+
+
+def manuscripts_page():
+    """manuscripts.html: every medieval Welsh manuscript on the site, oldest first, with where it is kept and where to see it online (src/manuscripts.py)."""
+    M = OB.MSS
+    by_id = {b["id"]: (b, g) for b, g in ALL_BOOKS}
+    libs = {k: (en, cy, ten, tcy) for k, en, cy, ten, tcy in M.LIBS}
+    rows = sorted(((v[0], k, v) for k, v in M.HUB.items() if k in by_id), key=lambda r: r[0])
+    online = sum(1 for _, _, v in rows if v[3])
+    pages_n = sum(1 for _, _, v in rows if v[4] == "pages")
+    used_libs = [k for k in libs if k != "lost" and any(k in v[1] for _, _, v in rows)]
+
+    def row(k, v):
+        b, g = by_id[k]
+        lib = " · ".join(bi(libs[x][0], libs[x][1]) + (f", {bi(libs[x][2], libs[x][3])}" if libs[x][2] else "") for x in v[1])
+        shelf = bi(v[2], v[2].replace("burnt in the early 1800s", "llosgwyd yn nechrau’r 1800au")) if v[2] else ""
+        alt = f'<p class="alt l-en" lang="cy">{e(b["cy"])}</p>' if b["cy"] != b["en"] else ""
+        on = (f'<a class="on btn" href="{e(v[3])}" target="_blank" rel="noopener">'
+              + (bi("Every page online", "Pob tudalen ar-lein") if v[4] == "pages" else bi("Library record", "Cofnod y llyfrgell")) + ' ↗</a>') if v[3] else ""
+        return (f'<li class="ms-row wl-card" id="ms-{k}">{ms_thumb(b["pic"])}<div><p class="meta">{bi(b["date"], b["dateCy"])}</p>'
+                f'<h3><a class="wl-go" href="book-{k}.html">{bi(b["en"], b["cy"])}</a></h3>{alt}'
+                f'<p class="shelf">{lib}{" · " + shelf if shelf else ""}</p></div>{on}</li>')
+
+    secs, chips = "", ""
+    for ck, cen, ccy, lo, hi in M.CENTURIES:
+        mine = [(k, v) for y, k, v in rows if lo <= y <= hi]
+        if not mine:
+            continue
+        chips += f'<a class="chip" href="#{ck}">{bi(cen, ccy)}</a>'
+        secs += (f'<section class="tight" id="{ck}"><div class="wrap"><h2 class="sub-h">{bi(cen, ccy)}</h2>'
+                 f'<ol class="ms-list">{"".join(row(k, v) for k, v in mine)}</ol></div></section>')
+    jump = f'<nav class="chips l-jump" aria-label="Centuries / Canrifoedd">{chips}<a class="chip" href="#libraries">{bi("Where they are kept", "Ble y’u cedwir")}</a></nav>'
+    stats = (f'<ul class="ms-stats"><li><b>{len(rows)}</b>{bi("manuscripts", "llawysgrif")}</li>'
+             f'<li><b>{pages_n}</b>{bi("to read page by page online", "i’w darllen dudalen wrth dudalen ar-lein")}</li>'
+             f'<li><b>{len(used_libs)}</b>{bi("libraries keep them", "llyfrgell yn eu cadw")}</li>'
+             f'<li><b>{rows[-1][2][0] - rows[0][2][0]:.0f}</b>{bi("years from first to last", "mlynedd o’r cyntaf i’r olaf")}</li></ul>')
+    lib_cards = ""
+    for lk in used_libs + ["lost"]:
+        mine = [k for _, k, v in rows if lk in v[1]]
+        if not mine:
+            continue
+        en, cy, ten, tcy = libs[lk]
+        n = len(mine)
+        lib_cards += (f'<div class="ms-lib"><h3>{bi(en, cy)}</h3><p class="n">{bi(ten, tcy) + " · " if ten else ""}{n} {bi("manuscript" if n == 1 else "manuscripts", "llawysgrif")}</p><ul>'
+                      + "".join(f'<li><a href="book-{k}.html">{bi(by_id[k][0]["en"], by_id[k][0]["cy"])}</a></li>' for k in mine) + "</ul></div>")
+    main = (hero("medieval", f'<a href="index.html">{SITE}</a> / <a href="literature.html">{bi("Literature", "Llenyddiaeth")}</a> / <a href="books.html">{bi("The old books of Wales", "Hen lyfrau Cymru")}</a>',
+                 "book", "c. 750–1500", "tua 750–1500", "The medieval manuscripts of Wales", "Llawysgrifau canoloesol Cymru",
+                 "Every great book written by hand in medieval Wales, oldest first: when it was written, where it is kept today, and where you can turn its pages yourself.",
+                 "Pob llyfr mawr a ysgrifennwyd â llaw yng Nghymru’r Oesoedd Canol, yr hynaf yn gyntaf: pryd yr ysgrifennwyd ef, ble y’i cedwir heddiw, a ble y gallwch droi ei dudalennau eich hun.", art="book", extra=jump)
+            + f'<style>{LIT_CSS}{MS_CSS}</style>'
+            + section(prose_bi(M.HUB_INTRO_EN, M.HUB_INTRO_CY) + stats, top=True)
+            + secs
+            + f'<section class="tight" id="libraries"><div class="wrap"><h2 class="sub-h">{bi("Where they are kept", "Ble y’u cedwir")}</h2><div class="ms-libs">{lib_cards}</div></div></section>'
+            + section(prose_bi(M.HUB_READ_EN, M.HUB_READ_CY) + f'<p class="l-links"><a class="btn" href="place-library.html">{bi("The National Library of Wales", "Llyfrgell Genedlaethol Cymru")} →</a> '
+                      f'<a class="btn" href="story-writers.html">{bi("The writers who recorded early Wales", "Yr awduron a gofnododd Gymru gynnar")} →</a> '
+                      f'<a class="btn" href="laws.html">{bi("The Laws of Hywel Dda", "Cyfraith Hywel Dda")} →</a></p>')
+            + section(f'<div class="pager"><a class="btn" href="literature.html">← {bi("The literature of Wales", "Llenyddiaeth Cymru")}</a><a class="btn solid" href="books.html">{bi("The old books of Wales", "Hen lyfrau Cymru")} →</a></div>'))
+    ld = {"@context": "https://schema.org", "@type": "CollectionPage", "headline": "The medieval manuscripts of Wales", "inLanguage": ["en", "cy"],
+          "hasPart": [{"@type": "Book", "name": by_id[k][0]["en"], "url": f"{BASE_URL}book-{k}.html"} for _, k, _ in rows],
+          "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
+    return page("manuscripts.html", "The medieval manuscripts of Wales · History of Wales",
+                f"All {len(rows)} great medieval Welsh manuscripts, oldest first: the Lichfield Gospels, the Juvencus, the Black Book of Carmarthen, the lawbooks, the Red and White Books, the Llanbeblig Hours and more, with where each is kept and where to read it free online.",
+                main, era="medieval", ld=ld, og_type="website", active="literature.html", track="page:manuscripts")
 
 
 def triad_card(t, k):
@@ -3634,6 +3742,8 @@ def search_index():
     items.append(dict(k="page", t="Cynghanedd", c="Cynghanedd", u="literature.html#cynghanedd", y=["Poetry", "Barddoniaeth"], b=[LT.CYNG_EN[0], LT.CYNG_CY[0]], e="medieval"))
     items.append(dict(k="page", t="The great books of Wales", c="Llyfrau mawr Cymru", u="books.html", y=["Manuscripts", "Llawysgrifau"],
                       b=["The Four Ancient Books of Wales, the White Book of Rhydderch, the Hendregadredd Manuscript, the chronicles and the first printed books.", "Pedwar Llyfr Hynafol Cymru, Llyfr Gwyn Rhydderch, Llawysgrif Hendregadredd, y croniclau a’r llyfrau printiedig cyntaf."], e="medieval"))
+    items.append(dict(k="page", t="The medieval manuscripts of Wales", c="Llawysgrifau canoloesol Cymru", u="manuscripts.html", y=["Manuscripts", "Llawysgrifau"],
+                      b=["Every great medieval Welsh manuscript, oldest first, with where it is kept and where to read it online.", "Pob llawysgrif Gymraeg ganoloesol fawr, yr hynaf yn gyntaf, gyda ble y’i cedwir a ble i’w darllen ar-lein."], e="medieval"))
     items += [dict(k="page", t=b["en"], c=b["cy"], u=f"books.html#{b['id']}", y=[b["date"], b["dateCy"]], b=[b["en_t"], b["cy_t"]], e="medieval") for g in LT.BOOK_GROUPS for b in g["books"]]
     items.append(dict(k="page", t="The Welsh Triads", c="Trioedd Ynys Prydain", u="triads.html", y=["Triads", "Trioedd"],
                       b=["The memory of the Island of Britain in threes: the Three Generous Men, the Three Faithful War Bands, the Three Fortunate Concealments and more.", "Cof Ynys Prydain fesul tri."], e="saints"))
@@ -4058,6 +4168,7 @@ def main():
         pages[f'mabinogi-{t["id"]}.html'] = tale_page(t, i)
     pages["literature.html"] = literature_page()
     pages["books.html"] = books_page()
+    pages["manuscripts.html"] = manuscripts_page()
     for i, (b, _g) in enumerate(ALL_BOOKS):
         pages[f'book-{b["id"]}.html'] = book_page(i)
     pages["books-and-authors.html"] = bookshelf_page()
