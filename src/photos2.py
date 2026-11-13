@@ -2,6 +2,8 @@
 # Found via the Wikipedia pageimages API (pilicense=free) and Commons extmetadata; see SKILLS.md.
 # slug -> (Commons file name, caption EN, caption CY, credit: artist and licence)
 PERSON_PHOTOS_MORE = {
+ 'riothamus': ('Sidonius_Riothamo_suo.jpg', '‘Sidonius to his friend Riothamus’: the letter to the king of the Britons, in a medieval copy of the letters of Sidonius', '‘Sidonius at ei gyfaill Riothamus’: y llythyr at frenin y Brythoniaid, mewn copi canoloesol o lythyrau Sidonius', 'Bibliothèque nationale de France MS lat. 2782, photograph ThêtaBlackhole, CC BY-SA 4.0'),
+ 'gwenole': ("045_Statue_de_saint_Guénolé_en_kersanton_réalisée_en_1522_à_la_demande_de_l'abbé_Jehan_du_Vieux-Chastel.JPG", 'Gwenole, a statue carved in 1522 for his abbey of Landévennec', 'Gwenole, cerflun a gerfiwyd yn 1522 i’w abaty yn Landevenneg', 'Moreau.henri, CC BY-SA 3.0'),
  'caratacus': ('CaractacusClaudius.jpg', 'Caratacus before the Emperor Claudius, from an old engraving', 'Caradog o flaen yr Ymerawdwr Clawdiws, o hen engrafiad', 'Public domain'),
  'macsen-wledig': ('Rare_aureus_of_Magnus_Maximus_(obverse_transparent).png', 'A gold coin of Magnus Maximus', 'Darn arian aur Macsen Wledig', 'CNG, CC BY-SA 2.5'),
  'pelagius': ('Pelagius.jpg', 'Pelagius', 'Pelagius', 'Public domain'),

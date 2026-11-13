@@ -14,6 +14,8 @@ ALL = _A.PEOPLE + _B.PEOPLE + _C.PEOPLE + _D.PEOPLE + _E.PEOPLE + _F.PEOPLE + _A
 ALL = ALL + _PRN.PEOPLE  # the kings and princes of Wales (src/princes.py)
 ALL = ALL + _MBP.PEOPLE  # the people of the Mabinogi (src/mabinogi_people.py)
 ALL = ALL + _WRT.PEOPLE  # the writers who recorded early Wales (src/writers.py)
+import brittany as _BZH
+ALL = ALL + _BZH.PEOPLE  # Riothamus and Gwenole (src/brittany.py)
 
 # tuples in the site's people format: (slug, era, dates, nameEn, nameCy, epithetEn, epithetCy, bioEn, bioCy, wikipediaTitle)
 PEOPLE_NEW = [(p["id"], p["era"], p["d"], p["en"], p["cy"], p["eEn"], p["eCy"], p["bEn"], p["bCy"], p["w"]) for p in ALL]

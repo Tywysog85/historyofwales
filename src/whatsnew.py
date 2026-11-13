@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-13", "Llydaw: how the Britons made a second Britain", "Llydaw: sut y gwnaeth y Brythoniaid ail Brydain",
+     "A new long read on how the Britons crossed the sea to Brittany, with Macsen Wledig and Cynan Meiriadog in 383 and again in the age of the Saxon wars, led by the saints of Wales: Samson, Paul Aurelian, Tudwal, Brioc, Malo, Teilo and Gildas. With a map, pictures, and new pages for Riothamus, king of the Britons, and Gwenole of Landévennec.",
+     "Erthygl newydd ar sut y croesodd y Brythoniaid y môr i Lydaw, gyda Macsen Wledig a Chynan Meiriadog yn 383 ac eto yn oes rhyfeloedd y Saeson, dan arweiniad saint Cymru: Samson, Pol Aurelian, Tudwal, Briog, Malo, Teilo a Gildas. Gyda map, lluniau, a thudalennau newydd i Riothamus, brenin y Brythoniaid, a Gwenole o Landevenneg.",
+     "story-brittany.html"),
     ("2026-11-13", "Cofiwch Epynt: the clearing of the mountain, 1940", "Cofiwch Epynt: clirio’r mynydd, 1940",
      "A new long read: how 219 people from 54 homes on Mynydd Epynt, a whole Welsh-speaking community with its chapel, school and inn, were made to leave in 1940 for an army range; Iorwerth Peate and ‘Mae’n ddiwedd byd yma’; the fire on the hearth at Glandŵr; and how Wales remembers them, with the farm names set back on the land in 2025.",
      "Erthygl newydd: sut y gorfodwyd 219 o bobl o 54 o gartrefi ar Fynydd Epynt, cymuned Gymraeg gyfan gyda’i chapel, ei hysgol a’i thafarn, i adael yn 1940 er mwyn maes tanio’r fyddin; Iorwerth Peate a ‘Mae’n ddiwedd byd yma’; y tân ar aelwyd Glandŵr; a sut y mae Cymru’n eu cofio, gydag enwau’r ffermydd yn ôl ar y tir yn 2025.",
