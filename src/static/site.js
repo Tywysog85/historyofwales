@@ -304,8 +304,9 @@
     function say(text, kind) { msg.textContent = text; msg.className = "f-msg" + (kind ? " " + kind : ""); }
     function done() {
       f.classList.add("f-done");
-      say(T("Thank you, you’re signed up! The first email comes on Monday. If an email arrives asking you to confirm, press the button in it.",
-            "Diolch, rydych chi wedi ymuno! Daw’r e-bost cyntaf ddydd Llun. Os daw e-bost yn gofyn i chi gadarnhau, pwyswch y botwm ynddo."), "ok");
+      /* The Brevo form uses double confirmation: nobody joins the list until they press the button in Brevo's email. */
+      say(T("Nearly there! We’ve sent you an email. Press the button in it to confirm, and the weekly email starts on Monday. Can’t see it? Look in your junk or spam folder.",
+            "Bron yno! Rydyn ni wedi anfon e-bost atoch. Pwyswch y botwm ynddo i gadarnhau, a bydd yr e-bost wythnosol yn dechrau ddydd Llun. Ddim yn ei weld? Edrychwch yn eich ffolder sbam."), "ok");
       try { if (window.goatcounter && goatcounter.count) goatcounter.count({ path: "email-signup", title: "Weekly email sign-up", event: true }); } catch (e) {}
     }
     function fail() {
