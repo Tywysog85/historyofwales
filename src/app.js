@@ -324,7 +324,10 @@
     /* load the lifelike 3D dragon where the device can draw it; otherwise the flag dragon stays */
     try {
       var tc = document.createElement("canvas"), gl3 = window.WebGLRenderingContext && (tc.getContext("webgl2") || tc.getContext("webgl"));
-      if (gl3 && !(navigator.connection && navigator.connection.saveData)) {
+      /* skipped on data saver and on very old phones with 1 GB of memory or less (Ifan, 13 Nov 2026: keep it on every modern phone).
+         deviceMemory is only reported by Chrome-based browsers; Safari never reports it, so iPhones always get the dragon. */
+      var lowMem = navigator.deviceMemory && navigator.deviceMemory <= 1;
+      if (gl3 && !lowMem && !(navigator.connection && navigator.connection.saveData)) {
         window.HCD3_WANT = window.HCL3_WANT = 1;
         var c3 = document.createElement("canvas"); c3.id = "sky3d"; c3.setAttribute("aria-hidden", "true"); cv.after(c3);
         var cl = document.createElement("canvas"); cl.id = "land3d"; cl.setAttribute("aria-hidden", "true"); cv.after(cl);
@@ -769,7 +772,7 @@
     var more = $("#people-more"); more.hidden = P_PAGE || pEra !== "all" || pField !== "all"; more.textContent = pAll ? T("Show fewer", "Dangos llai") : T("Show all " + PEOPLE.length + " people", "Dangos pob un o’r " + PEOPLE.length);
     $("#people-grid").innerHTML = list.map(function (p) {
       var name = T(p[3], p[4]), other = lang === "en" ? p[4] : p[3], link = "person-" + p[0] + ".html", ph = D.PPH[p[0]];
-      return '<article class="plaque wl-card" data-era="' + p[1] + '"><div class="top-row"><span class="ava" aria-hidden="true">' + initials(p[3]) + (ph ? '<img src="' + ph + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : "") + '</span><div><span class="dates">' + esc(p[2]) + "</span><h3>" + esc(name) + '</h3></div></div><span class="epi">' + esc(T(p[5], p[6])) + (other !== name ? " · " + esc(other) : "") + "</span>" + ((D.PFIRST || {})[p[0]] ? '<span class="first-tag">★ ' + esc(T(D.PFIRST[p[0]][1], D.PFIRST[p[0]][2])) + "</span>" : "") + "<p>" + esc(T(p[7], p[8])) + '</p><a class="wl" href="' + link + '">' + esc(name) + "</a></article>";
+      return '<article class="plaque wl-card" data-era="' + p[1] + '"><div class="top-row"><span class="ava" aria-hidden="true">' + initials(p[3]) + (ph ? '<img src="' + ph + '" alt="" width="96" height="96" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : "") + '</span><div><span class="dates">' + esc(p[2]) + "</span><h3>" + esc(name) + '</h3></div></div><span class="epi">' + esc(T(p[5], p[6])) + (other !== name ? " · " + esc(other) : "") + "</span>" + ((D.PFIRST || {})[p[0]] ? '<span class="first-tag">★ ' + esc(T(D.PFIRST[p[0]][1], D.PFIRST[p[0]][2])) + "</span>" : "") + "<p>" + esc(T(p[7], p[8])) + '</p><a class="wl" href="' + link + '">' + esc(name) + "</a></article>";
     }).join("");
   }
   $("#people-more").onclick = function () { pAll = !pAll; renderPeople(); if (!pAll) goTo($("#people")); };
@@ -965,6 +968,50 @@
   };
   $("#near-list").addEventListener("click", function (ev) { var b = ev.target.closest(".near-go"); if (!b) return; selectPlace(b.dataset.pid); var c = $("#place-card"); if (c && c.scrollIntoView && innerWidth < 900) c.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }); });
 
+  /* ---------- Home page: history near you, in the Map section (#mh-near). The three nearest places become picture cards, and a "You" pin lands on the small map. ---------- */
+  var MH = document.getElementById("mh-near"), mhAt = null;
+  function renderMh() {
+    if (!MH) return;
+    $("#mh-towns").innerHTML = TW.map(function (t) { return '<option value="' + esc(T(t[0], t[1])) + '">'; }).join("");
+    $("#mh-in").placeholder = T("Your town, e.g. Bala", "Eich tref, e.e. Y Bala");
+    $(".mh-go", MH).setAttribute("aria-label", T("Find", "Chwilio")); $("#mh-geo").setAttribute("aria-label", T("Use my location", "Defnyddio fy lleoliad"));
+    var res = $("#mh-res"), you = document.getElementById("mh-you");
+    $$(".map-teaser .pin.hl").forEach(function (g) { g.classList.toggle("hl", false); });
+    if (!mhAt) { res.innerHTML = ""; if (you) you.setAttribute("hidden", ""); return; }
+    var near = PLACES.map(function (p) { return [km(mhAt.lat, mhAt.lon, p.lat, p.lon), p]; }).sort(function (a, b) { return a[0] - b[0]; }).slice(0, 3);
+    $("#mh-msg").textContent = T("The nearest historic places to ", "Y lleoedd hanesyddol agosaf at ") + mhAt.name + ":";
+    res.innerHTML = near.map(function (x) {
+      var p = x[1], d = x[0] < 1 ? T("under 1 km", "llai nag 1 km") : Math.round(x[0]) + " km", name = esc(T(p.en, p.cy));
+      var pin = document.querySelector('.map-teaser .pin[data-pid="' + p.id + '"]'); if (pin) pin.classList.add("hl");
+      return '<li class="mh-place wl-card" data-era="' + p.era + '"><span class="mh-ph">' + (p.ph ? '<img src="' + esc(p.ph[0]) + '" alt="" loading="lazy" decoding="async">' : "") + '</span><span class="mh-pt"><b>' + name + "</b><small>" + d + " · " + esc(p.year) + '</small></span><a class="wl" href="place-' + p.id + '.html">' + name + "</a></li>";
+    }).join("");
+    if (you) {
+      var xy = proj(mhAt.lat, mhAt.lon);
+      you.toggleAttribute("hidden", false);
+      you.setAttribute("transform", "translate(" + xy[0].toFixed(1) + " " + xy[1].toFixed(1) + ")");
+      you.innerHTML = '<circle class="ring" r="22"/><circle r="12"/><circle class="in" r="5"/><text x="0" y="-26" text-anchor="middle">' + esc(T("You", "Chi")) + "</text>";
+    }
+  }
+  if (MH) {
+    MH.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      var t = findTown($("#mh-in").value);
+      if (!t) { mhAt = null; renderMh(); $("#mh-msg").textContent = T("Sorry, I don’t know that town yet. Try a nearby larger town.", "Mae’n ddrwg gen i, dw i ddim yn adnabod y dref honno eto. Rhowch gynnig ar dref fwy gerllaw."); return; }
+      mhAt = { lat: t[2], lon: t[3], name: T(t[0], t[1]) }; renderMh(); $("#mh-in").blur();
+    });
+    $("#mh-geo").onclick = function () {
+      var msg = $("#mh-msg");
+      if (!navigator.geolocation) { msg.textContent = T("Your browser can’t share your location. Type your town instead.", "Ni all eich porwr rannu’ch lleoliad. Teipiwch eich tref yn lle hynny."); return; }
+      msg.textContent = T("Finding you…", "Yn chwilio amdanoch…");
+      navigator.geolocation.getCurrentPosition(function (pos) {
+        var la = pos.coords.latitude, lo = pos.coords.longitude, out = la < 51.2 || la > 53.6 || lo < -5.8 || lo > -2.5;
+        if (out) { la = Math.min(53.45, Math.max(51.38, la)); lo = Math.min(-2.75, Math.max(-5.3, lo)); }
+        mhAt = { lat: la, lon: lo, name: T("you", "chi") }; renderMh();
+        if (out) msg.textContent = T("You seem to be outside Wales, so here is the nearest corner of it:", "Mae’n ymddangos eich bod y tu allan i Gymru, felly dyma’r gornel agosaf ati:");
+      }, function () { msg.textContent = T("Location wasn’t shared. Type your town instead.", "Ni rannwyd eich lleoliad. Teipiwch eich tref yn lle hynny."); }, { timeout: 10000, maximumAge: 600000 });
+    };
+  }
+
   /* ---------- Timeline challenge ---------- */
   var G = null;
   function gameRound() {
@@ -1028,7 +1075,7 @@
     document.documentElement.lang = lang; document.documentElement.classList.toggle("cy", lang === "cy");
     $$("[data-cy]").forEach(function (el) { el.textContent = lang === "cy" ? el.dataset.cy : el.dataset.en; });
     $$("[data-cy-svg]").forEach(function (el) { el.textContent = lang === "cy" ? el.dataset.cySvg : el.dataset.enSvg; });
-    renderChapters(); renderToday(); renderTimeline(); renderPeople(); renderFact(); renderStreak(); renderChart(); renderDecoder(); renderWords(); renderSources(); renderNear(); renderGame(); selectPlace(sel); if (mode === "kg") renderKg(); renderQuiz();
+    renderChapters(); renderToday(); renderTimeline(); renderPeople(); renderFact(); renderStreak(); renderChart(); renderDecoder(); renderWords(); renderSources(); renderNear(); renderMh(); renderGame(); selectPlace(sel); if (mode === "kg") renderKg(); renderQuiz();
     if (!ov.hidden) { var m = /^#pennod-(\w+)/.exec(location.hash); if (m) openChapter(m[1], false); }
   }
   /* the EN / CY switch is a pair of links to the other language's page (see welshpages.py) */

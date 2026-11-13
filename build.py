@@ -415,9 +415,11 @@ COPYRIGHT_OWNER_CY = "Hanes Cymru"
 
 def footer():
     def col(title_en, title_cy, links):
-        return f'<div><p class="eyebrow">{bi(title_en, title_cy)}</p><ul>' + "".join(f'<li><a href="{h}">{bi(a, b)}</a></li>' for h, a, b in links) + "</ul></div>"
-    eras_col = (f'<div><p class="eyebrow">{bi("The nine ages", "Y naw oes")}</p><ul>' + "".join(
-        f'<li><a href="era-{x["id"]}.html">{bi(x["en"], x["cy"])} <span class="m-dates">{bi(x["spanEn"], x["spanCy"])}</span></a></li>' for x in D.ERAS) + "</ul></div>")
+        return f'<details class="fcol" open><summary class="eyebrow">{bi(title_en, title_cy)}</summary><ul>' + "".join(f'<li><a href="{h}">{bi(a, b)}</a></li>' for h, a, b in links) + "</ul></details>"
+    # Each list is a <details>, open in the HTML so every link shows on wide screens and without JavaScript.
+    # On phones site.js closes them, so the footer is four tappable headings instead of 1,600 px of links.
+    eras_col = (f'<details class="fcol" open><summary class="eyebrow">{bi("The nine ages", "Y naw oes")}</summary><ul>' + "".join(
+        f'<li><a href="era-{x["id"]}.html">{bi(x["en"], x["cy"])} <span class="m-dates">{bi(x["spanEn"], x["spanCy"])}</span></a></li>' for x in D.ERAS) + "</ul></details>")
     explore = [("timeline.html", "Timeline", "Llinell amser"), ("map.html", "Map of Wales", "Map Cymru"), ("people.html", "People", "Pobl"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("castles.html", "Castles of Wales", "Cestyll Cymru"), ("trails.html", "Themed trails", "Llwybrau thema"),
                ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"), ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg")]
     read = [("whatsnew.html", "What’s new", "Beth sy’n newydd"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"), ("laws.html", "The Laws of Hywel Dda", "Cyfreithiau Hywel Dda"), ("literature.html", "Welsh literature", "Llenyddiaeth Gymraeg"), ("books.html", "The great books of Wales", "Llyfrau mawr Cymru"), ("triads.html", "The Welsh Triads", "Trioedd Ynys Prydain"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
@@ -2816,7 +2818,7 @@ def family_trees_page():
                 main, era="kings", ld=ld, og_type="website", active="kings.html", track="kings:trees", extra=FT_JS)
 
 # ---------- Welsh word of the day and beginner's phrases (src/cymraeg.py, src/welsh.js) ----------
-WELSH_JS_VER = 1
+WELSH_JS_VER = 2  # raise whenever src/welsh.js changes, so browsers fetch the new copy
 AUDIO_DIR = os.path.join(SRC, "static", "audio")
 AUDIO_FILES = sorted(f[:-4] for f in os.listdir(AUDIO_DIR) if f.endswith(".mp3")) if os.path.isdir(AUDIO_DIR) else []
 LL_CREDITS = json.loads(read("audio_credits.json")) if os.path.exists(os.path.join(SRC, "audio_credits.json")) else {}
@@ -3241,7 +3243,7 @@ def ssr_person(p):
     ph = DATA["PPH"].get(slug)
     first = P2.FIRSTS.get(slug)
     return (f'<article class="plaque wl-card" data-era="{p[1]}"><div class="top-row"><span class="ava" aria-hidden="true">{e(_initials(p[3]))}'
-            + (f'<img src="{e(ph)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' if ph else "")
+            + (f'<img src="{e(ph)}" alt="" width="96" height="96" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' if ph else "")
             + f'</span><div><span class="dates">{bi(p[2], date_cy(p[2]))}</span><h3>{bi(p[3], p[4])}</h3></div></div>'
             f'<span class="epi">{bi(p[5], p[6])}{(" · " + e(other)) if other else ""}</span>'
             + (f'<span class="first-tag">★ {bi(first[1], first[2])}</span>' if first else "")
@@ -3428,10 +3430,48 @@ def ssr_place_card(pid="caernarfon"):
             f'<a class="wl" href="place-{p["id"]}.html">{bi(p["en"], p["cy"])}</a></div>')
 
 
+MAP_LABELS = [("caernarfon", "Caernarfon", "Caernarfon"), ("harlech", "Harlech", "Harlech"), ("machynlleth", "Machynlleth", "Machynlleth"),
+              ("stdavids", "St Davids", "Tyddewi"), ("senedd", "Cardiff", "Caerdydd"), ("conwy", "Conwy", "Conwy"), ("tintern", "Tintern", "Tyndyrn")]
+
+
 def ssr_map_teaser():
-    """The home page's small map: Wales and every place, as one link to the full map page."""
+    """The home page's map: Wales, every place, a few names, and a "You" pin the town finder moves (app.js). One link to the full map."""
+    lbl = ""
+    for pid, en, cy in MAP_LABELS:
+        p = next((x for x in D.PLACES if x["id"] == pid), None)
+        if not p:
+            continue
+        x, y = _proj(p["lat"], p["lon"])
+        right = x > 420
+        lbl += (f'<g class="mlab" transform="translate({x:.1f} {y:.1f})"><circle r="11"/><text x="{-18 if right else 18}" y="7" text-anchor="{"end" if right else "start"}">'
+                f'<tspan class="l-en" lang="en">{e(en)}</tspan><tspan class="l-cy" lang="cy">{e(cy)}</tspan></text></g>')
     return (f'<a class="map-teaser" href="map.html" aria-label="Open the map of Wales / Agor map Cymru">'
-            f'<svg viewBox="-40 -30 680 735" aria-hidden="true" focusable="false"><path class="land" d="{geo["outline"]}"/><g class="pins">{ssr_pins(None, links=False, labels=False)}</g></svg></a>')
+            f'<svg viewBox="-40 -30 680 735" aria-hidden="true" focusable="false"><path class="land" d="{geo["outline"]}"/>'
+            f'<g class="pins">{ssr_pins(None, links=False, labels=False)}</g><g class="mlabs">{lbl}</g><g class="you" id="mh-you" hidden></g></svg></a>')
+
+
+def map_link_cards():
+    """Three whole-card links under the home page map, each with a real picture."""
+    cards = [("map.html", "map.html", f"{len(D.PLACES)} historic places", f"{len(D.PLACES)} o leoedd hanesyddol", "The map of Wales", "Map Cymru",
+              "Every place with its story, its age and how to visit.", "Pob lle gyda’i stori, ei oes a sut i ymweld.", "medieval"),
+             ("map.html#kingdoms", "era-kings.html", f"{len(D.KINGDOMS)} moments in time", f"{len(D.KINGDOMS)} adeg mewn amser", "The kingdoms", "Y teyrnasoedd",
+              "Gwynedd, Powys, Deheubarth and the rest, as the borders changed.", "Gwynedd, Powys, Deheubarth a’r lleill, wrth i’r ffiniau newid.", "kings"),
+             ("castles.html", "castles.html", f"{N_CASTLES:,} castles", f"{N_CASTLES:,} o gestyll", "The castles", "Y cestyll",
+              "Every castle in Wales, Welsh-built and Norman, on one map.", "Pob castell yng Nghymru, rhai Cymreig a Normanaidd, ar un map.", "tudor")]
+    out = ""
+    for href, pic, n_en, n_cy, t_en, t_cy, d_en, d_cy, era in cards:
+        out += (f'<a class="mh-card" href="{href}" data-era="{era}"><span class="mh-pic">{PX.card_img(pic, era) or ""}</span>'
+                f'<span class="mh-n">{bi(n_en, n_cy)}</span><span class="mh-t"><b>{bi(t_en, t_cy)}</b><small>{bi(d_en, d_cy)}</small></span><span class="ar" aria-hidden="true">→</span></a>')
+    return out
+
+
+def stories_more():
+    """The tile under the long reads on the home page: a fan of their pictures and how many there are."""
+    faces = "".join(f'<span>{PX.card_img(f"story-{x["id"]}.html", x.get("era")) or ""}</span>' for x in F.STORIES[HOME_STORIES:HOME_STORIES + 4])
+    n = len(F.STORIES)
+    return (f'<a class="more-tile rv" href="stories.html"><span class="p-faces" aria-hidden="true">{faces}</span>'
+            f'<span class="t"><b>{bi(f"All {n} long reads", f"Pob un o’r {n} erthygl")}</b><small>{bi("Five-minute stories on the big questions of Welsh history.", "Straeon pum munud ar gwestiynau mawr hanes Cymru.")}</small></span>'
+            f'<span class="ar" aria-hidden="true">→</span></a>')
 
 
 ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"]
@@ -3449,8 +3489,12 @@ ERA_Q = {
     "today": ("What has Wales done with a parliament of its own?", "Beth y mae Cymru wedi’i wneud â’i senedd ei hun?"),
 }
 assert set(ERA_Q) == {x["id"] for x in D.ERAS}, "every age needs a question in ERA_Q"
+# On phones the nine age cards are thin strips with the picture behind a dark veil, so the 600 px picture is plenty.
+# "200px" makes even a 3x phone screen (200 x 3 = 600) fetch it;
+# without it phones fetched the 1400 px pictures, about 1.5 MB for the nine. Wide screens still use 40vw.
+POSTER_SIZES = "(max-width: 700px) 200px, 40vw"
 AGES_HTML = "".join(
-    f'<a class="poster" href="era-{x["id"]}.html" data-era="{x["id"]}">{PX.card_img(f"era-{x['id']}.html") or A.scene(ERA_ART[x["id"]], COL[x["id"]])}<span class="shade"></span><span class="rn"><span class="vh">{bi("Age", "Oes")} </span>{ROMAN[i]}<span class="vh">: </span></span>'
+    f'<a class="poster" href="era-{x["id"]}.html" data-era="{x["id"]}">{PX.card_img(f"era-{x['id']}.html", sizes=POSTER_SIZES) or A.scene(ERA_ART[x["id"]], COL[x["id"]])}<span class="shade"></span><span class="rn"><span class="vh">{bi("Age", "Oes")} </span>{ROMAN[i]}<span class="vh">: </span></span>'
     f'<span class="txt"><span class="span">{bi(x["spanEn"], x["spanCy"])}</span><h3>{bi(x["en"], x["cy"])}</h3><span class="q">{bi(*ERA_Q[x["id"]])}</span><p>{bi(x["blurbEn"], x["blurbCy"])}</p></span></a>'
     for i, x in enumerate(D.ERAS))
 MARQ = [("Castles", "Cestyll", "story-castles.html"), ("Poets", "Beirdd", "person-dafydd-ap-gwilym.html"), ("Saints", "Seintiau", "saints.html"),
@@ -3481,7 +3525,7 @@ def fill(fragment, active="", skip="#chapters", home=False):
             .replace("__NCASTLES_FMT__", f"{N_CASTLES:,}").replace("__NCASTLES__", str(N_CASTLES))
             .replace("__TODAY__", ssr_today()).replace("__FACT__", ssr_fact()).replace("__FACTHREF__", ssr_fact_href()).replace("__TLTEASER__", ssr_tl_teaser()).replace("__CHART__", ssr_chart())
             .replace("__BOOKS__", ssr_books()).replace("__ONLINE__", ssr_online()).replace("__WORDS__", ssr_words())
-            .replace("__PEOPLEHOME__", ssr_people(FEATURED[:6])).replace("__PEOPLEALL__", ssr_people()).replace("__MAPTEASER__", ssr_map_teaser())
+            .replace("__PEOPLEHOME__", ssr_people(FEATURED[:6])).replace("__PEOPLEALL__", ssr_people()).replace("__MAPTEASER__", ssr_map_teaser()).replace("__MAPCARDS__", map_link_cards()).replace("__STORIESMORE__", stories_more())
             .replace("__WALES__", geo["outline"]).replace("__GRAT__", ssr_grat()).replace("__PINS__", ssr_pins()).replace("__PLACECARD__", ssr_place_card())
             .replace("__NEWS__", news_strip()).replace("__LEGENDS__", "".join(legend_card(x) for x in F.LEGENDS_HOME)).replace("__PLAY__", play_cards(home=True)))
 
