@@ -176,6 +176,12 @@ TRAIL_ART = dict(women="torch", sea="ship", chapel="book", iron="pit")
 EVENT_BY_TITLE = {ev[5]: ev for ev in D.EVENTS}
 
 
+# The logo. Gloock sets the f of "of" almost against the W of "Wales" and leaves a wide gap after "History", so each word is
+# nudged to make the two gaps look the same (measured on screen, ink to ink; Ifan, 13 Nov 2026). Hanes Cymru needs nothing.
+BRAND = ('<span class="l-en" lang="en">History <span class="b-of">of</span> <span class="b-wales">Wales</span></span>'
+         '<span class="l-cy" lang="cy">Hanes Cymru</span>')
+
+
 def bi(en, cy, tag="span", cls=""):
     if en == cy:
         return e(en)
@@ -415,7 +421,7 @@ def nav(active="", skip="#main", home=False):
     big = li("index.html", "Home", "Hafan", 1) + "".join(li(h, a, b, i + 2) for i, (h, a, b) in enumerate(NAV_MAIN))
     more = "".join(f'<div class="menu-group{" mg-ages" if links and len(links[0]) == 5 else ""}"><p class="eyebrow">{bi(ge, gc)}</p><ul class="menu-more">' + "".join(li_more(*x) for x in links) + "</ul></div>" for ge, gc, links in NAV_GROUPS)
     return (f'<a class="skip" href="{skip}">{bi("Skip to content", "Neidio i’r cynnwys")}</a><div class="progress" aria-hidden="true"><i id="progress"></i></div>'
-            f'<nav class="nav" aria-label="Main"><div class="wrap">' + f'<a class="brand" href="index.html">{bi("History of Wales", "Hanes Cymru")}</a>' +
+            f'<nav class="nav" aria-label="Main"><div class="wrap">' + f'<a class="brand" href="index.html">{BRAND}</a>' +
             f'<ul class="nav-inline">{main}</ul>' +
             f'<a class="journey-chip" href="journey.html" id="journey-chip" data-total="{JOURNEY_TOTAL}" title="Your journey: pages you have read / Eich taith: y tudalennau a ddarllenoch" aria-label="0 pages read: your journey / Eich taith"><span class="jc-ring"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" class="tr"/><circle cx="18" cy="18" r="15" class="fg" id="journey-ring" pathLength="100" stroke-dasharray="0 100"/></svg><b id="journey-n">0</b></span><span class="jc-l" aria-hidden="true">{bi("read", "wedi’u darllen")}</span></a>'
             f'<button type="button" class="search-btn" data-search aria-label="Search / Chwilio">{SEARCH_SVG}</button>'
