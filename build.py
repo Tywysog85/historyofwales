@@ -1009,8 +1009,7 @@ def teachers_page():
             + section(f'<div class="lessons">{blocks}</div>', "Lesson ideas", "Syniadau gwersi")
             + section(f'<p class="no-print"><button type="button" class="btn solid" data-print="1">{bi("Print the quiz sheets", "Argraffu’r taflenni cwis")}</button> '
                       f'<span class="muted">{bi("Prints in whichever language is selected. Answers are hidden until opened.", "Yn argraffu yn yr iaith a ddewiswyd. Mae’r atebion yn gudd nes eu hagor.")}</span></p>{sheets}', "Printable quiz sheets", "Taflenni cwis i’w hargraffu")
-            + section(f'<p>{bi("Spotted a mistake, or have a resource to share? Contact the site owner through the GitHub repository.", "Wedi gweld camgymeriad, neu am rannu adnodd? Cysylltwch â pherchennog y wefan drwy’r ystorfa GitHub.")} '
-                      '<a href="https://github.com/Tywysog85/historyofwales/issues" target="_blank" rel="noopener">GitHub ↗</a></p>'))
+            + section("<p>" + AB.rbi(f"Spotted a mistake, or have a resource to share? Email {AB.mail_link()}.", f"Wedi gweld camgymeriad, neu am rannu adnodd? Anfonwch e-bost at {AB.mail_link()}.") + "</p>"))
     return page("teachers.html", "For teachers · History of Wales", "Lesson ideas and printable quiz sheets on the history of Wales, in English and Welsh.", main, era="industrial", og_type="website", active="teachers.html")
 
 

@@ -24,8 +24,8 @@ BIO_CY = ""
 METHOD_EN = "It is researched with the help of AI and checked against real sources: the chronicles, the Dictionary of Welsh Biography, Cadw, Coflein and the published histories of Wales."
 METHOD_CY = "Caiff ei hymchwilio gyda chymorth deallusrwydd artiffisial (AI) a’i gwirio yn erbyn ffynonellau go iawn: y cronicl, y Bywgraffiadur Cymreig, Cadw, Coflein a’r llyfrau hanes a gyhoeddwyd am Gymru."
 # How people report a mistake. Set ONE of these:
-CORRECTIONS_EMAIL = ""  # e.g. "corrections@historyofwales.cymru" (a free forwarding address to your own inbox)
-CORRECTIONS_FORM = ""   # or the link to an online form (Ifan chose a form, 12 November 2026: waiting for its link)
+CORRECTIONS_EMAIL = "hello@historyofwales.cymru"  # Ifan's choice (13 November 2026): forwarded by ImprovMX to Ifan's own inbox
+CORRECTIONS_FORM = ""   # or the link to an online form (used only when CORRECTIONS_EMAIL is empty)
 # Corrections worth telling readers about, newest first: ("YYYY-MM-DD", page, what changed EN, what changed CY)
 CORRECTIONS = []
 
@@ -85,6 +85,11 @@ def author():
     if AUTHOR_EN:
         return AUTHOR_EN, AUTHOR_CY or AUTHOR_EN
     return "History of Wales", "Hanes Cymru"
+
+
+def mail_link():
+    """The site's email address as a link (hello@...), for "get in touch" lines."""
+    return f'<a href="mailto:{e(CORRECTIONS_EMAIL)}">{e(CORRECTIONS_EMAIL)}</a>'
 
 
 def has_contact():
@@ -160,6 +165,10 @@ def about_page():
         who_en.append(METHOD_EN)
         who_cy.append(METHOD_CY or METHOD_EN)
     who = g["paras"](who_en, who_cy, "ab-text")
+    if CORRECTIONS_EMAIL:
+        mail = mail_link()
+        who += (f'<div class="ab-text" style="margin-top:1rem"><p>' + rbi(f"To get in touch about anything, email {mail}. Every message is read.",
+                f"I gysylltu am unrhyw beth, anfonwch e-bost at {mail}. Caiff pob neges ei darllen.") + "</p></div>")
 
     how = [("Every page is built on published sources: the Welsh chronicles (Brut y Tywysogion and the Welsh Annals), the Dictionary of Welsh Biography, Coflein and Cadw for places and monuments, and the standard histories of Wales. Many pages end with <em>Read further</em> links to these, so you can check for yourself.",
             "Mae pob tudalen wedi’i seilio ar ffynonellau cyhoeddedig: cronicl Cymru (Brut y Tywysogion ac Annales Cambriae), y Bywgraffiadur Cymreig, Coflein a Cadw ar gyfer lleoedd a henebion, a’r prif lyfrau ar hanes Cymru. Mae llawer o dudalennau’n gorffen â dolenni <em>Darllen ymhellach</em> i’r rhain, er mwyn i chi wirio drosoch eich hun."),

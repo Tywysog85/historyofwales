@@ -64,6 +64,7 @@ Ifan asked on 12 November 2026 that readers can see who writes the site and how 
 
 - Every page ends with who wrote it, when it was first published (long reads, legends, people and places added since 11 November 2026) and when it was last updated. Long reads also say "By ..." and "Updated ..." at the top. The name and the way to report a mistake are set at the top of `src/about.py`.
 - "Last updated" is never typed in: it moves on by itself when the words or pictures on a page change.
+- Readers report mistakes, or get in touch about anything, by emailing hello@historyofwales.cymru (set in `src/about.py`). Do not put Google Forms or GitHub links on the site for this.
 - When a reader reports a mistake: check it against the sources, fix it, and if it was more than a typo, add a line to `CORRECTIONS` in `src/about.py` so it is listed on the About page.
 
 ## Before publishing
