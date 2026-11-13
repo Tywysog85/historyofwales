@@ -982,3 +982,30 @@ main.home .mh .head { margin-bottom: 1.4rem }
 }
 @media print { .pq-pic, .row-pic, .tl-pic { display: none !important } .plaque.has-pic { padding: 1.35rem } }
 .era-places b span { font-size: inherit; color: inherit }  /* the name keeps its size when it is wrapped in a language span */
+/* reference cards (battles, documents): a small picture at the top right */
+.rc-pic { float: right; display: block; width: 5.2rem; height: 5.2rem; margin: .15rem 0 .6rem 1rem; border-radius: 12px; overflow: hidden; background: #141925; border: 1px solid var(--line) }
+.rc-pic img { display: block; width: 100%; height: 100%; object-fit: cover }
+.rc-pic.ic { display: grid; place-items: center; color: var(--c); background: color-mix(in srgb, var(--c) 9%, #161b26) }
+.rc-pic.ic svg { width: 2.8rem; height: 2.8rem }
+@media print { .rc-pic { display: none !important } }
+/* cards with a link list layout (topic guide people, an event page's links): the picture at the top right */
+.wrap .tp-people a, .wrap .ev-rel a { position: relative; padding-right: 5rem }
+.tp-people .rc-pic, .ev-rel .rc-pic { position: absolute; right: .7rem; top: .7rem; width: 3.6rem; height: 3.6rem; margin: 0; float: none }
+.ev-rel .rc-pic.ic svg, .tp-people .rc-pic.ic svg { width: 2rem; height: 2rem }
+/* a picture across the top of a card (trails, Mabinogion tales, lesson ideas) */
+.card-ban { position: relative; display: block; overflow: hidden; aspect-ratio: 16 / 9; background: #141925; margin: -1.3rem -1.4rem .3rem }
+.card-ban img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease) }
+a:hover > .card-ban img, .wl-card:hover > .card-ban img { transform: scale(1.04) }
+.chap > .card-ban { margin: -1.5rem -1.4rem .2rem }
+.mab-tale { overflow: hidden }
+.mab-tale > .card-ban { margin: -1.3rem -1.4rem .3rem }
+.lesson { overflow: hidden }
+/* the news list: a small picture beside each line */
+.news-item.has-pic a { grid-template-columns: 3.2rem 7.5rem minmax(0, 1fr) }
+.news-list.big .news-item.has-pic a { grid-template-columns: 4rem 9rem minmax(0, 1fr) }
+.n-pic { grid-row: 1 / span 2; width: 3.2rem; height: 3.2rem; border-radius: 10px; overflow: hidden; background: #141925; align-self: start }
+.news-list.big .n-pic { width: 4rem; height: 4rem }
+.n-pic img { display: block; width: 100%; height: 100%; object-fit: cover }
+.news-item.has-pic .n-s { grid-column: 3 }
+@media (max-width: 520px) { .news-item.has-pic a, .news-list.big .news-item.has-pic a { grid-template-columns: 3.2rem minmax(0, 1fr) } .news-item.has-pic .n-s { grid-column: 2 } .news-list.big .n-pic { width: 3.2rem; height: 3.2rem } }
+@media print { .card-ban, .n-pic { display: none !important } }

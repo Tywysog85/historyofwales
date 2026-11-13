@@ -90,7 +90,7 @@ def _docs(ev):
 
 
 def _link_list(items):
-    return '<ul class="ev-rel">' + "".join(f'<li><a href="{h}"><b>{bi(en, cy)}</b>{f"<small>{bi(sen, scy)}</small>" if sen else ""}</a></li>' for h, en, cy, sen, scy in items) + "</ul>"
+    return '<ul class="ev-rel">' + "".join(f'<li><a href="{h}">{g["see_pic"]([h])}<b>{bi(en, cy)}</b>{f"<small>{bi(sen, scy)}</small>" if sen else ""}</a></li>' for h, en, cy, sen, scy in items) + "</ul>"
 
 
 def event_page(i, ev):
