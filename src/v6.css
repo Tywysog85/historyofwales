@@ -722,7 +722,6 @@ html.cy .news-item.is-new .n-t::after { content: "Newydd" }
 
 /* ---------- home page: the map and people teasers (the full versions are map.html and people.html) ---------- */
 /* ---------- home page: the Map section (#map) — a panel with the map, the town finder and three picture cards ---------- */
-#map { padding-top: clamp(.5rem, 1.5vw, 1rem) }
 .mh { position: relative; isolation: isolate; overflow: hidden; display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center;
   padding: clamp(1.4rem, 4vw, 3rem); border-radius: calc(var(--r) + 6px); border: 1px solid var(--line);
   background: radial-gradient(60% 70% at 22% 45%, rgba(226,69,61,.16), transparent 70%), radial-gradient(50% 60% at 95% 0%, rgba(232,198,90,.08), transparent 70%), linear-gradient(160deg, #161c29, #10141e 70%) }
@@ -793,7 +792,6 @@ html:not(.cy) .map-teaser .mlab .l-cy, html.cy .map-teaser .mlab .l-en { display
   .mh-res { gap: .4rem } .mh-pt { padding: .45rem .5rem .55rem } .mh-pt b { font-size: .82rem }
 }
 /* the tile under the long reads (and any "all of them" tile like it) */
-#stories { padding-bottom: clamp(2rem, 4vw, 3rem) }
 .more-tile { position: relative; margin-top: 1rem; display: flex; align-items: center; gap: 1.1rem; padding: .9rem 4.2rem .9rem 1.1rem; border-radius: var(--r); text-decoration: none; color: var(--ink);
   background: linear-gradient(120deg, rgba(232,198,90,.13), rgba(232,198,90,.02) 70%), var(--card); border: 1px solid rgba(232,198,90,.32); transition: border-color .3s, transform .3s var(--ease) }
 .more-tile:hover { border-color: var(--gold); transform: translateY(-2px) }
@@ -901,3 +899,13 @@ a.wl-go:focus-visible { outline: none }
   .site-foot .fcol ul { margin: 0 0 1rem; grid-template-columns: 1fr 1fr; gap: .2rem 1rem }
   .site-foot .fcol ul a { display: block; padding-block: .45rem }
 }
+
+/* ---------- home page rhythm: the same gap between every section (Ifan, 2026-11-13, "a little less gap").
+   Each section keeps half the gap above and below, so two sections meet at one --home-gap (about 56px on a phone, 112px on a wide screen).
+   Change --home-gap here, not the sections one by one. ---------- */
+main:has(> #chapters) { --home-gap: clamp(1.75rem, 4vw, 3.5rem) }
+main:has(> #chapters) > section { padding-block: var(--home-gap) }
+main:has(> #chapters) > #chapters { padding-top: calc(var(--home-gap) * 1.4) }
+main:has(> #chapters) .head { margin-bottom: clamp(1.4rem, 3vw, 2.2rem) }
+main:has(> #chapters) .more-row { margin-top: 1.25rem }
+main:has(> #chapters) .mh .head { margin-bottom: 1.4rem }
