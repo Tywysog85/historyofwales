@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-13", "The place-name decoder now knows over 500 words", "Mae’r datgodiwr enwau lleoedd bellach yn gwybod dros 500 o eiriau",
+     "Type any Welsh place name and see what it means: the decoder now knows the rivers, saints and old lands behind the names, works out mutations (the Cammarch in Llangammarch, the Mair in Llanfair), keeps each word separate, and explains English words like the Wells of Builth Wells.",
+     "Teipiwch unrhyw enw lle Cymraeg i weld ei ystyr: mae’r datgodiwr bellach yn adnabod yr afonydd, y saint a’r hen diroedd y tu ôl i’r enwau, yn deall treigladau (Cammarch yn Llangammarch, Mair yn Llanfair), yn cadw pob gair ar wahân, ac yn egluro geiriau Saesneg fel Wells yn Builth Wells.",
+     "towns.html"),
     ("2026-11-13", "Picture backgrounds across the site", "Lluniau cefndir ar draws y wefan",
      "The plain panels now have real pictures behind them: the census of Welsh speakers over Cymdeithas yr Iaith’s 1966 protest, the place-name decoder over the long name of Llanfairpwllgwyngyll, the word of the day over the Brecon Beacons, and the phrases of Learn Welsh, the saints’ calendar, the Triads, the towns, the symbols, the games and the Visiting box of every place, each with a picture of its own.",
      "Mae lluniau go iawn bellach y tu ôl i’r paneli plaen: cyfrifiad siaradwyr Cymraeg dros brotest Cymdeithas yr Iaith yn 1966, y datgodiwr enwau lleoedd dros enw hir Llanfairpwllgwyngyll, gair y dydd dros Fannau Brycheiniog, ac ymadroddion Dysgu Cymraeg, calendr y saint, y Trioedd, y trefi, y symbolau, y gemau a blwch Ymweld pob lle, pob un gyda’i lun ei hun.",

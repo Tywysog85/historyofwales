@@ -242,6 +242,15 @@ section { padding-block: clamp(4rem, 9vw, 7rem); position: relative }
 .part b { font-family: var(--f-display); font-weight: 400; font-size: 1.45rem; color: var(--dragon); line-height: 1.1 }
 .part span { font-size: .82rem; color: var(--muted) }
 .part.unk b { color: var(--muted) }
+.part { max-width: 100% }
+.part small { font-size: .74rem; color: var(--muted); opacity: .85; font-style: italic }
+.part.eng { border-style: dashed }
+.part.eng b { color: var(--ink) }
+.part span em { font-style: normal; font-weight: 600 }
+.dec-word { display: flex; flex-wrap: wrap; gap: .35rem; max-width: 100% }
+.dec-word + .dec-word { padding-left: .6rem; border-left: 2px solid var(--line) }
+.dec-hit { flex-basis: 100%; margin: 0 0 .2rem }
+.dec-hit a { color: var(--dragon) }
 @keyframes pop { from { transform: translateY(6px) scale(.96) } to { transform: none } }
 .samples { display: flex; flex-wrap: wrap; gap: .4rem }
 .samples button { background: none; border: 1px dashed var(--line); border-radius: 8px; padding: .25rem .6rem; font-size: .85rem; color: var(--muted); cursor: pointer }
