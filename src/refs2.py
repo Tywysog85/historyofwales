@@ -864,3 +864,8 @@ SHELF_EXTRA["lang"] += [
      "The old alphabets of the Britons, and the Coelbren.", "Hen wyddorau’r Brythoniaid, a’r Coelbren.",
      "https://www.cymroglyphics.com/"),
 ]
+SHELF_EXTRA["princes"] += [
+    (B, "Jonathan Morgan, illustrated by Robert Macdonald", "The Welsh Warrior Through the Ages", "Cambria, 2016",
+     "The fighting men of Wales from the Britons and the longbowmen to the Welsh regiments.", "Milwyr Cymru o’r Brythoniaid a’r saethwyr bwa hir i’r catrodau Cymreig.",
+     "https://www.cambriabooks.co.uk/product/welsh-warrior/"),
+]
