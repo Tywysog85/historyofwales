@@ -329,3 +329,21 @@
     });
   });
 })();
+
+/* ---------- shorter pages on phones (November 2026) ----------
+   The footer lists are <details>, open in the HTML; on phones they start closed, so the footer is four headings to tap.
+   Long lists marked .clip-list show their first four items on phones, with a button for the rest (CSS in src/v6.css). */
+(function () {
+  var d = document, phone = window.matchMedia && matchMedia("(max-width: 700px)").matches;
+  Array.prototype.forEach.call(d.querySelectorAll(".site-foot details.fcol"), function (el) {
+    if (phone) el.open = false;
+    else el.addEventListener("toggle", function () { if (!el.open && !matchMedia("(max-width: 700px)").matches) el.open = true; });
+  });
+  Array.prototype.forEach.call(d.querySelectorAll(".clip-list"), function (ul) {
+    var n = ul.children.length; if (n <= 4) return;
+    var b = d.createElement("button"); b.type = "button"; b.className = "btn clip-more";
+    b.textContent = d.documentElement.classList.contains("cy") ? "Dangos y cyfan (" + n + ")" : "Show all " + n;
+    b.addEventListener("click", function () { ul.classList.add("open"); var f = ul.children[4] && ul.children[4].querySelector("a"); if (f) f.focus({ preventScroll: true }); });
+    ul.after(b);
+  });
+})();

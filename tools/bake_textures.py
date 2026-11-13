@@ -8,7 +8,7 @@ def nrm(im,strength):
     return Image.fromarray((n*255).astype(np.uint8))
 for name,f,size,st in (('stone','castle_wall_slates_diff.jpg',1024,5.0),('rock','aerial_rocks_02_diff.jpg',512,4.0)):
     im=Image.open(f'{src}/{f}').convert('RGB').resize((size,size),Image.LANCZOS)
-    im.save(f'{out}/{name}.webp',quality=82); nrm(im,st).save(f'{out}/{name}-n.webp',quality=82)
+    im.save(f'{out}/{name}.webp',quality=74,method=6); nrm(im,st).save(f'{out}/{name}-n.webp',quality=74,method=6)  # 74, method 6 (Nov 2026): a quarter lighter, same look
 # fine grain for the mountain slopes: the rock photograph in grey, evened out so that its average is mid-grey
 g=np.asarray(Image.open(f'{src}/aerial_rocks_02_diff.jpg').convert('L').resize((512,512),Image.LANCZOS)).astype(np.float64)
 g=np.clip(127.5+(g-g.mean())/g.std()*46,0,255).astype(np.uint8); Image.fromarray(np.stack([g,g,g],-1)).save(f'{out}/detail.webp',quality=80)
