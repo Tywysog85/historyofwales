@@ -21,8 +21,27 @@ AUTHOR_CY = "Ifan"
 BIO_EN = ""
 BIO_CY = ""
 # How the site is researched (Ifan's words, 12 November 2026), shown under "Who writes it".
-METHOD_EN = "It is researched with the help of AI and checked against real sources: the chronicles, the Dictionary of Welsh Biography, Cadw, Coflein and the published histories of Wales."
-METHOD_CY = "Caiff ei hymchwilio gyda chymorth deallusrwydd artiffisial (AI) a’i gwirio yn erbyn ffynonellau go iawn: y cronicl, y Bywgraffiadur Cymreig, Cadw, Coflein a’r llyfrau hanes a gyhoeddwyd am Gymru."
+METHOD_EN = "It is researched with the help of AI and checked against real sources. These are the ones the site leans on most:"
+METHOD_CY = "Caiff ei hymchwilio gyda chymorth deallusrwydd artiffisial (AI) a’i gwirio yn erbyn ffynonellau go iawn. Dyma’r rhai y mae’r wefan yn pwyso arnynt fwyaf:"
+# The sources named under METHOD (Ifan asked for more of them, 13 November 2026). Only sources the site really uses.
+# (heading EN, heading CY, list EN, list CY); a list may hold HTML links.
+SOURCES = [
+    ("The old texts of Wales", "Hen destunau Cymru",
+     "Gildas, the Historia Brittonum of Nennius, the Welsh Annals (Annales Cambriae), Brut y Tywysogion and Brut y Brenhinedd, Geoffrey of Monmouth, Gerald of Wales, the Laws of Hywel Dda, the Welsh Triads, the Mabinogion, the Book of Llandaf, and the great manuscripts: the Black Book of Carmarthen, the Book of Aneirin, the Book of Taliesin, the Red Book of Hergest and the Peniarth manuscripts.",
+     "Gildas, Historia Brittonum Nennius, Annales Cambriae, Brut y Tywysogion a Brut y Brenhinedd, Sieffre o Fynwy, Gerallt Gymro, Cyfraith Hywel Dda, Trioedd Ynys Prydain, y Mabinogion, Llyfr Llandaf, a’r llawysgrifau mawr: Llyfr Du Caerfyrddin, Llyfr Aneirin, Llyfr Taliesin, Llyfr Coch Hergest a llawysgrifau Peniarth."),
+    ("Writers from beyond Wales", "Awduron o’r tu hwnt i Gymru",
+     "Tacitus, Bede, the Anglo-Saxon Chronicle and Domesday Book.",
+     "Tacitus, Beda, Cronicl yr Eingl-Sacsoniaid a Llyfr Domesday."),
+    ("Libraries, museums and records", "Llyfrgelloedd, amgueddfeydd a chofnodion",
+     "The Dictionary of Welsh Biography and the National Library of Wales (with Welsh Journals and Welsh Newspapers Online), Amgueddfa Cymru – Museum Wales, Cadw, Coflein and the Royal Commission on the Ancient and Historical Monuments of Wales, Heneb: the Trust for Welsh Archaeology, People’s Collection Wales, the National Trust, UNESCO, the Senedd and Hansard.",
+     "Y Bywgraffiadur Cymreig a Llyfrgell Genedlaethol Cymru (gyda Chylchgronau Cymru a Phapurau Newydd Cymru Arlein), Amgueddfa Cymru, Cadw, Coflein a Chomisiwn Brenhinol Henebion Cymru, Heneb: Ymddiriedolaeth Archaeoleg Cymru, Casgliad y Werin Cymru, yr Ymddiriedolaeth Genedlaethol, UNESCO, y Senedd a Hansard."),
+    ("Historians of Wales", "Haneswyr Cymru",
+     "John Davies, R. R. Davies, Gwynfor Evans, Gwyn A. Williams, J. E. Lloyd, Geraint H. Jenkins, Kenneth O. Morgan, T. M. Charles-Edwards, Rachel Bromwich, Ifor Williams, Sioned Davies, Dafydd Jenkins, Thomas Jones, Alan Wilson and Baram Blackett, Adrian Gilbert, and many more on the <a href=\"books-and-authors.html\">Books and authors</a> page.",
+     "John Davies, R. R. Davies, Gwynfor Evans, Gwyn A. Williams, J. E. Lloyd, Geraint H. Jenkins, Kenneth O. Morgan, T. M. Charles-Edwards, Rachel Bromwich, Ifor Williams, Sioned Davies, Dafydd Jenkins, Thomas Jones, Alan Wilson a Baram Blackett, Adrian Gilbert, a llawer mwy ar y dudalen <a href=\"books-and-authors.html\">Llyfrau ac awduron</a>."),
+    ("Reference works", "Gweithiau cyfeirio",
+     "Encyclopaedia Britannica, the BBC, and Wikipedia in English and in Welsh.",
+     "Encyclopaedia Britannica, y BBC, a Wicipedia yn Saesneg ac yn Gymraeg."),
+]
 # How people report a mistake. Set ONE of these:
 CORRECTIONS_EMAIL = "hello@historyofwales.cymru"  # Ifan's choice (13 November 2026): forwarded by ImprovMX to Ifan's own inbox
 CORRECTIONS_FORM = ""   # or the link to an online form (used only when CORRECTIONS_EMAIL is empty)
@@ -165,6 +184,9 @@ def about_page():
         who_en.append(METHOD_EN)
         who_cy.append(METHOD_CY or METHOD_EN)
     who = g["paras"](who_en, who_cy, "ab-text")
+    if SOURCES:
+        who += ('<ul class="about-how about-src">' + "".join(
+            f"<li>{rbi(f'<b>{e(he)}:</b> {le}', f'<b>{e(hc)}:</b> {lc}')}</li>" for he, hc, le, lc in SOURCES) + "</ul>")
     if CORRECTIONS_EMAIL:
         mail = mail_link()
         who += (f'<div class="ab-text" style="margin-top:1rem"><p>' + rbi(f"To get in touch about anything, email {mail}. Every message is read.",
