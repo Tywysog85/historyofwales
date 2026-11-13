@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-13", "Seventy new books, and where to buy them", "Saith deg o lyfrau newydd, a ble i’w prynu",
+     "The Books and authors page has grown by seventy books, from Gwyn A. Williams’s Excalibur and every book by Alan Wilson and Baram Blackett to the old classics of Skene, Wade-Evans and Borrow, many with a free scan to read online. Every book on that page and in Further reading now has Buy links to Amazon and AbeBooks, so you can find a new or second-hand copy.",
+     "Mae’r dudalen Llyfrau ac awduron wedi tyfu o saith deg o lyfrau, o Excalibur Gwyn A. Williams a phob llyfr gan Alan Wilson a Baram Blackett i hen glasuron Skene, Wade-Evans a Borrow, llawer ohonynt gyda chopi i’w ddarllen am ddim ar-lein. Mae gan bob llyfr ar y dudalen honno ac yn Darllen pellach ddolenni Prynu i Amazon ac AbeBooks bellach, er mwyn i chi gael copi newydd neu ail-law.",
+     "books-and-authors.html"),
     ("2026-11-13", "A faster, calmer and more private site", "Gwefan gyflymach, dawelach a mwy preifat",
      "On older phones and slow connections the front page has a Pause animation button that stops the dragon, the moving words and the glint on the title, and remembers your choice. The fonts now come from this site itself, so reading it no longer contacts Google, and pages you have visited before open faster. The privacy note on the About page now covers the weekly email too, and a browser set to Welsh is offered the Welsh pages once.",
      "Ar ffonau hŷn a chysylltiadau araf mae botwm Oedi’r animeiddiad ar y dudalen flaen sy’n atal y ddraig, y geiriau sy’n symud a’r llewyrch ar y teitl, ac mae’n cofio eich dewis. Daw’r ffontiau o’r wefan hon ei hun bellach, felly nid yw ei darllen yn cysylltu â Google mwyach, ac mae tudalennau rydych wedi ymweld â nhw o’r blaen yn agor yn gyflymach. Mae’r nodyn preifatrwydd ar y dudalen Amdanom yn sôn am yr e-bost wythnosol hefyd, a chaiff porwr sydd wedi’i osod i’r Gymraeg gynnig y tudalennau Cymraeg unwaith.",
