@@ -1047,3 +1047,12 @@ a:hover > .card-ban img, .wl-card:hover > .card-ban img { transform: scale(1.04)
   .rv-chart text.rv-k { font-size: 17px }
   .rv-chart .rv-num { r: 13px }
 }
+
+/* A darkened picture behind a timeline row that has no picture of its own (build.py row_bg, src/panels.py THEMES) */
+.era-events li.has-bg { position: relative; isolation: isolate; padding: 1.1rem .95rem; margin: .45rem 0; border: 1px solid rgba(255,255,255,.12); border-radius: 16px; text-shadow: 0 1px 3px rgba(0,0,0,.65) }
+.row-bg { position: absolute; inset: 0; z-index: -1; border-radius: inherit; overflow: hidden; pointer-events: none; background: #141925 }
+.row-bg img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 35% }
+.row-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(12,15,22,.9) 0, rgba(12,15,22,.8) 55%, rgba(12,15,22,.62) 100%) }
+.era-events li.has-bg p { color: rgba(255,255,255,.86) }
+.era-events li.has-bg .row-pic.ic { background: rgba(12,15,22,.42); border-color: rgba(255,255,255,.18); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px) }
+@media print { .row-bg { display: none !important } .era-events li.has-bg { text-shadow: none } }

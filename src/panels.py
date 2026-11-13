@@ -59,6 +59,7 @@ SINGLE = [
     (".news-box", "g:land-three-cliffs"),                          # new on the site
     (".reading", "g:trea-bible-1588"),                             # further reading
     (".tl-band", "g:land-yr-wyddfa"),                              # the timeline band
+    (".otd-year", "g:anci-gors-fawr"),                             # On this day: "The whole year" (the stones of Gors Fawr)
     # on many pages
     (".refs", "g:trea-red-book"),                                  # references and further reading
     (".further", "g:trea-red-book"),
@@ -134,3 +135,89 @@ def css():
     out.append("@media print{html body :is(" + sel_all + "){background-image:none!important}}")
     out.append("@supports (content-visibility:auto){.author,.tw-card,.otd-day{content-visibility:auto;contain-intrinsic-size:auto 260px}}")
     return "\n".join(out) + "\n"
+
+
+# Background pictures for cards that have no picture of their own (Ifan, 13 November 2026: "this card and all other
+# cards needs a background image/picture", of an On this day row showing only a drawn sprout). The picture sits behind
+# the words, darkened, so it sets the scene rather than claiming to show the thing: the first line below whose words
+# appear in the card's text gives the picture (a place or person the card names, else its subject: sport, the pits,
+# poetry, the chapels, war ...). A card that matches nothing gets a Welsh landscape (LAND), never the stock picture
+# of its age (the audit of November 2026 found Capel Celyn beside Ivor Novello).
+import re as _re
+
+THEMES = [
+    # a place, person or thing the card names
+    (r"Senghenydd|Universal Colliery", "g:place-senghennydd"),
+    (r"Tonypandy", "g:place-tonypandy"),
+    (r"Penyberth", "g:place-penyberth"),
+    (r"Pennal", "g:trea-pennal-letter"),
+    (r"Chartist|Rebecca Riot", "g:place-westgate"),
+    (r"City Hall|named capital|capital city", "g:buil-city-hall"),
+    (r"Millennium Centre", "g:buil-wmc"),
+    (r"Snowdon Mountain Railway", "g:indu-snowdon-rly"),
+    (r"Talyllyn", "g:indu-talyllyn"),
+    (r"Hedd Wyn|black chair", "g:place-yrysgwrn"),
+    (r"St Fagans", "g:place-stfagans"),
+    (r"Bosworth|Harri Tudur", "g:person-harri-tudur"),
+    (r"Llywelyn ap Gruffudd|Treaty of Montgomery", "g:person-llywelyn-ap-gruffudd"),
+    (r"1282|Hawarden", "g:peop-cofia-1282"),
+    (r"Magna Carta|Llywelyn Fawr|Dafydd ap Llywelyn", "g:person-llywelyn-fawr"),
+    (r"Glyndŵr|Bryn Glas|French army", "g:person-owain-glyndwr"),
+    (r"Edward of Caernarfon|English Prince of Wales", "g:place-caernarfon"),
+    (r"king of Welsh tradition|named? \w+ Arthur", "g:person-arthur"),
+    (r"Gareth Edwards", "g:person-gareth-edwards"),
+    (r"Wallace|natural selection", "g:person-alfred-russel-wallace"),
+    (r"Patagonia|Wladfa|Mimosa", "g:person-michael-d-jones"),
+    (r"Aneurin Bevan|National Health Service|\bNHS\b", "g:person-aneurin-bevan"),
+    (r"Lloyd George", "g:person-lloyd-george"),
+    (r"Plaid Cymru|national party", "g:person-saunders-lewis"),
+    (r"Lavernock|Marconi|wireless|radio signal", "place:lavernock"),
+    (r"Llandaff Cathedral", "g:holy-llandaff"),
+    (r"Swansea Blitz", "g:buil-swansea-guildhall"),
+    (r"peace and goodwill", "g:buil-temple-peace"),
+    (r"Portmeirion", "g:buil-portmeirion"),
+    (r"Archbishop|Church in Wales", "g:holy-st-asaph"),
+    (r"Saint David’s Day", "g:place-stdavids"),
+    (r"Denbigh", "g:cast-denbigh"),
+    (r"Snowdonia National Park|Eryri becomes|Kyffin|Yr Wyddfa|Rhyd-ddu", "g:land-yr-wyddfa"),
+    (r"Brecon Beacons|Bannau Brycheiniog|Breconshire", "g:land-pen-y-fan"),
+    (r"Pembrokeshire Coast|Preseli", "g:land-barafundle"),
+    (r"Coast Path", "g:land-worms-head"),
+    (r"Royal Charter|Moelfre|wrecked", "g:land-south-stack"),
+    (r"Llandudno|hovercraft", "g:place-orme"),
+    (r"Senedd|Assembly|devolution|referendum|law-making|councils|counties|minister|prescriptions|Act of Parliament|self-government|politician|Liberal|\bParty\b", "g:place-senedd"),
+    # what the card is about
+    (r"Blitz|air raid|bomb|Welsh Guards|Mametz|Armistice|Great War|First World War|evacuee|Victoria Cross|archers|Crécy", "g:buil-temple-peace"),
+    (r"miner|colliery|coal|\bpit\b|Gresford|strike", "g:indu-big-pit-winding"),
+    (r"\bdock", "g:indu-coal-exchange"),
+    (r"poet|\bwriter|author|Welsh-medium|novel|\bbook|scholar|professor|Grammar|newspaper|Seren Gomer|storyteller|dramatist|critic|editor|biographer|lawyer|academic|hymn", "g:place-library"),
+    (r"rugby|All Blacks|Lions|fly-half|number eight|Grand Slam|Arms Park|Barbarians|football|FA Cup|League Cup|World Cup|\bEuro \d|the Euros|tournament|Premier League|"
+     r"boxer|boxing|champion|Olympic|hurdles|golf|\bMasters\b|Ryder Cup|snooker|\bTour\b|cyclist|runner|\bGames\b|sixes|taekwondo|long jump|caps for Wales|Wizard|Swansea City|Cardiff City", "g:place-stadiwm"),
+    (r"harpist", "g:trea-welsh-harp"),
+    (r"chapel|preacher|missionary|Methodist", "g:holy-tabernacl"),
+    (r"saint|feast|martyr|priest|monk|Franciscan|Benedictine|Catholic|church", HOLY),
+    (r"eisteddfod|Archdruid|Chair and the Crown", "g:place-cardigan"),
+    (r"actor|actress|comed|comic|folk|stage|screen|film|Oscar|singer|pop |tenor|Manic|music|composer|song|choir|conductor|television|Television|Teledu|Radio|radio|BBC|Pobol y Cwm|showman|broadcast",
+     "g:buil-wmc"),
+    (r"painter|artist|sculptor|designer|architect", "g:buil-national-museum"),
+    (r"physicist|philosopher|scientist|Nobel|explorer|economist|diplomat", "g:buil-old-college"),
+    (r"railway|bridge|Bridge|tunnel|Tunnel|Severn|bus|hovercraft", "g:indu-britannia-bridge"),
+]
+_THEMES = [(_re.compile(rx, _re.I), ref) for rx, ref in THEMES]
+
+
+def match(text):
+    """The THEMES line that fits this text, or None."""
+    for rx, ref in _THEMES:
+        if rx.search(text or ""):
+            return ref
+    return None
+
+
+def theme(text, seed=0):
+    """The ref of a fitting background picture for a card with this text (see THEMES); a landscape if nothing fits.
+    A ref may be a list (take turns by seed) or "place:<id>" (that place's photo, which build.py resolves)."""
+    for rx, ref in _THEMES:
+        if rx.search(text or ""):
+            return ref[seed % len(ref)] if isinstance(ref, list) else ref
+    return LAND[seed % len(LAND)]

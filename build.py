@@ -8,7 +8,7 @@ Environment:
   SITE_URL     public address of the site, ending in /   (default: the GitHub Pages address)
   GOATCOUNTER  your GoatCounter code, e.g. "hanescymru", to switch on visitor statistics
 """
-import datetime, html, json, os, re, sys, shutil
+import datetime, html, json, os, re, sys, shutil, zlib
 from xml.sax.saxutils import escape as xesc
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -651,6 +651,14 @@ def row_pic(pic, ill=None):
     return f'<span class="row-pic ic" aria-hidden="true"><svg><use href="#i-{ill}"/></svg></span>' if ill else ""
 
 
+def row_bg(path):
+    """A darkened picture behind a card or row that has no picture of its own (src/panels.py THEMES). An <img> rather
+    than a CSS background so the browser only fetches it when the row comes near the screen."""
+    if not path:
+        return ""
+    return f'<span class="row-bg" aria-hidden="true"><img src="{e(TH.thumb(path))}" alt="" loading="lazy" decoding="async"></span>'
+
+
 def event_pic(ev, sl=None):
     """An event's picture, the same as its own page shows: its place, else the first of its people with a portrait,
     else the long read that tells it."""
@@ -671,8 +679,10 @@ def event_li(ev, k=0, title_link=False):
              + (f'<a class="src" href="place-{ev[10]}.html">{bi("The place", "Y lle")} →</a>' if ev[10] else ""))
     links = f'<a class="wl" href="{EP.href(ev)}">{bi(ev[5], ev[6])}</a>' + (f'<div class="links">{links}</div>' if links else "")
     title = f'<a href="{EP.href(ev)}">{bi(ev[5], ev[6])}</a>' if title_link else bi(ev[5], ev[6])
-    pic = row_pic(event_pic(ev, sl), ERA.get(ev[0], ERA["medieval"])["ill"])
-    return (f'<li id="e{EVI[ev]}" class="wl-card has-pic{" key" if ev[9] else ""}" data-era="{ev[0]}"><time>{bi(year_label(ev), year_label(ev, True))}</time>'
+    own = event_pic(ev, sl)
+    pic = row_pic(own, ERA.get(ev[0], ERA["medieval"])["ill"])
+    bg = "" if own else row_bg(theme_bg(f"{ev[5]} | {ev[7]}", zlib.crc32(ev[5].encode())))  # no picture of its own: one behind it
+    return (f'<li id="e{EVI[ev]}" class="wl-card has-pic{" has-bg" if bg else ""}{" key" if ev[9] else ""}" data-era="{ev[0]}">{bg}<time>{bi(year_label(ev), year_label(ev, True))}</time>'
             f'<div><h3>{title}</h3><p>{bi(ev[7], ev[8])}</p>{links}</div>{pic}</li>')
 
 
@@ -682,7 +692,9 @@ def plaque_pic(p):
     pic = card_pic(f"person-{p[0]}.html")
     if pic:
         return f'<span class="pq-pic" aria-hidden="true">{pic_img(pic, small=False, w=600, h=400)}</span>'
-    return f'<span class="pq-pic is-age" aria-hidden="true">{pic_img(era_pic(p[1]))}<b>{e(_initials(p[3]))}</b></span>'
+    ref = PN.match(f"{p[5]} | {p[7]}")  # what they are known for (a poet, a footballer, a saint ...), else their age's picture
+    bg = (theme_bg(f"{p[5]} | {p[7]}"), "50% 40%") if ref else era_pic(p[1])
+    return f'<span class="pq-pic is-age" aria-hidden="true">{pic_img(bg)}<b>{e(_initials(p[3]))}</b></span>'
 
 
 def plaque(p, link=True):
@@ -2540,7 +2552,25 @@ def otd_rows():
             link = saint_href(sid)
             rows.append([f'{x["feast"][1]:02d}-{x["feast"][0]:02d}', None, "feast", x["en"], x["cy"], first(x["nEn"]), first(x["nCy"]), link, "saints", otd_pic(link, "saints", kind="feast")])
     rows.sort(key=lambda r: (r[0], OTD_ORDER[r[2]], r[1] if r[1] is not None else -10 ** 6))
+    for r in rows:  # an 11th field: the darkened picture behind a row with no picture of its own (src/panels.py THEMES)
+        r.append(otd_bg(r))
     return rows
+
+
+def theme_bg(text, seed=0):
+    """A fitting background picture for a card with no picture of its own (src/panels.py THEMES), as a site path."""
+    ref = PN.theme(text, seed)
+    if ref.startswith("place:"):
+        pic = card_pic(f"place-{ref[6:]}.html")
+        return pic[0] if pic and not pic[0].startswith("http") else PN.url(PN.LAND[seed % len(PN.LAND)])
+    return PN.url(ref)
+
+
+def otd_bg(r):
+    """The background of an On this day row on the home page: "" when the row's own picture serves (app.js uses it)."""
+    if not r[9].startswith("i:") and not r[9].startswith("http"):
+        return ""
+    return theme_bg(f"{r[3]} | {r[5]}", zlib.crc32(r[3].encode()))
 
 
 def otd_item(r):
@@ -3678,7 +3708,8 @@ WEEKDAYS = [("Mon", "Llun"), ("Tue", "Maw"), ("Wed", "Mer"), ("Thu", "Iau"), ("F
 
 def otd_home_row(r, show_date):
     """One row of the home page On this day panel: a picture, when, the title and one line. The whole row is a link (app.js draws the same)."""
-    md, y, k, te, tc, le, lc, link, era, pic = r
+    md, y, k, te, tc, le, lc, link, era, pic = r[:10]
+    bg = r[10] if len(r) > 10 and r[10] else pic
     tag = OTD_TAG.get(k)
     m = int(md[:2]) - 1
     bits = []
@@ -3689,7 +3720,8 @@ def otd_home_row(r, show_date):
     if tag:
         bits.append(f'<span class="k">{bi(*tag)}</span>')
     href = link or f"onthisday.html#d-{md}"
-    return (f'<li class="otd-row wl-card" data-era="{era}">{otd_pic_html(pic)}'
+    style = f' style="--pbg:url(\'{e(bg)}\')"' if bg and not bg.startswith("i:") else ""
+    return (f'<li class="otd-row wl-card pbg" data-era="{era}"{style}>{otd_pic_html(pic)}'
             f'<div class="otd-txt"><p class="otd-meta">{"".join(bits)}</p><h3>{bi(te, tc)}</h3><p>{bi(le, lc)}</p></div>'
             f'<a class="wl" href="{e(href)}">{bi(te, tc)}</a></li>')
 
