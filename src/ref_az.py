@@ -174,7 +174,7 @@ TERMS = [
  A("hen-ogledd", "Yr Hen Ogledd (the Old North)", "Yr Hen Ogledd",
    "The British kingdoms of what is now northern England and southern Scotland: Rheged, Gododdin, Strathclyde, Elfed and Efrog. The oldest Welsh poems, by Taliesin and Aneirin, were sung there.",
    "Teyrnasoedd Brythonig yr hyn sydd heddiw’n ogledd Lloegr a de’r Alban: Rheged, Gododdin, Ystrad Clud, Elfed ac Efrog. Yno y canwyd y cerddi Cymraeg hynaf, gan Daliesin ac Aneirin.",
-   ["kings-rheged.html", "kings-gododdin.html", "person-taliesin.html", "person-aneirin.html"]),
+   ["story-hen-ogledd.html", "kings-rheged.html", "kings-gododdin.html", "kings-ystrad-clud.html", "person-urien-rheged.html", "person-taliesin.html", "person-aneirin.html", "family-trees.html"]),
  A("gwynedd", "Gwynedd", "Gwynedd",
    "The kingdom of the north-west, ruled from Aberffraw by the line of Cunedda, Rhodri Mawr and the two Llywelyns. Its mountains made it the heart of Welsh resistance.",
    "Teyrnas y gogledd-orllewin, a reolid o Aberffraw gan linach Cunedda, Rhodri Mawr a’r ddau Lywelyn. Ei mynyddoedd a’i gwnaeth yn galon y gwrthsafiad Cymreig.",

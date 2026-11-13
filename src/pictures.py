@@ -101,7 +101,8 @@ PAGE = {
     "story-learning.html": "g:place-llanilltud",
     "story-unconquered.html": "g:cast-dolwyddelan",
     "story-firsts.html": "g:place-merthyr",
-    "story-brittany.html": "g:person-cadog",
+    "person-gwenole.html": "c:Abbaye de Landévennec.jpg",
+    "story-brittany.html": "c:Procession des saints de Bretagne - diocèse de Rennes, cathédrale saint Pierre, Rennes, France.jpg",
     "story-revival.html": "g:person-gwynfor-evans",
     "story-iolo.html": "g:person-iolo-morganwg",
     "story-wilson-blackett.html": "g:anci-maen-ceti",
@@ -300,6 +301,11 @@ _BY = "https://creativecommons.org/licenses/by/"
 _BYSA = "https://creativecommons.org/licenses/by-sa/"
 _PD = "https://creativecommons.org/publicdomain/mark/1.0/"
 EXTRA = {
+    # the Britons in Brittany (src/brittany.py)
+    "Abbaye de Landévennec.jpg": ("Rolf Krahl", "CC BY 4.0", "https://creativecommons.org/licenses/by/4.0",
+           "The ruins of the abbey of Landévennec, founded by Gwenole", "Adfeilion abaty Landevenneg, a sefydlwyd gan Gwenole"),
+    "Procession des saints de Bretagne - diocèse de Rennes, cathédrale saint Pierre, Rennes, France.jpg": ("Alphonse Le Hénaff", "Public domain", _PD,
+           "The Procession of the Saints of Brittany, painted for the cathedral of Rennes", "Gorymdaith Saint Llydaw, a baentiwyd i eglwys gadeiriol Roazhon"),
     # the Mabinogi tale guides (src/mabinogi_tales.py)
     "Narberth castle pembrokeshire.jpg": ("WestWalesP", "CC BY-SA 3.0", _BYSA + "3.0",
            "The ruins of Narberth Castle, Arberth, where tradition places the court of Pwyll", "Adfeilion Castell Arberth, lle mae traddodiad yn gosod llys Pwyll"),
@@ -392,6 +398,47 @@ PAGE.update({
     "book-bardd-cwsc.html": "c:WYNNE, Ellis (1671-1734). Gweledigaetheu y bardd cwsc. London; E. Powell, 1703.jpg",
     "book-drych.html": "c:Drych y Prif Oesoedd Ab Owen (Carreg Arthur, Abertawe).jpg",
     "book-myvyrian.html": "g:person-iolo-morganwg",
+})
+
+# Yr Hen Ogledd, the Old North: the long read and the Men of the North (src/hen_ogledd.py)
+EXTRA.update({
+    "Castle Rock Edinburgh.jpg": ("Scglossop1", "CC BY-SA 4.0", _BYSA + "4.0",
+        "Castle Rock in Edinburgh, Din Eidyn, the stronghold of Mynyddog Mwynfawr and the Gododdin", "Craig y Castell yng Nghaeredin, Din Eidyn, cadarnle Mynyddog Mwynfawr a’r Gododdin"),
+    "Dumbarton Castle from the south.JPG": ("Rosser1954", "CC BY-SA 4.0", _BYSA + "4.0",
+        "Dumbarton Rock, Alt Clut, the Rock of the Clyde, seat of the kings of Ystrad Clud", "Craig Dumbarton, Alclud, Craig y Clud, sedd brenhinoedd Ystrad Clud"),
+    "Dumbarton Castle and rock, south-east view.JPG": ("Rosser1954", "CC BY-SA 4.0", _BYSA + "4.0",
+        "The twin peaks of Dumbarton Rock, Alt Clut, which King Arthgal held against the Vikings in 870", "Dau gopa Craig Dumbarton, Alclud, a ddaliodd y Brenin Arthgal yn erbyn y Llychlynwyr yn 870"),
+    "Traprain Law from the north.JPG": ("Kim Traynor", "CC BY-SA 3.0", _BYSA + "3.0",
+        "Traprain Law, the great hill fort of the Votadini, the Gododdin of Roman times", "Traprain Law, bryngaer fawr y Votadini, Gododdin oes Rhufain"),
+    "LindisfarneCastleHolyIsland.jpg": ("Matthew Hunt", "CC BY 2.0", _BY + "2.0",
+        "Lindisfarne, Ynys Metcaud, where Urien and the kings of the Britons besieged the Angles for three days and three nights", "Lindisfarne, Ynys Fedcawd, lle gwarchaeodd Urien a brenhinoedd y Brythoniaid ar yr Eingl am dri diwrnod a thair noson"),
+    "Lindisfarne Castle, Holy Island, Northumberland MET DP821127.jpg": ("Thomas Girtin; Metropolitan Museum of Art", "CC0", "https://creativecommons.org/publicdomain/zero/1.0/",
+        "Lindisfarne, Holy Island, drawn by Thomas Girtin in 1796–97", "Lindisfarne, Ynys Fedcawd, gan Thomas Girtin yn 1796–97"),
+    "Arthuret Church and tower, Longtown, Cumbria, England.jpg": ("Rosser1954", "CC BY-SA 4.0", _BYSA + "4.0",
+        "Arthuret church by the river Esk, near the field of Arfderydd", "Eglwys Arthuret ger afon Esk, ger maes Arfderydd"),
+    "Carved sarcophagus in Govan Old Church.jpg": ("Joedkins", "CC BY-SA 3.0", _BYSA + "3.0",
+        "The carved sarcophagus of Govan, made for a king or saint of Strathclyde in the age of its last kings", "Arch gerfiedig Govan, a wnaed i frenin neu sant o Ystrad Clud yn oes ei frenhinoedd olaf"),
+    "Castle from pier, Dumbarton, Scotland-LCCN2001705975.jpg": ("Photochrom Print Collection, Library of Congress", "Public domain", _PD,
+        "Dumbarton Rock, Alt Clut, from the pier, about 1895", "Craig Dumbarton, Alclud, o’r pier, tua 1895"),
+})
+PAGE.update({
+    "story-hen-ogledd.html": "c:Castle Rock Edinburgh.jpg",
+    "person-cynfarch-oer.html": "g:trea-book-taliesin",
+    "person-rhun-ab-urien.html": "c:LindisfarneCastleHolyIsland.jpg",
+    "person-rhiainfellt.html": "c:Lindisfarne Castle, Holy Island, Northumberland MET DP821127.jpg",
+    "person-dyfnwal-hen.html": "c:Dumbarton Castle from the south.JPG",
+    "person-nudd-hael.html": "g:trea-red-book",
+    "person-mordaf-hael.html": "g:trea-red-book",
+    "person-elidir-mwynfawr.html": "g:place-caernarfon",
+    "person-dunod-fawr.html": "g:holy-bangor",
+    "person-eliffer-gosgorddfawr.html": "c:Arthuret Church and tower, Longtown, Cumbria, England.jpg",
+    "person-ceredig-ap-gwallog.html": "g:trea-book-taliesin",
+    "person-owain-ap-beli.html": "c:Castle from pier, Dumbarton, Scotland-LCCN2001705975.jpg",
+    "person-arthgal.html": "c:Dumbarton Castle and rock, south-east view.JPG",
+    "person-owain-foel.html": "c:Carved sarcophagus in Govan Old Church.jpg",
+    "person-talhaearn.html": "g:trea-book-taliesin",
+    "person-gwenddolau.html": "c:Arthuret Church and tower, Longtown, Cumbria, England.jpg",
+    "person-mynyddog-mwynfawr.html": "c:Castle Rock Edinburgh.jpg",
 })
 
 # Pages that keep the picture they already have at the top (nothing to replace).
@@ -514,6 +561,35 @@ def dress(path, era, html):
     k = seg.rfind("</div>")
     seg = seg[:k] + credit(ref) + seg[k:]
     return html[:m.start()] + seg + html[end:]
+
+
+# The medieval manuscripts of Wales (src/manuscripts.py): page tops, with the credits from its FIGS.
+import manuscripts as _MSS  # noqa: E402
+EXTRA.update({f[0]: (f[1], f[2], f[3], f[4], f[5]) for f in _MSS.FIGS.values() if f[0] not in EXTRA})
+PAGE.update({
+    "manuscripts.html": "c:" + _MSS.FIGS["llb-king"][0] + "@50% 25%",
+    "book-classbook.html": "c:" + _MSS.FIGS["classbook"][0] + "@50% 30%",
+    "book-martianus.html": "g:place-stdavids",
+    "book-computus.html": "c:" + _MSS.FIGS["computus-easter"][0] + "@50% 30%",
+    "book-ricemarch-psalter.html": "c:Ricemarch Psalter, Psalm 1.JPG@50% 20%",
+    "book-de-trinitate.html": "g:holy-llanbadarn",
+    "book-annales.html": "c:Catgualart fili' catguolaum obiit.png",
+    "book-vespasian.html": "g:place-llanilltud",
+    "book-chirk.html": "c:ChirkCodex.png@50% 30%",
+    "book-peniarth-28.html": "c:Laws of Hywel Dda (f.1.v) King Hywel cropped.jpg@50% 30%",
+    "book-boston.html": "c:Boston Welsh Law Ms (f.6.v).jpg@50% 30%",
+    "book-peniarth-6.html": "c:Branwen drudwy.JPG@50% 40%",
+    "book-peniarth-16.html": "c:" + _MSS.FIGS["macsen"][0] + "@50% 30%",
+    "book-peniarth-17.html": "g:person-gruffudd-ap-cynan",
+    "book-llanstephan-1.html": "c:" + _MSS.FIGS["pen44"][0] + "@50% 30%",
+    "book-jesus-20.html": "g:place-dinefwr",
+    "book-talgarth.html": "g:trea-red-book",
+    "book-myddfai.html": "g:land-llyn-y-fan",
+    "book-llanbeblig.html": "c:" + _MSS.FIGS["llb-annunciation"][0] + "@50% 30%",
+    "book-cwta-cyfarwydd.html": "c:" + _MSS.FIGS["cwta"][0] + "@50% 30%",
+    "book-lewys-glyn-cothi.html": "g:place-rhaglan",
+    "book-gwyn-hergest.html": "c:" + _MSS.FIGS["hergest"][0],
+})
 
 
 # Wales in 10 minutes: one picture on each of the seventeen steps.

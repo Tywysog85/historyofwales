@@ -311,3 +311,7 @@ PLACE_LONG.update(_TPL.LONG)
 # ---------- the writers who recorded early Wales, full-length pages (src/writers.py); kept last so nothing overwrites them ----------
 import writers as _WRT  # noqa: E402
 PEOPLE_LONG.update(_WRT.LONG)
+
+# ---------- the Men of the North, full-length pages (src/hen_ogledd.py) ----------
+import hen_ogledd as _HO  # noqa: E402
+PEOPLE_LONG.update(_HO.LONG)

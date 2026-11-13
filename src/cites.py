@@ -245,6 +245,37 @@ S = {
         note=("Adam of Usk copied Owain Glyndŵr’s letter of 1401 to Robert III, King of Scots, into his chronicle. Free to read online.",
               "Copïodd Adda o Frynbuga lythyr Owain Glyndŵr at Robert III, brenin yr Alban, yn 1401 i’w gronicl. Am ddim i’w ddarllen ar-lein."),
         url="https://archive.org/details/chroniconadaedeu00adamuoft", lang="en"),
+    # ---------- the Britons in Brittany (story-brittany.html) ----------
+    "gildas-giles": dict(
+        short=("Gildas", "Gildas"),
+        t="On the Ruin of Britain (De Excidio Britanniae), by Gildas", by=("translated by J. A. Giles, Project Gutenberg", "cyfieithiad Saesneg J. A. Giles, Project Gutenberg"),
+        note=("Gildas, a pupil of Illtud, writing in the sixth century: chapter 14 on the men who went with Maximus and never returned, chapter 25 on the Britons who sailed beyond the seas.",
+              "Gildas, disgybl Illtud, yn ysgrifennu yn y chweched ganrif: pennod 14 am y gwŷr a aeth gyda Maximus ac na ddaethant yn ôl, pennod 25 am y Brythoniaid a hwyliodd dros y moroedd."),
+        url="https://www.gutenberg.org/ebooks/1949", lang="en"),
+    "jordanes-mierow": dict(
+        short=("Jordanes", "Jordanes"),
+        t="The Origin and Deeds of the Goths (Getica), by Jordanes, sections 237–238", by=("translated by Charles C. Mierow, 1915; text at the Celtic Literature Collective", "cyfieithiad Saesneg Charles C. Mierow, 1915"),
+        note=("Written about 551: Riotimus, king of the Brittones, came with twelve thousand men by way of the Ocean to help the emperor Anthemius against Euric.",
+              "Ysgrifennwyd tua 551: daeth Riotimus, brenin y Brythoniaid, â deuddeng mil o wŷr ar hyd y Cefnfor i gynorthwyo’r ymerawdwr Anthemius yn erbyn Euric."),
+        url="https://maryjones.us/ctexts/jordanes.html", lang="en"),
+    "tours-461": dict(
+        short=("Council of Tours, 461", "Cyngor Tours, 461"),
+        t="Council of Tours", by=("Wikipedia, from the acts of the council", "Wikipedia, o weithredoedd y cyngor"),
+        note=("The last of the eight bishops to sign the canons of 461 was Mansuetus, episcopus Britannorum, bishop of the Britons.",
+              "Yr olaf o’r wyth esgob i lofnodi canonau 461 oedd Mansuetus, episcopus Britannorum, esgob y Brythoniaid."),
+        url="https://en.wikipedia.org/wiki/Council_of_Tours", lang="en"),
+    "riothamus-wiki": dict(
+        short=("Riothamus", "Riothamus"),
+        t="Riothamus", by=("Wikipedia, with the texts of Jordanes, Sidonius Apollinaris (Letters III.9) and Gregory of Tours (Histories II.18)", "Wikipedia, gyda thestunau Jordanes, Sidonius Apollinaris (Llythyrau III.9) a Gregori o Tours (Hanesion II.18)"),
+        note=("The letter of Sidonius to Riothamus, the twelve thousand men, and the Britons driven from Bourges with many killed at Déols.",
+              "Llythyr Sidonius at Riothamus, y deuddeng mil o wŷr, a’r Brythoniaid a yrrwyd o Bourges a llawer wedi’u lladd yn Déols."),
+        url="https://en.wikipedia.org/wiki/Riothamus", lang="en"),
+    "samson-life": dict(
+        short=("Life of Samson", "Buchedd Samson"),
+        t="Samson of Dol", by=("Wikipedia, from the Life of Samson (written between about 610 and 820)", "Wikipedia, o Fuchedd Samson (a ysgrifennwyd rhwng tua 610 ac 820)"),
+        note=("His parents Amon of Dyfed and Anna of Gwent, Illtud’s school, the abbacy of Caldey, Cornwall, Dol, his plea to Childebert for Iudual, and the council in Paris.",
+              "Ei rieni, Amon o Ddyfed ac Anna o Went, ysgol Illtud, abadaeth Ynys Bŷr, Cernyw, Dol, ei ble at Childebert dros Iudual, a’r cyngor ym Mharis."),
+        url="https://en.wikipedia.org/wiki/Samson_of_Dol", lang="en"),
     # ---------- the Aberfan disaster (story-aberfan.html) ----------
     "aberfan-wiki": dict(
         short=("Wikipedia", "Wikipedia"),
@@ -856,6 +887,8 @@ from onthisday import CITES as _OTD  # noqa: E402  (the sources of On this day, 
 S.update(_OTD)
 from epynt import CITES as _EPYNT  # noqa: E402  (the clearing of Epynt, src/epynt.py)
 S.update(_EPYNT)
+from hen_ogledd import CITES as _HENOGLEDD  # noqa: E402  (the Old North, src/hen_ogledd.py)
+S.update(_HENOGLEDD)
 
 MARK = re.compile(r"\[\[cite:([a-z0-9,\- ]+)\]\]")
 

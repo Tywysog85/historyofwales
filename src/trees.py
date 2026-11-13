@@ -253,6 +253,63 @@ TUDOR = T("Ednyfed Fychan", "d. 1246", ("Distain (steward) of Gwynedd", "Distain
             ("The last of the Tudors. She founded Jesus College, Oxford, for the Welsh in 1571, and in her reign William Morgan put the whole Bible into Welsh (1588).",
              "Yr olaf o’r Tuduriaid. Sefydlodd Goleg yr Iesu, Rhydychen, i’r Cymry yn 1571, ac yn ei theyrnasiad rhoddodd William Morgan y Beibl cyfan yn Gymraeg (1588)."))])])])])])])])])])])
 
+# ------------------------------------------------------------------ the Men of the North (src/hen_ogledd.py)
+# From Bonedd Gwŷr y Gogledd, "the descent of the Men of the North", and the Harleian genealogies. Dates are estimates.
+COELING = T("Coel Hen", "fl. c. 400", ("Forefather of the Men of the North", "Cyndad Gwŷr y Gogledd"),
+  ("Coel the Old, from whom the kings of Rheged, Eidyn, Elfed and the Pennines all traced their line. His descendants were called the Coeling.",
+   "Coel Hen, yr olrheiniodd brenhinoedd Rheged, Eidyn, Elfed a’r Pennines eu llinach ato. Gelwid ei ddisgynyddion yn Goeling."), P("coel-hen"), crown=True, id="hn-coel", kids=[
+ T(("Gwawl", "Gwawl"), note=("Welsh tradition holds that she was the mother of Cunedda, who came south to found Gwynedd.", "Yn ôl traddodiad Cymru, hi oedd mam Cunedda, a ddaeth i’r de i sefydlu Gwynedd."), kids=[
+  T("Cunedda", "fl. 5th century", ("King, founder of Gwynedd", "Brenin, sylfaenydd Gwynedd"),
+    ("Came from Manaw Gododdin with his sons, and from him came the royal line of Gwynedd.", "Daeth o Fanaw Gododdin gyda’i feibion, ac ohono ef y daeth llinach frenhinol Gwynedd."), P("cunedda"), crown=True, id="hn-cunedda")]),
+ T("Ceneu ap Coel", note=("Father of the two great branches of the Coeling.", "Tad dwy gangen fawr y Coeling."), id="hn-ceneu", kids=[
+  T("Gwrwst Ledlwm", kids=[
+   T("Meirchion Gul", kids=[
+    T("Cynfarch Oer", "fl. mid 6th century", ("King in the North", "Brenin yn y Gogledd"), ("Father of Urien Rheged.", "Tad Urien Rheged."), P("cynfarch-oer"), crown=True, kids=[
+     T("Urien Rheged", "fl. late 6th century", ("King of Rheged", "Brenin Rheged"),
+       ("The greatest of the Men of the North, praised by Taliesin, who led the kings of the Britons against the Angles at Lindisfarne.",
+        "Y mwyaf o Wŷr y Gogledd, a ganmolwyd gan Daliesin, ac a arweiniodd frenhinoedd y Brythoniaid yn erbyn yr Eingl yn Lindisfarne."), P("urien-rheged"), crown=True, id="hn-urien", kids=[
+      T("Owain ab Urien", "fl. late 6th century", ("King of Rheged", "Brenin Rheged"), ("Victor over Fflamddwyn, and the Owain of the tale of the Lady of the Fountain.", "Trechodd Fflamddwyn, ac ef yw Owain chwedl Iarlles y Ffynnon."), P("owain-ab-urien"), crown=True),
+      T("Rhun ab Urien", "fl. early 7th century", note=("Welsh tradition holds that he baptised King Edwin of Northumbria.", "Yn ôl traddodiad Cymru, ef a fedyddiodd y Brenin Edwin o Northumbria."), link=P("rhun-ab-urien"), kids=[
+       T("Rhoth ap Rhun", kids=[
+        T("Rhiainfellt", "fl. c. 640", ("Queen of Northumbria", "Brenhines Northumbria"), ("Heiress of Rheged, married to King Oswiu.", "Aeres Rheged, yn wraig i’r Brenin Oswiu."), P("rhiainfellt"))])])])]),
+    T("Elidir Lydanwyn", kids=[
+     T("Llywarch Hen", "fl. late 6th century", ("Prince of the North and poet", "Tywysog o’r Gogledd a bardd"),
+       ("Cousin of Urien. Welsh tradition holds that he came south to Powys and ended his days at Llanfor.", "Cefnder Urien. Yn ôl traddodiad Cymru, daeth i’r de i Bowys a diweddu ei ddyddiau yn Llanfor."), P("llywarch-hen"), id="hn-llywarch")])])]),
+  T("Masgwid Gloff", kids=[
+   T("Lleenog", kids=[
+    T("Gwallog ap Lleenog", "fl. late 6th century", ("King, probably of Elfed", "Brenin, Elfed yn ôl pob tebyg"), ("Fought beside Urien at Lindisfarne and was praised by Taliesin.", "Ymladdodd ochr yn ochr ag Urien yn Lindisfarne ac fe’i canmolwyd gan Daliesin."), P("gwallog"), crown=True)])]),
+  T("Mar ap Ceneu", kids=[
+   T("Arthwys ap Mar", kids=[
+    T("Pabo Post Prydain", "fl. early 6th century", ("King, Pillar of Britain", "Brenin, Post Prydain"), ("Ended his days at Llanbabo in Môn, where his crowned figure is carved in stone.", "Diweddodd ei ddyddiau yn Llanbabo ym Môn, lle mae ei ddelw goronog wedi’i cherfio mewn carreg."), P("pabo-post-prydain"), crown=True, kids=[
+     T("Dunod Fawr", "d. 595", ("King in the North", "Brenin yn y Gogledd"), ("One of the Three Pillars of Battle of the Island of Britain.", "Un o Dri Phost Cad Ynys Prydain."), P("dunod-fawr"), crown=True, kids=[
+      T("Deiniol", "d. c. 584", ("Saint, first bishop of Bangor", "Sant, esgob cyntaf Bangor"), ("Founded the church of Bangor in Gwynedd.", "Sefydlodd eglwys Bangor yng Ngwynedd."), P("deiniol"))])]),
+    T("Eliffer Gosgorddfawr", "fl. mid 6th century", ("King in the North", "Brenin yn y Gogledd"), ("‘Of the great war band’.", "‘Y Gosgordd Fawr’."), P("eliffer-gosgorddfawr"), crown=True, kids=[
+     T("Gwrgi ab Eliffer", "d. 580"),
+     T("Peredur ab Eliffer", "d. 580", note=("Welsh tradition remembers him and his brother at Arfderydd and linked with York.", "Mae traddodiad Cymru yn ei gofio ef a’i frawd yn Arfderydd ac yn eu cysylltu ag Efrog."), link=P("peredur"))]),
+    T("Ceidio ab Arthwys", kids=[
+     T("Gwenddolau", "d. 573", ("King, lord of Arfderydd", "Brenin, arglwydd Arfderydd"), ("Fell at Arfderydd in 573. Myrddin was his bard.", "Syrthiodd yn Arfderydd yn 573. Myrddin oedd ei fardd."), P("gwenddolau"), crown=True),
+     T("Nudd ap Ceidio"), T("Cof ap Ceidio")]),
+    T("Cynfelyn ab Arthwys", kids=[
+     T("Cynwyd Cynwydion", kids=[
+      T("Clydno Eidyn", "fl. mid 6th century", ("King of Eidyn", "Brenin Eidyn"), ("Lord of Din Eidyn, Edinburgh.", "Arglwydd Din Eidyn, Caeredin."), P("clydno-eidyn"), crown=True, kids=[
+       T("Cynon ap Clydno", "fl. 6th century", ("Hero of Catraeth", "Arwr Catraeth"), ("Praised in Y Gododdin as one of those who came back from Catraeth.", "Fe’i canmolir yn Y Gododdin fel un o’r rhai a ddaeth yn ôl o Gatraeth."), P("cynon-ap-clydno"))])])])])])])])
+
+DYFNWAL = T("Dyfnwal Hen", "fl. early 6th century", ("Forefather of the kings of the Clyde", "Cyndad brenhinoedd y Clud"),
+  ("From him came the kings of Ystrad Clud, who ruled from Alt Clut, Dumbarton Rock, and three of the Generous Men of the Island of Britain.",
+   "Ohono ef y daeth brenhinoedd Ystrad Clud, a reolai o Alclud, Craig Dumbarton, a thri o Haelion Ynys Prydain."), P("dyfnwal-hen"), crown=True, id="hn-dyfnwal", kids=[
+ T("Cedig ap Dyfnwal", kids=[
+  T("Tudwal Tudglyd", kids=[
+   T("Rhydderch Hael", "d. c. 614", ("King of Ystrad Clud", "Brenin Ystrad Clud"), ("One of the Three Generous Men, friend of Saint Cyndeyrn, and keeper of the dish among the Thirteen Treasures.", "Un o Dri Hael Ynys Prydain, cyfaill Sant Cyndeyrn, a cheidwad y ddysgl ymhlith y Tri Thlws ar Ddeg."), P("rhydderch-hael"), crown=True)]),
+  T("Serwan ap Cedig", kids=[
+   T("Mordaf Hael", "fl. 6th century", ("One of the Three Generous Men", "Un o Dri Hael Ynys Prydain"), link=P("mordaf-hael"))]),
+  T("Senyllt ap Cedig", kids=[
+   T("Nudd Hael", "fl. 6th century", ("One of the Three Generous Men", "Un o Dri Hael Ynys Prydain"), link=P("nudd-hael"))])]),
+ T("Garmonion ap Dyfnwal", kids=[
+  T("Cawrdaf", kids=[
+   T("Gwyddno Garanhir", "fl. 6th century", ("King of Cantre’r Gwaelod in Welsh tradition", "Brenin Cantre’r Gwaelod yn ôl traddodiad Cymru"), link=P("gwyddno-garanhir"), crown=True, kids=[
+    T("Elffin ap Gwyddno", "fl. 6th century", note=("Who found the baby Taliesin in the weir.", "A ddaeth o hyd i’r baban Taliesin yn y gored."), link=P("elffin"))])])])])
+
+
 TREES = [
  dict(id="gwynedd", root=GWYNEDD, realm="gwynedd", era="medieval", en="Gwynedd: the house of Aberffraw", cy="Gwynedd: tŷ Aberffraw",
   introEn="From Merfyn Frych and Rhodri Mawr to Llywelyn the Last and Owain Lawgoch. The princes of Wales came from this line, and its daughters married into every other royal house.",
@@ -266,6 +323,12 @@ TREES = [
  dict(id="gwent", root=GWENT, realm="glywysing", era="saints", en="Gwent and Glywysing: the house of Tewdrig", cy="Gwent a Glywysing: tŷ Tewdrig",
   introEn="The kings of the south-east, from the saint-king Tewdrig to Athrwys ap Meurig, whom Welsh tradition holds was Arthur.",
   introCy="Brenhinoedd y de-ddwyrain, o’r sant-frenin Tewdrig i Athrwys ap Meurig, sef Arthur yn ôl traddodiad Cymru."),
+ dict(id="coeling", root=COELING, realm="rheged", era="saints", en="The Coeling: the Men of the North", cy="Y Coeling: Gwŷr y Gogledd",
+  introEn="Bonedd Gwŷr y Gogledd, the descent of the Men of the North, kept in Wales for a thousand years: Urien and Owain of Rheged, Llywarch Hen, Clydno Eidyn, Gwenddolau, Pabo Post Prydain and Saint Deiniol, all of one line.",
+  introCy="Bonedd Gwŷr y Gogledd, a gadwyd yng Nghymru am fil o flynyddoedd: Urien ac Owain o Reged, Llywarch Hen, Clydno Eidyn, Gwenddolau, Pabo Post Prydain a Sant Deiniol, i gyd o’r un llinach."),
+ dict(id="dyfnwal", root=DYFNWAL, realm="ystrad-clud", era="saints", en="Ystrad Clud: the line of Dyfnwal Hen", cy="Ystrad Clud: llinach Dyfnwal Hen",
+  introEn="The kings of the Clyde: Rhydderch Hael, the friend of Saint Cyndeyrn, his cousins Mordaf and Nudd, the Three Generous Men, and Gwyddno Garanhir, whose son Elffin found Taliesin.",
+  introCy="Brenhinoedd y Clud: Rhydderch Hael, cyfaill Sant Cyndeyrn, ei gefndryd Mordaf a Nudd, y Tri Hael, a Gwyddno Garanhir, y cafodd ei fab Elffin hyd i Daliesin."),
  dict(id="tudor", root=TUDOR, realm=None, era="tudor", en="The Tudors of Penmynydd", cy="Tuduriaid Penmynydd",
   introEn="From Ednyfed Fychan, steward of Llywelyn Fawr, to Harri Tudur and the throne. Every king and queen of Britain since 1603 descends from this Welsh family of Ynys Môn.",
   introCy="O Ednyfed Fychan, distain Llywelyn Fawr, i Harri Tudur a’r orsedd. Mae pob brenin a brenhines ym Mhrydain ers 1603 yn disgyn o’r teulu Cymreig hwn o Ynys Môn."),

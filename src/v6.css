@@ -911,4 +911,35 @@ main.home > #chapters { padding-top: calc(var(--home-gap) * 1.4) }
 main.home .head { margin-bottom: clamp(1.4rem, 3vw, 2.2rem) }
 main.home .more-row { margin-top: 1.25rem }
 main.home .mh .head { margin-bottom: 1.4rem }
+
+/* the map in the Brittany long read (brittany_map() in build.py) */
+.bm-map .bm-home { fill: #4a2b33; stroke: #b0606a; stroke-width: 1.2 }
+.bm-map .bm-kin { fill: #3a3346; stroke: #8a7aa8; stroke-width: 1 }
+.bm-map .bm-kin2 { fill: #2e3446; stroke: #6a7590; stroke-width: 1 }
+.bm-map .bm-road { fill: none; stroke: #e8c26a; stroke-width: 2.2; stroke-dasharray: 7 6; opacity: .9 }
+.bm-map .bm-lab { fill: #d8dbe3; font: 600 15px var(--f-body); text-anchor: middle; letter-spacing: .12em; pointer-events: none }
+.bm-map .bm-big { font-size: 22px; fill: #f1e3c6 }
+.bm-map .bm-sea { font-style: italic; font-weight: 400; letter-spacing: .04em; fill: #8fa3c0 }
+.bm-map .bm-old { font-size: 13px; font-weight: 400; letter-spacing: .02em; fill: #c9b9a0; font-style: italic }
+.bm-cr { font-size: .85rem; color: #9aa0ad; margin: .4rem 0 0; text-align: center }
 .refs .ref-buy, #sources .ref-buy { display: block; margin-top: .2rem; font-size: .8rem; color: #9aa0ad } .ref-buy a { color: var(--gold); text-decoration: none } .ref-buy a:hover { text-decoration: underline }
+
+/* ---------- the map of Yr Hen Ogledd, the Old North (north_map in build.py, src/hen_ogledd.py) ---------- */
+.nm-fig { margin: 2rem 0; padding: 0 }
+.nm-fig .ar-map { max-width: none; border-radius: 14px; border: 1px solid var(--line) }
+.nm .nm-sea { fill: #141a26 }
+.nm .land { fill: #262e40; stroke: #4f5a72; stroke-width: 1 }
+.nm .nm-ire { fill: #1d2433; stroke: #3a4458; stroke-width: 1 }
+.nm .nm-wales { fill: color-mix(in srgb, #d43c34 26%, #262e40); stroke: #b0544e; stroke-width: 1.2 }
+.nm-reg { fill: #c9cfdb; font: 700 15px var(--f-body); letter-spacing: .14em; text-transform: uppercase; text-anchor: middle; paint-order: stroke; stroke: #141a26; stroke-width: 4px; pointer-events: none }
+.nm-reg.foe { fill: #8a93a6; font-style: italic; font-weight: 600 }
+.nm-route { fill: none; stroke-width: 3.5; stroke-dasharray: 9 7; stroke-linecap: round; opacity: .95 }
+.nm-fig figcaption { color: var(--muted); font-size: .88rem; line-height: 1.5; margin-top: .7rem }
+.nm-fig figcaption a { color: inherit }
+.nm-key { display: flex; flex-wrap: wrap; gap: .4rem 1.1rem; list-style: none; padding: 0; margin: 0 0 .5rem; color: var(--ink); font-size: .9rem }
+.nm-key li { display: flex; align-items: center; gap: .45rem }
+.nm-key i { display: inline-block; width: 1.4rem; height: .3rem; border-radius: 2px }
+.nm-key .nm-k-wales { height: .9rem; width: .9rem; background: color-mix(in srgb, #d43c34 26%, #262e40); border: 1px solid #b0544e }
+.nm-key .nm-k-foe { height: auto; width: auto; background: none; border: 0; color: #8a93a6 }
+.nm-key .nm-k-foe::before { content: "Aa"; font: italic 600 .8rem var(--f-body) }
+@media (min-width: 900px) { .nm-list { grid-template-columns: 1fr 1fr; column-gap: 1.2rem } }
