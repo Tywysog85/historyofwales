@@ -34,6 +34,7 @@ import places3 as PL3  # noqa: E402  (historic places of importance: their peopl
 import visit as VS  # noqa: E402  (the Visiting box on place pages and the map card, src/visit.py)
 import pictures as PX  # noqa: E402  (a real picture at the top of every page and on its card: src/pictures.py)
 import thumbs as TH  # noqa: E402  (small copies of pictures for the cards: src/thumbs.py)
+import panels as PN  # noqa: E402  (picture backgrounds for the plain panels: src/panels.py)
 PX.check()
 L.TEACH.update(AG.TEACH)
 import ages9 as AG9
@@ -115,7 +116,7 @@ def e(s):
 head = read("head.html")
 body = read("body.html")
 app = read("app.js")
-extra_css = read("extra.css") + read("v6.css") + read("onthisday.css") + read("people2.css")
+extra_css = read("extra.css") + read("v6.css") + read("onthisday.css") + read("people2.css") + PN.css()
 geo = json.loads(read("geo", "map.json"))
 la = json.loads(read("geo", "la.json"))
 
@@ -667,7 +668,6 @@ def event_pic(ev, sl=None):
 def event_li(ev, k=0, title_link=False):
     sl = story_links("events", ev[5])
     links = ((f'<a class="src" href="laws.html">{bi("The Laws of Hywel Dda: the big page", "Cyfreithiau Hywel Dda: y dudalen fawr")} →</a>' if ev[5] == "The laws of Hywel Dda" else "")
-             + "".join(f'<a class="src" href="story-{x["id"]}.html">{bi("Read the long read", "Darllen yr erthygl")} →</a>' for x in sl)
              + (f'<a class="src" href="place-{ev[10]}.html">{bi("The place", "Y lle")} →</a>' if ev[10] else ""))
     links = f'<a class="wl" href="{EP.href(ev)}">{bi(ev[5], ev[6])}</a>' + (f'<div class="links">{links}</div>' if links else "")
     title = f'<a href="{EP.href(ev)}">{bi(ev[5], ev[6])}</a>' if title_link else bi(ev[5], ev[6])
@@ -1073,7 +1073,8 @@ def visit_box(pl):
          f'<a href="map.html#lle-{pid}">{bi("On our map", "Ar ein map")} →</a>')
     rows += f'<div><dt>{bi("Getting there", "Cyrraedd")}</dt><dd>{where}</dd></div>'
     note = f'<p class="visit-note">{bi(*v["note"])}</p>' if v.get("note") else ""
-    return (f'<aside class="visit-box" aria-label="Visiting / Ymweld"><h2>{bi("Visiting", "Ymweld")}</h2><dl>{rows}</dl>{note}'
+    pic = card_pic(f"place-{pid}.html")  # the place's own photo behind the box (src/panels.py)
+    return (f'<aside class="visit-box{" pbg" if pic else ""}" aria-label="Visiting / Ymweld"{PN.bg_style(pic[0]) if pic else ""}><h2>{bi("Visiting", "Ymweld")}</h2><dl>{rows}</dl>{note}'
             f'<p class="visit-small">{bi("Check the official page before you travel: times change, and some sites close in winter.", "Edrychwch ar y dudalen swyddogol cyn teithio: mae amseroedd yn newid, ac mae rhai safleoedd yn cau yn y gaeaf.")}</p></aside>')
 
 
@@ -1149,18 +1150,14 @@ def _stop(era, date_en, date_cy, href, en, cy, text_en, text_cy, extra=""):
             f'<p>{bi(text_en, text_cy)}</p>{full}{f'<div class="links">{extra}</div>' if extra else ""}</div>{pic}</li>')
 
 
-def _reads(kind, key):
-    return "".join(f'<a class="src" href="story-{x["id"]}.html">{bi("Long read: " + x["en"], "Erthygl: " + x["cy"])} →</a>' for x in sorted(story_links(kind, key), key=lambda x: len(x.get(kind, [])))[:1])
-
-
 def trail_item(item):
     kind, ref = item[0], item[1]
     if kind == "person":
         p = PERSON[ref]
-        return _stop(p[1], p[2], date_cy(p[2]), f"person-{ref}.html", p[3], p[4], p[7], p[8], _reads("people", ref))
+        return _stop(p[1], p[2], date_cy(p[2]), f"person-{ref}.html", p[3], p[4], p[7], p[8])
     if kind == "place":
         p = PLACE[ref]
-        return _stop(p["era"], p["year"], p["year"], f"place-{ref}.html", p["en"], p["cy"], p["dEn"], p["dCy"], _reads("places", ref))
+        return _stop(p["era"], p["year"], p["year"], f"place-{ref}.html", p["en"], p["cy"], p["dEn"], p["dCy"])
     if kind == "story":
         x = STORY_BY_ID[ref]
         d = item[2:4] if len(item) > 2 else (f'{x["mins"]} min read', f'{x["mins"]} munud')
@@ -2241,7 +2238,11 @@ def triads_page():
 
 
 def symbols_page():
-    cards = "".join(f'<article class="sym rv" id="{s[0]}" data-era="{D.ERAS[i % len(D.ERAS)]["id"]}"><span class="sym-n">{i + 1:02d}</span><h2>{bi(s[3], s[1])}</h2>'
+    sym_pic = {"dragon": "g:land-dinas-emrys", "harp": "g:trea-welsh-harp", "lovespoon": "g:trea-lovespoon", "dwynwen": "g:land-llanddwyn",
+               "choir": "g:holy-tabernacl", "eisteddfod": "g:place-cardigan"}
+    if card_pic("person-lady-llanover.html"):
+        sym_pic["costume"] = card_pic("person-lady-llanover.html")[0]  # Lady Llanover, who championed the Welsh costume
+    cards = "".join(f'<article class="sym rv pbg" id="{s[0]}" data-era="{D.ERAS[i % len(D.ERAS)]["id"]}"{PN.bg_style(sym_pic.get(s[0], PN.LAND[i % len(PN.LAND)]))}><span class="sym-n">{i + 1:02d}</span><h2>{bi(s[3], s[1])}</h2>'
                     + (f'<p class="sym-alt">{bi(s[1], s[3])}</p>' if s[1] != s[3] else "") + f'<p>{bi(s[4], s[5])}</p></article>' for i, s in enumerate(F.SYMBOLS))
     main = (hero("modern", f'<a href="index.html">{SITE}</a>', "harp", "Symbols and traditions", "Symbolau a thraddodiadau", "The dragon, the leek and the grey mare", "Y ddraig, y genhinen a’r Fari Lwyd",
                  "Where the emblems and customs of Wales come from. Some are a thousand years old; some are younger than they look.", "O ble daw arwyddluniau ac arferion Cymru. Mae rhai’n fil o flynyddoedd oed; mae rhai’n iau nag y maent yn edrych.", art="dragons")
@@ -3598,7 +3599,6 @@ DATA = dict(
     TRAILS=[dict(id=t["id"], en=t["en"], cy=t["cy"], ill=t["ill"], n=len(trail_stops(t)), introEn=t["introEn"][0], introCy=t["introCy"][0]) for t in L.TRAILS],
     AUDIO=sorted(f[:-4] for f in os.listdir(os.path.join(SRC, 'static', 'audio')) if f.endswith('.mp3')) if os.path.isdir(os.path.join(SRC, 'static', 'audio')) else [],
     MAPC=dict(minx=geo["minx"], maxy=geo["maxy"], k=geo["k"], sc=geo["sc"]),
-    SL={i: x["id"] for i, ev in enumerate(D.EVENTS) for x in story_links("events", ev[5])},
     EVS=EP.SLUG,  # the page of each event: event-<slug>.html (src/eventpages.py)
     KGLINK={"Gwynedd": "kings-gwynedd.html", "Powys": "kings-powys.html", "Ceredigion": "kings-ceredigion.html", "Dyfed": "kings-dyfed.html", "Brycheiniog": "kings-brycheiniog.html",
             "Rhwng Gwy a Hafren": "kings-gwy-a-hafren.html", "Glywysing": "kings-glywysing.html", "Morgannwg": "kings-glywysing.html", "Gwent": "kings-gwent.html", "Deheubarth": "kings-deheubarth.html",
