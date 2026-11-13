@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-13", "Llydaw: how the Britons made a second Britain", "Llydaw: sut y gwnaeth y Brythoniaid ail Brydain",
+     "A new long read on how the Britons crossed the sea to Brittany, with Macsen Wledig and Cynan Meiriadog in 383 and again in the age of the Saxon wars, led by the saints of Wales: Samson, Paul Aurelian, Tudwal, Brioc, Malo, Teilo and Gildas. With a map, pictures, and new pages for Riothamus, king of the Britons, and Gwenole of Landévennec.",
+     "Erthygl newydd ar sut y croesodd y Brythoniaid y môr i Lydaw, gyda Macsen Wledig a Chynan Meiriadog yn 383 ac eto yn oes rhyfeloedd y Saeson, dan arweiniad saint Cymru: Samson, Pol Aurelian, Tudwal, Briog, Malo, Teilo a Gildas. Gyda map, lluniau, a thudalennau newydd i Riothamus, brenin y Brythoniaid, a Gwenole o Landevenneg.",
+     "story-brittany.html"),
     ("2026-11-13", "A faster, calmer and more private site", "Gwefan gyflymach, dawelach a mwy preifat",
      "The front page has a Pause animation button that stops the dragon, the moving words and the glint on the title, and remembers your choice. The fonts now come from this site itself, so reading it no longer contacts Google, and pages you have visited before open faster. The privacy note on the About page now covers the weekly email too, and a browser set to Welsh is offered the Welsh pages once.",
      "Mae botwm Oedi’r animeiddiad ar y dudalen flaen sy’n atal y ddraig, y geiriau sy’n symud a’r llewyrch ar y teitl, ac mae’n cofio eich dewis. Daw’r ffontiau o’r wefan hon ei hun bellach, felly nid yw ei darllen yn cysylltu â Google mwyach, ac mae tudalennau rydych wedi ymweld â nhw o’r blaen yn agor yn gyflymach. Mae’r nodyn preifatrwydd ar y dudalen Amdanom yn sôn am yr e-bost wythnosol hefyd, a chaiff porwr sydd wedi’i osod i’r Gymraeg gynnig y tudalennau Cymraeg unwaith.",

@@ -731,6 +731,9 @@ EVENTS = sorted(EVENTS + _MACE, key=lambda ev: ev[1])
 # ---------- The drowning of Capel Celyn and Cwm Tryweryn (src/tryweryn.py) ----------
 from tryweryn import EVENTS as _TWE
 EVENTS = sorted(EVENTS + _TWE, key=lambda ev: ev[1])
+# ---------- The Britons in Brittany (src/brittany.py) ----------
+from brittany import EVENTS as _BZE
+EVENTS = sorted(EVENTS + _BZE, key=lambda ev: ev[1])
 # ---------- The Welsh Not and the fight for the language (src/welshnot.py) ----------
 from welshnot import EVENTS as _WNE
 EVENTS = sorted(EVENTS + _WNE, key=lambda ev: ev[1])

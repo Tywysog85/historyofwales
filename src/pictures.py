@@ -101,7 +101,8 @@ PAGE = {
     "story-learning.html": "g:place-llanilltud",
     "story-unconquered.html": "g:cast-dolwyddelan",
     "story-firsts.html": "g:place-merthyr",
-    "story-brittany.html": "g:person-cadog",
+    "person-gwenole.html": "c:Abbaye de Landévennec.jpg",
+    "story-brittany.html": "c:Procession des saints de Bretagne - diocèse de Rennes, cathédrale saint Pierre, Rennes, France.jpg",
     "story-revival.html": "g:person-gwynfor-evans",
     "story-iolo.html": "g:person-iolo-morganwg",
     "story-wilson-blackett.html": "g:anci-maen-ceti",
@@ -297,6 +298,11 @@ _BY = "https://creativecommons.org/licenses/by/"
 _BYSA = "https://creativecommons.org/licenses/by-sa/"
 _PD = "https://creativecommons.org/publicdomain/mark/1.0/"
 EXTRA = {
+    # the Britons in Brittany (src/brittany.py)
+    "Abbaye de Landévennec.jpg": ("Rolf Krahl", "CC BY 4.0", "https://creativecommons.org/licenses/by/4.0",
+           "The ruins of the abbey of Landévennec, founded by Gwenole", "Adfeilion abaty Landevenneg, a sefydlwyd gan Gwenole"),
+    "Procession des saints de Bretagne - diocèse de Rennes, cathédrale saint Pierre, Rennes, France.jpg": ("Alphonse Le Hénaff", "Public domain", _PD,
+           "The Procession of the Saints of Brittany, painted for the cathedral of Rennes", "Gorymdaith Saint Llydaw, a baentiwyd i eglwys gadeiriol Roazhon"),
     # the Mabinogi tale guides (src/mabinogi_tales.py)
     "Narberth castle pembrokeshire.jpg": ("WestWalesP", "CC BY-SA 3.0", _BYSA + "3.0",
            "The ruins of Narberth Castle, Arberth, where tradition places the court of Pwyll", "Adfeilion Castell Arberth, lle mae traddodiad yn gosod llys Pwyll"),

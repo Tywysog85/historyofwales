@@ -1,25 +1,484 @@
 {
- "branch": "claude/project-thread-w2ycde",
- "out": "_research/brittany",
- "max": 420,
- "searches": [
-  "\"Vallée des Saints\" Samson",
-  "\"Vallée des Saints\" Konan Meriadeg",
-  "\"Vallée des Saints\" Pol Tugdual Brieuc Malo",
-  "\"Procession des saints de Bretagne\"",
-  "Dol-de-Bretagne cathédrale Saint-Samson façade",
-  "Tréguier cathédrale Saint-Tugdual",
-  "Saint-Pol-de-Léon cathédrale Saint-Paul-Aurélien",
-  "Landévennec abbaye ruines",
-  "Saint-Gildas-de-Rhuys abbatiale",
-  "Caldey Island monastery",
-  "panneau bilingue breton",
-  "Tro Breizh",
-  "Harley 3859",
-  "Vita Samsonis",
-  "Sidonius Apollinaris manuscript",
-  "Saint-Malo remparts intra-muros",
-  "Saint-Brieuc cathédrale",
-  "Breizh map dioceses Domnonée Cornouaille Bro Waroc"
+ "branch": "",
+ "out": "_research/people2",
+ "people": [
+  {
+   "slug": "_hoc",
+   "name": "Historie of Cambria",
+   "wiki": "",
+   "search": [
+    "historieofcambria"
+   ],
+   "n": 50
+  },
+  {
+   "slug": "_jc111",
+   "name": "Red Book tale openings",
+   "wiki": "",
+   "search": [
+    "Jesus-College-MS-111 cropped"
+   ],
+   "n": 50
+  },
+  {
+   "slug": "_hendre",
+   "name": "Hendregadredd rubrics",
+   "wiki": "",
+   "search": [
+    "NLW MS 6680B"
+   ],
+   "n": 50
+  },
+  {
+   "slug": "enid",
+   "name": "Enid",
+   "wiki": "",
+   "search": [
+    "\"Geraint and Enid\"",
+    "\"Enid\" Tennyson"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "william-herbert",
+   "name": "William Herbert",
+   "wiki": "",
+   "search": [
+    "\"Royal MS 18 D II\"",
+    "\"William Herbert\" Edward IV kneeling",
+    "\"Herbert\" Raglan effigy"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "gruffydd-robert",
+   "name": "Gruffydd Robert",
+   "wiki": "",
+   "search": [
+    "\"Dosparth byrr\"",
+    "Gramadeg Gruffydd Robert 1567"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "rhydderch-ab-ieuan-llwyd",
+   "name": "Rhydderch",
+   "wiki": "",
+   "search": [
+    "\"White Book of Rhydderch\"",
+    "\"Llyfr Gwyn Rhydderch\"",
+    "\"Peniarth MS 4\""
+   ],
+   "n": 6
+  },
+  {
+   "slug": "nennius",
+   "name": "Nennius",
+   "wiki": "",
+   "search": [
+    "\"Historia Brittonum\""
+   ],
+   "n": 8
+  },
+  {
+   "slug": "elis-gruffydd",
+   "name": "Elis Gruffydd",
+   "wiki": "",
+   "search": [
+    "\"Elis Gruffudd\"",
+    "\"Elis Gruffydd\""
+   ],
+   "n": 6
+  },
+  {
+   "slug": "llywelyn-bren",
+   "name": "Llywelyn Bren",
+   "wiki": "",
+   "search": [
+    "\"Llywelyn Bren\""
+   ],
+   "n": 6
+  },
+  {
+   "slug": "hywel-y-fwyall",
+   "name": "Hywel y Fwyall",
+   "wiki": "",
+   "search": [
+    "\"Hywel y Fwyall\"",
+    "\"Hywel ap Gruffudd\" Criccieth"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "grace-williams",
+   "name": "Grace Williams",
+   "wiki": "",
+   "search": [
+    "\"Grace Williams\" composer"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "gwyn-thomas",
+   "name": "Gwyn Thomas",
+   "wiki": "",
+   "search": [
+    "\"Gwyn Thomas\" novelist",
+    "\"Gwyn Thomas\" Porth"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "glyn-jones",
+   "name": "Glyn Jones",
+   "wiki": "",
+   "search": [
+    "\"Glyn Jones\" writer Merthyr",
+    "\"Glyn Jones\" poet"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "eileen-beasley",
+   "name": "Eileen Beasley",
+   "wiki": "",
+   "search": [
+    "\"Eileen Beasley\"",
+    "Beasley Llangennech"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "cliff-morgan",
+   "name": "Cliff Morgan",
+   "wiki": "",
+   "search": [
+    "\"Cliff Morgan\""
+   ],
+   "n": 6
+  },
+  {
+   "slug": "margaret-price",
+   "name": "Margaret Price",
+   "wiki": "",
+   "search": [
+    "\"Margaret Price\" soprano",
+    "\"Margaret Price\" Blackwood"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "gillian-clarke",
+   "name": "Gillian Clarke",
+   "wiki": "",
+   "search": [
+    "\"Gillian Clarke\""
+   ],
+   "n": 6
+  },
+  {
+   "slug": "terry-matthews",
+   "name": "Terry Matthews",
+   "wiki": "",
+   "search": [
+    "\"Terry Matthews\" Mitel",
+    "\"Terry Matthews\" Celtic Manor"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "david-emanuel",
+   "name": "David Emanuel",
+   "wiki": "",
+   "search": [
+    "\"David Emanuel\" designer",
+    "\"David Emanuel\" fashion"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "alexander-cordell",
+   "name": "Alexander Cordell",
+   "wiki": "",
+   "search": [
+    "\"Alexander Cordell\"",
+    "\"Cordell\" Blorenge"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "gwyn-alf-williams",
+   "name": "Gwyn Alf Williams",
+   "wiki": "",
+   "search": [
+    "\"Gwyn A. Williams\"",
+    "\"Gwyn Alf\""
+   ],
+   "n": 6
+  },
+  {
+   "slug": "elizabeth-andrews",
+   "name": "Elizabeth Andrews",
+   "wiki": "",
+   "search": [
+    "\"Elizabeth Andrews\" Labour",
+    "\"Elizabeth Andrews\" plaque"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "lucy-thomas",
+   "name": "Lucy Thomas",
+   "wiki": "",
+   "search": [
+    "\"Lucy Thomas\" Abercanaid",
+    "\"Lucy Thomas\" coal"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "ieuan-fardd",
+   "name": "Ieuan Fardd",
+   "wiki": "",
+   "search": [
+    "\"Ieuan Fardd\"",
+    "\"Ieuan Brydydd Hir\"",
+    "\"Evan Evans\" 1731"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "daniel-james-gwyrosydd",
+   "name": "Gwyrosydd",
+   "wiki": "",
+   "search": [
+    "Gwyrosydd",
+    "\"Calon Lân\""
+   ],
+   "n": 6
+  },
+  {
+   "slug": "evan-james-williams",
+   "name": "E. J. Williams",
+   "wiki": "",
+   "search": [
+    "\"Evan James Williams\" physicist",
+    "\"E. J. Williams\" Cwmsychbant"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "rhys-davies",
+   "name": "Rhys Davies",
+   "wiki": "",
+   "search": [
+    "\"Rhys Davies\" novelist",
+    "\"Rhys Davies\" Blaenclydach"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "donald-davies",
+   "name": "Donald Davies",
+   "wiki": "",
+   "search": [
+    "\"Donald Davies\" computer",
+    "\"Donald Watts Davies\""
+   ],
+   "n": 6
+  },
+  {
+   "slug": "william-wroth",
+   "name": "William Wroth",
+   "wiki": "",
+   "search": [
+    "\"William Wroth\"",
+    "Llanfaches chapel"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "isaac-carter",
+   "name": "Isaac Carter",
+   "wiki": "",
+   "search": [
+    "\"Isaac Carter\" printer",
+    "Trefhedyn press",
+    "Atpar press"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "marged-ferch-ifan",
+   "name": "Marged ferch Ifan",
+   "wiki": "",
+   "search": [
+    "\"Marged ferch Ifan\"",
+    "\"Margaret Evans\" Penllyn"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "gruffudd-ap-rhys",
+   "name": "Gruffudd ap Rhys",
+   "wiki": "",
+   "search": [
+    "\"Gruffudd ap Rhys\"",
+    "\"Gruffydd ap Rhys\" Deheubarth"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "madog-ap-llywelyn",
+   "name": "Madog ap Llywelyn",
+   "wiki": "",
+   "search": [
+    "\"Madog ap Llywelyn\" 1294",
+    "\"Madog ap Llywelyn\" Maes Moydog"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "nest",
+   "name": "Nest",
+   "wiki": "",
+   "search": [
+    "\"Nest ferch Rhys\"",
+    "\"Princess Nest\" Cilgerran"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "john-ap-john",
+   "name": "John ap John",
+   "wiki": "",
+   "search": [
+    "\"John ap John\" Quaker",
+    "\"John ap John\" Ruabon"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "matholwch",
+   "name": "Branwen branch",
+   "wiki": "",
+   "search": [
+    "\"Branwen ferch Llŷr\" manuscript",
+    "\"Branwen\" Jesus College"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "rhun-ap-maelgwn",
+   "name": "Rhun",
+   "wiki": "",
+   "search": [
+    "\"Rhun ap Maelgwn\"",
+    "\"Rhun\" Caer Rhun"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "gwerful-mechain",
+   "name": "Gwerful Mechain",
+   "wiki": "",
+   "search": [
+    "\"Gwerful Mechain\""
+   ],
+   "n": 6
+  },
+  {
+   "slug": "dafydd-ab-edmwnd",
+   "name": "Dafydd ab Edmwnd",
+   "wiki": "",
+   "search": [
+    "\"Dafydd ab Edmwnd\"",
+    "Hanmer church Dafydd"
+   ],
+   "n": 6
+  },
+  {
+   "slug": "cadwallon-lawhir",
+   "name": "Cadwallon Lawhir",
+   "wiki": "",
+   "search": [
+    "\"Cadwallon Lawhir\""
+   ],
+   "n": 4
+  },
+  {
+   "slug": "brochwel-ysgithrog",
+   "name": "Brochwel",
+   "wiki": "",
+   "search": [
+    "\"Brochwel\" Pennant Melangell",
+    "\"Brochfael\""
+   ],
+   "n": 6
+  },
+  {
+   "slug": "caradog-llancarfan",
+   "name": "Caradog of Llancarfan",
+   "wiki": "",
+   "search": [
+    "\"Caradog of Llancarfan\"",
+    "\"Vita Gildae\""
+   ],
+   "n": 6
+  },
+  {
+   "slug": "cadell-ap-rhodri",
+   "name": "Cadell ap Rhodri",
+   "wiki": "",
+   "search": [
+    "\"Cadell ap Rhodri\""
+   ],
+   "n": 4
+  },
+  {
+   "slug": "owain-ap-hywel",
+   "name": "Owain ap Hywel",
+   "wiki": "",
+   "search": [
+    "\"Owain ap Hywel\""
+   ],
+   "n": 4
+  },
+  {
+   "slug": "rhys-ap-tewdwr",
+   "name": "Rhys ap Tewdwr",
+   "wiki": "",
+   "search": [
+    "\"Rhys ap Tewdwr\""
+   ],
+   "n": 6
+  },
+  {
+   "slug": "iestyn-ap-gwrgant",
+   "name": "Iestyn ap Gwrgant",
+   "wiki": "",
+   "search": [
+    "\"Iestyn ap Gwrgant\""
+   ],
+   "n": 6
+  },
+  {
+   "slug": "maelgwn-ap-rhys",
+   "name": "Maelgwn ap Rhys",
+   "wiki": "",
+   "search": [
+    "\"Maelgwn ap Rhys\""
+   ],
+   "n": 6
+  },
+  {
+   "slug": "llywelyn-bren2",
+   "name": "Llywelyn Bren",
+   "wiki": "",
+   "search": [
+    "Llywelyn Bren Caerphilly 1316"
+   ],
+   "n": 4
+  }
  ]
 }
