@@ -2,8 +2,7 @@
 
 TOWNS maps each council area to a list of T(English name, Welsh name, meaning EN, meaning CY, history EN, history CY, see, geo).
 `geo` is (lat, lon); leave it out and tools/towns_geo.py finds it in the free GeoNames list (saved in src/towns_geo.json).
-ELEMENTS is the list of words that make up Welsh place names, used by the name decoder on the page. A mutated form
-(fach, fawr, bont, dre) is listed beside the word it comes from.
+The words that make up Welsh place names, used by the name decoder, are in src/placenames.py.
 Place-name meanings follow the standard works (Owen and Morgan, Dictionary of the Place-Names of Wales). Where a meaning
 is argued over, say "probably" or give both.
 """
@@ -467,44 +466,3 @@ TOWNS = {
     "Casglwyd y capel Anghydffurfiol cyntaf yng Nghymru yma yn 1639.", ["place-llanfaches.html"], (51.6200, -2.8210)),
  ],
 }
-
-# The words that make up Welsh place names: (word, English, Welsh). Mutated forms come right after the word they come from.
-ELEMENTS = [
- ("aber", "river mouth, where waters meet", "ceg afon, cymer"), ("afon", "river", "afon"), ("allt", "hillside, wooded slope", "llethr, llechwedd coediog"),
- ("bach", "small", "bach"), ("fach", "small", "bach"), ("ban", "peak", "copa"), ("fan", "peak", "copa"), ("bannau", "peaks", "copaon"),
- ("bedd", "grave", "bedd"), ("betws", "prayer house, chapel", "tŷ gweddi"), ("blaen", "head of a valley, source", "pen cwm, tarddle"), ("blaenau", "uplands", "ucheldir"),
- ("bod", "dwelling", "trigfan"), ("fod", "dwelling", "trigfan"), ("bont", "bridge", "pont"), ("pont", "bridge", "pont"), ("bro", "vale, region", "bro"), ("fro", "vale", "bro"),
- ("bryn", "hill", "bryn"), ("fryn", "hill", "bryn"), ("bwlch", "pass, gap", "bwlch"), ("cae", "field", "cae"), ("caer", "fort", "caer"), ("gaer", "fort", "caer"),
- ("capel", "chapel", "capel"), ("carn", "cairn, rocky hill", "carn"), ("garn", "cairn", "carn"), ("carnedd", "cairn", "carnedd"), ("carreg", "rock, stone", "carreg"),
- ("castell", "castle", "castell"), ("cefn", "ridge", "cefn"), ("celli", "grove", "llwyn"), ("gelli", "grove", "llwyn"), ("cil", "nook, retreat", "cilfach"),
- ("clawdd", "dyke, bank", "clawdd"), ("coch", "red", "coch"), ("goch", "red", "coch"), ("coed", "wood", "coed"), ("cors", "bog", "cors"), ("gors", "bog", "cors"),
- ("craig", "rock, crag", "craig"), ("graig", "crag", "craig"), ("croes", "cross", "croes"), ("groes", "cross", "croes"), ("crug", "mound, cairn", "crug"),
- ("cwm", "valley", "cwm"), ("gwm", "valley", "cwm"), ("cymer", "confluence", "cymer"), ("dinas", "fort, city", "dinas"), ("din", "fort", "din"),
- ("dol", "meadow", "dôl"), ("ddol", "meadow", "dôl"), ("du", "black", "du"), ("ddu", "black", "du"), ("dwr", "water", "dŵr"), ("dyffryn", "valley floor", "dyffryn"),
- ("eglwys", "church", "eglwys"), ("esgair", "long ridge", "esgair"), ("ffordd", "road", "ffordd"), ("ffos", "ditch", "ffos"), ("ffridd", "mountain pasture", "ffridd"),
- ("ffynnon", "spring, well", "ffynnon"), ("garth", "hill, enclosure", "garth"), ("glan", "bank, shore", "glan"), ("lan", "bank or shore (glan), or church (llan)", "glan neu llan"), ("glas", "blue, green", "glas"),
- ("las", "blue, green", "glas"), ("glyn", "glen, valley", "glyn"), ("lyn", "glen", "glyn"), ("gwaun", "moor", "gwaun"), ("waun", "moor", "gwaun"), ("gwern", "alder marsh", "gwern"),
- ("wern", "alder marsh", "gwern"), ("gwyn", "white, fair, holy", "gwyn"), ("wyn", "white", "gwyn"), ("gwen", "white (feminine)", "gwen"), ("wen", "white", "gwen"),
- ("hafod", "summer dwelling", "hafod"), ("hen", "old", "hen"), ("hendre", "winter home", "hendre"), ("is", "lower", "is"), ("isaf", "lowest", "isaf"),
- ("llan", "church, holy enclosure", "llan"), ("llech", "slate, flat stone", "llech"), ("llwyn", "grove", "llwyn"), ("llyn", "lake", "llyn"), ("llys", "court", "llys"),
- ("maen", "stone", "maen"), ("faen", "stone", "maen"), ("maes", "field, open land", "maes"), ("faes", "field", "maes"), ("mawr", "big, great", "mawr"), ("fawr", "great", "mawr"),
- ("melin", "mill", "melin"), ("felin", "mill", "melin"), ("merthyr", "martyr’s shrine", "merthyr"), ("moel", "bare hill", "moel"), ("foel", "bare hill", "moel"),
- ("morfa", "sea marsh", "morfa"), ("mynydd", "mountain", "mynydd"), ("fynydd", "mountain", "mynydd"), ("nant", "stream, small valley", "nant"), ("newydd", "new", "newydd"),
- ("ogof", "cave", "ogof"), ("pant", "hollow", "pant"), ("bant", "hollow", "pant"), ("pen", "head, top, end", "pen"), ("ben", "head", "pen"), ("pentre", "village", "pentref"), ("pentref", "village", "pentref"),
- ("plas", "mansion", "plas"), ("porth", "harbour, gateway", "porth"), ("borth", "harbour", "porth"), ("pwll", "pool, pit", "pwll"), ("bwll", "pool", "pwll"),
- ("rhiw", "slope, hill", "rhiw"), ("rhos", "moor, heath", "rhos"), ("ros", "moor", "rhos"), ("rhyd", "ford", "rhyd"), ("ryd", "ford", "rhyd"), ("sarn", "causeway, road", "sarn"),
- ("sych", "dry", "sych"), ("tal", "end, front", "tal"), ("tir", "land", "tir"), ("tomen", "mound", "tomen"), ("traeth", "beach", "traeth"), ("draeth", "beach", "traeth"),
- ("tre", "town, farm", "tref"), ("tref", "town", "tref"), ("dre", "town", "tref"), ("dref", "town", "tref"), ("trwyn", "point, nose", "trwyn"), ("twyn", "hillock", "twyn"),
- ("ty", "house", "tŷ"), ("uchaf", "highest, upper", "uchaf"), ("uwch", "higher", "uwch"), ("y", "the", "y"), ("yr", "the", "yr"), ("ym", "in", "yn"), ("yng", "in", "yn"),
- ("ynys", "island, river meadow", "ynys"), ("ystrad", "vale floor", "ystrad"), ("ystum", "bend", "ystum"), ("bedw", "birches", "bedw"), ("onnen", "ash tree", "onnen"),
- ("derwen", "oak", "derwen"), ("helyg", "willows", "helyg"), ("eithin", "gorse", "eithin"), ("brwyn", "rushes", "brwyn"), ("mair", "Mary", "Mair"), ("fair", "Mary", "Mair"),
- ("dau", "two", "dau"), ("dwy", "two", "dwy"), ("tri", "three", "tri"), ("cyll", "hazels", "cyll"), ("gyll", "hazels", "cyll"), ("gwydd", "trees, wood", "gwŷdd"),
- ("cleddau", "the river Cleddau (‘sword’)", "afon Cleddau"), ("gleddau", "the river Cleddau (‘sword’)", "afon Cleddau"), ("tawe", "the river Tawe", "afon Tawe"),
- ("teifi", "the river Teifi", "afon Teifi"), ("taf", "the river Taf", "afon Taf"), ("dyfi", "the river Dyfi", "afon Dyfi"), ("ystwyth", "the river Ystwyth (‘winding’)", "afon Ystwyth"),
- ("wysg", "the river Usk", "afon Wysg"), ("gwy", "the river Wye", "afon Gwy"), ("hafren", "the river Severn", "afon Hafren"), ("honddu", "the river Honddu", "afon Honddu"),
- ("dyfrdwy", "the river Dee (‘water of the goddess’)", "afon Dyfrdwy"), ("clwyd", "the river Clwyd", "afon Clwyd"), ("ogwr", "the river Ogwr (Ogmore)", "afon Ogwr"),
- ("rhondda", "the river Rhondda (‘noisy’)", "afon Rhondda"), ("cynon", "the river Cynon", "afon Cynon"), ("nedd", "the river Neath", "afon Nedd"), ("aman", "the river Aman", "afon Aman"),
- ("llwchwr", "the river Loughor", "afon Llwchwr"), ("menai", "the Menai Strait", "afon Menai"), ("elwy", "the river Elwy", "afon Elwy"), ("ebwy", "the river Ebbw", "afon Ebwy"),
- ("tywi", "the river Tywi (Towy)", "afon Tywi"), ("cothi", "the river Cothi", "afon Cothi"), ("mynwy", "the river Monnow", "afon Mynwy"), ("garw", "rough", "garw"),
- ("dewi", "David", "Dewi"), ("ddewi", "David", "Dewi"), ("fihangel", "Michael", "Mihangel"), ("sant", "saint", "sant"), ("santes", "female saint", "santes"),
-]

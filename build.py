@@ -3201,6 +3201,29 @@ HEAR_SVG = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5
 WELSH_SCRIPT = f'<script src="welsh.js?v={WELSH_JS_VER}" defer></script>\n'
 
 
+# ---------- the place-name decoder (src/placenames.py, src/placenames.js), on the home page and towns.html ----------
+import placenames as PNM  # noqa: E402
+
+
+def _pn_ver():
+    import hashlib
+    h = hashlib.md5()
+    for f in ("placenames.py", "placenames.js", "ref_towns.py"):
+        with open(os.path.join(SRC, f), "rb") as fh:
+            h.update(fh.read())
+    return h.hexdigest()[:10]
+
+
+PN_VER = _pn_ver()  # changes whenever the words or the decoder change, so browsers fetch the new copy
+PN_SCRIPT = f'<script src="placenames.js?v={PN_VER}" defer></script>\n'
+
+
+def placenames_js():
+    """The decoder's words, every town in towns.html (so a whole name can be matched), then the decoder itself."""
+    towns = [[r["en"], r["cy"], r["mEn"], r["mCy"], r["id"]] for r in RP.town_rows()]
+    return "var PND = " + json.dumps(PNM.data(towns), ensure_ascii=False, separators=(",", ":")) + ";\n" + read("placenames.js")
+
+
 def welsh_js():
     """The daily word: every word, a fixed shuffled order for ordinary days, and the fixed days."""
     import random
@@ -3592,7 +3615,7 @@ N_CASTLES = len(json.loads(read("castles_data.json")))  # the castle sites on ca
 FEATURED = ["dewi-sant", "hywel-dda", "gwenllian", "llywelyn-fawr", "llywelyn-ap-gruffudd", "dafydd-ap-gwilym", "owain-glyndwr", "harri-tudur", "william-morgan", "lloyd-george", "aneurin-bevan", "betty-campbell"]
 DATA = dict(
     ERAS=D.ERAS, EVENTS=D.EVENTS, PLACES=[dict(p, ph=place_ph(p['id']), vis=map_visit(p)) for p in D.PLACES], PEOPLE=D.PEOPLE, READING=D.READING, ONLINE=D.ONLINE,
-    CENSUS=D.CENSUS, KINGDOMS=D.KINGDOMS, LA=la, DICT=D.DICT, SAMPLES=D.SAMPLES, WORDS=D.WORDS,
+    CENSUS=D.CENSUS, KINGDOMS=D.KINGDOMS, LA=la, WORDS=D.WORDS,
     TRAILS=[dict(id=t["id"], en=t["en"], cy=t["cy"], ill=t["ill"], n=len(trail_stops(t)), introEn=t["introEn"][0], introCy=t["introCy"][0]) for t in L.TRAILS],
     AUDIO=sorted(f[:-4] for f in os.listdir(os.path.join(SRC, 'static', 'audio')) if f.endswith('.mp3')) if os.path.isdir(os.path.join(SRC, 'static', 'audio')) else [],
     MAPC=dict(minx=geo["minx"], maxy=geo["maxy"], k=geo["k"], sc=geo["sc"]),
@@ -3978,7 +4001,7 @@ _bare_head = index_head
 index_head = (head_tags("History of Wales · Hanes Cymru: Welsh history, people and places",
                         "Welsh history from the first people to the Senedd: kings, princes, castles, saints and poets, with a timeline, map and games. In English and Cymraeg.",
                         "", "website") + SEO.ld_script(SEO.home_ld(BASE_URL)) + "\n" + index_head)
-_body_filled = (body.replace("__WALES__", geo["outline"]).replace("__WELSHV__", str(WELSH_JS_VER))
+_body_filled = (body.replace("__WALES__", geo["outline"]).replace("__WELSHV__", str(WELSH_JS_VER)).replace("__PNV__", PN_VER)
                 .replace("__DATA__", json.dumps(DATA, ensure_ascii=False, separators=(",", ":")))
                 .replace("__TOWNS__", json.dumps(TW.TOWNS, ensure_ascii=False, separators=(",", ":")))
                 .replace("__APP__", app)
@@ -4546,6 +4569,7 @@ def main():
     if TH.OK:
         print(f"Made {TH.write(out)} small card pictures")
     write(os.path.join(out, "welsh.js"), welsh_js())
+    write(os.path.join(out, "placenames.js"), placenames_js())
     write(os.path.join(out, "onthisday.json"), json.dumps(otd_rows(), ensure_ascii=False, separators=(",", ":")))
     write(os.path.join(out, "feed.xml"), feed_xml(otd_rows()))
     write(os.path.join(out, "whatsnew.json"), json.dumps(WN.NEWS, ensure_ascii=False))
@@ -4567,6 +4591,7 @@ def main():
                 shutil.copy(os.path.join(SRC, "static", f), os.path.join(a, f))
         shutil.copy(os.path.join(out, "search.json"), os.path.join(a, "search.json"))
         shutil.copy(os.path.join(out, "welsh.js"), os.path.join(a, "welsh.js"))
+        shutil.copy(os.path.join(out, "placenames.js"), os.path.join(a, "placenames.js"))
         shutil.copy(os.path.join(out, "onthisday.json"), os.path.join(a, "onthisday.json"))
     # note when anything new first appeared (src/added.json), so the lists can show it first next time too
     AD.track("person", [p[0] for p in D.PEOPLE])
