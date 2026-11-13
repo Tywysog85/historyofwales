@@ -876,6 +876,13 @@ Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.
 - **Games read the age names from the page.** `play.js` used to keep its own list of nine names; it now takes `PLAY.ERAN` from `PLAY_DATA` in `build.py`, and `play.js` carries a `?v=` fingerprint like `site.js`, so a browser never mixes an old script with new ages.
 - **The "Time traveller" badge** in `src/static/site.js` counts age pages read; raise its number (now 12, "XII") when the ages change.
 
+### A chart card that opens a long read, and the chart inside the long read (November 2026)
+
+- Ifan asked for the home page census chart ("A century of decline, and a fight back") to be clickable and to open a long read on the revival of Welsh (`story-welsh-revival.html`, `src/welshrevival.py`).
+- The card in `src/body.html` follows "Whole cards are links": `class="panel wl-card lang-chart-card"` with an `a.wl` holding the long read's name in both languages. A chart that scrolls sideways cannot sit under the stretched link (a finger on it would hit the link, not the chart), so on phones the chart now fits the card instead: `min-width: 0 !important` beats the inline `min-width: 420px` that `app.js` writes, and the labels get larger (end of `src/v6.css`).
+- The long read reuses the same figures (`D.CENSUS`) in a larger chart, `revival_chart()` in `build.py`, put in at `"!! chart"` the way the Old North map goes in at `"!! map"` (story_page fills `x["figs"]["chart"]`). Words inside an SVG use `bi(en, cy, "tspan")`; give the gradient its own id so it does not clash with the home chart's.
+- Census and survey figures: the Annual Population Survey gives higher numbers than the census, and the Welsh Government says not to compare the two. Give each on its own, never as one trend.
+
 ### The place-name decoder (November 2026)
 - **One decoder for the whole site.** The home page and `towns.html` both run `src/placenames.js`; its words live in `src/placenames.py` (`WORDS`, `RIVERS`, `SAINTS`, `ENGLISH`, `OLDNAMES`). `build.py` writes them, plus every town in `towns.html` for whole-name matches, in front of the script as `_site/placenames.js`, with a `?v=` fingerprint of the three source files. Add a word there and both decoders (and the word list at the foot of `towns.html`) get it.
 - **Give the plain form only.** The decoder makes the mutated forms itself: soft (pont→bont, Cammarch→gammarch, Mair→fair, gwaun→waun), nasal (Buallt→Muallt, caer→nghaer) and aspirate (pen→phen). Extra spellings go after a `|` (`"taf|taff"`, `"gafenni|gavenny"`).

@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-13", "Yma o Hyd: how the Welsh language came back", "Yma o Hyd: sut y daeth y Gymraeg yn ôl",
+     "A new long read on the revival of Welsh: the Urdd and the school of seven children in Aberystwyth, Tynged yr Iaith and the sit-down on Trefechan Bridge, the road signs, the Welsh Language Acts and official status, Radio Cymru, Gwynfor’s fast and S4C, Sain, Mwng and Yma o Hyd, the census that turned in 2001, Welsh on the web and the million by 2050. The census chart on the home page now opens it.",
+     "Erthygl newydd ar adfywiad y Gymraeg: yr Urdd a’r ysgol o saith o blant yn Aberystwyth, Tynged yr Iaith a’r eistedd i lawr ar Bont Trefechan, yr arwyddion ffyrdd, Deddfau’r Iaith a statws swyddogol, Radio Cymru, ympryd Gwynfor ac S4C, Sain, Mwng ac Yma o Hyd, y cyfrifiad a drodd yn 2001, y Gymraeg ar y we a’r miliwn erbyn 2050. Mae siart y cyfrifiad ar yr hafan yn ei hagor bellach.",
+     "story-welsh-revival.html"),
     ("2026-11-13", "The place-name decoder now knows over 500 words", "Mae’r datgodiwr enwau lleoedd bellach yn gwybod dros 500 o eiriau",
      "Type any Welsh place name and see what it means: the decoder now knows the rivers, saints and old lands behind the names, works out mutations (the Cammarch in Llangammarch, the Mair in Llanfair), keeps each word separate, and explains English words like the Wells of Builth Wells.",
      "Teipiwch unrhyw enw lle Cymraeg i weld ei ystyr: mae’r datgodiwr bellach yn adnabod yr afonydd, y saint a’r hen diroedd y tu ôl i’r enwau, yn deall treigladau (Cammarch yn Llangammarch, Mair yn Llanfair), yn cadw pob gair ar wahân, ac yn egluro geiriau Saesneg fel Wells yn Builth Wells.",
