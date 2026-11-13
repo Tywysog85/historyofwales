@@ -791,6 +791,42 @@ def north_circle(slug):
     lead = bi("The kings, poets and saints of Yr Hen Ogledd, the Old North: the Britons of the lands between the Clyde and the Pennines, whose poems and pedigrees Wales has kept for fourteen hundred years.",
               "Brenhinoedd, beirdd a saint yr Hen Ogledd: Brythoniaid y tiroedd rhwng y Clud a’r Pennines, y cadwodd Cymru eu cerddi a’u hachau am bedair canrif ar ddeg.")
     return section(f'<div class="ar-circle"><p class="lede">{lead}</p>{out}<p class="ar-more">{more}</p></div>', "Gwŷr y Gogledd, the Men of the North", "Gwŷr y Gogledd")
+def brittany_map():
+    """The map in the Brittany long read (src/brittany.py): Wales, Cornwall and Brittany with the saints' places numbered,
+    the sea roads they sailed and the old names of the Breton kingdoms. Outlines from src/geo/brittany.json (Natural Earth)."""
+    import brittany as BZ
+    g = json.loads(read("geo", "brittany.json"))
+    def xy(lat, lon):
+        return (lon - g["w"]) * g["k"] * g["sc"], (g["n"] - lat) * g["sc"]
+    pins, items, seen = "", "", []
+    for i, (en, cy, lat, lon, ten, tcy, link) in enumerate(BZ.PINS, 1):
+        x0, y0 = xy(lat, lon)
+        x, y = x0, y0
+        for dx, dy in NUDGES:  # a pin that would sit on another moves aside, with a short line back to the real spot
+            if all((px - x0 - dx) ** 2 + (py - y0 - dy) ** 2 >= 25 ** 2 for px, py in seen):
+                x, y = x0 + dx, y0 + dy
+                break
+        if (x, y) != (x0, y0):
+            pins += f'<circle class="ar-dot" cx="{x0:.0f}" cy="{y0:.0f}" r="3" fill="#d43c34"/><line class="ar-lead" x1="{x0:.0f}" y1="{y0:.0f}" x2="{x:.0f}" y2="{y:.0f}"/>'
+        seen.append((x, y))
+        pins += (f'<a href="#bz-{i}" class="ar-pin"><circle cx="{x:.0f}" cy="{y:.0f}" r="12"/>'
+                 f'<text x="{x:.0f}" y="{y + 5:.0f}">{i}</text><title>{e(en)}</title></a>')
+        more = f'<a class="wl" href="{link}">{bi(en, cy)}</a>' if link else ""
+        items += f'<li id="bz-{i}"{' class="wl-card"' if link else ""}><b>{bi(en, cy)}</b><p>{bi(ten, tcy)}{more}</p></li>'
+    roads = ""
+    for pts in BZ.ROUTES:
+        (ax, ay), (bx, by), (cx, cy_) = [xy(*p) for p in pts]
+        roads += f'<path class="bm-road" d="M{ax:.0f} {ay:.0f} Q{bx:.0f} {by:.0f} {cx:.0f} {cy_:.0f}" marker-end="url(#bm-arrow)"/>'
+    labels = "".join(f'<text class="bm-lab {c}" x="{xy(la, lo)[0]:.0f}" y="{xy(la, lo)[1]:.0f}">{bi(en, cy, "tspan")}</text>' for en, cy, la, lo, c in BZ.LABELS)
+    svg = (f'<svg class="ar-map bm-map" viewBox="0 0 {g["W"]} {g["H"]:.0f}" role="img" aria-label="Map of Wales, Cornwall and Brittany with the places of the saints / Map o Gymru, Cernyw a Llydaw gyda lleoedd y saint">'
+           f'<defs><marker id="bm-arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#e8c26a"/></marker></defs>'
+           f'<path class="land" d="{g["land"]}"/><path class="bm-home" d="{g["wales"]}"/><path class="bm-kin" d="{g["cornwall"]}"/><path class="bm-kin2" d="{g["devon"]}"/>'
+           f'<path class="bm-home" d="{g["brittany"]}"/>{roads}{labels}{pins}</svg>')
+    lede = bi("The places of the story: where the saints were trained in Wales, the road they took by way of Cornwall, and the churches and cities they founded in Brittany. Tap a number to read about it.",
+              "Lleoedd yr hanes: lle hyfforddwyd y saint yng Nghymru, y ffordd a gymerasant drwy Gernyw, a’r eglwysi a’r dinasoedd a sefydlwyd ganddynt yn Llydaw. Tapiwch rif i ddarllen amdano.")
+    credit = bi("Coastlines: Natural Earth (public domain).", "Arfordiroedd: Natural Earth (parth cyhoeddus).")
+    return section(f'<p class="lede">{lede}</p><div class="ar-grid"><div class="ar-mapbox">{svg}<p class="bm-cr">{credit}</p></div><ol class="ar-list">{items}</ol></div>',
+                   "Map: from Wales to Llydaw", "Map: o Gymru i Lydaw")
 
 
 def tale_page(t, i):
@@ -1475,6 +1511,17 @@ def refs_ld(key):
     return [{"@type": "CreativeWork", "name": it[2], "author": it[1]} for it in r.get("items", []) if it[0] in "pb"]
 
 
+def story_body(x):
+    """The words of a long read. A paragraph "%% map" (in the English and the Welsh list alike) closes the column there,
+    puts in the long read's map across the page, and opens the column again (used by src/brittany.py)."""
+    en, cy, figs = x["pEn"], x["pCy"], x.get("figs")
+    if "%% map" not in en:
+        return prose_bi(en, cy, figs=figs)
+    a, b = en.index("%% map"), cy.index("%% map")
+    return (prose_bi(en[:a], cy[:b], figs=figs) + '</div></section>' + brittany_map()
+            + '<section class="article"><div class="wrap narrow">' + prose_bi(en[a + 1:], cy[b + 1:], figs=figs))
+
+
 def story_page(x, i):
     nxt = F.STORIES[(i + 1) % len(F.STORIES)]
     after = ""  # a section between the article and the pictures
@@ -1484,7 +1531,7 @@ def story_page(x, i):
     era = ERA[x["era"]]
     meta = f'<p class="byline">{AB.byline_top()}<span>{x["mins"]} {bi("minute read", "munud o ddarllen")}</span><a href="era-{x["era"]}.html">{bi(era["en"], era["cy"])}</a><button type="button" class="copy" data-copy="story-{x["id"]}.html">{bi("Copy link", "Copïo’r ddolen")}</button></p>'
     main = (hero(x["era"], f'<a href="index.html">{SITE}</a> / <a href="stories.html">{bi("Long reads", "Erthyglau")}</a>', "book", "Long read", "Erthygl", x["en"], x["cy"], x["sumEn"], x["sumCy"], art=x["art"])
-            + f'<section class="article"><div class="wrap narrow">{meta}{prose_bi(x["pEn"], x["pCy"], figs=x.get("figs"))}' + (f'<p><a class="btn solid" href="firsts.html">★ {bi("Every Welsh world first, with the people behind them", "Pob un o’r pethau a wnaeth Cymru gyntaf, a’r bobl y tu ôl iddynt")} →</a></p>' if x["id"] == "firsts" else "")
+            + f'<section class="article"><div class="wrap narrow">{meta}{story_body(x)}' + (f'<p><a class="btn solid" href="firsts.html">★ {bi("Every Welsh world first, with the people behind them", "Pob un o’r pethau a wnaeth Cymru gyntaf, a’r bobl y tu ôl iddynt")} →</a></p>' if x["id"] == "firsts" else "")
               + story_more_links(x)
               + (f'<p><a class="btn solid" href="laws.html">{bi("Much more on the law: the big page on the Laws of Hywel Dda, with the manuscripts and a quiz", "Llawer mwy am y gyfraith: y dudalen fawr ar Gyfreithiau Hywel Dda, gyda’r llawysgrifau a chwis")} →</a></p>' if x["id"] == "hywel" else "") + refs_block(x["id"]) + '</div></section>'
             + after + (section(f'<div class="mb-figs">{"".join(lit_fig(f) for f in x["figs"])}</div>', "Pictures", "Lluniau") if isinstance(x.get("figs"), list) and x["figs"] else "")
@@ -3236,6 +3283,7 @@ def saints_region_page(r, i):
     main = (hero(r["era"], f'<a href="index.html">{SITE}</a> / <a href="saints.html">{bi("Saints of Wales", "Seintiau Cymru")}</a>', "cross",
                  r["span"], cy_dates(r["span"]), t_en, t_cy, r["subEn"], r["subCy"], art=r["art"])
             + section(paras(r["introEn"], r["introCy"]), top=True)
+            + (section(f'<div class="s-grid">{story_card(STORY["brittany"], True)}</div>', "The full story", "Y stori lawn") if r["id"] == "llydaw" else "")
             + section(f'<ol class="era-events royal">{"".join(saint_li(x, r) for x in r["saints"])}</ol><p class="note-box" style="margin-top:2rem">{bi(SA.NOTE["en"], SA.NOTE["cy"])}</p>', "The saints", "Y saint")
             + section(saints_map_block(r["id"]), "Their llannau on the map", "Eu llannau ar y map")
             + (section(f'<div class="era-places">{"".join(place_tile(p) for p in places)}</div>', "Places to visit", "Lleoedd i ymweld â nhw") if places else "")

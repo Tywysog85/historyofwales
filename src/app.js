@@ -144,8 +144,9 @@
     /* the opening is staged: sky and title first, then the words, then the land fades in (never before 1.2 s, so it does not arrive under a half-drawn title), then the dragon flies in */
     var L3 = window.HCL3 && HCL3.ready && performance.now() > 1200 && FONTS, noLand = L3 || window.HCL3_WANT || (SLOW && !STILL_IMG.failed), STILLP = SLOW && STILL_IMG.land;
     if (L3 || STILLP) {
-      /* the valley mist the mountains rise out of, which also hides the stars below the skyline */
-      var vm = cx.createLinearGradient(0, eb - eh * 0.7, 0, H), mistC = mixHex(mixHex(SKY.sky[2], SKY.sky[1], 0.45), "#6f7896", 0.62), vc = hex(mistC).join(",");
+      /* the valley mist the mountains rise out of, which also hides the stars below the skyline. It is dark at night and a soft blue
+         haze by day: a light grey mist read as a flat grey sheet behind the castle at night (Ifan, 13 Nov 2026), so keep it dark. */
+      var vm = cx.createLinearGradient(0, eb - eh * 0.7, 0, H), mistC = mixHex(mixHex(SKY.sky[2], SKY.sky[1], 0.45), mixHex("#262b3d", "#56607c", SKY.sun), 0.7), vc = hex(mistC).join(",");
       vm.addColorStop(0, "rgba(" + vc + ",0)"); vm.addColorStop(0.34, "rgba(" + vc + ",.9)"); vm.addColorStop(0.55, "rgba(" + vc + ",1)"); vm.addColorStop(1, SKY.sky[3]); cx.fillStyle = vm; cx.fillRect(0, eb - eh * 0.7, W, H);
       if (!L3) drawStillLand(stacked); else {
         if (!FLAG) FLAG = flagArt(); HCL3.frame({ W: W, H: H, sumX: sumX - ew * 0.13, sumY: sumY + ew * 0.15, ppm: ew / 2000, ground: stacked ? { x: W * 0.7, y: eb - eh * 0.07 - sy * 0.04, ppm: Math.min(W * 0.0095, eh * 0.019) } : { x: Math.min(W * 0.885, W - H * 0.3) - mouse * 9, y: H * 0.7 - sy * 0.1, ppm: H * 0.0098 }, castle: true, t: t, sun: SKY.sun, fog: mixHex(SKY.sky[2], SKY.sky[1], 0.45), mist: mistC, flag: FLAG, flagV: FLAGV });

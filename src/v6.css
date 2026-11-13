@@ -911,6 +911,17 @@ main.home > #chapters { padding-top: calc(var(--home-gap) * 1.4) }
 main.home .head { margin-bottom: clamp(1.4rem, 3vw, 2.2rem) }
 main.home .more-row { margin-top: 1.25rem }
 main.home .mh .head { margin-bottom: 1.4rem }
+
+/* the map in the Brittany long read (brittany_map() in build.py) */
+.bm-map .bm-home { fill: #4a2b33; stroke: #b0606a; stroke-width: 1.2 }
+.bm-map .bm-kin { fill: #3a3346; stroke: #8a7aa8; stroke-width: 1 }
+.bm-map .bm-kin2 { fill: #2e3446; stroke: #6a7590; stroke-width: 1 }
+.bm-map .bm-road { fill: none; stroke: #e8c26a; stroke-width: 2.2; stroke-dasharray: 7 6; opacity: .9 }
+.bm-map .bm-lab { fill: #d8dbe3; font: 600 15px var(--f-body); text-anchor: middle; letter-spacing: .12em; pointer-events: none }
+.bm-map .bm-big { font-size: 22px; fill: #f1e3c6 }
+.bm-map .bm-sea { font-style: italic; font-weight: 400; letter-spacing: .04em; fill: #8fa3c0 }
+.bm-map .bm-old { font-size: 13px; font-weight: 400; letter-spacing: .02em; fill: #c9b9a0; font-style: italic }
+.bm-cr { font-size: .85rem; color: #9aa0ad; margin: .4rem 0 0; text-align: center }
 .refs .ref-buy, #sources .ref-buy { display: block; margin-top: .2rem; font-size: .8rem; color: #9aa0ad } .ref-buy a { color: var(--gold); text-decoration: none } .ref-buy a:hover { text-decoration: underline }
 
 /* ---------- the map of Yr Hen Ogledd, the Old North (north_map in build.py, src/hen_ogledd.py) ---------- */

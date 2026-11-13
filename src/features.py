@@ -422,7 +422,8 @@ import bruts as _BRT  # The Bruts, the chronicles of Wales (src/bruts.py)
 import welshnot as _WN  # The Welsh Not and how they tried to wipe out the language (src/welshnot.py)
 import mabinogi as _MBG  # The Mabinogi: the books that kept the tales (src/mabinogi.py)
 import hen_ogledd as _HO  # Yr Hen Ogledd, the Old North (src/hen_ogledd.py)
-STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY, _NS.STORY, _RH.STORY] + _CH.STORIES + [_PT.STORY, _AF.STORY, _TW.STORY, _EP.STORY] + _MAC.STORIES + [_WN.STORY] + [_IN.STORY] + [_MBG.STORY] + [_WRT.STORY, _BRT.STORY] + [_HO.STORY]
+import brittany as _BZH  # Llydaw: how the Britons made a second Britain (src/brittany.py)
+STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY, _NS.STORY, _RH.STORY] + _CH.STORIES + [_PT.STORY, _AF.STORY, _TW.STORY, _EP.STORY] + _MAC.STORIES + [_WN.STORY] + [_IN.STORY] + [_MBG.STORY] + [_WRT.STORY, _BRT.STORY] + [_BZH.STORY] + [_HO.STORY]
 # the long reads on the language and on protest point on to the Welsh Not long read (src/welshnot.py)
 for _s in STORIES:
     if _s["id"] in ("language", "revival", "protest"):

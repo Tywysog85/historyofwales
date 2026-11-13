@@ -94,6 +94,8 @@ LEGENDS = [
   hCy="Culhwch ac Olwen, a ysgrifennwyd tua 1100, yw’r chwedl hynaf mewn unrhyw iaith lle mae llys Arthur yn ymddangos, ac mae’n gwbl Gymreig: mae’n gosod llys Arthur yng Nghelli Wig yng Nghernyw ac yn ei lenwi â dros ddau gant o enwau o hen farddoniaeth Gymraeg. Mae llwybr y baedd yn daith go iawn y gallwch ei dilyn ar fap o dde Cymru, o Borth Clais i Hafren. Mae’r helfa’n hŷn eto: mae’r Historia Brittonum, tua 829, yn sôn am y baedd Troynt ac am faen ym Muellt ag ôl troed Cafall, y ci mawr, arno, yn y lle a elwir o hyd yn Gorn Gafallt. Mae gan Arthur ei hun ei dudalen ei hun ar y wefan hon, ‘Arthur, Brenin y Brythoniaid’."),
 
  dict(id="macsen", era="roman", art="roman", place="Caernarfon · Segontium",
+  links=[("story-macsen.html", "Long read: Macsen Wledig, the emperor from Britain", "Erthygl: Macsen Wledig, yr ymerawdwr o Brydain"),
+         ("story-brittany.html", "Long read: how Cynan and the Britons made a second Britain in Llydaw", "Erthygl: sut y gwnaeth Cynan a’r Brythoniaid ail Brydain yn Llydaw")],
   en="The Dream of Macsen Wledig", cy="Breuddwyd Macsen Wledig",
   sumEn="An emperor of Rome dreams of a maiden in a fort at the far end of the world, and finds her in Arfon.",
   sumCy="Mae ymerawdwr Rhufain yn breuddwydio am forwyn mewn caer ym mhen draw’r byd, ac yn ei chael yn Arfon.",
