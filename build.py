@@ -1886,6 +1886,7 @@ MS_CSS = """
 .ms-row .th{width:5.5rem;height:5.5rem;border-radius:calc(var(--r) * .6);overflow:hidden;background:var(--line)}
 .ms-row .th img{width:100%;height:100%;object-fit:cover;display:block}
 .ms-row h3{font-family:var(--f-display);font-size:1.2rem;line-height:1.25;margin:.15rem 0 .1rem}
+.ms-row h3 a{text-decoration:none;color:inherit}.ms-row:hover h3 a{text-decoration:underline}
 .ms-row .meta{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:0}
 .ms-row .alt{font-style:italic;color:var(--muted);margin:0;font-size:.95rem}
 .ms-row .shelf{margin:.25rem 0 0;font-size:.92rem}
