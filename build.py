@@ -33,6 +33,7 @@ import art as A  # noqa: E402
 import places3 as PL3  # noqa: E402  (historic places of importance: their people and links, src/places3.py)
 import visit as VS  # noqa: E402  (the Visiting box on place pages and the map card, src/visit.py)
 import pictures as PX  # noqa: E402  (a real picture at the top of every page and on its card: src/pictures.py)
+import thumbs as TH  # noqa: E402  (small copies of pictures for the cards: src/thumbs.py)
 PX.check()
 L.TEACH.update(AG.TEACH)
 import ages9 as AG9
@@ -550,6 +551,48 @@ def place_ph(pid):
     return None
 
 
+# ---------- a picture on every card (Ifan, 13 November 2026) ----------
+# card_pic() finds the picture of the thing a card opens: the person's portrait, the place's photo, the legend's
+# photo, or the picture src/pictures.py gives that page. It never gives the stock picture of an age, which would put
+# Pentre Ifan on the card for Paviland Cave. Cards with nothing of their own show the age's picture behind the
+# person's initials, or keep their drawing, so no card pretends to show what it does not.
+def card_pic(href, place=None, story=None):
+    """(picture path, object-position) for a card that links to href, or None. place: an event's place id;
+    story: a long read that tells it (both tried when the page itself has no picture)."""
+    path = (href or "").split("#")[0]
+    stem = path[:-5] if path.endswith(".html") else ""
+    if stem in GP.GALLERY:
+        g = GP.GALLERY[stem]
+        return f"gallery/{stem}-s.webp", "50% 22%" if g[7] > g[6] * .9 else "50% 45%"
+    if stem.startswith("person-") and stem[7:] in PH.PERSON_PHOTOS:
+        return photo_url(PH.PERSON_PHOTOS[stem[7:]][0], 240), "50% 22%"
+    if stem.startswith("place-") and stem[6:] in PH.PLACE_PHOTOS:
+        return photo_url(PH.PLACE_PHOTOS[stem[6:]][0], 240), "50% 50%"
+    if stem.startswith("legend-") and stem[7:] in LEGEND_BY_ID:
+        k = LEGEND_BY_ID[stem[7:]]["art"]
+        if k in A.LEGEND_PHOTOS:
+            return f"legends/{k}-s.webp", A.LEGEND_PHOTOS[k][6]
+    ref = PX.for_page(path) if path else None
+    if ref and ref not in PX.ERA.values():
+        p = PX._parse(ref)
+        return p["small"], p["pos"]
+    return (card_pic(f"place-{place}.html") if place else None) or (card_pic(f"story-{story}.html") if story else None)
+
+
+def era_pic(era):
+    """The picture of an age, for a card with nothing of its own (shown dimmed, behind initials or a drawing)."""
+    p = PX._parse(PX.ERA.get(era) or PX.ERA["medieval"])
+    return p["small"], p["pos"]
+
+
+def pic_img(pic, small=True, cls="", w=96, h=96):
+    """The <img> of a card picture: the small copy (src/thumbs.py) unless small=False (a wide picture on a card)."""
+    src, pos = pic
+    src = TH.thumb(src) if small else src
+    return (f'<img{f' class="{cls}"' if cls else ""} src="{e(src)}" alt="" width="{w}" height="{h}" loading="lazy" decoding="async" '
+            f'referrerpolicy="no-referrer" style="object-position:{pos}">')
+
+
 def photo_fig(ph, cls="", gid=None):
     g = GP.GALLERY.get(gid) if gid else None
     if g:  # a checked picture from the gallery, stored on the site, with its full credit
@@ -567,25 +610,48 @@ def photo_fig(ph, cls="", gid=None):
             f'<figcaption>{bi(cen, ccy)} · <a href="{COMMONS}File:{_q(f, safe="")}" target="_blank" rel="noopener">{bi("Photo: Wikimedia Commons", "Llun: Wikimedia Commons")}</a>{" · " + cr if cr else ""}</figcaption></figure>')
 
 
+def row_pic(pic, ill=None):
+    """The small picture at the side of a list row (timeline, trail stops, rulers, saints): a photo, or the row's drawing."""
+    if pic:
+        return f'<span class="row-pic" aria-hidden="true">{pic_img(pic)}</span>'
+    return f'<span class="row-pic ic" aria-hidden="true"><svg><use href="#i-{ill}"/></svg></span>' if ill else ""
+
+
 def event_li(ev, k=0, title_link=False):
+    sl = story_links("events", ev[5])
     links = ((f'<a class="src" href="laws.html">{bi("The Laws of Hywel Dda: the big page", "Cyfreithiau Hywel Dda: y dudalen fawr")} →</a>' if ev[5] == "The laws of Hywel Dda" else "")
-             + "".join(f'<a class="src" href="story-{x["id"]}.html">{bi("Read the long read", "Darllen yr erthygl")} →</a>' for x in story_links("events", ev[5]))
+             + "".join(f'<a class="src" href="story-{x["id"]}.html">{bi("Read the long read", "Darllen yr erthygl")} →</a>' for x in sl)
              + (f'<a class="src" href="place-{ev[10]}.html">{bi("The place", "Y lle")} →</a>' if ev[10] else ""))
     links = f'<a class="wl" href="{EP.href(ev)}">{bi(ev[5], ev[6])}</a>' + (f'<div class="links">{links}</div>' if links else "")
     title = f'<a href="{EP.href(ev)}">{bi(ev[5], ev[6])}</a>' if title_link else bi(ev[5], ev[6])
-    return (f'<li id="e{EVI[ev]}" class="wl-card{" key" if ev[9] else ""}" data-era="{ev[0]}"><time>{bi(year_label(ev), year_label(ev, True))}</time>'
-            f'<div><h3>{title}</h3><p>{bi(ev[7], ev[8])}</p>{links}</div></li>')
+    pic = row_pic(card_pic(EP.href(ev), place=ev[10], story=sl[0]["id"] if sl else None), ERA.get(ev[0], ERA["medieval"])["ill"])
+    return (f'<li id="e{EVI[ev]}" class="wl-card has-pic{" key" if ev[9] else ""}" data-era="{ev[0]}"><time>{bi(year_label(ev), year_label(ev, True))}</time>'
+            f'<div><h3>{title}</h3><p>{bi(ev[7], ev[8])}</p>{links}</div>{pic}</li>')
+
+
+def plaque_pic(p):
+    """The picture at the top of a person's card: their portrait (or the picture src/pictures.py gives their page),
+    else their age's picture, dimmed, behind their initials, so it is never taken for a likeness."""
+    pic = card_pic(f"person-{p[0]}.html")
+    if pic:
+        return f'<span class="pq-pic" aria-hidden="true">{pic_img(pic, small=False, w=600, h=400)}</span>'
+    return f'<span class="pq-pic is-age" aria-hidden="true">{pic_img(era_pic(p[1]))}<b>{e(_initials(p[3]))}</b></span>'
 
 
 def plaque(p, link=True):
-    return (f'<article class="plaque{" wl-card" if link else ""}" id="{p[0]}" data-era="{p[1]}"><span class="dates">{bi(p[2], date_cy(p[2]))}</span><h3>{bi(p[3], p[4])}</h3>'
+    return (f'<article class="plaque has-pic{" wl-card" if link else ""}" id="{p[0]}" data-era="{p[1]}">{plaque_pic(p)}<span class="dates">{bi(p[2], date_cy(p[2]))}</span><h3>{bi(p[3], p[4])}</h3>'
             f'<span class="epi">{bi(p[5], p[6])}</span><p>{bi(p[7], p[8])}</p>'
             + (f'<a class="wl" href="person-{p[0]}.html">{bi(p[3], p[4])}</a>' if link else "")
             + '</article>')
 
 
+def tile_pic(pic, ill):
+    """The picture of a tile (places, kingdoms, saints' regions): the photo, or its drawing where there is none."""
+    return f'<span class="tl-pic">{pic_img(pic)}</span>' if pic else f'<svg aria-hidden="true"><use href="#i-{ill}"/></svg>'
+
+
 def place_tile(p):
-    return (f'<a href="place-{p["id"]}.html" data-era="{p["era"]}"><svg aria-hidden="true"><use href="#i-{p["ill"]}"/></svg>'
+    return (f'<a href="place-{p["id"]}.html" data-era="{p["era"]}">{tile_pic(card_pic(f"place-{p['id']}.html"), p["ill"])}'
             f'<span><b>{bi(p["en"], p["cy"])}</b><span>{e(p["year"])}</span></span></a>')
 
 
@@ -1031,8 +1097,9 @@ def trail_stops(t):
 
 def _stop(era, date_en, date_cy, href, en, cy, text_en, text_cy, extra=""):
     full = f'<a class="wl" href="{href}">{bi(en, cy)}</a>'
-    return (f'<li class="wl-card" data-era="{era}"><time>{bi(date_en, date_cy)}</time><div><h3><a href="{href}">{bi(en, cy)}</a></h3>'
-            f'<p>{bi(text_en, text_cy)}</p>{full}{f'<div class="links">{extra}</div>' if extra else ""}</div></li>')
+    pic = row_pic(card_pic(href), ERA.get(era, ERA["medieval"])["ill"])
+    return (f'<li class="wl-card has-pic" data-era="{era}"><time>{bi(date_en, date_cy)}</time><div><h3><a href="{href}">{bi(en, cy)}</a></h3>'
+            f'<p>{bi(text_en, text_cy)}</p>{full}{f'<div class="links">{extra}</div>' if extra else ""}</div>{pic}</li>')
 
 
 def _reads(kind, key):
@@ -2695,8 +2762,9 @@ def ruler_li(x, chips="", rid=""):
         more = f'<a class="wl" href="{link}">{e(x["name"])}</a>'
     note = f'<p>{bi(x["en"], x["cy"])}</p>' if x["en"] else ""
     links = more + (f'<div class="links">{chips}</div>' if chips else "")
-    return (f'<li{f' id="{rid}"' if rid else ""} class="{" ".join(c for c in ("wl-card" if link else "", "key" if x["key"] else "") if c)}"><time>{bi(x["dates"], cy_dates(x["dates"]))}</time>'
-            f'<div><h3>{e(x["name"])}</h3>{note}{links}</div></li>')
+    pic = row_pic(card_pic(link)) if (link or "").startswith("person-") else ""  # only a ruler with a picture of their own
+    return (f'<li{f' id="{rid}"' if rid else ""} class="{" ".join(c for c in ("wl-card" if link else "", "key" if x["key"] else "", "has-pic" if pic else "") if c)}"><time>{bi(x["dates"], cy_dates(x["dates"]))}</time>'
+            f'<div><h3>{e(x["name"])}</h3>{note}{links}</div>{pic}</li>')
 
 
 def ruler_anchor(name, seen):
@@ -2727,7 +2795,7 @@ def ruler_list(items):
 
 def realm_tile(r):
     n = sum(1 for x in r["rulers"] if x["k"] == "r")
-    return (f'<a href="kings-{r["id"]}.html" data-era="{r["era"]}"><svg aria-hidden="true"><use href="#i-crown"/></svg>'
+    return (f'<a href="kings-{r["id"]}.html" data-era="{r["era"]}">{tile_pic(card_pic(f"kings-{r['id']}.html"), "crown")}'
             f'<span><b>{bi(r["en"], r["cy"])}</b><span>{bi(r["span"] + f" · {n} rulers", cy_dates(r["span"]) + f" · {n} o reolwyr")}</span></span></a>')
 
 
@@ -3192,8 +3260,9 @@ def saint_li(x, r=None, chips=""):
     places = "".join(ll_chip(n) for n in x["places"])
     places = f'<div class="ll-chips" aria-label="Places named after them">{places}</div>' if places else ""
     links = more + (f'<div class="links">{chips}</div>' if chips else "")
-    return (f'<li id="s-{x["id"]}" class="{" ".join(c for c in ("wl-card" if link else "", "key" if x["key"] else "") if c)}"><time>{bi(x["dates"], cy_dates(x["dates"]))}</time>'
-            f'<div><h3>{bi(x["en"], x["cy"])}</h3>{feast}<p>{bi(x["nEn"], x["nCy"])}</p>{places}{links}</div></li>')
+    pic = row_pic(card_pic(link)) if (link or "").startswith("person-") else ""  # only a saint with a picture of their own
+    return (f'<li id="s-{x["id"]}" class="{" ".join(c for c in ("wl-card" if link else "", "key" if x["key"] else "", "has-pic" if pic else "") if c)}"><time>{bi(x["dates"], cy_dates(x["dates"]))}</time>'
+            f'<div><h3>{bi(x["en"], x["cy"])}</h3>{feast}<p>{bi(x["nEn"], x["nCy"])}</p>{places}{links}</div>{pic}</li>')
 
 
 def saints_map(focus=None):
@@ -3330,7 +3399,7 @@ style += SAINTS_CSS
 
 def saint_region_tile(r):
     n = len(r["saints"])
-    return (f'<a href="saints-{r["id"]}.html" data-era="{r["era"]}" style="--c:{r["col"]}"><svg aria-hidden="true"><use href="#i-{"ship" if not r["realm"] else "cross"}"/></svg>'
+    return (f'<a href="saints-{r["id"]}.html" data-era="{r["era"]}" style="--c:{r["col"]}">{tile_pic(card_pic(f"saints-{r['id']}.html"), "ship" if not r["realm"] else "cross")}'
             f'<span><b>{bi(r["en"], r["cy"])}</b><span>{bi(f"{n} saints", f"{n} o saint")}</span></span></a>')
 
 
@@ -4421,6 +4490,8 @@ def main():
     for f in os.listdir(os.path.join(SRC, "static")):
         sp = os.path.join(SRC, "static", f)
         (shutil.copytree if os.path.isdir(sp) else shutil.copy)(sp, os.path.join(out, f))
+    if TH.OK:
+        print(f"Made {TH.write(out)} small card pictures")
     write(os.path.join(out, "welsh.js"), welsh_js())
     write(os.path.join(out, "onthisday.json"), json.dumps(otd_rows(), ensure_ascii=False, separators=(",", ":")))
     write(os.path.join(out, "feed.xml"), feed_xml(otd_rows()))
