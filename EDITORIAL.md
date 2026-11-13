@@ -69,7 +69,7 @@ Ifan asked on 12 November 2026 that readers can see who writes the site and how 
 
 ## Before publishing
 
-- New Welsh text should be read by a fluent speaker when one is available.
+- New Welsh text is run through Cysill and read line by line before it goes live (see SKILLS.md, "Checking the Welsh with Cysill").
 - Big changes are shown to the owner as pictures first, and published when they say "go live".
 
 ## Where this lives in the code
