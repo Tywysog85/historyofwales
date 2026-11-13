@@ -1090,7 +1090,7 @@
 
   /* ---------- Sources ---------- */
   function renderSources() {
-    $("#read-books").innerHTML = D.READING.map(function (r) { var b = "<b>" + esc(r.t) + "</b>"; return "<li>" + (r.u ? '<a href="' + r.u + '" target="_blank" rel="noopener">' + b + "</a>" : b) + "<span>" + esc(T(r.n, r.nCy)) + "</span></li>"; }).join("");
+    $("#read-books").innerHTML = D.READING.map(function (r) { var b = "<b>" + esc(r.t) + "</b>"; return "<li>" + (r.u ? '<a href="' + r.u + '" target="_blank" rel="noopener">' + b + "</a>" : b) + "<span>" + esc(T(r.n, r.nCy)) + "</span>" + (r.b ? '<span class="ref-buy">' + T("Buy:", "Prynu:") + ' <a href="' + r.b[0] + '" target="_blank" rel="noopener nofollow">Amazon</a> · <a href="' + r.b[1] + '" target="_blank" rel="noopener nofollow">AbeBooks</a></span>' : "") + "</li>"; }).join("");
     $("#read-online").innerHTML = D.ONLINE.map(function (r) { var u = T(r.u, r.uCy || r.u); return '<li><a href="' + u + '" target="_blank" rel="noopener"><b>' + esc(T(r.t, r.tCy)) + "</b></a><span>" + esc(u.replace(/^https:\/\/(www\.)?/, "").replace(/\/$/, "")) + "</span></li>"; }).join("");
   }
 

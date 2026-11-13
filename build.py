@@ -1175,7 +1175,7 @@ def refs_block(key, intro=None):
             _, who, title, det, nen, ncy = it[:6]
             url = (it[6] if len(it) > 6 else "") or BL.link(who, title)
             t = f'<a href="{e(url)}" target="_blank" rel="noopener"><cite>{e(title)}</cite> ↗</a>' if url else f"<cite>{e(title)}</cite>"
-            lis.append(f'<li><span class="ref-w">{e(who)}</span>, {t} <span class="ref-d">({e(det)})</span><span class="ref-n">{bi(nen, ncy)}</span></li>')
+            lis.append(f'<li><span class="ref-w">{e(who)}</span>, {t} {refd(det)}<span class="ref-n">{bi(nen, ncy)}</span></li>')
         if kind == "w":
             for pid in r.get("dwb", []):
                 rec = SOURCE_LINKS.get("person:" + pid, {})
@@ -1279,6 +1279,20 @@ def bookshelf_old_writers():
             f'<p class="l-links">{btns}</p></div>')
 
 
+def buyl(who, title, det=""):
+    """Small 'Buy: Amazon · AbeBooks' links after a book (src/booklinks.py buy())."""
+    b = BL.buy(who, title, det)
+    if not b:
+        return ""
+    return (f'<span class="ref-buy">{bi("Buy:", "Prynu:")} <a href="{e(b[0])}" target="_blank" rel="noopener nofollow">Amazon</a>'
+            f' · <a href="{e(b[1])}" target="_blank" rel="noopener nofollow">AbeBooks</a></span>')
+
+
+def refd(det):
+    """The (details) after a work's title; nothing when a book has no details."""
+    return f'<span class="ref-d">({e(det)})</span>' if det else ""
+
+
 def bookshelf_page():
     import fnmatch
     lists = {}
@@ -1323,7 +1337,7 @@ def bookshelf_page():
         on = where.get((who, title), [])
         more = (f'<span class="ref-on">{bi("On this site:", "Ar y wefan hon:")} ' + ", ".join(f'<a href="{h}">{bi(en, cy)}</a>' for h, en, cy in on[:4])
                 + (f' {bi(f"and {len(on) - 4} more", f"a {len(on) - 4} arall")}' if len(on) > 4 else "") + "</span>") if on else ""
-        return f'<li id="{bid(it)}"><span class="ref-w">{e(who)}</span>, {t} <span class="ref-d">({e(det)})</span><span class="ref-n">{bi(nen, ncy)}</span>{more}</li>'
+        return f'<li id="{bid(it)}"><span class="ref-w">{e(who)}</span>, {t} {refd(det)}<span class="ref-n">{bi(nen, ncy)}</span>{buyl(who, title, det)}{more}</li>'
 
     def slug(x, n):
         return re.sub(r"[^a-z0-9]+", "-", x.lower())[:n].strip("-")
@@ -3378,10 +3392,18 @@ def ssr_chart():
     return s + "</svg>"
 
 
+def buyr(r):
+    """The home Further reading row's buy links (r["b"] from data.py); app.js draws the same."""
+    if not r.get("b"):
+        return ""
+    return (f'<span class="ref-buy">{bi("Buy:", "Prynu:")} <a href="{e(r["b"][0])}" target="_blank" rel="noopener nofollow">Amazon</a>'
+            f' · <a href="{e(r["b"][1])}" target="_blank" rel="noopener nofollow">AbeBooks</a></span>')
+
+
 def ssr_books():
     def title(r):
         return f'<a href="{e(r["u"])}" target="_blank" rel="noopener"><b>{e(r["t"])}</b></a>' if r.get("u") else f"<b>{e(r['t'])}</b>"
-    return "".join(f"<li>{title(r)}<span>{bi(r['n'], r['nCy'])}</span></li>" for r in D.READING)
+    return "".join(f"<li>{title(r)}<span>{bi(r['n'], r['nCy'])}</span>{buyr(r)}</li>" for r in D.READING)
 
 
 def ssr_online():
