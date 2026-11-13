@@ -1,4 +1,4 @@
-"""Teacher packs: one printable pack for each of the nine ages, pack-<age>.html, for the Curriculum for Wales.
+"""Teacher packs: one printable pack for each of the twelve ages, pack-<age>.html, for the Curriculum for Wales.
 
 build.py calls setup(globals()) once and pages() for the HTML. Each pack mixes what is written here (the big idea,
 enquiry questions, key words, activities by progression step, the source to study) with what the site already holds
@@ -175,6 +175,9 @@ SOURCE_QS = [("Who made this source, and when?", "Pwy wnaeth y ffynhonnell hon, 
              ("What does it tell us about Wales at the time?", "Beth mae’n ei ddweud wrthym am Gymru ar y pryd?"),
              ("What can it not tell us? What other sources would help?", "Beth na all ei ddweud wrthym? Pa ffynonellau eraill fyddai’n help?")]
 
+import ages12 as _A12  # the twelve ages: new packs and the packs that changed shape (src/ages12.py)
+PACKS.update(_A12.PACKS)
+
 
 def setup(build_globals):
     g.update(build_globals)
@@ -231,7 +234,7 @@ def pack_page(i, era):
 
     nxt = D.ERAS[(i + 1) % len(D.ERAS)]
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="teachers.html">{bi("For teachers", "I athrawon")}</a>', era["ill"],
-                 f'Teacher pack {i + 1} of 9 · {era["spanEn"]}', f'Pecyn athrawon {i + 1} o 9 · {era["spanCy"]}', era["en"], era["cy"],
+                 f'Teacher pack {i + 1} of {len(D.ERAS)} · {era["spanEn"]}', f'Pecyn athrawon {i + 1} o {len(D.ERAS)} · {era["spanCy"]}', era["en"], era["cy"],
                  "A printable pack for the Curriculum for Wales: questions, key words, a timeline, people, places, a source to study, activities for each progression step and a quiz.",
                  "Pecyn i’w argraffu ar gyfer y Cwricwlwm i Gymru: cwestiynau, geiriau allweddol, llinell amser, pobl, lleoedd, ffynhonnell i’w hastudio, gweithgareddau ar gyfer pob cam cynnydd a chwis.",
                  art=ERA_ART[eid])

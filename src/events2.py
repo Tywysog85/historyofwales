@@ -2,7 +2,8 @@
 
 Same shape as EVENTS in data.py:
     (age, year, circa, endYear, day "MM-DD" or "", titleEn, titleCy, bodyEn, bodyCy, key, placeId, wikipediaTitle)
-age is one of the nine: ancient, roman, saints, kings, medieval, tudor, industrial, modern, today.
+age is one of the twelve: ancient, britons, roman, saints, kings, medieval, glyndwr, tudor, revival, industrial, modern, today
+(src/ages12.py moves anything dated into the right age by its year).
 Only put in a date that can be checked, and a day only when it is certain. Follow EDITORIAL.md: proud, nothing negative
 about the people of Welsh history, and King Arthur as Welsh tradition holds him.
 """

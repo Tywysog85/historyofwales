@@ -24,11 +24,14 @@ _LOCAL = json.load(open(os.path.join(_HERE, "photo_files.json"), encoding="utf-8
 # One picture for each age: the age's own page, its teacher pack, and any page in that age without its own picture.
 ERA = dict(
     ancient="g:place-pentreifan",
+    britons="g:place-castellhenllys",
     roman="g:place-caerleon",
     saints="g:place-stdavids",
     kings="g:place-eliseg",
-    medieval="g:place-harlech",
+    medieval="g:place-dolbadarn",
+    glyndwr="g:place-harlech",
     tudor="g:place-rhaglan",
+    revival="g:place-ybala",
     industrial="g:place-pontcysyllte",
     modern="g:place-celyn",
     today="g:place-senedd",
@@ -294,6 +297,9 @@ PAGE = {
     "person-ceridwen.html": "g:land-llyn-tegid",
     "person-elis-gruffydd.html": "g:place-library",
 }
+
+import ages12 as _A12  # the places of the Age of Revival (src/ages12.py)
+PAGE.update(_A12.PICTURES)
 
 # More pictures, found on Commons for this (tools/commons_research.py) and kept on the site by tools/fetch_photos.py.
 # Commons file -> (author, licence, licence link, what it shows EN, CY). Use them as "c:<Commons file>".

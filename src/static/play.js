@@ -11,7 +11,7 @@
   function shuffle(a, rnd) { a = a.slice(); rnd = rnd || Math.random; for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(rnd() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
   function seeded(seed) { return function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
   function copy(btn, txt) { var done = function () { var o = btn.textContent; btn.textContent = T("Copied", "Wedi copïo"); setTimeout(function () { btn.textContent = o; }, 1600); }; try { navigator.clipboard.writeText(txt).then(done, function () {}); } catch (e) {} }
-  var ERA_NAMES = { ancient: ["Ancient Wales (before AD 48)", "Cymru Hynafol (cyn 48 OC)"], roman: ["Roman Wales (48–410)", "Cymru Rufeinig (48–410)"], tudor: ["Tudor and Stuart Wales (1485–1750)", "Cymru’r Tuduriaid a’r Stiwartiaid (1485–1750)"], today: ["Wales Today (1997 to today)", "Cymru Heddiw (1997 hyd heddiw)"], saints: ["The Age of Saints (410–800)", "Oes y Seintiau (410–800)"], kings: ["The Age of Kings (800–1100)", "Oes y Brenhinoedd (800–1100)"], medieval: ["The Age of Princes (1100–1485)", "Oes y Tywysogion (1100–1485)"], industrial: ["Industrial Wales (1750–1914)", "Y Gymru Ddiwydiannol (1750–1914)"], modern: ["Twentieth-Century Wales (1914–1997)", "Cymru’r Ugeinfed Ganrif (1914–1997)"] };
+  var ERA_NAMES = P.ERAN || {};  /* the age names, from build.py (the twelve ages, src/ages12.py) */
   var render;
 
   /* ================= Daily challenge ================= */
@@ -40,7 +40,7 @@
         var gr = grade(g);
         rows += '<li style="--k:' + gr[0] + '"><b>' + g + "</b><span>" + gr[2] + (g === ANS ? "" : " · " + (g < ANS ? T("it was later", "roedd yn hwyrach") + " ↑" : T("it was earlier", "roedd yn gynharach") + " ↓")) + "</span><i>" + gr[1] + "</i></li>";
       }
-      var hint = st.g.length >= 3 && !st.done ? '<p class="g-note">' + T("Clue: it happened in ", "Cliw: digwyddodd yn ") + "<b>" + T(ERA_NAMES[ev[4]][0], ERA_NAMES[ev[4]][1]) + "</b>.</p>" : "";
+      var hint = st.g.length >= 3 && !st.done ? '<p class="g-note">' + T("Clue: it happened in ", "Cliw: digwyddodd yn ") + "<b>" + T((ERA_NAMES[ev[4]] || ["", ""])[0], (ERA_NAMES[ev[4]] || ["", ""])[1]) + "</b>.</p>" : "";
       var h = '<div class="q-top"><span>' + T("Challenge", "Her") + " #" + (dayN + 1) + "</span><span>" + T("Guess", "Cynnig") + " " + Math.min(st.g.length + (st.done ? 0 : 1), MAX) + " / " + MAX + "</span></div>" +
         "<h2>" + blank(T(ev[2], ev[3])) + '</h2><p class="g-ctx">' + blank(T(ev[5], ev[6])) + "</p>";
       if (!st.done) h += '<form class="g-form" id="d-form" autocomplete="off"><label for="d-in" class="sr-only">' + T("Year", "Blwyddyn") + '</label><input class="g-in" id="d-in" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="' + T("Year", "Blwyddyn") + '" required><button class="btn solid" type="submit">' + T("Guess", "Cynnig") + "</button></form>" + hint;

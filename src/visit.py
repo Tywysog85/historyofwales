@@ -231,6 +231,10 @@ VISIT = {
                 note=("Open to visitors, with security checks at the door.", "Ar agor i ymwelwyr, gyda gwiriadau diogelwch wrth y drws.")),
 }
 
+import ages12 as _A12  # the places of the Age of Revival (src/ages12.py)
+for _k, (_who, _url, _pc, _entry, _note) in _A12.VISIT.items():
+    VISIT[_k] = V(_who, _url, _pc, _entry, note=_note)
+
 
 CSS = """
 .visit-box{margin:2rem 0 0;padding:1.2rem 1.3rem 1rem;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:14px;background:var(--card)}
