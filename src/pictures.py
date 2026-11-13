@@ -613,3 +613,9 @@ def small_fig(ref, cls="w10-pic"):
     return (f'<figure class="{cls}"><img src="{p["small"]}" width="{p["w"]}" height="{p["h"]}" alt="{_esc(p["en"])}" loading="lazy" decoding="async" '
             f'style="object-position:{p["pos"]}"><figcaption>{_bi(_esc(p["en"]), _esc(p["cy"]))} · '
             f'<a href="{COMMONS}File:{_q(p["file"].replace(" ", "_"), safe="")}" target="_blank" rel="noopener">{who + ", " if who else ""}Wikimedia Commons</a></figcaption></figure>')
+
+# Yma o Hyd: how the Welsh language came back (src/welshrevival.py)
+EXTRA["Dafydd Iwan, Caerfyrddin, 2023, Cymdeithas yr Iaith.jpg"] = ("Cwmcafit", "CC BY-SA 4.0", _BYSA + "4.0",
+    "Dafydd Iwan sings Yma o Hyd to the Cymdeithas yr Iaith census rally in Carmarthen, January 2023",
+    "Dafydd Iwan yn canu Yma o Hyd i rali cyfrifiad Cymdeithas yr Iaith yng Nghaerfyrddin, Ionawr 2023")
+PAGE["story-welsh-revival.html"] = "c:Dafydd Iwan, Caerfyrddin, 2023, Cymdeithas yr Iaith.jpg@50% 40%"

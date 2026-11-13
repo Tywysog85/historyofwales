@@ -8,7 +8,7 @@ Environment:
   SITE_URL     public address of the site, ending in /   (default: the GitHub Pages address)
   GOATCOUNTER  your GoatCounter code, e.g. "hanescymru", to switch on visitor statistics
 """
-import datetime, html, json, os, re, sys, shutil
+import datetime, html, json, os, re, sys, shutil, zlib
 from xml.sax.saxutils import escape as xesc
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -177,6 +177,12 @@ COL = dict(ancient="#d39a62", britons="#b5c46a", roman="#e58fb4", saints="#b9a0e
 ERA_ART = dict(ancient="dolmen", britons="fort", roman="arches", saints="cross", kings="ship", medieval="castle", glyndwr="sword", tudor="book", revival="gorsedd", industrial="pit", modern="terrace", today="senedd")
 TRAIL_ART = dict(women="torch", sea="ship", chapel="book", iron="pit")
 EVENT_BY_TITLE = {ev[5]: ev for ev in D.EVENTS}
+
+
+# The logo. Gloock sets the f of "of" almost against the W of "Wales" and leaves a wide gap after "History", so each word is
+# nudged to make the two gaps look the same (measured on screen, ink to ink; Ifan, 13 Nov 2026). Hanes Cymru needs nothing.
+BRAND = ('<span class="l-en" lang="en">History <span class="b-of">of</span> <span class="b-wales">Wales</span></span>'
+         '<span class="l-cy" lang="cy">Hanes Cymru</span>')
 
 
 def bi(en, cy, tag="span", cls=""):
@@ -418,7 +424,7 @@ def nav(active="", skip="#main", home=False):
     big = li("index.html", "Home", "Hafan", 1) + "".join(li(h, a, b, i + 2) for i, (h, a, b) in enumerate(NAV_MAIN))
     more = "".join(f'<div class="menu-group{" mg-ages" if links and len(links[0]) == 5 else ""}"><p class="eyebrow">{bi(ge, gc)}</p><ul class="menu-more">' + "".join(li_more(*x) for x in links) + "</ul></div>" for ge, gc, links in NAV_GROUPS)
     return (f'<a class="skip" href="{skip}">{bi("Skip to content", "Neidio i’r cynnwys")}</a><div class="progress" aria-hidden="true"><i id="progress"></i></div>'
-            f'<nav class="nav" aria-label="Main"><div class="wrap">' + f'<a class="brand" href="index.html">{bi("History of Wales", "Hanes Cymru")}</a>' +
+            f'<nav class="nav" aria-label="Main"><div class="wrap">' + f'<a class="brand" href="index.html">{BRAND}</a>' +
             f'<ul class="nav-inline">{main}</ul>' +
             f'<a class="journey-chip" href="journey.html" id="journey-chip" data-total="{JOURNEY_TOTAL}" title="Your journey: pages you have read / Eich taith: y tudalennau a ddarllenoch" aria-label="0 pages read: your journey / Eich taith"><span class="jc-ring"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" class="tr"/><circle cx="18" cy="18" r="15" class="fg" id="journey-ring" pathLength="100" stroke-dasharray="0 100"/></svg><b id="journey-n">0</b></span><span class="jc-l" aria-hidden="true">{bi("read", "wedi’u darllen")}</span></a>'
             f'<button type="button" class="search-btn" data-search aria-label="Search / Chwilio">{SEARCH_SVG}</button>'
@@ -653,6 +659,14 @@ def row_pic(pic, ill=None):
     return f'<span class="row-pic ic" aria-hidden="true"><svg><use href="#i-{ill}"/></svg></span>' if ill else ""
 
 
+def row_bg(path):
+    """A darkened picture behind a card or row that has no picture of its own (src/panels.py THEMES). An <img> rather
+    than a CSS background so the browser only fetches it when the row comes near the screen."""
+    if not path:
+        return ""
+    return f'<span class="row-bg" aria-hidden="true"><img src="{e(TH.thumb(path))}" alt="" loading="lazy" decoding="async"></span>'
+
+
 def event_pic(ev, sl=None):
     """An event's picture, the same as its own page shows: its place, else the first of its people with a portrait,
     else the long read that tells it."""
@@ -673,8 +687,10 @@ def event_li(ev, k=0, title_link=False):
              + (f'<a class="src" href="place-{ev[10]}.html">{bi("The place", "Y lle")} →</a>' if ev[10] else ""))
     links = f'<a class="wl" href="{EP.href(ev)}">{bi(ev[5], ev[6])}</a>' + (f'<div class="links">{links}</div>' if links else "")
     title = f'<a href="{EP.href(ev)}">{bi(ev[5], ev[6])}</a>' if title_link else bi(ev[5], ev[6])
-    pic = row_pic(event_pic(ev, sl), ERA.get(ev[0], ERA["medieval"])["ill"])
-    return (f'<li id="e{EVI[ev]}" class="wl-card has-pic{" key" if ev[9] else ""}" data-era="{ev[0]}"><time>{bi(year_label(ev), year_label(ev, True))}</time>'
+    own = event_pic(ev, sl)
+    pic = row_pic(own, ERA.get(ev[0], ERA["medieval"])["ill"])
+    bg = "" if own else row_bg(theme_bg(f"{ev[5]} | {ev[7]}", zlib.crc32(ev[5].encode())))  # no picture of its own: one behind it
+    return (f'<li id="e{EVI[ev]}" class="wl-card has-pic{" has-bg" if bg else ""}{" key" if ev[9] else ""}" data-era="{ev[0]}">{bg}<time>{bi(year_label(ev), year_label(ev, True))}</time>'
             f'<div><h3>{title}</h3><p>{bi(ev[7], ev[8])}</p>{links}</div>{pic}</li>')
 
 
@@ -684,7 +700,9 @@ def plaque_pic(p):
     pic = card_pic(f"person-{p[0]}.html")
     if pic:
         return f'<span class="pq-pic" aria-hidden="true">{pic_img(pic, small=False, w=600, h=400)}</span>'
-    return f'<span class="pq-pic is-age" aria-hidden="true">{pic_img(era_pic(p[1]))}<b>{e(_initials(p[3]))}</b></span>'
+    ref = PN.match(f"{p[5]} | {p[7]}")  # what they are known for (a poet, a footballer, a saint ...), else their age's picture
+    bg = (theme_bg(f"{p[5]} | {p[7]}"), "50% 40%") if ref else era_pic(p[1])
+    return f'<span class="pq-pic is-age" aria-hidden="true">{pic_img(bg)}<b>{e(_initials(p[3]))}</b></span>'
 
 
 def plaque(p, link=True):
@@ -1451,7 +1469,7 @@ SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes
     ("tudor", "From the Tudors to the Methodists", "O’r Tuduriaid i’r Methodistiaid", ["era-tudor", "era-revival"]),
     ("industry", "Iron, coal, slate and the sea", "Haearn, glo, llechi a’r môr", ["era-industrial", "industry", "coal", "aberfan", "protest", "topic-industry", "trail-coal", "trail-sea", "firsts", "topic-science"]),
     ("modern", "Modern Wales and the Welsh abroad", "Cymru fodern a’r Cymry ar wasgar", ["era-modern", "era-today", "revival", "mac", "fwa", "world", "madog", "tryweryn", "epynt", "topic-abroad", "topic-sport"]),
-    ("lang", "The Welsh language, names and places", "Yr iaith Gymraeg, enwau a lleoedd", ["language", "welsh-not", "topic-language", "welsh", "names", "towns", "maps", "sites"]),
+    ("lang", "The Welsh language, names and places", "Yr iaith Gymraeg, enwau a lleoedd", ["language", "welsh-not", "welsh-revival", "topic-language", "welsh", "names", "towns", "maps", "sites"]),
     ("life", "Women and everyday life", "Menywod a bywyd bob dydd", ["topic-women", "trail-women", "topic-countryside"]),
 ]
 
@@ -1641,6 +1659,8 @@ def story_page(x, i):
     after = ""  # a section between the article and the pictures
     if x["id"] == "hen-ogledd":  # the map of the Old North goes at '!! map' in the text, its list of places after the article
         x["figs"]["map"], after = north_map()
+    if x["id"] == "welsh-revival":  # the census chart goes at '!! chart' in the text (revival_chart())
+        x["figs"]["chart"] = revival_chart()
     others = [y for y in F.STORIES if y["id"] != x["id"]][:3]
     era = ERA[x["era"]]
     meta = f'<p class="byline">{AB.byline_top()}<span>{x["mins"]} {bi("minute read", "munud o ddarllen")}</span><a href="era-{x["era"]}.html">{bi(era["en"], era["cy"])}</a><button type="button" class="copy" data-copy="story-{x["id"]}.html">{bi("Copy link", "Copïo’r ddolen")}</button></p>'
@@ -2541,7 +2561,25 @@ def otd_rows():
             link = saint_href(sid)
             rows.append([f'{x["feast"][1]:02d}-{x["feast"][0]:02d}', None, "feast", x["en"], x["cy"], first(x["nEn"]), first(x["nCy"]), link, "saints", otd_pic(link, "saints", kind="feast")])
     rows.sort(key=lambda r: (r[0], OTD_ORDER[r[2]], r[1] if r[1] is not None else -10 ** 6))
+    for r in rows:  # an 11th field: the darkened picture behind a row with no picture of its own (src/panels.py THEMES)
+        r.append(otd_bg(r))
     return rows
+
+
+def theme_bg(text, seed=0):
+    """A fitting background picture for a card with no picture of its own (src/panels.py THEMES), as a site path."""
+    ref = PN.theme(text, seed)
+    if ref.startswith("place:"):
+        pic = card_pic(f"place-{ref[6:]}.html")
+        return pic[0] if pic and not pic[0].startswith("http") else PN.url(PN.LAND[seed % len(PN.LAND)])
+    return PN.url(ref)
+
+
+def otd_bg(r):
+    """The background of an On this day row on the home page: "" when the row's own picture serves (app.js uses it)."""
+    if not r[9].startswith("i:") and not r[9].startswith("http"):
+        return ""
+    return theme_bg(f"{r[3]} | {r[5]}", zlib.crc32(r[3].encode()))
 
 
 def otd_item(r):
@@ -3679,7 +3717,8 @@ WEEKDAYS = [("Mon", "Llun"), ("Tue", "Maw"), ("Wed", "Mer"), ("Thu", "Iau"), ("F
 
 def otd_home_row(r, show_date):
     """One row of the home page On this day panel: a picture, when, the title and one line. The whole row is a link (app.js draws the same)."""
-    md, y, k, te, tc, le, lc, link, era, pic = r
+    md, y, k, te, tc, le, lc, link, era, pic = r[:10]
+    bg = r[10] if len(r) > 10 and r[10] else pic
     tag = OTD_TAG.get(k)
     m = int(md[:2]) - 1
     bits = []
@@ -3690,7 +3729,8 @@ def otd_home_row(r, show_date):
     if tag:
         bits.append(f'<span class="k">{bi(*tag)}</span>')
     href = link or f"onthisday.html#d-{md}"
-    return (f'<li class="otd-row wl-card" data-era="{era}">{otd_pic_html(pic)}'
+    style = f' style="--pbg:url(\'{e(bg)}\')"' if bg and not bg.startswith("i:") else ""
+    return (f'<li class="otd-row wl-card pbg" data-era="{era}"{style}>{otd_pic_html(pic)}'
             f'<div class="otd-txt"><p class="otd-meta">{"".join(bits)}</p><h3>{bi(te, tc)}</h3><p>{bi(le, lc)}</p></div>'
             f'<a class="wl" href="{e(href)}">{bi(te, tc)}</a></li>')
 
@@ -3764,6 +3804,38 @@ def ssr_chart():
         if end or c[0] == 2001:
             s += f'<text class="val" x="{n(X(c[0]) + (8 if i == 0 else -6))}" y="{n(Y(c[1]) - 10)}" text-anchor="{"start" if i == 0 else "end"}">{c[1]}%</text>'
     return s + "</svg>"
+
+
+def revival_chart():
+    """The census chart again, larger, for the long read on the revival (src/welshrevival.py, '!! chart'): the same figures
+    as the home page chart (D.CENSUS), with three moments of the fight back marked on the line."""
+    C, w, h, l, r, t, b, x0, x1, ymax = D.CENSUS, 640, 330, 36, 18, 22, 30, 1891, 2021, 60
+    X = lambda y: l + (y - x0) / (x1 - x0) * (w - l - r)
+    Y = lambda v: t + (1 - v / ymax) * (h - t - b)
+    n = lambda v: f"{v:.1f}".rstrip("0").rstrip(".")
+    s = (f'<svg class="chart rv-chart" viewBox="0 0 {w} {h}" width="100%" role="img" aria-label="Welsh speakers by census, 1891 to 2021: from 54.4% to a low of 18.7% in 1991, up to 20.8% in 2001, 17.8% in 2021 / Siaradwyr Cymraeg yn ôl y cyfrifiad, 1891 i 2021">'
+         '<defs><linearGradient id="gAreaRv" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2453d" stop-opacity=".35"/><stop offset="1" stop-color="#e2453d" stop-opacity="0"/></linearGradient></defs>')
+    for v in (0, 20, 40, 60):
+        s += f'<line class="grid" x1="{l}" x2="{w - r}" y1="{n(Y(v))}" y2="{n(Y(v))}"/><text x="{l - 6}" y="{n(Y(v) + 3.5)}" text-anchor="end">{v}%</text>'
+    for yv in (1891, 1921, 1951, 1981, 2021):
+        s += f'<text x="{n(X(yv))}" y="{h - 8}" text-anchor="middle">{yv}</text>'
+    marks = [(1962, "1", "Tynged yr Iaith", "Tynged yr Iaith"), (1982, "2", "S4C", "S4C"), (2001, "3", "First rise for a century", "Y cynnydd cyntaf ers canrif")]
+    for yr, k, en, cy in marks:
+        s += (f'<line class="rv-mark" x1="{n(X(yr))}" x2="{n(X(yr))}" y1="{n(Y(52))}" y2="{n(Y(0))}"/>'
+              f'<circle class="rv-num" cx="{n(X(yr))}" cy="{n(Y(55))}" r="9"/><text class="rv-k" x="{n(X(yr))}" y="{n(Y(55) + 3.8)}" text-anchor="middle">{k}</text>')
+    pts = [f"{X(c[0]):.1f},{Y(c[1]):.1f}" for c in C]
+    s += f'<path class="area" style="fill:url(#gAreaRv)" d="M{" L".join(pts)} L{n(X(2021))},{n(Y(0))} L{n(X(1891))},{n(Y(0))}Z"/><polyline class="ln" points="{" ".join(pts)}"/>'
+    for i, c in enumerate(C):
+        end = i == 0 or i == len(C) - 1
+        s += f'<circle class="{"end" if end or c[0] == 2001 else ""}" cx="{n(X(c[0]))}" cy="{n(Y(c[1]))}" r="{4.5 if end or c[0] == 2001 else 3}"><title>{c[0]}: {c[1]}%</title></circle>'
+        if end or c[0] in (1961, 1991, 2001):
+            anchor = "start" if i == 0 else "end" if end else "middle"
+            dx = 8 if i == 0 else -6 if end else 0
+            y = Y(c[1]) + 24 if c[0] == 1991 else Y(c[1]) - 10  # 1991 under the line, so it never meets 2001
+            s += f'<text class="val" x="{n(X(c[0]) + dx)}" y="{n(y)}" text-anchor="{anchor}">{c[1]}%</text>'
+    key = "".join(f'<li><b>{k}</b> {bi(f"{en}, {yr}", f"{cy}, {yr}")}</li>' for yr, k, en, cy in marks)
+    return (f'<figure class="rv-chart-fig"><div class="chart-wrap">{s}</svg></div>'
+            f'<figcaption><ol class="rv-key">{key}</ol>{bi("Share of people aged three and over who could speak Welsh, at each census from 1891 to 2021. No census was taken in 1941. Figures from the census (Office for National Statistics).", "Canran y bobl tair oed a hŷn a allai siarad Cymraeg, ym mhob cyfrifiad o 1891 hyd 2021. Ni chynhaliwyd cyfrifiad yn 1941. Ffigurau’r cyfrifiad (y Swyddfa Ystadegau Gwladol).")}</figcaption></figure>')
 
 
 def buyr(r):

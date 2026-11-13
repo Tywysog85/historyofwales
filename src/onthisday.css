@@ -100,3 +100,8 @@ html.cy .otd-day.is-today h3::after { content: "Heddiw" }
 /* a picture on every row (Ifan, 13 November 2026): the same picture as the home page panel, small copy */
 .otd-list li.has-pic { grid-template-columns: 4.4rem minmax(0,1fr) 3.6rem; align-items: start }
 .otd-list .otd-rp { width: 3.6rem; height: 3.6rem; border-radius: 10px }
+/* rows with a picture behind them (src/panels.py): the drawing tile sits on the picture like frosted glass */
+.otd-row.pbg { border-color: rgba(255,255,255,.14) }
+.otd-row.pbg .otd-ic { background: rgba(12,15,22,.42); box-shadow: inset 0 0 0 1px rgba(255,255,255,.18); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px) }
+.otd-row.pbg .otd-txt p:last-child { color: rgba(255,255,255,.86) }
+.otd-year.pbg, html body .otd-year { border-color: rgba(232,198,90,.45) }

@@ -24,7 +24,9 @@ html.js .rv.in, html.rv-all .rv { opacity: 1; transform: none }
 .progress i { display: block; height: 100%; width: 100%; transform: scaleX(0); transform-origin: left; background: linear-gradient(90deg, var(--red), var(--gold)) }
 .nav { z-index: 30; background: rgba(11,14,22,.72); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4) }
 .nav .wrap { flex-wrap: nowrap; gap: .6rem; padding-block: .6rem }
-.brand { white-space: nowrap; font-size: 1.35rem; word-spacing: .2em } /* Gloock sets the f of "of" almost against the W of "Wales"; a little more space between words (Ifan, 13 Nov 2026) */
+.brand { white-space: nowrap; font-size: 1.35rem }
+/* "History of Wales" in the logo: the same visible gap between each word (BRAND in build.py) */
+.brand .b-of { margin-left: .05em } .brand .b-wales { margin-left: .2em }
 .nav .nav-inline { display: flex; flex-wrap: nowrap; gap: 0 1.25rem; margin-right: .6rem; width: auto; order: 0 }
 .nav .nav-inline a { position: relative; padding: .4rem 0; white-space: nowrap }
 .nav .nav-inline a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--red); transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease) }
@@ -1018,3 +1020,41 @@ a:hover > .card-ban img, .wl-card:hover > .card-ban img { transform: scale(1.04)
 .news-item.has-pic .n-s { grid-column: 3 }
 @media (max-width: 520px) { .news-item.has-pic a, .news-list.big .news-item.has-pic a { grid-template-columns: 3.2rem minmax(0, 1fr) } .news-item.has-pic .n-s { grid-column: 2 } .news-list.big .n-pic { width: 3.2rem; height: 3.2rem } }
 @media print { .card-ban, .n-pic { display: none !important } }
+
+/* The census chart card on the home page is one link to the long read on the revival (story-welsh-revival.html).
+   On phones the whole chart fits the card (no sideways scroll under the link), with larger labels. */
+.lang-chart-card { transition: box-shadow .25s }
+.lang-chart-card:hover { box-shadow: 0 0 0 1px color-mix(in srgb, var(--dragon) 55%, transparent) }
+.lang-chart-card .chart { overflow: visible }
+@media (max-width: 640px) {
+  .lang-chart-card .chart-wrap { overflow: visible }
+  .lang-chart-card .chart { min-width: 0 !important }
+  .lang-chart-card .chart text { font-size: 15px }
+  .lang-chart-card .chart .val { font-size: 17px }
+}
+/* The same chart, larger, in the long read (revival_chart() in build.py) */
+.rv-chart-fig { margin: 2rem 0; padding: 1.25rem 1.25rem 1rem; background: var(--slate); border: 1px solid var(--line); border-radius: 14px }
+.rv-chart { overflow: visible; display: block }
+.rv-chart .val { paint-order: stroke; stroke: var(--slate); stroke-width: 5px; stroke-linejoin: round }
+.rv-chart .rv-mark { stroke: var(--gold, #e8b33a); stroke-width: 1.5; stroke-dasharray: 4 4; opacity: .7 }
+.rv-chart .rv-num { fill: var(--gold, #e8b33a); stroke: none }
+.rv-chart text.rv-k { fill: var(--night); font-weight: 700; font-size: 11px }
+.rv-chart-fig figcaption { color: var(--muted); font-size: .9rem; margin-top: .75rem }
+.rv-key { list-style: none; padding: 0; margin: 0 0 .5rem; display: flex; flex-wrap: wrap; gap: .35rem 1.25rem; color: var(--ink) }
+.rv-key b { display: inline-grid; place-items: center; width: 1.4em; height: 1.4em; border-radius: 50%; background: var(--gold, #e8b33a); color: var(--night); font-size: .8em; margin-right: .3em }
+@media (max-width: 640px) {
+  .rv-chart-fig { padding: 1rem .75rem .75rem }
+  .rv-chart text { font-size: 18px }
+  .rv-chart .val { font-size: 19px }
+  .rv-chart text.rv-k { font-size: 17px }
+  .rv-chart .rv-num { r: 13px }
+}
+
+/* A darkened picture behind a timeline row that has no picture of its own (build.py row_bg, src/panels.py THEMES) */
+.era-events li.has-bg { position: relative; isolation: isolate; padding: 1.1rem .95rem; margin: .45rem 0; border: 1px solid rgba(255,255,255,.12); border-radius: 16px; text-shadow: 0 1px 3px rgba(0,0,0,.65) }
+.row-bg { position: absolute; inset: 0; z-index: -1; border-radius: inherit; overflow: hidden; pointer-events: none; background: #141925 }
+.row-bg img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 35% }
+.row-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(12,15,22,.9) 0, rgba(12,15,22,.8) 55%, rgba(12,15,22,.62) 100%) }
+.era-events li.has-bg p { color: rgba(255,255,255,.86) }
+.era-events li.has-bg .row-pic.ic { background: rgba(12,15,22,.42); border-color: rgba(255,255,255,.18); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px) }
+@media print { .row-bg { display: none !important } .era-events li.has-bg { text-shadow: none } }
