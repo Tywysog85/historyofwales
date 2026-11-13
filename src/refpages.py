@@ -303,33 +303,22 @@ def town_card(r, have):
 
 
 DECODER_JS = r"""<script>(function(){var box=document.getElementById("tw-in"),out=document.getElementById("tw-out");if(!box)return;
-var EL=JSON.parse(document.getElementById("tw-el").textContent),TW=JSON.parse(document.getElementById("tw-towns").textContent);
 var cy=function(){return document.documentElement.classList.contains("cy")};
-var norm=function(s){return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[’'.]/g,"")};
 var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
-var keys=Object.keys(EL).sort(function(a,b){return b.length-a.length});
-function split(word){var parts=[],i=0,rest="";while(i<word.length){var hit=null;for(var k=0;k<keys.length;k++){if(keys[k].length>1&&word.substr(i,keys[k].length)===keys[k]){hit=keys[k];break}}
-if(hit){if(rest){parts.push([rest,null]);rest=""}parts.push([hit,EL[hit]]);i+=hit.length}else{rest+=word[i];i++}}if(rest)parts.push([rest,null]);return parts}
-function run(){var q=norm(box.value.trim());if(!q){out.innerHTML="";return}
-var t=TW.filter(function(x){return norm(x[0])===q||norm(x[1])===q})[0],html="";
-if(t)html+='<p class="tw-hit"><a href="#'+t[4]+'"><b>'+esc(t[1])+(t[0]!==t[1]?" / "+esc(t[0]):"")+"</b></a>: "+esc(cy()?t[3]:t[2])+"</p>";
-var words=q.split(/[\s-]+/).filter(Boolean),chips="";
-words.forEach(function(w){if(EL[w]){chips+='<li><b>'+esc(w)+"</b><span>"+esc(cy()?EL[w][1]:EL[w][0])+"</span></li>";return}
-split(w).forEach(function(p){chips+=p[1]?'<li><b>'+esc(p[0])+"</b><span>"+esc(cy()?p[1][1]:p[1][0])+"</span></li>":'<li class="un"><b>'+esc(p[0])+"</b><span>"+(cy()?"enw sant, person, afon neu air arall":"a saint, person, river or other word")+"</span></li>"})});
-out.innerHTML=html+'<ul class="tw-parts">'+chips+"</ul>"}
-box.addEventListener("input",run);document.addEventListener("click",function(ev){if(ev.target.closest("#lang-en,#lang-cy"))setTimeout(run,0)});
+function run(){var P=window.PN;if(!P)return;var r=P.decode(box.value),c=cy(),html="";if(!box.value.trim()){out.innerHTML="";return}
+if(r.hit)html+='<p class="tw-hit"><a href="'+esc(P.townLink(r.hit))+'"><b>'+esc(r.hit[1])+(r.hit[0]!==r.hit[1]?" / "+esc(r.hit[0]):"")+"</b></a>: "+esc(c?r.hit[3]:r.hit[2])+"</p>";
+html+='<div class="tw-words-out">'+r.words.map(function(w){return'<ul class="tw-parts">'+w.map(function(p){var l=P.label(p,c),eng=l.kind==="e"||l.kind==="n";
+return'<li class="'+(l.kind==="u"?"un":eng?"en":"")+'"><b>'+esc(l.t)+"</b><span>"+(eng?"<em>"+(c?"Saesneg":"English")+":</em> ":"")+esc(l.mean)+"</span>"+(l.note?"<small>"+esc(l.note)+"</small>":"")+"</li>"}).join("")+"</ul>"}).join("")+"</div>";
+out.innerHTML=html}
+box.addEventListener("input",run);document.addEventListener("pn:ready",run);
 [].slice.call(document.querySelectorAll("[data-tw-try]")).forEach(function(b){b.addEventListener("click",function(){box.value=b.textContent;run();box.focus()})})})();</script>
 """
 
 
 def towns_page(have):
     rows = town_rows()
-    els = {}
-    for w, en, cy in TWN.ELEMENTS:
-        els.setdefault(w, [en, cy])
-    data = (f'<script type="application/json" id="tw-el">{json.dumps(els, ensure_ascii=False)}</script>'
-            f'<script type="application/json" id="tw-towns">{json.dumps([[r["en"], r["cy"], r["mEn"], r["mCy"], r["id"]] for r in rows], ensure_ascii=False)}</script>')
-    tries = "".join(f'<button type="button" class="chip" data-tw-try>{w}</button>' for w in ("Aberystwyth", "Llanfair Pwllgwyngyll", "Pen-y-bont", "Bryn-coch", "Abertawe", "Pontypridd", "Maesteg", "Dolgellau"))
+    data = g["PN_SCRIPT"]  # the decoder and its words (src/placenames.py, src/placenames.js)
+    tries = "".join(f'<button type="button" class="chip" data-tw-try>{w}</button>' for w in ("Llangammarch Wells", "Aberystwyth", "Llanfair Pwllgwyngyll", "Pontrhydfendigaid", "Builth Wells", "Abertawe", "Betws-y-Coed", "Dolgellau"))
     decoder = (f'<div class="tw-dec"><label for="tw-in" class="tw-lab">{bi("What does the name mean? Type any Welsh place name.", "Beth yw ystyr yr enw? Teipiwch unrhyw enw lle Cymraeg.")}</label>'
                f'<input id="tw-in" class="ref-filter" type="search" autocomplete="off" spellcheck="false" placeholder="e.g. Aberdaugleddau, Pen-y-groes, Llanelli">'
                f'<p class="tw-try">{bi("Try:", "Rhowch gynnig ar:")} {tries}</p><div id="tw-out" aria-live="polite"></div>{data}</div>')
@@ -343,7 +332,7 @@ def towns_page(have):
                    f'<div class="tw-grid">{"".join(town_card(r, have) for r in rs)}</div></div>')
     jump = '<ul class="ref-jump">' + "".join(f'<li><a href="#tw-{slug(la)}">{bi(la, g["CS"].LA_CY[la])}</a></li>' for la in g["CS"].LA_ORDER if any(r["la"] == la for r in rows)) + "</ul>"
     seen, words = set(), []
-    for w, en, cy in TWN.ELEMENTS:
+    for w, en, cy in g["PNM"].glossary():
         if w in seen:
             continue
         seen.add(w)
@@ -373,6 +362,10 @@ TOWN_CSS = """
 .tw-parts li{display:grid;gap:.1rem;background:var(--night);border:1px solid var(--line);border-top:3px solid var(--gold,#e8c65a);border-radius:10px;padding:.5rem .8rem}
 .tw-parts li b{font:600 1.1rem var(--f-display)}.tw-parts li span{font-size:.85rem;color:var(--muted)}
 .tw-parts li.un{border-top-color:var(--line)}
+.tw-parts li.en{border-top-style:dashed}.tw-parts li em{font-style:normal;font-weight:600}
+.tw-parts li small{font-size:.76rem;color:var(--muted);font-style:italic}
+.tw-words-out{display:flex;flex-wrap:wrap;gap:.6rem 1.1rem;align-items:flex-start}.tw-words-out .tw-parts{margin:0}
+#tw-out .tw-hit+.tw-words-out,#tw-out>.tw-words-out:first-child{margin-top:1rem}
 .tw-hit{margin:1rem 0 0}.tw-hit a{color:var(--gold,#e8c65a)}
 .tw-top{display:grid;grid-template-columns:minmax(0,1fr);gap:1.4rem;margin:0 0 2rem}
 @media(min-width:800px){.tw-top{grid-template-columns:minmax(0,22rem) minmax(0,1fr);align-items:start}}

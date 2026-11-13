@@ -523,30 +523,6 @@ KINGDOMS = [
   groups=[["Wales","Cymru","#7cc495","*"]]),
 ]
 
-# Place-name elements: key -> (English, Welsh)
-DICT = {
- "aber": ("mouth of a river", "aber, ceg afon"), "llan": ("church, enclosure", "eglwys, llan"), "pont": ("bridge", "pont"), "bont": ("bridge (pont)", "pont"),
- "tre": ("town, homestead", "tref, cartref"), "tref": ("town", "tref"), "dre": ("town (tref)", "tref"), "caer": ("fort", "caer"), "gaer": ("fort (caer)", "caer"),
- "cwm": ("valley", "cwm"), "pen": ("head, top, end", "pen, copa"), "nant": ("stream, valley", "nant"), "coed": ("wood", "coed"), "mynydd": ("mountain", "mynydd"),
- "fynydd": ("mountain (mynydd)", "mynydd"), "afon": ("river", "afon"), "bryn": ("hill", "bryn"), "fryn": ("hill (bryn)", "bryn"), "llyn": ("lake", "llyn"),
- "maes": ("field", "maes"), "faes": ("field (maes)", "maes"), "porth": ("harbour, gateway", "porthladd, mynedfa"), "ystrad": ("valley floor", "llawr dyffryn"),
- "dinas": ("fort, city", "caer, dinas"), "betws": ("prayer house", "tŷ gweddi"), "capel": ("chapel", "capel"), "glan": ("bank, shore", "glan"), "lan": ("bank, shore (glan)", "glan"),
- "rhos": ("moor", "rhos, gwaun"), "pwll": ("pool, hollow", "pwll"), "gwyn": ("white, blessed", "gwyn, bendigaid"), "wyn": ("white (gwyn)", "gwyn"), "du": ("black", "du"),
- "ddu": ("black (du)", "du"), "coch": ("red", "coch"), "goch": ("red (coch)", "coch"), "mawr": ("big", "mawr"), "fawr": ("big (mawr)", "mawr"), "bach": ("small", "bach"),
- "fach": ("small (bach)", "bach"), "newydd": ("new", "newydd"), "y": ("the", "y fannod"), "yr": ("the", "y fannod"), "ty": ("house", "tŷ"), "pridd": ("earth", "pridd"),
- "tawe": ("River Tawe", "Afon Tawe"), "ystwyth": ("River Ystwyth, ‘winding’", "Afon Ystwyth, ‘troellog’"), "dydd": ("River Taf (Taff)", "Afon Taf"),
- "merthyr": ("martyr’s shrine", "creirfa merthyr"), "tudful": ("Saint Tudful", "Santes Tudful"), "tydfil": ("Saint Tudful", "Santes Tudful"),
- "madog": ("W. A. Madocks, its founder", "W. A. Madocks, ei sefydlydd"), "bran": ("crow, or River Brân", "brân, neu Afon Brân"), "fan": ("peak (ban)", "copa (ban)"),
- "ban": ("peak", "copa"), "gyll": ("hazels (cyll)", "coed cyll"), "fair": ("Saint Mary (Mair)", "y Santes Fair"), "mair": ("Saint Mary", "y Santes Fair"),
- "dewi": ("Saint David", "Dewi Sant"), "eglwys": ("church", "eglwys"), "llech": ("slate, flat stone", "llech"), "rhyd": ("ford", "rhyd"), "hen": ("old", "hen"),
- "is": ("below", "is"), "uwch": ("above", "uwch"), "castell": ("castle", "castell"), "ffordd": ("road", "ffordd"), "heol": ("street", "heol"),
- "gogarth": ("terraced headland", "pentir"), "teifi": ("River Teifi", "Afon Teifi"), "conwy": ("River Conwy", "Afon Conwy"), "dyfi": ("River Dyfi", "Afon Dyfi"),
- "celyn": ("holly", "celyn"), "derwen": ("oak", "derwen"), "ynys": ("island", "ynys"), "rhondda": ("River Rhondda, ‘noisy’", "Afon Rhondda, ‘swnllyd’"),
- "ogof": ("cave", "ogof"), "carreg": ("stone", "carreg"), "garreg": ("stone (carreg)", "carreg"), "sant": ("saint", "sant"), "ffynnon": ("spring, well", "ffynnon"),
- "plas": ("mansion", "plas"), "bedd": ("grave", "bedd"), "gelert": ("Gelert", "Gelert"), "dinbych": ("little fort", "din bach"), "hir": ("long", "hir"),
- "traeth": ("beach", "traeth"), "mon": ("Anglesey (Môn)", "Môn"), "gwaun": ("moor, meadow", "gwaun"),
-}
-SAMPLES = ["Aberystwyth", "Llanfairpwllgwyngyll", "Pontypridd", "Caerdydd", "Betws-y-Coed", "Abertawe", "Merthyr Tudful", "Porthmadog", "Pen-y-fan", "Cwmbrân", "Beddgelert", "Abergwaun"]
 WORDS = [
  ["Cymru", "KUM-ree", "Wales", "y wlad"], ["Cymraeg", "kum-RAYG", "the Welsh language", "yr iaith"], ["Croeso", "KROY-so", "welcome", "cyfarchiad"],
  ["Diolch", "DEE-olkh", "thank you", "gair o werthfawrogiad"], ["Hiraeth", "HEER-eyeth", "a longing for home that has no English word", "dyhead am gartref, heb air Saesneg amdano"],

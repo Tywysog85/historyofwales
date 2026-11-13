@@ -149,7 +149,7 @@
       var vm = cx.createLinearGradient(0, eb - eh * 0.7, 0, H), mistC = mixHex(mixHex(SKY.sky[2], SKY.sky[1], 0.45), mixHex("#262b3d", "#56607c", SKY.sun), 0.7), vc = hex(mistC).join(",");
       vm.addColorStop(0, "rgba(" + vc + ",0)"); vm.addColorStop(0.34, "rgba(" + vc + ",.9)"); vm.addColorStop(0.55, "rgba(" + vc + ",1)"); vm.addColorStop(1, SKY.sky[3]); cx.fillStyle = vm; cx.fillRect(0, eb - eh * 0.7, W, H);
       if (!L3) drawStillLand(stacked); else {
-        if (!FLAG) FLAG = flagArt(); HCL3.frame({ W: W, H: H, sumX: sumX - ew * 0.13, sumY: sumY + ew * 0.15, ppm: ew / 2000, ground: stacked ? { x: W * 0.7, y: eb - eh * 0.07 - sy * 0.04, ppm: Math.min(W * 0.0095, eh * 0.019) } : { x: Math.min(W * 0.885, W - H * 0.3) - mouse * 9, y: H * 0.7 - sy * 0.1, ppm: H * 0.0098 }, castle: true, t: t, sun: SKY.sun, fog: mixHex(SKY.sky[2], SKY.sky[1], 0.45), mist: mistC, flag: FLAG, flagV: FLAGV });
+        if (!FLAG) FLAG = flagArt(); HCL3.frame({ W: W, H: H, sumX: sumX - ew * 0.13, sumY: sumY + ew * 0.15, ppm: ew / 2000, ground: stacked ? { x: W * 0.7, y: eb - eh * 0.07 - sy * 0.04, ppm: Math.min(W * 0.0095, eh * 0.019), tilt: narrow ? 0 : 0.12 } : { x: Math.min(W * 0.885, W - H * 0.3) - mouse * 9, y: H * 0.7 - sy * 0.1, ppm: H * 0.0098 }, castle: true, t: t, sun: SKY.sun, fog: mixHex(SKY.sky[2], SKY.sky[1], 0.45), mist: mistC, flag: FLAG, flagV: FLAGV });
         if (HCL3.shown && !LANDT) LANDT = t; }
     }
     LAYERS.forEach(function (L, i) {
@@ -358,7 +358,7 @@
         var cl = document.createElement("canvas"); cl.id = "land3d"; cl.setAttribute("aria-hidden", "true"); cv.after(cl);
         /* the 3D scene starts downloading once the page itself has loaded, so the words, fonts and pictures come first on a slow phone */
         var go3 = function () {
-          var s3 = document.createElement("script"); s3.type = "module"; s3.src = "hero3d.js?v=7"; /* raise the number whenever hero3d.js changes, so browsers fetch the new one */ s3.onerror = function () { window.HCD3_WANT = window.HCL3_WANT = 0; c3.remove(); cl.remove(); }; document.head.appendChild(s3);
+          var s3 = document.createElement("script"); s3.type = "module"; s3.src = "hero3d.js?v=8"; /* raise the number whenever hero3d.js changes, so browsers fetch the new one */ s3.onerror = function () { window.HCD3_WANT = window.HCL3_WANT = 0; c3.remove(); cl.remove(); }; document.head.appendChild(s3);
           setTimeout(function () { if (!(window.HCD3 && HCD3.ready)) window.HCD3_WANT = 0; if (!(window.HCL3 && HCL3.ready)) { window.HCL3_WANT = 0; cl.remove(); } }, 15000);
         };
         if (document.readyState === "complete") go3(); else window.addEventListener("load", go3, { once: true });
@@ -853,26 +853,23 @@
     $("#chart").innerHTML = s + "</svg>";
   }
 
-  /* ---------- Place-name decoder ---------- */
-  var DICT = D.DICT, keys = Object.keys(DICT).sort(function (a, b) { return b.length - a.length; });
-  function norm(s) { return s.toLowerCase().replace(/[âàá]/g, "a").replace(/[êé]/g, "e").replace(/[îí]/g, "i").replace(/[ôó]/g, "o").replace(/[ûú]/g, "u").replace(/ŵ/g, "w").replace(/ŷ/g, "y").replace(/[^a-z]/g, ""); }
-  function decode(raw) {
-    var s = norm(raw), out = [], unk = "", i = 0;
-    while (i < s.length) {
-      var hit = null;
-      for (var k = 0; k < keys.length; k++) if (s.substr(i, keys[k].length) === keys[k]) { hit = keys[k]; break; }
-      if (hit && !(hit === "y" && unk)) { if (unk) { out.push([unk, null]); unk = ""; } out.push([hit, DICT[hit]]); i += hit.length; }
-      else { unk += s[i]; i++; }
-    }
-    if (unk) out.push([unk, null]);
-    return out;
-  }
+  /* ---------- Place-name decoder: the words and the decoder itself are in placenames.js (src/placenames.py, src/placenames.js) ---------- */
   function renderDecoder() {
-    var parts = decode($("#dec-in").value);
-    $("#dec-out").innerHTML = parts.length ? parts.map(function (p, i) { return '<div class="part' + (p[1] ? "" : " unk") + '" style="--i:' + i + '"><b>' + esc(p[0]) + "</b><span>" + esc(p[1] ? T(p[1][0], p[1][1]) : T("not in this glossary", "dim yn y rhestr")) + "</span></div>"; }).join("") :
-      '<p style="color:var(--muted)">' + T("Type a Welsh place name above.", "Teipiwch enw lle uchod.") + "</p>";
-    $("#dec-samples").innerHTML = '<span class="eyebrow" style="align-self:center;margin-right:.25rem">' + T("Try", "Rhowch gynnig ar") + "</span>" + D.SAMPLES.map(function (s) { return '<button type="button" data-s="' + esc(s) + '">' + esc(s) + "</button>"; }).join("");
+    var out = $("#dec-out"), P = window.PN;
+    if (!out) return;
+    if (!P) { out.innerHTML = '<p style="color:var(--muted)">' + T("Loading the word list…", "Yn llwytho’r geiriau…") + "</p>"; return; }
+    var r = P.decode($("#dec-in").value), cy = lang === "cy", i = 0, html = "";
+    if (r.hit) html += '<p class="dec-hit"><a href="' + esc(P.townLink(r.hit)) + '"><b>' + esc(r.hit[1]) + (r.hit[0] !== r.hit[1] ? " / " + esc(r.hit[0]) : "") + "</b></a>: " + esc(cy ? r.hit[3] : r.hit[2]) + "</p>";
+    html += r.words.map(function (w) {
+      return '<div class="dec-word">' + w.map(function (p) {
+        var l = P.label(p, cy), eng = l.kind === "e" || l.kind === "n";
+        return '<div class="part' + (l.kind === "u" ? " unk" : eng ? " eng" : "") + '" style="--i:' + (i++) + '"><b>' + esc(l.t) + "</b><span>" + (eng ? "<em>" + T("English", "Saesneg") + ":</em> " : "") + esc(l.mean) + "</span>" + (l.note ? "<small>" + esc(l.note) + "</small>" : "") + "</div>";
+      }).join("") + "</div>";
+    }).join("");
+    out.innerHTML = html || '<p style="color:var(--muted)">' + T("Type a Welsh place name above.", "Teipiwch enw lle uchod.") + "</p>";
+    $("#dec-samples").innerHTML = '<span class="eyebrow" style="align-self:center;margin-right:.25rem">' + T("Try", "Rhowch gynnig ar") + "</span>" + P.samples.map(function (s) { return '<button type="button" data-s="' + esc(s) + '">' + esc(s) + "</button>"; }).join("");
   }
+  document.addEventListener("pn:ready", renderDecoder);
   $("#dec-in").addEventListener("input", renderDecoder);
   $("#dec-form").addEventListener("submit", function (e) { e.preventDefault(); });
   $("#dec-samples").addEventListener("click", function (e) { var b = e.target.closest("[data-s]"); if (b) { $("#dec-in").value = b.dataset.s; renderDecoder(); } });
