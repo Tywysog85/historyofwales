@@ -71,6 +71,8 @@ import bruts as BRT  # noqa: E402  (the Bruts, the chronicles of Wales: long rea
 REF.REFS.update(BRT.REFS)
 import hen_ogledd as HO  # noqa: E402  (Yr Hen Ogledd, the Old North: long read, map, the Men of the North block, reading list)
 REF.REFS.update(HO.REFS)
+import druids as DRU  # noqa: E402  (the Druids long read: reading list)
+REF.REFS.update(DRU.REFS)
 import oldbooks as OB  # noqa: E402  (the old books of Wales: a page for every book, book-<id>.html)
 REF2.PAGES.update(OB.REFS)
 REF2.PAGES.update(AG12.refs(REF2))  # reading lists for the twelve ages (src/ages12.py)
@@ -718,6 +720,7 @@ def era_page(i, era):
             + section(f'<div class="people">{"".join(plaque(p) for p in ppl)}</div>', "People", "Pobl")
             + (section(f'<div class="era-places">{"".join(place_tile(p) for p in plc)}</div>', "Places to visit", "Lleoedd i ymweld â nhw") if plc else "")
             + (section(f'<p class="lede">{bi("Dewi, Teilo, Illtud, Cadog, Beuno, Melangell and sixty more: every saint region by region, with the llannau that carry their names.", "Dewi, Teilo, Illtud, Cadog, Beuno, Melangell a thrigain arall: pob sant fesul rhanbarth, gyda’r llannau sy’n dwyn eu henwau.")}</p><p><a class="btn solid" href="saints.html">{bi("Meet the saints of Wales", "Cwrdd â seintiau Cymru")} →</a></p>', "The saints of Wales", "Seintiau Cymru") if eid == "saints" else "")
+            + (section(f'<div class="s-grid">{story_card(STORY["druids"], True)}</div>', "The Druids, teachers of the Britons", "Y Derwyddon, athrawon y Brythoniaid") if eid == "britons" else "")  # src/druids.py
             + section(f'<div class="pager">{pager}</div>'))
     ld = {"@context": "https://schema.org", "@type": "Article", "headline": era["en"], "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
     return page(f"era-{eid}.html", f'{era["en"]} · History of Wales', era["blurbEn"], main, era=eid, ld=ld, track=f"era:{eid}")
@@ -1439,7 +1442,7 @@ def page_refs(path):
 # ---------- the Bookshelf (bookshelf.html): every work from every reading list, gathered and grouped ----------
 SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes; the first section to claim a work keeps it)
     ("start", "Start here: the whole story", "Dechrau yma: yr hanes cyfan", ["general", "wales-in-10"]),
-    ("britons", "The Britons and Rome", "Y Brythoniaid a Rhufain", ["era-ancient", "era-britons", "era-roman", "celts", "brutus", "caradog", "macsen"]),
+    ("britons", "The Britons and Rome", "Y Brythoniaid a Rhufain", ["era-ancient", "era-britons", "era-roman", "druids", "celts", "brutus", "caradog", "macsen"]),
     ("kings", "Kings, kingdoms and the Old North", "Brenhinoedd, teyrnasoedd a’r Hen Ogledd", ["era-saints", "era-kings", "kings", "kings-*", "family-trees", "arthur", "arthur-circle", "hen-ogledd", "wilson-blackett", "unconquered"]),
     ("law", "The laws of Hywel Dda", "Cyfreithiau Hywel Dda", ["laws", "hywel", "topic-law"]),
     ("saints", "Saints, learning and faith", "Seintiau, dysg a ffydd", ["christianity", "joseph", "lucius", "patrick", "saints", "saints-*", "learning", "brittany", "topic-faith"]),

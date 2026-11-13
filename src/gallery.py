@@ -33,6 +33,13 @@ PLACE_CAT["mold"] = "treasures"
 
 # Pictures of places that have no page of their own: id -> (category, English, Welsh, link or None)
 EXTRA = {
+ "druid-teaching": ("people", "Druids teaching under the oaks", "Derwyddon yn dysgu dan y derw", "story-druids.html"),
+ "druid-caesar": ("people", "Caesar and the druids", "Cesar a’r derwyddon", "story-druids.html"),
+ "druid-arch-judge": ("people", "An Arch Druid as judge", "Archdderwydd yn farnwr", "story-druids.html"),
+ "druid-mistletoe": ("people", "A druid cuts the mistletoe", "Derwydd yn torri’r uchelwydd", "story-druids.html"),
+ "druid-cerrigbach-lake": ("ancient", "Llyn Cerrig Bach", "Llyn Cerrig Bach", "story-druids.html"),
+ "druid-chief-mona": ("treasures", "‘The Chief Druid’, Mona Antiqua Restaurata, 1723", "‘The Chief Druid’, Mona Antiqua Restaurata, 1723", "story-druids.html"),
+ "druid-cynan-1952": ("people", "The Archdruid Cynan, 1952", "Yr Archdderwydd Cynan, 1952", "story-druids.html"),
  "peop-celyn-protest": ("people", "The protest at the opening of Llyn Celyn, 1965", "Y brotest yn agoriad Llyn Celyn, 1965", "story-fwa.html"),
  "peop-celyn-line": ("people", "‘Stop robbing Wales’ at Llyn Celyn, 1965", "‘Stop robbing Wales’ yn Llyn Celyn, 1965", "place-celyn.html"),
  "peop-liverpool-steals": ("people", "‘Liverpool steals Welsh water’, 1965", "‘Liverpool steals Welsh water’, 1965", "story-mac.html"),

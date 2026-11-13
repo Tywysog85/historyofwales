@@ -889,6 +889,8 @@ from epynt import CITES as _EPYNT  # noqa: E402  (the clearing of Epynt, src/epy
 S.update(_EPYNT)
 from hen_ogledd import CITES as _HENOGLEDD  # noqa: E402  (the Old North, src/hen_ogledd.py)
 S.update(_HENOGLEDD)
+from druids import CITES as _DRUIDS  # noqa: E402  (the Druids, src/druids.py)
+S.update(_DRUIDS)
 from ages12 import CITES as _AGES12  # noqa: E402  (the places of the Age of Revival, src/ages12.py)
 S.update(_AGES12)
 

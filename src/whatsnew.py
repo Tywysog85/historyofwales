@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-13", "The Druids: when Europe came to Britain to learn", "Y Derwyddon: pan ddaeth Ewrop i Brydain i ddysgu",
+     "A new long read on the Druids, the teachers, judges and philosophers of the Britons: Julius Caesar’s witness that their learning began in Britain and that students crossed the sea to master it here, their twenty years of learning by heart, the Greek letters they wrote their business in, the Greek and Roman writers who praised them as philosophers and peacemakers, Môn their holy island, and how Wales kept their memory, from Armes Prydein to the Gorsedd.",
+     "Erthygl newydd ar y Derwyddon, athrawon, barnwyr ac athronwyr y Brythoniaid: tystiolaeth Iŵl Cesar mai ym Mhrydain y dechreuodd eu dysg a bod myfyrwyr yn croesi’r môr i’w meistroli yma, eu hugain mlynedd o ddysgu ar gof, y llythrennau Groeg yr ysgrifennent eu busnes ynddynt, yr awduron Groeg a Rhufeinig a’u canmolodd fel athronwyr a thangnefeddwyr, Môn eu hynys sanctaidd, a sut y cadwodd Cymru eu cof, o Armes Prydein i’r Orsedd.",
+     "story-druids.html"),
     ("2026-11-13", "The place-name decoder now knows over 500 words", "Mae’r datgodiwr enwau lleoedd bellach yn gwybod dros 500 o eiriau",
      "Type any Welsh place name and see what it means: the decoder now knows the rivers, saints and old lands behind the names, works out mutations (the Cammarch in Llangammarch, the Mair in Llanfair), keeps each word separate, and explains English words like the Wells of Builth Wells.",
      "Teipiwch unrhyw enw lle Cymraeg i weld ei ystyr: mae’r datgodiwr bellach yn adnabod yr afonydd, y saint a’r hen diroedd y tu ôl i’r enwau, yn deall treigladau (Cammarch yn Llangammarch, Mair yn Llanfair), yn cadw pob gair ar wahân, ac yn egluro geiriau Saesneg fel Wells yn Builth Wells.",

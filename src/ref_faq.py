@@ -179,7 +179,7 @@ GROUPS = [
   Q("druids", "Who were the Druids?", "Pwy oedd y Derwyddon?",
     "The learned class of the Britons: priests, judges, poets and teachers. Julius Caesar wrote that their learning was first found in Britain and that students crossed the sea to study it here. Their great centre was Ynys Môn, attacked by Rome in AD 60.",
     "Dosbarth dysgedig y Brythoniaid: offeiriaid, barnwyr, beirdd ac athrawon. Ysgrifennodd Iŵl Cesar mai ym Mhrydain y cafwyd eu dysg gyntaf a bod myfyrwyr yn croesi’r môr i’w hastudio yma. Eu canolfan fawr oedd Ynys Môn, a ymosodwyd arni gan Rufain yn 60 OC.",
-    ["a-z.html#az-druids", "era-ancient.html"]),
+    ["story-druids.html", "a-z.html#az-druids", "era-ancient.html"]),
   Q("romans", "Did the Romans conquer Wales?", "A goncrodd y Rhufeiniaid Gymru?",
     "It took them over thirty years, longer than anywhere else in southern Britain. Caradog led the resistance until 51, and the Silures and Ordovices fought on until about 78. Rome then held Wales with forts and roads, and its gold was mined at Dolaucothi.",
     "Cymerodd dros ddeng mlynedd ar hugain iddynt, yn hwy nag unman arall yn ne Prydain. Arweiniodd Caradog y gwrthsafiad hyd 51, ac ymladdodd y Silwriaid a’r Ordofigiaid ymlaen hyd tua 78. Daliodd Rhufain Gymru wedyn â chaerau a ffyrdd, a chloddiwyd ei haur yn Nolaucothi.",
