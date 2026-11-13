@@ -1451,7 +1451,7 @@ SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes
     ("tudor", "From the Tudors to the Methodists", "O’r Tuduriaid i’r Methodistiaid", ["era-tudor", "era-revival"]),
     ("industry", "Iron, coal, slate and the sea", "Haearn, glo, llechi a’r môr", ["era-industrial", "industry", "coal", "aberfan", "protest", "topic-industry", "trail-coal", "trail-sea", "firsts", "topic-science"]),
     ("modern", "Modern Wales and the Welsh abroad", "Cymru fodern a’r Cymry ar wasgar", ["era-modern", "era-today", "revival", "mac", "fwa", "world", "madog", "tryweryn", "epynt", "topic-abroad", "topic-sport"]),
-    ("lang", "The Welsh language, names and places", "Yr iaith Gymraeg, enwau a lleoedd", ["language", "welsh-not", "topic-language", "welsh", "names", "towns", "maps", "sites"]),
+    ("lang", "The Welsh language, names and places", "Yr iaith Gymraeg, enwau a lleoedd", ["language", "welsh-not", "welsh-revival", "topic-language", "welsh", "names", "towns", "maps", "sites"]),
     ("life", "Women and everyday life", "Menywod a bywyd bob dydd", ["topic-women", "trail-women", "topic-countryside"]),
 ]
 
@@ -1641,6 +1641,8 @@ def story_page(x, i):
     after = ""  # a section between the article and the pictures
     if x["id"] == "hen-ogledd":  # the map of the Old North goes at '!! map' in the text, its list of places after the article
         x["figs"]["map"], after = north_map()
+    if x["id"] == "welsh-revival":  # the census chart goes at '!! chart' in the text (revival_chart())
+        x["figs"]["chart"] = revival_chart()
     others = [y for y in F.STORIES if y["id"] != x["id"]][:3]
     era = ERA[x["era"]]
     meta = f'<p class="byline">{AB.byline_top()}<span>{x["mins"]} {bi("minute read", "munud o ddarllen")}</span><a href="era-{x["era"]}.html">{bi(era["en"], era["cy"])}</a><button type="button" class="copy" data-copy="story-{x["id"]}.html">{bi("Copy link", "Copïo’r ddolen")}</button></p>'
@@ -3738,6 +3740,38 @@ def ssr_chart():
         if end or c[0] == 2001:
             s += f'<text class="val" x="{n(X(c[0]) + (8 if i == 0 else -6))}" y="{n(Y(c[1]) - 10)}" text-anchor="{"start" if i == 0 else "end"}">{c[1]}%</text>'
     return s + "</svg>"
+
+
+def revival_chart():
+    """The census chart again, larger, for the long read on the revival (src/welshrevival.py, '!! chart'): the same figures
+    as the home page chart (D.CENSUS), with three moments of the fight back marked on the line."""
+    C, w, h, l, r, t, b, x0, x1, ymax = D.CENSUS, 640, 330, 36, 18, 22, 30, 1891, 2021, 60
+    X = lambda y: l + (y - x0) / (x1 - x0) * (w - l - r)
+    Y = lambda v: t + (1 - v / ymax) * (h - t - b)
+    n = lambda v: f"{v:.1f}".rstrip("0").rstrip(".")
+    s = (f'<svg class="chart rv-chart" viewBox="0 0 {w} {h}" width="100%" role="img" aria-label="Welsh speakers by census, 1891 to 2021: from 54.4% to a low of 18.7% in 1991, up to 20.8% in 2001, 17.8% in 2021 / Siaradwyr Cymraeg yn ôl y cyfrifiad, 1891 i 2021">'
+         '<defs><linearGradient id="gAreaRv" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2453d" stop-opacity=".35"/><stop offset="1" stop-color="#e2453d" stop-opacity="0"/></linearGradient></defs>')
+    for v in (0, 20, 40, 60):
+        s += f'<line class="grid" x1="{l}" x2="{w - r}" y1="{n(Y(v))}" y2="{n(Y(v))}"/><text x="{l - 6}" y="{n(Y(v) + 3.5)}" text-anchor="end">{v}%</text>'
+    for yv in (1891, 1921, 1951, 1981, 2021):
+        s += f'<text x="{n(X(yv))}" y="{h - 8}" text-anchor="middle">{yv}</text>'
+    marks = [(1962, "1", "Tynged yr Iaith", "Tynged yr Iaith"), (1982, "2", "S4C", "S4C"), (2001, "3", "First rise for a century", "Y cynnydd cyntaf ers canrif")]
+    for yr, k, en, cy in marks:
+        s += (f'<line class="rv-mark" x1="{n(X(yr))}" x2="{n(X(yr))}" y1="{n(Y(52))}" y2="{n(Y(0))}"/>'
+              f'<circle class="rv-num" cx="{n(X(yr))}" cy="{n(Y(55))}" r="9"/><text class="rv-k" x="{n(X(yr))}" y="{n(Y(55) + 3.8)}" text-anchor="middle">{k}</text>')
+    pts = [f"{X(c[0]):.1f},{Y(c[1]):.1f}" for c in C]
+    s += f'<path class="area" style="fill:url(#gAreaRv)" d="M{" L".join(pts)} L{n(X(2021))},{n(Y(0))} L{n(X(1891))},{n(Y(0))}Z"/><polyline class="ln" points="{" ".join(pts)}"/>'
+    for i, c in enumerate(C):
+        end = i == 0 or i == len(C) - 1
+        s += f'<circle class="{"end" if end or c[0] == 2001 else ""}" cx="{n(X(c[0]))}" cy="{n(Y(c[1]))}" r="{4.5 if end or c[0] == 2001 else 3}"><title>{c[0]}: {c[1]}%</title></circle>'
+        if end or c[0] in (1961, 1991, 2001):
+            anchor = "start" if i == 0 else "end" if end else "middle"
+            dx = 8 if i == 0 else -6 if end else 0
+            y = Y(c[1]) + 24 if c[0] == 1991 else Y(c[1]) - 10  # 1991 under the line, so it never meets 2001
+            s += f'<text class="val" x="{n(X(c[0]) + dx)}" y="{n(y)}" text-anchor="{anchor}">{c[1]}%</text>'
+    key = "".join(f'<li><b>{k}</b> {bi(f"{en}, {yr}", f"{cy}, {yr}")}</li>' for yr, k, en, cy in marks)
+    return (f'<figure class="rv-chart-fig"><div class="chart-wrap">{s}</svg></div>'
+            f'<figcaption><ol class="rv-key">{key}</ol>{bi("Share of people aged three and over who could speak Welsh, at each census from 1891 to 2021. No census was taken in 1941. Figures from the census (Office for National Statistics).", "Canran y bobl tair oed a hŷn a allai siarad Cymraeg, ym mhob cyfrifiad o 1891 hyd 2021. Ni chynhaliwyd cyfrifiad yn 1941. Ffigurau’r cyfrifiad (y Swyddfa Ystadegau Gwladol).")}</figcaption></figure>')
 
 
 def buyr(r):

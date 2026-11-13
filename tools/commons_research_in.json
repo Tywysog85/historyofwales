@@ -1,27 +1,159 @@
 {
- "branch": "claude/project-thread-rdtpti",
- "out": "_research/revival2",
+ "branch": "claude/project-thread-3g7ghg",
+ "out": "_research/cardplaces",
  "max": 300,
- "categories": [
-  "Category:Dafydd Iwan in 1973",
-  "Category:Bilingual welcome signs in Wales",
-  "Category:Aerial images of Nant Gwrtheyrn",
-  "Category:Urdd National Eisteddfod"
- ],
- "searches": [
-  "Ysgol Gymraeg Aberystwyth",
-  "Welsh school Aberystwyth Geoff Charles",
-  "Ysgol Dewi Sant Llanelli",
-  "Nant Gwrtheyrn",
-  "Ysgol Glan Clwyd",
-  "Welsh-medium school pupils Geoff Charles",
-  "Gwynfor Evans Geoff Charles",
-  "Welsh language road sign Araf",
-  "Croeso i Gymru sign",
-  "Radio Cymru",
-  "Cylch Meithrin",
-  "Eisteddfod yr Urdd Geoff Charles",
-  "Llangrannog Urdd camp",
-  "Glan-llyn Urdd"
+ "people": [
+  {
+   "slug": "trefflemin",
+   "name": "Flemingston",
+   "wiki": "Flemingston",
+   "search": [
+    "Flemingston church"
+   ]
+  },
+  {
+   "slug": "deganwy",
+   "name": "Deganwy",
+   "wiki": "Deganwy Castle",
+   "search": [
+    "Deganwy"
+   ]
+  },
+  {
+   "slug": "llanymddyfri",
+   "name": "Llandovery",
+   "wiki": "Llandovery Castle",
+   "search": [
+    "Llandovery Castle"
+   ]
+  },
+  {
+   "slug": "caergybi",
+   "name": "Caer Gybi, Holyhead",
+   "wiki": "Caer Gybi (fort)",
+   "search": [
+    "Caer Gybi, Holyhead"
+   ]
+  },
+  {
+   "slug": "cymer",
+   "name": "Cymer Abbey",
+   "wiki": "Cymer Abbey",
+   "search": [
+    "Cymer Abbey"
+   ]
+  },
+  {
+   "slug": "nanhyfer",
+   "name": "Nevern",
+   "wiki": "Nevern",
+   "search": [
+    "Nevern"
+   ]
+  },
+  {
+   "slug": "clynnog",
+   "name": "Clynnog Fawr",
+   "wiki": "St Beuno's Church, Clynnog Fawr",
+   "search": [
+    "Clynnog Fawr"
+   ]
+  },
+  {
+   "slug": "moridunum",
+   "name": "Moridunum, Carmarthen",
+   "wiki": "Moridunum (Carmarthen)",
+   "search": [
+    "Carmarthen Roman amphitheatre"
+   ]
+  },
+  {
+   "slug": "llanmelin",
+   "name": "Llanmelin Wood hillfort",
+   "wiki": "Llanmelin Wood Hillfort",
+   "search": [
+    "Llanmelin hillfort"
+   ]
+  },
+  {
+   "slug": "caerytwr",
+   "name": "Caer y Twr, Holyhead Mountain",
+   "wiki": "Caer y Twr",
+   "search": [
+    "Caer y Twr Holyhead"
+   ]
+  },
+  {
+   "slug": "caerdrewyn",
+   "name": "Caer Drewyn",
+   "wiki": "Caer Drewyn",
+   "search": [
+    "Caer Drewyn"
+   ]
+  },
+  {
+   "slug": "tretower",
+   "name": "Tretower Court and Castle",
+   "wiki": "Tretower Court",
+   "search": [
+    "Tretower Court and Castle"
+   ]
+  },
+  {
+   "slug": "penmynydd",
+   "name": "Penmynydd",
+   "wiki": "Penmynydd",
+   "search": [
+    "Plas Penmynydd"
+   ]
+  },
+  {
+   "slug": "tymawrwybrnant",
+   "name": "Tŷ Mawr Wybrnant",
+   "wiki": "Ty Mawr Wybrnant",
+   "search": [
+    "Tŷ Mawr Wybrnant"
+   ]
+  },
+  {
+   "slug": "botanic",
+   "name": "National Botanic Garden of Wales",
+   "wiki": "National Botanic Garden of Wales",
+   "search": [
+    "National Botanic Garden of Wales"
+   ]
+  },
+  {
+   "slug": "llanfairpwll",
+   "name": "Llanfairpwllgwyngyll",
+   "wiki": "Llanfairpwllgwyngyll",
+   "search": [
+    "Llanfairpwllgwyngyll"
+   ]
+  },
+  {
+   "slug": "bethlehem",
+   "name": "Bethlehem, Carmarthenshire",
+   "wiki": "Bethlehem, Carmarthenshire",
+   "search": [
+    "Bethlehem Carmarthenshire post office"
+   ]
+  },
+  {
+   "slug": "penygwryd",
+   "name": "Pen-y-Gwryd",
+   "wiki": "Pen-y-Gwryd",
+   "search": [
+    "Pen-y-Gwryd Hotel"
+   ]
+  },
+  {
+   "slug": "lavernock",
+   "name": "Lavernock Point",
+   "wiki": "Lavernock Point",
+   "search": [
+    "Lavernock Point"
+   ]
+  }
  ]
 }

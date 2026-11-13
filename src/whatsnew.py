@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-13", "Yma o Hyd: how the Welsh language came back", "Yma o Hyd: sut y daeth y Gymraeg yn ôl",
+     "A new long read on the revival of Welsh: the Urdd and the school of seven children in Aberystwyth, Tynged yr Iaith and the sit-down on Trefechan Bridge, the road signs, the Welsh Language Acts and official status, Radio Cymru, Gwynfor’s fast and S4C, Sain, Mwng and Yma o Hyd, the census that turned in 2001, Welsh on the web and the million by 2050. The census chart on the home page now opens it.",
+     "Erthygl newydd ar adfywiad y Gymraeg: yr Urdd a’r ysgol o saith o blant yn Aberystwyth, Tynged yr Iaith a’r eistedd i lawr ar Bont Trefechan, yr arwyddion ffyrdd, Deddfau’r Iaith a statws swyddogol, Radio Cymru, ympryd Gwynfor ac S4C, Sain, Mwng ac Yma o Hyd, y cyfrifiad a drodd yn 2001, y Gymraeg ar y we a’r miliwn erbyn 2050. Mae siart y cyfrifiad ar yr hafan yn ei hagor bellach.",
+     "story-welsh-revival.html"),
     ("2026-11-13", "Twelve ages of Wales: the Stone Age, the Britons, Glyndŵr’s Wales and the Age of Revival", "Deuddeg oes Cymru: Oes y Cerrig, y Brythoniaid, Cymru Glyndŵr ac Oes yr Adfywiad",
      "The story of Wales now runs in twelve ages instead of nine. Prehistory splits into the Stone Age and the Bronze and Iron Age Britons of the hillforts, the princes’ age ends at Cilmeri and Glyndŵr’s Wales tells the risings, poets and great rising of 1400, and a new Age of Revival tells the 1700s of Griffith Jones, Pantycelyn and Iolo, with new pages on Trefeca, Llangeitho, Llanddowror and Pantycelyn and a teacher pack for every age.",
      "Mae stori Cymru bellach yn rhedeg mewn deuddeg oes yn lle naw. Mae’r cynfyd yn rhannu’n Oes y Cerrig a Brythoniaid y bryngaerau yn Oes yr Efydd a’r Haearn, mae oes y tywysogion yn dod i ben yng Nghilmeri ac mae Cymru Glyndŵr yn adrodd y gwrthryfeloedd, y beirdd a gwrthryfel mawr 1400, ac mae Oes yr Adfywiad newydd yn adrodd 1700au Griffith Jones, Pantycelyn ac Iolo, gyda thudalennau newydd ar Drefeca, Llangeitho, Llanddowror a Phantycelyn a phecyn athrawon i bob oes.",
