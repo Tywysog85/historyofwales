@@ -2818,7 +2818,7 @@ def family_trees_page():
                 main, era="kings", ld=ld, og_type="website", active="kings.html", track="kings:trees", extra=FT_JS)
 
 # ---------- Welsh word of the day and beginner's phrases (src/cymraeg.py, src/welsh.js) ----------
-WELSH_JS_VER = 2  # raise whenever src/welsh.js changes, so browsers fetch the new copy
+WELSH_JS_VER = 3  # raise whenever src/welsh.js changes, so browsers fetch the new copy
 AUDIO_DIR = os.path.join(SRC, "static", "audio")
 AUDIO_FILES = sorted(f[:-4] for f in os.listdir(AUDIO_DIR) if f.endswith(".mp3")) if os.path.isdir(AUDIO_DIR) else []
 LL_CREDITS = json.loads(read("audio_credits.json")) if os.path.exists(os.path.join(SRC, "audio_credits.json")) else {}
