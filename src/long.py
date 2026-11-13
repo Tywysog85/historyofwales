@@ -288,6 +288,9 @@ PEOPLE_LONG["owain-gwynedd"] = _OG.PERSON_LONG
 # ---------- historic places of importance (src/places3.py) ----------
 import places3 as _PL3
 PLACE_LONG.update(_PL3.LONG)
+# the clearing of Mynydd Epynt, 1940 (src/epynt.py)
+import epynt as _EPY  # noqa: E402
+PLACE_LONG["epynt"] = _EPY.PLACE_LONG
 # ---------- the kings and princes of Wales, full-length pages (src/princes.py) ----------
 import princes as _PRN
 PEOPLE_LONG.update(_PRN.LONG)

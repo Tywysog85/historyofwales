@@ -122,6 +122,7 @@ PAGE = {
     "story-aberfan.html": "g:place-aberfan",
     "story-patrick.html": "g:place-stdavids",
     "story-tryweryn.html": "g:place-celyn@50% 55%",
+    "story-epynt.html": "g:place-epynt",
     "story-welsh-not.html": "l:iaith-1966",  # Cymdeithas yr Iaith at Llangefni, 1966 (Geoff Charles), src/art.py LEGEND_PHOTOS
     # legends that have no photograph of their own yet
     "legend-dragons.html": "g:land-dinas-emrys",
@@ -207,6 +208,8 @@ PAGE = {
     "mabinogion.html": "g:trea-red-book",
     "literature.html": "g:trea-book-aneirin",
     "books-and-authors.html": "g:place-library",
+    "further-reading.html": "g:place-library",
+    "online-sources.html": "g:place-library",
     "documents.html": "g:trea-llywelyn-seal",
     "symbols.html": "g:trea-lovespoon",
     "play.html": "g:place-caerleon",

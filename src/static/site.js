@@ -340,9 +340,11 @@
   });
   Array.prototype.forEach.call(d.querySelectorAll(".clip-list"), function (ul) {
     var n = ul.children.length; if (n <= 4) return;
-    var b = d.createElement("button"); b.type = "button"; b.className = "btn clip-more";
+    var all = ul.getAttribute("data-all");   // a list with a page of its own (Further reading): Show all opens that page
+    var b = d.createElement(all ? "a" : "button"); b.className = "btn clip-more";
+    if (all) b.href = all; else b.type = "button";
     b.textContent = d.documentElement.classList.contains("cy") ? "Dangos y cyfan (" + n + ")" : "Show all " + n;
-    b.addEventListener("click", function () { ul.classList.add("open"); var f = ul.children[4] && ul.children[4].querySelector("a"); if (f) f.focus({ preventScroll: true }); });
+    if (!all) b.addEventListener("click", function () { ul.classList.add("open"); var f = ul.children[4] && ul.children[4].querySelector("a"); if (f) f.focus({ preventScroll: true }); });
     ul.after(b);
   });
 })();
