@@ -81,7 +81,7 @@
   }
   function card(back) {
     var x = dayOf(back), w = W[x.i];
-    var more = w[8] ? '<a class="wotd-more" href="' + esc(w[8]) + '">' + bi("Read the history", "Darllen yr hanes") + " →</a>" : "";
+    var more = w[8] ? '<a class="wotd-more" href="' + esc(w[8]) + '">' + bi("Read the history<span class=\"vh\"> behind the word " + esc(w[1]) + "</span>", "Darllen yr hanes<span class=\"vh\"> y tu ôl i’r gair " + esc(w[1]) + "</span>") + " →</a>" : "";
     return '<div class="wotd-top"><p class="eyebrow"><b>' + bi("Word of the day", "Gair y dydd") + "</b> · " + dateLabel(x.d, back) + "</p>"
       + '<div class="wotd-nav"><button type="button" data-wotd-go="1"' + (back >= 6 ? " disabled" : "") + ' aria-label="' + esc("Previous day / Diwrnod blaenorol") + '">‹</button>'
       + '<button type="button" data-wotd-go="-1"' + (back <= 0 ? " disabled" : "") + ' aria-label="' + esc("Next day / Diwrnod nesaf") + '">›</button></div></div>'

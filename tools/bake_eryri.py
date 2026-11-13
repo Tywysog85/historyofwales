@@ -71,7 +71,7 @@ det -= gul * (5 + 24 * ss(slope, 0.12, 0.5))
 det = np.where(water, base, det)
 
 gy, gx = np.gradient(det * VE, cell); l = 1 / np.sqrt(gx * gx + gy * gy + 1); nx, ny, nz = -gx * l, l, -gy * l
-Image.fromarray((np.stack([nx * .5 + .5, ny * .5 + .5, nz * .5 + .5], -1) * 255).clip(0, 255).astype(np.uint8)).save(out + '/eryri-n.webp', quality=84)
+Image.fromarray((np.stack([nx * .5 + .5, ny * .5 + .5, nz * .5 + .5], -1) * 255).clip(0, 255).astype(np.uint8)).save(out + '/eryri-n.webp', quality=70, method=6)  # 70 and method 6 (Nov 2026): 40% lighter, no visible change in side-by-side shots
 sl = 1 - ny  # fine slope: 0 flat, 1 vertical
 
 # ---- shadows cast by the ridges, from where the moon stands
@@ -108,7 +108,7 @@ col = lerp(col, np.array([0.80, 0.85, 0.93]), sn)
 col *= (ao * (0.93 + 0.14 * f3 * (1 - sn)))[..., None]
 col *= (0.32 + 0.68 * lit)[..., None] * np.where(lit[..., None] < 1, lerp(np.ones(3), np.array([0.82, 0.9, 1.12]), 1 - lit), 1)   # shadow is bluer
 col = np.where(water[..., None], np.array([0.01, 0.018, 0.035]), col)
-Image.fromarray((np.clip(col, 0, 1) ** (1 / 2.2) * 255).astype(np.uint8)).save(out + '/eryri-c.webp', quality=82)
+Image.fromarray((np.clip(col, 0, 1) ** (1 / 2.2) * 255).astype(np.uint8)).save(out + '/eryri-c.webp', quality=74, method=6)  # 74 and method 6 (Nov 2026): a third lighter, no visible change
 
 rough = np.where(water, 0.12, 0.96 - 0.3 * sn)
 hm = resize(blur(det, 2.0), M, Image.BILINEAR)

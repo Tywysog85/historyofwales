@@ -324,7 +324,10 @@
     /* load the lifelike 3D dragon where the device can draw it; otherwise the flag dragon stays */
     try {
       var tc = document.createElement("canvas"), gl3 = window.WebGLRenderingContext && (tc.getContext("webgl2") || tc.getContext("webgl"));
-      if (gl3 && !(navigator.connection && navigator.connection.saveData)) {
+      /* skipped on data saver and on very old phones with 1 GB of memory or less (Ifan, 13 Nov 2026: keep it on every modern phone).
+         deviceMemory is only reported by Chrome-based browsers; Safari never reports it, so iPhones always get the dragon. */
+      var lowMem = navigator.deviceMemory && navigator.deviceMemory <= 1;
+      if (gl3 && !lowMem && !(navigator.connection && navigator.connection.saveData)) {
         window.HCD3_WANT = window.HCL3_WANT = 1;
         var c3 = document.createElement("canvas"); c3.id = "sky3d"; c3.setAttribute("aria-hidden", "true"); cv.after(c3);
         var cl = document.createElement("canvas"); cl.id = "land3d"; cl.setAttribute("aria-hidden", "true"); cv.after(cl);
@@ -769,7 +772,7 @@
     var more = $("#people-more"); more.hidden = P_PAGE || pEra !== "all" || pField !== "all"; more.textContent = pAll ? T("Show fewer", "Dangos llai") : T("Show all " + PEOPLE.length + " people", "Dangos pob un o’r " + PEOPLE.length);
     $("#people-grid").innerHTML = list.map(function (p) {
       var name = T(p[3], p[4]), other = lang === "en" ? p[4] : p[3], link = "person-" + p[0] + ".html", ph = D.PPH[p[0]];
-      return '<article class="plaque wl-card" data-era="' + p[1] + '"><div class="top-row"><span class="ava" aria-hidden="true">' + initials(p[3]) + (ph ? '<img src="' + ph + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : "") + '</span><div><span class="dates">' + esc(p[2]) + "</span><h3>" + esc(name) + '</h3></div></div><span class="epi">' + esc(T(p[5], p[6])) + (other !== name ? " · " + esc(other) : "") + "</span>" + ((D.PFIRST || {})[p[0]] ? '<span class="first-tag">★ ' + esc(T(D.PFIRST[p[0]][1], D.PFIRST[p[0]][2])) + "</span>" : "") + "<p>" + esc(T(p[7], p[8])) + '</p><a class="wl" href="' + link + '">' + esc(name) + "</a></article>";
+      return '<article class="plaque wl-card" data-era="' + p[1] + '"><div class="top-row"><span class="ava" aria-hidden="true">' + initials(p[3]) + (ph ? '<img src="' + ph + '" alt="" width="96" height="96" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : "") + '</span><div><span class="dates">' + esc(p[2]) + "</span><h3>" + esc(name) + '</h3></div></div><span class="epi">' + esc(T(p[5], p[6])) + (other !== name ? " · " + esc(other) : "") + "</span>" + ((D.PFIRST || {})[p[0]] ? '<span class="first-tag">★ ' + esc(T(D.PFIRST[p[0]][1], D.PFIRST[p[0]][2])) + "</span>" : "") + "<p>" + esc(T(p[7], p[8])) + '</p><a class="wl" href="' + link + '">' + esc(name) + "</a></article>";
     }).join("");
   }
   $("#people-more").onclick = function () { pAll = !pAll; renderPeople(); if (!pAll) goTo($("#people")); };

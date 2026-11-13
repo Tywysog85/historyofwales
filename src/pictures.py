@@ -474,13 +474,14 @@ def hero_img(ref):
             f'width="{p["w"]}" height="{p["h"]}" alt="" decoding="async" fetchpriority="high" style="object-fit:cover;object-position:{p["pos"]}">')
 
 
-def card_img(path, era=None):
-    """The picture for a card that links to a page (a long read, a legend, an age), or None."""
+def card_img(path, era=None, sizes="(max-width: 700px) 100vw, 40vw"):
+    """The picture for a card that links to a page (a long read, a legend, an age), or None.
+    sizes tells the browser how wide the card is drawn, so phones fetch the 600 px picture when that is enough."""
     ref = for_page(path, era)
     if not ref:
         return None
     p = _parse(ref)
-    return (f'<img class="scene photo" src="{p["small"]}" srcset="{p["small"]} 600w, {p["src"]} {p["w"]}w" sizes="(max-width: 700px) 100vw, 40vw" '
+    return (f'<img class="scene photo" src="{p["small"]}" srcset="{p["small"]} 600w, {p["src"]} {p["w"]}w" sizes="{sizes}" '
             f'width="{p["w"]}" height="{p["h"]}" alt="" loading="lazy" decoding="async" style="object-fit:cover;object-position:{p["pos"]}">')
 
 

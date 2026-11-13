@@ -44,7 +44,7 @@
       <div class="b-fact rv">
         <p class="eyebrow" data-cy="Wyddech chi?">Did you know?</p>
         <p class="fact" id="fact" aria-live="polite">__FACT__</p>
-        <p class="fact-actions"><a class="chip solid" id="fact-more" href="__FACTHREF__"><span data-cy="Darllen yr hanes llawn">Read the full story</span> →</a>
+        <p class="fact-actions"><a class="chip solid" id="fact-more" href="__FACTHREF__" aria-describedby="fact"><span data-cy="Darllen yr hanes llawn">Read the full story</span> →</a>
         <button type="button" class="chip" id="fact-next"><span data-cy="Un arall">Another</span> ↻</button></p>
       </div>
     </div>
@@ -174,8 +174,8 @@
       <p data-cy="Mae pob digwyddiad, lle a pherson ar y wefan hon yn cysylltu â ffynhonnell. Dyma’r llyfrau a’r casgliadau gorau i fynd ymhellach.">Every event, place and person on this site links to a source. These are the best books and collections for going further.</p>
     </div>
     <div class="reading">
-      <div><p class="eyebrow" style="margin-bottom:.5rem" data-cy="Llyfrau">Books</p><ul id="read-books">__BOOKS__</ul></div>
-      <div><p class="eyebrow" style="margin-bottom:.5rem" data-cy="Ar-lein">Online</p><ul id="read-online">__ONLINE__</ul></div>
+      <div><p class="eyebrow" style="margin-bottom:.5rem" data-cy="Llyfrau">Books</p><ul id="read-books" class="clip-list">__BOOKS__</ul></div>
+      <div><p class="eyebrow" style="margin-bottom:.5rem" data-cy="Ar-lein">Online</p><ul id="read-online" class="clip-list">__ONLINE__</ul></div>
     </div>
     <p style="margin-top:1.5rem"><a class="btn solid" href="books-and-authors.html" data-cy="Pob un o’r llyfrau a’u hawduron, fesul cyfnod →">Every book and its author, period by period →</a></p>
     <p class="note-box" style="margin-top:2rem" data-cy="Mae’r dolenni i ddigwyddiadau unigol yn mynd i Wicipedia, sydd yn ei dro yn rhestru ffynonellau academaidd. Dyddiadau bras yw’r rhai a nodir ‘c.’ (circa). Map yn seiliedig ar ffiniau awdurdodau lleol; mae’r map teyrnasoedd yn fras.">Links on individual events go to Wikipedia, which in turn lists academic sources. Dates marked c. (circa) are approximate. The map is drawn from local authority boundaries, and the kingdoms map is an approximation.</p>

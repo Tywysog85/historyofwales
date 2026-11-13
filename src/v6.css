@@ -861,3 +861,43 @@ a.wl-go:focus-visible { outline: none }
 :is(.behind, .mab-tale, .pk-person, .firsts-banner, .place-card).wl-card { transition: box-shadow .25s }
 :is(.behind, .mab-tale, .pk-person, .firsts-banner, .place-card).wl-card:hover { box-shadow: 0 0 0 1px color-mix(in srgb, var(--c, var(--gold)) 55%, transparent) }
 @media print { a.wl, a.wl-go::after { display: none } .wl-card { cursor: auto } }
+
+/* ---------- Bigger touch targets on touch screens (November 2026) ----------
+   Small controls get an invisible tap area of at least 44 x 44 px (an empty ::before centred on them), so they look the same
+   but are easy to hit with a thumb. The EN/CY pair only grows outwards, so neither steals taps from the other. */
+@media (pointer: coarse) {
+  :is(.lang a, .menu-btn, .search-btn, .journey-chip, .chip, .hear, .wotd-nav button, #dec-samples button, .marquee a, .n-all, .wotd-more, .site-foot .fcol summary) { position: relative }
+  :is(.menu-btn, .search-btn, .journey-chip, .chip, .hear, .wotd-nav button, #dec-samples button, .marquee a, .n-all, .wotd-more)::before { content: ""; position: absolute; left: 50%; top: 50%; width: max(100%, 44px); height: max(100%, 44px); transform: translate(-50%, -50%) }
+  .lang a::before { content: ""; position: absolute; top: 50%; width: 44px; height: 44px; transform: translateY(-50%) }
+  .lang a:first-child::before { right: 0 }
+  .lang a:last-child::before { left: 0 }
+  /* scrolling chip rows would clip the taller tap areas, so they get room above and below (taken back with a negative margin) */
+  #tl-teaser, #people .chips { padding-block: 7px; margin-block: -7px }
+}
+
+/* ---------- A shorter home page on phones (November 2026) ---------- */
+@media (max-width: 700px) {
+  /* the timeline's nine age chips: one row to swipe, like the people filters, instead of ten stacked rows */
+  #tl-teaser { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; max-width: 100%; -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent) }
+  #tl-teaser::-webkit-scrollbar { display: none }
+  #tl-teaser .chip { flex: none }
+  /* further reading: the first four books and four websites, and a button for the rest (site.js adds it) */
+  html.js .clip-list:not(.open) > li:nth-child(n+5) { display: none }
+}
+.clip-more { display: none }
+@media (max-width: 700px) { html.js .clip-more { display: inline-flex; margin-top: .8rem } html.js .clip-list.open + .clip-more { display: none } }
+
+/* the footer lists are <details>: always open on wide screens; on phones site.js closes them into four tappable headings */
+.site-foot .fcol summary { list-style: none; cursor: default }
+.site-foot .fcol summary::-webkit-details-marker { display: none }
+@media (min-width: 701px) { .site-foot .fcol summary { pointer-events: none } }
+@media (max-width: 700px) {
+  .foot-cols { grid-template-columns: 1fr; gap: 0 }
+  .site-foot .fcol { border-top: 1px solid var(--line) }
+  .site-foot .fcol:last-child { border-bottom: 1px solid var(--line) }
+  .site-foot .fcol summary { cursor: pointer; display: flex; justify-content: space-between; align-items: center; min-height: 48px; color: var(--ink) }
+  .site-foot .fcol summary::after { content: "+"; font: 400 1.3rem/1 var(--f-body); color: var(--muted); transition: transform .2s }
+  .site-foot .fcol[open] summary::after { transform: rotate(45deg) }
+  .site-foot .fcol ul { margin: 0 0 1rem; grid-template-columns: 1fr 1fr; gap: .2rem 1rem }
+  .site-foot .fcol ul a { display: block; padding-block: .45rem }
+}
