@@ -529,7 +529,8 @@
     if (tag) bits.push('<span class="k">' + T(tag[0], tag[1]) + "</span>");
     var t = esc(T(r[3], r[4])), href = r[7] || "onthisday.html#d-" + r[0];
     var pic = r[9] || "i:castle";  // "i:<icon>": no picture of its own, so a small drawing (build.py otd_pic)
-    return '<li class="otd-row wl-card" data-era="' + r[8] + '">' + (pic.slice(0, 2) === "i:" ? '<span class="otd-pic otd-ic" aria-hidden="true"><svg><use href="#i-' + pic.slice(2) + '"/></svg></span>' :
+    var bg = r[10] || (pic.slice(0, 2) === "i:" ? "" : pic);  // the darkened picture behind the row (build.py otd_bg)
+    return '<li class="otd-row wl-card pbg" data-era="' + r[8] + '"' + (bg ? ' style="--pbg:url(\'' + esc(bg) + '\')"' : "") + '>' + (pic.slice(0, 2) === "i:" ? '<span class="otd-pic otd-ic" aria-hidden="true"><svg><use href="#i-' + pic.slice(2) + '"/></svg></span>' :
       '<span class="otd-pic"><img src="' + esc(pic) + '" alt="" width="96" height="96" loading="lazy" decoding="async"></span>') +
       '<div class="otd-txt"><p class="otd-meta">' + bits.join("") + "</p><h3>" + t + "</h3><p>" + esc(T(r[5], r[6])) + '</p></div><a class="wl" href="' + esc(href) + '">' + t + "</a></li>";
   }
