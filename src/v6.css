@@ -943,3 +943,69 @@ main.home .mh .head { margin-bottom: 1.4rem }
 .nm-key .nm-k-foe { height: auto; width: auto; background: none; border: 0; color: #8a93a6 }
 .nm-key .nm-k-foe::before { content: "Aa"; font: italic 600 .8rem var(--f-body) }
 @media (min-width: 900px) { .nm-list { grid-template-columns: 1fr 1fr; column-gap: 1.2rem } }
+
+/* ---------- A picture on every card (Ifan, 13 November 2026: "add pictures to all cards on the site") ----------
+   build.py card_pic() finds the picture of what a card opens; pic_img() draws it, small copies from src/thumbs.py.
+   People cards: the picture across the top (down the left side on phones). A person with no picture of their own
+   shows their age's picture, dimmed, behind their initials. Tiles (places, kingdoms, saints' regions): the photo in
+   place of the drawing. List rows (timeline, trail stops, rulers, saints): a small square at the right. */
+.plaque.has-pic { padding-top: 0 }
+.pq-pic { position: relative; display: block; margin: 0 -1.35rem .35rem; aspect-ratio: 16 / 9; overflow: hidden; background: #141925 }
+.pq-pic img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease) }
+.pq-pic::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(27,33,48,.92)) }
+.plaque.wl-card:hover .pq-pic img { transform: scale(1.04) }
+.pq-pic.is-age img { filter: grayscale(.6) brightness(.38) }
+.pq-pic.is-age b { position: absolute; inset: 0; z-index: 1; display: grid; place-items: center; font: 400 3.2rem/1 var(--f-display); color: var(--c); letter-spacing: .04em; text-shadow: 0 2px 12px rgba(0,0,0,.6) }
+@media (max-width: 560px) {
+  .plaque.has-pic { padding: 1.1rem 1.1rem 1.1rem 8.1rem; min-height: 9.5rem }
+  .pq-pic { position: absolute; left: 0; top: 0; bottom: 0; width: 7rem; margin: 0; aspect-ratio: auto }
+  .pq-pic::after { background: linear-gradient(90deg, transparent 60%, rgba(27,33,48,.7)) }
+  .pq-pic.is-age b { font-size: 2.2rem }
+}
+@supports (content-visibility: auto) { .people > .plaque { content-visibility: auto; contain-intrinsic-size: auto 420px } }
+
+.era-places a { grid-template-columns: 4.6rem minmax(0,1fr); padding: .6rem 1rem .6rem .6rem }
+.era-places a > svg { box-sizing: border-box; width: 4.6rem; height: 4.6rem; padding: .75rem; border-radius: 10px; background: color-mix(in srgb, var(--c) 9%, #161b26) }
+.tl-pic { display: block; width: 4.6rem; height: 4.6rem; border-radius: 10px; overflow: hidden; background: #141925 }
+.tl-pic img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease) }
+.era-places a:hover .tl-pic img { transform: scale(1.06) }
+
+.era-events li.has-pic { grid-template-columns: 9rem minmax(0,1fr) 4.5rem }
+.row-pic { display: block; width: 4.5rem; height: 4.5rem; margin-top: .2rem; border-radius: 12px; overflow: hidden; background: #141925; border: 1px solid var(--line) }
+.row-pic img { display: block; width: 100%; height: 100%; object-fit: cover }
+.row-pic.ic { display: grid; place-items: center; color: var(--c); background: color-mix(in srgb, var(--c) 9%, #161b26) }
+.row-pic.ic svg { width: 2.5rem; height: 2.5rem }
+@media (max-width: 560px) {
+  .era-events li.has-pic { grid-template-columns: minmax(0,1fr) 4rem; column-gap: .9rem }
+  .era-events li.has-pic > time, .era-events li.has-pic > div { grid-column: 1 }
+  .era-events li.has-pic > .row-pic { grid-column: 2; grid-row: 1 / span 2; width: 4rem; height: 4rem }
+}
+@media print { .pq-pic, .row-pic, .tl-pic { display: none !important } .plaque.has-pic { padding: 1.35rem } }
+.era-places b span { font-size: inherit; color: inherit }  /* the name keeps its size when it is wrapped in a language span */
+/* reference cards (battles, documents): a small picture at the top right */
+.rc-pic { float: right; display: block; width: 5.2rem; height: 5.2rem; margin: .15rem 0 .6rem 1rem; border-radius: 12px; overflow: hidden; background: #141925; border: 1px solid var(--line) }
+.rc-pic img { display: block; width: 100%; height: 100%; object-fit: cover }
+.rc-pic.ic { display: grid; place-items: center; color: var(--c); background: color-mix(in srgb, var(--c) 9%, #161b26) }
+.rc-pic.ic svg { width: 2.8rem; height: 2.8rem }
+@media print { .rc-pic { display: none !important } }
+/* cards with a link list layout (topic guide people, an event page's links): the picture at the top right */
+.wrap .tp-people a, .wrap .ev-rel a { position: relative; padding-right: 5rem }
+.tp-people .rc-pic, .ev-rel .rc-pic { position: absolute; right: .7rem; top: .7rem; width: 3.6rem; height: 3.6rem; margin: 0; float: none }
+.ev-rel .rc-pic.ic svg, .tp-people .rc-pic.ic svg { width: 2rem; height: 2rem }
+/* a picture across the top of a card (trails, Mabinogion tales, lesson ideas) */
+.card-ban { position: relative; display: block; overflow: hidden; aspect-ratio: 16 / 9; background: #141925; margin: -1.3rem -1.4rem .3rem }
+.card-ban img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease) }
+a:hover > .card-ban img, .wl-card:hover > .card-ban img { transform: scale(1.04) }
+.chap > .card-ban { margin: -1.5rem -1.4rem .2rem }
+.mab-tale { overflow: hidden }
+.mab-tale > .card-ban { margin: -1.3rem -1.4rem .3rem }
+.lesson { overflow: hidden }
+/* the news list: a small picture beside each line */
+.news-item.has-pic a { grid-template-columns: 3.2rem 7.5rem minmax(0, 1fr) }
+.news-list.big .news-item.has-pic a { grid-template-columns: 4rem 9rem minmax(0, 1fr) }
+.n-pic { grid-row: 1 / span 2; width: 3.2rem; height: 3.2rem; border-radius: 10px; overflow: hidden; background: #141925; align-self: start }
+.news-list.big .n-pic { width: 4rem; height: 4rem }
+.n-pic img { display: block; width: 100%; height: 100%; object-fit: cover }
+.news-item.has-pic .n-s { grid-column: 3 }
+@media (max-width: 520px) { .news-item.has-pic a, .news-list.big .news-item.has-pic a { grid-template-columns: 3.2rem minmax(0, 1fr) } .news-item.has-pic .n-s { grid-column: 2 } .news-list.big .n-pic { width: 3.2rem; height: 3.2rem } }
+@media print { .card-ban, .n-pic { display: none !important } }
