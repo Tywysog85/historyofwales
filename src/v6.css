@@ -903,9 +903,9 @@ a.wl-go:focus-visible { outline: none }
 /* ---------- home page rhythm: the same gap between every section (Ifan, 2026-11-13, "a little less gap").
    Each section keeps half the gap above and below, so two sections meet at one --home-gap (about 56px on a phone, 112px on a wide screen).
    Change --home-gap here, not the sections one by one. ---------- */
-main:has(> #chapters) { --home-gap: clamp(1.75rem, 4vw, 3.5rem) }
-main:has(> #chapters) > section { padding-block: var(--home-gap) }
-main:has(> #chapters) > #chapters { padding-top: calc(var(--home-gap) * 1.4) }
-main:has(> #chapters) .head { margin-bottom: clamp(1.4rem, 3vw, 2.2rem) }
-main:has(> #chapters) .more-row { margin-top: 1.25rem }
-main:has(> #chapters) .mh .head { margin-bottom: 1.4rem }
+main.home { --home-gap: clamp(1.75rem, 4vw, 3.5rem) }
+main.home > :is(#chapters, #today, #stories, #map, #people, #legends, #language, #play, #sources) { padding-block: var(--home-gap) }
+main.home > #chapters { padding-top: calc(var(--home-gap) * 1.4) }
+main.home .head { margin-bottom: clamp(1.4rem, 3vw, 2.2rem) }
+main.home .more-row { margin-top: 1.25rem }
+main.home .mh .head { margin-bottom: 1.4rem }
