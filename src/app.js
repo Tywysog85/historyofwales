@@ -19,6 +19,15 @@
     return c + y + end;
   }
   var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* A slow connection (Ifan, 13 Nov 2026: "slow phones just show a picture of the dragon"): the 3D scene (about 2.7 MB) is not
+     downloaded. Instead a still picture of the same land and castle, rendered from the 3D scene (hero-land-*.webp), and a picture
+     of the same dragon (dragon-red.webp). "Slow" is what the browser reports (Chrome and Android do; Safari reports nothing,
+     so iPhones always get the 3D). Data saver and very old phones still get the drawn scene, as before. */
+  var SLOW = !reduce && !!(navigator.connection && /^(slow-2g|2g|3g)$/.test(navigator.connection.effectiveType || "")) && !navigator.connection.saveData;
+  var STILL_IMG = { land: null, dragon: null, ref: null };
+  /* how the pictures were taken (tools: see SKILLS.md "Still pictures of the 3D land"): w = page width, d = pixels per CSS pixel,
+     h = hero height, b = how far the bottom of the picture runs below the row of figures (p) or the hero's foot (w) */
+  var STILL_REF = { p: { w: 390, d: 1.5, h: 1077, b: 220 }, w: { w: 1440, d: 1.5, h: 952, b: 0 } };
   var MONTHS_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   var MONTHS_CY = ["Ionawr","Chwefror","Mawrth","Ebrill","Mai","Mehefin","Gorffennaf","Awst","Medi","Hydref","Tachwedd","Rhagfyr"];
 
@@ -133,13 +142,14 @@
     cx.fillStyle = hz; cx.fillRect(0, eb - eh * 0.75, W, eh * 0.85);
     /* where the device can draw it, the mountain and castle are real 3D on their own canvas (tools/land3d.src.js); until that is ready only the sky shows */
     /* the opening is staged: sky and title first, then the words, then the land fades in (never before 1.2 s, so it does not arrive under a half-drawn title), then the dragon flies in */
-    var L3 = window.HCL3 && HCL3.ready && performance.now() > 1200 && FONTS, noLand = L3 || window.HCL3_WANT;
-    if (L3) {
+    var L3 = window.HCL3 && HCL3.ready && performance.now() > 1200 && FONTS, noLand = L3 || window.HCL3_WANT || (SLOW && !STILL_IMG.failed), STILLP = SLOW && STILL_IMG.land;
+    if (L3 || STILLP) {
       /* the valley mist the mountains rise out of, which also hides the stars below the skyline */
       var vm = cx.createLinearGradient(0, eb - eh * 0.7, 0, H), mistC = mixHex(mixHex(SKY.sky[2], SKY.sky[1], 0.45), "#6f7896", 0.62), vc = hex(mistC).join(",");
       vm.addColorStop(0, "rgba(" + vc + ",0)"); vm.addColorStop(0.34, "rgba(" + vc + ",.9)"); vm.addColorStop(0.55, "rgba(" + vc + ",1)"); vm.addColorStop(1, SKY.sky[3]); cx.fillStyle = vm; cx.fillRect(0, eb - eh * 0.7, W, H);
-      if (!FLAG) FLAG = flagArt(); HCL3.frame({ W: W, H: H, sumX: sumX - ew * 0.13, sumY: sumY + ew * 0.15, ppm: ew / 2000, ground: stacked ? { x: W * 0.7, y: eb - eh * 0.07 - sy * 0.04, ppm: Math.min(W * 0.0095, eh * 0.019) } : { x: Math.min(W * 0.885, W - H * 0.3) - mouse * 9, y: H * 0.7 - sy * 0.1, ppm: H * 0.0098 }, castle: true, t: t, sun: SKY.sun, fog: mixHex(SKY.sky[2], SKY.sky[1], 0.45), mist: mistC, flag: FLAG, flagV: FLAGV });
-      if (HCL3.shown && !LANDT) LANDT = t;
+      if (!L3) drawStillLand(stacked); else {
+        if (!FLAG) FLAG = flagArt(); HCL3.frame({ W: W, H: H, sumX: sumX - ew * 0.13, sumY: sumY + ew * 0.15, ppm: ew / 2000, ground: stacked ? { x: W * 0.7, y: eb - eh * 0.07 - sy * 0.04, ppm: Math.min(W * 0.0095, eh * 0.019) } : { x: Math.min(W * 0.885, W - H * 0.3) - mouse * 9, y: H * 0.7 - sy * 0.1, ppm: H * 0.0098 }, castle: true, t: t, sun: SKY.sun, fog: mixHex(SKY.sky[2], SKY.sky[1], 0.45), mist: mistC, flag: FLAG, flagV: FLAGV });
+        if (HCL3.shown && !LANDT) LANDT = t; }
     }
     LAYERS.forEach(function (L, i) {
       if (noLand) return;
@@ -276,11 +286,17 @@
   }
   var FIRE_PREVIEW = /[?&]fire=1/.test(location.search);
   var DPOS = { x: -999, y: -999, r: 0 }, fireAt = 0, nextFire = 5000;
+  /* the still land: phones and narrow windows scale it to the width and stand it on the row of figures; wide screens cover from the bottom right */
+  function drawStillLand(stacked) {
+    var im = STILL_IMG.land, r = STILL_IMG.ref, s, w, h;
+    if (stacked) { s = W / r.w; w = im.width / r.d * s; h = im.height / r.d * s; cx.drawImage(im, 0, M.tick + r.b * s - h, w, h); }
+    else { s = Math.max(W / r.w, H / r.h); w = im.width / r.d * s; h = im.height / r.d * s; cx.drawImage(im, W - w, H + r.b * s - h, w, h); }
+  }
   var LANDT = 0, DT0 = -1, WING_UP = /[?&]wing=([\d.]+)/.test(location.search) ? +RegExp.$1 : 0.62; /* how far the wingtips rise above the chest, as a share of the wingspan */
   function drawDragon(t, sumX, sumY, narrow, stacked) {
     /* the dragon waits for the land to finish fading in, then starts at the beginning of its flight */
     if (DT0 < 0 && !reduce) { if (window.HCD3_WANT && !(window.HCD3 && HCD3.ready)) return; if (window.HCL3_WANT && !(LANDT && t > LANDT + 1700)) return; DT0 = t; nextFire = t + 5000; }
-    var period = 26000, k = reduce ? 0.55 : ((t - DT0) % period) / period;
+    var fixed = reduce || SLOW, period = 26000, k = fixed ? 0.55 : ((t - DT0) % period) / period;
     var base = narrow ? W * 0.27 : Math.min(W * 0.17, 260);
     var sx = narrow ? W * 0.61 : W * 0.6, ex = narrow ? W * 0.72 : stacked ? W * 0.78 : sumX - W * 0.06;
     var sy0 = narrow ? M.h1t + M.h1h * 0.3 : stacked ? M.h1t + M.h1h * 0.1 : H * 0.07, ey = narrow ? M.h1t + M.h1h * 0.42 : stacked ? M.h1t + M.h1h * 0.45 : sumY - H * 0.05;
@@ -288,9 +304,9 @@
     var size = base * (1 - (narrow ? 0.18 : 0.3) * k), sc = size / 220;
     /* keep the whole dragon, wingtips included, below the menu bar */
     var clear = M.nav + 10 + size * WING_UP - (y + 60 * sc); if (clear > 0) y += clear;
-    var alpha = reduce ? 1 : Math.min(1, k / 0.08, (1 - k) / 0.12);
+    var alpha = fixed ? 1 : Math.min(1, k / 0.08, (1 - k) / 0.12);
     DPOS.x = x + 110 * sc; DPOS.y = y + 60 * sc; DPOS.r = Math.max(44, 120 * sc);
-    if (!reduce && t > nextFire && alpha >= 1) { fireAt = t; nextFire = t + 9000 + Math.random() * 7000; }
+    if (!fixed && t > nextFire && alpha >= 1) { fireAt = t; nextFire = t + 9000 + Math.random() * 7000; }
     if (FIRE_PREVIEW && !reduce && (!fireAt || t - fireAt > 1300)) fireAt = t; /* preview: add ?fire=1 to the address and the dragon breathes fire without stopping */
     var fp = (t - fireAt) / 1300, pow = fireAt && fp >= 0 && fp < 1 ? Math.sin(Math.min(1, fp * 1.15) * Math.PI) : 0;
     /* the lifelike dragon: a 3D model on its own canvas (hero3d.js). It tells us where its mouth is, for the fire. */
@@ -304,7 +320,8 @@
     /* fallback (no WebGL, data saver, reduced motion): the dragon of the flag, turned to face the mountain */
     cx.save(); cx.globalAlpha = alpha; cx.translate(x, y); cx.scale(sc, sc); cx.rotate(-0.06);
     if (pow) { cx.save(); cx.translate(198, 22); cx.rotate(0.12); flames(t, pow); cx.restore(); }
-    if (SKYD) { cx.translate(222, 0); cx.scale(-1, 1); cx.drawImage(SKYD, 0, 0, 222, 143.4); }
+    if (SLOW && !STILL_IMG.failed) { if (STILL_IMG.dragon) cx.drawImage(STILL_IMG.dragon, -20, 25, 300, 113.7); } /* the render of the 3D dragon, already facing the mountain */
+    else if (SKYD) { cx.translate(222, 0); cx.scale(-1, 1); cx.drawImage(SKYD, 0, 0, 222, 143.4); }
     cx.restore();
   }
   /* fire: three flickering tongues from the mouth, brightest at the root */
@@ -327,13 +344,20 @@
       /* skipped on data saver and on very old phones with 1 GB of memory or less (Ifan, 13 Nov 2026: keep it on every modern phone).
          deviceMemory is only reported by Chrome-based browsers; Safari never reports it, so iPhones always get the dragon. */
       var lowMem = navigator.deviceMemory && navigator.deviceMemory <= 1;
-      if (gl3 && !lowMem && !(navigator.connection && navigator.connection.saveData)) {
+      /* old phones (1 GB of memory or less), data saver and browsers without WebGL get the still pictures too (Ifan, 13 Nov 2026) */
+      if (SLOW || lowMem || !gl3 || (navigator.connection && navigator.connection.saveData)) {
+        SLOW = true;
+        var narrowS = Math.min(innerWidth, screen.width) < 1100, sky = SKY.sun > 0.5 ? "day" : "night";
+        STILL_IMG.ref = narrowS ? STILL_REF.p : STILL_REF.w;
+        var li = new Image(); li.onload = function () { STILL_IMG.land = li; }; li.onerror = function () { STILL_IMG.failed = 1; }; li.src = "hero-land-" + (narrowS ? "p" : "w") + "-" + sky + ".webp";
+        var di = new Image(); di.onload = function () { STILL_IMG.dragon = di; }; di.src = "dragon-red.webp";
+      } else if (gl3 && !lowMem && !(navigator.connection && navigator.connection.saveData)) {
         window.HCD3_WANT = window.HCL3_WANT = 1;
         var c3 = document.createElement("canvas"); c3.id = "sky3d"; c3.setAttribute("aria-hidden", "true"); cv.after(c3);
         var cl = document.createElement("canvas"); cl.id = "land3d"; cl.setAttribute("aria-hidden", "true"); cv.after(cl);
         /* the 3D scene starts downloading once the page itself has loaded, so the words, fonts and pictures come first on a slow phone */
         var go3 = function () {
-          var s3 = document.createElement("script"); s3.type = "module"; s3.src = "hero3d.js?v=6"; /* raise the number whenever hero3d.js changes, so browsers fetch the new one */ s3.onerror = function () { window.HCD3_WANT = window.HCL3_WANT = 0; c3.remove(); cl.remove(); }; document.head.appendChild(s3);
+          var s3 = document.createElement("script"); s3.type = "module"; s3.src = "hero3d.js?v=7"; /* raise the number whenever hero3d.js changes, so browsers fetch the new one */ s3.onerror = function () { window.HCD3_WANT = window.HCL3_WANT = 0; c3.remove(); cl.remove(); }; document.head.appendChild(s3);
           setTimeout(function () { if (!(window.HCD3 && HCD3.ready)) window.HCD3_WANT = 0; if (!(window.HCL3 && HCL3.ready)) { window.HCL3_WANT = 0; cl.remove(); } }, 15000);
         };
         if (document.readyState === "complete") go3(); else window.addEventListener("load", go3, { once: true });
@@ -503,7 +527,9 @@
     if (r[1] != null) bits.push('<span class="y">' + r[1] + "</span>");
     if (tag) bits.push('<span class="k">' + T(tag[0], tag[1]) + "</span>");
     var t = esc(T(r[3], r[4])), href = r[7] || "onthisday.html#d-" + r[0];
-    return '<li class="otd-row wl-card" data-era="' + r[8] + '"><span class="otd-pic"><img src="' + esc(r[9] || "") + '" alt="" width="96" height="96" loading="lazy" decoding="async"></span>' +
+    var pic = r[9] || "i:castle";  // "i:<icon>": no picture of its own, so a small drawing (build.py otd_pic)
+    return '<li class="otd-row wl-card" data-era="' + r[8] + '">' + (pic.slice(0, 2) === "i:" ? '<span class="otd-pic otd-ic" aria-hidden="true"><svg><use href="#i-' + pic.slice(2) + '"/></svg></span>' :
+      '<span class="otd-pic"><img src="' + esc(pic) + '" alt="" width="96" height="96" loading="lazy" decoding="async"></span>') +
       '<div class="otd-txt"><p class="otd-meta">' + bits.join("") + "</p><h3>" + t + "</h3><p>" + esc(T(r[5], r[6])) + '</p></div><a class="wl" href="' + esc(href) + '">' + t + "</a></li>";
   }
   function renderToday() {
@@ -523,10 +549,10 @@
       var dm = stepDay(day, i), dd = dateOf(dm), n = Math.min(at(dm).length, 3), dots = "";
       dd.setFullYear(new Date().getFullYear());
       for (var j = 0; j < n; j++) dots += "<b></b>";
-      week += '<button type="button" class="otd-wd' + (i === 0 ? " on" : "") + (n ? " has" : "") + (dm === md ? " is-today" : "") + '" data-otd-day="' + dm + '" aria-pressed="' + (i === 0) + '" aria-label="' + dayLabel(dm) + '">' +
-        '<span class="w">' + T(WD[dd.getDay()][0], WD[dd.getDay()][1]) + '</span><span class="n">' + +dm.slice(3) + '</span><i aria-hidden="true">' + dots + "</i></button>";
+      week += '<button type="button" class="otd-wd' + (i === 0 ? " on" : "") + (n ? " has" : "") + (dm === md ? " is-today" : "") + '" data-otd-day="' + dm + '" aria-pressed="' + (i === 0) + '" aria-label="' + T(WD[dd.getDay()][0], WD[dd.getDay()][1]) + " " + dayLabel(dm) + '">' + /* the label starts with the words on the button (WCAG 2.5.3) */
+        '<span class="w">' + T(WD[dd.getDay()][0], WD[dd.getDay()][1]) + '</span> <span class="n">' + +dm.slice(3) + '</span><i aria-hidden="true">' + dots + "</i></button>";
     }
-    var pic = shown[0] && shown[0][9];
+    var pic = (shown.filter(function (r) { return r[9] && r[9].slice(0, 2) !== "i:"; })[0] || [])[9];  // the first real picture, or none
     $("#today-box").innerHTML = '<div class="otd-head">' + (pic ? '<img class="otd-bg" src="' + esc(pic) + '" alt="" decoding="async">' : "") +
       '<p class="otd-date"><span class="d">' + +day.slice(3) + '</span><span class="m">' + T(MONTHS_EN[m], MONTHS_CY[m]) + '</span><span class="lab">' +
       (isToday ? T("Today", "Heddiw") : '<button type="button" class="otd-back" data-otd="today">' + T("Back to today", "Yn ôl i heddiw") + "</button>") + "</span></p>" +
@@ -1064,7 +1090,7 @@
 
   /* ---------- Sources ---------- */
   function renderSources() {
-    $("#read-books").innerHTML = D.READING.map(function (r) { var b = "<b>" + esc(r.t) + "</b>"; return "<li>" + (r.u ? '<a href="' + r.u + '" target="_blank" rel="noopener">' + b + "</a>" : b) + "<span>" + esc(T(r.n, r.nCy)) + "</span></li>"; }).join("");
+    $("#read-books").innerHTML = D.READING.map(function (r) { var b = "<b>" + esc(r.t) + "</b>"; return "<li>" + (r.u ? '<a href="' + r.u + '" target="_blank" rel="noopener">' + b + "</a>" : b) + "<span>" + esc(T(r.n, r.nCy)) + "</span>" + (r.b ? '<span class="ref-buy">' + T("Buy:", "Prynu:") + ' <a href="' + r.b[0] + '" target="_blank" rel="noopener nofollow">Amazon</a> · <a href="' + r.b[1] + '" target="_blank" rel="noopener nofollow">AbeBooks</a></span>' : "") + "</li>"; }).join("");
     $("#read-online").innerHTML = D.ONLINE.map(function (r) { var u = T(r.u, r.uCy || r.u); return '<li><a href="' + u + '" target="_blank" rel="noopener"><b>' + esc(T(r.t, r.tCy)) + "</b></a><span>" + esc(u.replace(/^https:\/\/(www\.)?/, "").replace(/\/$/, "")) + "</span></li>"; }).join("");
   }
 

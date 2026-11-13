@@ -21,6 +21,7 @@ import photos as PH  # noqa: E402
 import eventpages as EP  # noqa: E402
 import welshpages as WP  # noqa: E402
 import cites as CITE  # noqa: E402  (sources beside the claims: [[cite:...]] markers, src/cites.py)
+import booklinks as BL  # noqa: E402  (a checked web page for books in the reading lists, src/booklinks.py)
 import llys as LLYS  # noqa: E402  (Llys Rhosyr in 3D: llys-rhosyr.html, src/llys.py, tools/llys3d.src.js -> src/static/llys3d.js)
 import ride as RIDE  # noqa: E402  (Ride with Glyndŵr, 1400: ride-glyndwr.html, src/ride.py, src/static/ride.js)
 import teachpacks as TPK  # noqa: E402  (teacher packs: pack-<age>.html, src/teachpacks.py)  (every page also in Welsh at cy/<page>.html: src/welshpages.py)  (a page for every timeline event: src/eventpages.py)
@@ -337,6 +338,7 @@ def follow_box(where):
                 f'<input type="hidden" name="locale" value="en">'
                 f'<button class="btn solid" type="submit">{bi("Sign up", "Ymuno")}</button></div>'
                 f'<p class="f-msg" role="status" aria-live="polite"></p></form>'
+                f'<p class="f-priv">{bi("We use your address only to send this email, and Brevo sends it for us.", "Dim ond i anfon yr e-bost hwn y defnyddiwn eich cyfeiriad, a Brevo sy’n ei anfon ar ein rhan.")} <a href="about.html#privacy">{bi("Privacy", "Preifatrwydd")}</a></p>'
                 f'<a class="f-more" href="whatsnew.html">{bi("See what’s new on the site", "Gweld beth sy’n newydd ar y wefan")} →</a></div>')
     return (f'<div class="follow follow-{where}"><p class="f-h">{bi("Keep up with the site", "Dilynwch y wefan")}</p>'
             f'<p class="f-sub">{bi("New history is added every week. See what has arrived, or follow the news feed in any feed reader.", "Mae hanes newydd yn cael ei ychwanegu bob wythnos. Gwelwch beth sydd wedi cyrraedd, neu dilynwch y ffrwd newyddion mewn unrhyw ddarllenydd ffrydiau.")}</p>'
@@ -463,9 +465,7 @@ def page(path, title, desc, main_html, era=None, og_type="article", ld=None, act
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="claude:viewport-fit-sides" content="cover">
 {head_tags(title, desc, path, og_type, card)}{LANG_BOOT}
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 {fonts}
 <style>{style}{PRINT_CSS}</style>
 {ld_html}
@@ -1046,7 +1046,7 @@ a.chap { text-decoration: none; color: inherit }
 .bank { font-size: .95rem; line-height: 1.9 }
 .qs { width: 100%; border-collapse: collapse; min-width: 22rem }
 .qs th, .qs td { text-align: left; border-bottom: 1px solid var(--line); padding: .55rem .5rem; vertical-align: top }
-.qs th { font-family: var(--f-mono); font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-weight: 500 }
+.qs th { font-family: var(--f-mono); font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-weight: 500 }
 .qs td:first-child { width: 2rem; color: var(--muted) } .qs td.blank { width: 6rem; border-bottom: 1px solid var(--muted) }
 .answers-key summary { cursor: pointer; color: var(--muted); font-size: .9rem }
 """
@@ -1173,9 +1173,9 @@ def refs_block(key, intro=None):
             if it[0] != kind:
                 continue
             _, who, title, det, nen, ncy = it[:6]
-            url = it[6] if len(it) > 6 else ""
+            url = (it[6] if len(it) > 6 else "") or BL.link(who, title)
             t = f'<a href="{e(url)}" target="_blank" rel="noopener"><cite>{e(title)}</cite> ↗</a>' if url else f"<cite>{e(title)}</cite>"
-            lis.append(f'<li><span class="ref-w">{e(who)}</span>, {t} <span class="ref-d">({e(det)})</span><span class="ref-n">{bi(nen, ncy)}</span></li>')
+            lis.append(f'<li><span class="ref-w">{e(who)}</span>, {t} {refd(det)}<span class="ref-n">{bi(nen, ncy)}</span></li>')
         if kind == "w":
             for pid in r.get("dwb", []):
                 rec = SOURCE_LINKS.get("person:" + pid, {})
@@ -1234,7 +1234,7 @@ SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes
     ("lit", "Poets, old books and legends", "Beirdd, hen lyfrau a chwedlau", ["literature", "books", "triads", "mabinogion", "mabinogi", "mabinogi-tales", "mabinogi-people", "mabinogi-*", "legends", "legend-*", "bran", "symbols", "iolo", "topic-music", "trail-song"]),
     ("tudor", "From the Tudors to the Methodists", "O’r Tuduriaid i’r Methodistiaid", ["era-tudor"]),
     ("industry", "Iron, coal, slate and the sea", "Haearn, glo, llechi a’r môr", ["era-industrial", "industry", "coal", "aberfan", "protest", "topic-industry", "trail-coal", "trail-sea", "firsts", "topic-science"]),
-    ("modern", "Modern Wales and the Welsh abroad", "Cymru fodern a’r Cymry ar wasgar", ["era-modern", "era-today", "revival", "mac", "fwa", "world", "madog", "tryweryn", "topic-abroad", "topic-sport"]),
+    ("modern", "Modern Wales and the Welsh abroad", "Cymru fodern a’r Cymry ar wasgar", ["era-modern", "era-today", "revival", "mac", "fwa", "world", "madog", "tryweryn", "epynt", "topic-abroad", "topic-sport"]),
     ("lang", "The Welsh language, names and places", "Yr iaith Gymraeg, enwau a lleoedd", ["language", "welsh-not", "topic-language", "welsh", "names", "towns", "maps", "sites"]),
     ("life", "Women and everyday life", "Menywod a bywyd bob dydd", ["topic-women", "trail-women", "topic-countryside"]),
 ]
@@ -1279,6 +1279,20 @@ def bookshelf_old_writers():
             f'<p class="l-links">{btns}</p></div>')
 
 
+def buyl(who, title, det=""):
+    """Small 'Buy: Amazon · AbeBooks' links after a book (src/booklinks.py buy())."""
+    b = BL.buy(who, title, det)
+    if not b:
+        return ""
+    return (f'<span class="ref-buy">{bi("Buy:", "Prynu:")} <a href="{e(b[0])}" target="_blank" rel="noopener nofollow">Amazon</a>'
+            f' · <a href="{e(b[1])}" target="_blank" rel="noopener nofollow">AbeBooks</a></span>')
+
+
+def refd(det):
+    """The (details) after a work's title; nothing when a book has no details."""
+    return f'<span class="ref-d">({e(det)})</span>' if det else ""
+
+
 def bookshelf_page():
     import fnmatch
     lists = {}
@@ -1318,12 +1332,12 @@ def bookshelf_page():
 
     def li(it):
         _, who, title, det, nen, ncy = it[:6]
-        url = it[6] if len(it) > 6 else ""
+        url = (it[6] if len(it) > 6 else "") or BL.link(who, title)
         t = f'<a href="{e(url)}" target="_blank" rel="noopener"><cite>{e(title)}</cite> ↗</a>' if url else f"<cite>{e(title)}</cite>"
         on = where.get((who, title), [])
         more = (f'<span class="ref-on">{bi("On this site:", "Ar y wefan hon:")} ' + ", ".join(f'<a href="{h}">{bi(en, cy)}</a>' for h, en, cy in on[:4])
                 + (f' {bi(f"and {len(on) - 4} more", f"a {len(on) - 4} arall")}' if len(on) > 4 else "") + "</span>") if on else ""
-        return f'<li id="{bid(it)}"><span class="ref-w">{e(who)}</span>, {t} <span class="ref-d">({e(det)})</span><span class="ref-n">{bi(nen, ncy)}</span>{more}</li>'
+        return f'<li id="{bid(it)}"><span class="ref-w">{e(who)}</span>, {t} {refd(det)}<span class="ref-n">{bi(nen, ncy)}</span>{buyl(who, title, det)}{more}</li>'
 
     def slug(x, n):
         return re.sub(r"[^a-z0-9]+", "-", x.lower())[:n].strip("-")
@@ -2126,9 +2140,14 @@ def era_of_year(y):
     return "today"
 
 
-def otd_pic(link, era, place=None):
-    """A small picture for an On this day row (home page panel): the person's or place's own photo,
-    else the linked page's picture (src/pictures.py), else the event's place, else the picture of its age."""
+OTD_ICON = {"born": "born", "died": "died", "feast": "cross", "custom": "harp"}
+
+
+def otd_pic(link, era, place=None, kind="ev"):
+    """A small picture for an On this day row (home page panel): the person's or place's own photo, else the linked page's
+    own picture (src/pictures.py), else the event's place. An entry with no picture of its own gets a small line drawing
+    instead ("i:<icon>": born, died, feast day, tradition, or the drawing of its age for an event), never the stock picture
+    of its age, which showed Capel Celyn beside Ivor Novello and the Cardiff Blitz (audit, November 2026)."""
     path = (link or "").split("#")[0]
     stem = path[:-5] if path.endswith(".html") else ""
     if stem.startswith("saints-") and "#s-" in (link or ""):
@@ -2142,8 +2161,16 @@ def otd_pic(link, era, place=None):
     if place and "place-" + place in GP.GALLERY:
         return f"gallery/place-{place}-s.webp"
     ref = PX.for_page(path) if path else None  # a saint without a portrait takes the picture of their region's saints page
-    ref = ref or PX.ERA.get(era) or PX.ERA["medieval"]
-    return PX._parse(ref)["small"]
+    if ref and ref not in PX.ERA.values():
+        return PX._parse(ref)["small"]
+    return "i:" + OTD_ICON.get(kind, ERA.get(era, ERA["medieval"])["ill"])
+
+
+def otd_pic_html(pic, cls="otd-pic"):
+    """The picture box of an On this day row: a photo, or the small drawing otd_pic() chose (app.js draws the same)."""
+    if pic.startswith("i:"):
+        return f'<span class="{cls} otd-ic" aria-hidden="true"><svg><use href="#i-{pic[2:]}"/></svg></span>'
+    return f'<span class="{cls}"><img src="{e(pic)}" alt="" width="96" height="96" loading="lazy" decoding="async"></span>'
 
 
 OTD_SRC = {}  # (MM-DD, year, English title) -> "[[cite:...]]" keys, filled by otd_rows()
@@ -2167,12 +2194,12 @@ def otd_rows():
         if link.startswith("saint:"):
             link = saint_href(link[6:])
         era = era_of_year(y) if y is not None else "saints" if k == "feast" else "modern"
-        rows.append([md, y, k, te, tc, le, lc, link, era, otd_pic(link, era)])
+        rows.append([md, y, k, te, tc, le, lc, link, era, otd_pic(link, era, kind=k)])
     for sid, (x, r) in SAINT.items():  # every other saint with a feast day on the Saints of Wales page
         if x["feast"] and sid not in covered:
             first = lambda t: t.split(". ")[0].rstrip(".") + "."
             link = saint_href(sid)
-            rows.append([f'{x["feast"][1]:02d}-{x["feast"][0]:02d}', None, "feast", x["en"], x["cy"], first(x["nEn"]), first(x["nCy"]), link, "saints", otd_pic(link, "saints")])
+            rows.append([f'{x["feast"][1]:02d}-{x["feast"][0]:02d}', None, "feast", x["en"], x["cy"], first(x["nEn"]), first(x["nCy"]), link, "saints", otd_pic(link, "saints", kind="feast")])
     rows.sort(key=lambda r: (r[0], OTD_ORDER[r[2]], r[1] if r[1] is not None else -10 ** 6))
     return rows
 
@@ -2674,7 +2701,7 @@ FT_CSS = """
 .ft-card.crown { border-left: 3px solid var(--c) }
 .ft-card.gap { background: transparent; border-style: dashed }
 .ft-card.gap .ft-nm { font-style: italic; color: var(--muted) }
-.ft-d { display: block; font: 500 .7rem var(--f-mono); letter-spacing: .05em; color: var(--muted) }
+.ft-d { display: block; font: 500 .75rem var(--f-mono); letter-spacing: .05em; color: var(--muted) }
 .ft-nm { all: unset; display: inline; cursor: pointer; font-family: var(--f-display); font-size: 1.22rem; line-height: 1.2; color: var(--ink); word-spacing: .04em }
 .ft-nm:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px }
 .ft-crown { width: .9em; height: .9em; margin-right: .3em; vertical-align: -.08em; color: var(--gold); fill: var(--gold) }
@@ -2695,19 +2722,19 @@ FT_CSS = """
 .ft-wed { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); gap: .9rem; margin-top: 1.2rem }
 .ft-wed a { display: grid; gap: .45rem; align-content: start; text-decoration: none; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 1rem 1.1rem; transition: transform .3s var(--ease), border-color .2s }
 .ft-wed a:hover { transform: translateY(-3px); border-color: var(--gold) }
-.ft-wed .hs { display: flex; align-items: center; gap: .45rem; font: 600 .7rem var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--gold) }
+.ft-wed .hs { display: flex; align-items: center; gap: .45rem; font: 600 .75rem var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--gold) }
 .ft-wed .hs i { font-style: normal; color: var(--muted) }
 .ft-wed p { margin: 0; font-size: .92rem; line-height: 1.55; color: #c9ccd4 }
 .road { display: grid; gap: 0 1.2rem; margin-top: 1.6rem; grid-template-columns: 1fr;
   grid-template-areas: "t" "r" "j1" "m" "l" "j2" "e" }
-.rd-col h3 { font: 600 .72rem var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--gold); margin: 1.4rem 0 .6rem; text-align: center }
+.rd-col h3 { font: 600 .75rem var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--gold); margin: 1.4rem 0 .6rem; text-align: center }
 .rd-chain { list-style: none; margin: 0 auto; padding: 0; max-width: 21rem; display: grid; gap: 1.2rem }
 .rd-chain li { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: .5rem .8rem; text-align: center }
 .rd-chain li + li::before { content: ""; position: absolute; left: 50%; top: -1.25rem; height: 1.2rem; border-left: 2px solid var(--gold); opacity: .7 }
 .rd-chain li.gap { background: transparent; border-style: dashed; font-style: italic; color: var(--muted); font-size: .88rem }
 .rd-chain b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 1.1rem; line-height: 1.2 }
 .rd-chain b a { color: var(--ink); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--gold) 55%, transparent) }
-.rd-chain .dt { display: block; font: 500 .68rem var(--f-mono); color: var(--muted) }
+.rd-chain .dt { display: block; font: 500 .75rem var(--f-mono); color: var(--muted) }
 .rd-chain small { display: block; font-size: .8rem; color: #c9ccd4; margin-top: .1rem }
 .rd-join { position: relative; text-align: center; padding: 1.4rem 0 1.2rem; color: var(--gold); font-size: .9rem; font-style: italic }
 .rd-join::before { content: "↓"; display: block; font-style: normal; font-size: 1.2rem; line-height: 1; margin-bottom: .3rem }
@@ -2825,7 +2852,7 @@ def family_trees_page():
                 main, era="kings", ld=ld, og_type="website", active="kings.html", track="kings:trees", extra=FT_JS)
 
 # ---------- Welsh word of the day and beginner's phrases (src/cymraeg.py, src/welsh.js) ----------
-WELSH_JS_VER = 3  # raise whenever src/welsh.js changes, so browsers fetch the new copy
+WELSH_JS_VER = 4  # raise whenever src/welsh.js changes, so browsers fetch the new copy
 AUDIO_DIR = os.path.join(SRC, "static", "audio")
 AUDIO_FILES = sorted(f[:-4] for f in os.listdir(AUDIO_DIR) if f.endswith(".mp3")) if os.path.isdir(AUDIO_DIR) else []
 LL_CREDITS = json.loads(read("audio_credits.json")) if os.path.exists(os.path.join(SRC, "audio_credits.json")) else {}
@@ -3020,7 +3047,7 @@ SAINTS_JS = '<script src="saints.js?v=2" defer></script>\n'
 SAINTS_CSS = """
 .ll-chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .6rem }
 .chip.ll { font: 500 .8rem var(--f-body); padding: .22rem .7rem; cursor: default; color: var(--ink); border-color: color-mix(in srgb, var(--c) 45%, var(--line)) }
-.chip.ll small { color: var(--muted); font-size: .74rem }
+.chip.ll small { color: var(--muted); font-size: .75rem }
 a.chip.ll { cursor: pointer } a.chip.ll:hover { border-color: var(--c) }
 .chip.ll.away { border-style: dashed }
 .era-events .feast { font: 500 .78rem var(--f-mono); color: var(--c); letter-spacing: .04em; margin-top: .15rem }
@@ -3289,7 +3316,7 @@ def otd_home_row(r, show_date):
     if tag:
         bits.append(f'<span class="k">{bi(*tag)}</span>')
     href = link or f"onthisday.html#d-{md}"
-    return (f'<li class="otd-row wl-card" data-era="{era}"><span class="otd-pic"><img src="{e(pic)}" alt="" width="96" height="96" loading="lazy" decoding="async"></span>'
+    return (f'<li class="otd-row wl-card" data-era="{era}">{otd_pic_html(pic)}'
             f'<div class="otd-txt"><p class="otd-meta">{"".join(bits)}</p><h3>{bi(te, tc)}</h3><p>{bi(le, lc)}</p></div>'
             f'<a class="wl" href="{e(href)}">{bi(te, tc)}</a></li>')
 
@@ -3321,11 +3348,12 @@ def ssr_today():
         n = len(by_day.get(dm, []))
         wd = WEEKDAYS[d.weekday()]
         week += (f'<button type="button" class="otd-wd{" on" if k == 0 else ""}{" has" if n else ""}" data-otd-day="{dm}" aria-pressed="{"true" if k == 0 else "false"}">'
-                 f'<span class="w">{bi(*wd)}</span><span class="n">{d.day}</span><i aria-hidden="true">{"".join("<b></b>" for _ in range(min(n, 3)))}</i></button>')
-    pic = shown[0][9] if shown else PX._parse(PX.ERA["medieval"])["small"]
+                 f'<span class="w">{bi(*wd)}</span> <span class="n">{d.day}</span><i aria-hidden="true">{"".join("<b></b>" for _ in range(min(n, 3)))}</i></button>')
+    pic = next((r[9] for r in shown if not r[9].startswith("i:")), "")  # the first real picture of the day, or none
     note = (f'<p class="otd-near">{bi("Nothing we know of happened on exactly this day. Here are the nearest dates.", "Ni wyddom am ddim a ddigwyddodd ar union y diwrnod hwn. Dyma’r dyddiadau agosaf.")}</p>' if near else "")
     more = (f'<button type="button" class="otd-more" data-otd="more">+{len(hit) - len(shown)} {bi("more on this day", "arall ar y dydd hwn")}</button>' if len(hit) > len(shown) else "")
-    return (f'<div class="otd-head"><img class="otd-bg" src="{e(pic)}" alt="" loading="lazy" decoding="async">'
+    bg = f'<img class="otd-bg" src="{e(pic)}" alt="" loading="lazy" decoding="async">' if pic else ""
+    return (f'<div class="otd-head">{bg}'
             f'<p class="otd-date"><span class="d">{day.day}</span><span class="m">{bi(*MONTHS[m])}</span><span class="lab">{bi("Today", "Heddiw")}</span></p>'
             f'<span class="otd-nav"><button type="button" data-otd="-1" aria-label="{bi("Day before", "Y diwrnod cynt")}">‹</button><button type="button" data-otd="1" aria-label="{bi("Next day", "Y diwrnod nesaf")}">›</button></span></div>'
             f'<div class="otd-week" role="group" aria-label="{bi("Choose a day", "Dewiswch ddiwrnod")}">{week}</div>'
@@ -3364,10 +3392,65 @@ def ssr_chart():
     return s + "</svg>"
 
 
+def buyr(r):
+    """The home Further reading row's buy links (r["b"] from data.py); app.js draws the same."""
+    if not r.get("b"):
+        return ""
+    return (f'<span class="ref-buy">{bi("Buy:", "Prynu:")} <a href="{e(r["b"][0])}" target="_blank" rel="noopener nofollow">Amazon</a>'
+            f' · <a href="{e(r["b"][1])}" target="_blank" rel="noopener nofollow">AbeBooks</a></span>')
+
+
 def ssr_books():
     def title(r):
         return f'<a href="{e(r["u"])}" target="_blank" rel="noopener"><b>{e(r["t"])}</b></a>' if r.get("u") else f"<b>{e(r['t'])}</b>"
-    return "".join(f"<li>{title(r)}<span>{bi(r['n'], r['nCy'])}</span></li>" for r in D.READING)
+    return "".join(f"<li>{title(r)}<span>{bi(r['n'], r['nCy'])}</span>{buyr(r)}</li>" for r in D.READING)
+
+
+def reading_page():
+    """further-reading.html: every book in the home page's Further reading, with notes and Buy links (Ifan: Show all opens a page)."""
+    def li(r):
+        who, title = r["t"].split(", ", 1)
+        t = f'<a href="{e(r["u"])}" target="_blank" rel="noopener"><cite>{e(title)}</cite> ↗</a>' if r.get("u") else f"<cite>{e(title)}</cite>"
+        return f'<li><span class="ref-w">{e(who)}</span>, {t}<span class="ref-n">{bi(r["n"], r["nCy"])}</span>{buyr(r)}</li>'
+    n = len(D.READING)
+    main = (hero("tudor", f'<a href="index.html">{SITE}</a>', "book", "Further reading", "Darllen pellach", "The best books on Welsh history", "Y llyfrau gorau ar hanes Cymru",
+                 f"The {n} books we would hand anyone who wants to know the story of Wales.", f"Y {n} llyfr y byddem yn eu rhoi i unrhyw un sydd am wybod stori Cymru.", art="book")
+            + section(f'<div class="narrow"><section class="refs"><ul>{"".join(li(r) for r in D.READING)}</ul></section>'
+                      f'<p class="refs-all"><a class="btn solid" href="books-and-authors.html">{bi("Every book on the site, with its authors, period by period", "Pob llyfr ar y wefan, gyda’u hawduron, fesul cyfnod")} →</a></p>'
+                      f'<p class="refs-all"><a class="btn" href="online-sources.html">{bi("The best websites on Welsh history", "Y gwefannau gorau ar hanes Cymru")} →</a></p></div>', top=True))
+    return page("further-reading.html", "Further reading: the best books on Welsh history · History of Wales",
+                f"The {n} best books on the history of Wales, from John Davies and Gwynfor Evans to Jan Morris, each with a link and where to buy it.", main, era="tudor", track="further-reading")
+
+
+def online_page():
+    """online-sources.html: every website in the home page's Online list, then every website the pages' reading lists cite."""
+    def short(u):
+        return re.sub(r"/$", "", re.sub(r"^https://(www[.])?", "", u))
+
+    def li(r):
+        cy = r.get("uCy") or r["u"]
+        if cy == r["u"]:
+            a = f'<a href="{e(r["u"])}" target="_blank" rel="noopener"><b>{bi(r["t"], r.get("tCy", r["t"]))}</b> ↗</a>'
+        else:
+            a = (f'<a class="l-en" lang="en" href="{e(r["u"])}" target="_blank" rel="noopener"><b>{e(r["t"])}</b> ↗</a>'
+                 f'<a class="l-cy" lang="cy" href="{e(cy)}" target="_blank" rel="noopener"><b>{e(r.get("tCy", r["t"]))}</b> ↗</a>')
+        return f'<li>{a}<span class="ref-d"> {e(short(r["u"]))}</span></li>'
+    seen, more = {short(r["u"]) for r in D.ONLINE}, []
+    for v in list(REF.REFS.values()) + list(REF2.PAGES.values()):
+        for it in (v or {}).get("items", []):
+            if it[0] == "w" and len(it) > 6 and it[6] and it[2] not in {m[2] for m in more} and short(it[6]) not in seen:
+                more.append(it)
+    more.sort(key=lambda it: it[2].lower())
+    rows = "".join(f'<li><span class="ref-w">{e(it[1])}</span>, <a href="{e(it[6])}" target="_blank" rel="noopener"><cite>{e(it[2])}</cite> ↗</a>'
+                   f'<span class="ref-n">{bi(it[4], it[5])}</span></li>' for it in more)
+    n = len(D.ONLINE)
+    main = (hero("today", f'<a href="index.html">{SITE}</a>', "book", "Online", "Ar-lein", "The best websites on Welsh history", "Y gwefannau gorau ar hanes Cymru",
+                 f"The {n} best places online to read, search and see the history of Wales, all free.", f"Y {n} lle gorau ar-lein i ddarllen, chwilio a gweld hanes Cymru, i gyd am ddim.", art="book")
+            + section(f'<div class="narrow"><section class="refs"><ul>{"".join(li(r) for r in D.ONLINE)}</ul></section>'
+                      + (f'<section class="refs"><h2>{bi("More websites the pages of this site use", "Rhagor o wefannau a ddefnyddir gan dudalennau’r wefan hon")}</h2><ul>{rows}</ul></section>' if more else "")
+                      + f'<p class="refs-all"><a class="btn" href="further-reading.html">{bi("The best books on Welsh history", "Y llyfrau gorau ar hanes Cymru")} →</a></p></div>', top=True))
+    return page("online-sources.html", "Online: the best websites on Welsh history · History of Wales",
+                "The best free websites for the history of Wales: the Dictionary of Welsh Biography, the National Library, Welsh Newspapers, Coflein and more.", main, era="today", track="online-sources")
 
 
 def ssr_online():
@@ -3521,8 +3604,9 @@ def _letters(text):
     return " ".join(out)
 
 
-HERO_NAME = (f'<p class="hero-name"><span class="l-en" lang="en" aria-label="History of Wales">{_letters("History of Wales")}</span>'
-             f'<span class="l-cy" lang="cy" aria-label="Hanes Cymru">{_letters("Hanes Cymru")}</span></p>')
+# the letters are hidden from screen readers, which hear the name once, whole (an aria-label on a <span> is ignored)
+HERO_NAME = (f'<p class="hero-name"><span class="l-en" lang="en"><span class="sr-only">History of Wales</span><span aria-hidden="true">{_letters("History of Wales")}</span></span>'
+             f'<span class="l-cy" lang="cy"><span class="sr-only">Hanes Cymru</span><span aria-hidden="true">{_letters("Hanes Cymru")}</span></span></p>')
 
 
 def fill(fragment, active="", skip="#chapters", home=False):
@@ -3918,8 +4002,17 @@ def _fp(text):
     return hashlib.md5(text.encode("utf-8")).hexdigest()[:10]
 
 
+SPRITE = ('<svg xmlns="http://www.w3.org/2000/svg">' + symbols[symbols.index("<defs>"): symbols.rindex("</defs>") + 7] + "</svg>\n")
+SPRITE_URL = f"sprite.svg?v={_fp(SPRITE)}"
+
+
 def shared_assets(pages):
-    files = {}
+    files = {"sprite.svg": SPRITE}
+    # The line drawings (#i-castle and the rest) live in sprite.svg, not in every page. A page used to carry them inline and
+    # point at "#i-castle", but the Welsh pages have <base href="../">, so "#i-castle" meant the English home page and the
+    # drawings came out blank on /cy/ (audit, November 2026). "sprite.svg#i-castle" works the same in both languages.
+    for name, text in list(pages.items()):
+        pages[name] = text.replace(symbols + "\n", "").replace(symbols, "").replace('href="#i-', f'href="{SPRITE_URL}#i-')
     css = style + PRINT_CSS
     css_tag = f'<link rel="stylesheet" href="site.css?v={_fp(css)}">\n'
     files["site.css"] = css
@@ -3943,6 +4036,35 @@ def shared_assets(pages):
         files["data.js"] = data_js
         files["app.js"] = app_js
     return files
+
+
+# ---------- every link between pages must lead somewhere ----------
+# The audit of November 2026 found one dead link on the whole site (learn-welsh.html on the Welsh Not long read). This
+# check keeps it that way: the build stops and names the page and the link if any link points at a page that is not built.
+_HREF = re.compile(r'<a\b[^>]*?\shref="([^"]*)"', re.I)
+_SCRIPTS = re.compile(r"<(script|style|template)\b.*?</\1\s*>", re.S | re.I)
+
+
+def check_links(pages):
+    static = set()
+    for root, _dirs, files in os.walk(os.path.join(SRC, "static")):
+        for f in files:
+            static.add(os.path.relpath(os.path.join(root, f), os.path.join(SRC, "static")).replace(os.sep, "/"))
+    broken = []
+    for name, text in pages.items():
+        if not name.endswith(".html"):
+            continue
+        folder = "" if name.startswith("cy/") else os.path.dirname(name)  # the Welsh pages have <base href="../">
+        for h in _HREF.findall(_SCRIPTS.sub("", text)):
+            h = html.unescape(h).split("#")[0].split("?")[0]
+            if not h or re.match(r"^[a-z][a-z0-9+.-]*:|^//", h, re.I):
+                continue   # a #part of the same page, or another website
+            t = os.path.normpath(h.lstrip("/") if h.startswith("/") else os.path.join(folder, h)).replace(os.sep, "/")
+            if h.endswith("/") or h in (".", ".."):
+                t = "index.html" if t == "." else t + "/index.html"   # a folder: its index.html
+            if t.endswith(".html") and t not in pages and t not in static:
+                broken.append(f"{name} -> {h}")
+    return broken
 
 
 # ---------- the page for addresses that do not exist ----------
@@ -4008,6 +4130,8 @@ def main():
     for i, (b, _g) in enumerate(ALL_BOOKS):
         pages[f'book-{b["id"]}.html'] = book_page(i)
     pages["books-and-authors.html"] = bookshelf_page()
+    pages["further-reading.html"] = reading_page()     # the home page's Show all buttons open these two
+    pages["online-sources.html"] = online_page()
     pages["triads.html"] = triads_page()
     pages["laws.html"] = laws_page()
     for i, x in enumerate(F.LEGENDS):
@@ -4051,6 +4175,12 @@ def main():
     today = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
     for name in pages:   # "Last updated" on each page, and dateModified for search engines (src/about.py)
         pages[name] = AB.fill_dates(pages[name], marks.get(name, [None, today])[1])
+    broken = check_links(pages)
+    if broken:
+        print(f"BROKEN LINKS: {len(broken)} link(s) point at pages that do not exist. Fix them (or add the page) and build again:")
+        print("\n".join("  " + b for b in sorted(set(broken))[:200]))
+        if os.environ.get("ALLOW_BROKEN_LINKS") != "1":
+            sys.exit(1)
     for name, text in pages.items():
         write(os.path.join(out, name), text)
     for name, text in shared_files.items():

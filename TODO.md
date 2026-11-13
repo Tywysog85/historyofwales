@@ -8,10 +8,6 @@ Open jobs for History of Wales. Tick a job off by deleting it. Keep this list sh
 - **Lifelike dragon: who made it.** The 3D dragon comes from a kit that says its assets are Creative Commons but does not name the artist or the exact licence. If the artist is found, credit them by name in README.md. If anyone objects, swap the model (see SKILLS.md, "The lifelike dragon in the sky").
 - **Photo check.** The photos of places, people and castles were picked by file name and have not been looked at. Any that are wrong should be swapped. The owner's own photos are welcome.
 
-## Needs a fluent Welsh speaker
-
-- **Proofread the Welsh.** All of it, and most of all the text added in November 2026: the long reads, the new people, the new places, the kingdoms map, the saints pages, the castles map, the old books, the Mabinogi pages and the people in `src/people2a.py` to `people2i.py`.
-
 ## Checking and sources
 
 - **Check the new history against sources.** The long reads and new people added in November 2026 were written from general knowledge. Dates, names and quotations should be checked, and sources linked.

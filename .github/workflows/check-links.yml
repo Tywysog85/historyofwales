@@ -1,0 +1,50 @@
+name: Check links to other websites
+
+# Once a week: builds the site, asks every outside website the site links to whether the page is still there
+# (tools/check_links.py), and keeps one GitHub issue, "Broken links to other websites", up to date with the answer.
+# The issue closes itself when nothing is broken. The run never fails, so nobody gets failure emails.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * 0"   # Sundays, 03:00 UTC
+  push:
+    branches: ["claude/**"]
+    paths: ["tools/check_links.py", ".github/workflows/check-links.yml"]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build the site
+        run: pip install pillow && python3 build.py > /dev/null
+        env:
+          CARDS: "0"
+          SITE_URL: https://historyofwales.cymru/
+      - name: Check the links
+        continue-on-error: true
+        run: python3 tools/check_links.py
+      - name: Update the issue
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          [ -f link-report.md ] || exit 0
+          cat link-report.md >> "$GITHUB_STEP_SUMMARY"
+          title="Broken links to other websites"
+          n=$(cat link-count.txt)
+          num=$(gh issue list --state all --search "in:title \"$title\"" --json number,title --jq ".[] | select(.title == \"$title\") | .number" | head -1)
+          if [ "$n" = "0" ]; then
+            [ -n "$num" ] && gh issue edit "$num" --body-file link-report.md && gh issue close "$num" || true
+            exit 0
+          fi
+          if [ -n "$num" ]; then gh issue edit "$num" --body-file link-report.md && gh issue reopen "$num" || true
+          else gh issue create --title "$title" --body-file link-report.md; fi

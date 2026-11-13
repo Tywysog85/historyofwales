@@ -33,7 +33,7 @@
 .w10-step:first-child h1 { font-size: clamp(2.2rem, 5vw, 3.4rem) }
 .w10-card p { line-height: 1.65; margin: 0 0 .85rem }
 .w10-card .eyebrow { margin: 0; color: var(--dragon) }
-.w10-n { float: right; font-family: var(--f-mono); font-size: .72rem; color: var(--muted) }
+.w10-n { float: right; font-family: var(--f-mono); font-size: .75rem; color: var(--muted) }
 .w10-more { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; margin: 1rem 0 0 !important; font-weight: 600 }
 .w10-more a { color: var(--dragon); text-decoration: none }
 .w10-more a:hover { text-decoration: underline }
@@ -63,5 +63,5 @@
 
 .w10-pic { margin: .4rem 0 1rem }
 .w10-pic img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; display: block }
-.w10-pic figcaption { font-size: .72rem; line-height: 1.4; color: var(--mute, #9aa0ad); margin-top: .4rem }
+.w10-pic figcaption { font-size: .75rem; line-height: 1.4; color: var(--mute, #9aa0ad); margin-top: .4rem }
 .w10-pic figcaption a { color: inherit }

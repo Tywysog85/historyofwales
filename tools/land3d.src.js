@@ -218,8 +218,10 @@ try {
   let castle = null, wantCastle = false, W = 0, H = 0, key = "", flagV = -1;
   const cA = new THREE.Color(), cB = new THREE.Color(), v = new THREE.Vector3();
   const img = new Image();
-  /* phones get half-size castle stone pictures (the same look on a small screen). The mountain pictures stay full size: smaller ones visibly soften the snow. */
-  const SM = Math.min(screen.width, screen.height) <= 600 ? "-m" : "";
+  /* phones, and screens no more than 1600 real pixels wide, get half-size castle stone pictures (the same look there, 250 KB less).
+     Sharp wide screens keep the full-size stone: half-size softens the mortar lines at 2x. The mountain pictures stay full size on every screen:
+     half-size colour dims the snow and half-size relief loses the gullies (side-by-side renders, 13 November 2026). */
+  const SM = Math.min(screen.width, screen.height) <= 600 || screen.width * (window.devicePixelRatio || 1) <= 1600 ? "-m" : "";
   let rockT = null;
   img.onload = () => Promise.all(["eryri-c.webp", "eryri-n.webp", "detail.webp", "rock.webp", "rock-n.webp"].map(ld)).then((t) => {
     [t[3], t[4]].forEach((q) => { q.wrapS = q.wrapT = THREE.RepeatWrapping; q.anisotropy = 8; }); t[3].colorSpace = THREE.SRGBColorSpace;

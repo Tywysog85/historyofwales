@@ -854,6 +854,8 @@ from oldbooks import CITES as _OLDBOOKS  # noqa: E402  (the old books of Wales, 
 S.update(_OLDBOOKS)
 from onthisday import CITES as _OTD  # noqa: E402  (the sources of On this day, src/onthisday.py)
 S.update(_OTD)
+from epynt import CITES as _EPYNT  # noqa: E402  (the clearing of Epynt, src/epynt.py)
+S.update(_EPYNT)
 
 MARK = re.compile(r"\[\[cite:([a-z0-9,\- ]+)\]\]")
 
@@ -886,7 +888,6 @@ def chip(ks, cy=False, prefix="cite"):
     i = 0 if not cy else 1
     _n[0] += 1
     pid = f"{prefix}-{_n[0]}"
-    link = next((s.get("url_cy") if cy and s.get("url_cy") else s["url"] for s in srcs if s["url"]), None)
     label = first["short"][i] + (f" +{len(srcs) - 1}" if len(srcs) > 1 else "")
     word = ("Ffynhonnell" if len(srcs) == 1 else "Ffynonellau") if cy else ("Source" if len(srcs) == 1 else "Sources")
     aria = f"{word}: " + "; ".join(s["short"][i] for s in srcs)
@@ -897,8 +898,8 @@ def chip(ks, cy=False, prefix="cite"):
         eng = " (Saesneg)" if cy and s.get("lang") == "en" else ""
         items += (f'<span class="cite-i"><span class="cite-t">{title}</span><span class="cite-by">{e(s["by"][i] if isinstance(s["by"], tuple) else s["by"])}{eng}</span>'
                   f'<span class="cite-n">{e(s["note"][i])}</span></span>')
-    tag_open = f'<a class="cite" href="{e(link)}" target="_blank" rel="noopener"' if link else '<a class="cite" href="#"'
-    return (f'<span class="cite-w">{tag_open} aria-controls="{pid}" aria-label="{e(aria)}" data-cite>{e(label)}</a>'
+    # a real button (it opens the card; the card holds the links), so Space and Enter both work and screen readers hear "button, collapsed"
+    return (f'<span class="cite-w"><button type="button" class="cite" aria-expanded="false" aria-controls="{pid}" aria-label="{e(aria)}" data-cite>{e(label)}</button>'
             f'<span class="cite-pop" id="{pid}" role="note" hidden><span class="cite-h">{e(word)}</span>{items}'
             f'<button type="button" class="cite-x" aria-label="{"Cau" if cy else "Close"}">×</button></span></span>')
 
@@ -953,7 +954,7 @@ CSS = """
 .cite-w { position: relative; display: inline; white-space: nowrap }
 .cite { display: inline-block; margin-left: .3em; padding: .05em .5em .1em; border: 1px solid var(--line); border-radius: 999px;
   font-family: var(--f-mono); font-size: .62rem; font-weight: 500; line-height: 1.5; letter-spacing: .02em; vertical-align: .2em;
-  color: var(--muted); background: rgba(255,255,255,.03); text-decoration: none; white-space: nowrap; cursor: pointer }
+  color: var(--muted); background: rgba(255,255,255,.03); text-decoration: none; white-space: nowrap; cursor: pointer; -webkit-appearance: none; appearance: none; font-style: normal; text-transform: none }
 .cite::before { content: "§"; margin-right: .3em; color: var(--dragon) }
 .cite:hover, .cite[aria-expanded="true"] { color: var(--ink); border-color: var(--dragon) }
 .cite:focus-visible { outline: 2px solid var(--dragon); outline-offset: 2px }
@@ -962,7 +963,7 @@ CSS = """
   background: var(--slate-2); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 14px 40px rgba(0,0,0,.45);
   font-family: var(--f-body); font-size: .86rem; line-height: 1.45; font-weight: 400; letter-spacing: 0; word-spacing: 0; color: var(--ink) }
 .cite-pop[hidden] { display: none }
-.cite-h { font-family: var(--f-mono); font-size: .66rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted) }
+.cite-h { font-family: var(--f-mono); font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted) }
 .cite-i { display: grid; gap: .2rem }
 .cite-i + .cite-i { padding-top: .7rem; border-top: 1px solid var(--line) }
 .cite-t { font-weight: 600 }
@@ -973,7 +974,7 @@ CSS = """
   color: var(--muted); font-size: 1.25rem; line-height: 1; cursor: pointer }
 .cite-x:hover { color: var(--ink); background: rgba(255,255,255,.06) }
 @media (max-width: 640px) {
-  .cite { font-size: .7rem; padding: .28em .7em .32em; vertical-align: .1em }
+  .cite { font-size: .75rem; padding: .28em .7em .32em; vertical-align: .1em }
   .cite-pop { position: fixed; left: .75rem; right: .75rem; top: auto; bottom: .75rem; width: auto; max-height: 70vh; overflow: auto }
 }
 @media print { .cite-pop { display: none !important } .cite { border: 0; padding: 0 } }

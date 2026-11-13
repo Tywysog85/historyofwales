@@ -439,6 +439,7 @@ READING = [
  dict(t="John Davies, A History of Wales", n="Penguin, revised 2007. The standard one-volume history.", nCy="Penguin, argraffiad diwygiedig 2007. Y safon mewn un gyfrol."),
  dict(t="Gwynfor Evans, Land of My Fathers: 2000 Years of Welsh History", n="John Penry Press, 1974; now from Y Lolfa. Two thousand years of the story of Wales, told with pride.", nCy="Gwasg John Penry, 1974; bellach gan y Lolfa. Dwy fil o flynyddoedd o stori Cymru, wedi’u hadrodd gyda balchder. Yn Gymraeg: Aros Mae.", u="YL9780862432652/land-of-my-fathers"),
  dict(t="Gwynfor Evans, The Fight for Welsh Freedom", n="Y Lolfa. The long struggle of the Welsh to stay a free nation.", nCy="Y Lolfa. Brwydr hir y Cymry i aros yn genedl rydd.", u="YL9780862435158/the-fight-for-welsh-freedom"),
+ dict(t="Gwynfor Evans, For the Sake of Wales: The Memoirs of Gwynfor Evans", n="Welsh Academic Press, 1996; first published in Welsh in 1982. Gwynfor’s own story of his life and his fight for Wales.", nCy="Gwasg Academaidd Cymru, 1996; cyhoeddwyd gyntaf yn Gymraeg yn 1982. Stori Gwynfor ei hun am ei fywyd a’i frwydr dros Gymru.", u="https://openlibrary.org/books/OL596418M/For_the_sake_of_Wales"),
  dict(t="Gwyn A. Williams, When Was Wales?", n="Penguin, 1985. A passionate, provocative history.", nCy="Penguin, 1985. Hanes angerddol a phryfoclyd."),
  dict(t="Geraint H. Jenkins, A Concise History of Wales", n="Cambridge University Press, 2007. The whole story in one short, well-illustrated book.", nCy="Gwasg Prifysgol Caergrawnt, 2007. Yr hanes cyfan mewn un llyfr byr, llawn lluniau."),
  dict(t="Gerald Morgan, A Brief History of Wales", n="Y Lolfa, 2008. The whole story in one short, clear book.", nCy="Y Lolfa, 2008. Yr hanes cyfan mewn un llyfr byr a chlir.", u="YL9781847710185/a-brief-history-of-wales"),
@@ -456,9 +457,15 @@ READING = [
  dict(t="Martin Johnes, Wales since 1939", n="Manchester University Press, 2012.", nCy="Gwasg Prifysgol Manceinion, 2012."),
  dict(t="Jan Morris, Wales: Epic Views of a Small Country", n="Penguin, 1998. History as travel writing.", nCy="Penguin, 1998. Hanes drwy lenyddiaeth teithio."),
 ]
+import booklinks as _BL  # every other book gets its publisher's (or Open Library's) page
 for _r in READING:
     if _r.get("u", "").startswith("YL"):
         _r["u"] = "https://www.ylolfa.com/products/" + _r["u"][2:]
+    elif not _r.get("u"):
+        _r["u"] = _BL.link(*_r["t"].split(", ", 1))
+    _b = _BL.buy(*_r["t"].split(", ", 1))   # where to buy it: Amazon UK and AbeBooks search links
+    if _b:
+        _r["b"] = list(_b)
 ONLINE = [  # u: the English site, uCy: its Welsh address (each checked 2026-11-12)
  dict(t="Dictionary of Welsh Biography", tCy="Y Bywgraffiadur Cymreig", u="https://biography.wales/", uCy="https://bywgraffiadur.cymru/"),
  dict(t="National Library of Wales", tCy="Llyfrgell Genedlaethol Cymru", u="https://www.library.wales/", uCy="https://www.llyfrgell.cymru/"),
@@ -470,6 +477,14 @@ ONLINE = [  # u: the English site, uCy: its Welsh address (each checked 2026-11-
  dict(t="People’s Collection Wales", tCy="Casgliad y Werin Cymru", u="https://www.peoplescollection.wales/", uCy="https://www.casgliadywerin.cymru/"),
  dict(t="Royal Commission on the Ancient and Historical Monuments of Wales", tCy="Comisiwn Brenhinol Henebion Cymru", u="https://rcahmw.gov.uk/", uCy="https://cbhc.gov.uk/"),
  dict(t="Coflein, the national monuments record", tCy="Coflein, cofnod henebion cenedlaethol", u="https://coflein.gov.uk/", uCy="https://coflein.gov.uk/cy/"),
+ dict(t="Heneb: the Trust for Welsh Archaeology", tCy="Heneb: Ymddiriedolaeth Archaeoleg Cymru", u="https://heneb.org.uk/", uCy="https://heneb.org.uk/cy/"),  # added 2026-11-13
+ dict(t="Cambrian Archaeological Association", tCy="Cymdeithas Hynafiaethau Cymru", u="https://cambrians.org.uk/", uCy="https://cambrians.org.uk/cy/"),
+ dict(t="Historic Place Names of Wales", tCy="Enwau Lleoedd Hanesyddol Cymru", u="https://historicplacenames.rcahmw.gov.uk/", uCy="https://enwaulleoeddhanesyddol.cbhc.gov.uk/"),
+ dict(t="Seintiau: the saints of Wales", tCy="Seintiau: seintiau Cymru", u="https://saints.wales/"),
+ dict(t="Dafydd ap Gwilym: all his poems", tCy="Dafydd ap Gwilym: ei gerddi i gyd", u="https://dafyddapgwilym.net/index_eng.php", uCy="https://dafyddapgwilym.net/index_cym.php"),
+ dict(t="Guto’r Glyn and his Wales", tCy="Guto’r Glyn a’i Gymru", u="https://gutorglyn.net/gutoswales/index.php", uCy="https://gutorglyn.net/gutoswales/cy/index.php"),
+ dict(t="Welsh Prose 1300–1425: the old tales and laws in their manuscripts", tCy="Rhyddiaith 1300–1425: yr hen chwedlau a’r cyfreithiau yn eu llawysgrifau", u="https://rhyddiaithganoloesol.cardiff.ac.uk/en"),
+ dict(t="The Honourable Society of Cymmrodorion, since 1751", tCy="Anrhydeddus Gymdeithas y Cymmrodorion, ers 1751", u="https://www.cymmrodorion.org/", uCy="https://www.cymmrodorion.org/cy/"),
  dict(t="Cymdeithas yr Iaith: its story since 1962", tCy="Cymdeithas yr Iaith: ei hanes ers 1962", u="https://archif.cymdeithas.cymru/what-is-cymdeithas-yr-iaith"),
  dict(t="Y Lolfa, the Talybont press", tCy="Y Lolfa, gwasg Tal-y-bont", u="https://www.ylolfa.com/"),
  dict(t="ffolio: Welsh books from the Books Council of Wales", tCy="ffolio: llyfrau Cymru gan Gyngor Llyfrau Cymru", u="https://www.ffolio.wales/", uCy="https://www.ffolio.cymru/"),
@@ -719,6 +734,9 @@ EVENTS = sorted(EVENTS + _MACE, key=lambda ev: ev[1])
 # ---------- The drowning of Capel Celyn and Cwm Tryweryn (src/tryweryn.py) ----------
 from tryweryn import EVENTS as _TWE
 EVENTS = sorted(EVENTS + _TWE, key=lambda ev: ev[1])
+# ---------- The clearing of Mynydd Epynt, 1940 (src/epynt.py) ----------
+from epynt import EVENTS as _EPE
+EVENTS = sorted(EVENTS + _EPE, key=lambda ev: ev[1])
 # ---------- The Welsh Not and the fight for the language (src/welshnot.py) ----------
 from welshnot import EVENTS as _WNE
 EVENTS = sorted(EVENTS + _WNE, key=lambda ev: ev[1])

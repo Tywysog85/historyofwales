@@ -8,6 +8,22 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-13", "Cofiwch Epynt: the clearing of the mountain, 1940", "Cofiwch Epynt: clirio’r mynydd, 1940",
+     "A new long read: how 219 people from 54 homes on Mynydd Epynt, a whole Welsh-speaking community with its chapel, school and inn, were made to leave in 1940 for an army range; Iorwerth Peate and ‘Mae’n ddiwedd byd yma’; the fire on the hearth at Glandŵr; and how Wales remembers them, with the farm names set back on the land in 2025.",
+     "Erthygl newydd: sut y gorfodwyd 219 o bobl o 54 o gartrefi ar Fynydd Epynt, cymuned Gymraeg gyfan gyda’i chapel, ei hysgol a’i thafarn, i adael yn 1940 er mwyn maes tanio’r fyddin; Iorwerth Peate a ‘Mae’n ddiwedd byd yma’; y tân ar aelwyd Glandŵr; a sut y mae Cymru’n eu cofio, gydag enwau’r ffermydd yn ôl ar y tir yn 2025.",
+     "story-epynt.html"),
+    ("2026-11-13", "Seventy new books, and where to buy them", "Saith deg o lyfrau newydd, a ble i’w prynu",
+     "The Books and authors page has grown by seventy books, from Gwyn A. Williams’s Excalibur and every book by Alan Wilson and Baram Blackett to the old classics of Skene, Wade-Evans and Borrow, many with a free scan to read online. Every book on that page and in Further reading now has Buy links to Amazon and AbeBooks, so you can find a new or second-hand copy.",
+     "Mae’r dudalen Llyfrau ac awduron wedi tyfu o saith deg o lyfrau, o Excalibur Gwyn A. Williams a phob llyfr gan Alan Wilson a Baram Blackett i hen glasuron Skene, Wade-Evans a Borrow, llawer ohonynt gyda chopi i’w ddarllen am ddim ar-lein. Mae gan bob llyfr ar y dudalen honno ac yn Darllen pellach ddolenni Prynu i Amazon ac AbeBooks bellach, er mwyn i chi gael copi newydd neu ail-law.",
+     "books-and-authors.html"),
+    ("2026-11-13", "A faster and more private site", "Gwefan gyflymach a mwy preifat",
+     "On older phones and slow connections the front page now shows a still picture of the dragon over Eryri instead of the 3D scene, so it opens quickly. The fonts now come from this site itself, so reading it no longer contacts Google, and pages you have visited before open faster. The privacy note on the About page now covers the weekly email too, and a browser set to Welsh is offered the Welsh pages once.",
+     "Ar ffonau hŷn a chysylltiadau araf mae’r dudalen flaen bellach yn dangos llun llonydd o’r ddraig dros Eryri yn lle’r olygfa 3D, fel ei bod yn agor yn gyflym. Daw’r ffontiau o’r wefan hon ei hun bellach, felly nid yw ei darllen yn cysylltu â Google mwyach, ac mae tudalennau rydych wedi ymweld â nhw o’r blaen yn agor yn gyflymach. Mae’r nodyn preifatrwydd ar y dudalen Amdanom yn sôn am yr e-bost wythnosol hefyd, a chaiff porwr sydd wedi’i osod i’r Gymraeg gynnig y tudalennau Cymraeg unwaith.",
+     "about.html#privacy"),
+    ("2026-11-13", "Every book in Further reading now has a link", "Mae dolen i bob llyfr yn Darllen pellach bellach",
+     "Every book in the Further reading list, and in the reading lists on every page, now links to its publisher’s page, or to its free library record when it is out of print. Eight more good Welsh history websites have joined the Online list, from Heneb and the Cambrian Archaeological Association to the poems of Dafydd ap Gwilym and Guto’r Glyn.",
+     "Mae pob llyfr yn y rhestr Darllen pellach, ac yn y rhestrau darllen ar bob tudalen, yn arwain at dudalen ei gyhoeddwr bellach, neu at ei gofnod llyfrgell rhad ac am ddim pan fo allan o brint. Mae wyth gwefan dda arall ar hanes Cymru wedi ymuno â’r rhestr Ar-lein, o Heneb a Chymdeithas Hynafiaethau Cymru i gerddi Dafydd ap Gwilym a Guto’r Glyn.",
+     "index.html#sources"),
     ("2026-11-13", "Every day of the year in On this day", "Pob diwrnod o’r flwyddyn yn Ar y dydd hwn",
      "On this day now has an entry of its own for every day of the year, even 29 February: 126 new births, deaths, saints’ days and events, each with its source beside it.",
      "Mae gan Ar y dydd hwn gofnod ei hun ar gyfer pob diwrnod o’r flwyddyn bellach, hyd yn oed 29 Chwefror: 126 o enedigaethau, marwolaethau, gwyliau seintiau a digwyddiadau newydd, pob un â’i ffynhonnell wrth ei ochr.",

@@ -90,7 +90,9 @@ CY_HEAD = ('<base href="../">\n<script>(function(){var P=location.pathname,S=loc
            'H.replaceState=function(s,t,u){return rs.call(H,s,t,fx(u))};H.pushState=function(s,t,u){return ps.call(H,s,t,fx(u))};'
            'document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href]");if(!a||a.hasAttribute("hreflang"))return;var h=a.getAttribute("href")||"";'
            'if(h.charAt(0)==="#"){a.setAttribute("href",P+S+h);return}'
-           'if(/^[^:\\/?#]+\\.html([?#].*)?$/.test(h))a.setAttribute("href","cy/"+h)},true)})()</script>\n')
+           'var u=a.href.split("#"),N=function(x){return x.split("#")[0].replace(/\\/index\\.html(?=$|\\?)/,"/")};'
+           'if(u.length>1&&N(u[0])===N(location.href)){a.setAttribute("href",P+S+"#"+u.slice(1).join("#"));return}'
+           'if(/^[^:\\/?#]+\\.html([?#].*)?$/.test(h))a.setAttribute("href","cy/"+h.replace(/^index\\.html/,""))},true)})()</script>\n')
 
 # EN / CY are real links to the other page's address (so they can be copied, opened in a new tab and followed by search
 # engines). Pressing one remembers the choice and keeps the reader's place (#…) on the other page.
@@ -107,15 +109,18 @@ def _switch(en_href, cy_href, here):
 
 SWITCH_JS = ('<script>(function(){var d=document,here=d.documentElement.lang==="cy"?"cy":"en",want=null;'
              'try{want=localStorage.getItem("hc-lang")}catch(e){}'
+             # a browser set to Welsh, on an English page, by a reader who has never chosen: offer Cymraeg once (never a redirect)
+             'var ask=0;if(!want&&here==="en"){var L=navigator.languages||[navigator.language||""];for(var i=0;i<L.length;i++)if(/^cy(-|$)/i.test(L[i]||""))ask=1;'
+             'try{if(localStorage.getItem("hc-cyask"))ask=0;else if(ask)localStorage.setItem("hc-cyask","1")}catch(e){ask=0}if(ask)want="cy"}'
              'd.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[data-lang]");if(!a)return;'
              'try{localStorage.setItem("hc-lang",a.dataset.lang)}catch(x){}'
              'if(a.dataset.lang!==here&&location.hash&&a.getAttribute("href").indexOf("#")<0)a.setAttribute("href",a.getAttribute("href")+location.hash)});'
              'var o=d.getElementById("lang-"+want);'
              'if(!o||want===here)return;try{if(sessionStorage.getItem("hc-hint"))return}catch(e){}'
              'var cy=want==="cy",b=d.createElement("div");b.className="lang-hint no-print";b.lang=want;'
-             'b.innerHTML=\'<div class="wrap"><span>\'+(cy?"Mae’r dudalen hon ar gael yn Gymraeg.":"This page is also in English.")+\'</span>\''
+             'b.innerHTML=\'<div class="wrap"><span>\'+(ask?"<b>Darllen yn Gymraeg?</b> Mae’r dudalen hon, a’r wefan i gyd, ar gael yn Gymraeg.":cy?"Mae’r dudalen hon ar gael yn Gymraeg.":"This page is also in English.")+\'</span>\''
              '+\'<a data-lang="\'+want+\'" hreflang="\'+want+\'" href="\'+o.getAttribute("href")+\'">\'+(cy?"Darllen yn Gymraeg":"Read it in English")+\' →</a>\''
-             '+\'<button type="button" aria-label="\'+(cy?"Cau":"Close")+\'">×</button></div>\';'
+             '+\'<button type="button" aria-label="\'+(ask?"Dim diolch":cy?"Cau":"Close")+\'">×</button></div>\';'
              'b.querySelector("button").onclick=function(){b.remove();try{sessionStorage.setItem("hc-hint","1")}catch(e){}};'
              'var m=d.getElementById("main")||d.querySelector("main");if(m)m.parentNode.insertBefore(b,m)})()</script>')
 
@@ -131,21 +136,38 @@ _LINK = re.compile(r'(\shref=")([^"]*)(")')
 
 
 def _cy_links(doc, name):
+    # A "#part" link must name this page's own address, because <base href="../"> would send it to the English home page.
+    # The home page's address is cy/, never cy/index.html: a link to cy/index.html#… from /cy/ reloaded the whole page
+    # instead of scrolling (audit, November 2026). Anyone who did open /cy/index.html is kept on it by the click helper.
+    here = "cy/" + ("" if name == "index.html" else name)
+
     def fix(m):
         h = m.group(2)
         if h.startswith("#"):
-            return m.group(1) + "cy/" + name + h + m.group(3)
+            return m.group(1) + here + h + m.group(3)
+        if h == "./" or h.startswith(("./#", "./?")):   # the home page (see _home_links)
+            return m.group(1) + "cy/" + h[2:] + m.group(3)
         if re.match(r"^[^:/?#]+\.html([?#].*)?$", h):
             return m.group(1) + "cy/" + h + m.group(3)
         return m.group(0)
     # only rewrite links outside scripts (scripts are handled by the click helper)
+    return _outside_scripts(doc, lambda t: _LINK.sub(fix, t))
+
+
+def _outside_scripts(doc, fn):
     out, pos = [], 0
     for r in _RAW.finditer(doc):
-        out.append(_LINK.sub(fix, doc[pos:r.start()]))
+        out.append(fn(doc[pos:r.start()]))
         out.append(doc[r.start():r.end()])
         pos = r.end()
-    out.append(_LINK.sub(fix, doc[pos:]))
+    out.append(fn(doc[pos:]))
     return "".join(out)
+
+
+def _home_links(doc):
+    """Links to the home page say "./" (the address everyone uses, /), not "index.html": from / a link to index.html#chapters
+    loaded the whole page again instead of scrolling to the chapters."""
+    return _outside_scripts(doc, lambda t: re.sub(r'(\shref=")index\.html(?=["#?])', r"\1./", t))
 
 
 def _swap_data_cy(doc):
@@ -161,6 +183,8 @@ def split(pages, base_url, lang_boot, lang_js, tidy_title, tidy_desc):
     assert boot != lang_boot, "LANG_BOOT changed: update _STORED_OLD in welshpages.py"
     boot_en, boot_cy = boot, boot.replace('h.classList.add("js");', 'h.classList.add("js","cy");h.lang="cy";')
     for name, doc in pages.items():
+        if name.endswith(".html"):
+            doc = _home_links(doc)
         if name in SKIP or "/" in name or not doc.lstrip().lower().startswith("<!doctype html"):
             out[name] = doc
             continue
@@ -218,4 +242,62 @@ def split(pages, base_url, lang_boot, lang_js, tidy_title, tidy_desc):
         cy = _with_switch_js(cy.replace(SWITCH_BUTTONS, _switch(en_href_from_cy, cy_href, "cy"), 1))  # after _cy_links, so EN stays English
         cy = cy.replace("<head>\n", "<head>\n" + CY_HEAD, 1)
         out["cy/" + name] = cy
+    _unique_titles(out, tidy_title)
     return out
+
+
+# A Welsh title comes from the page's heading, so two pages on one subject shared a title: the person and their event
+# (Owain Gwynedd), the legend and its Mabinogi guide, an age and its teacher pack. The audit of November 2026 found 56.
+# Where titles clash, each page of these kinds says what it is; an event gives its year, as the English title does.
+_KIND_CY = {"pack-": "pecyn i athrawon", "trail-": "llwybr", "story-": "erthygl", "legend-": "y chwedl",
+            "mabinogi-": "canllaw i’r chwedl", "topic-": "canllaw"}
+_SUFFIX_CY = " · Hanes Cymru"
+
+
+def _year_cy(en_title):
+    m = re.search(r"\(([^()]*\d[^()]*)\)(?: · [^·]*)?$", en_title)
+    if not m:
+        return ""
+    y = m.group(1).replace("c. ", "tua ").replace(" BC", " CC").replace("AD ", "OC ")
+    return f" ({y})"
+
+
+def _set_title(doc, title):
+    doc = re.sub(r"<title>.*?</title>", lambda m: f"<title>{_html.escape(title, quote=False)}</title>", doc, count=1, flags=re.S)
+    doc = re.sub(r'<meta property="og:title" content="[^"]*">', lambda m: f'<meta property="og:title" content="{_html.escape(title)}">', doc, count=1)
+    return re.sub(r'<meta property="og:image:alt" content="[^"]*">', lambda m: f'<meta property="og:image:alt" content="{_html.escape(title)}">', doc, count=1)
+
+
+def _unique_titles(out, tidy_title):
+    def title_of(doc):
+        return _first(doc, r"<title>(.*?)</title>")
+
+    for _round in range(2):
+        seen = {}
+        for name, doc in out.items():
+            if name.startswith("cy/"):
+                seen.setdefault(title_of(doc), []).append(name)
+        clashes = [names for names in seen.values() if len(names) > 1]
+        if not clashes:
+            return
+        for names in clashes:
+            for name in names:
+                page = name[3:]
+                head = title_of(out[name])
+                head = head[: -len(_SUFFIX_CY)] if head.endswith(_SUFFIX_CY) else head
+                en = title_of(out.get(page, ""))
+                if _round == 0:
+                    kind = next((v for k, v in _KIND_CY.items() if page.startswith(k)), None)
+                    if page.startswith("event-"):
+                        new = head + _year_cy(en)
+                    elif kind:
+                        new = f"{head}: {kind}"
+                    else:
+                        continue
+                else:   # still the same: two people with one Welsh name (Caradog) also give their English name
+                    en_name = en.split(" · ")[0]
+                    if not en_name or en_name == head:
+                        continue
+                    new = f"{head} ({en_name})"
+                if new != head:
+                    out[name] = _set_title(out[name], tidy_title(new + _SUFFIX_CY))

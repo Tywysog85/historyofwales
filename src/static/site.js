@@ -289,7 +289,6 @@
     if (open && !e.target.closest(".cite-pop")) shut();
   });
   d.addEventListener("keydown", function (e) { if (e.key === "Escape" && open) shut(true); });
-  Array.prototype.forEach.call(d.querySelectorAll(".cite"), function (c) { c.setAttribute("role", "button"); c.setAttribute("aria-expanded", "false"); });
 })();
 
 /* ---------- weekly email sign-up (the form in follow_box, build.py) ----------
@@ -341,9 +340,25 @@
   });
   Array.prototype.forEach.call(d.querySelectorAll(".clip-list"), function (ul) {
     var n = ul.children.length; if (n <= 4) return;
-    var b = d.createElement("button"); b.type = "button"; b.className = "btn clip-more";
+    var all = ul.getAttribute("data-all");   // a list with a page of its own (Further reading): Show all opens that page
+    var b = d.createElement(all ? "a" : "button"); b.className = "btn clip-more";
+    if (all) b.href = all; else b.type = "button";
     b.textContent = d.documentElement.classList.contains("cy") ? "Dangos y cyfan (" + n + ")" : "Show all " + n;
-    b.addEventListener("click", function () { ul.classList.add("open"); var f = ul.children[4] && ul.children[4].querySelector("a"); if (f) f.focus({ preventScroll: true }); });
+    if (!all) b.addEventListener("click", function () { ul.classList.add("open"); var f = ul.children[4] && ul.children[4].querySelector("a"); if (f) f.focus({ preventScroll: true }); });
     ul.after(b);
   });
+})();
+
+/* Opening a page at #somewhere (onthisday.html#d-11-13): the browser's smooth scroll runs while the page below is still
+   settling, and on a long page it stopped thousands of pixels away. Jump straight there once the page has loaded, and once
+   more a moment later, unless the reader has already started scrolling. */
+(function () {
+  var id = location.hash.slice(1), moved = false; if (!id) return;
+  ["wheel", "touchstart", "keydown", "mousedown"].forEach(function (e) { addEventListener(e, function () { moved = true; }, { passive: true, once: true }); });
+  function go() {
+    if (moved) return; var el = null; try { el = document.getElementById(decodeURIComponent(id)); } catch (e) {} if (!el) return;
+    var h = document.documentElement, was = h.style.scrollBehavior; h.style.scrollBehavior = "auto"; el.scrollIntoView(); h.style.scrollBehavior = was;
+  }
+  if (document.readyState === "complete") go(); else addEventListener("load", go, { once: true });
+  setTimeout(go, 1500);
 })();
