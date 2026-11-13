@@ -503,7 +503,9 @@
     if (r[1] != null) bits.push('<span class="y">' + r[1] + "</span>");
     if (tag) bits.push('<span class="k">' + T(tag[0], tag[1]) + "</span>");
     var t = esc(T(r[3], r[4])), href = r[7] || "onthisday.html#d-" + r[0];
-    return '<li class="otd-row wl-card" data-era="' + r[8] + '"><span class="otd-pic"><img src="' + esc(r[9] || "") + '" alt="" width="96" height="96" loading="lazy" decoding="async"></span>' +
+    var pic = r[9] || "i:castle";  // "i:<icon>": no picture of its own, so a small drawing (build.py otd_pic)
+    return '<li class="otd-row wl-card" data-era="' + r[8] + '">' + (pic.slice(0, 2) === "i:" ? '<span class="otd-pic otd-ic" aria-hidden="true"><svg><use href="#i-' + pic.slice(2) + '"/></svg></span>' :
+      '<span class="otd-pic"><img src="' + esc(pic) + '" alt="" width="96" height="96" loading="lazy" decoding="async"></span>') +
       '<div class="otd-txt"><p class="otd-meta">' + bits.join("") + "</p><h3>" + t + "</h3><p>" + esc(T(r[5], r[6])) + '</p></div><a class="wl" href="' + esc(href) + '">' + t + "</a></li>";
   }
   function renderToday() {
@@ -526,7 +528,7 @@
       week += '<button type="button" class="otd-wd' + (i === 0 ? " on" : "") + (n ? " has" : "") + (dm === md ? " is-today" : "") + '" data-otd-day="' + dm + '" aria-pressed="' + (i === 0) + '" aria-label="' + dayLabel(dm) + '">' +
         '<span class="w">' + T(WD[dd.getDay()][0], WD[dd.getDay()][1]) + '</span><span class="n">' + +dm.slice(3) + '</span><i aria-hidden="true">' + dots + "</i></button>";
     }
-    var pic = shown[0] && shown[0][9];
+    var pic = (shown.filter(function (r) { return r[9] && r[9].slice(0, 2) !== "i:"; })[0] || [])[9];  // the first real picture, or none
     $("#today-box").innerHTML = '<div class="otd-head">' + (pic ? '<img class="otd-bg" src="' + esc(pic) + '" alt="" decoding="async">' : "") +
       '<p class="otd-date"><span class="d">' + +day.slice(3) + '</span><span class="m">' + T(MONTHS_EN[m], MONTHS_CY[m]) + '</span><span class="lab">' +
       (isToday ? T("Today", "Heddiw") : '<button type="button" class="otd-back" data-otd="today">' + T("Back to today", "Yn ôl i heddiw") + "</button>") + "</span></p>" +

@@ -60,10 +60,21 @@ def title_for(path, title):
     return title
 
 
+ENDINGS = (SUFFIX, " · Hanes Cymru", " · The old books of Wales", " · Hen lyfrau Cymru")
+
+
 def tidy_title(title, limit=65):
-    """Google shows about 60 characters. Long titles lose the ' · History of Wales' ending first."""
-    if len(title) > limit and title.endswith(SUFFIX):
-        return title[: -len(SUFFIX)]
+    """Google shows about 60 characters. Long titles lose the ' · History of Wales' (or ' · Hanes Cymru') ending first.
+    One still too long is cut at its last natural break (a comma, a colon or "and") that fits, so the long reads'
+    titles read whole in search results: "The Welsh Not: how they tried to wipe out our language"."""
+    title = title.strip()
+    for end in ENDINGS:   # in this order, so "… · The old books of Wales · History of Wales" can lose both
+        if len(title) > limit and title.endswith(end):
+            title = title[: -len(end)]
+    if len(title) > limit + 1:
+        cuts = [m.start() for m in re.finditer(r"(?:, |: | and )(?=[a-zà-ÿŵŷ’])", title) if 20 <= m.start() <= limit]  # not inside a list of names
+        if cuts:
+            title = title[: max(cuts)]
     return title
 
 
@@ -243,7 +254,7 @@ def sitemap(base, pages, skip=("404.html",)):
                 u = base + src.group(1)
                 if u not in imgs:
                     imgs.append(u)
-        loc = base + ("" if p == "index.html" else p)
+        loc = base + re.sub(r"(^|/)index\.html$", r"\1", p)   # the home pages are / and /cy/, as their canonical says
         img_xml = "".join(f"<image:image><image:loc>{_x(u)}</image:loc></image:image>" for u in imgs[:30])
         rows.append(f"  <url><loc>{_x(loc)}</loc><lastmod>{when}</lastmod>{img_xml}</url>\n")
     xml = ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
