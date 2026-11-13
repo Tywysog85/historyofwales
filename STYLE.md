@@ -30,6 +30,7 @@ Headings in sibling cards or list rows must all have the same size and font: no 
 ## Cards and links
 
 - **Whole cards are links.** Every card and list row is one big link (`wl-card` with an `a.wl` inside). Never add "Read more", "Read →", "The full story" or "Source ↗" to a card. Other buttons inside a card stay clickable on their own.
+- **No repeated wording.** Cards next to each other each say something of their own, even when they are about the same person (a long read and a person page, say). Check with `tools/check_repeats.py`.
 - Tap areas on phones are at least 44 × 44 px, without changing the look (see "Touch targets" in `SKILLS.md`).
 - Every `<img>` has a width and height, so the page does not jump while pictures load.
 
@@ -43,6 +44,7 @@ The gap between home page sections is one setting, `--home-gap` near the end of 
 - **Never draw dragons by hand.** The flag dragon is the real flag artwork (`DSVG` in `src/app.js`), and the red and white dragons elsewhere are pictures of the 3D dragon. Hand-drawn dragons were rejected as fake.
 - Drawn scenes from `src/art.py` are only a stand-in where no picture exists yet.
 - **A picture on every card** (Ifan, 13 November 2026). A card shows the picture of the page it opens (`card_pic()` in `build.py`), never the stand-in picture of an age. People cards: the picture across the top (down the left side on phones); with no likeness, the age's picture dimmed behind their initials. Tiles: the photo where the drawing was. List rows: a small square at the side. Use the small copies (`src/thumbs.py`), `loading="lazy"` and `alt=""`. See SKILLS.md, "A picture on every card".
+- **Picture backgrounds on plain panels** (Ifan, 13 November 2026): a fitting real picture under a dark veil (`src/panels.py`), never so light that the words get hard to read. Side-by-side panels take turns from a set of pictures, never the same one repeated.
 
 ## Movement
 

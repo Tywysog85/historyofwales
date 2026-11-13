@@ -1020,3 +1020,32 @@ a:hover > .card-ban img, .wl-card:hover > .card-ban img { transform: scale(1.04)
 .news-item.has-pic .n-s { grid-column: 3 }
 @media (max-width: 520px) { .news-item.has-pic a, .news-list.big .news-item.has-pic a { grid-template-columns: 3.2rem minmax(0, 1fr) } .news-item.has-pic .n-s { grid-column: 2 } .news-list.big .n-pic { width: 3.2rem; height: 3.2rem } }
 @media print { .card-ban, .n-pic { display: none !important } }
+
+/* The census chart card on the home page is one link to the long read on the revival (story-welsh-revival.html).
+   On phones the whole chart fits the card (no sideways scroll under the link), with larger labels. */
+.lang-chart-card { transition: box-shadow .25s }
+.lang-chart-card:hover { box-shadow: 0 0 0 1px color-mix(in srgb, var(--dragon) 55%, transparent) }
+.lang-chart-card .chart { overflow: visible }
+@media (max-width: 640px) {
+  .lang-chart-card .chart-wrap { overflow: visible }
+  .lang-chart-card .chart { min-width: 0 !important }
+  .lang-chart-card .chart text { font-size: 15px }
+  .lang-chart-card .chart .val { font-size: 17px }
+}
+/* The same chart, larger, in the long read (revival_chart() in build.py) */
+.rv-chart-fig { margin: 2rem 0; padding: 1.25rem 1.25rem 1rem; background: var(--slate); border: 1px solid var(--line); border-radius: 14px }
+.rv-chart { overflow: visible; display: block }
+.rv-chart .val { paint-order: stroke; stroke: var(--slate); stroke-width: 5px; stroke-linejoin: round }
+.rv-chart .rv-mark { stroke: var(--gold, #e8b33a); stroke-width: 1.5; stroke-dasharray: 4 4; opacity: .7 }
+.rv-chart .rv-num { fill: var(--gold, #e8b33a); stroke: none }
+.rv-chart text.rv-k { fill: var(--night); font-weight: 700; font-size: 11px }
+.rv-chart-fig figcaption { color: var(--muted); font-size: .9rem; margin-top: .75rem }
+.rv-key { list-style: none; padding: 0; margin: 0 0 .5rem; display: flex; flex-wrap: wrap; gap: .35rem 1.25rem; color: var(--ink) }
+.rv-key b { display: inline-grid; place-items: center; width: 1.4em; height: 1.4em; border-radius: 50%; background: var(--gold, #e8b33a); color: var(--night); font-size: .8em; margin-right: .3em }
+@media (max-width: 640px) {
+  .rv-chart-fig { padding: 1rem .75rem .75rem }
+  .rv-chart text { font-size: 18px }
+  .rv-chart .val { font-size: 19px }
+  .rv-chart text.rv-k { font-size: 17px }
+  .rv-chart .rv-num { r: 13px }
+}

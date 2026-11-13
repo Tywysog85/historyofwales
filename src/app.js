@@ -584,7 +584,7 @@
       if (e[E_ERA] !== last) { var E = ERA[e[E_ERA]]; html += '<li class="era-head" id="era-' + E.id + '" data-era="' + E.id + '"><span class="eyebrow">' + T(E.spanEn, E.spanCy) + "</span><h3>" + T(E.en, E.cy) + '</h3><button type="button" data-open="' + E.id + '">' + T("Read the chapter", "Darllen y bennod") + "</button></li>"; last = e[E_ERA]; }
       html += '<li class="ev' + (D.EVS ? " wl-card" : "") + (e[E_KEY] ? " key" : "") + '" id="ev-' + i + '" data-i="' + i + '" data-era="' + e[E_ERA] + '"><time>' + yearLabel(e) + "</time><h4>" + esc(T(e[E_TEN], e[E_TCY])) + "</h4><p>" + esc(T(e[E_BEN], e[E_BCY])) + '</p><div class="links">' +
         (D.EVS ? '<a class="wl" href="event-' + D.EVS[i] + '.html">' + esc(T(e[E_TEN], e[E_TCY])) + "</a>" : "") +
-        (e[E_PLACE] ? '<button type="button" class="maplink" data-map="' + e[E_PLACE] + '"><svg aria-hidden="true"><use href="#i-pin"/></svg>' + T("See it on the map", "Gweld ar y map") + "</button>" : "") + (D.SL && D.SL[i] ? '<a class="src" href="story-' + D.SL[i] + '.html">' + T("Read the long read", "Darllen yr erthygl") + " →</a>" : "") + "</div></li>";
+        (e[E_PLACE] ? '<button type="button" class="maplink" data-map="' + e[E_PLACE] + '"><svg aria-hidden="true"><use href="#i-pin"/></svg>' + T("See it on the map", "Gweld ar y map") + "</button>" : "") + "</div></li>";
     });
     $("#events").innerHTML = html;
     $("#tl-count").textContent = n + " " + T("events", "digwyddiad");
@@ -853,26 +853,23 @@
     $("#chart").innerHTML = s + "</svg>";
   }
 
-  /* ---------- Place-name decoder ---------- */
-  var DICT = D.DICT, keys = Object.keys(DICT).sort(function (a, b) { return b.length - a.length; });
-  function norm(s) { return s.toLowerCase().replace(/[âàá]/g, "a").replace(/[êé]/g, "e").replace(/[îí]/g, "i").replace(/[ôó]/g, "o").replace(/[ûú]/g, "u").replace(/ŵ/g, "w").replace(/ŷ/g, "y").replace(/[^a-z]/g, ""); }
-  function decode(raw) {
-    var s = norm(raw), out = [], unk = "", i = 0;
-    while (i < s.length) {
-      var hit = null;
-      for (var k = 0; k < keys.length; k++) if (s.substr(i, keys[k].length) === keys[k]) { hit = keys[k]; break; }
-      if (hit && !(hit === "y" && unk)) { if (unk) { out.push([unk, null]); unk = ""; } out.push([hit, DICT[hit]]); i += hit.length; }
-      else { unk += s[i]; i++; }
-    }
-    if (unk) out.push([unk, null]);
-    return out;
-  }
+  /* ---------- Place-name decoder: the words and the decoder itself are in placenames.js (src/placenames.py, src/placenames.js) ---------- */
   function renderDecoder() {
-    var parts = decode($("#dec-in").value);
-    $("#dec-out").innerHTML = parts.length ? parts.map(function (p, i) { return '<div class="part' + (p[1] ? "" : " unk") + '" style="--i:' + i + '"><b>' + esc(p[0]) + "</b><span>" + esc(p[1] ? T(p[1][0], p[1][1]) : T("not in this glossary", "dim yn y rhestr")) + "</span></div>"; }).join("") :
-      '<p style="color:var(--muted)">' + T("Type a Welsh place name above.", "Teipiwch enw lle uchod.") + "</p>";
-    $("#dec-samples").innerHTML = '<span class="eyebrow" style="align-self:center;margin-right:.25rem">' + T("Try", "Rhowch gynnig ar") + "</span>" + D.SAMPLES.map(function (s) { return '<button type="button" data-s="' + esc(s) + '">' + esc(s) + "</button>"; }).join("");
+    var out = $("#dec-out"), P = window.PN;
+    if (!out) return;
+    if (!P) { out.innerHTML = '<p style="color:var(--muted)">' + T("Loading the word list…", "Yn llwytho’r geiriau…") + "</p>"; return; }
+    var r = P.decode($("#dec-in").value), cy = lang === "cy", i = 0, html = "";
+    if (r.hit) html += '<p class="dec-hit"><a href="' + esc(P.townLink(r.hit)) + '"><b>' + esc(r.hit[1]) + (r.hit[0] !== r.hit[1] ? " / " + esc(r.hit[0]) : "") + "</b></a>: " + esc(cy ? r.hit[3] : r.hit[2]) + "</p>";
+    html += r.words.map(function (w) {
+      return '<div class="dec-word">' + w.map(function (p) {
+        var l = P.label(p, cy), eng = l.kind === "e" || l.kind === "n";
+        return '<div class="part' + (l.kind === "u" ? " unk" : eng ? " eng" : "") + '" style="--i:' + (i++) + '"><b>' + esc(l.t) + "</b><span>" + (eng ? "<em>" + T("English", "Saesneg") + ":</em> " : "") + esc(l.mean) + "</span>" + (l.note ? "<small>" + esc(l.note) + "</small>" : "") + "</div>";
+      }).join("") + "</div>";
+    }).join("");
+    out.innerHTML = html || '<p style="color:var(--muted)">' + T("Type a Welsh place name above.", "Teipiwch enw lle uchod.") + "</p>";
+    $("#dec-samples").innerHTML = '<span class="eyebrow" style="align-self:center;margin-right:.25rem">' + T("Try", "Rhowch gynnig ar") + "</span>" + P.samples.map(function (s) { return '<button type="button" data-s="' + esc(s) + '">' + esc(s) + "</button>"; }).join("");
   }
+  document.addEventListener("pn:ready", renderDecoder);
   $("#dec-in").addEventListener("input", renderDecoder);
   $("#dec-form").addEventListener("submit", function (e) { e.preventDefault(); });
   $("#dec-samples").addEventListener("click", function (e) { var b = e.target.closest("[data-s]"); if (b) { $("#dec-in").value = b.dataset.s; renderDecoder(); } });

@@ -34,6 +34,7 @@ import places3 as PL3  # noqa: E402  (historic places of importance: their peopl
 import visit as VS  # noqa: E402  (the Visiting box on place pages and the map card, src/visit.py)
 import pictures as PX  # noqa: E402  (a real picture at the top of every page and on its card: src/pictures.py)
 import thumbs as TH  # noqa: E402  (small copies of pictures for the cards: src/thumbs.py)
+import panels as PN  # noqa: E402  (picture backgrounds for the plain panels: src/panels.py)
 PX.check()
 L.TEACH.update(AG.TEACH)
 import ages9 as AG9
@@ -115,7 +116,7 @@ def e(s):
 head = read("head.html")
 body = read("body.html")
 app = read("app.js")
-extra_css = read("extra.css") + read("v6.css") + read("onthisday.css") + read("people2.css")
+extra_css = read("extra.css") + read("v6.css") + read("onthisday.css") + read("people2.css") + PN.css()
 geo = json.loads(read("geo", "map.json"))
 la = json.loads(read("geo", "la.json"))
 
@@ -673,7 +674,6 @@ def event_pic(ev, sl=None):
 def event_li(ev, k=0, title_link=False):
     sl = story_links("events", ev[5])
     links = ((f'<a class="src" href="laws.html">{bi("The Laws of Hywel Dda: the big page", "Cyfreithiau Hywel Dda: y dudalen fawr")} →</a>' if ev[5] == "The laws of Hywel Dda" else "")
-             + "".join(f'<a class="src" href="story-{x["id"]}.html">{bi("Read the long read", "Darllen yr erthygl")} →</a>' for x in sl)
              + (f'<a class="src" href="place-{ev[10]}.html">{bi("The place", "Y lle")} →</a>' if ev[10] else ""))
     links = f'<a class="wl" href="{EP.href(ev)}">{bi(ev[5], ev[6])}</a>' + (f'<div class="links">{links}</div>' if links else "")
     title = f'<a href="{EP.href(ev)}">{bi(ev[5], ev[6])}</a>' if title_link else bi(ev[5], ev[6])
@@ -1079,7 +1079,8 @@ def visit_box(pl):
          f'<a href="map.html#lle-{pid}">{bi("On our map", "Ar ein map")} →</a>')
     rows += f'<div><dt>{bi("Getting there", "Cyrraedd")}</dt><dd>{where}</dd></div>'
     note = f'<p class="visit-note">{bi(*v["note"])}</p>' if v.get("note") else ""
-    return (f'<aside class="visit-box" aria-label="Visiting / Ymweld"><h2>{bi("Visiting", "Ymweld")}</h2><dl>{rows}</dl>{note}'
+    pic = card_pic(f"place-{pid}.html")  # the place's own photo behind the box (src/panels.py)
+    return (f'<aside class="visit-box{" pbg" if pic else ""}" aria-label="Visiting / Ymweld"{PN.bg_style(pic[0]) if pic else ""}><h2>{bi("Visiting", "Ymweld")}</h2><dl>{rows}</dl>{note}'
             f'<p class="visit-small">{bi("Check the official page before you travel: times change, and some sites close in winter.", "Edrychwch ar y dudalen swyddogol cyn teithio: mae amseroedd yn newid, ac mae rhai safleoedd yn cau yn y gaeaf.")}</p></aside>')
 
 
@@ -1155,18 +1156,14 @@ def _stop(era, date_en, date_cy, href, en, cy, text_en, text_cy, extra=""):
             f'<p>{bi(text_en, text_cy)}</p>{full}{f'<div class="links">{extra}</div>' if extra else ""}</div>{pic}</li>')
 
 
-def _reads(kind, key):
-    return "".join(f'<a class="src" href="story-{x["id"]}.html">{bi("Long read: " + x["en"], "Erthygl: " + x["cy"])} →</a>' for x in sorted(story_links(kind, key), key=lambda x: len(x.get(kind, [])))[:1])
-
-
 def trail_item(item):
     kind, ref = item[0], item[1]
     if kind == "person":
         p = PERSON[ref]
-        return _stop(p[1], p[2], date_cy(p[2]), f"person-{ref}.html", p[3], p[4], p[7], p[8], _reads("people", ref))
+        return _stop(p[1], p[2], date_cy(p[2]), f"person-{ref}.html", p[3], p[4], p[7], p[8])
     if kind == "place":
         p = PLACE[ref]
-        return _stop(p["era"], p["year"], p["year"], f"place-{ref}.html", p["en"], p["cy"], p["dEn"], p["dCy"], _reads("places", ref))
+        return _stop(p["era"], p["year"], p["year"], f"place-{ref}.html", p["en"], p["cy"], p["dEn"], p["dCy"])
     if kind == "story":
         x = STORY_BY_ID[ref]
         d = item[2:4] if len(item) > 2 else (f'{x["mins"]} min read', f'{x["mins"]} munud')
@@ -1457,7 +1454,7 @@ SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes
     ("tudor", "From the Tudors to the Methodists", "O’r Tuduriaid i’r Methodistiaid", ["era-tudor", "era-revival"]),
     ("industry", "Iron, coal, slate and the sea", "Haearn, glo, llechi a’r môr", ["era-industrial", "industry", "coal", "aberfan", "protest", "topic-industry", "trail-coal", "trail-sea", "firsts", "topic-science"]),
     ("modern", "Modern Wales and the Welsh abroad", "Cymru fodern a’r Cymry ar wasgar", ["era-modern", "era-today", "revival", "mac", "fwa", "world", "madog", "tryweryn", "epynt", "topic-abroad", "topic-sport"]),
-    ("lang", "The Welsh language, names and places", "Yr iaith Gymraeg, enwau a lleoedd", ["language", "welsh-not", "topic-language", "welsh", "names", "towns", "maps", "sites"]),
+    ("lang", "The Welsh language, names and places", "Yr iaith Gymraeg, enwau a lleoedd", ["language", "welsh-not", "welsh-revival", "topic-language", "welsh", "names", "towns", "maps", "sites"]),
     ("life", "Women and everyday life", "Menywod a bywyd bob dydd", ["topic-women", "trail-women", "topic-countryside"]),
 ]
 
@@ -1647,6 +1644,8 @@ def story_page(x, i):
     after = ""  # a section between the article and the pictures
     if x["id"] == "hen-ogledd":  # the map of the Old North goes at '!! map' in the text, its list of places after the article
         x["figs"]["map"], after = north_map()
+    if x["id"] == "welsh-revival":  # the census chart goes at '!! chart' in the text (revival_chart())
+        x["figs"]["chart"] = revival_chart()
     others = [y for y in F.STORIES if y["id"] != x["id"]][:3]
     era = ERA[x["era"]]
     meta = f'<p class="byline">{AB.byline_top()}<span>{x["mins"]} {bi("minute read", "munud o ddarllen")}</span><a href="era-{x["era"]}.html">{bi(era["en"], era["cy"])}</a><button type="button" class="copy" data-copy="story-{x["id"]}.html">{bi("Copy link", "Copïo’r ddolen")}</button></p>'
@@ -2245,7 +2244,11 @@ def triads_page():
 
 
 def symbols_page():
-    cards = "".join(f'<article class="sym rv" id="{s[0]}" data-era="{D.ERAS[i % len(D.ERAS)]["id"]}"><span class="sym-n">{i + 1:02d}</span><h2>{bi(s[3], s[1])}</h2>'
+    sym_pic = {"dragon": "g:land-dinas-emrys", "harp": "g:trea-welsh-harp", "lovespoon": "g:trea-lovespoon", "dwynwen": "g:land-llanddwyn",
+               "choir": "g:holy-tabernacl", "eisteddfod": "g:place-cardigan"}
+    if card_pic("person-lady-llanover.html"):
+        sym_pic["costume"] = card_pic("person-lady-llanover.html")[0]  # Lady Llanover, who championed the Welsh costume
+    cards = "".join(f'<article class="sym rv pbg" id="{s[0]}" data-era="{D.ERAS[i % len(D.ERAS)]["id"]}"{PN.bg_style(sym_pic.get(s[0], PN.LAND[i % len(PN.LAND)]))}><span class="sym-n">{i + 1:02d}</span><h2>{bi(s[3], s[1])}</h2>'
                     + (f'<p class="sym-alt">{bi(s[1], s[3])}</p>' if s[1] != s[3] else "") + f'<p>{bi(s[4], s[5])}</p></article>' for i, s in enumerate(F.SYMBOLS))
     main = (hero("modern", f'<a href="index.html">{SITE}</a>', "harp", "Symbols and traditions", "Symbolau a thraddodiadau", "The dragon, the leek and the grey mare", "Y ddraig, y genhinen a’r Fari Lwyd",
                  "Where the emblems and customs of Wales come from. Some are a thousand years old; some are younger than they look.", "O ble daw arwyddluniau ac arferion Cymru. Mae rhai’n fil o flynyddoedd oed; mae rhai’n iau nag y maent yn edrych.", art="dragons")
@@ -3207,6 +3210,29 @@ HEAR_SVG = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5
 WELSH_SCRIPT = f'<script src="welsh.js?v={WELSH_JS_VER}" defer></script>\n'
 
 
+# ---------- the place-name decoder (src/placenames.py, src/placenames.js), on the home page and towns.html ----------
+import placenames as PNM  # noqa: E402
+
+
+def _pn_ver():
+    import hashlib
+    h = hashlib.md5()
+    for f in ("placenames.py", "placenames.js", "ref_towns.py"):
+        with open(os.path.join(SRC, f), "rb") as fh:
+            h.update(fh.read())
+    return h.hexdigest()[:10]
+
+
+PN_VER = _pn_ver()  # changes whenever the words or the decoder change, so browsers fetch the new copy
+PN_SCRIPT = f'<script src="placenames.js?v={PN_VER}" defer></script>\n'
+
+
+def placenames_js():
+    """The decoder's words, every town in towns.html (so a whole name can be matched), then the decoder itself."""
+    towns = [[r["en"], r["cy"], r["mEn"], r["mCy"], r["id"]] for r in RP.town_rows()]
+    return "var PND = " + json.dumps(PNM.data(towns), ensure_ascii=False, separators=(",", ":")) + ";\n" + read("placenames.js")
+
+
 def welsh_js():
     """The daily word: every word, a fixed shuffled order for ordinary days, and the fixed days."""
     import random
@@ -3598,11 +3624,10 @@ N_CASTLES = len(json.loads(read("castles_data.json")))  # the castle sites on ca
 FEATURED = ["dewi-sant", "hywel-dda", "gwenllian", "llywelyn-fawr", "llywelyn-ap-gruffudd", "dafydd-ap-gwilym", "owain-glyndwr", "harri-tudur", "william-morgan", "lloyd-george", "aneurin-bevan", "betty-campbell"]
 DATA = dict(
     ERAS=D.ERAS, EVENTS=D.EVENTS, PLACES=[dict(p, ph=place_ph(p['id']), vis=map_visit(p)) for p in D.PLACES], PEOPLE=D.PEOPLE, READING=D.READING, ONLINE=D.ONLINE,
-    CENSUS=D.CENSUS, KINGDOMS=D.KINGDOMS, LA=la, DICT=D.DICT, SAMPLES=D.SAMPLES, WORDS=D.WORDS,
+    CENSUS=D.CENSUS, KINGDOMS=D.KINGDOMS, LA=la, WORDS=D.WORDS,
     TRAILS=[dict(id=t["id"], en=t["en"], cy=t["cy"], ill=t["ill"], n=len(trail_stops(t)), introEn=t["introEn"][0], introCy=t["introCy"][0]) for t in L.TRAILS],
     AUDIO=sorted(f[:-4] for f in os.listdir(os.path.join(SRC, 'static', 'audio')) if f.endswith('.mp3')) if os.path.isdir(os.path.join(SRC, 'static', 'audio')) else [],
     MAPC=dict(minx=geo["minx"], maxy=geo["maxy"], k=geo["k"], sc=geo["sc"]),
-    SL={i: x["id"] for i, ev in enumerate(D.EVENTS) for x in story_links("events", ev[5])},
     EVS=EP.SLUG,  # the page of each event: event-<slug>.html (src/eventpages.py)
     KGLINK={"Gwynedd": "kings-gwynedd.html", "Powys": "kings-powys.html", "Ceredigion": "kings-ceredigion.html", "Dyfed": "kings-dyfed.html", "Brycheiniog": "kings-brycheiniog.html",
             "Rhwng Gwy a Hafren": "kings-gwy-a-hafren.html", "Glywysing": "kings-glywysing.html", "Morgannwg": "kings-glywysing.html", "Gwent": "kings-gwent.html", "Deheubarth": "kings-deheubarth.html",
@@ -3744,6 +3769,38 @@ def ssr_chart():
         if end or c[0] == 2001:
             s += f'<text class="val" x="{n(X(c[0]) + (8 if i == 0 else -6))}" y="{n(Y(c[1]) - 10)}" text-anchor="{"start" if i == 0 else "end"}">{c[1]}%</text>'
     return s + "</svg>"
+
+
+def revival_chart():
+    """The census chart again, larger, for the long read on the revival (src/welshrevival.py, '!! chart'): the same figures
+    as the home page chart (D.CENSUS), with three moments of the fight back marked on the line."""
+    C, w, h, l, r, t, b, x0, x1, ymax = D.CENSUS, 640, 330, 36, 18, 22, 30, 1891, 2021, 60
+    X = lambda y: l + (y - x0) / (x1 - x0) * (w - l - r)
+    Y = lambda v: t + (1 - v / ymax) * (h - t - b)
+    n = lambda v: f"{v:.1f}".rstrip("0").rstrip(".")
+    s = (f'<svg class="chart rv-chart" viewBox="0 0 {w} {h}" width="100%" role="img" aria-label="Welsh speakers by census, 1891 to 2021: from 54.4% to a low of 18.7% in 1991, up to 20.8% in 2001, 17.8% in 2021 / Siaradwyr Cymraeg yn ôl y cyfrifiad, 1891 i 2021">'
+         '<defs><linearGradient id="gAreaRv" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2453d" stop-opacity=".35"/><stop offset="1" stop-color="#e2453d" stop-opacity="0"/></linearGradient></defs>')
+    for v in (0, 20, 40, 60):
+        s += f'<line class="grid" x1="{l}" x2="{w - r}" y1="{n(Y(v))}" y2="{n(Y(v))}"/><text x="{l - 6}" y="{n(Y(v) + 3.5)}" text-anchor="end">{v}%</text>'
+    for yv in (1891, 1921, 1951, 1981, 2021):
+        s += f'<text x="{n(X(yv))}" y="{h - 8}" text-anchor="middle">{yv}</text>'
+    marks = [(1962, "1", "Tynged yr Iaith", "Tynged yr Iaith"), (1982, "2", "S4C", "S4C"), (2001, "3", "First rise for a century", "Y cynnydd cyntaf ers canrif")]
+    for yr, k, en, cy in marks:
+        s += (f'<line class="rv-mark" x1="{n(X(yr))}" x2="{n(X(yr))}" y1="{n(Y(52))}" y2="{n(Y(0))}"/>'
+              f'<circle class="rv-num" cx="{n(X(yr))}" cy="{n(Y(55))}" r="9"/><text class="rv-k" x="{n(X(yr))}" y="{n(Y(55) + 3.8)}" text-anchor="middle">{k}</text>')
+    pts = [f"{X(c[0]):.1f},{Y(c[1]):.1f}" for c in C]
+    s += f'<path class="area" style="fill:url(#gAreaRv)" d="M{" L".join(pts)} L{n(X(2021))},{n(Y(0))} L{n(X(1891))},{n(Y(0))}Z"/><polyline class="ln" points="{" ".join(pts)}"/>'
+    for i, c in enumerate(C):
+        end = i == 0 or i == len(C) - 1
+        s += f'<circle class="{"end" if end or c[0] == 2001 else ""}" cx="{n(X(c[0]))}" cy="{n(Y(c[1]))}" r="{4.5 if end or c[0] == 2001 else 3}"><title>{c[0]}: {c[1]}%</title></circle>'
+        if end or c[0] in (1961, 1991, 2001):
+            anchor = "start" if i == 0 else "end" if end else "middle"
+            dx = 8 if i == 0 else -6 if end else 0
+            y = Y(c[1]) + 24 if c[0] == 1991 else Y(c[1]) - 10  # 1991 under the line, so it never meets 2001
+            s += f'<text class="val" x="{n(X(c[0]) + dx)}" y="{n(y)}" text-anchor="{anchor}">{c[1]}%</text>'
+    key = "".join(f'<li><b>{k}</b> {bi(f"{en}, {yr}", f"{cy}, {yr}")}</li>' for yr, k, en, cy in marks)
+    return (f'<figure class="rv-chart-fig"><div class="chart-wrap">{s}</svg></div>'
+            f'<figcaption><ol class="rv-key">{key}</ol>{bi("Share of people aged three and over who could speak Welsh, at each census from 1891 to 2021. No census was taken in 1941. Figures from the census (Office for National Statistics).", "Canran y bobl tair oed a hŷn a allai siarad Cymraeg, ym mhob cyfrifiad o 1891 hyd 2021. Ni chynhaliwyd cyfrifiad yn 1941. Ffigurau’r cyfrifiad (y Swyddfa Ystadegau Gwladol).")}</figcaption></figure>')
 
 
 def buyr(r):
@@ -3984,7 +4041,7 @@ _bare_head = index_head
 index_head = (head_tags("History of Wales · Hanes Cymru: Welsh history, people and places",
                         "Welsh history from the first people to the Senedd: kings, princes, castles, saints and poets, with a timeline, map and games. In English and Cymraeg.",
                         "", "website") + SEO.ld_script(SEO.home_ld(BASE_URL)) + "\n" + index_head)
-_body_filled = (body.replace("__WALES__", geo["outline"]).replace("__WELSHV__", str(WELSH_JS_VER))
+_body_filled = (body.replace("__WALES__", geo["outline"]).replace("__WELSHV__", str(WELSH_JS_VER)).replace("__PNV__", PN_VER)
                 .replace("__DATA__", json.dumps(DATA, ensure_ascii=False, separators=(",", ":")))
                 .replace("__TOWNS__", json.dumps(TW.TOWNS, ensure_ascii=False, separators=(",", ":")))
                 .replace("__APP__", app)
@@ -4552,6 +4609,7 @@ def main():
     if TH.OK:
         print(f"Made {TH.write(out)} small card pictures")
     write(os.path.join(out, "welsh.js"), welsh_js())
+    write(os.path.join(out, "placenames.js"), placenames_js())
     write(os.path.join(out, "onthisday.json"), json.dumps(otd_rows(), ensure_ascii=False, separators=(",", ":")))
     write(os.path.join(out, "feed.xml"), feed_xml(otd_rows()))
     write(os.path.join(out, "whatsnew.json"), json.dumps(WN.NEWS, ensure_ascii=False))
@@ -4573,6 +4631,7 @@ def main():
                 shutil.copy(os.path.join(SRC, "static", f), os.path.join(a, f))
         shutil.copy(os.path.join(out, "search.json"), os.path.join(a, "search.json"))
         shutil.copy(os.path.join(out, "welsh.js"), os.path.join(a, "welsh.js"))
+        shutil.copy(os.path.join(out, "placenames.js"), os.path.join(a, "placenames.js"))
         shutil.copy(os.path.join(out, "onthisday.json"), os.path.join(a, "onthisday.json"))
     # note when anything new first appeared (src/added.json), so the lists can show it first next time too
     AD.track("person", [p[0] for p in D.PEOPLE])
