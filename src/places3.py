@@ -1760,3 +1760,8 @@ for _k in CITES:
     if _k in _CITES.S and _CITES.S[_k] is not CITES[_k]:
         raise SystemExit(f"src/places3.py: source key {_k} is already used in src/cites.py")
 _CITES.S.update(CITES)
+
+
+# Mynydd Epynt and the clearing of 1940 (src/epynt.py)
+LINKS["epynt"] = [("story-epynt.html", "Cofiwch Epynt: the clearing of the mountain, 1940", "Cofiwch Epynt: clirio’r mynydd, 1940")]
+PEOPLE["epynt"] = ["john-penry", "iorwerth-peate", "jim-griffiths"]
