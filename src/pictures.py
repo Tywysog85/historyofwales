@@ -563,6 +563,35 @@ def dress(path, era, html):
     return html[:m.start()] + seg + html[end:]
 
 
+# The medieval manuscripts of Wales (src/manuscripts.py): page tops, with the credits from its FIGS.
+import manuscripts as _MSS  # noqa: E402
+EXTRA.update({f[0]: (f[1], f[2], f[3], f[4], f[5]) for f in _MSS.FIGS.values() if f[0] not in EXTRA})
+PAGE.update({
+    "manuscripts.html": "c:" + _MSS.FIGS["llb-king"][0] + "@50% 25%",
+    "book-classbook.html": "c:" + _MSS.FIGS["classbook"][0] + "@50% 30%",
+    "book-martianus.html": "g:place-stdavids",
+    "book-computus.html": "c:" + _MSS.FIGS["computus-easter"][0] + "@50% 30%",
+    "book-ricemarch-psalter.html": "c:Ricemarch Psalter, Psalm 1.JPG@50% 20%",
+    "book-de-trinitate.html": "g:holy-llanbadarn",
+    "book-annales.html": "c:Catgualart fili' catguolaum obiit.png",
+    "book-vespasian.html": "g:place-llanilltud",
+    "book-chirk.html": "c:ChirkCodex.png@50% 30%",
+    "book-peniarth-28.html": "c:Laws of Hywel Dda (f.1.v) King Hywel cropped.jpg@50% 30%",
+    "book-boston.html": "c:Boston Welsh Law Ms (f.6.v).jpg@50% 30%",
+    "book-peniarth-6.html": "c:Branwen drudwy.JPG@50% 40%",
+    "book-peniarth-16.html": "c:" + _MSS.FIGS["macsen"][0] + "@50% 30%",
+    "book-peniarth-17.html": "g:person-gruffudd-ap-cynan",
+    "book-llanstephan-1.html": "c:" + _MSS.FIGS["pen44"][0] + "@50% 30%",
+    "book-jesus-20.html": "g:place-dinefwr",
+    "book-talgarth.html": "g:trea-red-book",
+    "book-myddfai.html": "g:land-llyn-y-fan",
+    "book-llanbeblig.html": "c:" + _MSS.FIGS["llb-annunciation"][0] + "@50% 30%",
+    "book-cwta-cyfarwydd.html": "c:" + _MSS.FIGS["cwta"][0] + "@50% 30%",
+    "book-lewys-glyn-cothi.html": "g:place-rhaglan",
+    "book-gwyn-hergest.html": "c:" + _MSS.FIGS["hergest"][0],
+})
+
+
 # Wales in 10 minutes: one picture on each of the seventeen steps.
 W10 = ["g:land-yr-wyddfa", "g:place-pentreifan", "g:person-caratacus", "g:place-caerleon", "g:place-stdavids", "g:person-rhodri-mawr",
        "g:trea-laws-hywel", "g:place-mathrafal", "g:person-gruffudd-ap-llywelyn", "g:place-strataflorida", "g:person-llywelyn-ap-gruffudd",

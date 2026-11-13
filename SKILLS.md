@@ -819,6 +819,14 @@ Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.
 - **Long titles**: `tidy_title()` in `src/seo.py` drops the " · History of Wales" / " · Hanes Cymru" ending, then cuts a title still over 66 characters at its last comma, colon or "and" that starts a lower-case clause ("The Welsh Not: how they tried to wipe out our language"). It never cuts inside a list of names.
 - To check a whole build for clashing or long titles, read every `<title>` in `_site/*.html` and `_site/cy/*.html` and count repeats and lengths over 65.
 
+### The medieval manuscripts of Wales (November 2026)
+- 21 more manuscripts have book pages: their texts are in `src/manuscripts_a.py` (the early and Latin books) and `src/manuscripts_b.py` (lawbooks, tales, later books), in the `OB.PAGES` format (`## ` headings, `|| L | R` facts rows, `!! key` pictures, `[[cite:key]]` sources). `src/manuscripts.py` holds their cards, pictures (`FIGS`), sources (`CITES`), reading lists (`REFS`) and the data for `manuscripts.html`. `src/oldbooks.py` merges it all at its end.
+- New cards go into books.html two ways: `_EARLY` puts a card into an existing group after a named book; `GROUPS` adds whole groups after a named group. Each new group needs an era in `ERAS`. `build.py` does the inserting just before `BOOK_ERAS`.
+- `manuscripts.html` (`manuscripts_page()` in `build.py`) lists every manuscript in `HUB`, oldest first, by century, with its library, shelf mark and online link. `HUB` is `id: (year to sort by, [library keys], shelf mark, link, "pages" or "record")`: "pages" means every page can be seen online, "record" is a catalogue description. Add any new medieval manuscript page to `HUB` too, and the book page gets a "See every page online" button by itself.
+- National Library of Wales manuscripts each have a lasting link of the form `https://hdl.handle.net/10107/<number>`; the number is in the Commons file names of their pages (e.g. "Y Cwta Cyfarwydd, folio 6v (4686929).jpg") and in the library's catalogue.
+- Book cards on books.html are whole-card links now (`bk wl-card`, title link `wl-go`), with no "The whole story of the book" line.
+- Manuscript pictures: the NLW has put many pages on Commons as CC0 (search the manuscript's name with "folio"); the Bodleian's classbook pages and the Llanbeblig Hours are there too. Credits for page tops come from `MSS.FIGS` automatically (a block at the end of `src/pictures.py`).
+
 ### Books from Ifan's shelves and Buy links (November 2026)
 
 - **Adding books Ifan owns**: put them in `SHELF_EXTRA` in `src/refs2.py` with `SHELF_EXTRA["<section>"] += [...]` at the end of the file, so new batches never clash with older ones. Skip any book the page already has (same author and title), and anything not about Wales or the Britons.

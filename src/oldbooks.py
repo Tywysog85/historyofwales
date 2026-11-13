@@ -153,3 +153,10 @@ REFS = {
     "The list of the Peniarth manuscripts that gave each its number.", "Y rhestr o lawysgrifau Peniarth a roddodd ei rif i bob un."),
    _HUWS, _NLW]),
 }
+
+# The medieval Welsh manuscripts (src/manuscripts.py): 21 more books, four new groups and the manuscripts.html list.
+import manuscripts as MSS
+PAGES.update(MSS.PAGES)
+FIGS.update({k: v for k, v in MSS.FIGS.items() if k not in FIGS})
+CITES.update({k: v for k, v in MSS.CITES.items() if k not in CITES})
+REFS.update(MSS.REFS)
