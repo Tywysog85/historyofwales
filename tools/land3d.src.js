@@ -222,10 +222,10 @@ try {
      Sharp wide screens keep the full-size stone: half-size softens the mortar lines at 2x. The mountain pictures stay full size on every screen:
      half-size colour dims the snow and half-size relief loses the gullies (side-by-side renders, 13 November 2026). */
   const SM = Math.min(screen.width, screen.height) <= 600 || screen.width * (window.devicePixelRatio || 1) <= 1600 ? "-m" : "";
-  let rockT = null;
+  let rockT = null, moor = null;
   img.onload = () => Promise.all(["eryri-c.webp", "eryri-n.webp", "detail.webp", "rock.webp", "rock-n.webp"].map(ld)).then((t) => {
     [t[3], t[4]].forEach((q) => { q.wrapS = q.wrapT = THREE.RepeatWrapping; q.anisotropy = 8; }); t[3].colorSpace = THREE.SRGBColorSpace;
-    const h = readHeights(img); land.add(buildLand(h, t[0], t[1], t[2], t[3], t[4])); rockT = { rock: t[3], rockN: t[4] }; fort.add(buildMoor(rockT));
+    const h = readHeights(img); land.add(buildLand(h, t[0], t[1], t[2], t[3], t[4])); rockT = { rock: t[3], rockN: t[4] }; moor = buildMoor(rockT); fort.add(moor);
     camL.position.set(EYE[0], heightAt(h, EYE[0], EYE[1]) + 40, EYE[1]); camL.lookAt(SUMMIT); camL.updateMatrixWorld(true);
     api.ready = true; window.dispatchEvent(new Event("hcl3"));
   }).catch(fail);
@@ -252,7 +252,7 @@ try {
     if (st.castle && !castle && !noCastle) return;
     const c = castle && st.castle, tt = st.t / 1000; if (castle) castle.group.visible = !!c;
     if (c && st.flagV !== flagV) { flagV = st.flagV; castle.flagTex.needsUpdate = true; key = ""; }
-    const k = [st.sumX, st.sumY, st.ppm * 1000, st.sun, st.fog, st.mist, st.ground.x, st.ground.y, st.ground.ppm * 1000, c ? 1 : 0].map((q) => typeof q === "number" ? q.toFixed(1) : q).join("|");
+    const k = [st.sumX, st.sumY, st.ppm * 1000, st.sun, st.fog, st.mist, st.ground.x, st.ground.y, st.ground.ppm * 1000, (st.ground.tilt || 0) * 1000, c ? 1 : 0].map((q) => typeof q === "number" ? q.toFixed(1) : q).join("|");
     const full = k !== key; key = k;
     if (!full && !c) return;
     if (full) {
@@ -264,6 +264,8 @@ try {
       hemiF.intensity = 0.5 + 0.7 * sun; moonF.intensity = 1.9 + 1.3 * sun; moonF.color.copy(cA.set(0xbfcfff)).lerp(cB.set(0xffe9cc), sun);
       place(camL, camL.position.distanceTo(SUMMIT), st.ppm, st.sumX, st.sumY);
       place(camF, Math.hypot(FD, 18), st.ground.ppm, st.ground.x, st.ground.y - 14 * st.ground.ppm);
+      /* tilt lifts the far side of the moor (radians), so it rises to meet the mountains where they stand well above the castle (tablets, phones in desktop mode) */
+      if (moor) moor.rotation.x = st.ground.tilt || 0;
       if (c) { castle.lights.forEach((l, i) => { l.intensity = castle.base[i] * (1 - 0.7 * sun); }); castle.glows.forEach((g) => { g.material.opacity = 0.4 * (1 - 0.7 * sun); }); }
       renderer.setScissorTest(false);
     } else {
