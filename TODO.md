@@ -15,7 +15,7 @@ Open jobs for History of Wales. Tick a job off by deleting it. Keep this list sh
 ## Checking and sources
 
 - **Check the new history against sources.** The long reads and new people added in November 2026 were written from general knowledge. Dates, names and quotations should be checked, and sources linked.
-- **More photos.** 67 of the 68 places now have a photo, but about 60 of the 322 people still show drawn pictures or initials. Most of them have no free picture on Wikipedia, so these need a new source.
+- **More photos.** 461 of the 516 people pages have a picture of their own (November 2026). The 55 left have no free picture on Commons that is certainly them: Ifan's own photos of their graves, plaques or places, or pictures from the National Library of Wales, would fill them.
 - **Real recordings for the word buttons.** The words of the day, the phrases on `welsh.html` and the home page words use the device's own voice for now. MP3 files go in `src/static/audio/` (naming rules in `SKILLS.md`, "Welsh word of the day"). Own recordings, or free ones from Lingua Libre on Wikimedia Commons with credits.
 
 ## Ideas, not started
