@@ -19,7 +19,6 @@
     return c + y + end;
   }
   var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var STILL = false; try { STILL = localStorage.getItem("hc-still") === "1"; } catch (e) {}
   /* A slow connection (Ifan, 13 Nov 2026: "slow phones just show a picture of the dragon"): the 3D scene (about 2.7 MB) is not
      downloaded. Instead a still picture of the same land and castle, rendered from the 3D scene (hero-land-*.webp), and a picture
      of the same dragon (dragon-red.webp). "Slow" is what the browser reports (Chrome and Android do; Safari reports nothing,
@@ -29,11 +28,6 @@
   /* how the pictures were taken (tools: see SKILLS.md "Still pictures of the 3D land"): w = page width, d = pixels per CSS pixel,
      h = hero height, b = how far the bottom of the picture runs below the row of figures (p) or the hero's foot (w) */
   var STILL_REF = { p: { w: 390, d: 1.5, h: 1077, b: 220 }, w: { w: 1440, d: 1.5, h: 952, b: 0 } };
-  /* The Pause animation button is offered only on old devices and slow connections (Ifan, 13 Nov 2026): a slow connection (SLOW),
-     data saver, a phone with 1 GB of memory or less, or a browser without WebGL. Elsewhere it is not shown, and an earlier pause is not applied. */
-  var LITE = SLOW || !!(navigator.connection && navigator.connection.saveData) || !!(navigator.deviceMemory && navigator.deviceMemory <= 1) || !window.WebGLRenderingContext;
-  if (!LITE) STILL = false;
-  if (STILL) document.documentElement.classList.add("still");
   var MONTHS_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   var MONTHS_CY = ["Ionawr","Chwefror","Mawrth","Ebrill","Mai","Mehefin","Gorffennaf","Awst","Medi","Hydref","Tachwedd","Rhagfyr"];
 
@@ -341,17 +335,7 @@
     });
     cx.restore();
   }
-  /* Pause animation (WCAG 2.2.2): the hero's own clock (vt) stops, so the dragon, flames, stars and flag hold still.
-     The opening still plays to the end (land, castle, then the dragon fading in, a few seconds), then the scene stops; the frame is redrawn
-     only when the page scrolls or every half second (for a late picture or a resize). The choice is kept in localStorage "hc-still". */
-  var vt = 0, rt = 0, lastSy = -1, lastStill = 0;
-  function loop(t) {
-    var dt = rt ? Math.min(100, t - rt) : 0; rt = t;
-    var opening = DT0 < 0 || vt < DT0 + 2200; /* the dragon takes about 2 s to fade in */
-    if (!STILL || opening) { vt += dt; t0 = vt; if (window.scrollY < H) draw(vt); }
-    else if (window.scrollY < H && (window.scrollY !== lastSy || t - lastStill > 500)) { lastSy = window.scrollY; lastStill = t; draw(vt); }
-    requestAnimationFrame(loop);
-  }
+  function loop(t) { t0 = t; if (window.scrollY < H) draw(t); requestAnimationFrame(loop); }
   window.addEventListener("resize", size);
   if (HERO && !reduce) {
     /* load the lifelike 3D dragon where the device can draw it; otherwise the flag dragon stays */
@@ -360,7 +344,9 @@
       /* skipped on data saver and on very old phones with 1 GB of memory or less (Ifan, 13 Nov 2026: keep it on every modern phone).
          deviceMemory is only reported by Chrome-based browsers; Safari never reports it, so iPhones always get the dragon. */
       var lowMem = navigator.deviceMemory && navigator.deviceMemory <= 1;
-      if (SLOW) {
+      /* old phones (1 GB of memory or less), data saver and browsers without WebGL get the still pictures too (Ifan, 13 Nov 2026) */
+      if (SLOW || lowMem || !gl3 || (navigator.connection && navigator.connection.saveData)) {
+        SLOW = true;
         var narrowS = Math.min(innerWidth, screen.width) < 1100, sky = SKY.sun > 0.5 ? "day" : "night";
         STILL_IMG.ref = narrowS ? STILL_REF.p : STILL_REF.w;
         var li = new Image(); li.onload = function () { STILL_IMG.land = li; }; li.onerror = function () { STILL_IMG.failed = 1; }; li.src = "hero-land-" + (narrowS ? "p" : "w") + "-" + sky + ".webp";
@@ -386,7 +372,7 @@
     });
     /* tilt the phone and the scene shifts a little. iOS asks permission for this, so it is left alone there. */
     if (window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission !== "function") {
-      window.addEventListener("deviceorientation", function (e) { if (e.gamma == null || STILL) return; var g = Math.max(-1, Math.min(1, e.gamma / 28)); mouse += (g * 1.6 - mouse) * 0.12; }, { passive: true });
+      window.addEventListener("deviceorientation", function (e) { if (e.gamma == null) return; var g = Math.max(-1, Math.min(1, e.gamma / 28)); mouse += (g * 1.6 - mouse) * 0.12; }, { passive: true });
     }
     requestAnimationFrame(loop);
   } else { window.addEventListener("scroll", function () { if (window.scrollY < H) draw(); }, { passive: true }); }
@@ -419,25 +405,9 @@
     if (reduce) return;
     requestAnimationFrame(function step(t) {
       var dt = Math.min(50, t - (last || t)); last = t;
-      if (!hold && !down && t > idle && !STILL) { pos += dt * 0.045; var h = half(); if (h > 0 && pos >= h) pos -= h; m.scrollLeft = pos; }
+      if (!hold && !down && t > idle) { pos += dt * 0.045; var h = half(); if (h > 0 && pos >= h) pos -= h; m.scrollLeft = pos; }
       else pos = m.scrollLeft;
       requestAnimationFrame(step);
-    });
-  })();
-
-  /* ---------- Pause animation button (in the hero, above the row of figures) ---------- */
-  (function () {
-    var b = document.getElementById("still-btn"); if (!b) return;
-    if (reduce || !LITE) { b.remove(); return; } /* nothing moves for visitors who asked their device for less motion; modern devices on normal connections do not get the button */
-    function show() {
-      b.classList.toggle("is-still", STILL);
-      b.querySelector(".sb-t").textContent = STILL ? T("Play animation", "Chwarae’r animeiddiad") : T("Pause animation", "Oedi’r animeiddiad");
-    }
-    b.hidden = false; show();
-    b.addEventListener("click", function () {
-      STILL = !STILL; document.documentElement.classList.toggle("still", STILL);
-      try { if (STILL) localStorage.setItem("hc-still", "1"); else localStorage.removeItem("hc-still"); } catch (e) {}
-      show();
     });
   })();
 
