@@ -1,24 +1,18 @@
 {
  "branch": "claude/project-thread-5nwyl6",
- "out": "_research/druids",
+ "out": "_research/druids2",
  "max": 260,
- "categories": [
-  "Category:Mona Antiqua Restaurata",
-  "Category:Druids in art",
-  "Category:Llyn Cerrig Bach",
-  "Category:Gorsedh of the Bards of the Island of Britain"
- ],
- "searches": [
-  "Arch Druid judicial habit Meyrick Smith",
-  "Druids bringing in the mistletoe Hornel Henry",
-  "Druid Stukeley engraving",
-  "Henry Rowlands Mona Antiqua druid",
-  "Gorsedd Eisteddfod archdruid ceremony",
-  "Llyn Cerrig Bach lake Anglesey",
-  "Menai Strait Anglesey Roman invasion",
-  "Coligny calendar",
-  "druid oak mistletoe golden sickle",
-  "Gallo-Greek inscription",
-  "Gorsedd stones stone circle Eisteddfod"
+ "categories": [],
+ "searches": [],
+ "files": [],
+ "download": [
+  "File:An Arch Druid in his Judicial Habit, from Meyrick and Smith.jpg",
+  "File:TheChiefDruid.png",
+  "File:César vient traiter avec les druides, Francois Hippolyte Debon, 1867.jpg",
+  "File:Pictures of English History Plate I - Druids, or British Priests.jpg",
+  "File:Welsh Druid playing the harp 02400.jpg",
+  "File:Motte Druide coupant le gui au 6e jour de la lune.jpg",
+  "File:LlynCerrigBach.jpg",
+  "File:National Eisteddfod of Wales 1952, Aberystwyth (5184388271).jpg"
  ]
 }
