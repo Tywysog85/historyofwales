@@ -67,7 +67,7 @@ This file collects the techniques and lessons from building History of Wales. Ad
 ## Building the site
 
 ### Static site, no framework
-- Content lives in Python data files in `src/` (the table in `README.md` says which file holds what). `build.py` turns them into about 1,900 pages (every page in English and again in Welsh under `cy/`).
+- Content lives in Python data files in `src/` (the table in `README.md` says which file holds what). `build.py` turns them into about 2,600 pages (every page in English and again in Welsh under `cy/`).
 - The home page and the timeline page share one script (`src/app.js`). The script checks which parts exist on the page (the timeline, the hero sky, the map) and skips the rest.
 
 ### Bilingual pages (English / Cymraeg)
@@ -767,11 +767,6 @@ Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.
 - Reading lists: `page_refs()` gives a book page its own list if `src/oldbooks.py` `REFS` has `book-<id>`, otherwise the `books` list. `"book-*"` is added to the "lit" shelf so they count on Books and authors.
 - Picture research: Commons categories for manuscripts are often missing, so searches by shelf mark work better (`Jesus College MS 119` found the Bodleian's CC BY photos of every page of Llyfr Ancr; `Basingwerk manuscript` found the National Library's CC0 photos). Look at the previews before choosing: flyleaves with owners' notes (dates, names) make good, honest captions.
 
-## Working together
-
-- Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
-- Small visual tweaks are published one at a time so each can be seen live.
-
 ### The home page On this day panel, Daily challenge card and game cards (November 2026)
 - On this day on the home page is drawn twice with the same markup: `ssr_today()` / `otd_home_row()` in `build.py` (so it shows before any script runs) and `renderToday()` / `otdLi()` in `src/app.js` (the visitor's own date, the week strip, ‹ ›). Change both together. Its CSS is at the top of `src/onthisday.css`.
 - Every row of `onthisday.json` now has a 10th field, a small picture, chosen by `otd_pic()` in `build.py`: the person's or place's own photo, else the linked page's picture from `src/pictures.py` (saints take their region's saints page), else the event's place, else the picture of its age. Tools that read the JSON by position are unaffected.
@@ -792,3 +787,8 @@ Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.
 - **Every `<img>` has a width and height** so the page does not jump as pictures arrive: `photo_scene()` in `src/art.py` reads the legend photo's size from the file; avatar pictures say 96 x 96 (CSS sets the real size).
 - The console error `ERR_TUNNEL_CONNECTION_FAILED` that checkers report is the GoatCounter script (`gc.zgo.at`) being blocked by the checker's own network, not a fault in the site. It loads `async`, so a blocked copy never holds up the page.
 - The space between home page sections is one setting, `--home-gap` at the end of `src/v6.css` (about 56px between sections on a phone, 112px on a wide screen). Ifan wants the gaps tight and even, so change that value rather than one section, and check with a script that measures each gap: from the bottom of the last visible block in one section to the top of the first block in the next.
+
+## Working together
+
+- Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
+- Small visual tweaks are published one at a time so each can be seen live.

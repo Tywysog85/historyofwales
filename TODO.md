@@ -10,7 +10,7 @@ Open jobs for History of Wales. Tick a job off by deleting it. Keep this list sh
 
 ## Needs a fluent Welsh speaker
 
-- **Proofread the Welsh.** All of it, and most of all the text added in November 2026: the long reads, the new people, the new places, the kingdoms map, the saints pages, the castles map and the 251 people in `src/people2a.py` to `people2f.py`.
+- **Proofread the Welsh.** All of it, and most of all the text added in November 2026: the long reads, the new people, the new places, the kingdoms map, the saints pages, the castles map, the old books, the Mabinogi pages and the people in `src/people2a.py` to `people2i.py`.
 
 ## Checking and sources
 
