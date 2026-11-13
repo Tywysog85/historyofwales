@@ -887,6 +887,8 @@ from onthisday import CITES as _OTD  # noqa: E402  (the sources of On this day, 
 S.update(_OTD)
 from epynt import CITES as _EPYNT  # noqa: E402  (the clearing of Epynt, src/epynt.py)
 S.update(_EPYNT)
+from hen_ogledd import CITES as _HENOGLEDD  # noqa: E402  (the Old North, src/hen_ogledd.py)
+S.update(_HENOGLEDD)
 
 MARK = re.compile(r"\[\[cite:([a-z0-9,\- ]+)\]\]")
 

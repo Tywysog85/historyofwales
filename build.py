@@ -66,6 +66,8 @@ import writers as WRT  # noqa: E402  (the writers who recorded early Wales: thei
 REF.REFS.update(WRT.REFS)
 import bruts as BRT  # noqa: E402  (the Bruts, the chronicles of Wales: long read and reading list)
 REF.REFS.update(BRT.REFS)
+import hen_ogledd as HO  # noqa: E402  (Yr Hen Ogledd, the Old North: long read, map, the Men of the North block, reading list)
+REF.REFS.update(HO.REFS)
 import oldbooks as OB  # noqa: E402  (the old books of Wales: a page for every book, book-<id>.html)
 REF2.PAGES.update(OB.REFS)
 import authors as AU  # noqa: E402  (the authors on the Books and authors page)
@@ -705,10 +707,10 @@ def mabinogi_circle(slug):
 NUDGES = [(0, 0)] + [(round(r * c), round(r * s_)) for r in (30, 56, 84) for c, s_ in ((1, 0), (-1, 0), (0, -1), (0, 1), (.7, -.7), (-.7, -.7), (.7, .7), (-.7, .7))]
 
 
-def pin_map(places, pre, label):
-    """A numbered map of Wales with a list beside it (the look of Arthur's Wales). places: (en, cy, lat, lon, note en, note cy, link);
-    a place with lat None is listed but has no pin (it lies outside Wales or is not known)."""
-    sc, k, minx, maxy = geo["sc"], geo["k"], geo["minx"], geo["maxy"]
+def pin_parts(places, pre, g):
+    """The numbered pins and the list beside them, for a map drawn with the frame of geo file g (see pin_map, north_map).
+    places: (en, cy, lat, lon, note en, note cy, link); a place with lat None is listed but has no pin."""
+    sc, k, minx, maxy = g["sc"], g["k"], g["minx"], g["maxy"]
     pins, items, seen = "", "", []
     for i, (en, cy, lat, lon, ten, tcy, link) in enumerate(places, 1):
         if lat is not None:
@@ -725,11 +727,70 @@ def pin_map(places, pre, label):
                      f'<text x="{x:.0f}" y="{y + 5:.0f}">{i}</text><title>{e(en)}</title></a>')
         more = f'<a class="wl" href="{link}">{bi(en, cy)}</a>' if link else ""
         items += f'<li id="{pre}-{i}"{' class="wl-card"' if link else ""}><b>{bi(en, cy)}</b><p>{bi(ten, tcy)}{more}</p></li>'
+    return pins, items
+
+
+def pin_map(places, pre, label):
+    """A numbered map of Wales with a list beside it (the look of Arthur's Wales)."""
+    pins, items = pin_parts(places, pre, geo)
     svg = (f'<svg class="ar-map" viewBox="-10 -10 630 691" role="img" aria-label="{e(label)}">'
            f'<path class="land" d="{geo["outline"]}"/>{pins}</svg>')
     return f'<div class="ar-grid"><div class="ar-mapbox">{svg}</div><ol class="ar-list">{items}</ol></div>'
 
 
+north_geo = json.loads(read("geo", "north.json"))  # northern Britain and Wales, from Natural Earth (tools/north_map.py)
+ROUTE_COL = ["#e8b33a", "#7fb8e6", "#8fd18a"]  # the three journeys south on the map of the Old North
+
+
+def north_map():
+    """The map of Yr Hen Ogledd for the long read (src/hen_ogledd.py): the kingdoms, the journeys south to Wales, and numbered
+    pins that open the list of places below the article. Returns (map figure for '!! map', places section)."""
+    g = north_geo
+    sc, k, minx, maxy = g["sc"], g["k"], g["minx"], g["maxy"]
+    xy = lambda lat, lon: ((lon - minx) * k * sc, (maxy - lat) * sc)
+    pins, items = pin_parts(HO.MAP, "hn", g)
+    regs = "".join(f'<text class="nm-reg{" foe" if c else ""}" x="{xy(la, lo)[0]:.0f}" y="{xy(la, lo)[1]:.0f}">{bi(en, cy, "tspan")}</text>' for en, cy, la, lo, c in HO.REGIONS)
+    routes, legend = "", ""
+    for n, (en, cy, pts) in enumerate(HO.ROUTES):
+        p = [xy(*q) for q in pts]
+        d = f"M{p[0][0]:.0f},{p[0][1]:.0f}"
+        for j in range(len(p) - 1):  # a smooth curve through the points (Catmull-Rom as Bézier curves)
+            a, b, c, d2 = p[max(j - 1, 0)], p[j], p[j + 1], p[min(j + 2, len(p) - 1)]
+            d += (f" C{b[0] + (c[0] - a[0]) / 6:.0f},{b[1] + (c[1] - a[1]) / 6:.0f} "
+                  f"{c[0] - (d2[0] - b[0]) / 6:.0f},{c[1] - (d2[1] - b[1]) / 6:.0f} {c[0]:.0f},{c[1]:.0f}")
+        col = ROUTE_COL[n % len(ROUTE_COL)]
+        routes += f'<path class="nm-route" d="{d}" stroke="{col}" marker-end="url(#nm-arr{n})"/>'
+        routes += (f'<marker id="nm-arr{n}" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">'
+                   f'<path d="M0,0 L10,5 L0,10 z" fill="{col}"/></marker>')
+        legend += f'<li><i style="background:{col}"></i>{bi(en + " comes south", cy + " yn dod i’r de")}</li>'
+    label = "Map of Yr Hen Ogledd, the Old North / Map o’r Hen Ogledd"
+    svg = (f'<svg class="ar-map nm" viewBox="-6 -6 612 667" role="img" aria-label="{e(label)}">'
+           f'<rect class="nm-sea" x="-6" y="-6" width="612" height="667"/><path class="nm-ire" d="{g["ire"]}"/><path class="land" d="{g["land"]}"/>'
+           f'<path class="nm-wales" d="{g["wales"]}"/>{regs}{routes}{pins}</svg>')
+    fig = (f'<figure class="nm-fig">{svg}<figcaption><ul class="nm-key"><li><i class="nm-k-wales"></i>{bi("Wales today", "Cymru heddiw")}</li>'
+           f'<li><i class="nm-k-foe"></i>{bi("Kingdoms of the Angles", "Teyrnasoedd yr Eingl")}</li>{legend}</ul>'
+           f'{bi("The kingdoms of the Men of the North, about AD 600, and the roads they took to Wales. Tap a number to read about the place.", "Teyrnasoedd Gwŷr y Gogledd, tua 600 OC, a’r ffyrdd a gymerasant i Gymru. Tapiwch rif i ddarllen am y lle.")}'
+           f' · {bi("Outline", "Amlinell")}: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a></figcaption></figure>')
+    places = section(f'<p class="lede">{bi(f"{len(HO.MAP)} places of the Old North and of the men who came south to Wales.", f"{len(HO.MAP)} o leoedd yr Hen Ogledd ac o’r gwŷr a ddaeth i’r de i Gymru.")}</p>'
+                     f'<ol class="ar-list nm-list">{items}</ol>', "The places of the Old North", "Lleoedd yr Hen Ogledd")
+    return fig, places
+
+
+def north_circle(slug):
+    """The Men of the North (src/hen_ogledd.py): the whole set, on each of their pages. Only people with a page are shown."""
+    if slug not in HO.ALL_IDS:
+        return ""
+    out = ""
+    for en, cy, ids in HO.GROUPS:
+        ids = [s for s in ids if s in PERSON]
+        if not ids:
+            continue
+        chips = "".join(lit_person_chip(s).replace("<a ", '<a aria-current="page" ', 1) if s == slug else lit_person_chip(s) for s in ids)
+        out += f'<h3 class="sub-h">{bi(en, cy)}</h3><div class="ppl">{chips}</div>'
+    more = " ".join(f'<a class="btn" href="{u}">{bi(a, b)} →</a>' for u, a, b in HO.LINKS)
+    lead = bi("The kings, poets and saints of Yr Hen Ogledd, the Old North: the Britons of the lands between the Clyde and the Pennines, whose poems and pedigrees Wales has kept for fourteen hundred years.",
+              "Brenhinoedd, beirdd a saint yr Hen Ogledd: Brythoniaid y tiroedd rhwng y Clud a’r Pennines, y cadwodd Cymru eu cerddi a’u hachau am bedair canrif ar ddeg.")
+    return section(f'<div class="ar-circle"><p class="lede">{lead}</p>{out}<p class="ar-more">{more}</p></div>', "Gwŷr y Gogledd, the Men of the North", "Gwŷr y Gogledd")
 def brittany_map():
     """The map in the Brittany long read (src/brittany.py): Wales, Cornwall and Brittany with the saints' places numbered,
     the sea roads they sailed and the old names of the Breton kingdoms. Outlines from src/geo/brittany.json (Natural Earth)."""
@@ -846,6 +907,7 @@ def person_page(p):
             + mabinogi_circle(slug)
             + princes_circle(slug)
             + writers_circle(slug)
+            + north_circle(slug)
             + story_feature("people", slug)
             + person_places(slug)
             + (section(f'<ol class="era-events">{"".join(event_li(ev) for ev in related)}</ol>', "On the timeline", "Ar y llinell amser") if related else "")
@@ -1111,7 +1173,9 @@ def prose(pars, cls="prose", figs=None):
             rows = []
         if not a:
             continue
-        if a.startswith("!! ") and a[3:].strip() in (figs or {}):  # a picture from the long read's own list (see lit_fig)
+        if a.startswith("!! ") and isinstance(figs, dict) and str(figs.get(a[3:].strip(), "")).startswith("<"):  # ready-made HTML, such as a map
+            out += figs[a[3:].strip()]
+        elif a.startswith("!! ") and a[3:].strip() in (figs or {}):  # a picture from the long read's own list (see lit_fig)
             out += lit_fig(figs[a[3:].strip()], "lr-fig")
         elif a.startswith("!! "):  # a picture from the gallery, with its full credit (see photo_fig)
             if a[3:].strip() not in GP.GALLERY:
@@ -1265,7 +1329,7 @@ def page_refs(path):
 SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes; the first section to claim a work keeps it)
     ("start", "Start here: the whole story", "Dechrau yma: yr hanes cyfan", ["general", "wales-in-10"]),
     ("britons", "The Britons and Rome", "Y Brythoniaid a Rhufain", ["era-ancient", "era-roman", "celts", "brutus", "caradog", "macsen"]),
-    ("kings", "Kings, kingdoms and the Old North", "Brenhinoedd, teyrnasoedd a’r Hen Ogledd", ["era-saints", "era-kings", "kings", "kings-*", "family-trees", "arthur", "arthur-circle", "wilson-blackett", "unconquered"]),
+    ("kings", "Kings, kingdoms and the Old North", "Brenhinoedd, teyrnasoedd a’r Hen Ogledd", ["era-saints", "era-kings", "kings", "kings-*", "family-trees", "arthur", "arthur-circle", "hen-ogledd", "wilson-blackett", "unconquered"]),
     ("law", "The laws of Hywel Dda", "Cyfreithiau Hywel Dda", ["laws", "hywel", "topic-law"]),
     ("saints", "Saints, learning and faith", "Seintiau, dysg a ffydd", ["christianity", "joseph", "lucius", "patrick", "saints", "saints-*", "learning", "brittany", "topic-faith"]),
     ("princes", "Princes, castles and Owain Glyndŵr", "Tywysogion, cestyll ac Owain Glyndŵr", ["era-medieval", "castles", "glyndwr", "longbow", "battles", "documents", "topic-war", "nest", "rhys"]),
@@ -1460,6 +1524,9 @@ def story_body(x):
 
 def story_page(x, i):
     nxt = F.STORIES[(i + 1) % len(F.STORIES)]
+    after = ""  # a section between the article and the pictures
+    if x["id"] == "hen-ogledd":  # the map of the Old North goes at '!! map' in the text, its list of places after the article
+        x["figs"]["map"], after = north_map()
     others = [y for y in F.STORIES if y["id"] != x["id"]][:3]
     era = ERA[x["era"]]
     meta = f'<p class="byline">{AB.byline_top()}<span>{x["mins"]} {bi("minute read", "munud o ddarllen")}</span><a href="era-{x["era"]}.html">{bi(era["en"], era["cy"])}</a><button type="button" class="copy" data-copy="story-{x["id"]}.html">{bi("Copy link", "Copïo’r ddolen")}</button></p>'
@@ -1467,7 +1534,7 @@ def story_page(x, i):
             + f'<section class="article"><div class="wrap narrow">{meta}{story_body(x)}' + (f'<p><a class="btn solid" href="firsts.html">★ {bi("Every Welsh world first, with the people behind them", "Pob un o’r pethau a wnaeth Cymru gyntaf, a’r bobl y tu ôl iddynt")} →</a></p>' if x["id"] == "firsts" else "")
               + story_more_links(x)
               + (f'<p><a class="btn solid" href="laws.html">{bi("Much more on the law: the big page on the Laws of Hywel Dda, with the manuscripts and a quiz", "Llawer mwy am y gyfraith: y dudalen fawr ar Gyfreithiau Hywel Dda, gyda’r llawysgrifau a chwis")} →</a></p>' if x["id"] == "hywel" else "") + refs_block(x["id"]) + '</div></section>'
-            + (section(f'<div class="mb-figs">{"".join(lit_fig(f) for f in x["figs"])}</div>', "Pictures", "Lluniau") if isinstance(x.get("figs"), list) else "")
+            + after + (section(f'<div class="mb-figs">{"".join(lit_fig(f) for f in x["figs"])}</div>', "Pictures", "Lluniau") if isinstance(x.get("figs"), list) and x["figs"] else "")
             + section(f'<div class="s-grid three">{"".join(story_card(y) for y in others)}</div>', "Keep reading", "Daliwch ati i ddarllen")
             + section(f'<div class="pager"><a class="btn" href="stories.html">← {bi("All long reads", "Pob erthygl")}</a><a class="btn solid" href="story-{nxt["id"]}.html">{bi(nxt["en"], nxt["cy"])} →</a></div>'))
     ld = {"@context": "https://schema.org", "@type": "Article", "headline": x["en"], "description": x["sumEn"], "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
@@ -2846,7 +2913,8 @@ def ft_road():
     return f'<div class="road">{col("tudur", "t")}{col("rhys", "r")}{j1}{joined}{col("llywelyn", "l")}{j2}{end}</div>'
 
 
-FT_REALM_TREE = {"gwynedd": "gwynedd", "deheubarth": "deheubarth", "ceredigion": "deheubarth", "powys": "powys", "glywysing": "gwent", "gwent": "gwent"}
+FT_REALM_TREE = {"gwynedd": "gwynedd", "deheubarth": "deheubarth", "ceredigion": "deheubarth", "powys": "powys", "glywysing": "gwent", "gwent": "gwent",
+                 "rheged": "coeling", "gododdin": "coeling", "elfed": "coeling", "efrog": "coeling", "ystrad-clud": "dyfnwal"}
 FT_TREE = {t["id"]: t for t in TR.TREES}
 
 

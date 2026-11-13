@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-13", "Yr Hen Ogledd: the Old North, where Welsh poetry was born", "Yr Hen Ogledd: y wlad lle ganed barddoniaeth Gymraeg",
+     "A new long read on the Britons of the North, from the Clyde and the Forth to the Pennines: Urien of Rheged and his poet Taliesin, Aneirin and the men who rode to Catraeth, Rhydderch Hael, Arfderydd and Myrddin, and Cunedda, who came south to found Gwynedd. It has a map of the northern kingdoms and the roads their people took to Wales, 14 new pages on the Men of the North, and two new family trees of the line of Coel Hen and of Dyfnwal Hen.",
+     "Erthygl newydd ar Frythoniaid y Gogledd, o’r Clud a Gwerydd i’r Pennines: Urien Rheged a’i fardd Taliesin, Aneirin a’r gwŷr a aeth i Gatraeth, Rhydderch Hael, Arfderydd a Myrddin, a Cunedda, a ddaeth i’r de i sefydlu Gwynedd. Mae ganddi fap o deyrnasoedd y Gogledd a’r ffyrdd a gymerodd eu pobl i Gymru, 14 tudalen newydd ar Wŷr y Gogledd, a dwy goeden deulu newydd, llinach Coel Hen a llinach Dyfnwal Hen.",
+     "story-hen-ogledd.html"),
     ("2026-11-13", "Llydaw: how the Britons made a second Britain", "Llydaw: sut y gwnaeth y Brythoniaid ail Brydain",
      "A new long read on how the Britons crossed the sea to Brittany, with Macsen Wledig and Cynan Meiriadog in 383 and again in the age of the Saxon wars, led by the saints of Wales: Samson, Paul Aurelian, Tudwal, Brioc, Malo, Teilo and Gildas. With a map, pictures, and new pages for Riothamus, king of the Britons, and Gwenole of Landévennec.",
      "Erthygl newydd ar sut y croesodd y Brythoniaid y môr i Lydaw, gyda Macsen Wledig a Chynan Meiriadog yn 383 ac eto yn oes rhyfeloedd y Saeson, dan arweiniad saint Cymru: Samson, Pol Aurelian, Tudwal, Briog, Malo, Teilo a Gildas. Gyda map, lluniau, a thudalennau newydd i Riothamus, brenin y Brythoniaid, a Gwenole o Landevenneg.",
