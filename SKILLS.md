@@ -364,9 +364,9 @@ Learnt while expanding Arthur's page (`src/arthur.py`).
 - Quick check after adding people: `python3 -c "import sys; sys.path.insert(0,'src'); import data, people2; print([p[0] for p in data.PEOPLE if p[0] not in people2.FIELD])"` must print `[]`.
 - Person photos: Wikipedia, Wikimedia and Wikidata are blocked from the cloud, so look them up on the owner's Mini-PC through Remote Control (Node `fetch` or PowerShell). Ask the Wikipedia API for each article's free lead image (`action=query&prop=pageimages&piprop=name&pilicense=free&redirects=1`, up to 40 titles a call), then ask the Commons API for each file's credit (`prop=imageinfo&iiprop=extmetadata&iiextmetadatafilter=Artist|LicenseShortName`). Commons answers 429 to a bare User-Agent: send one with the site address, such as `HistoryOfWalesSite/1.0 (https://historyofwales.cymru)`, and pause a second between calls. Put the results in `src/photos2.py` as slug → (file, caption EN, caption CY, credit); `photos.py` merges them, and the credit prints after "Photo: Wikimedia Commons". A lead image is not always the person (a map, a coat of arms, a grave, an album cover): skip it, or write a caption that says what it shows.
 
-### The four notes in the top folder (November 2026)
+### The notes in the top folder (November 2026)
 
-`README.md` says what the site is and where things live. `EDITORIAL.md` holds the owner's rules for how it is written. `TODO.md` lists the open jobs. `SKILLS.md` is this file. The owner wants them kept clean and tidy: when something changes, edit the line that is there instead of adding a new one at the bottom, delete finished jobs from `TODO.md`, and keep the counts in `README.md` true.
+`README.md` says what the site is and where things live. `EDITORIAL.md` holds the owner's rules for how it is written. `STYLE.md` says how it looks, and `SOURCES.md` how facts are checked and cited. `TODO.md` lists the open jobs. `SKILLS.md` is this file. The owner wants them kept clean and tidy: when something changes, edit the line that is there instead of adding a new one at the bottom, delete finished jobs from `TODO.md`, and keep the counts in `README.md` true. A nightly task (7pm) tidies all six and removes unused files.
 
 ### Adding or splitting an age (November 2026)
 
@@ -829,3 +829,8 @@ Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.
 - Picture research for a landscape: Geograph photos on Commons (CC BY-SA 2.0) cover most of Wales, chapel sites and datestones included. Search the Commons categories for the place, the training area and the path round it, and the names of the chapel, school and inn.
 - Amgueddfa Cymru's Collections Online pictures (for example Iorwerth Peate's 1940 negatives of Epynt) are not under an open licence: their copyright page asks for permission from the Image Licensing Officer. Cite the record as a source; don't put the picture on the site.
 - When only the English page of a bilingual site loads (Literature Wales), the language-switch link's address often gives the Welsh title. Treat it as a hint, not a fact, and word the Welsh so it doesn't depend on it.
+
+## Working together
+
+- Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
+- Small visual tweaks are published one at a time so each can be seen live.
