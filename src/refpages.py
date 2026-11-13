@@ -280,9 +280,25 @@ def towns_map(rows):
             f'<path class="land" d="{g["geo"]["outline"]}"/>{dots}</svg>')
 
 
+def town_pic(r):
+    """A photo for a town's card: a place on the site with a photo of its own, in or right by the town (2.5 km)."""
+    import math
+    best = None
+    for p in g["D"].PLACES:
+        if p.get("lat") is None:
+            continue
+        d = math.hypot((p["lat"] - r["lat"]) * 111, (p["lon"] - r["lon"]) * 111 * math.cos(math.radians(r["lat"])))
+        if d < 2.5 and (best is None or d < best[0]):
+            pic = g["card_pic"](f'place-{p["id"]}.html')
+            if pic:
+                best = (d, pic[0])
+    return best[1] if best else None
+
+
 def town_card(r, have):
     sub = f'<span class="tw-en">{e(r["en"])}</span>' if r["en"] != r["cy"] else ""
-    return (f'<article class="tw-card" id="{r["id"]}" data-ref-item><h3><span class="tw-cy" lang="cy">{e(r["cy"])}</span>{sub}</h3>'
+    pic = town_pic(r)
+    return (f'<article class="tw-card{" pbg" if pic else ""}" id="{r["id"]}" data-ref-item{g["PN"].bg_style(pic, small=True) if pic else ""}><h3><span class="tw-cy" lang="cy">{e(r["cy"])}</span>{sub}</h3>'
             f'<p class="tw-m"><b>{bi("Means", "Ystyr")}:</b> {bi(r["mEn"], r["mCy"])}</p><p>{bi(r["hEn"], r["hCy"])}</p>{link_chips(r["see"], have)}</article>')
 
 

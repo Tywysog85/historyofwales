@@ -22,9 +22,9 @@ TRAILS = [
          ("event", "Prince of Wales"), ("event", "Death at Cilmeri")]),
 
  dict(id="arthur", en="Arthur’s Wales", cy="Cymru Arthur", ill="stone",
-  introEn=["Welsh tradition holds that Arthur was Athrwys ap Meurig, king of Gwent and Glywysing, who led the Britons to victory at Badon.",
+  introEn=["Arthur led the Britons to their greatest victory, at Badon, and held the Saxons back for a generation. Wales remembered him first, centuries before the romances of France and England.",
            "Follow his story through the people and places Wales remembers, from his father Uthr to the cave where he sleeps."],
-  introCy=["Yn ôl traddodiad Cymru, Athrwys ap Meurig oedd Arthur, brenin Gwent a Glywysing, a arweiniodd y Brythoniaid i fuddugoliaeth ym Maddon.",
+  introCy=["Arweiniodd Arthur y Brythoniaid i’w buddugoliaeth fwyaf, ym Maddon, a dal y Saeson draw am genhedlaeth. Cymru a’i cofiodd gyntaf, ganrifoedd cyn rhamantau Ffrainc a Lloegr.",
            "Dilynwch ei hanes drwy’r bobl a’r lleoedd y mae Cymru’n eu cofio, o’i dad Uthr i’r ogof lle mae’n cysgu."],
   items=[("story", "arthur", "Welsh tradition", "Traddodiad Cymru"), ("person", "arthur"), ("person", "uthr-bendragon"), ("person", "emrys-wledig"), ("person", "myrddin"),
          ("event", "The victory at Badon"), ("person", "gwenhwyfar"), ("legend", "culhwch", "Preseli", "Preseli"), ("event", "Camlann"),

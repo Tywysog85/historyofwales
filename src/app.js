@@ -584,7 +584,7 @@
       if (e[E_ERA] !== last) { var E = ERA[e[E_ERA]]; html += '<li class="era-head" id="era-' + E.id + '" data-era="' + E.id + '"><span class="eyebrow">' + T(E.spanEn, E.spanCy) + "</span><h3>" + T(E.en, E.cy) + '</h3><button type="button" data-open="' + E.id + '">' + T("Read the chapter", "Darllen y bennod") + "</button></li>"; last = e[E_ERA]; }
       html += '<li class="ev' + (D.EVS ? " wl-card" : "") + (e[E_KEY] ? " key" : "") + '" id="ev-' + i + '" data-i="' + i + '" data-era="' + e[E_ERA] + '"><time>' + yearLabel(e) + "</time><h4>" + esc(T(e[E_TEN], e[E_TCY])) + "</h4><p>" + esc(T(e[E_BEN], e[E_BCY])) + '</p><div class="links">' +
         (D.EVS ? '<a class="wl" href="event-' + D.EVS[i] + '.html">' + esc(T(e[E_TEN], e[E_TCY])) + "</a>" : "") +
-        (e[E_PLACE] ? '<button type="button" class="maplink" data-map="' + e[E_PLACE] + '"><svg aria-hidden="true"><use href="#i-pin"/></svg>' + T("See it on the map", "Gweld ar y map") + "</button>" : "") + (D.SL && D.SL[i] ? '<a class="src" href="story-' + D.SL[i] + '.html">' + T("Read the long read", "Darllen yr erthygl") + " →</a>" : "") + "</div></li>";
+        (e[E_PLACE] ? '<button type="button" class="maplink" data-map="' + e[E_PLACE] + '"><svg aria-hidden="true"><use href="#i-pin"/></svg>' + T("See it on the map", "Gweld ar y map") + "</button>" : "") + "</div></li>";
     });
     $("#events").innerHTML = html;
     $("#tl-count").textContent = n + " " + T("events", "digwyddiad");
