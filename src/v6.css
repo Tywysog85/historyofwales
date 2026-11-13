@@ -911,3 +911,4 @@ main.home > #chapters { padding-top: calc(var(--home-gap) * 1.4) }
 main.home .head { margin-bottom: clamp(1.4rem, 3vw, 2.2rem) }
 main.home .more-row { margin-top: 1.25rem }
 main.home .mh .head { margin-bottom: 1.4rem }
+.refs .ref-buy, #sources .ref-buy { display: block; margin-top: .2rem; font-size: .8rem; color: #9aa0ad } .ref-buy a { color: var(--gold); text-decoration: none } .ref-buy a:hover { text-decoration: underline }

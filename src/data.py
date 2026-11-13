@@ -463,6 +463,9 @@ for _r in READING:
         _r["u"] = "https://www.ylolfa.com/products/" + _r["u"][2:]
     elif not _r.get("u"):
         _r["u"] = _BL.link(*_r["t"].split(", ", 1))
+    _b = _BL.buy(*_r["t"].split(", ", 1))   # where to buy it: Amazon UK and AbeBooks search links
+    if _b:
+        _r["b"] = list(_b)
 ONLINE = [  # u: the English site, uCy: its Welsh address (each checked 2026-11-12)
  dict(t="Dictionary of Welsh Biography", tCy="Y Bywgraffiadur Cymreig", u="https://biography.wales/", uCy="https://bywgraffiadur.cymru/"),
  dict(t="National Library of Wales", tCy="Llyfrgell Genedlaethol Cymru", u="https://www.library.wales/", uCy="https://www.llyfrgell.cymru/"),
