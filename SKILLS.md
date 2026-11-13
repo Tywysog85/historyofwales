@@ -25,6 +25,14 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - Gotcha: "Token is expired" at 123-reg means the login session timed out. Log in again.
 - Gotcha: a GoDaddy "Domain Connect" pop-up can appear. You don't need it; add the records by hand.
 
+### Email address (hello@historyofwales.cymru, November 2026)
+- 123-reg's own forwarding needs a paid mailbox, so the address uses **ImprovMX** (improvmx.com), free plan: 1 domain, up to 25 addresses, 500 forwarded emails a day, no sending. hello@ forwards to Ifan's Outlook inbox. Add more addresses on the ImprovMX dashboard (Add alias). Avoid the `*` catch-all, which attracts spam.
+- At 123-reg (Domains → Manage All → the domain → **DNS**): delete any old MX rows, then add MX `@` priority 10 `mx1.improvmx.com.` and MX `@` priority 20 `mx2.improvmx.com.` (123-reg wants the full stop at the end).
+- **Only one SPF line per domain.** The one TXT on `@` starting `v=spf1` covers every service that sends as the domain: `v=spf1 include:spf.improvmx.com include:spf.brevo.com ~all`. When another service asks for SPF, add its `include:` to this line; never add a second `v=spf1` row (two make both fail).
+- Brevo's own records (the `brevo-code:` TXT, the DKIM CNAMEs `brevo1._domainkey` and `brevo2._domainkey`, and the DMARC TXT on `_dmarc`) sit on other names and don't clash.
+- Replying *as* hello@: Outlook.com can't send through an outside server, so the free way is Gmail → Settings → Accounts → **Send mail as**, using Brevo's SMTP relay (smtp-relay.brevo.com, port 587, login and key from Brevo → SMTP & API) once the domain shows Authenticated in Brevo.
+- Gotcha: Claude's cloud computer can't look up DNS records (DNS look-up sites are blocked), so check the records from a screenshot, from ImprovMX's green ticks, or on the PC.
+
 ### Google Search Console
 - Add the site as a property, choose the **HTML file** verification method, and download the file Google gives you.
 - Put the file in `src/static/` so it is published at the site root. Then click **Verify**. Keep the file there for good.
