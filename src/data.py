@@ -249,7 +249,7 @@ EVENTS = [
  ("modern",1984,0,1985,"03-12","The miners’ strike","Streic y glowyr",
   "A year-long strike ends in defeat, and the closure of the coalfield accelerates.",
   "Mae streic a barodd flwyddyn yn gorffen mewn methiant, ac mae cau’r maes glo yn cyflymu.",0,"","UK_miners%27_strike_(1984%E2%80%931985)"),
- ("modern",1993,0,0,"","Welsh Language Act","Deddf yr Iaith Gymraeg 1993",
+ ("modern",1993,0,0,"","Welsh Language Act 1993","Deddf yr Iaith Gymraeg 1993",
   "Welsh and English are to be treated equally in public business in Wales.",
   "Mae’r Gymraeg a’r Saesneg i’w trin yn gyfartal mewn busnes cyhoeddus yng Nghymru.",0,"","Welsh_Language_Act_1993"),
  ("modern",1997,0,0,"09-18","Yes to devolution","Ie i ddatganoli",
@@ -747,3 +747,20 @@ EVENTS = sorted(EVENTS + _WNE, key=lambda ev: ev[1])
 # ---------- twelve ages (src/ages12.py): last of all, so everything above is moved into the right age ----------
 import ages12 as _A12
 _A12.apply(globals())
+
+# ---------- no repeats: one entry per person, one title per event ----------
+# Two entries for one person put them twice in every list, and two events with one title share a name on the
+# timeline and can link to the wrong one on a trail. Give each its own wording instead (Ifan, 13 November 2026).
+def _repeats(xs):
+    seen, out = set(), []
+    for x in xs:
+        if x in seen:
+            out.append(x)
+        seen.add(x)
+    return out
+
+
+if _repeats(p[0] for p in PEOPLE):
+    raise SystemExit(f"data.py: the same person is listed twice: {_repeats(p[0] for p in PEOPLE)}")
+if _repeats(ev[5] for ev in EVENTS):
+    raise SystemExit(f"data.py: two events share a title, give each its own: {_repeats(ev[5] for ev in EVENTS)}")
