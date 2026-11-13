@@ -5,6 +5,12 @@
   var $ = function (s, r) { return (r || document).querySelector(s) || document.createElement("input"); };
   var HAS_TL = !!document.getElementById("events"), HERO = !!document.getElementById("sky"), HAS_MAP = !!document.getElementById("pins");
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  /* --nav-h: the top bar's real height (it grows with big phone text or a wrapped bar), so sticky bars below it sit flush under it */
+  (function () {
+    var nav = document.querySelector(".nav"), root = document.documentElement; if (!nav) return;
+    function set() { root.style.setProperty("--nav-h", nav.offsetHeight + "px"); var d = document.getElementById("dial"); if (d) root.style.setProperty("--dial-h", d.offsetHeight + "px"); }
+    set(); if (window.ResizeObserver) { var ro = new ResizeObserver(set); ro.observe(nav); var d = document.getElementById("dial"); if (d) ro.observe(d); } else window.addEventListener("resize", set);
+  })();
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   var ERA = {}; ERAS.forEach(function (e) { ERA[e.id] = e; });
   var PLACE = {}; PLACES.forEach(function (p) { PLACE[p.id] = p; });

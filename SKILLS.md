@@ -219,6 +219,10 @@ This file collects the techniques and lessons from building History of Wales. Ad
 ### Word spacing in display fonts
 - The Gloock display font has tight word spaces. `word-spacing: .1em` on headings, the logo and the tagline makes phrases like "of Kings" read clearly.
 
+### Sticky bars under the top bar
+- The top bar's height changes with phone text size and when it wraps, so a sticky bar under it must not guess a fixed `top`. `src/app.js` measures the bar and sets `--nav-h` (and `--dial-h` for the timeline's year bar) on the page; use `top: calc(env(safe-area-inset-top, 0px) + var(--nav-h, 3.7rem) - 1px)`.
+- Give a sticky bar a solid background (no see-through colour or blur), or text scrolling under it shows through. Set `scroll-margin-top` on the things it jumps to, so a jump lands below the bar.
+
 ### Letter animations
 - The "Cymru" letters animate with a CSS `@keyframes` rule. A negative `translateY` makes them drop down into place; a positive one makes them rise.
 
