@@ -208,6 +208,8 @@ PAGE = {
     "mabinogion.html": "g:trea-red-book",
     "literature.html": "g:trea-book-aneirin",
     "books-and-authors.html": "g:place-library",
+    "further-reading.html": "g:place-library",
+    "online-sources.html": "g:place-library",
     "documents.html": "g:trea-llywelyn-seal",
     "symbols.html": "g:trea-lovespoon",
     "play.html": "g:place-caerleon",

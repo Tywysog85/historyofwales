@@ -3406,6 +3406,53 @@ def ssr_books():
     return "".join(f"<li>{title(r)}<span>{bi(r['n'], r['nCy'])}</span>{buyr(r)}</li>" for r in D.READING)
 
 
+def reading_page():
+    """further-reading.html: every book in the home page's Further reading, with notes and Buy links (Ifan: Show all opens a page)."""
+    def li(r):
+        who, title = r["t"].split(", ", 1)
+        t = f'<a href="{e(r["u"])}" target="_blank" rel="noopener"><cite>{e(title)}</cite> ↗</a>' if r.get("u") else f"<cite>{e(title)}</cite>"
+        return f'<li><span class="ref-w">{e(who)}</span>, {t}<span class="ref-n">{bi(r["n"], r["nCy"])}</span>{buyr(r)}</li>'
+    n = len(D.READING)
+    main = (hero("tudor", f'<a href="index.html">{SITE}</a>', "book", "Further reading", "Darllen pellach", "The best books on Welsh history", "Y llyfrau gorau ar hanes Cymru",
+                 f"The {n} books we would hand anyone who wants to know the story of Wales.", f"Y {n} llyfr y byddem yn eu rhoi i unrhyw un sydd am wybod stori Cymru.", art="book")
+            + section(f'<div class="narrow"><section class="refs"><ul>{"".join(li(r) for r in D.READING)}</ul></section>'
+                      f'<p class="refs-all"><a class="btn solid" href="books-and-authors.html">{bi("Every book on the site, with its authors, period by period", "Pob llyfr ar y wefan, gyda’u hawduron, fesul cyfnod")} →</a></p>'
+                      f'<p class="refs-all"><a class="btn" href="online-sources.html">{bi("The best websites on Welsh history", "Y gwefannau gorau ar hanes Cymru")} →</a></p></div>', top=True))
+    return page("further-reading.html", "Further reading: the best books on Welsh history · History of Wales",
+                f"The {n} best books on the history of Wales, from John Davies and Gwynfor Evans to Jan Morris, each with a link and where to buy it.", main, era="tudor", track="further-reading")
+
+
+def online_page():
+    """online-sources.html: every website in the home page's Online list, then every website the pages' reading lists cite."""
+    def short(u):
+        return re.sub(r"/$", "", re.sub(r"^https://(www[.])?", "", u))
+
+    def li(r):
+        cy = r.get("uCy") or r["u"]
+        if cy == r["u"]:
+            a = f'<a href="{e(r["u"])}" target="_blank" rel="noopener"><b>{bi(r["t"], r.get("tCy", r["t"]))}</b> ↗</a>'
+        else:
+            a = (f'<a class="l-en" lang="en" href="{e(r["u"])}" target="_blank" rel="noopener"><b>{e(r["t"])}</b> ↗</a>'
+                 f'<a class="l-cy" lang="cy" href="{e(cy)}" target="_blank" rel="noopener"><b>{e(r.get("tCy", r["t"]))}</b> ↗</a>')
+        return f'<li>{a}<span class="ref-d"> {e(short(r["u"]))}</span></li>'
+    seen, more = {short(r["u"]) for r in D.ONLINE}, []
+    for v in list(REF.REFS.values()) + list(REF2.PAGES.values()):
+        for it in (v or {}).get("items", []):
+            if it[0] == "w" and len(it) > 6 and it[6] and it[2] not in {m[2] for m in more} and short(it[6]) not in seen:
+                more.append(it)
+    more.sort(key=lambda it: it[2].lower())
+    rows = "".join(f'<li><span class="ref-w">{e(it[1])}</span>, <a href="{e(it[6])}" target="_blank" rel="noopener"><cite>{e(it[2])}</cite> ↗</a>'
+                   f'<span class="ref-n">{bi(it[4], it[5])}</span></li>' for it in more)
+    n = len(D.ONLINE)
+    main = (hero("today", f'<a href="index.html">{SITE}</a>', "book", "Online", "Ar-lein", "The best websites on Welsh history", "Y gwefannau gorau ar hanes Cymru",
+                 f"The {n} best places online to read, search and see the history of Wales, all free.", f"Y {n} lle gorau ar-lein i ddarllen, chwilio a gweld hanes Cymru, i gyd am ddim.", art="book")
+            + section(f'<div class="narrow"><section class="refs"><ul>{"".join(li(r) for r in D.ONLINE)}</ul></section>'
+                      + (f'<section class="refs"><h2>{bi("More websites the pages of this site use", "Rhagor o wefannau a ddefnyddir gan dudalennau’r wefan hon")}</h2><ul>{rows}</ul></section>' if more else "")
+                      + f'<p class="refs-all"><a class="btn" href="further-reading.html">{bi("The best books on Welsh history", "Y llyfrau gorau ar hanes Cymru")} →</a></p></div>', top=True))
+    return page("online-sources.html", "Online: the best websites on Welsh history · History of Wales",
+                "The best free websites for the history of Wales: the Dictionary of Welsh Biography, the National Library, Welsh Newspapers, Coflein and more.", main, era="today", track="online-sources")
+
+
 def ssr_online():
     def short(u):
         return re.sub(r"/$", "", re.sub(r"^https://(www[.])?", "", u))
@@ -4083,6 +4130,8 @@ def main():
     for i, (b, _g) in enumerate(ALL_BOOKS):
         pages[f'book-{b["id"]}.html'] = book_page(i)
     pages["books-and-authors.html"] = bookshelf_page()
+    pages["further-reading.html"] = reading_page()     # the home page's Show all buttons open these two
+    pages["online-sources.html"] = online_page()
     pages["triads.html"] = triads_page()
     pages["laws.html"] = laws_page()
     for i, x in enumerate(F.LEGENDS):
