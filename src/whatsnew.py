@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-13", "History near you, on the home page", "Hanes yn eich ymyl, ar yr hafan",
+     "Type your town in the Map section of the home page, or share your location, to see the three nearest historic places and where you are on the map of Wales.",
+     "Teipiwch eich tref yn adran y Map ar yr hafan, neu rhannwch eich lleoliad, i weld y tri lle hanesyddol agosaf a ble rydych chi ar fap Cymru.",
+     "index.html#map"),
     ("2026-11-13", "A brighter On this day and games", "Ar y dydd hwn a’r gemau, yn fwy lliwgar",
      "On the home page, On this day now has a picture for every entry and a week of days to tap through, the Daily challenge card shows today’s event and your guesses, and every game has a real picture.",
      "Ar yr hafan, mae llun ar bob cofnod yn Ar y dydd hwn ac wythnos o ddyddiau i’w tapio, mae cerdyn Her y dydd yn dangos digwyddiad heddiw a’ch cynigion, ac mae llun go iawn gan bob gêm.",

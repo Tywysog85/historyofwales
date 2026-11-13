@@ -965,6 +965,50 @@
   };
   $("#near-list").addEventListener("click", function (ev) { var b = ev.target.closest(".near-go"); if (!b) return; selectPlace(b.dataset.pid); var c = $("#place-card"); if (c && c.scrollIntoView && innerWidth < 900) c.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }); });
 
+  /* ---------- Home page: history near you, in the Map section (#mh-near). The three nearest places become picture cards, and a "You" pin lands on the small map. ---------- */
+  var MH = document.getElementById("mh-near"), mhAt = null;
+  function renderMh() {
+    if (!MH) return;
+    $("#mh-towns").innerHTML = TW.map(function (t) { return '<option value="' + esc(T(t[0], t[1])) + '">'; }).join("");
+    $("#mh-in").placeholder = T("Your town, e.g. Bala", "Eich tref, e.e. Y Bala");
+    $(".mh-go", MH).setAttribute("aria-label", T("Find", "Chwilio")); $("#mh-geo").setAttribute("aria-label", T("Use my location", "Defnyddio fy lleoliad"));
+    var res = $("#mh-res"), you = document.getElementById("mh-you");
+    $$(".map-teaser .pin.hl").forEach(function (g) { g.classList.toggle("hl", false); });
+    if (!mhAt) { res.innerHTML = ""; if (you) you.setAttribute("hidden", ""); return; }
+    var near = PLACES.map(function (p) { return [km(mhAt.lat, mhAt.lon, p.lat, p.lon), p]; }).sort(function (a, b) { return a[0] - b[0]; }).slice(0, 3);
+    $("#mh-msg").textContent = T("The nearest historic places to ", "Y lleoedd hanesyddol agosaf at ") + mhAt.name + ":";
+    res.innerHTML = near.map(function (x) {
+      var p = x[1], d = x[0] < 1 ? T("under 1 km", "llai nag 1 km") : Math.round(x[0]) + " km", name = esc(T(p.en, p.cy));
+      var pin = document.querySelector('.map-teaser .pin[data-pid="' + p.id + '"]'); if (pin) pin.classList.add("hl");
+      return '<li class="mh-place wl-card" data-era="' + p.era + '"><span class="mh-ph">' + (p.ph ? '<img src="' + esc(p.ph[0]) + '" alt="" loading="lazy" decoding="async">' : "") + '</span><span class="mh-pt"><b>' + name + "</b><small>" + d + " · " + esc(p.year) + '</small></span><a class="wl" href="place-' + p.id + '.html">' + name + "</a></li>";
+    }).join("");
+    if (you) {
+      var xy = proj(mhAt.lat, mhAt.lon);
+      you.toggleAttribute("hidden", false);
+      you.setAttribute("transform", "translate(" + xy[0].toFixed(1) + " " + xy[1].toFixed(1) + ")");
+      you.innerHTML = '<circle class="ring" r="22"/><circle r="12"/><circle class="in" r="5"/><text x="0" y="-26" text-anchor="middle">' + esc(T("You", "Chi")) + "</text>";
+    }
+  }
+  if (MH) {
+    MH.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      var t = findTown($("#mh-in").value);
+      if (!t) { mhAt = null; renderMh(); $("#mh-msg").textContent = T("Sorry, I don’t know that town yet. Try a nearby larger town.", "Mae’n ddrwg gen i, dw i ddim yn adnabod y dref honno eto. Rhowch gynnig ar dref fwy gerllaw."); return; }
+      mhAt = { lat: t[2], lon: t[3], name: T(t[0], t[1]) }; renderMh(); $("#mh-in").blur();
+    });
+    $("#mh-geo").onclick = function () {
+      var msg = $("#mh-msg");
+      if (!navigator.geolocation) { msg.textContent = T("Your browser can’t share your location. Type your town instead.", "Ni all eich porwr rannu’ch lleoliad. Teipiwch eich tref yn lle hynny."); return; }
+      msg.textContent = T("Finding you…", "Yn chwilio amdanoch…");
+      navigator.geolocation.getCurrentPosition(function (pos) {
+        var la = pos.coords.latitude, lo = pos.coords.longitude, out = la < 51.2 || la > 53.6 || lo < -5.8 || lo > -2.5;
+        if (out) { la = Math.min(53.45, Math.max(51.38, la)); lo = Math.min(-2.75, Math.max(-5.3, lo)); }
+        mhAt = { lat: la, lon: lo, name: T("you", "chi") }; renderMh();
+        if (out) msg.textContent = T("You seem to be outside Wales, so here is the nearest corner of it:", "Mae’n ymddangos eich bod y tu allan i Gymru, felly dyma’r gornel agosaf ati:");
+      }, function () { msg.textContent = T("Location wasn’t shared. Type your town instead.", "Ni rannwyd eich lleoliad. Teipiwch eich tref yn lle hynny."); }, { timeout: 10000, maximumAge: 600000 });
+    };
+  }
+
   /* ---------- Timeline challenge ---------- */
   var G = null;
   function gameRound() {
@@ -1028,7 +1072,7 @@
     document.documentElement.lang = lang; document.documentElement.classList.toggle("cy", lang === "cy");
     $$("[data-cy]").forEach(function (el) { el.textContent = lang === "cy" ? el.dataset.cy : el.dataset.en; });
     $$("[data-cy-svg]").forEach(function (el) { el.textContent = lang === "cy" ? el.dataset.cySvg : el.dataset.enSvg; });
-    renderChapters(); renderToday(); renderTimeline(); renderPeople(); renderFact(); renderStreak(); renderChart(); renderDecoder(); renderWords(); renderSources(); renderNear(); renderGame(); selectPlace(sel); if (mode === "kg") renderKg(); renderQuiz();
+    renderChapters(); renderToday(); renderTimeline(); renderPeople(); renderFact(); renderStreak(); renderChart(); renderDecoder(); renderWords(); renderSources(); renderNear(); renderMh(); renderGame(); selectPlace(sel); if (mode === "kg") renderKg(); renderQuiz();
     if (!ov.hidden) { var m = /^#pennod-(\w+)/.exec(location.hash); if (m) openChapter(m[1], false); }
   }
   /* the EN / CY switch is a pair of links to the other language's page (see welshpages.py) */

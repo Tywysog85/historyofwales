@@ -60,21 +60,34 @@
       <p data-cy="Erthyglau pum munud ar y cwestiynau mawr: pam cymaint o gestyll, sut y goroesodd yr iaith, beth a gostiodd glo.">Five-minute essays on the big questions: why so many castles, how the language survived, what coal cost.</p>
     </div>
     <div class="s-grid">__STORIES__</div>
-    <p class="more-row rv"><a class="btn" href="stories.html"><span class="l-en" lang="en">All __NSTORIES__ long reads →</span><span class="l-cy" lang="cy">Pob un o’r __NSTORIES__ erthygl →</span></a></p>
+    __STORIESMORE__
   </div>
 </section>
 
 <section id="map">
   <div class="wrap">
-    <div class="map-home">
-      __MAPTEASER__
-      <div class="head rv">
-        <p class="eyebrow"><span class="num">03</span> · <span data-cy="Map">Map</span></p>
-        <h2 data-cy="Lle digwyddodd">Where it happened</h2>
-        <p><span class="l-en" lang="en">__NPLACES__ historic places on one map of Wales, each with its story, and the kingdoms of Wales changing through time. Type your town to find the history near you.</span><span class="l-cy" lang="cy">__NPLACES__ o leoedd hanesyddol ar un map o Gymru, pob un â’i stori, a theyrnasoedd Cymru’n newid drwy amser. Teipiwch eich tref i ganfod yr hanes yn eich ymyl.</span></p>
-        <p class="more-row"><a class="btn solid" href="map.html" data-cy="Agor y map →">Open the map →</a> <a class="btn" href="map.html#kingdoms" data-cy="Y teyrnasoedd">The kingdoms</a> <a class="btn" href="castles.html" data-cy="Map y cestyll">Castles map</a></p>
+    <div class="mh rv">
+      <div class="mh-map">__MAPTEASER__</div>
+      <div class="mh-side">
+        <div class="head">
+          <p class="eyebrow"><span class="num">03</span> · <span data-cy="Map">Map</span></p>
+          <h2 data-cy="Lle digwyddodd">Where it happened</h2>
+          <p><span class="l-en" lang="en">__NPLACES__ historic places on one map of Wales, each with its story, and the kingdoms of Wales changing through time.</span><span class="l-cy" lang="cy">__NPLACES__ o leoedd hanesyddol ar un map o Gymru, pob un â’i stori, a theyrnasoedd Cymru’n newid drwy amser.</span></p>
+        </div>
+        <form class="mh-near" id="mh-near" autocomplete="off">
+          <label for="mh-in" data-cy="Hanes yn eich ymyl">History near you</label>
+          <div class="mh-row">
+            <input id="mh-in" type="text" list="mh-towns" placeholder="Your town, e.g. Bala" data-cy-ph="Eich tref, e.e. Y Bala" enterkeyhint="search">
+            <button type="submit" class="mh-go" aria-label="Find / Chwilio">→</button>
+            <button type="button" class="mh-geo" id="mh-geo" aria-label="Use my location / Defnyddio fy lleoliad"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="3.2" fill="currentColor"/><circle cx="12" cy="12" r="7.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 1.5v3.5M12 19v3.5M1.5 12h3.5M19 12h3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          </div>
+          <datalist id="mh-towns"></datalist>
+          <p class="mh-msg" id="mh-msg" aria-live="polite"></p>
+          <ul class="mh-res" id="mh-res"></ul>
+        </form>
       </div>
     </div>
+    <div class="mh-cards">__MAPCARDS__</div>
   </div>
 </section>
 
