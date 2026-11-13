@@ -252,7 +252,16 @@ def head_tags(title, desc, path, og_type="website", image=None):
     return t
 
 
-TAIL_JS = ('<script src="site.js?v=6" defer></script>\n<script src="search.js?v=2" defer></script>\n<script>if("serviceWorker" in navigator&&location.protocol==="https:"){addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>\n'
+def _static_fp(name):
+    """A fingerprint of a file in src/static, for its ?v= number: it changes whenever the file does, so a browser that
+    kept the old copy fetches the new one at once (a fixed number left people seeing old text for up to ten minutes)."""
+    import hashlib
+    with open(os.path.join(SRC, "static", name), "rb") as fh:
+        return hashlib.md5(fh.read()).hexdigest()[:10]
+
+
+TAIL_JS = (f'<script src="site.js?v={_static_fp("site.js")}" defer></script>\n<script src="search.js?v={_static_fp("search.js")}" defer></script>\n'
+           '<script>if("serviceWorker" in navigator&&location.protocol==="https:"){addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>\n'
            + (f'<script data-goatcounter="https://{GOATCOUNTER}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>\n' if GOATCOUNTER else ""))
 
 LANG_BOOT = '<script>(function(){var h=document.documentElement;h.classList.add("js");setTimeout(function(){if(!window.__site)h.classList.add("rv-all")},2500);try{if(localStorage.getItem("hc-lang")==="cy"){h.classList.add("cy");h.lang="cy"}}catch(e){}})()</script>'
