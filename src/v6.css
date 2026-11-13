@@ -149,22 +149,34 @@ html.menu-open { overflow: hidden }
 #today { padding-block: clamp(2.5rem, 6vw, 4.5rem) 0 }
 .bento-today { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr) minmax(0, 1fr); gap: 1rem }
 .bento-today > * { border-radius: var(--r); border: 1px solid var(--line); padding: clamp(1.2rem, 2.5vw, 1.7rem); display: grid; gap: 1rem; align-content: start; min-width: 0; background: var(--card) }
-.b-day .today { border: 0; border-radius: 14px; grid-template-columns: minmax(7rem, 9.5rem) minmax(0, 1fr); background: transparent; gap: 1.2rem }
-.b-day .today .cal { border-radius: 16px; padding: 1.2rem .8rem }
-.b-day .today .items { background: transparent; padding: 0 }
-.b-daily { text-decoration: none; background: linear-gradient(150deg, #d43c34, #8e1f1a 70%); border-color: transparent; color: #fff; position: relative; overflow: hidden; align-content: space-between; transition: transform .35s var(--ease), box-shadow .35s }
-.b-daily::before { content: "?"; position: absolute; right: -.06em; bottom: -.34em; font: 400 15rem/1 var(--f-display); color: rgba(255,255,255,.1) }
-.b-daily:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -20px rgba(226,69,61,.6) }
-.b-daily .eyebrow { color: rgba(255,255,255,.75) }
-.b-q { font-family: var(--f-display); font-size: clamp(2rem, 3.4vw, 2.8rem); line-height: 1 }
-.b-sub { color: rgba(255,255,255,.85); font-size: .98rem }
-.b-go { font-weight: 700 }
-.b-streak { position: absolute; top: 1.1rem; right: 1.1rem; background: rgba(0,0,0,.28); border-radius: 999px; padding: .2rem .7rem; font: 600 .75rem var(--f-mono) }
+/* Daily challenge: today's own event with its year blanked, and six tiles for the guesses (app.js renderStreak fills them) */
+.b-daily { text-decoration: none; background: radial-gradient(120% 90% at 100% 0%, #e0544a 0%, transparent 55%), linear-gradient(155deg, #c9352e, #7d1915 80%); border-color: transparent; color: #fff; position: relative; overflow: hidden; align-content: start; gap: .85rem; transition: transform .35s var(--ease), box-shadow .35s; box-shadow: 0 22px 46px -28px rgba(226,69,61,.9) }
+.b-daily:hover { transform: translateY(-4px); box-shadow: 0 26px 54px -20px rgba(226,69,61,.7) }
+.b-daily:active { transform: scale(.985) }
+.b-daily > * { position: relative }
+@media (min-width: 1001px) { .b-daily::after { content: "?"; position: absolute; right: .02em; bottom: -.28em; font: 400 15rem/1 var(--f-display); color: rgba(255,255,255,.09); pointer-events: none } }
+.bd-top { display: flex; align-items: center; justify-content: space-between; gap: .6rem; min-height: 1.6rem }
+.b-daily .eyebrow { color: rgba(255,255,255,.8); margin: 0 }
+#daily-n { color: #fff; opacity: .9 }
+.b-q { display: block; font-family: var(--f-display); font-size: clamp(2.3rem, 3.4vw, 2.8rem); line-height: 1 }
+.bd-ev { display: block; font: 600 1.08rem/1.4 var(--f-body); background: rgba(0,0,0,.2); border: 1px solid rgba(255,255,255,.16); border-radius: 14px; padding: .8rem .95rem; backdrop-filter: blur(2px) }
+.bd-ev small { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin-top: .35rem; font: 400 .9rem/1.45 var(--f-body); color: rgba(255,255,255,.82) }
+.bd-ev b { display: inline-block; min-width: 3.4em; text-align: center; color: var(--gold); letter-spacing: .05em; border-bottom: 2px solid var(--gold); line-height: 1.1 }
+.bd-tiles { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .4rem }
+.bd-tiles i { aspect-ratio: 1; border-radius: 10px; border: 1.5px solid rgba(255,255,255,.3); background: rgba(0,0,0,.12); display: grid; place-items: center; font: 600 .74rem var(--f-mono); font-style: normal; color: #fff }
+.bd-tiles i.next { border-color: #fff; background: rgba(255,255,255,.14); font: 400 1.3rem/1 var(--f-display); animation: bd-pulse 2.2s ease-in-out infinite }
+.bd-tiles i.ok { background: #7cc495; border-color: #7cc495; color: #0b1a10 } .bd-tiles i.c5 { background: #e8c65a; border-color: #e8c65a; color: #2a2108 }
+.bd-tiles i.c25 { background: #f0975a; border-color: #f0975a; color: #2b1406 } .bd-tiles i.c100 { background: #f6857e; border-color: #f6857e; color: #2b0d0b } .bd-tiles i.far { background: #3b4252; border-color: #59617a }
+@keyframes bd-pulse { 50% { background: rgba(255,255,255,.28) } }
+@media (prefers-reduced-motion: reduce) { .bd-tiles i.next { animation: none } }
+.b-sub { display: block; color: rgba(255,255,255,.88); font-size: .95rem }
+.b-streak { background: rgba(0,0,0,.28); border-radius: 999px; padding: .2rem .7rem; font: 600 .75rem var(--f-mono); white-space: nowrap }
+.b-streak[hidden] { display: none }
 .b-fact .fact { font-family: var(--f-display); font-size: clamp(1.15rem, 1.6vw, 1.4rem); line-height: 1.3; word-spacing: .06em }
 .b-fact { align-content: space-between }
 .b-fact .chip { justify-self: start }
 @media (max-width: 1000px) { .bento-today { grid-template-columns: 1fr 1fr } .b-day { grid-column: 1 / -1 } }
-@media (max-width: 600px) { .bento-today { grid-template-columns: 1fr } .b-day .today { grid-template-columns: 1fr } }
+@media (max-width: 600px) { .bento-today { grid-template-columns: 1fr } }
 
 /* ---------- the ages: poster accordion ---------- */
 .posters { display: flex; gap: .7rem; height: clamp(26rem, 46vw, 36rem) }
@@ -271,23 +283,48 @@ html.menu-open { overflow: hidden }
 
 /* ---------- play ---------- */
 #play { background: var(--slate) }
-.play-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: minmax(12.5rem, auto); gap: 1rem }
-.p-card { position: relative; overflow: hidden; border-radius: var(--r); padding: 1.3rem 1.4rem; text-decoration: none; display: grid; gap: .5rem; align-content: end; background: linear-gradient(160deg, color-mix(in srgb, var(--c) 16%, var(--card)), var(--card) 70%); border: 1px solid color-mix(in srgb, var(--c) 28%, var(--line)); transition: transform .4s var(--ease), box-shadow .4s; isolation: isolate }
-.p-card:hover { transform: translateY(-5px); box-shadow: 0 24px 50px -24px color-mix(in srgb, var(--c) 70%, transparent) }
-.p-card::before { position: absolute; top: -.18em; right: .1em; font: 400 8.5rem/1 var(--f-display); color: color-mix(in srgb, var(--c) 22%, transparent); z-index: -1; transition: transform .6s var(--ease) }
-.p-card:hover::before { transform: rotate(-6deg) scale(1.08) }
-.p-daily::before { content: "?" } .p-quiz::before { content: "10" } .p-map::before { content: "⌖" } .p-order::before { content: "1→5"; font-size: 5.5rem; top: .1em }
-.p-names::before { content: "ap"; font-style: italic } .p-hero::before { content: "♛" } .p-pairs::before { content: "Aa" } .p-ride::before { content: "♞" } .p-llys::before { content: "3D"; font-size: 6rem; top: .1em }
-.p-card h3 { font-size: 1.6rem; line-height: 1.08 }
-.p-card p { color: #c3c7cf; font-size: .93rem }
-.p-card .go { font-weight: 700; font-size: .9rem }
-.p-card .tag { justify-self: start; border: 1px solid color-mix(in srgb, var(--c) 45%, transparent); border-radius: 999px; padding: .15rem .6rem; align-self: start; margin-bottom: auto }
-.p-daily { grid-column: span 2; grid-row: span 2; background: linear-gradient(150deg, #d43c34, #8e1f1a 75%); border-color: transparent; color: #fff }
-.p-daily::before { font-size: 22rem; color: rgba(255,255,255,.1); top: auto; bottom: -.3em }
-.p-daily h3 { font-size: clamp(2.2rem, 4vw, 3.4rem) } .p-daily p { color: rgba(255,255,255,.88); font-size: 1.05rem; max-width: 26rem } .p-daily .tag { color: #fff; border-color: rgba(255,255,255,.5) }
-.p-quiz, .p-names { grid-column: span 2 }
-@media (max-width: 1000px) { .play-grid { grid-template-columns: 1fr 1fr } }
-@media (max-width: 520px) { .play-grid { grid-template-columns: 1fr } .p-daily, .p-quiz, .p-names { grid-column: auto } .p-daily { grid-row: auto; min-height: 17rem } }
+/* Game cards: a real picture for each game (src/pictures.py), a badge, the kind of game, its name and one line. The card is one link, with no "Play" line. */
+.play-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: minmax(16rem, auto); gap: 1rem }
+.p-card { position: relative; overflow: hidden; isolation: isolate; border-radius: var(--r); padding: 1.1rem 1.2rem 1.2rem; text-decoration: none; color: #fff; display: flex; flex-direction: column; justify-content: flex-end; gap: .5rem; min-height: 16rem;
+  background: var(--card); border: 1px solid color-mix(in srgb, var(--c) 35%, var(--line)); transition: transform .4s var(--ease), box-shadow .4s, border-color .4s }
+.p-card:hover { transform: translateY(-5px); border-color: color-mix(in srgb, var(--c) 70%, var(--line)); box-shadow: 0 26px 50px -24px color-mix(in srgb, var(--c) 70%, transparent) }
+.p-card:active { transform: scale(.985) }
+.p-pic { position: absolute; inset: 0; z-index: -2 }
+.p-pic img { width: 100%; height: 100%; max-width: none; object-fit: cover; transition: transform 1.2s var(--ease) }
+.p-card:hover .p-pic img { transform: scale(1.06) }
+.p-pic::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(9,12,19,.15) 0%, rgba(9,12,19,.35) 38%, rgba(9,12,19,.94) 78%), linear-gradient(0deg, color-mix(in srgb, var(--c) 30%, transparent), transparent 60%) }
+.p-ico { position: absolute; top: 1rem; right: 1rem; min-width: 3rem; height: 3rem; padding: 0 .55rem; border-radius: 999px; display: grid; place-items: center; font: 400 1.35rem/1 var(--f-display); color: #fff;
+  background: color-mix(in srgb, var(--c) 55%, rgba(9,12,19,.5)); border: 1px solid rgba(255,255,255,.3); backdrop-filter: blur(6px); box-shadow: 0 8px 20px -8px rgba(0,0,0,.6) }
+.p-names .p-ico { font-style: italic }
+.p-card .tag { position: absolute; top: 1.15rem; left: 1.1rem; font: 600 .66rem var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: #fff; background: rgba(9,12,19,.55); border: 1px solid rgba(255,255,255,.22); border-radius: 999px; padding: .3rem .7rem; backdrop-filter: blur(6px) }
+.p-txt { display: grid; gap: .35rem }
+.p-card h3 { font-size: 1.6rem; line-height: 1.06; text-shadow: 0 2px 18px rgba(0,0,0,.55) }
+.p-card p { color: #d9dce3; font-size: .93rem; line-height: 1.45; margin: 0 }
+/* the newest game leads, bigger */
+.play-grid > .p-card:first-child { grid-column: span 2; grid-row: span 2 }
+.play-grid > .p-card:first-child h3 { font-size: clamp(2rem, 3.6vw, 3rem) }
+.play-grid > .p-card:first-child p { font-size: 1.02rem; max-width: 30rem }
+/* the last tile on the home page: all the games, with a fan of their pictures */
+.p-all { background: linear-gradient(150deg, color-mix(in srgb, var(--gold) 14%, var(--card)), var(--card) 70%); border-color: rgba(232,198,90,.35); color: var(--ink); justify-content: space-between }
+.p-all:hover { border-color: var(--gold); box-shadow: 0 26px 50px -24px rgba(232,198,90,.45) }
+.p-faces { display: flex; padding-left: .6rem }
+.p-faces span { width: 3.4rem; height: 3.4rem; border-radius: 50%; overflow: hidden; margin-left: -.6rem; border: 2px solid var(--card); box-shadow: 0 6px 14px -6px rgba(0,0,0,.6); flex: none }
+.p-faces span:nth-child(2) { transform: translateY(-4px) } .p-faces span:nth-child(4) { transform: translateY(-4px) }
+.p-faces img { width: 100%; height: 100%; max-width: none; object-fit: cover }
+.p-all p { color: var(--muted) }
+.p-all .ar { position: absolute; right: 1.2rem; bottom: 1.1rem; width: 2.6rem; height: 2.6rem; border-radius: 50%; background: var(--gold); color: var(--night); display: grid; place-items: center; font-size: 1.2rem; transition: transform .3s var(--ease) }
+.p-all:hover .ar { transform: translateX(4px) }
+.p-all .p-txt { padding-right: 3.2rem }
+@media (max-width: 1000px) { .play-grid { grid-template-columns: 1fr 1fr } .play-grid > .p-card:first-child { grid-row: auto; min-height: 20rem } }
+@media (max-width: 560px) {
+  .play-grid { grid-template-columns: 1fr; grid-auto-rows: auto; gap: .8rem }
+  .play-grid > .p-card:first-child { grid-column: auto; min-height: 21rem }
+  .p-card { min-height: 14.5rem }
+  .p-all { min-height: 0; flex-direction: row; align-items: center; gap: 1rem; padding: 1rem 1.1rem }
+  .p-all .p-faces { flex: none } .p-all .p-faces span:nth-child(n+4) { display: none }
+  .p-all .p-txt { padding-right: 2.6rem } .p-all h3 { font-size: 1.3rem } .p-all p { font-size: .85rem }
+  .p-all .ar { top: 50%; bottom: auto; right: 1rem; margin-top: -1.3rem }
+}
 
 /* ---------- illustrated page headers ---------- */
 .era-hero { position: relative; overflow: hidden; isolation: isolate }
@@ -605,10 +642,8 @@ html.cy .news-item.is-new .n-t::after { content: "Newydd" }
 
 /* Phones: a shorter front page. The full lists are one tap away ("All long reads", "All legends", "All games", Learn Welsh). */
 .lang-words { margin-top: clamp(2rem, 5vw, 3.5rem); display: grid; gap: 1.25rem }
-.play-more { display: none }
 @media (max-width: 700px) {
-  #stories .s-grid > .s-card:nth-child(n+5), #legends .l-grid > .l-card:nth-child(n+5), #play .play-grid > .p-card:nth-child(n+5), #language .lang-words { display: none }
-  #play .play-more { display: flex }
+  #stories .s-grid > .s-card:nth-child(n+5), #legends .l-grid > .l-card:nth-child(n+5), #play .play-grid > .p-card:nth-child(n+5):not(.p-all), #language .lang-words { display: none }
   #people .chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; max-width: 100%; -webkit-mask-image: linear-gradient(90deg, #000 90%, transparent); mask-image: linear-gradient(90deg, #000 90%, transparent); padding-bottom: 2px }
   #people .chips::-webkit-scrollbar { display: none }
   #people .chips .chip { flex: none }

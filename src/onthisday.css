@@ -1,26 +1,65 @@
-/* ---------- On this day: home panel (#today-box) and onthisday.html ---------- */
-.today .cal { position: relative }
-.today .cal .lab { min-height: 1.6em }
-.otd-back { font: 600 .78rem var(--f-body); color: #fff; background: rgba(0,0,0,.22); border: 1px solid rgba(255,255,255,.35); border-radius: 999px; padding: .2rem .7rem; cursor: pointer }
-.otd-nav { display: flex; justify-content: center; gap: .5rem; margin-top: .7rem }
-.otd-nav button { width: 2.4rem; height: 2.4rem; border-radius: 50%; border: 1px solid rgba(255,255,255,.4); background: rgba(0,0,0,.18); color: #fff; font: 400 1.5rem/1 var(--f-display); cursor: pointer; display: grid; place-items: center; padding: 0 0 .15rem; transition: background .2s }
-.otd-nav button:hover, .otd-back:hover { background: rgba(0,0,0,.4) }
-.today .it { grid-template-columns: 5.2rem minmax(0,1fr) }
-.today .it .when, .otd-list .when { display: grid; gap: .15rem; align-content: start; margin: 0 }
-.today .it .when .y, .otd-list .when .y { font-family: var(--f-display); font-size: 1.6rem; line-height: 1; color: var(--c) }
-.today .it .when .k, .otd-list .when .k, .today .it .when .dt { font: 600 .66rem var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted) }
-.today .it .when .dt { color: var(--ink) }
-.today .it h3 a, .otd-list h4 a { color: inherit; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .3s }
-.today .it h3 a:hover, .otd-list h4 a:hover { background-size: 100% 1px }
-.otd-near { color: var(--muted); font-size: .92rem; font-style: italic }
-.b-day .today .cal { align-content: center }
-@media (max-width: 600px) {
-  .b-day .today .cal { grid-template-columns: auto auto 1fr; align-items: center; text-align: left; gap: 0 .8rem }
-  .b-day .today .cal .d { font-size: 3rem }
-  .b-day .today .cal .lab { grid-column: 1 / 3; margin: 0 }
-  .otd-nav { grid-column: 3; grid-row: 1 / 3; justify-content: end; margin: 0 }
-  .today .it { grid-template-columns: 4.4rem minmax(0,1fr); gap: .8rem }
-}
+/* ---------- On this day: home panel (#today-box, drawn by build.py ssr_today and app.js renderToday) ---------- */
+.otd-box { display: grid; gap: 1rem; min-width: 0 }
+/* the date over the picture of its first entry, washed in dragon red */
+.otd-head { position: relative; isolation: isolate; overflow: hidden; border-radius: 18px; min-height: 8.5rem; padding: 1.1rem 1.2rem; display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; color: #fff;
+  background: linear-gradient(135deg, #d43c34, #8e1f1a 75%); box-shadow: 0 18px 40px -26px rgba(226,69,61,.9) }
+.otd-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; opacity: .5; mix-blend-mode: luminosity; filter: contrast(1.1) }
+.otd-head::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(100deg, rgba(142,31,26,.92) 15%, rgba(190,50,44,.55) 60%, rgba(142,31,26,.35)) }
+.otd-date { margin: 0; display: grid; grid-template-columns: auto 1fr; align-items: end; gap: 0 .7rem }
+.otd-date .d { grid-row: 1 / 3; font: 400 clamp(3.6rem, 9vw, 4.6rem)/.82 var(--f-display); letter-spacing: -.02em; text-shadow: 0 4px 24px rgba(0,0,0,.3) }
+.otd-date .m { font: 600 .82rem var(--f-mono); letter-spacing: .16em; text-transform: uppercase; align-self: end }
+.otd-date .lab { font-size: .85rem; opacity: .92; align-self: start; min-height: 1.6em }
+.otd-back { font: 600 .76rem var(--f-body); color: #fff; background: rgba(0,0,0,.25); border: 1px solid rgba(255,255,255,.4); border-radius: 999px; padding: .2rem .7rem; cursor: pointer }
+.otd-nav { display: flex; gap: .45rem; flex: none }
+.otd-nav button { width: 2.6rem; height: 2.6rem; border-radius: 50%; border: 1px solid rgba(255,255,255,.45); background: rgba(0,0,0,.2); color: #fff; font: 400 1.5rem/1 var(--f-display); cursor: pointer; display: grid; place-items: center; padding: 0 0 .15rem; transition: background .2s, transform .2s; backdrop-filter: blur(4px) }
+.otd-nav button:hover, .otd-back:hover { background: rgba(0,0,0,.42) }
+.otd-nav button:active { transform: scale(.92) }
+/* a week of days to tap; a dot for each thing that happened on that day */
+.otd-week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: .3rem }
+.otd-wd { display: grid; justify-items: center; gap: .1rem; padding: .45rem 0 .4rem; border-radius: 12px; border: 1px solid transparent; background: rgba(255,255,255,.03); color: var(--muted); cursor: pointer; font: inherit; transition: background .2s, color .2s, border-color .2s }
+.otd-wd .w { font: 600 .62rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase }
+.otd-wd .n { font: 400 1.25rem/1.1 var(--f-display); color: var(--ink) }
+.otd-wd i { display: flex; gap: 2px; height: 4px }
+.otd-wd i b { width: 4px; height: 4px; border-radius: 50%; background: var(--gold) }
+.otd-wd:not(.has) .n { opacity: .45 }
+.otd-wd:hover { background: rgba(255,255,255,.07) }
+.otd-wd.is-today { border-color: rgba(226,69,61,.55) }
+.otd-wd.on { background: var(--ink); color: var(--night); border-color: var(--ink) }
+.otd-wd.on .n { color: var(--night); opacity: 1 } .otd-wd.on i b { background: var(--dragon) }
+.otd-near { color: var(--muted); font-size: .9rem; font-style: italic; margin: 0 0 .2rem }
+/* each entry: picture, when, title and a line; the whole row is a link */
+.otd-body { display: grid; gap: .6rem }
+.otd-rows { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem }
+.otd-row { display: grid; grid-template-columns: 4.4rem minmax(0, 1fr); gap: .9rem; align-items: start; padding: .6rem; border-radius: 16px; background: rgba(255,255,255,.035); border: 1px solid var(--line); transition: background .25s, border-color .25s, transform .25s var(--ease) }
+.otd-row:hover { background: rgba(255,255,255,.06); border-color: color-mix(in srgb, var(--c) 55%, var(--line)) }
+.otd-row:active { transform: scale(.985) }
+.otd-pic { width: 4.4rem; height: 4.4rem; border-radius: 12px; overflow: hidden; background: color-mix(in srgb, var(--c) 30%, var(--slate)); box-shadow: inset 0 0 0 1px rgba(255,255,255,.08) }
+.otd-pic img { width: 100%; height: 100%; object-fit: cover; display: block }
+.otd-txt { min-width: 0; padding-top: .1rem }
+.otd-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .2rem .5rem; margin: 0 0 .2rem; font: 600 .66rem var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted) }
+.otd-meta .y { font: 400 1.05rem/1 var(--f-display); letter-spacing: 0; color: var(--c) }
+.otd-meta .dt { color: var(--ink) }
+.otd-meta .k { border: 1px solid color-mix(in srgb, var(--c) 45%, transparent); color: color-mix(in srgb, var(--c) 70%, var(--ink)); border-radius: 999px; padding: .08rem .45rem }
+.otd-txt h3 { font: 700 1.04rem/1.25 var(--f-body); margin: 0 0 .15rem; color: var(--ink) }
+.otd-txt p:last-child { color: var(--muted); font-size: .9rem; line-height: 1.45; margin: 0 }
+.otd-more { justify-self: start; font: 600 .85rem var(--f-body); color: var(--ink); background: none; border: 1px dashed var(--line); border-radius: 999px; padding: .35rem .9rem; cursor: pointer }
+.otd-more:hover { border-color: var(--muted) }
+/* the whole year: a wide button with the number of dates */
+.otd-year { display: flex; align-items: center; gap: .9rem; padding: .7rem .9rem .7rem .7rem; border-radius: 16px; text-decoration: none; color: var(--ink); background: linear-gradient(120deg, rgba(232,198,90,.12), rgba(232,198,90,.03)); border: 1px solid rgba(232,198,90,.3); transition: border-color .25s, background .25s }
+.otd-year:hover { border-color: var(--gold); background: linear-gradient(120deg, rgba(232,198,90,.2), rgba(232,198,90,.05)) }
+.otd-year .ic { width: 3rem; height: 3rem; flex: none; border-radius: 10px; background: var(--gold); color: var(--night); display: grid; place-items: center; position: relative; padding-top: .5rem; font: 400 1.05rem/1 var(--f-display) }
+.otd-year .ic::before { content: ""; position: absolute; inset: 0 0 auto; height: .65rem; border-radius: 10px 10px 0 0; background: var(--dragon) }
+.otd-year .t { display: grid; flex: 1; min-width: 0 }
+.otd-year .t b { font-size: 1rem } .otd-year .t small { color: var(--muted); font-size: .84rem }
+.otd-year .ar { font-size: 1.3rem; color: var(--gold); transition: transform .25s }
+.otd-year:hover .ar { transform: translateX(4px) }
+
+/* ---------- onthisday.html ---------- */
+.otd-list .when { display: grid; gap: .15rem; align-content: start; margin: 0 }
+.otd-list .when .y { font-family: var(--f-display); font-size: 1.6rem; line-height: 1; color: var(--c) }
+.otd-list .when .k { font: 600 .66rem var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted) }
+.otd-list h4 a { color: inherit; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .3s }
+.otd-list h4 a:hover { background-size: 100% 1px }
 
 .otd-jump { padding-block: 1rem 0 !important }
 .otd-chips { display: flex; flex-wrap: nowrap; gap: .4rem; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px }

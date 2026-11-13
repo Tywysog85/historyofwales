@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-13", "A brighter On this day and games", "Ar y dydd hwn a’r gemau, yn fwy lliwgar",
+     "On the home page, On this day now has a picture for every entry and a week of days to tap through, the Daily challenge card shows today’s event and your guesses, and every game has a real picture.",
+     "Ar yr hafan, mae llun ar bob cofnod yn Ar y dydd hwn ac wythnos o ddyddiau i’w tapio, mae cerdyn Her y dydd yn dangos digwyddiad heddiw a’ch cynigion, ac mae llun go iawn gan bob gêm.",
+     "index.html#today"),
     ("2026-11-12", "The old books of Wales", "Hen lyfrau Cymru",
      "Every great old book of Wales now has a page of its own, from the Llandeilo Gospels and the Black Book of Carmarthen to the Red Book of Hergest, the Book of the Anchorite, the Peniarth manuscripts and William Morgan’s Bible.",
      "Mae gan bob un o hen lyfrau mawr Cymru dudalen ei hun bellach, o Efengylau Llandeilo a Llyfr Du Caerfyrddin hyd Lyfr Coch Hergest, Llyfr Ancr, llawysgrifau Peniarth a Beibl William Morgan.",

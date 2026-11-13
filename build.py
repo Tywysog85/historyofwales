@@ -1963,8 +1963,29 @@ GAMES = [
 GAMES = AD.newest("game", GAMES, key=lambda g: g[0], ties="keep")  # a new game goes at the top
 
 
-def play_cards():
-    return "".join(f'<a class="p-card rv p-{g[1]}" href="{g[0]}" data-era="{g[8]}"><span class="tag">{bi(g[6], g[7])}</span><h3>{bi(g[2], g[3])}</h3><p>{bi(g[4], g[5])}</p><span class="go">{bi("Play", "Chwarae")} →</span></a>' for g in GAMES)
+GAME_ICON = {"llys": "3D", "ride": "♞", "daily": "?", "quiz": "10", "map": "⌖", "order": "1→5", "names": "ap", "hero": "♛", "pairs": "Aa"}
+
+
+def play_card(g):
+    """One game: its real picture (src/pictures.py), a badge, what kind of game, its name and one line. The card is one link."""
+    pic = PX.card_img(g[0] if "#" not in g[0] else "", g[8]) or ""  # the timeline game (quiz.html#game) takes its age's picture
+    return (f'<a class="p-card rv p-{g[1]}" href="{g[0]}" data-era="{g[8]}"><span class="p-pic">{pic}</span>'
+            f'<span class="p-ico" aria-hidden="true">{GAME_ICON.get(g[1], "")}</span><span class="tag">{bi(g[6], g[7])}</span>'
+            f'<div class="p-txt"><h3>{bi(g[2], g[3])}</h3><p>{bi(g[4], g[5])}</p></div></a>')
+
+
+def play_cards(home=False):
+    """The games. On the home page the Daily challenge already has its own card beside On this day, so it is left out here,
+    and the last tile leads to all the games."""
+    games = [g for g in GAMES if not (home and g[1] == "daily")]
+    out = "".join(play_card(g) for g in games)
+    if home:
+        faces = "".join(f'<span>{PX.card_img(g[0] if "#" not in g[0] else "", g[8]) or ""}</span>' for g in GAMES[:5])
+        out += (f'<a class="p-card p-all rv" href="play.html"><span class="p-faces" aria-hidden="true">{faces}</span>'
+                f'<div class="p-txt"><h3>{bi(f"All {len(GAMES)} games", f"Pob un o’r {len(GAMES)} gêm")}</h3>'
+                f'<p>{bi("Quizzes, a map game, Welsh names and more, with badges to collect.", "Cwisiau, gêm fap, enwau Cymraeg a mwy, gyda bathodynnau i’w casglu.")}</p></div>'
+                f'<span class="ar" aria-hidden="true">→</span></a>')
+    return out
 
 
 PLAY_DATA = dict(
@@ -2103,28 +2124,54 @@ def era_of_year(y):
     return "today"
 
 
+def otd_pic(link, era, place=None):
+    """A small picture for an On this day row (home page panel): the person's or place's own photo,
+    else the linked page's picture (src/pictures.py), else the event's place, else the picture of its age."""
+    path = (link or "").split("#")[0]
+    stem = path[:-5] if path.endswith(".html") else ""
+    if stem.startswith("saints-") and "#s-" in (link or ""):
+        stem = "person-" + link.split("#s-")[1]  # a saint who also has a person page or portrait
+    if stem in GP.GALLERY:
+        return f"gallery/{stem}-s.webp"
+    if stem.startswith("person-") and stem[7:] in PH.PERSON_PHOTOS:
+        return photo_url(PH.PERSON_PHOTOS[stem[7:]][0], 240)
+    if stem.startswith("place-") and stem[6:] in PH.PLACE_PHOTOS:
+        return photo_url(PH.PLACE_PHOTOS[stem[6:]][0], 240)
+    if place and "place-" + place in GP.GALLERY:
+        return f"gallery/place-{place}-s.webp"
+    ref = PX.for_page(path) if path else None  # a saint without a portrait takes the picture of their region's saints page
+    ref = ref or PX.ERA.get(era) or PX.ERA["medieval"]
+    return PX._parse(ref)["small"]
+
+
 def otd_rows():
-    """Every dated entry: [MM-DD, year or None, kind, titleEn, titleCy, lineEn, lineCy, link, era]."""
-    rows = []
+    """Every dated entry: [MM-DD, year or None, kind, titleEn, titleCy, lineEn, lineCy, link, era, picture]."""
+    rows, seen = [], set()
     for i, ev in enumerate(D.EVENTS):
         if ev[4]:
             st = story_links("events", ev[5])
-            rows.append([ev[4], ev[1], "ev", ev[5], ev[6], ev[7], ev[8], f'story-{st[0]["id"]}.html' if st else f"era-{ev[0]}.html#e{i}", ev[0]])
+            link = f'story-{st[0]["id"]}.html' if st else EP.href(ev)  # the long read that tells it, or the event's own page
+            rows.append([ev[4], ev[1], "ev", ev[5], ev[6], ev[7], ev[8], link, ev[0], otd_pic(link, ev[0], ev[10])])
+            seen.add((ev[4], ev[1], ev[5]))
     covered = {r[7][6:] for r in OTD.OTD if r[7].startswith("saint:")}
     for md, y, k, te, tc, le, lc, link in OTD.OTD:
+        if (md, y, te) in seen:  # the same day already comes from the timeline (11 November 1918 was in twice)
+            continue
         if link.startswith("saint:"):
             link = saint_href(link[6:])
-        rows.append([md, y, k, te, tc, le, lc, link, era_of_year(y) if y is not None else "saints" if k == "feast" else "modern"])
+        era = era_of_year(y) if y is not None else "saints" if k == "feast" else "modern"
+        rows.append([md, y, k, te, tc, le, lc, link, era, otd_pic(link, era)])
     for sid, (x, r) in SAINT.items():  # every other saint with a feast day on the Saints of Wales page
         if x["feast"] and sid not in covered:
             first = lambda t: t.split(". ")[0].rstrip(".") + "."
-            rows.append([f'{x["feast"][1]:02d}-{x["feast"][0]:02d}', None, "feast", x["en"], x["cy"], first(x["nEn"]), first(x["nCy"]), saint_href(sid), "saints"])
+            link = saint_href(sid)
+            rows.append([f'{x["feast"][1]:02d}-{x["feast"][0]:02d}', None, "feast", x["en"], x["cy"], first(x["nEn"]), first(x["nCy"]), link, "saints", otd_pic(link, "saints")])
     rows.sort(key=lambda r: (r[0], OTD_ORDER[r[2]], r[1] if r[1] is not None else -10 ** 6))
     return rows
 
 
 def otd_item(r):
-    md, y, k, te, tc, le, lc, link, era = r
+    md, y, k, te, tc, le, lc, link, era = r[:9]
     tag = OTD_TAG.get(k)
     when = (f'<span class="y">{y}</span>' if y is not None else "") + (f'<span class="k">{bi(*tag)}</span>' if tag else "")
     title = bi(te, tc)
@@ -3217,28 +3264,65 @@ def ssr_fact_href():
     return F.FACTS[days % len(F.FACTS)][2]
 
 
+WEEKDAYS = [("Mon", "Llun"), ("Tue", "Maw"), ("Wed", "Mer"), ("Thu", "Iau"), ("Fri", "Gwe"), ("Sat", "Sad"), ("Sun", "Sul")]
+
+
+def otd_home_row(r, show_date):
+    """One row of the home page On this day panel: a picture, when, the title and one line. The whole row is a link (app.js draws the same)."""
+    md, y, k, te, tc, le, lc, link, era, pic = r
+    tag = OTD_TAG.get(k)
+    m = int(md[:2]) - 1
+    bits = []
+    if show_date:
+        bits.append(f'<span class="dt">{int(md[3:])} {bi(MONTHS[m][0][:3], MONTHS[m][1])}</span>')
+    if y is not None:
+        bits.append(f'<span class="y">{y}</span>')
+    if tag:
+        bits.append(f'<span class="k">{bi(*tag)}</span>')
+    href = link or f"onthisday.html#d-{md}"
+    return (f'<li class="otd-row wl-card" data-era="{era}"><span class="otd-pic"><img src="{e(pic)}" alt="" width="96" height="96" loading="lazy" decoding="async"></span>'
+            f'<div class="otd-txt"><p class="otd-meta">{"".join(bits)}</p><h3>{bi(te, tc)}</h3><p>{bi(le, lc)}</p></div>'
+            f'<a class="wl" href="{e(href)}">{bi(te, tc)}</a></li>')
+
+
 def ssr_today():
-    """On this day: the build day's anniversaries (the site is rebuilt every morning)."""
+    """On this day: the build day's anniversaries (the site is rebuilt every morning). app.js redraws it with the visitor's own date."""
     day = _today()
     md = day.strftime("%m-%d")
     rows = otd_rows()
-    hit = [r for r in rows if r[0] == md]
-    note = ""
-    if not hit:  # nothing on this exact day: the next dates after it
-        later = [r for r in rows if r[0] > md] or rows
-        hit = [r for r in later if r[0] == later[0][0]]
-        note = f'<p class="otd-near">{bi("Nothing we know of happened on exactly this day. Here is the next date.", "Ni wyddom am ddim a ddigwyddodd ar union y diwrnod hwn. Dyma’r dyddiad nesaf.")}</p>'
-    items = ""
-    for md_, y, k, te, tc, le, lc, link, era in hit[:3]:
-        tag = OTD_TAG.get(k)
-        when = (f'<span class="y">{y}</span>' if y is not None else "") + (f'<span class="k">{bi(*tag)}</span>' if tag else "")
-        t = bi(te, tc)
-        if link:
-            t = f'<a href="{e(link)}">{t}</a>'
-        items += f'<div class="it" data-era="{era}"><p class="when">{when}</p><div><h3>{t}</h3><p>{bi(le, lc)}</p></div></div>'
+    by_day = {}
+    for r in rows:
+        by_day.setdefault(r[0], []).append(r)
+    hit = by_day.get(md, [])
+    near = False
+    if not hit:  # nothing on this exact day: the closest dates either side
+        for k in range(1, 200):
+            a = (day - datetime.timedelta(days=k)).strftime("%m-%d")
+            b = (day + datetime.timedelta(days=k)).strftime("%m-%d")
+            if a in by_day or b in by_day:
+                hit = by_day.get(a, [])[:2] + by_day.get(b, [])[:2]
+                break
+        near = True
+    shown = hit[:3]
     m = int(md[:2]) - 1
-    return (f'<div class="cal"><span class="d">{day.day}</span><span class="m">{bi(*MONTHS[m])}</span><span class="lab">{bi("Today", "Heddiw")}</span></div>'
-            f'<div class="items">{note}{items}<div class="more"><a class="chip" href="onthisday.html#d-{md}">{bi("The whole year", "Y flwyddyn gyfan")} →</a></div></div>')
+    week = ""
+    for k in range(-3, 4):
+        d = day + datetime.timedelta(days=k)
+        dm = d.strftime("%m-%d")
+        n = len(by_day.get(dm, []))
+        wd = WEEKDAYS[d.weekday()]
+        week += (f'<button type="button" class="otd-wd{" on" if k == 0 else ""}{" has" if n else ""}" data-otd-day="{dm}" aria-pressed="{"true" if k == 0 else "false"}">'
+                 f'<span class="w">{bi(*wd)}</span><span class="n">{d.day}</span><i aria-hidden="true">{"".join("<b></b>" for _ in range(min(n, 3)))}</i></button>')
+    pic = shown[0][9] if shown else PX._parse(PX.ERA["medieval"])["small"]
+    note = (f'<p class="otd-near">{bi("Nothing we know of happened on exactly this day. Here are the nearest dates.", "Ni wyddom am ddim a ddigwyddodd ar union y diwrnod hwn. Dyma’r dyddiadau agosaf.")}</p>' if near else "")
+    more = (f'<button type="button" class="otd-more" data-otd="more">+{len(hit) - len(shown)} {bi("more on this day", "arall ar y dydd hwn")}</button>' if len(hit) > len(shown) else "")
+    return (f'<div class="otd-head"><img class="otd-bg" src="{e(pic)}" alt="" loading="lazy" decoding="async">'
+            f'<p class="otd-date"><span class="d">{day.day}</span><span class="m">{bi(*MONTHS[m])}</span><span class="lab">{bi("Today", "Heddiw")}</span></p>'
+            f'<span class="otd-nav"><button type="button" data-otd="-1" aria-label="{bi("Day before", "Y diwrnod cynt")}">‹</button><button type="button" data-otd="1" aria-label="{bi("Next day", "Y diwrnod nesaf")}">›</button></span></div>'
+            f'<div class="otd-week" role="group" aria-label="{bi("Choose a day", "Dewiswch ddiwrnod")}">{week}</div>'
+            f'<div class="otd-body" aria-live="polite">{note}<ul class="otd-rows">{"".join(otd_home_row(r, near) for r in shown)}</ul>{more}</div>'
+            f'<a class="otd-year" href="onthisday.html#d-{shown[0][0] if shown else md}"><span class="ic" aria-hidden="true"><b>{len(rows)}</b></span>'
+            f'<span class="t"><b>{bi("The whole year", "Y flwyddyn gyfan")}</b><small>{bi(f"{len(rows)} dates, day by day", f"{len(rows)} o ddyddiadau, fesul diwrnod")}</small></span><span class="ar" aria-hidden="true">→</span></a>')
 
 
 def ssr_tl_teaser():
@@ -3399,7 +3483,7 @@ def fill(fragment, active="", skip="#chapters", home=False):
             .replace("__BOOKS__", ssr_books()).replace("__ONLINE__", ssr_online()).replace("__WORDS__", ssr_words())
             .replace("__PEOPLEHOME__", ssr_people(FEATURED[:6])).replace("__PEOPLEALL__", ssr_people()).replace("__MAPTEASER__", ssr_map_teaser())
             .replace("__WALES__", geo["outline"]).replace("__GRAT__", ssr_grat()).replace("__PINS__", ssr_pins()).replace("__PLACECARD__", ssr_place_card())
-            .replace("__NEWS__", news_strip()).replace("__LEGENDS__", "".join(legend_card(x) for x in F.LEGENDS_HOME)).replace("__PLAY__", play_cards()))
+            .replace("__NEWS__", news_strip()).replace("__LEGENDS__", "".join(legend_card(x) for x in F.LEGENDS_HOME)).replace("__PLAY__", play_cards(home=True)))
 
 
 index_head = head.replace("</style>", extra_css + PRINT_CSS + EXTRA_PAGE_CSS + "\n</style>", 1)
