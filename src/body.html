@@ -44,7 +44,7 @@
       <div class="b-fact rv">
         <p class="eyebrow" data-cy="Wyddech chi?">Did you know?</p>
         <p class="fact" id="fact" aria-live="polite">__FACT__</p>
-        <p class="fact-actions"><a class="chip solid" id="fact-more" href="__FACTHREF__"><span data-cy="Darllen yr hanes llawn">Read the full story</span> →</a>
+        <p class="fact-actions"><a class="chip solid" id="fact-more" href="__FACTHREF__" aria-describedby="fact"><span data-cy="Darllen yr hanes llawn">Read the full story</span> →</a>
         <button type="button" class="chip" id="fact-next"><span data-cy="Un arall">Another</span> ↻</button></p>
       </div>
     </div>
@@ -60,21 +60,34 @@
       <p data-cy="Erthyglau pum munud ar y cwestiynau mawr: pam cymaint o gestyll, sut y goroesodd yr iaith, beth a gostiodd glo.">Five-minute essays on the big questions: why so many castles, how the language survived, what coal cost.</p>
     </div>
     <div class="s-grid">__STORIES__</div>
-    <p class="more-row rv"><a class="btn" href="stories.html"><span class="l-en" lang="en">All __NSTORIES__ long reads →</span><span class="l-cy" lang="cy">Pob un o’r __NSTORIES__ erthygl →</span></a></p>
+    __STORIESMORE__
   </div>
 </section>
 
 <section id="map">
   <div class="wrap">
-    <div class="map-home">
-      __MAPTEASER__
-      <div class="head rv">
-        <p class="eyebrow"><span class="num">03</span> · <span data-cy="Map">Map</span></p>
-        <h2 data-cy="Lle digwyddodd">Where it happened</h2>
-        <p><span class="l-en" lang="en">__NPLACES__ historic places on one map of Wales, each with its story, and the kingdoms of Wales changing through time. Type your town to find the history near you.</span><span class="l-cy" lang="cy">__NPLACES__ o leoedd hanesyddol ar un map o Gymru, pob un â’i stori, a theyrnasoedd Cymru’n newid drwy amser. Teipiwch eich tref i ganfod yr hanes yn eich ymyl.</span></p>
-        <p class="more-row"><a class="btn solid" href="map.html" data-cy="Agor y map →">Open the map →</a> <a class="btn" href="map.html#kingdoms" data-cy="Y teyrnasoedd">The kingdoms</a> <a class="btn" href="castles.html" data-cy="Map y cestyll">Castles map</a></p>
+    <div class="mh rv">
+      <div class="mh-map">__MAPTEASER__</div>
+      <div class="mh-side">
+        <div class="head">
+          <p class="eyebrow"><span class="num">03</span> · <span data-cy="Map">Map</span></p>
+          <h2 data-cy="Lle digwyddodd">Where it happened</h2>
+          <p><span class="l-en" lang="en">__NPLACES__ historic places on one map of Wales, each with its story, and the kingdoms of Wales changing through time.</span><span class="l-cy" lang="cy">__NPLACES__ o leoedd hanesyddol ar un map o Gymru, pob un â’i stori, a theyrnasoedd Cymru’n newid drwy amser.</span></p>
+        </div>
+        <form class="mh-near" id="mh-near" autocomplete="off">
+          <label for="mh-in" data-cy="Hanes yn eich ymyl">History near you</label>
+          <div class="mh-row">
+            <input id="mh-in" type="text" list="mh-towns" placeholder="Your town, e.g. Bala" data-cy-ph="Eich tref, e.e. Y Bala" enterkeyhint="search">
+            <button type="submit" class="mh-go" aria-label="Find / Chwilio">→</button>
+            <button type="button" class="mh-geo" id="mh-geo" aria-label="Use my location / Defnyddio fy lleoliad"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="3.2" fill="currentColor"/><circle cx="12" cy="12" r="7.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 1.5v3.5M12 19v3.5M1.5 12h3.5M19 12h3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          </div>
+          <datalist id="mh-towns"></datalist>
+          <p class="mh-msg" id="mh-msg" aria-live="polite"></p>
+          <ul class="mh-res" id="mh-res"></ul>
+        </form>
       </div>
     </div>
+    <div class="mh-cards">__MAPCARDS__</div>
   </div>
 </section>
 
@@ -161,8 +174,8 @@
       <p data-cy="Mae pob digwyddiad, lle a pherson ar y wefan hon yn cysylltu â ffynhonnell. Dyma’r llyfrau a’r casgliadau gorau i fynd ymhellach.">Every event, place and person on this site links to a source. These are the best books and collections for going further.</p>
     </div>
     <div class="reading">
-      <div><p class="eyebrow" style="margin-bottom:.5rem" data-cy="Llyfrau">Books</p><ul id="read-books">__BOOKS__</ul></div>
-      <div><p class="eyebrow" style="margin-bottom:.5rem" data-cy="Ar-lein">Online</p><ul id="read-online">__ONLINE__</ul></div>
+      <div><p class="eyebrow" style="margin-bottom:.5rem" data-cy="Llyfrau">Books</p><ul id="read-books" class="clip-list">__BOOKS__</ul></div>
+      <div><p class="eyebrow" style="margin-bottom:.5rem" data-cy="Ar-lein">Online</p><ul id="read-online" class="clip-list">__ONLINE__</ul></div>
     </div>
     <p style="margin-top:1.5rem"><a class="btn solid" href="books-and-authors.html" data-cy="Pob un o’r llyfrau a’u hawduron, fesul cyfnod →">Every book and its author, period by period →</a></p>
     <p class="note-box" style="margin-top:2rem" data-cy="Mae’r dolenni i ddigwyddiadau unigol yn mynd i Wicipedia, sydd yn ei dro yn rhestru ffynonellau academaidd. Dyddiadau bras yw’r rhai a nodir ‘c.’ (circa). Map yn seiliedig ar ffiniau awdurdodau lleol; mae’r map teyrnasoedd yn fras.">Links on individual events go to Wikipedia, which in turn lists academic sources. Dates marked c. (circa) are approximate. The map is drawn from local authority boundaries, and the kingdoms map is an approximation.</p>

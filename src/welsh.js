@@ -81,7 +81,8 @@
   }
   function card(back) {
     var x = dayOf(back), w = W[x.i];
-    var more = w[8] ? '<a class="wotd-more" href="' + esc(w[8]) + '">' + bi("Read the history", "Darllen yr hanes") + " →</a>" : "";
+    // the whole card is one link to the history behind the word (see "Whole cards are links" in SKILLS.md); the buttons stay their own
+    var more = w[8] ? '<a class="wl" href="' + esc(w[8]) + '">' + bi("The history behind the word " + esc(w[1]), "Yr hanes y tu ôl i’r gair " + esc(w[1])) + "</a>" : "";
     return '<div class="wotd-top"><p class="eyebrow"><b>' + bi("Word of the day", "Gair y dydd") + "</b> · " + dateLabel(x.d, back) + "</p>"
       + '<div class="wotd-nav"><button type="button" data-wotd-go="1"' + (back >= 6 ? " disabled" : "") + ' aria-label="' + esc("Previous day / Diwrnod blaenorol") + '">‹</button>'
       + '<button type="button" data-wotd-go="-1"' + (back <= 0 ? " disabled" : "") + ' aria-label="' + esc("Next day / Diwrnod nesaf") + '">›</button></div></div>'
@@ -93,7 +94,7 @@
   }
   [].forEach.call(document.querySelectorAll("[data-wotd]"), function (el) {
     var back = 0;
-    function draw() { el.innerHTML = card(back); el.classList.remove("in"); void el.offsetWidth; el.classList.add("in"); }
+    function draw() { el.innerHTML = card(back); el.classList.toggle("wl-card", !!el.querySelector("a.wl")); el.classList.remove("in"); void el.offsetWidth; el.classList.add("in"); }
     el.addEventListener("click", function (ev) {
       var b = ev.target.closest("[data-wotd-go]"); if (!b || b.disabled) return;
       back = Math.max(0, Math.min(6, back + +b.getAttribute("data-wotd-go"))); draw();

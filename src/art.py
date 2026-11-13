@@ -1,7 +1,7 @@
 # Original scene illustrations, drawn in code as SVG. Each scene is a night landscape in the
 # site's own style (sky, moon, rolling ridges) with one paper-cut motif in the foreground.
 # scene(kind, colour) returns an <svg> string that fills its container.
-import math
+import math, os
 import random, zlib
 
 W, H = 800, 500
@@ -306,8 +306,22 @@ def photo_scene(kind, small=False):
     ph = LEGEND_PHOTOS.get(kind)
     if not ph:
         return None
-    return (f'<img class="scene photo" src="legends/{kind}{"-s" if small else ""}.webp" alt="" decoding="async"{" loading=lazy" if small else ""} '
+    f = f'legends/{kind}{"-s" if small else ""}.webp'
+    w, h = _photo_size(f)
+    return (f'<img class="scene photo" src="{f}" width="{w}" height="{h}" alt="" decoding="async"{" loading=lazy" if small else ""} '
             f'style="object-fit:cover;object-position:{ph[6]}">')
+
+
+_SIZES = {}
+
+
+def _photo_size(rel):
+    """Width and height of a picture in src/static, so the page can keep its space before it loads."""
+    if rel not in _SIZES:
+        from PIL import Image
+        with Image.open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "static", rel)) as im:
+            _SIZES[rel] = im.size
+    return _SIZES[rel]
 
 
 def scene(kind, colour, seed=None):
