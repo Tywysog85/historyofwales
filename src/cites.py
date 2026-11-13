@@ -854,6 +854,8 @@ from oldbooks import CITES as _OLDBOOKS  # noqa: E402  (the old books of Wales, 
 S.update(_OLDBOOKS)
 from onthisday import CITES as _OTD  # noqa: E402  (the sources of On this day, src/onthisday.py)
 S.update(_OTD)
+from hen_ogledd import CITES as _HENOGLEDD  # noqa: E402  (the Old North, src/hen_ogledd.py)
+S.update(_HENOGLEDD)
 
 MARK = re.compile(r"\[\[cite:([a-z0-9,\- ]+)\]\]")
 

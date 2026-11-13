@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-13", "Yr Hen Ogledd: the Old North, where Welsh poetry was born", "Yr Hen Ogledd: y wlad lle ganed barddoniaeth Gymraeg",
+     "A new long read on the Britons of the North, from the Clyde and the Forth to the Pennines: Urien of Rheged and his poet Taliesin, Aneirin and the men who rode to Catraeth, Rhydderch Hael, Arfderydd and Myrddin, and Cunedda, who came south to found Gwynedd. It has a map of the northern kingdoms and the roads their people took to Wales, 14 new pages on the Men of the North, and two new family trees of the line of Coel Hen and of Dyfnwal Hen.",
+     "Erthygl newydd ar Frythoniaid y Gogledd, o’r Clud a Gwerydd i’r Pennines: Urien Rheged a’i fardd Taliesin, Aneirin a’r gwŷr a aeth i Gatraeth, Rhydderch Hael, Arfderydd a Myrddin, a Cunedda, a ddaeth i’r de i sefydlu Gwynedd. Mae ganddi fap o deyrnasoedd y Gogledd a’r ffyrdd a gymerodd eu pobl i Gymru, 14 tudalen newydd ar Wŷr y Gogledd, a dwy goeden deulu newydd, llinach Coel Hen a llinach Dyfnwal Hen.",
+     "story-hen-ogledd.html"),
     ("2026-11-13", "A faster, calmer and more private site", "Gwefan gyflymach, dawelach a mwy preifat",
      "The front page has a Pause animation button that stops the dragon, the moving words and the glint on the title, and remembers your choice. The fonts now come from this site itself, so reading it no longer contacts Google, and pages you have visited before open faster. The privacy note on the About page now covers the weekly email too, and a browser set to Welsh is offered the Welsh pages once.",
      "Mae botwm Oedi’r animeiddiad ar y dudalen flaen sy’n atal y ddraig, y geiriau sy’n symud a’r llewyrch ar y teitl, ac mae’n cofio eich dewis. Daw’r ffontiau o’r wefan hon ei hun bellach, felly nid yw ei darllen yn cysylltu â Google mwyach, ac mae tudalennau rydych wedi ymweld â nhw o’r blaen yn agor yn gyflymach. Mae’r nodyn preifatrwydd ar y dudalen Amdanom yn sôn am yr e-bost wythnosol hefyd, a chaiff porwr sydd wedi’i osod i’r Gymraeg gynnig y tudalennau Cymraeg unwaith.",
