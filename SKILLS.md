@@ -762,3 +762,11 @@ Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
 - Small visual tweaks are published one at a time so each can be seen live.
+
+### The home page On this day panel, Daily challenge card and game cards (November 2026)
+- On this day on the home page is drawn twice with the same markup: `ssr_today()` / `otd_home_row()` in `build.py` (so it shows before any script runs) and `renderToday()` / `otdLi()` in `src/app.js` (the visitor's own date, the week strip, ‹ ›). Change both together. Its CSS is at the top of `src/onthisday.css`.
+- Every row of `onthisday.json` now has a 10th field, a small picture, chosen by `otd_pic()` in `build.py`: the person's or place's own photo, else the linked page's picture from `src/pictures.py` (saints take their region's saints page), else the event's place, else the picture of its age. Tools that read the JSON by position are unaffected.
+- Timeline events in On this day now link to their own `event-<slug>.html` page (or the long read that tells them). An `OTD` row with the same day, year and title as a timeline event is dropped, so a date is never in twice.
+- The Daily challenge card on the home page works out today's event itself (`dailyPick()` in `src/app.js`), with the same pool, seeded shuffle and day number as `src/static/play.js`. If you change how daily.html picks its event, change both, then check that the home card and daily.html show the same event. The card reads the visitor's guesses from `hc-journey` in localStorage and colours the six tiles.
+- Game cards (`play_card()` in `build.py`) take their picture from `PX.card_img()`; a game page with no line in `PAGE` gets its age's picture. On the home page the Daily challenge is left out of the games grid (it has its own card) and the last tile, `.p-all`, leads to play.html. The first card in the grid is the big one.
+

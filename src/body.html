@@ -32,14 +32,14 @@
     <div class="bento-today">
       <div class="b-day rv">
         <p class="eyebrow" data-cy="Ar y dydd hwn yn hanes Cymru">On this day in Welsh history</p>
-        <div class="today" id="today-box">__TODAY__</div>
+        <div class="otd-box" id="today-box">__TODAY__</div>
       </div>
       <a class="b-daily rv" href="daily.html">
-        <p class="eyebrow" data-cy="Her y dydd">Daily challenge</p>
-        <p class="b-q" data-cy="Ym mha flwyddyn?">In which year?</p>
-        <p class="b-sub" id="daily-sub" data-cy="Un digwyddiad newydd bob dydd. Chwe chynnig i ddyfalu’r flwyddyn.">One new event every day. Six guesses to find the year.</p>
-        <span class="b-go"><span data-cy="Chwarae heddiw">Play today’s</span> →</span>
-        <span class="b-streak" id="daily-streak" hidden></span>
+        <span class="bd-top"><span class="eyebrow"><span data-cy="Her y dydd">Daily challenge</span> <span id="daily-n"></span></span><span class="b-streak" id="daily-streak" hidden></span></span>
+        <span class="b-q" data-cy="Ym mha flwyddyn?">In which year?</span>
+        <span class="bd-ev" id="daily-ev" data-cy="Un digwyddiad newydd bob dydd. Chwe chynnig i ddyfalu’r flwyddyn.">One new event every day. Six guesses to find the year.</span>
+        <span class="bd-tiles" id="daily-tiles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        <span class="b-sub" id="daily-sub" data-cy="Chwe chynnig. Her newydd bob hanner nos.">Six guesses. A new event every midnight.</span>
       </a>
       <div class="b-fact rv">
         <p class="eyebrow" data-cy="Wyddech chi?">Did you know?</p>
@@ -147,10 +147,9 @@
     <div class="head rv">
       <p class="eyebrow"><span class="num">07</span> · <span data-cy="Chwarae">Play</span></p>
       <h2 data-cy="Profwch eich hun">Test yourself</h2>
-      <p data-cy="Saith gêm i bob oed: her newydd bob dydd, cwis, map, ac enwau Cymraeg. Mae eich cynnydd yn cael ei gadw ar eich dyfais.">Seven games for all ages: a new challenge every day, a quiz, a map, and Welsh names. Your progress is kept on your device.</p>
+      <p data-cy="Gemau i bob oed: llys brenhinol mewn 3D, stori rydych chi’n ei dewis, cwis, map ac enwau Cymraeg. Mae eich cynnydd yn cael ei gadw ar eich dyfais.">Games for all ages: a royal court in 3D, a story you choose, a quiz, a map and Welsh names. Your progress is kept on your device.</p>
     </div>
     <div class="play-grid">__PLAY__</div>
-    <p class="more-row rv play-more"><a class="btn" href="play.html" data-cy="Pob gêm →">All games →</a></p>
   </div>
 </section>
 
