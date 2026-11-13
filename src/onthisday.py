@@ -828,3 +828,964 @@ OTD = [
   "Saint Stephen’s Day. In old Wales young men went ‘holming’, slapping bare arms and legs with holly for luck.",
   "Gŵyl San Steffan. Yn yr hen Gymru byddai dynion ifanc yn ‘holmio’, yn taro breichiau a choesau noeth â chelyn am lwc.", "symbols.html"),
 ]
+
+
+# ---------- Every day its own date (November 2026) ----------
+# These rows fill the days that had no entry of their own. Each one has a 9th field: the keys of its sources,
+# shown as a § chip after the line on onthisday.html. The sources are in CITES below (or in src/cites.py), and each
+# was opened and read before the row went in. Wikipedia's "<year> in Wales" lists and its day-of-the-year pages
+# are good finders; the person's own article (or the Dictionary of Welsh Biography) is the better source.
+
+def _w(article, title, en, cy):
+    return dict(short=("Wikipedia", "Wikipedia"), t=title, by=("Wikipedia, with its sources", "Wikipedia, gyda’i ffynonellau"),
+                note=(en, cy), url="https://en.wikipedia.org/wiki/" + article, lang="en")
+
+
+def _year(y):
+    return _w(f"{y}_in_Wales", f"{y} in Wales", f"Wikipedia’s dated list of the year {y} in Wales: its events, births and deaths.",
+              f"Rhestr ddyddiedig Wikipedia o’r flwyddyn {y} yng Nghymru: ei digwyddiadau, ei genedigaethau a’i marwolaethau.")
+
+
+def _day(page, en_day, cy_day):
+    return _w(page, page.replace("_", " "), f"Wikipedia’s page for {en_day}: what happened on that day, and who was born and died.",
+              f"Tudalen Wikipedia ar gyfer {cy_day}: beth ddigwyddodd y diwrnod hwnnw, a phwy a aned ac a fu farw.")
+
+
+CITES = {
+    "otd-jones-parry": _w("Sir_Love_Jones-Parry,_1st_Baronet", "Sir Love Jones-Parry, 1st Baronet",
+        "Born 5 January 1832; one of the founders of Y Wladfa. In 1862 he went to Patagonia with Lewis Jones; a storm drove their ship into a bay they named Porth Madryn after his estate.",
+        "Ganed 5 Ionawr 1832; un o sylfaenwyr y Wladfa. Yn 1862 aeth i Batagonia gyda Lewis Jones; gyrrodd storm eu llong i fae a enwyd ganddynt yn Borth Madryn ar ôl ei stad."),
+    "otd-roy-jenkins": _w("Roy_Jenkins", "Roy Jenkins",
+        "Born at Abersychan, 11 November 1920; died 5 January 2003. Home Secretary, Chancellor of the Exchequer, and the first British President of the European Commission (1977–81).",
+        "Ganed yn Abersychan, 11 Tachwedd 1920; bu farw 5 Ionawr 2003. Ysgrifennydd Cartref, Canghellor y Trysorlys, a Llywydd Prydeinig cyntaf y Comisiwn Ewropeaidd (1977–81)."),
+    "otd-cwyllog": _w("Saint_Cwyllog", "Saint Cwyllog",
+        "Her feast has been recorded as 7 January at Llangwyllog in Anglesey, the church she is said to have founded; a daughter of Caw.",
+        "Cofnodwyd ei gŵyl ar 7 Ionawr yn Llangwyllog ym Môn, yr eglwys y dywedir iddi ei sefydlu; merch i Caw."),
+    "otd-jd-llewelyn": _w("John_Dillwyn_Llewelyn", "John Dillwyn Llewelyn",
+        "Born 12 January 1810 in Llangyfelach parish, Swansea. His earliest surviving daguerreotype dates from 1840; about a thousand of his negatives survive; a founder member of the council of the Royal Photographic Society.",
+        "Ganed 12 Ionawr 1810 ym mhlwyf Llangyfelach, Abertawe. Mae ei ddaguerreoteip cynharaf sydd wedi goroesi yn dyddio o 1840; mae tua mil o’i negyddion wedi goroesi; un o aelodau cyntaf cyngor y Gymdeithas Ffotograffig Frenhinol."),
+    "otd-gwanas": _w("Bethan_Gwanas", "Bethan Gwanas",
+        "Born 16 January 1962; grew up at Brithdir near Dolgellau. Her first book, Amdani!, about a women’s rugby team, became an S4C series; Tir na n-Og awards in 2001 and 2003.",
+        "Ganed 16 Ionawr 1962; magwyd ym Mrithdir ger Dolgellau. Trodd ei llyfr cyntaf, Amdani!, am dîm rygbi merched, yn gyfres ar S4C; gwobrau Tir na n-Og yn 2001 a 2003."),
+    "otd-talhaiarn": _w("Talhaiarn", "Talhaiarn (John Jones)",
+        "Born 19 January 1810 at the Harp Inn, Llanfair Talhaearn. A poet of Welsh song lyrics, and an architect employed by Sir Joseph Paxton to oversee the building of the Crystal Palace.",
+        "Ganed 19 Ionawr 1810 yn nhafarn yr Harp, Llanfair Talhaearn. Bardd geiriau caneuon Cymraeg, a phensaer a gyflogwyd gan Syr Joseph Paxton i oruchwylio codi’r Palas Grisial."),
+    "otd-wire": _w("Nicky_Wire", "Nicky Wire",
+        "Born 20 January 1969; a founding member of the Manic Street Preachers, its bass player and, since 1995, its chief lyricist.",
+        "Ganed 20 Ionawr 1969; un o sylfaenwyr y Manic Street Preachers, ei chwaraewr bas ac, ers 1995, prif awdur ei geiriau."),
+    "otd-de-hughes": _w("David_Edward_Hughes", "David Edward Hughes",
+        "Died in London, 22 January 1900; his family came from Bala. His printing telegraph of 1855 became a standard across Europe, and in 1878 he published his work on the carbon microphone.",
+        "Bu farw yn Llundain, 22 Ionawr 1900; o’r Bala y daeth ei deulu. Daeth ei delegraff argraffu (1855) yn safon ar draws Ewrop, ac yn 1878 cyhoeddodd ei waith ar y meicroffon carbon."),
+    "otd-maedoc": _w("Máedóc_of_Ferns", "Máedóc of Ferns (Aeddan)",
+        "His feast is 31 January. He studied under Dewi Sant, and the Welsh Triads count him among David’s three most faithful disciples; Llawhaden and Haroldston West in Pembrokeshire remember him.",
+        "Mae ei ŵyl ar 31 Ionawr. Bu’n astudio dan Ddewi Sant, ac mae’r Trioedd yn ei gyfrif ymhlith tri disgybl mwyaf ffyddlon Dewi; mae Llanhuadain a Haroldston West yn Sir Benfro yn ei gofio."),
+    "otd-sheen": _w("Michael_Sheen", "Michael Sheen",
+        "Born 5 February 1969 in Newport and raised in Port Talbot, where in 2011 he led The Passion, a 72-hour play with over a thousand local people taking part.",
+        "Ganed 5 Chwefror 1969 yng Nghasnewydd a’i fagu ym Mhort Talbot, lle yn 2011 arweiniodd The Passion, drama 72 awr gyda mwy na mil o bobl leol yn cymryd rhan."),
+    "otd-bowen": _w("Jeremy_Bowen", "Jeremy Bowen",
+        "Born 6 February 1960 in Cardiff; the BBC’s first Middle East Editor (2005) and its International Editor from 2022.",
+        "Ganed 6 Chwefror 1960 yng Nghaerdydd; Golygydd Dwyrain Canol cyntaf y BBC (2005) a’i Golygydd Rhyngwladol o 2022."),
+    "otd-osian-ellis": _w("Osian_Ellis", "Osian Ellis",
+        "Born 8 February 1928 at Ffynnongroew, Flintshire. Britten wrote harp parts with him in mind and his Harp Suite (1969) for him; professor of harp at the Royal Academy of Music 1959–89.",
+        "Ganed 8 Chwefror 1928 yn Ffynnongroew, Sir y Fflint. Ysgrifennodd Britten rannau telyn gydag ef mewn golwg a’i Gyfres i’r Delyn (1969) iddo; athro’r delyn yn yr Academi Gerdd Frenhinol 1959–89."),
+    "otd-d-feb11": _day("February_11", "11 February", "11 Chwefror"),
+    "otd-cjackson": _w("Colin_Jackson", "Colin Jackson",
+        "Born 18 February 1967 in Cardiff; world champion in 1993 and 1999; his world record of 12.91 s (20 August 1993) stood until 11 July 2006.",
+        "Ganed 18 Chwefror 1967 yng Nghaerdydd; pencampwr y byd yn 1993 a 1999; safodd ei record byd o 12.91 eiliad (20 Awst 1993) tan 11 Gorffennaf 2006."),
+    "otd-parks": _w("National_parks_of_the_United_Kingdom", "National parks of the United Kingdom",
+        "The table of dates formed: Snowdonia 18 October 1951, Pembrokeshire Coast 29 February 1952, Brecon Beacons 17 April 1957.",
+        "Tabl y dyddiadau sefydlu: Eryri 18 Hydref 1951, Arfordir Penfro 29 Chwefror 1952, Bannau Brycheiniog 17 Ebrill 1957."),
+    "otd-pembs-coast": _w("Pembrokeshire_Coast_National_Park", "Pembrokeshire Coast National Park",
+        "“The only national park in the United Kingdom to consist largely of coastal landscapes”; its Coast Path runs 186 miles.",
+        "“Yr unig barc cenedlaethol yn y Deyrnas Unedig sy’n dirwedd arfordirol yn bennaf”; mae Llwybr yr Arfordir yn 186 milltir."),
+    "otd-edgar-evans": _w("Edgar_Evans", "Edgar Evans",
+        "Born 7 March 1876 at Rhossili; one of the five men Scott chose for the Pole, which they reached on 17 January 1912. Scott called him “a giant worker”.",
+        "Ganed 7 Mawrth 1876 yn Rhosili; un o’r pum dyn a ddewisodd Scott ar gyfer y Pegwn, a gyrhaeddwyd ar 17 Ionawr 1912. Galwodd Scott ef yn “weithiwr anferth”."),
+    "otd-meic-stevens": _w("Meic_Stevens", "Meic Stevens",
+        "Born 13 March 1942 at Solva, Pembrokeshire; writing mostly in Welsh, he has been called “the Welsh Bob Dylan”.",
+        "Ganed 13 Mawrth 1942 yn Solfach, Sir Benfro; gan ganu’n Gymraeg gan amlaf, fe’i galwyd yn “Bob Dylan Cymru”."),
+    "otd-emrys-ap-iwan": _w("Emrys_ap_Iwan", "Emrys ap Iwan",
+        "Born at Abergele, 24 March 1848; died 6 January 1906. “Often seen as one of the most important forerunners of modern Welsh nationalism.”",
+        "Ganed yn Abergele, 24 Mawrth 1848; bu farw 6 Ionawr 1906. Fe’i gwelir yn aml fel un o ragflaenwyr pwysicaf cenedlaetholdeb Cymreig modern."),
+    "otd-kinnock": _w("Neil_Kinnock", "Neil Kinnock",
+        "Born 28 March 1942 in Tredegar; Leader of the Labour Party 1983–92, the youngest in its history, and later a Vice-President of the European Commission.",
+        "Ganed 28 Mawrth 1942 yn Nhredegar; Arweinydd y Blaid Lafur 1983–92, yr ieuengaf yn ei hanes, ac yn ddiweddarach yn Is-lywydd y Comisiwn Ewropeaidd."),
+    "otd-prince-arthur": _w("Arthur,_Prince_of_Wales", "Arthur, Prince of Wales",
+        "Died at Ludlow Castle, 2 April 1502, aged 15. Henry VII named him Arthur, and had him born at Winchester, “to emphasise the Welsh origin of the Tudors”.",
+        "Bu farw yng Nghastell Llwydlo, 2 Ebrill 1502, yn 15 oed. Enwodd Harri VII ef yn Arthur, a threfnu ei eni yng Nghaerwynt, i bwysleisio tarddiad Cymreig y Tuduriaid."),
+    "otd-rprice": _w("Richard_Price", "Richard Price",
+        "Born at Llangeinor, 23 February 1723; died at Newington Green, 19 April 1791. His 1776 pamphlet backed the American colonies; John Davies called him “the greatest Welsh thinker of all time”.",
+        "Ganed yn Llangeinor, 23 Chwefror 1723; bu farw yn Newington Green, 19 Ebrill 1791. Cefnogodd ei bamffled yn 1776 drefedigaethau America; galwodd John Davies ef y meddyliwr Cymreig mwyaf erioed."),
+    "otd-om-edwards": _w("Owen_Morgan_Edwards", "Owen Morgan Edwards",
+        "Born at Llanuwchllyn, 26 December 1858; died there 15 May 1920. Founded Cymru’r Plant (1892); first Chief Inspector of Schools for Wales (1907), who “took the first steps towards ensuring that the Welsh language was taught in the schools of Wales”.",
+        "Ganed yn Llanuwchllyn, 26 Rhagfyr 1858; bu farw yno 15 Mai 1920. Sefydlodd Cymru’r Plant (1892); Prif Arolygydd Ysgolion cyntaf Cymru (1907), a gymerodd y camau cyntaf i sicrhau dysgu’r Gymraeg yn ysgolion Cymru."),
+}
+
+OTD += [
+ ("01-05", 1832, "born", "Love Jones-Parry", "Love Jones-Parry",
+  "Born. He helped found the Welsh settlement in Patagonia: in 1862 he sailed there with Lewis Jones, and a storm drove their ship into a bay they named Porth Madryn after his home.",
+  "Ganed. Helpodd sefydlu’r Wladfa ym Mhatagonia: yn 1862 hwyliodd yno gyda Lewis Jones, a gyrrodd storm eu llong i fae a enwyd ganddynt yn Borth Madryn ar ôl ei gartref.",
+  "event-y-wladfa.html", "otd-jones-parry"),
+ ("01-05", 2003, "died", "Roy Jenkins", "Roy Jenkins",
+  "The statesman from Abersychan dies. He was Home Secretary, Chancellor of the Exchequer and the first British President of the European Commission.",
+  "Bu farw’r gwladweinydd o Abersychan. Bu’n Ysgrifennydd Cartref, yn Ganghellor y Trysorlys ac yn Llywydd Prydeinig cyntaf y Comisiwn Ewropeaidd.",
+  "person-roy-jenkins.html", "otd-roy-jenkins"),
+ ("01-07", None, "feast", "Saint Cwyllog", "Santes Cwyllog",
+  "Feast day of Cwyllog, who founded the church of Llangwyllog in the heart of Anglesey. Tradition makes her a daughter of Caw.",
+  "Gŵyl Cwyllog, a sefydlodd eglwys Llangwyllog yng nghanol Môn. Yn ôl traddodiad roedd hi’n ferch i Caw.",
+  "person-caw-o-brydyn.html", "otd-cwyllog"),
+ ("01-12", 1810, "born", "John Dillwyn Llewelyn", "John Dillwyn Llewelyn",
+  "The pioneer photographer is born in Swansea. At Penllergare he was making photographs by 1840, and he helped found the Royal Photographic Society.",
+  "Ganed y ffotograffydd arloesol yn Abertawe. Ym Mhenllergaer roedd yn tynnu ffotograffau erbyn 1840, a helpodd sefydlu’r Gymdeithas Ffotograffig Frenhinol.",
+  "person-mary-dillwyn.html", "otd-jd-llewelyn"),
+ ("01-16", 1962, "born", "Bethan Gwanas", "Bethan Gwanas",
+  "The Welsh-language writer is born. Her first book, Amdani!, about a women’s rugby team, became an S4C series, and her children’s books twice won the Tir na n-Og award.",
+  "Ganed yr awdur Cymraeg. Trodd ei llyfr cyntaf, Amdani!, am dîm rygbi merched, yn gyfres ar S4C, a dwywaith enillodd ei llyfrau plant wobr Tir na n-Og.",
+  "", "otd-gwanas"),
+ ("01-19", 1810, "born", "Talhaiarn", "Talhaiarn",
+  "John Jones, the poet Talhaiarn, is born at the Harp Inn in Llanfair Talhaearn. He wrote Welsh words for much-loved songs and, as an architect, oversaw the building of the Crystal Palace.",
+  "Ganed John Jones, y bardd Talhaiarn, yn nhafarn yr Harp yn Llanfair Talhaearn. Ysgrifennodd eiriau Cymraeg i ganeuon annwyl ac, fel pensaer, bu’n goruchwylio codi’r Palas Grisial.",
+  "", "otd-talhaiarn"),
+ ("01-20", 1969, "born", "Nicky Wire", "Nicky Wire",
+  "Born. Bass player and, since 1995, chief lyricist of the Manic Street Preachers.",
+  "Ganed. Chwaraewr bas y Manic Street Preachers ac, ers 1995, prif awdur eu geiriau.",
+  "", "otd-wire"),
+ ("01-22", 1900, "died", "David Edward Hughes", "David Edward Hughes",
+  "The inventor dies in London. His family came from Bala; his printing telegraph became a standard across Europe, and in 1878 he showed the world the carbon microphone.",
+  "Bu farw’r dyfeisiwr yn Llundain. O’r Bala y daeth ei deulu; daeth ei delegraff argraffu yn safon ar draws Ewrop, ac yn 1878 dangosodd y meicroffon carbon i’r byd.",
+  "person-david-edward-hughes.html", "otd-de-hughes"),
+ ("01-31", None, "feast", "Saint Aeddan", "Sant Aeddan",
+  "Feast day of Aeddan, pupil of Dewi Sant and, in the Welsh Triads, one of his three most faithful disciples. Llawhaden and Haroldston West in Pembrokeshire remember him.",
+  "Gŵyl Aeddan, disgybl i Ddewi Sant ac, yn y Trioedd, un o’i dri disgybl mwyaf ffyddlon. Mae Llanhuadain a Haroldston West yn Sir Benfro yn ei gofio.",
+  "saints-dyfed.html", "otd-maedoc"),
+ ("02-05", 1969, "born", "Michael Sheen", "Michael Sheen",
+  "The actor is born in Newport and raised in Port Talbot. In 2011 he led The Passion there, a 72-hour play with more than a thousand of the town’s people taking part.",
+  "Ganed yr actor yng Nghasnewydd a’i fagu ym Mhort Talbot. Yn 2011 arweiniodd The Passion yno, drama 72 awr gyda mwy na mil o bobl y dref yn cymryd rhan.",
+  "person-michael-sheen.html", "otd-sheen"),
+ ("02-06", 1960, "born", "Jeremy Bowen", "Jeremy Bowen",
+  "The journalist is born in Cardiff. He became the BBC’s first Middle East Editor and later its International Editor.",
+  "Ganed y newyddiadurwr yng Nghaerdydd. Daeth yn Olygydd Dwyrain Canol cyntaf y BBC ac yn ddiweddarach yn Olygydd Rhyngwladol.",
+  "", "otd-bowen"),
+ ("02-08", 1928, "born", "Osian Ellis", "Osian Ellis",
+  "The harpist is born at Ffynnongroew in Flintshire. Benjamin Britten wrote music for him, and he taught the harp at the Royal Academy of Music for thirty years.",
+  "Ganed y telynor yn Ffynnongroew yn Sir y Fflint. Ysgrifennodd Benjamin Britten gerddoriaeth iddo, a bu’n dysgu’r delyn yn yr Academi Gerdd Frenhinol am ddeng mlynedd ar hugain.",
+  "", "otd-osian-ellis"),
+ ("02-11", 1958, "died", "Ernest Jones", "Ernest Jones",
+  "The neurologist and psychoanalyst dies. He was the first English-speaking practitioner of psychoanalysis and a close colleague of Sigmund Freud.",
+  "Bu farw’r niwrolegydd a’r seicdreiddiwr. Ef oedd y seicdreiddiwr cyntaf yn y byd Saesneg ei iaith, a chydweithiwr agos i Sigmund Freud.",
+  "person-ernest-jones.html", "otd-d-feb11,wiki-ernestjones"),
+ ("02-18", 1967, "born", "Colin Jackson", "Colin Jackson",
+  "The hurdler is born in Cardiff. Twice world champion, he set a world record of 12.91 seconds in 1993 that stood for almost thirteen years.",
+  "Ganed y clwydwr yng Nghaerdydd. Bu’n bencampwr y byd ddwywaith, a gosododd record byd o 12.91 eiliad yn 1993 a safodd am bron i dair blynedd ar ddeg.",
+  "person-colin-jackson.html", "otd-cjackson"),
+ ("02-29", 1952, "ev", "The Pembrokeshire Coast National Park", "Parc Cenedlaethol Arfordir Penfro",
+  "The Pembrokeshire Coast becomes a national park, the only one in the United Kingdom made largely of coastline. A leap-day birthday.",
+  "Daw Arfordir Penfro yn barc cenedlaethol, yr unig un yn y Deyrnas Unedig sy’n arfordir yn bennaf. Pen-blwydd ar ddydd naid.",
+  "", "otd-parks,otd-pembs-coast"),
+ ("03-07", 1876, "born", "Edgar Evans", "Edgar Evans",
+  "The sailor is born at Rhossili on Gower. In 1912 he was one of the five men of Scott’s party who reached the South Pole.",
+  "Ganed y morwr yn Rhosili ar Benrhyn Gŵyr. Yn 1912 roedd yn un o bum dyn mintai Scott a gyrhaeddodd Begwn y De.",
+  "person-edgar-evans.html", "otd-edgar-evans"),
+ ("03-13", 1942, "born", "Meic Stevens", "Meic Stevens",
+  "The singer-songwriter is born at Solva in Pembrokeshire. Singing mostly in Welsh for over fifty years, he has been called the Welsh Bob Dylan.",
+  "Ganed y canwr-gyfansoddwr yn Solfach yn Sir Benfro. Gan ganu’n Gymraeg gan amlaf am dros hanner can mlynedd, cafodd ei alw’n Bob Dylan Cymru.",
+  "person-meic-stevens.html", "otd-meic-stevens"),
+ ("03-22", 1282, "ev", "Hawarden on Palm Sunday", "Penarlâg ar Sul y Blodau",
+  "On Palm Sunday Dafydd ap Gruffudd takes Hawarden Castle. Llywelyn joins his brother, and the last war of independent Wales begins.",
+  "Ar Sul y Blodau mae Dafydd ap Gruffudd yn cipio Castell Penarlâg. Mae Llywelyn yn ymuno â’i frawd, a dechreua rhyfel olaf Cymru annibynnol.",
+  "person-dafydd-ap-gruffudd.html", "wiki-dafydd-ap-gruffudd"),
+ ("03-23", 1956, "ev", "The Capel Celyn Defence Committee", "Pwyllgor Amddiffyn Capel Celyn",
+  "The people of Capel Celyn form a Defence Committee to save their valley, with Dafydd Roberts as chairman and the teacher Elizabeth Watkin Jones as secretary.",
+  "Mae pobl Capel Celyn yn ffurfio Pwyllgor Amddiffyn i achub eu cwm, gyda Dafydd Roberts yn gadeirydd a’r athrawes Elizabeth Watkin Jones yn ysgrifennydd.",
+  "story-tryweryn.html", "dwb-watkin-jones"),
+ ("03-24", 1848, "born", "Emrys ap Iwan", "Emrys ap Iwan",
+  "Robert Ambrose Jones is born at Abergele. As Emrys ap Iwan he championed the Welsh language and self-government, a forerunner of the modern national movement.",
+  "Ganed Robert Ambrose Jones yn Abergele. Fel Emrys ap Iwan hyrwyddodd y Gymraeg a hunanlywodraeth, un o ragflaenwyr y mudiad cenedlaethol modern.",
+  "person-emrys-ap-iwan.html", "otd-emrys-ap-iwan"),
+ ("03-28", 1942, "born", "Neil Kinnock", "Neil Kinnock",
+  "Born in Tredegar. At 41 he became the youngest leader in the Labour Party’s history, and later a Vice-President of the European Commission.",
+  "Ganed yn Nhredegar. Yn 41 oed daeth yn arweinydd ieuengaf y Blaid Lafur erioed, ac yn ddiweddarach yn Is-lywydd y Comisiwn Ewropeaidd.",
+  "person-neil-kinnock.html", "otd-kinnock"),
+ ("04-02", 1502, "died", "Arthur, Prince of Wales", "Arthur, Tywysog Cymru",
+  "Harri Tudur’s eldest son dies at Ludlow, aged 15. His father named him Arthur to show the Welsh roots of the Tudors.",
+  "Bu farw mab hynaf Harri Tudur yn Llwydlo, yn 15 oed. Enwodd ei dad ef yn Arthur i ddangos gwreiddiau Cymreig y Tuduriaid.",
+  "person-harri-tudur.html", "otd-prince-arthur"),
+ ("04-17", 1957, "ev", "Bannau Brycheiniog National Park", "Parc Cenedlaethol Bannau Brycheiniog",
+  "The Brecon Beacons, Bannau Brycheiniog, become the third national park in Wales, after Eryri and the Pembrokeshire Coast.",
+  "Daw Bannau Brycheiniog yn drydydd parc cenedlaethol Cymru, ar ôl Eryri ac Arfordir Penfro.",
+  "", "otd-parks"),
+ ("04-19", 1791, "died", "Richard Price", "Richard Price",
+  "The philosopher from Llangeinor dies in London. He spoke up for American liberty, and the historian John Davies called him the greatest Welsh thinker of all time.",
+  "Bu farw’r athronydd o Langeinor yn Llundain. Siaradodd dros ryddid America, a galwodd yr hanesydd John Davies ef y meddyliwr Cymreig mwyaf erioed.",
+  "person-richard-price.html", "otd-rprice"),
+ ("04-25", 1283, "ev", "Castell y Bere", "Castell y Bere",
+  "Castell y Bere, the castle of the princes of Gwynedd under Cadair Idris, gives up at last after holding out for Dafydd ap Gruffudd.",
+  "Mae Castell y Bere, castell tywysogion Gwynedd dan Gadair Idris, yn ildio o’r diwedd wedi iddo ddal allan dros Dafydd ap Gruffudd.",
+  "place-ybere.html", "wiki-dafydd-ap-gruffudd"),
+ ("05-15", 1920, "died", "O. M. Edwards", "O. M. Edwards",
+  "Owen Morgan Edwards dies at Llanuwchllyn. Through Cymru’r Plant and as the first Chief Inspector of Schools for Wales, he gave children back their language and history.",
+  "Bu farw Owen Morgan Edwards yn Llanuwchllyn. Drwy Gymru’r Plant ac fel Prif Arolygydd Ysgolion cyntaf Cymru, rhoddodd eu hiaith a’u hanes yn ôl i’r plant.",
+  "person-om-edwards.html", "otd-om-edwards"),
+]
+
+CITES.update({
+    "otd-cale": _w("John_Cale", "John Cale",
+        "Born 9 March 1942 in the coal mining village of Garnant; his mother taught him Welsh; a founding member of the Velvet Underground; represented Wales at the 2009 Venice Biennale.",
+        "Ganed 9 Mawrth 1942 ym mhentref glofaol Garnant; dysgodd ei fam Gymraeg iddo; un o sylfaenwyr y Velvet Underground; cynrychiolodd Gymru yn Biennale Fenis 2009."),
+    "otd-preece": _w("William_Preece", "William Henry Preece",
+        "Born 15 February 1834 in Caernarfon; Engineer-in-Chief of the General Post Office from 1892; after the Lavernock–Flat Holm experiments of 1897 one of Marconi’s strongest supporters.",
+        "Ganed 15 Chwefror 1834 yng Nghaernarfon; Prif Beiriannydd Swyddfa’r Post o 1892; wedi arbrofion Larnog–Ynys Echni yn 1897 un o gefnogwyr cryfaf Marconi."),
+    "otd-yale": _w("Elihu_Yale", "Elihu Yale",
+        "Died in London, 8 July 1721; buried at St Giles’ Church, Wrexham; lived at Plas Grono beside Erddig; the college was named Yale in 1718. His epitaph begins “Born in America, in Europe bred”.",
+        "Bu farw yn Llundain, 8 Gorffennaf 1721; claddwyd yn Eglwys San Silyn, Wrecsam; bu’n byw ym Mhlas Grono ger Erddig; enwyd y coleg yn Yale yn 1718. Mae ei feddargraff yn dechrau “Born in America, in Europe bred”."),
+    "otd-evan-jones": _w("Evan_Jones_(missionary)", "Evan Jones (missionary)",
+        "Born in Wales, 1788; died at Tahlequah, Cherokee Nation, 18 August 1872. He learned Cherokee and translated scripture into its syllabary, opposed the removal of the Cherokee, and helped found the anti-slavery Keetoowah Society in 1856.",
+        "Ganed yng Nghymru, 1788; bu farw yn Tahlequah, Cenedl y Cherokee, 18 Awst 1872. Dysgodd Cherokee a chyfieithu’r ysgrythur i’w sillwyddor, gwrthwynebodd symud y Cherokee, a helpodd sefydlu Cymdeithas Keetoowah yn erbyn caethwasiaeth yn 1856."),
+    "otd-holidays": _w("Welsh_holidays", "Traditional festival days of Wales",
+        "Gŵyl Ieuan y Moch, 29 August: pigs were turned out into the woods to forage for the winter.",
+        "Gŵyl Ieuan y Moch, 29 Awst: troid y moch allan i’r coed i chwilota dros y gaeaf."),
+    "otd-y1859": _year(1859), "otd-y1866": _year(1866), "otd-y1880": _year(1880), "otd-y1893": _year(1893),
+    "otd-y1898": _year(1898), "otd-y1905": _year(1905), "otd-y1910": _year(1910), "otd-y1922": _year(1922),
+    "otd-y1928": _year(1928), "otd-y1940": _year(1940), "otd-y1945": _year(1945), "otd-y1951": _year(1951),
+    "otd-y1957": _year(1957), "otd-y1960": _year(1960), "otd-y1962": _year(1962), "otd-y1970": _year(1970),
+    "otd-y1973": _year(1973), "otd-y1990": _year(1990), "otd-y1999": _year(1999), "otd-y2012": _year(2012),
+    "otd-y1905b": _year(1905), "otd-y1900": _year(1900),
+    "otd-d-oct2": _day("October_2", "2 October", "2 Hydref"), "otd-d-dec4": _day("December_4", "4 December", "4 Rhagfyr"),
+    "otd-d-dec5": _day("December_5", "5 December", "5 Rhagfyr"), "otd-d-dec22": _day("December_22", "22 December", "22 Rhagfyr"),
+    "otd-d-aug17": _day("August_17", "17 August", "17 Awst"), "otd-d-aug21": _day("August_21", "21 August", "21 Awst"),
+    "otd-d-nov28": _day("November_28", "28 November", "28 Tachwedd"), "otd-d-apr24": _day("April_24", "24 April", "24 Ebrill"),
+    "otd-d-jul24": _day("July_24", "24 July", "24 Gorffennaf"),
+    "otd-dyfnan": _w("Dyfnan", "Dyfnan", "“He is commemorated on 24 April”; sometimes counted a son of Brychan; Llanddyfnan in Anglesey is dedicated to him and claimed his relics.",
+        "Cofir ef ar 24 Ebrill; fe’i cyfrifir weithiau yn fab i Frychan; mae Llanddyfnan ym Môn wedi’i chysegru iddo ac yn hawlio ei greiriau."),
+})
+
+OTD += [
+ ("02-15", 1834, "born", "William Henry Preece", "William Henry Preece",
+  "The engineer is born in Caernarfon. As chief engineer of the Post Office he backed young Marconi, whose radio messages crossed the sea from Lavernock to Flat Holm in 1897.",
+  "Ganed y peiriannydd yng Nghaernarfon. Fel prif beiriannydd Swyddfa’r Post cefnogodd y Marconi ifanc, a chroesodd ei negeseuon radio dros y môr o Larnog i Ynys Echni yn 1897.",
+  "person-william-preece.html", "otd-preece,lavernock-wiki"),
+ ("03-09", 1942, "born", "John Cale", "John Cale",
+  "Born in the mining village of Garnant, where his mother raised him speaking Welsh. He was a founder of the Velvet Underground and represented Wales at the Venice Biennale in 2009.",
+  "Ganed ym mhentref glofaol Garnant, lle magodd ei fam ef yn siarad Cymraeg. Roedd yn un o sylfaenwyr y Velvet Underground a chynrychiolodd Gymru yn Biennale Fenis yn 2009.",
+  "person-john-cale.html", "otd-cale"),
+ ("03-30", 2012, "died", "Emrys Roberts", "Emrys Roberts",
+  "The poet and author Emrys Roberts, a former Archdruid of Wales, dies, aged 82.",
+  "Bu farw’r bardd a’r awdur Emrys Roberts, cyn-Archdderwydd Cymru, yn 82 oed.",
+  "", "otd-y2012"),
+ ("04-18", 1905, "born", "Alun Oldfield-Davies", "Alun Oldfield-Davies",
+  "Born. He became Controller of BBC Wales.",
+  "Ganed. Daeth yn Rheolwr BBC Cymru.",
+  "", "otd-y1905"),
+ ("04-24", None, "feast", "Saint Dyfnan", "Sant Dyfnan",
+  "Feast day of Dyfnan, whose church is Llanddyfnan in Anglesey. Tradition counts him among the children of Brychan.",
+  "Gŵyl Dyfnan, a’i eglwys yw Llanddyfnan ym Môn. Yn ôl traddodiad roedd yn un o blant Brychan.",
+  "person-brychan.html", "otd-dyfnan,otd-d-apr24"),
+ ("06-02", 1893, "born", "D. J. Davies", "D. J. Davies",
+  "David James Davies is born: economist, industrialist and writer.",
+  "Ganed David James Davies: economegydd, diwydiannwr ac awdur.",
+  "", "otd-y1893"),
+ ("06-10", 1990, "died", "John Evans of Fforest-fach", "John Evans o Fforest-fach",
+  "John Evans dies at 112 years and 295 days, the oldest man in the world at the time and the oldest man in Britain whose age could be proved.",
+  "Bu farw John Evans yn 112 oed a 295 diwrnod, dyn hynaf y byd ar y pryd a’r dyn hynaf ym Mhrydain y gellid profi ei oed.",
+  "", "otd-y1990"),
+ ("06-13", 1910, "ev", "Scott’s farewell in Cardiff", "Ffarwél Scott yng Nghaerdydd",
+  "Captain Scott and his officers dine at the Royal Hotel in Cardiff before the Terra Nova sails for Antarctica.",
+  "Mae Capten Scott a’i swyddogion yn ciniawa yng Ngwesty’r Royal yng Nghaerdydd cyn i’r Terra Nova hwylio am Antarctica.",
+  "person-edgar-evans.html", "otd-y1910"),
+ ("06-18", 1928, "ev", "Amelia Earhart at Burry Port", "Amelia Earhart ym Mhorth Tywyn",
+  "Amelia Earhart’s seaplane lands near Burry Port: she is the first woman to cross the Atlantic by air.",
+  "Mae awyren fôr Amelia Earhart yn glanio ger Porth Tywyn: hi yw’r fenyw gyntaf i groesi’r Iwerydd yn yr awyr.",
+  "", "otd-y1928"),
+ ("07-04", 1922, "born", "Phyllis Kinney", "Phyllis Kinney",
+  "Born in the United States. She became an expert on Welsh folk music.",
+  "Ganed yn yr Unol Daleithiau. Daeth yn arbenigwraig ar gerddoriaeth werin Cymru.",
+  "", "otd-y1922"),
+ ("07-08", 1721, "died", "Elihu Yale", "Elihu Yale",
+  "Elihu Yale dies in London and is buried at St Giles’ Church in Wrexham, the home of his family. Yale College was named after him in 1718.",
+  "Bu farw Elihu Yale yn Llundain a’i gladdu yn Eglwys San Silyn yn Wrecsam, cartref ei deulu. Enwyd Coleg Yale ar ei ôl yn 1718.",
+  "person-elihu-yale.html", "otd-yale"),
+ ("07-09", 1900, "ev", "Guest, Keen and Co.", "Guest, Keen a’i Gwmni",
+  "The Dowlais Iron Company joins with Arthur Keen’s Patent Nut and Bolt Company to form Guest, Keen and Co., the beginning of GKN.",
+  "Mae Cwmni Haearn Dowlais yn uno â chwmni Patent Nut and Bolt Arthur Keen i ffurfio Guest, Keen a’i Gwmni, dechrau GKN.",
+  "story-industry.html", "otd-y1900"),
+ ("07-22", 1962, "born", "Arthur Emyr", "Arthur Emyr",
+  "Born. A rugby player who became a television presenter and broadcasting executive.",
+  "Ganed. Chwaraewr rygbi a ddaeth yn gyflwynydd teledu ac yn weithredwr darlledu.",
+  "", "otd-y1962"),
+ ("07-24", 1612, "died", "John Salusbury", "John Salusbury",
+  "Sir John Salusbury of Lleweni, politician and poet, dies.",
+  "Bu farw Syr John Salusbury o Leweni, gwleidydd a bardd.",
+  "", "otd-d-jul24"),
+ ("08-02", 1898, "ev", "The first motor buses in Wales", "Y bysiau modur cyntaf yng Nghymru",
+  "The Llandudno Motor Touring Company starts running excursions with the first motor buses in Wales.",
+  "Mae Cwmni Teithiau Modur Llandudno yn dechrau rhedeg gwibdeithiau gyda’r bysiau modur cyntaf yng Nghymru.",
+  "", "otd-y1898"),
+ ("08-02", 1945, "ev", "Clement Davies leads the Liberals", "Clement Davies yn arwain y Rhyddfrydwyr",
+  "Clement Davies becomes leader of the Liberal Party.",
+  "Daw Clement Davies yn arweinydd y Blaid Ryddfrydol.",
+  "", "otd-y1945"),
+ ("08-08", 1940, "died", "Sir Daniel Lleufer Thomas", "Syr Daniel Lleufer Thomas",
+  "The lawyer and biographer dies, aged 76.",
+  "Bu farw’r cyfreithiwr a’r cofiannydd, yn 76 oed.",
+  "", "otd-y1940"),
+ ("08-17", 1950, "born", "Geraint Jarman", "Geraint Jarman",
+  "Born. Musician, poet and television producer.",
+  "Ganed. Cerddor, bardd a chynhyrchydd teledu.",
+  "", "otd-d-aug17"),
+ ("08-18", 1872, "died", "Evan Jones, friend of the Cherokee", "Evan Jones, cyfaill y Cherokee",
+  "The Welsh missionary dies in the Cherokee Nation. He learned Cherokee, translated scripture into it, stood against the removal of the Cherokee from their lands and against slavery.",
+  "Bu farw’r cenhadwr o Gymro yng Nghenedl y Cherokee. Dysgodd Cherokee a chyfieithu’r ysgrythur iddi, a safodd yn erbyn symud y Cherokee o’u tiroedd ac yn erbyn caethwasiaeth.",
+  "", "otd-evan-jones"),
+ ("08-21", 1886, "born", "Ruth Manning-Sanders", "Ruth Manning-Sanders",
+  "The author and poet is born.",
+  "Ganed yr awdur a’r bardd.",
+  "", "otd-d-aug21"),
+ ("08-29", None, "custom", "Gŵyl Ieuan y Moch", "Gŵyl Ieuan y Moch",
+  "Saint John of the Swine. On this day in old Wales the pigs were turned out into the woods to forage through the winter.",
+  "Gŵyl Ieuan y Moch. Ar y diwrnod hwn yn yr hen Gymru troid y moch allan i’r coed i chwilota drwy’r gaeaf.",
+  "symbols.html", "otd-holidays"),
+ ("09-03", 1951, "born", "Ray Gravell", "Ray Gravell",
+  "Born. The rugby player and much-loved radio presenter.",
+  "Ganed. Y chwaraewr rygbi a’r cyflwynydd radio annwyl.",
+  "person-ray-gravell.html", "otd-y1951"),
+ ("09-05", 1960, "ev", "Waldo Williams stands by his beliefs", "Waldo Williams yn sefyll dros ei egwyddorion",
+  "The poet and peace campaigner Waldo Williams is sentenced at Haverfordwest to six weeks in prison, for standing by his convictions.",
+  "Dedfrydir y bardd a’r ymgyrchydd heddwch Waldo Williams yn Hwlffordd i chwe wythnos yn y carchar, am sefyll dros ei argyhoeddiadau.",
+  "person-waldo-williams.html", "otd-y1960"),
+ ("09-09", 1880, "died", "W. W. E. Wynne", "W. W. E. Wynne",
+  "William Watkin Edward Wynne, politician and antiquarian, dies, aged 78.",
+  "Bu farw William Watkin Edward Wynne, gwleidydd a hynafiaethydd, yn 78 oed.",
+  "", "otd-y1880"),
+ ("09-15", 1880, "born", "William Charles Williams VC", "William Charles Williams VC",
+  "Born. He won the Victoria Cross, and died in 1915.",
+  "Ganed. Enillodd Groes Victoria, a bu farw yn 1915.",
+  "", "otd-y1880"),
+ ("10-02", 1926, "born", "Jan Morris", "Jan Morris",
+  "The historian and author is born.",
+  "Ganed yr hanesydd a’r awdur.",
+  "person-jan-morris.html", "otd-d-oct2"),
+ ("10-12", 1951, "ev", "Penrhyn Castle to the National Trust", "Castell Penrhyn i’r Ymddiriedolaeth Genedlaethol",
+  "Penrhyn Castle and its estate are accepted by the National Trust.",
+  "Derbynnir Castell Penrhyn a’i stad gan yr Ymddiriedolaeth Genedlaethol.",
+  "place-penrhyn.html", "otd-y1951"),
+ ("10-23", 1973, "ev", "Brian Josephson’s Nobel Prize", "Gwobr Nobel Brian Josephson",
+  "The Cardiff-born physicist Brian Josephson wins the Nobel Prize in Physics, for work he did as a student of 22.",
+  "Mae’r ffisegydd o Gaerdydd Brian Josephson yn ennill Gwobr Nobel mewn Ffiseg, am waith a wnaeth yn fyfyriwr 22 oed.",
+  "person-brian-josephson.html", "otd-y1973,wiki-josephson"),
+ ("11-05", 1866, "born", "Daniel Protheroe", "Daniel Protheroe",
+  "The conductor and choirmaster is born.",
+  "Ganed yr arweinydd a’r côr-feistr.",
+  "", "otd-y1866"),
+ ("11-19", 1905, "died", "Watcyn Wyn", "Watcyn Wyn",
+  "Watkin Hezekiah Williams, the schoolmaster and poet Watcyn Wyn, dies, aged 61.",
+  "Bu farw Watkin Hezekiah Williams, yr ysgolfeistr a’r bardd Watcyn Wyn, yn 61 oed.",
+  "", "otd-y1905"),
+ ("11-25", 1905, "died", "William Cadwaladr Davies", "William Cadwaladr Davies",
+  "The educationist dies, aged 56.",
+  "Bu farw’r addysgwr, yn 56 oed.",
+  "story-learning.html", "otd-y1905"),
+ ("11-27", 1999, "died", "Ernest Zobole", "Ernest Zobole",
+  "The artist dies, aged 72.",
+  "Bu farw’r arlunydd, yn 72 oed.",
+  "", "otd-y1999"),
+ ("12-04", 1897, "died", "Caradog", "Caradog",
+  "Griffith Rhys Jones, the conductor Caradog, dies. His Côr Mawr, the great choir of the south, twice won first prize at the Crystal Palace, and his statue stands in Aberdare.",
+  "Bu farw Griffith Rhys Jones, yr arweinydd Caradog. Enillodd ei Gôr Mawr y wobr gyntaf ddwywaith yn y Palas Grisial, ac mae ei gerflun yn sefyll yn Aberdâr.",
+  "person-caradog-griffith-rhys-jones.html", "otd-caradog"),
+ ("12-05", 1986, "died", "Sir Edward Youde", "Syr Edward Youde",
+  "The diplomat and scholar of China, Governor of Hong Kong, dies.",
+  "Bu farw’r diplomydd ac ysgolhaig Tsieina, Llywodraethwr Hong Kong.",
+  "", "otd-d-dec5"),
+ ("12-12", 1957, "ev", "A minister for Wales", "Gweinidog dros Gymru",
+  "Wales gets its own Minister of State in the Westminster government for the first time.",
+  "Mae Cymru’n cael ei Gweinidog Gwladol ei hun yn llywodraeth San Steffan am y tro cyntaf.",
+  "", "otd-y1957"),
+ ("12-13", 1928, "died", "Harry Jarman", "Harry Jarman",
+  "The Wales and British Lions rugby forward dies.",
+  "Bu farw blaenwr rygbi Cymru a’r Llewod Prydeinig.",
+  "", "otd-y1928"),
+ ("12-22", 1967, "born", "Richey Edwards", "Richey Edwards",
+  "Born. Lyricist and guitarist of the Manic Street Preachers.",
+  "Ganed. Awdur geiriau a gitarydd y Manic Street Preachers.",
+  "person-richey-edwards.html", "otd-d-dec22"),
+ ("12-23", 1999, "died", "Eirene White", "Eirene White",
+  "The politician Eirene White dies, aged 90.",
+  "Bu farw’r wleidyddes Eirene White, yn 90 oed.",
+  "", "otd-y1999"),
+]
+
+CITES.update({
+    "otd-caradog": _w("Griffith_Rhys_Jones", "Griffith Rhys Jones (Caradog)",
+        "Born at Trecynon, 21 December 1834; died 4 December 1897. His Côr Mawr, the South Wales Choral Union, twice won first prize at the Crystal Palace, in 1872 and 1873; his statue by Goscombe John stands in Victoria Square, Aberdare.",
+        "Ganed yn Nhrecynon, 21 Rhagfyr 1834; bu farw 4 Rhagfyr 1897. Enillodd ei Gôr Mawr y wobr gyntaf ddwywaith yn y Palas Grisial, yn 1872 a 1873; mae ei gerflun gan Goscombe John yn sefyll yn Sgwâr Victoria, Aberdâr."),
+    "otd-gwyn-jones": _w("Gwyn_Jones_(author)", "Gwyn Jones (author)",
+        "Born at New Tredegar, 24 May 1907; died 6 December 1999. With Thomas Jones he translated The Mabinogion (1948); founder of the Welsh Review; professor at Aberystwyth and Cardiff; a translator of the Norse sagas.",
+        "Ganed yn Nhredegar Newydd, 24 Mai 1907; bu farw 6 Rhagfyr 1999. Gyda Thomas Jones cyfieithodd y Mabinogion (1948); sylfaenydd y Welsh Review; athro yn Aberystwyth a Chaerdydd; cyfieithydd sagâu’r Llychlynwyr."),
+    "otd-teddy-morgan": _w("Teddy_Morgan", "Teddy Morgan",
+        "Born at Aberdare, 22 May 1880. He scored the winning try against New Zealand at Cardiff Arms Park on 16 December 1905, and captained the British team on the 1904 tour.",
+        "Ganed yn Aberdâr, 22 Mai 1880. Sgoriodd y cais buddugol yn erbyn Seland Newydd ym Mharc yr Arfau ar 16 Rhagfyr 1905, a bu’n gapten tîm Prydain ar daith 1904."),
+    "otd-y1936": _year(1936), "otd-y1953": _year(1953), "otd-y1884": _year(1884), "otd-y1887": _year(1887),
+    "otd-d-feb12": _day("February_12", "12 February", "12 Chwefror"), "otd-d-mar8": _day("March_8", "8 March", "8 Mawrth"),
+    "otd-d-may2": _day("May_2", "2 May", "2 Mai"), "otd-d-apr12": _day("April_12", "12 April", "12 Ebrill"),
+    "otd-y1839": _year(1839),
+})
+
+OTD += [
+ ("05-22", 1880, "born", "Teddy Morgan", "Teddy Morgan",
+  "The wing is born in Aberdare. In 1905 he scored the try that beat the All Blacks at Cardiff Arms Park, in the Match of the Century.",
+  "Ganed yr asgellwr yn Aberdâr. Yn 1905 sgoriodd y cais a gurodd y Crysau Duon ym Mharc yr Arfau, yng Ngêm y Ganrif.",
+  "", "otd-teddy-morgan"),
+ ("12-06", 1999, "died", "Gwyn Jones", "Gwyn Jones",
+  "The writer and scholar from New Tredegar dies, aged 92. With Thomas Jones he made the great English translation of the Mabinogion in 1948.",
+  "Bu farw’r llenor a’r ysgolhaig o Dredegar Newydd, yn 92 oed. Gyda Thomas Jones gwnaeth gyfieithiad Saesneg mawr y Mabinogion yn 1948.",
+  "story-mabinogi.html", "otd-gwyn-jones"),
+ ("03-14", 1936, "born", "John Meirion Morris", "John Meirion Morris",
+  "The sculptor John Meirion Morris is born.",
+  "Ganed y cerflunydd John Meirion Morris.",
+  "", "otd-y1936"),
+ ("03-20", 1940, "died", "Gwilym Deudraeth", "Gwilym Deudraeth",
+  "The poet William Thomas Edwards, Gwilym Deudraeth, dies.",
+  "Bu farw’r bardd William Thomas Edwards, Gwilym Deudraeth.",
+  "", "otd-y1940"),
+ ("05-31", 1880, "born", "E. Tegla Davies", "E. Tegla Davies",
+  "The Welsh-language author Edward Tegla Davies is born.",
+  "Ganed y llenor Edward Tegla Davies.",
+  "", "otd-y1880"),
+ ("06-09", 1928, "born", "R. Geraint Gruffydd", "R. Geraint Gruffydd",
+  "The academic and theologian R. Geraint Gruffydd is born.",
+  "Ganed R. Geraint Gruffydd, ysgolhaig a diwinydd.",
+  "", "otd-y1928"),
+ ("05-11", 1880, "born", "David Davies, Lord Davies", "David Davies, yr Arglwydd Davies",
+  "David Davies, the politician who became the first Baron Davies, is born.",
+  "Ganed David Davies, y gwleidydd a ddaeth yn Farwn Davies cyntaf.",
+  "", "otd-y1880"),
+]
+
+CITES.update({
+    "otd-hopkin": _w("Mary_Hopkin", "Mary Hopkin",
+        "Born 3 May 1950 in Pontardawe, to a Welsh-speaking family; began with Welsh-language songs; “Those Were the Days” (1968) was a UK number one; one of the first artists signed to the Beatles’ Apple label.",
+        "Ganed 3 Mai 1950 ym Mhontardawe, i deulu Cymraeg; dechreuodd gyda chaneuon Cymraeg; roedd “Those Were the Days” (1968) yn rhif un yn y DU; un o’r artistiaid cyntaf ar label Apple y Beatles."),
+    "otd-cguest": _w("Lady_Charlotte_Guest", "Lady Charlotte Guest",
+        "Born 19 May 1812 at Uffington, Lincolnshire; her Mabinogion was published in seven volumes, 1838–45, in Llandovery and London; she helped run the Dowlais Ironworks after 1852 and its progressive school.",
+        "Ganed 19 Mai 1812 yn Uffington, Swydd Lincoln; cyhoeddwyd ei Mabinogion mewn saith cyfrol, 1838–45, yn Llanymddyfri a Llundain; helpodd redeg Gwaith Haearn Dowlais wedi 1852 a’i ysgol flaengar."),
+})
+
+OTD += [
+ ("05-03", 1950, "born", "Mary Hopkin", "Mary Hopkin",
+  "The singer is born in Pontardawe. She began singing in Welsh, and her ‘Those Were the Days’ went to number one in 1968 on the Beatles’ Apple label.",
+  "Ganed y gantores ym Mhontardawe. Dechreuodd ganu yn Gymraeg, ac aeth ei ‘Those Were the Days’ i rif un yn 1968 ar label Apple y Beatles.",
+  "person-mary-hopkin.html", "otd-hopkin"),
+ ("05-19", 1812, "born", "Lady Charlotte Guest", "Arglwyddes Charlotte Guest",
+  "Born in Lincolnshire. She made Wales her life’s work: her English Mabinogion, printed at Llandovery from 1838, carried the old Welsh tales to the world.",
+  "Ganed yn Swydd Lincoln. Gwnaeth Gymru’n waith ei hoes: aeth ei Mabinogion Saesneg, a argraffwyd yn Llanymddyfri o 1838, â’r hen chwedlau Cymreig i’r byd.",
+  "person-lady-charlotte-guest.html", "otd-cguest"),
+]
+
+CITES.update({
+    "otd-y1966": _year(1966), "otd-adam-usk": dict(
+        short=("Adam of Usk", "Adda o Frynbuga"),
+        t="Chronicon Adae de Usk, A.D. 1377–1421", by=("Adam of Usk’s chronicle, edited and translated by E. M. Thompson, 1904", "Cronicl Adda o Frynbuga, golygwyd a chyfieithwyd gan E. M. Thompson, 1904"),
+        note=("Adam copied Owain’s letter to Robert III of Scotland into his chronicle, dated 29 November 1401, with its words on Brutus and his sons Albanact, Locrinus and Camber.",
+              "Copïodd Adda lythyr Owain at Robert III o’r Alban i’w gronicl, wedi’i ddyddio 29 Tachwedd 1401, gyda’i eiriau am Brutus a’i feibion Albanact, Locrinus a Chamber."),
+        url=None),
+})
+
+OTD += [
+ ("02-12", 1945, "born", "Gareth Thomas", "Gareth Thomas",
+  "The actor Gareth Thomas is born.",
+  "Ganed yr actor Gareth Thomas.",
+  "", "otd-y1945"),
+ ("02-20", 1966, "died", "Emrys Evans", "Emrys Evans",
+  "The classical scholar and academic Emrys Evans dies, aged 75.",
+  "Bu farw’r ysgolhaig clasurol a’r academydd Emrys Evans, yn 75 oed.",
+  "", "otd-y1966"),
+ ("02-27", 1887, "born", "James Dickson Innes", "James Dickson Innes",
+  "The landscape painter James Dickson Innes is born.",
+  "Ganed yr arlunydd tirluniau James Dickson Innes.",
+  "", "otd-y1887"),
+ ("03-08", 1939, "born", "Robert Tear", "Robert Tear",
+  "The tenor and conductor Robert Tear is born.",
+  "Ganed y tenor a’r arweinydd Robert Tear.",
+  "", "otd-d-mar8"),
+ ("04-10", 1936, "born", "Ricky Valance", "Ricky Valance",
+  "The pop singer Ricky Valance is born David Spencer.",
+  "Ganed y canwr pop Ricky Valance, David Spencer o’i enw iawn.",
+  "", "otd-y1936"),
+ ("04-12", 1884, "born", "Tenby Davies", "Tenby Davies",
+  "The runner Tenby Davies is born.",
+  "Ganed y rhedwr Tenby Davies.",
+  "", "otd-d-apr12"),
+ ("04-20", 1970, "died", "T. I. Ellis", "T. I. Ellis",
+  "The academic Thomas Iorwerth Ellis dies, aged 70.",
+  "Bu farw’r academydd Thomas Iorwerth Ellis, yn 70 oed.",
+  "", "otd-y1970"),
+ ("05-02", 1993, "born", "Owain Doull", "Owain Doull",
+  "The track cyclist Owain Doull is born.",
+  "Ganed y seiclwr trac Owain Doull.",
+  "", "otd-d-may2"),
+ ("11-16", 1953, "born", "Griff Rhys Jones", "Griff Rhys Jones",
+  "The actor, comedian and television presenter Griff Rhys Jones is born.",
+  "Ganed yr actor, y digrifwr a’r cyflwynydd teledu Griff Rhys Jones.",
+  "", "otd-y1953"),
+ ("11-18", 1936, "born", "Brian Huggett", "Brian Huggett",
+  "The golfer Brian Huggett is born.",
+  "Ganed y golffiwr Brian Huggett.",
+  "", "otd-y1936"),
+ ("05-29", 1953, "ev", "Everest and Pen-y-Gwryd", "Everest a Phen-y-Gwryd",
+  "Hillary and Tenzing reach the top of Everest. The team had trained in Eryri with the Pen-y-Gwryd inn as their home, and their names are still signed on its ceiling.",
+  "Mae Hillary a Tenzing yn cyrraedd copa Everest. Bu’r tîm yn ymarfer yn Eryri gyda gwesty Pen-y-Gwryd yn gartref, ac mae eu henwau wedi’u llofnodi ar ei nenfwd o hyd.",
+  "place-penygwryd.html", "everest-pyg,pyg-wiki"),
+ ("06-16", 1056, "ev", "Gruffudd ap Llywelyn at Glasbury", "Gruffudd ap Llywelyn yn y Clas-ar-Wy",
+  "Gruffudd ap Llywelyn, king of all Wales, wins on the Machawy by Glasbury: the bishop of Hereford who marched against him falls, and the English make peace.",
+  "Mae Gruffudd ap Llywelyn, brenin Cymru gyfan, yn ennill ar y Fachawy ger y Clas-ar-Wy: syrth esgob Henffordd a ymdeithiodd yn ei erbyn, ac mae’r Saeson yn gwneud heddwch.",
+  "person-gruffudd-ap-llywelyn.html", "dwb-gruffudd-ap-llywelyn"),
+ ("06-19", 1282, "died", "Eleanor de Montfort", "Eleanor de Montfort",
+  "Eleanor, wife of Llywelyn ap Gruffudd and Princess of Wales, dies at Garth Celyn after giving birth to their daughter Gwenllian.",
+  "Bu farw Eleanor, gwraig Llywelyn ap Gruffudd a Thywysoges Cymru, yng Ngarth Celyn wedi geni eu merch Gwenllian.",
+  "person-eleanor-de-montfort.html", "wiki-gwenllian-wales"),
+ ("06-29", 1889, "ev", "The sea comes into Barry Dock", "Y môr yn dod i Ddoc y Barri",
+  "Water is let into David Davies’s new dock at Barry for the first time. By 1913 Barry was the busiest coal port in the world.",
+  "Gollyngir dŵr i ddoc newydd David Davies yn y Barri am y tro cyntaf. Erbyn 1913 y Barri oedd porthladd glo prysuraf y byd.",
+  "event-barry-docks-open.html", "wiki-barry"),
+ ("08-15", 2003, "ev", "A memorial to Owain Lawgoch", "Cofeb i Owain Lawgoch",
+  "A memorial to Owain Lawgoch, heir of the princes of Gwynedd, is unveiled at Mortagne-sur-Gironde in France, where he fell in 1378.",
+  "Dadorchuddir cofeb i Owain Lawgoch, etifedd tywysogion Gwynedd, yn Mortagne-sur-Gironde yn Ffrainc, lle syrthiodd yn 1378.",
+  "person-owain-lawgoch.html", "wiki-owain-lawgoch,dwb-owain-lawgoch"),
+ ("09-26", 2009, "ev", "Carnedd Gwenllian", "Carnedd Gwenllian",
+  "A summit of the Carneddau is named Carnedd Gwenllian, after the daughter of Llywelyn ap Gruffudd, the lost princess of Wales.",
+  "Enwir copa yn y Carneddau yn Garnedd Gwenllian, ar ôl merch Llywelyn ap Gruffudd, tywysoges goll Cymru.",
+  "person-gwenllian-ferch-llywelyn.html", "wiki-gwenllian-wales"),
+ ("11-29", 1401, "ev", "Owain Glyndŵr writes to Scotland", "Owain Glyndŵr yn ysgrifennu at yr Alban",
+  "Owain Glyndŵr writes to Robert III of Scotland, as one descendant of Brutus to another, asking him to stand with Wales against their common enemy.",
+  "Mae Owain Glyndŵr yn ysgrifennu at Robert III o’r Alban, fel un o ddisgynyddion Brutus at un arall, yn gofyn iddo sefyll gyda Chymru yn erbyn eu gelyn cyffredin.",
+  "person-owain-glyndwr.html", "otd-adam-usk"),
+ ("12-21", 1993, "ev", "The Welsh Language Act", "Deddf yr Iaith Gymraeg",
+  "The Welsh Language Act 1993 becomes law, and the last of the Act of 1536, which had shut Welsh speakers out of public office, is swept away.",
+  "Daw Deddf yr Iaith Gymraeg 1993 yn gyfraith, ac ysgubir ymaith yr olaf o Ddeddf 1536, a gaeodd siaradwyr Cymraeg allan o swyddi cyhoeddus.",
+  "story-language.html", "wn-act1536,wn-hop"),
+ ("12-29", 1888, "ev", "Isaac Roberts photographs Andromeda", "Isaac Roberts yn tynnu llun Andromeda",
+  "The astronomer Isaac Roberts photographs the great nebula in Andromeda and shows, for the first time, its spiral shape.",
+  "Mae’r seryddwr Isaac Roberts yn tynnu llun nifwl mawr Andromeda ac yn dangos, am y tro cyntaf, ei siâp troellog.",
+  "person-isaac-roberts.html", "wiki-iroberts"),
+]
+
+CITES.update({
+    "otd-ceri-richards": _w("Ceri_Richards", "Ceri Richards",
+        "Born 6 June 1903 at Dunvant near Swansea; a career-long engagement with the poems of Dylan Thomas; a prizewinner at the Venice Biennale of 1962; National Eisteddfod Gold Medal 1961.",
+        "Ganed 6 Mehefin 1903 yn Nynfant ger Abertawe; ymdriniodd â cherddi Dylan Thomas drwy gydol ei yrfa; enillodd wobr yn Biennale Fenis 1962; Medal Aur yr Eisteddfod Genedlaethol 1961."),
+    "otd-henry-morgan": _w("Henry_Morgan", "Henry Morgan",
+        "Born Harri Morgan, about 1635, at Llanrumney or Pencarn in Monmouthshire; knighted by Charles II in 1674; lieutenant governor of Jamaica, acting as governor three times; died 25 August 1688 at Lawrencefield, Jamaica.",
+        "Ganed yn Harri Morgan, tua 1635, yn Llanrhymni neu Bencarn yn Sir Fynwy; urddwyd yn farchog gan Siarl II yn 1674; is-lywodraethwr Jamaica, a fu’n llywodraethwr dros dro deirgwaith; bu farw 25 Awst 1688 yn Lawrencefield, Jamaica."),
+})
+
+OTD += [
+ ("06-06", 1903, "born", "Ceri Richards", "Ceri Richards",
+  "The painter is born at Dunvant near Swansea. His paintings for the poems of Dylan Thomas, and a prize at the Venice Biennale, made him one of the great artists of Wales.",
+  "Ganed yr arlunydd yn Nynfant ger Abertawe. Gwnaeth ei luniau ar gyfer cerddi Dylan Thomas, a gwobr yn Biennale Fenis, ef yn un o artistiaid mawr Cymru.",
+  "person-ceri-richards.html", "otd-ceri-richards"),
+ ("08-25", 1688, "died", "Sir Henry Morgan", "Syr Harri Morgan",
+  "Harri Morgan of Llanrumney dies in Jamaica. The Welsh sea captain was knighted by the king and rose to be lieutenant governor of the island.",
+  "Bu farw Harri Morgan o Lanrhymni yn Jamaica. Urddwyd y capten môr o Gymro yn farchog gan y brenin a daeth yn is-lywodraethwr yr ynys.",
+  "person-henry-morgan.html", "otd-henry-morgan"),
+]
+
+CITES.update({
+    "otd-dafydd-iwan": _w("Dafydd_Iwan", "Dafydd Iwan",
+        "Born 24 August 1943 in Brynamman; wrote “Yma o Hyd” “to remind people we still speak Welsh against all odds”; a founder of Sain; President of Plaid Cymru 2003–10.",
+        "Ganed 24 Awst 1943 ym Mrynaman; ysgrifennodd “Yma o Hyd” i atgoffa pobl ein bod yn dal i siarad Cymraeg er gwaethaf popeth; un o sylfaenwyr Sain; Llywydd Plaid Cymru 2003–10."),
+    "otd-bale": _w("Gareth_Bale", "Gareth Bale",
+        "Born 16 July 1989 in Cardiff; 111 caps and 41 goals, Wales’ most capped player and top scorer; led Wales to the Euro 2016 semi-finals and to the 2022 World Cup, their first since 1958.",
+        "Ganed 16 Gorffennaf 1989 yng Nghaerdydd; 111 cap a 41 gôl, y chwaraewr â’r mwyaf o gapiau a’r prif sgoriwr i Gymru; arweiniodd Gymru i rownd gynderfynol Ewro 2016 ac i Gwpan y Byd 2022, y cyntaf ers 1958."),
+})
+
+OTD += [
+ ("08-24", 1943, "born", "Dafydd Iwan", "Dafydd Iwan",
+  "The singer is born in Brynamman. His ‘Yma o Hyd’, written to remind us that Welsh is still spoken against all odds, became the anthem of a nation.",
+  "Ganed y canwr ym Mrynaman. Daeth ei ‘Yma o Hyd’, a ysgrifennwyd i’n hatgoffa bod y Gymraeg yn dal yn fyw er gwaethaf popeth, yn anthem cenedl.",
+  "person-dafydd-iwan.html", "otd-dafydd-iwan"),
+ ("07-16", 1989, "born", "Gareth Bale", "Gareth Bale",
+  "Born in Cardiff. Wales’ most capped player and greatest goalscorer, he led his country to the semi-finals of Euro 2016 and to the World Cup in 2022.",
+  "Ganed yng Nghaerdydd. Y chwaraewr â’r mwyaf o gapiau a phrif sgoriwr Cymru erioed, arweiniodd ei wlad i rownd gynderfynol Ewro 2016 ac i Gwpan y Byd yn 2022.",
+  "person-gareth-bale.html", "otd-bale"),
+]
+
+CITES.update({
+    "otd-christmas-evans": _w("Christmas_Evans", "Christmas Evans",
+        "Born near Llandysul, 25 December 1766; built up the Baptists of Anglesey from Llangefni; called “the Bunyan of Wales”; died at Swansea, 19 July 1838, on a preaching tour.",
+        "Ganed ger Llandysul, 25 Rhagfyr 1766; adeiladodd Fedyddwyr Môn o Langefni; galwyd ef yn “Bunyan Cymru”; bu farw yn Abertawe, 19 Gorffennaf 1838, ar daith bregethu."),
+    "otd-dee": _w("John_Dee", "John Dee",
+        "Born 13 July 1527 in London, son of Rowland Dee, of Welsh descent; his grandfather was Bedo Ddu of Nant-y-groes, Pilleth; he traced his line to Rhodri Mawr, and in 1580 wrote that Madog ab Owain Gwynedd had discovered America.",
+        "Ganed 13 Gorffennaf 1527 yn Llundain, yn fab i Rowland Dee, o dras Gymreig; ei daid oedd Bedo Ddu o Nant-y-groes, Pyllalai; olrheiniodd ei linach i Rodri Mawr, ac yn 1580 ysgrifennodd mai Madog ab Owain Gwynedd a ddarganfu America."),
+})
+
+OTD += [
+ ("07-19", 1838, "died", "Christmas Evans", "Christmas Evans",
+  "The great Baptist preacher dies in Swansea on a preaching tour. They called him the Bunyan of Wales.",
+  "Bu farw’r pregethwr mawr gyda’r Bedyddwyr yn Abertawe ar daith bregethu. Bunyan Cymru oedd ei enw.",
+  "person-christmas-evans.html", "otd-christmas-evans"),
+ ("07-13", 1527, "born", "John Dee", "John Dee",
+  "The scholar John Dee is born in London, grandson of Bedo Ddu of Radnorshire. Proud of his descent from Rhodri Mawr, he told Elizabeth I that Madog ab Owain Gwynedd had found America.",
+  "Ganed yr ysgolhaig John Dee yn Llundain, ŵyr i Bedo Ddu o Sir Faesyfed. Yn falch o’i dras o Rodri Mawr, dywedodd wrth Elisabeth I mai Madog ab Owain Gwynedd a ddarganfu America.",
+  "person-john-dee.html", "otd-dee"),
+]
+
+CITES.update({
+    "otd-ioan": _w("Ioan_Gruffudd", "Ioan Gruffudd",
+        "Born 6 October 1973 in Aberdare; a native Welsh speaker, schooled in Welsh; Pobol y Cwm 1987–94; Horatio Hornblower 1998–2003; Mister Fantastic in Fantastic Four (2005); admitted to the Gorsedd in 2003.",
+        "Ganed 6 Hydref 1973 yn Aberdâr; Cymro Cymraeg, a addysgwyd yn Gymraeg; Pobol y Cwm 1987–94; Horatio Hornblower 1998–2003; Mister Fantastic yn Fantastic Four (2005); urddwyd i’r Orsedd yn 2003."),
+})
+
+OTD += [
+ ("10-06", 1973, "born", "Ioan Gruffudd", "Ioan Gruffudd",
+  "The actor is born in Aberdare. He started in Welsh on Pobol y Cwm and went on to play Hornblower and Mister Fantastic.",
+  "Ganed yr actor yn Aberdâr. Dechreuodd yn Gymraeg ar Pobol y Cwm ac aeth ymlaen i chwarae Hornblower a Mister Fantastic.",
+  "person-ioan-gruffudd.html", "otd-ioan"),
+]
+
+CITES.update({
+    "otd-daniel-owen": _w("Daniel_Owen", "Daniel Owen",
+        "Born at Mold, 20 October 1836; died 22 October 1895; “the foremost Welsh-language novelist of the 19th century”, best known for Rhys Lewis (1885) and Enoc Huws (1891).",
+        "Ganed yn yr Wyddgrug, 20 Hydref 1836; bu farw 22 Hydref 1895; prif nofelydd Cymraeg y 19eg ganrif, sy’n fwyaf adnabyddus am Rhys Lewis (1885) ac Enoc Huws (1891)."),
+})
+
+OTD += [
+ ("10-22", 1895, "died", "Daniel Owen", "Daniel Owen",
+  "The novelist from Mold dies, two days after his birthday. Rhys Lewis and Enoc Huws made him the greatest Welsh-language novelist of his century.",
+  "Bu farw’r nofelydd o’r Wyddgrug, ddeuddydd wedi ei ben-blwydd. Gwnaeth Rhys Lewis ac Enoc Huws ef yn nofelydd Cymraeg mwyaf ei ganrif.",
+  "person-daniel-owen.html", "otd-daniel-owen"),
+]
+
+CITES.update({
+    "otd-gwenallt": _w("D._Gwenallt_Jones", "D. Gwenallt Jones",
+        "Born at Pontardawe, 18 May 1899; died 24 December 1968; won the National Eisteddfod Chair in 1926 and again in 1931; “one of the most important figures of 20th-century Welsh-language literature”; his bardic name turns round Alltwen.",
+        "Ganed ym Mhontardawe, 18 Mai 1899; bu farw 24 Rhagfyr 1968; enillodd Gadair yr Eisteddfod Genedlaethol yn 1926 ac eto yn 1931; un o ffigurau pwysicaf llenyddiaeth Gymraeg yr 20fed ganrif; mae ei enw barddol yn troi Alltwen o chwith."),
+})
+
+OTD += [
+ ("12-24", 1968, "died", "Gwenallt", "Gwenallt",
+  "The poet Gwenallt dies. Twice winner of the National Eisteddfod Chair, he was one of the great Welsh poets of the twentieth century.",
+  "Bu farw’r bardd Gwenallt. Enillodd Gadair yr Eisteddfod Genedlaethol ddwywaith, ac roedd yn un o feirdd Cymraeg mawr yr ugeinfed ganrif.",
+  "person-gwenallt.html", "otd-gwenallt"),
+]
+
+CITES.update({
+    "otd-dwb-te-ellis": dict(short=("Dictionary of Welsh Biography", "Y Bywgraffiadur"),
+        t="Ellis, Thomas Edward (1859–1899), M.P. for Merioneth (1886–99) and chief Liberal whip (1894–5)",
+        by=("Dictionary of Welsh Biography, National Library of Wales", "Y Bywgraffiadur Cymreig, Llyfrgell Genedlaethol Cymru"),
+        note=("Born at Cynlas, Cefnddwysarn, 16 February 1859; died at Cannes, 5 April 1899, and buried at Cefnddwysarn. “His unsparing advocacy of Welsh interests marked him out as a leader in Welsh life.”",
+              "Ganed yng Nghynlas, Cefnddwysarn, 16 Chwefror 1859; bu farw yn Cannes, 5 Ebrill 1899, a’i gladdu yng Nghefnddwysarn. Gwnaeth ei ddadlau di-ildio dros fuddiannau Cymru ef yn arweinydd ym mywyd Cymru."),
+        url="https://biography.wales/article/s-ELLI-EDW-1859", url_cy="https://bywgraffiadur.cymru/article/s-ELLI-EDW-1859"),
+    "otd-te-ellis": _w("Thomas_Edward_Ellis", "T. E. Ellis",
+        "Leader of Cymru Fydd, the movement for Welsh home rule; MP for Merioneth from 1886; in an 1890 speech at Bala he called for a legislative assembly for Wales.",
+        "Arweinydd Cymru Fydd, y mudiad dros ymreolaeth i Gymru; AS Meirionnydd o 1886; mewn araith yn y Bala yn 1890 galwodd am gynulliad deddfwriaethol i Gymru."),
+})
+
+OTD += [
+ ("04-05", 1899, "died", "Tom Ellis", "Tom Ellis",
+  "Tom Ellis, member for Merioneth and leader of Cymru Fydd, dies at Cannes, aged 40. In 1890 he had called for a legislative assembly for Wales.",
+  "Bu farw Tom Ellis, aelod Meirionnydd ac arweinydd Cymru Fydd, yn Cannes, yn 40 oed. Yn 1890 roedd wedi galw am gynulliad deddfwriaethol i Gymru.",
+  "person-tom-ellis.html", "otd-dwb-te-ellis,otd-te-ellis"),
+]
+
+CITES.update({
+    "otd-dwb-griffith-john": dict(short=("Dictionary of Welsh Biography", "Y Bywgraffiadur"),
+        t="John, Griffith (1831–1912), missionary in China",
+        by=("Dictionary of Welsh Biography, National Library of Wales", "Y Bywgraffiadur Cymreig, Llyfrgell Genedlaethol Cymru"),
+        note=("“Born 14 December 1831 at Swansea”; founded a permanent base at Hankow; in 1885 published a New Testament in the Wen-li dialect of Chinese; died in London in 1912 and buried at Sketty.",
+              "Ganed 14 Rhagfyr 1831 yn Abertawe; sefydlodd ganolfan barhaol yn Hankow; yn 1885 cyhoeddodd Destament Newydd yn nhafodiaith Wen-li y Tsieinëeg; bu farw yn Llundain yn 1912 a’i gladdu yn Sgeti."),
+        url="https://biography.wales/article/s-JOHN-GRI-1831", url_cy="https://bywgraffiadur.cymru/article/s-JOHN-GRI-1831"),
+})
+
+OTD += [
+ ("12-14", 1831, "born", "Griffith John", "Griffith John",
+  "The missionary is born in Swansea. In China he made Hankow his base and gave the Chinese a New Testament in their own tongue.",
+  "Ganed y cenhadwr yn Abertawe. Yn Tsieina gwnaeth Hankow yn ganolfan iddo a rhoi Testament Newydd i’r Tsieineaid yn eu hiaith eu hunain.",
+  "", "otd-dwb-griffith-john"),
+]
+
+CITES.update({
+    "otd-dwb-driscoll": dict(short=("Dictionary of Welsh Biography", "Y Bywgraffiadur"), t="Driscoll, James (1880–1925), boxer",
+        by=("Dictionary of Welsh Biography, National Library of Wales", "Y Bywgraffiadur Cymreig, Llyfrgell Genedlaethol Cymru"),
+        note=("“Born at Newton, Cardiff, 15 December 1880, of Irish parentage”; came to prominence in 1906 as bantam-weight champion of England; died at Cardiff, 30 January 1925.",
+              "Ganed yn Newton, Caerdydd, 15 Rhagfyr 1880, o dras Wyddelig; daeth i amlygrwydd yn 1906 yn bencampwr pwysau bantam Lloegr; bu farw yng Nghaerdydd, 30 Ionawr 1925."),
+        url="https://biography.wales/article/s-DRIS-JAM-1880", url_cy="https://bywgraffiadur.cymru/article/s-DRIS-JAM-1880"),
+    "otd-dwb-hoddinott": dict(short=("Dictionary of Welsh Biography", "Y Bywgraffiadur"), t="Hoddinott, Alun (1929–2008), composer and teacher",
+        by=("Dictionary of Welsh Biography, National Library of Wales", "Y Bywgraffiadur Cymreig, Llyfrgell Genedlaethol Cymru"),
+        note=("“Alun Hoddinott was born in Bargoed on 11 August 1929”; he founded the Cardiff Festival of 20th century music; died in Swansea, 11 March 2008.",
+              "Ganed Alun Hoddinott ym Margod ar 11 Awst 1929; sefydlodd Ŵyl Gerddoriaeth yr 20fed ganrif Caerdydd; bu farw yn Abertawe, 11 Mawrth 2008."),
+        url="https://biography.wales/article/s10-HODD-ALU-1929", url_cy="https://bywgraffiadur.cymru/article/s10-HODD-ALU-1929"),
+})
+
+OTD += [
+ ("12-15", 1880, "born", "Peerless Jim Driscoll", "Jim Driscoll",
+  "The boxer is born in Newton, Cardiff, to an Irish family. Peerless Jim first made his name in 1906 as bantamweight champion.",
+  "Ganed y paffiwr yn Newton, Caerdydd, i deulu Gwyddelig. Gwnaeth ‘Peerless Jim’ ei enw gyntaf yn 1906 fel pencampwr pwysau bantam.",
+  "", "otd-dwb-driscoll"),
+ ("08-11", 1929, "born", "Alun Hoddinott", "Alun Hoddinott",
+  "The composer is born in Bargoed. He founded the Cardiff Festival of twentieth-century music and became one of the great composers of Wales.",
+  "Ganed y cyfansoddwr ym Margod. Sefydlodd Ŵyl Gerddoriaeth yr ugeinfed ganrif yng Nghaerdydd a daeth yn un o gyfansoddwyr mawr Cymru.",
+  "person-alun-hoddinott.html", "otd-dwb-hoddinott"),
+]
+
+CITES.update({
+    "otd-william-jones": _w("William_Jones_(philologist)", "William Jones (philologist)",
+        "Died in Calcutta, 27 April 1794; son of William Jones, the mathematician from Anglesey; grew up speaking English and Welsh; in 1786 proposed that Sanskrit, Greek and Latin “sprung from some common source”, often cited as the beginning of comparative linguistics.",
+        "Bu farw yn Calcutta, 27 Ebrill 1794; mab William Jones, y mathemategydd o Fôn; magwyd yn siarad Saesneg a Chymraeg; yn 1786 cynigiodd fod Sansgrit, Groeg a Lladin yn tarddu o ffynhonnell gyffredin, a ystyrir yn aml yn ddechrau ieithyddiaeth gymharol."),
+})
+
+OTD += [
+ ("04-27", 1794, "died", "Sir William Jones", "Syr William Jones",
+  "The scholar and judge dies in Calcutta. Son of the Anglesey mathematician who gave us π, he grew up with Welsh, and in 1786 showed that Sanskrit, Greek and Latin spring from one common source.",
+  "Bu farw’r ysgolhaig a’r barnwr yn Calcutta. Yn fab i’r mathemategydd o Fôn a roddodd π i ni, fe’i magwyd gyda’r Gymraeg, ac yn 1786 dangosodd fod Sansgrit, Groeg a Lladin yn tarddu o un ffynhonnell gyffredin.",
+  "person-william-jones-orientalist.html", "otd-william-jones"),
+]
+
+CITES.update({
+    "otd-maximus": _w("Magnus_Maximus", "Magnus Maximus",
+        "Died at Aquileia, 28 August 388. As Macsen Wledig, the earliest Welsh genealogies make him founding father of the dynasties of Powys, Gwynedd and Gwent; with Elen he is traditionally the father of Saint Peblig of Caernarfon.",
+        "Bu farw yn Aquileia, 28 Awst 388. Fel Macsen Wledig, mae’r achau Cymreig cynharaf yn ei wneud yn dad sylfaenydd llinachau Powys, Gwynedd a Gwent; gydag Elen mae’n draddodiadol yn dad i Sant Peblig o Gaernarfon."),
+    "otd-ieuan-glan": _w("Evan_Evans_(Ieuan_Glan_Geirionydd)", "Evan Evans (Ieuan Glan Geirionydd)",
+        "Born near Trefriw, 20 April 1795; died at Rhyl, 21 January 1855; buried at Trefriw. His hymns, such as “Mae ’nghyfeillion adre’n myned”, are “among the greatest in the Welsh language”.",
+        "Ganed ger Trefriw, 20 Ebrill 1795; bu farw yn y Rhyl, 21 Ionawr 1855; claddwyd yn Nhrefriw. Mae ei emynau, fel “Mae ’nghyfeillion adre’n myned”, ymhlith y mwyaf yn yr iaith Gymraeg."),
+})
+
+OTD += [
+ ("08-28", 388, "died", "Macsen Wledig", "Macsen Wledig",
+  "Magnus Maximus, Macsen Wledig of the Mabinogion, dies at Aquileia. The oldest Welsh genealogies make him the father of the royal lines of Powys, Gwynedd and Gwent.",
+  "Bu farw Magnus Maximus, Macsen Wledig y Mabinogion, yn Aquileia. Mae’r achau Cymreig hynaf yn ei wneud yn dad i linachau brenhinol Powys, Gwynedd a Gwent.",
+  "person-macsen-wledig.html", "otd-maximus"),
+ ("01-21", 1855, "died", "Ieuan Glan Geirionydd", "Ieuan Glan Geirionydd",
+  "The poet and hymn writer Evan Evans dies at Rhyl and is buried at Trefriw. His hymns are among the greatest in the Welsh language.",
+  "Bu farw’r bardd a’r emynydd Evan Evans yn y Rhyl a’i gladdu yn Nhrefriw. Mae ei emynau ymhlith y mwyaf yn yr iaith Gymraeg.",
+  "", "otd-ieuan-glan"),
+]
+
+CITES.update({
+    "otd-tuthill": _w("Battle_of_Tuthill", "Battle of Tuthill",
+        "Fought at Caernarfon on 2 November 1401, “the morrow of All Saints”; Adam of Usk writes that Owain “raised his standard, a golden dragon on a white field”.",
+        "Ymladdwyd yng Nghaernarfon ar 2 Tachwedd 1401, trannoeth Gŵyl yr Holl Saint; mae Adda o Frynbuga yn ysgrifennu i Owain godi ei faner, draig aur ar gae gwyn."),
+    "otd-mervyn-davies": _w("Mervyn_Davies_(rugby_union)", "Mervyn Davies (rugby union)",
+        "Born in Swansea, 9 December 1946; 38 consecutive caps at No. 8; captained Wales to the Grand Slam in 1976; played every Test on the Lions tours of 1971 and 1974; voted Greatest Ever Welsh Captain in 2002.",
+        "Ganed yn Abertawe, 9 Rhagfyr 1946; 38 cap yn olynol yn wythwr; capten Cymru pan enillwyd y Gamp Lawn yn 1976; chwaraeodd ym mhob prawf ar deithiau’r Llewod yn 1971 a 1974; dewiswyd yn Gapten Gorau Cymru erioed yn 2002."),
+    "otd-cooke": _w("Nicole_Cooke", "Nicole Cooke",
+        "Born in Swansea, 13 April 1983; won the Olympic road race in Beijing on 10 August 2008, the 200th gold for Great Britain in the modern Games.",
+        "Ganed yn Abertawe, 13 Ebrill 1983; enillodd y ras ffordd Olympaidd yn Beijing ar 10 Awst 2008, y 200fed medal aur i Brydain yn y Gemau modern."),
+})
+
+OTD += [
+ ("11-02", 1401, "ev", "The golden dragon at Tuthill", "Y ddraig aur yn Tuthill",
+  "Owain Glyndŵr attacks Caernarfon and raises his standard, a golden dragon on a white field, at Tuthill above the town.",
+  "Mae Owain Glyndŵr yn ymosod ar Gaernarfon ac yn codi ei faner, draig aur ar gae gwyn, yn Tuthill uwchben y dref.",
+  "person-owain-glyndwr.html", "otd-tuthill"),
+ ("12-09", 1946, "born", "Mervyn Davies", "Mervyn Davies",
+  "Mervyn Davies is born in Swansea. The great number eight captained Wales to the Grand Slam in 1976, and Welsh fans voted him their greatest captain ever.",
+  "Ganed Mervyn Davies yn Abertawe. Arweiniodd yr wythwr mawr Gymru i’r Gamp Lawn yn 1976, a dewisodd cefnogwyr Cymru ef yn gapten gorau erioed.",
+  "", "otd-mervyn-davies"),
+ ("08-10", 2008, "ev", "Nicole Cooke’s Olympic gold", "Aur Olympaidd Nicole Cooke",
+  "Nicole Cooke of Swansea wins the Olympic road race in Beijing: the 200th gold medal for Britain in the modern Games.",
+  "Mae Nicole Cooke o Abertawe yn ennill y ras ffordd Olympaidd yn Beijing: y 200fed medal aur i Brydain yn y Gemau modern.",
+  "person-nicole-cooke.html", "otd-cooke,wiki-cooke"),
+]
+
+CITES.update({
+    "otd-severn-tunnel": _w("Severn_Tunnel", "Severn Tunnel",
+        "The first passenger train ran through on 1 December 1886. At 7,008 metres it was the longest mainline railway tunnel in the United Kingdom for over a hundred years.",
+        "Rhedodd y trên teithwyr cyntaf drwyddo ar 1 Rhagfyr 1886. Yn 7,008 metr, hwn oedd y twnnel rheilffordd prif lein hiraf yn y Deyrnas Unedig am dros gan mlynedd."),
+})
+
+OTD += [
+ ("12-01", 1886, "ev", "The Severn Tunnel opens to passengers", "Twnnel Hafren yn agor i deithwyr",
+  "The first passenger train runs through the Severn Tunnel from Monmouthshire. At over seven kilometres, it stayed the longest mainline railway tunnel in the United Kingdom for more than a hundred years.",
+  "Mae’r trên teithwyr cyntaf yn rhedeg drwy Dwnnel Hafren o Sir Fynwy. Yn hwy na saith cilometr, hwn oedd y twnnel rheilffordd prif lein hiraf yn y Deyrnas Unedig am fwy na chan mlynedd.",
+  "", "otd-severn-tunnel"),
+]
+
+CITES.update({
+    "otd-billy-boston": _w("Billy_Boston", "Billy Boston",
+        "Born in Butetown, Cardiff, 6 August 1934; 478 tries in 488 games for Wigan, 571 in his career; the first non-white player picked for a Lions tour (1954), where he scored 36 tries in 18 games; knighted in 2025, the first rugby league player to be.",
+        "Ganed yn Butetown, Caerdydd, 6 Awst 1934; 478 cais mewn 488 gêm i Wigan, 571 yn ei yrfa; y chwaraewr croenddu cyntaf a ddewiswyd i daith y Llewod (1954), lle sgoriodd 36 cais mewn 18 gêm; urddwyd yn farchog yn 2025, y chwaraewr rygbi’r gynghrair cyntaf i’w urddo."),
+    "otd-llanidloes-1839": _w("1839_in_Wales", "1839 in Wales",
+        "30 April: Chartists in Llanidloes take control of the town for five days.",
+        "30 Ebrill: Siartwyr yn Llanidloes yn cymryd rheolaeth o’r dref am bum diwrnod."),
+    "otd-cardiff-city-hall": _w("City_Hall,_Cardiff", "City Hall, Cardiff",
+        "Officially opened by Lord Bute on 29 October 1906; Cardiff received its city charter in 1905 while the building was going up.",
+        "Agorwyd yn swyddogol gan Arglwydd Bute ar 29 Hydref 1906; cafodd Caerdydd ei siarter dinas yn 1905 tra oedd yr adeilad yn cael ei godi."),
+})
+
+OTD += [
+ ("08-06", 1934, "born", "Billy Boston", "Billy Boston",
+  "Billy Boston is born in Butetown, Cardiff. One of rugby league’s greatest players, he scored 478 tries for Wigan and became the first rugby league player to be knighted.",
+  "Ganed Billy Boston yn Butetown, Caerdydd. Yn un o chwaraewyr mwyaf rygbi’r gynghrair, sgoriodd 478 cais i Wigan a dod y chwaraewr rygbi’r gynghrair cyntaf i’w urddo’n farchog.",
+  "", "otd-billy-boston"),
+ ("04-30", 1839, "ev", "The Chartists of Llanidloes", "Siartwyr Llanidloes",
+  "Chartists in Llanidloes, standing up for the vote for working men, take control of the town and hold it for five days.",
+  "Mae Siartwyr Llanidloes, yn sefyll dros y bleidlais i weithwyr, yn cymryd rheolaeth o’r dref ac yn ei dal am bum diwrnod.",
+  "", "otd-llanidloes-1839"),
+ ("10-29", 1906, "ev", "Cardiff City Hall opens", "Agor Neuadd y Ddinas, Caerdydd",
+  "Lord Bute opens the new City Hall in Cathays Park, built as Cardiff grew into a city: it had received its city charter the year before.",
+  "Mae Arglwydd Bute yn agor Neuadd y Ddinas newydd ym Mharc Cathays, a godwyd wrth i Gaerdydd dyfu’n ddinas: roedd wedi cael ei siarter dinas y flwyddyn cynt.",
+  "", "otd-cardiff-city-hall"),
+]
+
+CITES.update({
+    "otd-mynyddog": dict(short=("Dictionary of Welsh Biography", "Y Bywgraffiadur"), t="DAVIES, RICHARD (Mynyddog; 1833 - 1877)",
+        by=("Dictionary of Welsh Biography, National Library of Wales", "Y Bywgraffiadur Cymreig, Llyfrgell Genedlaethol Cymru"),
+        note=("Born at Dôl Lydan, Llanbrynmair, 10 January 1833; his tuneful, simple songs about the joys and hardships of ordinary people were sung at concerts across Wales; much in demand as an eisteddfod conductor.",
+              "Ganed yn Nôl Lydan, Llanbrynmair, 10 Ionawr 1833; canwyd ei ganeuon syml, swynol am lawenydd a chaledi pobl gyffredin mewn cyngherddau drwy Gymru; roedd galw mawr amdano fel arweinydd eisteddfodau."),
+        url="https://biography.wales/article/s-DAVI-RIC-1833", url_cy="https://bywgraffiadur.cymru/article/s-DAVI-RIC-1833", lang="en"),
+    "otd-lady-rhondda": dict(short=("Dictionary of Welsh Biography", "Y Bywgraffiadur"), t="THOMAS, MARGARET HAIG, Viscountess Rhondda (1883 - 1958)",
+        by=("Dictionary of Welsh Biography, National Library of Wales", "Y Bywgraffiadur Cymreig, Llyfrgell Genedlaethol Cymru"),
+        note=("Born 12 June 1883; founded the weekly Time and Tide in 1920; campaigned for women’s votes; in 1926 became the first woman president of the Institute of Directors; ‘The Persistent Peeress’ for her fight to sit in the House of Lords.",
+              "Ganed 12 Mehefin 1883; sefydlodd yr wythnosolyn Time and Tide yn 1920; ymgyrchodd dros bleidlais i fenywod; yn 1926 daeth yn llywydd benywaidd cyntaf Sefydliad y Cyfarwyddwyr; ‘The Persistent Peeress’ am ei brwydr i eistedd yn Nhŷ’r Arglwyddi."),
+        url="https://biography.wales/article/s12-THOM-HAI-1883", url_cy="https://bywgraffiadur.cymru/article/s12-THOM-HAI-1883", lang="en"),
+})
+
+OTD += [
+ ("01-10", 1833, "born", "Mynyddog", "Mynyddog",
+  "Richard Davies, the poet Mynyddog, is born at Llanbrynmair. His warm, tuneful songs about the joys and hardships of ordinary people were sung at concerts all over Wales, and he was the best-loved eisteddfod conductor of his day.",
+  "Ganed Richard Davies, y bardd Mynyddog, yn Llanbrynmair. Canwyd ei ganeuon cynnes, swynol am lawenydd a chaledi pobl gyffredin mewn cyngherddau drwy Gymru gyfan, ac roedd galw mawr amdano fel arweinydd eisteddfodau.",
+  "", "otd-mynyddog"),
+ ("06-12", 1883, "born", "Lady Rhondda", "Arglwyddes Rhondda",
+  "Margaret Haig Thomas, Lady Rhondda, is born. She fought for women’s votes, founded the weekly Time and Tide and became the first woman to lead the Institute of Directors.",
+  "Ganed Margaret Haig Thomas, Arglwyddes Rhondda. Brwydrodd dros bleidlais i fenywod, sefydlodd yr wythnosolyn Time and Tide a daeth y fenyw gyntaf i arwain Sefydliad y Cyfarwyddwyr.",
+  "person-lady-rhondda.html", "otd-lady-rhondda"),
+]
+
+CITES.update({
+    "otd-1978-slam": dict(short=("Welsh Sports Hall of Fame", "Oriel Anfarwolion Chwaraeon Cymru"), t="Grand Slam ending for Edwards and Bennett",
+        by=("Welsh Sports Hall of Fame", "Oriel Anfarwolion Chwaraeon Cymru"),
+        note=("18 March 1978, Cardiff: the Grand Slam win over France was the last Wales match for both Gareth Edwards (53 caps in a row, a record 20 tries) and Phil Bennett, who scored two tries and a conversion.",
+              "18 Mawrth 1978, Caerdydd: y fuddugoliaeth dros Ffrainc i ennill y Gamp Lawn oedd gêm olaf Gareth Edwards (53 cap yn olynol, record o 20 cais) a Phil Bennett, a sgoriodd ddau gais a throsiad."),
+        url="https://welsh-sports-hall-of-fame.wales/?p=912", lang="en"),
+    "otd-1978-five-nations": _w("1978_Five_Nations_Championship", "1978 Five Nations Championship",
+        "Having won all four of their games, Wales won the Grand Slam, as well as the Triple Crown.",
+        "Ar ôl ennill eu pedair gêm, enillodd Cymru’r Gamp Lawn, yn ogystal â’r Goron Driphlyg."),
+})
+
+OTD += [
+ ("03-18", 1978, "ev", "The 1978 Grand Slam", "Camp Lawn 1978",
+  "Wales beat France in Cardiff to win the Grand Slam. It was the last game for Wales of two of the greatest, Gareth Edwards and Phil Bennett, and Bennett scored two tries.",
+  "Mae Cymru’n curo Ffrainc yng Nghaerdydd i ennill y Gamp Lawn. Hon oedd gêm olaf dau o’r mawrion dros Gymru, Gareth Edwards a Phil Bennett, a sgoriodd Bennett ddau gais.",
+  "person-gareth-edwards.html", "otd-1978-slam,otd-1978-five-nations"),
+]
+
+CITES.update({
+    "otd-alf-sherwood": _w("Alf_Sherwood", "Alf Sherwood",
+        "Born in Aberaman, 13 November 1923; 41 caps for Wales (1946–1956), the first on his 23rd birthday; captained Wales to the 1955 win over England; Stanley Matthews called him the most difficult opponent he ever played against.",
+        "Ganed yn Aberaman, 13 Tachwedd 1923; 41 cap i Gymru (1946–1956), y cyntaf ar ei ben-blwydd yn 23 oed; capten Cymru pan gurwyd Lloegr yn 1955; dywedodd Stanley Matthews mai ef oedd y gwrthwynebydd anoddaf a wynebodd erioed."),
+})
+
+OTD += [
+ ("11-13", 1923, "born", "Alf Sherwood", "Alf Sherwood",
+  "The footballer Alf Sherwood is born in Aberaman. He won 41 caps for Wales, captained them to a famous win over England in 1955, and Stanley Matthews called him the hardest opponent he ever faced.",
+  "Ganed y pêl-droediwr Alf Sherwood yn Aberaman. Enillodd 41 cap i Gymru, bu’n gapten pan gurwyd Lloegr yn 1955, a dywedodd Stanley Matthews mai ef oedd y gwrthwynebydd anoddaf a wynebodd erioed.",
+  "", "otd-alf-sherwood"),
+]
+
+CITES.update({
+    "otd-john-houghton": _w("John_T._Houghton", "John T. Houghton",
+        "Born in Dyserth, 30 December 1931; Director General of the Met Office 1983–1991 and founder of the Hadley Centre; co-chaired the scientific working group of the Intergovernmental Panel on Climate Change and was lead editor of its first three reports; the IPCC shared the 2007 Nobel Peace Prize.",
+        "Ganed yn Nyserth, 30 Rhagfyr 1931; Cyfarwyddwr Cyffredinol y Swyddfa Dywydd 1983–1991 a sylfaenydd Canolfan Hadley; cyd-gadeirydd gweithgor gwyddonol y Panel Rhynglywodraethol ar Newid Hinsawdd a phrif olygydd ei dri adroddiad cyntaf; rhannodd y Panel Wobr Heddwch Nobel 2007."),
+})
+
+OTD += [
+ ("12-30", 1931, "born", "Sir John Houghton", "Syr John Houghton",
+  "The scientist John Houghton is born in Dyserth. He led the Met Office, founded the Hadley Centre and edited the first three world climate reports of the IPCC, which shared the Nobel Peace Prize in 2007.",
+  "Ganed y gwyddonydd John Houghton yn Nyserth. Arweiniodd y Swyddfa Dywydd, sefydlodd Ganolfan Hadley a golygodd dri adroddiad hinsawdd byd-eang cyntaf yr IPCC, a rannodd Wobr Heddwch Nobel yn 2007.",
+  "", "otd-john-houghton"),
+]
+
+CITES.update({
+    "otd-morgan-john-rhys": dict(short=("Dictionary of Welsh Biography", "Y Bywgraffiadur"),
+        t="RHYS, MORGAN JOHN (Morgan ab Ioan Rhus; 1760 - 1804), Baptist minister, author, and American settler",
+        by=("Dictionary of Welsh Biography, National Library of Wales", "Y Bywgraffiadur Cymreig, Llyfrgell Genedlaethol Cymru"),
+        note=("Born 8 December 1760 at Graddfa, near Llanbradach; launched Y Cylchgrawn Cymraeg in 1793; campaigned against the slave trade; in America bought land he named Cambria and founded the town of Beulah.",
+              "Ganed 8 Rhagfyr 1760 yn y Graddfa, ger Llanbradach; lansiodd Y Cylchgrawn Cymraeg yn 1793; ymgyrchodd yn erbyn y fasnach gaethweision; yn America prynodd dir a enwodd yn Cambria a sefydlodd dref Beulah."),
+        url="https://biography.wales/article/s-RHYS-JOH-1760", url_cy="https://bywgraffiadur.cymru/article/s-RHYS-JOH-1760"),
+})
+
+OTD += [
+ ("12-08", 1760, "born", "Morgan John Rhys", "Morgan John Rhys",
+  "Morgan John Rhys is born near Llanbradach. The Baptist minister started Y Cylchgrawn Cymraeg, spoke out against slavery, and in America founded a Welsh settlement he named Cambria.",
+  "Ganed Morgan John Rhys ger Llanbradach. Dechreuodd y gweinidog gyda’r Bedyddwyr Y Cylchgrawn Cymraeg, siaradodd yn erbyn caethwasiaeth, ac yn America sefydlodd wladfa Gymreig a enwodd yn Cambria.",
+  "person-morgan-john-rhys.html", "otd-morgan-john-rhys"),
+]
+
+CITES.update({
+    "otd-ann-griffiths": dict(short=("Dictionary of Welsh Biography", "Y Bywgraffiadur"),
+        t="GRIFFITHS, ANN (1776 - 1805), hymn-writer",
+        by=("Dictionary of Welsh Biography, National Library of Wales", "Y Bywgraffiadur Cymreig, Llyfrgell Genedlaethol Cymru"),
+        note=("Born at Dolwar Fach, Llanfihangel-yng-Ngwynfa, in April 1776; died in August 1805 and was buried at Llanfihangel on 12 August. Her hymns are marked by “a wealth of scriptural allusion, by deep religious and mystical feeling, and by bold metaphors”.",
+              "Ganed yn Nolwar Fach, Llanfihangel-yng-Ngwynfa, yn Ebrill 1776; bu farw yn Awst 1805 a’i chladdu yn Llanfihangel ar 12 Awst. Nodweddir ei hemynau gan gyfoeth o gyfeiriadau ysgrythurol, teimlad crefyddol a chyfriniol dwfn, a throsiadau beiddgar."),
+        url="https://biography.wales/article/s-GRIF-ANN-1776", url_cy="https://bywgraffiadur.cymru/article/s-GRIF-ANN-1776"),
+})
+
+OTD += [
+ ("08-12", 1805, "died", "Ann Griffiths is laid to rest", "Claddu Ann Griffiths",
+  "The hymn writer Ann Griffiths of Dolwar Fach is buried at Llanfihangel-yng-Ngwynfa, aged 29. Her hymns are full of the Bible, of deep, mystical feeling and of bold images.",
+  "Claddwyd yr emynyddes Ann Griffiths o Ddolwar Fach yn Llanfihangel-yng-Ngwynfa, yn 29 oed. Mae ei hemynau’n llawn o’r Beibl, o deimlad dwfn, cyfriniol ac o ddelweddau beiddgar.",
+  "person-ann-griffiths.html", "otd-ann-griffiths"),
+]
+
+CITES.update({
+    "otd-cewydd": _w("Cewydd", "Cewydd",
+        "His feast day is 1 July; South Wales tradition keeps 15 July as Dygwyl Cewydd, the Feast of St Cewydd. He is the Welsh ‘Rain Saint’: rain on his day was said to last forty days. Churches and places remember him from Anglesey to Aberedw, Disserth and Llangewydd.",
+        "Ei ŵyl yw 1 Gorffennaf; mae traddodiad y De yn cadw 15 Gorffennaf yn Ddygwyl Cewydd. Ef yw ‘Sant y Glaw’ Cymru: dywedid y byddai glaw ar ei ddydd yn para deugain diwrnod. Mae eglwysi a lleoedd yn ei gofio o Fôn i Aberedw, Diserth a Llangewydd."),
+})
+
+OTD += [
+ ("07-15", None, "custom", "Dygwyl Cewydd", "Dygwyl Cewydd",
+  "In South Wales tradition this is Dygwyl Cewydd, the feast of Saint Cewydd, the Welsh Rain Saint. If it rained today, people said, it would rain for forty days.",
+  "Yn nhraddodiad y De dyma Ddygwyl Cewydd, gŵyl Sant Cewydd, Sant y Glaw. Os oedd hi’n bwrw heddiw, meddai pobl, byddai’n bwrw am ddeugain diwrnod.",
+  "", "otd-cewydd"),
+]
+
+CITES.update({
+    "otd-welsh-saints": _w("List_of_Welsh_saints", "List of Welsh saints",
+        "Gives the traditional feast days of the saints of Wales, among them Mwrog, “24 or 26 September (trad.)”.",
+        "Yn rhoi gwyliau traddodiadol seintiau Cymru, yn eu plith Mwrog, “24 neu 26 Medi (trad.)”."),
+    "otd-llanfwrog": dict(short=("Dyffryn Clwyd churches", "Eglwysi Dyffryn Clwyd"), t="St Mwrog, Llanfwrog",
+        by=("Church in Wales, Dyffryn Clwyd", "Yr Eglwys yng Nghymru, Dyffryn Clwyd"),
+        note=("Mwrog “first proclaimed the Gospel in this part of the world”; worship has gone on at Llanfwrog, by Ruthin, since the 6th century, and parts of the church are 13th-century.",
+              "Mwrog a gyhoeddodd yr Efengyl gyntaf yn yr ardal hon; mae addoli wedi bod yn Llanfwrog, ger Rhuthun, ers y 6ed ganrif, ac mae rhannau o’r eglwys o’r 13eg ganrif."),
+        url="https://dyffrynclwyd.co.uk/our-church-buildings/st-mwrog-llanfwrog", lang="en"),
+})
+
+OTD += [
+ ("09-24", None, "feast", "Saint Mwrog", "Sant Mwrog",
+  "A traditional feast day of Mwrog, who first preached the Gospel in the Vale of Clwyd. People have worshipped at his church, Llanfwrog by Ruthin, since the 6th century.",
+  "Un o wyliau traddodiadol Mwrog, a bregethodd yr Efengyl gyntaf yn Nyffryn Clwyd. Mae pobl wedi addoli yn ei eglwys, Llanfwrog ger Rhuthun, ers y 6ed ganrif.",
+  "", "otd-welsh-saints,otd-llanfwrog"),
+]
+
+CITES.update({
+    "otd-bidofydd": _w("Bidofydd", "Bidofydd",
+        "A 6th-century saint of Wales, often associated with Saint Fidalis. The List of Welsh saints gives the feast of both as “26 April (trad.)”.",
+        "Sant o Gymru yn y 6ed ganrif, a gysylltir yn aml â Sant Fidalis. Mae Rhestr Seintiau Cymru yn rhoi gŵyl y ddau fel “26 Ebrill (trad.)”."),
+})
+
+OTD += [
+ ("04-26", None, "feast", "Saints Bidofydd and Fidalis", "Seintiau Bidofydd a Fidalis",
+  "The traditional feast day of Bidofydd, a saint of 6th-century Wales, and of Fidalis, with whom he is often remembered.",
+  "Gŵyl draddodiadol Bidofydd, sant yng Nghymru’r 6ed ganrif, a Fidalis, y cofir amdano’n aml gydag ef.",
+  "", "otd-bidofydd,otd-welsh-saints"),
+]
+
+CITES.update({
+    "otd-gwilym-gwent": dict(short=("Dictionary of Welsh Biography", "Y Bywgraffiadur"),
+        t="WILLIAMS, WILLIAM AUBREY (Gwilym Gwent; 1834 - 1891), musician",
+        by=("Dictionary of Welsh Biography, National Library of Wales", "Y Bywgraffiadur Cymreig, Llyfrgell Genedlaethol Cymru"),
+        note=("Born at Tredegar, 28 November 1834 (after Blackwell); “probably the most popular and possibly one of the most prolific composers in Wales in his time”; his part-songs such as ‘Yr Haf’ were widely sung. He emigrated to Plymouth, Pennsylvania.",
+              "Ganed yn Nhredegar, 28 Tachwedd 1834 (yn ôl Blackwell); y cyfansoddwr mwyaf poblogaidd yng Nghymru yn ei ddydd, mae’n debyg, ac un o’r mwyaf toreithiog; canwyd ei ranganau fel ‘Yr Haf’ yn eang. Ymfudodd i Plymouth, Pennsylvania."),
+        url="https://biography.wales/article/s-WILL-AUB-1834", url_cy="https://bywgraffiadur.cymru/article/s-WILL-AUB-1834"),
+    "otd-gwilym-gwent-w": _w("Gwilym_Gwent", "Gwilym Gwent",
+        "Born in Tredegar, 28 November 1834; composer of part-songs, anthems and hymn tunes, among them ‘Yr Haf’, ‘Y Gwanwyn’ and ‘Y Clychau’; called the “Mozart of the Mines”.",
+        "Ganed yn Nhredegar, 28 Tachwedd 1834; cyfansoddwr rhanganau, anthemau ac emyn-donau, yn eu plith ‘Yr Haf’, ‘Y Gwanwyn’ ac ‘Y Clychau’; fe’i galwyd yn “Mozart y Pyllau”."),
+})
+
+OTD += [
+ ("11-28", 1834, "born", "Gwilym Gwent", "Gwilym Gwent",
+  "The composer William Aubrey Williams, Gwilym Gwent, is born at Tredegar. Perhaps the most popular composer in Wales in his day, his part-songs such as ‘Yr Haf’ were sung everywhere, and he was called the Mozart of the Mines.",
+  "Ganed y cyfansoddwr William Aubrey Williams, Gwilym Gwent, yn Nhredegar. Y cyfansoddwr mwyaf poblogaidd yng Nghymru yn ei ddydd, mae’n debyg; canwyd ei ranganau fel ‘Yr Haf’ ym mhobman, a’i alw’n Mozart y Pyllau.",
+  "", "otd-gwilym-gwent,otd-gwilym-gwent-w"),
+]

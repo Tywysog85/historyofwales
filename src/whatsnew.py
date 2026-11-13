@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-13", "Every day of the year in On this day", "Pob diwrnod o’r flwyddyn yn Ar y dydd hwn",
+     "On this day now has an entry of its own for every day of the year, even 29 February: 126 new births, deaths, saints’ days and events, each with its source beside it.",
+     "Mae gan Ar y dydd hwn gofnod ei hun ar gyfer pob diwrnod o’r flwyddyn bellach, hyd yn oed 29 Chwefror: 126 o enedigaethau, marwolaethau, gwyliau seintiau a digwyddiadau newydd, pob un â’i ffynhonnell wrth ei ochr.",
+     "onthisday.html"),
     ("2026-11-13", "Pictures for 196 more people", "Lluniau i 196 yn rhagor o bobl",
      "196 people who had no picture now have one, with credits: portraits, seals, statues, graves and the manuscripts their stories survive in, such as the Red Book of Hergest. 461 of the 516 people pages now have a picture of their own.",
      "Mae gan 196 o bobl nad oedd llun ganddynt un nawr, gyda chydnabyddiaeth: portreadau, seliau, cerfluniau, beddau a’r llawysgrifau lle mae eu hanes wedi goroesi, fel Llyfr Coch Hergest. Mae gan 461 o’r 516 tudalen pobl lun eu hunain nawr.",
