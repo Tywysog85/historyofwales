@@ -34,6 +34,7 @@ import places3 as PL3  # noqa: E402  (historic places of importance: their peopl
 import visit as VS  # noqa: E402  (the Visiting box on place pages and the map card, src/visit.py)
 import pictures as PX  # noqa: E402  (a real picture at the top of every page and on its card: src/pictures.py)
 import thumbs as TH  # noqa: E402  (small copies of pictures for the cards: src/thumbs.py)
+import panels as PN  # noqa: E402  (picture backgrounds for the plain panels: src/panels.py)
 PX.check()
 L.TEACH.update(AG.TEACH)
 import ages9 as AG9
@@ -115,7 +116,7 @@ def e(s):
 head = read("head.html")
 body = read("body.html")
 app = read("app.js")
-extra_css = read("extra.css") + read("v6.css") + read("onthisday.css") + read("people2.css")
+extra_css = read("extra.css") + read("v6.css") + read("onthisday.css") + read("people2.css") + PN.css()
 geo = json.loads(read("geo", "map.json"))
 la = json.loads(read("geo", "la.json"))
 
@@ -1073,7 +1074,8 @@ def visit_box(pl):
          f'<a href="map.html#lle-{pid}">{bi("On our map", "Ar ein map")} →</a>')
     rows += f'<div><dt>{bi("Getting there", "Cyrraedd")}</dt><dd>{where}</dd></div>'
     note = f'<p class="visit-note">{bi(*v["note"])}</p>' if v.get("note") else ""
-    return (f'<aside class="visit-box" aria-label="Visiting / Ymweld"><h2>{bi("Visiting", "Ymweld")}</h2><dl>{rows}</dl>{note}'
+    pic = card_pic(f"place-{pid}.html")  # the place's own photo behind the box (src/panels.py)
+    return (f'<aside class="visit-box{" pbg" if pic else ""}" aria-label="Visiting / Ymweld"{PN.bg_style(pic[0]) if pic else ""}><h2>{bi("Visiting", "Ymweld")}</h2><dl>{rows}</dl>{note}'
             f'<p class="visit-small">{bi("Check the official page before you travel: times change, and some sites close in winter.", "Edrychwch ar y dudalen swyddogol cyn teithio: mae amseroedd yn newid, ac mae rhai safleoedd yn cau yn y gaeaf.")}</p></aside>')
 
 
@@ -2239,7 +2241,11 @@ def triads_page():
 
 
 def symbols_page():
-    cards = "".join(f'<article class="sym rv" id="{s[0]}" data-era="{D.ERAS[i % len(D.ERAS)]["id"]}"><span class="sym-n">{i + 1:02d}</span><h2>{bi(s[3], s[1])}</h2>'
+    sym_pic = {"dragon": "g:land-dinas-emrys", "harp": "g:trea-welsh-harp", "lovespoon": "g:trea-lovespoon", "dwynwen": "g:land-llanddwyn",
+               "choir": "g:holy-tabernacl", "eisteddfod": "g:place-cardigan"}
+    if card_pic("person-lady-llanover.html"):
+        sym_pic["costume"] = card_pic("person-lady-llanover.html")[0]  # Lady Llanover, who championed the Welsh costume
+    cards = "".join(f'<article class="sym rv pbg" id="{s[0]}" data-era="{D.ERAS[i % len(D.ERAS)]["id"]}"{PN.bg_style(sym_pic.get(s[0], PN.LAND[i % len(PN.LAND)]))}><span class="sym-n">{i + 1:02d}</span><h2>{bi(s[3], s[1])}</h2>'
                     + (f'<p class="sym-alt">{bi(s[1], s[3])}</p>' if s[1] != s[3] else "") + f'<p>{bi(s[4], s[5])}</p></article>' for i, s in enumerate(F.SYMBOLS))
     main = (hero("modern", f'<a href="index.html">{SITE}</a>', "harp", "Symbols and traditions", "Symbolau a thraddodiadau", "The dragon, the leek and the grey mare", "Y ddraig, y genhinen a’r Fari Lwyd",
                  "Where the emblems and customs of Wales come from. Some are a thousand years old; some are younger than they look.", "O ble daw arwyddluniau ac arferion Cymru. Mae rhai’n fil o flynyddoedd oed; mae rhai’n iau nag y maent yn edrych.", art="dragons")

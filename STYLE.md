@@ -43,6 +43,7 @@ The gap between home page sections is one setting, `--home-gap` near the end of 
 - **Never draw dragons by hand.** The flag dragon is the real flag artwork (`DSVG` in `src/app.js`), and the red and white dragons elsewhere are pictures of the 3D dragon. Hand-drawn dragons were rejected as fake.
 - Drawn scenes from `src/art.py` are only a stand-in where no picture exists yet.
 - **A picture on every card** (Ifan, 13 November 2026). A card shows the picture of the page it opens (`card_pic()` in `build.py`), never the stand-in picture of an age. People cards: the picture across the top (down the left side on phones); with no likeness, the age's picture dimmed behind their initials. Tiles: the photo where the drawing was. List rows: a small square at the side. Use the small copies (`src/thumbs.py`), `loading="lazy"` and `alt=""`. See SKILLS.md, "A picture on every card".
+- **Picture backgrounds on plain panels** (Ifan, 13 November 2026): a fitting real picture under a dark veil (`src/panels.py`), never so light that the words get hard to read. Side-by-side panels take turns from a set of pictures, never the same one repeated.
 
 ## Movement
 
