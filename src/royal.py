@@ -558,6 +558,16 @@ NORTH = [
    R(570.1, "d. 580", "Gwrgi ab Eliffer"),
   ]),
 ]
+# the Men of the North who have pages of their own (src/hen_ogledd.py and the earlier person pages)
+NORTH_PAGES = {"Coel Hen": "coel-hen", "Cynfarch ap Meirchion": "cynfarch-oer", "Urien Rheged": "urien-rheged", "Llywarch Hen": "llywarch-hen",
+               "Owain ab Urien": "owain-ab-urien", "Rhun ab Urien": "rhun-ab-urien", "Cunedda Wledig": "cunedda", "Clydno Eidyn": "clydno-eidyn",
+               "Mynyddog Mwynfawr": "mynyddog-mwynfawr", "Dyfnwal Hen": "dyfnwal-hen", "Rhydderch Hael": "rhydderch-hael", "Owain ap Beli": "owain-ap-beli",
+               "Arthgal ap Dyfnwal": "arthgal", "Owain Foel": "owain-foel", "Gwallawg ap Lleenog": "gwallog", "Ceredig ap Gwallawg": "ceredig-ap-gwallog",
+               "Eliffer Gosgorddfawr": "eliffer-gosgorddfawr", "Peredur ab Eliffer": "peredur"}
+for _realm in NORTH:
+    for _r in _realm["rulers"]:
+        if _r.get("k") == "r" and _r["name"] in NORTH_PAGES:
+            _r["link"], _r["key"] = P(NORTH_PAGES[_r["name"]]), True
 REALMS += NORTH
 
 NORTH_INTRO = dict(
