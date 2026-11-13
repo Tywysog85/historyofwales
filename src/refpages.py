@@ -400,7 +400,7 @@ def battles_page(have):
         where = "" if b["geo"] else f'<span class="bt-nomap"> · {bi("not on the map", "nid ar y map")}</span>'
         vs = "".join(f'<span>{bi(*BT.AGAINST[v])}</span>' for v in b["vs"])
         cards += (f'<article class="bt-card bt-{b["win"]}" id="b-{b["id"]}" data-ref-item data-vs="{" ".join(b["vs"])}" style="--c:{g["COL"][b["era"]]}">'
-                  f'<p class="bt-date">{bi(b["dEn"], b["dCy"])} · <span class="bt-k">{bi(*WIN[b["win"]])}</span>{where}{g["new_tag"]("battle", b["id"])}</p>'
+                  f'{g["see_pic"](b["see"], "castle")}<p class="bt-date">{bi(b["dEn"], b["dCy"])} · <span class="bt-k">{bi(*WIN[b["win"]])}</span>{where}{g["new_tag"]("battle", b["id"])}</p>'
                   f'<h3>{bi(b["en"], b["cy"])}</h3><p class="bt-vs"><b>{bi("Against", "Yn erbyn")}:</b> {vs}</p><p class="bt-side">{bi(b["sEn"], b["sCy"])}</p><p>{bi(b["tEn"], b["tCy"])}</p>{link_chips(b["see"], have)}</article>')
     legend = (f'<ul class="bt-legend"><li class="bt-w">{bi(*WIN["w"])}</li><li class="bt-l">{bi(*WIN["l"])}</li><li class="bt-o">{bi(*WIN["o"])}</li></ul>')
     n = len(rows)
@@ -479,7 +479,7 @@ def documents_page(have):
     cards = ""
     for d in rows:
         cards += (f'<article class="dc-card" id="doc-{d["id"]}" data-ref-item style="--c:{g["COL"][d["era"]]}">'
-                  f'<p class="bt-date">{bi(d["dEn"], d["dCy"])}{g["new_tag"]("doc", d["id"])}</p><h3>{bi(d["en"], d["cy"])}</h3><p>{bi(d["aEn"], d["aCy"])}</p>'
+                  f'{g["see_pic"](d["see"], "book")}<p class="bt-date">{bi(d["dEn"], d["dCy"])}{g["new_tag"]("doc", d["id"])}</p><h3>{bi(d["en"], d["cy"])}</h3><p>{bi(d["aEn"], d["aCy"])}</p>'
                   f'{doc_words(d)}<p><b>{bi("Why it matters", "Pam mae’n bwysig")}:</b> {bi(d["wEn"], d["wCy"])}</p>'
                   f'<p class="dc-kept">{bi("Where to find it", "Ble i’w chael")}: {bi(d["kEn"], d["kCy"])}</p>{link_chips(d["see"], have)}</article>')
     n = len(rows)
@@ -545,7 +545,7 @@ def topic_page(t, have):
     out = g["section"](body, top=True)
     ppl = [person[s] for s in t["people"] if s in person and exists(f"person-{s}.html", have)]
     if ppl:
-        cards = "".join(f'<a href="person-{p[0]}.html" data-era="{p[1]}"><b>{bi(p[3], p[4])}</b><span class="dt">{g["e"](p[2])}</span><span class="d">{bi(p[5], p[6])}</span></a>' for p in ppl)
+        cards = "".join(f'<a href="person-{p[0]}.html" data-era="{p[1]}">{g["see_pic"]([f"person-{p[0]}.html"])}<b>{bi(p[3], p[4])}</b><span class="dt">{g["e"](p[2])}</span><span class="d">{bi(p[5], p[6])}</span></a>' for p in ppl)
         out += g["section"](f'<div class="tp-people">{cards}</div>', "People", "Pobl")
     evs = _topic_events(t)
     if evs:

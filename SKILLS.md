@@ -67,7 +67,7 @@ This file collects the techniques and lessons from building History of Wales. Ad
 ## Building the site
 
 ### Static site, no framework
-- Content lives in Python data files in `src/` (the table in `README.md` says which file holds what). `build.py` turns them into about 1,900 pages (every page in English and again in Welsh under `cy/`).
+- Content lives in Python data files in `src/` (the table in `README.md` says which file holds what). `build.py` turns them into about 2,600 pages (every page in English and again in Welsh under `cy/`).
 - The home page and the timeline page share one script (`src/app.js`). The script checks which parts exist on the page (the timeline, the hero sky, the map) and skips the rest.
 
 ### Bilingual pages (English / Cymraeg)
@@ -364,9 +364,9 @@ Learnt while expanding Arthur's page (`src/arthur.py`).
 - Quick check after adding people: `python3 -c "import sys; sys.path.insert(0,'src'); import data, people2; print([p[0] for p in data.PEOPLE if p[0] not in people2.FIELD])"` must print `[]`.
 - Person photos: Wikipedia, Wikimedia and Wikidata are blocked from the cloud, so look them up on the owner's Mini-PC through Remote Control (Node `fetch` or PowerShell). Ask the Wikipedia API for each article's free lead image (`action=query&prop=pageimages&piprop=name&pilicense=free&redirects=1`, up to 40 titles a call), then ask the Commons API for each file's credit (`prop=imageinfo&iiprop=extmetadata&iiextmetadatafilter=Artist|LicenseShortName`). Commons answers 429 to a bare User-Agent: send one with the site address, such as `HistoryOfWalesSite/1.0 (https://historyofwales.cymru)`, and pause a second between calls. Put the results in `src/photos2.py` as slug → (file, caption EN, caption CY, credit); `photos.py` merges them, and the credit prints after "Photo: Wikimedia Commons". A lead image is not always the person (a map, a coat of arms, a grave, an album cover): skip it, or write a caption that says what it shows.
 
-### The four notes in the top folder (November 2026)
+### The notes in the top folder (November 2026)
 
-`README.md` says what the site is and where things live. `EDITORIAL.md` holds the owner's rules for how it is written. `TODO.md` lists the open jobs. `SKILLS.md` is this file. The owner wants them kept clean and tidy: when something changes, edit the line that is there instead of adding a new one at the bottom, delete finished jobs from `TODO.md`, and keep the counts in `README.md` true.
+`README.md` says what the site is and where things live. `EDITORIAL.md` holds the owner's rules for how it is written. `STYLE.md` says how it looks, and `SOURCES.md` how facts are checked and cited. `TODO.md` lists the open jobs. `SKILLS.md` is this file. The owner wants them kept clean and tidy: when something changes, edit the line that is there instead of adding a new one at the bottom, delete finished jobs from `TODO.md`, and keep the counts in `README.md` true. A nightly task (7pm) tidies all six and removes unused files.
 
 ### Adding or splitting an age (November 2026)
 
@@ -752,6 +752,13 @@ Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.
 - Family tree cards are left alone, because a tap on them lights up the family line.
 - To check: load the page in Playwright, and for each `.wl-card` use `document.elementFromPoint` at the corners and middle: it must hit the card's link, and every other link or button inside must still hit itself. Turn off smooth scrolling first, or the points are measured mid-scroll.
 
+
+### A picture on every card (November 2026)
+- Ifan asked for pictures on all cards. One rule picks them: a card shows the picture of the page it opens. `card_pic(href)` in `build.py` returns (picture, crop) from the person's portrait, the place's photo, the legend's photo, or that page's line in `PAGE` (`src/pictures.py`). It never gives the stand-in picture of an age, so Pentre Ifan never appears on the card for Paviland Cave. An event uses its place, then the first of its people with a portrait, then the long read that tells it (`event_pic()`), the same order as its own page.
+- What each card does with it: people cards (`plaque()`) have the picture across the top, or down the left side on phones; a person with no picture shows their age's picture, dimmed, behind their initials, so it is never taken for a likeness. Place, kingdom and saints' region tiles (`tile_pic()`) show the photo where the drawing was, and keep the drawing in a tinted box when there is no photo. Timeline rows, trail stops (`row_pic()`), On this day rows and reference cards (`see_pic()`: battles, documents, teacher packs, topic guide people, an event page's links) have a small square at the side. Trails, Mabinogion tales and lesson ideas have a banner (`ban_pic()`). The news list has a small picture by each line. Rulers and saints get one only when they have a portrait.
+- Small copies keep phones fast: `TH.thumb(path)` (`src/thumbs.py`) names a copy whose short side is 220 px (about 14 KB, against about 45 KB for the 600 px copy) and the build makes them in `_site/t/` with Pillow; nothing is kept in the repository. Banners use the 600 px copy. All card pictures are `loading="lazy"` with `alt=""` (the card's words already say what it is), so the sitemap does not list them. Long lists of people cards use `content-visibility: auto`.
+- New card types: call `card_pic()` with the card's link and draw it with `pic_img()` (small copy) or `pic_img(pic, small=False)`. Keep to classes, not `:has()`, for the layout (Ifan's phone ignores `:has()` rules).
+- To find the places with no photo: `card_pic("place-<id>.html")` returns None. Their photos were found with the "people" mode of `tools/commons_research.py`, which works for places too (give the place's Wikipedia title as `wiki`), and added to `PLACE_PHOTOS` in `src/photos.py` with a credit as the fourth field. Run "Fetch photos from Wikimedia Commons" afterwards so the site keeps its own copies.
 ### A set of linked writers' pages, and checking an old book when its site is blocked (November 2026)
 - `src/writers.py` holds the writers who recorded early Wales, the same way `src/princes.py` holds the rulers: `LONG` (full coded texts put over the short ones, added last in `src/long.py` so nothing overwrites them), `PEOPLE` (new people), `GROUPS`/`LINKS` (the block `writers_circle()` in `build.py` shows on each of their pages), `STORY` (the long read `story-writers.html`), `REFS` (its reading list) and `CITES` (its sources, added to `src/cites.py`).
 - A link in `LINKS` to a long read that is not built yet (`story-bruts.html`) is left out until it exists, so pages can name each other before both are published.
@@ -765,11 +772,6 @@ Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.
 - Pictures inside the text use `"!! key"` with `OB.FIGS` (Commons tuples); the picture at the top is one `PAGE` line per book in `src/pictures.py`, with an `EXTRA` credit for each `c:` file. Commons files only kept locally under an underscored name (`Yny_Lhyvyr_hwnn_title_page.jpg`) must be named that way in a `c:` ref.
 - Reading lists: `page_refs()` gives a book page its own list if `src/oldbooks.py` `REFS` has `book-<id>`, otherwise the `books` list. `"book-*"` is added to the "lit" shelf so they count on Books and authors.
 - Picture research: Commons categories for manuscripts are often missing, so searches by shelf mark work better (`Jesus College MS 119` found the Bodleian's CC BY photos of every page of Llyfr Ancr; `Basingwerk manuscript` found the National Library's CC0 photos). Look at the previews before choosing: flyleaves with owners' notes (dates, names) make good, honest captions.
-
-## Working together
-
-- Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
-- Small visual tweaks are published one at a time so each can be seen live.
 
 ### The home page On this day panel, Daily challenge card and game cards (November 2026)
 - On this day on the home page is drawn twice with the same markup: `ssr_today()` / `otd_home_row()` in `build.py` (so it shows before any script runs) and `renderToday()` / `otdLi()` in `src/app.js` (the visitor's own date, the week strip, ‹ ›). Change both together. Its CSS is at the top of `src/onthisday.css`.
@@ -866,3 +868,8 @@ Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.
 - **Twelve posters on the home page** are narrower than nine: the closed poster's Roman numeral is smaller (`.poster .rn` in the hover block of `src/v6.css`) so VIII and XII fit.
 - **Games read the age names from the page.** `play.js` used to keep its own list of nine names; it now takes `PLAY.ERAN` from `PLAY_DATA` in `build.py`, and `play.js` carries a `?v=` fingerprint like `site.js`, so a browser never mixes an old script with new ages.
 - **The "Time traveller" badge** in `src/static/site.js` counts age pages read; raise its number (now 12, "XII") when the ages change.
+
+## Working together
+
+- Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
+- Small visual tweaks are published one at a time so each can be seen live.

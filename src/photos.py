@@ -53,3 +53,28 @@ PERSON_PHOTOS = {
 import photos2 as _P2
 import mabinogi_people as _MBP
 PERSON_PHOTOS = {**_P2.PERSON_PHOTOS_MORE, **_MBP.PHOTOS, **PERSON_PHOTOS}
+
+# The places that had no photo of their own (13 November 2026, for the pictures on every card). Found on Commons with
+# tools/commons_research.py ("people" mode works for places too: it reads each place's Wikipedia lead image,
+# Wikidata picture and Commons category) and picked by eye. The fourth field is the credit.
+PLACE_PHOTOS.update({
+ "trefflemin": ("Church of St Michael, Flemingston - geograph.org.uk - 3840217.jpg", "Saint Michael’s church, Flemingston, where Iolo Morganwg lies", "Eglwys Sant Mihangel, Trefflemin, lle gorwedd Iolo Morganwg", "John Lord, CC BY-SA 2.0"),
+ "deganwy": ("Castell Degannwy Deganwy Castle Sir Ddinbych Wales 09.JPG", "The twin hills of Deganwy, where Maelgwn Gwynedd held court", "Dau fryn Degannwy, lle cadwai Maelgwn Gwynedd ei lys", "Llywelyn2000, CC BY-SA 4.0"),
+ "llanymddyfri": ("Llandovery Castle - geograph.org.uk - 2662826.jpg", "The ruins of Llandovery Castle", "Adfeilion castell Llanymddyfri", "Stuart Logan, CC BY-SA 2.0"),
+ "caergybi": ("Roman fort at Holyhead - geograph.org.uk - 1367143.jpg", "The Roman walls of Caer Gybi, Holyhead", "Muriau Rhufeinig Caergybi", "Nigel Mykura, CC BY-SA 2.0"),
+ "cymer": ("The Ruins of Cymer Abbey - geograph.org.uk - 3795241.jpg", "The ruins of Cymer Abbey near Dolgellau", "Adfeilion Abaty Cymer ger Dolgellau", "Jeff Buck, CC BY-SA 2.0"),
+ "nanhyfer": ("Nevern High Cross from the East.jpg", "The great cross of Saint Brynach at Nevern", "Croes fawr Sant Brynach yn Nanhyfer", "Martinvl, CC BY 4.0"),
+ "clynnog": ("Eglwys Beuno Sant – St Beuno's Church, Clynnog-Fawr - geograph.org.uk - 5754051.jpg", "Saint Beuno’s church, Clynnog Fawr", "Eglwys Beuno Sant, Clynnog Fawr", "Kate Jewell, CC BY-SA 2.0"),
+ "moridunum": ("Amphitheatre Moridunum - geograph.org.uk - 777546.jpg", "The Roman amphitheatre of Moridunum, Carmarthen", "Amffitheatr Rufeinig Moridunum, Caerfyrddin", "Marion Phillips, CC BY-SA 2.0"),
+ "llanmelin": ("Inside Llanmelin hillfort - geograph.org.uk - 3311300.jpg", "Inside Llanmelin hillfort, near Caerwent", "Y tu mewn i fryngaer Llanmelin, ger Caer-went", "Jeremy Bolwell, CC BY-SA 2.0"),
+ "caerytwr": ("Caerytwr.jpg", "The stone rampart of Caer y Tŵr on Holyhead Mountain", "Rhagfur cerrig Caer y Tŵr ar Fynydd Twr", "Eric Jones, CC BY-SA 2.0"),
+ "caerdrewyn": ("Bryngaer Geltaidd Caer Drewyn Celtic Hillfort near Corwen, from the air; 2023 35.jpg", "Caer Drewyn hillfort above Corwen, from the air", "Bryngaer Caer Drewyn uwchben Corwen, o’r awyr", "Llywelyn2000, CC BY-SA 4.0"),
+ "tretower": ("Tretower Court - geograph.org.uk - 2629360.jpg", "Tretower Court, home of the Vaughans", "Llys Tretŵr, cartref teulu Fychan", "Philip Pankhurst, CC BY-SA 2.0"),
+ "penmynydd": ("Plas Penmynydd, Mon, previous seat of the Tudor dynasty (1501978).jpg", "Plas Penmynydd, Anglesey, the old home of the Tudors", "Plas Penmynydd, Môn, hen gartref y Tuduriaid", "Geoff Charles, CC BY-SA 4.0"),
+ "tymawrwybrnant": ("Tŷ Mawr Wybrnant.jpg", "Tŷ Mawr Wybrnant, birthplace of Bishop William Morgan", "Tŷ Mawr Wybrnant, man geni’r Esgob William Morgan", "Hefin Owen, CC BY-SA 2.0"),
+ "botanic": ("Great Glass House.jpg", "The Great Glasshouse at the National Botanic Garden of Wales", "Y Tŷ Gwydr Mawr yng Ngardd Fotaneg Genedlaethol Cymru", "Col Ford and Natasha de Vere, CC BY 2.0"),
+ "llanfairpwll": ("The James Pringle Weavers shop in Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch on the Isle of Anglesey in North Wales.jpg", "The long name of Llanfairpwllgwyngyll on Anglesey", "Enw hir Llanfairpwllgwyngyll ym Môn", "Fatih Renkligil, CC BY-SA 4.0"),
+ "bethlehem": ("The old Post Office in Bethlehem, near Llangadog - geograph.org.uk - 20591.jpg", "The old post office at Bethlehem, near Llangadog", "Hen swyddfa bost Bethlehem, ger Llangadog", "Nigel Davies, CC BY-SA 2.0"),
+ "penygwryd": ("Pen y Gwryd Hotel - geograph.org.uk - 4757553.jpg", "The Pen-y-Gwryd Hotel below Yr Wyddfa", "Gwesty Pen-y-Gwryd islaw’r Wyddfa", "Peter S, CC BY-SA 2.0"),
+ "lavernock": ("Lavernock Point 062315.jpg", "Lavernock Point on the Bristol Channel", "Trwyn Larnog ar Fôr Hafren", "Wilson44691, CC0"),
+})

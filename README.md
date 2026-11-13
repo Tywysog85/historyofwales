@@ -20,6 +20,8 @@ A proud, bilingual (English and Cymraeg) history of Wales, live at [historyofwal
 ## The other notes in this folder
 
 - `EDITORIAL.md`: the rules for how the site is written. Read this before changing any text.
+- `STYLE.md`: how the site looks: colours, fonts, cards, spacing, pictures and movement.
+- `SOURCES.md`: which sources to trust first, and how to check and cite them.
 - `TODO.md`: the open jobs.
 - `SKILLS.md`: how things are done, step by step, added to each time something new is learnt.
 
