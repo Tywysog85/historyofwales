@@ -284,8 +284,8 @@ PEOPLE += [
 
  # ---------- Tudor and Stuart Wales ----------
  P("richard-davies", "tudor", "c. 1505–1581", "Richard Davies", "Richard Davies", "Bishop and translator", "Esgob a chyfieithydd", "Richard_Davies_(bishop)", "faith",
-   "Bishop of St Davids who translated the New Testament into Welsh with William Salesbury in 1567, and wrote a famous letter to the Welsh people about their history.",
-   "Esgob Tyddewi a gyfieithodd y Testament Newydd i’r Gymraeg gyda William Salesbury yn 1567, ac a ysgrifennodd lythyr enwog at y Cymry am eu hanes.",
+   "Bishop of St Davids who worked with William Salesbury on the Welsh New Testament of 1567, and wrote for it a famous letter to the Welsh people about their history.",
+   "Esgob Tyddewi a gydweithiodd â William Salesbury ar Destament Newydd Cymraeg 1567, ac a ysgrifennodd iddo lythyr enwog at y Cymry am eu hanes.",
    ["Richard Davies was born in the Conwy valley, son of a curate. In exile under Queen Mary, he came home under Elizabeth to be bishop first of St Asaph and then of St Davids, and he worked hard for the act of 1563 that ordered the Bible to be put into Welsh.",
     "At his palace at Abergwili he and William Salesbury translated the New Testament, published in 1567. Davies translated several books himself and wrote its preface, the Epistol at y Cymry, a proud letter to the Welsh reminding them of the ancient faith of the Britons."],
    ["Ganed Richard Davies yn nyffryn Conwy, yn fab i gurad. Bu’n alltud dan y Frenhines Mari, a daeth adref dan Elisabeth yn esgob Llanelwy yn gyntaf ac yna Tyddewi, a gweithiodd yn galed dros ddeddf 1563 a orchmynnodd roi’r Beibl yn Gymraeg.",
@@ -426,8 +426,8 @@ PEOPLE += [
    ["Magwyd Ruth Jones ym Mhorthcawl ac astudiodd ddrama yn Warwick. Yn 2007, gyda James Corden, creodd Gavin & Stacey, stori carwriaeth rhwng Essex a’r Barri, lle chwaraeodd y Nessa fythgofiadwy.",
     "Daeth y gyfres yn un o hoff gomedïau Prydain, a gwyliwyd ei rhaglen Nadolig yn 2019 gan bron i ddeunaw miliwn o bobl. Mae hefyd wedi ysgrifennu nofelau poblogaidd ac, â’i chwmni Tidy Productions, wedi creu’r gyfres Stella, a leolwyd yn y Cymoedd."]),
  P("rob-brydon", "today", "b. 1965", "Rob Brydon", "Rob Brydon", "Comedian and actor", "Digrifwr ac actor", "Rob_Brydon", "stage",
-   "Comedian and actor from Port Talbot, star of Marion and Geoff and Gavin & Stacey’s Uncle Bryn, and a master of impressions.",
-   "Digrifwr ac actor o Bort Talbot, seren Marion and Geoff ac Wncwl Bryn yn Gavin & Stacey, a meistr ar ddynwared.",
+   "Comedian and actor from Baglan, star of Marion and Geoff and Gavin & Stacey’s Uncle Bryn, and a master of impressions.",
+   "Digrifwr ac actor o Faglan, seren Marion and Geoff ac Wncwl Bryn yn Gavin & Stacey, a meistr ar ddynwared.",
    ["Rob Brydon grew up in Baglan, Port Talbot, and started out in Welsh radio and as a voice artist. His series Marion and Geoff (2000), in which he played a hopeful taxi driver talking to a camera, made his name.",
     "He became a household name as Uncle Bryn in Gavin & Stacey and with Steve Coogan in The Trip, where his small man in a box and duelling impressions won fans around the world. He has also hosted Would I Lie to You? for many years."],
    ["Magwyd Rob Brydon ym Maglan, Port Talbot, a dechreuodd ar radio yng Nghymru ac fel artist lleisiol. Gwnaeth ei gyfres Marion and Geoff (2000), lle chwaraeodd yrrwr tacsi gobeithiol yn siarad â chamera, ei enw.",

@@ -726,7 +726,7 @@ Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.
 
 ### Themed trails (November 2026)
 - The trails are `TRAILS` in `src/long.py` (the first four) and `src/trails.py` (the newer ones, put in front, newest first). `build.py` makes `trails.html` and one `trail-<id>.html` per trail.
-- A stop can be an event (by its English title), a person, a place, a long read (`("story", id)`), a legend (`("legend", id)`) or any page (`("page", href, era, dates, titles, texts)`). Every stop is one link to its own page (the whole row, see "Whole cards are links"), and person and place stops also link any long read that names them.
+- A stop can be an event (by its English title), a person, a place, a long read (`("story", id)`), a legend (`("legend", id)`) or any page (`("page", href, era, dates, titles, texts)`). Every stop is one link to its own page (the whole row, see "Whole cards are links"), with no "Long read: … →" or "Read the long read →" line under it.
 - A long read that does not exist yet can already be named on a trail: it stays hidden until another thread publishes it (for example `story-welsh-not`, `story-mac`).
 - Keep 8 to 10 stops per trail, and keep the number of trails a multiple of 6, so the grid on `trails.html` is full at three columns and at two.
 - Every stop title has the same size and font: there is no bigger serif style for "key" events any more (removed from `.era-events li.key h3` and the timeline's `.ev.key h4`). Key events keep their coloured dot.
@@ -868,6 +868,13 @@ Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.
 - **Twelve posters on the home page** are narrower than nine: the closed poster's Roman numeral is smaller (`.poster .rn` in the hover block of `src/v6.css`) so VIII and XII fit.
 - **Games read the age names from the page.** `play.js` used to keep its own list of nine names; it now takes `PLAY.ERAN` from `PLAY_DATA` in `build.py`, and `play.js` carries a `?v=` fingerprint like `site.js`, so a browser never mixes an old script with new ages.
 - **The "Time traveller" badge** in `src/static/site.js` counts age pages read; raise its number (now 12, "XII") when the ages change.
+
+### No repeated wording (13 November 2026)
+- Ifan spotted two Arthur stops on a trail saying nearly the same words. His rule: where two cards open different pages, keep both and give each its own wording, fitting its own page. Only a card that opens the same page twice is a true repeat to remove.
+- `python3 tools/check_repeats.py` (and `... cy` for the Welsh pages) reads the built `_site` and lists, page by page, cards in one list that open the same page, share the same words or say nearly the same thing, and sentences that appear twice on a page. Dates, feast days and source notes repeat by nature; read the list with sense.
+- A person's short text shows on every list they are in, so rewrite it in its source file (`src/people2*.py`, `arthur_circle.py`, `hen_ogledd.py` ...), English and Welsh together. A long read's card text is its `sumEn`/`sumCy`: make it say what the long read covers, not repeat the person card.
+- `data.py` stops the build if one person is listed twice or two events share a title. To rename an event without breaking its address, add the new title to `KEEP_SLUG` in `src/eventpages.py` with the old page name.
+- Timeline, era and trail rows no longer carry "Read the long read →" or "Long read: … →" lines (Whole cards are links); the event's own page links its long reads.
 
 ## Working together
 

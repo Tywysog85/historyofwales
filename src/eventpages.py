@@ -25,9 +25,17 @@ def _slugify(s):
     return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")[:70].strip("-")
 
 
+# An event whose title was changed keeps its old page name, so links from outside still work.
+KEEP_SLUG = {"The great copper lode at Parys": "copper-at-parys-mountain-1768"}
+
+
 def _make_slugs():
     seen, out = set(), []
     for ev in D.EVENTS:
+        if ev[5] in KEEP_SLUG:
+            seen.add(KEEP_SLUG[ev[5]])
+            out.append(KEEP_SLUG[ev[5]])
+            continue
         base = _slugify(ev[5]) or "event"
         s = base
         if s in seen:

@@ -30,6 +30,7 @@ Headings in sibling cards or list rows must all have the same size and font: no 
 ## Cards and links
 
 - **Whole cards are links.** Every card and list row is one big link (`wl-card` with an `a.wl` inside). Never add "Read more", "Read →", "The full story" or "Source ↗" to a card. Other buttons inside a card stay clickable on their own.
+- **No repeated wording.** Cards next to each other each say something of their own, even when they are about the same person (a long read and a person page, say). Check with `tools/check_repeats.py`.
 - Tap areas on phones are at least 44 × 44 px, without changing the look (see "Touch targets" in `SKILLS.md`).
 - Every `<img>` has a width and height, so the page does not jump while pictures load.
 
