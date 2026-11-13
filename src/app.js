@@ -29,6 +29,10 @@
   /* how the pictures were taken (tools: see SKILLS.md "Still pictures of the 3D land"): w = page width, d = pixels per CSS pixel,
      h = hero height, b = how far the bottom of the picture runs below the row of figures (p) or the hero's foot (w) */
   var STILL_REF = { p: { w: 390, d: 1.5, h: 1077, b: 220 }, w: { w: 1440, d: 1.5, h: 952, b: 0 } };
+  /* The Pause animation button is offered only on old devices and slow connections (Ifan, 13 Nov 2026): a slow connection (SLOW),
+     data saver, a phone with 1 GB of memory or less, or a browser without WebGL. Elsewhere it is not shown, and an earlier pause is not applied. */
+  var LITE = SLOW || !!(navigator.connection && navigator.connection.saveData) || !!(navigator.deviceMemory && navigator.deviceMemory <= 1) || !window.WebGLRenderingContext;
+  if (!LITE) STILL = false;
   if (STILL) document.documentElement.classList.add("still");
   var MONTHS_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   var MONTHS_CY = ["Ionawr","Chwefror","Mawrth","Ebrill","Mai","Mehefin","Gorffennaf","Awst","Medi","Hydref","Tachwedd","Rhagfyr"];
@@ -424,7 +428,7 @@
   /* ---------- Pause animation button (in the hero, above the row of figures) ---------- */
   (function () {
     var b = document.getElementById("still-btn"); if (!b) return;
-    if (reduce) { b.remove(); return; } /* nothing moves for visitors who asked their device for less motion */
+    if (reduce || !LITE) { b.remove(); return; } /* nothing moves for visitors who asked their device for less motion; modern devices on normal connections do not get the button */
     function show() {
       b.classList.toggle("is-still", STILL);
       b.querySelector(".sb-t").textContent = STILL ? T("Play animation", "Chwarae’r animeiddiad") : T("Pause animation", "Oedi’r animeiddiad");
