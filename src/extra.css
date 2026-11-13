@@ -2,7 +2,7 @@
 /* ---------- v3 additions ---------- */
 [hidden] { display: none !important }
 html.cy .l-en, html:not(.cy) .l-cy { display: none !important }
-.src { font-family: var(--f-mono); font-size: .72rem; color: var(--muted); text-decoration: none; letter-spacing: .03em; display: inline-flex; gap: .3rem; align-items: center }
+.src { font-family: var(--f-mono); font-size: .75rem; color: var(--muted); text-decoration: none; letter-spacing: .03em; display: inline-flex; gap: .3rem; align-items: center; min-height: 24px }
 .src:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px }
 .ev .links { display: flex; flex-wrap: wrap; gap: .4rem 1.1rem; align-items: center; margin-top: .2rem }
 .ev .links .maplink { margin-top: 0 }
@@ -75,7 +75,7 @@ footer nav a:hover { color: var(--ink) }
 .plaque { scroll-margin-top: 6rem }
 .plaque:target { outline: 2px solid var(--c); outline-offset: 4px }
 .plaque .links { display: flex; flex-wrap: wrap; gap: .4rem 1rem; align-items: center; margin-top: .2rem }
-.copy { background: none; border: 0; padding: 0; cursor: pointer; font-family: var(--f-mono); font-size: .72rem; color: var(--muted) }
+.copy { background: none; border: 0; padding: 0; cursor: pointer; font-family: var(--f-mono); font-size: .75rem; color: var(--muted) }
 .copy:hover { color: var(--ink) }
 .plaque a.go { color: var(--ink); font-weight: 700; font-size: .9rem; text-decoration: none }
 .plaque a.go:hover { text-decoration: underline }
@@ -126,7 +126,7 @@ footer nav a:hover { color: var(--ink) }
 .words .say { display: flex; align-items: center; gap: .5rem }
 .words .say .g { font-size: inherit; color: inherit; flex: 0 1 auto; min-width: 0 }
 .words .say .g i { font-style: normal; white-space: nowrap }
-.words .play { flex: none; background: none; border: 1px solid var(--line); color: var(--ink); border-radius: 999px; width: 1.9rem; height: 1.9rem; cursor: pointer; font-size: .7rem; vertical-align: middle }
+.words .play { flex: none; background: none; border: 1px solid var(--line); color: var(--ink); border-radius: 999px; width: 1.9rem; height: 1.9rem; cursor: pointer; font-size: .75rem; vertical-align: middle }
 .words-credit { margin: .7rem 0 0; font-size: .8rem; color: var(--muted) }
 .words-credit a { color: inherit; text-decoration: underline; text-underline-offset: 2px }
 .words .play:hover { border-color: var(--dragon); color: var(--dragon) }
@@ -135,7 +135,7 @@ footer nav a:hover { color: var(--ink) }
 .photo.portrait { max-width: 24rem } .photo.portrait img { aspect-ratio: 4 / 5; object-position: center 25% }
 .photo figcaption { font-size: .85rem; color: var(--muted) } .photo figcaption a { color: var(--muted) }
 .place-card .art.has-photo { padding: 0; overflow: hidden; height: 12rem } .place-card .art.has-photo img { width: 100%; height: 100%; object-fit: cover; display: block }
-.place-card .credit { font-size: .75rem; color: var(--muted) } .place-card .credit a { color: var(--muted) }
+.place-card .credit { font-size: .75rem; color: var(--muted); padding-block: 3px } .place-card .credit a { color: var(--muted) }
 /* search button: styled up front so the nav doesn't jump on load */
 .search-btn{background:none;border:1px solid var(--line);color:var(--ink);border-radius:999px;width:2.4rem;height:2.4rem;display:grid;place-items:center;cursor:pointer;flex:none;margin-right:.6rem;padding:0}.search-btn:hover{border-color:var(--ink)}.search-btn svg{width:1.05rem;height:1.05rem}
 a.chip { text-decoration: none; color: inherit }
@@ -182,7 +182,7 @@ a.chip { text-decoration: none; color: inherit }
 @media (pointer: coarse) { .kg-slide { --th: 36px; --tr: 12px } }
 /* not room for every year in one row on a phone: every other year drops to a second row */
 @media (max-width: 560px) {
-  .kg-ticks { height: 3.4rem; font-size: .74rem }
+  .kg-ticks { height: 3.4rem; font-size: .75rem }
   .kg-ticks span:nth-child(even) { padding-top: 1.75rem }
   .kg-ticks span:nth-child(even)::before { height: 1.55rem; opacity: .35 }
   .kg-ticks span.on:nth-child(even)::before { height: 1.6rem }

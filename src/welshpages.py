@@ -107,15 +107,18 @@ def _switch(en_href, cy_href, here):
 
 SWITCH_JS = ('<script>(function(){var d=document,here=d.documentElement.lang==="cy"?"cy":"en",want=null;'
              'try{want=localStorage.getItem("hc-lang")}catch(e){}'
+             # a browser set to Welsh, on an English page, by a reader who has never chosen: offer Cymraeg once (never a redirect)
+             'var ask=0;if(!want&&here==="en"){var L=navigator.languages||[navigator.language||""];for(var i=0;i<L.length;i++)if(/^cy(-|$)/i.test(L[i]||""))ask=1;'
+             'try{if(localStorage.getItem("hc-cyask"))ask=0;else if(ask)localStorage.setItem("hc-cyask","1")}catch(e){ask=0}if(ask)want="cy"}'
              'd.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[data-lang]");if(!a)return;'
              'try{localStorage.setItem("hc-lang",a.dataset.lang)}catch(x){}'
              'if(a.dataset.lang!==here&&location.hash&&a.getAttribute("href").indexOf("#")<0)a.setAttribute("href",a.getAttribute("href")+location.hash)});'
              'var o=d.getElementById("lang-"+want);'
              'if(!o||want===here)return;try{if(sessionStorage.getItem("hc-hint"))return}catch(e){}'
              'var cy=want==="cy",b=d.createElement("div");b.className="lang-hint no-print";b.lang=want;'
-             'b.innerHTML=\'<div class="wrap"><span>\'+(cy?"Mae’r dudalen hon ar gael yn Gymraeg.":"This page is also in English.")+\'</span>\''
+             'b.innerHTML=\'<div class="wrap"><span>\'+(ask?"<b>Darllen yn Gymraeg?</b> Mae’r dudalen hon, a’r wefan i gyd, ar gael yn Gymraeg.":cy?"Mae’r dudalen hon ar gael yn Gymraeg.":"This page is also in English.")+\'</span>\''
              '+\'<a data-lang="\'+want+\'" hreflang="\'+want+\'" href="\'+o.getAttribute("href")+\'">\'+(cy?"Darllen yn Gymraeg":"Read it in English")+\' →</a>\''
-             '+\'<button type="button" aria-label="\'+(cy?"Cau":"Close")+\'">×</button></div>\';'
+             '+\'<button type="button" aria-label="\'+(ask?"Dim diolch":cy?"Cau":"Close")+\'">×</button></div>\';'
              'b.querySelector("button").onclick=function(){b.remove();try{sessionStorage.setItem("hc-hint","1")}catch(e){}};'
              'var m=d.getElementById("main")||d.querySelector("main");if(m)m.parentNode.insertBefore(b,m)})()</script>')
 

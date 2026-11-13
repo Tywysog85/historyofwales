@@ -33,3 +33,6 @@
 .first-row { display: flex; align-items: center; gap: .5rem; max-width: 46rem; margin: 0 0 1.4rem }
 .first-row .first-badge { margin: 0; flex: 1 }
 .first-src { flex: none }
+/* 517 cards on one page: the browser lays out and paints only the ones near the screen (content-visibility).
+   "auto 340px" is the space a card keeps until it is first drawn; after that the browser remembers its real height. */
+@supports (content-visibility: auto) { #people-grid .plaque { content-visibility: auto; contain-intrinsic-size: auto 340px } }

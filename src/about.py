@@ -226,9 +226,25 @@ def about_page():
         fix += (f'<p class="eyebrow" style="margin-top:1.6rem">{bi("Corrections made", "Cywiriadau a wnaed")}</p><ul class="fix-log">'
                 + "".join(f'<li><time datetime="{d}">{bi(g["_news_date"](d), g["_news_date"](d, True))}</time><a href="{p}">{bi(a, b)}</a></li>' for d, p, a, b in CORRECTIONS) + "</ul>")
 
-    privacy = g["paras"](
-        ["We count visits with GoatCounter, which uses no cookies and does not track you from site to site. Your progress in the games and your journey through the site are kept only on your own device."],
-        ["Rydym yn cyfrif ymweliadau â GoatCounter, nad yw’n defnyddio cwcis nac yn eich dilyn o wefan i wefan. Dim ond ar eich dyfais eich hun y cedwir eich cynnydd yn y gemau a’ch taith drwy’r wefan."], "ab-text")
+    # Your privacy: every outside service a visitor's browser or email address meets, in plain words (13 November 2026).
+    # Keep it true: when a new outside service is added (a form, a map, a script), add a line here.
+    mail = mail_link()
+    priv_en = [
+        "<b>Counting visits.</b> We count visits with GoatCounter, which uses no cookies and does not track you from site to site. Its small counting script comes from GoatCounter’s own server; it tells us which pages are read, not who reads them.",
+        "<b>The weekly email.</b> If you sign up, your email address is kept by Brevo, a French company that sends the email for us, so it stays under European data protection law. We use it only to send that email, and never pass it on or sell it. Every email has a link to leave the list at once. Like most email services, Brevo can record whether an email is opened and which of its links are clicked.",
+        "<b>Nothing else is fetched from other companies.</b> The fonts, pictures and code all come from this site itself, so reading it does not tell Google or anyone else what you read. The site is hosted by GitHub Pages; like any web host, GitHub keeps short server logs, including addresses of the computers that visit, for security.",
+        "<b>On your own device.</b> Your progress in the games, your choice of language, whether you paused the animation, and your journey through the site are kept only in your own browser and are never sent to us.",
+        f"<b>Your rights.</b> Under UK data protection law you can ask what we hold about you, or ask us to delete it, including your email address: write to {mail}. If you are not happy with the answer, you can complain to the Information Commissioner’s Office at <a href=\"https://ico.org.uk/make-a-complaint/\">ico.org.uk</a>.",
+    ]
+    priv_cy = [
+        "<b>Cyfrif ymweliadau.</b> Rydym yn cyfrif ymweliadau â GoatCounter, nad yw’n defnyddio cwcis nac yn eich dilyn o wefan i wefan. Daw ei sgript gyfrif fach o weinydd GoatCounter ei hun; mae’n dweud wrthym pa dudalennau sy’n cael eu darllen, nid pwy sy’n eu darllen.",
+        "<b>Yr e-bost wythnosol.</b> Os ymunwch, caiff eich cyfeiriad e-bost ei gadw gan Brevo, cwmni o Ffrainc sy’n anfon yr e-bost ar ein rhan, felly mae’n aros dan gyfraith diogelu data Ewrop. Dim ond i anfon yr e-bost hwnnw y defnyddiwn ef, ac ni fyddwn byth yn ei roi i neb arall na’i werthu. Mae dolen ym mhob e-bost i adael y rhestr ar unwaith. Fel y rhan fwyaf o wasanaethau e-bost, gall Brevo gofnodi a agorwyd e-bost a pha ddolenni ynddo a gliciwyd.",
+        "<b>Dim byd arall gan gwmnïau eraill.</b> Daw’r ffontiau, y lluniau a’r cod i gyd o’r wefan hon ei hun, felly nid yw ei darllen yn dweud wrth Google nac unrhyw un arall beth rydych yn ei ddarllen. Caiff y wefan ei chynnal gan GitHub Pages; fel unrhyw westeiwr gwe, mae GitHub yn cadw cofnodion gweinydd byr, gan gynnwys cyfeiriadau’r cyfrifiaduron sy’n ymweld, er mwyn diogelwch.",
+        "<b>Ar eich dyfais eich hun.</b> Dim ond yn eich porwr eich hun y cedwir eich cynnydd yn y gemau, eich dewis o iaith, a oeddech wedi oedi’r animeiddiad, a’ch taith drwy’r wefan, ac ni chânt byth eu hanfon atom.",
+        f"<b>Eich hawliau.</b> Dan gyfraith diogelu data’r DU gallwch ofyn beth rydym yn ei gadw amdanoch, neu ofyn i ni ei ddileu, gan gynnwys eich cyfeiriad e-bost: ysgrifennwch at {mail}. Os nad ydych yn fodlon â’r ateb, gallwch gwyno i Swyddfa’r Comisiynydd Gwybodaeth yn <a href=\"https://ico.org.uk/make-a-complaint/\">ico.org.uk</a>.",
+    ]
+    privacy = ('<div class="ab-text l-en" lang="en">' + "".join(f"<p>{x}</p>" for x in priv_en) + "</div>"
+               '<div class="ab-text l-cy" lang="cy">' + "".join(f"<p>{x}</p>" for x in priv_cy) + "</div>")
 
     def sec(sid, en_h, cy_h, inner, top=False):
         return (f'<section id="{sid}" class="about-sec{"" if top else " tight"}"><div class="wrap narrow">'
