@@ -31,7 +31,9 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - **Only one SPF line per domain.** The one TXT on `@` starting `v=spf1` covers every service that sends as the domain: `v=spf1 include:spf.improvmx.com include:spf.brevo.com ~all`. When another service asks for SPF, add its `include:` to this line; never add a second `v=spf1` row (two make both fail).
 - Brevo's own records (the `brevo-code:` TXT, the DKIM CNAMEs `brevo1._domainkey` and `brevo2._domainkey`, and the DMARC TXT on `_dmarc`) sit on other names and don't clash.
 - Replying *as* hello@: Outlook.com can't send through an outside server, so the free way is Gmail → Settings → Accounts → **Send mail as**, using Brevo's SMTP relay (smtp-relay.brevo.com, port 587, login and key from Brevo → SMTP & API) once the domain shows Authenticated in Brevo.
-- Gotcha: Claude's cloud computer can't look up DNS records (DNS look-up sites are blocked), so check the records from a screenshot, from ImprovMX's green ticks, or on the PC.
+- Set up and live on 13 November 2026: hello@ forwards to Ifan's Outlook, the `*` alias is deleted, and the DNS page holds both MX rows, the one SPF line, the `brevo-code` TXT, both Brevo DKIM CNAMEs and the DMARC TXT.
+- 123-reg's DNS page (nameservers `ns45`/`ns46.domaincontrol.com`) shows 10 rows at a time, so check page 2 before deciding a record is missing. The NS and SOA rows are greyed out and can't be changed.
+- Checking records from Claude's cloud computer: `dig` isn't installed and the shell can't reach DNS servers, but WebFetch on `https://dns.google/resolve?name=historyofwales.cymru&type=MX` (or `TXT`, `A`, `CNAME`) works and shows what the world sees.
 
 ### Google Search Console
 - Add the site as a property, choose the **HTML file** verification method, and download the file Google gives you.
