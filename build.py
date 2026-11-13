@@ -338,6 +338,7 @@ def follow_box(where):
                 f'<input type="hidden" name="locale" value="en">'
                 f'<button class="btn solid" type="submit">{bi("Sign up", "Ymuno")}</button></div>'
                 f'<p class="f-msg" role="status" aria-live="polite"></p></form>'
+                f'<p class="f-priv">{bi("We use your address only to send this email, and Brevo sends it for us.", "Dim ond i anfon yr e-bost hwn y defnyddiwn eich cyfeiriad, a Brevo sy’n ei anfon ar ein rhan.")} <a href="about.html#privacy">{bi("Privacy", "Preifatrwydd")}</a></p>'
                 f'<a class="f-more" href="whatsnew.html">{bi("See what’s new on the site", "Gweld beth sy’n newydd ar y wefan")} →</a></div>')
     return (f'<div class="follow follow-{where}"><p class="f-h">{bi("Keep up with the site", "Dilynwch y wefan")}</p>'
             f'<p class="f-sub">{bi("New history is added every week. See what has arrived, or follow the news feed in any feed reader.", "Mae hanes newydd yn cael ei ychwanegu bob wythnos. Gwelwch beth sydd wedi cyrraedd, neu dilynwch y ffrwd newyddion mewn unrhyw ddarllenydd ffrydiau.")}</p>'
@@ -465,7 +466,6 @@ def page(path, title, desc, main_html, era=None, og_type="article", ld=None, act
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 {head_tags(title, desc, path, og_type, card)}{LANG_BOOT}
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 {fonts}
 <style>{style}{PRINT_CSS}</style>
 {ld_html}
@@ -1046,7 +1046,7 @@ a.chap { text-decoration: none; color: inherit }
 .bank { font-size: .95rem; line-height: 1.9 }
 .qs { width: 100%; border-collapse: collapse; min-width: 22rem }
 .qs th, .qs td { text-align: left; border-bottom: 1px solid var(--line); padding: .55rem .5rem; vertical-align: top }
-.qs th { font-family: var(--f-mono); font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-weight: 500 }
+.qs th { font-family: var(--f-mono); font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-weight: 500 }
 .qs td:first-child { width: 2rem; color: var(--muted) } .qs td.blank { width: 6rem; border-bottom: 1px solid var(--muted) }
 .answers-key summary { cursor: pointer; color: var(--muted); font-size: .9rem }
 """
@@ -2687,7 +2687,7 @@ FT_CSS = """
 .ft-card.crown { border-left: 3px solid var(--c) }
 .ft-card.gap { background: transparent; border-style: dashed }
 .ft-card.gap .ft-nm { font-style: italic; color: var(--muted) }
-.ft-d { display: block; font: 500 .7rem var(--f-mono); letter-spacing: .05em; color: var(--muted) }
+.ft-d { display: block; font: 500 .75rem var(--f-mono); letter-spacing: .05em; color: var(--muted) }
 .ft-nm { all: unset; display: inline; cursor: pointer; font-family: var(--f-display); font-size: 1.22rem; line-height: 1.2; color: var(--ink); word-spacing: .04em }
 .ft-nm:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px }
 .ft-crown { width: .9em; height: .9em; margin-right: .3em; vertical-align: -.08em; color: var(--gold); fill: var(--gold) }
@@ -2708,19 +2708,19 @@ FT_CSS = """
 .ft-wed { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); gap: .9rem; margin-top: 1.2rem }
 .ft-wed a { display: grid; gap: .45rem; align-content: start; text-decoration: none; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 1rem 1.1rem; transition: transform .3s var(--ease), border-color .2s }
 .ft-wed a:hover { transform: translateY(-3px); border-color: var(--gold) }
-.ft-wed .hs { display: flex; align-items: center; gap: .45rem; font: 600 .7rem var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--gold) }
+.ft-wed .hs { display: flex; align-items: center; gap: .45rem; font: 600 .75rem var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--gold) }
 .ft-wed .hs i { font-style: normal; color: var(--muted) }
 .ft-wed p { margin: 0; font-size: .92rem; line-height: 1.55; color: #c9ccd4 }
 .road { display: grid; gap: 0 1.2rem; margin-top: 1.6rem; grid-template-columns: 1fr;
   grid-template-areas: "t" "r" "j1" "m" "l" "j2" "e" }
-.rd-col h3 { font: 600 .72rem var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--gold); margin: 1.4rem 0 .6rem; text-align: center }
+.rd-col h3 { font: 600 .75rem var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--gold); margin: 1.4rem 0 .6rem; text-align: center }
 .rd-chain { list-style: none; margin: 0 auto; padding: 0; max-width: 21rem; display: grid; gap: 1.2rem }
 .rd-chain li { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: .5rem .8rem; text-align: center }
 .rd-chain li + li::before { content: ""; position: absolute; left: 50%; top: -1.25rem; height: 1.2rem; border-left: 2px solid var(--gold); opacity: .7 }
 .rd-chain li.gap { background: transparent; border-style: dashed; font-style: italic; color: var(--muted); font-size: .88rem }
 .rd-chain b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 1.1rem; line-height: 1.2 }
 .rd-chain b a { color: var(--ink); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--gold) 55%, transparent) }
-.rd-chain .dt { display: block; font: 500 .68rem var(--f-mono); color: var(--muted) }
+.rd-chain .dt { display: block; font: 500 .75rem var(--f-mono); color: var(--muted) }
 .rd-chain small { display: block; font-size: .8rem; color: #c9ccd4; margin-top: .1rem }
 .rd-join { position: relative; text-align: center; padding: 1.4rem 0 1.2rem; color: var(--gold); font-size: .9rem; font-style: italic }
 .rd-join::before { content: "↓"; display: block; font-style: normal; font-size: 1.2rem; line-height: 1; margin-bottom: .3rem }
@@ -2838,7 +2838,7 @@ def family_trees_page():
                 main, era="kings", ld=ld, og_type="website", active="kings.html", track="kings:trees", extra=FT_JS)
 
 # ---------- Welsh word of the day and beginner's phrases (src/cymraeg.py, src/welsh.js) ----------
-WELSH_JS_VER = 3  # raise whenever src/welsh.js changes, so browsers fetch the new copy
+WELSH_JS_VER = 4  # raise whenever src/welsh.js changes, so browsers fetch the new copy
 AUDIO_DIR = os.path.join(SRC, "static", "audio")
 AUDIO_FILES = sorted(f[:-4] for f in os.listdir(AUDIO_DIR) if f.endswith(".mp3")) if os.path.isdir(AUDIO_DIR) else []
 LL_CREDITS = json.loads(read("audio_credits.json")) if os.path.exists(os.path.join(SRC, "audio_credits.json")) else {}
@@ -3033,7 +3033,7 @@ SAINTS_JS = '<script src="saints.js?v=2" defer></script>\n'
 SAINTS_CSS = """
 .ll-chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .6rem }
 .chip.ll { font: 500 .8rem var(--f-body); padding: .22rem .7rem; cursor: default; color: var(--ink); border-color: color-mix(in srgb, var(--c) 45%, var(--line)) }
-.chip.ll small { color: var(--muted); font-size: .74rem }
+.chip.ll small { color: var(--muted); font-size: .75rem }
 a.chip.ll { cursor: pointer } a.chip.ll:hover { border-color: var(--c) }
 .chip.ll.away { border-style: dashed }
 .era-events .feast { font: 500 .78rem var(--f-mono); color: var(--c); letter-spacing: .04em; margin-top: .15rem }
@@ -3334,7 +3334,7 @@ def ssr_today():
         n = len(by_day.get(dm, []))
         wd = WEEKDAYS[d.weekday()]
         week += (f'<button type="button" class="otd-wd{" on" if k == 0 else ""}{" has" if n else ""}" data-otd-day="{dm}" aria-pressed="{"true" if k == 0 else "false"}">'
-                 f'<span class="w">{bi(*wd)}</span><span class="n">{d.day}</span><i aria-hidden="true">{"".join("<b></b>" for _ in range(min(n, 3)))}</i></button>')
+                 f'<span class="w">{bi(*wd)}</span> <span class="n">{d.day}</span><i aria-hidden="true">{"".join("<b></b>" for _ in range(min(n, 3)))}</i></button>')
     pic = next((r[9] for r in shown if not r[9].startswith("i:")), "")  # the first real picture of the day, or none
     note = (f'<p class="otd-near">{bi("Nothing we know of happened on exactly this day. Here are the nearest dates.", "Ni wyddom am ddim a ddigwyddodd ar union y diwrnod hwn. Dyma’r dyddiadau agosaf.")}</p>' if near else "")
     more = (f'<button type="button" class="otd-more" data-otd="more">+{len(hit) - len(shown)} {bi("more on this day", "arall ar y dydd hwn")}</button>' if len(hit) > len(shown) else "")
@@ -3535,8 +3535,9 @@ def _letters(text):
     return " ".join(out)
 
 
-HERO_NAME = (f'<p class="hero-name"><span class="l-en" lang="en" aria-label="History of Wales">{_letters("History of Wales")}</span>'
-             f'<span class="l-cy" lang="cy" aria-label="Hanes Cymru">{_letters("Hanes Cymru")}</span></p>')
+# the letters are hidden from screen readers, which hear the name once, whole (an aria-label on a <span> is ignored)
+HERO_NAME = (f'<p class="hero-name"><span class="l-en" lang="en"><span class="sr-only">History of Wales</span><span aria-hidden="true">{_letters("History of Wales")}</span></span>'
+             f'<span class="l-cy" lang="cy"><span class="sr-only">Hanes Cymru</span><span aria-hidden="true">{_letters("Hanes Cymru")}</span></span></p>')
 
 
 def fill(fragment, active="", skip="#chapters", home=False):

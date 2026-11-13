@@ -19,6 +19,8 @@
     return c + y + end;
   }
   var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var STILL = false; try { STILL = localStorage.getItem("hc-still") === "1"; } catch (e) {}
+  if (STILL) document.documentElement.classList.add("still");
   var MONTHS_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   var MONTHS_CY = ["Ionawr","Chwefror","Mawrth","Ebrill","Mai","Mehefin","Gorffennaf","Awst","Medi","Hydref","Tachwedd","Rhagfyr"];
 
@@ -318,7 +320,17 @@
     });
     cx.restore();
   }
-  function loop(t) { t0 = t; if (window.scrollY < H) draw(t); requestAnimationFrame(loop); }
+  /* Pause animation (WCAG 2.2.2): the hero's own clock (vt) stops, so the dragon, flames, stars and flag hold still.
+     The opening still plays to the end (land, castle, then the dragon fading in, a few seconds), then the scene stops; the frame is redrawn
+     only when the page scrolls or every half second (for a late picture or a resize). The choice is kept in localStorage "hc-still". */
+  var vt = 0, rt = 0, lastSy = -1, lastStill = 0;
+  function loop(t) {
+    var dt = rt ? Math.min(100, t - rt) : 0; rt = t;
+    var opening = DT0 < 0 || vt < DT0 + 2200; /* the dragon takes about 2 s to fade in */
+    if (!STILL || opening) { vt += dt; t0 = vt; if (window.scrollY < H) draw(vt); }
+    else if (window.scrollY < H && (window.scrollY !== lastSy || t - lastStill > 500)) { lastSy = window.scrollY; lastStill = t; draw(vt); }
+    requestAnimationFrame(loop);
+  }
   window.addEventListener("resize", size);
   if (HERO && !reduce) {
     /* load the lifelike 3D dragon where the device can draw it; otherwise the flag dragon stays */
@@ -333,7 +345,7 @@
         var cl = document.createElement("canvas"); cl.id = "land3d"; cl.setAttribute("aria-hidden", "true"); cv.after(cl);
         /* the 3D scene starts downloading once the page itself has loaded, so the words, fonts and pictures come first on a slow phone */
         var go3 = function () {
-          var s3 = document.createElement("script"); s3.type = "module"; s3.src = "hero3d.js?v=6"; /* raise the number whenever hero3d.js changes, so browsers fetch the new one */ s3.onerror = function () { window.HCD3_WANT = window.HCL3_WANT = 0; c3.remove(); cl.remove(); }; document.head.appendChild(s3);
+          var s3 = document.createElement("script"); s3.type = "module"; s3.src = "hero3d.js?v=7"; /* raise the number whenever hero3d.js changes, so browsers fetch the new one */ s3.onerror = function () { window.HCD3_WANT = window.HCL3_WANT = 0; c3.remove(); cl.remove(); }; document.head.appendChild(s3);
           setTimeout(function () { if (!(window.HCD3 && HCD3.ready)) window.HCD3_WANT = 0; if (!(window.HCL3 && HCL3.ready)) { window.HCL3_WANT = 0; cl.remove(); } }, 15000);
         };
         if (document.readyState === "complete") go3(); else window.addEventListener("load", go3, { once: true });
@@ -348,7 +360,7 @@
     });
     /* tilt the phone and the scene shifts a little. iOS asks permission for this, so it is left alone there. */
     if (window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission !== "function") {
-      window.addEventListener("deviceorientation", function (e) { if (e.gamma == null) return; var g = Math.max(-1, Math.min(1, e.gamma / 28)); mouse += (g * 1.6 - mouse) * 0.12; }, { passive: true });
+      window.addEventListener("deviceorientation", function (e) { if (e.gamma == null || STILL) return; var g = Math.max(-1, Math.min(1, e.gamma / 28)); mouse += (g * 1.6 - mouse) * 0.12; }, { passive: true });
     }
     requestAnimationFrame(loop);
   } else { window.addEventListener("scroll", function () { if (window.scrollY < H) draw(); }, { passive: true }); }
@@ -381,9 +393,25 @@
     if (reduce) return;
     requestAnimationFrame(function step(t) {
       var dt = Math.min(50, t - (last || t)); last = t;
-      if (!hold && !down && t > idle) { pos += dt * 0.045; var h = half(); if (h > 0 && pos >= h) pos -= h; m.scrollLeft = pos; }
+      if (!hold && !down && t > idle && !STILL) { pos += dt * 0.045; var h = half(); if (h > 0 && pos >= h) pos -= h; m.scrollLeft = pos; }
       else pos = m.scrollLeft;
       requestAnimationFrame(step);
+    });
+  })();
+
+  /* ---------- Pause animation button (in the hero, above the row of figures) ---------- */
+  (function () {
+    var b = document.getElementById("still-btn"); if (!b) return;
+    if (reduce) { b.remove(); return; } /* nothing moves for visitors who asked their device for less motion */
+    function show() {
+      b.classList.toggle("is-still", STILL);
+      b.querySelector(".sb-t").textContent = STILL ? T("Play animation", "Chwarae’r animeiddiad") : T("Pause animation", "Oedi’r animeiddiad");
+    }
+    b.hidden = false; show();
+    b.addEventListener("click", function () {
+      STILL = !STILL; document.documentElement.classList.toggle("still", STILL);
+      try { if (STILL) localStorage.setItem("hc-still", "1"); else localStorage.removeItem("hc-still"); } catch (e) {}
+      show();
     });
   })();
 
@@ -525,8 +553,8 @@
       var dm = stepDay(day, i), dd = dateOf(dm), n = Math.min(at(dm).length, 3), dots = "";
       dd.setFullYear(new Date().getFullYear());
       for (var j = 0; j < n; j++) dots += "<b></b>";
-      week += '<button type="button" class="otd-wd' + (i === 0 ? " on" : "") + (n ? " has" : "") + (dm === md ? " is-today" : "") + '" data-otd-day="' + dm + '" aria-pressed="' + (i === 0) + '" aria-label="' + dayLabel(dm) + '">' +
-        '<span class="w">' + T(WD[dd.getDay()][0], WD[dd.getDay()][1]) + '</span><span class="n">' + +dm.slice(3) + '</span><i aria-hidden="true">' + dots + "</i></button>";
+      week += '<button type="button" class="otd-wd' + (i === 0 ? " on" : "") + (n ? " has" : "") + (dm === md ? " is-today" : "") + '" data-otd-day="' + dm + '" aria-pressed="' + (i === 0) + '" aria-label="' + T(WD[dd.getDay()][0], WD[dd.getDay()][1]) + " " + dayLabel(dm) + '">' + /* the label starts with the words on the button (WCAG 2.5.3) */
+        '<span class="w">' + T(WD[dd.getDay()][0], WD[dd.getDay()][1]) + '</span> <span class="n">' + +dm.slice(3) + '</span><i aria-hidden="true">' + dots + "</i></button>";
     }
     var pic = (shown.filter(function (r) { return r[9] && r[9].slice(0, 2) !== "i:"; })[0] || [])[9];  // the first real picture, or none
     $("#today-box").innerHTML = '<div class="otd-head">' + (pic ? '<img class="otd-bg" src="' + esc(pic) + '" alt="" decoding="async">' : "") +

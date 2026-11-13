@@ -39,7 +39,7 @@
 .otd-ic { display: grid; place-items: center; color: color-mix(in srgb, var(--c) 75%, #fff) }
 .otd-ic svg { width: 58%; height: 58% }
 .otd-txt { min-width: 0; padding-top: .1rem }
-.otd-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .2rem .5rem; margin: 0 0 .2rem; font: 600 .66rem var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted) }
+.otd-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .2rem .5rem; margin: 0 0 .2rem; font: 600 .75rem var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted) }
 .otd-meta .y { font: 400 1.05rem/1 var(--f-display); letter-spacing: 0; color: var(--c) }
 .otd-meta .dt { color: var(--ink) }
 .otd-meta .k { border: 1px solid color-mix(in srgb, var(--c) 45%, transparent); color: color-mix(in srgb, var(--c) 70%, var(--ink)); border-radius: 999px; padding: .08rem .45rem }
@@ -60,8 +60,8 @@
 /* ---------- onthisday.html ---------- */
 .otd-list .when { display: grid; gap: .15rem; align-content: start; margin: 0 }
 .otd-list .when .y { font-family: var(--f-display); font-size: 1.6rem; line-height: 1; color: var(--c) }
-.otd-list .when .k { font: 600 .66rem var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted) }
-.otd-list h4 a { color: inherit; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .3s }
+.otd-list .when .k { font: 600 .75rem var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted) }
+.otd-list h4 a { color: inherit; text-decoration: none; padding-block: 3px; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .3s }
 .otd-list h4 a:hover { background-size: 100% 1px }
 
 .otd-jump { padding-block: 1rem 0 !important }
@@ -77,7 +77,7 @@
 .otd-day h3 { display: flex; align-items: baseline; gap: .55rem; font: 600 .78rem var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: .8rem }
 .otd-day h3 .dn { font: 400 2.4rem/1 var(--f-display); letter-spacing: 0; color: var(--ink) }
 .otd-day.is-today { border-color: var(--dragon, #e2453d); box-shadow: 0 0 0 1px var(--dragon, #e2453d), 0 20px 40px -24px rgba(226,69,61,.7) }
-.otd-day.is-today h3::after { content: "Today"; margin-left: auto; font-size: .66rem; color: #fff; background: var(--dragon, #e2453d); border-radius: 999px; padding: .2rem .6rem }
+.otd-day.is-today h3::after { content: "Today"; margin-left: auto; font-size: .75rem; color: #fff; background: var(--dragon, #e2453d); border-radius: 999px; padding: .2rem .6rem }
 html.cy .otd-day.is-today h3::after { content: "Heddiw" }
 .otd-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .9rem }
 .otd-list li { display: grid; grid-template-columns: 4.4rem minmax(0,1fr); gap: .8rem; align-items: baseline }
@@ -95,3 +95,5 @@ html.cy .otd-day.is-today h3::after { content: "Heddiw" }
 .today-fig .eyebrow { margin: 0 }
 .today-fig textarea { width: 100%; resize: vertical; background: var(--card); color: var(--ink); border: 1px solid var(--line); border-radius: 12px; padding: .8rem .9rem; font: 400 .92rem/1.5 var(--f-body) }
 .today-fig .more-row { margin: 0 }
+/* 366 days on one page: only the days near the screen are laid out and painted (content-visibility); a link to #d-11-13 still lands on the day */
+@supports (content-visibility: auto) { .otd-day { content-visibility: auto; contain-intrinsic-size: auto 250px } }

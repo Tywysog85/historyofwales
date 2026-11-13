@@ -54,7 +54,7 @@
   function hasSound(text) { return canSpeak || !!AUDIO[slug(text)]; }
   function hearBtn(text, guide, label) {
     if (!hasSound(text)) return "";
-    return '<button type="button" class="hear" data-hear="' + esc(text) + '" data-guide="' + esc(guide) + '" aria-label="' + esc("Hear / Clywed: " + text) + '">'
+    return '<button type="button" class="hear" data-hear="' + esc(text) + '" data-guide="' + esc(guide) + '" aria-label="' + esc((label ? (document.documentElement.lang === "cy" ? "Gwrando: " : "Hear it: ") : "Hear / Clywed: ") + text) + '">'
       + '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
       + (label ? bi("Hear it", "Gwrando") : "") + "</button>";
   }

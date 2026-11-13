@@ -2,3 +2,5 @@ _site/
 _artifact/
 __pycache__/
 *.pyc
+link-report.md
+link-count.txt

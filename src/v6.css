@@ -40,7 +40,7 @@ html.js .rv.in, html.rv-all .rv { opacity: 1; transform: none }
 .journey-chip svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg) }
 .journey-chip circle { fill: none; stroke-width: 3 }
 .journey-chip .tr { stroke: var(--line) } .journey-chip .fg { stroke: var(--gold); stroke-linecap: round; transition: stroke-dasharray .8s var(--ease) }
-.journey-chip b { font: 600 .72rem var(--f-mono); color: var(--ink) }
+.journey-chip b { font: 600 .75rem var(--f-mono); color: var(--ink) }
 .journey-chip .jc-l { font-size: .78rem; color: var(--muted); white-space: nowrap }
 .journey-chip:hover .tr { stroke: var(--muted) } .journey-chip:hover .jc-l { color: var(--ink) }
 @media (max-width: 640px) { .journey-chip .jc-l { display: none } }
@@ -57,7 +57,7 @@ html.js .rv.in, html.rv-all .rv { opacity: 1; transform: none }
 .menu-big a { display: flex; align-items: baseline; gap: 1.2rem; text-decoration: none; font-family: var(--f-display); font-size: clamp(2rem, 5.2vw, 3.7rem); line-height: 1.12; padding: .28rem 0; border-bottom: 1px solid rgba(46,54,71,.6); word-spacing: .1em; transition: color .2s, padding-left .35s var(--ease) }
 .menu-big a:hover, .menu-big a:focus-visible { color: var(--dragon); padding-left: .6rem }
 .menu-big a.on { color: var(--dragon) }
-.menu-big .n { font: 500 .72rem var(--f-mono); color: var(--muted); letter-spacing: .1em; width: 1.6rem }
+.menu-big .n { font: 500 .75rem var(--f-mono); color: var(--muted); letter-spacing: .1em; width: 1.6rem }
 .menu-big li { animation: menu-in .5s var(--ease) both; animation-delay: calc(var(--k, 0) * 40ms) }
 .menu-big li:nth-child(1) { --k: 1 } .menu-big li:nth-child(2) { --k: 2 } .menu-big li:nth-child(3) { --k: 3 } .menu-big li:nth-child(4) { --k: 4 } .menu-big li:nth-child(5) { --k: 5 } .menu-big li:nth-child(6) { --k: 6 } .menu-big li:nth-child(7) { --k: 7 } .menu-big li:nth-child(8) { --k: 8 } .menu-big li:nth-child(9) { --k: 9 }
 @keyframes menu-in { from { opacity: 0; transform: translateY(18px) } }
@@ -130,9 +130,9 @@ html.menu-open { overflow: hidden }
 @media (prefers-reduced-motion: reduce) { .begin { animation: none } .begin-card, .begin-card i { transition: none } }
 /* the nine ages always carry their dates, so a newcomer can tell the Age of Kings (800 – 1100) from the Age of Princes (1100 – 1485) */
 .m-dates, .c-dates { font: 500 .78em var(--f-mono); letter-spacing: .02em; opacity: .72; white-space: nowrap }
-.menu-group .m-dates { display: block; margin-top: .1rem; font-size: .72rem }
+.menu-group .m-dates { display: block; margin-top: .1rem; font-size: .75rem }
 .pager .m-dates { opacity: .75; margin-inline: .15rem }
-.foot-cols .m-dates { display: block; font-size: .7rem; margin-top: .05rem }
+.foot-cols .m-dates { display: block; font-size: .75rem; margin-top: .05rem }
 
 /* ---------- marquee ---------- */
 .marquee { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; cursor: grab; -webkit-user-select: none; user-select: none; overscroll-behavior-x: contain; border-block: 1px solid var(--line); padding-block: 1.1rem; background: var(--night); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent) }
@@ -163,7 +163,7 @@ html.menu-open { overflow: hidden }
 .bd-ev small { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin-top: .35rem; font: 400 .9rem/1.45 var(--f-body); color: rgba(255,255,255,.82) }
 .bd-ev b { display: inline-block; min-width: 3.4em; text-align: center; color: var(--gold); letter-spacing: .05em; border-bottom: 2px solid var(--gold); line-height: 1.1 }
 .bd-tiles { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .4rem }
-.bd-tiles i { aspect-ratio: 1; border-radius: 10px; border: 1.5px solid rgba(255,255,255,.3); background: rgba(0,0,0,.12); display: grid; place-items: center; font: 600 .74rem var(--f-mono); font-style: normal; color: #fff }
+.bd-tiles i { aspect-ratio: 1; border-radius: 10px; border: 1.5px solid rgba(255,255,255,.3); background: rgba(0,0,0,.12); display: grid; place-items: center; font: 600 .75rem var(--f-mono); font-style: normal; color: #fff }
 .bd-tiles i.next { border-color: #fff; background: rgba(255,255,255,.14); font: 400 1.3rem/1 var(--f-display); animation: bd-pulse 2.2s ease-in-out infinite }
 .bd-tiles i.ok { background: #7cc495; border-color: #7cc495; color: #0b1a10 } .bd-tiles i.c5 { background: #e8c65a; border-color: #e8c65a; color: #2a2108 }
 .bd-tiles i.c25 { background: #f0975a; border-color: #f0975a; color: #2b1406 } .bd-tiles i.c100 { background: #f6857e; border-color: #f6857e; color: #2b0d0b } .bd-tiles i.far { background: #3b4252; border-color: #59617a }
@@ -185,7 +185,7 @@ html.menu-open { overflow: hidden }
 .poster .shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(transparent 30%, rgba(9,12,19,.92)) }
 .poster .rn { position: absolute; top: 1rem; left: 1.1rem; font: 400 2.4rem/1 var(--f-display); color: var(--c) }
 .poster .txt { position: absolute; inset: auto 0 0 0; padding: 1.2rem 1.1rem 1.3rem; display: flex; flex-direction: column; gap: .45rem }
-.poster .span { font: 500 .68rem var(--f-mono); letter-spacing: .06em; color: var(--c); white-space: nowrap }
+.poster .span { font: 500 .75rem var(--f-mono); letter-spacing: .06em; color: var(--c); white-space: nowrap }
 .poster h3 { font-size: clamp(1.25rem, 1.9vw, 1.7rem); line-height: 1.05 }
 .poster p, .poster .go { font-size: .95rem; color: rgba(255,255,255,.82); max-height: 0; opacity: 0; overflow: hidden; transition: max-height .5s var(--ease), opacity .4s; min-width: 15rem }
 .poster .go { font-weight: 700; color: #fff }
@@ -197,9 +197,9 @@ html.menu-open { overflow: hidden }
   /* nine posters are narrow when closed, so a closed poster carries its title up the side */
   .poster h3 { writing-mode: vertical-rl; text-orientation: sideways; rotate: 180deg; white-space: nowrap; align-self: flex-start; font-size: clamp(1.2rem, 1.7vw, 1.5rem) }
   /* a closed poster keeps its dates too, running up the side beside its name */
-  .poster .span { position: absolute; right: .55rem; bottom: 1.3rem; writing-mode: vertical-rl; text-orientation: sideways; rotate: 180deg; font-size: .66rem }
+  .poster .span { position: absolute; right: .55rem; bottom: 1.3rem; writing-mode: vertical-rl; text-orientation: sideways; rotate: 180deg; font-size: .75rem }
   .posters:not(:hover):not(:focus-within) .poster:first-child h3, .poster:hover h3, .poster:focus-visible h3 { writing-mode: horizontal-tb; rotate: none; white-space: normal; font-size: clamp(1.25rem, 1.9vw, 1.7rem) }
-  .posters:not(:hover):not(:focus-within) .poster:first-child .span, .poster:hover .span, .poster:focus-visible .span { position: static; writing-mode: horizontal-tb; rotate: none; font-size: .68rem }
+  .posters:not(:hover):not(:focus-within) .poster:first-child .span, .poster:hover .span, .poster:focus-visible .span { position: static; writing-mode: horizontal-tb; rotate: none; font-size: .75rem }
   .posters:not(:hover):not(:focus-within) .poster:first-child, .poster:hover, .poster:focus-visible { flex-grow: 4.2 }
 }
 @media (hover: none), (max-width: 900px) {
@@ -235,7 +235,7 @@ html.menu-open { overflow: hidden }
 .s-card:hover .scene, .l-card:hover .scene { transform: scale(1.06) }
 .s-card .art { position: relative; aspect-ratio: 16 / 9; overflow: hidden; display: block; isolation: isolate }
 .s-card .txt { padding: 1.2rem 1.3rem 1.4rem; display: grid; gap: .55rem; align-content: start }
-.s-card .span, .l-card .span, .p-card .tag { font: 500 .7rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--c) }
+.s-card .span, .l-card .span, .p-card .tag { font: 500 .75rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--c) }
 .s-card h3 { font-size: 1.55rem; line-height: 1.1 }
 .s-card p { color: var(--muted); font-size: .95rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden }
 .s-card .go { font-weight: 700; font-size: .9rem; margin-top: .2rem }
@@ -257,7 +257,7 @@ html.menu-open { overflow: hidden }
 .mab-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem }
 .mab-tale { background: var(--slate); border: 1px solid var(--line); border-top: 3px solid var(--c, var(--gold)); border-radius: var(--r); padding: 1.3rem 1.4rem 1.4rem; display: flex; flex-direction: column; gap: .55rem }
 .mab-tale h3 { font-family: var(--f-display); font-weight: 400; font-size: 1.6rem; line-height: 1.15; margin: 0 }
-.mab-tale .mab-en { font: 500 .72rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--c, var(--gold)); margin: 0 }
+.mab-tale .mab-en { font: 500 .75rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--c, var(--gold)); margin: 0 }
 .mab-tale p { margin: 0; color: var(--muted) } .mab-tale .btn { align-self: flex-start; margin-top: auto }
 @media (max-width: 760px) { .mab-grid { grid-template-columns: 1fr } }
 .l-sum { color: var(--muted); max-width: 46rem; margin: -.8rem 0 1.6rem; font-size: 1.05rem }
@@ -294,9 +294,9 @@ html.menu-open { overflow: hidden }
 .p-card:hover .p-pic img { transform: scale(1.06) }
 .p-pic::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(9,12,19,.15) 0%, rgba(9,12,19,.35) 38%, rgba(9,12,19,.94) 78%), linear-gradient(0deg, color-mix(in srgb, var(--c) 30%, transparent), transparent 60%) }
 .p-ico { position: absolute; top: 1rem; right: 1rem; min-width: 3rem; height: 3rem; padding: 0 .55rem; border-radius: 999px; display: grid; place-items: center; font: 400 1.35rem/1 var(--f-display); color: #fff;
-  background: color-mix(in srgb, var(--c) 55%, rgba(9,12,19,.5)); border: 1px solid rgba(255,255,255,.3); backdrop-filter: blur(6px); box-shadow: 0 8px 20px -8px rgba(0,0,0,.6) }
+  background: color-mix(in srgb, var(--c) 45%, rgba(9,12,19,.62)); border: 1px solid rgba(255,255,255,.3); backdrop-filter: blur(6px); box-shadow: 0 8px 20px -8px rgba(0,0,0,.6) }
 .p-names .p-ico { font-style: italic }
-.p-card .tag { position: absolute; top: 1.15rem; left: 1.1rem; font: 600 .66rem var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: #fff; background: rgba(9,12,19,.55); border: 1px solid rgba(255,255,255,.22); border-radius: 999px; padding: .3rem .7rem; backdrop-filter: blur(6px) }
+.p-card .tag { position: absolute; top: 1.15rem; left: 1.1rem; font: 600 .75rem var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: #fff; background: rgba(9,12,19,.55); border: 1px solid rgba(255,255,255,.22); border-radius: 999px; padding: .3rem .7rem; backdrop-filter: blur(6px) }
 .p-txt { display: grid; gap: .35rem }
 .p-card h3 { font-size: 1.6rem; line-height: 1.06; text-shadow: 0 2px 18px rgba(0,0,0,.55) }
 .p-card p { color: #d9dce3; font-size: .93rem; line-height: 1.45; margin: 0 }
@@ -333,7 +333,7 @@ html.menu-open { overflow: hidden }
 .hero-art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(11,14,22,.9), rgba(11,14,22,.45) 55%, rgba(11,14,22,.1)), linear-gradient(transparent 55%, var(--night)) }
 .hero-art:has(.photo)::after { background: linear-gradient(90deg, rgba(11,14,22,.78), rgba(11,14,22,.3) 60%, rgba(11,14,22,.12)), linear-gradient(transparent 50%, var(--night)) } /* photographs: enough veil for the words, light enough to see the picture */
 .hero-art img.scene.photo, .l-card img.scene.photo, .s-card img.scene.photo, .poster img.scene.photo, .cc-img img.scene.photo { width: 100%; height: 100%; max-width: none; object-fit: cover }
-.hero-credit { font-size: .72rem; line-height: 1.45; color: rgba(225,228,236,.66); margin: 1.1rem 0 0; max-width: 46rem }
+.hero-credit { font-size: .75rem; line-height: 1.45; color: rgba(225,228,236,.66); margin: 1.1rem 0 0; max-width: 46rem }
 .hero-credit a { color: inherit; text-decoration: underline; text-underline-offset: 2px }
 .ph-credit { font-size: .8rem; color: var(--muted); margin-top: 1.2rem } .ph-credit a { color: inherit }
 .hero-art:has(image)::after { background: linear-gradient(90deg, rgba(11,14,22,.5), rgba(11,14,22,.15) 55%, rgba(11,14,22,.05)), linear-gradient(transparent 55%, var(--night)) } /* lighter veil where the art holds a picture (the dragons), so the picture is not dulled */
@@ -380,7 +380,7 @@ html.menu-open { overflow: hidden }
 .g-chips { display: flex; gap: .45rem; overflow-x: auto; padding: .7rem 0; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 92%, transparent) ; mask-image: linear-gradient(90deg, #000 92%, transparent) }
 .g-chips::-webkit-scrollbar { display: none }
 .g-chip { flex: none; font: 500 .85rem var(--f-body); color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: .42rem .85rem; cursor: pointer; white-space: nowrap; transition: background .2s, border-color .2s, color .2s }
-.g-chip i { font: 500 .7rem var(--f-mono); font-style: normal; color: var(--muted); margin-left: .2rem }
+.g-chip i { font: 500 .75rem var(--f-mono); font-style: normal; color: var(--muted); margin-left: .2rem }
 .g-chip:hover { border-color: var(--gold) }
 .g-chip.on { background: var(--gold); border-color: var(--gold); color: #14100a } .g-chip.on i { color: #14100a }
 .g-secs { padding: 1rem 0 2rem }
@@ -395,7 +395,7 @@ html.menu-open { overflow: hidden }
 .g-item img { display: block; width: 100%; height: auto; aspect-ratio: var(--ar, 4 / 3); object-fit: cover; transition: transform .8s var(--ease) }
 .g-item:hover img, .g-item:focus-visible img { transform: scale(1.04) }
 .g-item .cap { position: absolute; inset: auto 0 0 0; padding: 2.4rem 1rem .85rem; background: linear-gradient(transparent, rgba(9,12,19,.92)); display: grid; gap: .1rem }
-.g-item .cap b { font: 400 1.22rem/1.15 var(--f-display) } .g-item .cap span span, .g-item .cap > span { font: 500 .72rem var(--f-mono); color: var(--gold) }
+.g-item .cap b { font: 400 1.22rem/1.15 var(--f-display) } .g-item .cap span span, .g-item .cap > span { font: 500 .75rem var(--f-mono); color: var(--gold) }
 .g-credits summary { cursor: pointer; font-weight: 600 }
 .g-credits ol { columns: 2 22rem; column-gap: 2rem; font-size: .82rem; color: var(--muted); padding-left: 1.4rem } .g-credits li { break-inside: avoid; margin-bottom: .3rem }
 .g-credits a { color: var(--muted) }
@@ -410,7 +410,7 @@ html.menu-open { overflow: hidden }
 .g-x:hover, .g-prev:hover, .g-next:hover { background: var(--red) }
 .g-info { padding: 1rem clamp(1rem, 4vw, 2rem) max(1.2rem, env(safe-area-inset-bottom)); display: grid; gap: .35rem; max-width: 70rem }
 .g-info h3 { margin: 0; font: 400 1.6rem/1.1 var(--f-display) } .g-info p { margin: 0 } .g-what { color: #cfd3dc }
-.g-count { font: 500 .72rem var(--f-mono); color: var(--gold) } .g-cred { font-size: .8rem; color: #9aa1ae } .g-cred a { color: inherit }
+.g-count { font: 500 .75rem var(--f-mono); color: var(--gold) } .g-cred { font-size: .8rem; color: #9aa1ae } .g-cred a { color: inherit }
 .g-go { justify-self: start; margin-top: .4rem } .g-go[hidden] { display: none }
 @media (max-width: 640px) { .gallery { columns: 2 9rem; column-gap: .6rem } .g-item { margin-bottom: .6rem; border-radius: 12px } .g-item .cap { padding: 1.8rem .6rem .55rem } .g-item .cap b { font-size: 1rem } .g-item .cap > span { font-size: .62rem } .g-prev, .g-next { display: none } .g-info h3 { font-size: 1.3rem } }
 .photo img { border-radius: var(--r); height: auto }
@@ -455,7 +455,7 @@ footer .big span { color: var(--red) }
 .g-share { font: 500 1rem/1.5 var(--f-mono); background: var(--night); border: 1px solid var(--line); border-radius: 12px; padding: .8rem 1rem; white-space: pre-wrap }
 .g-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .6rem }
 .g-stats div { background: var(--night); border: 1px solid var(--line); border-radius: 14px; padding: .8rem; text-align: center }
-.g-stats b { display: block; font: 400 2rem/1 var(--f-display) } .g-stats span { font: 500 .68rem var(--f-mono); color: var(--muted); letter-spacing: .08em; text-transform: uppercase }
+.g-stats b { display: block; font: 400 2rem/1 var(--f-display) } .g-stats span { font: 500 .75rem var(--f-mono); color: var(--muted); letter-spacing: .08em; text-transform: uppercase }
 .g-map { width: 100%; max-width: 30rem; height: auto; display: block; margin-inline: auto; cursor: crosshair; touch-action: manipulation; overflow: visible }
 .g-map .land { fill: #232b3c; stroke: #55617a }
 .g-map .guess { fill: var(--ink); stroke: var(--night); stroke-width: 2 } .g-map .real { fill: var(--e-modern); stroke: var(--night); stroke-width: 2 }
@@ -487,7 +487,7 @@ footer .big span { color: var(--red) }
 .j-top { display: grid; grid-template-columns: minmax(0, 1.2fr) repeat(3, minmax(0, 1fr)); gap: 1rem }
 .j-top > div { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 1.4rem; display: grid; gap: .3rem; align-content: center }
 .j-top b { font: 400 clamp(2.2rem, 5vw, 3.4rem)/1 var(--f-display) } .j-top .rank b { color: var(--gold) }
-.j-top span { font: 500 .7rem var(--f-mono); color: var(--muted); letter-spacing: .08em; text-transform: uppercase }
+.j-top span { font: 500 .75rem var(--f-mono); color: var(--muted); letter-spacing: .08em; text-transform: uppercase }
 .j-top small { color: var(--muted); font-size: .88rem }
 @media (max-width: 860px) { .j-top { grid-template-columns: 1fr 1fr } .j-top .rank { grid-column: 1 / -1 } }
 .j-h { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 3rem 0 1.2rem }
@@ -593,7 +593,7 @@ footer .big span { color: var(--red) }
 .n-date { font-family: var(--f-mono); font-size: .76rem; color: var(--muted); letter-spacing: .04em; padding-top: .2rem }
 .n-t { font-weight: 700; line-height: 1.35 }
 .n-s { grid-column: 2; color: var(--muted); font-size: .95rem; line-height: 1.5 }
-.news-item.is-new .n-t::after { content: "New"; margin-left: .5rem; font: 700 .68rem var(--f-body); letter-spacing: .06em; text-transform: uppercase; color: #fff; background: var(--dragon-deep); border-radius: 999px; padding: .12rem .45rem; vertical-align: .15em }
+.news-item.is-new .n-t::after { content: "New"; margin-left: .5rem; font: 700 .75rem var(--f-body); letter-spacing: .06em; text-transform: uppercase; color: #fff; background: var(--dragon-deep); border-radius: 999px; padding: .12rem .45rem; vertical-align: .15em }
 html.cy .news-item.is-new .n-t::after { content: "Newydd" }
 .n-all { display: inline-block; margin-top: .8rem; font-weight: 700; color: var(--ink) }
 .news-list.big .news-item a { padding: 1.1rem 0; grid-template-columns: 9rem minmax(0, 1fr) }
@@ -617,6 +617,8 @@ html.cy .news-item.is-new .n-t::after { content: "Newydd" }
 .f-msg.ok { color: var(--ink); background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--gold); border-radius: 12px; padding: .8rem 1rem }
 .f-msg.err { color: var(--dragon) }
 .f-done .f-row { display: none }
+.follow .f-priv { color: var(--muted); font-size: .85rem; line-height: 1.45; margin: 0 }
+.follow .f-priv a { color: var(--ink); text-underline-offset: 2px; display: inline-block; padding-block: .2rem }
 .follow .f-more { font-size: .92rem; color: var(--muted); text-decoration: none; justify-self: start }
 .follow .f-more:hover { color: var(--dragon) }
 .follow-foot { margin-top: 1.4rem; max-width: 34rem }
@@ -670,7 +672,7 @@ html.cy .news-item.is-new .n-t::after { content: "Newydd" }
 .cc-img img, .cc-img svg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 25% }
 .cc-t { padding: .55rem .65rem .7rem; display: grid; gap: .15rem; align-content: start }
 .cc-t b { font: 400 1rem/1.15 var(--f-display) }
-.cc-t small { font: 500 .66rem var(--f-mono); color: var(--muted); letter-spacing: .02em }
+.cc-t small { font: 500 .75rem var(--f-mono); color: var(--muted); letter-spacing: .02em }
 .cc-no { position: absolute; top: .45rem; left: .45rem; font: 600 .62rem var(--f-mono); background: rgba(8,10,14,.72); color: #ece9e1; padding: .18rem .45rem; border-radius: 999px; z-index: 1 }
 .cc:not(.got) { opacity: .55 }
 .cc:not(.got) .cc-img img, .cc:not(.got) .cc-img svg { filter: grayscale(1) brightness(.45) }
@@ -696,14 +698,14 @@ html.cy .news-item.is-new .n-t::after { content: "Newydd" }
 .further a:hover { border-color: var(--gold); color: var(--gold) }
 
 /* Newest first (src/added.py): the "New" badge and the "Just added" strip at the top of ordered lists */
-.new-tag { display: inline-block; margin-left: .5rem; padding: .12rem .5rem; border-radius: 999px; background: #b8302a; color: #fff; font: 700 .66rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; vertical-align: .15em; line-height: 1.4 }
+.new-tag { display: inline-block; margin-left: .5rem; padding: .12rem .5rem; border-radius: 999px; background: #b8302a; color: #fff; font: 700 .75rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; vertical-align: .15em; line-height: 1.4 }
 .just-added { margin: 0 0 1.8rem; padding: 1rem 1.1rem 1.1rem; border: 1px solid color-mix(in srgb, var(--gold, #e8c65a) 45%, var(--line)); border-radius: 14px; background: color-mix(in srgb, var(--gold, #e8c65a) 6%, var(--slate, transparent)) }
 .just-added h2 { font: 600 .78rem var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--gold, #e8c65a); margin: 0 0 .7rem }
 .just-added ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr)); gap: .6rem }
 .just-added a { display: grid; grid-template-rows: 1fr auto; gap: .35rem; height: 100%; box-sizing: border-box; padding: .7rem .85rem; border-radius: 10px; border: 1px solid var(--line); background: var(--card, var(--slate)); text-decoration: none; color: var(--ink) }
 .just-added a:hover, .just-added a:focus-visible { border-color: var(--gold, #e8c65a) }
 .just-added b { font-weight: 600; line-height: 1.3 }
-.just-added .ja-d { font: 500 .72rem var(--f-mono); color: var(--muted); letter-spacing: .04em; text-transform: uppercase }
+.just-added .ja-d { font: 500 .75rem var(--f-mono); color: var(--muted); letter-spacing: .04em; text-transform: uppercase }
 /* Further reading and references at the end of every long read (src/refs.py, refs_block in build.py) */
 .refs { margin-top: 3rem; padding: 1.6rem clamp(1.1rem, 3vw, 1.8rem); border: 1px solid var(--line); border-radius: var(--r); background: var(--card) }
 .refs h2 { margin: 0 0 .5rem; font-size: clamp(1.35rem, 2.6vw, 1.7rem); color: var(--ink) }
@@ -750,7 +752,7 @@ html:not(.cy) .map-teaser .mlab .l-cy, html.cy .map-teaser .mlab .l-en { display
 @media (prefers-reduced-motion: reduce) { .map-teaser .pins .dot, .map-teaser .you circle.ring { animation: none } }
 /* the town finder */
 .mh-near { display: grid; gap: .55rem }
-.mh-near > label { font: 600 .7rem var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--gold) }
+.mh-near > label { font: 600 .75rem var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--gold) }
 .mh-row { display: flex; gap: .45rem; padding: .35rem; border-radius: 999px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.14); transition: border-color .2s, box-shadow .2s }
 .mh-row:focus-within { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(232,198,90,.15) }
 .mh-row input { flex: 1; min-width: 0; background: none; border: 0; outline: 0; color: var(--ink); font: 500 1.05rem var(--f-body); padding: .55rem .4rem .55rem .9rem }
@@ -775,7 +777,7 @@ html:not(.cy) .map-teaser .mlab .l-cy, html.cy .map-teaser .mlab .l-en { display
 .mh-pic { position: absolute; inset: 0; z-index: -1 } .mh-pic img { width: 100%; height: 100%; max-width: none; object-fit: cover; transition: transform 1.2s var(--ease) }
 .mh-card:hover .mh-pic img { transform: scale(1.06) }
 .mh-pic::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(9,12,19,.1), rgba(9,12,19,.5) 45%, rgba(9,12,19,.94)) }
-.mh-n { align-self: flex-start; margin-bottom: auto; font: 600 .66rem var(--f-mono); letter-spacing: .1em; text-transform: uppercase; background: rgba(9,12,19,.55); border: 1px solid rgba(255,255,255,.22); border-radius: 999px; padding: .3rem .7rem; backdrop-filter: blur(6px) }
+.mh-n { align-self: flex-start; margin-bottom: auto; font: 600 .75rem var(--f-mono); letter-spacing: .1em; text-transform: uppercase; background: rgba(9,12,19,.55); border: 1px solid rgba(255,255,255,.22); border-radius: 999px; padding: .3rem .7rem; backdrop-filter: blur(6px) }
 .mh-t { display: grid; gap: .2rem; padding-right: 2.6rem } .mh-t b { font: 400 1.6rem/1.05 var(--f-display) } .mh-t small { color: #d9dce3; font-size: .9rem; line-height: 1.4 }
 .mh-card .ar, .more-tile .ar { position: absolute; right: 1.1rem; bottom: 1.1rem; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.3); color: #fff; display: grid; place-items: center; font-size: 1.1rem; transition: transform .3s var(--ease), background .3s }
 .mh-card:hover .ar { transform: translateX(4px); background: var(--gold); color: var(--night); border-color: var(--gold) }
@@ -811,7 +813,7 @@ section.page-top { padding-top: clamp(1.5rem, 4vw, 3rem) }
 .author h3 { margin: 0; font-size: 1.15rem; color: var(--ink) }
 .author h3 a { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--gold) 55%, transparent); text-underline-offset: 3px }
 .author .au-d { margin: .15rem 0 .5rem; font-size: .82rem; color: #9aa0ad }
-.author .au-b { margin: .7rem 0 .3rem; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold) }
+.author .au-b { margin: .7rem 0 .3rem; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold) }
 .author ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .2rem }
 .author ul a { color: #dcdee4 }
 .shelf { scroll-margin-top: 5rem } .shelf li { scroll-margin-top: 6rem }
