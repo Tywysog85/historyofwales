@@ -24,7 +24,9 @@ html.js .rv.in, html.rv-all .rv { opacity: 1; transform: none }
 .progress i { display: block; height: 100%; width: 100%; transform: scaleX(0); transform-origin: left; background: linear-gradient(90deg, var(--red), var(--gold)) }
 .nav { z-index: 30; background: rgba(11,14,22,.72); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4) }
 .nav .wrap { flex-wrap: nowrap; gap: .6rem; padding-block: .6rem }
-.brand { white-space: nowrap; font-size: 1.35rem; word-spacing: .2em } /* Gloock sets the f of "of" almost against the W of "Wales"; a little more space between words (Ifan, 13 Nov 2026) */
+.brand { white-space: nowrap; font-size: 1.35rem }
+/* "History of Wales" in the logo: the same visible gap between each word (BRAND in build.py) */
+.brand .b-of { margin-left: .05em } .brand .b-wales { margin-left: .2em }
 .nav .nav-inline { display: flex; flex-wrap: nowrap; gap: 0 1.25rem; margin-right: .6rem; width: auto; order: 0 }
 .nav .nav-inline a { position: relative; padding: .4rem 0; white-space: nowrap }
 .nav .nav-inline a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--red); transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease) }
