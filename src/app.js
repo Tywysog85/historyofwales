@@ -35,7 +35,7 @@
   var STILL_IMG = { land: null, dragon: null, ref: null };
   /* how the pictures were taken (tools: see SKILLS.md "Still pictures of the 3D land"): w = page width, d = pixels per CSS pixel,
      h = hero height, b = how far the bottom of the picture runs below the row of figures (p) or the hero's foot (w) */
-  var STILL_REF = { p: { w: 390, d: 1.5, h: 1160, b: 220 }, w: { w: 1440, d: 1.5, h: 977, b: 0 } };
+  var STILL_REF = { p: { w: 390, d: 1.5, h: 1191, b: 220 }, w: { w: 1440, d: 1.5, h: 612, b: 0 } };
   var MONTHS_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   var MONTHS_CY = ["Ionawr","Chwefror","Mawrth","Ebrill","Mai","Mehefin","Gorffennaf","Awst","Medi","Hydref","Tachwedd","Rhagfyr"];
 
