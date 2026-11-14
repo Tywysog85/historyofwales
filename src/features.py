@@ -423,8 +423,9 @@ import welshnot as _WN  # The Welsh Not and how they tried to wipe out the langu
 import mabinogi as _MBG  # The Mabinogi: the books that kept the tales (src/mabinogi.py)
 import hen_ogledd as _HO  # Yr Hen Ogledd, the Old North (src/hen_ogledd.py)
 import brittany as _BZH  # Llydaw: how the Britons made a second Britain (src/brittany.py)
+import druids as _DRU  # The Druids: when Europe came to Britain to learn (src/druids.py)
 import welshrevival as _WRV  # Yma o Hyd: how the Welsh language came back (src/welshrevival.py)
-STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY, _NS.STORY, _RH.STORY] + _CH.STORIES + [_PT.STORY, _AF.STORY, _TW.STORY, _EP.STORY] + _MAC.STORIES + [_WN.STORY] + [_IN.STORY] + [_MBG.STORY] + [_WRT.STORY, _BRT.STORY] + [_BZH.STORY] + [_HO.STORY] + [_WRV.STORY]
+STORIES = STORIES + [_arthur, _P.GLYNDWR] + _P2.STORIES + _P3.STORIES + [_IO.STORY, _WB.STORY, _BR.STORY, _CE.STORY, _MD.STORY, _CR.STORY, _MX.STORY, _NS.STORY, _RH.STORY] + _CH.STORIES + [_PT.STORY, _AF.STORY, _TW.STORY, _EP.STORY] + _MAC.STORIES + [_WN.STORY] + [_IN.STORY] + [_MBG.STORY] + [_WRT.STORY, _BRT.STORY] + [_BZH.STORY] + [_HO.STORY] + [_WRV.STORY] + [_DRU.STORY]
 # the long reads on the language and on protest point on to the Welsh Not long read (src/welshnot.py)
 for _s in STORIES:
     if _s["id"] in ("language", "revival", "protest"):
@@ -435,6 +436,10 @@ for _s in STORIES:  # the long reads on the language, the Welsh Not and Gwynfor'
 for _s in STORIES:  # the industrial revolution long read, linked from the long reads beside it
     if _s["id"] in ("coal", "firsts", "world", "protest"):
         _s["links"] = [("story-industry.html", "How Wales moved the world: the industrial revolution", "Sut y symudodd Cymru’r byd: y chwyldro diwydiannol")] + _s.get("links", [])
+
+for _s in STORIES:  # the long reads on learning, Iolo and the Britons point on to the Druids (src/druids.py)
+    if _s["id"] in ("learning", "iolo", "celts", "brutus", "caradog"):
+        _s["links"] = _s.get("links", []) + [("story-druids.html", "The Druids: when Europe came to Britain to learn", "Y Derwyddon: pan ddaeth Ewrop i Brydain i ddysgu")]
 
 for _s in STORIES:  # the long reads on Arthur's world and the old poets point on to the Old North (src/hen_ogledd.py)
     if _s["id"] in ("writers", "mabinogi", "arthur"):

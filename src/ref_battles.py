@@ -18,7 +18,7 @@ BATTLES = [
    "The Druids and the Britons of Môn against Suetonius Paulinus", "Derwyddon a Brythoniaid Môn yn erbyn Suetonius Paulinus",
    "Tacitus describes the Britons lined up on the shore of the Menai, women in black running among them with torches and Druids raising their hands to the sky, a sight that froze the legions. Rome crossed and destroyed the sacred groves, but had to turn back when Boudica rose in the east.",
    "Mae Tacitus yn disgrifio’r Brythoniaid wedi’u rhesu ar lan y Fenai, menywod mewn du yn rhedeg yn eu plith â ffaglau a’r Derwyddon yn codi’u dwylo i’r nef, golygfa a rewodd y llengoedd. Croesodd Rhufain a dinistrio’r llwyni sanctaidd, ond bu’n rhaid troi’n ôl pan gododd Buddug yn y dwyrain.",
-   ["a-z.html#az-druids", "era-roman.html"], "o"),
+   ["story-druids.html", "a-z.html#az-druids", "era-roman.html"], "o"),
  B("caradog", "Caradog’s last stand", "Brwydr olaf Caradog", 51, "AD 51", "51 OC", None, "roman",
    "Caradog with the Ordovices and Silures against Ostorius Scapula", "Caradog gyda’r Ordofigiaid a’r Silwriaid yn erbyn Ostorius Scapula",
    "Caradog chose a hill with a river before it and ramparts of stone, somewhere in mid Wales or the March. He was defeated and later handed to Rome, but his speech before the emperor Claudius won his freedom. The Silures fought on for another quarter of a century.",

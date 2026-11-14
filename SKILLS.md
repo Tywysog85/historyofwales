@@ -901,6 +901,13 @@ Learnt while writing the Tryweryn long read (`src/tryweryn.py`, `story-tryweryn.
 - `data.py` stops the build if one person is listed twice or two events share a title. To rename an event without breaking its address, add the new title to `KEEP_SLUG` in `src/eventpages.py` with the old page name.
 - Timeline, era and trail rows no longer carry "Read the long read →" or "Long read: … →" lines (Whole cards are links); the event's own page links its long reads.
 
+### Reading the classical writers, and a long read on an age page (13 November 2026)
+Learnt while writing the Druids long read (`src/druids.py`, `story-druids.html`).
+- Perseus, LacusCurtius (penelope.uchicago.edu) and Wikisource are blocked for `curl` from the cloud, but the WebFetch tool reaches them once WebSearch has turned up the page. WebFetch only quotes about 125 characters at a time, so ask it for several short exact quotes, one per line, and name the translation from the page itself.
+- Good free English texts: Caesar (McDevitte and Bohn) at fgh.perseids.org, Diogenes Laertius and Ammianus at cts/fgh.perseids.org, Strabo, Diodorus, Cicero and Tacitus (Loeb) at LacusCurtius, Lucan (Ridley) at maryjones.us, Pliny (Bostock and Riley) at Perseus.
+- An age page can show one long read in a section of its own: one line in `era_page()` in `build.py` (`if eid == "britons"`), as the Saints age does for the saints. Use it for a long read that belongs to the whole age.
+- Ifan's rule for the Druids (13 November 2026): positive only, teachers, judges, philosophers, peacemakers; never sacrifice or anything negative. Leave such lines of the old writers out, and leave out books whose titles dwell on it.
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.

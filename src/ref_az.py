@@ -232,7 +232,7 @@ TERMS = [
  A("druids", "Druids (derwyddon)", "Derwyddon",
    "The learned class of the Britons: priests, judges and teachers. Caesar wrote that their learning was first found in Britain, and students crossed the sea to study it here. Ynys Môn was their great centre until AD 60.",
    "Dosbarth dysgedig y Brythoniaid: offeiriaid, barnwyr ac athrawon. Ysgrifennodd Cesar mai ym Mhrydain y cafwyd eu dysg gyntaf, a chroesai myfyrwyr y môr i’w hastudio yma. Ynys Môn oedd eu canolfan fawr hyd 60 OC.",
-   ["era-ancient.html", "place-cerrigbach.html"]),
+   ["story-druids.html", "era-ancient.html", "place-cerrigbach.html"]),
  A("ordovices", "Ordovices", "Ordofigiaid",
    "The people of north and mid Wales in Roman times. With Caradog they fought the legions; the Ordovician period of geology is named after them.",
    "Pobl gogledd a chanolbarth Cymru yn oes y Rhufeiniaid. Gyda Charadog buont yn ymladd y llengoedd; enwyd y cyfnod Ordofigaidd mewn daeareg ar eu hôl.",

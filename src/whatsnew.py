@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-13", "The Druids: when Europe came to Britain to learn", "Y Derwyddon: pan ddaeth Ewrop i Brydain i ddysgu",
+     "A new long read on the Druids, the teachers, judges and philosophers of the Britons: Julius Caesar’s witness that their learning began in Britain and that students crossed the sea to master it here, their twenty years of learning by heart, the Greek letters they wrote their business in, the Greek and Roman writers who praised them as philosophers and peacemakers, Môn their holy island, and how Wales kept their memory, from Armes Prydein to the Gorsedd.",
+     "Erthygl newydd ar y Derwyddon, athrawon, barnwyr ac athronwyr y Brythoniaid: tystiolaeth Iŵl Cesar mai ym Mhrydain y dechreuodd eu dysg a bod myfyrwyr yn croesi’r môr i’w meistroli yma, eu hugain mlynedd o ddysgu ar gof, y llythrennau Groeg yr ysgrifennent eu busnes ynddynt, yr awduron Groeg a Rhufeinig a’u canmolodd fel athronwyr a thangnefeddwyr, Môn eu hynys sanctaidd, a sut y cadwodd Cymru eu cof, o Armes Prydein i’r Orsedd.",
+     "story-druids.html"),
     ("2026-11-13", "Yma o Hyd: how the Welsh language came back", "Yma o Hyd: sut y daeth y Gymraeg yn ôl",
      "A new long read on the revival of Welsh: the Urdd and the school of seven children in Aberystwyth, Tynged yr Iaith and the sit-down on Trefechan Bridge, the road signs, the Welsh Language Acts and official status, Radio Cymru, Gwynfor’s fast and S4C, Sain, Mwng and Yma o Hyd, the census that turned in 2001, Welsh on the web and the million by 2050. The census chart on the home page now opens it.",
      "Erthygl newydd ar adfywiad y Gymraeg: yr Urdd a’r ysgol o saith o blant yn Aberystwyth, Tynged yr Iaith a’r eistedd i lawr ar Bont Trefechan, yr arwyddion ffyrdd, Deddfau’r Iaith a statws swyddogol, Radio Cymru, ympryd Gwynfor ac S4C, Sain, Mwng ac Yma o Hyd, y cyfrifiad a drodd yn 2001, y Gymraeg ar y we a’r miliwn erbyn 2050. Mae siart y cyfrifiad ar yr hafan yn ei hagor bellach.",

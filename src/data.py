@@ -720,6 +720,9 @@ EVENTS = sorted(EVENTS + _EPE, key=lambda ev: ev[1])
 from welshnot import EVENTS as _WNE
 EVENTS = sorted(EVENTS + _WNE, key=lambda ev: ev[1])
 
+# ---------- The Druids (src/druids.py) ----------
+from druids import EVENTS as _DRE
+EVENTS = sorted(EVENTS + _DRE, key=lambda ev: ev[1])
 # ---------- twelve ages (src/ages12.py): last of all, so everything above is moved into the right age ----------
 import ages12 as _A12
 _A12.apply(globals())

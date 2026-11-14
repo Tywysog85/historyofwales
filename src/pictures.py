@@ -38,6 +38,8 @@ ERA = dict(
 )
 
 PAGE = {
+    # The Druids long read (src/druids.py)
+    "story-druids.html": "g:druid-teaching@50% 30%",
     # the princes of Powys and Deheubarth (src/princes4.py)
     "person-gwenwynwyn.html": "g:cast-powis",
     "person-madog-ap-gruffudd-maelor.html": "g:holy-valle-crucis",
