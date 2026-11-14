@@ -73,13 +73,14 @@ REF.REFS.update(BRT.REFS)
 import hen_ogledd as HO  # noqa: E402  (Yr Hen Ogledd, the Old North: long read, map, the Men of the North block, reading list)
 REF.REFS.update(HO.REFS)
 import druids as DRU  # noqa: E402  (the Druids long read: reading list)
+import related as REL  # noqa: E402  (related reading at the end of every long read)
 REF.REFS.update(DRU.REFS)
 import oldbooks as OB  # noqa: E402  (the old books of Wales: a page for every book, book-<id>.html)
 REF2.PAGES.update(OB.REFS)
 REF2.PAGES.update(AG12.refs(REF2))  # reading lists for the twelve ages (src/ages12.py)
 import authors as AU  # noqa: E402  (the authors on the Books and authors page)
 import ylolfa as YLF  # noqa: E402  (Y Lolfa books: the "Y Lolfa" section of the Books and authors page)
-F.STORIES = AD.newest("story", F.STORIES)  # long reads: the newest first everywhere (index, home page, "Keep reading")
+F.STORIES = AD.newest("story", F.STORIES)  # long reads: the newest first everywhere (index, home page)
 L.TEACH.update(AG9.TEACH)
 L.TEACH.update(AG12.TEACH)
 for _x in F.STORIES:  # long reads, legends and tales carry an age but no year: move them into the twelve ages
@@ -1297,11 +1298,13 @@ JOURNEY_TOTAL = len(D.ERAS) + len(D.PEOPLE) + len(D.PLACES) + len(F.STORIES) + l
 STORY = {x["id"]: x for x in F.STORIES}
 
 
-def prose(pars, cls="prose", figs=None):
+def prose(pars, cls="prose", figs=None, hids=None, cy=False):
     # "## " sub-heading, "> quote | source" pull quote, "|| left | right" table row (rows in a run make one table),
     # "!! key" a credited picture: from the long read's own figs={key: Commons tuple} (see lit_fig), or a gallery id
-    # (src/gallery_photos.py)
+    # (src/gallery_photos.py). hids: the anchor ids for the sub-headings, in order (long reads, see head_ids): each
+    # heading then gets id= and a small link to itself, so any section can be shared.
     out, rows = "", []
+    hids = list(hids or [])
     for a in pars + [""]:
         if a.startswith("|| "):
             rows.append(a[3:].split(" | ", 1))
@@ -1320,6 +1323,10 @@ def prose(pars, cls="prose", figs=None):
                 raise SystemExit(f"prose(): unknown gallery picture '{a[3:].strip()}' (see src/gallery_photos.py)")
             g = GP.GALLERY[a[3:].strip()]
             out += photo_fig(None, "in-text portrait" if g[7] > g[6] else "in-text", a[3:].strip())  # tall pictures keep their faces
+        elif a.startswith("## ") and hids:
+            h = hids.pop(0)
+            lab = "Dolen i’r adran hon" if cy else "Link to this section"
+            out += f'<h2 id="{h}">{e(a[3:])}<a class="h-link" href="#{h}" aria-label="{lab}" title="{lab}">#</a></h2>'
         elif a.startswith("## "):
             out += f"<h2>{e(a[3:])}</h2>"
         elif a.startswith("> "):
@@ -1649,15 +1656,94 @@ def refs_ld(key):
     return [{"@type": "CreativeWork", "name": it[2], "author": it[1]} for it in r.get("items", []) if it[0] in "pb"]
 
 
-def story_body(x):
+TOC_MIN = 4  # a long read with this many sections or more gets a contents list at the top
+
+
+def _heads(pars):
+    return [CITE.strip(a[3:]).strip() for a in pars if a.startswith("## ")]
+
+
+def head_ids(x):
+    """Anchor ids for a long read's sections, made from the English headings so that the English and Welsh pages share
+    them (story-druids.html#taught-in-greek-letters and cy/story-druids.html#taught-in-greek-letters are the same
+    place, and the EN / CY switch keeps the reader's section). Short: the first few words of the heading."""
+    import unicodedata
+    he, hc = _heads(x["pEn"]), _heads(x["pCy"])
+    if len(he) != len(hc):
+        raise SystemExit(f'long read {x["id"]}: {len(he)} English sections but {len(hc)} Welsh ones; the "## " headings must pair up')
+    out, seen = [], {"contents", "main", "top", "refs", "progress", "to-top"}
+    for h in he:
+        w = unicodedata.normalize("NFD", h.lower()).encode("ascii", "ignore").decode()
+        w = re.sub(r"[^a-z0-9]+", " ", w).split()
+        sl, n = "", 0
+        for t in w:  # whole words up to about 40 letters
+            if sl and len(sl) + len(t) > 40:
+                break
+            sl = f"{sl}-{t}" if sl else t
+        sl = sl or "section"
+        base, n = sl, 2
+        while sl in seen:
+            sl, n = f"{base}-{n}", n + 1
+        seen.add(sl)
+        out.append(sl)
+    return out
+
+
+def story_toc(x, ids):
+    """The compact contents list near the top of a long read: one link per section. Phones show it closed when it is
+    long (site.js); a small bar at the foot of the screen then names the section being read and leads back here."""
+    if len(ids) < TOC_MIN:
+        return ""
+    def one(heads, lang, h_en, h_cy):
+        cy = lang == "cy"
+        lis = "".join(f'<li><a href="#{i}">{e(h)}</a></li>' for i, h in zip(ids, heads))
+        n = len(ids)
+        return (f'<nav class="toc l-{lang}" lang="{lang}" id="contents" aria-label="{h_cy if cy else h_en}"><details open>'
+                f'<summary><b>{h_cy if cy else h_en}</b><small>{n} {"adran" if cy else "sections"} · {x["mins"]} {"munud" if cy else "min"}</small></summary>'
+                f'<ol class="toc-list{" two" if n > 6 else ""}">{lis}</ol></details></nav>')
+    return (one(_heads(x["pEn"]), "en", "In this long read", "Yn yr erthygl hon")
+            + one(_heads(x["pCy"]), "cy", "In this long read", "Yn yr erthygl hon"))
+
+
+def story_body(x, ids=None):
     """The words of a long read. A paragraph "%% map" (in the English and the Welsh list alike) closes the column there,
-    puts in the long read's map across the page, and opens the column again (used by src/brittany.py)."""
+    puts in the long read's map across the page, and opens the column again (used by src/brittany.py).
+    ids: the anchor ids of its sections (head_ids)."""
     en, cy, figs = x["pEn"], x["pCy"], x.get("figs")
+    ids = ids or []
+    def pb(e_, c_, skip):  # one stretch of the text, its headings numbered on from `skip`
+        k = sum(1 for a in e_ if a.startswith("## "))
+        return (f'<div class="prose l-en" lang="en">{prose(e_, figs=figs, hids=ids[skip:skip + k])}</div>'
+                f'<div class="prose l-cy" lang="cy">{prose(c_, figs=figs, hids=ids[skip:skip + k], cy=True)}</div>'), skip + k
     if "%% map" not in en:
-        return prose_bi(en, cy, figs=figs)
+        return pb(en, cy, 0)[0]
     a, b = en.index("%% map"), cy.index("%% map")
-    return (prose_bi(en[:a], cy[:b], figs=figs) + '</div></section>' + brittany_map()
-            + '<section class="article"><div class="wrap narrow">' + prose_bi(en[a + 1:], cy[b + 1:], figs=figs))
+    first, k = pb(en[:a], cy[:b], 0)
+    return (first + '</div></section>' + brittany_map()
+            + '<section class="article"><div class="wrap narrow">' + pb(en[a + 1:], cy[b + 1:], k)[0])
+
+
+def related_ids(x):
+    """Three long reads on the same subject (src/related.py); for a long read not listed there yet, the three that share
+    the most people, places and events with it (the same age counts a little)."""
+    ids = {y["id"]: y for y in F.STORIES}
+    if x["id"] in REL.RELATED:
+        bad = [i for i in REL.RELATED[x["id"]] if i not in ids or i == x["id"]]
+        if bad:
+            raise SystemExit(f'src/related.py: {x["id"]} lists {bad}, which are not other long reads')
+        return [ids[i] for i in REL.RELATED[x["id"]]][:3]
+    print(f'  related reading for long read "{x["id"]}" picked by shared people and places: add it to src/related.py')
+    def score(y):
+        return sum(len(set(x.get(k, [])) & set(y.get(k, []))) for k in ("people", "places", "events")) + (0.5 if y["era"] == x["era"] else 0)
+    return sorted((y for y in F.STORIES if y["id"] != x["id"]), key=score, reverse=True)[:3]
+
+
+def era_card(eid):
+    """A card for one of the twelve ages, in the long-read card's style (whole card is the link)."""
+    era = ERA[eid]
+    return (f'<a class="s-card rv" href="era-{eid}.html" data-era="{eid}"><span class="art">{PX.card_img(f"era-{eid}.html", eid) or A.scene(ERA_ART[eid], COL[eid])}</span>'
+            f'<span class="txt"><span class="span">{bi("The age", "Yr oes")} · {bi(era["spanEn"], era["spanCy"])}</span><h3>{bi(era["en"], era["cy"])}</h3><p>{bi(era["blurbEn"], era["blurbCy"])}</p>'
+            f'</span></a>')
 
 
 def story_page(x, i):
@@ -1667,15 +1753,16 @@ def story_page(x, i):
         x["figs"]["map"], after = north_map()
     if x["id"] == "welsh-revival":  # the census chart goes at '!! chart' in the text (revival_chart())
         x["figs"]["chart"] = revival_chart()
-    others = [y for y in F.STORIES if y["id"] != x["id"]][:3]
+    others = related_ids(x)
+    ids = head_ids(x)
     era = ERA[x["era"]]
     meta = f'<p class="byline">{AB.byline_top()}<span>{x["mins"]} {bi("minute read", "munud o ddarllen")}</span><a href="era-{x["era"]}.html">{bi(era["en"], era["cy"])}</a><button type="button" class="copy" data-copy="story-{x["id"]}.html">{bi("Copy link", "Copïo’r ddolen")}</button></p>'
     main = (hero(x["era"], f'<a href="index.html">{SITE}</a> / <a href="stories.html">{bi("Long reads", "Erthyglau")}</a>', "book", "Long read", "Erthygl", x["en"], x["cy"], x["sumEn"], x["sumCy"], art=x["art"])
-            + f'<section class="article"><div class="wrap narrow">{meta}{story_body(x)}' + (f'<p><a class="btn solid" href="firsts.html">★ {bi("Every Welsh world first, with the people behind them", "Pob un o’r pethau a wnaeth Cymru gyntaf, a’r bobl y tu ôl iddynt")} →</a></p>' if x["id"] == "firsts" else "")
+            + f'<section class="article"><div class="wrap narrow">{meta}{story_toc(x, ids)}{story_body(x, ids)}' + (f'<p><a class="btn solid" href="firsts.html">★ {bi("Every Welsh world first, with the people behind them", "Pob un o’r pethau a wnaeth Cymru gyntaf, a’r bobl y tu ôl iddynt")} →</a></p>' if x["id"] == "firsts" else "")
               + story_more_links(x)
               + (f'<p><a class="btn solid" href="laws.html">{bi("Much more on the law: the big page on the Laws of Hywel Dda, with the manuscripts and a quiz", "Llawer mwy am y gyfraith: y dudalen fawr ar Gyfreithiau Hywel Dda, gyda’r llawysgrifau a chwis")} →</a></p>' if x["id"] == "hywel" else "") + refs_block(x["id"]) + '</div></section>'
             + after + (section(f'<div class="mb-figs">{"".join(lit_fig(f) for f in x["figs"])}</div>', "Pictures", "Lluniau") if isinstance(x.get("figs"), list) and x["figs"] else "")
-            + section(f'<div class="s-grid three">{"".join(story_card(y) for y in others)}</div>', "Keep reading", "Daliwch ati i ddarllen")
+            + section(f'<div class="s-grid four">{"".join(story_card(y) for y in others)}{era_card(x["era"])}</div>', "Read next on this subject", "Darllen nesaf ar y pwnc hwn")
             + section(f'<div class="pager"><a class="btn" href="stories.html">← {bi("All long reads", "Pob erthygl")}</a><a class="btn solid" href="story-{nxt["id"]}.html">{bi(nxt["en"], nxt["cy"])} →</a></div>'))
     ld = {"@context": "https://schema.org", "@type": "Article", "headline": x["en"], "description": x["sumEn"], "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
     if refs_ld(x["id"]):
@@ -1685,7 +1772,7 @@ def story_page(x, i):
 
 def stories_index():
     main = (hero("kings", f'<a href="index.html">{SITE}</a>', "book", "Long reads", "Erthyglau", "The stories behind the dates", "Y straeon y tu ôl i’r dyddiadau",
-                 "Short essays on the big questions of Welsh history. Each takes about five minutes.", "Erthyglau byr ar gwestiynau mawr hanes Cymru. Tua phum munud yr un.", art="book")
+                 "Essays on the big questions of Welsh history. Each one shows how long it takes to read.", "Erthyglau ar gwestiynau mawr hanes Cymru. Mae amser darllen pob un wedi’i nodi.", art="book")
             + section(f'<h2 class="sr-only">{bi("All long reads", "Pob erthygl")}</h2><div class="s-grid">{"".join(story_card(x, k == 0) for k, x in enumerate(F.STORIES))}</div>', top=True))
     return page("stories.html", "Long reads · History of Wales", "Essays on Welsh history: castles, the language, the laws of Hywel Dda, coal, protest and the Welsh across the world.", main, era="kings", og_type="website", active="stories.html")
 
@@ -4082,8 +4169,9 @@ def stories_more():
     shown = {x["id"] for x in home_stories()}
     faces = "".join(f'<span>{PX.card_img(f"story-{x["id"]}.html", x.get("era")) or ""}</span>' for x in [y for y in F.STORIES if y["id"] not in shown][:4])
     n = len(F.STORIES)
+    mn, mx = min(x["mins"] for x in F.STORIES), max(x["mins"] for x in F.STORIES)  # each long read keeps its own time
     return (f'<a class="more-tile rv" href="stories.html"><span class="p-faces" aria-hidden="true">{faces}</span>'
-            f'<span class="t"><b>{bi(f"All {n} long reads", f"Pob un o’r {n} erthygl")}</b><small>{bi("Five-minute stories on the big questions of Welsh history.", "Straeon pum munud ar gwestiynau mawr hanes Cymru.")}</small></span>'
+            f'<span class="t"><b>{bi(f"All {n} long reads", f"Pob un o’r {n} erthygl")}</b><small>{bi(f"Essays on the big questions of Welsh history, from {mn} to {mx} minutes.", f"Erthyglau ar gwestiynau mawr hanes Cymru, o {mn} i {mx} munud.")}</small></span>'
             f'<span class="ar" aria-hidden="true">→</span></a>')
 
 
