@@ -47,7 +47,7 @@ _GENERAL = {
     "laws.html": ("The Laws of Hywel Dda", "Cyfreithiau Hywel Dda"), "kings.html": ("Kings and princes", "Brenhinoedd a thywysogion"),
     "castles.html": ("Castles map", "Map y cestyll"), "saints.html": ("Saints of Wales", "Seintiau Cymru"), "family-trees.html": ("Royal family trees", "Coed teulu brenhinol"),
     "mabinogion.html": ("The Mabinogion", "Y Mabinogion"), "symbols.html": ("Symbols and traditions", "Symbolau a thraddodiadau"), "welsh.html": ("Learn Welsh", "Dysgu Cymraeg"),
-    "names.html": ("Welsh names", "Enwau Cymraeg"), "firsts.html": ("Welsh world firsts", "Cymru oedd y cyntaf"), "timeline.html": ("Timeline", "Llinell amser"),
+    "names.html": ("Welsh names", "Enwau Cymraeg"), "family-history.html": ("Finding your Welsh family", "Dod o hyd i’ch teulu Cymreig"), "firsts.html": ("Welsh world firsts", "Cymru oedd y cyntaf"), "timeline.html": ("Timeline", "Llinell amser"),
     "onthisday.html": ("On this day", "Ar y dydd hwn"), "gallery.html": ("Photo gallery", "Oriel luniau"), "stories.html": ("Long reads", "Erthyglau"),
     "legends.html": ("Legends", "Chwedlau"), "wales-in-10.html": ("Wales in 10 minutes", "Cymru mewn 10 munud"), "trails.html": ("Themed trails", "Llwybrau thema"),
     "literature.html": ("The literature of Wales", "Llenyddiaeth Cymru"), "books.html": ("The old books of Wales", "Hen lyfrau Cymru"), "triads.html": ("The Welsh Triads", "Trioedd Ynys Prydain"),
@@ -838,6 +838,7 @@ DESK = [  # href, English, Welsh, English line, Welsh line, era colour
     ("laws.html", "The Laws of Hywel Dda", "Cyfreithiau Hywel Dda", "The law of Wales for six hundred years.", "Cyfraith Cymru am chwe chan mlynedd.", "kings"),
     ("onthisday.html", "On this day", "Ar y dydd hwn", "What happened on every day of the year.", "Beth ddigwyddodd ar bob diwrnod o’r flwyddyn.", "medieval"),
     ("names.html", "Welsh surnames", "Cyfenwau Cymraeg", "What Welsh surnames mean and where they come from.", "Beth mae cyfenwau Cymraeg yn ei olygu ac o ble maent yn dod.", "saints"),
+    ("family-history.html", "Family history", "Hanes teulu", "Trace your Welsh ancestors: census, parish and chapel books, wills and tithe maps.", "Olrhain eich hynafiaid: y cyfrifiad, llyfrau’r plwyf a’r capel, ewyllysiau a mapiau’r degwm.", "revival"),
     ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau", "The dragon, the leek, the harp, the Mari Lwyd and more.", "Y ddraig, y genhinen, y delyn, y Fari Lwyd a rhagor.", "modern"),
 ]
 

@@ -979,6 +979,13 @@ A missing `}` after a `@media (pointer: coarse)` block once swallowed about 1,00
 ### Mountains close behind the castle
 Ifan (14 Nov 2026) wanted the mountains nearer the castle. In src/app.js the mountains are drawn 1.2 times bigger and a little lower on phones and in phone desktop mode (`mk`, `mdy` beside `HCL3.frame`), and `ground.fade` tells tools/land3d.src.js where the moor melts away (metres from the eye: 450–1000 on phones, 600–1300 in the middle layout, 800–1600 on wide screens). Nearer fade means less flat ground between the castle and the mountains. After changing either, rebuild hero3d.js, raise its `?v=`, retake the still pictures and raise `hero-land-*.webp?v=` (sw.js serves cached files first).
 
+### A guide page with its own module, and a finder that filters by year (14 November 2026)
+Learnt while building the family history corner (`family-history.html`, `src/family.py`).
+- **A whole page in one module.** Like the teacher packs, `src/family.py` holds the words, the data, the page's CSS and its small script, and gets the build's helpers through `setup(globals())`. build.py only imports it, adds `FAM.CSS` to the stylesheet and sets `pages["family-history.html"] = FAM.page()`. Its sources (`CITES`) are merged in `src/cites.py`, its reading list is `PAGES["family-history"]` at the end of `src/refs2.py`, and the list goes on the Books and authors page through the "lang" shelf in `SHELF`.
+- **A new stand-alone page needs a few lines elsewhere too:** the Menu (`NAV_GROUPS`) and footer lists in build.py, a search entry (`k="page"` near the end of the search items), a search title in `src/seo.py`, its picture in `PAGE` in `src/pictures.py`, and a title in `_GENERAL` in `src/refpages.py`. Without that title, links from the topic guides and quick answers are dropped and the build prints "links left out because the page does not exist".
+- **Filter a list by year.** Each row carries `data-from` and `data-to`; a range input (`<input type="range">` with an `<output>`) hides the rows whose span misses the chosen year, with ten years' grace either side. Without JavaScript every row shows, so the page still works.
+- **Checking family-history facts.** The National Library's family-history pages (library.wales, "information for family historians"), The National Archives' census guide and FreeBMD's "about" page all open from the cloud computer and say plainly what each record covers. Project Gutenberg is blocked; Gerald of Wales's Description of Wales (Hoare's translation) can be read on buildinghistory.org.
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
