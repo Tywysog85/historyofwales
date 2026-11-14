@@ -1663,6 +1663,7 @@ PEOPLE.update({
 LINKS.update({
  "sycharth": [("court-sycharth.html", "Walk through Sycharth in 3D", "Cerdded drwy Sycharth mewn 3D"), ("story-glyndwr.html", "Owain Glyndŵr", "Owain Glyndŵr"), ("ride-glyndwr.html", "Ride with Glyndŵr, 1400", "Marchogaeth gyda Glyndŵr, 1400")],
  "garthcelyn": [("court-aber.html", "Walk through Garth Celyn in 3D", "Cerdded drwy Garth Celyn mewn 3D")],
+ "dolwyddelan": [("court-dolwyddelan.html", "Walk through Dolwyddelan in 3D", "Cerdded drwy Ddolwyddelan mewn 3D")],
  "pilleth": [("story-glyndwr.html", "Owain Glyndŵr", "Owain Glyndŵr")],
  "pennal": [("story-glyndwr.html", "Owain Glyndŵr", "Owain Glyndŵr")],
  "penmynydd": [("trail-tudors.html", "The Tudor trail", "Llwybr y Tuduriaid")],

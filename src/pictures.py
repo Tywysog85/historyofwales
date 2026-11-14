@@ -258,6 +258,7 @@ PAGE = {
     "llys-rhosyr.html": "g:anci-llys-rhosyr",
     "court-sycharth.html": "g:place-sycharth",  # the courts in 3D (src/courts.py)
     "court-aber.html": "g:person-siwan",
+    "court-dolwyddelan.html": "g:cast-dolwyddelan",
     "story-mabinogi.html": "g:trea-red-book",
     # the Mabinogi tale guides (src/mabinogi_tales.py)
     "mabinogi-pwyll.html": "c:Narberth castle pembrokeshire.jpg@50% 55%",

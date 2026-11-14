@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-14", "Dolwyddelan in 3D: Llywelyn the Great’s castle on its rock", "Dolwyddelan mewn 3D: castell Llywelyn Fawr ar ei graig",
+     "Walk into Dolwyddelan as it might have looked about 1280: cross the timber bridge over the ditch cut in the rock, climb the steps to the great room of Llywelyn the Great’s keep, look out from its wall-walk to Tomen Castell, where he was most probably born, and hear how the castle fell in January 1283. Every stop names its sources.",
+     "Cerddwch i mewn i Ddolwyddelan fel y gallai fod wedi edrych tua 1280: croeswch y bont bren dros y ffos a dorrwyd yn y graig, dringwch y grisiau i ystafell fawr gorthwr Llywelyn Fawr, edrychwch allan o rodfa’r mur at Domen Castell, lle ganed ef yn ôl pob tebyg, a chlywed sut y syrthiodd y castell ym mis Ionawr 1283. Mae pob arhosfan yn enwi ei ffynonellau.",
+     "court-dolwyddelan.html"),
     ("2026-11-14", "Sycharth and Garth Celyn rebuilt in 3D, with their people", "Sycharth a Garth Celyn wedi’u hailadeiladu mewn 3D, gyda’u pobl",
      "Owain Glyndŵr’s Sycharth and the princes’ court at Aber look far more real: oak timber framing you can see standing out from the limewashed walls, a palisade of single sharpened logs, a gatehouse with its gates, trestle tables, leafy trees, and real-looking stone, slate, thatch and wood. Owain and Llywelyn sit at their high tables with the household around them, with guards at the gates, grooms and horses, hounds, sheep, cattle and deer, and you can hear the hall’s talk, the harp, the birds and the river.",
      "Mae Sycharth Owain Glyndŵr a llys y tywysogion yn Aber yn edrych yn llawer mwy byw: fframiau derw sy’n sefyll allan o’r waliau gwyngalch, palis o foncyffion miniog unigol, porthdy a’i byrth, byrddau trestl, coed deiliog, a cherrig, llechi, to gwellt a phren sy’n edrych yn real. Mae Owain a Llywelyn yn eistedd wrth eu byrddau uchel gyda’r teulu o’u cwmpas, gyda gwylwyr wrth y pyrth, gweision a cheffylau, cŵn hela, defaid, gwartheg a cheirw, a gallwch glywed sŵn y neuadd, y delyn, yr adar a’r afon.",
