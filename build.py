@@ -120,7 +120,7 @@ def e(s):
 head = read("head.html")
 body = read("body.html")
 app = read("app.js")
-extra_css = read("extra.css") + read("v6.css") + read("onthisday.css") + read("people2.css") + PN.css() + EVID.CSS
+extra_css = read("extra.css") + read("browse.css") + read("v6.css") + read("onthisday.css") + read("people2.css") + PN.css() + EVID.CSS
 EVID.check(D.EVENTS, D.PEOPLE)
 geo = json.loads(read("geo", "map.json"))
 la = json.loads(read("geo", "la.json"))
@@ -1362,8 +1362,8 @@ def prose_bi(en, cy, cls="prose", figs=None):
     return f'<div class="{cls} l-en" lang="en">{prose(en, figs=figs)}</div><div class="{cls} l-cy" lang="cy">{prose(cy, figs=figs)}</div>'
 
 
-def story_card(x, lead=False):
-    return (f'<a class="s-card rv{" lead" if lead else ""}" href="story-{x["id"]}.html" data-era="{x["era"]}"><span class="art">{PX.card_img(f"story-{x['id']}.html", x["era"]) or A.scene(x["art"], COL[x["era"]])}</span>'
+def story_card(x, lead=False, attrs=""):
+    return (f'<a class="s-card rv{" lead" if lead else ""}" href="story-{x["id"]}.html" data-era="{x["era"]}"{attrs}><span class="art">{PX.card_img(f"story-{x['id']}.html", x["era"]) or A.scene(x["art"], COL[x["era"]])}</span>'
             f'<span class="txt"><span class="span">{bi("Long read", "Erthygl")} · {x["mins"]} {bi("min", "mun")}{new_tag("story", x["id"])}</span><h3>{bi(x["en"], x["cy"])}</h3><p>{bi(x["sumEn"], x["sumCy"])}</p>'
             f'</span></a>')
 
@@ -1770,11 +1770,71 @@ def story_page(x, i):
     return page(f"story-{x['id']}.html", f'{x["en"]} · History of Wales', x["sumEn"], main, era=x["era"], ld=ld, active="stories.html", track=f"story:{x['id']}")
 
 
+def story_subjects(x):
+    """The subjects of one long read for the filters on stories.html (src/related.py)."""
+    keys = {k for k, _, _ in REL.SUBJECTS}
+    subj = REL.STORY_SUBJECTS.get(x["id"])
+    if subj is None:
+        subj = sorted({k for y in related_ids(x) for k in REL.STORY_SUBJECTS.get(y["id"], [])})
+        print(f'  subjects for long read "{x["id"]}" borrowed from its related reading: add it to STORY_SUBJECTS in src/related.py')
+    bad = [k for k in subj if k not in keys]
+    if bad:
+        raise SystemExit(f'src/related.py: STORY_SUBJECTS["{x["id"]}"] has {bad}, which are not in SUBJECTS')
+    return subj
+
+
+# Reading time on stories.html: (key, English, Welsh, test on the minutes)
+STORY_LENGTHS = [("short", "Under 10 min", "Llai na 10 munud", lambda m: m < 10),
+                 ("mid", "10 to 15 min", "10 i 15 munud", lambda m: 10 <= m <= 15),
+                 ("long", "Over 15 min", "Dros 15 munud", lambda m: m > 15)]
+
+
+def story_length(m):
+    return next(k for k, _, _, t in STORY_LENGTHS if t(m))
+
+
+def story_filters():
+    """Subject, age and reading-time filters above the long reads (src/static/stories.js does the filtering).
+    Each group is a row of chips, one row to swipe on phones; the ages keep their dates (EDITORIAL.md)."""
+    subj = {x["id"]: story_subjects(x) for x in F.STORIES}
+    n_subj = {k: sum(k in v for v in subj.values()) for k, _, _ in REL.SUBJECTS}
+    n_era = {}
+    for x in F.STORIES:
+        n_era[x["era"]] = n_era.get(x["era"], 0) + 1
+    n_len = {k: sum(t(x["mins"]) for x in F.STORIES) for k, _, _, t in STORY_LENGTHS}
+
+    def chip(group, key, label, n, era=None):
+        return (f'<button type="button" class="chip" data-f="{group}" data-v="{key}" aria-pressed="false"{f" data-era={chr(34)}{era}{chr(34)}" if era else ""}>'
+                f'{"<i></i>" if era else ""}{label} <span class="n">{n}</span></button>')
+
+    def group(gid, en, cy, chips_html):
+        return (f'<div class="sf-group"><p class="sf-lbl" id="sf-{gid}">{bi(en, cy)}</p>'
+                f'<div class="chips sf-row" role="group" aria-labelledby="sf-{gid}">'
+                f'<button type="button" class="chip" data-f="{gid}" data-v="" aria-pressed="true">{bi("All", "Y cyfan")}</button>{chips_html}</div></div>')
+
+    subjects = "".join(chip("subject", k, bi(en, cy), n_subj[k]) for k, en, cy in REL.SUBJECTS if n_subj[k])
+    ages = "".join(chip("age", x["id"], bi(x["en"], x["cy"]) + f' <span class="c-dates">{bi(x["spanEn"], x["spanCy"])}</span>', n_era[x["id"]], x["id"])
+                   for x in D.ERAS if n_era.get(x["id"]))
+    lengths = "".join(chip("time", k, bi(en, cy), n_len[k]) for k, en, cy, _ in STORY_LENGTHS if n_len[k])
+    return (f'<div class="sf" id="sf" hidden>'
+            + group("subject", "Subject", "Pwnc", subjects)
+            + group("age", "Age", "Oes", ages)
+            + group("time", "Reading time", "Amser darllen", lengths)
+            + f'<div class="sf-foot"><p class="people-count" id="sf-count" role="status"></p>'
+            f'<button type="button" class="btn ghost" id="sf-clear" hidden>{bi("Show all long reads", "Dangos pob erthygl")}</button></div></div>'
+            f'<p class="sf-none" id="sf-none" hidden>{bi("No long read matches all of these. Try fewer filters.", "Does dim erthygl yn cyfateb i bob un o’r rhain. Rhowch gynnig ar lai o hidlwyr.")}</p>'), subj
+
+
 def stories_index():
+    filters, subj = story_filters()
+
+    def attrs(x):
+        return f' data-subj="{" ".join(subj[x["id"]])}" data-time="{story_length(x["mins"])}"'
     main = (hero("kings", f'<a href="index.html">{SITE}</a>', "book", "Long reads", "Erthyglau", "The stories behind the dates", "Y straeon y tu ôl i’r dyddiadau",
                  "Essays on the big questions of Welsh history. Each one shows how long it takes to read.", "Erthyglau ar gwestiynau mawr hanes Cymru. Mae amser darllen pob un wedi’i nodi.", art="book")
-            + section(f'<h2 class="sr-only">{bi("All long reads", "Pob erthygl")}</h2><div class="s-grid">{"".join(story_card(x, k == 0) for k, x in enumerate(F.STORIES))}</div>', top=True))
-    return page("stories.html", "Long reads · History of Wales", "Essays on Welsh history: castles, the language, the laws of Hywel Dda, coal, protest and the Welsh across the world.", main, era="kings", og_type="website", active="stories.html")
+            + section(f'<h2 class="sr-only">{bi("All long reads", "Pob erthygl")}</h2>{filters}<div class="s-grid" id="s-all">{"".join(story_card(x, k == 0, attrs(x)) for k, x in enumerate(F.STORIES))}</div>', top=True))
+    return page("stories.html", "Long reads · History of Wales", "Essays on Welsh history: castles, the language, the laws of Hywel Dda, coal, protest and the Welsh across the world.", main, era="kings", og_type="website", active="stories.html",
+                extra=f'<script src="stories.js?v={_static_fp("stories.js")}" defer></script>\n')
 
 
 def legend_credit(art):

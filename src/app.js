@@ -525,6 +525,13 @@
     el.onclick = function (ev) { var b = ev.target.closest(".chip"); if (b) onPick(b.dataset.v); };
   }
 
+  /* a chip row that swipes on phones is redrawn on every tap: put it back where it was, then bring the chosen chip into view */
+  function chipRowKeep(el, sl) {
+    el.scrollLeft = sl;
+    var on = el.querySelector('[aria-pressed="true"]');
+    if (on && el.scrollWidth > el.clientWidth) { var l = on.offsetLeft - el.offsetLeft, r = l + on.offsetWidth; if (l < el.scrollLeft || r > el.scrollLeft + el.clientWidth) el.scrollLeft = Math.max(0, l - 24); }
+  }
+
   /* ---------- On this day ---------- */
   // Until onthisday.json arrives (or if it cannot load) the panel uses the dated timeline events.
   // The JSON adds saints' days, traditions, births and deaths for nearly every day; ‹ › step through the year.
@@ -608,7 +615,11 @@
         ERAS.map(function (e) { return '<a class="chip" data-era="' + e.id + '" href="timeline.html#era-' + e.id + '"><i></i>' + T(e.en, e.cy) + ' <span class="c-dates">' + T(e.spanEn, e.spanCy) + "</span></a>"; }).join("");
       return;
     }
-    chips($("#tl-filter"), tlEra, setTlEra, counts);
+    var tf = $("#tl-filter"), tsl = tf.scrollLeft;
+    chips(tf, tlEra, setTlEra, counts);
+    chipRowKeep(tf, tsl);
+    $("#tl-q").placeholder = T("e.g. 1282, Hywel, Tryweryn", "e.e. 1282, Hywel, Tryweryn");
+    if (tlQ) tlFind(false);
     var html = "", last = null, n = 0;
     EVENTS.forEach(function (e, i) {
       if (tlEra !== "all" && e[E_ERA] !== tlEra) return;
@@ -623,6 +634,66 @@
     evEls = $$("#events .ev"); active = -1;
     $("#dial-bar").innerHTML = ERAS.map(function (E) { return '<div data-era="' + E.id + '" style="--n:' + counts[E.id] + '"><i></i></div>'; }).join("");
     onScroll();
+  }
+  /* ---------- Timeline: jump to a year, person or event (November 2026) ----------
+     A year ("1282", "500 BC", "c. 60 OC") lists the events nearest to it; words list the events whose title or text
+     hold every word (either language, accents ignored), titles first. Enter or Go jumps to the first; a row jumps to its event. */
+  var tlQ = "", TL_HAY = null;
+  function fold(s) { return String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[’'`]/g, ""); }
+  function tlYear(q) {
+    var m = /^(?:c\.?\s*)?(\d{1,3}(?:,\d{3})+|\d+)\s*(bc|bce|cc|ad|ce|oc)?\.?$/i.exec(q.trim());
+    if (!m) return null;
+    var y = +m[1].replace(/,/g, ""), suf = (m[2] || "").toLowerCase();
+    return suf === "bc" || suf === "bce" || suf === "cc" || (!suf && y > new Date().getFullYear() + 1) ? -y : y;
+  }
+  function tlFind(go) {
+    var q = tlQ.trim(), msg = $("#tl-msg"), list = $("#tl-hits"), hits = [], y = tlYear(q), MAX = window.matchMedia && matchMedia("(max-width: 860px)").matches ? 5 : 8;  /* five rows on phones, like the map */
+    if (!q) { msg.textContent = ""; list.innerHTML = ""; return; }
+    if (y !== null) {
+      hits = EVENTS.map(function (e, i) { return i; }).sort(function (a, b) { return Math.abs(EVENTS[a][E_Y] - y) - Math.abs(EVENTS[b][E_Y] - y) || a - b; }).slice(0, 5);
+      var best = hits[0];
+      hits.sort(function (a, b) { return a - b; });
+      hits.splice(hits.indexOf(best), 1); hits.unshift(best);  /* the nearest first (Enter goes there), then the others in date order */
+      msg.textContent = T("Nearest to ", "Agosaf at ") + (y < 0 ? fmt(-y) + T(" BC", " CC") : y) + ":";
+    } else {
+      if (!TL_HAY) TL_HAY = EVENTS.map(function (e) { return [fold(e[E_TEN] + " " + e[E_TCY]), fold(e[E_TEN] + " " + e[E_TCY] + " " + e[E_BEN] + " " + e[E_BCY])]; });
+      var words = fold(q).split(/\s+/).filter(Boolean), inT = [], inB = [];
+      EVENTS.forEach(function (e, i) {
+        var h = TL_HAY[i];
+        if (!words.every(function (w) { return h[1].indexOf(w) >= 0; })) return;
+        (words.every(function (w) { return h[0].indexOf(w) >= 0; }) ? inT : inB).push(i);
+      });
+      hits = inT.concat(inB);
+      msg.textContent = !hits.length ? T("No event matches “" + q + "”. Try a year, or another name.", "Does dim digwyddiad yn cyfateb i “" + q + "”. Rhowch gynnig ar flwyddyn, neu enw arall.")
+        : hits.length === 1 ? T("1 event:", "1 digwyddiad:")
+        : hits.length > MAX ? T(hits.length + " events. Here are the first " + MAX + ": add a word to narrow it down.", hits.length + " o ddigwyddiadau. Dyma’r " + MAX + " cyntaf: ychwanegwch air i’w cyfyngu.")
+        : T(hits.length + " events:", hits.length + " o ddigwyddiadau:");
+      hits = hits.slice(0, MAX);
+    }
+    list.innerHTML = hits.map(function (i) { var e = EVENTS[i], E = ERA[e[E_ERA]]; return '<li><button type="button" class="near-go" data-ev="' + i + '" data-era="' + e[E_ERA] + '"><span>' + yearLabel(e) + " · " + T(E.en, E.cy) + "</span><b>" + esc(T(e[E_TEN], e[E_TCY])) + "</b></button></li>"; }).join("");
+    if (go && hits.length) tlJump(hits[0]);
+  }
+  function tlJump(i) {
+    if (tlEra !== "all" && EVENTS[i][E_ERA] !== tlEra) setTlEra("all");
+    var el = document.getElementById("ev-" + i); if (!el) return;
+    $$("#tl-hits .near-go").forEach(function (b) { b.classList.toggle("on", +b.dataset.ev === i); });
+    $$("#events .ev.hit").forEach(function (x) { x.classList.remove("hit"); });
+    el.classList.add("hit");
+    goTo(el, "center");
+    var a = el.querySelector("a.wl"); if (a) a.focus({ preventScroll: true }); else $("#tl-q").blur();
+    if (history.replaceState) history.replaceState(null, "", "#ev-" + i);
+  }
+  if (HAS_TL) {
+    $("#tl-jump").addEventListener("submit", function (ev) { ev.preventDefault(); tlQ = $("#tl-q").value; tlFind(true); });
+    $("#tl-q").addEventListener("input", function () { tlQ = this.value; tlFind(false); });
+    $("#tl-q").addEventListener("keydown", function (ev) { if (ev.key === "ArrowDown" && document.getElementById("tl-hits").firstChild) { ev.preventDefault(); $("#tl-hits .near-go").focus(); } });
+    $("#tl-hits").addEventListener("click", function (ev) { var b = ev.target.closest("[data-ev]"); if (b) tlJump(+b.dataset.ev); });
+    $("#tl-hits").addEventListener("keydown", function (ev) {
+      var bs = $$("#tl-hits .near-go"), k = bs.indexOf(document.activeElement);
+      if (ev.key === "ArrowDown" && k < bs.length - 1) { ev.preventDefault(); bs[k + 1].focus(); }
+      else if (ev.key === "ArrowUp") { ev.preventDefault(); (k > 0 ? bs[k - 1] : $("#tl-q")).focus(); }
+      else if (ev.key === "Escape") $("#tl-q").focus();
+    });
   }
   function showYear(e) {
     var to = e[E_Y], from = shownYear, el = $("#dial-yr"), st = null;
@@ -673,9 +744,7 @@
     /* the age chips are one row to swipe on phones: keep the row where it was when it is redrawn, and bring the chosen age into view */
     var mf = $("#map-filter"), sl = mf.scrollLeft;
     chips(mf, mapEra, function (v) { mapEra = v; nearN = NEAR_STEP; renderPins(); if (mapEra !== "all" && PLACE[sel].era !== mapEra) selectPlace(PLACES.filter(function (p) { return p.era === mapEra; })[0].id); renderNear(); }, counts);
-    mf.scrollLeft = sl;
-    var on = mf.querySelector('[aria-pressed="true"]');
-    if (on && mf.scrollWidth > mf.clientWidth) { var l = on.offsetLeft - mf.offsetLeft, r = l + on.offsetWidth; if (l < mf.scrollLeft || r > mf.scrollLeft + mf.clientWidth) mf.scrollLeft = Math.max(0, l - 24); }
+    chipRowKeep(mf, sl);
     $("#pins").innerHTML = PLACES.map(function (p) {
       var xy = proj(p.lat, p.lon), right = xy[0] > 430;
       return '<g class="pin' + (p.id === sel ? " sel" : "") + (mapEra !== "all" && p.era !== mapEra ? " dim" : "") + '" data-era="' + p.era + '" data-pid="' + p.id + '" tabindex="0" role="button" aria-label="' + esc(T(p.en, p.cy)) + '" transform="translate(' + xy[0].toFixed(1) + " " + xy[1].toFixed(1) + ')">' +
