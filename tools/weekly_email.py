@@ -223,11 +223,8 @@ def build(today):
                    f'<p style="margin:0 0 16px;font:400 15px/1.6 {SANS};color:{MUTED}">{e(w["note"])}</p>'
                    f'<a href="{SITE}welsh.html" style="font:700 14px/1 {SANS};color:{GOLD};text-decoration:none">Learn a Welsh word every day &rarr;</a></td></tr></table></td></tr>')
 
-    # play
-    out.append(f'<tr><td style="padding:36px 32px 0" align="center"><p style="margin:0 0 6px;font:400 24px/1.2 {SERIF};color:{INK}">Fancy a challenge?</p>'
-               f'<p style="margin:0 0 18px;font:400 15px/1.55 {SANS};color:{MUTED}">A new daily challenge is waiting every morning. How well do you know your history?</p>'
-               f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center"><tr><td>{button(SITE + "daily.html", "Play today’s challenge", RED, "#ffffff")}</td>'
-               f'<td width="10" style="width:10px">&nbsp;</td><td>{button(SITE + "quiz.html", "Take the quiz", SLATE2, INK)}</td></tr></table></td></tr>')
+    # the weekly quiz: a taste of this week's first question, and last week's top three from the leaderboard
+    out.append(quiz_block(today))
 
     # sign-off and footer
     out.append(f'<tr><td style="padding:44px 32px 0"><p style="margin:0;font:400 44px/1 {SERIF};color:{INK}">Diolch<span style="color:{RED}">.</span></p>'
@@ -269,6 +266,47 @@ def build(today):
 </body>
 </html>'''
     return subject, preview, doc
+
+
+def quiz_block(today):
+    """This week's quiz (src/quiz_weeks.json), with last week's champions when the leaderboard is up."""
+    wk = (today - datetime.timedelta(days=today.weekday())).isoformat()
+    try:
+        weeks = json.load(open(os.path.join(ROOT, "src", "quiz_weeks.json"), encoding="utf-8"))
+    except (OSError, ValueError):
+        weeks = {}
+    w = weeks.get(wk)
+    champs = []
+    lb = os.environ.get("LEADERBOARD_URL", "").rstrip("/")
+    try:
+        if not lb:   # the address the live site uses (deploy.yml finds it)
+            with urllib.request.urlopen(SITE + "quiz/index.json", timeout=20) as r:
+                lb = (json.loads(r.read().decode()).get("lb") or "").rstrip("/")
+        if lb and w:
+            with urllib.request.urlopen(urllib.request.Request(f"{lb}/board?week={wk}", headers={"User-Agent": "historyofwales-email"}), timeout=20) as r:
+                champs = json.loads(r.read().decode()).get("last") or []
+    except Exception as err:   # no leaderboard yet, or it could not be reached: the email goes without it
+        print("Leaderboard not read:", err)
+    url = SITE + "weekly-quiz.html"
+    teaser = ""
+    if w:
+        q = w["qs"][0]
+        line = (q.get("t") or q["h"])[0]
+        teaser = (f'<p style="margin:0 0 6px;font:700 12px/1.4 {SANS};letter-spacing:.12em;text-transform:uppercase;color:{GOLD}">Question 1</p>'
+                  f'<p style="margin:0 0 18px;font:400 21px/1.3 {SERIF};color:{INK}">{e(q["h"][0])}' + (f'<br><span style="color:{MUTED};font-size:17px">{e(line)}</span>' if q.get("t") else "") + '</p>')
+    rows = ""
+    for i, (nick, score, secs) in enumerate(champs[:3]):
+        rows += (f'<tr><td width="34" style="width:34px;padding:6px 0;font:400 18px/1 {SANS}">{["&#129351;", "&#129352;", "&#129353;"][i]}</td>'
+                 f'<td style="padding:6px 0;font:700 16px/1.3 {SANS};color:{INK}">{e(nick)}</td>'
+                 f'<td align="right" style="padding:6px 0;font:400 14px/1 {MONO};color:{MUTED}">{score}/10 &middot; {secs // 60}:{secs % 60:02d}</td></tr>')
+    champ_html = (f'<p style="margin:22px 0 6px;font:700 12px/1.4 {SANS};letter-spacing:.12em;text-transform:uppercase;color:{MUTED}">Last week’s champions</p>'
+                  f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">{rows}</table>') if rows else ""
+    num = f" · week {w['n']}" if w else ""
+    return (section("The weekly quiz" + num, "Cwis yr wythnos")
+            + f'<tr><td style="padding:14px 32px 0"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="{SLATE}" style="{bg(SLATE)};border:1px solid {LINE};border-radius:16px">'
+              f'<tr><td style="padding:22px 24px 24px"><p style="margin:0 0 16px;font:400 16px/1.6 {SANS};color:{MUTED}">Ten new questions are out, three of them on the anniversaries in this email. One go each, and a leaderboard to climb.</p>'
+              f'{teaser}{button(url, "Take this week’s quiz &rarr;", RED, "#ffffff")}{champ_html}'
+              f'<p style="margin:20px 0 0;font:400 14px/1.5 {SANS};color:{MUTED}">And every morning, a new <a href="{SITE}daily.html" style="color:{GOLD}">daily challenge</a>.</p></td></tr></table></td></tr>')
 
 
 def api(path, body, key):

@@ -1022,6 +1022,8 @@ from ages12 import CITES as _AGES12  # noqa: E402  (the places of the Age of Rev
 S.update(_AGES12)
 from courts import CITES as _COURTS  # noqa: E402  (the courts in 3D, src/courts.py)
 S.update(_COURTS)
+from family import CITES as _FAMILY  # noqa: E402  (family history, src/family.py)
+S.update(_FAMILY)
 
 MARK = re.compile(r"\[\[cite:([a-z0-9,\- ]+)\]\]")
 

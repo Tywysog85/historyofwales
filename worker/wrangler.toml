@@ -1,0 +1,18 @@
+# The leaderboard for the weekly quiz: a Cloudflare Worker on the free plan (see worker/README.md).
+# deploy.yml puts it up on every deploy once the CLOUDFLARE_API_TOKEN secret is set.
+name = "historyofwales-quiz"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+preview_urls = false
+
+[[durable_objects.bindings]]
+name = "BOARD"
+class_name = "Board"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Board"]
+
+[observability]
+enabled = false
