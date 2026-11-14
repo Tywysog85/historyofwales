@@ -222,7 +222,7 @@
   if (location.pathname.indexOf("whatsnew") >= 0) put("hc-news-seen", latest);
   else if (latest > seen) {
     mb.classList.add("has-news");
-    Array.prototype.forEach.call(d.querySelectorAll('.menu a[href="whatsnew.html"]'), function (a) { a.classList.add("has-news"); });
+    Array.prototype.forEach.call(d.querySelectorAll('.menu a[href="whatsnew.html"], .menu a[href="cy/whatsnew.html"]'), function (a) { a.classList.add("has-news"); });
   }
 })();
 

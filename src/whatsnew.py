@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-14", "Garth Celyn in 3D: the princes’ court at Aber", "Garth Celyn mewn 3D: llys y tywysogion yn Aber",
+     "Walk into the court of the princes of Gwynedd at Abergwyngregyn, between the mountains and the sea: the stone hall with its two wings found by the archaeologists, the mound Pen y Mwd, Pen y Bryn on the hill, and the stories of Siwan, Dafydd, Eleanor and Gwenllian, and Llywelyn’s answer to the archbishop in 1282. Eleven stops, with the sources for every one.",
+     "Cerddwch i mewn i lys tywysogion Gwynedd yn Abergwyngregyn, rhwng y mynyddoedd a’r môr: y neuadd garreg a’i dwy adain a ganfu’r archaeolegwyr, y domen Pen y Mwd, Pen y Bryn ar y bryn, a hanesion Siwan, Dafydd, Elinor a Gwenllian, ac ateb Llywelyn i’r archesgob yn 1282. Un arhosfan ar ddeg, gyda’r ffynonellau i bob un.",
+     "court-aber.html"),
     ("2026-11-14", "Llys Rhosyr rebuilt in 3D: walk the court of the princes of Gwynedd", "Llys Rhosyr wedi’i ailadeiladu mewn 3D: cerddwch drwy lys tywysogion Gwynedd",
      "The 3D court at Rhosyr has been built again on the excavated plan: walk through the gate and into the hall by firelight, past the painted posts and the hangings to the prince’s seat, then on to the chamber, the kitchen and the stables, with the household at the tables, guards at the gate, grooms with the horses and sheep on the pasture, the real land of Môn around you with cloud shadows crossing Eryri, the sound of the fire, a harp and a skylark, and nine stops that tell its story with their sources.",
      "Mae’r llys 3D yn Rhosyr wedi’i adeiladu o’r newydd ar sail cynllun y cloddio: cerddwch drwy’r porth ac i mewn i’r neuadd yng ngolau’r tân, heibio i’r pyst wedi’u paentio a’r llenni at sedd y tywysog, ac ymlaen i’r ystafell, y gegin a’r stablau, gyda’r teulu wrth y byrddau, gwylwyr wrth y porth, gweision gyda’r ceffylau a defaid ar y borfa, tir go iawn Môn o’ch cwmpas a chysgodion y cymylau’n croesi Eryri, sŵn y tân, telyn ac ehedydd, a naw arhosfan sy’n adrodd ei hanes gyda’u ffynonellau.",
