@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-14", "Llys Rhosyr rebuilt in 3D: walk the court of the princes of Gwynedd", "Llys Rhosyr wedi’i ailadeiladu mewn 3D: cerddwch drwy lys tywysogion Gwynedd",
+     "The 3D court at Rhosyr has been built again on the excavated plan: walk through the gate and into the hall by firelight, past the painted posts and the hangings to the prince’s seat, then on to the chamber, the kitchen and the stables, with the real land of Môn around you, the Menai and Eryri beyond, the sound of the fire and a harp, and nine stops that tell its story with their sources.",
+     "Mae’r llys 3D yn Rhosyr wedi’i adeiladu o’r newydd ar sail cynllun y cloddio: cerddwch drwy’r porth ac i mewn i’r neuadd yng ngolau’r tân, heibio i’r pyst wedi’u paentio a’r llenni at sedd y tywysog, ac ymlaen i’r ystafell, y gegin a’r stablau, gyda thir go iawn Môn o’ch cwmpas, y Fenai ac Eryri y tu hwnt, sŵn y tân a thelyn, a naw arhosfan sy’n adrodd ei hanes gyda’u ffynonellau.",
+     "llys-rhosyr.html"),
     ("2026-11-14", "Sycharth in 3D: walk through Owain Glyndŵr’s court", "Sycharth mewn 3D: cerddwch drwy lys Owain Glyndŵr",
      "Cross the moat, climb the green hill and step inside the timber court of Owain Glyndŵr, as Iolo Goch sang it around 1390: the H-shaped house on the motte with its chimney, glass windows and slate roof, the hall where the poets were welcomed, the bailey, the fishpond, the mill and the deer park. Twelve stops tell its story, from the poem to the fire of 1403 and what the excavators found, with the sources for each.",
      "Croeswch y ffos, dringwch y bryn gwyrdd a chamwch i mewn i lys pren Owain Glyndŵr, fel y canodd Iolo Goch iddo tua 1390: y tŷ siâp H ar y domen â’i simnai, ei ffenestri gwydr a’i do llechi, y neuadd lle croesewid y beirdd, y beili, y pysgodlyn, y felin a’r parc ceirw. Mae deuddeg arhosfan yn adrodd ei hanes, o’r gerdd i dân 1403 a’r hyn a ganfu’r cloddwyr, gyda ffynonellau pob un.",
