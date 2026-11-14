@@ -1,8 +1,8 @@
 {
  "branch": "claude/project-thread-56vkej",
- "en": "",
- "cy": "",
+ "en": "azure:en-GB-OllieMultilingualNeural+cy",
+ "cy": "azure:cy-GB-AledNeural",
  "only": [],
  "redo": false,
- "sample": {"id": "glyndwr", "sections": 2, "voices": ["azure:en-GB-RyanNeural", "azure:en-GB-SoniaNeural", "azure:en-GB-OllieMultilingualNeural", "azure:en-GB-AdaMultilingualNeural", "azure:en-GB-OllieMultilingualNeural+cy", "azure:en-GB-AdaMultilingualNeural+cy", "azure:cy-GB-AledNeural", "azure:cy-GB-NiaNeural"]}
+ "sample": null
 }
