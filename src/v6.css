@@ -1115,6 +1115,7 @@ a:hover > .card-ban img, .wl-card:hover > .card-ban img { transform: scale(1.04)
   #pins .pin.sel .dot { r: 13 }
   #pins .pin .halo { r: 26 }
   #pins .pin .lbl { font-size: 21px; stroke-width: 6px }
+}
 
 /* ---------- long reads: contents, section links, "where am I" bar (November 2026; story_toc / head_ids in build.py) ---------- */
 .prose h2[id] { scroll-margin-top: 5rem }
