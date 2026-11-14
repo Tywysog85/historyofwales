@@ -19,7 +19,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 5256217
+   "bitrate": "32k",
+   "bytes": 4175874
   },
   "en": {
    "file": "aberfan-en.m4a",
@@ -40,7 +41,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 4472821
+   "bitrate": "32k",
+   "bytes": 3597740
   }
  },
  "arthur": {
@@ -57,22 +59,24 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 1428260
+   "bitrate": "32k",
+   "bytes": 1132838
   },
   "en": {
    "file": "arthur-en.m4a",
-   "secs": 246.5,
+   "secs": 246.4,
    "marks": [
     32.81,
-    79.7,
-    135.54,
-    166.29
+    79.66,
+    135.5,
+    166.25
    ],
    "hash": "5be3963368c8",
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 1266216
+   "bitrate": "32k",
+   "bytes": 1019326
   }
  },
  "bran": {
@@ -93,7 +97,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 3131095
+   "bitrate": "32k",
+   "bytes": 2477288
   },
   "en": {
    "file": "bran-en.m4a",
@@ -112,7 +117,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 2796685
+   "bitrate": "32k",
+   "bytes": 2241172
   }
  },
  "brittany": {
@@ -139,7 +145,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 7902626
+   "bitrate": "32k",
+   "bytes": 6265938
   },
   "en": {
    "file": "brittany-en.m4a",
@@ -164,7 +171,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 6981930
+   "bitrate": "32k",
+   "bytes": 5592659
   }
  },
  "bruts": {
@@ -187,7 +195,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 3717129
+   "bitrate": "32k",
+   "bytes": 2953497
   },
   "en": {
    "file": "bruts-en.m4a",
@@ -208,7 +217,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 3247688
+   "bitrate": "32k",
+   "bytes": 2603305
   }
  },
  "brutus": {
@@ -236,7 +246,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 5936925
+   "bitrate": "32k",
+   "bytes": 4726636
   },
   "en": {
    "file": "brutus-en.m4a",
@@ -262,7 +273,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 5172980
+   "bitrate": "32k",
+   "bytes": 4151050
   }
  },
  "caradog": {
@@ -289,7 +301,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 6159981
+   "bitrate": "32k",
+   "bytes": 4863422
   },
   "en": {
    "file": "caradog-en.m4a",
@@ -314,7 +327,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 5247228
+   "bitrate": "32k",
+   "bytes": 4216716
   }
  },
  "castles": {
@@ -331,7 +345,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 1080140
+   "bitrate": "32k",
+   "bytes": 867932
   },
   "en": {
    "file": "castles-en.m4a",
@@ -346,7 +361,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 909881
+   "bitrate": "32k",
+   "bytes": 731083
   }
  },
  "celts": {
@@ -366,7 +382,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 2808454
+   "bitrate": "32k",
+   "bytes": 2213362
   },
   "en": {
    "file": "celts-en.m4a",
@@ -384,7 +401,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 2407703
+   "bitrate": "32k",
+   "bytes": 1931102
   }
  },
  "christianity": {
@@ -407,7 +425,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 5097013
+   "bitrate": "32k",
+   "bytes": 4045919
   },
   "en": {
    "file": "christianity-en.m4a",
@@ -428,7 +447,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 4400515
+   "bitrate": "32k",
+   "bytes": 3530688
   }
  },
  "coal": {
@@ -445,7 +465,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 1253589
+   "bitrate": "32k",
+   "bytes": 1004656
   },
   "en": {
    "file": "coal-en.m4a",
@@ -460,7 +481,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 1068216
+   "bitrate": "32k",
+   "bytes": 853415
   }
  },
  "druids": {
@@ -482,7 +504,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 5469943
+   "bitrate": "32k",
+   "bytes": 4303147
   },
   "en": {
    "file": "druids-en.m4a",
@@ -502,7 +525,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 4763446
+   "bitrate": "32k",
+   "bytes": 3828312
   }
  },
  "epynt": {
@@ -526,7 +550,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 4972742
+   "bitrate": "32k",
+   "bytes": 3947565
   },
   "en": {
    "file": "epynt-en.m4a",
@@ -548,7 +573,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 4268194
+   "bitrate": "32k",
+   "bytes": 3429519
   }
  },
  "firsts": {
@@ -566,7 +592,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 1566345
+   "bitrate": "32k",
+   "bytes": 1244082
   },
   "en": {
    "file": "firsts-en.m4a",
@@ -582,7 +609,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 1302551
+   "bitrate": "32k",
+   "bytes": 1048949
   }
  },
  "fwa": {
@@ -603,7 +631,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 2927581
+   "bitrate": "32k",
+   "bytes": 2307017
   },
   "en": {
    "file": "fwa-en.m4a",
@@ -622,7 +651,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 2485603
+   "bitrate": "32k",
+   "bytes": 1997441
   }
  },
  "glyndwr": {
@@ -641,7 +671,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 2124896
+   "bitrate": "32k",
+   "bytes": 1698242
   },
   "en": {
    "file": "glyndwr-en.m4a",
@@ -658,7 +689,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 1806655
+   "bitrate": "32k",
+   "bytes": 1453611
   }
  },
  "hen-ogledd": {
@@ -683,7 +715,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 5436704
+   "bitrate": "32k",
+   "bytes": 4300278
   },
   "en": {
    "file": "hen-ogledd-en.m4a",
@@ -706,7 +739,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 5124885
+   "bitrate": "32k",
+   "bytes": 4099279
   }
  },
  "hywel": {
@@ -731,7 +765,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 4244103
+   "bitrate": "32k",
+   "bytes": 3362193
   },
   "en": {
    "file": "hywel-en.m4a",
@@ -754,7 +789,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 3669230
+   "bitrate": "32k",
+   "bytes": 2950308
   }
  },
  "industry": {
@@ -781,7 +817,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 6613595
+   "bitrate": "32k",
+   "bytes": 5278115
   },
   "en": {
    "file": "industry-en.m4a",
@@ -806,7 +843,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 5626325
+   "bitrate": "32k",
+   "bytes": 4516746
   }
  },
  "iolo": {
@@ -834,7 +872,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 4970595
+   "bitrate": "32k",
+   "bytes": 3960542
   },
   "en": {
    "file": "iolo-en.m4a",
@@ -860,7 +899,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 4620779
+   "bitrate": "32k",
+   "bytes": 3705241
   }
  },
  "joseph": {
@@ -883,7 +923,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 3377362
+   "bitrate": "32k",
+   "bytes": 2697684
   },
   "en": {
    "file": "joseph-en.m4a",
@@ -904,7 +945,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 2831645
+   "bitrate": "32k",
+   "bytes": 2270801
   }
  },
  "language": {
@@ -922,7 +964,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 1735334
+   "bitrate": "32k",
+   "bytes": 1390518
   },
   "en": {
    "file": "language-en.m4a",
@@ -938,7 +981,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 1475058
+   "bitrate": "32k",
+   "bytes": 1188845
   }
  },
  "learning": {
@@ -955,7 +999,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 1450786
+   "bitrate": "32k",
+   "bytes": 1154108
   },
   "en": {
    "file": "learning-en.m4a",
@@ -970,7 +1015,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 1248175
+   "bitrate": "32k",
+   "bytes": 1003603
   }
  },
  "longbow": {
@@ -987,7 +1033,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 1173708
+   "bitrate": "32k",
+   "bytes": 938000
   },
   "en": {
    "file": "longbow-en.m4a",
@@ -1002,7 +1049,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 1001176
+   "bitrate": "32k",
+   "bytes": 807090
   }
  },
  "lucius": {
@@ -1020,7 +1068,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 2337000
+   "bitrate": "32k",
+   "bytes": 1856940
   },
   "en": {
    "file": "lucius-en.m4a",
@@ -1036,7 +1085,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 2044364
+   "bitrate": "32k",
+   "bytes": 1634333
   }
  },
  "mabinogi": {
@@ -1059,7 +1109,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 5260372
+   "bitrate": "32k",
+   "bytes": 4160807
   },
   "en": {
    "file": "mabinogi-en.m4a",
@@ -1080,7 +1131,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 4526556
+   "bitrate": "32k",
+   "bytes": 3624456
   }
  },
  "mac": {
@@ -1102,7 +1154,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 4873530
+   "bitrate": "32k",
+   "bytes": 3865990
   },
   "en": {
    "file": "mac-en.m4a",
@@ -1122,7 +1175,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 4241359
+   "bitrate": "32k",
+   "bytes": 3408954
   }
  },
  "macsen": {
@@ -1146,7 +1200,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 4399018
+   "bitrate": "32k",
+   "bytes": 3495940
   },
   "en": {
    "file": "macsen-en.m4a",
@@ -1168,7 +1223,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 3823088
+   "bitrate": "32k",
+   "bytes": 3070729
   }
  },
  "madog": {
@@ -1192,7 +1248,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 5311953
+   "bitrate": "32k",
+   "bytes": 4225719
   },
   "en": {
    "file": "madog-en.m4a",
@@ -1214,7 +1271,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 4433069
+   "bitrate": "32k",
+   "bytes": 3560794
   }
  },
  "nest": {
@@ -1234,7 +1292,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 3006434
+   "bitrate": "32k",
+   "bytes": 2394669
   },
   "en": {
    "file": "nest-en.m4a",
@@ -1252,7 +1311,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 2652610
+   "bitrate": "32k",
+   "bytes": 2125452
   }
  },
  "patrick": {
@@ -1274,7 +1334,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 3658165
+   "bitrate": "32k",
+   "bytes": 2909112
   },
   "en": {
    "file": "patrick-en.m4a",
@@ -1294,7 +1355,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 3195185
+   "bitrate": "32k",
+   "bytes": 2572138
   }
  },
  "protest": {
@@ -1311,7 +1373,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 1159519
+   "bitrate": "32k",
+   "bytes": 936478
   },
   "en": {
    "file": "protest-en.m4a",
@@ -1326,7 +1389,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 971427
+   "bitrate": "32k",
+   "bytes": 780878
   }
  },
  "revival": {
@@ -1344,7 +1408,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 1862407
+   "bitrate": "32k",
+   "bytes": 1477968
   },
   "en": {
    "file": "revival-en.m4a",
@@ -1360,7 +1425,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 1651412
+   "bitrate": "32k",
+   "bytes": 1327589
   }
  },
  "rhys": {
@@ -1381,7 +1447,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 3103095
+   "bitrate": "32k",
+   "bytes": 2470817
   },
   "en": {
    "file": "rhys-en.m4a",
@@ -1400,7 +1467,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 2654731
+   "bitrate": "32k",
+   "bytes": 2129623
   }
  },
  "tryweryn": {
@@ -1425,7 +1493,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 5932560
+   "bitrate": "32k",
+   "bytes": 4715626
   },
   "en": {
    "file": "tryweryn-en.m4a",
@@ -1448,7 +1517,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 5006936
+   "bitrate": "32k",
+   "bytes": 4010595
   }
  },
  "unconquered": {
@@ -1464,7 +1534,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 1529437
+   "bitrate": "32k",
+   "bytes": 1211737
   },
   "en": {
    "file": "unconquered-en.m4a",
@@ -1478,7 +1549,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 1295703
+   "bitrate": "32k",
+   "bytes": 1040304
   }
  },
  "welsh-not": {
@@ -1505,7 +1577,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 7155700
+   "bitrate": "32k",
+   "bytes": 5674817
   },
   "en": {
    "file": "welsh-not-en.m4a",
@@ -1530,7 +1603,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 6188661
+   "bitrate": "32k",
+   "bytes": 4970049
   }
  },
  "welsh-revival": {
@@ -1554,7 +1628,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 5065636
+   "bitrate": "32k",
+   "bytes": 4020844
   },
   "en": {
    "file": "welsh-revival-en.m4a",
@@ -1576,7 +1651,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 4367903
+   "bitrate": "32k",
+   "bytes": 3511744
   }
  },
  "wilson-blackett": {
@@ -1597,7 +1673,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 2834773
+   "bitrate": "32k",
+   "bytes": 2251824
   },
   "en": {
    "file": "wilson-blackett-en.m4a",
@@ -1616,7 +1693,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 2427912
+   "bitrate": "32k",
+   "bytes": 1939302
   }
  },
  "world": {
@@ -1633,7 +1711,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 1076412
+   "bitrate": "32k",
+   "bytes": 866674
   },
   "en": {
    "file": "world-en.m4a",
@@ -1648,7 +1727,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 929002
+   "bitrate": "32k",
+   "bytes": 745976
   }
  },
  "writers": {
@@ -1676,7 +1756,8 @@
    "voice": "azure:cy-GB-NiaNeural",
    "engine": "azure",
    "voice_name": "Nia",
-   "bytes": 3970953
+   "bitrate": "32k",
+   "bytes": 3172798
   },
   "en": {
    "file": "writers-en.m4a",
@@ -1702,7 +1783,8 @@
    "voice": "azure:en-GB-AdaMultilingualNeural+cy",
    "engine": "azure",
    "voice_name": "Ada",
-   "bytes": 3472178
+   "bitrate": "32k",
+   "bytes": 2783833
   }
  }
 }

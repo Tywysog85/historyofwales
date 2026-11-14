@@ -18,7 +18,7 @@ Which voice reads each language, and what to make, is set in tools/listen_reques
 Every file is made section by section (the opening, then one per heading); the time each section starts is saved, so
 the player can jump to a heading. Pauses between paragraphs, before headings and around quotes are added here, so all
 voices are paced alike. The finished file is evened out in loudness (ffmpeg loudnorm) and saved as AAC (.m4a), which
-every browser plays, at 40 kbit/s mono: clear speech at about 18 MB an hour.
+every browser plays, at 32 kbit/s mono: clear speech at about 14 MB an hour.
 
 Keys (GitHub repository secrets, never in the code): AZURE_SPEECH_KEY and AZURE_SPEECH_REGION for Microsoft;
 ELEVENLABS_API_KEY for ElevenLabs. Kokoro and Piper are free and need none.
@@ -82,7 +82,7 @@ for _k in list(os.environ.get("LISTEN_EXTRA_VOICES", "").split(",")):  # "eleven
 PAUSE = {"title": (0.3, 0.9), "head": (1.1, 0.6), "para": (0, 0.55), "quote": (0.25, 0.4), "cite": (0, 0.7),
          "row": (0, 0.35), "end": (0.9, 0.6)}
 SPEED = {"kokoro": 0.95, "piper": 1.0, "azure": 0.97, "elevenlabs": 1.0}
-BITRATE = "40k"
+BITRATE = "32k"  # was 40k until 14 Nov 2026; any file made at another rate is remade on the next run (see jobs())
 
 
 def request():
@@ -294,7 +294,7 @@ def render(x, lang, key, out_path, sections=None):
     with open(raw, "wb") as f:
         f.write(pcm.tobytes())
     mp3 = out_path.endswith(".mp3")
-    codec = ["-c:a", "libmp3lame", "-b:a", "64k"] if mp3 else ["-c:a", "aac", "-b:a", BITRATE, "-movflags", "+faststart"]
+    codec = ["-c:a", "libmp3lame", "-b:a", "64k"] if mp3 else ["-c:a", "aac", "-aac_coder", "twoloop", "-b:a", BITRATE, "-movflags", "+faststart"]
     meta = ["-metadata", f"title={x['cy'] if lang == 'cy' else x['en']}", "-metadata", "artist=Hanes Cymru" if lang == "cy" else "artist=History of Wales",
             "-metadata", "album=Hanes Cymru · History of Wales"]
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "s16le", "-ar", str(eng.rate), "-ac", "1", "-i", raw,
@@ -313,7 +313,7 @@ def jobs():
                 continue
             have = L.MANIFEST.get(x["id"], {}).get(lang)
             if (req.get("redo") or x["id"] in req.get("only", []) or not have or have.get("hash") != L.words_hash(x, lang)
-                    or have.get("voice") != key):
+                    or have.get("voice") != key or have.get("bitrate", "40k") != BITRATE):
                 out.append((x["id"], lang))
     return out
 
@@ -347,7 +347,7 @@ def main():
             secs, marks = render(x, lang, key, os.path.join(out, name))
             eng, _, _, shown = VOICES[key]
             entry = {"file": name, "secs": round(secs, 1), "marks": [round(m, 2) for m in marks], "hash": L.words_hash(x, lang),
-                     "voice": key, "engine": eng, "voice_name": shown, "bytes": os.path.getsize(os.path.join(out, name))}
+                     "voice": key, "engine": eng, "voice_name": shown, "bitrate": BITRATE, "bytes": os.path.getsize(os.path.join(out, name))}
             json.dump({"id": xid, "lang": lang, **entry}, open(os.path.join(out, f"{xid}-{lang}.json"), "w"), ensure_ascii=False)
             print(f"{name}: {secs / 60:.1f} min of sound in {(time.time() - t0) / 60:.1f} min, {entry['bytes'] / 1e6:.1f} MB", flush=True)
         return
