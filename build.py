@@ -2357,6 +2357,10 @@ def play_cards(home=False):
     """The games. On the home page the Daily challenge already has its own card beside On this day, so it is left out here,
     and the last tile leads to all the games."""
     games = [g for g in GAMES if not (home and g[1] == "daily")]
+    if home:  # a different game in the big spot each day, and the rest in a new order (src/daily.py)
+        order = DY.shuffled(games, 1282)
+        k = HOME_DAY % len(order)
+        games = order[k:] + order[:k]
     out = "".join(play_card(g) for g in games)
     if home:
         faces = "".join(f'<span>{PX.card_img(g[0] if "#" not in g[0] else "", g[8]) or ""}</span>' for g in GAMES[:5])
@@ -3653,11 +3657,60 @@ def firsts_page():
 
 # ---------- index ----------
 HOME_STORIES = 6  # long reads shown on the home page; the rest are on stories.html
+import daily as DY  # noqa: E402  (the home page changes every day: src/daily.py)
+HOME_DAY = DY.day_no()  # today in Wales, as a day number: what the daily picks below go by
+HOME_PEOPLE = 8  # people cards on the home page: two full rows of four on a wide screen
+HOME_LEGENDS = 4
+HOME_WORDS = 10
+
+
+def home_stories():
+    """Today's long reads: a story still marked New keeps the big spot; otherwise the big spot and the rest take turns."""
+    lead = F.STORIES[0] if AD.is_new("story", F.STORIES[0]["id"]) else None
+    by = {x["id"]: x for x in F.STORIES}
+    order = DY.shuffled([x["id"] for x in F.STORIES], 1402)
+    ids = DY.window(order, HOME_DAY, HOME_STORIES - (1 if lead else 0), skip={lead["id"]} if lead else ())
+    return ([lead] if lead else []) + [by[i] for i in ids]
+
+
+def home_legends():
+    by = {x["id"]: x for x in F.LEGENDS}
+    return [by[i] for i in DY.window(DY.shuffled([x["id"] for x in F.LEGENDS], 1176), HOME_DAY, HOME_LEGENDS)]
+
+
+def _audio_slug(w):
+    import unicodedata
+    w = unicodedata.normalize("NFD", w.lower()).encode("ascii", "ignore").decode()
+    return re.sub(r"[^a-z0-9]+", "-", w).strip("-")
+
+
+def word_pool():
+    """Words to know: every everyday word and phrase that has a real recording, in a fixed shuffled order.
+    Each is [Welsh, how to say it, English, Welsh line]. The ten starter words first get their own Welsh lines."""
+    have = set(f[:-4] for f in os.listdir(os.path.join(SRC, "static", "audio")) if f.endswith(".mp3")) if os.path.isdir(os.path.join(SRC, "static", "audio")) else set()
+    out, seen = [], set()
+    def add(w, say, en, cy):
+        k = _audio_slug(w)
+        if k in seen or (have and k not in have):
+            return
+        seen.add(k)
+        out.append([w, say, en, cy])
+    for w in D.WORDS:
+        add(*w)
+    for w in CYM.WORDS:
+        add(w[1][:1].upper() + w[1][1:], w[2], w[3], f"‘{w[3]}’ yn Saesneg")
+    for ph in CYM.PHRASES:
+        for cy_, say, en in ph[5]:
+            add(cy_, say, en, f"‘{en}’ yn Saesneg")
+    return DY.shuffled(out, 2050)
+
+
+WORD_POOL = word_pool()
 N_CASTLES = len(json.loads(read("castles_data.json")))  # the castle sites on castles.html, also the figure in the home page's opening
 FEATURED = ["dewi-sant", "hywel-dda", "gwenllian", "llywelyn-fawr", "llywelyn-ap-gruffudd", "dafydd-ap-gwilym", "owain-glyndwr", "harri-tudur", "william-morgan", "lloyd-george", "aneurin-bevan", "betty-campbell"]
 DATA = dict(
     ERAS=D.ERAS, EVENTS=D.EVENTS, PLACES=[dict(p, ph=place_ph(p['id']), vis=map_visit(p)) for p in D.PLACES], PEOPLE=D.PEOPLE, READING=D.READING, ONLINE=D.ONLINE,
-    CENSUS=D.CENSUS, KINGDOMS=D.KINGDOMS, LA=la, WORDS=D.WORDS,
+    CENSUS=D.CENSUS, KINGDOMS=D.KINGDOMS, LA=la, WORDS=WORD_POOL, WORDS_N=HOME_WORDS,
     TRAILS=[dict(id=t["id"], en=t["en"], cy=t["cy"], ill=t["ill"], n=len(trail_stops(t)), introEn=t["introEn"][0], introCy=t["introCy"][0]) for t in L.TRAILS],
     AUDIO=sorted(f[:-4] for f in os.listdir(os.path.join(SRC, 'static', 'audio')) if f.endswith('.mp3')) if os.path.isdir(os.path.join(SRC, 'static', 'audio')) else [],
     MAPC=dict(minx=geo["minx"], maxy=geo["maxy"], k=geo["k"], sc=geo["sc"]),
@@ -3702,8 +3755,7 @@ def ssr_people(slugs=None):
 
 
 def ssr_fact():
-    days = (datetime.datetime.now(datetime.timezone.utc) - datetime.datetime(1970, 1, 1, tzinfo=datetime.timezone.utc)).days
-    f = F.FACTS[days % len(F.FACTS)]  # the same fact app.js picks for today
+    f = F.FACTS[HOME_DAY % len(F.FACTS)]  # the same fact app.js picks for today
     return (f'<span class="l-en" lang="en">{CITE.linked(f[0], f[2])}</span><span class="l-cy" lang="cy">{CITE.linked(f[1], f[2], cy=True)}</span>')
 
 
@@ -3913,7 +3965,20 @@ def ssr_online():
 
 
 def ssr_words():
-    return "".join(f'<li><b>{e(w[0])}</b><span class="say">{e(w[1])}</span><span>{bi(w[2], w[3])}</span></li>' for w in D.WORDS)
+    """Today's ten (app.js picks the same ten by the visitor's date and adds the play buttons)."""
+    return "".join(f'<li><b>{e(w[0])}</b><span class="say">{e(w[1])}</span><span>{bi(w[2], w[3])}</span></li>' for w in DY.window(WORD_POOL, HOME_DAY, HOME_WORDS))
+
+
+def home_people():
+    """Today's people: one from each of eight ages, taking turns, and people with a picture where an age has enough."""
+    ages = [x["id"] for x in D.ERAS]
+    by_age = {}
+    for p in D.PEOPLE:
+        by_age.setdefault(p[1], []).append(p[0])
+    for a, ps in by_age.items():
+        pics = [x for x in ps if x in DATA["PPH"]]
+        by_age[a] = DY.shuffled(pics if len(pics) >= 4 else ps, 1485)
+    return DY.mixed_ages(by_age, ages, HOME_DAY, HOME_PEOPLE)
 
 
 def _proj(lat, lon):
@@ -4003,7 +4068,8 @@ def map_link_cards():
 
 def stories_more():
     """The tile under the long reads on the home page: a fan of their pictures and how many there are."""
-    faces = "".join(f'<span>{PX.card_img(f"story-{x["id"]}.html", x.get("era")) or ""}</span>' for x in F.STORIES[HOME_STORIES:HOME_STORIES + 4])
+    shown = {x["id"] for x in home_stories()}
+    faces = "".join(f'<span>{PX.card_img(f"story-{x["id"]}.html", x.get("era")) or ""}</span>' for x in [y for y in F.STORIES if y["id"] not in shown][:4])
     n = len(F.STORIES)
     return (f'<a class="more-tile rv" href="stories.html"><span class="p-faces" aria-hidden="true">{faces}</span>'
             f'<span class="t"><b>{bi(f"All {n} long reads", f"Pob un o’r {n} erthygl")}</b><small>{bi("Five-minute stories on the big questions of Welsh history.", "Straeon pum munud ar gwestiynau mawr hanes Cymru.")}</small></span>'
@@ -4076,14 +4142,14 @@ HERO_NAME = ""
 
 def fill(fragment, active="", skip="#chapters", home=False):
     return (fragment.replace("__NAV__", nav(active, skip, home)).replace("__HERONAME__", HERO_NAME).replace("__FOOTER__", footer()).replace("__AGES__", AGES_HTML).replace("__MARQUEE__", MARQUEE).replace("__MARQUEE2__", MARQUEE2)
-            .replace("__STORIES__", "".join(story_card(x, k == 0) for k, x in enumerate(F.STORIES[:HOME_STORIES])))
+            .replace("__STORIES__", "".join(story_card(x, k == 0) for k, x in enumerate(home_stories())))
             .replace("__NSTORIES__", str(len(F.STORIES))).replace("__NPEOPLE__", str(len(D.PEOPLE))).replace("__NPLACES__", str(len(D.PLACES)))
             .replace("__NCASTLES_FMT__", f"{N_CASTLES:,}").replace("__NCASTLES__", str(N_CASTLES))
             .replace("__TODAY__", ssr_today()).replace("__FACT__", ssr_fact()).replace("__FACTHREF__", ssr_fact_href()).replace("__TLTEASER__", ssr_tl_teaser()).replace("__CHART__", ssr_chart())
             .replace("__BOOKS__", ssr_books()).replace("__ONLINE__", ssr_online()).replace("__WORDS__", ssr_words())
-            .replace("__PEOPLEHOME__", ssr_people(FEATURED[:6])).replace("__PEOPLEALL__", ssr_people()).replace("__MAPTEASER__", ssr_map_teaser()).replace("__MAPCARDS__", map_link_cards()).replace("__STORIESMORE__", stories_more())
+            .replace("__PEOPLEHOME__", ssr_people(home_people())).replace("__PEOPLEALL__", ssr_people()).replace("__MAPTEASER__", ssr_map_teaser()).replace("__MAPCARDS__", map_link_cards()).replace("__STORIESMORE__", stories_more())
             .replace("__WALES__", geo["outline"]).replace("__GRAT__", ssr_grat()).replace("__PINS__", ssr_pins()).replace("__PLACECARD__", ssr_place_card())
-            .replace("__NEWS__", news_strip()).replace("__LEGENDS__", "".join(legend_card(x) for x in F.LEGENDS_HOME)).replace("__PLAY__", play_cards(home=True)))
+            .replace("__NEWS__", news_strip()).replace("__LEGENDS__", "".join(legend_card(x) for x in home_legends())).replace("__PLAY__", play_cards(home=True)))
 
 
 index_head = head.replace("</style>", extra_css + PRINT_CSS + EXTRA_PAGE_CSS + "\n</style>", 1)
