@@ -142,8 +142,8 @@ html.menu-open { overflow: hidden }
 .marquee { position: relative; border-block: 1px solid var(--line); padding-block: 1rem .9rem; background: var(--night); -webkit-user-select: none; user-select: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent) }
 .mq-top { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; cursor: grab; overscroll-behavior-x: contain }
 .mq-top::-webkit-scrollbar { display: none }
-.mq-under { overflow: hidden; cursor: grab; touch-action: pan-y; margin-top: .55rem }
-.marquee .track { display: flex; align-items: center; gap: 1.6rem; width: max-content; padding-inline: 1.1rem; padding-block: .06em .12em; font-family: var(--f-display); font-size: clamp(2.1rem, 5.4vw, 4rem); line-height: 1; white-space: nowrap }
+.mq-under { overflow: hidden; cursor: grab; touch-action: pan-y; margin-top: .1rem; padding-bottom: .1em }
+.marquee .track { display: flex; align-items: center; gap: 1.6rem; width: max-content; padding-inline: 1.1rem; font-family: var(--f-display); font-size: clamp(2.1rem, 5.4vw, 4rem); line-height: 1; white-space: nowrap }
 .marquee .track2 { display: flex; align-items: center; gap: 1.1rem; width: max-content; font-family: var(--f-display); font-size: clamp(1.05rem, 2.1vw, 1.6rem); line-height: 1.1; white-space: nowrap; will-change: transform }
 .marquee.drag, .marquee.drag .mq-top, .marquee.drag .mq-under { cursor: grabbing }
 .marquee a { color: var(--ink); text-decoration: none; -webkit-user-drag: none }
@@ -154,7 +154,9 @@ html.menu-open { overflow: hidden }
 .marquee .track > i { display: flex; align-items: center; flex: none }
 .marquee .mq-drag { height: .62em; width: auto; display: block; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .5)) }
 .marquee .mq-daff { height: .58em; width: .58em; display: block }
-.marquee .track a { transition: transform .35s var(--ease), filter .35s }
+/* the words sit in boxes one line high, but the tails of g, y and p hang below that line. The padding makes the box (and the
+   picture painted in it) reach the bottom of every tail and the top of every capital and circumflex (Ifan, 14 Nov 2026). */
+.marquee .track a { transition: transform .35s var(--ease), filter .35s; padding: .1em .03em .3em }
 .marquee .track a:hover, .marquee .track a:focus-visible { transform: translateY(-.04em) scale(1.04) }
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
   .marquee .track a { color: transparent; -webkit-text-fill-color: transparent; -webkit-background-clip: text; background-clip: text;
