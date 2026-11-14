@@ -24,6 +24,7 @@ import cites as CITE  # noqa: E402  (sources beside the claims: [[cite:...]] mar
 import booklinks as BL  # noqa: E402  (a checked web page for books in the reading lists, src/booklinks.py)
 import llys as LLYS  # noqa: E402  (Llys Rhosyr in 3D: llys-rhosyr.html, src/llys.py, tools/llys3d.src.js -> src/static/llys3d.js)
 import ride as RIDE  # noqa: E402  (Ride with Glyndŵr, 1400: ride-glyndwr.html, src/ride.py, src/static/ride.js)
+import evidence as EVID  # noqa: E402  (evidence labels: archaeology, early chronicle, recorded: src/evidence.py)
 import teachpacks as TPK  # noqa: E402  (teacher packs: pack-<age>.html, src/teachpacks.py)  (every page also in Welsh at cy/<page>.html: src/welshpages.py)  (a page for every timeline event: src/eventpages.py)
 import gallery as G  # noqa: E402
 import gallery_photos as GP  # noqa: E402
@@ -118,7 +119,8 @@ def e(s):
 head = read("head.html")
 body = read("body.html")
 app = read("app.js")
-extra_css = read("extra.css") + read("v6.css") + read("onthisday.css") + read("people2.css") + PN.css()
+extra_css = read("extra.css") + read("v6.css") + read("onthisday.css") + read("people2.css") + PN.css() + EVID.CSS
+EVID.check(D.EVENTS, D.PEOPLE)
 geo = json.loads(read("geo", "map.json"))
 la = json.loads(read("geo", "la.json"))
 
@@ -687,6 +689,8 @@ def event_li(ev, k=0, title_link=False):
              + (f'<a class="src" href="place-{ev[10]}.html">{bi("The place", "Y lle")} →</a>' if ev[10] else ""))
     links = f'<a class="wl" href="{EP.href(ev)}">{bi(ev[5], ev[6])}</a>' + (f'<div class="links">{links}</div>' if links else "")
     title = f'<a href="{EP.href(ev)}">{bi(ev[5], ev[6])}</a>' if title_link else bi(ev[5], ev[6])
+    if ev[0] in EVID.EARLY:  # how we know: src/evidence.py
+        title += EVID.tag(EVID.event_kind(ev), bi)
     own = event_pic(ev, sl)
     pic = row_pic(own, ERA.get(ev[0], ERA["medieval"])["ill"])
     bg = "" if own else row_bg(theme_bg(f"{ev[5]} | {ev[7]}", zlib.crc32(ev[5].encode())))  # no picture of its own: one behind it
@@ -707,7 +711,7 @@ def plaque_pic(p):
 
 def plaque(p, link=True):
     return (f'<article class="plaque has-pic{" wl-card" if link else ""}" id="{p[0]}" data-era="{p[1]}">{plaque_pic(p)}<span class="dates">{bi(p[2], date_cy(p[2]))}</span><h3>{bi(p[3], p[4])}</h3>'
-            f'<span class="epi">{bi(p[5], p[6])}</span><p>{bi(p[7], p[8])}</p>'
+            f'<span class="epi">{bi(p[5], p[6])}</span>{EVID.tag(EVID.person_kind(p), bi)}<p>{bi(p[7], p[8])}</p>'
             + (f'<a class="wl" href="person-{p[0]}.html">{bi(p[3], p[4])}</a>' if link else "")
             + '</article>')
 
@@ -1028,7 +1032,7 @@ def person_page(p):
     pager = (f'<a class="btn" href="person-{prev_p[0]}.html">← {bi(prev_p[3], prev_p[4])}</a>' if prev_p else f'<a class="btn" href="era-{eid}.html">← {bi(era["en"], era["cy"])}</a>') + \
             (f'<a class="btn solid" href="person-{next_p[0]}.html">{bi(next_p[3], next_p[4])} →</a>' if next_p else '<a class="btn solid" href="people.html">' + bi("All people", "Pawb") + " →</a>")
     fld = FIELD_LABEL.get(P2.FIELD.get(slug))
-    meta = (f'<div class="person-meta"><span>{bi(p[2], date_cy(p[2]))}</span><span>{bi(p[5], p[6])}</span><a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>'
+    meta = (f'<div class="person-meta"><span>{bi(p[2], date_cy(p[2]))}</span>{EVID.tag(EVID.person_kind(p), bi)}<span>{bi(p[5], p[6])}</span><a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>'
             + (f'<a href="people.html?field={P2.FIELD[slug]}">{bi(*fld)}</a>' if fld else "") + '</div>' + first_badge(slug))
     rl = realm_links(f"person-{slug}.html") + ft_link_for_person(f"person-{slug}.html") + saints_links(f"person-{slug}.html") + lit_link(slug)
     meta += f'<p class="realm-links">{rl}</p>' if rl else ""
@@ -1220,12 +1224,12 @@ def quiz_sheet(era, n=10):
     pick = sorted(pick, key=lambda x: x[5])  # mixed order: alphabetical by title, not by date
     years = sorted(pick, key=lambda x: x[1])
     letters = "ABCDEFGHIJKL"
-    rows = "".join(f'<tr><td>{k + 1}</td><td>{bi(ev[5], ev[6])}</td><td class="blank"></td></tr>' for k, ev in enumerate(pick))
+    rows = "".join(f'<tr><td>{k + 1}</td><td>{bi(ev[5], ev[6])} {EVID.tag(EVID.event_kind(ev), bi)}</td><td class="blank"></td></tr>' for k, ev in enumerate(pick))
     bank = " · ".join(f"<b>{letters[k]}</b> {bi(year_label(ev), year_label(ev, True))}" for k, ev in enumerate(years))
     key = ", ".join(f"{k + 1}{letters[years.index(ev)]}" for k, ev in enumerate(pick))
     return (f'<div class="sheet-print"><h3 class="sheet-h">{bi(era["en"], era["cy"])}: {bi("match the event to the date", "parwch y digwyddiad â’r dyddiad")}</h3>'
             f'<p class="muted">{bi("Name", "Enw")}: ____________________ &nbsp; {bi("Class", "Dosbarth")}: ________</p>'
-            f'<p class="bank">{bank}</p><table class="qs"><thead><tr><th>#</th><th>{bi("Event", "Digwyddiad")}</th><th>{bi("Letter", "Llythyren")}</th></tr></thead><tbody>{rows}</tbody></table>'
+            f'<p class="bank">{bank}</p>{EVID.key(bi)}<table class="qs"><thead><tr><th>#</th><th>{bi("Event", "Digwyddiad")}</th><th>{bi("Letter", "Llythyren")}</th></tr></thead><tbody>{rows}</tbody></table>'
             f'<details class="answers-key"><summary>{bi("Answers", "Atebion")}</summary><p>{key}</p></details></div>')
 
 
@@ -1241,10 +1245,12 @@ def teachers_page():
     sheets = "".join(quiz_sheet(era) for era in D.ERAS)
     intro_en = ["History of Wales is free to use in the classroom. Every page works in English and Welsh, and every event links to a source, so pupils can practise checking evidence.",
                 "The text is shared under a Creative Commons BY-NC 4.0 licence, so you may copy, print and adapt it for lessons and worksheets, as long as you credit History of Wales and link to the page. Photographs keep their own licences, shown with each one.",
-                "The ideas below fit the Humanities Area of Learning and Experience in the Curriculum for Wales, with its focus on cynefin, enquiry and the diverse stories of Wales. Adapt them freely."]
+                "The ideas below fit the Humanities Area of Learning and Experience in the Curriculum for Wales, with its focus on cynefin, enquiry and the diverse stories of Wales. Adapt them freely.",
+                "On the worksheets and in the packs, every event and person carries a small label that says how we know about them: archaeology, early chronicle or recorded. They print too, so pupils can talk about the different kinds of evidence."]
     intro_cy = ["Mae Hanes Cymru am ddim i’w ddefnyddio yn y dosbarth. Mae pob tudalen yn gweithio yn Gymraeg ac yn Saesneg, ac mae pob digwyddiad yn cysylltu â ffynhonnell, fel y gall disgyblion ymarfer gwirio tystiolaeth.",
                 "Rhennir y testun dan drwydded Creative Commons BY-NC 4.0, felly gallwch ei gopïo, ei argraffu a’i addasu ar gyfer gwersi a thaflenni gwaith, cyn belled â’ch bod yn cydnabod Hanes Cymru ac yn rhoi dolen i’r dudalen. Mae gan y ffotograffau eu trwyddedau eu hunain, a ddangosir gyda phob un.",
-                "Mae’r syniadau isod yn addas ar gyfer Maes Dysgu a Phrofiad y Dyniaethau yng Nghwricwlwm i Gymru, gyda’i bwyslais ar gynefin, ymholi a straeon amrywiol Cymru. Addaswch nhw fel y mynnwch."]
+                "Mae’r syniadau isod yn addas ar gyfer Maes Dysgu a Phrofiad y Dyniaethau yng Nghwricwlwm i Gymru, gyda’i bwyslais ar gynefin, ymholi a straeon amrywiol Cymru. Addaswch nhw fel y mynnwch.",
+                "Ar y taflenni gwaith ac yn y pecynnau, mae label bach ar bob digwyddiad a pherson sy’n dweud sut rydyn ni’n gwybod amdanyn nhw: archaeoleg, cronicl cynnar neu wedi’i gofnodi. Maen nhw’n argraffu hefyd, fel y gall disgyblion drafod y gwahanol fathau o dystiolaeth."]
     main = (hero("industrial", f'<a href="index.html">{SITE}</a>', "book", "For teachers", "I athrawon", "History of Wales in the classroom", "Hanes Cymru yn y dosbarth",
                  "Twelve free teacher packs for the Curriculum for Wales, lesson ideas, enquiry questions and printable quiz sheets for each age.", "Deuddeg pecyn athrawon am ddim ar gyfer y Cwricwlwm i Gymru, syniadau gwersi, cwestiynau ymholi a thaflenni cwis i’w hargraffu ar gyfer pob oes.", art="book")
             + section(paras(intro_en, intro_cy), top=True)
@@ -3721,6 +3727,10 @@ DATA = dict(
             "Owain Glyndŵr, Prince of Wales": "person-owain-glyndwr.html"},
     FACTS=[[CITE.linked(en, h, js=True), CITE.linked(cy, h, cy=True, js=True), h] for en, cy, h in F.FACTS], FEATURED=FEATURED, PPH=dict({k: photo_url(v[0], 240) for k, v in PH.PERSON_PHOTOS.items()}, **{k[7:]: f'gallery/{k}-s.webp' for k in GP.GALLERY if k.startswith('person-')}),  # (made small, and filled in for everyone with a picture, just below)
     PFIELDS=P2.FIELDS, PFIELD=P2.FIELD, PFIRST={k: [v[0], v[1], v[2]] for k, v in P2.FIRSTS.items()},
+    # evidence labels (src/evidence.py): one letter per event (a, c, r; "-" after 1100, where the timeline shows none),
+    # the people who are not "recorded", and the words of the labels
+    EVK="".join(EVID.event_kind(ev) if ev[0] in EVID.EARLY else "-" for ev in D.EVENTS),
+    PEVK={p[0]: EVID.person_kind(p) for p in D.PEOPLE if EVID.person_kind(p) != "r"}, EVL=EVID.LABELS,
 )
 # the avatars on the people cards: the small copy (src/thumbs.py), and a picture for people whose page has one
 DATA["PPH"] = {k: TH.thumb(v) for k, v in DATA["PPH"].items()}
@@ -3746,6 +3756,7 @@ def ssr_person(p):
             + f'</span><div><span class="dates">{bi(p[2], date_cy(p[2]))}</span><h3>{bi(p[3], p[4])}</h3></div></div>'
             f'<span class="epi">{bi(p[5], p[6])}{(" · " + e(other)) if other else ""}</span>'
             + (f'<span class="first-tag">★ {bi(first[1], first[2])}</span>' if first else "")
+            + EVID.tag(EVID.person_kind(p), bi)
             + f'<p>{bi(p[7], p[8])}</p><a class="wl" href="person-{slug}.html">{bi(p[3], p[4])}</a></article>')
 
 
@@ -4149,7 +4160,7 @@ def fill(fragment, active="", skip="#chapters", home=False):
             .replace("__BOOKS__", ssr_books()).replace("__ONLINE__", ssr_online()).replace("__WORDS__", ssr_words())
             .replace("__PEOPLEHOME__", ssr_people(home_people())).replace("__PEOPLEALL__", ssr_people()).replace("__MAPTEASER__", ssr_map_teaser()).replace("__MAPCARDS__", map_link_cards()).replace("__STORIESMORE__", stories_more())
             .replace("__WALES__", geo["outline"]).replace("__GRAT__", ssr_grat()).replace("__PINS__", ssr_pins()).replace("__PLACECARD__", ssr_place_card())
-            .replace("__NEWS__", news_strip()).replace("__LEGENDS__", "".join(legend_card(x) for x in home_legends())).replace("__PLAY__", play_cards(home=True)))
+            .replace("__EVIKEY__", EVID.key(bi)).replace("__NEWS__", news_strip()).replace("__LEGENDS__", "".join(legend_card(x) for x in home_legends())).replace("__PLAY__", play_cards(home=True)))
 
 
 index_head = head.replace("</style>", extra_css + PRINT_CSS + EXTRA_PAGE_CSS + "\n</style>", 1)

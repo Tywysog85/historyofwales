@@ -922,6 +922,13 @@ Learnt while writing the Druids long read (`src/druids.py`, `story-druids.html`)
 - **Picked at build time:** the long reads (`home_stories()`: a story still marked New keeps the big spot, otherwise the big spot takes turns), the eight people (`home_people()`: one from each of eight ages, taking turns), the four legends (`home_legends()`) and the order of the games (`play_cards(home=True)`). The site is rebuilt every morning by the 04:15 UTC run in `deploy.yml`, so these move on early each morning. If that run is ever removed, they stop changing.
 - **Picked in the browser,** using the same day number (`dayNo()` in `app.js`): Did you know? (Another gives the next fact), Words to know (ten a day from `WORD_POOL` in `build.py`: every word and phrase from `data.py` and `cymraeg.py` that has a real recording), and the place-name decoder (`DAILY` in `src/placenames.py`).
 
+### Evidence labels: how we know (14 November 2026)
+- **Ifan's three labels, and only these:** "archaeology", "early chronicle" and "recorded" (Welsh: archaeoleg, cronicl cynnar, wedi’i gofnodi). Never "myth", "legend", "tradition", "later account" or "literary character". Brutus, Joseph of Arimathea, Arthur and the people of the Four Branches are "early chronicle".
+- **One file decides:** `src/evidence.py`. Each age has a default (Stone Age and Britons events: archaeology; Roman events: recorded; Age of Saints: early chronicle; Age of Kings and after: recorded), then short lists of exceptions by event title or person slug. A new early event or person that doesn't fit its age's default goes in a list. The build stops if a list names an event or person that no longer exists (so renaming an event means updating the list).
+- **Where they show:** the "match the event to the date" sheets (teachers.html and every pack), the pack timelines, the card sort and the "People to know" cards; every person card (People page, home page, age pages) and the top of each person page; and the timeline rows of the first five ages (to 1100) on `timeline.html` and the age pages. Each worksheet, the timeline and the People page carry a one-line key (`EVID.key()`).
+- **Two renderers, one rule:** cards drawn by `build.py` use `EVID.tag()`; cards drawn in the browser (`app.js`, timeline and people) read `DATA.EVK` (one letter per event, "-" where no label shows), `DATA.PEVK` (people who are not "recorded") and `DATA.EVL` (the words) through `eviTag()`.
+- **Printing:** the tags print in black, with a solid border for recorded, dashed for early chronicle and dotted for archaeology, so they still read on a black-and-white printer.
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
