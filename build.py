@@ -103,10 +103,22 @@ EMAIL_FORM = os.environ.get("EMAIL_FORM", "").strip() or ""
 try:
     sys.path.insert(0, os.path.join(ROOT, "tools"))
     import cards as CARDS  # noqa: E402
+    with open(CARDS.__file__, "rb") as _fh:   # the code that draws the cards, as loaded: a change to it draws them all again
+        import hashlib as _hl
+        CARDS_FP = _hl.md5(_fh.read()).hexdigest()
     CARDS_ON = os.environ.get("CARDS", "1") != "0"
 except ImportError:
     CARDS_ON = False
 CARD_JOBS = {}
+
+
+def card_for(path, title, desc, era=None):
+    """Book a share picture for a page (drawn at the end of the build by share_cards()) and return its address, or None
+    when there are no share pictures (no Pillow, or CARDS=0): the page then shows og.png."""
+    if not CARDS_ON or path == "404.html":
+        return None
+    CARD_JOBS[path] = (title, desc, era)
+    return "cards/" + path[:-5] + ".jpg"
 WIKI = "https://en.wikipedia.org/wiki/"
 
 
@@ -122,7 +134,7 @@ def e(s):
 head = read("head.html")
 body = read("body.html")
 app = read("app.js")
-extra_css = read("extra.css") + read("browse.css") + read("v6.css") + read("onthisday.css") + read("people2.css") + PN.css() + EVID.CSS
+extra_css = read("extra.css") + read("browse.css") + read("v6.css") + read("onthisday.css") + read("people2.css") + read("weekly.css") + PN.css() + EVID.CSS
 EVID.check(D.EVENTS, D.PEOPLE)
 geo = json.loads(read("geo", "map.json"))
 la = json.loads(read("geo", "la.json"))
@@ -275,7 +287,7 @@ def head_tags(title, desc, path, og_type="website", image=None):
          f'<meta property="og:type" content="{og_type}">\n<meta property="og:url" content="{url}">\n<meta property="og:site_name" content="History of Wales">\n'
          f'<meta property="og:image" content="{BASE_URL}{image or "og.png"}">\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n<meta property="og:image:alt" content="{e(title)}">\n'
          '<meta property="og:locale" content="en_GB">\n<meta property="og:locale:alternate" content="cy_GB">\n'
-         '<meta name="twitter:card" content="summary_large_image">\n'
+         f'<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:image" content="{BASE_URL}{image or "og.png"}">\n<meta name="twitter:image:alt" content="{e(title)}">\n'
          f'<link rel="alternate" type="application/atom+xml" title="History of Wales: what’s new and on this day" href="{BASE_URL}feed.xml">\n')
     return t
 
@@ -325,8 +337,8 @@ NAV_TOP = NAV_MAIN  # Ifan wants the same links along the top bar as in the big 
 NAV_GROUPS = [
     # the twelve ages, each with its dates, so a newcomer can tell the Age of Kings from the Age of Princes (Ifan, 2026-11-12)
     ("The twelve ages", "Y deuddeg oes", [(f'era-{x["id"]}.html', x["en"], x["cy"], x["spanEn"], x["spanCy"]) for x in D.ERAS]),
-    ("Explore", "Archwilio", [("reference.html", "Look it up", "Chwilio’r hanes"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"),
-                              ("castles.html", "Castles map", "Map y cestyll"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"),
+    ("Explore", "Archwilio", [("reference.html", "Look it up", "Chwilio’r hanes"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("family-history.html", "Your Welsh family", "Eich teulu Cymreig"),
+                              ("castles.html", "Castles map", "Map y cestyll"), ("visit.html", "Plan a day out", "Cynllunio diwrnod allan"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"),
                               ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn")]),
     ("Read", "Darllen", [("wales-in-10.html", "Wales in 10 minutes", "Cymru mewn 10 munud"), ("laws.html", "The Laws of Hywel Dda", "Cyfreithiau Hywel Dda"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"),
                          ("literature.html", "Literature and old books", "Llên a hen lyfrau"), ("triads.html", "The Welsh Triads", "Trioedd Ynys Prydain"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
@@ -451,7 +463,7 @@ def footer():
     # On phones site.js closes them, so the footer is four tappable headings instead of 1,600 px of links.
     eras_col = (f'<details class="fcol" open><summary class="eyebrow">{bi("The twelve ages", "Y deuddeg oes")}</summary><ul>' + "".join(
         f'<li><a href="era-{x["id"]}.html">{bi(x["en"], x["cy"])} <span class="m-dates">{bi(x["spanEn"], x["spanCy"])}</span></a></li>' for x in D.ERAS) + "</ul></details>")
-    explore = [("timeline.html", "Timeline", "Llinell amser"), ("map.html", "Map of Wales", "Map Cymru"), ("people.html", "People", "Pobl"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("castles.html", "Castles of Wales", "Cestyll Cymru"), ("trails.html", "Themed trails", "Llwybrau thema"),
+    explore = [("timeline.html", "Timeline", "Llinell amser"), ("map.html", "Map of Wales", "Map Cymru"), ("people.html", "People", "Pobl"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("family-history.html", "Your Welsh family", "Eich teulu Cymreig"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("castles.html", "Castles of Wales", "Cestyll Cymru"), ("visit.html", "Plan a day out", "Cynllunio diwrnod allan"), ("trails.html", "Themed trails", "Llwybrau thema"),
                ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"), ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg")]
     read = [("whatsnew.html", "What’s new", "Beth sy’n newydd"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"), ("laws.html", "The Laws of Hywel Dda", "Cyfreithiau Hywel Dda"), ("literature.html", "Welsh literature", "Llenyddiaeth Gymraeg"), ("books.html", "The great books of Wales", "Llyfrau mawr Cymru"), ("manuscripts.html", "Medieval manuscripts", "Llawysgrifau canoloesol"), ("triads.html", "The Welsh Triads", "Trioedd Ynys Prydain"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
             ("teachers.html", "For teachers", "I athrawon"), ("index.html#sources", "Sources", "Ffynonellau"),
@@ -478,10 +490,7 @@ def footer():
 
 def page(path, title, desc, main_html, era=None, og_type="article", ld=None, active="", track="", extra=""):
     main_html = PX.dress(path, era, main_html)
-    card = None
-    if CARDS_ON and path != "404.html":
-        CARD_JOBS[path] = (title, desc, era)
-        card = "cards/" + path[:-5] + ".jpg"
+    card = card_for(path, title, desc, era)
     first = first_published(path)
     ld_html = SEO.ld_script(SEO.page_ld(BASE_URL, path, title, desc, og_type, ld, main_html, card, published=first))
     rk, rintro = page_refs(path)
@@ -1098,7 +1107,8 @@ def visit_box(pl):
     rows += f'<div><dt>{bi("Entry", "Mynediad")}</dt><dd>{bi(ent_en, ent_cy)}</dd></div>'
     where = (f'{bi("Postcode", "Cod post")} <b>{e(pc)}</b> · ' if pc else "") + \
         (f'<a href="{directions_url(pl)}" target="_blank" rel="noopener">{bi("Directions", "Cyfarwyddiadau")} ↗</a> · '
-         f'<a href="map.html#lle-{pid}">{bi("On our map", "Ar ein map")} →</a>')
+         f'<a href="map.html#lle-{pid}">{bi("On our map", "Ar ein map")} →</a>'
+         + (f' · <a href="visit.html?from=s:{pid}">{bi("Plan a day out from here", "Cynllunio diwrnod allan o’r fan hon")} →</a>' if pid not in VP.NOT_A_STOP else ""))
     rows += f'<div><dt>{bi("Getting there", "Cyrraedd")}</dt><dd>{where}</dd></div>'
     note = f'<p class="visit-note">{bi(*v["note"])}</p>' if v.get("note") else ""
     pic = card_pic(f"place-{pid}.html")  # the place's own photo behind the box (src/panels.py)
@@ -1488,7 +1498,7 @@ SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes
     ("tudor", "From the Tudors to the Methodists", "O’r Tuduriaid i’r Methodistiaid", ["era-tudor", "era-revival"]),
     ("industry", "Iron, coal, slate and the sea", "Haearn, glo, llechi a’r môr", ["era-industrial", "industry", "coal", "aberfan", "protest", "topic-industry", "trail-coal", "trail-sea", "firsts", "topic-science"]),
     ("modern", "Modern Wales and the Welsh abroad", "Cymru fodern a’r Cymry ar wasgar", ["era-modern", "era-today", "revival", "mac", "fwa", "world", "madog", "tryweryn", "epynt", "topic-abroad", "topic-sport"]),
-    ("lang", "The Welsh language, names and places", "Yr iaith Gymraeg, enwau a lleoedd", ["language", "welsh-not", "welsh-revival", "topic-language", "welsh", "names", "towns", "maps", "sites"]),
+    ("lang", "The Welsh language, names and places", "Yr iaith Gymraeg, enwau a lleoedd", ["language", "welsh-not", "welsh-revival", "topic-language", "welsh", "names", "family-history", "towns", "maps", "sites"]),
     ("life", "Women and everyday life", "Menywod a bywyd bob dydd", ["topic-women", "trail-women", "topic-countryside"]),
 ]
 
@@ -2491,6 +2501,7 @@ GAMES = [
  ("llys-rhosyr.html", "llys", "Llys Rhosyr in 3D", "Llys Rhosyr mewn 3D", "Walk through a royal court of the princes of Gwynedd: the great hall, the hearth, the prince’s seat.", "Cerddwch drwy un o lysoedd brenhinol tywysogion Gwynedd: y neuadd fawr, yr aelwyd, sedd y tywysog.", "Explore in 3D", "Crwydro mewn 3D", "medieval"),
  ("ride-glyndwr.html", "ride", "Ride with Glyndŵr, 1400", "Marchogaeth gyda Glyndŵr, 1400", "Answer Owain Glyndŵr’s call as an archer, a bard or a rider, and choose your way through the rising.", "Atebwch alwad Owain Glyndŵr fel saethydd, bardd neu farchog, a dewiswch eich ffordd drwy’r gwrthryfel.", "A story you choose", "Stori rydych chi’n ei dewis", "medieval"),
  ("daily.html", "daily", "Daily challenge", "Her y dydd", "One event, six guesses to find the year. A new one every day, and a streak to keep.", "Un digwyddiad, chwe chynnig i ddyfalu’r flwyddyn. Un newydd bob dydd, a rhediad i’w gadw.", "Every day", "Bob dydd", "medieval"),
+ ("weekly-quiz.html", "weekly", "The weekly quiz", "Cwis yr wythnos", "Ten new questions every Monday, three on the week’s anniversaries. One go each, and a leaderboard.", "Deg cwestiwn newydd bob dydd Llun, tri ar ben-blwyddi’r wythnos. Un cynnig yr un, a thabl y goreuon.", "New every Monday", "Newydd bob dydd Llun", "glyndwr"),
  ("quiz.html", "quiz", "The quiz", "Y cwis", "Ten questions drawn from the timeline and the people. Every round is different.", "Deg cwestiwn o’r llinell amser a’r bobl. Mae pob rownd yn wahanol.", "10 questions", "10 cwestiwn", "kings"),
  ("map-game.html", "map", "Where in Wales?", "Ble yng Nghymru?", "Put castles, towns and battlefields on a blank map. How close can you get?", "Rhowch gestyll, trefi a meysydd brwydr ar fap gwag. Pa mor agos allwch chi fynd?", "5 rounds", "5 rownd", "modern"),
  ("quiz.html#game", "order", "Timeline challenge", "Her y llinell amser", "Put five events in order, oldest first.", "Rhowch bum digwyddiad yn eu trefn, yr hynaf yn gyntaf.", "3 rounds", "3 rownd", "industrial"),
@@ -2504,7 +2515,7 @@ GAMES = GAMES[:1] + COURTS.games() + GAMES[1:]  # the courts in 3D (src/courts.p
 GAMES = AD.newest("game", GAMES, key=lambda g: g[0], ties="keep")  # a new game goes at the top
 
 
-GAME_ICON = {"llys": "3D", "ride": "♞", "daily": "?", "quiz": "10", "map": "⌖", "order": "1→5", "names": "ap", "hero": "♛", "pairs": "Aa"}
+GAME_ICON = {"weekly": "7", "llys": "3D", "ride": "♞", "daily": "?", "quiz": "10", "map": "⌖", "order": "1→5", "names": "ap", "hero": "♛", "pairs": "Aa"}
 
 
 def play_card(g):
@@ -2550,7 +2561,9 @@ def game_page(path, kind, era, title_en, title_cy, sub_en, sub_cy, art, desc, wi
         data["OUT"] = geo["outline"]
     main = (hero(era, f'<a href="index.html">{SITE}</a> / <a href="play.html">{bi("Play", "Chwarae")}</a>', "book", "Play", "Chwarae", title_en, title_cy, sub_en, sub_cy, art=art)
             + f'<section class="game-sec"><div class="wrap narrow"><div class="g-root" id="g-root" data-game="{kind}"><noscript>This game needs JavaScript.</noscript></div>'
-              f'<p class="more-row"><a class="btn" href="play.html">← {bi("All games", "Pob gêm")}</a></p></div></section>')
+              f'<p class="more-row"><a class="btn" href="play.html">← {bi("All games", "Pob gêm")}</a>'
+              + (f' <a class="btn solid" href="family-history.html">{bi("Trace your own Welsh family", "Olrhain eich teulu Cymreig eich hun")} →</a>' if kind == "names" else "")
+              + '</p></div></section>')
     extra = f'<script>var PLAY={json.dumps(data, ensure_ascii=False, separators=(",", ":"))};</script>\n<script src="play.js?v={_static_fp("play.js")}" defer></script>\n'
     return page(path, f"{title_en} · History of Wales", desc, main, era=era, og_type="website", active="play.html", extra=extra)
 
@@ -2561,6 +2574,86 @@ def play_index():
             + section(f'<h2 class="sr-only">{bi("All games", "Pob gêm")}</h2><div class="play-grid">{play_cards()}</div>', top=True)
             + section(f'<div class="pager"><a class="btn" href="journey.html">{bi("See your journey and badges", "Gweld eich taith a’ch bathodynnau")} →</a></div>'))
     return page("play.html", "Play · History of Wales", "Games on the history of Wales: a daily year challenge, quiz, map game, Welsh names and more.", main, era="medieval", og_type="website", active="play.html")
+
+
+# ---------- the weekly quiz (src/weeklyquiz.py writes the weeks, src/static/weekly.js runs it, worker/ keeps the leaderboard) ----------
+import weeklyquiz as WQ  # noqa: E402
+# The leaderboard's address (a Cloudflare Worker, see worker/README.md). deploy.yml finds it once the Cloudflare token is set;
+# without it the quiz works and keeps scores on the visitor's own device only.
+LEADERBOARD = os.environ.get("LEADERBOARD_URL", "").strip().rstrip("/")
+_WQ = {}
+
+
+def _wq_small(page):
+    """The picture shown with a question's answer: the linked page's card picture (a site path), or None."""
+    pic = card_pic(page)
+    if pic and not pic[0].startswith("http"):
+        return pic[0]
+    ref = PX.for_page(page.split("#")[0])
+    p = PX._parse(ref) if ref else None
+    return p["small"] if p and not p.get("remote") else None
+
+
+def _wales_today():
+    return datetime.date(1970, 1, 1) + datetime.timedelta(days=DY.day_no())
+
+
+def quiz_weeks():
+    """Every week of the weekly quiz, writing any that are missing (src/quiz_weeks.json)."""
+    if "w" not in _WQ:
+        pics = {}
+        for pl in D.PLACES:
+            g = GP.GALLERY.get("place-" + pl["id"])
+            if g:
+                pics[pl["id"]] = (f'gallery/place-{pl["id"]}-s.webp', [g[1], g[2], g[3]])
+        tales = [dict(x, link=f'legend-{x["id"]}.html') for x in F.LEGENDS if x["id"] != "arthur"]  # Arthur is history here, not a tale
+        pool = WQ.Pool(otd_rows(), D.PEOPLE, D.PLACES, pics, CYM.WORDS, tales, D.EVENTS, _wq_small)
+        weeks, added = WQ.ensure(pool, _wales_today())
+        if added:
+            print(f"Weekly quiz: wrote {added} new week(s) to src/quiz_weeks.json (commit it)")
+        _WQ["w"] = weeks
+    return _WQ["w"]
+
+
+def quiz_week_files(pages):
+    """quiz/<Monday>.json for every week up to next week, and quiz/index.json listing them. Links to pages that no longer
+    exist are dropped here (the weeks themselves stay as they were written)."""
+    weeks = quiz_weeks()
+    last = (WQ.monday(_wales_today()) + datetime.timedelta(weeks=1)).isoformat()
+    out, idx = {}, []
+    for k in sorted(weeks):
+        if k > last:
+            break
+        w = json.loads(json.dumps(weeks[k]))
+        for q in w["qs"]:
+            if q.get("l") and q["l"].split("#")[0] not in pages:
+                del q["l"]
+        out[f"quiz/{k}.json"] = json.dumps(dict(w, wk=k), ensure_ascii=False, separators=(",", ":"))
+        idx.append([k, w["n"]])
+    out["quiz/index.json"] = json.dumps(dict(weeks=idx, lb=LEADERBOARD), separators=(",", ":"))
+    return out
+
+
+def weekly_quiz_page():
+    lb = f' data-lb="{e(LEADERBOARD)}"' if LEADERBOARD else ""
+    how_en = ("Ten new questions every Monday morning, the same for everyone. The first three are on the anniversaries of the week, the same days as the Monday email. "
+              "The rest take in a figure from history, a photograph of a place, a Welsh word, a tale from Wales and which came first. You get one go a week; quizzes from past weeks can be played for practice.")
+    how_cy = ("Deg cwestiwn newydd bob bore Llun, yr un rhai i bawb. Mae’r tri cyntaf ar ben-blwyddi’r wythnos, yr un dyddiau â’r e-bost dydd Llun. "
+              "Mae’r gweddill yn cynnwys ffigwr o hanes, llun o le, gair Cymraeg, chwedl o Gymru a pha un ddaeth gyntaf. Cewch un cynnig yr wythnos; gellir chwarae cwisiau’r wythnosau a fu i ymarfer.")
+    main = (hero("glyndwr", f'<a href="index.html">{SITE}</a> / <a href="play.html">{bi("Play", "Chwarae")}</a>', "book", "Play", "Chwarae",
+                 "The weekly quiz", "Cwis yr wythnos", "Ten new questions every Monday. One go each, then see where you stand.",
+                 "Deg cwestiwn newydd bob dydd Llun. Un cynnig yr un, yna gweld ble rydych chi’n sefyll.", art="castle")
+            + f'<section class="game-sec wq-sec"><div class="wrap narrow"><div class="wq" id="wq-root"{lb}><noscript>{bi("The quiz needs JavaScript.", "Mae angen JavaScript ar y cwis.")}</noscript></div>'
+              f'<div class="wq-board" id="wq-board" hidden></div>'
+              f'<div class="wq-past" id="wq-past" hidden></div>'
+              f'<details class="wq-how"><summary>{bi("How the weekly quiz works", "Sut mae cwis yr wythnos yn gweithio")}</summary><p>{bi(how_en, how_cy)}</p>'
+              + (f'<p>{bi("The leaderboard shows a nickname you choose, your score and your time, and nothing else. Each week’s board is deleted after twelve weeks.", "Mae’r tabl yn dangos llysenw a ddewiswch, eich sgôr a’ch amser, a dim byd arall. Caiff tabl pob wythnos ei ddileu ar ôl deuddeg wythnos.")} '
+                 f'<a href="about.html#privacy">{bi("Your privacy", "Eich preifatrwydd")}</a></p>' if LEADERBOARD else "")
+              + f'</details><p class="more-row"><a class="btn" href="play.html">← {bi("All games", "Pob gêm")}</a></p></div></section>')
+    extra = f'<script src="weekly.js?v={_static_fp("weekly.js")}" defer></script>\n'
+    return page("weekly-quiz.html", "The weekly quiz · History of Wales",
+                "A new quiz on the history of Wales every Monday: ten questions, three on the week’s anniversaries, and a leaderboard.",
+                main, era="glyndwr", og_type="website", active="play.html", extra=extra)
 
 
 def journey_page():
@@ -4327,7 +4420,7 @@ index_head = re.sub(r'<meta name="description"[^>]*>\n', "", index_head, count=1
 _bare_head = index_head
 index_head = (head_tags("History of Wales · Hanes Cymru: Welsh history, people and places",
                         "Welsh history from the first people to the Senedd: kings, princes, castles, saints and poets, with a timeline, map and games. In English and Cymraeg.",
-                        "", "website") + SEO.ld_script(SEO.home_ld(BASE_URL)) + "\n" + index_head)
+                        "", "website", card_for("index.html", "Cymru", "")) + SEO.ld_script(SEO.home_ld(BASE_URL)) + "\n" + index_head)
 _body_filled = (body.replace("__WALES__", geo["outline"]).replace("__WELSHV__", str(WELSH_JS_VER)).replace("__PNV__", PN_VER)
                 .replace("__DATA__", json.dumps(DATA, ensure_ascii=False, separators=(",", ":")))
                 .replace("__TOWNS__", json.dumps(TW.TOWNS, ensure_ascii=False, separators=(",", ":")))
@@ -4340,7 +4433,7 @@ def app_page(path, title, desc, hero_html, section_file, active, skip):
     """A page that reuses the home page's script with only one of its sections (timeline, quiz)."""
     hero_html = PX.dress(path, None, hero_html)
     h = re.sub(r'<header class="hero" id="top">.*?</header>', lambda m: hero_html, _bare_head, count=1, flags=re.S)
-    h = head_tags(title, desc, path) + SEO.ld_script(SEO.page_ld(BASE_URL, path, title, desc, "website", None, hero_html)) + "\n" + h
+    h = head_tags(title, desc, path, image=card_for(path, title, desc)) + SEO.ld_script(SEO.page_ld(BASE_URL, path, title, desc, "website", None, hero_html)) + "\n" + h
     b = "<main>\n" + read(section_file) + "</main>\n" + _body_filled[_body_filled.index("__FOOTER__"):]
     return fill(h + b, active, skip)
 
@@ -4364,7 +4457,8 @@ _mp_hero = (f'<header class="era-hero has-art" id="top" data-era="medieval"><div
             '<p class="span" data-cy="Map">Map</p>'
             '<h1 data-cy="Lle digwyddodd">Where it happened</h1>'
             f'<p class="lede"><span class="l-en" lang="en">{len(D.PLACES)} historic places on one map of Wales. Choose a pin to read the story behind the place, switch to Kingdoms to watch the map of Wales change, or type your town to find the history near you.</span>'
-            f'<span class="l-cy" lang="cy">{len(D.PLACES)} o leoedd hanesyddol ar un map o Gymru. Dewiswch bin i ddarllen y stori y tu ôl i’r lle, newidiwch i’r teyrnasoedd i weld map Cymru’n newid, neu teipiwch eich tref i ganfod yr hanes yn eich ymyl.</span></p></div></header>')
+            f'<span class="l-cy" lang="cy">{len(D.PLACES)} o leoedd hanesyddol ar un map o Gymru. Dewiswch bin i ddarllen y stori y tu ôl i’r lle, newidiwch i’r teyrnasoedd i weld map Cymru’n newid, neu teipiwch eich tref i ganfod yr hanes yn eich ymyl.</span></p>'
+            '<p class="more-row"><a class="btn" href="visit.html"><span class="l-en" lang="en">Plan a day out among them →</span><span class="l-cy" lang="cy">Cynlluniwch ddiwrnod allan yn eu plith →</span></a></p></div></header>')
 map_fragment = app_page("map.html", "Map of Wales · History of Wales", f"An interactive map of Welsh history: {len(D.PLACES)} historic places with their stories, the kingdoms of Wales through time, and the history near you.",
                         _mp_hero, "map_section.html", "map.html", "#map")
 
@@ -4420,6 +4514,8 @@ def search_index():
     items += [dict(k="page", t=x["en"], c=x["cy"], u=saint_href(sid), y=[x["dates"], cy_dates(x["dates"])], b=[x["nEn"].split(". ")[0] + ". " + " ".join(x["places"]), x["nCy"].split(". ")[0] + "."], e=r["era"]) for sid, (x, r) in SAINT.items()]
     items.append(dict(k="page", t="On this day in Welsh history", c="Ar y dydd hwn yn hanes Cymru", u="onthisday.html", y=["Every day", "Bob dydd"], b=["What happened on each day of the year in Welsh history", "Beth ddigwyddodd ar bob diwrnod o’r flwyddyn yn hanes Cymru"], e="medieval"))
     items.append(dict(k="page", t="Famous Welsh people", c="Pobl enwog Cymru", u="people.html", y=["People", "Pobl"], b=[f"All {len(D.PEOPLE)} people who shaped Wales, from every age, with filters by age and field", f"Pob un o’r {len(D.PEOPLE)} o bobl a luniodd Gymru, o bob oes, gyda hidlwyr yn ôl oes a maes"], e="industrial"))
+    items.append(dict(k="page", t="Plan a day out", c="Cynllunio diwrnod allan", u="visit.html", y=["Visit", "Ymweld"], b=["A day among the castles, courts, abbeys and museums of Wales you can visit: the best order, drive times, entry and a printable map", "Diwrnod ymhlith cestyll, llysoedd, abatai ac amgueddfeydd Cymru: y drefn orau, amseroedd gyrru, mynediad a map i’w argraffu"], e="medieval"))
+    items += [dict(k="page", t=f"A day out: {a[1]}", c=f"Diwrnod allan: {a[2]}", u=f"visit-{a[0]}.html", y=["Visit", "Ymweld"], b=[a[4], a[5]], e="medieval") for a in VP.AREAS]
     items.append(dict(k="page", t="Map of Wales: where it happened", c="Map Cymru: lle digwyddodd", u="map.html", y=["Map", "Map"], b=[f"{len(D.PLACES)} historic places on one map, the kingdoms through time, and history near you", f"{len(D.PLACES)} o leoedd hanesyddol ar un map, y teyrnasoedd drwy amser, a hanes yn eich ymyl"], e="medieval"))
     items.append(dict(k="page", t="The castles of Wales: the map", c="Cestyll Cymru: y map", u="castles.html", y=["Map", "Map"], b=[f"All {len(CASTLES)} castle sites in Wales on one map, with who built them", f"Pob un o’r {len(CASTLES)} o safleoedd cestyll yng Nghymru ar un map, gyda phwy a’u cododd"], e="medieval"))
     items += [dict(k="place", t=r["en"], c=r["cy"], u=f'castles.html#castle-{r["q"]}', y=[r["d"], castle_date_cy(r["d"])], b=[r["cur"][1] + ". " + r["cur"][4], r["cur"][2] + ". " + r["cur"][5]], e="medieval") for r in castle_rows() if r["cur"]]
@@ -4442,6 +4538,8 @@ def search_index():
                           b=[f'{kd[0]}, {r["la"]}. On the castles map.', f'{kd[1]}, {CS.LA_CY.get(r["la"], r["la"])}. Ar fap y cestyll.'], e="medieval"))
     items.append(dict(k="page", t="Welsh world firsts", c="Cymru oedd y cyntaf", u="firsts.html", y=["Firsts", "Y cyntaf"], b=["The equals sign, π, the fuel cell, the microphone, packet switching, mail order and more: everything Wales and the Welsh did first. " + ", ".join(PERSON[k][3] for k in P2.FIRSTS if k in PERSON), "Yr hafalnod, π, y gell danwydd, y meicroffon, newid pecynnau, archebu drwy’r post a rhagor: popeth a wnaeth Cymru a’r Cymry gyntaf."], e="industrial"))
     items += RP.search_items()  # the reference pages (src/refpages.py)
+    items.append(dict(k="page", t="Finding your Welsh family", c="Dod o hyd i’ch teulu Cymreig", u="family-history.html", y=["Family history", "Hanes teulu"],
+                      b=["Welsh surnames, ap and ferch, and how to trace your Welsh ancestors: census, parish and chapel registers, wills, tithe maps, newspapers", "Cyfenwau Cymreig, ap a ferch, a sut i olrhain eich hynafiaid: cyfrifiad, cofrestri plwyf a chapel, ewyllysiau, mapiau’r degwm, papurau newydd"], e="revival"))
     items.append(dict(k="page", t="For teachers", c="I athrawon", u="teachers.html", y=["", ""], b=["Lesson ideas and printable quizzes", "Syniadau gwersi a chwisiau i’w hargraffu"], e="industrial"))
     return items
 
@@ -4661,7 +4759,7 @@ CARD_KIND = [("person-", "Person", "Person"), ("event-", "On the timeline", "Ar 
              ("onthisday", "On this day", "Ar y dydd hwn"), ("firsts", "Welsh world firsts", "Y cyntaf"), ("mabinogion", "The Mabinogion", "Y Mabinogion"),
              ("literature", "The literature of Wales", "Llenyddiaeth Cymru"), ("books", "The great books of Wales", "Llyfrau mawr Cymru"), ("triads", "The Welsh Triads", "Trioedd Ynys Prydain")]
 CARD_GALLERY = {"literature": "trea-book-aneirin", "books": "trea-black-book", "triads": "trea-red-book"}
-GAME_PAGES = {*(f"court-{c['id']}.html" for c in COURTS.COURTS), "llys-rhosyr.html", "ride-glyndwr.html", "daily.html", "map-game.html", "names.html", "hero.html", "pairs.html", "play.html", "quiz.html"}
+GAME_PAGES = {*(f"court-{c['id']}.html" for c in COURTS.COURTS), "llys-rhosyr.html", "ride-glyndwr.html", "daily.html", "map-game.html", "names.html", "hero.html", "pairs.html", "play.html", "quiz.html", "weekly-quiz.html"}
 
 
 def card_photo(path):
@@ -4679,19 +4777,122 @@ def card_photo(path):
     return None
 
 
-def make_cards(out):
-    done = 0
+# The page's picture for its share card: a picture named for it in src/pictures.py, else its own portrait, place or
+# gallery photo, else the picture at the top of its page (its age's photo). Returns (file, where the subject sits).
+def card_picture(path, era):
+    if path in PX.PAGE or path in CARD_HOME:
+        ref = CARD_HOME.get(path) or PX.PAGE[path]
+    else:
+        f = card_photo(path)
+        if f:
+            return f, None
+        ref = PX.for_page(path, era)
+    if not ref:
+        return None, None
+    p = PX._parse(ref)
+    if p.get("remote"):
+        return None, None
+    return os.path.join(SRC, "static", p["src"]), p.get("pos")
+
+
+CARD_HOME = {"index.html": "g:place-harlech@50% 45%"}   # the home page's card: "Cymru" over Harlech
+CARD_DESIGN = "2"   # raise when the look of the cards changes, so Facebook and WhatsApp fetch the new ones (the ?v= number)
+CARD_CACHE = os.environ.get("CARD_CACHE") or os.path.join(ROOT, ".cache", "cards")
+_pic_fp = {}
+
+
+def _file_fp(f):
+    import hashlib
+    if f not in _pic_fp:
+        with open(f, "rb") as fh:
+            _pic_fp[f] = hashlib.md5(fh.read()).hexdigest()
+    return _pic_fp[f]
+
+
+def _strip_tags(t):
+    return html.unescape(re.sub(r"<[^>]+>", "", t or "")).strip()
+
+
+def share_cards(pages):
+    """Give every page, English and Cymraeg, its own share picture: cards/<page>.jpg and cards/cy/<page>.jpg. Points
+    og:image and twitter:image at it (with ?v=, so a changed picture is fetched again) and returns the list of pictures to
+    draw. Welsh cards take the Welsh page's own heading and description, and say "Hanes Cymru"."""
+    import hashlib
+    design = CARDS_FP
     dragon = os.path.join(SRC, "static", "dragon-red.webp")
-    for path, (title, desc, era) in CARD_JOBS.items():
-        name = html.unescape(re.sub(r"\s*·\s*History of Wales$", "", title))
-        kind = "Play" if path in GAME_PAGES else next((k[1] for k in CARD_KIND if path.startswith(k[0])), "History of Wales")
-        if path.startswith("era-") and era in ERA:
-            kind = "The ages of Wales · " + ERA[era]["spanEn"]
-        elif era in ERA and kind in ("Person", "Place", "Legend", "Long read"):
-            kind += " · " + ERA[era]["en"]
-        CARDS.make(os.path.join(out, "cards", path[:-5] + ".jpg"), kind, CITE.strip(name), CITE.strip(html.unescape(desc)), COL.get(era or "medieval", "#f26a62"), card_photo(path), dragon)
-        done += 1
-    return done
+    jobs = {}
+    for name, doc in pages.items():
+        cy = name.startswith("cy/")
+        base = name[3:] if cy else name
+        if not name.endswith(".html") or base not in CARD_JOBS or "/" in base:
+            continue
+        title, desc, era = CARD_JOBS[base]
+        lang = "cy" if cy else "en"
+        photo, pos = card_picture(base, era)
+        colour = COL.get(era or "medieval", "#f26a62")
+        if base == "index.html":
+            line = ("Hanes Cymru, o’r bobl gyntaf hyd y Senedd" if cy else "The history of Wales, from the first people to the Senedd")
+            spec = dict(kind="home", line=line)
+        else:
+            if cy:
+                name_t = _strip_tags(WP._first(doc, r"<h1\b[^>]*>(.*?)</h1>")) or _strip_tags(WP._first(doc, r"<title>(.*?)</title>"))
+                m = re.search(r'<meta property="og:description" content="([^"]*)"', doc)
+                sub = html.unescape(m.group(1)) if m else ""
+            else:
+                name_t = html.unescape(re.sub(r"\s*·\s*History of Wales$", "", title))
+                sub = html.unescape(desc)
+            name_t = re.sub(r"\s*·\s*(History of Wales|Hanes Cymru)$", "", CITE.strip(name_t))
+            k = next((k for k in CARD_KIND if base.startswith(k[0])), None)
+            kind = ("Chwarae" if cy else "Play") if base in GAME_PAGES else (k[2] if cy else k[1]) if k else ("Hanes Cymru" if cy else "History of Wales")
+            if base.startswith("era-") and era in ERA:
+                kind = ("Oesoedd Cymru · " + ERA[era]["spanCy"]) if cy else ("The ages of Wales · " + ERA[era]["spanEn"])
+            elif era in ERA and k and k[1] in ("Person", "Place", "Legend", "Long read", "On the timeline"):
+                kind += " · " + ERA[era]["cy" if cy else "en"]
+            spec = dict(kind="page", eyebrow=kind, title=name_t, sub=CITE.strip(sub), colour=colour)
+        spec.update(lang=lang, photo=photo, pos=pos, dragon=dragon)
+        key = hashlib.sha1(json.dumps([design, spec, photo and _file_fp(photo)], ensure_ascii=False, sort_keys=True).encode("utf-8")).hexdigest()
+        url = ("cards/cy/" if cy else "cards/") + base[:-5] + ".jpg"
+        ver = hashlib.sha1(json.dumps([CARD_DESIGN, {k: v for k, v in spec.items() if k not in ("photo", "dragon")}, photo and _file_fp(photo)],
+                                      ensure_ascii=False, sort_keys=True).encode("utf-8")).hexdigest()[:8]
+        full = f"{BASE_URL}{url}?v={ver}"
+        doc = re.sub(r'(<meta (?:property="og:image"|name="twitter:image") content=")[^"]*(")', lambda m: m.group(1) + full + m.group(2), doc)
+        if cy:   # the structured data names the English card; the Welsh page's should be the Welsh one
+            doc = doc.replace(f'"{BASE_URL}cards/{base[:-5]}.jpg"', f'"{BASE_URL}{url}"')
+        pages[name] = doc
+        jobs[url] = (key, spec)
+    return jobs
+
+
+def make_cards(out, jobs):
+    """Draw the share pictures, or copy them from the cache (.cache/cards, kept between GitHub builds by deploy.yml):
+    a picture is only drawn again when its words, its photo or tools/cards.py change. New ones are drawn on every core."""
+    os.makedirs(CARD_CACHE, exist_ok=True)
+    todo = []
+    for url, (key, spec) in jobs.items():
+        if not os.path.exists(os.path.join(CARD_CACHE, key + ".jpg")):
+            todo.append((os.path.join(CARD_CACHE, key + ".jpg"), spec))
+    todo = list({t[0]: t for t in todo}.values())
+    if todo:
+        import multiprocessing
+        n = min(len(todo), os.cpu_count() or 1)
+        if n > 1:
+            with multiprocessing.get_context("fork").Pool(n) as pool:
+                pool.map(CARDS.render, todo, chunksize=8)
+        else:
+            for t in todo:
+                CARDS.render(t)
+    for url, (key, spec) in jobs.items():
+        dest = os.path.join(out, url)
+        os.makedirs(os.path.dirname(dest), exist_ok=True)
+        shutil.copyfile(os.path.join(CARD_CACHE, key + ".jpg"), dest)
+    keep = {key + ".jpg" for key, _ in jobs.values()}
+    for f in os.listdir(CARD_CACHE):   # drop pictures no page uses any more, so the cache does not grow for ever
+        if f not in keep:
+            os.remove(os.path.join(CARD_CACHE, f))
+    if todo and os.environ.get("GITHUB_OUTPUT"):
+        with open(os.environ["GITHUB_OUTPUT"], "a") as fh:
+            fh.write("cards_new=true\n")
+    return len(jobs), len(todo)
 
 
 # ---------- shared files: the stylesheet and the home page's data and script are kept in files of their own ----------
@@ -4809,11 +5010,18 @@ RP.setup(globals())
 EP.setup(globals())
 style += EP.CSS
 TPK.setup(globals())
+import family as FAM  # noqa: E402  (family history: family-history.html, src/family.py)
+FAM.setup(globals())
+style += FAM.CSS
 RIDE.setup(globals())
 COURTS.setup(globals())
 style += COURTS.CSS
 LLYS.setup(globals())
 style += LLYS.CSS
+import visitplan as VP  # noqa: E402  (plan a day out: visit.html and the ready-made days, visit-<area>.html; src/visitplan.py, src/static/visitplan.js)
+import ref_sites as _VP_ST, ref_towns as _VP_RT  # noqa: E402
+VP.setup(dict(globals(), ST=_VP_ST, RT=_VP_RT))
+style += VP.CSS
 style += RIDE.CSS
 style += TPK.CSS
 import about as AB  # noqa: E402  (the About page, the author and "last updated" lines, reporting a mistake)
@@ -4841,6 +5049,7 @@ def main():
     for i, t in enumerate(L.TRAILS):
         pages[f"trail-{t['id']}.html"] = trail_page(t, i)
     pages["teachers.html"] = teachers_page()
+    pages["family-history.html"] = FAM.page()  # finding your Welsh family (src/family.py)
     pages["stories.html"] = stories_index()
     for i, x in enumerate(F.STORIES):
         pages[f"story-{x['id']}.html"] = story_page(x, i)
@@ -4884,12 +5093,14 @@ def main():
     pages["hero.html"] = game_page("hero.html", "hero", "ancient", "Which figure from history are you?", "Pa ffigwr o hanes ydych chi?", "Six quick questions.", "Chwe chwestiwn cyflym.", "torch", "A short personality quiz: which figure from Welsh history are you most like?")
     pages["welsh.html"] = welsh_page()
     pages["pairs.html"] = game_page("pairs.html", "pairs", "modern", "Word pairs", "Parau geiriau", "Turn over two cards at a time and match each Welsh word to its meaning.", "Trowch ddau gerdyn ar y tro a pharu pob gair Cymraeg â’i ystyr.", "owl", "A memory game: match Welsh words to their meanings.")
+    pages["weekly-quiz.html"] = weekly_quiz_page()
     pages["404.html"] = not_found_page()
     pages["whatsnew.html"] = whatsnew_page()
     pages["about.html"] = AB.about_page()
     pages["llys-rhosyr.html"] = LLYS.page()  # Llys Rhosyr in 3D (src/llys.py)
     pages.update(COURTS.pages())  # more courts in 3D (src/courts.py)
     pages["ride-glyndwr.html"] = RIDE.page()  # Ride with Glyndŵr, 1400 (src/ride.py)
+    pages.update(VP.pages())  # plan a day out, and the ready-made days out (src/visitplan.py)
     pages.update(TPK.pages())  # teacher packs, one for each age (src/teachpacks.py)
     pages.update(EP.pages())  # a page for every event on the timeline (src/eventpages.py)
     pages.update(RP.pages(pages.keys()))  # the reference pages: look-it-up desk, A–Z and the rest (src/refpages.py)
@@ -4898,6 +5109,7 @@ def main():
     shared_files = shared_assets(pages)
     pages = WP.split(pages, BASE_URL, LANG_BOOT, LANG_TOGGLE, SEO.tidy_title, SEO.tidy_desc)  # English pages and their Welsh twins in cy/
     pages = {name: CITE.render(text, cy=name.startswith("cy/")) for name, text in pages.items()}  # sources beside the claims
+    card_jobs = share_cards(pages) if CARDS_ON else {}   # a share picture for every page, in English and Cymraeg
     sm, marks = SEO.sitemap(BASE_URL, pages)   # every page, with the date it last changed and its pictures
     today = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
     for name in pages:   # "Last updated" on each page, and dateModified for search engines (src/about.py)
@@ -4913,7 +5125,8 @@ def main():
     for name, text in shared_files.items():
         write(os.path.join(out, name), text)
     if CARDS_ON:
-        print(f"Made {make_cards(out)} share pictures")
+        n, drawn = make_cards(out, card_jobs)
+        print(f"Share pictures: {n} ({drawn} drawn, {n - drawn} from the cache)")
         make_today(out)
     for f in os.listdir(os.path.join(SRC, "static")):
         sp = os.path.join(SRC, "static", f)
@@ -4922,6 +5135,8 @@ def main():
         print(f"Made {TH.write(out)} small card pictures")
     write(os.path.join(out, "welsh.js"), welsh_js())
     write(os.path.join(out, "placenames.js"), placenames_js())
+    for name, text in quiz_week_files(pages).items():   # the weekly quiz, a file a week
+        write(os.path.join(out, name), text)
     write(os.path.join(out, "onthisday.json"), json.dumps(otd_rows(), ensure_ascii=False, separators=(",", ":")))
     write(os.path.join(out, "feed.xml"), feed_xml(otd_rows()))
     write(os.path.join(out, "whatsnew.json"), json.dumps(WN.NEWS, ensure_ascii=False))
