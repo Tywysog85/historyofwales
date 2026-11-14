@@ -15,6 +15,8 @@
   var ERA = {}; ERAS.forEach(function (e) { ERA[e.id] = e; });
   var PLACE = {}; PLACES.forEach(function (p) { PLACE[p.id] = p; });
   function T(en, cy) { return lang === "cy" ? cy : en; }
+  /* today as a day number, by the visitor's own date: the build picks the home page's daily things with the same number (src/daily.py) */
+  function dayNo() { var d = new Date(); return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5); }
   function fmt(n) { n = Math.abs(n); return n >= 10000 ? n.toLocaleString("en-GB") : String(n); }  /* 2026, not 2,026; 230,000 BC keeps its comma */
   /* event fields */
   var E_ERA = 0, E_Y = 1, E_C = 2, E_END = 3, E_DAY = 4, E_TEN = 5, E_TCY = 6, E_BEN = 7, E_BCY = 8, E_KEY = 9, E_PLACE = 10, E_SRC = 11;
@@ -812,7 +814,7 @@
   $("#people-more").onclick = function () { pAll = !pAll; renderPeople(); if (!pAll) goTo($("#people")); };
 
   /* ---------- Did you know? + daily streak ---------- */
-  var factI = Math.floor(Date.now() / 864e5) % D.FACTS.length;
+  var factI = dayNo() % D.FACTS.length;  /* a new fact each day; Another gives the next */
   function renderFact() { var f = D.FACTS[factI % D.FACTS.length]; $("#fact").innerHTML = T(f[0], f[1]); var m = $("#fact-more"); if (m) m.setAttribute("href", f[2]); }  /* our own text, escaped at build, with its source chip (src/cites.py) */
   $("#fact-next").onclick = function () { factI++; renderFact(); };
   // The Daily challenge card shows today's own puzzle and the visitor's guesses so far.
@@ -899,9 +901,15 @@
     if (cy) { u.voice = cy; u.lang = cy.lang; } else if (en) { u.voice = en; u.lang = en.lang; }
     u.rate = 0.8; speechSynthesis.cancel(); speechSynthesis.speak(u);
   }
+  /* today's ten words: the next ten in turn from the shuffled list (WORD_POOL in build.py, src/daily.py window()) */
+  var WORDS_TODAY = (function () {
+    var all = D.WORDS, k = Math.min(D.WORDS_N || 10, all.length), start = (dayNo() * k) % all.length, out = [];
+    for (var j = 0; j < k; j++) out.push((start + j) % all.length);
+    return out;
+  })();
   function renderWords() {
     var play = canSpeak || D.AUDIO && D.AUDIO.length;
-    $("#words").innerHTML = D.WORDS.map(function (w, i) {
+    $("#words").innerHTML = WORDS_TODAY.map(function (i) { var w = D.WORDS[i];
       return "<li><b>" + esc(w[0]) + '</b><span class="say"><span class="g">' + w[1].split(" ").map(function (x) { return "<i>" + esc(x) + "</i>"; }).join(" ") + "</span>" + (play ? '<button type="button" class="play" data-w="' + i + '" aria-label="' + T("Hear ", "Clywed ") + esc(w[0]) + '">▶</button>' : "") + "</span><span>" + esc(T(w[2], w[3])) + "</span></li>";
     }).join("");
   }

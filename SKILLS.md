@@ -908,6 +908,11 @@ Learnt while writing the Druids long read (`src/druids.py`, `story-druids.html`)
 - An age page can show one long read in a section of its own: one line in `era_page()` in `build.py` (`if eid == "britons"`), as the Saints age does for the saints. Use it for a long read that belongs to the whole age.
 - Ifan's rule for the Druids (13 November 2026): positive only, teachers, judges, philosophers, peacemakers; never sacrifice or anything negative. Leave such lines of the old writers out, and leave out books whose titles dwell on it.
 
+### A home page that changes every day (14 November 2026)
+- **Ifan's rule:** the home page should look different each day, the same for everyone that day. `src/daily.py` does the picking: `day_no()` is today's date in Wales as a day number, `shuffled()` fixes an order once with a seed, and `window()` gives each day the next few in turn, so everything comes round before anything repeats.
+- **Picked at build time:** the long reads (`home_stories()`: a story still marked New keeps the big spot, otherwise the big spot takes turns), the eight people (`home_people()`: one from each of eight ages, taking turns), the four legends (`home_legends()`) and the order of the games (`play_cards(home=True)`). The site is rebuilt every morning by the 04:15 UTC run in `deploy.yml`, so these move on early each morning. If that run is ever removed, they stop changing.
+- **Picked in the browser,** using the same day number (`dayNo()` in `app.js`): Did you know? (Another gives the next fact), Words to know (ten a day from `WORD_POOL` in `build.py`: every word and phrase from `data.py` and `cymraeg.py` that has a real recording), and the place-name decoder (`DAILY` in `src/placenames.py`).
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
