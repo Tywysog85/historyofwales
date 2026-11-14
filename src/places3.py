@@ -1381,14 +1381,14 @@ LONG.update({
  "sycharth": (
   ["## Owain’s court",
    "Sycharth, near Llansilin, was the chief home of Owain Glyndŵr and the place of his birth. He inherited it in 1369 and lived here with his wife Margaret Hanmer and their children.[[cite:pl-wiki-sycharth]]",
-   "The poet Iolo Goch praised it as a court of nine halls on a green hill, with a tiled roof and a chimney on every house.[[cite:pl-wiki-sycharth]] Digging in the 1960s found two timber halls on the mound, one 43 metres long.[[cite:pl-wiki-sycharth]]",
+   "The poet Iolo Goch praised it as a court of nine halls on a green hill, with a tiled roof and a chimney on every house.[[cite:pl-wiki-sycharth]] Digging in 1962–63 found two timber buildings on the mound, one about 13 metres (43 feet) long.[[cite:ct-coflein-sycharth,ct-hague-1966]]",
    "## Burned in 1403",
    "In May 1403 Prince Henry, the future Henry V, came to Sycharth and wrote to his father that he had burned the whole place. Owain fought on, and the court lives on in Iolo’s poem.[[cite:pl-wiki-sycharth]]",
    "## Visiting",
    "Cadw looks after the grassy mound and its banks. There is a small car park with information boards on the lane near the B4580, south of Llansilin.[[cite:pl-wiki-sycharth]]"],
   ["## Llys Owain",
    "Sycharth, ger Llansilin, oedd prif gartref Owain Glyndŵr a man ei eni. Etifeddodd ef yn 1369 a bu’n byw yma gyda’i wraig Marged Hanmer a’u plant.[[cite:pl-wiki-sycharth]]",
-   "Canmolodd y bardd Iolo Goch ef fel llys naw neuadd ar fryn gwyrdd, gyda tho teils a simnai ar bob tŷ.[[cite:pl-wiki-sycharth]] Cafodd cloddio yn yr 1960au ddwy neuadd bren ar y domen, un yn 43 metr o hyd.[[cite:pl-wiki-sycharth]]",
+   "Canmolodd y bardd Iolo Goch ef fel llys naw neuadd ar fryn gwyrdd, gyda tho teils a simnai ar bob tŷ.[[cite:pl-wiki-sycharth]] Cafodd cloddio yn 1962–63 ddau adeilad pren ar y domen, un tua 13 metr (43 troedfedd) o hyd.[[cite:ct-coflein-sycharth,ct-hague-1966]]",
    "## Ei losgi yn 1403",
    "Ym Mai 1403 daeth y Tywysog Harri, Harri V yn ddiweddarach, i Sycharth ac ysgrifennu at ei dad iddo losgi’r lle i gyd. Ymladdodd Owain ymlaen, ac mae’r llys yn byw yng ngherdd Iolo.[[cite:pl-wiki-sycharth]]",
    "## Ymweld",
@@ -1661,7 +1661,7 @@ PEOPLE.update({
 })
 
 LINKS.update({
- "sycharth": [("story-glyndwr.html", "Owain Glyndŵr", "Owain Glyndŵr"), ("ride-glyndwr.html", "Ride with Glyndŵr, 1400", "Marchogaeth gyda Glyndŵr, 1400")],
+ "sycharth": [("court-sycharth.html", "Walk through Sycharth in 3D", "Cerdded drwy Sycharth mewn 3D"), ("story-glyndwr.html", "Owain Glyndŵr", "Owain Glyndŵr"), ("ride-glyndwr.html", "Ride with Glyndŵr, 1400", "Marchogaeth gyda Glyndŵr, 1400")],
  "pilleth": [("story-glyndwr.html", "Owain Glyndŵr", "Owain Glyndŵr")],
  "pennal": [("story-glyndwr.html", "Owain Glyndŵr", "Owain Glyndŵr")],
  "penmynydd": [("trail-tudors.html", "The Tudor trail", "Llwybr y Tuduriaid")],
@@ -1728,7 +1728,7 @@ CITES.update(dict([
            "Agorwyd yn 2004; yr arysgrif gan Gwyneth Lewis, cyn-Fardd Cenedlaethol Cymru; 2,000 tunnell o lechi Cymru wedi’u hailgylchu dros 4,500 tunnell o ddur; Stryd Bute, CF10 5AL."),
      url="https://www.wmc.org.uk/en/what-we-do/our-building-and-people/our-building", lang="en")),
  _wiki("pl-wiki-sycharth", "Sycharth", "Sycharth",
-       "Owain Glyndŵr’s principal residence and birthplace, inherited in 1369; Iolo Goch’s nine halls with tiled roofs and chimneys; 1960s excavation found timber halls, one 43m long; burned in May 1403 by Prince Henry; managed by Cadw, with a small car park near the B4580.",
+       "Owain Glyndŵr’s principal residence and birthplace, inherited in 1369; Iolo Goch’s nine halls with tiled roofs and chimneys; 1960s excavation found two timber halls on the mound; burned in May 1403 by Prince Henry, who wrote to his father that he found it empty; managed by Cadw, with a small car park near the B4580.",
        "Prif gartref a man geni Owain Glyndŵr, a etifeddwyd yn 1369; naw neuadd Iolo Goch; cloddio’r 1960au; llosgwyd ym Mai 1403 gan y Tywysog Harri; Cadw sy’n ei reoli, gyda maes parcio bach ger y B4580."),
  _wiki("pl-wiki-bryn-glas", "Battle of Bryn Glas", "Battle_of_Bryn_Glas",
        "22 June 1402 near Pilleth; one of the greatest Welsh victories over an English army in open field; Welsh archers in Mortimer’s army changed sides; Mortimer captured, not ransomed, married Catrin; Wellingtonia trees mark the burial site; St Mary’s church and well.",

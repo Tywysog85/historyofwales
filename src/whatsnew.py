@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-14", "Sycharth in 3D: walk through Owain Glyndŵr’s court", "Sycharth mewn 3D: cerddwch drwy lys Owain Glyndŵr",
+     "Cross the moat, climb the green hill and step inside the timber court of Owain Glyndŵr, as Iolo Goch sang it around 1390: the H-shaped house on the motte with its chimney, glass windows and slate roof, the hall where the poets were welcomed, the bailey, the fishpond, the mill and the deer park. Twelve stops tell its story, from the poem to the fire of 1403 and what the excavators found, with the sources for each.",
+     "Croeswch y ffos, dringwch y bryn gwyrdd a chamwch i mewn i lys pren Owain Glyndŵr, fel y canodd Iolo Goch iddo tua 1390: y tŷ siâp H ar y domen â’i simnai, ei ffenestri gwydr a’i do llechi, y neuadd lle croesewid y beirdd, y beili, y pysgodlyn, y felin a’r parc ceirw. Mae deuddeg arhosfan yn adrodd ei hanes, o’r gerdd i dân 1403 a’r hyn a ganfu’r cloddwyr, gyda ffynonellau pob un.",
+     "court-sycharth.html"),
     ("2026-11-13", "The Druids: when Europe came to Britain to learn", "Y Derwyddon: pan ddaeth Ewrop i Brydain i ddysgu",
      "A new long read on the Druids, the teachers, judges and philosophers of the Britons: Julius Caesar’s witness that their learning began in Britain and that students crossed the sea to master it here, their twenty years of learning by heart, the Greek letters they wrote their business in, the Greek and Roman writers who praised them as philosophers and peacemakers, Môn their holy island, and how Wales kept their memory, from Armes Prydein to the Gorsedd.",
      "Erthygl newydd ar y Derwyddon, athrawon, barnwyr ac athronwyr y Brythoniaid: tystiolaeth Iŵl Cesar mai ym Mhrydain y dechreuodd eu dysg a bod myfyrwyr yn croesi’r môr i’w meistroli yma, eu hugain mlynedd o ddysgu ar gof, y llythrennau Groeg yr ysgrifennent eu busnes ynddynt, yr awduron Groeg a Rhufeinig a’u canmolodd fel athronwyr a thangnefeddwyr, Môn eu hynys sanctaidd, a sut y cadwodd Cymru eu cof, o Armes Prydein i’r Orsedd.",
