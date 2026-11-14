@@ -157,7 +157,9 @@
       var vm = cx.createLinearGradient(0, eb - eh * 0.7, 0, H), mistC = mixHex(mixHex(SKY.sky[2], SKY.sky[1], 0.45), mixHex("#262b3d", "#444d68", SKY.sun), 0.7), vc = hex(mistC).join(",");
       vm.addColorStop(0, "rgba(" + vc + ",0)"); vm.addColorStop(0.34, "rgba(" + vc + ",.9)"); vm.addColorStop(0.55, "rgba(" + vc + ",1)"); vm.addColorStop(1, SKY.sky[3]); cx.fillStyle = vm; cx.fillRect(0, eb - eh * 0.7, W, H);
       if (!L3) drawStillLand(stacked); else {
-        if (!FLAG) FLAG = flagArt(); HCL3.frame({ W: W, H: H, sumX: sumX - ew * 0.13, sumY: sumY + ew * 0.15, ppm: ew / 2000, ground: stacked ? { x: W * 0.7, y: eb - eh * 0.07 - sy * 0.04, ppm: Math.min(W * 0.0095, eh * 0.019), tilt: narrow ? 0 : 0.12 } : { x: Math.min(W * 0.885, W - H * 0.3) - mouse * 9, y: H * 0.7 - sy * 0.1, ppm: H * 0.0098, tilt: 0.1 }, castle: true, t: t, sun: SKY.sun, fog: mixHex(SKY.sky[2], SKY.sky[1], 0.45), mist: mistC, flag: FLAG, flagV: FLAGV });
+        if (!FLAG) FLAG = flagArt(); /* the mountains stand close behind the castle (Ifan, 14 Nov 2026): on phones and in phone desktop mode they are drawn 1.2 times bigger and lower, and the moor melts away sooner (fade, metres from the eye) so little flat ground shows between the castle and the mountains */
+        var mk = stacked ? 1.2 : 1, mdy = stacked ? 0.1 : 0.02;
+        HCL3.frame({ W: W, H: H, sumX: sumX - ew * 0.13, sumY: sumY + ew * (0.15 + mdy), ppm: ew / 2000 * mk, ground: stacked ? { x: W * 0.7, y: eb - eh * 0.07 - sy * 0.04, ppm: Math.min(W * 0.0095, eh * 0.019), tilt: narrow ? 0 : 0.12, fade: narrow ? [450, 1000] : [600, 1300] } : { x: Math.min(W * 0.885, W - H * 0.3) - mouse * 9, y: H * 0.7 - sy * 0.1, ppm: H * 0.0098, tilt: 0.1, fade: [800, 1600] }, castle: true, t: t, sun: SKY.sun, fog: mixHex(SKY.sky[2], SKY.sky[1], 0.45), mist: mistC, flag: FLAG, flagV: FLAGV });
         if (HCL3.shown && !LANDT) LANDT = t; }
     }
     LAYERS.forEach(function (L, i) {
@@ -358,7 +360,7 @@
         SLOW = true;
         var narrowS = Math.min(innerWidth, screen.width) < 1100, sky = SKY.sun > 0.5 ? "day" : "night";
         STILL_IMG.ref = narrowS ? STILL_REF.p : STILL_REF.w;
-        var li = new Image(); li.onload = function () { STILL_IMG.land = li; }; li.onerror = function () { STILL_IMG.failed = 1; }; li.src = "hero-land-" + (narrowS ? "p" : "w") + "-" + sky + ".webp";
+        var li = new Image(); li.onload = function () { STILL_IMG.land = li; }; li.onerror = function () { STILL_IMG.failed = 1; }; li.src = "hero-land-" + (narrowS ? "p" : "w") + "-" + sky + ".webp?v=2"; /* raise v whenever the still pictures are retaken: sw.js serves cached files first */
         var di = new Image(); di.onload = function () { STILL_IMG.dragon = di; }; di.src = "dragon-red.webp";
       } else if (gl3 && !lowMem && !(navigator.connection && navigator.connection.saveData)) {
         window.HCD3_WANT = window.HCL3_WANT = 1;
@@ -366,7 +368,7 @@
         var cl = document.createElement("canvas"); cl.id = "land3d"; cl.setAttribute("aria-hidden", "true"); cv.after(cl);
         /* the 3D scene starts downloading once the page itself has loaded, so the words, fonts and pictures come first on a slow phone */
         var go3 = function () {
-          var s3 = document.createElement("script"); s3.type = "module"; s3.src = "hero3d.js?v=8"; /* raise the number whenever hero3d.js changes, so browsers fetch the new one */ s3.onerror = function () { window.HCD3_WANT = window.HCL3_WANT = 0; c3.remove(); cl.remove(); }; document.head.appendChild(s3);
+          var s3 = document.createElement("script"); s3.type = "module"; s3.src = "hero3d.js?v=9"; /* raise the number whenever hero3d.js changes, so browsers fetch the new one */ s3.onerror = function () { window.HCD3_WANT = window.HCL3_WANT = 0; c3.remove(); cl.remove(); }; document.head.appendChild(s3);
           setTimeout(function () { if (!(window.HCD3 && HCD3.ready)) window.HCD3_WANT = 0; if (!(window.HCL3 && HCL3.ready)) { window.HCL3_WANT = 0; cl.remove(); } }, 15000);
         };
         if (document.readyState === "complete") go3(); else window.addEventListener("load", go3, { once: true });

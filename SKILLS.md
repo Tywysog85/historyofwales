@@ -974,6 +974,9 @@ Learnt while writing the Druids long read (`src/druids.py`, `story-druids.html`)
 ### Stylesheet braces are checked at build time
 A missing `}` after a `@media (pointer: coarse)` block once swallowed about 1,000 lines of CSS, so those rules only worked on touch screens. On computers the hidden screen-reader title (`.sr-only`) showed as a giant heading above Cymru (November 2026). `_css_braces()` in build.py now stops the build if site.css has an unclosed `{` or an extra `}`. When adding a media block, close it before the next section's comment.
 
+### Mountains close behind the castle
+Ifan (14 Nov 2026) wanted the mountains nearer the castle. In src/app.js the mountains are drawn 1.2 times bigger and a little lower on phones and in phone desktop mode (`mk`, `mdy` beside `HCL3.frame`), and `ground.fade` tells tools/land3d.src.js where the moor melts away (metres from the eye: 450–1000 on phones, 600–1300 in the middle layout, 800–1600 on wide screens). Nearer fade means less flat ground between the castle and the mountains. After changing either, rebuild hero3d.js, raise its `?v=`, retake the still pictures and raise `hero-land-*.webp?v=` (sw.js serves cached files first).
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
