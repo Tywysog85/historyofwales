@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-14", "The weekly quiz: ten new questions every Monday", "Cwis yr wythnos: deg cwestiwn newydd bob dydd Llun",
+     "A new quiz on the history of Wales comes out every Monday morning, the same for everyone: three questions on the week’s anniversaries, then a figure from history, a photograph of a place to name, a Welsh word, a tale from Wales and which came first. One go each, a score to share, and quizzes from past weeks to practise on.",
+     "Daw cwis newydd ar hanes Cymru allan bob bore Llun, yr un un i bawb: tri chwestiwn ar ben-blwyddi’r wythnos, yna ffigwr o hanes, llun o le i’w enwi, gair Cymraeg, chwedl o Gymru a pha un ddaeth gyntaf. Un cynnig yr un, sgôr i’w rhannu, a chwisiau’r wythnosau a fu i ymarfer arnynt.",
+     "weekly-quiz.html"),
     ("2026-11-14", "Garth Celyn in 3D: the princes’ court at Aber", "Garth Celyn mewn 3D: llys y tywysogion yn Aber",
      "Walk into the court of the princes of Gwynedd at Abergwyngregyn, between the mountains and the sea: the stone hall with its two wings found by the archaeologists, the mound Pen y Mwd, Pen y Bryn on the hill, and the stories of Siwan, Dafydd, Eleanor and Gwenllian, and Llywelyn’s answer to the archbishop in 1282. Eleven stops, with the sources for every one.",
      "Cerddwch i mewn i lys tywysogion Gwynedd yn Abergwyngregyn, rhwng y mynyddoedd a’r môr: y neuadd garreg a’i dwy adain a ganfu’r archaeolegwyr, y domen Pen y Mwd, Pen y Bryn ar y bryn, a hanesion Siwan, Dafydd, Elinor a Gwenllian, ac ateb Llywelyn i’r archesgob yn 1282. Un arhosfan ar ddeg, gyda’r ffynonellau i bob un.",

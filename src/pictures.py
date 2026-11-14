@@ -225,6 +225,7 @@ PAGE = {
     "symbols.html": "g:trea-lovespoon",
     "play.html": "g:place-caerleon",
     "quiz.html": "g:place-conwy",
+    "weekly-quiz.html": "g:place-harlech",
     "pairs.html": "g:cast-carreg-cennen",
     "map-game.html": "g:cast-criccieth",
     "names.html": "g:buil-llanfairpwll",

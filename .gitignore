@@ -4,3 +4,9 @@ __pycache__/
 *.pyc
 link-report.md
 link-count.txt
+
+# the weekly quiz answer key, made at deploy (src/weeklyquiz.py worker)
+worker/src/gen.json
+worker/.wrangler/
+worker/node_modules/
+wrangler.log
