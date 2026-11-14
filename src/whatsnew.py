@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-14", "Sycharth and Garth Celyn rebuilt in 3D, with their people", "Sycharth a Garth Celyn wedi’u hailadeiladu mewn 3D, gyda’u pobl",
+     "Owain Glyndŵr’s Sycharth and the princes’ court at Aber look far more real: oak timber framing you can see standing out from the limewashed walls, a palisade of single sharpened logs, a gatehouse with its gates, trestle tables, leafy trees, and real-looking stone, slate, thatch and wood. Owain and Llywelyn sit at their high tables with the household around them, with guards at the gates, grooms and horses, hounds, sheep, cattle and deer, and you can hear the hall’s talk, the harp, the birds and the river.",
+     "Mae Sycharth Owain Glyndŵr a llys y tywysogion yn Aber yn edrych yn llawer mwy byw: fframiau derw sy’n sefyll allan o’r waliau gwyngalch, palis o foncyffion miniog unigol, porthdy a’i byrth, byrddau trestl, coed deiliog, a cherrig, llechi, to gwellt a phren sy’n edrych yn real. Mae Owain a Llywelyn yn eistedd wrth eu byrddau uchel gyda’r teulu o’u cwmpas, gyda gwylwyr wrth y pyrth, gweision a cheffylau, cŵn hela, defaid, gwartheg a cheirw, a gallwch glywed sŵn y neuadd, y delyn, yr adar a’r afon.",
+     "court-sycharth.html"),
     ("2026-11-14", "Garth Celyn in 3D: the princes’ court at Aber", "Garth Celyn mewn 3D: llys y tywysogion yn Aber",
      "Walk into the court of the princes of Gwynedd at Abergwyngregyn, between the mountains and the sea: the stone hall with its two wings found by the archaeologists, the mound Pen y Mwd, Pen y Bryn on the hill, and the stories of Siwan, Dafydd, Eleanor and Gwenllian, and Llywelyn’s answer to the archbishop in 1282. Eleven stops, with the sources for every one.",
      "Cerddwch i mewn i lys tywysogion Gwynedd yn Abergwyngregyn, rhwng y mynyddoedd a’r môr: y neuadd garreg a’i dwy adain a ganfu’r archaeolegwyr, y domen Pen y Mwd, Pen y Bryn ar y bryn, a hanesion Siwan, Dafydd, Elinor a Gwenllian, ac ateb Llywelyn i’r archesgob yn 1282. Un arhosfan ar ddeg, gyda’r ffynonellau i bob un.",

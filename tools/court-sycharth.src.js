@@ -1,6 +1,6 @@
 /* Sycharth, the court of Owain Glyndŵr, as it might have looked around 1390, when Iolo Goch sang about it.
    Built on the shared court engine (tools/court3d.src.js); the words for each stop are in src/courts.py.
-     npx esbuild court-sycharth.src.js --bundle --minify --format=esm --target=es2019 --outfile=court-sycharth.js
+     npx esbuild court-sycharth.src.js --bundle --minify --format=esm --target=es2020 --outfile=court-sycharth.js
    What it rests on (see the page's "How we know"):
      - the earthworks, from the Royal Commission (Coflein NPRN 306999) and Cadw: a ditched motte about 50 m across and
        10.6 m high with a summit 26 m across; a crescent-shaped bailey 64 m across and 32 m deep on the south-west;
@@ -136,35 +136,29 @@ function colour(x, z, y, c) {
 
 // ---------- the buildings ----------
 function build(K) {
-  const { THREE, scene, M, R, tex, block, cyl, wallLine, wallSeg, roof, trees, fire, smoke, posts, walls, anim, ground } = K;
-  // close-studded timber framing, the way of the March in Owain's day: dark oak studs, lime-washed panels, a rail at each floor
-  const frameTex = tex(512, (x, s) => {
-    x.fillStyle = "#e6dfcf"; x.fillRect(0, 0, s, s);
-    for (let i = 0; i < 2500; i++) { const v = 200 + (R() - .5) * 50; x.fillStyle = `rgba(${v},${v - 4},${v - 14},.3)`; x.fillRect(R() * s, R() * s, R() * 5 + 1, R() * 5 + 1); }
-    const oak = (X, Y, W, H) => { x.fillStyle = "#3b2a1c"; x.fillRect(X, Y, W, H); x.fillStyle = "rgba(255,230,190,.07)"; x.fillRect(X + 2, Y, 3, H); };
-    const st = s / 6;   // six studs in 3 m
-    for (let i = 0; i < 6; i++) oak(i * st, 0, st * .42, s);
-    oak(0, s - 26, s, 26); oak(0, s * .5 - 12, s, 24); oak(0, 0, s, 18);   // sill, floor rail, head
-  });
-  M.frame = new THREE.MeshStandardMaterial({ map: frameTex, roughness: .9 }); M.frame.userData.ts = 3;
+  const { THREE, scene, M, R, hanging, add, limb, ball, mtxF, person, horse, hound, sheep, cow, goose, DYE, block, bblock, cyl, wallLine, wallSeg, framed, framedBox, logWall, table, bench, roof, trees, fire, smoke, posts, walls, anim, ground } = K;
+  // close-studded timber framing, the way of the March in Owain's day: oak posts and studs, limewashed daub between them
+  M.frame = M.daub;
+  const CS = { stud: .5 };
   const MT = M_TOP;
 
   // ----- the house on the motte -----
   // the hall: two long walls between the wings, 8.6 m long and 6.2 m wide, open to the roof
   const hz = (HALL.z0 + HALL.z1) / 2;
-  wallLine(HALL.x0, HALL.z1, HALL.x1, HALL.z1, 4.2, .3, M.frame, [[5.4, 1.5]], MT, 2.3);   // south wall with the door
-  wallLine(HALL.x0, HALL.z0, HALL.x1, HALL.z0, 4.2, .3, M.frame, [], MT);                  // north wall, with the chimney
+  framed(HALL.x0, HALL.z1, HALL.x1, HALL.z1, 4.2, MT, [[7.4, 1.3]], 2.3, CS);   // south wall, with the door at the lower (east) end, away from the high table
+  framed(HALL.x0, HALL.z0, HALL.x1, HALL.z0, 4.2, MT, [], 2.3, CS);              // north wall, with the chimney
   // the two wings, two storeys, the upper floor jettied out over the lower
   [-1, 1].forEach((s) => {
     const cx = s * (HALL.x1 + WING.w / 2), w = WING.w, x0 = cx - w / 2, x1 = cx + w / 2, z0 = WING.z0, z1 = WING.z1, zc = (z0 + z1) / 2, dd = z1 - z0;
     const inner = s < 0 ? x1 : x0, outer = s < 0 ? x0 : x1;
-    wallLine(outer, z0, outer, z1, 3, .3, M.frame, [], MT);
-    wallLine(x0, z0, x1, z0, 3, .3, M.frame, [], MT);
-    wallLine(x0, z1, x1, z1, 3, .3, M.frame, [[w / 2, 1.2]], MT, 2.1);
-    wallLine(inner, z0, inner, z1, 3, .3, M.frame, [[dd / 2 + (hz - zc), 1.3]], MT, 2.1);
-    const up = block(w + .8, 2.9, dd + .8, M.frame, cx, MT + 3 + 1.45, zc);   // the upper floor: the lofts
-    up.castShadow = true;
+    framed(outer, z0, outer, z1, 3, MT, [], 2.1, CS);
+    framed(x0, z0, x1, z0, 3, MT, [], 2.1, CS);
+    framed(x0, z1, x1, z1, 3, MT, [[w / 2, 1.2]], 2.1, CS);
+    framed(inner, z0, inner, z1, 3, MT, [[dd / 2 + (hz - zc), 1.3]], 2.1, CS);
+    framedBox(cx, zc, w + .8, dd + .8, 2.75, MT + 3.16, 0, { stud: .5, mid: false });   // the upper floor, the lofts, jettied out over the lower
     block(w + .9, .22, dd + .9, M.oak, cx, MT + 3.05, zc);                    // the jetty bressumer
+    bblock(w - .2, .04, dd - .2, M.boards, cx, MT + 2.92, zc);                // the boards of the loft floor, seen from below, on joists
+    for (let jz = z0 + .6; jz < z1 - .3; jz += .9) bblock(w - .2, .16, .14, M.oak, cx, MT + 2.82, jz);
     [[x0, z0], [x1, z0], [x0, z1], [x1, z1]].forEach(([px, pz]) => { block(.3, 3, .3, M.oak, px, MT + 1.5, pz); });   // corner posts: Iolo's pillars
     roof(cx, zc, dd + .8, w + .8, MT + 5.9, 3.1, M.slate, Math.PI / 2, .45, M.frame, .3);
     // windows: glass in oak mullions, on the outer wall and the gable
@@ -195,23 +189,27 @@ function build(K) {
   smoke(0, MT + 10.6, HALL.z0 - .55);
   posts.push([0, HALL.z0 + .5, .9]);
   // the hall windows: glass, which Iolo praised
-  [-2.2, 2.2].forEach((wx) => { block(1.1, 1.1, .06, M.glass, wx, MT + 2.4, HALL.z1 + .17); block(1.2, .1, .1, M.oak, wx, MT + 1.8, HALL.z1 + .2); block(1.2, .1, .1, M.oak, wx, MT + 3.0, HALL.z1 + .2); [-.55, 0, .55].forEach((o) => block(.08, 1.2, .1, M.oak, wx + o, MT + 2.4, HALL.z1 + .2)); });
+  [-2.2, 1.0].forEach((wx) => { block(1.1, 1.1, .06, M.glass, wx, MT + 2.4, HALL.z1 + .17); block(1.2, .1, .1, M.oak, wx, MT + 1.8, HALL.z1 + .2); block(1.2, .1, .1, M.oak, wx, MT + 3.0, HALL.z1 + .2); [-.55, 0, .55].forEach((o) => block(.08, 1.2, .1, M.oak, wx + o, MT + 2.4, HALL.z1 + .2)); });
   [-2.6, 2.6].forEach((wx) => block(1.0, 1.0, .06, M.glass, wx, MT + 2.6, HALL.z0 - .17));
   // the hall floor of rushes, the dais at the upper (west) end, the high table, Owain's chair, the benches and the tables
   const fl = new THREE.Mesh(new THREE.PlaneGeometry(HALL.x1 - HALL.x0, HALL.z1 - HALL.z0), M.floor); fl.rotation.x = -Math.PI / 2; fl.position.set(0, MT + .02, hz); fl.receiveShadow = true; scene.add(fl);
   block(2, .3, HALL.z1 - HALL.z0 - .4, M.boards, HALL.x0 + 1, MT + .15, hz);
-  block(.8, .08, 4.2, M.wood, HALL.x0 + 1.25, MT + 1.1, hz); [-1.7, 1.7].forEach((o) => block(.06, .75, .06, M.oak, HALL.x0 + 1.25, MT + .7, hz + o));
+  table(HALL.x0 + 1.25, hz, 4.2, .8, Math.PI / 2, MT + .3);   // the high table on the dais
   block(.9, .5, .7, M.oak, HALL.x0 + .5, MT + .55, hz); block(.12, 1.6, .8, M.oak, HALL.x0 + .2, MT + 1.1, hz); block(.4, .5, .7, M.red, HALL.x0 + .55, MT + .85, hz);
-  const hang = new THREE.Mesh(new THREE.PlaneGeometry(3.2, 2.2), M.red); hang.rotation.y = Math.PI / 2; hang.position.set(HALL.x0 + .2, MT + 2.2, hz); scene.add(hang);
-  [HALL.z0 + 1.1, HALL.z1 - 1.1].forEach((z) => { block(4.2, .07, .75, M.wood, 1.2, MT + .78, z); block(4.2, .4, .3, M.oak, 1.2, MT + .2, z + (z < hz ? -.6 : .6)); [-.8, 3.2].forEach((x) => block(.08, .72, .5, M.oak, x, MT + .38, z)); });
-  for (let i = 0; i < 6; i++) { const c = cyl(.05, .04, .14, M.gold, HALL.x0 + 1.25, MT + 1.21, hz - 1.6 + i * .64); c.castShadow = false; }
+  const hangM = new THREE.MeshStandardMaterial({ map: hanging("#7a1a14", "#c89a2a", "#e8d9a0", "roundel"), roughness: .95, side: THREE.DoubleSide }); hangM.map.repeat.set(2, 1.4);
+  const hang = new THREE.Mesh(new THREE.PlaneGeometry(3.2, 2.2), hangM); hang.rotation.y = Math.PI / 2; hang.position.set(HALL.x0 + .2, MT + 2.2, hz); scene.add(hang);
+  // the household's tables down the long walls, with benches against the walls: kept clear of the fire and the door
+  table(.1, HALL.z1 - 1.2, 3.6, .75, 0, MT); bench(.1, HALL.z1 - .52, 3.4, 0, MT);
+  table(2.85, HALL.z0 + 1.2, 2.0, .75, 0, MT); bench(2.85, HALL.z0 + .52, 1.9, 0, MT);
+  bench(-1.3, HALL.z1 - 1.95, 2.0, 0, MT);
+  for (let i = 0; i < 6; i++) { const c = cyl(.05, .04, .14, M.gold, HALL.x0 + 1.25, MT + 1.2, hz - 1.6 + i * .64); c.castShadow = false; }
   [[HALL.x0 + 1.25, hz - 1.9], [HALL.x0 + 1.25, hz + 1.9]].forEach(([x, z]) => { const L = new THREE.PointLight(0xffb36b, 4, 7, 1.6); L.position.set(x, MT + 1.6, z); scene.add(L); });
   // the second building on the motte: the kitchen, with its own hearth
   const KX = 1.6, KZ = 6.9;
-  wallLine(KX - 2.8, KZ - 1.9, KX + 2.8, KZ - 1.9, 2.8, .3, M.frame, [[1.5, 1.3]], MT, 2.1);
-  wallLine(KX - 2.8, KZ + 1.9, KX + 2.8, KZ + 1.9, 2.8, .3, M.frame, [], MT);
-  wallLine(KX - 2.8, KZ - 1.9, KX - 2.8, KZ + 1.9, 2.8, .3, M.frame, [], MT);
-  wallLine(KX + 2.8, KZ - 1.9, KX + 2.8, KZ + 1.9, 2.8, .3, M.frame, [], MT);
+  framed(KX - 2.8, KZ - 1.9, KX + 2.8, KZ - 1.9, 2.8, MT, [[1.5, 1.3]], 2.1, CS);
+  framed(KX - 2.8, KZ + 1.9, KX + 2.8, KZ + 1.9, 2.8, MT, [], 2.1, CS);
+  framed(KX - 2.8, KZ - 1.9, KX - 2.8, KZ + 1.9, 2.8, MT, [], 2.1, CS);
+  framed(KX + 2.8, KZ - 1.9, KX + 2.8, KZ + 1.9, 2.8, MT, [], 2.1, CS);
   roof(KX, KZ, 6.2, 3.8, MT + 2.8, 2.4, M.slate, 0, .5, M.frame, .3);
   block(1.2, 1.4, .6, M.stone, KX + 2.2, MT + 4.6, KZ); smoke(KX + 2.2, MT + 5.4, KZ, 5);
   fire(KX + 1.8, MT, KZ, .6, 8, 6);
@@ -256,20 +254,31 @@ function build(K) {
     for (let i = 0; i <= 19; i++) { const a = a0 + (a1 - a0) * i / 19; pts.push([Math.cos(a) * Ro, Math.sin(a) * Ro]); }
     for (let i = 0; i <= 11; i++) { const a = a1 - (a1 - a0) * i / 11; pts.push([Math.cos(a) * Ri, Math.sin(a) * Ri]); }
     pts.push(pts[0]);
-    const gates = [[Math.cos(SW) * Ro, Math.sin(SW) * Ro, 3.4], [Math.cos(SW) * Ri, Math.sin(SW) * Ri, 2.4]];
+    const gates = [[Math.cos(SW) * Ro, Math.sin(SW) * Ro, 3.6], [Math.cos(SW) * Ri, Math.sin(SW) * Ri, 2.4]];
     for (let i = 0; i < pts.length - 1; i++) {
       const [x1, z1] = pts[i], [x2, z2] = pts[i + 1], L = Math.hypot(x2 - x1, z2 - z1);
       const gaps = [];
       gates.forEach(([gx2, gz2, gw]) => { const t = ((gx2 - x1) * (x2 - x1) + (gz2 - z1) * (z2 - z1)) / (L * L); if (t > -.05 && t < 1.05 && Math.hypot(x1 + (x2 - x1) * t - gx2, z1 + (z2 - z1) * t - gz2) < .5) gaps.push([t * L, gw]); });
-      wallLine(x1, z1, x2, z2, 3.4, .35, M.logs, gaps, B_Y - .3);
+      logWall(x1, z1, x2, z2, 3.3, B_Y, gaps, 1);
     }
-    // the gatehouse over the outer gate: a timber tower on four posts, with a slate roof
+    // the gatehouse over the outer gate: a framed room on four oak posts, floored with boards, roofed with slate,
+    // and the two leaves of the gate standing open against the inside of the palisade
     const gxo = Math.cos(SW) * Ro, gzo = Math.sin(SW) * Ro, ry = -SW - Math.PI / 2;
     const px = Math.cos(SW + Math.PI / 2), pz = Math.sin(SW + Math.PI / 2), qx = Math.cos(SW), qz = Math.sin(SW);
-    [[-1, -1], [-1, 1], [1, -1], [1, 1]].forEach(([a, b]) => { block(.4, 6.2, .4, M.oak, gxo + px * a * 2 + qx * b * 1.3, B_Y + 3.1, gzo + pz * a * 2 + qz * b * 1.3); posts.push([gxo + px * a * 2 + qx * b * 1.3, gzo + pz * a * 2 + qz * b * 1.3, .3]); });
-    block(4.6, 2.4, 3.2, M.frame, gxo, B_Y + 5.1, gzo, ry);
-    roof(gxo, gzo, 4.6, 3.2, B_Y + 6.3, 2.2, M.slate, ry, .4, M.frame, .3);
-    block(1.6, .12, 2.6, M.oak, gxo + px * 1.1, B_Y + 1.6, gzo + pz * 1.1, ry - .8);   // one leaf of the gate, standing open
+    [[-1, -1], [-1, 1], [1, -1], [1, 1]].forEach(([a, b]) => { const x = gxo + px * a * 2 + qx * b * 1.3, z = gzo + pz * a * 2 + qz * b * 1.3; block(.36, 6.1, .36, M.oak, x, B_Y + 3.05, z); posts.push([x, z, .3]); });
+    [-1, 1].forEach((b) => bblock(4.4, .3, .3, M.oak, gxo + qx * b * 1.3, B_Y + 3.75, gzo + qz * b * 1.3, ry));   // the beams the floor rests on
+    for (let k = -3; k <= 3; k++) bblock(.18, .2, 3.0, M.oak, gxo + px * k * .62, B_Y + 4.0, gzo + pz * k * .62, ry);   // the joists
+    bblock(4.6, .08, 3.2, M.boards, gxo, B_Y + 4.14, gzo, ry);                                                           // the floor
+    framedBox(gxo, gzo, 4.6, 3.2, 2.15, B_Y + 4.18, ry, { stud: .5, mid: false });
+    roof(gxo, gzo, 4.6, 3.2, B_Y + 6.33, 2.2, M.slate, ry, .4, M.daub, .3);
+    [-1, 1].forEach((s2) => {   // the gate leaves: boards on ledges and a brace, hung on the jambs, opened inward
+      const hx = gxo + px * s2 * 1.8, hz2 = gzo + pz * s2 * 1.8, th = 1.32, dx = -s2 * px * Math.cos(th) - qx * Math.sin(th), dz = -s2 * pz * Math.cos(th) - qz * Math.sin(th);
+      const cx = hx + dx * .9, cz = hz2 + dz * .9, lry = -Math.atan2(dz, dx);
+      bblock(1.75, 3.0, .09, M.boards, cx, B_Y + 1.55, cz, lry);
+      [.6, 2.5].forEach((yy) => bblock(1.6, .16, .07, M.oak, cx - dz * .08, B_Y + yy, cz + dx * .08, lry));
+      bblock(1.95, .14, .07, M.oak, cx - dz * .08, B_Y + 1.55, cz + dx * .08, lry, 0, -s2 * .95);
+      block(.26, 3.6, .26, M.oak, hx, B_Y + 1.8, hz2); posts.push([hx, hz2, .2]);   // the jamb
+    });
   }
   // the ranges round the bailey: lodgings, kitchen and bakehouse, stables, each framed and roofed in slate
   const range = (r, a, len, dep, h) => {
@@ -279,8 +288,8 @@ function build(K) {
     const [a1, a2, a3, a4] = [c(-1, -1), c(1, -1), c(1, 1), c(-1, 1)];
     const doors = [];
     for (let d = 2.5; d < len - 1; d += 5) doors.push([d, 1.2]);
-    wallLine(...a1, ...a2, h, .3, M.frame, doors, B_Y, 2.0);   // the side facing the yard
-    wallLine(...a2, ...a3, h, .3, M.frame, [], B_Y); wallLine(...a3, ...a4, h, .3, M.frame, [], B_Y); wallLine(...a4, ...a1, h, .3, M.frame, [], B_Y);
+    framed(...a1, ...a2, h, B_Y, doors, 2.0, CS);   // the side facing the yard
+    framed(...a2, ...a3, h, B_Y, [], 2, CS); framed(...a3, ...a4, h, B_Y, [], 2, CS); framed(...a4, ...a1, h, B_Y, [], 2, CS);
     roof(cx, cz, len, dep, B_Y + h, 2.3, M.slate, ry, .5, M.frame, .3);
   };
   range(54.5, SW - .3, 14, 5.5, 2.8);
@@ -290,9 +299,9 @@ function build(K) {
     const r = 46, cx = Math.cos(a) * r, cz = Math.sin(a) * r, tx = Math.cos(a + s * Math.PI / 2) * 2.8, tz = Math.sin(a + s * Math.PI / 2) * 2.8;
     const x0 = cx + tx, z0 = cz + tz, ux = Math.cos(a), uz = Math.sin(a), L = 13, dep = 5.4;
     const p1 = [x0 - ux * L / 2, z0 - uz * L / 2], p2 = [x0 + ux * L / 2, z0 + uz * L / 2], nx = -Math.cos(a + s * Math.PI / 2) * dep, nz = -Math.sin(a + s * Math.PI / 2) * dep;
-    wallLine(p1[0] + nx, p1[1] + nz, p2[0] + nx, p2[1] + nz, 2.7, .3, M.frame, [[L / 2, 2.4]], B_Y, 2.1);
-    wallLine(...p1, ...p2, 2.7, .3, M.frame, [], B_Y);
-    wallLine(...p1, p1[0] + nx, p1[1] + nz, 2.7, .3, M.frame, [], B_Y); wallLine(...p2, p2[0] + nx, p2[1] + nz, 2.7, .3, M.frame, [], B_Y);
+    framed(p1[0] + nx, p1[1] + nz, p2[0] + nx, p2[1] + nz, 2.7, B_Y, [[L / 2, 2.4]], 2.1, CS);
+    framed(...p1, ...p2, 2.7, B_Y, [], 2.1, CS);
+    framed(...p1, p1[0] + nx, p1[1] + nz, 2.7, B_Y, [], 2.1, CS); framed(...p2, p2[0] + nx, p2[1] + nz, 2.7, B_Y, [], 2.1, CS);
     roof(x0 + nx / 2, z0 + nz / 2, L, dep, B_Y + 2.7, 2.2, M.slate, -a, .5, M.frame, .3);
   });
   // the bakehouse oven, the well, the dovecot of stone with its slate cap, firewood and a cart
@@ -318,6 +327,45 @@ function build(K) {
     [-.06, .06].forEach((o) => { const l = new THREE.Mesh(new THREE.CylinderGeometry(.015, .015, .45, 4), M.oak); l.position.set(0, .22, o); grp.add(l); });
   });
   for (let i = 0; i < 12; i++) { const l = cyl(.11, .11, 1.4, M.oak, Math.cos(SW + .45) * 50 + (i % 4) * .24, B_Y + .12 + Math.floor(i / 4) * .21, Math.sin(SW + .45) * 50, 7); l.rotation.x = Math.PI / 2; }
+
+
+  // ----- the people of the court, about 1400, and their beasts -----
+  // at the outer gate: two of Owain's men, with spears
+  { const gx = Math.cos(SW) * 60.4, gz = Math.sin(SW) * 60.4, px = Math.cos(SW + Math.PI / 2), pz = Math.sin(SW + Math.PI / 2), face = Math.atan2(Math.cos(SW), Math.sin(SW));
+    person(gx + px * 2.5, gz + pz * 2.5, face, { arms: "spear", tunic: DYE.madder, hose: DYE.black, cloak: DYE.green, beard: true, h: 1.03, y: B_Y });
+    person(gx - px * 2.5, gz - pz * 2.5, face, { arms: "spear", tunic: DYE.green, hose: DYE.brown, cloak: DYE.madder, h: 1.0, y: B_Y }); }
+  // in the hall: Owain in his chair at the high table, his wife Margaret at his right, the household along the tables,
+  // the bard standing by the fire, a servant with a jug of mead, a hound asleep by the hearth
+  bench(HALL.x0 + .5, hz - 1.35, 1.4, Math.PI / 2, MT + .3); bench(HALL.x0 + .5, hz + 1.35, 1.4, Math.PI / 2, MT + .3);
+  person(HALL.x0 + .55, hz, Math.PI / 2, { sit: .5, y: MT + .3, tunic: DYE.woad, hose: DYE.black, cloak: DYE.madder, beard: true, hair: 0x3d2a1b });
+  person(HALL.x0 + .5, hz - .9, Math.PI / 2, { sit: .47, y: MT + .3, woman: true, tunic: DYE.green, veil: DYE.linen });
+  person(HALL.x0 + .5, hz - 1.75, Math.PI / 2, { sit: .47, y: MT + .3, tunic: DYE.plum, hose: DYE.black, cloak: DYE.woad });
+  person(HALL.x0 + .5, hz + .95, Math.PI / 2, { sit: .47, y: MT + .3, tunic: DYE.rust, hose: DYE.brown, beard: true, hair: 0x8a7a68 });
+  person(HALL.x0 + .5, hz + 1.8, Math.PI / 2, { sit: .47, y: MT + .3, woman: true, tunic: DYE.madder, veil: 0xd9cfb8 });
+  const dress = [DYE.madder, DYE.woad, DYE.green, DYE.weld, DYE.rust, DYE.plum, DYE.fawn];
+  [-1.2, -.3, .6, 1.5].forEach((x, i) => person(x, HALL.z1 - .52, Math.PI, { sit: .47, y: MT, tunic: dress[i], hose: DYE.black, woman: i === 2, veil: 0xd9cfb8, beard: i === 1 }));
+  [-1.9, -.9].forEach((x, i) => person(x, HALL.z1 - 1.95, 0, { sit: .47, y: MT, tunic: dress[i + 4], hose: DYE.brown, cloak: i ? 0 : DYE.fawn }));
+  [2.35, 3.35].forEach((x, i) => person(x, HALL.z0 + .52, 0, { sit: .47, y: MT, tunic: dress[(i + 2) % 7], hose: DYE.black, beard: !i, woman: !!i, veil: 0xd9cfb8 }));
+  person(-.95, -4.3, -Math.PI / 2 + .25, { tunic: DYE.green, cloak: DYE.madder, beard: true, hair: 0x8a7a68, y: MT });   // the bard, Iolo Goch
+  person(-1.2, -2.35, -Math.PI / 2 - .3, { arms: "hold", jug: true, tunic: DYE.fawn, hose: DYE.grey, y: MT });
+  hound(1.25, -4.75, -2.3, 0x8f7454, true, MT);
+  // the kitchen: the cook at the fire
+  person(2.55, 6.9, Math.PI / 2, { arms: "work", tunic: DYE.brown, hose: DYE.grey, hood: DYE.fawn, y: MT });
+  // on the motte, one of the guard at the gate
+  { const gx = Math.cos(SW) * (M_R - 2.4), gz = Math.sin(SW) * (M_R - 2.4); person(gx + 1.6 * Math.cos(SW + 1.57), gz + 1.6 * Math.sin(SW + 1.57), Math.atan2(Math.cos(SW), Math.sin(SW)), { arms: "spear", tunic: DYE.woad, hose: DYE.black, cloak: DYE.fawn, y: MT }); }
+  // the bailey: grooms with the horses by the stables, a woman at the well, the hounds, a man at the woodpile
+  { const at = (a, r) => [Math.cos(a) * r, Math.sin(a) * r];
+    const [h1x, h1z] = at(SW - .26, 49.5), [h2x, h2z] = at(SW - .34, 49.8), [h3x, h3z] = at(SW + .3, 49.5);
+    horse(h1x, h1z, SW, 0x6b3d22, true); horse(h2x, h2z, SW + .2, 0x8f8a80); horse(h3x, h3z, SW + 3.3, 0x2b2420);
+    const [gx, gz] = at(SW - .3, 47.6); person(gx, gz, SW + 1.4, { tunic: DYE.fawn, hose: DYE.brown, hood: DYE.green, y: B_Y });
+    const [wx2, wz2] = at(SW - .1, 39.6); person(wx2, wz2, SW - 2.6, { woman: true, tunic: DYE.woad, veil: 0xd9cfb8, y: B_Y });
+    const [kx, kz] = at(SW + .42, 50.6); person(kx, kz, SW + 2.6, { arms: "work", tunic: DYE.rust, hose: DYE.brown, y: B_Y });
+    [[SW + .18, 46], [SW + .22, 47.5], [SW + .14, 47.2]].forEach(([a, r], i) => { const [x, z] = at(a, r); hound(x, z, R() * 6.3, [0xd8cdb8, 0x5a4a3c, 0xb08a60][i], i === 2, B_Y); }); }
+  // geese by the fishpond, sheep on the far side of the river and their shepherd, black cattle in the meadow
+  for (let i = 0; i < 7; i++) goose(POND.x - 30 + R() * 6, POND.z - 4 + R() * 8, R() * 6.3);
+  for (let i = 0, k = 0; i < 40 && k < 400; k++) { const a = R() * 6.3, r = Math.sqrt(R()) * 26, x = -265 + Math.cos(a) * r * 1.3, z = 150 + Math.sin(a) * r; if (blocked(x, z)) continue; sheep(x, z, R() * 6.3, R()); i++; }
+  person(-248, 128, -.9, { tunic: DYE.grey, hose: DYE.brown, cloak: DYE.fawn, hood: DYE.brown, free: true });
+  for (let i = 0, k = 0; i < 9 && k < 200; k++) { const x = -120 + R() * 50, z = -210 + R() * 50; if (blocked(x, z)) continue; cow(x, z, R() * 6.3); i++; }
 
   // ----- the water: the moat, the fishpond and the river -----
   {
@@ -366,7 +414,7 @@ function build(K) {
   const T = [];
   for (let i = 0; i < 6; i++) for (let j = 0; j < 5; j++) T.push([-30 + i * 6 + R() * 1.5, -78 + j * 6 + R() * 1.5, 3.4 + R(), 1.8 + R() * .6]);   // the orchard, north of the motte
   // the vineyard: rows of staked vines on the slope to the north-east
-  const vineM = new THREE.MeshStandardMaterial({ color: 0x55702f, roughness: 1 });
+  const vineM = M.leaves.clone(); vineM.color.set(0xb8d090);
   for (let r = 0; r < 9; r++) {
     const z = -75 + r * 3.2;
     for (let x = 70; x < 104; x += 1.6) { const y = ground(x, z); const v = new THREE.Mesh(new THREE.BoxGeometry(1.5, .9, .5), vineM); v.position.set(x, y + .6, z); scene.add(v); }
@@ -387,14 +435,16 @@ function build(K) {
     const y1 = ground(x, z), y2 = ground(x2, z + 12), L = Math.hypot(x2 - x, 12, y2 - y1);
     const p = block(.12, 1.8, L, M.logs, (x + x2) / 2, (y1 + y2) / 2 + .9, z + 6); p.rotation.set(-Math.atan2(y2 - y1, 12), Math.atan2(x2 - x, 12), 0, "YXZ");
   }
-  // deer in the clearing
-  const deerM = new THREE.MeshStandardMaterial({ color: 0x7a5232, roughness: 1 });
-  for (let i = 0; i < 6; i++) {
-    const x = 195 + R() * 60, z = -50 + R() * 60, y = ground(x, z), grp = new THREE.Group(); grp.position.set(x, y, z); grp.rotation.y = R() * 6.3; scene.add(grp);
-    const b = new THREE.Mesh(new THREE.BoxGeometry(1.2, .5, .4), deerM); b.position.y = 1.05; grp.add(b);
-    const n = new THREE.Mesh(new THREE.BoxGeometry(.2, .6, .2), deerM); n.position.set(.6, 1.45, 0); n.rotation.z = -.4; grp.add(n);
-    const hd = new THREE.Mesh(new THREE.BoxGeometry(.35, .2, .2), deerM); hd.position.set(.8, 1.75, 0); grp.add(hd);
-    [[-.45, -.13], [-.45, .13], [.45, -.13], [.45, .13]].forEach(([a, b2]) => { const l = new THREE.Mesh(new THREE.BoxGeometry(.08, .8, .08), deerM); l.position.set(a, .4, b2); grp.add(l); });
+  // deer in the clearing: red deer, a stag among the hinds
+  for (let i = 0; i < 7; i++) {
+    const x = 195 + R() * 60, z = -50 + R() * 60, B = mtxF(x, ground(x, z), z, R() * 6.3, 0, 0, 1.15), c = new THREE.Color(0x7a5232), put = (g) => add(g, M.coat, B.clone(), true, c), graze = R() < .5;
+    const bd = new THREE.CapsuleGeometry(.24, .7, 4, 10); bd.rotateX(Math.PI / 2); bd.translate(0, 1.0, 0); put(bd);
+    put(limb([0, 1.08, .42], graze ? [0, .55, .8] : [0, 1.5, .62], .14, .09));
+    put(ball(.1, 0, graze ? .45 : 1.55, graze ? .88 : .72, .85, .9, 1.4));
+    for (const s2 of [-1, 1]) put(limb([s2 * .06, graze ? .55 : 1.63, graze ? .8 : .68], [s2 * .14, graze ? .62 : 1.72, graze ? .74 : .64], .03, .01, 4));
+    if (i === 0) for (const s2 of [-1, 1]) { put(limb([s2 * .05, 1.66, .7], [s2 * .28, 2.15, .62], .025, .015, 5)); put(limb([s2 * .2, 1.98, .64], [s2 * .14, 2.2, .8], .018, .008, 4)); }
+    for (const [lx, lz] of [[-.12, .4], [.12, .4], [-.12, -.38], [.12, -.38]]) put(limb([lx, .95, lz], [lx, .02, lz], .06, .03));
+    put(limb([0, 1.08, -.48], [0, .95, -.58], .05, .02, 5));
   }
   // the warren: long low pillow mounds where the rabbits were kept
   const turf = new THREE.MeshStandardMaterial({ color: 0x6d8a42, roughness: 1 });
@@ -402,11 +452,11 @@ function build(K) {
 
   // the palisade helper: a ring of upright logs round (cx, cz) at radius r, with gaps [angle, half angle]
   function palisade(cx, cz, r, y0, h, ...gaps) {
-    const N = 28;
+    const N = 36;
     for (let i = 0; i < N; i++) {
       const a1 = i / N * Math.PI * 2, a2 = (i + 1) / N * Math.PI * 2, am = (a1 + a2) / 2;
       if (gaps.some(([ga, gw]) => { let d = am - ga; while (d > Math.PI) d -= 2 * Math.PI; while (d < -Math.PI) d += 2 * Math.PI; return Math.abs(d) < gw; })) continue;
-      wallSeg(cx + Math.cos(a1) * r, cz + Math.sin(a1) * r, cx + Math.cos(a2) * r, cz + Math.sin(a2) * r, h, .3, M.logs, y0);
+      logWall(cx + Math.cos(a1) * r, cz + Math.sin(a1) * r, cx + Math.cos(a2) * r, cz + Math.sin(a2) * r, h - .2, y0, [], 0);   // kept low enough to see over from the fire-step
     }
   }
 }
@@ -426,6 +476,7 @@ export function start(host, D) {
   return run(host, D, {
     STOPS, START, land: LAND, fine: 170, fineAt: [-12, 14], shape, floor, blocked, colour, build, bound: 460, seed: 1403, shadow: 70,
     indoor, grass, grassAt: { x: -10, z: 10, r: 120 }, plan: { x: -12, z: 12, r: 78 }, planExtra, sea: 0, harp: { x: -1, z: -3, r: 9 },
+    people: true, birds: { kind: "rook", x: 0, z: 0, r: 260 }, flock: { x: -265, z: 150 }, kennel: { x: -32, z: 34 }, water: (x, z) => Math.abs(x - riverAt(z)),
     look: { fog: 0xc4ccc8, fogNear: 50, fogFar: 760, top: 0x8ea4b8, mid: 0xc4cfd3, low: 0xd9ddd6, sun: [-60, 70, 40], sunI: 2.0, hemi: .9, exposure: 1.0 },
   });
 }

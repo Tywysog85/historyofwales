@@ -1,7 +1,7 @@
 /* Abergwyngregyn: the court of the princes of Gwynedd at Aber, which they called Garth Celyn, as it might have looked
    around 1280, in the time of Llywelyn ap Gruffudd. Built on the shared court engine (tools/court3d.src.js); the words
    for each stop are in src/courts.py.
-     npx esbuild court-aber.src.js --bundle --minify --format=esm --target=es2019 --outfile=court-aber.js
+     npx esbuild court-aber.src.js --bundle --minify --format=esm --target=es2020 --outfile=court-aber.js
    What it rests on (see the page's "How we know"):
      - the hall found by excavation in 1993 (Johnstone) and dug again in 2010-11 (Snowdonia National Park, Gwynedd
        Archaeological Trust): a hall with a cross-wing at each end, 11.2 m by 8.0 m inside, with 13th- and
@@ -132,7 +132,7 @@ function colour(x, z, y, c) {
 
 // ---------- the buildings ----------
 function build(K) {
-  const { THREE, scene, M, R, block, cyl, wallLine, wallSeg, roof, trees, fire, smoke, posts, anim, ground } = K;
+  const { THREE, scene, M, R, block, bblock, cyl, wallLine, wallSeg, roof, trees, fire, smoke, posts, anim, ground, table, bench, person, horse, hound, sheep, cow, goose, DYE } = K;
   const G = (x, z) => ground(x, z);
   const g0 = G(0, 0);
 
@@ -175,7 +175,7 @@ function build(K) {
   posts.push([0, 0, 1.0]);
   // the dais at the upper (west) end, the prince's table and chair, a hanging on the wall behind
   block(2, .3, 2 * HALL.z, M.boards, -HALL.x + 1, g0 + .15, 0);
-  block(.85, .08, 4.4, M.wood, -HALL.x + 1.35, g0 + 1.1, 0); [-1.8, 1.8].forEach((o) => block(.07, .78, .07, M.oak, -HALL.x + 1.35, g0 + .7, o));
+  table(-HALL.x + 1.35, 0, 4.4, .85, Math.PI / 2, g0 + .3);   // the prince's table on the dais
   block(.9, .5, .75, M.oak, -HALL.x + .55, g0 + .55, 0); block(.12, 1.7, .85, M.oak, -HALL.x + .2, g0 + 1.15, 0); block(.4, .5, .7, M.red, -HALL.x + .6, g0 + .85, 0);
   const hang = new THREE.Mesh(new THREE.PlaneGeometry(4.6, 2.3), M.green); hang.rotation.y = Math.PI / 2; hang.position.set(-HALL.x + .03, g0 + 2.4, 0); scene.add(hang);
   { // the three lions of Gwynedd on the hanging: gold on red, quartered
@@ -184,12 +184,13 @@ function build(K) {
   }
   // the letters on the prince's table: parchment, ink and the seal
   const parch = new THREE.MeshStandardMaterial({ color: 0xe9dcb8, roughness: .9 });
-  [[-1.4, .1], [-1.0, -.25], [-.45, .15]].forEach(([o, r2]) => { const p = block(.42, .01, .32, parch, -HALL.x + 1.38, g0 + 1.15, o, r2); p.castShadow = false; });
-  const seal = cyl(.07, .07, .03, M.red, -HALL.x + 1.25, g0 + 1.17, -1.0, 14); seal.castShadow = false;
-  cyl(.04, .05, .14, M.darkwood, -HALL.x + 1.5, g0 + 1.21, -.7, 8);
+  [[-1.4, .1], [-1.0, -.25], [-.45, .15]].forEach(([o, r2]) => { const p = block(.42, .01, .32, parch, -HALL.x + 1.38, g0 + 1.112, o, r2); p.castShadow = false; });
+  const seal = cyl(.07, .07, .03, M.red, -HALL.x + 1.25, g0 + 1.12, -1.0, 14); seal.castShadow = false;
+  cyl(.04, .05, .14, M.darkwood, -HALL.x + 1.5, g0 + 1.17, -.7, 8);
   // tables and benches down the hall, for the household
-  [-HALL.z + 1.2, HALL.z - 1.2].forEach((z) => { block(6.4, .07, .8, M.wood, .6, g0 + .78, z); block(6.4, .42, .3, M.oak, .6, g0 + .21, z + (z < 0 ? -.65 : .65)); [-2.4, 3.6].forEach((x) => block(.08, .74, .55, M.oak, x, g0 + .39, z)); });
-  for (let i = 0; i < 7; i++) { const c = cyl(.05, .04, .15, M.gold, -HALL.x + 1.35, g0 + 1.22, -1.9 + i * .6); c.castShadow = false; }
+  // kept short of the doors of the cross-passage at the lower (east) end
+  [-HALL.z + 1.2, HALL.z - 1.2].forEach((z) => { table(.2, z, 5.2, .8, 0, g0); bench(.2, z + (z < 0 ? -.68 : .68), 5.0, 0, g0); });
+  for (let i = 0; i < 7; i++) { if (i === 3) continue; const c = cyl(.05, .04, .15, M.gold, -HALL.x + 1.35, g0 + 1.2, -1.9 + i * .6); c.castShadow = false; }
   [[-HALL.x + 1.4, -2.2], [-HALL.x + 1.4, 2.2]].forEach(([x, z]) => { const L = new THREE.PointLight(0xffb36b, 4, 7, 1.6); L.position.set(x, g0 + 1.7, z); scene.add(L); });
 
   // ----- the chamber in the west wing: the prince's own room -----
@@ -408,14 +409,40 @@ function build(K) {
   for (let i = 0; i < 5; i++) for (let j = 0; j < 4; j++) TR.push([2 + i * 6 + R(), -44 + j * 6 + R(), 3.4 + R(), 1.8 + R() * .6]);   // an orchard north of the court
   trees(TR);
 
-  // cattle in the meadow and sheep on the hill
-  const cowM = new THREE.MeshStandardMaterial({ color: 0x2b211a, roughness: 1 }), sheepM = new THREE.MeshStandardMaterial({ color: 0xd8d2c4, roughness: 1 });
-  const beast = (x, z, m, s) => { const y = G(x, z), grp = new THREE.Group(); grp.position.set(x, y, z); grp.rotation.y = R() * 6.3; grp.scale.setScalar(s); scene.add(grp);
-    const b = new THREE.Mesh(new THREE.BoxGeometry(1.5, .7, .6), m); b.position.y = .95; grp.add(b);
-    const hd = new THREE.Mesh(new THREE.BoxGeometry(.45, .4, .35), m); hd.position.set(.9, 1.05, 0); grp.add(hd);
-    [[-.55, -.2], [-.55, .2], [.55, -.2], [.55, .2]].forEach(([a, b2]) => { const l = new THREE.Mesh(new THREE.BoxGeometry(.12, .65, .12), m); l.position.set(a, .32, b2); grp.add(l); }); };
-  for (let i = 0; i < 7; i++) beast(-200 + R() * 80, 120 + R() * 80, cowM, 1);
-  for (let i = 0; i < 14; i++) beast(200 + R() * 160, -60 + R() * 120, sheepM, .55);
+  // ----- the people of the court, about 1280, and their beasts -----
+  // in the hall: Llywelyn at his table reading the letters, the household along the tables, the bard, a servant, hounds
+  bench(-HALL.x + .55, -1.45, 1.6, Math.PI / 2, g0 + .3); bench(-HALL.x + .55, 1.45, 1.6, Math.PI / 2, g0 + .3);
+  person(-HALL.x + .6, 0, Math.PI / 2, { sit: .5, y: g0 + .3, tunic: DYE.madder, hose: DYE.black, cloak: DYE.woad, beard: true, hair: 0x3d2a1b, arms: "table" });
+  person(-HALL.x + .55, -1.1, Math.PI / 2, { sit: .47, y: g0 + .3, tunic: DYE.plum, hose: DYE.black, cloak: DYE.green });
+  person(-HALL.x + .55, 1.15, Math.PI / 2, { sit: .47, y: g0 + .3, tunic: DYE.rust, hose: DYE.brown, beard: true, hair: 0x8a7a68 });
+  const dress = [DYE.madder, DYE.woad, DYE.green, DYE.weld, DYE.rust, DYE.plum, DYE.fawn];
+  [-1.9, -.8, .5, 1.6, 2.4].forEach((x, i) => person(x, -HALL.z + .52, 0, { sit: .47, y: g0, tunic: dress[i], hose: DYE.black, woman: i === 2, veil: 0xd9cfb8, beard: i === 1 }));
+  [-1.6, -.4, 1.0, 2.2].forEach((x, i) => person(x, HALL.z - .52, Math.PI, { sit: .47, y: g0, tunic: dress[(i + 3) % 7], hose: DYE.brown, cloak: i === 1 ? DYE.fawn : 0, beard: i === 3 }));
+  person(-2.1, 1.25, -Math.PI / 2 - .2, { tunic: DYE.green, cloak: DYE.madder, beard: true, hair: 0x8a7a68, y: g0 });   // the bard
+  person(2.6, -1.4, Math.PI / 2 + 2.6, { arms: "hold", jug: true, tunic: DYE.fawn, hose: DYE.grey, y: g0 });
+  hound(1.6, 1.3, -2.3, 0x8f7454, true, g0); hound(-1.2, -1.5, 1.2, 0x4a3f36, true, g0);
+  // in the chamber: a nurse by the cradle
+  person(CX - 2.1, -1.55, Math.PI, { sit: .45, y: g0, woman: true, tunic: DYE.woad, veil: DYE.linen, arms: "work" });
+  block(.4, .45, .4, M.wood, CX - 2.1, g0 + .22, -1.55);
+  // the yard: the cook at the kitchen door, a woman at the oven, the smith at the forge, the grooms and the horses
+  person(-12, 34.6, 0, { arms: "work", tunic: DYE.brown, hose: DYE.grey, hood: DYE.fawn });
+  person(ex - 2.6, ez + .3, Math.PI, { arms: "work", woman: true, tunic: DYE.weld, veil: 0xd9cfb8 });
+  person(ex + 1.9, ez - .6, Math.PI / 2 + .3, { arms: "work", tunic: DYE.rust, hose: DYE.brown, beard: true });
+  horse(16, 38.4, -Math.PI / 2, 0x6b3d22, true); horse(30, 39.5, Math.PI / 2 + .2, 0x8f8a80); horse(33.4, 39.2, Math.PI / 2 - .15, 0x2b2420);
+  person(18.2, 38.2, -Math.PI / 2 + .4, { tunic: DYE.fawn, hose: DYE.brown, hood: DYE.green });
+  hound(34, 22, .6, 0xd8cdb8); hound(35.6, 23.4, -1.9, 0x5a4a3c); hound(32.4, 24.2, 2.6, 0xb08a60, true);
+  for (let i = 0; i < 6; i++) goose(-20 + R() * 4, 40 + R() * 3, R() * 6.3);
+  // at the gate of the yard, two of the teulu, the prince's war-band; and the watchman on the look-out on the mound
+  person(.2, 47.6, 0, { arms: "spear", tunic: DYE.madder, hose: DYE.black, cloak: DYE.woad, beard: true, h: 1.03 });
+  person(5.8, 47.6, 0, { arms: "spear", tunic: DYE.woad, hose: DYE.brown, cloak: DYE.green, h: 1.0 });
+  person(TW.x + 1.0, TW.z - 1.1, Math.PI * .8, { arms: "spear", tunic: DYE.green, hose: DYE.black, cloak: DYE.fawn, y: mt + TW.up + .1 });
+  // the township: a man at his door, a woman with her geese
+  person(-74, 34, .3, { tunic: DYE.grey, hose: DYE.brown, hood: DYE.brown }); person(-43, 78, -2.5, { woman: true, tunic: DYE.fawn, veil: 0xd9cfb8 });
+  for (let i = 0; i < 5; i++) goose(-48 + R() * 5, 80 + R() * 4, R() * 6.3);
+  // black cattle in the meadow, sheep on the hill with their shepherd
+  for (let i = 0; i < 9; i++) cow(-200 + R() * 80, 120 + R() * 80, R() * 6.3);
+  for (let i = 0; i < 30; i++) { const a = R() * 6.3, r = Math.sqrt(R()) * 40; sheep(280 + Math.cos(a) * r * 1.6, Math.sin(a) * r, R() * 6.3, R()); }
+  person(250, -30, -.9, { tunic: DYE.grey, hose: DYE.brown, cloak: DYE.fawn, hood: DYE.brown, free: true });
   // two boats drawn up on the shore, for the crossing to Môn
   const boatM = new THREE.MeshStandardMaterial({ color: 0x4a3a2a, roughness: .9 });
   [[-120, coast(-120) + 12, .3], [-108, coast(-108) + 16, -.2]].forEach(([x, z, a]) => { const y = Math.max(SEA, G(x, z)); const bt = new THREE.Mesh(new THREE.SphereGeometry(1, 12, 6, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2), boatM); bt.scale.set(3, .8, 1.1); bt.position.set(x, y + .7, z); bt.rotation.y = a; scene.add(bt); });
@@ -436,6 +463,7 @@ export function start(host, D) {
   return run(host, D, {
     STOPS, START, land: LAND, fine: 190, fineAt: [-14, 0], shape, floor, blocked, colour, build, bound: 620, seed: 1282, shadow: 70,
     indoor, grass, grassAt: { x: -10, z: 10, r: 130 }, plan: { x: 2, z: 6, r: 62 }, planExtra, sea: .8, harp: { x: -2, z: 0, r: 9 },
+    people: true, birds: { kind: "gull", x: -60, z: -250, r: 520 }, flock: { x: 280, z: 0 }, kennel: { x: 34, z: 23 }, water: (x, z) => Math.abs(x - riverAt(z)),
     look: { fog: 0xc9d3d8, fogNear: 90, fogFar: 2700, top: 0x86a2bc, mid: 0xc3d0d8, low: 0xd8dfe2, sun: [-50, 75, 35], sunI: 2.1, hemi: .9, exposure: 1.0 },
   });
 }
