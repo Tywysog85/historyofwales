@@ -393,7 +393,7 @@ BY_ID = {c["id"]: c for c in COURTS}
 UI = dict(
     canvas=("A 3D picture of {name}. The stops below tell the same story in words.", "Llun 3D o {name}. Mae’r arosfannau isod yn adrodd yr un hanes mewn geiriau."),
     tour=("Next stop", "Yr arhosfan nesaf"), next=("Next", "Nesaf"), prev=("Back", "Yn ôl"), again=("Back to the start", "Yn ôl i’r dechrau"),
-    close=("Close", "Cau"), fs=("Full screen", "Sgrin lawn"), stop=("Stop {n} of {of}", "Arhosfan {n} o {of}"), src=("Sources", "Ffynonellau"),
+    close=("Close", "Cau"), fs=("Full screen", "Sgrin lawn"), soundOn=("Sound on", "Sain ymlaen"), soundOff=("Sound off", "Diffodd y sain"), stop=("Stop {n} of {of}", "Arhosfan {n} o {of}"), src=("Sources", "Ffynonellau"),
     help=("Walk with W A S D or the arrow keys. Drag to look around. Click a gold marker to go to it.",
           "Cerddwch gyda W A S D neu’r bysellau saeth. Llusgwch i edrych o gwmpas. Cliciwch ar nod aur i fynd ato."),
     helpTouch=("Walk with the circle. Drag to look around. Tap a gold marker to go to it.",
@@ -440,7 +440,7 @@ def page(c):
     href, en_c, cy_c = c["crumbs"]
     top = hero(c["era"], f'<a href="index.html">{SITE}</a> / <a href="{href}">{bi(en_c, cy_c)}</a> / <a href="play.html">{bi("Play", "Chwarae")}</a>', "book",
                c["eyebrow"][0], c["eyebrow"][1], c["title"][0], c["title"][1], c["sub"][0], c["sub"][1], art="castle")
-    stage = (f'<div class="ll-stage" id="ll-stage"><img class="ll-poster" src="court/{cid}-poster.webp" alt="" width="1200" height="675" loading="lazy" decoding="async">'
+    stage = (f'<div class="ll-stage ct" id="ll-stage"><img class="ll-poster" src="court/{cid}-poster.webp" alt="" width="1200" height="675" loading="lazy" decoding="async">'
              f'<div class="ll-start"><p>{bi("The court is drawn on your device, so it takes a moment to load. On a slow connection, look at it in pictures instead.", "Caiff y llys ei dynnu ar eich dyfais, felly mae’n cymryd eiliad i lwytho. Ar gysylltiad araf, edrychwch arno mewn lluniau yn lle hynny.")}</p>'
              f'<p class="ll-gos"><button type="button" class="btn solid ll-go" id="ll-go">{bi("Enter the court", "Mynd i mewn i’r llys")} →</button> '
              f'<button type="button" class="btn ll-pics" id="ll-pics">{bi("See it in pictures", "Ei weld mewn lluniau")}</button></p></div>'
@@ -484,6 +484,10 @@ def pages():
 
 
 CSS = """
+.ct .ll-bar { right: 11rem }
+.ct .ll-panel { max-height: calc(100% - 9.6rem) }
+@media (pointer: coarse) and (min-width: 701px) { .ct .ll-panel { top: 8.8rem; max-height: calc(100% - 9.6rem) } }
+@media (max-width: 700px) { .ct .ll-bar { right: .7rem; flex-wrap: nowrap; gap: .35rem } .ct .ll-bar .btn { padding: .38rem .62rem; font-size: .8rem; white-space: nowrap } .ct .ll-panel { top: 3.3rem } }
 .ct-known { display: grid; gap: .7rem; padding-left: 1.2rem; max-width: 52rem }
 .ct-known li { line-height: 1.6 }
 .ct-srcs { display: grid; gap: .8rem; padding-left: 1.4rem; max-width: 56rem; font-size: .95rem; line-height: 1.55 }

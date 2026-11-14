@@ -26,8 +26,8 @@ const STOPS = {
   lofts: [[7.2, 5.6], [6.2, 13.4, 1.6]],
   table: [[0.4, -3.2], [-3.4, 10.9, -3]],
   estate: [[8.6, 8.2], [58, 0, 72]],
-  park: [[11.3, 2.4], [230, 70, -10]],
-  prince: [[-11.3, 2.6], [-320, 60, -240]],
+  park: [[11.3, 2.4], [230, 70, -10], 48],
+  prince: [[-11.3, 2.6], [-320, 60, -240], 48],
   fire: [[-37, 30], [0, 14, -3]],
   spade: [[-18, 96], [0, 9, 0]],
 };
@@ -191,7 +191,7 @@ function build(K) {
   block(1.3, .9, .5, M.stone, 0, MT + 10.4 - .2, HALL.z0 - .55);
   block(2.2, 1.6, .5, M.stone, -.0, MT + .8, HALL.z0 + .25);   // the fireplace's back and hood
   block(2.4, .35, .9, M.stone, 0, MT + 1.75, HALL.z0 + .45);
-  fire(0, MT, HALL.z0 + .55, .9, 26, 12);
+  fire(0, MT, HALL.z0 + .55, .9, 26, 12, true);
   smoke(0, MT + 10.6, HALL.z0 - .55);
   posts.push([0, HALL.z0 + .5, .9]);
   // the hall windows: glass, which Iolo praised
@@ -411,9 +411,21 @@ function build(K) {
   }
 }
 
+// inside the house on the motte, or the kitchen beside it
+const indoor = (x, z) => (Math.abs(x) < HALL.x1 + WING.w && z > WING.z0 && z < WING.z1) || (Math.abs(x - 1.6) < 2.8 && Math.abs(z - 6.9) < 1.9);
+// tufts of grass on the banks and in the fields, not in the trodden yard, on the motte top, in the water or on the lane
+const grass = (x, z) => { const r = Math.hypot(x, z); if (r < M_R + .5 || baileyEdge(x, z) > 1 || onBridge(x, z) !== null || laneDist(x, z) < 2.8) return false; const [px, pz] = pondLocal(x, z); if (Math.abs(px) < POND.w / 2 + 1 && Math.abs(pz) < POND.d / 2 + 1) return false; return shape(x, z) > WATER + .25 && Math.abs(x - riverAt(z)) > 5; };
+// the moat, the fishpond and the river on the plan
+function planExtra(c, P, k) {
+  c.strokeStyle = "rgba(95,140,160,.9)"; c.lineWidth = MOAT * k * .8; c.beginPath(); const [a, b] = P(0, 0); c.arc(a, b, (M_FOOT + MOAT / 2) * k, 0, 7); c.stroke();
+  c.save(); const [pa, pb] = P(POND.x, POND.z); c.translate(pa, pb); c.rotate(-POND.a); c.fillStyle = "rgba(95,140,160,.9)"; c.fillRect(-POND.w / 2 * k, -POND.d / 2 * k, POND.w * k, POND.d * k); c.restore();
+  c.strokeStyle = "rgba(95,140,160,.9)"; c.lineWidth = 6 * k; c.beginPath(); for (let z = -200; z <= 200; z += 10) { const [x2, y2] = P(riverAt(z), z); z === -200 ? c.moveTo(x2, y2) : c.lineTo(x2, y2); } c.stroke();
+}
+
 export function start(host, D) {
   return run(host, D, {
     STOPS, START, land: LAND, fine: 170, fineAt: [-12, 14], shape, floor, blocked, colour, build, bound: 460, seed: 1403, shadow: 70,
+    indoor, grass, grassAt: { x: -10, z: 10, r: 120 }, plan: { x: -12, z: 12, r: 78 }, planExtra, sea: 0, harp: { x: -1, z: -3, r: 9 },
     look: { fog: 0xc4ccc8, fogNear: 50, fogFar: 760, top: 0x8ea4b8, mid: 0xc4cfd3, low: 0xd9ddd6, sun: [-60, 70, 40], sunI: 2.0, hemi: .9, exposure: 1.0 },
   });
 }

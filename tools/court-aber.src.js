@@ -21,13 +21,13 @@ const STOPS = {
   arrive: [[-58, 62], [2, 6, 0]],
   hall: [[-3, 24], [0, 4.2, 0]],
   mound: [[-27, -2], [-40, 8.5, -27]],
-  siwan: [[-43.4, -28.4], [-1380, 14, -1500]],
+  siwan: [[-43.4, -28.4], [-1380, 14, -1500], 40],
   dafydd: [[-15.5, 16], [-9, 6, 0]],
   inside: [[4.6, 2.2], [-5.6, 1.6, -.4]],
   eleanor: [[-8.6, .6], [-10, .7, -4.4]],
   letters: [[-.6, -1.9], [-4.4, .9, -1.1]],
-  garthcelyn: [[104, -18], [129, 9, -104]],
-  bera: [[60, 62], [520, 160, 900]],
+  garthcelyn: [[104, -18], [129, 9, -104], 50],
+  bera: [[60, 62], [520, 160, 900], 44],
   spade: [[-12, 20], [-26, 3, -16]],
 };
 const START = { x: -70, z: 76, yaw: -Math.PI * .3 };
@@ -170,7 +170,7 @@ function build(K) {
   // the hearth in the middle of the floor, ringed with stones
   const fl = new THREE.Mesh(new THREE.PlaneGeometry(2 * HALL.x, 2 * HALL.z), M.floor); fl.rotation.x = -Math.PI / 2; fl.position.set(0, g0 + .02, 0); fl.receiveShadow = true; scene.add(fl);
   for (let i = 0; i < 12; i++) { const a = i / 12 * Math.PI * 2; block(.36, .18, .3, M.stone, Math.cos(a) * 1.0, g0 + .09, Math.sin(a) * .8, -a); }
-  fire(0, g0, 0, 1, 32, 14);
+  fire(0, g0, 0, 1, 32, 14, true);
   smoke(0, g0 + H + 5.4, 0, 7);
   posts.push([0, 0, 1.0]);
   // the dais at the upper (west) end, the prince's table and chair, a hanging on the wall behind
@@ -421,9 +421,21 @@ function build(K) {
   [[-120, coast(-120) + 12, .3], [-108, coast(-108) + 16, -.2]].forEach(([x, z, a]) => { const y = Math.max(SEA, G(x, z)); const bt = new THREE.Mesh(new THREE.SphereGeometry(1, 12, 6, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2), boatM); bt.scale.set(3, .8, 1.1); bt.position.set(x, y + .7, z); bt.rotation.y = a; scene.add(bt); });
 }
 
+// inside the hall or its wings
+const indoor = (x, z) => (Math.abs(x) < HALL.x && Math.abs(z) < HALL.z) || (Math.abs(x) > WING.x0 && Math.abs(x) < WING.x1 && Math.abs(z) < WING.z);
+// tufts of grass everywhere but the trodden yard, the lanes, the water and the shore
+const grass = (x, z) => { if (x > -24.5 && x < 40.5 && z > -12.5 && z < 46.5) return false; if (laneDist(x, z) < 2.8 || Math.abs(x - riverAt(z)) < 6) return false; return shape(x, z) > SEA + 3; };
+// the river, the mound and the road on the plan
+function planExtra(c, P, k) {
+  c.strokeStyle = "rgba(95,140,160,.9)"; c.lineWidth = 8 * k; c.beginPath(); for (let z = -120; z <= 160; z += 8) { const [a, b] = P(riverAt(z), z); z === -120 ? c.moveTo(a, b) : c.lineTo(a, b); } c.stroke();
+  c.fillStyle = "rgba(120,160,90,.85)"; c.beginPath(); const [a, b] = P(MD.x, MD.z); c.arc(a, b, M_FOOT * k, 0, 7); c.fill();
+  c.fillStyle = "rgba(230,220,200,.45)"; const [h1, h2] = P(-WING.x1, -WING.z), [h3, h4] = P(WING.x1, WING.z); c.fillRect(h1, h2, h3 - h1, h4 - h2);
+}
+
 export function start(host, D) {
   return run(host, D, {
     STOPS, START, land: LAND, fine: 190, fineAt: [-14, 0], shape, floor, blocked, colour, build, bound: 620, seed: 1282, shadow: 70,
+    indoor, grass, grassAt: { x: -10, z: 10, r: 130 }, plan: { x: 2, z: 6, r: 62 }, planExtra, sea: .8, harp: { x: -2, z: 0, r: 9 },
     look: { fog: 0xc9d3d8, fogNear: 90, fogFar: 2700, top: 0x86a2bc, mid: 0xc3d0d8, low: 0xd8dfe2, sun: [-50, 75, 35], sunI: 2.1, hemi: .9, exposure: 1.0 },
   });
 }

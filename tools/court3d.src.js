@@ -8,6 +8,14 @@
      colour(x, z, h, c)  tint the land (c is a THREE.Color to change), optional
      build(K)       makes the buildings with the helpers in K (below)
      look           sky, fog, sun and light settings, optional
+     indoor(x, z)   true inside a building: the eye opens up to the firelight there and the wind drops (optional)
+     grass(x, z)    true where tufts of grass may grow (optional), within grassAt { x, z, r }
+     plan           { x, z, r }: the area the little plan (top right) shows; planExtra(ctx, P, k) draws water on it
+     sea            0 to 1, how loud the sea is (0 inland); harp { x, z, r }, where the harp plays in the hall
+   A stop may give a third number, a narrower field of view (degrees) for far views, as the eye sees mountains.
+   Brought up to the Llys Rhosyr engine (tools/llys3d.src.js, November 2026): log depth, sky light, fire shadows,
+   grass tufts, smoothed looking and walking, a fade when the straight way to a stop is blocked, the field of view per
+   stop, the pixel ratio falling when frames are slow, sound made in code, and the plan.
    x is east and z is south, in metres. Bundle each court with three.js:
      npx esbuild court-<id>.src.js --bundle --minify --format=esm --target=es2019 --outfile=court-<id>.js
    and copy it to src/static/. Everything is made in code: no models or pictures to download. */
@@ -43,9 +51,11 @@ export function run(host, D, S) {
   canvas.setAttribute("role", "img"); canvas.setAttribute("aria-label", T(D.ui.canvas));
   host.appendChild(canvas);
   let renderer;
-  try { renderer = new THREE.WebGLRenderer({ canvas, antialias: !small, powerPreference: "high-performance" }); }
+  try { renderer = new THREE.WebGLRenderer({ canvas, antialias: !small, powerPreference: "high-performance", logarithmicDepthBuffer: true }); }
   catch (e) { host.classList.add("fail"); canvas.remove(); return; }
-  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, small ? 1.5 : 2));
+  const maxDpr = Math.min(devicePixelRatio || 1, small ? 1.6 : 2);
+  let dpr = small ? Math.min(maxDpr, 1.25) : maxDpr;
+  renderer.setPixelRatio(dpr);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = look.exposure;
@@ -54,7 +64,7 @@ export function run(host, D, S) {
 
   const scene = new THREE.Scene();
   scene.fog = new THREE.Fog(look.fog, look.fogNear, look.fogFar);
-  const camera = new THREE.PerspectiveCamera(small ? 70 : 62, 1, 0.1, 3000);
+  const FOV = small ? 68 : 60, camera = new THREE.PerspectiveCamera(FOV, 1, 0.1, 3000);
   camera.rotation.order = "YXZ";
 
   // ---------- textures, drawn in code ----------
@@ -225,11 +235,14 @@ export function run(host, D, S) {
     scene.add(ti, ci);
   }
   // a fire: embers, flames and a flickering light; returns the light
-  function fire(x, y, z, size = 1, power = 30, dist = 14) {
+  const fires = [];
+  function fire(x, y, z, size = 1, power = 30, dist = 14, shadow = false) {
+    fires.push([x, z, power]);
     const em = new THREE.Mesh(new THREE.CircleGeometry(.5 * size, 16), M.ember); em.rotation.x = -Math.PI / 2; em.position.set(x, y + .03, z); scene.add(em);
     const fl = [];
     for (let i = 0; i < 4; i++) { const f = new THREE.Mesh(new THREE.ConeGeometry((.14 + R() * .08) * size, (.6 + R() * .3) * size, 7), M.flame); f.position.set(x + (R() - .5) * .35 * size, y + .35 * size, z + (R() - .5) * .35 * size); scene.add(f); fl.push([f, R() * 6]); }
     const L = new THREE.PointLight(0xff8c3a, power, dist, 1.6); L.position.set(x, y + 1, z); scene.add(L);
+    if (shadow && !small) { L.castShadow = true; L.shadow.mapSize.set(512, 512); L.shadow.bias = -.002; L.shadow.radius = 3; L.shadow.camera.near = .2; L.shadow.camera.far = dist; }
     anim.push((t) => { const k = 1 + Math.sin(t * 11) * .08 + Math.sin(t * 23.7) * .06 + (Math.random() - .5) * .08; L.intensity = power * k; fl.forEach(([f, o]) => { f.scale.set(1, .8 + Math.sin(t * 9 + o) * .25 + Math.random() * .1, 1); f.rotation.y = t * 2 + o; }); });
     return L;
   }
@@ -269,10 +282,16 @@ export function run(host, D, S) {
     const sky = new THREE.Mesh(new THREE.SphereGeometry(2400, 32, 16), new THREE.ShaderMaterial({
       side: THREE.BackSide, depthWrite: false, fog: false,
       uniforms: { top: { value: new THREE.Color(look.top) }, mid: { value: new THREE.Color(look.mid) }, low: { value: new THREE.Color(look.low) } },
-      vertexShader: "varying vec3 v;void main(){v=normalize(position);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}",
-      fragmentShader: "uniform vec3 top,mid,low;varying vec3 v;void main(){float h=v.y;vec3 c=h>.1?mix(mid,top,smoothstep(.1,.7,h)):mix(low,mid,smoothstep(-.02,.1,h));gl_FragColor=vec4(c,1.);}",
+      vertexShader: "#include <common>\n#include <logdepthbuf_pars_vertex>\nvarying vec3 v;void main(){v=normalize(position);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);\n#include <logdepthbuf_vertex>\n}",
+      fragmentShader: "#include <logdepthbuf_pars_fragment>\nuniform vec3 top,mid,low;varying vec3 v;void main(){\n#include <logdepthbuf_fragment>\nfloat h=v.y;vec3 c=h>.1?mix(mid,top,smoothstep(.1,.7,h)):mix(low,mid,smoothstep(-.02,.1,h));gl_FragColor=vec4(c,1.);}",
     }));
     scene.add(sky);
+    // soft light from the whole sky (and the green land below it) on every surface, as Llys Rhosyr has
+    try {
+      const es = new THREE.Scene(); es.add(sky.clone());
+      const gnd = new THREE.Mesh(new THREE.CircleGeometry(2000, 24), new THREE.MeshBasicMaterial({ color: 0x4d5e36 })); gnd.rotation.x = -Math.PI / 2; gnd.position.y = -40; es.add(gnd);
+      const pm = new THREE.PMREMGenerator(renderer); scene.environment = pm.fromScene(es, 0, 1, 3000).texture; pm.dispose();
+    } catch (e) { /* the hemisphere light is enough */ }
     // clouds: soft puffs painted on a canvas, laid flat high up
     const cloudTex = tex(256, (x, s) => {
       x.clearRect(0, 0, s, s);
@@ -287,7 +306,7 @@ export function run(host, D, S) {
   }
 
   // ---------- light ----------
-  const hemi = new THREE.HemisphereLight(0xdfe8f2, 0x6a5a3c, look.hemi); scene.add(hemi);
+  const hemi = new THREE.HemisphereLight(0xdfe8f2, 0x6a5a3c, look.hemi * .35); scene.add(hemi);
   const sun = new THREE.DirectionalLight(0xfff0d8, look.sunI);
   sun.position.set(...look.sun); sun.target.position.set(0, 0, 0); scene.add(sun, sun.target);
   sun.castShadow = true; sun.shadow.mapSize.set(small ? 1024 : 2048, small ? 1024 : 2048);
@@ -298,6 +317,29 @@ export function run(host, D, S) {
   // ---------- the court ----------
   const K = { THREE, scene, M, R, tex, block, cyl, wallSeg, wallLine, roof, trees, fire, smoke, walls, posts, anim, ground, floor, small, reduce, smooth };
   S.build(K);
+
+  // ---------- tufts of grass round the court: a colour canvas and a separate black-and-white alpha map, lit alike on both sides ----------
+  const noFlip = (sh) => { sh.fragmentShader = sh.fragmentShader.replace("#include <normal_fragment_begin>", THREE.ShaderChunk.normal_fragment_begin.replace("normal *= faceDirection;", "")); };
+  if (S.grass) {
+    const ga = S.grassAt || { x: 0, z: 0, r: 80 }, n = small ? 2600 : 8000;
+    const col = tex(128, (x, s) => { const gr = x.createLinearGradient(0, s, 0, 0); gr.addColorStop(0, "#5b7431"); gr.addColorStop(1, "#b3c872"); x.fillStyle = gr; x.fillRect(0, 0, s, s); });
+    const alpha = tex(128, (x, s) => { x.fillStyle = "#000"; x.fillRect(0, 0, s, s); x.strokeStyle = "#fff"; x.lineCap = "round"; for (let i = 0; i < 26; i++) { const bx = s * (.12 + R() * .76), lean = (R() - .5) * s * .35, h = s * (.45 + R() * .5); x.lineWidth = 2 + R() * 3; x.beginPath(); x.moveTo(bx, s); x.quadraticCurveTo(bx + lean * .3, s - h * .6, bx + lean, s - h); x.stroke(); } }, null, false);
+    const gm = new THREE.MeshStandardMaterial({ map: col, alphaMap: alpha, alphaTest: .5, side: THREE.DoubleSide, roughness: 1 }); gm.onBeforeCompile = noFlip;
+    const q1 = new THREE.PlaneGeometry(.55, .42); q1.translate(0, .21, 0); const q2 = q1.clone(); q2.rotateY(Math.PI / 2);
+    const P = [...q1.attributes.position.array, ...q2.attributes.position.array], U = [...q1.attributes.uv.array, ...q2.attributes.uv.array], Nn = [...q1.attributes.normal.array, ...q2.attributes.normal.array];
+    const I = [...q1.index.array, ...Array.from(q2.index.array, (v) => v + 4)];
+    const tg = new THREE.BufferGeometry(); tg.setAttribute("position", new THREE.Float32BufferAttribute(P, 3)); tg.setAttribute("uv", new THREE.Float32BufferAttribute(U, 2)); tg.setAttribute("normal", new THREE.Float32BufferAttribute(Nn, 3)); tg.setIndex(I);
+    const inst = new THREE.InstancedMesh(tg, gm, n), m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), c = new THREE.Color(), up = new THREE.Vector3(0, 1, 0);
+    let k = 0;
+    for (let tries = 0; k < n && tries < n * 4; tries++) {
+      const a = R() * Math.PI * 2, r = Math.sqrt(R()) * ga.r, x = ga.x + Math.cos(a) * r, z = ga.z + Math.sin(a) * r;
+      if (!S.grass(x, z)) continue;
+      const sc = .7 + R() * .8; q.setFromAxisAngle(up, R() * 6.3);
+      m4.compose(new THREE.Vector3(x, ground(x, z) - .03, z), q, new THREE.Vector3(sc, sc * (.8 + R() * .5), sc)); inst.setMatrixAt(k, m4);
+      c.setHSL(.2 + R() * .06, .3 + R() * .15, .6 + R() * .15); inst.setColorAt(k, c); k++;
+    }
+    inst.count = k; inst.receiveShadow = true; scene.add(inst);
+  }
 
   // ---------- the stops: a gold marker over each, and the panel that tells about it ----------
   const STOPS = S.STOPS;
@@ -311,7 +353,7 @@ export function run(host, D, S) {
   });
 
   // ---------- the walker ----------
-  const me = { x: S.START.x, z: S.START.z, yaw: S.START.yaw || 0, pitch: -.02 };
+  const me = { x: S.START.x, z: S.START.z, yaw: S.START.yaw || 0, pitch: -.02, vx: 0, vz: 0 }, look2 = { yaw: me.yaw, pitch: me.pitch };
   const eye = (x, z) => floor(x, z) + 1.65;
   const lim = S.bound || 420;
   function bump(nx, nz, ox, oz) {
@@ -331,16 +373,84 @@ export function run(host, D, S) {
     return [nx, nz];
   }
 
+  // is the straight way from a to b through a wall? then going to a stop fades out and in, instead of flying through it
+  function pathBlocked(ax, az, bx, bz) {
+    const ex = bx - ax, ez = bz - az;
+    for (const [x1, z1, x2, z2, , b, t] of walls) {
+      const fx = x2 - x1, fz = z2 - z1, den = ex * fz - ez * fx; if (Math.abs(den) < 1e-9) continue;
+      const u = ((x1 - ax) * fz - (z1 - az) * fx) / den, v = ((x1 - ax) * ez - (z1 - az) * ex) / den;
+      if (u <= .02 || u >= .98 || v < 0 || v > 1) continue;
+      const fy = floor(ax + ex * u, az + ez * u);
+      if (t > fy + 1.0 && b < fy + 1.6) return true;
+    }
+    return false;
+  }
+
+  // ---------- sound: made in the browser (the wind, the sea, birds, the fire, a harp in the hall) ----------
+  let AC = null, snd = null, soundOn = true;
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  function startSound() {
+    if (AC) { if (soundOn && AC.state === "suspended") AC.resume(); return; }
+    if (!soundOn) return;
+    try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return; }
+    const sr = AC.sampleRate, nb = AC.createBuffer(1, sr * 4, sr), d = nb.getChannelData(0);
+    let b0 = 0, b1 = 0, b2 = 0; for (let i = 0; i < d.length; i++) { const w = Math.random() * 2 - 1; b0 = .99765 * b0 + w * .099; b1 = .963 * b1 + w * .2965; b2 = .57 * b2 + w * 1.0527; d[i] = (b0 + b1 + b2 + w * .1848) * .2; }
+    const master = AC.createGain(); master.gain.value = .9; master.connect(AC.destination);
+    const loop = (f, q, type = "bandpass") => { const s = AC.createBufferSource(); s.buffer = nb; s.loop = true; s.playbackRate.value = .5 + Math.random() * .1; const fl2 = AC.createBiquadFilter(); fl2.type = type; fl2.frequency.value = f; fl2.Q.value = q; const g = AC.createGain(); g.gain.value = 0; s.connect(fl2); fl2.connect(g); g.connect(master); s.start(); return { g, f: fl2 }; };
+    snd = { wind: loop(500, .6), sea: loop(260, .4, "lowpass"), rumble: loop(180, .7, "lowpass"), master, crackT: 0, harpT: 2, note: 0, birdT: 3 };
+  }
+  function crackle(vol) {
+    const len = .02 + Math.random() * .05, b = AC.createBuffer(1, Math.ceil(AC.sampleRate * len), AC.sampleRate), d = b.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 3);
+    const s = AC.createBufferSource(); s.buffer = b; const f = AC.createBiquadFilter(); f.type = "highpass"; f.frequency.value = 900 + Math.random() * 2500; const g = AC.createGain(); g.gain.value = vol * (.2 + Math.random() * .5);
+    s.connect(f); f.connect(g); g.connect(snd.master); s.start();
+  }
+  function chirp(vol) {   // a small bird, somewhere in the hedges
+    const t = AC.currentTime, n = 2 + (Math.random() * 4 | 0), base = 2600 + Math.random() * 1800;
+    for (let i = 0; i < n; i++) {
+      const o = AC.createOscillator(), g = AC.createGain(), t0 = t + i * (.11 + Math.random() * .05);
+      o.frequency.setValueAtTime(base, t0); o.frequency.exponentialRampToValueAtTime(base * (1.3 + Math.random() * .4), t0 + .07);
+      g.gain.setValueAtTime(0, t0); g.gain.linearRampToValueAtTime(vol, t0 + .015); g.gain.exponentialRampToValueAtTime(.0005, t0 + .09);
+      o.connect(g); g.connect(snd.master); o.start(t0); o.stop(t0 + .1);
+    }
+  }
+  const SCALE = [146.83, 164.81, 174.61, 196, 220, 246.94, 261.63, 293.66, 329.63, 349.23, 392];   // D, in the Dorian mode
+  const TUNE = [7, 5, 4, 5, 7, 7, 8, 7, 5, 4, 2, 4, 5, 4, 2, 0, 2, 4, 5, 7, 5, 4, 2, 4];
+  function pluck(freq, vol) {   // a plucked string (Karplus and Strong)
+    const sr = AC.sampleRate, n = Math.round(sr / freq), len = Math.ceil(sr * 2.6), b = AC.createBuffer(1, len, sr), d = b.getChannelData(0), ring = new Float32Array(n);
+    for (let i = 0; i < n; i++) ring[i] = Math.random() * 2 - 1;
+    let p = 0; for (let i = 0; i < len; i++) { const nxt = (p + 1) % n; const v = (ring[p] + ring[nxt]) * .4985; d[i] = ring[p]; ring[p] = v; p = nxt; }
+    const s = AC.createBufferSource(); s.buffer = b; const g = AC.createGain(); g.gain.value = vol; const f = AC.createBiquadFilter(); f.type = "lowpass"; f.frequency.value = 2600;
+    s.connect(f); f.connect(g); g.connect(snd.master); s.start();
+  }
+  function sound(dt, ind) {
+    if (!AC || !snd) return;
+    const t = AC.currentTime;
+    let fireV = 0; for (const [x, z, pw] of fires) fireV = Math.max(fireV, clamp(1.3 - Math.hypot(me.x - x, me.z - z) / (pw > 15 ? 8 : 4), 0, 1) * (pw > 15 ? 1 : .5));
+    snd.wind.g.gain.setTargetAtTime((1 - ind * .8) * (.3 + .17 * Math.sin(t * .23) + .1 * Math.sin(t * .71)), t, .4);
+    snd.wind.f.frequency.setTargetAtTime(380 + 160 * Math.sin(t * .17), t, .5);
+    snd.sea.g.gain.setTargetAtTime((S.sea || 0) * (1 - ind * .7) * (.25 + .15 * Math.sin(t * .45)), t, .5);
+    snd.rumble.g.gain.setTargetAtTime(fireV * .6, t, .3);
+    snd.crackT -= dt; if (snd.crackT < 0 && fireV > .02) { crackle(fireV); snd.crackT = Math.random() * .22; }
+    snd.birdT -= dt; if (snd.birdT < 0) { if (ind < .5 && !reduce) chirp(.03 + Math.random() * .03); snd.birdT = 2.5 + Math.random() * 6; }
+    const H = S.harp;
+    if (H && ind > .5 && Math.hypot(me.x - H.x, me.z - H.z) < H.r) { snd.harpT -= dt; if (snd.harpT < 0) { const n = TUNE[snd.note++ % TUNE.length]; const v = clamp(1.2 - Math.hypot(me.x - H.x, me.z - H.z) / H.r, .15, 1) * .45; pluck(SCALE[n], v); if (snd.note % 4 === 1) pluck(SCALE[Math.max(0, n - 4)] / 2, v * .55); snd.harpT = (snd.note % 8 === 0 ? 1.1 : .52) * (1 + (Math.random() - .5) * .08); } }
+  }
+
   // ---------- the controls and the panel ----------
   const ui = document.createElement("div"); ui.className = "ll-ui";
   ui.innerHTML = '<div class="ll-panel" hidden><p class="ll-n"></p><h2 tabindex="-1"></h2><div class="ll-txt"></div><p class="ll-src"></p><div class="ll-btns">' +
     '<button type="button" class="btn" data-k="prev">← ' + T(D.ui.prev) + '</button><button type="button" class="btn solid" data-k="next">' + T(D.ui.next) + ' →</button>' +
     '<button type="button" class="ll-x" data-k="close" aria-label="' + T(D.ui.close) + '">×</button></div></div>' +
     '<div class="ll-bar"><button type="button" class="btn solid" data-k="tour">' + T(D.ui.tour) + ' →</button>' +
+    '<button type="button" class="btn" data-k="snd" aria-pressed="true"></button>' +
     '<button type="button" class="btn" data-k="fs">' + T(D.ui.fs) + '</button><span class="ll-help">' + T(small || matchMedia("(pointer: coarse)").matches ? D.ui.helpTouch : D.ui.help) + "</span></div>" +
-    '<div class="ll-stick" aria-hidden="true"><i></i></div>';
+    (S.plan ? '<canvas class="ll-plan" width="200" height="160" aria-hidden="true"></canvas>' : "") +
+    '<div class="ll-stick" aria-hidden="true"><i></i></div><div class="ll-fade"></div>';
   host.appendChild(ui);
-  const panel = ui.querySelector(".ll-panel"), stick = ui.querySelector(".ll-stick"), knob = stick.querySelector("i");
+  const panel = ui.querySelector(".ll-panel"), stick = ui.querySelector(".ll-stick"), knob = stick.querySelector("i"), fade = ui.querySelector(".ll-fade"), sndB = ui.querySelector('[data-k="snd"]');
+  const setSnd = () => { sndB.textContent = (soundOn ? "♪ " : "") + T(soundOn ? D.ui.soundOff : D.ui.soundOn); sndB.setAttribute("aria-pressed", soundOn); };
+  setSnd();
   let cur = -1, dismissed = -1, fly = null;
   const esc = (p) => p.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
 
@@ -355,12 +465,15 @@ export function run(host, D, S) {
     panel.querySelector('[data-k="prev"]').disabled = i === 0;
     panel.querySelector('[data-k="next"]').textContent = (i === stops.length - 1 ? T(D.ui.again) : T(D.ui.next)) + " →";
   }
-  function goStop(i) {
+  let snapF = false;
+  function goStop(i, instant) {
     i = (i + stops.length) % stops.length;
     const [[x, z], [lx, ly, lz]] = STOPS[stops[i].id];
     const yaw = Math.atan2(-(lx - x), -(lz - z)), pitch = Math.atan2(ly - eye(x, z), Math.hypot(lx - x, lz - z));
     let dy = yaw - me.yaw; while (dy > Math.PI) dy -= 2 * Math.PI; while (dy < -Math.PI) dy += 2 * Math.PI;
-    fly = { t: 0, dur: reduce ? .01 : Math.min(3.6, .9 + Math.hypot(x - me.x, z - me.z) / 16), from: { ...me }, to: { x, z, yaw: me.yaw + dy, pitch } };
+    const far = Math.hypot(x - me.x, z - me.z), jump = instant || reduce || far > 140 || pathBlocked(me.x, me.z, x, z);
+    fly = { t: 0, jump, dur: jump ? .9 : Math.min(3.6, .9 + far / 16), from: { ...me }, to: { x, z, yaw: me.yaw + dy, pitch } };
+    if (instant) { Object.assign(me, fly.to); look2.yaw = me.yaw; look2.pitch = me.pitch; fly = null; snapF = true; camera.position.y = 0; }
     showStop(i); dismissed = -1;
   }
   ui.addEventListener("click", (e) => {
@@ -369,26 +482,50 @@ export function run(host, D, S) {
     if (k === "tour" || k === "next") goStop(cur + 1);
     else if (k === "prev") goStop(cur - 1);
     else if (k === "close") { panel.hidden = true; dismissed = cur; canvas.focus({ preventScroll: true }); }
+    else if (k === "snd") { soundOn = !soundOn; setSnd(); if (soundOn) { if (!AC) startSound(); else AC.resume(); } else if (AC) AC.suspend(); }
     else if (k === "fs") { const fs = document.fullscreenElement; if (fs) document.exitFullscreen(); else if (host.requestFullscreen) host.requestFullscreen().catch(() => {}); }
+  });
+
+  // the plan of the court, with you on it (top right; bottom right on phones): tap it to go to a stop
+  const plan = ui.querySelector(".ll-plan"), pc = plan && plan.getContext("2d");
+  const PL = S.plan || { x: 0, z: 0, r: 60 }, PK = 72 / PL.r, PP = (x, z) => [100 + (x - PL.x) * PK, 80 + (z - PL.z) * PK];
+  function drawPlan() {
+    if (!pc) return;
+    pc.clearRect(0, 0, 200, 160); pc.fillStyle = "rgba(8,10,16,.62)"; pc.fillRect(0, 0, 200, 160);
+    if (S.planExtra) S.planExtra(pc, PP, PK);
+    pc.strokeStyle = "rgba(230,220,200,.8)"; pc.lineWidth = 1.6; pc.beginPath();
+    for (const [x1, z1, x2, z2] of walls) { if (Math.abs(x1 - PL.x) > PL.r * 1.5 || Math.abs(z1 - PL.z) > PL.r * 1.2) continue; const [a, b] = PP(x1, z1), [c, d] = PP(x2, z2); pc.moveTo(a, b); pc.lineTo(c, d); }
+    pc.stroke();
+    stops.forEach((st, i) => { const [[x, z]] = STOPS[st.id]; const [a, b] = PP(x, z); if (a < 3 || a > 197 || b < 3 || b > 157) return; pc.fillStyle = i === cur ? "#fff" : "#f2c14e"; pc.beginPath(); pc.arc(a, b, 3.2, 0, 7); pc.fill(); });
+    const [a, b] = PP(clamp(me.x, PL.x - PL.r * 1.35, PL.x + PL.r * 1.35), clamp(me.z, PL.z - PL.r * 1.08, PL.z + PL.r * 1.08));
+    pc.save(); pc.translate(a, b); pc.rotate(-me.yaw); pc.fillStyle = "#e8483f"; pc.beginPath(); pc.moveTo(0, -7); pc.lineTo(5, 5); pc.lineTo(0, 2); pc.lineTo(-5, 5); pc.closePath(); pc.fill(); pc.restore();
+    pc.fillStyle = "rgba(230,220,200,.85)"; pc.font = "600 10px system-ui, sans-serif"; pc.fillText(cy ? "G" : "N", 188, 14); pc.beginPath(); pc.moveTo(191, 18); pc.lineTo(191, 30); pc.strokeStyle = "rgba(230,220,200,.85)"; pc.lineWidth = 1.2; pc.stroke();
+  }
+  if (plan) plan.addEventListener("click", (e) => {
+    const r = plan.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * 200, y = (e.clientY - r.top) / r.height * 160;
+    let best = -1, bd = 14; stops.forEach((st, i) => { const [[sx, sz]] = STOPS[st.id]; const [a, b] = PP(sx, sz); const d = Math.hypot(a - x, b - y); if (d < bd) { bd = d; best = i; } });
+    if (best >= 0) goStop(best);
   });
 
   const keys = {};
   canvas.addEventListener("keydown", (e) => {
     const k = e.key.toLowerCase();
-    if (["w", "a", "s", "d", "arrowup", "arrowdown", "arrowleft", "arrowright", "q", "e", "shift"].includes(k)) { keys[k] = 1; e.preventDefault(); fly = null; }
+    if (["w", "a", "s", "d", "arrowup", "arrowdown", "arrowleft", "arrowright", "q", "e", "shift"].includes(k)) { keys[k] = 1; e.preventDefault(); if (fly) { look2.yaw = me.yaw; look2.pitch = me.pitch; fly = null; fade.style.opacity = "0"; } }
     if (k === "n") goStop(cur + 1);
+    startSound();
   });
   canvas.addEventListener("keyup", (e) => { keys[e.key.toLowerCase()] = 0; });
   canvas.addEventListener("blur", () => { for (const k in keys) keys[k] = 0; });
 
   let drag = null;
   const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
-  canvas.addEventListener("pointerdown", (e) => { drag = { id: e.pointerId, x: e.clientX, y: e.clientY, moved: 0 }; canvas.setPointerCapture(e.pointerId); canvas.focus({ preventScroll: true }); });
+  canvas.addEventListener("pointerdown", (e) => { drag = { id: e.pointerId, x: e.clientX, y: e.clientY, moved: 0 }; canvas.setPointerCapture(e.pointerId); canvas.focus({ preventScroll: true }); startSound(); });
   canvas.addEventListener("pointermove", (e) => {
     if (!drag || drag.id !== e.pointerId) return;
     const dx = e.clientX - drag.x, dy = e.clientY - drag.y; drag.x = e.clientX; drag.y = e.clientY; drag.moved += Math.abs(dx) + Math.abs(dy);
     const k = e.pointerType === "touch" ? .006 : .0045;
-    me.yaw += dx * k; me.pitch = Math.max(-1.2, Math.min(1.2, me.pitch + dy * k)); fly = null;
+    if (fly) { look2.yaw = me.yaw; look2.pitch = me.pitch; fly = null; fade.style.opacity = "0"; }
+    look2.yaw += dx * k; look2.pitch = clamp(look2.pitch + dy * k, -1.25, 1.25);
   });
   canvas.addEventListener("pointerup", (e) => {
     if (drag && drag.moved < 6) {
@@ -400,7 +537,7 @@ export function run(host, D, S) {
   });
   const mv = { x: 0, y: 0 }; let sid = null;
   const stickAt = (e) => { const r = stick.getBoundingClientRect(), cx = r.left + r.width / 2, cyy = r.top + r.height / 2; let x = (e.clientX - cx) / (r.width / 2), y = (e.clientY - cyy) / (r.height / 2); const l = Math.hypot(x, y); if (l > 1) { x /= l; y /= l; } mv.x = x; mv.y = y; knob.style.transform = `translate(${x * 34}px,${y * 34}px)`; };
-  stick.addEventListener("pointerdown", (e) => { sid = e.pointerId; stick.setPointerCapture(sid); stickAt(e); fly = null; e.preventDefault(); });
+  stick.addEventListener("pointerdown", (e) => { sid = e.pointerId; stick.setPointerCapture(sid); stickAt(e); if (fly) { look2.yaw = me.yaw; look2.pitch = me.pitch; fly = null; fade.style.opacity = "0"; } e.preventDefault(); startSound(); });
   stick.addEventListener("pointermove", (e) => { if (e.pointerId === sid) stickAt(e); });
   const stickEnd = () => { sid = null; mv.x = mv.y = 0; knob.style.transform = ""; };
   stick.addEventListener("pointerup", stickEnd); stick.addEventListener("pointercancel", stickEnd);
@@ -411,45 +548,74 @@ export function run(host, D, S) {
   let visible = true;
   new IntersectionObserver((en) => { visible = en[0].isIntersecting; if (visible) last = performance.now(); }).observe(host);
   let last = performance.now(), time = 0, fixed = null, showMarks = true;
+  let slowT = 0, fastT = 0, bob = 0, indoor = 0;
+  const allMats = new Set(); scene.traverse((o) => { if (o.material) (Array.isArray(o.material) ? o.material : [o.material]).forEach((m) => { if (m.isMeshStandardMaterial) allMats.add(m); }); });
   function frame(now) {
     requestAnimationFrame(frame);
     if (!visible || document.hidden) return;
     const raw = Math.min(.5, (now - last) / 1000), dt = Math.min(.05, raw); last = now; time += dt;
+    // keep it smooth: lower the resolution if frames are slow, raise it again when there is room
+    if (raw > .034) { slowT += raw; fastT = 0; } else if (raw < .019) { fastT += raw; slowT = 0; }
+    if (slowT > 1.2 && dpr > .6) { dpr = Math.max(.6, dpr - .15); renderer.setPixelRatio(dpr); size(); slowT = 0; }
+    if (fastT > 4 && dpr < maxDpr) { dpr = Math.min(maxDpr, dpr + .1); renderer.setPixelRatio(dpr); size(); fastT = 0; }
+    let moving = 0;
     if (fly) {
       fly.t += raw / fly.dur; const k = fly.t >= 1 ? 1 : (1 - Math.cos(Math.PI * fly.t)) / 2;
-      ["x", "z", "yaw", "pitch"].forEach((p) => { me[p] = fly.from[p] + (fly.to[p] - fly.from[p]) * k; });
-      if (fly.t >= 1) fly = null;
+      if (fly.jump) {   // through a wall, or far away: fade out, move, fade in
+        fade.style.opacity = String(Math.sin(Math.min(1, fly.t) * Math.PI));
+        if (fly.t >= .5 && !fly.done) { Object.assign(me, fly.to); fly.done = true; camera.position.y = eye(me.x, me.z); }
+      } else ["x", "z", "yaw", "pitch"].forEach((p) => { me[p] = fly.from[p] + (fly.to[p] - fly.from[p]) * k; });
+      if (fly.t >= 1) { Object.assign(me, fly.to); fly = null; fade.style.opacity = "0"; }
+      look2.yaw = me.yaw; look2.pitch = me.pitch; me.vx = me.vz = 0;
     } else {
-      const run = keys.shift ? 2 : 1, sp = 3.6 * run * dt;
+      // turn smoothly toward where the visitor is looking, and walk with a little weight
+      const kk = 1 - Math.exp(-dt * 16);
+      me.yaw += (look2.yaw - me.yaw) * kk; me.pitch += (look2.pitch - me.pitch) * kk;
+      if (keys.arrowleft || keys.q) look2.yaw += 1.8 * dt;
+      if (keys.arrowright || keys.e) look2.yaw -= 1.8 * dt;
+      const run = keys.shift ? 2.1 : 1;
       let f = (keys.w || keys.arrowup ? 1 : 0) - (keys.s || keys.arrowdown ? 1 : 0) - mv.y;
       let s = (keys.d ? 1 : 0) - (keys.a ? 1 : 0) + mv.x;
-      if (keys.arrowleft || keys.q) me.yaw += 1.8 * dt;
-      if (keys.arrowright || keys.e) me.yaw -= 1.8 * dt;
-      if (f || s) {
-        const l = Math.max(1, Math.hypot(f, s)); f /= l; s /= l;
-        const nx = me.x + (-Math.sin(me.yaw) * f + Math.cos(me.yaw) * s) * sp, nz = me.z + (-Math.cos(me.yaw) * f - Math.sin(me.yaw) * s) * sp;
-        [me.x, me.z] = bump(nx, nz, me.x, me.z);
-      }
+      const l = Math.max(1, Math.hypot(f, s)); f /= l; s /= l;
+      const tx = (-Math.sin(me.yaw) * f + Math.cos(me.yaw) * s) * 3.4 * run, tz = (-Math.cos(me.yaw) * f - Math.sin(me.yaw) * s) * 3.4 * run;
+      const a = 1 - Math.exp(-dt * 9); me.vx += (tx - me.vx) * a; me.vz += (tz - me.vz) * a;
+      const sp = Math.hypot(me.vx, me.vz);
+      if (sp > .02) { const ox = me.x, oz = me.z; [me.x, me.z] = bump(me.x + me.vx * dt, me.z + me.vz * dt, ox, oz); moving = Math.min(1, sp / 3.4); }
       stops.forEach((st, i) => { const [[x, z]] = STOPS[st.id]; if (i !== cur && i !== dismissed && Math.hypot(me.x - x, me.z - z) < 1.8) showStop(i); });
     }
+    bob += dt * 9 * moving;
+    // the field of view: a stop may narrow it for far views (as the eye sees mountains), and a still may set its own
+    const sf = cur >= 0 && !fly ? STOPS[stops[cur].id][2] : 0, wantFov = (fixed && fixed[6]) || sf || FOV;
+    if (snapF) { camera.fov = wantFov; camera.updateProjectionMatrix(); snapF = false; }
+    if (Math.abs(camera.fov - wantFov) > .05) { camera.fov += (wantFov - camera.fov) * Math.min(1, dt * 2.5); camera.updateProjectionMatrix(); }
     if (fixed) { camera.position.set(fixed[0], fixed[1], fixed[2]); camera.lookAt(fixed[3], fixed[4], fixed[5]); }
     else {
-    const ey = eye(me.x, me.z); camera.position.set(me.x, camera.position.y ? camera.position.y + (ey - camera.position.y) * Math.min(1, dt * 8) : ey, me.z);
-    camera.rotation.set(me.pitch, me.yaw, 0);
+      const ey = eye(me.x, me.z) + (reduce ? 0 : Math.sin(bob) * .025 * moving);
+      camera.position.set(me.x, camera.position.y ? camera.position.y + (ey - camera.position.y) * Math.min(1, dt * 10) : ey, me.z);
+      camera.rotation.set(me.pitch, me.yaw, 0);
     }
-    // the sun's shadows follow the walker, so they are sharp wherever you are
-    sun.position.set(me.x + look.sun[0], look.sun[1], me.z + look.sun[2]); sun.target.position.set(me.x, 0, me.z);
+    // indoors or out: inside, the eye opens up to the firelight and the sky's light drops away
+    const inNow = S.indoor ? (S.indoor(fixed ? fixed[0] : me.x, fixed ? fixed[2] : me.z) ? 1 : 0) : 0;
+    indoor += (inNow - indoor) * Math.min(1, fixed ? 1 : dt * 2.2);
+    renderer.toneMappingExposure = look.exposure * (1 + indoor * .3);
+    const env = 1 - indoor * .75; for (const m of allMats) m.envMapIntensity = env;
+    // the sun's shadows follow the walker, kept to whole shadow pixels so their edges do not swim
+    const tx2 = (sr * 2) / sun.shadow.mapSize.x, sx = Math.round((fixed ? fixed[0] : me.x) / tx2) * tx2, sz = Math.round((fixed ? fixed[2] : me.z) / tx2) * tx2;
+    sun.position.set(sx + look.sun[0], look.sun[1], sz + look.sun[2]); sun.target.position.set(sx, 0, sz); sun.target.updateMatrixWorld();
     anim.forEach((f) => f(time, dt));
     marks.forEach((m, i) => { m.rotation.y = time * 1.4 + i; m.position.y = m.userData.y + Math.sin(time * 2 + i) * .06; m.visible = showMarks && (i !== cur || !!fly) && m.position.distanceTo(camera.position) > 4; });
+    sound(dt, indoor);
+    if ((time * 10 | 0) % 2 === 0) drawPlan();
     renderer.render(scene, camera);
   }
   requestAnimationFrame(frame);
   host.classList.add("ready");
   camera.position.y = 0;
   canvas.focus({ preventScroll: true });
+  if (soundOn) startSound();
   setTimeout(() => goStop(0), 400);
   // for making the still pictures (tools/court_stills.js): stand anywhere and look anywhere, or go back to walking
-  const api = { goStop, me, view: (v) => { fixed = v; }, panel: (on) => { panel.hidden = !on; ui.style.display = on ? "" : "none"; showMarks = on; } };
+  const api = { goStop, me, view: (v) => { fixed = v; snapF = true; }, panel: (on) => { panel.hidden = !on; ui.style.display = on ? "" : "none"; showMarks = on; } };
   host.__court = api;
   return api;
 }
