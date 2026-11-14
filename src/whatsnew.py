@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-14", "Dolwyddelan in 3D: Llywelyn the Great’s castle on its rock", "Dolwyddelan mewn 3D: castell Llywelyn Fawr ar ei graig",
+     "Walk into Dolwyddelan as it might have looked about 1280: cross the timber bridge over the ditch cut in the rock, climb the steps to the great room of Llywelyn the Great’s keep, look out from its wall-walk to Tomen Castell, where he was most probably born, and hear how the castle fell in January 1283. Every stop names its sources.",
+     "Cerddwch i mewn i Ddolwyddelan fel y gallai fod wedi edrych tua 1280: croeswch y bont bren dros y ffos a dorrwyd yn y graig, dringwch y grisiau i ystafell fawr gorthwr Llywelyn Fawr, edrychwch allan o rodfa’r mur at Domen Castell, lle ganed ef yn ôl pob tebyg, a chlywed sut y syrthiodd y castell ym mis Ionawr 1283. Mae pob arhosfan yn enwi ei ffynonellau.",
+     "court-dolwyddelan.html"),
     ("2026-11-14", "Then and now: 29 Welsh castles, abbeys and towns, old and new", "Ddoe a heddiw: 29 o gestyll, abatai a threfi Cymru, hen a newydd",
      "Drag across the picture to wipe from an old view to today: the Buck brothers’ engravings of the 1740s, prints from the National Library of Wales and colour photochroms of about 1895, each beside a photograph of the same place now. Conwy’s bridge, Caerphilly’s lakes filled again, Raglan without its ivy, Dolwyddelan’s keep given back its top, Llandaff rebuilt, and Telford’s bridges at Menai and Pontcysyllte. Each pair is also on its place page.",
      "Llusgwch ar draws y llun i symud o hen olygfa i heddiw: engrafiadau’r brodyr Buck o’r 1740au, printiau o Lyfrgell Genedlaethol Cymru a ffotograffau lliw ‘photochrom’ o tua 1895, pob un wrth ochr ffotograff o’r un lle nawr. Pont Conwy, llynnoedd Caerffili wedi’u llenwi eto, Rhaglan heb ei eiddew, gorthwr Dolwyddelan wedi cael ei ben yn ôl, Llandaf wedi’i hailgodi, a phontydd Telford ym Mhorthaethwy a Phontcysyllte. Mae pob pâr hefyd ar dudalen ei le.",

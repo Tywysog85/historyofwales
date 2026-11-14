@@ -16,6 +16,8 @@
    Brought up to the Llys Rhosyr engine (tools/llys3d.src.js, November 2026): log depth, sky light, fire shadows,
    grass tufts, smoothed looking and walking, a fade when the straight way to a stop is blocked, the field of view per
    stop, the pixel ratio falling when frames are slow, sound made in code, and the plan.
+     fineMore       [[size, x, z], ...]: more pieces of finer land, for a second place seen close
+     far            how far the eye sees, in metres (default 3000), for courts with mountains far off
      people         true if the hall has its household (their talk is heard); birds { kind: "gull" | "rook", x, z, r };
                     flock { x, z } and kennel { x, z } for the bleating and the barking; water(x, z), the distance to a stream
    build(K) has, besides the boxes and walls: framed() and framedBox() for timber framing, logWall() for palisades, table()
@@ -71,7 +73,7 @@ export function run(host, D, S) {
 
   const scene = new THREE.Scene();
   scene.fog = new THREE.Fog(look.fog, look.fogNear, look.fogFar);
-  const FOV = small ? 68 : 60, camera = new THREE.PerspectiveCamera(FOV, 1, 0.1, 3000);
+  const FOV = small ? 68 : 60, camera = new THREE.PerspectiveCamera(FOV, 1, 0.1, S.far || 3000);
   camera.rotation.order = "YXZ";
 
   // ---------- textures, drawn in code ----------
@@ -168,7 +170,8 @@ export function run(host, D, S) {
     smoke: new THREE.MeshBasicMaterial({ color: 0xcfcfcf, transparent: true, opacity: .22, depthWrite: false }),
     mark: new THREE.MeshStandardMaterial({ color: 0xf2c14e, emissive: 0xc8901a, emissiveIntensity: 1.2, roughness: .3, metalness: .4 }),
   };
-  M.daub = M.lime.clone(); M.daub.userData.ts = 1.5;   // wattle and daub under limewash, between the timbers of a framed wall
+  M.daub = M.lime.clone(); M.daub.userData.ts = 1.5;
+  M.rubble = M.stone.clone(); M.rubble.userData.ts = 1.15;   // castle walls: smaller stones, grit and slate rubble   // wattle and daub under limewash, between the timbers of a framed wall
   ["oak", "wood", "darkwood"].forEach((k) => { M[k].userData.ts = 1.3; M[k].userData.grain = true; });
   M.boards.userData.grain = true;
 
@@ -181,7 +184,7 @@ export function run(host, D, S) {
     loader.load(TEX + name + sfx + ".webp", (t) => { set(t, true); mat.map = t; if (o.tint !== undefined) mat.color.set(o.tint); mat.needsUpdate = true; });
     if (o.normal !== false) loader.load(TEX + name + "_n" + sfx + ".webp", (t) => { set(t, false); mat.normalMap = t; mat.normalScale.set(o.n || 1, o.n || 1); mat.needsUpdate = true; });
   }
-  surf(M.stone, "stone"); surf(M.lime, "daub", { n: .7 }); surf(M.daub, "daub", { n: .7 }); surf(M.thatch, "thatch"); surf(M.slate, "slate", { n: 1.2 });
+  surf(M.stone, "stone"); surf(M.rubble, "stone", { tint: 0xf2f0ea }); surf(M.lime, "daub", { n: .7 }); surf(M.daub, "daub", { n: .7 }); surf(M.thatch, "thatch"); surf(M.slate, "slate", { n: 1.2 });
   surf(M.wood, "oak", { tint: 0xd8c8b4 }); surf(M.oak, "oak", { tint: 0x9a8a7a }); surf(M.darkwood, "oak", { tint: 0x6e6258 });
   surf(M.logs, "bark", { tint: 0xc8bcae }); surf(M.boards, "boards", { tint: 0xe0d0bc }); surf(M.floor, "rushes"); surf(M.bark, "bark", { tint: 0xb0a496 });
 
@@ -574,7 +577,7 @@ export function run(host, D, S) {
       const p = g.attributes.position, col = [], c = new THREE.Color(), grass = new THREE.Color(0x6f8f45), dark = new THREE.Color(0x55703a);
       for (let i = 0; i < p.count; i++) {
         const x = p.getX(i), z = p.getZ(i), y = ground(x, z);
-        p.setY(i, sink && Math.abs(x - cx) < fine / 2 - 2 && Math.abs(z - cz) < fine / 2 - 2 ? y - 4 : y);
+        p.setY(i, sink && fines.some(([fs, fx, fz]) => Math.abs(x - fx) < fs / 2 - 2 && Math.abs(z - fz) < fs / 2 - 2) ? y - 4 : y);
         c.copy(grass).lerp(dark, (Math.sin(x * .05) * Math.sin(z * .04) + 1) / 2 * .6);
         if (S.colour) S.colour(x, z, y, c);
         col.push(c.r, c.g, c.b);
@@ -583,8 +586,10 @@ export function run(host, D, S) {
       const land = new THREE.Mesh(g, landM); land.receiveShadow = true; scene.add(land);
     };
     surf(landM, "grass", { n: .55 });
-    piece(size, N, 0, 0, fine > 0);
-    if (fine) piece(fine, FN, (S.fineAt || [0, 0])[0], (S.fineAt || [0, 0])[1], false);
+    // more fine pieces, [size, x, z], for a second place worth seeing close (fineMore)
+    const fines = (fine ? [[fine, (S.fineAt || [0, 0])[0], (S.fineAt || [0, 0])[1]]] : []).concat(S.fineMore || []);
+    piece(size, N, 0, 0, fines.length > 0);
+    fines.forEach(([fs, fx, fz], i) => piece(fs, i === 0 && fine ? FN : Math.round(fs / (small ? 2 : 1.4)), fx, fz, false));
     // the sky
     const sky = new THREE.Mesh(new THREE.SphereGeometry(2400, 32, 16), new THREE.ShaderMaterial({
       side: THREE.BackSide, depthWrite: false, fog: false,
@@ -592,7 +597,7 @@ export function run(host, D, S) {
       vertexShader: "#include <common>\n#include <logdepthbuf_pars_vertex>\nvarying vec3 v;void main(){v=normalize(position);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);\n#include <logdepthbuf_vertex>\n}",
       fragmentShader: "#include <logdepthbuf_pars_fragment>\nuniform vec3 top,mid,low;varying vec3 v;void main(){\n#include <logdepthbuf_fragment>\nfloat h=v.y;vec3 c=h>.1?mix(mid,top,smoothstep(.1,.7,h)):mix(low,mid,smoothstep(-.02,.1,h));gl_FragColor=vec4(c,1.);}",
     }));
-    scene.add(sky);
+    sky.renderOrder = -1; scene.add(sky);   // drawn first, so far mountains beyond its sphere (S.far) still show
     // soft light from the whole sky (and the green land below it) on every surface, as Llys Rhosyr has
     try {
       const es = new THREE.Scene(); es.add(sky.clone());
