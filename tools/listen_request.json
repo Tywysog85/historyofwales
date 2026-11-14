@@ -1,7 +1,7 @@
 {
  "branch": "claude/project-thread-56vkej",
- "en": "azure:en-GB-OllieMultilingualNeural+cy",
- "cy": "azure:cy-GB-AledNeural",
+ "en": "azure:en-GB-AdaMultilingualNeural+cy",
+ "cy": "azure:cy-GB-NiaNeural",
  "only": [],
  "redo": false,
  "sample": null

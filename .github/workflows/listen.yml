@@ -78,7 +78,7 @@ jobs:
 
   make:
     needs: [plan, sample]
-    if: always() && needs.plan.outputs.go == '1' && needs.plan.outputs.count != '0' && needs.plan.outputs.count != ''
+    if: ${{ !cancelled() && needs.plan.outputs.go == '1' && needs.plan.outputs.count != '0' && needs.plan.outputs.count != '' }}
     runs-on: ubuntu-latest
     timeout-minutes: 300
     strategy:
@@ -112,7 +112,7 @@ jobs:
 
   publish:
     needs: [plan, make]
-    if: always() && needs.plan.outputs.go == '1' && needs.plan.outputs.count != '0' && needs.plan.outputs.count != ''
+    if: ${{ !cancelled() && needs.plan.outputs.go == '1' && needs.plan.outputs.count != '0' && needs.plan.outputs.count != '' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
