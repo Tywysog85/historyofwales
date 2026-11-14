@@ -27,6 +27,8 @@
     ["streak7", "7", "A week of dates", "Wythnos o ddyddiadau", "Play the daily challenge 7 days running", "Chwarae her y dydd 7 diwrnod yn olynol", function (j) { return j.d.best >= 7; }],
     ["quiz8", "8", "Sharp", "Craff", "Score 8 or more in the quiz", "Sgorio 8 neu fwy yn y cwis", function (j) { return j.f.quiz8; }],
     ["quiz10", "★", "Pencampwr", "Pencampwr", "A perfect 10 in the quiz", "10 perffaith yn y cwis", function (j) { return j.f.quiz10; }],
+    ["weekly", "W", "Week by week", "Wythnos wrth wythnos", "Finish a weekly quiz", "Gorffen cwis yr wythnos", function (j) { return j.f.weekly; }],
+    ["weekly10", "X", "A perfect week", "Wythnos berffaith", "A perfect 10 in the weekly quiz", "10 perffaith yng nghwis yr wythnos", function (j) { return j.f.weekly10; }],
     ["order15", "↕", "In good order", "Mewn trefn", "A perfect timeline challenge", "Her y llinell amser berffaith", function (j) { return j.f.order15; }],
     ["map300", "◎", "Map reader", "Darllenydd mapiau", "Score 300 or more in Where in Wales?", "Sgorio 300 neu fwy yn Ble yng Nghymru?", function (j) { return j.f.map300; }],
     ["pairs", "Aa", "Good memory", "Cof da", "Finish a game of word pairs", "Gorffen gêm o barau geiriau", function (j) { return j.f.pairs; }],
