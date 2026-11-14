@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-14", "A history page for every town in Wales", "Tudalen hanes i bob tref yng Nghymru",
+     "All 183 towns of Wales now have a page of their own, from Holyhead to Chepstow and from St Davids to Wrexham: the story of the town, what its name means, the castles, churches, forts and battlefields around it, the people born there, its days on the timeline and a photo of the town today.",
+     "Mae gan bob un o 183 o drefi Cymru dudalen ei hun bellach, o Gaergybi i Gas-gwent ac o Dyddewi i Wrecsam: hanes y dref, ystyr ei henw, y cestyll, yr eglwysi, y caerau a’r meysydd brwydr o’i chwmpas, y bobl a aned yno, ei dyddiau ar y llinell amser a llun o’r dref heddiw.",
+     "towns.html"),
     ("2026-11-14", "Sycharth and Garth Celyn rebuilt in 3D, with their people", "Sycharth a Garth Celyn wedi’u hailadeiladu mewn 3D, gyda’u pobl",
      "Owain Glyndŵr’s Sycharth and the princes’ court at Aber look far more real: oak timber framing you can see standing out from the limewashed walls, a palisade of single sharpened logs, a gatehouse with its gates, trestle tables, leafy trees, and real-looking stone, slate, thatch and wood. Owain and Llywelyn sit at their high tables with the household around them, with guards at the gates, grooms and horses, hounds, sheep, cattle and deer, and you can hear the hall’s talk, the harp, the birds and the river.",
      "Mae Sycharth Owain Glyndŵr a llys y tywysogion yn Aber yn edrych yn llawer mwy byw: fframiau derw sy’n sefyll allan o’r waliau gwyngalch, palis o foncyffion miniog unigol, porthdy a’i byrth, byrddau trestl, coed deiliog, a cherrig, llechi, to gwellt a phren sy’n edrych yn real. Mae Owain a Llywelyn yn eistedd wrth eu byrddau uchel gyda’r teulu o’u cwmpas, gyda gwylwyr wrth y pyrth, gweision a cheffylau, cŵn hela, defaid, gwartheg a cheirw, a gallwch glywed sŵn y neuadd, y delyn, yr adar a’r afon.",
