@@ -5,8 +5,26 @@
       <button type="button" id="mode-sites" aria-pressed="true" data-cy="Safleoedd hanesyddol">Historic sites</button>
       <button type="button" id="mode-kg" aria-pressed="false" data-cy="Teyrnasoedd">Kingdoms</button>
     </div>
+    <!-- Find first: town search and the list of places sit above the map, so phones see them without scrolling past it -->
+    <div class="near map-find" id="near">
+      <form class="near-form" id="near-form" role="search" autocomplete="off">
+        <label for="near-in" class="near-lbl" data-cy="Hanes yn eich ymyl">History near you</label>
+        <input id="near-in" type="text" list="near-towns" enterkeyhint="search" placeholder="Type your town, e.g. Bala" data-cy-ph="Teipiwch eich tref, e.e. Y Bala">
+        <datalist id="near-towns"></datalist>
+        <button type="submit" class="btn" data-cy="Chwilio">Find</button>
+      </form>
+      <p class="near-msg" id="near-msg" aria-live="polite"></p>
+      <ol class="near-list" id="near-list"></ol>
+      <div class="near-more">
+        <button type="button" class="btn" id="near-geo" data-cy="Defnyddio fy lleoliad">Use my location</button>
+        <button type="button" class="btn" id="near-browse" data-cy="Rhestr o’r lleoedd">List the places</button>
+        <button type="button" class="btn" id="near-more" hidden data-cy="Rhagor o leoedd">More places</button>
+        <button type="button" class="btn ghost" id="near-hide" hidden data-cy="Cuddio’r rhestr">Hide the list</button>
+      </div>
+    </div>
+    <div class="chips map-legend" id="map-filter" role="group" aria-label="Filter places by age"></div>
     <div class="map-grid">
-      <div class="map-box">
+      <div class="map-box" id="map-box">
         <svg id="wales" viewBox="-40 -30 680 735" role="group" aria-label="Map of Wales">
           <g id="grat">__GRAT__</g>
           <text class="sea-l" x="40" y="430" data-cy-svg="BAE ABERTEIFI">CARDIGAN BAY</text>
@@ -16,26 +34,9 @@
           <g id="kg-labels" hidden></g>
           <g id="pins">__PINS__</g>
         </svg>
-        <div class="chips map-legend" id="map-filter" role="group" aria-label="Filter places by era"></div>
       </div>
       <article class="place-card wl-card" id="place-card" aria-live="polite">__PLACECARD__</article>
       <article class="place-card kg-panel" id="kg-card" aria-live="polite" hidden></article>
     </div>
-    <div class="near" id="near">
-      <div class="near-head">
-        <p class="eyebrow" data-cy="Hanes yn eich ymyl">History near you</p>
-        <h3 data-cy="Beth sydd gerllaw?">What’s near you?</h3>
-      </div>
-      <form class="near-form" id="near-form" autocomplete="off">
-        <label for="near-in" class="sr-only" data-cy="Eich tref">Your town</label>
-        <input id="near-in" type="text" list="near-towns" placeholder="Type your town, e.g. Bala" data-cy-ph="Teipiwch eich tref, e.e. Bala">
-        <datalist id="near-towns"></datalist>
-        <button type="submit" class="btn" data-cy="Chwilio">Find</button>
-        <button type="button" class="btn" id="near-geo" data-cy="Defnyddio fy lleoliad">Use my location</button>
-      </form>
-      <p class="near-msg" id="near-msg" aria-live="polite"></p>
-      <ol class="near-list" id="near-list"></ol>
-    </div>
   </div>
 </section>
-
