@@ -925,6 +925,13 @@ Learnt while writing the Druids long read (`src/druids.py`, `story-druids.html`)
 - **Picked at build time:** the long reads (`home_stories()`: a story still marked New keeps the big spot, otherwise the big spot takes turns), the eight people (`home_people()`: one from each of eight ages, taking turns), the four legends (`home_legends()`) and the order of the games (`play_cards(home=True)`). The site is rebuilt every morning by the 04:15 UTC run in `deploy.yml`, so these move on early each morning. If that run is ever removed, they stop changing.
 - **Picked in the browser,** using the same day number (`dayNo()` in `app.js`): Did you know? (Another gives the next fact), Words to know (ten a day from `WORD_POOL` in `build.py`: every word and phrase from `data.py` and `cymraeg.py` that has a real recording), and the place-name decoder (`DAILY` in `src/placenames.py`).
 
+### Contents, section links and related reading on long reads (14 November 2026)
+- **Every long read with four or more sections** gets a contents list under its byline (`story_toc()` in `build.py`). Each `## ` heading gets an `id` and a small `#` link (`head_ids()`, passed to `prose()` as `hids`), so any section can be shared: `story-druids.html#mon-the-island-of-the-druids`. The ids come from the **English** headings and are used on the Welsh page too, so the EN / CY switch keeps the reader's place. The build stops if a long read's English and Welsh texts have a different number of `## ` headings.
+- **Renaming a heading changes its address.** Old shared links then land at the top of the page, which is harmless, but keep heading changes rare on long reads that people share.
+- **In the browser** (`src/static/site.js`, end of file): phones show a list of more than 12 sections closed; once the reader scrolls past the list a small bar at the bottom left names the section they are in ("3 / 9") and leads back to the list; pressing `#` beside a heading copies the link to that section.
+- **Related reading** at the end ("Read next on this subject") is three long reads on the same subject from `src/related.py`, plus a card for the long read's own age (`era_card()`). **A new long read needs a line in `src/related.py`**; until it has one the build picks three by shared people, places and events and prints a reminder. A wrong id there stops the build.
+- Home page and `stories.html` no longer promise "five-minute" essays: each long read shows its own time, and the home tile gives the real range (shortest to longest), worked out from the `mins` of every long read.
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.

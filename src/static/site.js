@@ -362,3 +362,50 @@
   if (document.readyState === "complete") go(); else addEventListener("load", go, { once: true });
   setTimeout(go, 1500);
 })();
+
+/* ---------- long reads: contents list, section links and the "where am I" bar (November 2026) ----------
+   build.py (story_toc, head_ids) gives every section of a long read an id and puts a contents list near the top.
+   On phones a very long list (over 12 sections) starts closed. Once the reader has scrolled past it, a small bar at the foot of the screen names
+   the section they are in (3 / 9) and leads back to the list. The # beside a heading copies a link to that section. */
+(function () {
+  var d = document, toc = d.querySelector("nav.toc"), cy = d.documentElement.classList.contains("cy");
+  var T = function (en, c) { return cy ? c : en; };
+  d.addEventListener("click", function (e) {
+    var a = e.target.closest(".h-link"); if (!a) return;
+    var url = location.origin + location.pathname + location.search + a.getAttribute("href").replace(/^[^#]*/, "");
+    function done() { a.setAttribute("data-done", T("Link copied", "Wedi copïo")); a.classList.add("done"); setTimeout(function () { a.classList.remove("done"); }, 1800); }
+    try { if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, function () {}); } catch (err) {}
+  });
+  if (!toc) return;
+  var det = toc.querySelector("details"), links = toc.querySelectorAll(".toc-list a");
+  if (det && links.length > 12 && window.matchMedia && matchMedia("(max-width: 700px)").matches && !location.hash) det.open = false;
+  var heads = Array.prototype.slice.call(d.querySelectorAll(".prose h2[id]"));
+  if (heads.length < 2) return;
+  var ends = d.querySelectorAll("section.article"), end = ends[ends.length - 1];
+  var pill = d.createElement("a");
+  pill.className = "toc-pill no-print"; pill.href = "#contents"; pill.hidden = true;
+  pill.innerHTML = '<span class="n"></span><span class="t"></span>';
+  d.body.appendChild(pill);
+  pill.addEventListener("click", function () { if (det) det.open = true; });
+  var cur = -1, tick = false;
+  function name(h) { return (h.firstChild && h.firstChild.nodeType === 3 ? h.firstChild.nodeValue : h.textContent.replace(/#$/, "")).trim(); }
+  function update() {
+    tick = false;
+    var line = innerHeight * 0.3, i = -1;
+    for (var k = 0; k < heads.length; k++) { if (heads[k].getBoundingClientRect().top < line) i = k; else break; }
+    var past = toc.getBoundingClientRect().bottom < 0, over = end && end.getBoundingClientRect().bottom < innerHeight * 0.6;
+    pill.hidden = !past || over || i < 0;
+    if (i !== cur) {
+      if (cur >= 0 && links[cur]) links[cur].classList.remove("on");
+      cur = i;
+      if (i >= 0) {
+        if (links[i]) links[i].classList.add("on");
+        pill.querySelector(".n").textContent = (i + 1) + " / " + heads.length;
+        pill.querySelector(".t").textContent = name(heads[i]);
+        pill.setAttribute("aria-label", T("Contents. Now reading: ", "Cynnwys. Yn darllen: ") + name(heads[i]));
+      }
+    }
+  }
+  addEventListener("scroll", function () { if (!tick) { tick = true; requestAnimationFrame(update); } }, { passive: true });
+  addEventListener("resize", update); update();
+})();

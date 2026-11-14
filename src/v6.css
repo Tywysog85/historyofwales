@@ -1080,6 +1080,38 @@ a:hover > .card-ban img, .wl-card:hover > .card-ban img { transform: scale(1.04)
 .era-events li.has-bg p { color: rgba(255,255,255,.86) }
 .era-events li.has-bg .row-pic.ic { background: rgba(12,15,22,.42); border-color: rgba(255,255,255,.18); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px) }
 @media print { .row-bg { display: none !important } .era-events li.has-bg { text-shadow: none } }
+
+/* ---------- long reads: contents, section links, "where am I" bar (November 2026; story_toc / head_ids in build.py) ---------- */
+.prose h2[id] { scroll-margin-top: 5rem }
+.h-link { margin-left: .45rem; font: 500 .7em var(--f-mono); color: var(--c); text-decoration: none; opacity: 0; transition: opacity .2s; vertical-align: .12em; padding: .1em .25em; border-radius: 6px }
+.prose h2:hover .h-link, .h-link:focus-visible, .h-link.done { opacity: 1 }
+@media (hover: none) { .h-link { opacity: .55 } }
+.h-link.done::after { content: attr(data-done); margin-left: .4rem; font: 500 .75rem var(--f-mono); letter-spacing: .03em; color: var(--muted) }
+.toc { margin: 0 0 2.2rem; border: 1px solid var(--line); border-left: 4px solid var(--c); border-radius: 0 16px 16px 0; background: var(--card); scroll-margin-top: 5rem }
+.toc summary { list-style: none; cursor: pointer; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .2rem 1rem; padding: .85rem 1.1rem; min-height: 44px }
+.toc summary::-webkit-details-marker { display: none }
+.toc summary b { font: 600 .8rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--c) }
+.toc summary b::after { content: "▾"; display: inline-block; margin-left: .5rem; transition: transform .2s }
+.toc details:not([open]) summary b::after { transform: rotate(-90deg) }
+.toc summary small { font: 500 .75rem var(--f-mono); color: var(--muted); letter-spacing: .03em }
+.toc-list { margin: 0; padding: 0 1.1rem 1rem; list-style: none; counter-reset: toc; display: grid; gap: .1rem 1.6rem }
+.toc-list.two { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+.toc-list li { counter-increment: toc; display: grid; grid-template-columns: 1.7rem minmax(0, 1fr); align-items: baseline }
+.toc-list li::before { content: counter(toc, decimal-leading-zero); font: 500 .72rem var(--f-mono); color: var(--muted) }
+.toc-list a { display: block; padding: .32rem 0; font-size: .95rem; line-height: 1.35; color: var(--ink); text-decoration: none }
+.toc-list a:hover, .toc-list a:focus-visible { color: var(--c); text-decoration: underline; text-underline-offset: 3px }
+.toc-list a.on { color: var(--c) }
+@media (max-width: 640px) { .toc-list.two { grid-template-columns: 1fr } .toc-list a { padding: .55rem 0 } }
+.toc-pill { position: fixed; left: max(16px, env(safe-area-inset-left, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 24; max-width: min(26rem, calc(100vw - 32px - 3.6rem)); min-height: 2.9rem; display: flex; align-items: center; gap: .6rem; padding: .45rem 1rem .45rem .5rem; border-radius: 999px; border: 1px solid var(--line); background: rgba(21,26,37,.92); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); color: var(--ink); text-decoration: none; font-size: .88rem; animation: fade .3s both }
+.toc-pill[hidden] { display: none }
+.toc-pill .n { flex: none; display: grid; place-items: center; min-width: 2.6rem; height: 1.9rem; padding: 0 .4rem; border-radius: 999px; background: var(--c); color: #0c0f16; font: 600 .72rem var(--f-mono) }
+.toc-pill .t { overflow: hidden; white-space: nowrap; text-overflow: ellipsis }
+.toc-pill:hover { border-color: var(--ink) }
+.s-grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)) }
+.s-grid.four .s-card h3 { font-size: 1.3rem }
+@media (max-width: 1100px) { .s-grid.four { grid-template-columns: 1fr 1fr } }
+@media (max-width: 560px) { .s-grid.four { grid-template-columns: 1fr } }
+@media print { .toc-pill, .h-link { display: none !important } .toc { break-inside: avoid } .toc details > * { display: block } }
 /* ---------- a shorter opening screen on computers, so "Twelve ages of Wales" shows when the page loads (Ifan, 14 Nov 2026) ---------- */
 @media (min-width: 1100px) {
   .hero { min-height: 0 }
