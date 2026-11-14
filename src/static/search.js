@@ -125,6 +125,7 @@
   function tabbables() { return [].slice.call(box.querySelectorAll("input,button,a[href]")).filter(function (el) { return el.offsetParent !== null || el === document.activeElement; }); }
   var shut = [];  // the rest of the page, made inert while search is open
   function open() {
+    if (box && !box.hidden) { box.querySelector("input").focus(); return; }  // already open ("/" pressed on Close or a result): opening again would lose what to give back on close
     last = document.activeElement;
     if (!box) {
       box = document.createElement("div"); box.className = "sx"; box.setAttribute("role", "dialog"); box.setAttribute("aria-modal", "true");
