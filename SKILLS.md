@@ -499,6 +499,15 @@ Behind the dragon, the mountains, the moor and the castle are real 3D too, drawn
 - **Phones fetch the 600 px age pictures.** The nine age cards are thin strips under a dark veil on phones, but `sizes="(max-width: 700px) 100vw"` made a 2.6x phone fetch the 1400 px pictures, about 1.5 MB. `card_img()` in `src/pictures.py` takes a `sizes`; the age cards pass `POSTER_SIZES` in `build.py`. Measure with a Pixel 7 window: list every response by size and look for `-s.webp` against the big ones.
 - Result on 13 November 2026 (Pixel 7, gzip as GitHub Pages sends it): phone 4.1 MB down to 2.5 MB, desktop 3.4 MB down to 2.8 MB.
 
+### The scrolling words band: pictures in the letters, two rows (14 November 2026)
+Under the opening screen, a band of big words (Castles, Kings, Poets...) drifts left, and the same words in the other language drift right underneath in small gold letters (Ifan, 14 November 2026).
+- **The words live in `MARQ` in `build.py`**: English, Welsh, the page it opens, and the picture's name. Keep an even number of words, because the little dragon and the daffodil between them take turns (the build stops otherwise).
+- **Pictures inside letters** use `background-clip: text` with transparent text (`.marquee .track a` in `src/v6.css`). A pale wash (`linear-gradient(rgba(250,244,230,.34)...)`) is laid over the picture so the letters stay light enough to read on the dark band; hovering thins the wash. Older browsers without `background-clip: text` just show cream letters (the rule sits inside `@supports`). Do not add `filter: drop-shadow` to these letters: phones drew a dark box around each word.
+- **The pictures are strips cut from pictures the gallery already credits**, made by `tools/make_marquee_pictures.py` (512 x 160 WebP, about 12 KB each, 155 KB for all twelve). To change one, change its line in `STRIPS` (file and the part to keep) and run the script. "Dragons" is the Welsh flag with the site's own 3D dragon drawn on it; the little dragon between the words (`mq-dragon.webp`) is the same 3D dragon with its tail trimmed.
+- **Two rows moving opposite ways**: only the top row really scrolls (`#marquee`, so swiping, the mouse wheel and the auto drift all work as before). `sync()` in `src/app.js` moves the gold row (four copies of the words) by the same distance the other way with a `transform`. It follows how far the top row moved, not where it is, so the top row's jump back to the start each loop never shows in the gold row. Dragging or swiping the gold row drives the top row the other way round.
+- **Welsh pages**: the gold row uses swapped language spans (`_mq_flip()`): `l-en` holds the Welsh word and `l-cy` the English, so `/cy/` shows Welsh on top and English underneath with no extra code.
+- The gold row is `aria-hidden` and out of the Tab order (it repeats the top row). With "reduce motion" nothing drifts, but both rows still move when dragged.
+
 ## More pages and techniques (November 2026)
 
 ### Photographs for the legend pictures
