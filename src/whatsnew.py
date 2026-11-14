@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-14", "Sycharth and Garth Celyn rebuilt in 3D, with their people", "Sycharth a Garth Celyn wedi’u hailadeiladu mewn 3D, gyda’u pobl",
+     "Owain Glyndŵr’s Sycharth and the princes’ court at Aber look far more real: oak timber framing you can see standing out from the limewashed walls, a palisade of single sharpened logs, a gatehouse with its gates, trestle tables, leafy trees, and real-looking stone, slate, thatch and wood. Owain and Llywelyn sit at their high tables with the household around them, with guards at the gates, grooms and horses, hounds, sheep, cattle and deer, and you can hear the hall’s talk, the harp, the birds and the river.",
+     "Mae Sycharth Owain Glyndŵr a llys y tywysogion yn Aber yn edrych yn llawer mwy byw: fframiau derw sy’n sefyll allan o’r waliau gwyngalch, palis o foncyffion miniog unigol, porthdy a’i byrth, byrddau trestl, coed deiliog, a cherrig, llechi, to gwellt a phren sy’n edrych yn real. Mae Owain a Llywelyn yn eistedd wrth eu byrddau uchel gyda’r teulu o’u cwmpas, gyda gwylwyr wrth y pyrth, gweision a cheffylau, cŵn hela, defaid, gwartheg a cheirw, a gallwch glywed sŵn y neuadd, y delyn, yr adar a’r afon.",
+     "court-sycharth.html"),
     ("2026-11-14", "The weekly quiz: ten new questions every Monday", "Cwis yr wythnos: deg cwestiwn newydd bob dydd Llun",
      "A new quiz on the history of Wales comes out every Monday morning, the same for everyone: three questions on the week’s anniversaries, then a figure from history, a photograph of a place to name, a Welsh word, a tale from Wales and which came first. One go each, a score to share, and quizzes from past weeks to practise on.",
      "Daw cwis newydd ar hanes Cymru allan bob bore Llun, yr un un i bawb: tri chwestiwn ar ben-blwyddi’r wythnos, yna ffigwr o hanes, llun o le i’w enwi, gair Cymraeg, chwedl o Gymru a pha un ddaeth gyntaf. Un cynnig yr un, sgôr i’w rhannu, a chwisiau’r wythnosau a fu i ymarfer arnynt.",
