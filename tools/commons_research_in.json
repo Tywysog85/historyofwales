@@ -1,159 +1,157 @@
 {
- "branch": "claude/project-thread-3g7ghg",
- "out": "_research/cardplaces",
- "max": 300,
- "people": [
-  {
-   "slug": "trefflemin",
-   "name": "Flemingston",
-   "wiki": "Flemingston",
-   "search": [
-    "Flemingston church"
-   ]
-  },
-  {
-   "slug": "deganwy",
-   "name": "Deganwy",
-   "wiki": "Deganwy Castle",
-   "search": [
-    "Deganwy"
-   ]
-  },
-  {
-   "slug": "llanymddyfri",
-   "name": "Llandovery",
-   "wiki": "Llandovery Castle",
-   "search": [
-    "Llandovery Castle"
-   ]
-  },
-  {
-   "slug": "caergybi",
-   "name": "Caer Gybi, Holyhead",
-   "wiki": "Caer Gybi (fort)",
-   "search": [
-    "Caer Gybi, Holyhead"
-   ]
-  },
-  {
-   "slug": "cymer",
-   "name": "Cymer Abbey",
-   "wiki": "Cymer Abbey",
-   "search": [
-    "Cymer Abbey"
-   ]
-  },
-  {
-   "slug": "nanhyfer",
-   "name": "Nevern",
-   "wiki": "Nevern",
-   "search": [
-    "Nevern"
-   ]
-  },
-  {
-   "slug": "clynnog",
-   "name": "Clynnog Fawr",
-   "wiki": "St Beuno's Church, Clynnog Fawr",
-   "search": [
-    "Clynnog Fawr"
-   ]
-  },
-  {
-   "slug": "moridunum",
-   "name": "Moridunum, Carmarthen",
-   "wiki": "Moridunum (Carmarthen)",
-   "search": [
-    "Carmarthen Roman amphitheatre"
-   ]
-  },
-  {
-   "slug": "llanmelin",
-   "name": "Llanmelin Wood hillfort",
-   "wiki": "Llanmelin Wood Hillfort",
-   "search": [
-    "Llanmelin hillfort"
-   ]
-  },
-  {
-   "slug": "caerytwr",
-   "name": "Caer y Twr, Holyhead Mountain",
-   "wiki": "Caer y Twr",
-   "search": [
-    "Caer y Twr Holyhead"
-   ]
-  },
-  {
-   "slug": "caerdrewyn",
-   "name": "Caer Drewyn",
-   "wiki": "Caer Drewyn",
-   "search": [
-    "Caer Drewyn"
-   ]
-  },
-  {
-   "slug": "tretower",
-   "name": "Tretower Court and Castle",
-   "wiki": "Tretower Court",
-   "search": [
-    "Tretower Court and Castle"
-   ]
-  },
-  {
-   "slug": "penmynydd",
-   "name": "Penmynydd",
-   "wiki": "Penmynydd",
-   "search": [
-    "Plas Penmynydd"
-   ]
-  },
-  {
-   "slug": "tymawrwybrnant",
-   "name": "Tŷ Mawr Wybrnant",
-   "wiki": "Ty Mawr Wybrnant",
-   "search": [
-    "Tŷ Mawr Wybrnant"
-   ]
-  },
-  {
-   "slug": "botanic",
-   "name": "National Botanic Garden of Wales",
-   "wiki": "National Botanic Garden of Wales",
-   "search": [
-    "National Botanic Garden of Wales"
-   ]
-  },
-  {
-   "slug": "llanfairpwll",
-   "name": "Llanfairpwllgwyngyll",
-   "wiki": "Llanfairpwllgwyngyll",
-   "search": [
-    "Llanfairpwllgwyngyll"
-   ]
-  },
-  {
-   "slug": "bethlehem",
-   "name": "Bethlehem, Carmarthenshire",
-   "wiki": "Bethlehem, Carmarthenshire",
-   "search": [
-    "Bethlehem Carmarthenshire post office"
-   ]
-  },
-  {
-   "slug": "penygwryd",
-   "name": "Pen-y-Gwryd",
-   "wiki": "Pen-y-Gwryd",
-   "search": [
-    "Pen-y-Gwryd Hotel"
-   ]
-  },
-  {
-   "slug": "lavernock",
-   "name": "Lavernock Point",
-   "wiki": "Lavernock Point",
-   "search": [
-    "Lavernock Point"
-   ]
-  }
+ "branch": "claude/project-thread-7bwosa",
+ "out": "_research/thennow1",
+ "max": 900,
+ "categories": [
+  "Category:Photochrom prints of Wales",
+  "Category:Photochroms of Wales",
+  "Category:Buck's Antiquities",
+  "Category:Samuel and Nathaniel Buck",
+  "Category:Engravings by Samuel and Nathaniel Buck"
+ ],
+ "searches": [
+  "Caernarvon Castle photochrom",
+  "Caernarvon Castle engraving",
+  "Conway Castle photochrom",
+  "Conway Castle engraving",
+  "Harlech Castle photochrom",
+  "Harlech Castle engraving",
+  "Beaumaris Castle photochrom",
+  "Beaumaris Castle engraving",
+  "Chepstow Castle photochrom",
+  "Chepstow Castle engraving",
+  "Tintern Abbey photochrom",
+  "Tintern Abbey engraving",
+  "Pembroke Castle photochrom",
+  "Pembroke Castle engraving",
+  "Kidwelly Castle photochrom",
+  "Kidwelly Castle engraving",
+  "Caerphilly Castle photochrom",
+  "Caerphilly Castle engraving",
+  "Raglan Castle photochrom",
+  "Raglan Castle engraving",
+  "Carreg Cennen Castle photochrom",
+  "Carreg Cennen Castle engraving",
+  "Dolbadarn Castle photochrom",
+  "Dolbadarn Castle engraving",
+  "Rhuddlan Castle photochrom",
+  "Rhuddlan Castle engraving",
+  "Criccieth Castle photochrom",
+  "Criccieth Castle engraving",
+  "Dinevor Castle photochrom",
+  "Dinevor Castle engraving",
+  "Valle Crucis Abbey photochrom",
+  "Valle Crucis Abbey engraving",
+  "Neath Abbey photochrom",
+  "Neath Abbey engraving",
+  "Llanthony Priory photochrom",
+  "Llanthony Priory engraving",
+  "Powis Castle photochrom",
+  "Powis Castle engraving",
+  "Chirk Castle photochrom",
+  "Chirk Castle engraving",
+  "Castell Dinas Bran photochrom",
+  "Castell Dinas Bran engraving",
+  "Menai Bridge photochrom",
+  "Menai Bridge engraving",
+  "Pont Cysylltau aqueduct photochrom",
+  "Pont Cysylltau aqueduct engraving",
+  "St Davids Cathedral photochrom",
+  "St Davids Cathedral engraving",
+  "Llandaff Cathedral photochrom",
+  "Llandaff Cathedral engraving",
+  "Bangor Cathedral photochrom",
+  "Bangor Cathedral engraving",
+  "Dolwyddelan Castle photochrom",
+  "Dolwyddelan Castle engraving",
+  "Carew Castle photochrom",
+  "Carew Castle engraving",
+  "Tenby photochrom",
+  "Tenby engraving",
+  "Aberystwyth photochrom",
+  "Aberystwyth engraving",
+  "Llangollen photochrom",
+  "Llangollen engraving",
+  "Bettws-y-Coed photochrom",
+  "Bettws-y-Coed engraving",
+  "Beddgelert photochrom",
+  "Beddgelert engraving",
+  "Cardiff Castle photochrom",
+  "Cardiff Castle engraving",
+  "Swansea photochrom",
+  "Swansea engraving",
+  "Cardigan Castle photochrom",
+  "Cardigan Castle engraving",
+  "Strata Florida photochrom",
+  "Strata Florida engraving",
+  "Basingwerk Abbey photochrom",
+  "Basingwerk Abbey engraving",
+  "Ewloe Castle photochrom",
+  "Ewloe Castle engraving",
+  "Dryslwyn Castle photochrom",
+  "Dryslwyn Castle engraving",
+  "Penrhyn Castle photochrom",
+  "Penrhyn Castle engraving",
+  "Llandovery Castle photochrom",
+  "Llandovery Castle engraving",
+  "Tretower photochrom",
+  "Tretower engraving",
+  "Castell y Bere photochrom",
+  "Castell y Bere engraving",
+  "Penmon Priory photochrom",
+  "Penmon Priory engraving",
+  "Machynlleth photochrom",
+  "Machynlleth engraving",
+  "Bala lake photochrom",
+  "Bala lake engraving",
+  "Merthyr Tydfil photochrom",
+  "Merthyr Tydfil engraving",
+  "Caerleon photochrom",
+  "Caerleon engraving",
+  "Margam Abbey photochrom",
+  "Margam Abbey engraving",
+  "Holywell St Winefride photochrom",
+  "Holywell St Winefride engraving",
+  "Plas Mawr Conway photochrom",
+  "Plas Mawr Conway engraving",
+  "Snowdon photochrom",
+  "Snowdon engraving",
+  "Swallow Falls photochrom",
+  "Swallow Falls engraving",
+  "Llanberis photochrom",
+  "Llanberis engraving",
+  "Buck Caernarvon",
+  "Buck Conway",
+  "Buck Harlech",
+  "Buck Beaumaris",
+  "Buck Chepstow",
+  "Buck Pembroke",
+  "Buck Kidwelly",
+  "Buck Caerphilly",
+  "Buck Raglan",
+  "Buck Carreg Cennen",
+  "Buck Rhuddlan",
+  "Buck Cardigan",
+  "Buck Dinevor",
+  "Buck Valle Crucis",
+  "Buck Neath Abbey",
+  "Buck Criccieth",
+  "Turner Conway Castle",
+  "Turner Caernarvon",
+  "Turner Dolbadarn",
+  "Turner Kidwelly",
+  "Turner Tintern",
+  "Turner Llanthony",
+  "Turner Harlech",
+  "Turner Pembroke",
+  "Sandby Wales castle",
+  "Richard Wilson Caernarvon",
+  "Richard Wilson Dinas Bran",
+  "John Thomas photographer castle",
+  "Francis Frith Wales castle",
+  "Moses Griffith Wales",
+  "Cotman Wales castle",
+  "Telford Menai bridge 1826",
+  "Pontcysyllte 1810"
  ]
 }
