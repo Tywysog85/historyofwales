@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-14", "57 historic villages join the towns", "57 o bentrefi hanesyddol yn ymuno â’r trefi",
+     "Villages with a big story now have pages too: Beddgelert and its old priory, Clynnog Fawr and St Beuno, Llanddewi Brefi where Dewi spoke, Pennal and Owain Glyndŵr’s letter to France, Myddfai and its physicians, Llanwddyn under Lake Vyrnwy, Penmachno, Llangernyw’s ancient yew, Talley, Nevern, Trellech, Llanthony and many more. Each has its story, what its name means, the sites and people around it and a photo.",
+     "Mae gan bentrefi â stori fawr dudalennau hefyd bellach: Beddgelert a’i hen briordy, Clynnog Fawr a Sant Beuno, Llanddewi Brefi lle siaradodd Dewi, Pennal a llythyr Owain Glyndŵr at Ffrainc, Myddfai a’i meddygon, Llanwddyn o dan Lyn Efyrnwy, Penmachno, ywen hynafol Llangernyw, Talyllychau, Nanhyfer, Tryleg, Llanddewi Nant Hodni a llawer mwy. Mae gan bob un ei stori, ystyr ei enw, y safleoedd a’r bobl o’i gwmpas a llun.",
+     "town-beddgelert.html"),
     ("2026-11-14", "Then and now: 29 Welsh castles, abbeys and towns, old and new", "Ddoe a heddiw: 29 o gestyll, abatai a threfi Cymru, hen a newydd",
      "Drag across the picture to wipe from an old view to today: the Buck brothers’ engravings of the 1740s, prints from the National Library of Wales and colour photochroms of about 1895, each beside a photograph of the same place now. Conwy’s bridge, Caerphilly’s lakes filled again, Raglan without its ivy, Dolwyddelan’s keep given back its top, Llandaff rebuilt, and Telford’s bridges at Menai and Pontcysyllte. Each pair is also on its place page.",
      "Llusgwch ar draws y llun i symud o hen olygfa i heddiw: engrafiadau’r brodyr Buck o’r 1740au, printiau o Lyfrgell Genedlaethol Cymru a ffotograffau lliw ‘photochrom’ o tua 1895, pob un wrth ochr ffotograff o’r un lle nawr. Pont Conwy, llynnoedd Caerffili wedi’u llenwi eto, Rhaglan heb ei eiddew, gorthwr Dolwyddelan wedi cael ei ben yn ôl, Llandaf wedi’i hailgodi, a phontydd Telford ym Mhorthaethwy a Phontcysyllte. Mae pob pâr hefyd ar dudalen ei le.",
