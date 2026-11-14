@@ -1,0 +1,308 @@
+{
+ "conwy": {
+  "then": "_research/thennow5/full/32.jpg",
+  "now": "_research/thennow5/full/0.jpg",
+  "mode": "box",
+  "then_box": [
+   0.22,
+   0.05,
+   1,
+   0.82
+  ],
+  "trim": true
+ },
+ "caernarfon": {
+  "then": "_research/thennow5/full/33.jpg",
+  "now": "_research/thennow5/full/1.jpg",
+  "mode": "box",
+  "then_box": [
+   0.025,
+   0.085,
+   0.975,
+   0.68
+  ],
+  "ar": 2.4,
+  "then_at": [
+   0.5,
+   0.5
+  ],
+  "now_at": [
+   0.6,
+   0.55
+  ],
+  "trim": true
+ },
+ "beaumaris": {
+  "then": "_research/thennow5/full/35.jpg",
+  "now": "_research/thennow5/full/3.jpg",
+  "mode": "box",
+  "then_box": [
+   0,
+   0.05,
+   1,
+   0.86
+  ],
+  "trim": true
+ },
+ "caerffili": {
+  "then": "_research/thennow5/full/36.jpg",
+  "now": "_research/thennow5/full/4.jpg",
+  "mode": "box",
+  "then_box": [
+   0,
+   0.08,
+   1,
+   1
+  ],
+  "trim": true
+ },
+ "chepstow": {
+  "then": "_research/thennow5/full/37.jpg",
+  "now": "_research/thennow5/full/5.jpg",
+  "mode": "box",
+  "trim": true
+ },
+ "tintern2": {
+  "then": "_research/thennow5/full/38.jpg",
+  "now": "_research/thennow5/full/6.jpg",
+  "mode": "box",
+  "now_box": [
+   0.12,
+   0.08,
+   0.88,
+   0.82
+  ],
+  "trim": true
+ },
+ "penfro": {
+  "then": "_research/thennow5/full/39.jpg",
+  "now": "_research/thennow5/full/7.jpg",
+  "mode": "box",
+  "then_box": [
+   0.12,
+   0.18,
+   0.88,
+   0.75
+  ],
+  "trim": true
+ },
+ "rhaglan": {
+  "then": "_research/thennow5/full/40.jpg",
+  "now": "_research/thennow5/full/8.jpg",
+  "mode": "box",
+  "trim": true
+ },
+ "dolbadarn": {
+  "then": "_research/thennow5/full/41.jpg",
+  "now": "_research/thennow5/full/9.jpg",
+  "mode": "box",
+  "trim": true,
+  "then_box": [
+   0,
+   0,
+   0.985,
+   1
+  ]
+ },
+ "rhuddlan": {
+  "then": "_research/thennow5/full/42.jpg",
+  "now": "_research/thennow5/full/10.jpg",
+  "mode": "box",
+  "now_box": [
+   0.02,
+   0.18,
+   0.78,
+   0.78
+  ],
+  "trim": true
+ },
+ "cricieth": {
+  "then": "_research/thennow5/full/43.jpg",
+  "now": "_research/thennow5/full/11.jpg",
+  "mode": "box",
+  "trim": true
+ },
+ "dolwyddelan2": {
+  "then": "_research/thennow5/full/44.jpg",
+  "now": "_research/thennow5/full/12.jpg",
+  "mode": "box",
+  "then_box": [
+   0.02,
+   0.057,
+   0.98,
+   0.71
+  ],
+  "ar": 1.6,
+  "then_at": [
+   0.4,
+   0.5
+  ],
+  "now_at": [
+   0.7,
+   0.2
+  ],
+  "trim": true
+ },
+ "aberystwyth": {
+  "then": "_research/thennow5/full/45.jpg",
+  "now": "_research/thennow5/full/13.jpg",
+  "mode": "box",
+  "trim": true
+ },
+ "swansea": {
+  "then": "_research/thennow5/full/47.jpg",
+  "now": "_research/thennow5/full/15.jpg",
+  "mode": "box",
+  "then_box": [
+   0,
+   0,
+   0.985,
+   0.9
+  ],
+  "trim": true
+ },
+ "carew": {
+  "then": "_research/thennow5/full/48.jpg",
+  "now": "_research/thennow5/full/16.jpg",
+  "mode": "box",
+  "trim": true
+ },
+ "penrhyn": {
+  "then": "_research/thennow5/full/49.jpg",
+  "now": "_research/thennow5/full/17.jpg",
+  "mode": "box",
+  "trim": true
+ },
+ "powis": {
+  "then": "_research/thennow5/full/50.jpg",
+  "now": "_research/thennow5/full/18.jpg",
+  "mode": "box",
+  "then_box": [
+   0,
+   0,
+   1,
+   0.93
+  ],
+  "trim": true
+ },
+ "llandaf": {
+  "then": "_research/thennow5/full/51.jpg",
+  "now": "_research/thennow5/full/19.jpg",
+  "mode": "box",
+  "then_box": [
+   0.02,
+   0.085,
+   0.98,
+   0.68
+  ],
+  "ar": 2.2,
+  "then_at": [
+   0.6,
+   0.5
+  ],
+  "now_at": [
+   0.5,
+   0.45
+  ],
+  "trim": true
+ },
+ "stdavids2": {
+  "then": "_research/thennow5/full/52.jpg",
+  "now": "_research/thennow5/full/20.jpg",
+  "mode": "box",
+  "then_box": [
+   0.135,
+   0.225,
+   0.875,
+   0.56
+  ],
+  "ar": 2.4,
+  "then_at": [
+   0.5,
+   0.5
+  ],
+  "now_at": [
+   0.6,
+   0.55
+  ],
+  "trim": true
+ },
+ "neathabbey": {
+  "then": "_research/thennow5/full/53.jpg",
+  "now": "_research/thennow5/full/21.jpg",
+  "mode": "box",
+  "then_box": [
+   0,
+   0,
+   1,
+   0.86
+  ],
+  "trim": true
+ },
+ "llanthony": {
+  "then": "_research/thennow5/full/54.jpg",
+  "now": "_research/thennow5/full/22.jpg",
+  "mode": "box",
+  "then_box": [
+   0,
+   0,
+   1,
+   0.85
+  ],
+  "trim": true
+ },
+ "menai": {
+  "then": "_research/thennow5/full/55.jpg",
+  "now": "_research/thennow5/full/23.jpg",
+  "mode": "box",
+  "trim": true
+ },
+ "pontcysyllte": {
+  "then": "_research/thennow5/full/56.jpg",
+  "now": "_research/thennow5/full/24.jpg",
+  "mode": "box",
+  "now_box": [
+   0.12,
+   0.3,
+   0.88,
+   0.95
+  ],
+  "trim": true
+ },
+ "llangollen": {
+  "then": "_research/thennow5/full/57.jpg",
+  "now": "_research/thennow5/full/25.jpg",
+  "mode": "box",
+  "trim": true
+ },
+ "tenby2": {
+  "then": "_research/thennow5/full/58.jpg",
+  "now": "_research/thennow5/full/26.jpg",
+  "mode": "box",
+  "trim": true
+ },
+ "betws": {
+  "then": "_research/thennow5/full/59.jpg",
+  "now": "_research/thennow5/full/27.jpg",
+  "mode": "box",
+  "trim": true
+ },
+ "beddgelert": {
+  "then": "_research/thennow5/full/60.jpg",
+  "now": "_research/thennow5/full/28.jpg",
+  "mode": "box",
+  "trim": true
+ },
+ "ybala": {
+  "then": "_research/thennow5/full/61.jpg",
+  "now": "_research/thennow5/full/29.jpg",
+  "mode": "box",
+  "trim": true
+ },
+ "tintern": {
+  "then": "_research/thennow5/full/62.jpg",
+  "now": "_research/thennow5/full/31.jpg",
+  "mode": "box",
+  "trim": true
+ }
+}

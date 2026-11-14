@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-14", "Then and now: 29 Welsh castles, abbeys and towns, old and new", "Ddoe a heddiw: 29 o gestyll, abatai a threfi Cymru, hen a newydd",
+     "Drag across the picture to wipe from an old view to today: the Buck brothers’ engravings of the 1740s, prints from the National Library of Wales and colour photochroms of about 1895, each beside a photograph of the same place now. Conwy’s bridge, Caerphilly’s lakes filled again, Raglan without its ivy, Dolwyddelan’s keep given back its top, Llandaff rebuilt, and Telford’s bridges at Menai and Pontcysyllte. Each pair is also on its place page.",
+     "Llusgwch ar draws y llun i symud o hen olygfa i heddiw: engrafiadau’r brodyr Buck o’r 1740au, printiau o Lyfrgell Genedlaethol Cymru a ffotograffau lliw ‘photochrom’ o tua 1895, pob un wrth ochr ffotograff o’r un lle nawr. Pont Conwy, llynnoedd Caerffili wedi’u llenwi eto, Rhaglan heb ei eiddew, gorthwr Dolwyddelan wedi cael ei ben yn ôl, Llandaf wedi’i hailgodi, a phontydd Telford ym Mhorthaethwy a Phontcysyllte. Mae pob pâr hefyd ar dudalen ei le.",
+     "then-and-now.html"),
     ("2026-11-14", "Garth Celyn in 3D: the princes’ court at Aber", "Garth Celyn mewn 3D: llys y tywysogion yn Aber",
      "Walk into the court of the princes of Gwynedd at Abergwyngregyn, between the mountains and the sea: the stone hall with its two wings found by the archaeologists, the mound Pen y Mwd, Pen y Bryn on the hill, and the stories of Siwan, Dafydd, Eleanor and Gwenllian, and Llywelyn’s answer to the archbishop in 1282. Eleven stops, with the sources for every one.",
      "Cerddwch i mewn i lys tywysogion Gwynedd yn Abergwyngregyn, rhwng y mynyddoedd a’r môr: y neuadd garreg a’i dwy adain a ganfu’r archaeolegwyr, y domen Pen y Mwd, Pen y Bryn ar y bryn, a hanesion Siwan, Dafydd, Elinor a Gwenllian, ac ateb Llywelyn i’r archesgob yn 1282. Un arhosfan ar ddeg, gyda’r ffynonellau i bob un.",

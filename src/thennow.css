@@ -1,0 +1,54 @@
+/* Then and now sliders (src/thennow.py, src/static/thennow.js). Without the script the two pictures sit side by side. */
+.tn { margin: 0 0 1.4rem; max-width: 60rem }
+.tn-stage { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: .5rem }
+.tn-stage img { display: block; width: 100%; height: auto; aspect-ratio: var(--ar, 1.6); object-fit: cover; border-radius: 12px; background: var(--slate) }
+.tn-then { order: -1 }
+.tn-range, .tn-handle, .tn-bar { display: none }
+.tn-tag { position: absolute; top: .6rem; z-index: 3; font-family: var(--f-mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;
+  padding: .3rem .55rem; border-radius: 999px; background: rgba(11,14,22,.78); color: var(--ink); pointer-events: none; transition: opacity .25s }
+.tn-tag-then { left: .6rem }
+.tn-tag-now { right: .6rem }
+.tn:not(.on) .tn-tag-now { right: auto; left: calc(50% + .85rem) }
+
+/* with the script: one picture over the other */
+.tn.on .tn-stage { display: block; touch-action: pan-y; cursor: ew-resize; user-select: none; -webkit-user-select: none; border-radius: 14px; overflow: hidden;
+  border: 1px solid var(--line); background: var(--slate); --pos: 50% }
+.tn.on .tn-stage img { border-radius: 0; pointer-events: none; -webkit-user-drag: none }
+.tn.on .tn-then { position: absolute; inset: 0; z-index: 1; clip-path: inset(0 calc(100% - var(--pos)) 0 0) }
+.tn.on .tn-then img { height: 100% }
+.tn.on .tn-handle { display: block; position: absolute; top: 0; bottom: 0; left: var(--pos); z-index: 2; width: 0; pointer-events: none }
+.tn.on .tn-handle::before { content: ""; position: absolute; top: 0; bottom: 0; left: -1.5px; width: 3px; background: #fff; box-shadow: 0 0 10px rgba(0,0,0,.55) }
+.tn.on .tn-handle::after { content: "‹ ›"; position: absolute; top: 50%; left: 0; transform: translate(-50%, -50%); width: 3rem; height: 3rem; border-radius: 50%;
+  background: #fff; color: #11141c; font: 700 1.15rem/3rem var(--f-body); text-align: center; letter-spacing: .2em; text-indent: .2em; box-shadow: 0 4px 16px rgba(0,0,0,.5) }
+.tn.on .tn-stage.glide .tn-then { transition: clip-path .45s cubic-bezier(.3,.7,.3,1) }
+.tn.on .tn-stage.glide .tn-handle { transition: left .45s cubic-bezier(.3,.7,.3,1) }
+.tn.on .tn-range { display: block; position: absolute; inset: 0; z-index: 4; width: 100%; height: 100%; margin: 0; opacity: 0; pointer-events: none }
+.tn.on .tn-stage:has(.tn-range:focus-visible) { outline: 3px solid var(--dragon); outline-offset: 3px }
+.tn.at-now .tn-tag-then, .tn.at-then .tn-tag-now { opacity: 0 }
+
+.tn-bar { gap: .5rem; align-items: center; margin-top: .6rem; flex-wrap: wrap }
+.tn.on .tn-bar { display: flex }
+.tn-bar button { font: 600 .85rem var(--f-body); color: var(--ink); background: var(--slate-2); border: 1px solid var(--line); border-radius: 999px; padding: .5rem .95rem; cursor: pointer; min-height: 44px }
+.tn-bar button:hover { border-color: var(--muted) }
+.tn-bar .tn-hint { color: var(--muted); font-size: .85rem; margin-left: .3rem }
+.tn figcaption { margin-top: .7rem; font-size: .9rem; color: var(--muted); line-height: 1.55 }
+.tn figcaption b { color: var(--ink); font-weight: 600 }
+.tn figcaption .tn-cr { display: block; font-size: .8rem; margin-top: .35rem }
+.tn-what { color: var(--ink); font-size: 1rem; line-height: 1.6; margin: .2rem 0 0 }
+
+/* the gallery page */
+.tn-chips { display: flex; gap: .5rem; flex-wrap: wrap; margin: 0 0 1.6rem }
+.tn-chip { font: 600 .9rem var(--f-body); color: var(--ink); background: var(--slate); border: 1px solid var(--line); border-radius: 999px; padding: .55rem 1rem; cursor: pointer; min-height: 44px }
+.tn-chip.on { background: var(--dragon-deep); border-color: var(--dragon-deep) }
+.tn-chip i { font-style: normal; color: var(--muted); margin-left: .25rem }
+.tn-chip.on i { color: #fff }
+.tn-list { display: grid; gap: 3rem }
+.tn-card h2 { font: 400 clamp(1.5rem, 3.4vw, 2.1rem)/1.15 var(--f-display); word-spacing: .1em; margin: 0 0 .25rem }
+.tn-card h2 a { color: inherit; text-decoration: none }
+.tn-card h2 a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .2em }
+.tn-card .tn-when { font-family: var(--f-mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 .8rem }
+.tn-card .tn-go { display: inline-block; margin-top: .6rem; font-weight: 600 }
+@media (max-width: 640px) {
+  .tn.on .tn-handle::after { width: 2.6rem; height: 2.6rem; line-height: 2.6rem; font-size: 1rem }
+  .tn-list { gap: 2.4rem }
+}

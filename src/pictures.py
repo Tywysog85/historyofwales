@@ -5,6 +5,7 @@
 #   "g:<id>"  a gallery picture (src/gallery_photos.py, files in src/static/gallery/)
 #   "p:<id>"  a person's photo (src/photos.py PERSON_PHOTOS, files in src/static/photos/)
 #   "l:<key>" a legend photo (src/art.py LEGEND_PHOTOS, files in src/static/legends/)
+#   "t:<id>"  the old picture of a then and now pair (src/thennow.py, files in src/static/thennow/)
 # To change a page's picture, change its line in PAGE below. Pages not listed take their place's own picture,
 # or the picture for their age (ERA below). build.py calls dress() on every page and card_img() for the cards.
 import json
@@ -16,6 +17,7 @@ from urllib.parse import quote as _q
 import gallery_photos as GP
 import photos as PH
 import art as A
+import thennow as TN
 
 COMMONS = "https://commons.wikimedia.org/wiki/"
 _HERE = os.path.dirname(os.path.abspath(__file__))
@@ -251,6 +253,7 @@ PAGE = {
     "wales-in-10.html": "g:land-yr-wyddfa",
     "castles.html": "g:place-harlech",
     "gallery.html": "g:place-conwy",
+    "then-and-now.html": "t:conwy",
     "404.html": "g:land-borth-forest",
     "laws.html": "g:trea-laws-hywel",
     "llys-rhosyr.html": "g:anci-llys-rhosyr",
@@ -488,6 +491,11 @@ def _parse1(ref):
                         pos="50% 30%" if loc[2] > loc[1] * .9 else "50% 50%")
         u = COMMONS + "Special:FilePath/" + _q(key, safe="")  # until tools/fetch_photos.py has kept a copy on the site
         return dict(src=u + "?width=1280", small=u + "?width=600", w=1280, h=853, file=key, by=by, lic=lic, licu=licu, en=en, cy=cy, pos="50% 50%", remote=True)
+    if kind == "t":
+        pr = TN.BY_ID[key]
+        t = pr["then"]
+        return dict(src=f"thennow/{key}-then.webp", small=f"thennow/{key}-then-s.webp", w=1200, h=round(1200 / pr["ar"]), file=t[0], by=t[1], lic=t[2], licu=t[3],
+                    en=f'{pr["en"]}, {t[4]}: {t[6]}', cy=f'{pr["cy"]}, {t[5]}: {t[7]}', pos="50% 50%")
     if kind == "l":
         ph = A.LEGEND_PHOTOS[key]
         return dict(src=f"legends/{key}.webp", small=f"legends/{key}-s.webp", w=1280, h=853, file=ph[0], by=ph[1], lic=ph[2], licu=ph[3], en=ph[4], cy=ph[5], pos=ph[6])
