@@ -2,7 +2,7 @@
 
 Reads tools/commons_research_in.json: {"branch": "<your claude/ branch>", "out": "<folder>", "categories": [...], "searches": [...], "files": [...],
 "download": [...]}. Optional: "per_search" (results per search, default 40), "previews" (false = list only, no preview
-pictures, for a first wide sweep) and "preview_px" (preview size, default 500). Files listed under "download" are also saved full size (fits 1400 x 1400) as <folder>/full/<k>.jpg, ready to be
+pictures, for a first wide sweep) and "preview_px" (preview size, default 500) and "download_px" (size of the full copies, default 1400). Files listed under "download" are also saved full size (fits 1400 x 1400) as <folder>/full/<k>.jpg, ready to be
 made into gallery pictures.
 The workflow only runs it on the branch named in "branch" (or when started by hand), so set that to your own branch.
 For every file found it records the title, size, licence, author and description, and saves a small preview JPEG
@@ -95,11 +95,17 @@ def main():
     for k, f in enumerate(cfg.get("download", [])):  # full-size copies (fits 1400 x 1400) of the pictures chosen, for the site
         f = f if f.startswith("File:") else "File:" + f
         try:
-            r = api(action="query", prop="imageinfo", titles=f, iiprop="url", iiurlwidth="1400")
-            u = r["query"]["pages"][0]["imageinfo"][0]["thumburl"]
+            px = cfg.get("download_px", 1400)
+            r = api(action="query", prop="imageinfo", titles=f, iiprop="url|size", iiurlwidth=str(px))
+            ii = r["query"]["pages"][0]["imageinfo"][0]
+            u = ii["thumburl"] if ii.get("width", 0) > px else ii["url"]
             from PIL import Image
-            im = Image.open(io.BytesIO(get(u, raw=True))).convert("RGB")
-            im.thumbnail((1400, 1400))
+            Image.MAX_IMAGE_PIXELS = None
+            try:
+                im = Image.open(io.BytesIO(get(u, raw=True))).convert("RGB")
+            except Exception:  # noqa: BLE001  (Commons may refuse a thumbnail at an unusual width: take the original)
+                im = Image.open(io.BytesIO(get(ii["url"], raw=True))).convert("RGB")
+            im.thumbnail((px, px))
             os.makedirs(os.path.join(out, "full"), exist_ok=True)
             im.save(os.path.join(out, "full", f"{k}.jpg"), quality=90)
             found.append(dict(title=f, why="download", full=f"full/{k}.jpg", w=im.width, h=im.height))

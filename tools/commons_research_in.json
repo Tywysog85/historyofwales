@@ -1,6 +1,6 @@
 {
  "branch": "claude/project-thread-7bwosa",
- "out": "_research/thennow4",
+ "out": "_research/thennow5",
  "max": 10,
  "previews": false,
  "download": [
@@ -35,6 +35,38 @@
   "File:The Prince Llewelyn Hotel, Beddgelert - geograph.org.uk - 7588144.jpg",
   "File:Overlooking Lake Bala and Bala town - geograph.org.uk - 3037162.jpg",
   "File:June 2025 - Caernarfon Castle - 07.jpg",
-  "File:Tintern Abbey and Courtyard.jpg"
- ]
+  "File:Tintern Abbey and Courtyard.jpg",
+  "File:Castle and suspension bridge, Conway (i.e. Conwy), Wales-LCCN2001703465.jpg",
+  "File:The south east view of Caernarvon Castle (1131028).jpg",
+  "File:The castle, Harlech Castle, Wales-LCCN2001703487.jpg",
+  "File:Beaumaris Castle (1131274).jpg",
+  "File:The castle, Caerphilly, Wales-LCCN2001703448.jpg",
+  "File:Castle, I, Chepstow, Wales-LCCN2002696539.jpg",
+  "File:Abbey from the ferry, Tintern, England-LCCN2002708164.jpg",
+  "File:The castle, Pembroke, Wales-LCCN2001703529.jpg",
+  "File:Raglan Castle, I., Wales-LCCN2002708065.jpg",
+  "File:Dolbadarn Castle, Llanberis, Wales-LCCN2001703500.jpg",
+  "File:Rhuddlan Castle, Rhyl, Wales-LCCN2001703539.jpg",
+  "File:From the parade, Criccieth Castle, Wales-LCCN2001703467.jpg",
+  "File:The east view of Dolwyddelan Castle - in the county of Caernarvon.jpeg",
+  "File:The castle, Aberystwith, Wales-LCCN2001703410.jpg",
+  "File:From the southeast, Cardiff Castle, Wales-LCCN2001703450.jpg",
+  "File:Swansea castle (1128961).jpg",
+  "File:Carew castle May 1 1820 (1133191).jpg",
+  "File:Penrhyn Castle, Bangor, Wales-LCCN2001703418.jpg",
+  "File:Powis Castle, Montgomeryshire (1131074).jpg",
+  "File:The N. W. view of the church & palace of Llandaffe in the county of Glamorgan (1132826).jpg",
+  "File:The south east view of St. David's Church & Palace - in the county of Pembroke- April 5th 1740 (1132350).jpg",
+  "File:Neath Abbey, Glamorganshire (1132733).jpg",
+  "File:Llanthony Abbey, Monmouthshire (1130057).jpg",
+  "File:Menai Straits Suspension Bridge LCCN2017650157.jpg",
+  "File:Pontycysylltau Aqueduct, Llangollen, Wales-LCCN2001703515.jpg",
+  "File:General view, Llangollen, Wales-LCCN2001703511.jpg",
+  "File:Tenby, Wales-LCCN2001703554.jpg",
+  "File:Roman bridge II, Bettws-y-Coed (i.e. Betws), Wales-LCCN2001703444.jpg",
+  "File:Llewellyn Hotel, Beddgelert, Wales-LCCN2001703429.jpg",
+  "File:Town and lake, Bala, Wales-LCCN2001703413.jpg",
+  "File:Tintern Abbey. S.W. I. LCCN2017659756.jpg"
+ ],
+ "download_px": 2560
 }
