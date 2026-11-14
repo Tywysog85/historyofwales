@@ -96,7 +96,7 @@ UI = dict(
 )
 
 
-JS_V = "2"   # raise when llys3d.js or the llys-* pictures change, so browsers fetch the new ones
+JS_V = "3"   # raise when llys3d.js or the llys-* pictures change, so browsers fetch the new ones
 
 # Starts the 3D when the visitor presses "Enter the court". Slow connections, data saver, phones with 1 GB of memory or less,
 # and browsers without 3D are offered still pictures of each stop instead (src/static/llys-still-<id>.webp), with a button to
@@ -187,6 +187,8 @@ CSS = """
 .ll-ui > * { pointer-events: auto }
 .ll-bar { position: absolute; top: .7rem; left: .7rem; right: .7rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center }
 .ll-bar .btn { padding: .45rem .9rem; font-size: .9rem; backdrop-filter: blur(6px) }
+.ll-bar .btn:not(.solid) { background: rgba(12, 14, 20, .66); color: #f6f1e6; border-color: rgba(255, 255, 255, .4); box-shadow: 0 1px 6px rgba(0, 0, 0, .25) }
+.ll-bar .btn:not(.solid):hover { background: rgba(12, 14, 20, .82) }
 .ll-help { font-size: .82rem; color: #e6dcc8; background: rgba(8,10,16,.6); padding: .3rem .6rem; border-radius: 8px }
 .ll-panel { position: absolute; right: .7rem; bottom: .7rem; width: min(25rem, calc(100% - 1.4rem)); max-height: calc(100% - 5rem); overflow: auto;
   background: rgba(12,15,22,.9); border: 1px solid color-mix(in srgb, var(--gold) 40%, var(--line)); border-radius: 16px; padding: 1rem 1.1rem; backdrop-filter: blur(8px) }
