@@ -35,7 +35,7 @@
   var STILL_IMG = { land: null, dragon: null, ref: null };
   /* how the pictures were taken (tools: see SKILLS.md "Still pictures of the 3D land"): w = page width, d = pixels per CSS pixel,
      h = hero height, b = how far the bottom of the picture runs below the row of figures (p) or the hero's foot (w) */
-  var STILL_REF = { p: { w: 390, d: 1.5, h: 1160, b: 220 }, w: { w: 1440, d: 1.5, h: 977, b: 0 } };
+  var STILL_REF = { p: { w: 390, d: 1.5, h: 1191, b: 220 }, w: { w: 1440, d: 1.5, h: 612, b: 0 } };
   var MONTHS_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   var MONTHS_CY = ["Ionawr","Chwefror","Mawrth","Ebrill","Mai","Mehefin","Gorffennaf","Awst","Medi","Hydref","Tachwedd","Rhagfyr"];
 
@@ -595,6 +595,9 @@
       '<span class="t"><b>' + T("The whole year", "Y flwyddyn gyfan") + "</b><small>" + T(OTD.length + " dates, day by day", OTD.length + " o ddyddiadau, fesul diwrnod") + '</small></span><span class="ar" aria-hidden="true">→</span></a>';
   }
 
+  /* ---------- Evidence labels: archaeology, early chronicle, recorded (src/evidence.py) ---------- */
+  function eviTag(k) { var l = D.EVL && D.EVL[k]; return l ? '<span class="evi" data-k="' + k + '">' + esc(T(l[0], l[1])) + "</span>" : ""; }
+
   /* ---------- Timeline ---------- */
   var tlEra = "all", evEls = [], active = -1, shownYear = EVENTS[0][E_Y], yrAnim = null;
   function setTlEra(v) { tlEra = v; renderTimeline(); }
@@ -611,7 +614,7 @@
       if (tlEra !== "all" && e[E_ERA] !== tlEra) return;
       n++;
       if (e[E_ERA] !== last) { var E = ERA[e[E_ERA]]; html += '<li class="era-head" id="era-' + E.id + '" data-era="' + E.id + '"><span class="eyebrow">' + T(E.spanEn, E.spanCy) + "</span><h3>" + T(E.en, E.cy) + '</h3><button type="button" data-open="' + E.id + '">' + T("Read the chapter", "Darllen y bennod") + "</button></li>"; last = e[E_ERA]; }
-      html += '<li class="ev' + (D.EVS ? " wl-card" : "") + (e[E_KEY] ? " key" : "") + '" id="ev-' + i + '" data-i="' + i + '" data-era="' + e[E_ERA] + '"><time>' + yearLabel(e) + "</time><h4>" + esc(T(e[E_TEN], e[E_TCY])) + "</h4><p>" + esc(T(e[E_BEN], e[E_BCY])) + '</p><div class="links">' +
+      html += '<li class="ev' + (D.EVS ? " wl-card" : "") + (e[E_KEY] ? " key" : "") + '" id="ev-' + i + '" data-i="' + i + '" data-era="' + e[E_ERA] + '"><time>' + yearLabel(e) + "</time><h4>" + esc(T(e[E_TEN], e[E_TCY])) + eviTag(D.EVK && D.EVK.charAt(i)) + "</h4><p>" + esc(T(e[E_BEN], e[E_BCY])) + '</p><div class="links">' +
         (D.EVS ? '<a class="wl" href="event-' + D.EVS[i] + '.html">' + esc(T(e[E_TEN], e[E_TCY])) + "</a>" : "") +
         (e[E_PLACE] ? '<button type="button" class="maplink" data-map="' + e[E_PLACE] + '"><svg aria-hidden="true"><use href="#i-pin"/></svg>' + T("See it on the map", "Gweld ar y map") + "</button>" : "") + "</div></li>";
     });
@@ -851,7 +854,7 @@
     var more = $("#people-more"); more.hidden = P_PAGE || pEra !== "all" || pField !== "all"; more.textContent = pAll ? T("Show fewer", "Dangos llai") : T("Show all " + PEOPLE.length + " people", "Dangos pob un o’r " + PEOPLE.length);
     $("#people-grid").innerHTML = list.map(function (p) {
       var name = T(p[3], p[4]), other = lang === "en" ? p[4] : p[3], link = "person-" + p[0] + ".html", ph = D.PPH[p[0]];
-      return '<article class="plaque wl-card" data-era="' + p[1] + '"><div class="top-row"><span class="ava" aria-hidden="true">' + initials(p[3]) + (ph ? '<img src="' + ph + '" alt="" width="96" height="96" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : "") + '</span><div><span class="dates">' + esc(p[2]) + "</span><h3>" + esc(name) + '</h3></div></div><span class="epi">' + esc(T(p[5], p[6])) + (other !== name ? " · " + esc(other) : "") + "</span>" + ((D.PFIRST || {})[p[0]] ? '<span class="first-tag">★ ' + esc(T(D.PFIRST[p[0]][1], D.PFIRST[p[0]][2])) + "</span>" : "") + "<p>" + esc(T(p[7], p[8])) + '</p><a class="wl" href="' + link + '">' + esc(name) + "</a></article>";
+      return '<article class="plaque wl-card" data-era="' + p[1] + '"><div class="top-row"><span class="ava" aria-hidden="true">' + initials(p[3]) + (ph ? '<img src="' + ph + '" alt="" width="96" height="96" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : "") + '</span><div><span class="dates">' + esc(p[2]) + "</span><h3>" + esc(name) + '</h3></div></div><span class="epi">' + esc(T(p[5], p[6])) + (other !== name ? " · " + esc(other) : "") + "</span>" + ((D.PFIRST || {})[p[0]] ? '<span class="first-tag">★ ' + esc(T(D.PFIRST[p[0]][1], D.PFIRST[p[0]][2])) + "</span>" : "") + eviTag((D.PEVK || {})[p[0]] || "r") + "<p>" + esc(T(p[7], p[8])) + '</p><a class="wl" href="' + link + '">' + esc(name) + "</a></article>";
     }).join("");
   }
   $("#people-more").onclick = function () { pAll = !pAll; renderPeople(); if (!pAll) goTo($("#people")); };
