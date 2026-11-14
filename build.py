@@ -4100,12 +4100,39 @@ AGES_HTML = "".join(
     f'<a class="poster" href="era-{x["id"]}.html" data-era="{x["id"]}">{PX.card_img(f"era-{x['id']}.html", sizes=POSTER_SIZES) or A.scene(ERA_ART[x["id"]], COL[x["id"]])}<span class="shade"></span><span class="rn"><span class="vh">{bi("Age", "Oes")} </span>{ROMAN[i]}<span class="vh">: </span></span>'
     f'<span class="txt"><span class="span">{bi(x["spanEn"], x["spanCy"])}</span><h3>{bi(x["en"], x["cy"])}</h3><span class="q">{bi(*ERA_Q[x["id"]])}</span><p>{bi(x["blurbEn"], x["blurbCy"])}</p></span></a>'
     for i, x in enumerate(D.ERAS))
-MARQ = [("Castles", "Cestyll", "story-castles.html"), ("Poets", "Beirdd", "person-dafydd-ap-gwilym.html"), ("Saints", "Seintiau", "saints.html"),
-        ("Princes", "Tywysogion", "era-medieval.html"), ("Dragons", "Dreigiau", "legend-dragons.html"), ("Coal", "Glo", "story-coal.html"),
-        ("Slate", "Llechi", "place-dinorwig.html"), ("Song", "Cân", "trail-song.html"), ("Rebels", "Gwrthryfelwyr", "story-protest.html"), ("Legends", "Chwedlau", "legends.html")]
-# two copies so the strip can loop for ever; the second copy is hidden from screen readers and the Tab key
-MARQUEE = "".join(f'<a href="{u}" draggable="false">{bi(a, b)}</a><i aria-hidden="true">✦</i>' for a, b, u in MARQ) + \
-    "".join(f'<a href="{u}" draggable="false" tabindex="-1" aria-hidden="true">{bi(a, b)}</a><i aria-hidden="true">✦</i>' for a, b, u in MARQ)
+# The scrolling words band under the hero (Ifan, 14 Nov 2026). Each word is a link to its page and is painted with a picture
+# (src/static/mq/<key>.webp, made by tools/make_marquee_pictures.py). The top row drifts one way; the row under it drifts the
+# other way with the same words in the other language, smaller and gold. Between the words fly a little red dragon and a daffodil,
+# turn and turn about, so keep an even number of words or two dragons meet where the band loops.
+MARQ = [("Castles", "Cestyll", "story-castles.html", "castles"), ("Kings", "Brenhinoedd", "kings.html", "kings"),
+        ("Poets", "Beirdd", "trail-poets.html", "poets"), ("Saints", "Seintiau", "saints.html", "saints"),
+        ("Princes", "Tywysogion", "era-medieval.html", "princes"), ("Dragons", "Dreigiau", "legend-dragons.html", "dragons"),
+        ("Coal", "Glo", "story-coal.html", "coal"), ("Slate", "Llechi", "place-dinorwig.html", "slate"),
+        ("Song", "Cân", "trail-song.html", "song"), ("Language", "Iaith", "story-language.html", "language"),
+        ("Rebels", "Gwrthryfelwyr", "story-protest.html", "rebels"),
+        ("Legends", "Chwedlau", "legends.html", "legends")]
+assert len(MARQ) % 2 == 0, "the words band needs an even number of words (dragon, daffodil, dragon...)"
+_MQ_DAFF = ('<svg class="mq-daff" viewBox="0 0 32 32"><path d="M15 31c.6-6 .8-10 1-14" stroke="#4f9a4a" stroke-width="2" fill="none" stroke-linecap="round"/>'
+            '<path d="M16 26c-3-1-6-3-7-6 3 0 6 2 7 5" fill="#4f9a4a"/>'
+            '<g fill="#f6dc6b">' + "".join(f'<ellipse cx="16" cy="6.2" rx="3.3" ry="5.6" transform="rotate({a} 16 12)"/>' for a in range(0, 360, 60)) + '</g>'
+            '<circle cx="16" cy="12" r="4.4" fill="#f2a12c"/><circle cx="16" cy="12" r="2.4" fill="#d9771c"/></svg>')
+_MQ_DRAGON = '<img class="mq-drag" src="mq-dragon.webp" width="180" height="70" alt="" decoding="async">'
+
+
+def _mq_sep(i):
+    return f'<i aria-hidden="true">{_MQ_DRAGON if i % 2 == 0 else _MQ_DAFF}</i>'
+
+
+def _mq_flip(en, cy):
+    """The second row: the word in the page's other language (Welsh under English, English under Welsh on the /cy/ pages)."""
+    return f'<span class="l-en" lang="cy">{e(cy)}</span><span class="l-cy" lang="en">{e(en)}</span>'
+
+
+# two copies of the top row so it can loop for ever; the second copy is hidden from screen readers and the Tab key.
+# The second row is only the same words again, so all of it is hidden from screen readers and the Tab key.
+MARQUEE = "".join(f'<a class="mq-{k}" href="{u}" draggable="false">{bi(a, b)}</a>{_mq_sep(i)}' for i, (a, b, u, k) in enumerate(MARQ)) + \
+    "".join(f'<a class="mq-{k}" href="{u}" draggable="false" tabindex="-1" aria-hidden="true">{bi(a, b)}</a>{_mq_sep(i)}' for i, (a, b, u, k) in enumerate(MARQ))
+MARQUEE2 = "".join(f'<a href="{u}" draggable="false" tabindex="-1">{_mq_flip(a, b)}</a><i></i>' for a, b, u, k in MARQ) * 4
 
 
 # The "History of Wales" / "Hanes Cymru" line above the big Cymru was removed at Ifan's request (14 Nov 2026); the logo and the
@@ -4114,7 +4141,7 @@ HERO_NAME = ""
 
 
 def fill(fragment, active="", skip="#chapters", home=False):
-    return (fragment.replace("__NAV__", nav(active, skip, home)).replace("__HERONAME__", HERO_NAME).replace("__FOOTER__", footer()).replace("__AGES__", AGES_HTML).replace("__MARQUEE__", MARQUEE)
+    return (fragment.replace("__NAV__", nav(active, skip, home)).replace("__HERONAME__", HERO_NAME).replace("__FOOTER__", footer()).replace("__AGES__", AGES_HTML).replace("__MARQUEE__", MARQUEE).replace("__MARQUEE2__", MARQUEE2)
             .replace("__STORIES__", "".join(story_card(x, k == 0) for k, x in enumerate(home_stories())))
             .replace("__NSTORIES__", str(len(F.STORIES))).replace("__NPEOPLE__", str(len(D.PEOPLE))).replace("__NPLACES__", str(len(D.PLACES)))
             .replace("__NCASTLES_FMT__", f"{N_CASTLES:,}").replace("__NCASTLES__", str(N_CASTLES))

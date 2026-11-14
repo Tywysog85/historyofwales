@@ -135,15 +135,37 @@ html.menu-open { overflow: hidden }
 .pager .m-dates { opacity: .75; margin-inline: .15rem }
 .foot-cols .m-dates { display: block; font-size: .75rem; margin-top: .05rem }
 
-/* ---------- marquee ---------- */
-.marquee { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; cursor: grab; -webkit-user-select: none; user-select: none; overscroll-behavior-x: contain; border-block: 1px solid var(--line); padding-block: 1.1rem; background: var(--night); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent) }
-.marquee .track { display: flex; align-items: center; gap: 2.2rem; width: max-content; padding-inline: 1.1rem; font-family: var(--f-display); font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1; white-space: nowrap }
-.marquee::-webkit-scrollbar { display: none }
-.marquee.drag { cursor: grabbing }
-.marquee a { color: var(--ink); text-decoration: none; transition: color .2s; -webkit-user-drag: none }
-.marquee a:hover, .marquee a:focus-visible { color: var(--dragon, #e2453d) }
+/* ---------- marquee: the scrolling words band (Ifan, 14 Nov 2026) ----------
+   Two rows. The top row (.mq-top) scrolls: it drifts by itself and can be dragged, swiped or scrolled. The row under it
+   (.mq-under) is moved by app.js the opposite way. Each top word is painted with its own picture (src/static/mq/, made by
+   tools/make_marquee_pictures.py); a pale wash over the picture keeps the letters light enough to read on the dark band. */
+.marquee { position: relative; border-block: 1px solid var(--line); padding-block: 1rem .9rem; background: var(--night); -webkit-user-select: none; user-select: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent) }
+.mq-top { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; cursor: grab; overscroll-behavior-x: contain }
+.mq-top::-webkit-scrollbar { display: none }
+.mq-under { overflow: hidden; cursor: grab; touch-action: pan-y; margin-top: .55rem }
+.marquee .track { display: flex; align-items: center; gap: 1.6rem; width: max-content; padding-inline: 1.1rem; padding-block: .06em .12em; font-family: var(--f-display); font-size: clamp(2.1rem, 5.4vw, 4rem); line-height: 1; white-space: nowrap }
+.marquee .track2 { display: flex; align-items: center; gap: 1.1rem; width: max-content; font-family: var(--f-display); font-size: clamp(1.05rem, 2.1vw, 1.6rem); line-height: 1.1; white-space: nowrap; will-change: transform }
+.marquee.drag, .marquee.drag .mq-top, .marquee.drag .mq-under { cursor: grabbing }
+.marquee a { color: var(--ink); text-decoration: none; -webkit-user-drag: none }
+.marquee .track2 a { color: var(--gold); opacity: .88; letter-spacing: .02em; transition: opacity .2s, color .2s }
+.marquee .track2 a:hover { opacity: 1; color: #f3d77a }
+.marquee .track2 i { width: .32em; height: .32em; border-radius: 50%; background: var(--gold); opacity: .45; flex: none }
 .marquee.drag a { pointer-events: none }
-.marquee i { font-style: normal; color: var(--red); font-size: .45em }
+.marquee .track > i { display: flex; align-items: center; flex: none }
+.marquee .mq-drag { height: .62em; width: auto; display: block; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .5)) }
+.marquee .mq-daff { height: .58em; width: .58em; display: block }
+.marquee .track a { transition: transform .35s var(--ease), filter .35s }
+.marquee .track a:hover, .marquee .track a:focus-visible { transform: translateY(-.04em) scale(1.04) }
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .marquee .track a { color: transparent; -webkit-text-fill-color: transparent; -webkit-background-clip: text; background-clip: text;
+    background-image: linear-gradient(rgba(250, 244, 230, .34), rgba(250, 244, 230, .34)), var(--mq); background-size: cover; background-position: center }
+  .marquee .track a:hover, .marquee .track a:focus-visible { background-image: linear-gradient(rgba(250, 244, 230, .08), rgba(250, 244, 230, .08)), var(--mq) }
+}
+.mq-castles { --mq: url(mq/castles.webp) } .mq-kings { --mq: url(mq/kings.webp) } .mq-poets { --mq: url(mq/poets.webp) }
+.mq-saints { --mq: url(mq/saints.webp) } .mq-princes { --mq: url(mq/princes.webp) } .mq-dragons { --mq: url(mq/dragons.webp) }
+.mq-coal { --mq: url(mq/coal.webp) } .mq-slate { --mq: url(mq/slate.webp) } .mq-song { --mq: url(mq/song.webp) }
+.mq-language { --mq: url(mq/language.webp) } .mq-rebels { --mq: url(mq/rebels.webp) } .mq-legends { --mq: url(mq/legends.webp) }
+.marquee a:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 4px }
 
 
 /* ---------- today bento ---------- */
@@ -878,6 +900,7 @@ a.wl-go:focus-visible { outline: none }
 @media (pointer: coarse) {
   :is(.lang a, .menu-btn, .search-btn, .journey-chip, .chip, .hear, .wotd-nav button, #dec-samples button, .marquee a, .n-all, .wotd-more, .site-foot .fcol summary) { position: relative }
   :is(.menu-btn, .search-btn, .journey-chip, .chip, .hear, .wotd-nav button, #dec-samples button, .marquee a, .n-all, .wotd-more)::before { content: ""; position: absolute; left: 50%; top: 50%; width: max(100%, 44px); height: max(100%, 44px); transform: translate(-50%, -50%) }
+  .marquee .track2 a::before { height: max(100%, 30px) }
   .lang a::before { content: ""; position: absolute; top: 50%; width: 44px; height: 44px; transform: translateY(-50%) }
   .lang a:first-child::before { right: 0 }
   .lang a:last-child::before { left: 0 }
