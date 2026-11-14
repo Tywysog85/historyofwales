@@ -187,6 +187,8 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - Every king and prince is in it: each ruler on a kingdom page has an anchor (`kings-gwynedd.html#k-cadfan-ap-iago`, made by `ruler_anchor()`), and the line lights up when opened from search. All 827 castle sites are in it too, not only those with a story.
 - Old spellings and English names find the Welsh ones through `ALIAS` in `search.js` (Llewellyn → Llywelyn, Caernarvon → Caernarfon). Add a line there when someone searches for a spelling that finds nothing.
 - When a word finds nothing as typed, search undoes Welsh mutations (`MUT`: Nghymru → Cymru, Fangor → Bangor), then tries the nearest word in the index (one letter out for short words, two for long), and says "Showing results for …".
+- **Welsh results open Welsh pages** (14 November 2026). Welsh pages carry `<base href="../">`, so a bare `person-x.html` made in a script points at the English page; the click fixer in the Welsh page head never sees Enter, which sets `location.href` itself. `href()` in `search.js` writes `cy/…` straight into every result on a Welsh page. Any other script that builds links at run time must do the same.
+- **Keyboard and screen readers.** The search box is a named dialog (`aria-label`, `aria-modal`) with a "Close" / "Cau" button (`aria-label` "Close search", Esc still works). While it is open the rest of the page is `inert`, Tab and Shift+Tab go round the box's own controls, and focus that escapes is sent back to the input. The input is a combobox: the arrow keys move `aria-activedescendant` over the results (`role="option"`), and a hidden `role="status"` line reads out how many were found. Test with Playwright: Shift+Tab from the input must stay inside `.sx`.
 
 ### The reference pages: Look it up, the A–Z and quick answers (November 2026)
 - `reference.html` (Look it up), `a-z.html` and `questions.html` are built by `src/refpages.py`, which `build.py` loads with `RP.setup(globals())` so it can use `bi()`, `page()`, `hero()` and the rest. Keeping the new pages in their own file means other work on `build.py` rarely clashes with them.
@@ -206,7 +208,8 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - `src/ref_sites.py` sorts Cadw's 250 site types into eleven kinds a visitor would recognise. The map reuses `src/static/castles.js`, which reads `window.CMAP` (or `window.CASTLES`). Its wording, record link, hash prefix and group order can be overridden by keys in the payload (`t`, `rec`, `hp`, `order`, `hi0`), so one script serves both maps.
 
 ### Offline support
-- `src/static/sw.js` caches pages. **Change the cache name** (`history-of-wales-vN`, now v6) whenever the site's look changes a lot, so returning visitors get the new version.
+- `src/static/sw.js` caches pages. **Change the cache name** (`history-of-wales-vN`, now v7) whenever the site's look changes a lot, so returning visitors get the new version.
+- Look in the cache before starting any network request (14 November 2026). A file with `?v=` found in the cache is returned with no request at all; pictures and fonts are returned from the cache and only then refreshed in the background. Starting `fetch()` first and checking the cache after sent a wasted request for every versioned file on every visit. To check: register `sw.js` on a `localhost` copy in Playwright, reload twice, and count requests where `request.serviceWorker()` is set (8 on the first visit, 0 on the repeat).
 
 ---
 
