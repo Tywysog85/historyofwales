@@ -36,6 +36,20 @@ jobs:
           GOATCOUNTER: historyofwales
           SITE_URL: https://historyofwales.cymru/
           EMAIL_FORM: ${{ vars.EMAIL_FORM }}
+      # The long reads read aloud live on the repository's "listen" release (made by .github/workflows/listen.yml,
+      # see src/listen.py), not in the repository itself. Copy them into the site. Never stops the deploy.
+      - name: Add the long reads read aloud
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view listen >/dev/null 2>&1; then
+            mkdir -p _site/listen
+            gh release download listen --pattern "*.m4a" --dir _site/listen --clobber
+            echo "$(ls _site/listen | wc -l) sound files, $(du -sh _site/listen | cut -f1)"
+          else
+            echo "No listen release yet"
+          fi
       # The build stamps anything new with the time it was added (src/added.json), so pages can show the newest first.
       # If a change forgot to commit that file, save it back here so the date stays put. Never stops the deploy.
       - name: Save when new items were added

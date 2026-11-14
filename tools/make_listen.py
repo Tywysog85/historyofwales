@@ -30,6 +30,20 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "src"))
 import features as F  # noqa: E402
 import listen as L  # noqa: E402
+sys.path.insert(0, os.path.join(ROOT, "tools"))
+import welsh_words as WW  # noqa: E402
+
+_CY = set()
+
+
+def cy_words():
+    """Every word in the Welsh text of the long reads (for telling the Welsh words in the English text)."""
+    if not _CY:
+        for x in F.STORIES:
+            for s in L.spoken(x, "cy"):
+                for _, t in s["parts"]:
+                    _CY.update(WW.tokens(t))
+    return _CY
 
 REQUEST = os.path.join(ROOT, "tools", "listen_request.json")
 UA = "HistoryOfWalesSiteBuilder/1.0 (https://historyofwales.cymru; static site build)"
@@ -42,6 +56,9 @@ VOICES = {
     "azure:en-GB-SoniaNeural": ("azure", "en", "en-GB-SoniaNeural", "Sonia"),
     "azure:en-GB-OllieMultilingualNeural": ("azure", "en", "en-GB-OllieMultilingualNeural", "Ollie"),
     "azure:en-GB-AdaMultilingualNeural": ("azure", "en", "en-GB-AdaMultilingualNeural", "Ada"),
+    # the same two multilingual voices told to say each Welsh word and name the Welsh way (tools/welsh_words.py)
+    "azure:en-GB-OllieMultilingualNeural+cy": ("azure", "en", "en-GB-OllieMultilingualNeural+cy", "Ollie"),
+    "azure:en-GB-AdaMultilingualNeural+cy": ("azure", "en", "en-GB-AdaMultilingualNeural+cy", "Ada"),
     "azure:cy-GB-AledNeural": ("azure", "cy", "cy-GB-AledNeural", "Aled"),
     "azure:cy-GB-NiaNeural": ("azure", "cy", "cy-GB-NiaNeural", "Nia"),
     # Kokoro (free, Apache 2.0, hexgrad/Kokoro-82M): British English voices, and its best American one for comparison
@@ -172,7 +189,8 @@ class Azure(Engine):
     MAX = 3500  # characters of text in one request (a request may not give more than 10 minutes of sound)
 
     def __init__(self, voice):
-        self.voice, self.lang = voice, voice[:5]
+        voice, _, mode = voice.partition("+")
+        self.voice, self.lang, self.welsh = voice, voice[:5], mode == "cy"
         self.key, self.region = os.environ["AZURE_SPEECH_KEY"], os.environ.get("AZURE_SPEECH_REGION", "uksouth")
         self.last = 0.0
 
@@ -182,12 +200,13 @@ class Azure(Engine):
             before, after = PAUSE.get(kind, (0, 0.5))
             if before and i:
                 body += f'<break time="{int(before * 1000)}ms"/>'
-            body += escape(text)
+            body += WW.mark(escape(text), cy_words(), lambda run: f'<lang xml:lang="cy-GB">{run}</lang>') if self.welsh else escape(text)
             if after:
                 body += f'<break time="{int(after * 1000)}ms"/>'
         rate = f"{round((SPEED['azure'] - 1) * 100):+d}%"
         return (f'<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="{self.lang}">'
-                f'<voice name="{self.voice}"><prosody rate="{rate}">{body}</prosody></voice></speak>')
+                f'<voice name="{self.voice}">' + (body if self.welsh else f'<prosody rate="{rate}">{body}</prosody>') + '</voice></speak>')
+        # (<lang> is not allowed inside <prosody>, so the Welsh-aware voices keep their own pace)
 
     def post(self, ssml):
         url = f"https://{self.region}.tts.speech.microsoft.com/cognitiveservices/v1"
@@ -348,6 +367,17 @@ def main():
         os.makedirs(out, exist_ok=True)
         s = request().get("sample") or {}
         x = by_id[s.get("id", "glyndwr")]
+        if os.environ.get("AZURE_SPEECH_KEY"):  # what Microsoft offers for English and Welsh, to choose from
+            region = os.environ.get("AZURE_SPEECH_REGION", "uksouth")
+            req = urllib.request.Request(f"https://{region}.tts.speech.microsoft.com/cognitiveservices/voices/list",
+                                         headers={"Ocp-Apim-Subscription-Key": os.environ["AZURE_SPEECH_KEY"]})
+            try:
+                with urllib.request.urlopen(req, timeout=60) as r:
+                    vs = [v for v in json.loads(r.read()) if v.get("Locale") in ("en-GB", "cy-GB") or "cy-GB" in (v.get("SecondaryLocaleList") or [])]
+                json.dump(vs, open(os.path.join(out, "azure-voices.json"), "w"), ensure_ascii=False, indent=1)
+                print(f"Azure: {len(vs)} English (UK) and Welsh voices listed in azure-voices.json")
+            except Exception as ex:  # noqa: BLE001
+                print(f"Azure voice list: {ex}")
         for key in s.get("voices", []):
             lang = VOICES[key][1]
             path = os.path.join(out, f"{x['id']}-{lang}-{key.replace(':', '-')}.mp3")

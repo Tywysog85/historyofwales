@@ -4,5 +4,5 @@
  "cy": "",
  "only": [],
  "redo": false,
- "sample": {"id": "glyndwr", "sections": 2, "voices": ["kokoro:bm_george", "kokoro:bm_fable", "kokoro:bm_lewis", "kokoro:bm_daniel", "kokoro:bf_emma", "kokoro:bf_isabella", "kokoro:af_heart", "piper:gwryw-gogledd-pro"]}
+ "sample": {"id": "glyndwr", "sections": 2, "voices": ["azure:en-GB-RyanNeural", "azure:en-GB-SoniaNeural", "azure:en-GB-OllieMultilingualNeural", "azure:en-GB-AdaMultilingualNeural", "azure:en-GB-OllieMultilingualNeural+cy", "azure:en-GB-AdaMultilingualNeural+cy", "azure:cy-GB-AledNeural", "azure:cy-GB-NiaNeural"]}
 }

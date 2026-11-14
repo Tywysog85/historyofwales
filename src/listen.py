@@ -147,10 +147,10 @@ def player(x, e):
                 f'<div class="ls-row ls-ctl">'
                 f'<button type="button" class="ls-back" aria-label="{T("Back 15 seconds", "Yn ôl 15 eiliad")}">−15</button>'
                 f'<button type="button" class="ls-fwd" aria-label="{T("Forward 30 seconds", "Ymlaen 30 eiliad")}">+30</button>'
-                f'<button type="button" class="ls-prev" aria-label="{T("Previous section", "Adran flaenorol")}">⏮</button>'
-                f'<button type="button" class="ls-next" aria-label="{T("Next section", "Adran nesaf")}">⏭</button>'
+                f'<button type="button" class="ls-prev" aria-label="{T("Previous section", "Adran flaenorol")}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h2.5v14H6zM20 5.5v13L9.5 12z"/></svg></button>'
+                f'<button type="button" class="ls-next" aria-label="{T("Next section", "Adran nesaf")}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 5H18v14h-2.5zM4 5.5v13L14.5 12z"/></svg></button>'
                 f'<button type="button" class="ls-rate" aria-label="{T("Speed", "Cyflymder")}">1×</button>'
-                f'<a class="ls-dl" href="listen/{e(m["file"])}" download>{T("Download", "Lawrlwytho")}</a>'
+                f'<a class="ls-dl" download>{T("Download", "Lawrlwytho")}</a>'
                 f'</div></div></div>')
     return out
 
@@ -182,6 +182,7 @@ CSS = """
 .listen .ls-sec { color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100% }
 .listen .ls-ctl { justify-content: flex-start; gap: .4rem }
 .listen .ls-ctl button, .listen .ls-ctl a { min-width: 44px; min-height: 40px; padding: 0 .75rem; border-radius: 999px; border: 1px solid var(--line); background: none; color: var(--ink); font: 600 .8rem var(--f-mono); cursor: pointer; display: inline-grid; place-items: center; text-decoration: none }
+.listen .ls-ctl svg { width: 1rem; height: 1rem; fill: currentColor }
 .listen .ls-ctl button:hover, .listen .ls-ctl a:hover { border-color: var(--c, var(--gold)) }
 .listen .ls-ctl .ls-dl { margin-left: auto; color: var(--muted) }
 .listen.err .ls-txt small::after { content: " · " attr(data-err) }
