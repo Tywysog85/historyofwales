@@ -1,1834 +1,574 @@
 {
  "branch": "claude/project-thread-6tg1iy",
- "out": "_research/towns",
+ "out": "_research/villages",
  "max": 300,
  "people": [
   {
-   "slug": "holyhead",
-   "name": "Holyhead",
-   "wiki": "Holyhead",
+   "slug": "newborough",
+   "name": "Newborough",
+   "wiki": "Newborough,_Anglesey",
    "search": [
-    "Holyhead Isle of Anglesey town"
+    "Newborough Isle of Anglesey village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "beaumaris",
-   "name": "Beaumaris",
-   "wiki": "Beaumaris",
+   "slug": "valley",
+   "name": "Valley",
+   "wiki": "Valley,_Anglesey",
    "search": [
-    "Beaumaris Isle of Anglesey town"
+    "Valley Isle of Anglesey village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "llangefni",
-   "name": "Llangefni",
-   "wiki": "Llangefni",
+   "slug": "cemaes",
+   "name": "Cemaes",
+   "wiki": "Cemaes",
    "search": [
-    "Llangefni Isle of Anglesey town"
+    "Cemaes Isle of Anglesey village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "amlwch",
-   "name": "Amlwch",
-   "wiki": "Amlwch",
+   "slug": "moelfre",
+   "name": "Moelfre",
+   "wiki": "Moelfre",
    "search": [
-    "Amlwch Isle of Anglesey town"
+    "Moelfre Isle of Anglesey village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "aberffraw",
-   "name": "Aberffraw",
-   "wiki": "Aberffraw",
+   "slug": "y-felinheli",
+   "name": "Y Felinheli",
+   "wiki": "Y_Felinheli",
    "search": [
-    "Aberffraw Isle of Anglesey town"
+    "Y Felinheli Gwynedd village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "llanfairpwllgwyngyll",
-   "name": "Llanfairpwllgwyngyll",
-   "wiki": "Llanfairpwllgwyngyll",
+   "slug": "penygroes",
+   "name": "Penygroes",
+   "wiki": "Penygroes",
    "search": [
-    "Llanfairpwllgwyngyll Isle of Anglesey town"
+    "Penygroes Gwynedd village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "menai-bridge",
-   "name": "Menai Bridge",
-   "wiki": "Menai Bridge",
+   "slug": "talysarn",
+   "name": "Talysarn",
+   "wiki": "Talysarn",
    "search": [
-    "Menai Bridge Isle of Anglesey town"
+    "Talysarn Gwynedd village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "penmynydd",
-   "name": "Penmynydd",
-   "wiki": "Penmynydd",
+   "slug": "clynnog-fawr",
+   "name": "Clynnog Fawr",
+   "wiki": "Clynnog_Fawr",
    "search": [
-    "Penmynydd Isle of Anglesey town"
+    "Clynnog Fawr Gwynedd village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "caernarfon",
-   "name": "Caernarfon",
-   "wiki": "Caernarfon",
+   "slug": "beddgelert",
+   "name": "Beddgelert",
+   "wiki": "Beddgelert",
    "search": [
-    "Caernarfon Gwynedd town"
+    "Beddgelert Gwynedd village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "bangor",
-   "name": "Bangor",
-   "wiki": "Bangor, Gwynedd",
+   "slug": "dyffryn-ardudwy",
+   "name": "Dyffryn Ardudwy",
+   "wiki": "Dyffryn_Ardudwy",
    "search": [
-    "Bangor Gwynedd town"
+    "Dyffryn Ardudwy Gwynedd village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "harlech",
-   "name": "Harlech",
-   "wiki": "Harlech",
+   "slug": "llanuwchllyn",
+   "name": "Llanuwchllyn",
+   "wiki": "Llanuwchllyn",
    "search": [
-    "Harlech Gwynedd town"
+    "Llanuwchllyn Gwynedd village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "dolgellau",
-   "name": "Dolgellau",
-   "wiki": "Dolgellau",
+   "slug": "pennal",
+   "name": "Pennal",
+   "wiki": "Pennal",
    "search": [
-    "Dolgellau Gwynedd town"
+    "Pennal Gwynedd village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "bala",
-   "name": "Bala",
-   "wiki": "Bala, Gwynedd",
+   "slug": "penmachno",
+   "name": "Penmachno",
+   "wiki": "Penmachno",
    "search": [
-    "Bala Gwynedd town"
+    "Penmachno Conwy village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "pwllheli",
-   "name": "Pwllheli",
-   "wiki": "Pwllheli",
+   "slug": "ysbyty-ifan",
+   "name": "Ysbyty Ifan",
+   "wiki": "Ysbyty_Ifan",
    "search": [
-    "Pwllheli Gwynedd town"
+    "Ysbyty Ifan Conwy village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "porthmadog",
-   "name": "Porthmadog",
-   "wiki": "Porthmadog",
+   "slug": "llangernyw",
+   "name": "Llangernyw",
+   "wiki": "Llangernyw",
    "search": [
-    "Porthmadog Gwynedd town"
+    "Llangernyw Conwy village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "blaenau-ffestiniog",
-   "name": "Blaenau Ffestiniog",
-   "wiki": "Blaenau Ffestiniog",
+   "slug": "trefriw",
+   "name": "Trefriw",
+   "wiki": "Trefriw",
    "search": [
-    "Blaenau Ffestiniog Gwynedd town"
+    "Trefriw Conwy village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "llanberis",
-   "name": "Llanberis",
-   "wiki": "Llanberis",
+   "slug": "llansanffraid-glan-conwy",
+   "name": "Llansanffraid Glan Conwy",
+   "wiki": "Llansanffraid_Glan_Conwy",
    "search": [
-    "Llanberis Gwynedd town"
+    "Llansanffraid Glan Conwy Conwy village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "bethesda",
-   "name": "Bethesda",
-   "wiki": "Bethesda, Gwynedd",
+   "slug": "dyserth",
+   "name": "Dyserth",
+   "wiki": "Dyserth",
    "search": [
-    "Bethesda Gwynedd town"
+    "Dyserth Denbighshire village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "criccieth",
-   "name": "Criccieth",
-   "wiki": "Criccieth",
+   "slug": "bodelwyddan",
+   "name": "Bodelwyddan",
+   "wiki": "Bodelwyddan",
    "search": [
-    "Criccieth Gwynedd town"
+    "Bodelwyddan Denbighshire village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "tywyn",
-   "name": "Tywyn",
-   "wiki": "Tywyn",
+   "slug": "greenfield",
+   "name": "Greenfield",
+   "wiki": "Greenfield,_Flintshire",
    "search": [
-    "Tywyn Gwynedd town"
+    "Greenfield Flintshire village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "aberdyfi",
-   "name": "Aberdyfi",
-   "wiki": "Aberdyfi",
+   "slug": "guilsfield",
+   "name": "Guilsfield",
+   "wiki": "Guilsfield",
    "search": [
-    "Aberdyfi Gwynedd town"
+    "Guilsfield Powys village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "nefyn",
-   "name": "Nefyn",
-   "wiki": "Nefyn",
+   "slug": "llanymynech",
+   "name": "Llanymynech",
+   "wiki": "Llanymynech",
    "search": [
-    "Nefyn Gwynedd town"
+    "Llanymynech Powys village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "aberdaron",
-   "name": "Aberdaron",
-   "wiki": "Aberdaron",
+   "slug": "abermule",
+   "name": "Abermule",
+   "wiki": "Abermule",
    "search": [
-    "Aberdaron Gwynedd town"
+    "Abermule Powys village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "trawsfynydd",
-   "name": "Trawsfynydd",
-   "wiki": "Trawsfynydd",
+   "slug": "tregynon",
+   "name": "Tregynon",
+   "wiki": "Tregynon",
    "search": [
-    "Trawsfynydd Gwynedd town"
+    "Tregynon Powys village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "llanystumdwy",
-   "name": "Llanystumdwy",
-   "wiki": "Llanystumdwy",
+   "slug": "llanwddyn",
+   "name": "Llanwddyn",
+   "wiki": "Llanwddyn",
    "search": [
-    "Llanystumdwy Gwynedd town"
+    "Llanwddyn Powys village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "barmouth",
-   "name": "Barmouth",
-   "wiki": "Barmouth",
+   "slug": "meifod",
+   "name": "Meifod",
+   "wiki": "Meifod",
    "search": [
-    "Barmouth Gwynedd town"
+    "Meifod Powys village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "penrhyndeudraeth",
-   "name": "Penrhyndeudraeth",
-   "wiki": "Penrhyndeudraeth",
+   "slug": "llanfihangel-yng-ngwynfa",
+   "name": "Llanfihangel-yng-Ngwynfa",
+   "wiki": "Llanfihangel-yng-Ngwynfa",
    "search": [
-    "Penrhyndeudraeth Gwynedd town"
+    "Llanfihangel-yng-Ngwynfa Powys village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "conwy",
-   "name": "Conwy",
-   "wiki": "Conwy",
+   "slug": "borth",
+   "name": "Borth",
+   "wiki": "Borth",
    "search": [
-    "Conwy city centre"
+    "Borth Ceredigion village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "llandudno",
-   "name": "Llandudno",
-   "wiki": "Llandudno",
+   "slug": "llanddewi-brefi",
+   "name": "Llanddewi Brefi",
+   "wiki": "Llanddewi_Brefi",
    "search": [
-    "Llandudno Conwy town"
+    "Llanddewi Brefi Ceredigion village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "llanrwst",
-   "name": "Llanrwst",
-   "wiki": "Llanrwst",
+   "slug": "pontrhydfendigaid",
+   "name": "Pontrhydfendigaid",
+   "wiki": "Pontrhydfendigaid",
    "search": [
-    "Llanrwst Conwy town"
+    "Pontrhydfendigaid Ceredigion village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "betws-y-coed",
-   "name": "Betws-y-Coed",
-   "wiki": "Betws-y-Coed",
+   "slug": "llangrannog",
+   "name": "Llangrannog",
+   "wiki": "Llangrannog",
    "search": [
-    "Betws-y-Coed Conwy town"
+    "Llangrannog Ceredigion village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "abergele",
-   "name": "Abergele",
-   "wiki": "Abergele",
+   "slug": "llangeitho",
+   "name": "Llangeitho",
+   "wiki": "Llangeitho",
    "search": [
-    "Abergele Conwy town"
+    "Llangeitho Ceredigion village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "colwyn-bay",
-   "name": "Colwyn Bay",
-   "wiki": "Colwyn Bay",
+   "slug": "pencader",
+   "name": "Pencader",
+   "wiki": "Pencader",
    "search": [
-    "Colwyn Bay Conwy town"
+    "Pencader Carmarthenshire village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "dolwyddelan",
-   "name": "Dolwyddelan",
-   "wiki": "Dolwyddelan",
+   "slug": "llansteffan",
+   "name": "Llansteffan",
+   "wiki": "Llansteffan",
    "search": [
-    "Dolwyddelan Conwy town"
+    "Llansteffan Carmarthenshire village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "penmaenmawr",
-   "name": "Penmaenmawr",
-   "wiki": "Penmaenmawr",
+   "slug": "myddfai",
+   "name": "Myddfai",
+   "wiki": "Myddfai",
    "search": [
-    "Penmaenmawr Conwy town"
+    "Myddfai Carmarthenshire village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "llanfairfechan",
-   "name": "Llanfairfechan",
-   "wiki": "Llanfairfechan",
+   "slug": "talley",
+   "name": "Talley",
+   "wiki": "Talley",
    "search": [
-    "Llanfairfechan Conwy town"
+    "Talley Carmarthenshire village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "deganwy",
-   "name": "Deganwy",
-   "wiki": "Deganwy",
+   "slug": "llanarthne",
+   "name": "Llanarthne",
+   "wiki": "Llanarthney",
    "search": [
-    "Deganwy Conwy town"
+    "Llanarthne Carmarthenshire village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "denbigh",
-   "name": "Denbigh",
-   "wiki": "Denbigh",
+   "slug": "st-dogmaels",
+   "name": "St Dogmaels",
+   "wiki": "St_Dogmaels",
    "search": [
-    "Denbigh Denbighshire town"
+    "St Dogmaels Pembrokeshire village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "ruthin",
-   "name": "Ruthin",
-   "wiki": "Ruthin",
+   "slug": "nevern",
+   "name": "Nevern",
+   "wiki": "Nevern",
    "search": [
-    "Ruthin Denbighshire town"
+    "Nevern Pembrokeshire village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "st-asaph",
-   "name": "St Asaph",
-   "wiki": "St Asaph",
+   "slug": "manorbier",
+   "name": "Manorbier",
+   "wiki": "Manorbier",
    "search": [
-    "St Asaph Denbighshire town"
+    "Manorbier Pembrokeshire village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "llangollen",
-   "name": "Llangollen",
-   "wiki": "Llangollen",
+   "slug": "carew",
+   "name": "Carew",
+   "wiki": "Carew,_Pembrokeshire",
    "search": [
-    "Llangollen Denbighshire town"
+    "Carew Pembrokeshire village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "rhyl",
-   "name": "Rhyl",
-   "wiki": "Rhyl",
+   "slug": "penclawdd",
+   "name": "Penclawdd",
+   "wiki": "Penclawdd",
    "search": [
-    "Rhyl Denbighshire town"
+    "Penclawdd Swansea village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "rhuddlan",
-   "name": "Rhuddlan",
-   "wiki": "Rhuddlan",
+   "slug": "port-eynon",
+   "name": "Port Eynon",
+   "wiki": "Port_Eynon",
    "search": [
-    "Rhuddlan Denbighshire town"
+    "Port Eynon Swansea village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "corwen",
-   "name": "Corwen",
-   "wiki": "Corwen",
+   "slug": "pontrhydyfen",
+   "name": "Pontrhydyfen",
+   "wiki": "Pontrhydyfen",
    "search": [
-    "Corwen Denbighshire town"
+    "Pontrhydyfen Neath Port Talbot village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "prestatyn",
-   "name": "Prestatyn",
-   "wiki": "Prestatyn",
+   "slug": "aberdulais",
+   "name": "Aberdulais",
+   "wiki": "Aberdulais",
    "search": [
-    "Prestatyn Denbighshire town"
+    "Aberdulais Neath Port Talbot village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "flint",
-   "name": "Flint",
-   "wiki": "Flint, Flintshire",
+   "slug": "kenfig",
+   "name": "Kenfig",
+   "wiki": "Kenfig",
    "search": [
-    "Flint Flintshire town"
+    "Kenfig Bridgend village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "holywell",
-   "name": "Holywell",
-   "wiki": "Holywell, Flintshire",
+   "slug": "dinas-powys",
+   "name": "Dinas Powys",
+   "wiki": "Dinas_Powys",
    "search": [
-    "Holywell Flintshire town"
+    "Dinas Powys Vale of Glamorgan village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "mold",
-   "name": "Mold",
-   "wiki": "Mold, Flintshire",
+   "slug": "llancarfan",
+   "name": "Llancarfan",
+   "wiki": "Llancarfan",
    "search": [
-    "Mold Flintshire town"
+    "Llancarfan Vale of Glamorgan village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "hawarden",
-   "name": "Hawarden",
-   "wiki": "Hawarden",
+   "slug": "st-donats",
+   "name": "St Donat’s",
+   "wiki": "St_Donat's",
    "search": [
-    "Hawarden Flintshire town"
+    "St Donat’s Vale of Glamorgan village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "buckley",
-   "name": "Buckley",
-   "wiki": "Buckley, Flintshire",
+   "slug": "tongwynlais",
+   "name": "Tongwynlais",
+   "wiki": "Tongwynlais",
    "search": [
-    "Buckley Flintshire town"
+    "Tongwynlais Cardiff village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "connahs-quay",
-   "name": "Connah’s Quay",
-   "wiki": "Connah’s Quay",
+   "slug": "trehafod",
+   "name": "Trehafod",
+   "wiki": "Trehafod",
    "search": [
-    "Connah’s Quay Flintshire town"
+    "Trehafod Rhondda Cynon Taf village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "shotton",
-   "name": "Shotton",
-   "wiki": "Shotton",
+   "slug": "gelligaer",
+   "name": "Gelligaer",
+   "wiki": "Gelligaer",
    "search": [
-    "Shotton Flintshire town"
+    "Gelligaer Caerphilly village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "caerwys",
-   "name": "Caerwys",
-   "wiki": "Caerwys",
+   "slug": "crumlin",
+   "name": "Crumlin",
+   "wiki": "Crumlin,_Caerphilly",
    "search": [
-    "Caerwys Flintshire town"
+    "Crumlin Caerphilly village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "caergwrle",
-   "name": "Caergwrle",
-   "wiki": "Caergwrle",
+   "slug": "six-bells",
+   "name": "Six Bells",
+   "wiki": "Six_Bells",
    "search": [
-    "Caergwrle Flintshire town"
+    "Six Bells Blaenau Gwent village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "wrexham",
-   "name": "Wrexham",
-   "wiki": "Wrexham",
+   "slug": "llanover",
+   "name": "Llanover",
+   "wiki": "Llanover",
    "search": [
-    "Wrexham city centre"
+    "Llanover Monmouthshire village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "chirk",
-   "name": "Chirk",
-   "wiki": "Chirk",
+   "slug": "trellech",
+   "name": "Trellech",
+   "wiki": "Trellech",
    "search": [
-    "Chirk Wrexham town"
+    "Trellech Monmouthshire village"
    ],
    "n": 3,
    "cat": 4
   },
   {
-   "slug": "rhosllannerchrugog",
-   "name": "Rhosllannerchrugog",
-   "wiki": "Rhosllannerchrugog",
+   "slug": "llanthony",
+   "name": "Llanthony",
+   "wiki": "Llanthony",
    "search": [
-    "Rhosllannerchrugog Wrexham town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "ruabon",
-   "name": "Ruabon",
-   "wiki": "Ruabon",
-   "search": [
-    "Ruabon Wrexham town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "overton-on-dee",
-   "name": "Overton-on-Dee",
-   "wiki": "Overton-on-Dee",
-   "search": [
-    "Overton-on-Dee Wrexham town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "holt",
-   "name": "Holt",
-   "wiki": "Holt, Wrexham",
-   "search": [
-    "Holt Wrexham town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "coedpoeth",
-   "name": "Coedpoeth",
-   "wiki": "Coedpoeth",
-   "search": [
-    "Coedpoeth Wrexham town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "brymbo",
-   "name": "Brymbo",
-   "wiki": "Brymbo",
-   "search": [
-    "Brymbo Wrexham town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "gresford",
-   "name": "Gresford",
-   "wiki": "Gresford",
-   "search": [
-    "Gresford Wrexham town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "machynlleth",
-   "name": "Machynlleth",
-   "wiki": "Machynlleth",
-   "search": [
-    "Machynlleth Powys town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "brecon",
-   "name": "Brecon",
-   "wiki": "Brecon",
-   "search": [
-    "Brecon Powys town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "welshpool",
-   "name": "Welshpool",
-   "wiki": "Welshpool",
-   "search": [
-    "Welshpool Powys town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "newtown",
-   "name": "Newtown",
-   "wiki": "Newtown, Powys",
-   "search": [
-    "Newtown Powys town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "llandrindod-wells",
-   "name": "Llandrindod Wells",
-   "wiki": "Llandrindod Wells",
-   "search": [
-    "Llandrindod Wells Powys town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "builth-wells",
-   "name": "Builth Wells",
-   "wiki": "Builth Wells",
-   "search": [
-    "Builth Wells Powys town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "llanidloes",
-   "name": "Llanidloes",
-   "wiki": "Llanidloes",
-   "search": [
-    "Llanidloes Powys town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "montgomery",
-   "name": "Montgomery",
-   "wiki": "Montgomery, Powys",
-   "search": [
-    "Montgomery Powys town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "hay-on-wye",
-   "name": "Hay-on-Wye",
-   "wiki": "Hay-on-Wye",
-   "search": [
-    "Hay-on-Wye Powys town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "crickhowell",
-   "name": "Crickhowell",
-   "wiki": "Crickhowell",
-   "search": [
-    "Crickhowell Powys town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "llanwrtyd-wells",
-   "name": "Llanwrtyd Wells",
-   "wiki": "Llanwrtyd Wells",
-   "search": [
-    "Llanwrtyd Wells Powys town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "llanrhaeadr-ym-mochnant",
-   "name": "Llanrhaeadr-ym-Mochnant",
-   "wiki": "Llanrhaeadr-ym-Mochnant",
-   "search": [
-    "Llanrhaeadr-ym-Mochnant Powys town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "knighton",
-   "name": "Knighton",
-   "wiki": "Knighton, Powys",
-   "search": [
-    "Knighton Powys town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "presteigne",
-   "name": "Presteigne",
-   "wiki": "Presteigne",
-   "search": [
-    "Presteigne Powys town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "rhayader",
-   "name": "Rhayader",
-   "wiki": "Rhayader",
-   "search": [
-    "Rhayader Powys town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "llanfyllin",
-   "name": "Llanfyllin",
-   "wiki": "Llanfyllin",
-   "search": [
-    "Llanfyllin Powys town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "llanfair-caereinion",
-   "name": "Llanfair Caereinion",
-   "wiki": "Llanfair Caereinion",
-   "search": [
-    "Llanfair Caereinion Powys town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "talgarth",
-   "name": "Talgarth",
-   "wiki": "Talgarth",
-   "search": [
-    "Talgarth Powys town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "ystradgynlais",
-   "name": "Ystradgynlais",
-   "wiki": "Ystradgynlais",
-   "search": [
-    "Ystradgynlais Powys town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "aberystwyth",
-   "name": "Aberystwyth",
-   "wiki": "Aberystwyth",
-   "search": [
-    "Aberystwyth Ceredigion town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "cardigan",
-   "name": "Cardigan",
-   "wiki": "Cardigan, Ceredigion",
-   "search": [
-    "Cardigan Ceredigion town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "lampeter",
-   "name": "Lampeter",
-   "wiki": "Lampeter",
-   "search": [
-    "Lampeter Ceredigion town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "aberaeron",
-   "name": "Aberaeron",
-   "wiki": "Aberaeron",
-   "search": [
-    "Aberaeron Ceredigion town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "new-quay",
-   "name": "New Quay",
-   "wiki": "New Quay",
-   "search": [
-    "New Quay Ceredigion town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "tregaron",
-   "name": "Tregaron",
-   "wiki": "Tregaron",
-   "search": [
-    "Tregaron Ceredigion town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "llanbadarn-fawr",
-   "name": "Llanbadarn Fawr",
-   "wiki": "Llanbadarn Fawr, Ceredigion",
-   "search": [
-    "Llanbadarn Fawr Ceredigion town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "llandysul",
-   "name": "Llandysul",
-   "wiki": "Llandysul",
-   "search": [
-    "Llandysul Ceredigion town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "st-davids",
-   "name": "St Davids",
-   "wiki": "St Davids",
-   "search": [
-    "St Davids Pembrokeshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "pembroke",
-   "name": "Pembroke",
-   "wiki": "Pembroke, Pembrokeshire",
-   "search": [
-    "Pembroke Pembrokeshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "haverfordwest",
-   "name": "Haverfordwest",
-   "wiki": "Haverfordwest",
-   "search": [
-    "Haverfordwest Pembrokeshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "fishguard",
-   "name": "Fishguard",
-   "wiki": "Fishguard",
-   "search": [
-    "Fishguard Pembrokeshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "tenby",
-   "name": "Tenby",
-   "wiki": "Tenby",
-   "search": [
-    "Tenby Pembrokeshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "milford-haven",
-   "name": "Milford Haven",
-   "wiki": "Milford Haven",
-   "search": [
-    "Milford Haven Pembrokeshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "newport-pembrokeshire",
-   "name": "Newport (Pembrokeshire)",
-   "wiki": "Newport, Pembrokeshire",
-   "search": [
-    "Newport Pembrokeshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "narberth",
-   "name": "Narberth",
-   "wiki": "Narberth, Pembrokeshire",
-   "search": [
-    "Narberth Pembrokeshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "crymych",
-   "name": "Crymych",
-   "wiki": "Crymych",
-   "search": [
-    "Crymych Pembrokeshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "mynachlog-ddu",
-   "name": "Mynachlog-ddu",
-   "wiki": "Mynachlog-ddu",
-   "search": [
-    "Mynachlog-ddu Pembrokeshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "pembroke-dock",
-   "name": "Pembroke Dock",
-   "wiki": "Pembroke Dock",
-   "search": [
-    "Pembroke Dock Pembrokeshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "neyland",
-   "name": "Neyland",
-   "wiki": "Neyland",
-   "search": [
-    "Neyland Pembrokeshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "goodwick",
-   "name": "Goodwick",
-   "wiki": "Goodwick",
-   "search": [
-    "Goodwick Pembrokeshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "saundersfoot",
-   "name": "Saundersfoot",
-   "wiki": "Saundersfoot",
-   "search": [
-    "Saundersfoot Pembrokeshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "carmarthen",
-   "name": "Carmarthen",
-   "wiki": "Carmarthen",
-   "search": [
-    "Carmarthen Carmarthenshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "llandeilo",
-   "name": "Llandeilo",
-   "wiki": "Llandeilo",
-   "search": [
-    "Llandeilo Carmarthenshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "llandovery",
-   "name": "Llandovery",
-   "wiki": "Llandovery",
-   "search": [
-    "Llandovery Carmarthenshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "kidwelly",
-   "name": "Kidwelly",
-   "wiki": "Kidwelly",
-   "search": [
-    "Kidwelly Carmarthenshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "llanelli",
-   "name": "Llanelli",
-   "wiki": "Llanelli",
-   "search": [
-    "Llanelli Carmarthenshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "laugharne",
-   "name": "Laugharne",
-   "wiki": "Laugharne",
-   "search": [
-    "Laugharne Carmarthenshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "whitland",
-   "name": "Whitland",
-   "wiki": "Whitland",
-   "search": [
-    "Whitland Carmarthenshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "llanddowror",
-   "name": "Llanddowror",
-   "wiki": "Llanddowror",
-   "search": [
-    "Llanddowror Carmarthenshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "ammanford",
-   "name": "Ammanford",
-   "wiki": "Ammanford",
-   "search": [
-    "Ammanford Carmarthenshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "llandybie",
-   "name": "Llandybie",
-   "wiki": "Llandybie",
-   "search": [
-    "Llandybie Carmarthenshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "pumsaint",
-   "name": "Pumsaint",
-   "wiki": "Pumsaint",
-   "search": [
-    "Pumsaint Carmarthenshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "newcastle-emlyn",
-   "name": "Newcastle Emlyn",
-   "wiki": "Newcastle Emlyn",
-   "search": [
-    "Newcastle Emlyn Carmarthenshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "st-clears",
-   "name": "St Clears",
-   "wiki": "St Clears",
-   "search": [
-    "St Clears Carmarthenshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "burry-port",
-   "name": "Burry Port",
-   "wiki": "Burry Port",
-   "search": [
-    "Burry Port Carmarthenshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "llanybydder",
-   "name": "Llanybydder",
-   "wiki": "Llanybydder",
-   "search": [
-    "Llanybydder Carmarthenshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "swansea",
-   "name": "Swansea",
-   "wiki": "Swansea",
-   "search": [
-    "Swansea city centre"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "mumbles",
-   "name": "Mumbles",
-   "wiki": "Mumbles",
-   "search": [
-    "Mumbles Swansea town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "rhossili",
-   "name": "Rhossili",
-   "wiki": "Rhossili",
-   "search": [
-    "Rhossili Swansea town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "gorseinon",
-   "name": "Gorseinon",
-   "wiki": "Gorseinon",
-   "search": [
-    "Gorseinon Swansea town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "pontarddulais",
-   "name": "Pontarddulais",
-   "wiki": "Pontarddulais",
-   "search": [
-    "Pontarddulais Swansea town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "clydach",
-   "name": "Clydach",
-   "wiki": "Clydach, Swansea",
-   "search": [
-    "Clydach Swansea town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "morriston",
-   "name": "Morriston",
-   "wiki": "Morriston",
-   "search": [
-    "Morriston Swansea town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "loughor",
-   "name": "Loughor",
-   "wiki": "Loughor",
-   "search": [
-    "Loughor Swansea town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "neath",
-   "name": "Neath",
-   "wiki": "Neath",
-   "search": [
-    "Neath Neath Port Talbot town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "port-talbot",
-   "name": "Port Talbot",
-   "wiki": "Port Talbot",
-   "search": [
-    "Port Talbot Neath Port Talbot town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "pontardawe",
-   "name": "Pontardawe",
-   "wiki": "Pontardawe",
-   "search": [
-    "Pontardawe Neath Port Talbot town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "briton-ferry",
-   "name": "Briton Ferry",
-   "wiki": "Briton Ferry",
-   "search": [
-    "Briton Ferry Neath Port Talbot town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "margam",
-   "name": "Margam",
-   "wiki": "Margam",
-   "search": [
-    "Margam Neath Port Talbot town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "bridgend",
-   "name": "Bridgend",
-   "wiki": "Bridgend",
-   "search": [
-    "Bridgend city centre"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "maesteg",
-   "name": "Maesteg",
-   "wiki": "Maesteg",
-   "search": [
-    "Maesteg Bridgend town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "ogmore-by-sea",
-   "name": "Ogmore-by-Sea",
-   "wiki": "Ogmore-by-Sea",
-   "search": [
-    "Ogmore-by-Sea Bridgend town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "porthcawl",
-   "name": "Porthcawl",
-   "wiki": "Porthcawl",
-   "search": [
-    "Porthcawl Bridgend town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "llantwit-major",
-   "name": "Llantwit Major",
-   "wiki": "Llantwit Major",
-   "search": [
-    "Llantwit Major Vale of Glamorgan town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "cowbridge",
-   "name": "Cowbridge",
-   "wiki": "Cowbridge",
-   "search": [
-    "Cowbridge Vale of Glamorgan town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "barry",
-   "name": "Barry",
-   "wiki": "Barry, Vale of Glamorgan",
-   "search": [
-    "Barry Vale of Glamorgan town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "penarth",
-   "name": "Penarth",
-   "wiki": "Penarth",
-   "search": [
-    "Penarth Vale of Glamorgan town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "flemingston",
-   "name": "Flemingston",
-   "wiki": "Flemingston",
-   "search": [
-    "Flemingston Vale of Glamorgan town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "cardiff",
-   "name": "Cardiff",
-   "wiki": "Cardiff",
-   "search": [
-    "Cardiff city centre"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "llandaff",
-   "name": "Llandaff",
-   "wiki": "Llandaff",
-   "search": [
-    "Llandaff Cardiff town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "st-fagans",
-   "name": "St Fagans",
-   "wiki": "St Fagans",
-   "search": [
-    "St Fagans Cardiff town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "pontypridd",
-   "name": "Pontypridd",
-   "wiki": "Pontypridd",
-   "search": [
-    "Pontypridd Rhondda Cynon Taf town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "aberdare",
-   "name": "Aberdare",
-   "wiki": "Aberdare",
-   "search": [
-    "Aberdare Rhondda Cynon Taf town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "tonypandy",
-   "name": "Tonypandy",
-   "wiki": "Tonypandy",
-   "search": [
-    "Tonypandy Rhondda Cynon Taf town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "treorchy",
-   "name": "Treorchy",
-   "wiki": "Treorchy",
-   "search": [
-    "Treorchy Rhondda Cynon Taf town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "llantrisant",
-   "name": "Llantrisant",
-   "wiki": "Llantrisant",
-   "search": [
-    "Llantrisant Rhondda Cynon Taf town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "senghenydd",
-   "name": "Senghenydd",
-   "wiki": "Senghenydd",
-   "search": [
-    "Senghenydd Rhondda Cynon Taf town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "mountain-ash",
-   "name": "Mountain Ash",
-   "wiki": "Mountain Ash",
-   "search": [
-    "Mountain Ash Rhondda Cynon Taf town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "ferndale",
-   "name": "Ferndale",
-   "wiki": "Ferndale",
-   "search": [
-    "Ferndale Rhondda Cynon Taf town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "porth",
-   "name": "Porth",
-   "wiki": "Porth",
-   "search": [
-    "Porth Rhondda Cynon Taf town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "hirwaun",
-   "name": "Hirwaun",
-   "wiki": "Hirwaun",
-   "search": [
-    "Hirwaun Rhondda Cynon Taf town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "abercynon",
-   "name": "Abercynon",
-   "wiki": "Abercynon",
-   "search": [
-    "Abercynon Rhondda Cynon Taf town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "treherbert",
-   "name": "Treherbert",
-   "wiki": "Treherbert",
-   "search": [
-    "Treherbert Rhondda Cynon Taf town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "merthyr-tydfil",
-   "name": "Merthyr Tydfil",
-   "wiki": "Merthyr Tydfil",
-   "search": [
-    "Merthyr Tydfil city centre"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "aberfan",
-   "name": "Aberfan",
-   "wiki": "Aberfan",
-   "search": [
-    "Aberfan Merthyr Tydfil town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "dowlais",
-   "name": "Dowlais",
-   "wiki": "Dowlais",
-   "search": [
-    "Dowlais Merthyr Tydfil town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "treharris",
-   "name": "Treharris",
-   "wiki": "Treharris",
-   "search": [
-    "Treharris Merthyr Tydfil town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "caerphilly",
-   "name": "Caerphilly",
-   "wiki": "Caerphilly",
-   "search": [
-    "Caerphilly city centre"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "bargoed",
-   "name": "Bargoed",
-   "wiki": "Bargoed",
-   "search": [
-    "Bargoed Caerphilly town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "blackwood",
-   "name": "Blackwood",
-   "wiki": "Blackwood, Caerphilly",
-   "search": [
-    "Blackwood Caerphilly town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "rhymney",
-   "name": "Rhymney",
-   "wiki": "Rhymney",
-   "search": [
-    "Rhymney Caerphilly town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "nelson",
-   "name": "Nelson",
-   "wiki": "Nelson, Caerphilly",
-   "search": [
-    "Nelson Caerphilly town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "tredegar",
-   "name": "Tredegar",
-   "wiki": "Tredegar",
-   "search": [
-    "Tredegar Blaenau Gwent town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "ebbw-vale",
-   "name": "Ebbw Vale",
-   "wiki": "Ebbw Vale",
-   "search": [
-    "Ebbw Vale Blaenau Gwent town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "brynmawr",
-   "name": "Brynmawr",
-   "wiki": "Brynmawr",
-   "search": [
-    "Brynmawr Blaenau Gwent town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "blaenavon",
-   "name": "Blaenavon",
-   "wiki": "Blaenavon",
-   "search": [
-    "Blaenavon Torfaen town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "pontypool",
-   "name": "Pontypool",
-   "wiki": "Pontypool",
-   "search": [
-    "Pontypool Torfaen town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "cwmbran",
-   "name": "Cwmbran",
-   "wiki": "Cwmbran",
-   "search": [
-    "Cwmbran Torfaen town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "monmouth",
-   "name": "Monmouth",
-   "wiki": "Monmouth",
-   "search": [
-    "Monmouth Monmouthshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "abergavenny",
-   "name": "Abergavenny",
-   "wiki": "Abergavenny",
-   "search": [
-    "Abergavenny Monmouthshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "chepstow",
-   "name": "Chepstow",
-   "wiki": "Chepstow",
-   "search": [
-    "Chepstow Monmouthshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "caerleon",
-   "name": "Caerleon",
-   "wiki": "Caerleon",
-   "search": [
-    "Caerleon Monmouthshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "caerwent",
-   "name": "Caerwent",
-   "wiki": "Caerwent",
-   "search": [
-    "Caerwent Monmouthshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "usk",
-   "name": "Usk",
-   "wiki": "Usk",
-   "search": [
-    "Usk Monmouthshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "raglan",
-   "name": "Raglan",
-   "wiki": "Raglan, Monmouthshire",
-   "search": [
-    "Raglan Monmouthshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "tintern",
-   "name": "Tintern",
-   "wiki": "Tintern",
-   "search": [
-    "Tintern Monmouthshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "llanfihangel-crucorney",
-   "name": "Llanfihangel Crucorney",
-   "wiki": "Llanfihangel Crucorney",
-   "search": [
-    "Llanfihangel Crucorney Monmouthshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "caldicot",
-   "name": "Caldicot",
-   "wiki": "Caldicot",
-   "search": [
-    "Caldicot Monmouthshire town"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "newport",
-   "name": "Newport",
-   "wiki": "Newport, Wales",
-   "search": [
-    "Newport city centre"
-   ],
-   "n": 3,
-   "cat": 4
-  },
-  {
-   "slug": "llanfaches",
-   "name": "Llanfaches",
-   "wiki": "Llanvaches",
-   "search": [
-    "Llanfaches Newport town"
+    "Llanthony Monmouthshire village"
    ],
    "n": 3,
    "cat": 4

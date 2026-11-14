@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-14", "57 historic villages join the towns", "57 o bentrefi hanesyddol yn ymuno â’r trefi",
+     "Villages with a big story now have pages too: Beddgelert and its old priory, Clynnog Fawr and St Beuno, Llanddewi Brefi where Dewi spoke, Pennal and Owain Glyndŵr’s letter to France, Myddfai and its physicians, Llanwddyn under Lake Vyrnwy, Penmachno, Llangernyw’s ancient yew, Talley, Nevern, Trellech, Llanthony and many more. Each has its story, what its name means, the sites and people around it and a photo.",
+     "Mae gan bentrefi â stori fawr dudalennau hefyd bellach: Beddgelert a’i hen briordy, Clynnog Fawr a Sant Beuno, Llanddewi Brefi lle siaradodd Dewi, Pennal a llythyr Owain Glyndŵr at Ffrainc, Myddfai a’i meddygon, Llanwddyn o dan Lyn Efyrnwy, Penmachno, ywen hynafol Llangernyw, Talyllychau, Nanhyfer, Tryleg, Llanddewi Nant Hodni a llawer mwy. Mae gan bob un ei stori, ystyr ei enw, y safleoedd a’r bobl o’i gwmpas a llun.",
+     "town-beddgelert.html"),
     ("2026-11-14", "Dolwyddelan in 3D: Llywelyn the Great’s castle on its rock", "Dolwyddelan mewn 3D: castell Llywelyn Fawr ar ei graig",
      "Walk into Dolwyddelan as it might have looked about 1280: cross the timber bridge over the ditch cut in the rock, climb the steps to the great room of Llywelyn the Great’s keep, look out from its wall-walk to Tomen Castell, where he was most probably born, and hear how the castle fell in January 1283. Every stop names its sources.",
      "Cerddwch i mewn i Ddolwyddelan fel y gallai fod wedi edrych tua 1280: croeswch y bont bren dros y ffos a dorrwyd yn y graig, dringwch y grisiau i ystafell fawr gorthwr Llywelyn Fawr, edrychwch allan o rodfa’r mur at Domen Castell, lle ganed ef yn ôl pob tebyg, a chlywed sut y syrthiodd y castell ym mis Ionawr 1283. Mae pob arhosfan yn enwi ei ffynonellau.",

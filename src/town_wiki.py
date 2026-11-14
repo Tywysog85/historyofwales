@@ -18,6 +18,14 @@ WIKI = {
     "Rhosllannerchrugog": "Rhosllannerchrugog", "Crymych": "Crymych", "Mynachlog-ddu": "Mynachlog-ddu",
 }
 
+# the villages of batch 2 (src/villages.py)
+WIKI.update({
+    "Newborough": "Newborough,_Anglesey", "Valley": "Valley,_Anglesey", "Cemaes": "Cemaes", "Talysarn": "Talysarn",
+    "Greenfield": "Greenfield,_Flintshire", "Borth": "Borth", "Llanarthne": "Llanarthney", "Carew": "Carew,_Pembrokeshire",
+    "Penclawdd": "Penclawdd", "St Donat’s": "St_Donat%27s", "Crumlin": "Crumlin,_Caerphilly", "Six Bells": "Six_Bells",
+    "Llansanffraid Glan Conwy": "Llansanffraid_Glan_Conwy", "Talley": "Talley", "Llanddewi Brefi": "Llanddewi_Brefi",
+})
+
 
 def wiki(en):
     return WIKI.get(en, en.replace(" ", "_"))
