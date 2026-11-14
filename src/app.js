@@ -670,19 +670,26 @@
   }
   function renderPins() {
     var counts = {}; PLACES.forEach(function (p) { counts[p.era] = (counts[p.era] || 0) + 1; });
-    chips($("#map-filter"), mapEra, function (v) { mapEra = v; renderPins(); if (mapEra !== "all" && PLACE[sel].era !== mapEra) selectPlace(PLACES.filter(function (p) { return p.era === mapEra; })[0].id); }, counts);
+    /* the age chips are one row to swipe on phones: keep the row where it was when it is redrawn, and bring the chosen age into view */
+    var mf = $("#map-filter"), sl = mf.scrollLeft;
+    chips(mf, mapEra, function (v) { mapEra = v; nearN = NEAR_STEP; renderPins(); if (mapEra !== "all" && PLACE[sel].era !== mapEra) selectPlace(PLACES.filter(function (p) { return p.era === mapEra; })[0].id); renderNear(); }, counts);
+    mf.scrollLeft = sl;
+    var on = mf.querySelector('[aria-pressed="true"]');
+    if (on && mf.scrollWidth > mf.clientWidth) { var l = on.offsetLeft - mf.offsetLeft, r = l + on.offsetWidth; if (l < mf.scrollLeft || r > mf.scrollLeft + mf.clientWidth) mf.scrollLeft = Math.max(0, l - 24); }
     $("#pins").innerHTML = PLACES.map(function (p) {
       var xy = proj(p.lat, p.lon), right = xy[0] > 430;
       return '<g class="pin' + (p.id === sel ? " sel" : "") + (mapEra !== "all" && p.era !== mapEra ? " dim" : "") + '" data-era="' + p.era + '" data-pid="' + p.id + '" tabindex="0" role="button" aria-label="' + esc(T(p.en, p.cy)) + '" transform="translate(' + xy[0].toFixed(1) + " " + xy[1].toFixed(1) + ')">' +
         '<circle class="halo" r="20"/><circle class="dot" r="7"/><text class="lbl" x="' + (right ? -14 : 14) + '" y="4" text-anchor="' + (right ? "end" : "start") + '">' + esc(T(p.en, p.cy)) + "</text></g>";
     }).join("");
+    var top = document.querySelector("#pins .pin.sel"); if (top) top.parentNode.appendChild(top);  /* the chosen pin and its name are drawn over its neighbours */
   }
   function cap(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
   function selectPlace(id) {
     if (!PLACE[id]) return;
     sel = id; var p = PLACE[id], E = ERA[p.era];
-    if (mapEra !== "all" && p.era !== mapEra) mapEra = "all";
+    var eraReset = mapEra !== "all" && p.era !== mapEra; if (eraReset) mapEra = "all";
     renderPins();
+    if (eraReset && TW) renderNear(); else $$("#near-list .near-go").forEach(function (x) { x.classList.toggle("on", x.dataset.pid === id); });
     var visible = PLACES.filter(function (x) { return mapEra === "all" || x.era === mapEra; }), i = visible.indexOf(p);
     var evIdx = -1; EVENTS.forEach(function (e, j) { if (e[E_PLACE] === id && evIdx < 0) evIdx = j; });
     var other = lang === "en" ? p.cy : p.en;
@@ -697,7 +704,23 @@
     $("#pl-prev").onclick = function () { selectPlace(visible[(i - 1 + visible.length) % visible.length].id); };
     $("#pl-next").onclick = function () { selectPlace(visible[(i + 1) % visible.length].id); };
   }
-  $("#pins").addEventListener("click", function (ev) { var g = ev.target.closest(".pin"); if (g) selectPlace(g.dataset.pid); });
+  /* A tap picks the nearest pin within reach, not only the dot under the finger: about 48 px across on touch
+     screens, 24 px with a mouse. Where pins crowd together the closest one wins, so small dots are easy to hit on phones. */
+  var COARSE = window.matchMedia && matchMedia("(pointer: coarse)").matches;
+  $("#wales").addEventListener("click", function (ev) {
+    if (mode !== "sites") return;
+    var svg = $("#wales"), m = svg.getScreenCTM && svg.getScreenCTM(), hit = ev.target.closest && ev.target.closest(".pin");
+    if (!m) { if (hit) selectPlace(hit.dataset.pid); return; }
+    var pt = svg.createSVGPoint(); pt.x = ev.clientX; pt.y = ev.clientY; pt = pt.matrixTransform(m.inverse());
+    var reach = (COARSE ? 24 : 12) / (Math.abs(m.a) || 1), best = null, bd = reach * reach;
+    PLACES.forEach(function (p) {
+      if (mapEra !== "all" && p.era !== mapEra) return;
+      var xy = proj(p.lat, p.lon), dx = xy[0] - pt.x, dy = xy[1] - pt.y, d = dx * dx + dy * dy;
+      if (d <= bd) { bd = d; best = p.id; }
+    });
+    if (!best && hit && !hit.classList.contains("dim")) best = hit.dataset.pid;
+    if (best) selectPlace(best);
+  });
   $("#pins").addEventListener("keydown", function (ev) { var g = ev.target.closest(".pin"); if (g && (ev.key === "Enter" || ev.key === " ")) { ev.preventDefault(); selectPlace(g.dataset.pid); var n = $('.pin[data-pid="' + g.dataset.pid + '"]'); if (n) n.focus(); } });
 
   /* ---------- Map: kingdoms ---------- */
@@ -799,7 +822,7 @@
     mode = m;
     $("#mode-sites").setAttribute("aria-pressed", m === "sites"); $("#mode-kg").setAttribute("aria-pressed", m === "kg");
     /* SVG elements have no .hidden property in every browser, so set the attribute itself */
-    $("#las").toggleAttribute("hidden", m !== "kg"); $("#kg-labels").toggleAttribute("hidden", m !== "kg"); if (m !== "kg") kgStop(); $("#pins").style.display = m === "kg" ? "none" : ""; $("#map-filter").hidden = m === "kg";
+    $("#las").toggleAttribute("hidden", m !== "kg"); $("#kg-labels").toggleAttribute("hidden", m !== "kg"); if (m !== "kg") kgStop(); $("#pins").style.display = m === "kg" ? "none" : ""; $("#map-filter").hidden = m === "kg"; if (document.getElementById("near")) $("#near").hidden = m === "kg";
     $("#place-card").hidden = m === "kg"; $("#kg-card").hidden = m !== "kg";
     if (m === "kg") renderKg();
   }
@@ -994,43 +1017,83 @@
   }
 
 
-  /* ---------- History near you ---------- */
-  var TW = window.TOWNS || [], nearAt = null;
+  /* ---------- History near you, and the list of places (map.html). Both sit above the map.
+     With a town chosen, the list runs nearest first; without one, "See the places as a list" opens every place
+     in the chosen age, oldest first. The list grows a few at a time and follows the age chips. ---------- */
+  var TW = window.TOWNS || [], nearAt = null, NEAR_STEP = innerWidth < 700 ? 5 : 8, nearN = NEAR_STEP, nearOpen = false;
   function km(a, b, c, d) { var R = 6371, r = Math.PI / 180, x = Math.sin((c - a) * r / 2), y = Math.sin((d - b) * r / 2); return 2 * R * Math.asin(Math.sqrt(x * x + Math.cos(a * r) * Math.cos(c * r) * y * y)); }
   function findTown(q) { q = q.trim().toLowerCase(); if (!q) return null; var hit = null; TW.forEach(function (t) { if (!hit && (t[0].toLowerCase() === q || t[1].toLowerCase() === q)) hit = t; }); if (!hit) TW.forEach(function (t) { if (!hit && (t[0].toLowerCase().indexOf(q) === 0 || t[1].toLowerCase().indexOf(q) === 0)) hit = t; }); return hit; }
+  function nearRows() {
+    var rows = PLACES.filter(function (p) { return mapEra === "all" || p.era === mapEra; }).map(function (p) { return [nearAt ? km(nearAt.lat, nearAt.lon, p.lat, p.lon) : 0, p]; });
+    var ord = {}; ERAS.forEach(function (e, i) { ord[e.id] = i; });
+    rows.forEach(function (r, i) { r[2] = i; });
+    rows.sort(nearAt ? function (a, b) { return a[0] - b[0]; } : function (a, b) { return ord[a[1].era] - ord[b[1].era] || yearNum(a[1].year) - yearNum(b[1].year) || a[2] - b[2]; });
+    return rows;
+  }
+  /* "c. 500 BC" -> -500, "1180s" -> 1180, "6th century" -> 550; words such as "Iron Age" sort by their age alone */
+  function yearNum(s) {
+    var m = /(\d[\d,]*)(st|nd|rd|th)?/.exec(s || ""); if (!m) return /prehistoric/i.test(s) ? -3000 : /iron age/i.test(s) ? -500 : 1e5;
+    var n = +m[1].replace(/,/g, ""); if (m[2]) n = n * 100 - 50;
+    return /^\s*BC/.test(s.slice(m.index + m[0].length)) ? -n : n;
+  }
   function renderNear() {
-    $("#near-towns").innerHTML = TW.map(function (t) { return '<option value="' + esc(T(t[0], t[1])) + '">'; }).join("");
+    if (!document.getElementById("near-list")) return;
+    if (!$("#near-towns").firstChild) $("#near-towns").innerHTML = TW.map(function (t) { return '<option value="' + esc(T(t[0], t[1])) + '">'; }).join("");
     var inp = $("#near-in"); inp.placeholder = T("Type your town, e.g. Bala", "Teipiwch eich tref, e.e. Y Bala");
-    var list = $("#near-list"), you = $("#you-pin");
-    if (!nearAt) { list.innerHTML = ""; if (you) you.remove(); return; }
-    var near = PLACES.map(function (p) { return [km(nearAt.lat, nearAt.lon, p.lat, p.lon), p]; }).sort(function (a, b) { return a[0] - b[0]; }).slice(0, 5);
-    $("#near-msg").textContent = T("Nearest historic places to ", "Y lleoedd hanesyddol agosaf at ") + nearAt.name + ":";
-    list.innerHTML = near.map(function (x) {
-      var p = x[1], d = x[0] < 1 ? T("under 1 km", "llai nag 1 km") : Math.round(x[0]) + " km";
-      return '<li data-era="' + p.era + '"><button type="button" class="near-go" data-pid="' + p.id + '"><b>' + esc(T(p.en, p.cy)) + "</b><span>" + d + " · " + esc(p.year) + "</span></button></li>";
+    var list = $("#near-list"), you = document.getElementById("you-pin"), msg = $("#near-msg");
+    var browse = $("#near-browse"), more = $("#near-more"), hide = $("#near-hide");
+    if (!nearAt && you) you.parentNode.removeChild(you);
+    var rows = nearRows(), age = mapEra === "all" ? "" : T(ERA[mapEra].en, ERA[mapEra].cy), show = nearAt || nearOpen;
+    browse.hidden = !!show;
+    browse.textContent = mapEra === "all" ? T("List all " + rows.length + " places", "Rhestr o’r " + rows.length + " lle") : T("List these " + rows.length + " places", "Rhestr o’r " + rows.length + " lle hyn");
+    if (!show) { list.innerHTML = ""; more.hidden = hide.hidden = true; return; }
+    var shown = rows.slice(0, nearN);
+    msg.textContent = nearAt ? T("Nearest historic places to ", "Y lleoedd hanesyddol agosaf at ") + nearAt.name + (age ? " (" + age + ")" : "") + ":"
+                             : (age ? age + ": " : "") + T(rows.length + " places, oldest first:", rows.length + " lle, yr hynaf yn gyntaf:");
+    list.innerHTML = shown.map(function (x) {
+      var p = x[1], E = ERA[p.era], d = nearAt ? (x[0] < 1 ? T("under 1 km", "llai nag 1 km") : Math.round(x[0]) + " km") + " · " : "";
+      return '<li data-era="' + p.era + '"><button type="button" class="near-go' + (p.id === sel ? " on" : "") + '" data-pid="' + p.id + '"><b>' + esc(T(p.en, p.cy)) + "</b><span>" + d + esc(p.year) + (age ? "" : " · " + esc(T(E.en, E.cy))) + "</span></button></li>";
     }).join("");
+    more.hidden = rows.length <= nearN;
+    more.textContent = T("More places", "Rhagor o leoedd") + " (" + (rows.length - shown.length) + ")";
+    hide.hidden = false;
+    hide.textContent = nearAt ? T("Clear", "Clirio") : T("Hide the list", "Cuddio’r rhestr");
+    if (!nearAt) return;
     var xy = proj(nearAt.lat, nearAt.lon);
     if (!you) { you = document.createElementNS("http://www.w3.org/2000/svg", "g"); you.id = "you-pin"; you.setAttribute("class", "you"); $("#wales").appendChild(you); }
     you.setAttribute("transform", "translate(" + xy[0].toFixed(1) + " " + xy[1].toFixed(1) + ")");
     you.innerHTML = '<circle r="9"/><circle class="in" r="3.5"/><text x="0" y="-15" text-anchor="middle">' + esc(T("You", "Chi")) + "</text>";
   }
-  $("#near-form").addEventListener("submit", function (ev) {
-    ev.preventDefault();
-    var t = findTown($("#near-in").value);
-    if (!t) { nearAt = null; renderNear(); $("#near-msg").textContent = T("Sorry, I don’t know that town yet. Try a nearby larger town.", "Mae’n ddrwg gen i, dw i ddim yn adnabod y dref honno eto. Rhowch gynnig ar dref fwy gerllaw."); return; }
-    nearAt = { lat: t[2], lon: t[3], name: T(t[0], t[1]) }; renderNear();
-  });
-  $("#near-geo").onclick = function () {
-    var msg = $("#near-msg");
-    if (!navigator.geolocation) { msg.textContent = T("Your browser can’t share your location. Type your town instead.", "Ni all eich porwr rannu’ch lleoliad. Teipiwch eich tref yn lle hynny."); return; }
-    msg.textContent = T("Finding you…", "Yn chwilio amdanoch…");
-    navigator.geolocation.getCurrentPosition(function (pos) {
-      var la = pos.coords.latitude, lo = pos.coords.longitude;
-      if (la < 51.2 || la > 53.6 || lo < -5.8 || lo > -2.5) { msg.textContent = T("You seem to be outside Wales, so here is the nearest corner of it.", "Mae’n ymddangos eich bod y tu allan i Gymru, felly dyma’r gornel agosaf ati."); la = Math.min(53.45, Math.max(51.38, la)); lo = Math.min(-2.75, Math.max(-5.3, lo)); }
-      nearAt = { lat: la, lon: lo, name: T("you", "chi") }; renderNear();
-    }, function () { msg.textContent = T("Location wasn’t shared. Type your town instead.", "Ni rannwyd eich lleoliad. Teipiwch eich tref yn lle hynny."); }, { timeout: 10000, maximumAge: 600000 });
-  };
-  $("#near-list").addEventListener("click", function (ev) { var b = ev.target.closest(".near-go"); if (!b) return; selectPlace(b.dataset.pid); var c = $("#place-card"); if (c && c.scrollIntoView && innerWidth < 900) c.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }); });
+  function nearFound(at) { nearAt = at; nearN = NEAR_STEP; var r = nearRows(); if (r.length) selectPlace(r[0][1].id); renderNear(); }
+  if (document.getElementById("near-form")) {
+    $("#near-form").addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      var t = findTown($("#near-in").value);
+      if (!t) { nearAt = null; renderNear(); $("#near-msg").textContent = T("Sorry, I don’t know that town yet. Try a nearby larger town.", "Mae’n ddrwg gen i, dw i ddim yn adnabod y dref honno eto. Rhowch gynnig ar dref fwy gerllaw."); return; }
+      $("#near-in").blur();  /* phones: put the keyboard away so the list shows */
+      nearFound({ lat: t[2], lon: t[3], name: T(t[0], t[1]) });
+    });
+    $("#near-geo").onclick = function () {
+      var msg = $("#near-msg");
+      if (!navigator.geolocation) { msg.textContent = T("Your browser can’t share your location. Type your town instead.", "Ni all eich porwr rannu’ch lleoliad. Teipiwch eich tref yn lle hynny."); return; }
+      msg.textContent = T("Finding you…", "Yn chwilio amdanoch…");
+      navigator.geolocation.getCurrentPosition(function (pos) {
+        var la = pos.coords.latitude, lo = pos.coords.longitude, out = la < 51.2 || la > 53.6 || lo < -5.8 || lo > -2.5;
+        if (out) { la = Math.min(53.45, Math.max(51.38, la)); lo = Math.min(-2.75, Math.max(-5.3, lo)); }
+        nearFound({ lat: la, lon: lo, name: T("you", "chi") });
+        if (out) msg.textContent = T("You seem to be outside Wales, so here is the nearest corner of it.", "Mae’n ymddangos eich bod y tu allan i Gymru, felly dyma’r gornel agosaf ati.");
+      }, function () { msg.textContent = T("Location wasn’t shared. Type your town instead.", "Ni rannwyd eich lleoliad. Teipiwch eich tref yn lle hynny."); }, { timeout: 10000, maximumAge: 600000 });
+    };
+    $("#near-browse").onclick = function () { nearOpen = true; nearN = NEAR_STEP; renderNear(); var f = $("#near-list .near-go"); if (f) f.focus(); };
+    $("#near-more").onclick = function () { var n = nearN; nearN += NEAR_STEP * 2; renderNear(); var f = $$("#near-list .near-go")[n]; if (f) f.focus(); };
+    $("#near-hide").onclick = function () { nearOpen = false; nearAt = null; nearN = NEAR_STEP; $("#near-msg").textContent = ""; $("#near-in").value = ""; renderNear(); $("#near-browse").focus(); };
+    /* choosing from the list lights the pin, opens its card, and on phones brings the map into view */
+    $("#near-list").addEventListener("click", function (ev) {
+      var b = ev.target.closest(".near-go"); if (!b) return;
+      selectPlace(b.dataset.pid); $$("#near-list .near-go").forEach(function (x) { x.classList.toggle("on", x === b); });
+      if (innerWidth < 861) goTo($("#map-box"));
+    });
+  }
 
   /* ---------- Home page: history near you, in the Map section (#mh-near). The three nearest places become picture cards, and a "You" pin lands on the small map. ---------- */
   var MH = document.getElementById("mh-near"), mhAt = null;

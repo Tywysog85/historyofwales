@@ -1083,6 +1083,39 @@ a:hover > .card-ban img, .wl-card:hover > .card-ban img { transform: scale(1.04)
 .era-events li.has-bg .row-pic.ic { background: rgba(12,15,22,.42); border-color: rgba(255,255,255,.18); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px) }
 @media print { .row-bg { display: none !important } .era-events li.has-bg { text-shadow: none } }
 
+/* ---------- Map page: find first (14 November 2026). Town search and the list of places sit above the map,
+   the twelve age chips are one row to swipe on phones, and pins are easier to tap (app.js picks the nearest pin). ---------- */
+.map-find { margin: clamp(1rem, 3vw, 1.4rem) 0 0; gap: .6rem; padding: clamp(.9rem, 2.5vw, 1.3rem) }
+.map-find .near-form { align-items: center; max-width: 46rem }
+.near-lbl { flex: 1 0 100%; font-family: var(--f-mono); font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold) }
+.map-find .near-msg:empty { display: none }
+.map-find .near-list { grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); gap: .45rem }
+.near-go.on { border-color: var(--ink); border-left-color: var(--c); background: var(--slate-2) }
+.near-go b { font-weight: 600 }
+.near-more { display: flex; flex-wrap: wrap; gap: .5rem }
+.near-more .btn { padding: .5rem 1rem; font-size: .88rem }
+#near-geo { border-color: var(--line) }
+#map .map-legend { margin: 1rem 0 .6rem }
+#map-box { scroll-margin-top: 4.5rem }
+/* the card is a whole-card link (.wl-card sets position: relative), which pushed it 6rem down; keep it sticky beside the map on computers, and in place under it on phones */
+#map .place-card.wl-card { position: sticky }
+@media (max-width: 860px) {
+  .map-find .near-form .btn { padding: .6rem 1rem }
+  .map-find .near-form input { flex: 1 1 9rem; padding: .65rem 1rem }
+  .near-go { padding: .5rem .8rem; gap: .1rem }
+  .near-go span { font-size: .7rem }
+  #map .place-card.wl-card { position: relative; top: auto }
+  #map .map-legend { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; max-width: 100%; padding-block: 7px; margin: .7rem 0 .2rem; -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent) }
+  #map .map-legend::-webkit-scrollbar { display: none }
+  #map .map-legend .chip { flex: none; font-size: .82rem; padding: .34rem .8rem }
+  #map .map-legend .chip:last-child { margin-right: 2.5rem }
+}
+@media (pointer: coarse) {
+  #pins .pin .dot { r: 9 }
+  #pins .pin.sel .dot { r: 13 }
+  #pins .pin .halo { r: 26 }
+  #pins .pin .lbl { font-size: 21px; stroke-width: 6px }
+
 /* ---------- long reads: contents, section links, "where am I" bar (November 2026; story_toc / head_ids in build.py) ---------- */
 .prose h2[id] { scroll-margin-top: 5rem }
 .h-link { margin-left: .45rem; font: 500 .7em var(--f-mono); color: var(--c); text-decoration: none; opacity: 0; transition: opacity .2s; vertical-align: .12em; padding: .1em .25em; border-radius: 6px }
