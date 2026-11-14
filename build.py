@@ -1221,7 +1221,11 @@ def trails_index():
 # ---------- teachers ----------
 def quiz_sheet(era, n=10):
     evs = [ev for ev in D.EVENTS if ev[0] == era["id"]]
-    pick = (sorted(evs, key=lambda x: -x[9])[:n])
+    pick, seen = [], set()
+    for ev in sorted(evs, key=lambda x: -x[9]):  # turning points first; one event per date, so every letter in the bank fits one answer only
+        if year_label(ev) not in seen and len(pick) < n:
+            seen.add(year_label(ev))
+            pick.append(ev)
     pick = sorted(pick, key=lambda x: x[5])  # mixed order: alphabetical by title, not by date
     years = sorted(pick, key=lambda x: x[1])
     letters = "ABCDEFGHIJKL"
