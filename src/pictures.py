@@ -626,3 +626,7 @@ EXTRA["Dafydd Iwan, Caerfyrddin, 2023, Cymdeithas yr Iaith.jpg"] = ("Cwmcafit", 
     "Dafydd Iwan sings Yma o Hyd to the Cymdeithas yr Iaith census rally in Carmarthen, January 2023",
     "Dafydd Iwan yn canu Yma o Hyd i rali cyfrifiad Cymdeithas yr Iaith yng Nghaerfyrddin, Ionawr 2023")
 PAGE["story-welsh-revival.html"] = "c:Dafydd Iwan, Caerfyrddin, 2023, Cymdeithas yr Iaith.jpg@50% 40%"
+
+# the photo of each town, for its own page (src/town_pics.py, src/townpages.py)
+import town_pics as _TP  # noqa: E402
+EXTRA.update({k: v for k, v in _TP.EXTRA.items() if k not in EXTRA})

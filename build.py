@@ -1468,6 +1468,8 @@ def page_refs(path):
         rec = PERSON.get(rest) if kind == "person" else PLACE.get(rest)
         era = (rec[1] if kind == "person" else rec["era"]) if rec else None
         return (f"era-{era}", REF_AGE_INTRO) if era and f"era-{era}" in REF2.PAGES else (None, None)
+    if kind == "town":  # the town pages (src/townpages.py) share the towns list
+        return "towns", None
     if kind == "kings":
         return REF2.KINGS_GROUP.get(rest, "kings"), None
     if kind == "saints":
@@ -3414,7 +3416,7 @@ import placenames as PNM  # noqa: E402
 def _pn_ver():
     import hashlib
     h = hashlib.md5()
-    for f in ("placenames.py", "placenames.js", "ref_towns.py"):
+    for f in ("placenames.py", "placenames.js", "ref_towns.py", "towns_more.py", "town_long.py"):
         with open(os.path.join(SRC, f), "rb") as fh:
             h.update(fh.read())
     return h.hexdigest()[:10]
@@ -3426,7 +3428,7 @@ PN_SCRIPT = f'<script src="placenames.js?v={PN_VER}" defer></script>\n'
 
 def placenames_js():
     """The decoder's words, every town in towns.html (so a whole name can be matched), then the decoder itself."""
-    towns = [[r["en"], r["cy"], r["mEn"], r["mCy"], r["id"]] for r in RP.town_rows()]
+    towns = [[r["en"], r["cy"], r["mEn"], r["mCy"], r["id"], 1 if TOWNP.has_page(r["id"]) else 0] for r in RP.town_rows()]
     return "var PND = " + json.dumps(PNM.data(towns), ensure_ascii=False, separators=(",", ":")) + ";\n" + read("placenames.js")
 
 
@@ -4440,6 +4442,7 @@ def search_index():
                           b=[f'{kd[0]}, {r["la"]}. On the castles map.', f'{kd[1]}, {CS.LA_CY.get(r["la"], r["la"])}. Ar fap y cestyll.'], e="medieval"))
     items.append(dict(k="page", t="Welsh world firsts", c="Cymru oedd y cyntaf", u="firsts.html", y=["Firsts", "Y cyntaf"], b=["The equals sign, π, the fuel cell, the microphone, packet switching, mail order and more: everything Wales and the Welsh did first. " + ", ".join(PERSON[k][3] for k in P2.FIRSTS if k in PERSON), "Yr hafalnod, π, y gell danwydd, y meicroffon, newid pecynnau, archebu drwy’r post a rhagor: popeth a wnaeth Cymru a’r Cymry gyntaf."], e="industrial"))
     items += RP.search_items()  # the reference pages (src/refpages.py)
+    items += TOWNP.search_items()  # the town pages (src/townpages.py)
     items.append(dict(k="page", t="For teachers", c="I athrawon", u="teachers.html", y=["", ""], b=["Lesson ideas and printable quizzes", "Syniadau gwersi a chwisiau i’w hargraffu"], e="industrial"))
     return items
 
@@ -4804,6 +4807,9 @@ def not_found_page():
 
 import refpages as RP  # noqa: E402  (the reference pages: reference.html, a-z.html ...)
 RP.setup(globals())
+import townpages as TOWNP  # noqa: E402  (a history page for every town: src/townpages.py, src/town_long*.py)
+TOWNP.setup(globals())
+style += TOWNP.CSS
 EP.setup(globals())
 style += EP.CSS
 TPK.setup(globals())
@@ -4889,6 +4895,7 @@ def main():
     pages["ride-glyndwr.html"] = RIDE.page()  # Ride with Glyndŵr, 1400 (src/ride.py)
     pages.update(TPK.pages())  # teacher packs, one for each age (src/teachpacks.py)
     pages.update(EP.pages())  # a page for every event on the timeline (src/eventpages.py)
+    pages.update(TOWNP.pages(pages.keys()))  # a history page for every town and village (src/townpages.py)
     pages.update(RP.pages(pages.keys()))  # the reference pages: look-it-up desk, A–Z and the rest (src/refpages.py)
     if RP.MISSING:
         print("Reference pages: links left out because the page does not exist:", ", ".join(sorted(RP.MISSING)))

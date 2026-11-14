@@ -41,7 +41,7 @@ ADD = {
   T("Caerwys", "Caerwys", "caer, a fort; the meaning of the second part is argued over", "caer; mae ystyr yr ail ran yn ansicr",
     "A small borough chartered by Edward I in 1290. The great eisteddfodau of 1523 and 1568 met here to set the rules and grades of the bards.",
     "Bwrdeistref fach a gafodd siarter gan Edward I yn 1290. Cyfarfu eisteddfodau mawr 1523 a 1568 yma i osod rheolau a graddau’r beirdd.", [], (53.2500, -3.3080)),
-  T("Caergwrle", "Caergwrle", "the fort of Gwrle; the second part is argued over", "caer Gwrle; mae’r ail ran yn ansicr",
+  T("Caergwrle", "Caergwrle", "the fort of Gwrle, an old name not yet explained", "caer Gwrle, hen enw nas eglurwyd eto",
     "Dafydd ap Gruffudd built the castle on the hill above the village after 1277. The Caergwrle bowl, a Bronze Age boat of shale, tin and gold, was found here in 1823.",
     "Cododd Dafydd ap Gruffudd y castell ar y bryn uwchben y pentref wedi 1277. Darganfuwyd powlen Caergwrle, cwch o Oes yr Efydd o siâl, tun ac aur, yma yn 1823.", ["person-dafydd-ap-gruffudd.html"], (53.1100, -3.0380)),
  ],

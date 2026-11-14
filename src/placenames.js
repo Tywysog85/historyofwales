@@ -100,7 +100,8 @@
     return { t: p.t, kind: e.k === "e" ? "e" : e.k === "n" ? "n" : "w", mean: mean, note: note };
   }
   function townLink(t) {
-    var id = t[4];
+    var id = t[4], pre = document.documentElement.classList.contains("cy") ? "cy/" : "";
+    if (t[5]) return pre + id + ".html";  /* the town's own page (src/townpages.py) */
     return document.getElementById(id) ? "#" + id : (document.documentElement.classList.contains("cy") ? "cy/" : "") + "towns.html#" + id;
   }
 
