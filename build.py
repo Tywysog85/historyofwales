@@ -337,7 +337,7 @@ NAV_GROUPS = [
     # the twelve ages, each with its dates, so a newcomer can tell the Age of Kings from the Age of Princes (Ifan, 2026-11-12)
     ("The twelve ages", "Y deuddeg oes", [(f'era-{x["id"]}.html', x["en"], x["cy"], x["spanEn"], x["spanCy"]) for x in D.ERAS]),
     ("Explore", "Archwilio", [("reference.html", "Look it up", "Chwilio’r hanes"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("family-history.html", "Your Welsh family", "Eich teulu Cymreig"),
-                              ("castles.html", "Castles map", "Map y cestyll"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"),
+                              ("castles.html", "Castles map", "Map y cestyll"), ("visit.html", "Plan a day out", "Cynllunio diwrnod allan"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"),
                               ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn")]),
     ("Read", "Darllen", [("wales-in-10.html", "Wales in 10 minutes", "Cymru mewn 10 munud"), ("laws.html", "The Laws of Hywel Dda", "Cyfreithiau Hywel Dda"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"),
                          ("literature.html", "Literature and old books", "Llên a hen lyfrau"), ("triads.html", "The Welsh Triads", "Trioedd Ynys Prydain"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
@@ -462,7 +462,7 @@ def footer():
     # On phones site.js closes them, so the footer is four tappable headings instead of 1,600 px of links.
     eras_col = (f'<details class="fcol" open><summary class="eyebrow">{bi("The twelve ages", "Y deuddeg oes")}</summary><ul>' + "".join(
         f'<li><a href="era-{x["id"]}.html">{bi(x["en"], x["cy"])} <span class="m-dates">{bi(x["spanEn"], x["spanCy"])}</span></a></li>' for x in D.ERAS) + "</ul></details>")
-    explore = [("timeline.html", "Timeline", "Llinell amser"), ("map.html", "Map of Wales", "Map Cymru"), ("people.html", "People", "Pobl"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("family-history.html", "Your Welsh family", "Eich teulu Cymreig"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("castles.html", "Castles of Wales", "Cestyll Cymru"), ("trails.html", "Themed trails", "Llwybrau thema"),
+    explore = [("timeline.html", "Timeline", "Llinell amser"), ("map.html", "Map of Wales", "Map Cymru"), ("people.html", "People", "Pobl"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("family-history.html", "Your Welsh family", "Eich teulu Cymreig"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("castles.html", "Castles of Wales", "Cestyll Cymru"), ("visit.html", "Plan a day out", "Cynllunio diwrnod allan"), ("trails.html", "Themed trails", "Llwybrau thema"),
                ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"), ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg")]
     read = [("whatsnew.html", "What’s new", "Beth sy’n newydd"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"), ("laws.html", "The Laws of Hywel Dda", "Cyfreithiau Hywel Dda"), ("literature.html", "Welsh literature", "Llenyddiaeth Gymraeg"), ("books.html", "The great books of Wales", "Llyfrau mawr Cymru"), ("manuscripts.html", "Medieval manuscripts", "Llawysgrifau canoloesol"), ("triads.html", "The Welsh Triads", "Trioedd Ynys Prydain"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
             ("teachers.html", "For teachers", "I athrawon"), ("index.html#sources", "Sources", "Ffynonellau"),
@@ -1106,7 +1106,8 @@ def visit_box(pl):
     rows += f'<div><dt>{bi("Entry", "Mynediad")}</dt><dd>{bi(ent_en, ent_cy)}</dd></div>'
     where = (f'{bi("Postcode", "Cod post")} <b>{e(pc)}</b> · ' if pc else "") + \
         (f'<a href="{directions_url(pl)}" target="_blank" rel="noopener">{bi("Directions", "Cyfarwyddiadau")} ↗</a> · '
-         f'<a href="map.html#lle-{pid}">{bi("On our map", "Ar ein map")} →</a>')
+         f'<a href="map.html#lle-{pid}">{bi("On our map", "Ar ein map")} →</a>'
+         + (f' · <a href="visit.html?from=s:{pid}">{bi("Plan a day out from here", "Cynllunio diwrnod allan o’r fan hon")} →</a>' if pid not in VP.NOT_A_STOP else ""))
     rows += f'<div><dt>{bi("Getting there", "Cyrraedd")}</dt><dd>{where}</dd></div>'
     note = f'<p class="visit-note">{bi(*v["note"])}</p>' if v.get("note") else ""
     pic = card_pic(f"place-{pid}.html")  # the place's own photo behind the box (src/panels.py)
@@ -4454,7 +4455,8 @@ _mp_hero = (f'<header class="era-hero has-art" id="top" data-era="medieval"><div
             '<p class="span" data-cy="Map">Map</p>'
             '<h1 data-cy="Lle digwyddodd">Where it happened</h1>'
             f'<p class="lede"><span class="l-en" lang="en">{len(D.PLACES)} historic places on one map of Wales. Choose a pin to read the story behind the place, switch to Kingdoms to watch the map of Wales change, or type your town to find the history near you.</span>'
-            f'<span class="l-cy" lang="cy">{len(D.PLACES)} o leoedd hanesyddol ar un map o Gymru. Dewiswch bin i ddarllen y stori y tu ôl i’r lle, newidiwch i’r teyrnasoedd i weld map Cymru’n newid, neu teipiwch eich tref i ganfod yr hanes yn eich ymyl.</span></p></div></header>')
+            f'<span class="l-cy" lang="cy">{len(D.PLACES)} o leoedd hanesyddol ar un map o Gymru. Dewiswch bin i ddarllen y stori y tu ôl i’r lle, newidiwch i’r teyrnasoedd i weld map Cymru’n newid, neu teipiwch eich tref i ganfod yr hanes yn eich ymyl.</span></p>'
+            '<p class="more-row"><a class="btn" href="visit.html"><span class="l-en" lang="en">Plan a day out among them →</span><span class="l-cy" lang="cy">Cynlluniwch ddiwrnod allan yn eu plith →</span></a></p></div></header>')
 map_fragment = app_page("map.html", "Map of Wales · History of Wales", f"An interactive map of Welsh history: {len(D.PLACES)} historic places with their stories, the kingdoms of Wales through time, and the history near you.",
                         _mp_hero, "map_section.html", "map.html", "#map")
 
@@ -4510,6 +4512,8 @@ def search_index():
     items += [dict(k="page", t=x["en"], c=x["cy"], u=saint_href(sid), y=[x["dates"], cy_dates(x["dates"])], b=[x["nEn"].split(". ")[0] + ". " + " ".join(x["places"]), x["nCy"].split(". ")[0] + "."], e=r["era"]) for sid, (x, r) in SAINT.items()]
     items.append(dict(k="page", t="On this day in Welsh history", c="Ar y dydd hwn yn hanes Cymru", u="onthisday.html", y=["Every day", "Bob dydd"], b=["What happened on each day of the year in Welsh history", "Beth ddigwyddodd ar bob diwrnod o’r flwyddyn yn hanes Cymru"], e="medieval"))
     items.append(dict(k="page", t="Famous Welsh people", c="Pobl enwog Cymru", u="people.html", y=["People", "Pobl"], b=[f"All {len(D.PEOPLE)} people who shaped Wales, from every age, with filters by age and field", f"Pob un o’r {len(D.PEOPLE)} o bobl a luniodd Gymru, o bob oes, gyda hidlwyr yn ôl oes a maes"], e="industrial"))
+    items.append(dict(k="page", t="Plan a day out", c="Cynllunio diwrnod allan", u="visit.html", y=["Visit", "Ymweld"], b=["A day among the castles, courts, abbeys and museums of Wales you can visit: the best order, drive times, entry and a printable map", "Diwrnod ymhlith cestyll, llysoedd, abatai ac amgueddfeydd Cymru: y drefn orau, amseroedd gyrru, mynediad a map i’w argraffu"], e="medieval"))
+    items += [dict(k="page", t=f"A day out: {a[1]}", c=f"Diwrnod allan: {a[2]}", u=f"visit-{a[0]}.html", y=["Visit", "Ymweld"], b=[a[4], a[5]], e="medieval") for a in VP.AREAS]
     items.append(dict(k="page", t="Map of Wales: where it happened", c="Map Cymru: lle digwyddodd", u="map.html", y=["Map", "Map"], b=[f"{len(D.PLACES)} historic places on one map, the kingdoms through time, and history near you", f"{len(D.PLACES)} o leoedd hanesyddol ar un map, y teyrnasoedd drwy amser, a hanes yn eich ymyl"], e="medieval"))
     items.append(dict(k="page", t="The castles of Wales: the map", c="Cestyll Cymru: y map", u="castles.html", y=["Map", "Map"], b=[f"All {len(CASTLES)} castle sites in Wales on one map, with who built them", f"Pob un o’r {len(CASTLES)} o safleoedd cestyll yng Nghymru ar un map, gyda phwy a’u cododd"], e="medieval"))
     items += [dict(k="place", t=r["en"], c=r["cy"], u=f'castles.html#castle-{r["q"]}', y=[r["d"], castle_date_cy(r["d"])], b=[r["cur"][1] + ". " + r["cur"][4], r["cur"][2] + ". " + r["cur"][5]], e="medieval") for r in castle_rows() if r["cur"]]
@@ -5012,6 +5016,10 @@ COURTS.setup(globals())
 style += COURTS.CSS
 LLYS.setup(globals())
 style += LLYS.CSS
+import visitplan as VP  # noqa: E402  (plan a day out: visit.html and the ready-made days, visit-<area>.html; src/visitplan.py, src/static/visitplan.js)
+import ref_sites as _VP_ST, ref_towns as _VP_RT  # noqa: E402
+VP.setup(dict(globals(), ST=_VP_ST, RT=_VP_RT))
+style += VP.CSS
 style += RIDE.CSS
 style += TPK.CSS
 import about as AB  # noqa: E402  (the About page, the author and "last updated" lines, reporting a mistake)
@@ -5089,6 +5097,7 @@ def main():
     pages["llys-rhosyr.html"] = LLYS.page()  # Llys Rhosyr in 3D (src/llys.py)
     pages.update(COURTS.pages())  # more courts in 3D (src/courts.py)
     pages["ride-glyndwr.html"] = RIDE.page()  # Ride with Glyndŵr, 1400 (src/ride.py)
+    pages.update(VP.pages())  # plan a day out, and the ready-made days out (src/visitplan.py)
     pages.update(TPK.pages())  # teacher packs, one for each age (src/teachpacks.py)
     pages.update(EP.pages())  # a page for every event on the timeline (src/eventpages.py)
     pages.update(RP.pages(pages.keys()))  # the reference pages: look-it-up desk, A–Z and the rest (src/refpages.py)

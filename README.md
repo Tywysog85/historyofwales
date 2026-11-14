@@ -41,6 +41,7 @@ Everything is plain HTML, CSS and JavaScript. There is no framework and nothing 
 | The Kingdoms map | `src/kingdoms.py` |
 | A page for every timeline event, and the fuller telling of the big ones | `src/eventpages.py`, `src/events_more.py` |
 | The castles map | `src/castles.py`, `src/castles_data.json`, `src/static/castles.js` |
+| Plan a day out (`visit.html`) and the 18 ready-made days out (`visit-*.html`) | `src/visitplan.py`; the planner in the browser is `src/static/visitplan.js` (check the two agree with `python3 tools/visit_check.py`) |
 | Teacher packs (`pack-*.html`) | `src/teachpacks.py` |
 | Family history: surnames, ap and ferch, finding your ancestors (`family-history.html`) | `src/family.py` |
 | Ride with Glyndŵr (`ride-glyndwr.html`) and Llys Rhosyr in 3D (`llys-rhosyr.html`) | `src/ride.py`, `src/llys.py` (3D code in `tools/llys3d.src.js`) |
