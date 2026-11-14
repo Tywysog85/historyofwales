@@ -725,7 +725,7 @@
       setActive(best);
       var secs = ["chapters", "stories", "map", "people", "legends", "language", "play", "sources"], cur = null;
       secs.forEach(function (s) { var el = document.getElementById(s); if (!el) return; var r = el.getBoundingClientRect(); if (r.top < window.innerHeight * 0.4) cur = s; });
-      if (HERO) $$(".nav-inline a").forEach(function (a) { a.classList.toggle("on", a.getAttribute("href") === "index.html#" + cur); });
+      if (HERO) $$(".nav-inline a").forEach(function (a) { var h = a.getAttribute("href") || ""; a.classList.toggle("on", /^(\.\/|cy\/|index\.html)?#/.test(h) && h.split("#")[1] === cur); });  // home links are ./#x in English, cy/#x in Welsh
     });
   }
   window.addEventListener("scroll", onScroll, { passive: true });
