@@ -1112,3 +1112,22 @@ a:hover > .card-ban img, .wl-card:hover > .card-ban img { transform: scale(1.04)
 @media (max-width: 1100px) { .s-grid.four { grid-template-columns: 1fr 1fr } }
 @media (max-width: 560px) { .s-grid.four { grid-template-columns: 1fr } }
 @media print { .toc-pill, .h-link { display: none !important } .toc { break-inside: avoid } .toc details > * { display: block } }
+/* ---------- a shorter opening screen on computers, so "Twelve ages of Wales" shows when the page loads (Ifan, 14 Nov 2026) ---------- */
+@media (min-width: 1100px) {
+  .hero { min-height: 0 }
+  .hero .wrap { padding-block: 1.9rem 1.6rem }
+  .hero h1 { font-size: clamp(4.2rem, 8.6vw, 8.2rem) }
+  .hero .sub { margin-top: 1.1rem; gap: .7rem; max-width: 52rem }
+  .hero .sub p:first-child { font-size: clamp(1.4rem, 2.2vw, 1.75rem) }
+  .hero .sub p + p { max-width: 50rem; font-size: 1rem; line-height: 1.55 }
+  .begin { margin-top: 1.1rem }
+  .begin .eyebrow { margin-bottom: .45rem }
+  .begin-card { padding: .7rem 2.1rem .7rem .85rem }
+  .begin-card .b-s { font-size: .82rem; line-height: 1.35 }
+  .hero .ticker .wrap { padding-block: .65rem .85rem }
+  .hero .ticker b { font-size: 1.9rem }
+  .marquee { padding-block: .55rem .5rem }
+  .marquee .track { font-size: clamp(2rem, 2.8vw, 2.4rem) }
+  .marquee .track2 { font-size: 1.05rem }
+  main.home > #chapters { padding-top: 2rem }
+}
