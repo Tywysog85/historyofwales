@@ -14,7 +14,8 @@ function heightAt(h, x, z) { /* metres east and south of the map corner */
   const xi = u | 0, yi = v | 0, fx = u - xi, fy = v - yi, i = yi * HN + xi;
   return (h[i] * (1 - fx) + h[i + 1] * fx) * (1 - fy) + (h[i + HN] * (1 - fx) + h[i + HN + 1] * fx) * fy;
 }
-const MIST = { value: new THREE.Vector3(0.2, 0.18, 0.24) }; /* the colour of the valley mist as it is painted on screen, set each frame from the sky */
+const MIST = { value: new THREE.Vector3(0.2, 0.18, 0.24) };
+const FADE = { value: new THREE.Vector2(1400, 2700) }; /* where the moor melts away (metres from the eye), set each frame from src/app.js: nearer on phones, so the mountains rise just behind the castle (Ifan, 14 Nov 2026) */ /* the colour of the valley mist as it is painted on screen, set each frame from the sky */
 function buildLand(h, colour, normal, detail, rock, rockN) {
   const seg = HN - 1, geo = new THREE.PlaneGeometry(KM, KM, seg, seg); geo.rotateX(-Math.PI / 2); geo.translate(KM / 2, 0, KM / 2);
   const p = geo.attributes.position; /* the hill nearest the eye is levelled into the valley floor: it was too close and too low to read as anything but a blob */
@@ -187,8 +188,9 @@ function buildMoor(tex) {
   geo.setAttribute("color", new THREE.BufferAttribute(col, 3)); geo.computeVertexNormals();
   const mat = new THREE.MeshStandardMaterial({ map: tex.rock, normalMap: tex.rockN, normalScale: new THREE.Vector2(1.5, 1.5), roughness: 0.96, vertexColors: true, color: new THREE.Color(2.1, 2.1, 2.1), transparent: true });
   mat.onBeforeCompile = (sh) => {
-    sh.fragmentShader = sh.fragmentShader.replace("#include <map_fragment>", "#include <map_fragment>\n vec2 ru = mat2(0.766, 0.643, -0.643, 0.766) * vMapUv; diffuseColor.rgb = mix(diffuseColor.rgb, texture2D(map, ru * 0.31 + 0.17).rgb * vColor.rgb * diffuse, 0.5) * (0.5 + 1.0 * texture2D(map, ru * 0.047 + 0.31).g / 0.2);")
-      .replace("#include <premultiplied_alpha_fragment>", "gl_FragColor.a *= 1.0 - smoothstep(1400.0, 2700.0, length(vViewPosition)); if (gl_FragColor.a < 0.02) discard;\n#include <premultiplied_alpha_fragment>");
+    sh.uniforms.fade = FADE;
+    sh.fragmentShader = "uniform vec2 fade;\n" + sh.fragmentShader.replace("#include <map_fragment>", "#include <map_fragment>\n vec2 ru = mat2(0.766, 0.643, -0.643, 0.766) * vMapUv; diffuseColor.rgb = mix(diffuseColor.rgb, texture2D(map, ru * 0.31 + 0.17).rgb * vColor.rgb * diffuse, 0.5) * (0.5 + 1.0 * texture2D(map, ru * 0.047 + 0.31).g / 0.2);")
+      .replace("#include <premultiplied_alpha_fragment>", "gl_FragColor.a *= 1.0 - smoothstep(fade.x, fade.y, length(vViewPosition)); if (gl_FragColor.a < 0.02) discard;\n#include <premultiplied_alpha_fragment>");
   };
   const m = new THREE.Mesh(geo, mat); m.receiveShadow = false; return m;
 }
@@ -252,7 +254,7 @@ try {
     if (st.castle && !castle && !noCastle) return;
     const c = castle && st.castle, tt = st.t / 1000; if (castle) castle.group.visible = !!c;
     if (c && st.flagV !== flagV) { flagV = st.flagV; castle.flagTex.needsUpdate = true; key = ""; }
-    const k = [st.sumX, st.sumY, st.ppm * 1000, st.sun, st.fog, st.mist, st.ground.x, st.ground.y, st.ground.ppm * 1000, (st.ground.tilt || 0) * 1000, c ? 1 : 0].map((q) => typeof q === "number" ? q.toFixed(1) : q).join("|");
+    const k = [st.sumX, st.sumY, st.ppm * 1000, st.sun, st.fog, st.mist, st.ground.x, st.ground.y, st.ground.ppm * 1000, (st.ground.tilt || 0) * 1000, String(st.ground.fade || ""), c ? 1 : 0].map((q) => typeof q === "number" ? q.toFixed(1) : q).join("|");
     const full = k !== key; key = k;
     if (!full && !c) return;
     if (full) {
@@ -266,6 +268,7 @@ try {
       place(camF, Math.hypot(FD, 18), st.ground.ppm, st.ground.x, st.ground.y - 14 * st.ground.ppm);
       /* tilt lifts the far side of the moor (radians), so it rises to meet the mountains where they stand well above the castle (tablets, phones in desktop mode) */
       if (moor) moor.rotation.x = st.ground.tilt || 0;
+      if (st.ground.fade) FADE.value.set(st.ground.fade[0], st.ground.fade[1]);
       if (c) { castle.lights.forEach((l, i) => { l.intensity = castle.base[i] * (1 - 0.7 * sun); }); castle.glows.forEach((g) => { g.material.opacity = 0.4 * (1 - 0.7 * sun); }); }
       renderer.setScissorTest(false);
     } else {
