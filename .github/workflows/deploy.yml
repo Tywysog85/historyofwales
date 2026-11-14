@@ -30,12 +30,27 @@ jobs:
           python-version: "3.12"
       - name: Install Pillow (for the share pictures)
         run: pip install pillow
+      # The share pictures (cards/) are kept between builds, so only new or changed ones are drawn (see make_cards()).
+      - name: Restore the share pictures made last time
+        uses: actions/cache/restore@v4
+        with:
+          path: .cache/cards
+          key: share-cards-${{ github.run_id }}
+          restore-keys: share-cards-
       - name: Build site
+        id: build
         run: python3 build.py
         env:
           GOATCOUNTER: historyofwales
           SITE_URL: https://historyofwales.cymru/
           EMAIL_FORM: ${{ vars.EMAIL_FORM }}
+      - name: Keep the share pictures for next time
+        if: steps.build.outputs.cards_new == 'true'
+        continue-on-error: true
+        uses: actions/cache/save@v4
+        with:
+          path: .cache/cards
+          key: share-cards-${{ github.run_id }}
       # The build stamps anything new with the time it was added (src/added.json), so pages can show the newest first.
       # If a change forgot to commit that file, save it back here so the date stays put. Never stops the deploy.
       - name: Save when new items were added

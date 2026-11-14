@@ -102,10 +102,22 @@ EMAIL_FORM = os.environ.get("EMAIL_FORM", "").strip() or ""
 try:
     sys.path.insert(0, os.path.join(ROOT, "tools"))
     import cards as CARDS  # noqa: E402
+    with open(CARDS.__file__, "rb") as _fh:   # the code that draws the cards, as loaded: a change to it draws them all again
+        import hashlib as _hl
+        CARDS_FP = _hl.md5(_fh.read()).hexdigest()
     CARDS_ON = os.environ.get("CARDS", "1") != "0"
 except ImportError:
     CARDS_ON = False
 CARD_JOBS = {}
+
+
+def card_for(path, title, desc, era=None):
+    """Book a share picture for a page (drawn at the end of the build by share_cards()) and return its address, or None
+    when there are no share pictures (no Pillow, or CARDS=0): the page then shows og.png."""
+    if not CARDS_ON or path == "404.html":
+        return None
+    CARD_JOBS[path] = (title, desc, era)
+    return "cards/" + path[:-5] + ".jpg"
 WIKI = "https://en.wikipedia.org/wiki/"
 
 
@@ -274,7 +286,7 @@ def head_tags(title, desc, path, og_type="website", image=None):
          f'<meta property="og:type" content="{og_type}">\n<meta property="og:url" content="{url}">\n<meta property="og:site_name" content="History of Wales">\n'
          f'<meta property="og:image" content="{BASE_URL}{image or "og.png"}">\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n<meta property="og:image:alt" content="{e(title)}">\n'
          '<meta property="og:locale" content="en_GB">\n<meta property="og:locale:alternate" content="cy_GB">\n'
-         '<meta name="twitter:card" content="summary_large_image">\n'
+         f'<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:image" content="{BASE_URL}{image or "og.png"}">\n<meta name="twitter:image:alt" content="{e(title)}">\n'
          f'<link rel="alternate" type="application/atom+xml" title="History of Wales: what’s new and on this day" href="{BASE_URL}feed.xml">\n')
     return t
 
@@ -477,10 +489,7 @@ def footer():
 
 def page(path, title, desc, main_html, era=None, og_type="article", ld=None, active="", track="", extra=""):
     main_html = PX.dress(path, era, main_html)
-    card = None
-    if CARDS_ON and path != "404.html":
-        CARD_JOBS[path] = (title, desc, era)
-        card = "cards/" + path[:-5] + ".jpg"
+    card = card_for(path, title, desc, era)
     first = first_published(path)
     ld_html = SEO.ld_script(SEO.page_ld(BASE_URL, path, title, desc, og_type, ld, main_html, card, published=first))
     rk, rintro = page_refs(path)
@@ -4327,7 +4336,7 @@ index_head = re.sub(r'<meta name="description"[^>]*>\n', "", index_head, count=1
 _bare_head = index_head
 index_head = (head_tags("History of Wales · Hanes Cymru: Welsh history, people and places",
                         "Welsh history from the first people to the Senedd: kings, princes, castles, saints and poets, with a timeline, map and games. In English and Cymraeg.",
-                        "", "website") + SEO.ld_script(SEO.home_ld(BASE_URL)) + "\n" + index_head)
+                        "", "website", card_for("index.html", "Cymru", "")) + SEO.ld_script(SEO.home_ld(BASE_URL)) + "\n" + index_head)
 _body_filled = (body.replace("__WALES__", geo["outline"]).replace("__WELSHV__", str(WELSH_JS_VER)).replace("__PNV__", PN_VER)
                 .replace("__DATA__", json.dumps(DATA, ensure_ascii=False, separators=(",", ":")))
                 .replace("__TOWNS__", json.dumps(TW.TOWNS, ensure_ascii=False, separators=(",", ":")))
@@ -4340,7 +4349,7 @@ def app_page(path, title, desc, hero_html, section_file, active, skip):
     """A page that reuses the home page's script with only one of its sections (timeline, quiz)."""
     hero_html = PX.dress(path, None, hero_html)
     h = re.sub(r'<header class="hero" id="top">.*?</header>', lambda m: hero_html, _bare_head, count=1, flags=re.S)
-    h = head_tags(title, desc, path) + SEO.ld_script(SEO.page_ld(BASE_URL, path, title, desc, "website", None, hero_html)) + "\n" + h
+    h = head_tags(title, desc, path, image=card_for(path, title, desc)) + SEO.ld_script(SEO.page_ld(BASE_URL, path, title, desc, "website", None, hero_html)) + "\n" + h
     b = "<main>\n" + read(section_file) + "</main>\n" + _body_filled[_body_filled.index("__FOOTER__"):]
     return fill(h + b, active, skip)
 
@@ -4681,19 +4690,122 @@ def card_photo(path):
     return None
 
 
-def make_cards(out):
-    done = 0
+# The page's picture for its share card: a picture named for it in src/pictures.py, else its own portrait, place or
+# gallery photo, else the picture at the top of its page (its age's photo). Returns (file, where the subject sits).
+def card_picture(path, era):
+    if path in PX.PAGE or path in CARD_HOME:
+        ref = CARD_HOME.get(path) or PX.PAGE[path]
+    else:
+        f = card_photo(path)
+        if f:
+            return f, None
+        ref = PX.for_page(path, era)
+    if not ref:
+        return None, None
+    p = PX._parse(ref)
+    if p.get("remote"):
+        return None, None
+    return os.path.join(SRC, "static", p["src"]), p.get("pos")
+
+
+CARD_HOME = {"index.html": "g:place-harlech@50% 45%"}   # the home page's card: "Cymru" over Harlech
+CARD_DESIGN = "2"   # raise when the look of the cards changes, so Facebook and WhatsApp fetch the new ones (the ?v= number)
+CARD_CACHE = os.environ.get("CARD_CACHE") or os.path.join(ROOT, ".cache", "cards")
+_pic_fp = {}
+
+
+def _file_fp(f):
+    import hashlib
+    if f not in _pic_fp:
+        with open(f, "rb") as fh:
+            _pic_fp[f] = hashlib.md5(fh.read()).hexdigest()
+    return _pic_fp[f]
+
+
+def _strip_tags(t):
+    return html.unescape(re.sub(r"<[^>]+>", "", t or "")).strip()
+
+
+def share_cards(pages):
+    """Give every page, English and Cymraeg, its own share picture: cards/<page>.jpg and cards/cy/<page>.jpg. Points
+    og:image and twitter:image at it (with ?v=, so a changed picture is fetched again) and returns the list of pictures to
+    draw. Welsh cards take the Welsh page's own heading and description, and say "Hanes Cymru"."""
+    import hashlib
+    design = CARDS_FP
     dragon = os.path.join(SRC, "static", "dragon-red.webp")
-    for path, (title, desc, era) in CARD_JOBS.items():
-        name = html.unescape(re.sub(r"\s*·\s*History of Wales$", "", title))
-        kind = "Play" if path in GAME_PAGES else next((k[1] for k in CARD_KIND if path.startswith(k[0])), "History of Wales")
-        if path.startswith("era-") and era in ERA:
-            kind = "The ages of Wales · " + ERA[era]["spanEn"]
-        elif era in ERA and kind in ("Person", "Place", "Legend", "Long read"):
-            kind += " · " + ERA[era]["en"]
-        CARDS.make(os.path.join(out, "cards", path[:-5] + ".jpg"), kind, CITE.strip(name), CITE.strip(html.unescape(desc)), COL.get(era or "medieval", "#f26a62"), card_photo(path), dragon)
-        done += 1
-    return done
+    jobs = {}
+    for name, doc in pages.items():
+        cy = name.startswith("cy/")
+        base = name[3:] if cy else name
+        if not name.endswith(".html") or base not in CARD_JOBS or "/" in base:
+            continue
+        title, desc, era = CARD_JOBS[base]
+        lang = "cy" if cy else "en"
+        photo, pos = card_picture(base, era)
+        colour = COL.get(era or "medieval", "#f26a62")
+        if base == "index.html":
+            line = ("Hanes Cymru, o’r bobl gyntaf hyd y Senedd" if cy else "The history of Wales, from the first people to the Senedd")
+            spec = dict(kind="home", line=line)
+        else:
+            if cy:
+                name_t = _strip_tags(WP._first(doc, r"<h1\b[^>]*>(.*?)</h1>")) or _strip_tags(WP._first(doc, r"<title>(.*?)</title>"))
+                m = re.search(r'<meta property="og:description" content="([^"]*)"', doc)
+                sub = html.unescape(m.group(1)) if m else ""
+            else:
+                name_t = html.unescape(re.sub(r"\s*·\s*History of Wales$", "", title))
+                sub = html.unescape(desc)
+            name_t = re.sub(r"\s*·\s*(History of Wales|Hanes Cymru)$", "", CITE.strip(name_t))
+            k = next((k for k in CARD_KIND if base.startswith(k[0])), None)
+            kind = ("Chwarae" if cy else "Play") if base in GAME_PAGES else (k[2] if cy else k[1]) if k else ("Hanes Cymru" if cy else "History of Wales")
+            if base.startswith("era-") and era in ERA:
+                kind = ("Oesoedd Cymru · " + ERA[era]["spanCy"]) if cy else ("The ages of Wales · " + ERA[era]["spanEn"])
+            elif era in ERA and k and k[1] in ("Person", "Place", "Legend", "Long read", "On the timeline"):
+                kind += " · " + ERA[era]["cy" if cy else "en"]
+            spec = dict(kind="page", eyebrow=kind, title=name_t, sub=CITE.strip(sub), colour=colour)
+        spec.update(lang=lang, photo=photo, pos=pos, dragon=dragon)
+        key = hashlib.sha1(json.dumps([design, spec, photo and _file_fp(photo)], ensure_ascii=False, sort_keys=True).encode("utf-8")).hexdigest()
+        url = ("cards/cy/" if cy else "cards/") + base[:-5] + ".jpg"
+        ver = hashlib.sha1(json.dumps([CARD_DESIGN, {k: v for k, v in spec.items() if k not in ("photo", "dragon")}, photo and _file_fp(photo)],
+                                      ensure_ascii=False, sort_keys=True).encode("utf-8")).hexdigest()[:8]
+        full = f"{BASE_URL}{url}?v={ver}"
+        doc = re.sub(r'(<meta (?:property="og:image"|name="twitter:image") content=")[^"]*(")', lambda m: m.group(1) + full + m.group(2), doc)
+        if cy:   # the structured data names the English card; the Welsh page's should be the Welsh one
+            doc = doc.replace(f'"{BASE_URL}cards/{base[:-5]}.jpg"', f'"{BASE_URL}{url}"')
+        pages[name] = doc
+        jobs[url] = (key, spec)
+    return jobs
+
+
+def make_cards(out, jobs):
+    """Draw the share pictures, or copy them from the cache (.cache/cards, kept between GitHub builds by deploy.yml):
+    a picture is only drawn again when its words, its photo or tools/cards.py change. New ones are drawn on every core."""
+    os.makedirs(CARD_CACHE, exist_ok=True)
+    todo = []
+    for url, (key, spec) in jobs.items():
+        if not os.path.exists(os.path.join(CARD_CACHE, key + ".jpg")):
+            todo.append((os.path.join(CARD_CACHE, key + ".jpg"), spec))
+    todo = list({t[0]: t for t in todo}.values())
+    if todo:
+        import multiprocessing
+        n = min(len(todo), os.cpu_count() or 1)
+        if n > 1:
+            with multiprocessing.get_context("fork").Pool(n) as pool:
+                pool.map(CARDS.render, todo, chunksize=8)
+        else:
+            for t in todo:
+                CARDS.render(t)
+    for url, (key, spec) in jobs.items():
+        dest = os.path.join(out, url)
+        os.makedirs(os.path.dirname(dest), exist_ok=True)
+        shutil.copyfile(os.path.join(CARD_CACHE, key + ".jpg"), dest)
+    keep = {key + ".jpg" for key, _ in jobs.values()}
+    for f in os.listdir(CARD_CACHE):   # drop pictures no page uses any more, so the cache does not grow for ever
+        if f not in keep:
+            os.remove(os.path.join(CARD_CACHE, f))
+    if todo and os.environ.get("GITHUB_OUTPUT"):
+        with open(os.environ["GITHUB_OUTPUT"], "a") as fh:
+            fh.write("cards_new=true\n")
+    return len(jobs), len(todo)
 
 
 # ---------- shared files: the stylesheet and the home page's data and script are kept in files of their own ----------
@@ -4903,6 +5015,7 @@ def main():
     shared_files = shared_assets(pages)
     pages = WP.split(pages, BASE_URL, LANG_BOOT, LANG_TOGGLE, SEO.tidy_title, SEO.tidy_desc)  # English pages and their Welsh twins in cy/
     pages = {name: CITE.render(text, cy=name.startswith("cy/")) for name, text in pages.items()}  # sources beside the claims
+    card_jobs = share_cards(pages) if CARDS_ON else {}   # a share picture for every page, in English and Cymraeg
     sm, marks = SEO.sitemap(BASE_URL, pages)   # every page, with the date it last changed and its pictures
     today = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
     for name in pages:   # "Last updated" on each page, and dateModified for search engines (src/about.py)
@@ -4918,7 +5031,8 @@ def main():
     for name, text in shared_files.items():
         write(os.path.join(out, name), text)
     if CARDS_ON:
-        print(f"Made {make_cards(out)} share pictures")
+        n, drawn = make_cards(out, card_jobs)
+        print(f"Share pictures: {n} ({drawn} drawn, {n - drawn} from the cache)")
         make_today(out)
     for f in os.listdir(os.path.join(SRC, "static")):
         sp = os.path.join(SRC, "static", f)

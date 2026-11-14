@@ -4,3 +4,4 @@ __pycache__/
 *.pyc
 link-report.md
 link-count.txt
+.cache/
