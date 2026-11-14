@@ -23,6 +23,7 @@ import welshpages as WP  # noqa: E402
 import cites as CITE  # noqa: E402  (sources beside the claims: [[cite:...]] markers, src/cites.py)
 import booklinks as BL  # noqa: E402  (a checked web page for books in the reading lists, src/booklinks.py)
 import llys as LLYS  # noqa: E402  (Llys Rhosyr in 3D: llys-rhosyr.html, src/llys.py, tools/llys3d.src.js -> src/static/llys3d.js)
+import courts as COURTS  # noqa: E402  (more courts in 3D: court-<id>.html, src/courts.py, tools/court-<id>.src.js)
 import ride as RIDE  # noqa: E402  (Ride with Glyndŵr, 1400: ride-glyndwr.html, src/ride.py, src/static/ride.js)
 import evidence as EVID  # noqa: E402  (evidence labels: archaeology, early chronicle, recorded: src/evidence.py)
 import teachpacks as TPK  # noqa: E402  (teacher packs: pack-<age>.html, src/teachpacks.py)  (every page also in Welsh at cy/<page>.html: src/welshpages.py)  (a page for every timeline event: src/eventpages.py)
@@ -2496,6 +2497,8 @@ GAMES = [
  ("pairs.html", "pairs", "Word pairs", "Parau geiriau", "A memory game for younger visitors: match the Welsh word to its meaning.", "Gêm gof i ymwelwyr iau: parwch y gair Cymraeg â’i ystyr.", "For children", "I blant", "modern"),
 ]
 
+GAMES = GAMES[:1] + COURTS.games() + GAMES[1:]  # the courts in 3D (src/courts.py), beside Llys Rhosyr
+
 GAMES = AD.newest("game", GAMES, key=lambda g: g[0], ties="keep")  # a new game goes at the top
 
 
@@ -4656,7 +4659,7 @@ CARD_KIND = [("person-", "Person", "Person"), ("event-", "On the timeline", "Ar 
              ("onthisday", "On this day", "Ar y dydd hwn"), ("firsts", "Welsh world firsts", "Y cyntaf"), ("mabinogion", "The Mabinogion", "Y Mabinogion"),
              ("literature", "The literature of Wales", "Llenyddiaeth Cymru"), ("books", "The great books of Wales", "Llyfrau mawr Cymru"), ("triads", "The Welsh Triads", "Trioedd Ynys Prydain")]
 CARD_GALLERY = {"literature": "trea-book-aneirin", "books": "trea-black-book", "triads": "trea-red-book"}
-GAME_PAGES = {"llys-rhosyr.html", "ride-glyndwr.html", "daily.html", "map-game.html", "names.html", "hero.html", "pairs.html", "play.html", "quiz.html"}
+GAME_PAGES = {*(f"court-{c['id']}.html" for c in COURTS.COURTS), "llys-rhosyr.html", "ride-glyndwr.html", "daily.html", "map-game.html", "names.html", "hero.html", "pairs.html", "play.html", "quiz.html"}
 
 
 def card_photo(path):
@@ -4805,6 +4808,8 @@ EP.setup(globals())
 style += EP.CSS
 TPK.setup(globals())
 RIDE.setup(globals())
+COURTS.setup(globals())
+style += COURTS.CSS
 LLYS.setup(globals())
 style += LLYS.CSS
 style += RIDE.CSS
@@ -4880,6 +4885,7 @@ def main():
     pages["whatsnew.html"] = whatsnew_page()
     pages["about.html"] = AB.about_page()
     pages["llys-rhosyr.html"] = LLYS.page()  # Llys Rhosyr in 3D (src/llys.py)
+    pages.update(COURTS.pages())  # more courts in 3D (src/courts.py)
     pages["ride-glyndwr.html"] = RIDE.page()  # Ride with Glyndŵr, 1400 (src/ride.py)
     pages.update(TPK.pages())  # teacher packs, one for each age (src/teachpacks.py)
     pages.update(EP.pages())  # a page for every event on the timeline (src/eventpages.py)

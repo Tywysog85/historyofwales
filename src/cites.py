@@ -1020,6 +1020,8 @@ from druids import CITES as _DRUIDS  # noqa: E402  (the Druids, src/druids.py)
 S.update(_DRUIDS)
 from ages12 import CITES as _AGES12  # noqa: E402  (the places of the Age of Revival, src/ages12.py)
 S.update(_AGES12)
+from courts import CITES as _COURTS  # noqa: E402  (the courts in 3D, src/courts.py)
+S.update(_COURTS)
 
 MARK = re.compile(r"\[\[cite:([a-z0-9,\- ]+)\]\]")
 
