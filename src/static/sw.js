@@ -31,6 +31,7 @@ self.addEventListener("fetch", (e) => {
   if (req.method !== "GET" || req.headers.has("range")) return;
   const url = new URL(req.url);
   if (url.origin !== location.origin) return;
+  if (/\.(?:m4a|mp3|ogg|opus|wav)$/i.test(url.pathname)) return; // long reads read aloud and word sounds: too big to keep, and asked for in pieces
   const versioned = url.searchParams.has("v");
   if (versioned || ASSET.test(url.pathname)) {
     // Look in the cache before touching the network: a versioned file found there is used as it is, with no request at all.
