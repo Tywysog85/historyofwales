@@ -133,7 +133,7 @@ def e(s):
 head = read("head.html")
 body = read("body.html")
 app = read("app.js")
-extra_css = read("extra.css") + read("browse.css") + read("v6.css") + read("onthisday.css") + read("people2.css") + PN.css() + EVID.CSS
+extra_css = read("extra.css") + read("browse.css") + read("v6.css") + read("onthisday.css") + read("people2.css") + read("weekly.css") + PN.css() + EVID.CSS
 EVID.check(D.EVENTS, D.PEOPLE)
 geo = json.loads(read("geo", "map.json"))
 la = json.loads(read("geo", "la.json"))
@@ -2498,6 +2498,7 @@ GAMES = [
  ("llys-rhosyr.html", "llys", "Llys Rhosyr in 3D", "Llys Rhosyr mewn 3D", "Walk through a royal court of the princes of Gwynedd: the great hall, the hearth, the prince’s seat.", "Cerddwch drwy un o lysoedd brenhinol tywysogion Gwynedd: y neuadd fawr, yr aelwyd, sedd y tywysog.", "Explore in 3D", "Crwydro mewn 3D", "medieval"),
  ("ride-glyndwr.html", "ride", "Ride with Glyndŵr, 1400", "Marchogaeth gyda Glyndŵr, 1400", "Answer Owain Glyndŵr’s call as an archer, a bard or a rider, and choose your way through the rising.", "Atebwch alwad Owain Glyndŵr fel saethydd, bardd neu farchog, a dewiswch eich ffordd drwy’r gwrthryfel.", "A story you choose", "Stori rydych chi’n ei dewis", "medieval"),
  ("daily.html", "daily", "Daily challenge", "Her y dydd", "One event, six guesses to find the year. A new one every day, and a streak to keep.", "Un digwyddiad, chwe chynnig i ddyfalu’r flwyddyn. Un newydd bob dydd, a rhediad i’w gadw.", "Every day", "Bob dydd", "medieval"),
+ ("weekly-quiz.html", "weekly", "The weekly quiz", "Cwis yr wythnos", "Ten new questions every Monday, three on the week’s anniversaries. One go each, and a leaderboard.", "Deg cwestiwn newydd bob dydd Llun, tri ar ben-blwyddi’r wythnos. Un cynnig yr un, a thabl y goreuon.", "New every Monday", "Newydd bob dydd Llun", "glyndwr"),
  ("quiz.html", "quiz", "The quiz", "Y cwis", "Ten questions drawn from the timeline and the people. Every round is different.", "Deg cwestiwn o’r llinell amser a’r bobl. Mae pob rownd yn wahanol.", "10 questions", "10 cwestiwn", "kings"),
  ("map-game.html", "map", "Where in Wales?", "Ble yng Nghymru?", "Put castles, towns and battlefields on a blank map. How close can you get?", "Rhowch gestyll, trefi a meysydd brwydr ar fap gwag. Pa mor agos allwch chi fynd?", "5 rounds", "5 rownd", "modern"),
  ("quiz.html#game", "order", "Timeline challenge", "Her y llinell amser", "Put five events in order, oldest first.", "Rhowch bum digwyddiad yn eu trefn, yr hynaf yn gyntaf.", "3 rounds", "3 rownd", "industrial"),
@@ -2511,7 +2512,7 @@ GAMES = GAMES[:1] + COURTS.games() + GAMES[1:]  # the courts in 3D (src/courts.p
 GAMES = AD.newest("game", GAMES, key=lambda g: g[0], ties="keep")  # a new game goes at the top
 
 
-GAME_ICON = {"llys": "3D", "ride": "♞", "daily": "?", "quiz": "10", "map": "⌖", "order": "1→5", "names": "ap", "hero": "♛", "pairs": "Aa"}
+GAME_ICON = {"weekly": "7", "llys": "3D", "ride": "♞", "daily": "?", "quiz": "10", "map": "⌖", "order": "1→5", "names": "ap", "hero": "♛", "pairs": "Aa"}
 
 
 def play_card(g):
@@ -2570,6 +2571,86 @@ def play_index():
             + section(f'<h2 class="sr-only">{bi("All games", "Pob gêm")}</h2><div class="play-grid">{play_cards()}</div>', top=True)
             + section(f'<div class="pager"><a class="btn" href="journey.html">{bi("See your journey and badges", "Gweld eich taith a’ch bathodynnau")} →</a></div>'))
     return page("play.html", "Play · History of Wales", "Games on the history of Wales: a daily year challenge, quiz, map game, Welsh names and more.", main, era="medieval", og_type="website", active="play.html")
+
+
+# ---------- the weekly quiz (src/weeklyquiz.py writes the weeks, src/static/weekly.js runs it, worker/ keeps the leaderboard) ----------
+import weeklyquiz as WQ  # noqa: E402
+# The leaderboard's address (a Cloudflare Worker, see worker/README.md). deploy.yml finds it once the Cloudflare token is set;
+# without it the quiz works and keeps scores on the visitor's own device only.
+LEADERBOARD = os.environ.get("LEADERBOARD_URL", "").strip().rstrip("/")
+_WQ = {}
+
+
+def _wq_small(page):
+    """The picture shown with a question's answer: the linked page's card picture (a site path), or None."""
+    pic = card_pic(page)
+    if pic and not pic[0].startswith("http"):
+        return pic[0]
+    ref = PX.for_page(page.split("#")[0])
+    p = PX._parse(ref) if ref else None
+    return p["small"] if p and not p.get("remote") else None
+
+
+def _wales_today():
+    return datetime.date(1970, 1, 1) + datetime.timedelta(days=DY.day_no())
+
+
+def quiz_weeks():
+    """Every week of the weekly quiz, writing any that are missing (src/quiz_weeks.json)."""
+    if "w" not in _WQ:
+        pics = {}
+        for pl in D.PLACES:
+            g = GP.GALLERY.get("place-" + pl["id"])
+            if g:
+                pics[pl["id"]] = (f'gallery/place-{pl["id"]}-s.webp', [g[1], g[2], g[3]])
+        tales = [dict(x, link=f'legend-{x["id"]}.html') for x in F.LEGENDS if x["id"] != "arthur"]  # Arthur is history here, not a tale
+        pool = WQ.Pool(otd_rows(), D.PEOPLE, D.PLACES, pics, CYM.WORDS, tales, D.EVENTS, _wq_small)
+        weeks, added = WQ.ensure(pool, _wales_today())
+        if added:
+            print(f"Weekly quiz: wrote {added} new week(s) to src/quiz_weeks.json (commit it)")
+        _WQ["w"] = weeks
+    return _WQ["w"]
+
+
+def quiz_week_files(pages):
+    """quiz/<Monday>.json for every week up to next week, and quiz/index.json listing them. Links to pages that no longer
+    exist are dropped here (the weeks themselves stay as they were written)."""
+    weeks = quiz_weeks()
+    last = (WQ.monday(_wales_today()) + datetime.timedelta(weeks=1)).isoformat()
+    out, idx = {}, []
+    for k in sorted(weeks):
+        if k > last:
+            break
+        w = json.loads(json.dumps(weeks[k]))
+        for q in w["qs"]:
+            if q.get("l") and q["l"].split("#")[0] not in pages:
+                del q["l"]
+        out[f"quiz/{k}.json"] = json.dumps(dict(w, wk=k), ensure_ascii=False, separators=(",", ":"))
+        idx.append([k, w["n"]])
+    out["quiz/index.json"] = json.dumps(dict(weeks=idx, lb=LEADERBOARD), separators=(",", ":"))
+    return out
+
+
+def weekly_quiz_page():
+    lb = f' data-lb="{e(LEADERBOARD)}"' if LEADERBOARD else ""
+    how_en = ("Ten new questions every Monday morning, the same for everyone. The first three are on the anniversaries of the week, the same days as the Monday email. "
+              "The rest take in a figure from history, a photograph of a place, a Welsh word, a tale from Wales and which came first. You get one go a week; quizzes from past weeks can be played for practice.")
+    how_cy = ("Deg cwestiwn newydd bob bore Llun, yr un rhai i bawb. Mae’r tri cyntaf ar ben-blwyddi’r wythnos, yr un dyddiau â’r e-bost dydd Llun. "
+              "Mae’r gweddill yn cynnwys ffigwr o hanes, llun o le, gair Cymraeg, chwedl o Gymru a pha un ddaeth gyntaf. Cewch un cynnig yr wythnos; gellir chwarae cwisiau’r wythnosau a fu i ymarfer.")
+    main = (hero("glyndwr", f'<a href="index.html">{SITE}</a> / <a href="play.html">{bi("Play", "Chwarae")}</a>', "book", "Play", "Chwarae",
+                 "The weekly quiz", "Cwis yr wythnos", "Ten new questions every Monday. One go each, then see where you stand.",
+                 "Deg cwestiwn newydd bob dydd Llun. Un cynnig yr un, yna gweld ble rydych chi’n sefyll.", art="castle")
+            + f'<section class="game-sec wq-sec"><div class="wrap narrow"><div class="wq" id="wq-root"{lb}><noscript>{bi("The quiz needs JavaScript.", "Mae angen JavaScript ar y cwis.")}</noscript></div>'
+              f'<div class="wq-board" id="wq-board" hidden></div>'
+              f'<div class="wq-past" id="wq-past" hidden></div>'
+              f'<details class="wq-how"><summary>{bi("How the weekly quiz works", "Sut mae cwis yr wythnos yn gweithio")}</summary><p>{bi(how_en, how_cy)}</p>'
+              + (f'<p>{bi("The leaderboard shows a nickname you choose, your score and your time, and nothing else. Each week’s board is deleted after twelve weeks.", "Mae’r tabl yn dangos llysenw a ddewiswch, eich sgôr a’ch amser, a dim byd arall. Caiff tabl pob wythnos ei ddileu ar ôl deuddeg wythnos.")} '
+                 f'<a href="about.html#privacy">{bi("Your privacy", "Eich preifatrwydd")}</a></p>' if LEADERBOARD else "")
+              + f'</details><p class="more-row"><a class="btn" href="play.html">← {bi("All games", "Pob gêm")}</a></p></div></section>')
+    extra = f'<script src="weekly.js?v={_static_fp("weekly.js")}" defer></script>\n'
+    return page("weekly-quiz.html", "The weekly quiz · History of Wales",
+                "A new quiz on the history of Wales every Monday: ten questions, three on the week’s anniversaries, and a leaderboard.",
+                main, era="glyndwr", og_type="website", active="play.html", extra=extra)
 
 
 def journey_page():
@@ -4672,7 +4753,7 @@ CARD_KIND = [("person-", "Person", "Person"), ("event-", "On the timeline", "Ar 
              ("onthisday", "On this day", "Ar y dydd hwn"), ("firsts", "Welsh world firsts", "Y cyntaf"), ("mabinogion", "The Mabinogion", "Y Mabinogion"),
              ("literature", "The literature of Wales", "Llenyddiaeth Cymru"), ("books", "The great books of Wales", "Llyfrau mawr Cymru"), ("triads", "The Welsh Triads", "Trioedd Ynys Prydain")]
 CARD_GALLERY = {"literature": "trea-book-aneirin", "books": "trea-black-book", "triads": "trea-red-book"}
-GAME_PAGES = {*(f"court-{c['id']}.html" for c in COURTS.COURTS), "llys-rhosyr.html", "ride-glyndwr.html", "daily.html", "map-game.html", "names.html", "hero.html", "pairs.html", "play.html", "quiz.html"}
+GAME_PAGES = {*(f"court-{c['id']}.html" for c in COURTS.COURTS), "llys-rhosyr.html", "ride-glyndwr.html", "daily.html", "map-game.html", "names.html", "hero.html", "pairs.html", "play.html", "quiz.html", "weekly-quiz.html"}
 
 
 def card_photo(path):
@@ -5001,6 +5082,7 @@ def main():
     pages["hero.html"] = game_page("hero.html", "hero", "ancient", "Which figure from history are you?", "Pa ffigwr o hanes ydych chi?", "Six quick questions.", "Chwe chwestiwn cyflym.", "torch", "A short personality quiz: which figure from Welsh history are you most like?")
     pages["welsh.html"] = welsh_page()
     pages["pairs.html"] = game_page("pairs.html", "pairs", "modern", "Word pairs", "Parau geiriau", "Turn over two cards at a time and match each Welsh word to its meaning.", "Trowch ddau gerdyn ar y tro a pharu pob gair Cymraeg â’i ystyr.", "owl", "A memory game: match Welsh words to their meanings.")
+    pages["weekly-quiz.html"] = weekly_quiz_page()
     pages["404.html"] = not_found_page()
     pages["whatsnew.html"] = whatsnew_page()
     pages["about.html"] = AB.about_page()
@@ -5041,6 +5123,8 @@ def main():
         print(f"Made {TH.write(out)} small card pictures")
     write(os.path.join(out, "welsh.js"), welsh_js())
     write(os.path.join(out, "placenames.js"), placenames_js())
+    for name, text in quiz_week_files(pages).items():   # the weekly quiz, a file a week
+        write(os.path.join(out, name), text)
     write(os.path.join(out, "onthisday.json"), json.dumps(otd_rows(), ensure_ascii=False, separators=(",", ":")))
     write(os.path.join(out, "feed.xml"), feed_xml(otd_rows()))
     write(os.path.join(out, "whatsnew.json"), json.dumps(WN.NEWS, ensure_ascii=False))

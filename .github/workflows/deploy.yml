@@ -20,7 +20,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # to save src/added.json back (below)
+      contents: write   # to save src/added.json and src/quiz_weeks.json back (below)
+    env:
+      CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CF_ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -30,6 +33,41 @@ jobs:
           python-version: "3.12"
       - name: Install Pillow (for the share pictures)
         run: pip install pillow
+      # The weekly quiz leaderboard (worker/, a Cloudflare Worker on the free plan). It goes up only once the
+      # CLOUDFLARE_API_TOKEN secret is set (SKILLS.md, "The weekly quiz and its leaderboard"). Without it, or if this
+      # step fails, the site is still built and the quiz keeps each visitor's score on their own device.
+      - uses: actions/setup-node@v4
+        if: env.CF_TOKEN != ''
+        with:
+          node-version: "22"
+      - name: Put up the quiz leaderboard
+        id: lb
+        if: env.CF_TOKEN != ''
+        continue-on-error: true
+        run: |
+          api=https://api.cloudflare.com/client/v4
+          auth="Authorization: Bearer $CF_TOKEN"
+          acc="$CF_ACCOUNT"
+          if [ -z "$acc" ]; then
+            acc=$(curl -s -H "$auth" "$api/accounts" | python3 -c 'import json,sys; print(json.load(sys.stdin)["result"][0]["id"])')
+          fi
+          # a workers.dev address for the account, made the first time if the account has none yet
+          sub=$(curl -s -H "$auth" "$api/accounts/$acc/workers/subdomain" | python3 -c 'import json,sys; print((json.load(sys.stdin).get("result") or {}).get("subdomain") or "")')
+          if [ -z "$sub" ]; then
+            for name in historyofwales historyofwales-cymru hanes-cymru-quiz; do
+              if curl -s -X PUT -H "$auth" -H "Content-Type: application/json" -d "{\"subdomain\":\"$name\"}" "$api/accounts/$acc/workers/subdomain" | grep -q '"success":true'; then break; fi
+            done
+          fi
+          python3 src/weeklyquiz.py worker
+          cd worker
+          CLOUDFLARE_API_TOKEN="$CF_TOKEN" CLOUDFLARE_ACCOUNT_ID="$acc" npx --yes wrangler@4.150.0 deploy 2>&1 | tee ../wrangler.log
+          url=$(grep -o 'https://[a-z0-9.-]*\.workers\.dev' ../wrangler.log | head -1)
+          if [ -z "$url" ]; then   # the deploy failed this time: keep using the one already up, if there is one
+            sub=$(curl -s -H "$auth" "$api/accounts/$acc/workers/subdomain" | python3 -c 'import json,sys; print((json.load(sys.stdin).get("result") or {}).get("subdomain") or "")')
+            if [ -n "$sub" ] && curl -sf "https://historyofwales-quiz.$sub.workers.dev/" > /dev/null; then url="https://historyofwales-quiz.$sub.workers.dev"; fi
+          fi
+          echo "Leaderboard: ${url:-not up}"
+          echo "url=$url" >> "$GITHUB_OUTPUT"
       # The share pictures (cards/) are kept between builds, so only new or changed ones are drawn (see make_cards()).
       - name: Restore the share pictures made last time
         uses: actions/cache/restore@v4
@@ -41,6 +79,7 @@ jobs:
         id: build
         run: python3 build.py
         env:
+          LEADERBOARD_URL: ${{ steps.lb.outputs.url }}
           GOATCOUNTER: historyofwales
           SITE_URL: https://historyofwales.cymru/
           EMAIL_FORM: ${{ vars.EMAIL_FORM }}
@@ -51,17 +90,18 @@ jobs:
         with:
           path: .cache/cards
           key: share-cards-${{ github.run_id }}
-      # The build stamps anything new with the time it was added (src/added.json), so pages can show the newest first.
-      # If a change forgot to commit that file, save it back here so the date stays put. Never stops the deploy.
+      # The build stamps anything new with the time it was added (src/added.json), so pages can show the newest first,
+      # and writes the weekly quiz a year ahead (src/quiz_weeks.json, a new week each Monday).
+      # If a change forgot to commit those files, save them back here so they stay put. Never stops the deploy.
       - name: Save when new items were added
         if: github.ref == 'refs/heads/main'
         continue-on-error: true
         run: |
-          if [ -n "$(git status --porcelain -- src/added.json)" ]; then
+          if [ -n "$(git status --porcelain -- src/added.json src/quiz_weeks.json)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-            git add src/added.json
-            git commit -m "Record when new items were added to the site"
+            git add src/added.json src/quiz_weeks.json
+            git commit -m "Record when new items were added to the site, and the next weekly quiz"
             git pull --rebase origin main && git push origin HEAD:main
           fi
       - uses: actions/upload-pages-artifact@v3

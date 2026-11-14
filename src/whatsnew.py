@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-14", "The weekly quiz: ten new questions every Monday", "Cwis yr wythnos: deg cwestiwn newydd bob dydd Llun",
+     "A new quiz on the history of Wales comes out every Monday morning, the same for everyone: three questions on the week’s anniversaries, then a figure from history, a photograph of a place to name, a Welsh word, a tale from Wales and which came first. One go each, a score to share, and quizzes from past weeks to practise on.",
+     "Daw cwis newydd ar hanes Cymru allan bob bore Llun, yr un un i bawb: tri chwestiwn ar ben-blwyddi’r wythnos, yna ffigwr o hanes, llun o le i’w enwi, gair Cymraeg, chwedl o Gymru a pha un ddaeth gyntaf. Un cynnig yr un, sgôr i’w rhannu, a chwisiau’r wythnosau a fu i ymarfer arnynt.",
+     "weekly-quiz.html"),
     ("2026-11-14", "Finding your Welsh family: names, surnames and ancestors", "Dod o hyd i’ch teulu Cymreig: enwau, cyfenwau a hynafiaid",
      "A new family history corner: how ap and ferch carried a family’s memory, the Lord Rhys’s line back to Rhodri Mawr as Gerald of Wales gave it, how ap Hywel became Powell and John’s children became Jones, the twenty commonest surnames in Wales and where each comes from, and a step-by-step guide to finding your Welsh ancestors in the census, the parish and chapel registers, the wills, the tithe maps and the newspapers, with a finder that shows which records cover the years your ancestor lived.",
      "Cornel hanes teulu newydd: sut y cariai ap a ferch gof teulu, llinach yr Arglwydd Rhys yn ôl at Rodri Mawr fel y’i rhoddodd Gerallt Gymro, sut yr aeth ap Hywel yn Powell a phlant John yn Jones, yr ugain cyfenw mwyaf cyffredin yng Nghymru ac o ble daw pob un, a chanllaw gam wrth gam i ddod o hyd i’ch hynafiaid yn y cyfrifiad, cofrestri’r plwyf a’r capel, yr ewyllysiau, mapiau’r degwm a’r papurau newydd, gyda chwiliwr sy’n dangos pa gofnodion sy’n cwmpasu’r blynyddoedd y bu eich hynafiad fyw.",
