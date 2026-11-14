@@ -1,0 +1,1708 @@
+{
+ "aberfan": {
+  "cy": {
+   "file": "aberfan-cy.m4a",
+   "secs": 952.7,
+   "marks": [
+    121.33,
+    189.36,
+    283.58,
+    365.24,
+    434.52,
+    561.51,
+    659.63,
+    740.17,
+    801.92,
+    893.01
+   ],
+   "hash": "a38f3c5b90ff",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 4800996
+  },
+  "en": {
+   "file": "aberfan-en.m4a",
+   "secs": 843.0,
+   "marks": [
+    117.25,
+    178.44,
+    259.64,
+    333.64,
+    387.31,
+    501.43,
+    585.76,
+    660.34,
+    716.35,
+    792.6
+   ],
+   "hash": "c6c5f15c58d7",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 4388358
+  }
+ },
+ "arthur": {
+  "cy": {
+   "file": "arthur-cy.m4a",
+   "secs": 264.7,
+   "marks": [
+    35.5,
+    87.11,
+    145.03,
+    178.12
+   ],
+   "hash": "3554123486a8",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 1321909
+  },
+  "en": {
+   "file": "arthur-en.m4a",
+   "secs": 243.2,
+   "marks": [
+    31.88,
+    78.06,
+    132.39,
+    163.0
+   ],
+   "hash": "5be3963368c8",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 1253767
+  }
+ },
+ "bran": {
+  "cy": {
+   "file": "bran-cy.m4a",
+   "secs": 563.3,
+   "marks": [
+    94.53,
+    163.72,
+    229.13,
+    297.67,
+    332.81,
+    453.46,
+    487.94,
+    521.34
+   ],
+   "hash": "42192acf2db6",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 2847443
+  },
+  "en": {
+   "file": "bran-en.m4a",
+   "secs": 527.2,
+   "marks": [
+    98.75,
+    160.95,
+    223.6,
+    284.68,
+    314.56,
+    427.93,
+    457.06,
+    488.96
+   ],
+   "hash": "df0586934611",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 2739390
+  }
+ },
+ "brittany": {
+  "cy": {
+   "file": "brittany-cy.m4a",
+   "secs": 1429.4,
+   "marks": [
+    134.37,
+    187.88,
+    287.04,
+    404.76,
+    495.99,
+    529.71,
+    634.24,
+    763.07,
+    1007.24,
+    1068.44,
+    1128.36,
+    1228.24,
+    1271.68,
+    1379.82
+   ],
+   "hash": "9f8ac6515c16",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 7199545
+  },
+  "en": {
+   "file": "brittany-en.m4a",
+   "secs": 1315.1,
+   "marks": [
+    124.94,
+    172.15,
+    267.51,
+    372.57,
+    458.64,
+    487.54,
+    582.42,
+    701.73,
+    921.0,
+    979.06,
+    1034.34,
+    1138.04,
+    1175.34,
+    1270.44
+   ],
+   "hash": "d422b9b8397d",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 6842938
+  }
+ },
+ "bruts": {
+  "cy": {
+   "file": "bruts-cy.m4a",
+   "secs": 673.5,
+   "marks": [
+    77.94,
+    106.41,
+    191.94,
+    257.82,
+    419.24,
+    454.79,
+    489.61,
+    526.93,
+    571.68,
+    618.62
+   ],
+   "hash": "1675b923cc7c",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 3353861
+  },
+  "en": {
+   "file": "bruts-en.m4a",
+   "secs": 609.0,
+   "marks": [
+    73.21,
+    98.66,
+    175.66,
+    231.21,
+    379.89,
+    414.59,
+    446.8,
+    478.49,
+    517.92,
+    561.36
+   ],
+   "hash": "7afc71eb61ae",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 3135699
+  }
+ },
+ "brutus": {
+  "cy": {
+   "file": "brutus-cy.m4a",
+   "secs": 1075.6,
+   "marks": [
+    91.44,
+    143.47,
+    186.3,
+    271.77,
+    348.82,
+    383.77,
+    479.07,
+    607.08,
+    692.85,
+    726.04,
+    761.8,
+    824.41,
+    892.02,
+    968.44,
+    1013.48
+   ],
+   "hash": "22a9378c256c",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 5448030
+  },
+  "en": {
+   "file": "brutus-en.m4a",
+   "secs": 981.1,
+   "marks": [
+    89.15,
+    134.11,
+    172.43,
+    249.99,
+    318.76,
+    349.34,
+    438.19,
+    555.1,
+    636.69,
+    671.98,
+    704.59,
+    758.96,
+    817.91,
+    884.52,
+    926.7
+   ],
+   "hash": "d38082c5d3ed",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 5089632
+  }
+ },
+ "caradog": {
+  "cy": {
+   "file": "caradog-cy.m4a",
+   "secs": 1120.9,
+   "marks": [
+    107.08,
+    169.08,
+    215.68,
+    283.47,
+    375.4,
+    413.29,
+    535.13,
+    586.63,
+    661.67,
+    715.13,
+    866.9,
+    967.76,
+    1010.73,
+    1070.76
+   ],
+   "hash": "54e6b419bdc1",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 5628401
+  },
+  "en": {
+   "file": "caradog-en.m4a",
+   "secs": 999.8,
+   "marks": [
+    99.29,
+    152.26,
+    192.04,
+    251.24,
+    336.55,
+    369.35,
+    479.52,
+    523.3,
+    587.54,
+    635.44,
+    771.65,
+    865.01,
+    901.91,
+    954.04
+   ],
+   "hash": "178acdc8b423",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 5159156
+  }
+ },
+ "castles": {
+  "cy": {
+   "file": "castles-cy.m4a",
+   "secs": 200.1,
+   "marks": [
+    37.6,
+    70.03,
+    104.19,
+    155.17
+   ],
+   "hash": "8810d5d54f2c",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 1007768
+  },
+  "en": {
+   "file": "castles-en.m4a",
+   "secs": 173.6,
+   "marks": [
+    33.76,
+    61.71,
+    90.59,
+    134.79
+   ],
+   "hash": "fc793f3cd49c",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 893762
+  }
+ },
+ "celts": {
+  "cy": {
+   "file": "celts-cy.m4a",
+   "secs": 510.8,
+   "marks": [
+    82.23,
+    138.79,
+    222.57,
+    279.87,
+    333.97,
+    400.25,
+    461.7
+   ],
+   "hash": "19ea93305d6e",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 2545215
+  },
+  "en": {
+   "file": "celts-en.m4a",
+   "secs": 458.8,
+   "marks": [
+    77.26,
+    126.6,
+    202.5,
+    257.93,
+    305.93,
+    364.44,
+    417.14
+   ],
+   "hash": "acc80b4af61d",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 2379006
+  }
+ },
+ "christianity": {
+  "cy": {
+   "file": "christianity-cy.m4a",
+   "secs": 926.3,
+   "marks": [
+    154.27,
+    231.74,
+    311.62,
+    441.41,
+    502.46,
+    539.91,
+    618.21,
+    676.36,
+    713.57,
+    858.24
+   ],
+   "hash": "846943e34541",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 4656313
+  },
+  "en": {
+   "file": "christianity-en.m4a",
+   "secs": 828.3,
+   "marks": [
+    147.45,
+    213.96,
+    285.21,
+    393.85,
+    449.9,
+    484.04,
+    552.91,
+    604.29,
+    640.71,
+    767.74
+   ],
+   "hash": "9b4d17efe12b",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 4309941
+  }
+ },
+ "coal": {
+  "cy": {
+   "file": "coal-cy.m4a",
+   "secs": 231.7,
+   "marks": [
+    35.56,
+    86.84,
+    122.45,
+    165.08
+   ],
+   "hash": "6a6650b5416c",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 1163699
+  },
+  "en": {
+   "file": "coal-en.m4a",
+   "secs": 202.2,
+   "marks": [
+    32.0,
+    77.12,
+    107.53,
+    144.6
+   ],
+   "hash": "cbecd0b4abf4",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 1047099
+  }
+ },
+ "druids": {
+  "cy": {
+   "file": "druids-cy.m4a",
+   "secs": 996.2,
+   "marks": [
+    115.47,
+    198.56,
+    267.55,
+    371.57,
+    482.84,
+    582.78,
+    674.03,
+    759.46,
+    880.33
+   ],
+   "hash": "37bb253defab",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 4990603
+  },
+  "en": {
+   "file": "druids-en.m4a",
+   "secs": 905.7,
+   "marks": [
+    108.01,
+    182.24,
+    242.81,
+    333.96,
+    437.0,
+    527.52,
+    610.02,
+    689.25,
+    795.76
+   ],
+   "hash": "6f5ae1d072e9",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 4693980
+  }
+ },
+ "epynt": {
+  "cy": {
+   "file": "epynt-cy.m4a",
+   "secs": 911.1,
+   "marks": [
+    114.61,
+    182.3,
+    249.62,
+    296.47,
+    357.78,
+    467.17,
+    522.64,
+    582.89,
+    622.78,
+    683.54,
+    749.22
+   ],
+   "hash": "150dec197c17",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 4597980
+  },
+  "en": {
+   "file": "epynt-en.m4a",
+   "secs": 804.7,
+   "marks": [
+    111.55,
+    170.8,
+    229.65,
+    271.93,
+    322.59,
+    419.79,
+    464.01,
+    516.7,
+    555.45,
+    609.02,
+    668.29
+   ],
+   "hash": "a2cb452facab",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 4166173
+  }
+ },
+ "firsts": {
+  "cy": {
+   "file": "firsts-cy.m4a",
+   "secs": 287.5,
+   "marks": [
+    24.15,
+    64.98,
+    100.75,
+    172.05,
+    222.08
+   ],
+   "hash": "fae70113ca57",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 1424619
+  },
+  "en": {
+   "file": "firsts-en.m4a",
+   "secs": 248.7,
+   "marks": [
+    23.02,
+    57.99,
+    90.0,
+    150.64,
+    192.44
+   ],
+   "hash": "029671230365",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 1266978
+  }
+ },
+ "fwa": {
+  "cy": {
+   "file": "fwa-cy.m4a",
+   "secs": 530.3,
+   "marks": [
+    101.5,
+    153.87,
+    188.98,
+    219.23,
+    302.92,
+    329.19,
+    413.48,
+    466.74
+   ],
+   "hash": "86bd5f6f6de9",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 2653109
+  },
+  "en": {
+   "file": "fwa-en.m4a",
+   "secs": 471.0,
+   "marks": [
+    97.04,
+    146.11,
+    176.25,
+    203.66,
+    276.82,
+    299.36,
+    371.04,
+    417.7
+   ],
+   "hash": "1d0a09dc6953",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 2436535
+  }
+ },
+ "glyndwr": {
+  "cy": {
+   "file": "glyndwr-cy.m4a",
+   "secs": 395.3,
+   "marks": [
+    51.55,
+    124.74,
+    157.03,
+    217.4,
+    262.61,
+    342.64
+   ],
+   "hash": "a5f7e9004240",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 1973597
+  },
+  "en": {
+   "file": "glyndwr-en.m4a",
+   "secs": 343.2,
+   "marks": [
+    43.56,
+    107.12,
+    134.79,
+    187.09,
+    226.16,
+    298.31
+   ],
+   "hash": "6db56ebbe9e9",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 1771350
+  }
+ },
+ "hen-ogledd": {
+  "cy": {
+   "file": "hen-ogledd-cy.m4a",
+   "secs": 994.1,
+   "marks": [
+    120.45,
+    192.42,
+    262.02,
+    348.86,
+    408.18,
+    513.65,
+    568.93,
+    658.01,
+    725.7,
+    801.52,
+    857.8,
+    919.83
+   ],
+   "hash": "695e4437f7da",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 5010505
+  },
+  "en": {
+   "file": "hen-ogledd-en.m4a",
+   "secs": 966.2,
+   "marks": [
+    126.47,
+    194.97,
+    262.2,
+    351.96,
+    406.32,
+    508.99,
+    562.65,
+    642.33,
+    707.9,
+    788.08,
+    840.41,
+    898.09
+   ],
+   "hash": "cef7aa4f0394",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 5012478
+  }
+ },
+ "hywel": {
+  "cy": {
+   "file": "hywel-cy.m4a",
+   "secs": 775.1,
+   "marks": [
+    86.32,
+    145.96,
+    213.72,
+    313.0,
+    382.06,
+    438.39,
+    493.55,
+    545.88,
+    571.45,
+    592.61,
+    657.21,
+    718.58
+   ],
+   "hash": "719d3b93b81a",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 3894280
+  },
+  "en": {
+   "file": "hywel-en.m4a",
+   "secs": 698.5,
+   "marks": [
+    84.35,
+    139.99,
+    199.35,
+    283.56,
+    349.61,
+    400.54,
+    451.35,
+    496.65,
+    519.79,
+    540.29,
+    599.27,
+    649.62
+   ],
+   "hash": "84daae937a61",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 3635223
+  }
+ },
+ "industry": {
+  "cy": {
+   "file": "industry-cy.m4a",
+   "secs": 1206.8,
+   "marks": [
+    116.04,
+    151.31,
+    251.07,
+    300.68,
+    458.61,
+    523.19,
+    611.14,
+    700.12,
+    764.22,
+    875.55,
+    957.13,
+    1028.43,
+    1110.72,
+    1140.09
+   ],
+   "hash": "5d71b3667efd",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 6066482
+  },
+  "en": {
+   "file": "industry-en.m4a",
+   "secs": 1053.7,
+   "marks": [
+    109.53,
+    139.94,
+    226.79,
+    268.41,
+    404.84,
+    462.69,
+    538.29,
+    616.44,
+    671.01,
+    766.4,
+    836.66,
+    899.06,
+    967.85,
+    992.75
+   ],
+   "hash": "7761aab9a1f7",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 5486588
+  }
+ },
+ "iolo": {
+  "cy": {
+   "file": "iolo-cy.m4a",
+   "secs": 907.1,
+   "marks": [
+    97.07,
+    179.24,
+    254.12,
+    339.0,
+    423.5,
+    446.63,
+    492.24,
+    521.1,
+    586.25,
+    622.75,
+    661.82,
+    687.64,
+    729.17,
+    780.28,
+    846.19
+   ],
+   "hash": "370c413d9874",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 4555717
+  },
+  "en": {
+   "file": "iolo-en.m4a",
+   "secs": 875.4,
+   "marks": [
+    103.39,
+    183.32,
+    248.47,
+    324.59,
+    408.36,
+    431.29,
+    471.76,
+    500.4,
+    560.52,
+    593.58,
+    651.1,
+    674.7,
+    712.1,
+    757.56,
+    818.85
+   ],
+   "hash": "373a45728e6e",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 4532746
+  }
+ },
+ "joseph": {
+  "cy": {
+   "file": "joseph-cy.m4a",
+   "secs": 606.7,
+   "marks": [
+    94.25,
+    133.68,
+    160.46,
+    226.55,
+    295.46,
+    369.36,
+    409.75,
+    472.39,
+    532.62,
+    560.83
+   ],
+   "hash": "51dc39b0b044",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 3055684
+  },
+  "en": {
+   "file": "joseph-en.m4a",
+   "secs": 535.6,
+   "marks": [
+    89.86,
+    125.36,
+    148.71,
+    204.59,
+    265.73,
+    325.96,
+    360.56,
+    415.65,
+    469.96,
+    495.88
+   ],
+   "hash": "b998591bdf1b",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 2773808
+  }
+ },
+ "language": {
+  "cy": {
+   "file": "language-cy.m4a",
+   "secs": 321.3,
+   "marks": [
+    38.35,
+    136.84,
+    166.95,
+    202.81,
+    245.91
+   ],
+   "hash": "7400b78cf99b",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 1599437
+  },
+  "en": {
+   "file": "language-en.m4a",
+   "secs": 279.9,
+   "marks": [
+    34.25,
+    120.19,
+    146.4,
+    177.44,
+    214.39
+   ],
+   "hash": "bbb7bcb2aee8",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 1446022
+  }
+ },
+ "learning": {
+  "cy": {
+   "file": "learning-cy.m4a",
+   "secs": 266.2,
+   "marks": [
+    26.57,
+    112.02,
+    178.91,
+    229.81
+   ],
+   "hash": "fb0f21705a45",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 1321293
+  },
+  "en": {
+   "file": "learning-en.m4a",
+   "secs": 236.6,
+   "marks": [
+    24.35,
+    98.2,
+    159.8,
+    204.05
+   ],
+   "hash": "3394cded26b4",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 1214007
+  }
+ },
+ "longbow": {
+  "cy": {
+   "file": "longbow-cy.m4a",
+   "secs": 216.9,
+   "marks": [
+    28.92,
+    78.22,
+    108.19,
+    164.52
+   ],
+   "hash": "9a389925e291",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 1064360
+  },
+  "en": {
+   "file": "longbow-en.m4a",
+   "secs": 192.0,
+   "marks": [
+    25.86,
+    69.21,
+    96.86,
+    145.46
+   ],
+   "hash": "d80788cada75",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 988303
+  }
+ },
+ "lucius": {
+  "cy": {
+   "file": "lucius-cy.m4a",
+   "secs": 425.6,
+   "marks": [
+    88.19,
+    170.58,
+    244.64,
+    298.59,
+    358.66
+   ],
+   "hash": "777654e0cd03",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 2144589
+  },
+  "en": {
+   "file": "lucius-en.m4a",
+   "secs": 386.8,
+   "marks": [
+    86.76,
+    164.93,
+    232.61,
+    281.11,
+    330.02
+   ],
+   "hash": "bcc615bb210c",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 1991022
+  }
+ },
+ "mabinogi": {
+  "cy": {
+   "file": "mabinogi-cy.m4a",
+   "secs": 953.9,
+   "marks": [
+    149.46,
+    237.71,
+    300.59,
+    395.98,
+    467.03,
+    493.85,
+    568.49,
+    664.01,
+    810.6,
+    864.02
+   ],
+   "hash": "cdecf882beea",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 4834866
+  },
+  "en": {
+   "file": "mabinogi-en.m4a",
+   "secs": 849.1,
+   "marks": [
+    137.79,
+    215.49,
+    269.45,
+    348.82,
+    410.31,
+    433.66,
+    504.41,
+    589.88,
+    721.42,
+    766.88
+   ],
+   "hash": "7cdd86e475ce",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 4416574
+  }
+ },
+ "mac": {
+  "cy": {
+   "file": "mac-cy.m4a",
+   "secs": 883.6,
+   "marks": [
+    118.52,
+    194.67,
+    293.85,
+    408.96,
+    489.3,
+    589.59,
+    648.81,
+    715.06,
+    789.96
+   ],
+   "hash": "f6c977c5c8bb",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 4468531
+  },
+  "en": {
+   "file": "mac-en.m4a",
+   "secs": 790.9,
+   "marks": [
+    112.7,
+    179.56,
+    267.82,
+    369.6,
+    444.55,
+    537.35,
+    591.58,
+    645.85,
+    710.85
+   ],
+   "hash": "8eed609afb4a",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 4117174
+  }
+ },
+ "macsen": {
+  "cy": {
+   "file": "macsen-cy.m4a",
+   "secs": 798.3,
+   "marks": [
+    101.97,
+    154.64,
+    217.91,
+    273.02,
+    322.6,
+    418.84,
+    506.55,
+    554.52,
+    625.12,
+    680.54,
+    750.87
+   ],
+   "hash": "055a1d8b52d9",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 4042276
+  },
+  "en": {
+   "file": "macsen-en.m4a",
+   "secs": 722.0,
+   "marks": [
+    97.05,
+    142.06,
+    196.57,
+    243.25,
+    285.76,
+    372.01,
+    456.12,
+    502.07,
+    565.9,
+    616.84,
+    680.65
+   ],
+   "hash": "798813ec8e76",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 3719115
+  }
+ },
+ "madog": {
+  "cy": {
+   "file": "madog-cy.m4a",
+   "secs": 967.6,
+   "marks": [
+    110.54,
+    169.31,
+    270.91,
+    322.83,
+    395.19,
+    509.67,
+    577.96,
+    718.9,
+    752.74,
+    814.18,
+    892.06
+   ],
+   "hash": "c7020292c8af",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 4842047
+  },
+  "en": {
+   "file": "madog-en.m4a",
+   "secs": 832.1,
+   "marks": [
+    100.33,
+    153.8,
+    242.51,
+    287.59,
+    351.35,
+    445.35,
+    505.85,
+    622.19,
+    651.0,
+    704.15,
+    769.94
+   ],
+   "hash": "5747cf0c3e49",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 4321787
+  }
+ },
+ "nest": {
+  "cy": {
+   "file": "nest-cy.m4a",
+   "secs": 549.1,
+   "marks": [
+    89.25,
+    143.23,
+    200.59,
+    318.04,
+    369.19,
+    445.59,
+    501.09
+   ],
+   "hash": "22b484944dd6",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 2755068
+  },
+  "en": {
+   "file": "nest-en.m4a",
+   "secs": 499.2,
+   "marks": [
+    89.79,
+    139.31,
+    191.99,
+    291.34,
+    336.79,
+    404.95,
+    454.43
+   ],
+   "hash": "9d98707c11ad",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 2595334
+  }
+ },
+ "patrick": {
+  "cy": {
+   "file": "patrick-cy.m4a",
+   "secs": 669.7,
+   "marks": [
+    110.61,
+    174.45,
+    217.32,
+    273.6,
+    341.6,
+    380.34,
+    482.65,
+    570.4,
+    635.72
+   ],
+   "hash": "201df6215216",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 3347624
+  },
+  "en": {
+   "file": "patrick-en.m4a",
+   "secs": 607.1,
+   "marks": [
+    106.22,
+    168.26,
+    210.97,
+    258.85,
+    323.34,
+    355.27,
+    444.1,
+    521.27,
+    577.24
+   ],
+   "hash": "f8ae15246402",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 3133971
+  }
+ },
+ "protest": {
+  "cy": {
+   "file": "protest-cy.m4a",
+   "secs": 214.5,
+   "marks": [
+    31.0,
+    79.52,
+    126.95,
+    174.55
+   ],
+   "hash": "ccd38c0c2e76",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 1061158
+  },
+  "en": {
+   "file": "protest-en.m4a",
+   "secs": 185.1,
+   "marks": [
+    27.48,
+    70.34,
+    111.0,
+    150.29
+   ],
+   "hash": "2d7214e7e405",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 952040
+  }
+ },
+ "revival": {
+  "cy": {
+   "file": "revival-cy.m4a",
+   "secs": 345.0,
+   "marks": [
+    39.14,
+    96.64,
+    169.41,
+    232.63,
+    295.32
+   ],
+   "hash": "d00292584e40",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 1714939
+  },
+  "en": {
+   "file": "revival-en.m4a",
+   "secs": 313.1,
+   "marks": [
+    33.94,
+    87.83,
+    151.85,
+    210.84,
+    265.27
+   ],
+   "hash": "34e5b95a9f4a",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 1617588
+  }
+ },
+ "rhys": {
+  "cy": {
+   "file": "rhys-cy.m4a",
+   "secs": 563.6,
+   "marks": [
+    100.65,
+    163.99,
+    200.07,
+    268.07,
+    321.97,
+    395.78,
+    457.78,
+    513.73
+   ],
+   "hash": "31faf2e82161",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 2821634
+  },
+  "en": {
+   "file": "rhys-en.m4a",
+   "secs": 501.9,
+   "marks": [
+    93.78,
+    149.85,
+    182.15,
+    241.68,
+    290.07,
+    354.66,
+    408.89,
+    458.5
+   ],
+   "hash": "0355d777a636",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 2595698
+  }
+ },
+ "tryweryn": {
+  "cy": {
+   "file": "tryweryn-cy.m4a",
+   "secs": 1085.0,
+   "marks": [
+    119.63,
+    214.99,
+    278.96,
+    347.77,
+    407.66,
+    522.54,
+    614.02,
+    655.45,
+    696.45,
+    771.53,
+    882.54,
+    987.92
+   ],
+   "hash": "1634f55aef34",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 5448613
+  },
+  "en": {
+   "file": "tryweryn-en.m4a",
+   "secs": 942.2,
+   "marks": [
+    115.3,
+    201.7,
+    256.4,
+    317.82,
+    370.12,
+    466.09,
+    546.66,
+    585.21,
+    624.11,
+    690.3,
+    783.41,
+    856.31
+   ],
+   "hash": "933472c56ad5",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 4916336
+  }
+ },
+ "unconquered": {
+  "cy": {
+   "file": "unconquered-cy.m4a",
+   "secs": 280.0,
+   "marks": [
+    23.36,
+    100.91,
+    208.83
+   ],
+   "hash": "2a3da329f928",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 1387022
+  },
+  "en": {
+   "file": "unconquered-en.m4a",
+   "secs": 246.1,
+   "marks": [
+    20.21,
+    86.64,
+    180.64
+   ],
+   "hash": "9b78e83685d6",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 1267137
+  }
+ },
+ "welsh-not": {
+  "cy": {
+   "file": "welsh-not-cy.m4a",
+   "secs": 1303.9,
+   "marks": [
+    138.67,
+    177.34,
+    310.89,
+    381.74,
+    542.87,
+    708.48,
+    779.44,
+    860.5,
+    925.65,
+    1001.27,
+    1069.47,
+    1107.71,
+    1155.03,
+    1231.05
+   ],
+   "hash": "bac6c3eca4ac",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 6525445
+  },
+  "en": {
+   "file": "welsh-not-en.m4a",
+   "secs": 1166.3,
+   "marks": [
+    127.66,
+    161.8,
+    281.07,
+    342.74,
+    482.3,
+    623.77,
+    684.64,
+    759.75,
+    818.11,
+    898.8,
+    961.2,
+    992.64,
+    1036.05,
+    1103.3
+   ],
+   "hash": "74aa7c578fc7",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 6037221
+  }
+ },
+ "welsh-revival": {
+  "cy": {
+   "file": "welsh-revival-cy.m4a",
+   "secs": 920.4,
+   "marks": [
+    135.42,
+    198.87,
+    340.85,
+    381.64,
+    444.0,
+    519.34,
+    596.59,
+    684.02,
+    761.96,
+    826.03,
+    867.57
+   ],
+   "hash": "3364bd243582",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 4632955
+  },
+  "en": {
+   "file": "welsh-revival-en.m4a",
+   "secs": 819.5,
+   "marks": [
+    132.14,
+    184.14,
+    309.6,
+    347.98,
+    403.85,
+    467.76,
+    536.15,
+    616.46,
+    682.67,
+    738.04,
+    772.12
+   ],
+   "hash": "3fedf3dfef60",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 4249997
+  }
+ },
+ "wilson-blackett": {
+  "cy": {
+   "file": "wilson-blackett-cy.m4a",
+   "secs": 515.3,
+   "marks": [
+    108.41,
+    161.28,
+    214.56,
+    271.12,
+    333.59,
+    383.41,
+    441.25,
+    460.81
+   ],
+   "hash": "8857f91e8542",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 2597446
+  },
+  "en": {
+   "file": "wilson-blackett-en.m4a",
+   "secs": 455.8,
+   "marks": [
+    100.2,
+    148.24,
+    194.76,
+    242.61,
+    296.8,
+    339.02,
+    389.56,
+    406.59
+   ],
+   "hash": "9a4d6a1d5ffd",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 2366914
+  }
+ },
+ "world": {
+  "cy": {
+   "file": "world-cy.m4a",
+   "secs": 201.5,
+   "marks": [
+    26.29,
+    71.76,
+    105.6,
+    141.53
+   ],
+   "hash": "85746c60efa6",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 990127
+  },
+  "en": {
+   "file": "world-en.m4a",
+   "secs": 177.7,
+   "marks": [
+    24.57,
+    65.14,
+    94.9,
+    126.0
+   ],
+   "hash": "c815c9c54c7c",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 909654
+  }
+ },
+ "writers": {
+  "cy": {
+   "file": "writers-cy.m4a",
+   "secs": 715.2,
+   "marks": [
+    88.22,
+    125.03,
+    158.38,
+    223.54,
+    276.04,
+    317.35,
+    350.96,
+    392.26,
+    452.31,
+    481.82,
+    521.63,
+    550.09,
+    594.48,
+    625.67,
+    677.69
+   ],
+   "hash": "cb73a5f938f2",
+   "voice": "azure:cy-GB-AledNeural",
+   "engine": "azure",
+   "voice_name": "Aled",
+   "bytes": 3603086
+  },
+  "en": {
+   "file": "writers-en.m4a",
+   "secs": 649.1,
+   "marks": [
+    86.09,
+    119.38,
+    150.28,
+    206.97,
+    254.81,
+    291.86,
+    320.95,
+    357.7,
+    411.56,
+    437.35,
+    472.74,
+    499.1,
+    538.71,
+    569.58,
+    616.16
+   ],
+   "hash": "295b156db741",
+   "voice": "azure:en-GB-OllieMultilingualNeural+cy",
+   "engine": "azure",
+   "voice_name": "Ollie",
+   "bytes": 3355880
+  }
+ }
+}
