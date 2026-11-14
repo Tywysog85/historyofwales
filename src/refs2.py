@@ -869,3 +869,28 @@ SHELF_EXTRA["princes"] += [
      "The fighting men of Wales from the Britons and the longbowmen to the Welsh regiments.", "Milwyr Cymru o’r Brythoniaid a’r saethwyr bwa hir i’r catrodau Cymreig.",
      "https://www.cambriabooks.co.uk/product/welsh-warrior/"),
 ]
+
+# ---------- family history: family-history.html (src/family.py) ----------
+PAGES["family-history"] = L(
+    GERALD,
+    (B, "T. J. Morgan and Prys Morgan", "Welsh Surnames", "University of Wales Press, 1985",
+     "Where Welsh surnames come from, from ap and ab to Jones and Pritchard.", "O ble y daw cyfenwau Cymreig, o ap ac ab i Jones a Pritchard."),
+    (B, "John and Sheila Rowlands (eds)", "Welsh Family History: A Guide to Research", "Association of Family History Societies of Wales, second edition 1998",
+     "The family historian’s handbook for Wales: names, parishes, chapels, wills and estates.", "Llawlyfr yr hanesydd teulu yng Nghymru: enwau, plwyfi, capeli, ewyllysiau a stadau."),
+    (B, "Beryl Evans", "Tracing Your Welsh Ancestors: A Guide for Family Historians", "Pen & Sword",
+     "A guide to the records of Wales and where to find them, with the background of names, places and language.", "Canllaw i gofnodion Cymru a ble i ddod o hyd iddynt, gyda chefndir yr enwau, y lleoedd a’r iaith."),
+    (W, "John and Sheila Rowlands", "The Distribution of Surnames in Wales", "Nomina 29",
+     "Where each Welsh surname was most common, from the marriage registers of 1813–37.", "Ble roedd pob cyfenw Cymreig fwyaf cyffredin, o gofrestri priodasau 1813–37.",
+     "https://www.snsbi.org.uk/Nomina_articles/Nomina_29_Rowlands.pdf"),
+    (P, "S. R. Meyrick (ed.)", "Heraldic Visitations of Wales and Part of the Marches between the years 1586 and 1613, by Lewys Dwnn", "Llandovery, two volumes, 1846",
+     "The pedigrees of the families of Wales, written down by the deputy herald.", "Achau teuluoedd Cymru, wedi’u hysgrifennu gan y dirprwy herodr."),
+    (B, "P. C. Bartrum", "Welsh Genealogies AD 300–1400 and Welsh Genealogies AD 1400–1500", "University of Wales Press, 1974; National Library of Wales, 1983",
+     "Every known Welsh pedigree, from the kings to the gentry; scanned and free online from Aberystwyth University.", "Pob ach Gymreig hysbys, o’r brenhinoedd i’r bonedd; wedi’u sganio ac am ddim ar-lein gan Brifysgol Aberystwyth.",
+     "https://research.aber.ac.uk/en/datasets/bartrum-genealogical-project/"),
+    (W, "National Library of Wales", "Information for family historians", "library.wales",
+     "The Library’s guides to parish and chapel records, wills, tithe maps and more.", "Canllawiau’r Llyfrgell i gofnodion plwyf a chapel, ewyllysiau, mapiau’r degwm a rhagor.",
+     "https://www.library.wales/information-for/family-historians"),
+    (W, "National Library of Wales", "Welsh Newspapers Online", "newspapers.library.wales",
+     "More than a million pages of Welsh newspapers, 1804–1919, free.", "Mwy na miliwn o dudalennau o bapurau newydd Cymru, 1804–1919, am ddim.",
+     "https://newspapers.library.wales/"),
+    DWB)

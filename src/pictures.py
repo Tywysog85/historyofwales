@@ -188,6 +188,7 @@ PAGE = {
     "topic-abroad.html": "c:Vista de Gaiman.JPG",
     "topic-countryside.html": "g:place-stfagans",
     "topic-faith.html": "g:holy-soar-y-mynydd",
+    "family-history.html": "g:holy-soar-y-mynydd",
     "topic-industry.html": "g:place-dinorwig",
     "topic-language.html": "g:trea-black-book",
     "topic-law.html": "g:place-hendygwyn",
@@ -227,6 +228,7 @@ PAGE = {
     "symbols.html": "g:trea-lovespoon",
     "play.html": "g:place-caerleon",
     "quiz.html": "g:place-conwy",
+    "weekly-quiz.html": "g:place-harlech",
     "pairs.html": "g:cast-carreg-cennen",
     "map-game.html": "g:cast-criccieth",
     "names.html": "g:buil-llanfairpwll",
@@ -634,3 +636,7 @@ EXTRA["Dafydd Iwan, Caerfyrddin, 2023, Cymdeithas yr Iaith.jpg"] = ("Cwmcafit", 
     "Dafydd Iwan sings Yma o Hyd to the Cymdeithas yr Iaith census rally in Carmarthen, January 2023",
     "Dafydd Iwan yn canu Yma o Hyd i rali cyfrifiad Cymdeithas yr Iaith yng Nghaerfyrddin, Ionawr 2023")
 PAGE["story-welsh-revival.html"] = "c:Dafydd Iwan, Caerfyrddin, 2023, Cymdeithas yr Iaith.jpg@50% 40%"
+
+# the photo of each town, for its own page (src/town_pics.py, src/townpages.py)
+import town_pics as _TP  # noqa: E402
+EXTRA.update({k: v for k, v in _TP.EXTRA.items() if k not in EXTRA})

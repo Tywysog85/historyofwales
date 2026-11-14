@@ -14,6 +14,8 @@ Open jobs for History of Wales. Tick a job off by deleting it. Keep this list sh
 - **More photos.** 461 of the 516 people pages have a picture of their own (November 2026). The 55 left have no free picture on Commons that is certainly them: Ifan's own photos of their graves, plaques or places, or pictures from the National Library of Wales, would fill them.
 - **Real recordings for the word buttons.** The words of the day, the phrases on `welsh.html` and the home page words use the device's own voice for now. MP3 files go in `src/static/audio/` (naming rules in `SKILLS.md`, "Welsh word of the day"). Own recordings, or free ones from Lingua Libre on Wikimedia Commons with credits.
 
+- **Welsh of the day planner through Cysill.** The words of `visit.html`, the 18 ready-made days (`visit-*.html`) and the lines for the great houses and museums in `src/visitplan.py` (14 November 2026) have not been through Cysill yet.
+
 ## Ideas, not started
 
 - More people, events and places for every age.

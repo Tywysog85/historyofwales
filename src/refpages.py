@@ -47,7 +47,7 @@ _GENERAL = {
     "laws.html": ("The Laws of Hywel Dda", "Cyfreithiau Hywel Dda"), "kings.html": ("Kings and princes", "Brenhinoedd a thywysogion"),
     "castles.html": ("Castles map", "Map y cestyll"), "saints.html": ("Saints of Wales", "Seintiau Cymru"), "family-trees.html": ("Royal family trees", "Coed teulu brenhinol"),
     "mabinogion.html": ("The Mabinogion", "Y Mabinogion"), "symbols.html": ("Symbols and traditions", "Symbolau a thraddodiadau"), "welsh.html": ("Learn Welsh", "Dysgu Cymraeg"),
-    "names.html": ("Welsh names", "Enwau Cymraeg"), "firsts.html": ("Welsh world firsts", "Cymru oedd y cyntaf"), "timeline.html": ("Timeline", "Llinell amser"),
+    "names.html": ("Welsh names", "Enwau Cymraeg"), "family-history.html": ("Finding your Welsh family", "Dod o hyd i’ch teulu Cymreig"), "firsts.html": ("Welsh world firsts", "Cymru oedd y cyntaf"), "timeline.html": ("Timeline", "Llinell amser"),
     "onthisday.html": ("On this day", "Ar y dydd hwn"), "gallery.html": ("Photo gallery", "Oriel luniau"), "stories.html": ("Long reads", "Erthyglau"),
     "legends.html": ("Legends", "Chwedlau"), "wales-in-10.html": ("Wales in 10 minutes", "Cymru mewn 10 munud"), "trails.html": ("Themed trails", "Llwybrau thema"),
     "literature.html": ("The literature of Wales", "Llenyddiaeth Cymru"), "books.html": ("The old books of Wales", "Hen lyfrau Cymru"), "triads.html": ("The Welsh Triads", "Trioedd Ynys Prydain"),
@@ -298,8 +298,11 @@ def town_pic(r):
 def town_card(r, have):
     sub = f'<span class="tw-en">{e(r["en"])}</span>' if r["en"] != r["cy"] else ""
     pic = town_pic(r)
-    return (f'<article class="tw-card{" pbg" if pic else ""}" id="{r["id"]}" data-ref-item{g["PN"].bg_style(pic, small=True) if pic else ""}><h3><span class="tw-cy" lang="cy">{e(r["cy"])}</span>{sub}</h3>'
-            f'<p class="tw-m"><b>{bi("Means", "Ystyr")}:</b> {bi(r["mEn"], r["mCy"])}</p><p>{bi(r["hEn"], r["hCy"])}</p>{link_chips(r["see"], have)}</article>')
+    import townpages as TOWNP  # a town with a page of its own (src/townpages.py): the whole card opens it
+    own = TOWNP.has_page(r["id"])
+    wl = f'<a class="wl" href="{r["id"]}.html">{bi(r["en"], r["cy"])}</a>' if own else ""
+    return (f'<article class="tw-card{" pbg" if pic else ""}{" wl-card" if own else ""}" id="{r["id"]}" data-ref-item{g["PN"].bg_style(pic, small=True) if pic else ""}><h3><span class="tw-cy" lang="cy">{e(r["cy"])}</span>{sub}</h3>'
+            f'<p class="tw-m"><b>{bi("Means", "Ystyr")}:</b> {bi(r["mEn"], r["mCy"])}</p><p>{bi(r["hEn"], r["hCy"])}</p>{wl}{link_chips(r["see"], have)}</article>')
 
 
 DECODER_JS = r"""<script>(function(){var box=document.getElementById("tw-in"),out=document.getElementById("tw-out");if(!box)return;
@@ -838,6 +841,7 @@ DESK = [  # href, English, Welsh, English line, Welsh line, era colour
     ("laws.html", "The Laws of Hywel Dda", "Cyfreithiau Hywel Dda", "The law of Wales for six hundred years.", "Cyfraith Cymru am chwe chan mlynedd.", "kings"),
     ("onthisday.html", "On this day", "Ar y dydd hwn", "What happened on every day of the year.", "Beth ddigwyddodd ar bob diwrnod o’r flwyddyn.", "medieval"),
     ("names.html", "Welsh surnames", "Cyfenwau Cymraeg", "What Welsh surnames mean and where they come from.", "Beth mae cyfenwau Cymraeg yn ei olygu ac o ble maent yn dod.", "saints"),
+    ("family-history.html", "Family history", "Hanes teulu", "Trace your Welsh ancestors: census, parish and chapel books, wills and tithe maps.", "Olrhain eich hynafiaid: y cyfrifiad, llyfrau’r plwyf a’r capel, ewyllysiau a mapiau’r degwm.", "revival"),
     ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau", "The dragon, the leek, the harp, the Mari Lwyd and more.", "Y ddraig, y genhinen, y delyn, y Fari Lwyd a rhagor.", "modern"),
 ]
 
@@ -880,7 +884,7 @@ PAGE_NAMES = ["a-z.html", "questions.html", "towns.html", "battles.html", "docum
 def search_items():
     items = [dict(k="term", t=t["en"], c=t["cy"], u=f"a-z.html#az-{t['id']}", y=["A–Z", "A–Y"], b=[t["dEn"], t["dCy"]], e="kings") for t in AZ.TERMS]
     items += [dict(k="question", t=q["qEn"], c=q["qCy"], u=f"questions.html#q-{q['id']}", y=["Quick answer", "Ateb cyflym"], b=[q["aEn"], q["aCy"]], e="today") for gr in FAQ.GROUPS for q in gr["qs"]]
-    items += [dict(k="town", t=r["cy"], c=r["cy"], u=f"towns.html#{r['id']}", y=[r["en"] if r["en"] != r["cy"] else r["la"], r["laCy"]], b=[r["mEn"].capitalize() + ". " + r["hEn"], r["mCy"].capitalize() + ". " + r["hCy"]], e="saints", a=r["en"]) for r in town_rows()]
+    items += [dict(k="town", t=r["cy"], c=r["cy"], u=f"towns.html#{r['id']}", y=[r["en"] if r["en"] != r["cy"] else r["la"], r["laCy"]], b=[r["mEn"].capitalize() + ". " + r["hEn"], r["mCy"].capitalize() + ". " + r["hCy"]], e="saints", a=r["en"]) for r in town_rows() if not __import__("townpages").has_page(r["id"])]
     items.append(dict(k="page", t="Towns and villages: what Welsh place names mean", c="Trefi a phentrefi: ystyr enwau lleoedd", u="towns.html", y=["Place names", "Enwau lleoedd"],
                       b=["What Welsh place names mean, with a decoder for any name: aber, llan, caer, pen, tre and more.", "Ystyr enwau lleoedd Cymru, gyda datgodiwr i unrhyw enw: aber, llan, caer, pen, tre a rhagor."], e="saints"))
     items += [dict(k="battle", t=b["en"], c=b["cy"], u=f"battles.html#b-{b['id']}", y=[b["dEn"], b["dCy"]], b=[b["sEn"] + ". " + b["tEn"], b["sCy"] + ". " + b["tCy"]], e=b["era"]) for b in BT.BATTLES]

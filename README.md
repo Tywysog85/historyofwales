@@ -34,13 +34,17 @@ Everything is plain HTML, CSS and JavaScript. There is no framework and nothing 
 | Events, people, places | `src/data.py`, `src/more.py`, `src/places2.py` (extra items are merged in and sorted by year) |
 | The people added in November 2026, every person’s field, and the Welsh firsts | `src/people2a.py` onwards (`people2b.py`, `people2c.py` …), gathered by `src/people2.py` |
 | The reference pages: Look it up, the A–Z, quick answers, towns, battles, key documents, topic guides, maps through time and the historic sites map | `src/refpages.py` lays them out; the words are in `src/ref_az.py`, `src/ref_faq.py`, `src/ref_towns.py`, `src/ref_battles.py`, `src/ref_docs.py`, `src/ref_topics.py`, `src/ref_maps.py` and `src/ref_sites.py` (data from `tools/sites_fetch.py`) |
+| A history page for every town (`town-<slug>.html`) | `src/townpages.py` lays them out; the stories are in `src/town_long_north.py`, `src/town_long_mid.py` and `src/town_long_south.py`, the photos in `src/town_pics.py`, the extra towns in `src/towns_more.py` |
+| The weekly quiz and its leaderboard | `src/weeklyquiz.py` writes the weeks into `src/quiz_weeks.json`; `src/static/weekly.js` runs the page; `worker/` is the leaderboard (Cloudflare); hide a nickname in `src/quiz_hidden.json` |
 | Longer histories of people and places, trails, teacher notes | `src/long.py`, `src/trails.py` (the newer trails) |
 | The twelve ages | `src/ages.py`, `src/ages9.py`, `src/ages12.py` (the last word: it moves everything into the right age) |
 | Long reads, legends, symbols, facts | `src/features.py`, `src/legends2.py`, `src/mabinogion.py`, `src/pride.py`, `src/pride2.py`, `src/pride3.py`, `src/hywel.py`, `src/iolo.py`, `src/christianity.py` |
 | The Kingdoms map | `src/kingdoms.py` |
 | A page for every timeline event, and the fuller telling of the big ones | `src/eventpages.py`, `src/events_more.py` |
 | The castles map | `src/castles.py`, `src/castles_data.json`, `src/static/castles.js` |
+| Plan a day out (`visit.html`) and the 18 ready-made days out (`visit-*.html`) | `src/visitplan.py`; the planner in the browser is `src/static/visitplan.js` (check the two agree with `python3 tools/visit_check.py`) |
 | Teacher packs (`pack-*.html`) | `src/teachpacks.py` |
+| Family history: surnames, ap and ferch, finding your ancestors (`family-history.html`) | `src/family.py` |
 | Ride with Glyndŵr (`ride-glyndwr.html`) and Llys Rhosyr in 3D (`llys-rhosyr.html`) | `src/ride.py`, `src/llys.py` (3D code in `tools/llys3d.src.js`) |
 | The Welsh pages under `cy/` | `src/welshpages.py` (made by itself from every page) |
 | On this day (`onthisday.html` and the home page panel) | `src/onthisday.py`, `src/onthisday.css` |
