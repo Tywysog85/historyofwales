@@ -471,3 +471,8 @@ TOWNS = {
 from towns_more import ADD as _ADD  # noqa: E402
 for _la, _ts in _ADD.items():
     TOWNS[_la] = TOWNS[_la] + _ts
+
+# The villages added on 14 November 2026, batch 2 (src/villages.py), each under its council area.
+from villages import ADD as _VADD  # noqa: E402
+for _la, _ts in _VADD.items():
+    TOWNS[_la] = TOWNS[_la] + _ts
