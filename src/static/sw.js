@@ -33,14 +33,13 @@ self.addEventListener("fetch", (e) => {
   if (url.origin !== location.origin) return;
   const versioned = url.searchParams.has("v");
   if (versioned || ASSET.test(url.pathname)) {
-    e.respondWith(caches.open(FILES).then((c) => c.match(req).then((hit) => {
-      const net = fetch(req).then((res) => { keep(req, res); return res; });
-      if (hit) {
-        if (!versioned) e.waitUntil(net.catch(() => {})); // refresh in the background
-        return hit;
-      }
-      return net;
-    })));
+    // Look in the cache before touching the network: a versioned file found there is used as it is, with no request at all.
+    const get = () => fetch(req).then((res) => { keep(req, res); return res; });
+    e.respondWith(caches.open(FILES).then((c) => c.match(req)).then((hit) => {
+      if (!hit) return get();
+      if (!versioned) e.waitUntil(get().catch(() => {})); // refresh in the background
+      return hit;
+    }));
     return;
   }
   e.respondWith(fetch(req).then((res) => {
