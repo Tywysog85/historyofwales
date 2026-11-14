@@ -11,7 +11,7 @@ ADD = {
   T("Newborough", "Niwbwrch", "the new borough; the Welsh name is the English one in Welsh dress", "y fwrdeistref newydd; ffurf Gymraeg ar yr enw Saesneg",
     "The people of Llanfaes were moved here after Beaumaris was built in 1295, beside Llys Rhosyr, a court of the princes of Gwynedd. The new borough had its charter in 1303.",
     "Symudwyd pobl Llan-faes yma wedi codi Biwmares yn 1295, wrth ymyl Llys Rhosyr, un o lysoedd tywysogion Gwynedd. Cafodd y fwrdeistref newydd ei siarter yn 1303.",
-    ["place-llysrhosyr.html", "llys-rhosyr.html"], (53.1600, -4.3640)),
+    ["place-llysrhosyr.html"], (53.1600, -4.3640)),
   T("Valley", "Y Fali", "said to come from the cutting dug through the low hill for Telford’s road to Holyhead", "dywedir iddo ddod o’r toriad a gloddiwyd drwy’r bryncyn i ffordd Telford i Gaergybi",
     "When the airfield was built in 1942, the peat of Llyn Cerrig Bach gave up one of the greatest Iron Age hoards in Britain: weapons, chariot fittings and a slave chain, offerings thrown into the lake by the Britons of Môn.",
     "Pan godwyd y maes awyr yn 1942, rhoddodd mawn Llyn Cerrig Bach un o gelciau mwyaf Oes yr Haearn ym Mhrydain: arfau, rhannau cerbydau rhyfel a chadwyn caethweision, offrymau a daflwyd i’r llyn gan Frythoniaid Môn.",

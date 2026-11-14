@@ -12,7 +12,7 @@ The text of each region is in its own file: town_long_north.py, town_long_mid.py
 """
 LONG, PEOPLE, PICS, ALSO = {}, {}, {}, {}
 
-for _m in ("town_long_north", "town_long_mid", "town_long_south"):
+for _m in ("town_long_north", "town_long_mid", "town_long_south", "village_long_north", "village_long_mid", "village_long_south"):
     try:
         _mod = __import__(_m)
     except ModuleNotFoundError:
