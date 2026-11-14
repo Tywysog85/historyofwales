@@ -12,7 +12,7 @@ The slider is src/static/thennow.js; the styles are src/thennow.css.
 Each pair:
     id      the file name of its pictures
     place   the place page it belongs on (src/data.py PLACES id), or None
-    link    the page its title opens when there is no place page
+    link    the page its title opens when there is no place page; a town-<slug>.html link also shows the pair on that town page
     cat     "castles", "churches" or "towns"
     en, cy  its name
     then    (Commons file, artist, licence, licence link, date EN, date CY, what it shows EN, CY)
@@ -149,7 +149,7 @@ PAIRS = [
         "the ruins from the south-east", "yr adfeilion o’r de-ddwyrain"),
        ("Owain Glyndŵr held this castle from 1404 to 1408. Its broken towers by the sea were already a park for visitors in the 1890s, and the paths and lawns are still there today.",
         "Owain Glyndŵr oedd yn dal y castell hwn o 1404 hyd 1408. Roedd ei dyrau drylliedig ger y môr eisoes yn barc i ymwelwyr yn y 1890au, ac mae’r llwybrau a’r lawntiau yno o hyd."),
-       1.3592, link="castles.html"),
+       1.3592, link="town-aberystwyth.html"),
     _p("swansea", None, "castles", "Swansea Castle", "Castell Abertawe",
        _old("Swansea castle (1128961).jpg", "Paul Sandby, engraved by Richard Bernard Godfrey", "CC0", CC0, ("1786", "1786"),
             "the castle among the houses of the town", "y castell ymhlith tai’r dref"),
@@ -157,7 +157,7 @@ PAIRS = [
         "the castle in the middle of the city", "y castell yng nghanol y ddinas"),
        ("In 1786 houses and workshops crowded round the castle, with its arcaded parapet high on the wall. The houses have gone, and the castle now stands open in the heart of the city.",
         "Yn 1786 roedd tai a gweithdai’n gwasgu o gwmpas y castell, gyda rhes o fwâu’n uchel ar ei fur. Mae’r tai wedi mynd, ac mae’r castell bellach yn sefyll yn agored yng nghanol y ddinas."),
-       1.5111, link="castles.html"),
+       1.5111, link="town-swansea.html"),
     _p("carew", "carewcross", "castles", "Carew Castle", "Castell Caeriw",
        _old("Carew castle May 1 1820 (1133191).jpg", "Charles Norris, engraved by Daniel Havell", "CC0", CC0, ("1820", "1820"),
             "the castle across the mill pond", "y castell dros y pwll melin"),
@@ -261,7 +261,7 @@ PAIRS = [
         "the harbour and North Beach", "yr harbwr a’r Traeth Gogleddol"),
        ("Tenby was already a favourite seaside town in the 1890s. The harbour, the beach and the houses along the cliff top are much the same today, painted now in bright colours.",
         "Roedd Dinbych-y-pysgod eisoes yn hoff dref glan môr yn y 1890au. Mae’r harbwr, y traeth a’r tai ar ben y clogwyn yn debyg iawn heddiw, wedi’u peintio bellach mewn lliwiau llachar."),
-       1.3657),
+       1.3657, link="town-tenby.html"),
     _p("betws", None, "towns", "Pont-y-pair, Betws-y-Coed", "Pont-y-pair, Betws-y-coed",
        _old("Roman bridge II, Bettws-y-Coed (i.e. Betws), Wales-LCCN2001703444.jpg", PC, "Public domain", PD, C1895,
             "the bridge over the Llugwy", "y bont dros afon Llugwy"),
@@ -269,7 +269,7 @@ PAIRS = [
         "the bridge and the falls below it", "y bont a’r rhaeadr oddi tani"),
        ("The 1890s print called it the Roman bridge, but Pont-y-pair, the bridge of the cauldron, was built in the 1400s. It still carries the road over the rocks of the Llugwy.",
         "Galwodd print y 1890au hi’n bont Rufeinig, ond codwyd Pont-y-pair yn y 1400au. Mae’n dal i gario’r ffordd dros greigiau afon Llugwy."),
-       1.3585),
+       1.3585, link="town-betws-y-coed.html"),
     _p("beddgelert", None, "towns", "Beddgelert", "Beddgelert",
        _old("Llewellyn Hotel, Beddgelert, Wales-LCCN2001703429.jpg", PC, "Public domain", PD, C1895,
             "the Prince Llewelyn inn by the bridge", "tafarn y Tywysog Llywelyn wrth y bont"),
@@ -290,15 +290,19 @@ PAIRS = [
 
 BY_ID = {}
 BY_PLACE = {}
+BY_PAGE = {}  # a town (or other) page that shows a pair without being its place page: link -> pairs
 
 
 def _index():
     BY_ID.clear()
     BY_PLACE.clear()
+    BY_PAGE.clear()
     for p in PAIRS:
         BY_ID[p["id"]] = p
         if p.get("place"):
             BY_PLACE.setdefault(p["place"], []).append(p)
+        elif (p.get("link") or "").startswith("town-"):
+            BY_PAGE.setdefault(p["link"], []).append(p)
 
 
 _index()
@@ -329,23 +333,23 @@ def figure(p, small=False):
     img = lambda kind, alt: (f'<img src="thennow/{p["id"]}-{kind}{sfx}.webp" srcset="{srcset(kind)}" sizes="{sizes}" width="{w}" height="{h}" '
                              f'alt="{alt}" loading="lazy" decoding="async">')
     label = _e(f"{p['en']}: drag to compare {when_en} with today / Llusgwch i gymharu {when_cy} â heddiw")
-    return (f'<figure class="tn" data-tn="{p["id"]}"><div class="tn-stage" style="--ar:{ar:.4f}">'
+    return (f'<figure class="thn" data-thn="{p["id"]}"><div class="thn-stage" style="--ar:{ar:.4f}">'
             + img("now", alt_n)
-            + f'<div class="tn-then">{img("then", alt_t)}</div>'
-            + f'<span class="tn-tag tn-tag-then">{_bi(_e(when_en), _e(when_cy))}</span><span class="tn-tag tn-tag-now">{_bi("Today", "Heddiw")}</span>'
-            + '<span class="tn-handle" aria-hidden="true"></span>'
-            + f'<input class="tn-range" type="range" min="0" max="100" step="any" value="50" aria-label="{label}"></div>'
-            + f'<div class="tn-bar"><button type="button" data-tn-go="100">{_bi("Then", "Ddoe")}</button><button type="button" data-tn-go="50">{_bi("Half and half", "Hanner a hanner")}</button>'
-            + f'<button type="button" data-tn-go="0">{_bi("Now", "Heddiw")}</button><span class="tn-hint">{_bi("Drag across the picture", "Llusgwch ar draws y llun")}</span></div>'
-            + f'<figcaption><p class="tn-what">{_bi(p["what"][0], p["what"][1])}</p>'
-            + f'<span class="tn-cr"><b>{_bi("Then", "Ddoe")}:</b> {_bi(_e(t[6]), _e(t[7]))} · {_cred(t[0], t[1], t[2], t[3])}</span>'
-            + f'<span class="tn-cr"><b>{_bi("Now", "Heddiw")}:</b> {_bi(_e(n[4]), _e(n[5]))} · {_cred(n[0], n[1], n[2], n[3])}</span>'
+            + f'<div class="thn-then">{img("then", alt_t)}</div>'
+            + f'<span class="thn-tag thn-tag-then">{_bi(_e(when_en), _e(when_cy))}</span><span class="thn-tag thn-tag-now">{_bi("Today", "Heddiw")}</span>'
+            + '<span class="thn-handle" aria-hidden="true"></span>'
+            + f'<input class="thn-range" type="range" min="0" max="100" step="any" value="50" aria-label="{label}"></div>'
+            + f'<div class="thn-bar"><button type="button" data-thn-go="100">{_bi("Then", "Ddoe")}</button><button type="button" data-thn-go="50">{_bi("Half and half", "Hanner a hanner")}</button>'
+            + f'<button type="button" data-thn-go="0">{_bi("Now", "Heddiw")}</button><span class="thn-hint">{_bi("Drag across the picture", "Llusgwch ar draws y llun")}</span></div>'
+            + f'<figcaption><p class="thn-what">{_bi(p["what"][0], p["what"][1])}</p>'
+            + f'<span class="thn-cr"><b>{_bi("Then", "Ddoe")}:</b> {_bi(_e(t[6]), _e(t[7]))} · {_cred(t[0], t[1], t[2], t[3])}</span>'
+            + f'<span class="thn-cr"><b>{_bi("Now", "Heddiw")}:</b> {_bi(_e(n[4]), _e(n[5]))} · {_cred(n[0], n[1], n[2], n[3])}</span>'
             + "</figcaption></figure>")
 
 
-def place_block(pid):
-    """The Then and now section for a place page, or "" when the place has no pair."""
-    ps = BY_PLACE.get(pid)
+def place_block(pid, page=None):
+    """The Then and now section for a place page (or, with page, a town page), or "" when it has no pair."""
+    ps = BY_PAGE.get(page) if page else BY_PLACE.get(pid)
     if not ps:
         return ""
     more = f'<p><a class="go" href="then-and-now.html">{_bi("More places then and now", "Rhagor o leoedd ddoe a heddiw")} →</a></p>'
@@ -354,14 +358,14 @@ def place_block(pid):
 
 def page_main(link_of):
     """The body of then-and-now.html (after the hero). link_of(pair) gives the page each title opens."""
-    chips = (f'<button type="button" class="tn-chip on" data-cat="all" aria-pressed="true">{_bi("All", "Y cyfan")} <i>{len(PAIRS)}</i></button>'
-             + "".join(f'<button type="button" class="tn-chip" data-cat="{c}" aria-pressed="false">{_bi(en, cy)} <i>{sum(1 for p in PAIRS if p["cat"] == c)}</i></button>'
+    chips = (f'<button type="button" class="thn-chip on" data-cat="all" aria-pressed="true">{_bi("All", "Y cyfan")} <i>{len(PAIRS)}</i></button>'
+             + "".join(f'<button type="button" class="thn-chip" data-cat="{c}" aria-pressed="false">{_bi(en, cy)} <i>{sum(1 for p in PAIRS if p["cat"] == c)}</i></button>'
                        for c, en, cy in CATS if any(p["cat"] == c for p in PAIRS)))
     cards = ""
     for p in PAIRS:
         href = link_of(p)
         name = _bi(_e(p["en"]), _e(p["cy"]))
         h = f'<a href="{href}">{name}</a>' if href else name
-        cards += (f'<article class="tn-card" id="{p["id"]}" data-cat="{p["cat"]}"><h2>{h}</h2>'
-                  f'<p class="tn-when">{_bi(_e(p["then"][4]) + " · today", _e(p["then"][5]) + " · heddiw")}</p>{figure(p)}</article>')
-    return (f'<div class="tn-chips" role="toolbar" aria-label="Show / Dangos">{chips}</div><div class="tn-list">{cards}</div>')
+        cards += (f'<article class="thn-card" id="{p["id"]}" data-cat="{p["cat"]}"><h2>{h}</h2>'
+                  f'<p class="thn-when">{_bi(_e(p["then"][4]) + " · today", _e(p["then"][5]) + " · heddiw")}</p>{figure(p)}</article>')
+    return (f'<div class="thn-chips" role="toolbar" aria-label="Show / Dangos">{chips}</div><div class="thn-list">{cards}</div>')

@@ -9,7 +9,7 @@
   function cy() { return d.classList.contains("cy"); }
 
   function setup(fig) {
-    var stage = fig.querySelector(".tn-stage"), range = fig.querySelector(".tn-range");
+    var stage = fig.querySelector(".thn-stage"), range = fig.querySelector(".thn-range");
     if (!stage || !range) return;
     fig.classList.add("on");
     var pos = 50, drag = false;
@@ -53,8 +53,8 @@
       ev.preventDefault();
       fig.classList.add("used");
     });
-    [].forEach.call(fig.querySelectorAll("[data-tn-go]"), function (b) {
-      b.addEventListener("click", function () { fig.classList.add("used"); set(+b.getAttribute("data-tn-go"), true); });
+    [].forEach.call(fig.querySelectorAll("[data-thn-go]"), function (b) {
+      b.addEventListener("click", function () { fig.classList.add("used"); set(+b.getAttribute("data-thn-go"), true); });
     });
     set(50, false);
     // a small nudge the first time the pair comes into view, so people see that it moves
@@ -72,11 +72,11 @@
     // the Welsh / English switch changes the words read out
     new MutationObserver(function () { range.setAttribute("aria-valuetext", words(pos)); }).observe(d, { attributes: true, attributeFilter: ["class"] });
   }
-  [].forEach.call(document.querySelectorAll(".tn"), setup);
+  [].forEach.call(document.querySelectorAll(".thn"), setup);
 
   // the gallery page: filter chips
-  var chips = [].slice.call(document.querySelectorAll(".tn-chip"));
-  var cards = [].slice.call(document.querySelectorAll(".tn-card"));
+  var chips = [].slice.call(document.querySelectorAll(".thn-chip"));
+  var cards = [].slice.call(document.querySelectorAll(".thn-card"));
   chips.forEach(function (c) {
     c.addEventListener("click", function () {
       var cat = c.getAttribute("data-cat");

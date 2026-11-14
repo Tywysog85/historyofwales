@@ -173,6 +173,9 @@ def town_page(r, i, rows):
     body = g["paras"](rec["en"], rec["cy"])
     chips = g["RP"].link_chips(r["see"], g["HAVE"]) if r["see"] else ""
     main = top + section(meta + name_box + body + chips + _map(r), top=True)
+    then_now = g["TN"].place_block(None, page=href(r))  # an old picture beside today's (src/thennow.py)
+    if then_now:
+        main += section(then_now, "Then and now", "Ddoe a heddiw")
 
     places = near_places(r, 16)[:8]
     if places:
@@ -215,7 +218,7 @@ def town_page(r, i, rows):
           "geo": {"@type": "GeoCoordinates", "latitude": r["lat"], "longitude": r["lon"]},
           "containedInPlace": {"@type": "AdministrativeArea", "name": la}, "sameAs": g["WIKI"] + TWW.wiki(r["en"])}
     return page(href(r), f"{title} · History of Wales", desc, main, era=era, ld=ld, og_type="place", active="reference.html",
-                track=f"town:{tid[5:]}", extra=g["PN_SCRIPT"] + TN_JS)
+                track=f"town:{tid[5:]}", extra=g["PN_SCRIPT"] + TN_JS + (g["TN_JS"] if then_now else ""))
 
 
 def _english_only(r):
