@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-14", "A history page for every town in Wales", "Tudalen hanes i bob tref yng Nghymru",
+     "All 183 towns of Wales now have a page of their own, from Holyhead to Chepstow and from St Davids to Wrexham: the story of the town, what its name means, the castles, churches, forts and battlefields around it, the people born there, its days on the timeline and a photo of the town today.",
+     "Mae gan bob un o 183 o drefi Cymru dudalen ei hun bellach, o Gaergybi i Gas-gwent ac o Dyddewi i Wrecsam: hanes y dref, ystyr ei henw, y cestyll, yr eglwysi, y caerau a’r meysydd brwydr o’i chwmpas, y bobl a aned yno, ei dyddiau ar y llinell amser a llun o’r dref heddiw.",
+     "towns.html"),
     ("2026-11-14", "Garth Celyn in 3D: the princes’ court at Aber", "Garth Celyn mewn 3D: llys y tywysogion yn Aber",
      "Walk into the court of the princes of Gwynedd at Abergwyngregyn, between the mountains and the sea: the stone hall with its two wings found by the archaeologists, the mound Pen y Mwd, Pen y Bryn on the hill, and the stories of Siwan, Dafydd, Eleanor and Gwenllian, and Llywelyn’s answer to the archbishop in 1282. Eleven stops, with the sources for every one.",
      "Cerddwch i mewn i lys tywysogion Gwynedd yn Abergwyngregyn, rhwng y mynyddoedd a’r môr: y neuadd garreg a’i dwy adain a ganfu’r archaeolegwyr, y domen Pen y Mwd, Pen y Bryn ar y bryn, a hanesion Siwan, Dafydd, Elinor a Gwenllian, ac ateb Llywelyn i’r archesgob yn 1282. Un arhosfan ar ddeg, gyda’r ffynonellau i bob un.",
