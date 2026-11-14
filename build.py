@@ -4042,18 +4042,9 @@ MARQUEE = "".join(f'<a href="{u}" draggable="false">{bi(a, b)}</a><i aria-hidden
     "".join(f'<a href="{u}" draggable="false" tabindex="-1" aria-hidden="true">{bi(a, b)}</a><i aria-hidden="true">✦</i>' for a, b, u in MARQ)
 
 
-def _letters(text):
-    """Each letter in its own box so the opening words can drop in and glint one by one, like "Cymru"."""
-    out, i = [], 0
-    for w in text.split(" "):
-        out.append('<span class="w">' + "".join(f'<b style="--i:{i + k}">{e(ch)}</b>' for k, ch in enumerate(w)) + "</span>")
-        i += len(w)
-    return " ".join(out)
-
-
-# the letters are hidden from screen readers, which hear the name once, whole (an aria-label on a <span> is ignored)
-HERO_NAME = (f'<p class="hero-name"><span class="l-en" lang="en"><span class="sr-only">History of Wales</span><span aria-hidden="true">{_letters("History of Wales")}</span></span>'
-             f'<span class="l-cy" lang="cy"><span class="sr-only">Hanes Cymru</span><span aria-hidden="true">{_letters("Hanes Cymru")}</span></span></p>')
+# The "History of Wales" / "Hanes Cymru" line above the big Cymru was removed at Ifan's request (14 Nov 2026); the logo and the
+# h1's label still name the site.
+HERO_NAME = ""
 
 
 def fill(fragment, active="", skip="#chapters", home=False):

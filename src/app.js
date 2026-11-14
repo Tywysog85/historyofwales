@@ -33,7 +33,7 @@
   var STILL_IMG = { land: null, dragon: null, ref: null };
   /* how the pictures were taken (tools: see SKILLS.md "Still pictures of the 3D land"): w = page width, d = pixels per CSS pixel,
      h = hero height, b = how far the bottom of the picture runs below the row of figures (p) or the hero's foot (w) */
-  var STILL_REF = { p: { w: 390, d: 1.5, h: 1077, b: 220 }, w: { w: 1440, d: 1.5, h: 952, b: 0 } };
+  var STILL_REF = { p: { w: 390, d: 1.5, h: 1040, b: 220 }, w: { w: 1440, d: 1.5, h: 868, b: 0 } };
   var MONTHS_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   var MONTHS_CY = ["Ionawr","Chwefror","Mawrth","Ebrill","Mai","Mehefin","Gorffennaf","Awst","Medi","Hydref","Tachwedd","Rhagfyr"];
 
@@ -152,10 +152,10 @@
     if (L3 || STILLP) {
       /* the valley mist the mountains rise out of, which also hides the stars below the skyline. It is dark at night and a soft blue
          haze by day: a light grey mist read as a flat grey sheet behind the castle at night (Ifan, 13 Nov 2026), so keep it dark. */
-      var vm = cx.createLinearGradient(0, eb - eh * 0.7, 0, H), mistC = mixHex(mixHex(SKY.sky[2], SKY.sky[1], 0.45), mixHex("#262b3d", "#56607c", SKY.sun), 0.7), vc = hex(mistC).join(",");
+      var vm = cx.createLinearGradient(0, eb - eh * 0.7, 0, H), mistC = mixHex(mixHex(SKY.sky[2], SKY.sky[1], 0.45), mixHex("#262b3d", "#444d68", SKY.sun), 0.7), vc = hex(mistC).join(",");
       vm.addColorStop(0, "rgba(" + vc + ",0)"); vm.addColorStop(0.34, "rgba(" + vc + ",.9)"); vm.addColorStop(0.55, "rgba(" + vc + ",1)"); vm.addColorStop(1, SKY.sky[3]); cx.fillStyle = vm; cx.fillRect(0, eb - eh * 0.7, W, H);
       if (!L3) drawStillLand(stacked); else {
-        if (!FLAG) FLAG = flagArt(); HCL3.frame({ W: W, H: H, sumX: sumX - ew * 0.13, sumY: sumY + ew * 0.15, ppm: ew / 2000, ground: stacked ? { x: W * 0.7, y: eb - eh * 0.07 - sy * 0.04, ppm: Math.min(W * 0.0095, eh * 0.019), tilt: narrow ? 0 : 0.12 } : { x: Math.min(W * 0.885, W - H * 0.3) - mouse * 9, y: H * 0.7 - sy * 0.1, ppm: H * 0.0098 }, castle: true, t: t, sun: SKY.sun, fog: mixHex(SKY.sky[2], SKY.sky[1], 0.45), mist: mistC, flag: FLAG, flagV: FLAGV });
+        if (!FLAG) FLAG = flagArt(); HCL3.frame({ W: W, H: H, sumX: sumX - ew * 0.13, sumY: sumY + ew * 0.15, ppm: ew / 2000, ground: stacked ? { x: W * 0.7, y: eb - eh * 0.07 - sy * 0.04, ppm: Math.min(W * 0.0095, eh * 0.019), tilt: narrow ? 0 : 0.12 } : { x: Math.min(W * 0.885, W - H * 0.3) - mouse * 9, y: H * 0.7 - sy * 0.1, ppm: H * 0.0098, tilt: 0.1 }, castle: true, t: t, sun: SKY.sun, fog: mixHex(SKY.sky[2], SKY.sky[1], 0.45), mist: mistC, flag: FLAG, flagV: FLAGV });
         if (HCL3.shown && !LANDT) LANDT = t; }
     }
     LAYERS.forEach(function (L, i) {
