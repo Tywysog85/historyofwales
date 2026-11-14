@@ -201,6 +201,18 @@ SAMPLES = ["Llangammarch Wells", "Pontrhydfendigaid", "Betws-y-Coed", "Llanfair 
            "Llanfairpwllgwyngyll", "Pen-y-bont", "Abergavenny", "Llandrindod Wells", "Caerdydd", "Merthyr Tudful"]
 
 
+# the name already in the home page decoder: a different one each day, the same for everyone (see PN.today in placenames.js).
+# Keep to names the decoder explains fully, from every part of Wales, mixed so neighbours don't follow each other.
+DAILY = ["Llanfairpwllgwyngyll", "Aberystwyth", "Pontypridd", "Betws-y-Coed", "Caerfyrddin", "Llangammarch Wells", "Tyddewi",
+         "Llandudno", "Merthyr Tudful", "Pontrhydfendigaid", "Aberhonddu", "Caernarfon", "Cwmbrân", "Llanfair Caereinion",
+         "Abergwaun", "Penmaenmawr", "Tonypandy", "Llanddewi Brefi", "Llangollen", "Abertawe", "Dolgellau", "Builth Wells",
+         "Aberdaugleddau", "Llanrhaeadr-ym-Mochnant", "Ystradgynlais", "Beddgelert", "Llandeilo", "Casnewydd", "Pen-y-fan",
+         "Machynlleth", "Rhosllanerchrugog", "Llangefni", "Pontarddulais", "Llanidloes", "Aberaeron", "Caerdydd", "Pwllheli",
+         "Llandrindod Wells", "Glynebwy", "Llanberis", "Trefynwy", "Llangrannog", "Blaenau Ffestiniog", "Rhydaman", "Llanuwchllyn",
+         "Abergavenny", "Penmynydd", "Ystrad Mynach", "Llanelli", "Bwlch-y-groes", "Aberdaron", "Llanwrtyd Wells", "Castell-nedd",
+         "Porthmadog", "Abercynon", "Llanfyllin", "Cwm Rhondda", "Llanbedr Pont Steffan", "Y Drenewydd", "Abergele", "Llantrisant",
+         "Ynys Môn", "Aberdâr", "Pen-y-groes", "Caerffili", "Llanfair-ym-Muallt", "Abersoch", "Maesteg", "Treorci", "Aberdyfi"]
+
 def data(towns=()):
     """Everything placenames.js needs, as plain lists. `towns` is [en, cy, meaning en, meaning cy, id] for whole names."""
     rows = [[w, en, cy, "w"] for w, en, cy in WORDS]
@@ -208,7 +220,7 @@ def data(towns=()):
     rows += [[w, en, cy, "s"] for w, en, cy in SAINTS if en]
     rows += [[w, en, cy, "e"] for w, en, cy in ENGLISH]
     rows += [[w, en, cy, "n"] for w, en, cy in OLDNAMES]
-    return dict(W=rows, T=[list(t) for t in towns], S=SAMPLES)
+    return dict(W=rows, T=[list(t) for t in towns], S=SAMPLES, D=DAILY)
 
 
 def glossary():

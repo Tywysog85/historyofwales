@@ -104,6 +104,14 @@
     return document.getElementById(id) ? "#" + id : (document.documentElement.classList.contains("cy") ? "cy/" : "") + "towns.html#" + id;
   }
 
-  window.PN = { decode: decode, label: label, townLink: townLink, samples: D.S || [] };
+  /* today's name for the home page box: by the visitor's own date, so everyone sees the same name that day */
+  function today() {
+    var list = D.D || [], d = new Date();
+    if (!list.length) return "";
+    var n = Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5);
+    return list[n % list.length];
+  }
+
+  window.PN = { decode: decode, label: label, townLink: townLink, today: today, samples: D.S || [] };
   try { document.dispatchEvent(new Event("pn:ready")); } catch (err) { /* very old browsers: the decoder just waits for a keypress */ }
 })();

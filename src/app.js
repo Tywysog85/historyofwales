@@ -865,7 +865,9 @@
     var out = $("#dec-out"), P = window.PN;
     if (!out) return;
     if (!P) { out.innerHTML = '<p style="color:var(--muted)">' + T("Loading the word list…", "Yn llwytho’r geiriau…") + "</p>"; return; }
-    var r = P.decode($("#dec-in").value), cy = lang === "cy", i = 0, html = "";
+    var box = $("#dec-in");
+    if (!box.dataset.daily) { box.dataset.daily = "1"; if (!box.value) box.value = P.today(); }  /* a new name each day, until the visitor types */
+    var r = P.decode(box.value), cy = lang === "cy", i = 0, html = "";
     if (r.hit) html += '<p class="dec-hit"><a href="' + esc(P.townLink(r.hit)) + '"><b>' + esc(r.hit[1]) + (r.hit[0] !== r.hit[1] ? " / " + esc(r.hit[0]) : "") + "</b></a>: " + esc(cy ? r.hit[3] : r.hit[2]) + "</p>";
     html += r.words.map(function (w) {
       return '<div class="dec-word">' + w.map(function (p) {
