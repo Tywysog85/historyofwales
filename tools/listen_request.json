@@ -1,0 +1,8 @@
+{
+ "branch": "claude/project-thread-56vkej",
+ "en": "",
+ "cy": "",
+ "only": [],
+ "redo": false,
+ "sample": {"id": "glyndwr", "sections": 2, "voices": ["kokoro:bm_george", "kokoro:bm_fable", "kokoro:bm_lewis", "kokoro:bm_daniel", "kokoro:bf_emma", "kokoro:bf_isabella", "kokoro:af_heart", "piper:gwryw-gogledd-pro"]}
+}

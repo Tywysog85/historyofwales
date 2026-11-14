@@ -1,0 +1,143 @@
+name: Long reads read aloud
+
+# Makes the spoken versions of the long reads (tools/make_listen.py, src/listen.py) and keeps them on the repository's
+# "listen" release, so the repository itself stays small; deploy.yml copies them into the site.
+# Runs when tools/listen_request.json is pushed (on its "branch", or on main), by hand from the Actions tab, and every
+# Sunday morning, when it remakes only the long reads whose words have changed and adds any new ones.
+# Claude's cloud computer cannot reach Hugging Face, Microsoft or ElevenLabs, so this runs here.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 5 * * 0"
+  push:
+    branches: ["main", "claude/**"]
+    paths: ["tools/listen_request.json"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: listen
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      go: ${{ steps.mine.outputs.go }}
+      count: ${{ steps.plan.outputs.count }}
+      shards: ${{ steps.plan.outputs.shards }}
+      sample: ${{ steps.plan.outputs.sample }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Is this for this branch?
+        id: mine
+        run: |
+          want=$(python3 -c "import json; print(json.load(open('tools/listen_request.json')).get('branch') or 'main')")
+          if [ "${GITHUB_EVENT_NAME}" != "push" ] || [ "$want" = "${GITHUB_REF_NAME}" ]; then echo "go=1" >> "$GITHUB_OUTPUT"; else echo "Request is for '$want', not ${GITHUB_REF_NAME}: nothing to do."; fi
+      - name: What needs making
+        id: plan
+        if: steps.mine.outputs.go == '1'
+        run: |
+          python3 tools/make_listen.py plan 8 > plan.json
+          cat plan.json
+          echo "count=$(python3 -c "import json; print(json.load(open('plan.json'))['count'])")" >> "$GITHUB_OUTPUT"
+          echo "shards=$(python3 -c "import json; print(json.dumps(json.load(open('plan.json'))['shards']))")" >> "$GITHUB_OUTPUT"
+          echo "sample=$(python3 -c "import json; print(1 if (json.load(open('tools/listen_request.json')).get('sample') or {}).get('voices') else 0)")" >> "$GITHUB_OUTPUT"
+
+  sample:
+    needs: plan
+    if: needs.plan.outputs.go == '1' && needs.plan.outputs.sample == '1'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install the voices
+        run: |
+          sudo apt-get install -y ffmpeg espeak-ng
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install "kokoro>=0.9" soundfile piper-tts
+      - name: Make the samples
+        env:
+          AZURE_SPEECH_KEY: ${{ secrets.AZURE_SPEECH_KEY }}
+          AZURE_SPEECH_REGION: ${{ secrets.AZURE_SPEECH_REGION }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          LISTEN_EXTRA_VOICES: ${{ vars.LISTEN_EXTRA_VOICES }}
+        run: python3 tools/make_listen.py sample _research/listen
+      - name: Commit the samples
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f _research/listen
+          git diff --cached --quiet && exit 0
+          git commit -m "Voice samples for the long reads read aloud (tools/make_listen.py sample)"
+          for i in 1 2 3; do git pull --rebase origin "${GITHUB_REF_NAME}" && git push && exit 0; sleep 5; done
+          exit 1
+
+  make:
+    needs: [plan, sample]
+    if: always() && needs.plan.outputs.go == '1' && needs.plan.outputs.count != '0' && needs.plan.outputs.count != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJson(needs.plan.outputs.shards) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install the voices
+        run: |
+          sudo apt-get install -y ffmpeg espeak-ng
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install "kokoro>=0.9" soundfile piper-tts
+      - name: Read this shard's long reads aloud
+        env:
+          AZURE_SPEECH_KEY: ${{ secrets.AZURE_SPEECH_KEY }}
+          AZURE_SPEECH_REGION: ${{ secrets.AZURE_SPEECH_REGION }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          LISTEN_EXTRA_VOICES: ${{ vars.LISTEN_EXTRA_VOICES }}
+        run: python3 tools/make_listen.py make ${{ matrix.shard }} 8 listen_out
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: listen-${{ matrix.shard }}
+          path: listen_out
+          if-no-files-found: ignore
+          retention-days: 3
+
+  publish:
+    needs: [plan, make]
+    if: always() && needs.plan.outputs.go == '1' && needs.plan.outputs.count != '0' && needs.plan.outputs.count != ''
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: listen-*
+          path: listen_out
+          merge-multiple: true
+      - name: Put the sound on the "listen" release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ls listen_out/*.m4a >/dev/null 2>&1 || { echo "Nothing was made"; exit 0; }
+          gh release view listen >/dev/null 2>&1 || gh release create listen --title "Long reads read aloud" \
+            --notes "The spoken long reads of historyofwales.cymru. Made by tools/make_listen.py; copied into the site by deploy.yml. Please leave this release in place." --latest=false
+          # only files that also have their details (.json), so a half-made file never goes up
+          for j in listen_out/*.json; do f="${j%.json}.m4a"; [ -f "$f" ] && echo "$f"; done > up.txt
+          xargs -a up.txt gh release upload listen --clobber
+      - name: Save the details in src/listen.json
+        run: |
+          python3 tools/make_listen.py merge listen_out
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/listen.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Long reads read aloud: $(ls listen_out/*.json | wc -l) new or remade files"
+          for i in 1 2 3; do git pull --rebase origin "${GITHUB_REF_NAME}" && git push && exit 0; sleep 5; done
+          exit 1
