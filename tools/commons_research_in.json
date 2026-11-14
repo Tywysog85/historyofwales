@@ -1,7 +1,7 @@
 {
  "branch": "claude/project-thread-7bwosa",
  "out": "_research/thennow1",
- "max": 900,
+ "max": 4000,
  "categories": [
   "Category:Photochrom prints of Wales",
   "Category:Photochroms of Wales",
@@ -153,5 +153,7 @@
   "Cotman Wales castle",
   "Telford Menai bridge 1826",
   "Pontcysyllte 1810"
- ]
+ ],
+ "per_search": 25,
+ "previews": false
 }
