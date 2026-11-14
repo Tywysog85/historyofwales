@@ -39,6 +39,7 @@ TITLES = {
     "gallery.html": "Pictures of Welsh history: the gallery",
     "teachers.html": "Welsh history for teachers and schools",
     "names.html": "Welsh surnames and what they mean",
+    "family-history.html": "Welsh family history: surnames, ap and ferch, and tracing your Welsh ancestors",
     "symbols.html": "Welsh symbols and traditions",
     "map-game.html": "Where in Wales? A Welsh history map game",
     "era-ancient.html": "The Stone Age in Wales (230,000–2500 BC)",

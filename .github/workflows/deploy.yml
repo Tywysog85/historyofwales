@@ -68,13 +68,28 @@ jobs:
           fi
           echo "Leaderboard: ${url:-not up}"
           echo "url=$url" >> "$GITHUB_OUTPUT"
+      # The share pictures (cards/) are kept between builds, so only new or changed ones are drawn (see make_cards()).
+      - name: Restore the share pictures made last time
+        uses: actions/cache/restore@v4
+        with:
+          path: .cache/cards
+          key: share-cards-${{ github.run_id }}
+          restore-keys: share-cards-
       - name: Build site
+        id: build
         run: python3 build.py
         env:
           LEADERBOARD_URL: ${{ steps.lb.outputs.url }}
           GOATCOUNTER: historyofwales
           SITE_URL: https://historyofwales.cymru/
           EMAIL_FORM: ${{ vars.EMAIL_FORM }}
+      - name: Keep the share pictures for next time
+        if: steps.build.outputs.cards_new == 'true'
+        continue-on-error: true
+        uses: actions/cache/save@v4
+        with:
+          path: .cache/cards
+          key: share-cards-${{ github.run_id }}
       # The build stamps anything new with the time it was added (src/added.json), so pages can show the newest first,
       # and writes the weekly quiz a year ahead (src/quiz_weeks.json, a new week each Monday).
       # If a change forgot to commit those files, save them back here so they stay put. Never stops the deploy.
