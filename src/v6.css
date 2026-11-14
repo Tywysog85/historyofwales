@@ -143,8 +143,8 @@ html.menu-open { overflow: hidden }
 .mq-top { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; cursor: grab; overscroll-behavior-x: contain }
 .mq-top::-webkit-scrollbar { display: none }
 .mq-under { overflow: hidden; cursor: grab; touch-action: pan-y; margin-top: .1rem; padding-bottom: .1em }
-.marquee .track { display: flex; align-items: center; gap: 1.6rem; width: max-content; padding-inline: 1.1rem; font-family: var(--f-display); font-size: clamp(2.1rem, 5.4vw, 4rem); line-height: 1; white-space: nowrap }
-.marquee .track2 { display: flex; align-items: center; gap: 1.1rem; width: max-content; font-family: var(--f-display); font-size: clamp(1.05rem, 2.1vw, 1.6rem); line-height: 1.1; white-space: nowrap; will-change: transform }
+.marquee .track { display: flex; align-items: center; gap: 1.6rem; width: max-content; padding-inline: 1.1rem; font-family: var(--f-display); font-size: clamp(2.35rem, 6vw, 4.3rem); line-height: 1; white-space: nowrap }
+.marquee .track2 { display: flex; align-items: center; gap: 1.1rem; width: max-content; font-family: var(--f-display); font-size: clamp(1.3rem, 2.6vw, 1.9rem); line-height: 1.1; white-space: nowrap; will-change: transform }
 .marquee.drag, .marquee.drag .mq-top, .marquee.drag .mq-under { cursor: grabbing }
 .marquee a { color: var(--ink); text-decoration: none; -webkit-user-drag: none }
 .marquee .track2 a { color: var(--gold); opacity: .88; letter-spacing: .02em; transition: opacity .2s, color .2s }
@@ -1115,6 +1115,7 @@ a:hover > .card-ban img, .wl-card:hover > .card-ban img { transform: scale(1.04)
   #pins .pin.sel .dot { r: 13 }
   #pins .pin .halo { r: 26 }
   #pins .pin .lbl { font-size: 21px; stroke-width: 6px }
+}
 
 /* ---------- long reads: contents, section links, "where am I" bar (November 2026; story_toc / head_ids in build.py) ---------- */
 .prose h2[id] { scroll-margin-top: 5rem }
@@ -1162,7 +1163,7 @@ a:hover > .card-ban img, .wl-card:hover > .card-ban img { transform: scale(1.04)
   .hero .ticker .wrap { padding-block: .65rem .85rem }
   .hero .ticker b { font-size: 1.9rem }
   .marquee { padding-block: .55rem .5rem }
-  .marquee .track { font-size: clamp(2rem, 2.8vw, 2.4rem) }
-  .marquee .track2 { font-size: 1.05rem }
+  .marquee .track { font-size: clamp(2.4rem, 3.3vw, 3rem) }
+  .marquee .track2 { font-size: 1.5rem }
   main.home > #chapters { padding-top: 2rem }
 }
