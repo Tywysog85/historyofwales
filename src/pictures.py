@@ -38,6 +38,11 @@ ERA = dict(
 )
 
 PAGE = {
+    # pages that had no picture of their own, so their What's new lines had none (Ifan, 14 November 2026)
+    "story-rhys.html": "g:person-yr-arglwydd-rhys@50% 22%",
+    "story-nest.html": "g:cast-cilgerran",
+    "books.html": "g:trea-st-chad@50% 30%",
+    "firsts.html": "g:place-pontcysyllte",
     # The Druids long read (src/druids.py)
     "story-druids.html": "g:druid-teaching@50% 30%",
     # the princes of Powys and Deheubarth (src/princes4.py)
