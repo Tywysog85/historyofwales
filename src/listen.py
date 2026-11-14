@@ -23,10 +23,10 @@ except FileNotFoundError:
 
 # Who reads, shown small in the player. Filled in from the manifest's "voice" (see VOICES in tools/make_listen.py).
 CREDIT = {
-    "azure": ("Read by a Microsoft neural voice", "Darllenir gan lais niwral Microsoft"),
-    "kokoro": ("Read by the Kokoro open voice", "Darllenir gan lais agored Kokoro"),
-    "piper": ("Read by Bangor University's Welsh voice", "Darllenir gan lais Cymraeg Prifysgol Bangor"),
-    "elevenlabs": ("Read by an ElevenLabs voice", "Darllenir gan lais ElevenLabs"),
+    "azure": ("Read by {name}, a Microsoft computer voice", "Darllenir gan {name}, un o leisiau cyfrifiadurol Microsoft"),
+    "kokoro": ("Read by {name}, a Kokoro computer voice", "Darllenir gan {name}, llais cyfrifiadurol Kokoro"),
+    "piper": ("Read by Bangor University's Welsh computer voice", "Darllenir gan lais cyfrifiadurol Cymraeg Prifysgol Bangor"),
+    "elevenlabs": ("Read by {name}, an ElevenLabs computer voice", "Darllenir gan {name}, llais cyfrifiadurol ElevenLabs"),
 }
 
 # ---------------------------------------------------------------- the words read aloud
@@ -129,9 +129,7 @@ def player(x, e):
         if not m:
             continue
         cy = lang == "cy"
-        who = CREDIT.get(m.get("engine", ""), ("", ""))[1 if cy else 0]
-        if m.get("voice_name"):
-            who += f" ({m['voice_name']})"
+        who = CREDIT.get(m.get("engine", ""), ("", ""))[1 if cy else 0].replace("{name}", m.get("voice_name", ""))
         marks = ",".join(f"{t:.2f}" for t in m.get("marks", []))
         T = (lambda en, c: c if cy else en)
         out += (f'<div class="listen l-{lang} no-print" lang="{lang}" data-id="{e(x["id"])}" data-src="listen/{e(m["file"])}?v={e(m["hash"])}" '
