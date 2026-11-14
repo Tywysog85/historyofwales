@@ -324,7 +324,7 @@ NAV_TOP = NAV_MAIN  # Ifan wants the same links along the top bar as in the big 
 NAV_GROUPS = [
     # the twelve ages, each with its dates, so a newcomer can tell the Age of Kings from the Age of Princes (Ifan, 2026-11-12)
     ("The twelve ages", "Y deuddeg oes", [(f'era-{x["id"]}.html', x["en"], x["cy"], x["spanEn"], x["spanCy"]) for x in D.ERAS]),
-    ("Explore", "Archwilio", [("reference.html", "Look it up", "Chwilio’r hanes"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"),
+    ("Explore", "Archwilio", [("reference.html", "Look it up", "Chwilio’r hanes"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("family-history.html", "Your Welsh family", "Eich teulu Cymreig"),
                               ("castles.html", "Castles map", "Map y cestyll"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"),
                               ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn")]),
     ("Read", "Darllen", [("wales-in-10.html", "Wales in 10 minutes", "Cymru mewn 10 munud"), ("laws.html", "The Laws of Hywel Dda", "Cyfreithiau Hywel Dda"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"),
@@ -450,7 +450,7 @@ def footer():
     # On phones site.js closes them, so the footer is four tappable headings instead of 1,600 px of links.
     eras_col = (f'<details class="fcol" open><summary class="eyebrow">{bi("The twelve ages", "Y deuddeg oes")}</summary><ul>' + "".join(
         f'<li><a href="era-{x["id"]}.html">{bi(x["en"], x["cy"])} <span class="m-dates">{bi(x["spanEn"], x["spanCy"])}</span></a></li>' for x in D.ERAS) + "</ul></details>")
-    explore = [("timeline.html", "Timeline", "Llinell amser"), ("map.html", "Map of Wales", "Map Cymru"), ("people.html", "People", "Pobl"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("castles.html", "Castles of Wales", "Cestyll Cymru"), ("trails.html", "Themed trails", "Llwybrau thema"),
+    explore = [("timeline.html", "Timeline", "Llinell amser"), ("map.html", "Map of Wales", "Map Cymru"), ("people.html", "People", "Pobl"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("family-history.html", "Your Welsh family", "Eich teulu Cymreig"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("castles.html", "Castles of Wales", "Cestyll Cymru"), ("trails.html", "Themed trails", "Llwybrau thema"),
                ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"), ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg")]
     read = [("whatsnew.html", "What’s new", "Beth sy’n newydd"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"), ("laws.html", "The Laws of Hywel Dda", "Cyfreithiau Hywel Dda"), ("literature.html", "Welsh literature", "Llenyddiaeth Gymraeg"), ("books.html", "The great books of Wales", "Llyfrau mawr Cymru"), ("manuscripts.html", "Medieval manuscripts", "Llawysgrifau canoloesol"), ("triads.html", "The Welsh Triads", "Trioedd Ynys Prydain"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
             ("teachers.html", "For teachers", "I athrawon"), ("index.html#sources", "Sources", "Ffynonellau"),
@@ -1487,7 +1487,7 @@ SHELF = [  # (id, heading EN, heading CY, the reading lists whose works it takes
     ("tudor", "From the Tudors to the Methodists", "O’r Tuduriaid i’r Methodistiaid", ["era-tudor", "era-revival"]),
     ("industry", "Iron, coal, slate and the sea", "Haearn, glo, llechi a’r môr", ["era-industrial", "industry", "coal", "aberfan", "protest", "topic-industry", "trail-coal", "trail-sea", "firsts", "topic-science"]),
     ("modern", "Modern Wales and the Welsh abroad", "Cymru fodern a’r Cymry ar wasgar", ["era-modern", "era-today", "revival", "mac", "fwa", "world", "madog", "tryweryn", "epynt", "topic-abroad", "topic-sport"]),
-    ("lang", "The Welsh language, names and places", "Yr iaith Gymraeg, enwau a lleoedd", ["language", "welsh-not", "welsh-revival", "topic-language", "welsh", "names", "towns", "maps", "sites"]),
+    ("lang", "The Welsh language, names and places", "Yr iaith Gymraeg, enwau a lleoedd", ["language", "welsh-not", "welsh-revival", "topic-language", "welsh", "names", "family-history", "towns", "maps", "sites"]),
     ("life", "Women and everyday life", "Menywod a bywyd bob dydd", ["topic-women", "trail-women", "topic-countryside"]),
 ]
 
@@ -2548,7 +2548,9 @@ def game_page(path, kind, era, title_en, title_cy, sub_en, sub_cy, art, desc, wi
         data["OUT"] = geo["outline"]
     main = (hero(era, f'<a href="index.html">{SITE}</a> / <a href="play.html">{bi("Play", "Chwarae")}</a>', "book", "Play", "Chwarae", title_en, title_cy, sub_en, sub_cy, art=art)
             + f'<section class="game-sec"><div class="wrap narrow"><div class="g-root" id="g-root" data-game="{kind}"><noscript>This game needs JavaScript.</noscript></div>'
-              f'<p class="more-row"><a class="btn" href="play.html">← {bi("All games", "Pob gêm")}</a></p></div></section>')
+              f'<p class="more-row"><a class="btn" href="play.html">← {bi("All games", "Pob gêm")}</a>'
+              + (f' <a class="btn solid" href="family-history.html">{bi("Trace your own Welsh family", "Olrhain eich teulu Cymreig eich hun")} →</a>' if kind == "names" else "")
+              + '</p></div></section>')
     extra = f'<script>var PLAY={json.dumps(data, ensure_ascii=False, separators=(",", ":"))};</script>\n<script src="play.js?v={_static_fp("play.js")}" defer></script>\n'
     return page(path, f"{title_en} · History of Wales", desc, main, era=era, og_type="website", active="play.html", extra=extra)
 
@@ -4440,6 +4442,8 @@ def search_index():
                           b=[f'{kd[0]}, {r["la"]}. On the castles map.', f'{kd[1]}, {CS.LA_CY.get(r["la"], r["la"])}. Ar fap y cestyll.'], e="medieval"))
     items.append(dict(k="page", t="Welsh world firsts", c="Cymru oedd y cyntaf", u="firsts.html", y=["Firsts", "Y cyntaf"], b=["The equals sign, π, the fuel cell, the microphone, packet switching, mail order and more: everything Wales and the Welsh did first. " + ", ".join(PERSON[k][3] for k in P2.FIRSTS if k in PERSON), "Yr hafalnod, π, y gell danwydd, y meicroffon, newid pecynnau, archebu drwy’r post a rhagor: popeth a wnaeth Cymru a’r Cymry gyntaf."], e="industrial"))
     items += RP.search_items()  # the reference pages (src/refpages.py)
+    items.append(dict(k="page", t="Finding your Welsh family", c="Dod o hyd i’ch teulu Cymreig", u="family-history.html", y=["Family history", "Hanes teulu"],
+                      b=["Welsh surnames, ap and ferch, and how to trace your Welsh ancestors: census, parish and chapel registers, wills, tithe maps, newspapers", "Cyfenwau Cymreig, ap a ferch, a sut i olrhain eich hynafiaid: cyfrifiad, cofrestri plwyf a chapel, ewyllysiau, mapiau’r degwm, papurau newydd"], e="revival"))
     items.append(dict(k="page", t="For teachers", c="I athrawon", u="teachers.html", y=["", ""], b=["Lesson ideas and printable quizzes", "Syniadau gwersi a chwisiau i’w hargraffu"], e="industrial"))
     return items
 
@@ -4807,6 +4811,9 @@ RP.setup(globals())
 EP.setup(globals())
 style += EP.CSS
 TPK.setup(globals())
+import family as FAM  # noqa: E402  (family history: family-history.html, src/family.py)
+FAM.setup(globals())
+style += FAM.CSS
 RIDE.setup(globals())
 COURTS.setup(globals())
 style += COURTS.CSS
@@ -4838,6 +4845,7 @@ def main():
     for i, t in enumerate(L.TRAILS):
         pages[f"trail-{t['id']}.html"] = trail_page(t, i)
     pages["teachers.html"] = teachers_page()
+    pages["family-history.html"] = FAM.page()  # finding your Welsh family (src/family.py)
     pages["stories.html"] = stories_index()
     for i, x in enumerate(F.STORIES):
         pages[f"story-{x['id']}.html"] = story_page(x, i)

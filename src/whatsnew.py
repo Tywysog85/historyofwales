@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-14", "Finding your Welsh family: names, surnames and ancestors", "Dod o hyd i’ch teulu Cymreig: enwau, cyfenwau a hynafiaid",
+     "A new family history corner: how ap and ferch carried a family’s memory, the Lord Rhys’s line back to Rhodri Mawr as Gerald of Wales gave it, how ap Hywel became Powell and John’s children became Jones, the twenty commonest surnames in Wales and where each comes from, and a step-by-step guide to finding your Welsh ancestors in the census, the parish and chapel registers, the wills, the tithe maps and the newspapers, with a finder that shows which records cover the years your ancestor lived.",
+     "Cornel hanes teulu newydd: sut y cariai ap a ferch gof teulu, llinach yr Arglwydd Rhys yn ôl at Rodri Mawr fel y’i rhoddodd Gerallt Gymro, sut yr aeth ap Hywel yn Powell a phlant John yn Jones, yr ugain cyfenw mwyaf cyffredin yng Nghymru ac o ble daw pob un, a chanllaw gam wrth gam i ddod o hyd i’ch hynafiaid yn y cyfrifiad, cofrestri’r plwyf a’r capel, yr ewyllysiau, mapiau’r degwm a’r papurau newydd, gyda chwiliwr sy’n dangos pa gofnodion sy’n cwmpasu’r blynyddoedd y bu eich hynafiad fyw.",
+     "family-history.html"),
     ("2026-11-14", "Garth Celyn in 3D: the princes’ court at Aber", "Garth Celyn mewn 3D: llys y tywysogion yn Aber",
      "Walk into the court of the princes of Gwynedd at Abergwyngregyn, between the mountains and the sea: the stone hall with its two wings found by the archaeologists, the mound Pen y Mwd, Pen y Bryn on the hill, and the stories of Siwan, Dafydd, Eleanor and Gwenllian, and Llywelyn’s answer to the archbishop in 1282. Eleven stops, with the sources for every one.",
      "Cerddwch i mewn i lys tywysogion Gwynedd yn Abergwyngregyn, rhwng y mynyddoedd a’r môr: y neuadd garreg a’i dwy adain a ganfu’r archaeolegwyr, y domen Pen y Mwd, Pen y Bryn ar y bryn, a hanesion Siwan, Dafydd, Elinor a Gwenllian, ac ateb Llywelyn i’r archesgob yn 1282. Un arhosfan ar ddeg, gyda’r ffynonellau i bob un.",

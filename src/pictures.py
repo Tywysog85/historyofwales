@@ -186,6 +186,7 @@ PAGE = {
     "topic-abroad.html": "c:Vista de Gaiman.JPG",
     "topic-countryside.html": "g:place-stfagans",
     "topic-faith.html": "g:holy-soar-y-mynydd",
+    "family-history.html": "g:holy-soar-y-mynydd",
     "topic-industry.html": "g:place-dinorwig",
     "topic-language.html": "g:trea-black-book",
     "topic-law.html": "g:place-hendygwyn",
