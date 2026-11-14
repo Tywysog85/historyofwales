@@ -466,3 +466,8 @@ TOWNS = {
     "Casglwyd y capel Anghydffurfiol cyntaf yng Nghymru yma yn 1639.", ["place-llanfaches.html"], (51.6200, -2.8210)),
  ],
 }
+
+# The towns added on 14 November 2026 (src/towns_more.py), each under its council area.
+from towns_more import ADD as _ADD  # noqa: E402
+for _la, _ts in _ADD.items():
+    TOWNS[_la] = TOWNS[_la] + _ts
