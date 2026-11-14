@@ -1,7 +1,8 @@
 """Look up candidate pictures on Wikimedia Commons, on GitHub (Commons is blocked from Claude's cloud computer).
 
 Reads tools/commons_research_in.json: {"branch": "<your claude/ branch>", "out": "<folder>", "categories": [...], "searches": [...], "files": [...],
-"download": [...]}. Files listed under "download" are also saved full size (fits 1400 x 1400) as <folder>/full/<k>.jpg, ready to be
+"download": [...]}. Optional: "per_search" (results per search, default 40), "previews" (false = list only, no preview
+pictures, for a first wide sweep) and "preview_px" (preview size, default 500) and "download_px" (size of the full copies, default 1400). Files listed under "download" are also saved full size (fits 1400 x 1400) as <folder>/full/<k>.jpg, ready to be
 made into gallery pictures.
 The workflow only runs it on the branch named in "branch" (or when started by hand), so set that to your own branch.
 For every file found it records the title, size, licence, author and description, and saves a small preview JPEG
@@ -62,7 +63,7 @@ def main():
         print(c, "subcats:", subs)
         where.setdefault("_subcats", {})[c] = subs
     for s in cfg.get("searches", []):
-        r = api(action="query", list="search", srsearch=s, srnamespace="6", srlimit="40")
+        r = api(action="query", list="search", srsearch=s, srnamespace="6", srlimit=str(cfg.get("per_search", 40)))
         for m in r.get("query", {}).get("search", []):
             add(m["title"], "search: " + s)
     for f in cfg.get("files", []):
@@ -81,11 +82,12 @@ def main():
                               desc=v("ImageDescription")[:600], date=v("DateTimeOriginal")[:80], thumb=ii.get("thumburl")))
     for n, f in enumerate(found):
         f["n"] = n
-        if f.get("thumb") and (f.get("mime") or "").startswith("image/"):
+        if cfg.get("previews", True) and f.get("thumb") and (f.get("mime") or "").startswith("image/"):
             try:
                 from PIL import Image
                 im = Image.open(io.BytesIO(get(f["thumb"], raw=True))).convert("RGB")
-                im.thumbnail((500, 500))
+                px = cfg.get("preview_px", 500)
+                im.thumbnail((px, px))
                 im.save(os.path.join(out, f"{n}.jpg"), quality=70)
             except Exception as err:  # noqa: BLE001
                 f["thumb_error"] = str(err)
@@ -93,11 +95,17 @@ def main():
     for k, f in enumerate(cfg.get("download", [])):  # full-size copies (fits 1400 x 1400) of the pictures chosen, for the site
         f = f if f.startswith("File:") else "File:" + f
         try:
-            r = api(action="query", prop="imageinfo", titles=f, iiprop="url", iiurlwidth="1400")
-            u = r["query"]["pages"][0]["imageinfo"][0]["thumburl"]
+            px = cfg.get("download_px", 1400)
+            r = api(action="query", prop="imageinfo", titles=f, iiprop="url|size", iiurlwidth=str(px))
+            ii = r["query"]["pages"][0]["imageinfo"][0]
+            u = ii["thumburl"] if ii.get("width", 0) > px else ii["url"]
             from PIL import Image
-            im = Image.open(io.BytesIO(get(u, raw=True))).convert("RGB")
-            im.thumbnail((1400, 1400))
+            Image.MAX_IMAGE_PIXELS = None
+            try:
+                im = Image.open(io.BytesIO(get(u, raw=True))).convert("RGB")
+            except Exception:  # noqa: BLE001  (Commons may refuse a thumbnail at an unusual width: take the original)
+                im = Image.open(io.BytesIO(get(ii["url"], raw=True))).convert("RGB")
+            im.thumbnail((px, px))
             os.makedirs(os.path.join(out, "full"), exist_ok=True)
             im.save(os.path.join(out, "full", f"{k}.jpg"), quality=90)
             found.append(dict(title=f, why="download", full=f"full/{k}.jpg", w=im.width, h=im.height))

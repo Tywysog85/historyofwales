@@ -37,6 +37,7 @@ import visit as VS  # noqa: E402  (the Visiting box on place pages and the map c
 import pictures as PX  # noqa: E402  (a real picture at the top of every page and on its card: src/pictures.py)
 import thumbs as TH  # noqa: E402  (small copies of pictures for the cards: src/thumbs.py)
 import panels as PN  # noqa: E402  (picture backgrounds for the plain panels: src/panels.py)
+import thennow as TN  # noqa: E402  (then and now sliders: src/thennow.py, src/static/thennow.js, src/thennow.css)
 PX.check()
 L.TEACH.update(AG.TEACH)
 import ages9 as AG9
@@ -338,7 +339,7 @@ NAV_GROUPS = [
     ("The twelve ages", "Y deuddeg oes", [(f'era-{x["id"]}.html', x["en"], x["cy"], x["spanEn"], x["spanCy"]) for x in D.ERAS]),
     ("Explore", "Archwilio", [("reference.html", "Look it up", "Chwilio’r hanes"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("family-history.html", "Your Welsh family", "Eich teulu Cymreig"),
                               ("castles.html", "Castles map", "Map y cestyll"), ("visit.html", "Plan a day out", "Cynllunio diwrnod allan"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"),
-                              ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn")]),
+                              ("trails.html", "Themed trails", "Llwybrau thema"), ("gallery.html", "Photo gallery", "Oriel luniau"), ("then-and-now.html", "Then and now", "Ddoe a heddiw"), ("onthisday.html", "On this day", "Ar y dydd hwn")]),
     ("Read", "Darllen", [("wales-in-10.html", "Wales in 10 minutes", "Cymru mewn 10 munud"), ("laws.html", "The Laws of Hywel Dda", "Cyfreithiau Hywel Dda"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"),
                          ("literature.html", "Literature and old books", "Llên a hen lyfrau"), ("triads.html", "The Welsh Triads", "Trioedd Ynys Prydain"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
                          ("books-and-authors.html", "Books and authors", "Llyfrau ac awduron"), ("whatsnew.html", "What’s new", "Beth sy’n newydd")]),
@@ -463,7 +464,7 @@ def footer():
     eras_col = (f'<details class="fcol" open><summary class="eyebrow">{bi("The twelve ages", "Y deuddeg oes")}</summary><ul>' + "".join(
         f'<li><a href="era-{x["id"]}.html">{bi(x["en"], x["cy"])} <span class="m-dates">{bi(x["spanEn"], x["spanCy"])}</span></a></li>' for x in D.ERAS) + "</ul></details>")
     explore = [("timeline.html", "Timeline", "Llinell amser"), ("map.html", "Map of Wales", "Map Cymru"), ("people.html", "People", "Pobl"), ("firsts.html", "Welsh world firsts", "Cymru oedd y cyntaf"), ("kings.html", "Kings and princes", "Brenhinoedd a thywysogion"), ("family-trees.html", "Royal family trees", "Coed teulu brenhinol"), ("family-history.html", "Your Welsh family", "Eich teulu Cymreig"), ("saints.html", "Saints of Wales", "Seintiau Cymru"), ("castles.html", "Castles of Wales", "Cestyll Cymru"), ("visit.html", "Plan a day out", "Cynllunio diwrnod allan"), ("trails.html", "Themed trails", "Llwybrau thema"),
-               ("gallery.html", "Photo gallery", "Oriel luniau"), ("onthisday.html", "On this day", "Ar y dydd hwn"), ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg")]
+               ("gallery.html", "Photo gallery", "Oriel luniau"), ("then-and-now.html", "Then and now", "Ddoe a heddiw"), ("onthisday.html", "On this day", "Ar y dydd hwn"), ("index.html#language", "The Welsh language", "Yr iaith Gymraeg"), ("welsh.html", "Learn Welsh", "Dysgu Cymraeg")]
     read = [("whatsnew.html", "What’s new", "Beth sy’n newydd"), ("stories.html", "Long reads", "Erthyglau"), ("legends.html", "Legends", "Chwedlau"), ("mabinogion.html", "The Mabinogion", "Y Mabinogion"), ("laws.html", "The Laws of Hywel Dda", "Cyfreithiau Hywel Dda"), ("literature.html", "Welsh literature", "Llenyddiaeth Gymraeg"), ("books.html", "The great books of Wales", "Llyfrau mawr Cymru"), ("manuscripts.html", "Medieval manuscripts", "Llawysgrifau canoloesol"), ("triads.html", "The Welsh Triads", "Trioedd Ynys Prydain"), ("symbols.html", "Symbols and traditions", "Symbolau a thraddodiadau"),
             ("teachers.html", "For teachers", "I athrawon"), ("index.html#sources", "Sources", "Ffynonellau"),
             ("about.html", "About this site", "Am y wefan hon"), ("about.html#corrections", "Report a mistake", "Rhoi gwybod am gamgymeriad")]
@@ -1158,13 +1159,15 @@ def place_page(pl):
     body = prose_bi(long_en, long_cy, cls="story prose") if coded else paras(long_en, long_cy)
     main = (hero(eid, f'<a href="index.html">{SITE}</a> / <a href="era-{eid}.html">{bi(era["en"], era["cy"])}</a>', pl["ill"], era["en"], era["cy"], pl["en"], pl["cy"], pl["dEn"], pl["dCy"], art=ERA_ART[eid])
             + section(meta + photo_fig(PH.PLACE_PHOTOS.get(pid), "", "place-" + pid) + body + visit_box(pl) + place_people(pid) + further(f"place:{pid}", pl["src"]), top=True)
+            + (section(TN.place_block(pid), "Then and now", "Ddoe a heddiw") if pid in TN.BY_PLACE else "")
             + story_feature("places", pid)
             + (section(f'<ol class="era-events">{"".join(event_li(ev) for ev in related)}</ol>', "What happened here", "Beth ddigwyddodd yma") if related else "")
             + set_block(f"place:{pid}")
             + section(f'<div class="era-places">{"".join(place_tile(x) for x in near)}</div>', "Nearby", "Gerllaw"))
     ld = {"@context": "https://schema.org", "@type": "TouristAttraction", "name": pl["en"], "alternateName": pl["cy"], "description": pl["dEn"],
           "geo": {"@type": "GeoCoordinates", "latitude": pl["lat"], "longitude": pl["lon"]}}
-    return page(f"place-{pid}.html", f'{pl["en"]} · History of Wales', pl["dEn"], main, era=eid, ld=ld, og_type="place", track=f"place:{pid}")
+    return page(f"place-{pid}.html", f'{pl["en"]} · History of Wales', pl["dEn"], main, era=eid, ld=ld, og_type="place", track=f"place:{pid}",
+                extra=TN_JS if pid in TN.BY_PLACE else "")
 
 
 # ---------- trails ----------
@@ -2497,6 +2500,29 @@ def gallery_page():
                 era="industrial", og_type="website", extra='<script src="gallery.js?v=1" defer></script>\n')
 
 
+TN_JS = f'<script src="thennow.js?v={_static_fp("thennow.js")}" defer></script>\n'
+
+
+def then_and_now_page():
+    """then-and-now.html: every then and now pair (src/thennow.py), each with a slider."""
+    def link_of(p):
+        if p.get("place") and p["place"] in PLACE:
+            return f'place-{p["place"]}.html'
+        return p.get("link") or ""
+    n = len(TN.PAIRS)
+    intro_en = (f"{n} castles, abbeys and towns of Wales as the old artists and photographers saw them, beside a photograph taken from much the same spot today. "
+                "Drag across each picture to wipe from then to now.")
+    intro_cy = (f"{n} o gestyll, abatai a threfi Cymru fel y gwelodd yr hen artistiaid a ffotograffwyr hwy, ochr yn ochr â ffotograff o’r un fan, fwy neu lai, heddiw. "
+                "Llusgwch ar draws pob llun i symud o ddoe i heddiw.")
+    note = section(f'<p class="muted">{bi("The old pictures are the engravings of Samuel and Nathaniel Buck, who drew the castles and abbeys of Wales in the 1740s, prints of the late 1700s and early 1800s kept by the National Library of Wales, and the colour photochrom prints made of Wales around 1895, now in the Library of Congress. All are free to use, and every photograph of today is credited under its picture. The old artists did not always stand where a camera can, so some pairs line up more closely than others.", "Engrafiadau Samuel a Nathaniel Buck, a fu’n darlunio cestyll ac abatai Cymru yn y 1740au, yw’r hen luniau, ynghyd â phrintiau o ddiwedd y 1700au a dechrau’r 1800au sydd yng ngofal Llyfrgell Genedlaethol Cymru, a’r printiau lliw ‘photochrom’ a wnaed o Gymru tua 1895, sydd bellach yn Llyfrgell y Gyngres. Mae pob un yn rhydd i’w ddefnyddio, a rhoddir clod i bob ffotograff o heddiw o dan ei lun. Nid oedd yr hen artistiaid bob amser yn sefyll lle gall camera sefyll, felly mae rhai parau’n cyfateb yn well na’i gilydd.")}</p>')
+    main = (hero("industrial", f'<a href="index.html">{SITE}</a> / <a href="gallery.html">{bi("Photo gallery", "Oriel luniau")}</a>', "castle", "Then and now", "Ddoe a heddiw",
+                 "Wales then and now", "Cymru ddoe a heddiw", intro_en, intro_cy, art="castle")
+            + section(TN.page_main(link_of), top=True) + note)
+    return page("then-and-now.html", "Then and now: Welsh castles and towns in old pictures and today · History of Wales",
+                f"{n} Welsh castles, abbeys and towns in old engravings and 1890s photographs, beside photographs of the same places today. Drag to compare.",
+                main, era="industrial", og_type="website", extra=TN_JS)
+
+
 GAMES = [
  ("llys-rhosyr.html", "llys", "Llys Rhosyr in 3D", "Llys Rhosyr mewn 3D", "Walk through a royal court of the princes of Gwynedd: the great hall, the hearth, the prince’s seat.", "Cerddwch drwy un o lysoedd brenhinol tywysogion Gwynedd: y neuadd fawr, yr aelwyd, sedd y tywysog.", "Explore in 3D", "Crwydro mewn 3D", "medieval"),
  ("ride-glyndwr.html", "ride", "Ride with Glyndŵr, 1400", "Marchogaeth gyda Glyndŵr, 1400", "Answer Owain Glyndŵr’s call as an archer, a bard or a rider, and choose your way through the rising.", "Atebwch alwad Owain Glyndŵr fel saethydd, bardd neu farchog, a dewiswch eich ffordd drwy’r gwrthryfel.", "A story you choose", "Stori rydych chi’n ei dewis", "medieval"),
@@ -3071,6 +3097,7 @@ def wales_in_10_page():
 
 
 style += read("wales10.css")
+style += read("thennow.css")  # then and now sliders (src/thennow.py)
 
 
 # ---------- kings and princes (src/royal.py) ----------
@@ -5085,6 +5112,7 @@ def main():
         pages[f"saints-{r['id']}.html"] = saints_region_page(r, i)
     pages["symbols.html"] = symbols_page()
     pages["gallery.html"] = gallery_page()
+    pages["then-and-now.html"] = then_and_now_page()
     pages["play.html"] = play_index()
     pages["journey.html"] = journey_page()
     pages["onthisday.html"] = onthisday_page()
