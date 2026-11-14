@@ -8,6 +8,10 @@ The newest line must come first. The home page shows the first three.
 """
 
 NEWS = [
+    ("2026-11-14", "Garth Celyn in 3D: the princes’ court at Aber", "Garth Celyn mewn 3D: llys y tywysogion yn Aber",
+     "Walk into the court of the princes of Gwynedd at Abergwyngregyn, between the mountains and the sea: the stone hall with its two wings found by the archaeologists, the mound Pen y Mwd, Pen y Bryn on the hill, and the stories of Siwan, Dafydd, Eleanor and Gwenllian, and Llywelyn’s answer to the archbishop in 1282. Eleven stops, with the sources for every one.",
+     "Cerddwch i mewn i lys tywysogion Gwynedd yn Abergwyngregyn, rhwng y mynyddoedd a’r môr: y neuadd garreg a’i dwy adain a ganfu’r archaeolegwyr, y domen Pen y Mwd, Pen y Bryn ar y bryn, a hanesion Siwan, Dafydd, Elinor a Gwenllian, ac ateb Llywelyn i’r archesgob yn 1282. Un arhosfan ar ddeg, gyda’r ffynonellau i bob un.",
+     "court-aber.html"),
     ("2026-11-14", "Sycharth in 3D: walk through Owain Glyndŵr’s court", "Sycharth mewn 3D: cerddwch drwy lys Owain Glyndŵr",
      "Cross the moat, climb the green hill and step inside the timber court of Owain Glyndŵr, as Iolo Goch sang it around 1390: the H-shaped house on the motte with its chimney, glass windows and slate roof, the hall where the poets were welcomed, the bailey, the fishpond, the mill and the deer park. Twelve stops tell its story, from the poem to the fire of 1403 and what the excavators found, with the sources for each.",
      "Croeswch y ffos, dringwch y bryn gwyrdd a chamwch i mewn i lys pren Owain Glyndŵr, fel y canodd Iolo Goch iddo tua 1390: y tŷ siâp H ar y domen â’i simnai, ei ffenestri gwydr a’i do llechi, y neuadd lle croesewid y beirdd, y beili, y pysgodlyn, y felin a’r parc ceirw. Mae deuddeg arhosfan yn adrodd ei hanes, o’r gerdd i dân 1403 a’r hyn a ganfu’r cloddwyr, gyda ffynonellau pob un.",
