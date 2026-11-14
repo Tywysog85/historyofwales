@@ -4642,6 +4642,26 @@ SPRITE = ('<svg xmlns="http://www.w3.org/2000/svg">' + symbols[symbols.index("<d
 SPRITE_URL = f"sprite.svg?v={_fp(SPRITE)}"
 
 
+def _css_braces(css):
+    # A missing "}" once left 1,000 lines of the stylesheet inside "@media (pointer: coarse)", so on computers the hidden
+    # screen-reader title showed as a giant heading above Cymru (November 2026). Stop the build if the braces don't pair up.
+    depth, line = 0, 1
+    for m in re.finditer(r"/\*.*?\*/|[{}\n]", re.sub(r'"[^"\n]*"', '""', css), re.S):
+        t = m.group()
+        if t == "\n":
+            line += 1
+        elif t == "{":
+            depth += 1
+        elif t == "}":
+            depth -= 1
+            if depth < 0:
+                raise SystemExit(f"site.css: an extra '}}' near line {line}")
+        else:
+            line += t.count("\n")
+    if depth:
+        raise SystemExit(f"site.css: {depth} '{{' never closed; look for a missing '}}' in src/*.css")
+
+
 def shared_assets(pages):
     files = {"sprite.svg": SPRITE}
     # The line drawings (#i-castle and the rest) live in sprite.svg, not in every page. A page used to carry them inline and
@@ -4650,6 +4670,7 @@ def shared_assets(pages):
     for name, text in list(pages.items()):
         pages[name] = text.replace(symbols + "\n", "").replace(symbols, "").replace('href="#i-', f'href="{SPRITE_URL}#i-')
     css = style + PRINT_CSS
+    _css_braces(css)
     css_tag = f'<link rel="stylesheet" href="site.css?v={_fp(css)}">\n'
     files["site.css"] = css
     data_re = re.compile(r'<script>var DATA = (.*?);</script>\n<script>var TOWNS = (.*?);</script>\n<script>(.*?)</script>', re.S)

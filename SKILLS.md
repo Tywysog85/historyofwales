@@ -948,6 +948,9 @@ Learnt while writing the Druids long read (`src/druids.py`, `story-druids.html`)
 - **Related reading** at the end ("Read next on this subject") is three long reads on the same subject from `src/related.py`, plus a card for the long read's own age (`era_card()`). **A new long read needs a line in `src/related.py`**; until it has one the build picks three by shared people, places and events and prints a reminder. A wrong id there stops the build.
 - Home page and `stories.html` no longer promise "five-minute" essays: each long read shows its own time, and the home tile gives the real range (shortest to longest), worked out from the `mins` of every long read.
 
+### Stylesheet braces are checked at build time
+A missing `}` after a `@media (pointer: coarse)` block once swallowed about 1,000 lines of CSS, so those rules only worked on touch screens. On computers the hidden screen-reader title (`.sr-only`) showed as a giant heading above Cymru (November 2026). `_css_braces()` in build.py now stops the build if site.css has an unclosed `{` or an extra `}`. When adding a media block, close it before the next section's comment.
+
 ## Working together
 
 - Ifan sends a screenshot plus a short note, and each change is made, checked and published within minutes.
