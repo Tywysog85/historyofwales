@@ -90,6 +90,20 @@ jobs:
         with:
           path: .cache/cards
           key: share-cards-${{ github.run_id }}
+      # The long reads read aloud live on the repository's "listen" release (made by .github/workflows/listen.yml,
+      # see src/listen.py), not in the repository itself. Copy them into the site. Never stops the deploy.
+      - name: Add the long reads read aloud
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view listen >/dev/null 2>&1; then
+            mkdir -p _site/listen
+            gh release download listen --pattern "*.m4a" --dir _site/listen --clobber
+            echo "$(ls _site/listen | wc -l) sound files, $(du -sh _site/listen | cut -f1)"
+          else
+            echo "No listen release yet"
+          fi
       # The build stamps anything new with the time it was added (src/added.json), so pages can show the newest first,
       # and writes the weekly quiz a year ahead (src/quiz_weeks.json, a new week each Monday).
       # If a change forgot to commit those files, save them back here so they stay put. Never stops the deploy.

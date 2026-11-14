@@ -20,6 +20,7 @@ import towns as TW  # noqa: E402
 import photos as PH  # noqa: E402
 import eventpages as EP  # noqa: E402
 import welshpages as WP  # noqa: E402
+import listen as LSN  # noqa: E402  (long reads read aloud: src/listen.py, src/static/listen.js)
 import cites as CITE  # noqa: E402  (sources beside the claims: [[cite:...]] markers, src/cites.py)
 import booklinks as BL  # noqa: E402  (a checked web page for books in the reading lists, src/booklinks.py)
 import llys as LLYS  # noqa: E402  (Llys Rhosyr in 3D: llys-rhosyr.html, src/llys.py, tools/llys3d.src.js -> src/static/llys3d.js)
@@ -1778,7 +1779,7 @@ def story_page(x, i):
     era = ERA[x["era"]]
     meta = f'<p class="byline">{AB.byline_top()}<span>{x["mins"]} {bi("minute read", "munud o ddarllen")}</span><a href="era-{x["era"]}.html">{bi(era["en"], era["cy"])}</a><button type="button" class="copy" data-copy="story-{x["id"]}.html">{bi("Copy link", "Copïo’r ddolen")}</button></p>'
     main = (hero(x["era"], f'<a href="index.html">{SITE}</a> / <a href="stories.html">{bi("Long reads", "Erthyglau")}</a>', "book", "Long read", "Erthygl", x["en"], x["cy"], x["sumEn"], x["sumCy"], art=x["art"])
-            + f'<section class="article"><div class="wrap narrow">{meta}{story_toc(x, ids)}{story_body(x, ids)}' + (f'<p><a class="btn solid" href="firsts.html">★ {bi("Every Welsh world first, with the people behind them", "Pob un o’r pethau a wnaeth Cymru gyntaf, a’r bobl y tu ôl iddynt")} →</a></p>' if x["id"] == "firsts" else "")
+            + f'<section class="article"><div class="wrap narrow">{meta}{LSN.player(x, e)}{story_toc(x, ids)}{story_body(x, ids)}' + (f'<p><a class="btn solid" href="firsts.html">★ {bi("Every Welsh world first, with the people behind them", "Pob un o’r pethau a wnaeth Cymru gyntaf, a’r bobl y tu ôl iddynt")} →</a></p>' if x["id"] == "firsts" else "")
               + story_more_links(x)
               + (f'<p><a class="btn solid" href="laws.html">{bi("Much more on the law: the big page on the Laws of Hywel Dda, with the manuscripts and a quiz", "Llawer mwy am y gyfraith: y dudalen fawr ar Gyfreithiau Hywel Dda, gyda’r llawysgrifau a chwis")} →</a></p>' if x["id"] == "hywel" else "") + refs_block(x["id"]) + '</div></section>'
             + after + (section(f'<div class="mb-figs">{"".join(lit_fig(f) for f in x["figs"])}</div>', "Pictures", "Lluniau") if isinstance(x.get("figs"), list) and x["figs"] else "")
@@ -1787,7 +1788,8 @@ def story_page(x, i):
     ld = {"@context": "https://schema.org", "@type": "Article", "headline": x["en"], "description": x["sumEn"], "inLanguage": ["en", "cy"], "isPartOf": {"@type": "WebSite", "name": "History of Wales", "url": BASE_URL}}
     if refs_ld(x["id"]):
         ld["citation"] = refs_ld(x["id"])
-    return page(f"story-{x['id']}.html", f'{x["en"]} · History of Wales', x["sumEn"], main, era=x["era"], ld=ld, active="stories.html", track=f"story:{x['id']}")
+    listen_js = f'<script src="listen.js?v={_static_fp("listen.js")}" defer></script>\n' if LSN.has_audio(x) else ""
+    return page(f"story-{x['id']}.html", f'{x["en"]} · History of Wales', x["sumEn"], main, era=x["era"], ld=ld, active="stories.html", track=f"story:{x['id']}", extra=listen_js)
 
 
 def story_subjects(x):
@@ -5059,6 +5061,7 @@ import about as AB  # noqa: E402  (the About page, the author and "last updated"
 AB.setup(globals())
 SEO.AUTHOR = AB.author()[0] if AB.AUTHOR_EN else None
 style += AB.CSS
+style += LSN.CSS
 style += CITE.CSS
 style += VS.CSS
 style += RP.REF_CSS + RP.TOWN_CSS + RP.BATTLE_CSS + RP.DOC_CSS + RP.TOPIC_CSS + RP.MAP_CSS
