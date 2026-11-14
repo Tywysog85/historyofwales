@@ -156,7 +156,8 @@ This file collects the techniques and lessons from building History of Wales. Ad
 - The journey circle's screen-reader name says how many pages have been read, and the menu button has a name even on phones where the word "Menu" is hidden.
 
 ### What's new, the news feed and the weekly email (November 2026)
-- **Whenever something visitors would care about goes live, add a line at the top of `NEWS` in `src/whatsnew.py`** (date, English and Welsh title, one sentence each, link). It feeds `whatsnew.html`, the "New on the site" strip on the home page (first three lines) and the news feed `feed.xml`.
+- **Whenever new history goes live (a long read, people, places, a game), add a line at the top of `NEWS` in `src/whatsnew.py`**. Fixes and changes to how the site works never go there, not even ones visitors would notice (Ifan, 12 and 14 November 2026).
+- Each line holds the date, English and Welsh titles, one sentence in each language, and a link. It feeds `whatsnew.html`, the "New on the site" strip on the home page (first three lines) and the news feed `feed.xml`.
 - Returning visitors see "New" labels on lines added since their last look, and a red dot on the menu button until they open What's new (`hc-news-seen` in local storage, the newest date is on the menu button as `data-news`). First-time visitors see nothing marked new.
 - `feed.xml` is an Atom feed of the news plus today's anniversaries from On this day. `deploy.yml` now also rebuilds the site every morning at 04:15 UTC (`schedule`) so the feed carries each day's anniversaries.
 - **The weekly email** uses Brevo (brevo.com). Its free plan has no time limit and no card: up to 300 emails a day, with a small Brevo logo at the foot of each email. (Kit and MailerLite were ruled out: Kit's sign-up pushes a paid trial, and MailerLite's free plan cannot send our own email design through its API.) Four settings switch it on:
